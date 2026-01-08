@@ -1,5 +1,5 @@
 # Log Receiver Resource Example
-# Manages new Global Log Receiver object. in F5 Distributed Cloud.
+# Manages new Log Receiver object. in F5 Distributed Cloud.
 
 # Basic Log Receiver configuration
 resource "f5xc_log_receiver" "example" {

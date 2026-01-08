@@ -24,7 +24,7 @@ resource "f5xc_network_policy_view" "example" {
   adv_action {
     # Configure adv_action settings
   }
-  # Can be used for messages where no values are needed.
+  # Enable this option
   all_tcp_traffic {
     # Configure all_tcp_traffic settings
   }

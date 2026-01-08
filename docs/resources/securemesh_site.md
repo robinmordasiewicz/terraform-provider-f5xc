@@ -94,12 +94,12 @@ resource "f5xc_securemesh_site" "example" {
 <br><br>&#x2022; <a id="vmware"></a>[`vmware`](#vmware) - Optional Block<br>VMware Provider Type. VMware Provider Type
 
 -> **One of the following:**
-&#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable node local services on this site
 
 -> **One of the following:**
 &#x2022; <a id="custom-proxy"></a>[`custom_proxy`](#custom-proxy) - Optional Block<br>Custom Enterprise Proxy. Custom Enterprise Proxy
-<br><br>&#x2022; <a id="f5-proxy"></a>[`f5_proxy`](#f5-proxy) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="f5-proxy"></a>[`f5_proxy`](#f5-proxy) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="custom-proxy-bypass"></a>[`custom_proxy_bypass`](#custom-proxy-bypass) - Optional Block<br>Proxy Bypass. List of domains to bypass the proxy
@@ -109,19 +109,19 @@ resource "f5xc_securemesh_site" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="dc-cluster-group-slo"></a>[`dc_cluster_group_slo`](#dc-cluster-group-slo) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br><br>&#x2022; <a id="no-s2s-connectivity-slo"></a>[`no_s2s_connectivity_slo`](#no-s2s-connectivity-slo) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="no-s2s-connectivity-slo"></a>[`no_s2s_connectivity_slo`](#no-s2s-connectivity-slo) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-ha"></a>[`disable_ha`](#disable-ha) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-ha"></a>[`disable_ha`](#disable-ha) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-url-categorization"></a>[`disable_url_categorization`](#disable-url-categorization) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-url-categorization"></a>[`disable_url_categorization`](#disable-url-categorization) - Optional Block<br>Enable this option
 
 <a id="dns-ntp-config"></a>&#x2022; [`dns_ntp_config`](#dns-ntp-config) - Optional Block<br>Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site
 
-<a id="enable-ha"></a>&#x2022; [`enable_ha`](#enable-ha) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enable-ha"></a>&#x2022; [`enable_ha`](#enable-ha) - Optional Block<br>Enable this option
 
-<a id="enable-url-categorization"></a>&#x2022; [`enable_url_categorization`](#enable-url-categorization) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enable-url-categorization"></a>&#x2022; [`enable_url_categorization`](#enable-url-categorization) - Optional Block<br>Enable this option
 
 <a id="load-balancing"></a>&#x2022; [`load_balancing`](#load-balancing) - Optional Block<br>Section contains settings on the site that relate to Load Balancing functionality
 
@@ -129,15 +129,15 @@ resource "f5xc_securemesh_site" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Enable this option
 
-<a id="no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#no-forward-proxy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#no-forward-proxy) - Optional Block<br>Enable this option
 
-<a id="no-network-policy"></a>&#x2022; [`no_network_policy`](#no-network-policy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="no-network-policy"></a>&#x2022; [`no_network_policy`](#no-network-policy) - Optional Block<br>Enable this option
 
-<a id="no-proxy-bypass"></a>&#x2022; [`no_proxy_bypass`](#no-proxy-bypass) - Optional Block<br>Can be used for messages where no values are needed
+<a id="no-proxy-bypass"></a>&#x2022; [`no_proxy_bypass`](#no-proxy-bypass) - Optional Block<br>Enable this option
 
-<a id="no-s2s-connectivity-sli"></a>&#x2022; [`no_s2s_connectivity_sli`](#no-s2s-connectivity-sli) - Optional Block<br>Can be used for messages where no values are needed
+<a id="no-s2s-connectivity-sli"></a>&#x2022; [`no_s2s_connectivity_sli`](#no-s2s-connectivity-sli) - Optional Block<br>Enable this option
 
 <a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7
 
@@ -253,7 +253,7 @@ An [`interface_list`](#list-6c6298) block (within [`aws.not_managed.node_list`](
 
 <a id="spec-f3edfe"></a>&#x2022; [`description_spec`](#spec-f3edfe) - Optional String<br>Interface Description. Description for this Interface
 
-<a id="client-35134d"></a>&#x2022; [`dhcp_client`](#client-35134d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="client-35134d"></a>&#x2022; [`dhcp_client`](#client-35134d) - Optional Block<br>Enable this option
 
 <a id="interface-f28fa7"></a>&#x2022; [`ethernet_interface`](#interface-f28fa7) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-f28fa7) below.
 
@@ -263,7 +263,7 @@ An [`interface_list`](#list-6c6298) block (within [`aws.not_managed.node_list`](
 
 <a id="monitor-169def"></a>&#x2022; [`monitor`](#monitor-169def) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="disabled-428eab"></a>&#x2022; [`monitor_disabled`](#disabled-428eab) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-428eab"></a>&#x2022; [`monitor_disabled`](#disabled-428eab) - Optional Block<br>Enable this option
 
 <a id="mtu-9ea6fa"></a>&#x2022; [`mtu`](#mtu-9ea6fa) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
@@ -271,15 +271,15 @@ An [`interface_list`](#list-6c6298) block (within [`aws.not_managed.node_list`](
 
 <a id="option-4d9fd7"></a>&#x2022; [`network_option`](#option-4d9fd7) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-4d9fd7) below.
 
-<a id="address-95964e"></a>&#x2022; [`no_ipv4_address`](#address-95964e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-95964e"></a>&#x2022; [`no_ipv4_address`](#address-95964e) - Optional Block<br>Enable this option
 
-<a id="address-b6fb0a"></a>&#x2022; [`no_ipv6_address`](#address-b6fb0a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-b6fb0a"></a>&#x2022; [`no_ipv6_address`](#address-b6fb0a) - Optional Block<br>Enable this option
 
 <a id="priority-a786bf"></a>&#x2022; [`priority`](#priority-a786bf) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-<a id="disabled-1942d4"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-1942d4) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-1942d4"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-1942d4) - Optional Block<br>Enable this option
 
-<a id="enabled-850dad"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-850dad) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enabled-850dad"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-850dad) - Optional Block<br>Enable this option
 
 <a id="static-ip-f224ff"></a>&#x2022; [`static_ip`](#static-ip-f224ff) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-f224ff) below.
 
@@ -391,7 +391,7 @@ An [`interface_list`](#list-f42e50) block (within [`azure.not_managed.node_list`
 
 <a id="spec-4b4de9"></a>&#x2022; [`description_spec`](#spec-4b4de9) - Optional String<br>Interface Description. Description for this Interface
 
-<a id="client-b5ac25"></a>&#x2022; [`dhcp_client`](#client-b5ac25) - Optional Block<br>Can be used for messages where no values are needed
+<a id="client-b5ac25"></a>&#x2022; [`dhcp_client`](#client-b5ac25) - Optional Block<br>Enable this option
 
 <a id="interface-20c4ad"></a>&#x2022; [`ethernet_interface`](#interface-20c4ad) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-20c4ad) below.
 
@@ -401,7 +401,7 @@ An [`interface_list`](#list-f42e50) block (within [`azure.not_managed.node_list`
 
 <a id="monitor-a565a2"></a>&#x2022; [`monitor`](#monitor-a565a2) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="disabled-7aa1a9"></a>&#x2022; [`monitor_disabled`](#disabled-7aa1a9) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-7aa1a9"></a>&#x2022; [`monitor_disabled`](#disabled-7aa1a9) - Optional Block<br>Enable this option
 
 <a id="mtu-bfeae5"></a>&#x2022; [`mtu`](#mtu-bfeae5) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
@@ -409,15 +409,15 @@ An [`interface_list`](#list-f42e50) block (within [`azure.not_managed.node_list`
 
 <a id="option-e15a34"></a>&#x2022; [`network_option`](#option-e15a34) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-e15a34) below.
 
-<a id="address-087ea1"></a>&#x2022; [`no_ipv4_address`](#address-087ea1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-087ea1"></a>&#x2022; [`no_ipv4_address`](#address-087ea1) - Optional Block<br>Enable this option
 
-<a id="address-c7425d"></a>&#x2022; [`no_ipv6_address`](#address-c7425d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-c7425d"></a>&#x2022; [`no_ipv6_address`](#address-c7425d) - Optional Block<br>Enable this option
 
 <a id="priority-0e03ad"></a>&#x2022; [`priority`](#priority-0e03ad) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-<a id="disabled-34b2d0"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-34b2d0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-34b2d0"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-34b2d0) - Optional Block<br>Enable this option
 
-<a id="enabled-453c17"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-453c17) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enabled-453c17"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-453c17) - Optional Block<br>Enable this option
 
 <a id="static-ip-4b0611"></a>&#x2022; [`static_ip`](#static-ip-4b0611) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-4b0611) below.
 
@@ -529,7 +529,7 @@ An [`interface_list`](#list-30e058) block (within [`baremetal.not_managed.node_l
 
 <a id="spec-b7ed1b"></a>&#x2022; [`description_spec`](#spec-b7ed1b) - Optional String<br>Interface Description. Description for this Interface
 
-<a id="client-829bf8"></a>&#x2022; [`dhcp_client`](#client-829bf8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="client-829bf8"></a>&#x2022; [`dhcp_client`](#client-829bf8) - Optional Block<br>Enable this option
 
 <a id="interface-3933d2"></a>&#x2022; [`ethernet_interface`](#interface-3933d2) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-3933d2) below.
 
@@ -539,7 +539,7 @@ An [`interface_list`](#list-30e058) block (within [`baremetal.not_managed.node_l
 
 <a id="monitor-1cb67f"></a>&#x2022; [`monitor`](#monitor-1cb67f) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="disabled-1756b3"></a>&#x2022; [`monitor_disabled`](#disabled-1756b3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-1756b3"></a>&#x2022; [`monitor_disabled`](#disabled-1756b3) - Optional Block<br>Enable this option
 
 <a id="mtu-2d7f6c"></a>&#x2022; [`mtu`](#mtu-2d7f6c) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
@@ -547,15 +547,15 @@ An [`interface_list`](#list-30e058) block (within [`baremetal.not_managed.node_l
 
 <a id="option-ad2bbb"></a>&#x2022; [`network_option`](#option-ad2bbb) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-ad2bbb) below.
 
-<a id="address-ac89d0"></a>&#x2022; [`no_ipv4_address`](#address-ac89d0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-ac89d0"></a>&#x2022; [`no_ipv4_address`](#address-ac89d0) - Optional Block<br>Enable this option
 
-<a id="address-b8923c"></a>&#x2022; [`no_ipv6_address`](#address-b8923c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-b8923c"></a>&#x2022; [`no_ipv6_address`](#address-b8923c) - Optional Block<br>Enable this option
 
 <a id="priority-d77987"></a>&#x2022; [`priority`](#priority-d77987) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-<a id="disabled-309cd0"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-309cd0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-309cd0"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-309cd0) - Optional Block<br>Enable this option
 
-<a id="enabled-832872"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-832872) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enabled-832872"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-832872) - Optional Block<br>Enable this option
 
 <a id="static-ip-9bad70"></a>&#x2022; [`static_ip`](#static-ip-9bad70) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-9bad70) below.
 
@@ -645,21 +645,21 @@ A [`blocked_services`](#blocked-services) block supports the following:
 
 A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_services`](#blocked-services)) supports the following:
 
-<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Enable this option
 
 <a id="type-808ec9"></a>&#x2022; [`network_type`](#type-808ec9) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
 
-<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Enable this option
 
-<a id="interface-e57e21"></a>&#x2022; [`web_user_interface`](#interface-e57e21) - Optional Block<br>Can be used for messages where no values are needed
+<a id="interface-e57e21"></a>&#x2022; [`web_user_interface`](#interface-e57e21) - Optional Block<br>Enable this option
 
 #### Custom Proxy
 
 A [`custom_proxy`](#custom-proxy) block supports the following:
 
-<a id="custom-proxy-disable-re-tunnel"></a>&#x2022; [`disable_re_tunnel`](#custom-proxy-disable-re-tunnel) - Optional Block<br>Can be used for messages where no values are needed
+<a id="custom-proxy-disable-re-tunnel"></a>&#x2022; [`disable_re_tunnel`](#custom-proxy-disable-re-tunnel) - Optional Block<br>Enable this option
 
-<a id="custom-proxy-enable-re-tunnel"></a>&#x2022; [`enable_re_tunnel`](#custom-proxy-enable-re-tunnel) - Optional Block<br>Can be used for messages where no values are needed
+<a id="custom-proxy-enable-re-tunnel"></a>&#x2022; [`enable_re_tunnel`](#custom-proxy-enable-re-tunnel) - Optional Block<br>Enable this option
 
 <a id="custom-proxy-password"></a>&#x2022; [`password`](#custom-proxy-password) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#custom-proxy-password) below.
 
@@ -729,9 +729,9 @@ A [`dns_ntp_config`](#dns-ntp-config) block supports the following:
 
 <a id="dns-ntp-config-custom-ntp"></a>&#x2022; [`custom_ntp`](#dns-ntp-config-custom-ntp) - Optional Block<br>NTP Servers. NTP Servers<br>See [Custom NTP](#dns-ntp-config-custom-ntp) below.
 
-<a id="dns-ntp-config-f5-dns-default"></a>&#x2022; [`f5_dns_default`](#dns-ntp-config-f5-dns-default) - Optional Block<br>Can be used for messages where no values are needed
+<a id="dns-ntp-config-f5-dns-default"></a>&#x2022; [`f5_dns_default`](#dns-ntp-config-f5-dns-default) - Optional Block<br>Enable this option
 
-<a id="dns-ntp-config-f5-ntp-default"></a>&#x2022; [`f5_ntp_default`](#dns-ntp-config-f5-ntp-default) - Optional Block<br>Can be used for messages where no values are needed
+<a id="dns-ntp-config-f5-ntp-default"></a>&#x2022; [`f5_ntp_default`](#dns-ntp-config-f5-ntp-default) - Optional Block<br>Enable this option
 
 #### DNS NTP Config Custom DNS
 
@@ -777,7 +777,7 @@ An [`interface_list`](#list-3a9b82) block (within [`equinix.not_managed.node_lis
 
 <a id="spec-d32b48"></a>&#x2022; [`description_spec`](#spec-d32b48) - Optional String<br>Interface Description. Description for this Interface
 
-<a id="client-c83f23"></a>&#x2022; [`dhcp_client`](#client-c83f23) - Optional Block<br>Can be used for messages where no values are needed
+<a id="client-c83f23"></a>&#x2022; [`dhcp_client`](#client-c83f23) - Optional Block<br>Enable this option
 
 <a id="interface-a2d3e0"></a>&#x2022; [`ethernet_interface`](#interface-a2d3e0) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-a2d3e0) below.
 
@@ -787,7 +787,7 @@ An [`interface_list`](#list-3a9b82) block (within [`equinix.not_managed.node_lis
 
 <a id="monitor-15c36b"></a>&#x2022; [`monitor`](#monitor-15c36b) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="disabled-5d3350"></a>&#x2022; [`monitor_disabled`](#disabled-5d3350) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-5d3350"></a>&#x2022; [`monitor_disabled`](#disabled-5d3350) - Optional Block<br>Enable this option
 
 <a id="mtu-80c067"></a>&#x2022; [`mtu`](#mtu-80c067) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
@@ -795,15 +795,15 @@ An [`interface_list`](#list-3a9b82) block (within [`equinix.not_managed.node_lis
 
 <a id="option-1659e3"></a>&#x2022; [`network_option`](#option-1659e3) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-1659e3) below.
 
-<a id="address-e9c2b1"></a>&#x2022; [`no_ipv4_address`](#address-e9c2b1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-e9c2b1"></a>&#x2022; [`no_ipv4_address`](#address-e9c2b1) - Optional Block<br>Enable this option
 
-<a id="address-278ecf"></a>&#x2022; [`no_ipv6_address`](#address-278ecf) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-278ecf"></a>&#x2022; [`no_ipv6_address`](#address-278ecf) - Optional Block<br>Enable this option
 
 <a id="priority-8326e4"></a>&#x2022; [`priority`](#priority-8326e4) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-<a id="disabled-381ac6"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-381ac6) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-381ac6"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-381ac6) - Optional Block<br>Enable this option
 
-<a id="enabled-ea35c6"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-ea35c6) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enabled-ea35c6"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-ea35c6) - Optional Block<br>Enable this option
 
 <a id="static-ip-bfc08c"></a>&#x2022; [`static_ip`](#static-ip-bfc08c) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-bfc08c) below.
 
@@ -915,7 +915,7 @@ An [`interface_list`](#list-2f49ff) block (within [`gcp.not_managed.node_list`](
 
 <a id="spec-801a55"></a>&#x2022; [`description_spec`](#spec-801a55) - Optional String<br>Interface Description. Description for this Interface
 
-<a id="client-649578"></a>&#x2022; [`dhcp_client`](#client-649578) - Optional Block<br>Can be used for messages where no values are needed
+<a id="client-649578"></a>&#x2022; [`dhcp_client`](#client-649578) - Optional Block<br>Enable this option
 
 <a id="interface-fa1d2a"></a>&#x2022; [`ethernet_interface`](#interface-fa1d2a) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-fa1d2a) below.
 
@@ -925,7 +925,7 @@ An [`interface_list`](#list-2f49ff) block (within [`gcp.not_managed.node_list`](
 
 <a id="monitor-986ba9"></a>&#x2022; [`monitor`](#monitor-986ba9) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="disabled-33388b"></a>&#x2022; [`monitor_disabled`](#disabled-33388b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-33388b"></a>&#x2022; [`monitor_disabled`](#disabled-33388b) - Optional Block<br>Enable this option
 
 <a id="mtu-46e579"></a>&#x2022; [`mtu`](#mtu-46e579) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
@@ -933,15 +933,15 @@ An [`interface_list`](#list-2f49ff) block (within [`gcp.not_managed.node_list`](
 
 <a id="option-ca04ce"></a>&#x2022; [`network_option`](#option-ca04ce) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-ca04ce) below.
 
-<a id="address-c52373"></a>&#x2022; [`no_ipv4_address`](#address-c52373) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-c52373"></a>&#x2022; [`no_ipv4_address`](#address-c52373) - Optional Block<br>Enable this option
 
-<a id="address-40bebe"></a>&#x2022; [`no_ipv6_address`](#address-40bebe) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-40bebe"></a>&#x2022; [`no_ipv6_address`](#address-40bebe) - Optional Block<br>Enable this option
 
 <a id="priority-b17ea9"></a>&#x2022; [`priority`](#priority-b17ea9) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-<a id="disabled-45fbad"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-45fbad) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-45fbad"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-45fbad) - Optional Block<br>Enable this option
 
-<a id="enabled-b641ce"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-b641ce) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enabled-b641ce"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-b641ce) - Optional Block<br>Enable this option
 
 <a id="static-ip-b40b52"></a>&#x2022; [`static_ip`](#static-ip-b40b52) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-b40b52) below.
 
@@ -1053,7 +1053,7 @@ An [`interface_list`](#list-92338f) block (within [`kvm.not_managed.node_list`](
 
 <a id="spec-c3f95c"></a>&#x2022; [`description_spec`](#spec-c3f95c) - Optional String<br>Interface Description. Description for this Interface
 
-<a id="client-59a349"></a>&#x2022; [`dhcp_client`](#client-59a349) - Optional Block<br>Can be used for messages where no values are needed
+<a id="client-59a349"></a>&#x2022; [`dhcp_client`](#client-59a349) - Optional Block<br>Enable this option
 
 <a id="interface-0aad1d"></a>&#x2022; [`ethernet_interface`](#interface-0aad1d) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-0aad1d) below.
 
@@ -1063,7 +1063,7 @@ An [`interface_list`](#list-92338f) block (within [`kvm.not_managed.node_list`](
 
 <a id="monitor-1bfade"></a>&#x2022; [`monitor`](#monitor-1bfade) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="disabled-2ad250"></a>&#x2022; [`monitor_disabled`](#disabled-2ad250) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-2ad250"></a>&#x2022; [`monitor_disabled`](#disabled-2ad250) - Optional Block<br>Enable this option
 
 <a id="mtu-d603a1"></a>&#x2022; [`mtu`](#mtu-d603a1) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
@@ -1071,15 +1071,15 @@ An [`interface_list`](#list-92338f) block (within [`kvm.not_managed.node_list`](
 
 <a id="option-437c33"></a>&#x2022; [`network_option`](#option-437c33) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-437c33) below.
 
-<a id="address-4c9457"></a>&#x2022; [`no_ipv4_address`](#address-4c9457) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-4c9457"></a>&#x2022; [`no_ipv4_address`](#address-4c9457) - Optional Block<br>Enable this option
 
-<a id="address-e9ec91"></a>&#x2022; [`no_ipv6_address`](#address-e9ec91) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-e9ec91"></a>&#x2022; [`no_ipv6_address`](#address-e9ec91) - Optional Block<br>Enable this option
 
 <a id="priority-931ade"></a>&#x2022; [`priority`](#priority-931ade) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-<a id="disabled-320aad"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-320aad) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-320aad"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-320aad) - Optional Block<br>Enable this option
 
-<a id="enabled-390b0a"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-390b0a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enabled-390b0a"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-390b0a) - Optional Block<br>Enable this option
 
 <a id="static-ip-f20c45"></a>&#x2022; [`static_ip`](#static-ip-f20c45) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-f20c45) below.
 
@@ -1169,9 +1169,9 @@ A [`load_balancing`](#load-balancing) block supports the following:
 
 A [`local_vrf`](#local-vrf) block supports the following:
 
-<a id="local-vrf-default-config"></a>&#x2022; [`default_config`](#local-vrf-default-config) - Optional Block<br>Can be used for messages where no values are needed
+<a id="local-vrf-default-config"></a>&#x2022; [`default_config`](#local-vrf-default-config) - Optional Block<br>Enable this option
 
-<a id="local-vrf-default-sli-config"></a>&#x2022; [`default_sli_config`](#local-vrf-default-sli-config) - Optional Block<br>Can be used for messages where no values are needed
+<a id="local-vrf-default-sli-config"></a>&#x2022; [`default_sli_config`](#local-vrf-default-sli-config) - Optional Block<br>Enable this option
 
 <a id="local-vrf-sli-config"></a>&#x2022; [`sli_config`](#local-vrf-sli-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [SLI Config](#local-vrf-sli-config) below.
 
@@ -1185,9 +1185,9 @@ A [`sli_config`](#local-vrf-sli-config) block (within [`local_vrf`](#local-vrf))
 
 <a id="local-vrf-sli-config-nameserver"></a>&#x2022; [`nameserver`](#local-vrf-sli-config-nameserver) - Optional String<br>Optional DNS V4 server IP to be used for name resolution
 
-<a id="local-vrf-sli-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#local-vrf-sli-config-no-static-routes) - Optional Block<br>Can be used for messages where no values are needed
+<a id="local-vrf-sli-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#local-vrf-sli-config-no-static-routes) - Optional Block<br>Enable this option
 
-<a id="routes-53016e"></a>&#x2022; [`no_v6_static_routes`](#routes-53016e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="routes-53016e"></a>&#x2022; [`no_v6_static_routes`](#routes-53016e) - Optional Block<br>Enable this option
 
 <a id="local-vrf-sli-config-static-routes"></a>&#x2022; [`static_routes`](#local-vrf-sli-config-static-routes) - Optional Block<br>Static Routes List<br>See [Static Routes](#local-vrf-sli-config-static-routes) below.
 
@@ -1247,9 +1247,9 @@ A [`slo_config`](#local-vrf-slo-config) block (within [`local_vrf`](#local-vrf))
 
 <a id="local-vrf-slo-config-nameserver"></a>&#x2022; [`nameserver`](#local-vrf-slo-config-nameserver) - Optional String<br>Optional DNS V4 server IP to be used for name resolution
 
-<a id="local-vrf-slo-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#local-vrf-slo-config-no-static-routes) - Optional Block<br>Can be used for messages where no values are needed
+<a id="local-vrf-slo-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#local-vrf-slo-config-no-static-routes) - Optional Block<br>Enable this option
 
-<a id="routes-a47310"></a>&#x2022; [`no_v6_static_routes`](#routes-a47310) - Optional Block<br>Can be used for messages where no values are needed
+<a id="routes-a47310"></a>&#x2022; [`no_v6_static_routes`](#routes-a47310) - Optional Block<br>Enable this option
 
 <a id="local-vrf-slo-config-static-routes"></a>&#x2022; [`static_routes`](#local-vrf-slo-config-static-routes) - Optional Block<br>Static Routes List<br>See [Static Routes](#local-vrf-slo-config-static-routes) below.
 
@@ -1343,7 +1343,7 @@ An [`interface_list`](#list-b40ceb) block (within [`nutanix.not_managed.node_lis
 
 <a id="spec-baa727"></a>&#x2022; [`description_spec`](#spec-baa727) - Optional String<br>Interface Description. Description for this Interface
 
-<a id="client-112522"></a>&#x2022; [`dhcp_client`](#client-112522) - Optional Block<br>Can be used for messages where no values are needed
+<a id="client-112522"></a>&#x2022; [`dhcp_client`](#client-112522) - Optional Block<br>Enable this option
 
 <a id="interface-d78243"></a>&#x2022; [`ethernet_interface`](#interface-d78243) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-d78243) below.
 
@@ -1353,7 +1353,7 @@ An [`interface_list`](#list-b40ceb) block (within [`nutanix.not_managed.node_lis
 
 <a id="monitor-824921"></a>&#x2022; [`monitor`](#monitor-824921) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="disabled-1b5f4c"></a>&#x2022; [`monitor_disabled`](#disabled-1b5f4c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-1b5f4c"></a>&#x2022; [`monitor_disabled`](#disabled-1b5f4c) - Optional Block<br>Enable this option
 
 <a id="mtu-9286d4"></a>&#x2022; [`mtu`](#mtu-9286d4) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
@@ -1361,15 +1361,15 @@ An [`interface_list`](#list-b40ceb) block (within [`nutanix.not_managed.node_lis
 
 <a id="option-40de75"></a>&#x2022; [`network_option`](#option-40de75) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-40de75) below.
 
-<a id="address-768ec8"></a>&#x2022; [`no_ipv4_address`](#address-768ec8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-768ec8"></a>&#x2022; [`no_ipv4_address`](#address-768ec8) - Optional Block<br>Enable this option
 
-<a id="address-9dd875"></a>&#x2022; [`no_ipv6_address`](#address-9dd875) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-9dd875"></a>&#x2022; [`no_ipv6_address`](#address-9dd875) - Optional Block<br>Enable this option
 
 <a id="priority-e54ce8"></a>&#x2022; [`priority`](#priority-e54ce8) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-<a id="disabled-a3014f"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-a3014f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-a3014f"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-a3014f) - Optional Block<br>Enable this option
 
-<a id="enabled-47989b"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-47989b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enabled-47989b"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-47989b) - Optional Block<br>Enable this option
 
 <a id="static-ip-09302a"></a>&#x2022; [`static_ip`](#static-ip-09302a) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-09302a) below.
 
@@ -1481,7 +1481,7 @@ An [`interface_list`](#list-af4877) block (within [`oci.not_managed.node_list`](
 
 <a id="spec-6e395f"></a>&#x2022; [`description_spec`](#spec-6e395f) - Optional String<br>Interface Description. Description for this Interface
 
-<a id="client-29509c"></a>&#x2022; [`dhcp_client`](#client-29509c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="client-29509c"></a>&#x2022; [`dhcp_client`](#client-29509c) - Optional Block<br>Enable this option
 
 <a id="interface-e66013"></a>&#x2022; [`ethernet_interface`](#interface-e66013) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-e66013) below.
 
@@ -1491,7 +1491,7 @@ An [`interface_list`](#list-af4877) block (within [`oci.not_managed.node_list`](
 
 <a id="monitor-2b293c"></a>&#x2022; [`monitor`](#monitor-2b293c) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="disabled-773f90"></a>&#x2022; [`monitor_disabled`](#disabled-773f90) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-773f90"></a>&#x2022; [`monitor_disabled`](#disabled-773f90) - Optional Block<br>Enable this option
 
 <a id="mtu-314a9f"></a>&#x2022; [`mtu`](#mtu-314a9f) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
@@ -1499,15 +1499,15 @@ An [`interface_list`](#list-af4877) block (within [`oci.not_managed.node_list`](
 
 <a id="option-747ef7"></a>&#x2022; [`network_option`](#option-747ef7) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-747ef7) below.
 
-<a id="address-23b964"></a>&#x2022; [`no_ipv4_address`](#address-23b964) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-23b964"></a>&#x2022; [`no_ipv4_address`](#address-23b964) - Optional Block<br>Enable this option
 
-<a id="address-009f48"></a>&#x2022; [`no_ipv6_address`](#address-009f48) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-009f48"></a>&#x2022; [`no_ipv6_address`](#address-009f48) - Optional Block<br>Enable this option
 
 <a id="priority-aeec59"></a>&#x2022; [`priority`](#priority-aeec59) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-<a id="disabled-91e657"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-91e657) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-91e657"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-91e657) - Optional Block<br>Enable this option
 
-<a id="enabled-9b24dc"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-9b24dc) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enabled-9b24dc"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-9b24dc) - Optional Block<br>Enable this option
 
 <a id="static-ip-bd24d4"></a>&#x2022; [`static_ip`](#static-ip-bd24d4) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-bd24d4) below.
 
@@ -1591,9 +1591,9 @@ An [`interface_list`](#list-af4877) block (within [`oci.not_managed.node_list`](
 
 An [`offline_survivability_mode`](#offline-survivability-mode) block supports the following:
 
-<a id="mode-565021"></a>&#x2022; [`enable_offline_survivability_mode`](#mode-565021) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mode-565021"></a>&#x2022; [`enable_offline_survivability_mode`](#mode-565021) - Optional Block<br>Enable this option
 
-<a id="mode-02f0c8"></a>&#x2022; [`no_offline_survivability_mode`](#mode-02f0c8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mode-02f0c8"></a>&#x2022; [`no_offline_survivability_mode`](#mode-02f0c8) - Optional Block<br>Enable this option
 
 #### Openstack
 
@@ -1627,7 +1627,7 @@ An [`interface_list`](#list-08a137) block (within [`openstack.not_managed.node_l
 
 <a id="spec-6e2a64"></a>&#x2022; [`description_spec`](#spec-6e2a64) - Optional String<br>Interface Description. Description for this Interface
 
-<a id="client-3f6d38"></a>&#x2022; [`dhcp_client`](#client-3f6d38) - Optional Block<br>Can be used for messages where no values are needed
+<a id="client-3f6d38"></a>&#x2022; [`dhcp_client`](#client-3f6d38) - Optional Block<br>Enable this option
 
 <a id="interface-b6bf86"></a>&#x2022; [`ethernet_interface`](#interface-b6bf86) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-b6bf86) below.
 
@@ -1637,7 +1637,7 @@ An [`interface_list`](#list-08a137) block (within [`openstack.not_managed.node_l
 
 <a id="monitor-430458"></a>&#x2022; [`monitor`](#monitor-430458) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="disabled-7cde43"></a>&#x2022; [`monitor_disabled`](#disabled-7cde43) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-7cde43"></a>&#x2022; [`monitor_disabled`](#disabled-7cde43) - Optional Block<br>Enable this option
 
 <a id="mtu-12e85c"></a>&#x2022; [`mtu`](#mtu-12e85c) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
@@ -1645,15 +1645,15 @@ An [`interface_list`](#list-08a137) block (within [`openstack.not_managed.node_l
 
 <a id="option-c423fd"></a>&#x2022; [`network_option`](#option-c423fd) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-c423fd) below.
 
-<a id="address-96a5c5"></a>&#x2022; [`no_ipv4_address`](#address-96a5c5) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-96a5c5"></a>&#x2022; [`no_ipv4_address`](#address-96a5c5) - Optional Block<br>Enable this option
 
-<a id="address-9ee17d"></a>&#x2022; [`no_ipv6_address`](#address-9ee17d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-9ee17d"></a>&#x2022; [`no_ipv6_address`](#address-9ee17d) - Optional Block<br>Enable this option
 
 <a id="priority-34866f"></a>&#x2022; [`priority`](#priority-34866f) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-<a id="disabled-006035"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-006035) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-006035"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-006035) - Optional Block<br>Enable this option
 
-<a id="enabled-f181b0"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-f181b0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enabled-f181b0"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-f181b0) - Optional Block<br>Enable this option
 
 <a id="static-ip-458635"></a>&#x2022; [`static_ip`](#static-ip-458635) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-458635) below.
 
@@ -1739,21 +1739,21 @@ A [`performance_enhancement_mode`](#performance-enhancement-mode) block supports
 
 <a id="enhanced-31b8ac"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-31b8ac) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-31b8ac) below.
 
-<a id="enhanced-38f174"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-38f174) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enhanced-38f174"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-38f174) - Optional Block<br>Enable this option
 
 #### Performance Enhancement Mode Perf Mode L3 Enhanced
 
 A [`perf_mode_l3_enhanced`](#enhanced-31b8ac) block (within [`performance_enhancement_mode`](#performance-enhancement-mode)) supports the following:
 
-<a id="jumbo-7ba5b8"></a>&#x2022; [`jumbo`](#jumbo-7ba5b8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="jumbo-7ba5b8"></a>&#x2022; [`jumbo`](#jumbo-7ba5b8) - Optional Block<br>Enable this option
 
-<a id="jumbo-95338e"></a>&#x2022; [`no_jumbo`](#jumbo-95338e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="jumbo-95338e"></a>&#x2022; [`no_jumbo`](#jumbo-95338e) - Optional Block<br>Enable this option
 
 #### RE Select
 
 A [`re_select`](#re-select) block supports the following:
 
-<a id="re-select-geo-proximity"></a>&#x2022; [`geo_proximity`](#re-select-geo-proximity) - Optional Block<br>Can be used for messages where no values are needed
+<a id="re-select-geo-proximity"></a>&#x2022; [`geo_proximity`](#re-select-geo-proximity) - Optional Block<br>Enable this option
 
 <a id="re-select-specific-re"></a>&#x2022; [`specific_re`](#re-select-specific-re) - Optional Block<br>Select specific REs. This is useful when a site needs to deterministically connect to a set of REs. A site will always be connected to 2 REs<br>See [Specific RE](#re-select-specific-re) below.
 
@@ -1767,13 +1767,13 @@ A [`specific_re`](#re-select-specific-re) block (within [`re_select`](#re-select
 
 A [`site_mesh_group_on_slo`](#site-mesh-group-on-slo) block supports the following:
 
-<a id="group-0918cc"></a>&#x2022; [`no_site_mesh_group`](#group-0918cc) - Optional Block<br>Can be used for messages where no values are needed
+<a id="group-0918cc"></a>&#x2022; [`no_site_mesh_group`](#group-0918cc) - Optional Block<br>Enable this option
 
 <a id="site-mesh-group-on-slo-site-mesh-group"></a>&#x2022; [`site_mesh_group`](#site-mesh-group-on-slo-site-mesh-group) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site Mesh Group](#site-mesh-group-on-slo-site-mesh-group) below.
 
-<a id="public-ip-ebd29c"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-ebd29c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="public-ip-ebd29c"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-ebd29c) - Optional Block<br>Enable this option
 
-<a id="pvt-ip-9317b2"></a>&#x2022; [`sm_connection_pvt_ip`](#pvt-ip-9317b2) - Optional Block<br>Can be used for messages where no values are needed
+<a id="pvt-ip-9317b2"></a>&#x2022; [`sm_connection_pvt_ip`](#pvt-ip-9317b2) - Optional Block<br>Enable this option
 
 #### Site Mesh Group On Slo Site Mesh Group
 
@@ -1791,7 +1791,7 @@ A [`software_settings`](#software-settings) block supports the following:
 
 An [`os`](#software-settings-os) block (within [`software_settings`](#software-settings)) supports the following:
 
-<a id="software-settings-os-default-os-version"></a>&#x2022; [`default_os_version`](#software-settings-os-default-os-version) - Optional Block<br>Can be used for messages where no values are needed
+<a id="software-settings-os-default-os-version"></a>&#x2022; [`default_os_version`](#software-settings-os-default-os-version) - Optional Block<br>Enable this option
 
 <a id="version-dbab0c"></a>&#x2022; [`operating_system_version`](#version-dbab0c) - Optional String<br>Specify a OS version to be used e.g. 9.2024.6
 
@@ -1799,7 +1799,7 @@ An [`os`](#software-settings-os) block (within [`software_settings`](#software-s
 
 A [`sw`](#software-settings-sw) block (within [`software_settings`](#software-settings)) supports the following:
 
-<a id="software-settings-sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#software-settings-sw-default-sw-version) - Optional Block<br>Can be used for messages where no values are needed
+<a id="software-settings-sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#software-settings-sw-default-sw-version) - Optional Block<br>Enable this option
 
 <a id="version-0a788c"></a>&#x2022; [`volterra_software_version`](#version-0a788c) - Optional String<br>Specify a F5XC Software Version to be used e.g. Crt-20210329-1002
 
@@ -1825,7 +1825,7 @@ An [`upgrade_settings`](#upgrade-settings) block supports the following:
 
 A [`kubernetes_upgrade_drain`](#drain-bb0463) block (within [`upgrade_settings`](#upgrade-settings)) supports the following:
 
-<a id="drain-897b77"></a>&#x2022; [`disable_upgrade_drain`](#drain-897b77) - Optional Block<br>Can be used for messages where no values are needed
+<a id="drain-897b77"></a>&#x2022; [`disable_upgrade_drain`](#drain-897b77) - Optional Block<br>Enable this option
 
 <a id="drain-817909"></a>&#x2022; [`enable_upgrade_drain`](#drain-817909) - Optional Block<br>Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#drain-817909) below.
 
@@ -1865,7 +1865,7 @@ An [`interface_list`](#list-7c5ba9) block (within [`vmware.not_managed.node_list
 
 <a id="spec-2a2415"></a>&#x2022; [`description_spec`](#spec-2a2415) - Optional String<br>Interface Description. Description for this Interface
 
-<a id="client-c6d6b2"></a>&#x2022; [`dhcp_client`](#client-c6d6b2) - Optional Block<br>Can be used for messages where no values are needed
+<a id="client-c6d6b2"></a>&#x2022; [`dhcp_client`](#client-c6d6b2) - Optional Block<br>Enable this option
 
 <a id="interface-d5d7ec"></a>&#x2022; [`ethernet_interface`](#interface-d5d7ec) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-d5d7ec) below.
 
@@ -1875,7 +1875,7 @@ An [`interface_list`](#list-7c5ba9) block (within [`vmware.not_managed.node_list
 
 <a id="monitor-ad3d04"></a>&#x2022; [`monitor`](#monitor-ad3d04) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="disabled-3f7207"></a>&#x2022; [`monitor_disabled`](#disabled-3f7207) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-3f7207"></a>&#x2022; [`monitor_disabled`](#disabled-3f7207) - Optional Block<br>Enable this option
 
 <a id="mtu-2aef73"></a>&#x2022; [`mtu`](#mtu-2aef73) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
@@ -1883,15 +1883,15 @@ An [`interface_list`](#list-7c5ba9) block (within [`vmware.not_managed.node_list
 
 <a id="option-e71ea9"></a>&#x2022; [`network_option`](#option-e71ea9) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-e71ea9) below.
 
-<a id="address-208212"></a>&#x2022; [`no_ipv4_address`](#address-208212) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-208212"></a>&#x2022; [`no_ipv4_address`](#address-208212) - Optional Block<br>Enable this option
 
-<a id="address-b8f24d"></a>&#x2022; [`no_ipv6_address`](#address-b8f24d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="address-b8f24d"></a>&#x2022; [`no_ipv6_address`](#address-b8f24d) - Optional Block<br>Enable this option
 
 <a id="priority-378726"></a>&#x2022; [`priority`](#priority-378726) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-<a id="disabled-dfbb95"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-dfbb95) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-dfbb95"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-dfbb95) - Optional Block<br>Enable this option
 
-<a id="enabled-223030"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-223030) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enabled-223030"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-223030) - Optional Block<br>Enable this option
 
 <a id="static-ip-7bbfdd"></a>&#x2022; [`static_ip`](#static-ip-7bbfdd) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-7bbfdd) below.
 

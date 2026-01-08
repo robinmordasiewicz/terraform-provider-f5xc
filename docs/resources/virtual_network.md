@@ -68,10 +68,10 @@ resource "f5xc_virtual_network" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="global-network"></a>[`global_network`](#global-network) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="global-network"></a>[`global_network`](#global-network) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="legacy-type"></a>[`legacy_type`](#legacy-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
-<br><br>&#x2022; <a id="site-local-inside-network"></a>[`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="site-local-network"></a>[`site_local_network`](#site-local-network) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="site-local-inside-network"></a>[`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="site-local-network"></a>[`site_local_network`](#site-local-network) - Optional Block<br>Enable this option
 
 <a id="static-routes"></a>&#x2022; [`static_routes`](#static-routes) - Optional Block<br>List of static routes on the virtual network<br>See [Static Routes](#static-routes) below for details.
 
@@ -91,7 +91,7 @@ A [`static_routes`](#static-routes) block supports the following:
 
 <a id="static-routes-attrs"></a>&#x2022; [`attrs`](#static-routes-attrs) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
-<a id="static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#static-routes-default-gateway) - Optional Block<br>Can be used for messages where no values are needed
+<a id="static-routes-default-gateway"></a>&#x2022; [`default_gateway`](#static-routes-default-gateway) - Optional Block<br>Enable this option
 
 <a id="static-routes-ip-address"></a>&#x2022; [`ip_address`](#static-routes-ip-address) - Optional String<br>Traffic matching the IP prefixes is sent to this IP Address
 

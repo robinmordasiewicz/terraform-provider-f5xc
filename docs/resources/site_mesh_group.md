@@ -70,9 +70,9 @@ resource "f5xc_site_mesh_group" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="disable-re-fallback"></a>[`disable_re_fallback`](#disable-re-fallback) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-re-fallback"></a>[`disable_re_fallback`](#disable-re-fallback) - Optional Block<br>Enable this option
 
-<a id="enable-re-fallback"></a>&#x2022; [`enable_re_fallback`](#enable-re-fallback) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enable-re-fallback"></a>&#x2022; [`enable_re_fallback`](#enable-re-fallback) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="full-mesh"></a>[`full_mesh`](#full-mesh) - Optional Block<br>Full Mesh. Details of Full Mesh Group Type<br>See [Full Mesh](#full-mesh) below for details.
@@ -95,25 +95,25 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`full_mesh`](#full-mesh) block supports the following:
 
-<a id="full-mesh-control-and-data-plane-mesh"></a>&#x2022; [`control_and_data_plane_mesh`](#full-mesh-control-and-data-plane-mesh) - Optional Block<br>Can be used for messages where no values are needed
+<a id="full-mesh-control-and-data-plane-mesh"></a>&#x2022; [`control_and_data_plane_mesh`](#full-mesh-control-and-data-plane-mesh) - Optional Block<br>Enable this option
 
-<a id="full-mesh-data-plane-mesh"></a>&#x2022; [`data_plane_mesh`](#full-mesh-data-plane-mesh) - Optional Block<br>Can be used for messages where no values are needed
+<a id="full-mesh-data-plane-mesh"></a>&#x2022; [`data_plane_mesh`](#full-mesh-data-plane-mesh) - Optional Block<br>Enable this option
 
 #### Hub Mesh
 
 A [`hub_mesh`](#hub-mesh) block supports the following:
 
-<a id="hub-mesh-control-and-data-plane-mesh"></a>&#x2022; [`control_and_data_plane_mesh`](#hub-mesh-control-and-data-plane-mesh) - Optional Block<br>Can be used for messages where no values are needed
+<a id="hub-mesh-control-and-data-plane-mesh"></a>&#x2022; [`control_and_data_plane_mesh`](#hub-mesh-control-and-data-plane-mesh) - Optional Block<br>Enable this option
 
-<a id="hub-mesh-data-plane-mesh"></a>&#x2022; [`data_plane_mesh`](#hub-mesh-data-plane-mesh) - Optional Block<br>Can be used for messages where no values are needed
+<a id="hub-mesh-data-plane-mesh"></a>&#x2022; [`data_plane_mesh`](#hub-mesh-data-plane-mesh) - Optional Block<br>Enable this option
 
 #### Spoke Mesh
 
 A [`spoke_mesh`](#spoke-mesh) block supports the following:
 
-<a id="spoke-mesh-control-and-data-plane-mesh"></a>&#x2022; [`control_and_data_plane_mesh`](#spoke-mesh-control-and-data-plane-mesh) - Optional Block<br>Can be used for messages where no values are needed
+<a id="spoke-mesh-control-and-data-plane-mesh"></a>&#x2022; [`control_and_data_plane_mesh`](#spoke-mesh-control-and-data-plane-mesh) - Optional Block<br>Enable this option
 
-<a id="spoke-mesh-data-plane-mesh"></a>&#x2022; [`data_plane_mesh`](#spoke-mesh-data-plane-mesh) - Optional Block<br>Can be used for messages where no values are needed
+<a id="spoke-mesh-data-plane-mesh"></a>&#x2022; [`data_plane_mesh`](#spoke-mesh-data-plane-mesh) - Optional Block<br>Enable this option
 
 <a id="spoke-mesh-hub-mesh-group"></a>&#x2022; [`hub_mesh_group`](#spoke-mesh-hub-mesh-group) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Hub Mesh Group](#spoke-mesh-hub-mesh-group) below.
 

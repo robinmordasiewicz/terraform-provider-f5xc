@@ -90,9 +90,9 @@ A [`routes`](#routes) block supports the following:
 
 <a id="routes-disable-location-add"></a>&#x2022; [`disable_location_add`](#routes-disable-location-add) - Optional Bool<br>Disables append of x-F5 Distributed Cloud-location = `<RE-site-name>` at route level, if it is configured at virtual-host level. This configuration is ignored on CE sites
 
-<a id="injection-2c38a2"></a>&#x2022; [`inherited_bot_defense_javascript_injection`](#injection-2c38a2) - Optional Block<br>Can be used for messages where no values are needed
+<a id="injection-2c38a2"></a>&#x2022; [`inherited_bot_defense_javascript_injection`](#injection-2c38a2) - Optional Block<br>Enable this option
 
-<a id="routes-inherited-waf-exclusion"></a>&#x2022; [`inherited_waf_exclusion`](#routes-inherited-waf-exclusion) - Optional Block<br>Can be used for messages where no values are needed
+<a id="routes-inherited-waf-exclusion"></a>&#x2022; [`inherited_waf_exclusion`](#routes-inherited-waf-exclusion) - Optional Block<br>Enable this option
 
 <a id="routes-match"></a>&#x2022; [`match`](#routes-match) - Optional Block<br>Match. Route match condition<br>See [Match](#routes-match) below.
 
@@ -176,7 +176,7 @@ A [`headers`](#routes-match-headers) block (within [`routes.match`](#routes-matc
 
 An [`incoming_port`](#routes-match-incoming-port) block (within [`routes.match`](#routes-match)) supports the following:
 
-<a id="match-1d4edd"></a>&#x2022; [`no_port_match`](#match-1d4edd) - Optional Block<br>Can be used for messages where no values are needed
+<a id="match-1d4edd"></a>&#x2022; [`no_port_match`](#match-1d4edd) - Optional Block<br>Enable this option
 
 <a id="routes-match-incoming-port-port"></a>&#x2022; [`port`](#routes-match-incoming-port-port) - Optional Number<br>Exact Port to match
 
@@ -266,31 +266,31 @@ A [`response_cookies_to_add`](#routes-response-cookies-to-add) block (within [`r
 
 <a id="expiry-62b700"></a>&#x2022; [`add_expiry`](#expiry-62b700) - Optional String<br>Add expiry attribute
 
-<a id="httponly-c2890d"></a>&#x2022; [`add_httponly`](#httponly-c2890d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="httponly-c2890d"></a>&#x2022; [`add_httponly`](#httponly-c2890d) - Optional Block<br>Enable this option
 
-<a id="partitioned-aa1f08"></a>&#x2022; [`add_partitioned`](#partitioned-aa1f08) - Optional Block<br>Can be used for messages where no values are needed
+<a id="partitioned-aa1f08"></a>&#x2022; [`add_partitioned`](#partitioned-aa1f08) - Optional Block<br>Enable this option
 
 <a id="routes-response-cookies-to-add-add-path"></a>&#x2022; [`add_path`](#routes-response-cookies-to-add-add-path) - Optional String<br>Add path attribute
 
-<a id="secure-9cd35a"></a>&#x2022; [`add_secure`](#secure-9cd35a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="secure-9cd35a"></a>&#x2022; [`add_secure`](#secure-9cd35a) - Optional Block<br>Enable this option
 
-<a id="domain-c754cb"></a>&#x2022; [`ignore_domain`](#domain-c754cb) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domain-c754cb"></a>&#x2022; [`ignore_domain`](#domain-c754cb) - Optional Block<br>Enable this option
 
-<a id="expiry-44cdc8"></a>&#x2022; [`ignore_expiry`](#expiry-44cdc8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="expiry-44cdc8"></a>&#x2022; [`ignore_expiry`](#expiry-44cdc8) - Optional Block<br>Enable this option
 
-<a id="httponly-99def6"></a>&#x2022; [`ignore_httponly`](#httponly-99def6) - Optional Block<br>Can be used for messages where no values are needed
+<a id="httponly-99def6"></a>&#x2022; [`ignore_httponly`](#httponly-99def6) - Optional Block<br>Enable this option
 
-<a id="age-478fc0"></a>&#x2022; [`ignore_max_age`](#age-478fc0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="age-478fc0"></a>&#x2022; [`ignore_max_age`](#age-478fc0) - Optional Block<br>Enable this option
 
-<a id="partitioned-7a224c"></a>&#x2022; [`ignore_partitioned`](#partitioned-7a224c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="partitioned-7a224c"></a>&#x2022; [`ignore_partitioned`](#partitioned-7a224c) - Optional Block<br>Enable this option
 
-<a id="path-3677c1"></a>&#x2022; [`ignore_path`](#path-3677c1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="path-3677c1"></a>&#x2022; [`ignore_path`](#path-3677c1) - Optional Block<br>Enable this option
 
-<a id="samesite-0d04a2"></a>&#x2022; [`ignore_samesite`](#samesite-0d04a2) - Optional Block<br>Can be used for messages where no values are needed
+<a id="samesite-0d04a2"></a>&#x2022; [`ignore_samesite`](#samesite-0d04a2) - Optional Block<br>Enable this option
 
-<a id="secure-effaa1"></a>&#x2022; [`ignore_secure`](#secure-effaa1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="secure-effaa1"></a>&#x2022; [`ignore_secure`](#secure-effaa1) - Optional Block<br>Enable this option
 
-<a id="value-0e603e"></a>&#x2022; [`ignore_value`](#value-0e603e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="value-0e603e"></a>&#x2022; [`ignore_value`](#value-0e603e) - Optional Block<br>Enable this option
 
 <a id="value-e8b96e"></a>&#x2022; [`max_age_value`](#value-e8b96e) - Optional Number<br>Add max age attribute
 
@@ -298,11 +298,11 @@ A [`response_cookies_to_add`](#routes-response-cookies-to-add) block (within [`r
 
 <a id="overwrite-25fb1c"></a>&#x2022; [`overwrite`](#overwrite-25fb1c) - Optional Bool  Defaults to `do`<br>Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
 
-<a id="lax-3799dd"></a>&#x2022; [`samesite_lax`](#lax-3799dd) - Optional Block<br>Can be used for messages where no values are needed
+<a id="lax-3799dd"></a>&#x2022; [`samesite_lax`](#lax-3799dd) - Optional Block<br>Enable this option
 
-<a id="none-d063b8"></a>&#x2022; [`samesite_none`](#none-d063b8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-d063b8"></a>&#x2022; [`samesite_none`](#none-d063b8) - Optional Block<br>Enable this option
 
-<a id="strict-b3db69"></a>&#x2022; [`samesite_strict`](#strict-b3db69) - Optional Block<br>Can be used for messages where no values are needed
+<a id="strict-b3db69"></a>&#x2022; [`samesite_strict`](#strict-b3db69) - Optional Block<br>Enable this option
 
 <a id="value-172895"></a>&#x2022; [`secret_value`](#value-172895) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-172895) below.
 
@@ -366,7 +366,7 @@ A [`route_destination`](#routes-route-destination) block (within [`routes`](#rou
 
 <a id="routes-route-destination-destinations"></a>&#x2022; [`destinations`](#routes-route-destination-destinations) - Optional Block<br>When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured<br>See [Destinations](#routes-route-destination-destinations) below.
 
-<a id="cluster-098c21"></a>&#x2022; [`do_not_retract_cluster`](#cluster-098c21) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cluster-098c21"></a>&#x2022; [`do_not_retract_cluster`](#cluster-098c21) - Optional Block<br>Enable this option
 
 <a id="subsets-17b178"></a>&#x2022; [`endpoint_subsets`](#subsets-17b178) - Optional Block<br>Upstream cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer Labels field of endpoint object's metadata is used for subset
 
@@ -384,7 +384,7 @@ A [`route_destination`](#routes-route-destination) block (within [`routes`](#rou
 
 <a id="routes-route-destination-regex-rewrite"></a>&#x2022; [`regex_rewrite`](#routes-route-destination-regex-rewrite) - Optional Block<br>RegexMatchRewrite describes how to match a string and then produce a new string using a regular expression and a substitution string<br>See [Regex Rewrite](#routes-route-destination-regex-rewrite) below.
 
-<a id="cluster-96a194"></a>&#x2022; [`retract_cluster`](#cluster-96a194) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cluster-96a194"></a>&#x2022; [`retract_cluster`](#cluster-96a194) - Optional Block<br>Enable this option
 
 <a id="routes-route-destination-retry-policy"></a>&#x2022; [`retry_policy`](#routes-route-destination-retry-policy) - Optional Block<br>Retry policy configuration for route destination<br>See [Retry Policy](#routes-route-destination-retry-policy) below.
 
@@ -426,11 +426,11 @@ A [`cors_policy`](#routes-route-destination-cors-policy) block (within [`routes.
 
 A [`csrf_policy`](#routes-route-destination-csrf-policy) block (within [`routes.route_destination`](#routes-route-destination)) supports the following:
 
-<a id="domains-a58e7f"></a>&#x2022; [`all_load_balancer_domains`](#domains-a58e7f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domains-a58e7f"></a>&#x2022; [`all_load_balancer_domains`](#domains-a58e7f) - Optional Block<br>Enable this option
 
 <a id="list-904516"></a>&#x2022; [`custom_domain_list`](#list-904516) - Optional Block<br>List of domain names used for Host header matching<br>See [Custom Domain List](#list-904516) below.
 
-<a id="disabled-8b18cb"></a>&#x2022; [`disabled`](#disabled-8b18cb) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-8b18cb"></a>&#x2022; [`disabled`](#disabled-8b18cb) - Optional Block<br>Enable this option
 
 #### Routes Route Destination CSRF Policy Custom Domain List
 
@@ -478,25 +478,25 @@ A [`hash_policy`](#routes-route-destination-hash-policy) block (within [`routes.
 
 A [`cookie`](#cookie-fa8e38) block (within [`routes.route_destination.hash_policy`](#routes-route-destination-hash-policy)) supports the following:
 
-<a id="httponly-c187b0"></a>&#x2022; [`add_httponly`](#httponly-c187b0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="httponly-c187b0"></a>&#x2022; [`add_httponly`](#httponly-c187b0) - Optional Block<br>Enable this option
 
-<a id="secure-141faf"></a>&#x2022; [`add_secure`](#secure-141faf) - Optional Block<br>Can be used for messages where no values are needed
+<a id="secure-141faf"></a>&#x2022; [`add_secure`](#secure-141faf) - Optional Block<br>Enable this option
 
-<a id="httponly-d1eb99"></a>&#x2022; [`ignore_httponly`](#httponly-d1eb99) - Optional Block<br>Can be used for messages where no values are needed
+<a id="httponly-d1eb99"></a>&#x2022; [`ignore_httponly`](#httponly-d1eb99) - Optional Block<br>Enable this option
 
-<a id="samesite-dc4309"></a>&#x2022; [`ignore_samesite`](#samesite-dc4309) - Optional Block<br>Can be used for messages where no values are needed
+<a id="samesite-dc4309"></a>&#x2022; [`ignore_samesite`](#samesite-dc4309) - Optional Block<br>Enable this option
 
-<a id="secure-9eb9ca"></a>&#x2022; [`ignore_secure`](#secure-9eb9ca) - Optional Block<br>Can be used for messages where no values are needed
+<a id="secure-9eb9ca"></a>&#x2022; [`ignore_secure`](#secure-9eb9ca) - Optional Block<br>Enable this option
 
 <a id="name-a648a7"></a>&#x2022; [`name`](#name-a648a7) - Optional String<br>The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced
 
 <a id="path-b96c24"></a>&#x2022; [`path`](#path-b96c24) - Optional String<br>The name of the path for the cookie. If no path is specified here, no path will be set for the cookie
 
-<a id="lax-fbe3d9"></a>&#x2022; [`samesite_lax`](#lax-fbe3d9) - Optional Block<br>Can be used for messages where no values are needed
+<a id="lax-fbe3d9"></a>&#x2022; [`samesite_lax`](#lax-fbe3d9) - Optional Block<br>Enable this option
 
-<a id="none-087d30"></a>&#x2022; [`samesite_none`](#none-087d30) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-087d30"></a>&#x2022; [`samesite_none`](#none-087d30) - Optional Block<br>Enable this option
 
-<a id="strict-3e3555"></a>&#x2022; [`samesite_strict`](#strict-3e3555) - Optional Block<br>Can be used for messages where no values are needed
+<a id="strict-3e3555"></a>&#x2022; [`samesite_strict`](#strict-3e3555) - Optional Block<br>Enable this option
 
 <a id="ttl-e740ae"></a>&#x2022; [`ttl`](#ttl-e740ae) - Optional Number<br>If specified, a cookie with the TTL will be generated if the cookie is not present. If the TTL is present and zero, the generated cookie will be a session cookie. TTL value is in milliseconds
 
@@ -534,11 +534,11 @@ A [`percent`](#percent-e76235) block (within [`routes.route_destination.mirror_p
 
 A [`query_params`](#routes-route-destination-query-params) block (within [`routes.route_destination`](#routes-route-destination)) supports the following:
 
-<a id="params-29da85"></a>&#x2022; [`remove_all_params`](#params-29da85) - Optional Block<br>Can be used for messages where no values are needed
+<a id="params-29da85"></a>&#x2022; [`remove_all_params`](#params-29da85) - Optional Block<br>Enable this option
 
 <a id="params-cfccb5"></a>&#x2022; [`replace_params`](#params-cfccb5) - Optional String
 
-<a id="params-7e3845"></a>&#x2022; [`retain_all_params`](#params-7e3845) - Optional Block<br>Can be used for messages where no values are needed
+<a id="params-7e3845"></a>&#x2022; [`retain_all_params`](#params-7e3845) - Optional Block<br>Enable this option
 
 #### Routes Route Destination Regex Rewrite
 
@@ -602,13 +602,13 @@ A [`route_redirect`](#routes-route-redirect) block (within [`routes`](#routes)) 
 
 <a id="routes-route-redirect-proto-redirect"></a>&#x2022; [`proto_redirect`](#routes-route-redirect-proto-redirect) - Optional String<br>Swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done
 
-<a id="routes-route-redirect-remove-all-params"></a>&#x2022; [`remove_all_params`](#routes-route-redirect-remove-all-params) - Optional Block<br>Can be used for messages where no values are needed
+<a id="routes-route-redirect-remove-all-params"></a>&#x2022; [`remove_all_params`](#routes-route-redirect-remove-all-params) - Optional Block<br>Enable this option
 
 <a id="routes-route-redirect-replace-params"></a>&#x2022; [`replace_params`](#routes-route-redirect-replace-params) - Optional String
 
 <a id="routes-route-redirect-response-code"></a>&#x2022; [`response_code`](#routes-route-redirect-response-code) - Optional Number<br>The HTTP status code to use in the redirect response
 
-<a id="routes-route-redirect-retain-all-params"></a>&#x2022; [`retain_all_params`](#routes-route-redirect-retain-all-params) - Optional Block<br>Can be used for messages where no values are needed
+<a id="routes-route-redirect-retain-all-params"></a>&#x2022; [`retain_all_params`](#routes-route-redirect-retain-all-params) - Optional Block<br>Enable this option
 
 #### Routes Service Policy
 
@@ -632,9 +632,9 @@ A [`waf_type`](#routes-waf-type) block (within [`routes`](#routes)) supports the
 
 <a id="routes-waf-type-app-firewall"></a>&#x2022; [`app_firewall`](#routes-waf-type-app-firewall) - Optional Block<br>List of references to the app_firewall configuration objects<br>See [App Firewall](#routes-waf-type-app-firewall) below.
 
-<a id="routes-waf-type-disable-waf"></a>&#x2022; [`disable_waf`](#routes-waf-type-disable-waf) - Optional Block<br>Can be used for messages where no values are needed
+<a id="routes-waf-type-disable-waf"></a>&#x2022; [`disable_waf`](#routes-waf-type-disable-waf) - Optional Block<br>Enable this option
 
-<a id="routes-waf-type-inherit-waf"></a>&#x2022; [`inherit_waf`](#routes-waf-type-inherit-waf) - Optional Block<br>Can be used for messages where no values are needed
+<a id="routes-waf-type-inherit-waf"></a>&#x2022; [`inherit_waf`](#routes-waf-type-inherit-waf) - Optional Block<br>Enable this option
 
 #### Routes WAF Type App Firewall
 

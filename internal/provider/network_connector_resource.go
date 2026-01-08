@@ -335,7 +335,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 				Delete: true,
 			}),
 			"disable_forward_proxy": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_forward_proxy, enable_forward_proxy; Default: disable_forward_proxy] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable_forward_proxy, enable_forward_proxy; Default: disable_forward_proxy] Enable this option",
 			},
 			"enable_forward_proxy": schema.SingleNestedBlock{
 				MarkdownDescription: "Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the..",
@@ -361,7 +361,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"no_interception": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"tls_intercept": schema.SingleNestedBlock{
 						MarkdownDescription: "Configuration to enable TLS interception.",
@@ -396,7 +396,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 										},
 									},
 									"disable_ocsp_stapling": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"private_key": schema.SingleNestedBlock{
 										MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -435,12 +435,12 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 										},
 									},
 									"use_system_defaults": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
 							"enable_for_all_domains": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"policy": schema.SingleNestedBlock{
 								MarkdownDescription: "Policy to enable or disable TLS interception.",
@@ -452,7 +452,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"disable_interception": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"domain_match": schema.SingleNestedBlock{
 													MarkdownDescription: "Domains. Domains names.",
@@ -472,7 +472,7 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 													},
 												},
 												"enable_interception": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -480,10 +480,10 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 								},
 							},
 							"volterra_certificate": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"volterra_trusted_ca": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -521,10 +521,10 @@ func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.Sche
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_gw_snat": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"interface_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},

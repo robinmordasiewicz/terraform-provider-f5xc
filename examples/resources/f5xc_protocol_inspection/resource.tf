@@ -20,7 +20,7 @@ resource "f5xc_protocol_inspection" "example" {
   enable_disable_compliance_checks {
     # Configure enable_disable_compliance_checks settings
   }
-  # Can be used for messages where no values are needed.
+  # Enable this option
   disable_compliance_checks {
     # Configure disable_compliance_checks settings
   }

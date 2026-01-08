@@ -24,7 +24,7 @@ resource "f5xc_subnet" "example" {
   layer2_intf_ref {
     # Configure layer2_intf_ref settings
   }
-  # Can be used for messages where no values are needed.
+  # Enable this option
   connect_to_slo {
     # Configure connect_to_slo settings
   }

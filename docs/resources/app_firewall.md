@@ -78,15 +78,15 @@ resource "f5xc_app_firewall" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="ai-risk-based-blocking"></a>[`ai_risk_based_blocking`](#ai-risk-based-blocking) - Optional Block<br>All Attack Types, including high, medium, and low accuracy signatures, automatic Attack Signature tuning, Threat Campaigns, and all Violations will be enabled. AI and ML algorithms will assess request risk, and only high-risk requests will be blocked by default. This feature is in preview mode<br>See [Ai Risk Based Blocking](#ai-risk-based-blocking) below for details.
-<br><br>&#x2022; <a id="default-detection-settings"></a>[`default_detection_settings`](#default-detection-settings) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="default-detection-settings"></a>[`default_detection_settings`](#default-detection-settings) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="allow-all-response-codes"></a>[`allow_all_response_codes`](#allow-all-response-codes) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="allow-all-response-codes"></a>[`allow_all_response_codes`](#allow-all-response-codes) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="allowed-response-codes"></a>[`allowed_response_codes`](#allowed-response-codes) - Optional Block<br>List of HTTP response status codes that are allowed<br>See [Allowed Response Codes](#allowed-response-codes) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="blocking"></a>[`blocking`](#blocking) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="monitoring"></a>[`monitoring`](#monitoring) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="blocking"></a>[`blocking`](#blocking) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="monitoring"></a>[`monitoring`](#monitoring) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="blocking-page"></a>[`blocking_page`](#blocking-page) - Optional Block<br>Custom Blocking Response Page. Custom blocking response page body<br>See [Blocking Page](#blocking-page) below for details.
@@ -96,17 +96,17 @@ resource "f5xc_app_firewall" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="custom-anonymization"></a>[`custom_anonymization`](#custom-anonymization) - Optional Block<br>Anonymization settings which is a list of HTTP headers, parameters and cookies<br>See [Custom Anonymization](#custom-anonymization) below for details.
-<br><br>&#x2022; <a id="default-anonymization"></a>[`default_anonymization`](#default-anonymization) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="default-anonymization"></a>[`default_anonymization`](#default-anonymization) - Optional Block<br>Enable this option
 
-<a id="default-bot-setting"></a>&#x2022; [`default_bot_setting`](#default-bot-setting) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-bot-setting"></a>&#x2022; [`default_bot_setting`](#default-bot-setting) - Optional Block<br>Enable this option
 
 <a id="detection-settings"></a>&#x2022; [`detection_settings`](#detection-settings) - Optional Block<br>Specifies detection settings to be used by WAF<br>See [Detection Settings](#detection-settings) below for details.
 
-<a id="disable-anonymization"></a>&#x2022; [`disable_anonymization`](#disable-anonymization) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disable-anonymization"></a>&#x2022; [`disable_anonymization`](#disable-anonymization) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="use-default-blocking-page"></a>&#x2022; [`use_default_blocking_page`](#use-default-blocking-page) - Optional Block<br>Can be used for messages where no values are needed
+<a id="use-default-blocking-page"></a>&#x2022; [`use_default_blocking_page`](#use-default-blocking-page) - Optional Block<br>Enable this option
 
 ### Attributes Reference
 
@@ -190,19 +190,19 @@ A [`detection_settings`](#detection-settings) block supports the following:
 
 <a id="setting-37e8d9"></a>&#x2022; [`bot_protection_setting`](#setting-37e8d9) - Optional Block<br>Bot Protection. Configuration of WAF Bot Protection<br>See [Bot Protection Setting](#setting-37e8d9) below.
 
-<a id="detection-settings-default-bot-setting"></a>&#x2022; [`default_bot_setting`](#detection-settings-default-bot-setting) - Optional Block<br>Can be used for messages where no values are needed
+<a id="detection-settings-default-bot-setting"></a>&#x2022; [`default_bot_setting`](#detection-settings-default-bot-setting) - Optional Block<br>Enable this option
 
-<a id="settings-da3fa7"></a>&#x2022; [`default_violation_settings`](#settings-da3fa7) - Optional Block<br>Can be used for messages where no values are needed
+<a id="settings-da3fa7"></a>&#x2022; [`default_violation_settings`](#settings-da3fa7) - Optional Block<br>Enable this option
 
-<a id="detection-settings-disable-staging"></a>&#x2022; [`disable_staging`](#detection-settings-disable-staging) - Optional Block<br>Can be used for messages where no values are needed
+<a id="detection-settings-disable-staging"></a>&#x2022; [`disable_staging`](#detection-settings-disable-staging) - Optional Block<br>Enable this option
 
-<a id="detection-settings-disable-suppression"></a>&#x2022; [`disable_suppression`](#detection-settings-disable-suppression) - Optional Block<br>Can be used for messages where no values are needed
+<a id="detection-settings-disable-suppression"></a>&#x2022; [`disable_suppression`](#detection-settings-disable-suppression) - Optional Block<br>Enable this option
 
-<a id="campaigns-7bf1af"></a>&#x2022; [`disable_threat_campaigns`](#campaigns-7bf1af) - Optional Block<br>Can be used for messages where no values are needed
+<a id="campaigns-7bf1af"></a>&#x2022; [`disable_threat_campaigns`](#campaigns-7bf1af) - Optional Block<br>Enable this option
 
-<a id="detection-settings-enable-suppression"></a>&#x2022; [`enable_suppression`](#detection-settings-enable-suppression) - Optional Block<br>Can be used for messages where no values are needed
+<a id="detection-settings-enable-suppression"></a>&#x2022; [`enable_suppression`](#detection-settings-enable-suppression) - Optional Block<br>Enable this option
 
-<a id="campaigns-16aa5e"></a>&#x2022; [`enable_threat_campaigns`](#campaigns-16aa5e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="campaigns-16aa5e"></a>&#x2022; [`enable_threat_campaigns`](#campaigns-16aa5e) - Optional Block<br>Enable this option
 
 <a id="setting-306450"></a>&#x2022; [`signature_selection_setting`](#setting-306450) - Optional Block<br>Attack Signatures are patterns that identify attacks on a web application and its components<br>See [Signature Selection Setting](#setting-306450) below.
 
@@ -228,13 +228,13 @@ A [`signature_selection_setting`](#setting-306450) block (within [`detection_set
 
 <a id="settings-72f64b"></a>&#x2022; [`attack_type_settings`](#settings-72f64b) - Optional Block<br>Specifies attack-type settings to be used by WAF<br>See [Attack Type Settings](#settings-72f64b) below.
 
-<a id="settings-067018"></a>&#x2022; [`default_attack_type_settings`](#settings-067018) - Optional Block<br>Can be used for messages where no values are needed
+<a id="settings-067018"></a>&#x2022; [`default_attack_type_settings`](#settings-067018) - Optional Block<br>Enable this option
 
-<a id="signatures-38e545"></a>&#x2022; [`high_medium_accuracy_signatures`](#signatures-38e545) - Optional Block<br>Can be used for messages where no values are needed
+<a id="signatures-38e545"></a>&#x2022; [`high_medium_accuracy_signatures`](#signatures-38e545) - Optional Block<br>Enable this option
 
-<a id="signatures-b902f3"></a>&#x2022; [`high_medium_low_accuracy_signatures`](#signatures-b902f3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="signatures-b902f3"></a>&#x2022; [`high_medium_low_accuracy_signatures`](#signatures-b902f3) - Optional Block<br>Enable this option
 
-<a id="signatures-a0c47d"></a>&#x2022; [`only_high_accuracy_signatures`](#signatures-a0c47d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="signatures-a0c47d"></a>&#x2022; [`only_high_accuracy_signatures`](#signatures-a0c47d) - Optional Block<br>Enable this option
 
 #### Detection Settings Signature Selection Setting Attack Type Settings
 

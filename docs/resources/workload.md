@@ -155,7 +155,7 @@ A [`containers`](#job-containers) block (within [`job`](#job)) supports the foll
 
 <a id="job-containers-custom-flavor"></a>&#x2022; [`custom_flavor`](#job-containers-custom-flavor) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#job-containers-custom-flavor) below.
 
-<a id="job-containers-default-flavor"></a>&#x2022; [`default_flavor`](#job-containers-default-flavor) - Optional Block<br>Can be used for messages where no values are needed
+<a id="job-containers-default-flavor"></a>&#x2022; [`default_flavor`](#job-containers-default-flavor) - Optional Block<br>Enable this option
 
 <a id="job-containers-flavor"></a>&#x2022; [`flavor`](#job-containers-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have
 
@@ -187,7 +187,7 @@ An [`image`](#job-containers-image) block (within [`job.containers`](#job-contai
 
 <a id="job-containers-image-name"></a>&#x2022; [`name`](#job-containers-image-name) - Optional String<br>Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed
 
-<a id="job-containers-image-public"></a>&#x2022; [`public`](#job-containers-image-public) - Optional Block<br>Can be used for messages where no values are needed
+<a id="job-containers-image-public"></a>&#x2022; [`public`](#job-containers-image-public) - Optional Block<br>Enable this option
 
 <a id="job-containers-image-pull-policy"></a>&#x2022; [`pull_policy`](#job-containers-image-pull-policy) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only
 
@@ -309,9 +309,9 @@ A [`tcp_health_check`](#check-df7310) block (within [`job.containers.readiness_c
 
 A [`deploy_options`](#job-deploy-options) block (within [`job`](#job)) supports the following:
 
-<a id="job-deploy-options-all-res"></a>&#x2022; [`all_res`](#job-deploy-options-all-res) - Optional Block<br>Can be used for messages where no values are needed
+<a id="job-deploy-options-all-res"></a>&#x2022; [`all_res`](#job-deploy-options-all-res) - Optional Block<br>Enable this option
 
-<a id="sites-7d16a9"></a>&#x2022; [`default_virtual_sites`](#sites-7d16a9) - Optional Block<br>Can be used for messages where no values are needed
+<a id="sites-7d16a9"></a>&#x2022; [`default_virtual_sites`](#sites-7d16a9) - Optional Block<br>Enable this option
 
 <a id="job-deploy-options-deploy-ce-sites"></a>&#x2022; [`deploy_ce_sites`](#job-deploy-options-deploy-ce-sites) - Optional Block<br>Defines a way to deploy a workload on specific Customer sites<br>See [Deploy CE Sites](#job-deploy-options-deploy-ce-sites) below.
 
@@ -447,7 +447,7 @@ A [`storage`](#job-volumes-persistent-volume-storage) block (within [`job.volume
 
 <a id="name-a51d52"></a>&#x2022; [`class_name`](#name-a51d52) - Optional String<br>Use the specified class name
 
-<a id="default-3128b0"></a>&#x2022; [`default`](#default-3128b0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-3128b0"></a>&#x2022; [`default`](#default-3128b0) - Optional Block<br>Enable this option
 
 <a id="size-81eddf"></a>&#x2022; [`storage_size`](#size-81eddf) - Optional Number<br>Size in GiB of the persistent storage
 
@@ -465,7 +465,7 @@ A [`service`](#service) block supports the following:
 
 <a id="service-num-replicas"></a>&#x2022; [`num_replicas`](#service-num-replicas) - Optional Number<br>Number of replicas of service to spawn per site
 
-<a id="service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#service-scale-to-zero) - Optional Block<br>Can be used for messages where no values are needed
+<a id="service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#service-scale-to-zero) - Optional Block<br>Enable this option
 
 <a id="service-volumes"></a>&#x2022; [`volumes`](#service-volumes) - Optional Block<br>Volumes. Volumes for the service<br>See [Volumes](#service-volumes) below.
 
@@ -479,7 +479,7 @@ An [`advertise_options`](#service-advertise-options) block (within [`service`](#
 
 <a id="public-fac1e6"></a>&#x2022; [`advertise_on_public`](#public-fac1e6) - Optional Block<br>Advertise this workload via loadbalancer on Internet with default VIP<br>See [Advertise On Public](#public-fac1e6) below.
 
-<a id="advertise-e33e18"></a>&#x2022; [`do_not_advertise`](#advertise-e33e18) - Optional Block<br>Can be used for messages where no values are needed
+<a id="advertise-e33e18"></a>&#x2022; [`do_not_advertise`](#advertise-e33e18) - Optional Block<br>Enable this option
 
 #### Service Advertise Options Advertise Custom
 
@@ -1347,7 +1347,7 @@ A [`containers`](#service-containers) block (within [`service`](#service)) suppo
 
 <a id="service-containers-custom-flavor"></a>&#x2022; [`custom_flavor`](#service-containers-custom-flavor) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#service-containers-custom-flavor) below.
 
-<a id="service-containers-default-flavor"></a>&#x2022; [`default_flavor`](#service-containers-default-flavor) - Optional Block<br>Can be used for messages where no values are needed
+<a id="service-containers-default-flavor"></a>&#x2022; [`default_flavor`](#service-containers-default-flavor) - Optional Block<br>Enable this option
 
 <a id="service-containers-flavor"></a>&#x2022; [`flavor`](#service-containers-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have
 
@@ -1379,7 +1379,7 @@ An [`image`](#service-containers-image) block (within [`service.containers`](#se
 
 <a id="service-containers-image-name"></a>&#x2022; [`name`](#service-containers-image-name) - Optional String<br>Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed
 
-<a id="service-containers-image-public"></a>&#x2022; [`public`](#service-containers-image-public) - Optional Block<br>Can be used for messages where no values are needed
+<a id="service-containers-image-public"></a>&#x2022; [`public`](#service-containers-image-public) - Optional Block<br>Enable this option
 
 <a id="service-containers-image-pull-policy"></a>&#x2022; [`pull_policy`](#service-containers-image-pull-policy) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only
 
@@ -1501,9 +1501,9 @@ A [`tcp_health_check`](#check-6b7ea7) block (within [`service.containers.readine
 
 A [`deploy_options`](#service-deploy-options) block (within [`service`](#service)) supports the following:
 
-<a id="service-deploy-options-all-res"></a>&#x2022; [`all_res`](#service-deploy-options-all-res) - Optional Block<br>Can be used for messages where no values are needed
+<a id="service-deploy-options-all-res"></a>&#x2022; [`all_res`](#service-deploy-options-all-res) - Optional Block<br>Enable this option
 
-<a id="sites-736a02"></a>&#x2022; [`default_virtual_sites`](#sites-736a02) - Optional Block<br>Can be used for messages where no values are needed
+<a id="sites-736a02"></a>&#x2022; [`default_virtual_sites`](#sites-736a02) - Optional Block<br>Enable this option
 
 <a id="service-deploy-options-deploy-ce-sites"></a>&#x2022; [`deploy_ce_sites`](#service-deploy-options-deploy-ce-sites) - Optional Block<br>Defines a way to deploy a workload on specific Customer sites<br>See [Deploy CE Sites](#service-deploy-options-deploy-ce-sites) below.
 
@@ -1639,7 +1639,7 @@ A [`storage`](#storage-aa2194) block (within [`service.volumes.persistent_volume
 
 <a id="name-4c16c5"></a>&#x2022; [`class_name`](#name-4c16c5) - Optional String<br>Use the specified class name
 
-<a id="default-36c85c"></a>&#x2022; [`default`](#default-36c85c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-36c85c"></a>&#x2022; [`default`](#default-36c85c) - Optional Block<br>Enable this option
 
 <a id="size-fea8d4"></a>&#x2022; [`storage_size`](#size-fea8d4) - Optional Number<br>Size in GiB of the persistent storage
 
@@ -1651,9 +1651,9 @@ A [`simple_service`](#simple-service) block supports the following:
 
 <a id="simple-service-container"></a>&#x2022; [`container`](#simple-service-container) - Optional Block<br>ContainerType configures the container information<br>See [Container](#simple-service-container) below.
 
-<a id="simple-service-disabled"></a>&#x2022; [`disabled`](#simple-service-disabled) - Optional Block<br>Can be used for messages where no values are needed
+<a id="simple-service-disabled"></a>&#x2022; [`disabled`](#simple-service-disabled) - Optional Block<br>Enable this option
 
-<a id="simple-service-do-not-advertise"></a>&#x2022; [`do_not_advertise`](#simple-service-do-not-advertise) - Optional Block<br>Can be used for messages where no values are needed
+<a id="simple-service-do-not-advertise"></a>&#x2022; [`do_not_advertise`](#simple-service-do-not-advertise) - Optional Block<br>Enable this option
 
 <a id="simple-service-enabled"></a>&#x2022; [`enabled`](#simple-service-enabled) - Optional Block<br>Persistent storage volume configuration for the workload<br>See [Enabled](#simple-service-enabled) below.
 
@@ -1715,7 +1715,7 @@ A [`container`](#simple-service-container) block (within [`simple_service`](#sim
 
 <a id="simple-service-container-custom-flavor"></a>&#x2022; [`custom_flavor`](#simple-service-container-custom-flavor) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#simple-service-container-custom-flavor) below.
 
-<a id="simple-service-container-default-flavor"></a>&#x2022; [`default_flavor`](#simple-service-container-default-flavor) - Optional Block<br>Can be used for messages where no values are needed
+<a id="simple-service-container-default-flavor"></a>&#x2022; [`default_flavor`](#simple-service-container-default-flavor) - Optional Block<br>Enable this option
 
 <a id="simple-service-container-flavor"></a>&#x2022; [`flavor`](#simple-service-container-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have
 
@@ -1747,7 +1747,7 @@ An [`image`](#simple-service-container-image) block (within [`simple_service.con
 
 <a id="simple-service-container-image-name"></a>&#x2022; [`name`](#simple-service-container-image-name) - Optional String<br>Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed
 
-<a id="simple-service-container-image-public"></a>&#x2022; [`public`](#simple-service-container-image-public) - Optional Block<br>Can be used for messages where no values are needed
+<a id="simple-service-container-image-public"></a>&#x2022; [`public`](#simple-service-container-image-public) - Optional Block<br>Enable this option
 
 <a id="policy-b2dd3c"></a>&#x2022; [`pull_policy`](#policy-b2dd3c) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only
 
@@ -1875,7 +1875,7 @@ A [`storage`](#storage-8c6930) block (within [`simple_service.enabled.persistent
 
 <a id="name-b14a4c"></a>&#x2022; [`class_name`](#name-b14a4c) - Optional String<br>Use the specified class name
 
-<a id="default-f48482"></a>&#x2022; [`default`](#default-f48482) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-f48482"></a>&#x2022; [`default`](#default-f48482) - Optional Block<br>Enable this option
 
 <a id="size-17db0b"></a>&#x2022; [`storage_size`](#size-17db0b) - Optional Number<br>Size in GiB of the persistent storage
 
@@ -1903,7 +1903,7 @@ A [`stateful_service`](#stateful-service) block supports the following:
 
 <a id="stateful-service-persistent-volumes"></a>&#x2022; [`persistent_volumes`](#stateful-service-persistent-volumes) - Optional Block<br>Persistent storage configuration for the service<br>See [Persistent Volumes](#stateful-service-persistent-volumes) below.
 
-<a id="stateful-service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#stateful-service-scale-to-zero) - Optional Block<br>Can be used for messages where no values are needed
+<a id="stateful-service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#stateful-service-scale-to-zero) - Optional Block<br>Enable this option
 
 <a id="stateful-service-volumes"></a>&#x2022; [`volumes`](#stateful-service-volumes) - Optional Block<br>Ephemeral Volumes. Ephemeral volumes for the service<br>See [Volumes](#stateful-service-volumes) below.
 
@@ -1917,7 +1917,7 @@ An [`advertise_options`](#stateful-service-advertise-options) block (within [`st
 
 <a id="public-86b094"></a>&#x2022; [`advertise_on_public`](#public-86b094) - Optional Block<br>Advertise this workload via loadbalancer on Internet with default VIP<br>See [Advertise On Public](#public-86b094) below.
 
-<a id="advertise-a4c726"></a>&#x2022; [`do_not_advertise`](#advertise-a4c726) - Optional Block<br>Can be used for messages where no values are needed
+<a id="advertise-a4c726"></a>&#x2022; [`do_not_advertise`](#advertise-a4c726) - Optional Block<br>Enable this option
 
 #### Stateful Service Advertise Options Advertise Custom
 
@@ -2767,7 +2767,7 @@ A [`containers`](#stateful-service-containers) block (within [`stateful_service`
 
 <a id="flavor-0d2be0"></a>&#x2022; [`custom_flavor`](#flavor-0d2be0) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#flavor-0d2be0) below.
 
-<a id="flavor-c485c6"></a>&#x2022; [`default_flavor`](#flavor-c485c6) - Optional Block<br>Can be used for messages where no values are needed
+<a id="flavor-c485c6"></a>&#x2022; [`default_flavor`](#flavor-c485c6) - Optional Block<br>Enable this option
 
 <a id="stateful-service-containers-flavor"></a>&#x2022; [`flavor`](#stateful-service-containers-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have
 
@@ -2799,7 +2799,7 @@ An [`image`](#stateful-service-containers-image) block (within [`stateful_servic
 
 <a id="stateful-service-containers-image-name"></a>&#x2022; [`name`](#stateful-service-containers-image-name) - Optional String<br>Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed
 
-<a id="public-27eb7d"></a>&#x2022; [`public`](#public-27eb7d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="public-27eb7d"></a>&#x2022; [`public`](#public-27eb7d) - Optional Block<br>Enable this option
 
 <a id="policy-013972"></a>&#x2022; [`pull_policy`](#policy-013972) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only
 
@@ -2897,9 +2897,9 @@ A [`readiness_check`](#check-81b532) block (within [`stateful_service.containers
 
 A [`deploy_options`](#stateful-service-deploy-options) block (within [`stateful_service`](#stateful-service)) supports the following:
 
-<a id="stateful-service-deploy-options-all-res"></a>&#x2022; [`all_res`](#stateful-service-deploy-options-all-res) - Optional Block<br>Can be used for messages where no values are needed
+<a id="stateful-service-deploy-options-all-res"></a>&#x2022; [`all_res`](#stateful-service-deploy-options-all-res) - Optional Block<br>Enable this option
 
-<a id="sites-4ecc3f"></a>&#x2022; [`default_virtual_sites`](#sites-4ecc3f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="sites-4ecc3f"></a>&#x2022; [`default_virtual_sites`](#sites-4ecc3f) - Optional Block<br>Enable this option
 
 <a id="sites-6c0f50"></a>&#x2022; [`deploy_ce_sites`](#sites-6c0f50) - Optional Block<br>Defines a way to deploy a workload on specific Customer sites<br>See [Deploy CE Sites](#sites-6c0f50) below.
 
@@ -2979,7 +2979,7 @@ A [`storage`](#storage-33a80f) block (within [`stateful_service.persistent_volum
 
 <a id="name-6dd4e7"></a>&#x2022; [`class_name`](#name-6dd4e7) - Optional String<br>Use the specified class name
 
-<a id="default-def9af"></a>&#x2022; [`default`](#default-def9af) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-def9af"></a>&#x2022; [`default`](#default-def9af) - Optional Block<br>Enable this option
 
 <a id="size-f9136f"></a>&#x2022; [`storage_size`](#size-f9136f) - Optional Number<br>Size in GiB of the persistent storage
 

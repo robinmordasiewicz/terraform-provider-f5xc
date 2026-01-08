@@ -360,7 +360,7 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 						},
 						Blocks: map[string]schema.Block{
 							"dpd_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"dpd_keep_alive_timer": schema.SingleNestedBlock{
 								MarkdownDescription: "Keepalive Timer.",
@@ -414,10 +414,10 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"initiator": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"responder": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"rm_ip_address": schema.SingleNestedBlock{
 								MarkdownDescription: "IP Address used to specify an IPv4 or IPv6 address.",
@@ -444,10 +444,10 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"use_default_local_ike_id": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_default_remote_ike_id": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -519,10 +519,10 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"site_local_inside_network": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"site_local_network": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"tunnel_eps": schema.ListNestedBlock{
 								MarkdownDescription: "Configure tunnel parameters, local and remote IP addresses .",

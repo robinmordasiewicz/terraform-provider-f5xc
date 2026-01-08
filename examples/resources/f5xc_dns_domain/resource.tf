@@ -16,7 +16,7 @@ resource "f5xc_dns_domain" "example" {
   }
 
   # Resource-specific configuration
-  # Can be used for messages where no values are needed.
+  # Enable this option
   volterra_managed {
     # Configure volterra_managed settings
   }

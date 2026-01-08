@@ -368,7 +368,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 				Blocks: map[string]schema.Block{
 					"cache_bypass": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"eligible_for_cache": schema.SingleNestedBlock{
 						MarkdownDescription: "Cache Action OPTIONS. List of OPTIONS for Cache Action.",

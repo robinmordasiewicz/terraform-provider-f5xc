@@ -384,7 +384,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"no_snat_pool": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"snat_pool": schema.SingleNestedBlock{
 						MarkdownDescription: "List of IPv4 prefixes that represent an endpoint.",
@@ -412,10 +412,10 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"disable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Reference. A site direct reference .",
@@ -513,10 +513,10 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"disable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Virtual_site direct reference .",

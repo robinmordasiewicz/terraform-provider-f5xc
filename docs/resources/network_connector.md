@@ -65,7 +65,7 @@ resource "f5xc_network_connector" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="disable-forward-proxy"></a>[`disable_forward_proxy`](#disable-forward-proxy) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-forward-proxy"></a>[`disable_forward_proxy`](#disable-forward-proxy) - Optional Block<br>Enable this option
 
 <a id="enable-forward-proxy"></a>&#x2022; [`enable_forward_proxy`](#enable-forward-proxy) - Optional Block<br>Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the<br>See [Enable Forward Proxy](#enable-forward-proxy) below for details.
 
@@ -92,7 +92,7 @@ An [`enable_forward_proxy`](#enable-forward-proxy) block supports the following:
 
 <a id="attempts-e04850"></a>&#x2022; [`max_connect_attempts`](#attempts-e04850) - Optional Number  Defaults to `1`<br>Specifies the allowed number of retries on connect failure to upstream server
 
-<a id="enable-forward-proxy-no-interception"></a>&#x2022; [`no_interception`](#enable-forward-proxy-no-interception) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enable-forward-proxy-no-interception"></a>&#x2022; [`no_interception`](#enable-forward-proxy-no-interception) - Optional Block<br>Enable this option
 
 <a id="enable-forward-proxy-tls-intercept"></a>&#x2022; [`tls_intercept`](#enable-forward-proxy-tls-intercept) - Optional Block<br>Configuration to enable TLS interception<br>See [TLS Intercept](#enable-forward-proxy-tls-intercept) below.
 
@@ -106,15 +106,15 @@ A [`tls_intercept`](#enable-forward-proxy-tls-intercept) block (within [`enable_
 
 <a id="certificate-1f025c"></a>&#x2022; [`custom_certificate`](#certificate-1f025c) - Optional Block<br>TLS Certificate. Handle to fetch certificate and key<br>See [Custom Certificate](#certificate-1f025c) below.
 
-<a id="domains-448895"></a>&#x2022; [`enable_for_all_domains`](#domains-448895) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domains-448895"></a>&#x2022; [`enable_for_all_domains`](#domains-448895) - Optional Block<br>Enable this option
 
 <a id="policy-3a19ff"></a>&#x2022; [`policy`](#policy-3a19ff) - Optional Block<br>Policy to enable or disable TLS interception<br>See [Policy](#policy-3a19ff) below.
 
 <a id="url-498586"></a>&#x2022; [`trusted_ca_url`](#url-498586) - Optional String<br>Custom Root CA Certificate for validating upstream server certificate
 
-<a id="certificate-028e29"></a>&#x2022; [`volterra_certificate`](#certificate-028e29) - Optional Block<br>Can be used for messages where no values are needed
+<a id="certificate-028e29"></a>&#x2022; [`volterra_certificate`](#certificate-028e29) - Optional Block<br>Enable this option
 
-<a id="trusted-ca-89cb15"></a>&#x2022; [`volterra_trusted_ca`](#trusted-ca-89cb15) - Optional Block<br>Can be used for messages where no values are needed
+<a id="trusted-ca-89cb15"></a>&#x2022; [`volterra_trusted_ca`](#trusted-ca-89cb15) - Optional Block<br>Enable this option
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate
 
@@ -126,11 +126,11 @@ A [`custom_certificate`](#certificate-1f025c) block (within [`enable_forward_pro
 
 <a id="spec-00ecd4"></a>&#x2022; [`description_spec`](#spec-00ecd4) - Optional String<br>Description. Description for the certificate
 
-<a id="stapling-c941e6"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-c941e6) - Optional Block<br>Can be used for messages where no values are needed
+<a id="stapling-c941e6"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-c941e6) - Optional Block<br>Enable this option
 
 <a id="key-363f83"></a>&#x2022; [`private_key`](#key-363f83) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-363f83) below.
 
-<a id="defaults-cf3fd3"></a>&#x2022; [`use_system_defaults`](#defaults-cf3fd3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="defaults-cf3fd3"></a>&#x2022; [`use_system_defaults`](#defaults-cf3fd3) - Optional Block<br>Enable this option
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate Custom Hash Algorithms
 
@@ -182,9 +182,9 @@ A [`global_vn`](#sli-to-global-dr-global-vn) block (within [`sli_to_global_dr`](
 
 A [`sli_to_slo_snat`](#sli-to-slo-snat) block supports the following:
 
-<a id="sli-to-slo-snat-default-gw-snat"></a>&#x2022; [`default_gw_snat`](#sli-to-slo-snat-default-gw-snat) - Optional Block<br>Can be used for messages where no values are needed
+<a id="sli-to-slo-snat-default-gw-snat"></a>&#x2022; [`default_gw_snat`](#sli-to-slo-snat-default-gw-snat) - Optional Block<br>Enable this option
 
-<a id="sli-to-slo-snat-interface-ip"></a>&#x2022; [`interface_ip`](#sli-to-slo-snat-interface-ip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="sli-to-slo-snat-interface-ip"></a>&#x2022; [`interface_ip`](#sli-to-slo-snat-interface-ip) - Optional Block<br>Enable this option
 
 #### Slo To Global DR
 

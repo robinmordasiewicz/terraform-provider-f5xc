@@ -380,10 +380,10 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"external_id_is_optional": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"external_id_is_tenant_id": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"session_tags": schema.SingleNestedBlock{
 						MarkdownDescription: "Session tags are key-value pair attributes that you pass when you assume an IAM role.",

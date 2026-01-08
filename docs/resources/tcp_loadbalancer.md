@@ -77,32 +77,32 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="active-service-policies"></a>[`active_service_policies`](#active-service-policies) - Optional Block<br>Service Policy List. List of service policies<br>See [Active Service Policies](#active-service-policies) below for details.
-<br><br>&#x2022; <a id="no-service-policies"></a>[`no_service_policies`](#no-service-policies) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="no-service-policies"></a>[`no_service_policies`](#no-service-policies) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="advertise-custom"></a>[`advertise_custom`](#advertise-custom) - Optional Block<br>Defines a way to advertise a VIP on specific sites<br>See [Advertise Custom](#advertise-custom) below for details.
 <br><br>&#x2022; <a id="advertise-on-public"></a>[`advertise_on_public`](#advertise-on-public) - Optional Block<br>Defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Public](#advertise-on-public) below for details.
-<br><br>&#x2022; <a id="advertise-on-public-default-vip"></a>[`advertise_on_public_default_vip`](#advertise-on-public-default-vip) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="advertise-on-public-default-vip"></a>[`advertise_on_public_default_vip`](#advertise-on-public-default-vip) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="default-lb-with-sni"></a>[`default_lb_with_sni`](#default-lb-with-sni) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="no-sni"></a>[`no_sni`](#no-sni) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="default-lb-with-sni"></a>[`default_lb_with_sni`](#default-lb-with-sni) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="no-sni"></a>[`no_sni`](#no-sni) - Optional Block<br>Enable this option
 
 <a id="dns-volterra-managed"></a>&#x2022; [`dns_volterra_managed`](#dns-volterra-managed) - Optional Bool<br>DNS records for domains will be managed automatically by F5 Distributed Cloud. This requires the domain to be delegated to F5XC using the Delegated Domain feature
 
-<a id="do-not-advertise"></a>&#x2022; [`do_not_advertise`](#do-not-advertise) - Optional Block<br>Can be used for messages where no values are needed
+<a id="do-not-advertise"></a>&#x2022; [`do_not_advertise`](#do-not-advertise) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="do-not-retract-cluster"></a>[`do_not_retract_cluster`](#do-not-retract-cluster) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="retract-cluster"></a>[`retract_cluster`](#retract-cluster) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="do-not-retract-cluster"></a>[`do_not_retract_cluster`](#do-not-retract-cluster) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="retract-cluster"></a>[`retract_cluster`](#retract-cluster) - Optional Block<br>Enable this option
 
 <a id="domains"></a>&#x2022; [`domains`](#domains) - Optional List<br>List of Domains (host/authority header) that will be matched to this Load Balancer. Supported Domains and search order: 1. Exact Domain names: `www.example.com.` 2
 
 -> **One of the following:**
-&#x2022; <a id="hash-policy-choice-least-active"></a>[`hash_policy_choice_least_active`](#hash-policy-choice-least-active) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="hash-policy-choice-random"></a>[`hash_policy_choice_random`](#hash-policy-choice-random) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="hash-policy-choice-round-robin"></a>[`hash_policy_choice_round_robin`](#hash-policy-choice-round-robin) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="hash-policy-choice-source-ip-stickiness"></a>[`hash_policy_choice_source_ip_stickiness`](#hash-policy-choice-source-ip-stickiness) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="hash-policy-choice-least-active"></a>[`hash_policy_choice_least_active`](#hash-policy-choice-least-active) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="hash-policy-choice-random"></a>[`hash_policy_choice_random`](#hash-policy-choice-random) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="hash-policy-choice-round-robin"></a>[`hash_policy_choice_round_robin`](#hash-policy-choice-round-robin) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="hash-policy-choice-source-ip-stickiness"></a>[`hash_policy_choice_source_ip_stickiness`](#hash-policy-choice-source-ip-stickiness) - Optional Block<br>Enable this option
 
 <a id="idle-timeout"></a>&#x2022; [`idle_timeout`](#idle-timeout) - Optional Number<br>The amount of time that a stream can exist without upstream or downstream activity, in milliseconds
 
@@ -112,12 +112,12 @@ resource "f5xc_tcp_loadbalancer" "example" {
 
 <a id="origin-pools-weights"></a>&#x2022; [`origin_pools_weights`](#origin-pools-weights) - Optional Block<br>Origin pools and weights used for this load balancer<br>See [Origin Pools Weights](#origin-pools-weights) below for details.
 
-<a id="service-policies-from-namespace"></a>&#x2022; [`service_policies_from_namespace`](#service-policies-from-namespace) - Optional Block<br>Can be used for messages where no values are needed
+<a id="service-policies-from-namespace"></a>&#x2022; [`service_policies_from_namespace`](#service-policies-from-namespace) - Optional Block<br>Enable this option
 
-<a id="sni"></a>&#x2022; [`sni`](#sni) - Optional Block<br>Can be used for messages where no values are needed
+<a id="sni"></a>&#x2022; [`sni`](#sni) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="tcp"></a>[`tcp`](#tcp) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="tcp"></a>[`tcp`](#tcp) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="tls-tcp"></a>[`tls_tcp`](#tls-tcp) - Optional Block<br>Choice for selecting TLS over TCP proxy with bring your own certificates<br>See [TLS TCP](#tls-tcp) below for details.
 <br><br>&#x2022; <a id="tls-tcp-auto-cert"></a>[`tls_tcp_auto_cert`](#tls-tcp-auto-cert) - Optional Block<br>Choice for selecting TLS over TCP proxy with automatic certificates
 
@@ -165,7 +165,7 @@ An [`advertise_where`](#advertise-custom-advertise-where) block (within [`advert
 
 <a id="advertise-custom-advertise-where-site"></a>&#x2022; [`site`](#advertise-custom-advertise-where-site) - Optional Block<br>Defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised<br>See [Site](#advertise-custom-advertise-where-site) below.
 
-<a id="port-b19c4f"></a>&#x2022; [`use_default_port`](#port-b19c4f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-b19c4f"></a>&#x2022; [`use_default_port`](#port-b19c4f) - Optional Block<br>Enable this option
 
 <a id="network-a20be3"></a>&#x2022; [`virtual_network`](#network-a20be3) - Optional Block<br>Parameters to advertise on a given virtual network<br>See [Virtual Network](#network-a20be3) below.
 
@@ -209,9 +209,9 @@ A [`site`](#site-7ecf1d) block (within [`advertise_custom.advertise_where.site`]
 
 A [`virtual_network`](#network-a20be3) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
-<a id="vip-26d874"></a>&#x2022; [`default_v6_vip`](#vip-26d874) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vip-26d874"></a>&#x2022; [`default_v6_vip`](#vip-26d874) - Optional Block<br>Enable this option
 
-<a id="vip-c51931"></a>&#x2022; [`default_vip`](#vip-c51931) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vip-c51931"></a>&#x2022; [`default_vip`](#vip-c51931) - Optional Block<br>Enable this option
 
 <a id="vip-bb67d7"></a>&#x2022; [`specific_v6_vip`](#vip-bb67d7) - Optional String<br>Use given IPv6 address as VIP on virtual Network
 
@@ -341,7 +341,7 @@ A [`tls_cert_params`](#tls-tcp-tls-cert-params) block (within [`tls_tcp`](#tls-t
 
 <a id="tls-tcp-tls-cert-params-certificates"></a>&#x2022; [`certificates`](#tls-tcp-tls-cert-params-certificates) - Optional Block<br>Select one or more certificates with any domain names<br>See [Certificates](#tls-tcp-tls-cert-params-certificates) below.
 
-<a id="tls-tcp-tls-cert-params-no-mtls"></a>&#x2022; [`no_mtls`](#tls-tcp-tls-cert-params-no-mtls) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tls-tcp-tls-cert-params-no-mtls"></a>&#x2022; [`no_mtls`](#tls-tcp-tls-cert-params-no-mtls) - Optional Block<br>Enable this option
 
 <a id="tls-tcp-tls-cert-params-tls-config"></a>&#x2022; [`tls_config`](#tls-tcp-tls-cert-params-tls-config) - Optional Block<br>Defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#tls-tcp-tls-cert-params-tls-config) below.
 
@@ -363,11 +363,11 @@ A [`tls_config`](#tls-tcp-tls-cert-params-tls-config) block (within [`tls_tcp.tl
 
 <a id="security-b4cf97"></a>&#x2022; [`custom_security`](#security-b4cf97) - Optional Block<br>Defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-b4cf97) below.
 
-<a id="security-f2b15d"></a>&#x2022; [`default_security`](#security-f2b15d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-f2b15d"></a>&#x2022; [`default_security`](#security-f2b15d) - Optional Block<br>Enable this option
 
-<a id="security-72b87f"></a>&#x2022; [`low_security`](#security-72b87f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-72b87f"></a>&#x2022; [`low_security`](#security-72b87f) - Optional Block<br>Enable this option
 
-<a id="security-06c368"></a>&#x2022; [`medium_security`](#security-06c368) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-06c368"></a>&#x2022; [`medium_security`](#security-06c368) - Optional Block<br>Enable this option
 
 #### TLS TCP TLS Cert Params TLS Config Custom Security
 
@@ -381,13 +381,13 @@ An [`use_mtls`](#tls-tcp-tls-cert-params-use-mtls) block (within [`tls_tcp.tls_c
 
 <a id="tls-tcp-tls-cert-params-use-mtls-crl"></a>&#x2022; [`crl`](#tls-tcp-tls-cert-params-use-mtls-crl) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#tls-tcp-tls-cert-params-use-mtls-crl) below.
 
-<a id="tls-tcp-tls-cert-params-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#tls-tcp-tls-cert-params-use-mtls-no-crl) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tls-tcp-tls-cert-params-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#tls-tcp-tls-cert-params-use-mtls-no-crl) - Optional Block<br>Enable this option
 
 <a id="trusted-ca-902f4f"></a>&#x2022; [`trusted_ca`](#trusted-ca-902f4f) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-902f4f) below.
 
 <a id="url-f4f75a"></a>&#x2022; [`trusted_ca_url`](#url-f4f75a) - Optional String<br>Upload a Root CA Certificate specifically for this Load Balancer
 
-<a id="disabled-2638d6"></a>&#x2022; [`xfcc_disabled`](#disabled-2638d6) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-2638d6"></a>&#x2022; [`xfcc_disabled`](#disabled-2638d6) - Optional Block<br>Enable this option
 
 <a id="options-ff2b17"></a>&#x2022; [`xfcc_options`](#options-ff2b17) - Optional Block<br>X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-ff2b17) below.
 
@@ -407,7 +407,7 @@ An [`use_mtls`](#tls-tcp-tls-cert-params-use-mtls) block (within [`tls_tcp.tls_c
 
 A [`tls_parameters`](#tls-tcp-tls-parameters) block (within [`tls_tcp`](#tls-tcp)) supports the following:
 
-<a id="tls-tcp-tls-parameters-no-mtls"></a>&#x2022; [`no_mtls`](#tls-tcp-tls-parameters-no-mtls) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tls-tcp-tls-parameters-no-mtls"></a>&#x2022; [`no_mtls`](#tls-tcp-tls-parameters-no-mtls) - Optional Block<br>Enable this option
 
 <a id="tls-tcp-tls-parameters-tls-certificates"></a>&#x2022; [`tls_certificates`](#tls-tcp-tls-parameters-tls-certificates) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#tls-tcp-tls-parameters-tls-certificates) below.
 
@@ -425,11 +425,11 @@ A [`tls_certificates`](#tls-tcp-tls-parameters-tls-certificates) block (within [
 
 <a id="spec-b5de95"></a>&#x2022; [`description_spec`](#spec-b5de95) - Optional String<br>Description. Description for the certificate
 
-<a id="stapling-0ce8b2"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-0ce8b2) - Optional Block<br>Can be used for messages where no values are needed
+<a id="stapling-0ce8b2"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-0ce8b2) - Optional Block<br>Enable this option
 
 <a id="key-d0a2da"></a>&#x2022; [`private_key`](#key-d0a2da) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-d0a2da) below.
 
-<a id="defaults-304c9b"></a>&#x2022; [`use_system_defaults`](#defaults-304c9b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="defaults-304c9b"></a>&#x2022; [`use_system_defaults`](#defaults-304c9b) - Optional Block<br>Enable this option
 
 #### TLS TCP TLS Parameters TLS Certificates Custom Hash Algorithms
 
@@ -453,11 +453,11 @@ A [`tls_config`](#tls-tcp-tls-parameters-tls-config) block (within [`tls_tcp.tls
 
 <a id="security-101a5b"></a>&#x2022; [`custom_security`](#security-101a5b) - Optional Block<br>Defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-101a5b) below.
 
-<a id="security-1217a9"></a>&#x2022; [`default_security`](#security-1217a9) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-1217a9"></a>&#x2022; [`default_security`](#security-1217a9) - Optional Block<br>Enable this option
 
-<a id="security-629199"></a>&#x2022; [`low_security`](#security-629199) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-629199"></a>&#x2022; [`low_security`](#security-629199) - Optional Block<br>Enable this option
 
-<a id="security-12bbb1"></a>&#x2022; [`medium_security`](#security-12bbb1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-12bbb1"></a>&#x2022; [`medium_security`](#security-12bbb1) - Optional Block<br>Enable this option
 
 #### TLS TCP TLS Parameters TLS Config Custom Security
 
@@ -471,13 +471,13 @@ An [`use_mtls`](#tls-tcp-tls-parameters-use-mtls) block (within [`tls_tcp.tls_pa
 
 <a id="tls-tcp-tls-parameters-use-mtls-crl"></a>&#x2022; [`crl`](#tls-tcp-tls-parameters-use-mtls-crl) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#tls-tcp-tls-parameters-use-mtls-crl) below.
 
-<a id="tls-tcp-tls-parameters-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#tls-tcp-tls-parameters-use-mtls-no-crl) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tls-tcp-tls-parameters-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#tls-tcp-tls-parameters-use-mtls-no-crl) - Optional Block<br>Enable this option
 
 <a id="trusted-ca-2d90f2"></a>&#x2022; [`trusted_ca`](#trusted-ca-2d90f2) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-2d90f2) below.
 
 <a id="url-2f65b3"></a>&#x2022; [`trusted_ca_url`](#url-2f65b3) - Optional String<br>Upload a Root CA Certificate specifically for this Load Balancer
 
-<a id="disabled-f40808"></a>&#x2022; [`xfcc_disabled`](#disabled-f40808) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-f40808"></a>&#x2022; [`xfcc_disabled`](#disabled-f40808) - Optional Block<br>Enable this option
 
 <a id="options-b6e6a7"></a>&#x2022; [`xfcc_options`](#options-b6e6a7) - Optional Block<br>X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-b6e6a7) below.
 
@@ -503,7 +503,7 @@ A [`crl`](#tls-tcp-tls-parameters-use-mtls-crl) block (within [`tls_tcp.tls_para
 
 A [`tls_tcp_auto_cert`](#tls-tcp-auto-cert) block supports the following:
 
-<a id="tls-tcp-auto-cert-no-mtls"></a>&#x2022; [`no_mtls`](#tls-tcp-auto-cert-no-mtls) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tls-tcp-auto-cert-no-mtls"></a>&#x2022; [`no_mtls`](#tls-tcp-auto-cert-no-mtls) - Optional Block<br>Enable this option
 
 <a id="tls-tcp-auto-cert-tls-config"></a>&#x2022; [`tls_config`](#tls-tcp-auto-cert-tls-config) - Optional Block<br>Defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#tls-tcp-auto-cert-tls-config) below.
 
@@ -515,11 +515,11 @@ A [`tls_config`](#tls-tcp-auto-cert-tls-config) block (within [`tls_tcp_auto_cer
 
 <a id="security-efa56b"></a>&#x2022; [`custom_security`](#security-efa56b) - Optional Block<br>Defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-efa56b) below.
 
-<a id="security-bab03d"></a>&#x2022; [`default_security`](#security-bab03d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-bab03d"></a>&#x2022; [`default_security`](#security-bab03d) - Optional Block<br>Enable this option
 
-<a id="security-70efce"></a>&#x2022; [`low_security`](#security-70efce) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-70efce"></a>&#x2022; [`low_security`](#security-70efce) - Optional Block<br>Enable this option
 
-<a id="security-4c95cb"></a>&#x2022; [`medium_security`](#security-4c95cb) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-4c95cb"></a>&#x2022; [`medium_security`](#security-4c95cb) - Optional Block<br>Enable this option
 
 #### TLS TCP Auto Cert TLS Config Custom Security
 
@@ -533,13 +533,13 @@ An [`use_mtls`](#tls-tcp-auto-cert-use-mtls) block (within [`tls_tcp_auto_cert`]
 
 <a id="tls-tcp-auto-cert-use-mtls-crl"></a>&#x2022; [`crl`](#tls-tcp-auto-cert-use-mtls-crl) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#tls-tcp-auto-cert-use-mtls-crl) below.
 
-<a id="tls-tcp-auto-cert-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#tls-tcp-auto-cert-use-mtls-no-crl) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tls-tcp-auto-cert-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#tls-tcp-auto-cert-use-mtls-no-crl) - Optional Block<br>Enable this option
 
 <a id="tls-tcp-auto-cert-use-mtls-trusted-ca"></a>&#x2022; [`trusted_ca`](#tls-tcp-auto-cert-use-mtls-trusted-ca) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#tls-tcp-auto-cert-use-mtls-trusted-ca) below.
 
 <a id="url-602921"></a>&#x2022; [`trusted_ca_url`](#url-602921) - Optional String<br>Upload a Root CA Certificate specifically for this Load Balancer
 
-<a id="disabled-a390b4"></a>&#x2022; [`xfcc_disabled`](#disabled-a390b4) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-a390b4"></a>&#x2022; [`xfcc_disabled`](#disabled-a390b4) - Optional Block<br>Enable this option
 
 <a id="tls-tcp-auto-cert-use-mtls-xfcc-options"></a>&#x2022; [`xfcc_options`](#tls-tcp-auto-cert-use-mtls-xfcc-options) - Optional Block<br>X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#tls-tcp-auto-cert-use-mtls-xfcc-options) below.
 

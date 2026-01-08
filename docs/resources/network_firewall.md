@@ -76,11 +76,11 @@ resource "f5xc_network_firewall" "example" {
 -> **One of the following:**
 &#x2022; <a id="active-forward-proxy-policies"></a>[`active_forward_proxy_policies`](#active-forward-proxy-policies) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
 
-<a id="disable-fast-acl"></a>&#x2022; [`disable_fast_acl`](#disable-fast-acl) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disable-fast-acl"></a>&#x2022; [`disable_fast_acl`](#disable-fast-acl) - Optional Block<br>Enable this option
 
-<a id="disable-forward-proxy-policy"></a>&#x2022; [`disable_forward_proxy_policy`](#disable-forward-proxy-policy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disable-forward-proxy-policy"></a>&#x2022; [`disable_forward_proxy_policy`](#disable-forward-proxy-policy) - Optional Block<br>Enable this option
 
-<a id="disable-network-policy"></a>&#x2022; [`disable_network_policy`](#disable-network-policy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disable-network-policy"></a>&#x2022; [`disable_network_policy`](#disable-network-policy) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

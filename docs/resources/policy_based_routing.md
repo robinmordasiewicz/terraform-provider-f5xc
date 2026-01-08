@@ -40,7 +40,7 @@ resource "f5xc_policy_based_routing" "example" {
   forward_proxy_pbr_rules {
     # Configure forward_proxy_pbr_rules settings
   }
-  # Can be used for messages where no values are needed.
+  # Enable this option
   all_destinations {
     # Configure all_destinations settings
   }
@@ -92,9 +92,9 @@ A [`forward_proxy_pbr`](#forward-proxy-pbr) block supports the following:
 
 A [`forward_proxy_pbr_rules`](#rules-67a5cc) block (within [`forward_proxy_pbr`](#forward-proxy-pbr)) supports the following:
 
-<a id="destinations-1e0cd9"></a>&#x2022; [`all_destinations`](#destinations-1e0cd9) - Optional Block<br>Can be used for messages where no values are needed
+<a id="destinations-1e0cd9"></a>&#x2022; [`all_destinations`](#destinations-1e0cd9) - Optional Block<br>Enable this option
 
-<a id="sources-4f8004"></a>&#x2022; [`all_sources`](#sources-4f8004) - Optional Block<br>Can be used for messages where no values are needed
+<a id="sources-4f8004"></a>&#x2022; [`all_sources`](#sources-4f8004) - Optional Block<br>Enable this option
 
 <a id="list-a3b35a"></a>&#x2022; [`forwarding_class_list`](#list-a3b35a) - Optional Block<br>Ordered list of forwarding Class to be used if no rule match<br>See [Forwarding Class List](#list-a3b35a) below.
 
@@ -160,7 +160,7 @@ A [`forwarding_class_list`](#forwarding-class-list) block supports the following
 
 A [`network_pbr`](#network-pbr) block supports the following:
 
-<a id="network-pbr-any"></a>&#x2022; [`any`](#network-pbr-any) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-pbr-any"></a>&#x2022; [`any`](#network-pbr-any) - Optional Block<br>Enable this option
 
 <a id="network-pbr-label-selector"></a>&#x2022; [`label_selector`](#network-pbr-label-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects<br>See [Label Selector](#network-pbr-label-selector) below.
 
@@ -178,13 +178,13 @@ A [`label_selector`](#network-pbr-label-selector) block (within [`network_pbr`](
 
 A [`network_pbr_rules`](#network-pbr-network-pbr-rules) block (within [`network_pbr`](#network-pbr)) supports the following:
 
-<a id="traffic-e56c3b"></a>&#x2022; [`all_tcp_traffic`](#traffic-e56c3b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="traffic-e56c3b"></a>&#x2022; [`all_tcp_traffic`](#traffic-e56c3b) - Optional Block<br>Enable this option
 
-<a id="traffic-5b23a8"></a>&#x2022; [`all_traffic`](#traffic-5b23a8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="traffic-5b23a8"></a>&#x2022; [`all_traffic`](#traffic-5b23a8) - Optional Block<br>Enable this option
 
-<a id="traffic-d923ff"></a>&#x2022; [`all_udp_traffic`](#traffic-d923ff) - Optional Block<br>Can be used for messages where no values are needed
+<a id="traffic-d923ff"></a>&#x2022; [`all_udp_traffic`](#traffic-d923ff) - Optional Block<br>Enable this option
 
-<a id="network-pbr-network-pbr-rules-any"></a>&#x2022; [`any`](#network-pbr-network-pbr-rules-any) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-pbr-network-pbr-rules-any"></a>&#x2022; [`any`](#network-pbr-network-pbr-rules-any) - Optional Block<br>Enable this option
 
 <a id="applications-913ddd"></a>&#x2022; [`applications`](#applications-913ddd) - Optional Block<br>Applications. Application protocols like HTTP, SNMP<br>See [Applications](#applications-913ddd) below.
 

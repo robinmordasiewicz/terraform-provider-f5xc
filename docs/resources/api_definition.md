@@ -64,8 +64,8 @@ resource "f5xc_api_definition" "example" {
 <a id="api-inventory-inclusion-list"></a>&#x2022; [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) - Optional Block<br>List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list<br>See [API Inventory Inclusion List](#api-inventory-inclusion-list) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="mixed-schema-origin"></a>[`mixed_schema_origin`](#mixed-schema-origin) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="strict-schema-origin"></a>[`strict_schema_origin`](#strict-schema-origin) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="mixed-schema-origin"></a>[`mixed_schema_origin`](#mixed-schema-origin) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="strict-schema-origin"></a>[`strict_schema_origin`](#strict-schema-origin) - Optional Block<br>Enable this option
 
 <a id="non-api-endpoints"></a>&#x2022; [`non_api_endpoints`](#non-api-endpoints) - Optional Block<br>API Discovery Exclusion List. List of Non-API Endpoints<br>See [Non API Endpoints](#non-api-endpoints) below for details.
 

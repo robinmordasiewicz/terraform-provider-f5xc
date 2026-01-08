@@ -334,13 +334,13 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 						},
 					},
 					"default": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"individual": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"ves_io_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -398,7 +398,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 					},
 					Blocks: map[string]schema.Block{
 						"any": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"custom": schema.SingleNestedBlock{
 							MarkdownDescription: "Set of matchers an alert has to fulfill to match the route.",
@@ -449,7 +449,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"dont_send": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"group": schema.SingleNestedBlock{
 							MarkdownDescription: "Select one or more known group names to match the incoming alert.",
@@ -489,18 +489,18 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 									},
 								},
 								"default": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"individual": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"ves_io_group": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
 						"send": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"severity": schema.SingleNestedBlock{
 							MarkdownDescription: "Select one or more severity levels to match the incoming alert.",

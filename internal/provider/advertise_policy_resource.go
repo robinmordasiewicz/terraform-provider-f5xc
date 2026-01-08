@@ -499,10 +499,10 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 				},
 				Blocks: map[string]schema.Block{
 					"client_certificate_optional": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"client_certificate_required": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"common_params": schema.SingleNestedBlock{
 						MarkdownDescription: "Information of different aspects for TLS authentication related to ciphers, certificates and trust store.",
@@ -547,7 +547,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -586,7 +586,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -659,7 +659,7 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 					"no_client_certificate": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -677,10 +677,10 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 						},
 						Blocks: map[string]schema.Block{
 							"disable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Reference. A site direct reference .",
@@ -778,10 +778,10 @@ func (r *AdvertisePolicyResource) Schema(ctx context.Context, req resource.Schem
 						},
 						Blocks: map[string]schema.Block{
 							"disable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Virtual_site direct reference .",

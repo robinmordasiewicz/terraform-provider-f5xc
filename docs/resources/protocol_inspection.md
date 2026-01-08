@@ -36,7 +36,7 @@ resource "f5xc_protocol_inspection" "example" {
   enable_disable_compliance_checks {
     # Configure enable_disable_compliance_checks settings
   }
-  # Can be used for messages where no values are needed.
+  # Enable this option
   disable_compliance_checks {
     # Configure disable_compliance_checks settings
   }
@@ -86,7 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) block supports the following:
 
-<a id="checks-6c8eaa"></a>&#x2022; [`disable_compliance_checks`](#checks-6c8eaa) - Optional Block<br>Can be used for messages where no values are needed
+<a id="checks-6c8eaa"></a>&#x2022; [`disable_compliance_checks`](#checks-6c8eaa) - Optional Block<br>Enable this option
 
 <a id="checks-68d3e1"></a>&#x2022; [`enable_compliance_checks`](#checks-68d3e1) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Enable Compliance Checks](#checks-68d3e1) below.
 
@@ -104,9 +104,9 @@ An [`enable_compliance_checks`](#checks-68d3e1) block (within [`enable_disable_c
 
 An [`enable_disable_signatures`](#enable-disable-signatures) block supports the following:
 
-<a id="signature-dd5a1e"></a>&#x2022; [`disable_signature`](#signature-dd5a1e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="signature-dd5a1e"></a>&#x2022; [`disable_signature`](#signature-dd5a1e) - Optional Block<br>Enable this option
 
-<a id="signature-359b96"></a>&#x2022; [`enable_signature`](#signature-359b96) - Optional Block<br>Can be used for messages where no values are needed
+<a id="signature-359b96"></a>&#x2022; [`enable_signature`](#signature-359b96) - Optional Block<br>Enable this option
 
 #### Timeouts
 

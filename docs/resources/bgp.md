@@ -2,12 +2,12 @@
 page_title: "f5xc_bgp Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a BGP resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers. configuration.
+  Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.
 ---
 
 # f5xc_bgp (Resource)
 
-Manages a BGP resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers. configuration.
+Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -15,7 +15,7 @@ Manages a BGP resource in F5 Distributed Cloud for bgp routing policy is a list 
 
 ```terraform
 # BGP Resource Example
-# Manages a BGP resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers. configuration.
+# Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.
 
 # Basic BGP configuration
 resource "f5xc_bgp" "example" {
@@ -73,9 +73,13 @@ resource "f5xc_bgp" "example" {
 
 ### Spec Argument Reference
 
-<a id="rules"></a>&#x2022; [`rules`](#rules) - Optional Block<br>BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom<br>See [Rules](#rules) below for details.
+<a id="bgp-parameters"></a>&#x2022; [`bgp_parameters`](#bgp-parameters) - Optional Block<br>BGP Parameters. BGP parameters for the local site<br>See [BGP Parameters](#bgp-parameters) below for details.
+
+<a id="peers"></a>&#x2022; [`peers`](#peers) - Optional Block<br>Peers. List of peers<br>See [Peers](#peers) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+
+<a id="where"></a>&#x2022; [`where`](#where) - Optional Block<br>VirtualSiteSiteRefSelector defines a union of reference to site or reference to virtual_site It used to refer site or a group of sites indicated by virtual site<br>See [Where](#where) below for details.
 
 ### Attributes Reference
 
@@ -85,71 +89,175 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-#### Rules
+#### BGP Parameters
 
-A [`rules`](#rules) block supports the following:
+A [`bgp_parameters`](#bgp-parameters) block supports the following:
 
-<a id="rules-action"></a>&#x2022; [`action`](#rules-action) - Optional Block<br>Action to be enforced if the BGP route matches the rule<br>See [Action](#rules-action) below.
+<a id="bgp-parameters-asn"></a>&#x2022; [`asn`](#bgp-parameters-asn) - Optional Number<br>ASN. Autonomous System Number
 
-<a id="rules-match"></a>&#x2022; [`match`](#rules-match) - Optional Block<br>Predicates which have to match information in route for action to be applied<br>See [Match](#rules-match) below.
+<a id="bgp-parameters-from-site"></a>&#x2022; [`from_site`](#bgp-parameters-from-site) - Optional Block<br>Enable this option
 
-#### Rules Action
+<a id="bgp-parameters-ip-address"></a>&#x2022; [`ip_address`](#bgp-parameters-ip-address) - Optional String<br>Use the configured IPv4 Address as Router ID
 
-An [`action`](#rules-action) block (within [`rules`](#rules)) supports the following:
+<a id="bgp-parameters-local-address"></a>&#x2022; [`local_address`](#bgp-parameters-local-address) - Optional Block<br>Enable this option
 
-<a id="rules-action-aggregate"></a>&#x2022; [`aggregate`](#rules-action-aggregate) - Optional Block<br>Can be used for messages where no values are needed
+#### Peers
 
-<a id="rules-action-allow"></a>&#x2022; [`allow`](#rules-action-allow) - Optional Block<br>Can be used for messages where no values are needed
+A [`peers`](#peers) block supports the following:
 
-<a id="rules-action-as-path"></a>&#x2022; [`as_path`](#rules-action-as-path) - Optional String<br>AS-Path Prepending is generally used to influence incoming traffic
+<a id="peers-bfd-disabled"></a>&#x2022; [`bfd_disabled`](#peers-bfd-disabled) - Optional Block<br>Enable this option
 
-<a id="rules-action-community"></a>&#x2022; [`community`](#rules-action-community) - Optional Block<br>BGP Community list. List of BGP communities<br>See [Community](#rules-action-community) below.
+<a id="peers-bfd-enabled"></a>&#x2022; [`bfd_enabled`](#peers-bfd-enabled) - Optional Block<br>BFD. BFD parameters<br>See [Bfd Enabled](#peers-bfd-enabled) below.
 
-<a id="rules-action-deny"></a>&#x2022; [`deny`](#rules-action-deny) - Optional Block<br>Can be used for messages where no values are needed
+<a id="peers-disable"></a>&#x2022; [`disable`](#peers-disable) - Optional Block<br>Enable this option
 
-<a id="rules-action-local-preference"></a>&#x2022; [`local_preference`](#rules-action-local-preference) - Optional Number<br>BGP Local Preference is generally used to influence outgoing traffic
+<a id="peers-external"></a>&#x2022; [`external`](#peers-external) - Optional Block<br>External BGP Peer. External BGP Peer parameters<br>See [External](#peers-external) below.
 
-<a id="rules-action-metric"></a>&#x2022; [`metric`](#rules-action-metric) - Optional Number<br>The Multi-Exit Discriminator metric to indicate the preferred path to AS
+<a id="peers-label"></a>&#x2022; [`label`](#peers-label) - Optional String<br>Label. Specify whether this peer should be
 
-#### Rules Action Community
+<a id="peers-metadata"></a>&#x2022; [`metadata`](#peers-metadata) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#peers-metadata) below.
 
-A [`community`](#rules-action-community) block (within [`rules.action`](#rules-action)) supports the following:
+<a id="peers-passive-mode-disabled"></a>&#x2022; [`passive_mode_disabled`](#peers-passive-mode-disabled) - Optional Block<br>Enable this option
 
-<a id="rules-action-community-community"></a>&#x2022; [`community`](#rules-action-community-community) - Optional List<br>Unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
+<a id="peers-passive-mode-enabled"></a>&#x2022; [`passive_mode_enabled`](#peers-passive-mode-enabled) - Optional Block<br>Enable this option
 
-#### Rules Match
+<a id="peers-routing-policies"></a>&#x2022; [`routing_policies`](#peers-routing-policies) - Optional Block<br>List of rules which can be applied on all or particular nodes<br>See [Routing Policies](#peers-routing-policies) below.
 
-A [`match`](#rules-match) block (within [`rules`](#rules)) supports the following:
+#### Peers Bfd Enabled
 
-<a id="rules-match-as-path"></a>&#x2022; [`as_path`](#rules-match-as-path) - Optional String<br>AS path can also be a regex, which will be matched against route information
+A [`bfd_enabled`](#peers-bfd-enabled) block (within [`peers`](#peers)) supports the following:
 
-<a id="rules-match-community"></a>&#x2022; [`community`](#rules-match-community) - Optional Block<br>BGP Community list. List of BGP communities<br>See [Community](#rules-match-community) below.
+<a id="peers-bfd-enabled-multiplier"></a>&#x2022; [`multiplier`](#peers-bfd-enabled-multiplier) - Optional Number<br>Specify Number of missed packets to bring session down'
 
-<a id="rules-match-ip-prefixes"></a>&#x2022; [`ip_prefixes`](#rules-match-ip-prefixes) - Optional Block<br>List of IP prefix and prefix length range match condition<br>See [IP Prefixes](#rules-match-ip-prefixes) below.
+<a id="milliseconds-dab8b3"></a>&#x2022; [`receive_interval_milliseconds`](#milliseconds-dab8b3) - Optional Number<br>BFD receive interval timer, in milliseconds
 
-#### Rules Match Community
+<a id="milliseconds-135c29"></a>&#x2022; [`transmit_interval_milliseconds`](#milliseconds-135c29) - Optional Number<br>BFD transmit interval timer, in milliseconds
 
-A [`community`](#rules-match-community) block (within [`rules.match`](#rules-match)) supports the following:
+#### Peers External
 
-<a id="rules-match-community-community"></a>&#x2022; [`community`](#rules-match-community-community) - Optional List<br>Unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value
+An [`external`](#peers-external) block (within [`peers`](#peers)) supports the following:
 
-#### Rules Match IP Prefixes
+<a id="peers-external-address"></a>&#x2022; [`address`](#peers-external-address) - Optional String<br>Specify IPv4 peer address
 
-An [`ip_prefixes`](#rules-match-ip-prefixes) block (within [`rules.match`](#rules-match)) supports the following:
+<a id="peers-external-address-ipv6"></a>&#x2022; [`address_ipv6`](#peers-external-address-ipv6) - Optional String<br>Specify peer IPv6 address
 
-<a id="rules-match-ip-prefixes-prefixes"></a>&#x2022; [`prefixes`](#rules-match-ip-prefixes-prefixes) - Optional Block<br>Prefix list. List of IP prefix<br>See [Prefixes](#rules-match-ip-prefixes-prefixes) below.
+<a id="peers-external-asn"></a>&#x2022; [`asn`](#peers-external-asn) - Optional Number<br>Autonomous System Number for BGP peer
 
-#### Rules Match IP Prefixes Prefixes
+<a id="peers-external-default-gateway"></a>&#x2022; [`default_gateway`](#peers-external-default-gateway) - Optional Block<br>Enable this option
 
-A [`prefixes`](#rules-match-ip-prefixes-prefixes) block (within [`rules.match.ip_prefixes`](#rules-match-ip-prefixes)) supports the following:
+<a id="peers-external-default-gateway-v6"></a>&#x2022; [`default_gateway_v6`](#peers-external-default-gateway-v6) - Optional Block<br>Enable this option
 
-<a id="than-cdaaa6"></a>&#x2022; [`equal_or_longer_than`](#than-cdaaa6) - Optional Block<br>Can be used for messages where no values are needed
+<a id="peers-external-disable"></a>&#x2022; [`disable`](#peers-external-disable) - Optional Block<br>Enable this option
 
-<a id="match-0a0108"></a>&#x2022; [`exact_match`](#match-0a0108) - Optional Block<br>Can be used for messages where no values are needed
+<a id="peers-external-disable-v6"></a>&#x2022; [`disable_v6`](#peers-external-disable-v6) - Optional Block<br>Enable this option
 
-<a id="prefixes-e82cab"></a>&#x2022; [`ip_prefixes`](#prefixes-e82cab) - Optional String<br>IP Prefix. IP prefix to match on BGP route
+<a id="peers-external-external-connector"></a>&#x2022; [`external_connector`](#peers-external-external-connector) - Optional Block<br>Enable this option
 
-<a id="than-7e2ba6"></a>&#x2022; [`longer_than`](#than-7e2ba6) - Optional Block<br>Can be used for messages where no values are needed
+<a id="peers-external-family-inet"></a>&#x2022; [`family_inet`](#peers-external-family-inet) - Optional Block<br>BGP Family Inet. Parameters for inet family<br>See [Family Inet](#peers-external-family-inet) below.
+
+<a id="peers-external-from-site"></a>&#x2022; [`from_site`](#peers-external-from-site) - Optional Block<br>Enable this option
+
+<a id="peers-external-from-site-v6"></a>&#x2022; [`from_site_v6`](#peers-external-from-site-v6) - Optional Block<br>Enable this option
+
+<a id="peers-external-interface"></a>&#x2022; [`interface`](#peers-external-interface) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Interface](#peers-external-interface) below.
+
+<a id="peers-external-interface-list"></a>&#x2022; [`interface_list`](#peers-external-interface-list) - Optional Block<br>Interface List. List of network interfaces<br>See [Interface List](#peers-external-interface-list) below.
+
+<a id="peers-external-md5-auth-key"></a>&#x2022; [`md5_auth_key`](#peers-external-md5-auth-key) - Optional String<br>MD5 key for protecting BGP Sessions (RFC 2385)
+
+<a id="peers-external-no-authentication"></a>&#x2022; [`no_authentication`](#peers-external-no-authentication) - Optional Block<br>Enable this option
+
+<a id="peers-external-port"></a>&#x2022; [`port`](#peers-external-port) - Optional Number<br>Peer Port. Peer TCP port number
+
+<a id="peers-external-subnet-begin-offset"></a>&#x2022; [`subnet_begin_offset`](#peers-external-subnet-begin-offset) - Optional Number<br>Calculate peer address using offset from the beginning of the subnet
+
+<a id="peers-external-subnet-begin-offset-v6"></a>&#x2022; [`subnet_begin_offset_v6`](#peers-external-subnet-begin-offset-v6) - Optional Number<br>Calculate peer address using offset from the beginning of the subnet
+
+<a id="peers-external-subnet-end-offset"></a>&#x2022; [`subnet_end_offset`](#peers-external-subnet-end-offset) - Optional Number<br>Calculate peer address using offset from the end of the subnet
+
+<a id="peers-external-subnet-end-offset-v6"></a>&#x2022; [`subnet_end_offset_v6`](#peers-external-subnet-end-offset-v6) - Optional Number<br>Calculate peer address using offset from the end of the subnet
+
+#### Peers External Family Inet
+
+A [`family_inet`](#peers-external-family-inet) block (within [`peers.external`](#peers-external)) supports the following:
+
+<a id="peers-external-family-inet-disable"></a>&#x2022; [`disable`](#peers-external-family-inet-disable) - Optional Block<br>Enable this option
+
+<a id="peers-external-family-inet-enable"></a>&#x2022; [`enable`](#peers-external-family-inet-enable) - Optional Block<br>Enable this option
+
+#### Peers External Interface
+
+An [`interface`](#peers-external-interface) block (within [`peers.external`](#peers-external)) supports the following:
+
+<a id="peers-external-interface-name"></a>&#x2022; [`name`](#peers-external-interface-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="peers-external-interface-namespace"></a>&#x2022; [`namespace`](#peers-external-interface-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="peers-external-interface-tenant"></a>&#x2022; [`tenant`](#peers-external-interface-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Peers External Interface List
+
+An [`interface_list`](#peers-external-interface-list) block (within [`peers.external`](#peers-external)) supports the following:
+
+<a id="interfaces-2564cf"></a>&#x2022; [`interfaces`](#interfaces-2564cf) - Optional Block<br>List of network interfaces<br>See [Interfaces](#interfaces-2564cf) below.
+
+#### Peers External Interface List Interfaces
+
+An [`interfaces`](#interfaces-2564cf) block (within [`peers.external.interface_list`](#peers-external-interface-list)) supports the following:
+
+<a id="name-25eca0"></a>&#x2022; [`name`](#name-25eca0) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-7cb7a8"></a>&#x2022; [`namespace`](#namespace-7cb7a8) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-5d2baa"></a>&#x2022; [`tenant`](#tenant-5d2baa) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Peers Metadata
+
+A [`metadata`](#peers-metadata) block (within [`peers`](#peers)) supports the following:
+
+<a id="peers-metadata-description-spec"></a>&#x2022; [`description_spec`](#peers-metadata-description-spec) - Optional String<br>Description. Human readable description
+
+<a id="peers-metadata-name"></a>&#x2022; [`name`](#peers-metadata-name) - Optional String<br>Name of the message. The value of name has to follow DNS-1035 format
+
+#### Peers Routing Policies
+
+A [`routing_policies`](#peers-routing-policies) block (within [`peers`](#peers)) supports the following:
+
+<a id="peers-routing-policies-route-policy"></a>&#x2022; [`route_policy`](#peers-routing-policies-route-policy) - Optional Block<br>Policy configuration for this feature<br>See [Route Policy](#peers-routing-policies-route-policy) below.
+
+#### Peers Routing Policies Route Policy
+
+A [`route_policy`](#peers-routing-policies-route-policy) block (within [`peers.routing_policies`](#peers-routing-policies)) supports the following:
+
+<a id="nodes-761998"></a>&#x2022; [`all_nodes`](#nodes-761998) - Optional Block<br>Enable this option
+
+<a id="inbound-bbe39d"></a>&#x2022; [`inbound`](#inbound-bbe39d) - Optional Block<br>Enable this option
+
+<a id="name-e2301f"></a>&#x2022; [`node_name`](#name-e2301f) - Optional Block<br>List of nodes on which BGP routing policy has to be applied<br>See [Node Name](#name-e2301f) below.
+
+<a id="refs-6e5457"></a>&#x2022; [`object_refs`](#refs-6e5457) - Optional Block<br>Select route policy to apply<br>See [Object Refs](#refs-6e5457) below.
+
+<a id="outbound-195eea"></a>&#x2022; [`outbound`](#outbound-195eea) - Optional Block<br>Enable this option
+
+#### Peers Routing Policies Route Policy Node Name
+
+A [`node_name`](#name-e2301f) block (within [`peers.routing_policies.route_policy`](#peers-routing-policies-route-policy)) supports the following:
+
+<a id="node-a4a8b2"></a>&#x2022; [`node`](#node-a4a8b2) - Optional List<br>Select BGP Session on which policy will be applied
+
+#### Peers Routing Policies Route Policy Object Refs
+
+An [`object_refs`](#refs-6e5457) block (within [`peers.routing_policies.route_policy`](#peers-routing-policies-route-policy)) supports the following:
+
+<a id="kind-8c3ca2"></a>&#x2022; [`kind`](#kind-8c3ca2) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+
+<a id="name-7f5085"></a>&#x2022; [`name`](#name-7f5085) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-7ab467"></a>&#x2022; [`namespace`](#namespace-7ab467) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-685165"></a>&#x2022; [`tenant`](#tenant-685165) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+<a id="uid-965d22"></a>&#x2022; [`uid`](#uid-965d22) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Timeouts
 
@@ -162,6 +270,66 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+#### Where
+
+A [`where`](#where) block supports the following:
+
+<a id="where-site"></a>&#x2022; [`site`](#where-site) - Optional Block<br>Specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
+
+<a id="where-virtual-site"></a>&#x2022; [`virtual_site`](#where-virtual-site) - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
+
+#### Where Site
+
+A [`site`](#where-site) block (within [`where`](#where)) supports the following:
+
+<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Enable this option
+
+<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Enable this option
+
+<a id="where-site-network-type"></a>&#x2022; [`network_type`](#where-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
+
+<a id="where-site-ref"></a>&#x2022; [`ref`](#where-site-ref) - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
+
+#### Where Site Ref
+
+A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports the following:
+
+<a id="where-site-ref-kind"></a>&#x2022; [`kind`](#where-site-ref-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+
+<a id="where-site-ref-name"></a>&#x2022; [`name`](#where-site-ref-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="where-site-ref-namespace"></a>&#x2022; [`namespace`](#where-site-ref-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="where-site-ref-tenant"></a>&#x2022; [`tenant`](#where-site-ref-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+<a id="where-site-ref-uid"></a>&#x2022; [`uid`](#where-site-ref-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+
+#### Where Virtual Site
+
+A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
+
+<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Enable this option
+
+<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Enable this option
+
+<a id="where-virtual-site-network-type"></a>&#x2022; [`network_type`](#where-virtual-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
+
+<a id="where-virtual-site-ref"></a>&#x2022; [`ref`](#where-virtual-site-ref) - Optional Block<br>Virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
+
+#### Where Virtual Site Ref
+
+A [`ref`](#where-virtual-site-ref) block (within [`where.virtual_site`](#where-virtual-site)) supports the following:
+
+<a id="where-virtual-site-ref-kind"></a>&#x2022; [`kind`](#where-virtual-site-ref-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+
+<a id="where-virtual-site-ref-name"></a>&#x2022; [`name`](#where-virtual-site-ref-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="where-virtual-site-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-site-ref-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="where-virtual-site-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-site-ref-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+<a id="where-virtual-site-ref-uid"></a>&#x2022; [`uid`](#where-virtual-site-ref-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 ---
 

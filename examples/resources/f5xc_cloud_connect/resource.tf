@@ -20,11 +20,11 @@ resource "f5xc_cloud_connect" "example" {
   aws_tgw_site {
     # Configure aws_tgw_site settings
   }
-  # Object reference. This type establishes a direct referenc...
+  # Type establishes a direct reference from one object(the r...
   cred {
     # Configure cred settings
   }
-  # Object reference. This type establishes a direct referenc...
+  # Type establishes a direct reference from one object(the r...
   site {
     # Configure site settings
   }

@@ -16,11 +16,11 @@ resource "f5xc_app_type" "example" {
   }
 
   # Resource-specific configuration
-  # API Discovery Settings. Settings specifying how API Disco...
+  # Settings specifying how API Discovery will be performed.
   business_logic_markup_setting {
     # Configure business_logic_markup_setting settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   disable {
     # Configure disable settings
   }

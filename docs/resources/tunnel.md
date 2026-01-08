@@ -70,15 +70,15 @@ resource "f5xc_tunnel" "example" {
 
 ### Spec Argument Reference
 
-<a id="local-ip"></a>&#x2022; [`local_ip`](#local-ip) - Optional Block<br>Local IP Address Selector. Defines the OPTIONS to select local IP address and virtual network for tunnel object OPTIONS available are - 1. Local Interface - Network Interface from which IP address and network will be selected 2. IP Address - IP address and network can be configured explicitly<br>See [Local IP](#local-ip) below for details.
+<a id="local-ip"></a>&#x2022; [`local_ip`](#local-ip) - Optional Block<br>Defines the OPTIONS to select local IP address and virtual network for tunnel object OPTIONS available are - 1. Local Interface - Network Interface from which IP address and network will be selected 2. IP Address - IP address and network can be configured explicitly<br>See [Local IP](#local-ip) below for details.
 
-<a id="params"></a>&#x2022; [`params`](#params) - Optional Block<br>Tunnel Parameters. Tunnel configuration parameters for supported encapsulation 1. IPsec is supported with PSK for which PSK can be configured<br>See [Params](#params) below for details.
+<a id="params"></a>&#x2022; [`params`](#params) - Optional Block<br>Tunnel configuration parameters for supported encapsulation 1. IPsec is supported with PSK for which PSK can be configured<br>See [Params](#params) below for details.
 
-<a id="remote-ip"></a>&#x2022; [`remote_ip`](#remote-ip) - Optional Block<br>Remote IP Address Selector. Defines the OPTIONS to select remote IP address for tunnel object OPTIONS available are - 1. IP Address - Specifies the remote IP to which tunnel has to be connected 2. Remote endpoint - Is a map of IP address on per ver node basis<br>See [Remote IP](#remote-ip) below for details.
+<a id="remote-ip"></a>&#x2022; [`remote_ip`](#remote-ip) - Optional Block<br>Defines the OPTIONS to select remote IP address for tunnel object OPTIONS available are - 1. IP Address - Specifies the remote IP to which tunnel has to be connected 2. Remote endpoint - Is a map of IP address on per ver node basis<br>See [Remote IP](#remote-ip) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="tunnel-type"></a>&#x2022; [`tunnel_type`](#tunnel-type) - Optional String  Defaults to `IPSEC_PSK`<br>Possible values are `IPSEC_PSK`, `GRE`<br>[Enum: IPSEC_PSK|GRE] Tunnel Type. Supported tunnel types are IPsec IPsec tunnel type with PSK GRE tunnel type
+<a id="tunnel-type"></a>&#x2022; [`tunnel_type`](#tunnel-type) - Optional String  Defaults to `IPSEC_PSK`<br>Possible values are `IPSEC_PSK`, `GRE`<br>[Enum: IPSEC_PSK|GRE] Supported tunnel types are IPsec IPsec tunnel type with PSK GRE tunnel type
 
 ### Attributes Reference
 
@@ -92,39 +92,39 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`local_ip`](#local-ip) block supports the following:
 
-<a id="local-ip-intf"></a>&#x2022; [`intf`](#local-ip-intf) - Optional Block<br>Interface Type. Provides the local interface to pick up source IP and network for transporting encapsulated packet<br>See [Intf](#local-ip-intf) below.
+<a id="local-ip-intf"></a>&#x2022; [`intf`](#local-ip-intf) - Optional Block<br>Provides the local interface to pick up source IP and network for transporting encapsulated packet<br>See [Intf](#local-ip-intf) below.
 
-<a id="local-ip-ip-address"></a>&#x2022; [`ip_address`](#local-ip-ip-address) - Optional Block<br>Local IP Address Type. Provides the configuration to pick up source IP and network for transporting encapsulated packet<br>See [IP Address](#local-ip-ip-address) below.
+<a id="local-ip-ip-address"></a>&#x2022; [`ip_address`](#local-ip-ip-address) - Optional Block<br>Provides the configuration to pick up source IP and network for transporting encapsulated packet<br>See [IP Address](#local-ip-ip-address) below.
 
 #### Local IP Intf
 
 An [`intf`](#local-ip-intf) block (within [`local_ip`](#local-ip)) supports the following:
 
-<a id="local-ip-intf-local-intf"></a>&#x2022; [`local_intf`](#local-ip-intf-local-intf) - Optional Block<br>Local Interface. Local interface to be used for filling in source information of IP and network for transport<br>See [Local Intf](#local-ip-intf-local-intf) below.
+<a id="local-ip-intf-local-intf"></a>&#x2022; [`local_intf`](#local-ip-intf-local-intf) - Optional Block<br>Local interface to be used for filling in source information of IP and network for transport<br>See [Local Intf](#local-ip-intf-local-intf) below.
 
 #### Local IP Intf Local Intf
 
 A [`local_intf`](#local-ip-intf-local-intf) block (within [`local_ip.intf`](#local-ip-intf)) supports the following:
 
-<a id="local-ip-intf-local-intf-kind"></a>&#x2022; [`kind`](#local-ip-intf-local-intf-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="local-ip-intf-local-intf-kind"></a>&#x2022; [`kind`](#local-ip-intf-local-intf-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="local-ip-intf-local-intf-name"></a>&#x2022; [`name`](#local-ip-intf-local-intf-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="local-ip-intf-local-intf-name"></a>&#x2022; [`name`](#local-ip-intf-local-intf-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="local-ip-intf-local-intf-namespace"></a>&#x2022; [`namespace`](#local-ip-intf-local-intf-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="local-ip-intf-local-intf-namespace"></a>&#x2022; [`namespace`](#local-ip-intf-local-intf-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="local-ip-intf-local-intf-tenant"></a>&#x2022; [`tenant`](#local-ip-intf-local-intf-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="local-ip-intf-local-intf-tenant"></a>&#x2022; [`tenant`](#local-ip-intf-local-intf-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="local-ip-intf-local-intf-uid"></a>&#x2022; [`uid`](#local-ip-intf-local-intf-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="local-ip-intf-local-intf-uid"></a>&#x2022; [`uid`](#local-ip-intf-local-intf-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Local IP IP Address
 
 An [`ip_address`](#local-ip-ip-address) block (within [`local_ip`](#local-ip)) supports the following:
 
-<a id="local-ip-ip-address-auto"></a>&#x2022; [`auto`](#local-ip-ip-address-auto) - Optional Block<br>Enable this option
+<a id="local-ip-ip-address-auto"></a>&#x2022; [`auto`](#local-ip-ip-address-auto) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="local-ip-ip-address-ip-address"></a>&#x2022; [`ip_address`](#local-ip-ip-address-ip-address) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [IP Address](#local-ip-ip-address-ip-address) below.
+<a id="local-ip-ip-address-ip-address"></a>&#x2022; [`ip_address`](#local-ip-ip-address-ip-address) - Optional Block<br>IP Address used to specify an IPv4 or IPv6 address<br>See [IP Address](#local-ip-ip-address-ip-address) below.
 
-<a id="type-516223"></a>&#x2022; [`virtual_network_type`](#type-516223) - Optional Block<br>Virtual Network Type. Different types of virtual networks understood by the system<br>See [Virtual Network Type](#type-516223) below.
+<a id="type-516223"></a>&#x2022; [`virtual_network_type`](#type-516223) - Optional Block<br>Different types of virtual networks understood by the system<br>See [Virtual Network Type](#type-516223) below.
 
 #### Local IP IP Address IP Address
 
@@ -132,81 +132,81 @@ An [`ip_address`](#local-ip-ip-address-ip-address) block (within [`local_ip.ip_a
 
 <a id="local-ip-ip-address-ip-address-ipv4"></a>&#x2022; [`ipv4`](#local-ip-ip-address-ip-address-ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#local-ip-ip-address-ip-address-ipv4) below.
 
-<a id="local-ip-ip-address-ip-address-ipv6"></a>&#x2022; [`ipv6`](#local-ip-ip-address-ip-address-ipv6) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#local-ip-ip-address-ip-address-ipv6) below.
+<a id="local-ip-ip-address-ip-address-ipv6"></a>&#x2022; [`ipv6`](#local-ip-ip-address-ip-address-ipv6) - Optional Block<br>IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#local-ip-ip-address-ip-address-ipv6) below.
 
 #### Local IP IP Address IP Address IPv4
 
 An [`ipv4`](#local-ip-ip-address-ip-address-ipv4) block (within [`local_ip.ip_address.ip_address`](#local-ip-ip-address-ip-address)) supports the following:
 
-<a id="addr-d3ee55"></a>&#x2022; [`addr`](#addr-d3ee55) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
+<a id="addr-d3ee55"></a>&#x2022; [`addr`](#addr-d3ee55) - Optional String<br>IPv4 Address in string form with dot-decimal notation
 
 #### Local IP IP Address IP Address IPv6
 
 An [`ipv6`](#local-ip-ip-address-ip-address-ipv6) block (within [`local_ip.ip_address.ip_address`](#local-ip-ip-address-ip-address)) supports the following:
 
-<a id="addr-353140"></a>&#x2022; [`addr`](#addr-353140) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
+<a id="addr-353140"></a>&#x2022; [`addr`](#addr-353140) - Optional String<br>IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 #### Local IP IP Address Virtual Network Type
 
 A [`virtual_network_type`](#type-516223) block (within [`local_ip.ip_address`](#local-ip-ip-address)) supports the following:
 
-<a id="public-cec97b"></a>&#x2022; [`public`](#public-cec97b) - Optional Block<br>Enable this option
+<a id="public-cec97b"></a>&#x2022; [`public`](#public-cec97b) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="local-32ab3a"></a>&#x2022; [`site_local`](#local-32ab3a) - Optional Block<br>Enable this option
+<a id="local-32ab3a"></a>&#x2022; [`site_local`](#local-32ab3a) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="inside-d8c41c"></a>&#x2022; [`site_local_inside`](#inside-d8c41c) - Optional Block<br>Enable this option
+<a id="inside-d8c41c"></a>&#x2022; [`site_local_inside`](#inside-d8c41c) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Params
 
 A [`params`](#params) block supports the following:
 
-<a id="params-ipsec"></a>&#x2022; [`ipsec`](#params-ipsec) - Optional Block<br>IPsec tunnel parameters. Configuration for IPsec encapsulation are: 1. PSK - pre shared key to be used by IKE<br>See [Ipsec](#params-ipsec) below.
+<a id="params-ipsec"></a>&#x2022; [`ipsec`](#params-ipsec) - Optional Block<br>Configuration for IPsec encapsulation are: 1. PSK - pre shared key to be used by IKE<br>See [Ipsec](#params-ipsec) below.
 
 #### Params Ipsec
 
 An [`ipsec`](#params-ipsec) block (within [`params`](#params)) supports the following:
 
-<a id="params-ipsec-ipsec-psk"></a>&#x2022; [`ipsec_psk`](#params-ipsec-ipsec-psk) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Ipsec Psk](#params-ipsec-ipsec-psk) below.
+<a id="params-ipsec-ipsec-psk"></a>&#x2022; [`ipsec_psk`](#params-ipsec-ipsec-psk) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Ipsec Psk](#params-ipsec-ipsec-psk) below.
 
 #### Params Ipsec Ipsec Psk
 
 An [`ipsec_psk`](#params-ipsec-ipsec-psk) block (within [`params.ipsec`](#params-ipsec)) supports the following:
 
-<a id="info-5ffa9e"></a>&#x2022; [`blindfold_secret_info`](#info-5ffa9e) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-5ffa9e) below.
+<a id="info-5ffa9e"></a>&#x2022; [`blindfold_secret_info`](#info-5ffa9e) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-5ffa9e) below.
 
-<a id="info-8a167c"></a>&#x2022; [`clear_secret_info`](#info-8a167c) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-8a167c) below.
+<a id="info-8a167c"></a>&#x2022; [`clear_secret_info`](#info-8a167c) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-8a167c) below.
 
 #### Params Ipsec Ipsec Psk Blindfold Secret Info
 
 A [`blindfold_secret_info`](#info-5ffa9e) block (within [`params.ipsec.ipsec_psk`](#params-ipsec-ipsec-psk)) supports the following:
 
-<a id="provider-6bd5ca"></a>&#x2022; [`decryption_provider`](#provider-6bd5ca) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-6bd5ca"></a>&#x2022; [`decryption_provider`](#provider-6bd5ca) - Optional String<br>Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="location-b07027"></a>&#x2022; [`location`](#location-b07027) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-b07027"></a>&#x2022; [`location`](#location-b07027) - Optional String<br>Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-dd4d40"></a>&#x2022; [`store_provider`](#provider-dd4d40) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-dd4d40"></a>&#x2022; [`store_provider`](#provider-dd4d40) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Params Ipsec Ipsec Psk Clear Secret Info
 
 A [`clear_secret_info`](#info-8a167c) block (within [`params.ipsec.ipsec_psk`](#params-ipsec-ipsec-psk)) supports the following:
 
-<a id="ref-e757e5"></a>&#x2022; [`provider_ref`](#ref-e757e5) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-e757e5"></a>&#x2022; [`provider_ref`](#ref-e757e5) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="url-4ac735"></a>&#x2022; [`url`](#url-4ac735) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
+<a id="url-4ac735"></a>&#x2022; [`url`](#url-4ac735) - Optional String<br>URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### Remote IP
 
 A [`remote_ip`](#remote-ip) block supports the following:
 
-<a id="remote-ip-endpoints"></a>&#x2022; [`endpoints`](#remote-ip-endpoints) - Optional Block<br>Remote Endpoint Type. Provides a map of ver node name to remote node attributes Ver node should use these attributes to configure as remote tunnel<br>See [Endpoints](#remote-ip-endpoints) below.
+<a id="remote-ip-endpoints"></a>&#x2022; [`endpoints`](#remote-ip-endpoints) - Optional Block<br>Provides a map of ver node name to remote node attributes Ver node should use these attributes to configure as remote tunnel<br>See [Endpoints](#remote-ip-endpoints) below.
 
-<a id="remote-ip-ip"></a>&#x2022; [`ip`](#remote-ip-ip) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [IP](#remote-ip-ip) below.
+<a id="remote-ip-ip"></a>&#x2022; [`ip`](#remote-ip-ip) - Optional Block<br>IP Address used to specify an IPv4 or IPv6 address<br>See [IP](#remote-ip-ip) below.
 
 #### Remote IP Endpoints
 
 An [`endpoints`](#remote-ip-endpoints) block (within [`remote_ip`](#remote-ip)) supports the following:
 
-<a id="remote-ip-endpoints-endpoints"></a>&#x2022; [`endpoints`](#remote-ip-endpoints-endpoints) - Optional Block<br>Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes
+<a id="remote-ip-endpoints-endpoints"></a>&#x2022; [`endpoints`](#remote-ip-endpoints-endpoints) - Optional Block<br>Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes
 
 #### Remote IP IP
 
@@ -214,19 +214,19 @@ An [`ip`](#remote-ip-ip) block (within [`remote_ip`](#remote-ip)) supports the f
 
 <a id="remote-ip-ip-ipv4"></a>&#x2022; [`ipv4`](#remote-ip-ip-ipv4) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#remote-ip-ip-ipv4) below.
 
-<a id="remote-ip-ip-ipv6"></a>&#x2022; [`ipv6`](#remote-ip-ip-ipv6) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#remote-ip-ip-ipv6) below.
+<a id="remote-ip-ip-ipv6"></a>&#x2022; [`ipv6`](#remote-ip-ip-ipv6) - Optional Block<br>IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#remote-ip-ip-ipv6) below.
 
 #### Remote IP IP IPv4
 
 An [`ipv4`](#remote-ip-ip-ipv4) block (within [`remote_ip.ip`](#remote-ip-ip)) supports the following:
 
-<a id="remote-ip-ip-ipv4-addr"></a>&#x2022; [`addr`](#remote-ip-ip-ipv4-addr) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
+<a id="remote-ip-ip-ipv4-addr"></a>&#x2022; [`addr`](#remote-ip-ip-ipv4-addr) - Optional String<br>IPv4 Address in string form with dot-decimal notation
 
 #### Remote IP IP IPv6
 
 An [`ipv6`](#remote-ip-ip-ipv6) block (within [`remote_ip.ip`](#remote-ip-ip)) supports the following:
 
-<a id="remote-ip-ip-ipv6-addr"></a>&#x2022; [`addr`](#remote-ip-ip-ipv6-addr) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
+<a id="remote-ip-ip-ipv6-addr"></a>&#x2022; [`addr`](#remote-ip-ip-ipv6-addr) - Optional String<br>IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
 
 #### Timeouts
 

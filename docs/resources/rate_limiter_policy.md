@@ -36,7 +36,7 @@ resource "f5xc_rate_limiter_policy" "example" {
   any_server {
     # Configure any_server settings
   }
-  # Rules. A list of RateLimiterRules that are evaluated sequ...
+  # List of RateLimiterRules that are evaluated sequentially ...
   rules {
     # Configure rules settings
   }
@@ -63,12 +63,12 @@ resource "f5xc_rate_limiter_policy" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="any-server"></a>[`any_server`](#any-server) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="server-name"></a>[`server_name`](#server-name) - Optional String<br>Server Name. The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request
-<br><br>&#x2022; <a id="server-name-matcher"></a>[`server_name_matcher`](#server-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Server Name Matcher](#server-name-matcher) below for details.
-<br><br>&#x2022; <a id="server-selector"></a>[`server_selector`](#server-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Server Selector](#server-selector) below for details.
+&#x2022; <a id="any-server"></a>[`any_server`](#any-server) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="server-name"></a>[`server_name`](#server-name) - Optional String<br>The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request
+<br><br>&#x2022; <a id="server-name-matcher"></a>[`server_name_matcher`](#server-name-matcher) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Server Name Matcher](#server-name-matcher) below for details.
+<br><br>&#x2022; <a id="server-selector"></a>[`server_selector`](#server-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects<br>See [Server Selector](#server-selector) below for details.
 
-<a id="rules"></a>&#x2022; [`rules`](#rules) - Optional Block<br>Rules. A list of RateLimiterRules that are evaluated sequentially till a matching rule is identified<br>See [Rules](#rules) below for details.
+<a id="rules"></a>&#x2022; [`rules`](#rules) - Optional Block<br>List of RateLimiterRules that are evaluated sequentially till a matching rule is identified<br>See [Rules](#rules) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -84,7 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`rules`](#rules) block supports the following:
 
-<a id="rules-metadata"></a>&#x2022; [`metadata`](#rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#rules-metadata) below.
+<a id="rules-metadata"></a>&#x2022; [`metadata`](#rules-metadata) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#rules-metadata) below.
 
 <a id="rules-spec"></a>&#x2022; [`spec`](#rules-spec) - Optional Block<br>Rate Limiter Rule Specification. Shape of Rate Limiter Rule<br>See [Spec](#rules-spec) below.
 
@@ -94,67 +94,67 @@ A [`metadata`](#rules-metadata) block (within [`rules`](#rules)) supports the fo
 
 <a id="rules-metadata-description-spec"></a>&#x2022; [`description_spec`](#rules-metadata-description-spec) - Optional String<br>Description. Human readable description
 
-<a id="rules-metadata-name"></a>&#x2022; [`name`](#rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="rules-metadata-name"></a>&#x2022; [`name`](#rules-metadata-name) - Optional String<br>Name of the message. The value of name has to follow DNS-1035 format
 
 #### Rules Spec
 
 A [`spec`](#rules-spec) block (within [`rules`](#rules)) supports the following:
 
-<a id="rules-spec-any-asn"></a>&#x2022; [`any_asn`](#rules-spec-any-asn) - Optional Block<br>Enable this option
+<a id="rules-spec-any-asn"></a>&#x2022; [`any_asn`](#rules-spec-any-asn) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="rules-spec-any-country"></a>&#x2022; [`any_country`](#rules-spec-any-country) - Optional Block<br>Enable this option
+<a id="rules-spec-any-country"></a>&#x2022; [`any_country`](#rules-spec-any-country) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="rules-spec-any-ip"></a>&#x2022; [`any_ip`](#rules-spec-any-ip) - Optional Block<br>Enable this option
+<a id="rules-spec-any-ip"></a>&#x2022; [`any_ip`](#rules-spec-any-ip) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="rules-spec-apply-rate-limiter"></a>&#x2022; [`apply_rate_limiter`](#rules-spec-apply-rate-limiter) - Optional Block<br>Enable this option
+<a id="rules-spec-apply-rate-limiter"></a>&#x2022; [`apply_rate_limiter`](#rules-spec-apply-rate-limiter) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="rules-spec-asn-list"></a>&#x2022; [`asn_list`](#rules-spec-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#rules-spec-asn-list) below.
+<a id="rules-spec-asn-list"></a>&#x2022; [`asn_list`](#rules-spec-asn-list) - Optional Block<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#rules-spec-asn-list) below.
 
-<a id="rules-spec-asn-matcher"></a>&#x2022; [`asn_matcher`](#rules-spec-asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#rules-spec-asn-matcher) below.
+<a id="rules-spec-asn-matcher"></a>&#x2022; [`asn_matcher`](#rules-spec-asn-matcher) - Optional Block<br>Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#rules-spec-asn-matcher) below.
 
-<a id="rules-spec-bypass-rate-limiter"></a>&#x2022; [`bypass_rate_limiter`](#rules-spec-bypass-rate-limiter) - Optional Block<br>Enable this option
+<a id="rules-spec-bypass-rate-limiter"></a>&#x2022; [`bypass_rate_limiter`](#rules-spec-bypass-rate-limiter) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="rules-spec-country-list"></a>&#x2022; [`country_list`](#rules-spec-country-list) - Optional Block<br>Country Codes List. List of Country Codes to match against<br>See [Country List](#rules-spec-country-list) below.
 
-<a id="rules-spec-custom-rate-limiter"></a>&#x2022; [`custom_rate_limiter`](#rules-spec-custom-rate-limiter) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Rate Limiter](#rules-spec-custom-rate-limiter) below.
+<a id="rules-spec-custom-rate-limiter"></a>&#x2022; [`custom_rate_limiter`](#rules-spec-custom-rate-limiter) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Rate Limiter](#rules-spec-custom-rate-limiter) below.
 
-<a id="rules-spec-domain-matcher"></a>&#x2022; [`domain_matcher`](#rules-spec-domain-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Domain Matcher](#rules-spec-domain-matcher) below.
+<a id="rules-spec-domain-matcher"></a>&#x2022; [`domain_matcher`](#rules-spec-domain-matcher) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Domain Matcher](#rules-spec-domain-matcher) below.
 
-<a id="rules-spec-headers"></a>&#x2022; [`headers`](#rules-spec-headers) - Optional Block<br>A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true<br>See [Headers](#rules-spec-headers) below.
+<a id="rules-spec-headers"></a>&#x2022; [`headers`](#rules-spec-headers) - Optional Block<br>List of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type<br>See [Headers](#rules-spec-headers) below.
 
-<a id="rules-spec-http-method"></a>&#x2022; [`http_method`](#rules-spec-http-method) - Optional Block<br>HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true<br>See [HTTP Method](#rules-spec-http-method) below.
+<a id="rules-spec-http-method"></a>&#x2022; [`http_method`](#rules-spec-http-method) - Optional Block<br>HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true<br>See [HTTP Method](#rules-spec-http-method) below.
 
-<a id="rules-spec-ip-matcher"></a>&#x2022; [`ip_matcher`](#rules-spec-ip-matcher) - Optional Block<br>IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#rules-spec-ip-matcher) below.
+<a id="rules-spec-ip-matcher"></a>&#x2022; [`ip_matcher`](#rules-spec-ip-matcher) - Optional Block<br>Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#rules-spec-ip-matcher) below.
 
-<a id="rules-spec-ip-prefix-list"></a>&#x2022; [`ip_prefix_list`](#rules-spec-ip-prefix-list) - Optional Block<br>IP Prefix Match List. List of IP Prefix strings to match against<br>See [IP Prefix List](#rules-spec-ip-prefix-list) below.
+<a id="rules-spec-ip-prefix-list"></a>&#x2022; [`ip_prefix_list`](#rules-spec-ip-prefix-list) - Optional Block<br>List of IP Prefix strings to match against<br>See [IP Prefix List](#rules-spec-ip-prefix-list) below.
 
-<a id="rules-spec-path"></a>&#x2022; [`path`](#rules-spec-path) - Optional Block<br>Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions<br>See [Path](#rules-spec-path) below.
+<a id="rules-spec-path"></a>&#x2022; [`path`](#rules-spec-path) - Optional Block<br>Path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions<br>See [Path](#rules-spec-path) below.
 
 #### Rules Spec Asn List
 
 An [`asn_list`](#rules-spec-asn-list) block (within [`rules.spec`](#rules-spec)) supports the following:
 
-<a id="rules-spec-asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#rules-spec-asn-list-as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
+<a id="rules-spec-asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#rules-spec-asn-list-as-numbers) - Optional List<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 #### Rules Spec Asn Matcher
 
 An [`asn_matcher`](#rules-spec-asn-matcher) block (within [`rules.spec`](#rules-spec)) supports the following:
 
-<a id="rules-spec-asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#rules-spec-asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#rules-spec-asn-matcher-asn-sets) below.
+<a id="rules-spec-asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#rules-spec-asn-matcher-asn-sets) - Optional Block<br>List of references to bgp_asn_set objects<br>See [Asn Sets](#rules-spec-asn-matcher-asn-sets) below.
 
 #### Rules Spec Asn Matcher Asn Sets
 
 An [`asn_sets`](#rules-spec-asn-matcher-asn-sets) block (within [`rules.spec.asn_matcher`](#rules-spec-asn-matcher)) supports the following:
 
-<a id="rules-spec-asn-matcher-asn-sets-kind"></a>&#x2022; [`kind`](#rules-spec-asn-matcher-asn-sets-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="rules-spec-asn-matcher-asn-sets-kind"></a>&#x2022; [`kind`](#rules-spec-asn-matcher-asn-sets-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="rules-spec-asn-matcher-asn-sets-name"></a>&#x2022; [`name`](#rules-spec-asn-matcher-asn-sets-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="rules-spec-asn-matcher-asn-sets-name"></a>&#x2022; [`name`](#rules-spec-asn-matcher-asn-sets-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-3ce633"></a>&#x2022; [`namespace`](#namespace-3ce633) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-3ce633"></a>&#x2022; [`namespace`](#namespace-3ce633) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="rules-spec-asn-matcher-asn-sets-tenant"></a>&#x2022; [`tenant`](#rules-spec-asn-matcher-asn-sets-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="rules-spec-asn-matcher-asn-sets-tenant"></a>&#x2022; [`tenant`](#rules-spec-asn-matcher-asn-sets-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="rules-spec-asn-matcher-asn-sets-uid"></a>&#x2022; [`uid`](#rules-spec-asn-matcher-asn-sets-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="rules-spec-asn-matcher-asn-sets-uid"></a>&#x2022; [`uid`](#rules-spec-asn-matcher-asn-sets-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Rules Spec Country List
 
@@ -168,43 +168,43 @@ A [`country_list`](#rules-spec-country-list) block (within [`rules.spec`](#rules
 
 A [`custom_rate_limiter`](#rules-spec-custom-rate-limiter) block (within [`rules.spec`](#rules-spec)) supports the following:
 
-<a id="rules-spec-custom-rate-limiter-name"></a>&#x2022; [`name`](#rules-spec-custom-rate-limiter-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="rules-spec-custom-rate-limiter-name"></a>&#x2022; [`name`](#rules-spec-custom-rate-limiter-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-339376"></a>&#x2022; [`namespace`](#namespace-339376) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-339376"></a>&#x2022; [`namespace`](#namespace-339376) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="rules-spec-custom-rate-limiter-tenant"></a>&#x2022; [`tenant`](#rules-spec-custom-rate-limiter-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="rules-spec-custom-rate-limiter-tenant"></a>&#x2022; [`tenant`](#rules-spec-custom-rate-limiter-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Rules Spec Domain Matcher
 
 A [`domain_matcher`](#rules-spec-domain-matcher) block (within [`rules.spec`](#rules-spec)) supports the following:
 
-<a id="rules-spec-domain-matcher-exact-values"></a>&#x2022; [`exact_values`](#rules-spec-domain-matcher-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="rules-spec-domain-matcher-exact-values"></a>&#x2022; [`exact_values`](#rules-spec-domain-matcher-exact-values) - Optional List<br>List of exact values to match the input against
 
-<a id="rules-spec-domain-matcher-regex-values"></a>&#x2022; [`regex_values`](#rules-spec-domain-matcher-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="rules-spec-domain-matcher-regex-values"></a>&#x2022; [`regex_values`](#rules-spec-domain-matcher-regex-values) - Optional List<br>List of regular expressions to match the input against
 
 #### Rules Spec Headers
 
 A [`headers`](#rules-spec-headers) block (within [`rules.spec`](#rules-spec)) supports the following:
 
-<a id="rules-spec-headers-check-not-present"></a>&#x2022; [`check_not_present`](#rules-spec-headers-check-not-present) - Optional Block<br>Enable this option
+<a id="rules-spec-headers-check-not-present"></a>&#x2022; [`check_not_present`](#rules-spec-headers-check-not-present) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="rules-spec-headers-check-present"></a>&#x2022; [`check_present`](#rules-spec-headers-check-present) - Optional Block<br>Enable this option
+<a id="rules-spec-headers-check-present"></a>&#x2022; [`check_present`](#rules-spec-headers-check-present) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="rules-spec-headers-invert-matcher"></a>&#x2022; [`invert_matcher`](#rules-spec-headers-invert-matcher) - Optional Bool<br>Invert Header Matcher. Invert the match result
 
-<a id="rules-spec-headers-item"></a>&#x2022; [`item`](#rules-spec-headers-item) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#rules-spec-headers-item) below.
+<a id="rules-spec-headers-item"></a>&#x2022; [`item`](#rules-spec-headers-item) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#rules-spec-headers-item) below.
 
-<a id="rules-spec-headers-name"></a>&#x2022; [`name`](#rules-spec-headers-name) - Optional String<br>Header Name. A case-insensitive HTTP header name
+<a id="rules-spec-headers-name"></a>&#x2022; [`name`](#rules-spec-headers-name) - Optional String<br>Case-insensitive HTTP header name
 
 #### Rules Spec Headers Item
 
 An [`item`](#rules-spec-headers-item) block (within [`rules.spec.headers`](#rules-spec-headers)) supports the following:
 
-<a id="rules-spec-headers-item-exact-values"></a>&#x2022; [`exact_values`](#rules-spec-headers-item-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="rules-spec-headers-item-exact-values"></a>&#x2022; [`exact_values`](#rules-spec-headers-item-exact-values) - Optional List<br>List of exact values to match the input against
 
-<a id="rules-spec-headers-item-regex-values"></a>&#x2022; [`regex_values`](#rules-spec-headers-item-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="rules-spec-headers-item-regex-values"></a>&#x2022; [`regex_values`](#rules-spec-headers-item-regex-values) - Optional List<br>List of regular expressions to match the input against
 
-<a id="rules-spec-headers-item-transformers"></a>&#x2022; [`transformers`](#rules-spec-headers-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="rules-spec-headers-item-transformers"></a>&#x2022; [`transformers`](#rules-spec-headers-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rules Spec HTTP Method
 
@@ -212,7 +212,7 @@ A [`http_method`](#rules-spec-http-method) block (within [`rules.spec`](#rules-s
 
 <a id="rules-spec-http-method-invert-matcher"></a>&#x2022; [`invert_matcher`](#rules-spec-http-method-invert-matcher) - Optional Bool<br>Invert Method Matcher. Invert the match result
 
-<a id="rules-spec-http-method-methods"></a>&#x2022; [`methods`](#rules-spec-http-method-methods) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> Method List. List of methods values to match against
+<a id="rules-spec-http-method-methods"></a>&#x2022; [`methods`](#rules-spec-http-method-methods) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> List of methods values to match against
 
 #### Rules Spec IP Matcher
 
@@ -220,21 +220,21 @@ An [`ip_matcher`](#rules-spec-ip-matcher) block (within [`rules.spec`](#rules-sp
 
 <a id="rules-spec-ip-matcher-invert-matcher"></a>&#x2022; [`invert_matcher`](#rules-spec-ip-matcher-invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
-<a id="rules-spec-ip-matcher-prefix-sets"></a>&#x2022; [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#rules-spec-ip-matcher-prefix-sets) below.
+<a id="rules-spec-ip-matcher-prefix-sets"></a>&#x2022; [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) - Optional Block<br>List of references to ip_prefix_set objects<br>See [Prefix Sets](#rules-spec-ip-matcher-prefix-sets) below.
 
 #### Rules Spec IP Matcher Prefix Sets
 
 A [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) block (within [`rules.spec.ip_matcher`](#rules-spec-ip-matcher)) supports the following:
 
-<a id="rules-spec-ip-matcher-prefix-sets-kind"></a>&#x2022; [`kind`](#rules-spec-ip-matcher-prefix-sets-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="rules-spec-ip-matcher-prefix-sets-kind"></a>&#x2022; [`kind`](#rules-spec-ip-matcher-prefix-sets-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="rules-spec-ip-matcher-prefix-sets-name"></a>&#x2022; [`name`](#rules-spec-ip-matcher-prefix-sets-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="rules-spec-ip-matcher-prefix-sets-name"></a>&#x2022; [`name`](#rules-spec-ip-matcher-prefix-sets-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-5d9a15"></a>&#x2022; [`namespace`](#namespace-5d9a15) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-5d9a15"></a>&#x2022; [`namespace`](#namespace-5d9a15) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-68e36f"></a>&#x2022; [`tenant`](#tenant-68e36f) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-68e36f"></a>&#x2022; [`tenant`](#tenant-68e36f) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="rules-spec-ip-matcher-prefix-sets-uid"></a>&#x2022; [`uid`](#rules-spec-ip-matcher-prefix-sets-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="rules-spec-ip-matcher-prefix-sets-uid"></a>&#x2022; [`uid`](#rules-spec-ip-matcher-prefix-sets-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Rules Spec IP Prefix List
 
@@ -248,31 +248,31 @@ An [`ip_prefix_list`](#rules-spec-ip-prefix-list) block (within [`rules.spec`](#
 
 A [`path`](#rules-spec-path) block (within [`rules.spec`](#rules-spec)) supports the following:
 
-<a id="rules-spec-path-exact-values"></a>&#x2022; [`exact_values`](#rules-spec-path-exact-values) - Optional List<br>Exact Values. A list of exact path values to match the input HTTP path against
+<a id="rules-spec-path-exact-values"></a>&#x2022; [`exact_values`](#rules-spec-path-exact-values) - Optional List<br>List of exact path values to match the input HTTP path against
 
 <a id="rules-spec-path-invert-matcher"></a>&#x2022; [`invert_matcher`](#rules-spec-path-invert-matcher) - Optional Bool<br>Invert Path Matcher. Invert the match result
 
-<a id="rules-spec-path-prefix-values"></a>&#x2022; [`prefix_values`](#rules-spec-path-prefix-values) - Optional List<br>Prefix Values. A list of path prefix values to match the input HTTP path against
+<a id="rules-spec-path-prefix-values"></a>&#x2022; [`prefix_values`](#rules-spec-path-prefix-values) - Optional List<br>List of path prefix values to match the input HTTP path against
 
-<a id="rules-spec-path-regex-values"></a>&#x2022; [`regex_values`](#rules-spec-path-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input HTTP path against
+<a id="rules-spec-path-regex-values"></a>&#x2022; [`regex_values`](#rules-spec-path-regex-values) - Optional List<br>List of regular expressions to match the input HTTP path against
 
-<a id="rules-spec-path-suffix-values"></a>&#x2022; [`suffix_values`](#rules-spec-path-suffix-values) - Optional List<br>Suffix Values. A list of path suffix values to match the input HTTP path against
+<a id="rules-spec-path-suffix-values"></a>&#x2022; [`suffix_values`](#rules-spec-path-suffix-values) - Optional List<br>List of path suffix values to match the input HTTP path against
 
-<a id="rules-spec-path-transformers"></a>&#x2022; [`transformers`](#rules-spec-path-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="rules-spec-path-transformers"></a>&#x2022; [`transformers`](#rules-spec-path-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Server Name Matcher
 
 A [`server_name_matcher`](#server-name-matcher) block supports the following:
 
-<a id="server-name-matcher-exact-values"></a>&#x2022; [`exact_values`](#server-name-matcher-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="server-name-matcher-exact-values"></a>&#x2022; [`exact_values`](#server-name-matcher-exact-values) - Optional List<br>List of exact values to match the input against
 
-<a id="server-name-matcher-regex-values"></a>&#x2022; [`regex_values`](#server-name-matcher-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="server-name-matcher-regex-values"></a>&#x2022; [`regex_values`](#server-name-matcher-regex-values) - Optional List<br>List of regular expressions to match the input against
 
 #### Server Selector
 
 A [`server_selector`](#server-selector) block supports the following:
 
-<a id="server-selector-expressions"></a>&#x2022; [`expressions`](#server-selector-expressions) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
+<a id="server-selector-expressions"></a>&#x2022; [`expressions`](#server-selector-expressions) - Optional List<br>Expressions contains the Kubernetes style label expression for selections
 
 #### Timeouts
 

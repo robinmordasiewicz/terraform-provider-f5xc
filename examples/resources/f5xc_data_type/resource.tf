@@ -16,7 +16,7 @@ resource "f5xc_data_type" "example" {
   }
 
   # Resource-specific configuration
-  # Data Type Rules. Configure key/value or regex match rules...
+  # Configure key/value or regex match rules to enable the pl...
   rules {
     # Configure rules settings
   }

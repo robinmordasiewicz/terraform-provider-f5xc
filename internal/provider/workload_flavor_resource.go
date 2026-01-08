@@ -115,7 +115,7 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"ephemeral_storage": schema.StringAttribute{
-				MarkdownDescription: "Ephemeral Storage (MiB). Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor.",
+				MarkdownDescription: "Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -123,7 +123,7 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"memory": schema.StringAttribute{
-				MarkdownDescription: "Memory (MiB). Memory in MiB (mebibyte) allocated for the workload_flavor.",
+				MarkdownDescription: "Memory in MiB (mebibyte) allocated for the workload_flavor.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -131,7 +131,7 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"vcpus": schema.Int64Attribute{
-				MarkdownDescription: "VCPUs. Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core.",
+				MarkdownDescription: "Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{

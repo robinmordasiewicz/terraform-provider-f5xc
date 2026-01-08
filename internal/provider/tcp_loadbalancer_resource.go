@@ -849,7 +849,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Optional:            true,
 			},
 			"domains": schema.ListAttribute{
-				MarkdownDescription: "Domains. A list of Domains (host/authority header) that will be matched to this Load Balancer. Supported Domains and search order: 1. Exact Domain names: www.example.com. 2. Domains starting with a Wildcard: *.example.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. E.g. *.example.com and *.bar.example.com are valid Wildcards however *bar.example.com, *-bar.example.com, and bar*.example.com are all invalid. Additional notes: A Wildcard will not match empty string. E.g. *.example.com will match bar.example.com and baz-bar.example.com but not .example.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if SNI is activated on the given TCP Load Balancer. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system.",
+				MarkdownDescription: "List of Domains (host/authority header) that will be matched to this Load Balancer. Supported Domains and search order: 1. Exact Domain names: www.example.com. 2.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
@@ -866,7 +866,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"dns_volterra_managed": schema.BoolAttribute{
-				MarkdownDescription: "Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. This requires the domain to be delegated to F5XC using the Delegated Domain feature.",
+				MarkdownDescription: "DNS records for domains will be managed automatically by F5 Distributed Cloud. This requires the domain to be delegated to F5XC using the Delegated Domain feature.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
@@ -874,7 +874,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"idle_timeout": schema.Int64Attribute{
-				MarkdownDescription: "Idle Timeout. The amount of time that a stream can exist without upstream or downstream activity, in milliseconds.",
+				MarkdownDescription: "The amount of time that a stream can exist without upstream or downstream activity, in milliseconds.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -882,7 +882,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"listen_port": schema.Int64Attribute{
-				MarkdownDescription: "[OneOf: listen_port, port_ranges] Listen Port. Listen Port for this load balancer.",
+				MarkdownDescription: "[OneOf: listen_port, port_ranges] Listen Port for this load balancer.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -890,7 +890,7 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"port_ranges": schema.StringAttribute{
-				MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
+				MarkdownDescription: "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -910,19 +910,19 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"policies": schema.ListNestedBlock{
-						MarkdownDescription: "Policies. Service Policies is a sequential engine where policies (and rules within the policy) are evaluated one after the other. It's important to define the correct order (policies evaluated from top to bottom in the list) for service policies, to GET the intended result. For each request, its characteristics are evaluated based on the match criteria in each service policy starting at the top. If there is a match in the current policy, then the policy takes effect, and no more policies are evaluated. Otherwise, the next policy is evaluated. If all policies are evaluated and none match, then the request will be denied by default.",
+						MarkdownDescription: "Service Policies is a sequential engine where policies (and rules within the policy) are evaluated one after the other. It's important to define the correct order (policies evaluated from top to bottom in the list) for service policies, to GET the intended result. For each request, its..",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -935,40 +935,40 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"advertise_custom": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: advertise_custom, advertise_on_public, advertise_on_public_default_vip, do_not_advertise; Default: advertise_on_public_default_vip] Advertise Custom. This defines a way to advertise a VIP on specific sites.",
+				MarkdownDescription: "[OneOf: advertise_custom, advertise_on_public, advertise_on_public_default_vip, do_not_advertise; Default: advertise_on_public_default_vip] Defines a way to advertise a VIP on specific sites.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"advertise_where": schema.ListNestedBlock{
-						MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available .",
+						MarkdownDescription: "Where should this load balancer be available .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"port": schema.Int64Attribute{
-									MarkdownDescription: "Listen Port. Port to Listen.",
+									MarkdownDescription: "Port to Listen.",
 									Optional:            true,
 								},
 								"port_ranges": schema.StringAttribute{
-									MarkdownDescription: "Listen Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
+									MarkdownDescription: "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"advertise_on_public": schema.SingleNestedBlock{
-									MarkdownDescription: "Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available.",
+									MarkdownDescription: "Defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"public_ip": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+											MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -980,31 +980,31 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 								},
 								"site": schema.SingleNestedBlock{
-									MarkdownDescription: "Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised.",
+									MarkdownDescription: "Defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised.",
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
-											MarkdownDescription: "IP Address. Use given IP address as VIP on the site.",
+											MarkdownDescription: "Use given IP address as VIP on the site.",
 											Optional:            true,
 										},
 										"network": schema.StringAttribute{
-											MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. VK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
+											MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+											MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1016,40 +1016,40 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 								},
 								"use_default_port": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"virtual_network": schema.SingleNestedBlock{
-									MarkdownDescription: "Virtual Network. Parameters to advertise on a given virtual network.",
+									MarkdownDescription: "Parameters to advertise on a given virtual network.",
 									Attributes: map[string]schema.Attribute{
 										"specific_v6_vip": schema.StringAttribute{
-											MarkdownDescription: "Specific V6 VIP. Use given IPv6 address as VIP on virtual Network.",
+											MarkdownDescription: "Use given IPv6 address as VIP on virtual Network.",
 											Optional:            true,
 										},
 										"specific_vip": schema.StringAttribute{
-											MarkdownDescription: "Specific V4 VIP. Use given IPv4 address as VIP on virtual Network.",
+											MarkdownDescription: "Use given IPv4 address as VIP on virtual Network.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"default_v6_vip": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"default_vip": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"virtual_network": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+											MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1061,27 +1061,27 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 								},
 								"virtual_site": schema.SingleNestedBlock{
-									MarkdownDescription: "Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised.",
+									MarkdownDescription: "Defines a reference to a customer site virtual site along with network type where a load balancer could be advertised.",
 									Attributes: map[string]schema.Attribute{
 										"network": schema.StringAttribute{
-											MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. VK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
+											MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"virtual_site": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+											MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1093,31 +1093,31 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 								},
 								"virtual_site_with_vip": schema.SingleNestedBlock{
-									MarkdownDescription: "Virtual Site with Specified VIP. This defines a reference to a customer site virtual site along with network type and IP where a load balancer could be advertised.",
+									MarkdownDescription: "Defines a reference to a customer site virtual site along with network type and IP where a load balancer could be advertised.",
 									Attributes: map[string]schema.Attribute{
 										"ip": schema.StringAttribute{
-											MarkdownDescription: "IP Address. Use given IP address as VIP on the site.",
+											MarkdownDescription: "Use given IP address as VIP on the site.",
 											Optional:            true,
 										},
 										"network": schema.StringAttribute{
-											MarkdownDescription: "[Enum: SITE_NETWORK_SPECIFIED_VIP_OUTSIDE|SITE_NETWORK_SPECIFIED_VIP_INSIDE] Site Network. This defines network types to be used on virtual-site with specified VIP All outside networks. All inside networks. Possible values are `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE`, `SITE_NETWORK_SPECIFIED_VIP_INSIDE`. Defaults to `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE`.",
+											MarkdownDescription: "[Enum: SITE_NETWORK_SPECIFIED_VIP_OUTSIDE|SITE_NETWORK_SPECIFIED_VIP_INSIDE] Defines network types to be used on virtual-site with specified VIP All outside networks. All inside networks. Possible values are `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE`, `SITE_NETWORK_SPECIFIED_VIP_INSIDE`. Defaults to `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE`.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"virtual_site": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+											MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1129,22 +1129,22 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 								},
 								"vk8s_service": schema.SingleNestedBlock{
-									MarkdownDescription: "VK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network.",
+									MarkdownDescription: "Defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+											MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1154,18 +1154,18 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											},
 										},
 										"virtual_site": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+											MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1182,22 +1182,22 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"advertise_on_public": schema.SingleNestedBlock{
-				MarkdownDescription: "Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available.",
+				MarkdownDescription: "Defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -1209,62 +1209,62 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"advertise_on_public_default_vip": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"default_lb_with_sni": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: default_lb_with_sni, no_sni, sni; Default: default_lb_with_sni] Enable this option",
+				MarkdownDescription: "[OneOf: default_lb_with_sni, no_sni, sni; Default: default_lb_with_sni] Can be used for messages where no values are needed.",
 			},
 			"do_not_advertise": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"do_not_retract_cluster": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: do_not_retract_cluster, retract_cluster] Enable this option",
+				MarkdownDescription: "[OneOf: do_not_retract_cluster, retract_cluster] Can be used for messages where no values are needed.",
 			},
 			"hash_policy_choice_least_active": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: hash_policy_choice_least_active, hash_policy_choice_random, hash_policy_choice_round_robin, hash_policy_choice_source_ip_stickiness] Enable this option",
+				MarkdownDescription: "[OneOf: hash_policy_choice_least_active, hash_policy_choice_random, hash_policy_choice_round_robin, hash_policy_choice_source_ip_stickiness] Can be used for messages where no values are needed.",
 			},
 			"hash_policy_choice_random": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"hash_policy_choice_round_robin": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"hash_policy_choice_source_ip_stickiness": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"no_service_policies": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"no_sni": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"origin_pools_weights": schema.ListNestedBlock{
-				MarkdownDescription: "Origin Pools. Origin pools and weights used for this load balancer.",
+				MarkdownDescription: "Origin pools and weights used for this load balancer.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"priority": schema.Int64Attribute{
-							MarkdownDescription: "Priority. Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the increasing priority.",
+							MarkdownDescription: "Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the..",
 							Optional:            true,
 						},
 						"weight": schema.Int64Attribute{
-							MarkdownDescription: "Weight. Weight of this origin pool, valid only with multiple origin pool. Value of 0 will disable the pool.",
+							MarkdownDescription: "Weight of this origin pool, valid only with multiple origin pool. Value of 0 will disable the pool.",
 							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
 						"cluster": schema.SingleNestedBlock{
-							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+							MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -1274,21 +1274,21 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 						},
 						"endpoint_subsets": schema.SingleNestedBlock{
-							MarkdownDescription: "Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8s or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured endpoint and discovered service, labels from discovered service takes precedence. List of key-value pairs that will be used as matching metadata. Only those origin servers of upstream origin pool which match this metadata will be selected for load balancing.",
+							MarkdownDescription: "Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8s or Consul..",
 						},
 						"pool": schema.SingleNestedBlock{
-							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+							MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -1301,19 +1301,19 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"retract_cluster": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"service_policies_from_namespace": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"sni": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"tcp": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: tcp, tls_tcp, tls_tcp_auto_cert] Enable this option",
+				MarkdownDescription: "[OneOf: tcp, tls_tcp, tls_tcp_auto_cert] Can be used for messages where no values are needed.",
 			},
 			"tls_tcp": schema.SingleNestedBlock{
-				MarkdownDescription: "BYOC TLS over TCP Choice. Choice for selecting TLS over TCP proxy with bring your own certificates.",
+				MarkdownDescription: "Choice for selecting TLS over TCP proxy with bring your own certificates.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"tls_cert_params": schema.SingleNestedBlock{
@@ -1321,19 +1321,19 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"certificates": schema.ListNestedBlock{
-								MarkdownDescription: "Certificates. Select one or more certificates with any domain names.",
+								MarkdownDescription: "Select one or more certificates with any domain names.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -1344,67 +1344,67 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								},
 							},
 							"no_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"tls_config": schema.SingleNestedBlock{
-								MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
+								MarkdownDescription: "Defines various OPTIONS to configure TLS configuration parameters.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
+										MarkdownDescription: "Defines TLS protocol config including min/max versions and allowed ciphers.",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
-												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
+												MarkdownDescription: "The TLS listener will only support the specified cipher list.",
 												Optional:            true,
 												ElementType:         types.StringType,
 											},
 											"max_version": schema.StringAttribute{
-												MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+												MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 												Optional:            true,
 											},
 											"min_version": schema.StringAttribute{
-												MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+												MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 												Optional:            true,
 											},
 										},
 									},
 									"default_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 									"low_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 									"medium_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 								},
 							},
 							"use_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
+								MarkdownDescription: "Validation context for downstream client TLS connections.",
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
-										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
+										MarkdownDescription: "Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated.",
 										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
+										MarkdownDescription: "Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+										MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+												MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+												MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+												MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -1414,21 +1414,21 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"no_crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
-										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+										MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+												MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+												MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+												MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -1438,13 +1438,13 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
-										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
+										MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
-												MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+												MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 												Optional:            true,
 												ElementType:         types.StringType,
 											},
@@ -1459,14 +1459,14 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
+								MarkdownDescription: "Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
-											MarkdownDescription: "Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
+											MarkdownDescription: "TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
@@ -1476,48 +1476,48 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 									Blocks: map[string]schema.Block{
 										"custom_hash_algorithms": schema.SingleNestedBlock{
-											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used.",
+											MarkdownDescription: "Specifies the hash algorithms to be used.",
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
-													MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+													MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
 											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"private_key": schema.SingleNestedBlock{
-											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
-													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+													MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
-															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+															MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 															Optional:            true,
 														},
 														"location": schema.StringAttribute{
-															MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+															MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
-															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+															MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 													},
 												},
 												"clear_secret_info": schema.SingleNestedBlock{
-													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+													MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
-															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+															MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 														"url": schema.StringAttribute{
-															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+															MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 															Optional:            true,
 														},
 													},
@@ -1525,70 +1525,70 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 									},
 								},
 							},
 							"tls_config": schema.SingleNestedBlock{
-								MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
+								MarkdownDescription: "Defines various OPTIONS to configure TLS configuration parameters.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
+										MarkdownDescription: "Defines TLS protocol config including min/max versions and allowed ciphers.",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
-												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
+												MarkdownDescription: "The TLS listener will only support the specified cipher list.",
 												Optional:            true,
 												ElementType:         types.StringType,
 											},
 											"max_version": schema.StringAttribute{
-												MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+												MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 												Optional:            true,
 											},
 											"min_version": schema.StringAttribute{
-												MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+												MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 												Optional:            true,
 											},
 										},
 									},
 									"default_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 									"low_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 									"medium_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 								},
 							},
 							"use_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
+								MarkdownDescription: "Validation context for downstream client TLS connections.",
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
-										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
+										MarkdownDescription: "Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated.",
 										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
+										MarkdownDescription: "Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+										MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+												MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+												MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+												MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -1598,21 +1598,21 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"no_crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
-										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+										MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+												MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+												MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+												MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -1622,13 +1622,13 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
-										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
+										MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
-												MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+												MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 												Optional:            true,
 												ElementType:         types.StringType,
 											},
@@ -1641,71 +1641,71 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"tls_tcp_auto_cert": schema.SingleNestedBlock{
-				MarkdownDescription: "TLS over TCP with Auto Certs Choice. Choice for selecting TLS over TCP proxy with automatic certificates.",
+				MarkdownDescription: "Choice for selecting TLS over TCP proxy with automatic certificates.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"no_mtls": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"tls_config": schema.SingleNestedBlock{
-						MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
+						MarkdownDescription: "Defines various OPTIONS to configure TLS configuration parameters.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"custom_security": schema.SingleNestedBlock{
-								MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
+								MarkdownDescription: "Defines TLS protocol config including min/max versions and allowed ciphers.",
 								Attributes: map[string]schema.Attribute{
 									"cipher_suites": schema.ListAttribute{
-										MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
+										MarkdownDescription: "The TLS listener will only support the specified cipher list.",
 										Optional:            true,
 										ElementType:         types.StringType,
 									},
 									"max_version": schema.StringAttribute{
-										MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+										MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 										Optional:            true,
 									},
 									"min_version": schema.StringAttribute{
-										MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
+										MarkdownDescription: "[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version. Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`. Defaults to `TLS_AUTO`.",
 										Optional:            true,
 									},
 								},
 							},
 							"default_security": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"low_security": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"medium_security": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 						},
 					},
 					"use_mtls": schema.SingleNestedBlock{
-						MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
+						MarkdownDescription: "Validation context for downstream client TLS connections.",
 						Attributes: map[string]schema.Attribute{
 							"client_certificate_optional": schema.BoolAttribute{
-								MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
+								MarkdownDescription: "Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated.",
 								Optional:            true,
 							},
 							"trusted_ca_url": schema.StringAttribute{
-								MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
+								MarkdownDescription: "Upload a Root CA Certificate specifically for this Load Balancer.",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"crl": schema.SingleNestedBlock{
-								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+								MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -1715,21 +1715,21 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								},
 							},
 							"no_crl": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"trusted_ca": schema.SingleNestedBlock{
-								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+								MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -1739,13 +1739,13 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								},
 							},
 							"xfcc_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"xfcc_options": schema.SingleNestedBlock{
-								MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
+								MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
 								Attributes: map[string]schema.Attribute{
 									"xfcc_header_elements": schema.ListAttribute{
-										MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+										MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 										Optional:            true,
 										ElementType:         types.StringType,
 									},

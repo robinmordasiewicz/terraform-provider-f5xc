@@ -223,7 +223,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 				ElementType:         types.StringType,
 			},
 			"compliances": schema.ListAttribute{
-				MarkdownDescription: "[Enum: GDPR|CCPA|PIPEDA|LGPD|DPA_UK|PDPA_SG|APPI|HIPAA|CPRA_2023|CPA_CO|SOC2|PCI_DSS|ISO_IEC_27001|ISO_IEC_27701|EPRIVACY_DIRECTIVE|GLBA|SOX] Relevant Compliances. Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`.",
+				MarkdownDescription: "[Enum: GDPR|CCPA|PIPEDA|LGPD|DPA_UK|PDPA_SG|APPI|HIPAA|CPRA_2023|CPA_CO|SOC2|PCI_DSS|ISO_IEC_27001|ISO_IEC_27701|EPRIVACY_DIRECTIVE|GLBA|SOX] Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
@@ -248,7 +248,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 				},
 			},
 			"is_pii": schema.BoolAttribute{
-				MarkdownDescription: "Mark as PII. Select this option to classify the custom data type as personally identifiable information (PII)",
+				MarkdownDescription: "Select this option to classify the custom data type as personally identifiable information (PII).",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
@@ -256,7 +256,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 				},
 			},
 			"is_sensitive_data": schema.BoolAttribute{
-				MarkdownDescription: "Mark as Sensitive Data. Select this option to classify the custom data type as sensitive, enabling detection of API vulnerabilities related to this data type.",
+				MarkdownDescription: "Select this option to classify the custom data type as sensitive, enabling detection of API vulnerabilities related to this data type.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
@@ -272,7 +272,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 				Delete: true,
 			}),
 			"rules": schema.ListNestedBlock{
-				MarkdownDescription: "Data Type Rules. Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response .",
+				MarkdownDescription: "Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
@@ -280,11 +280,11 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 							MarkdownDescription: "Rule Pattern Type. Test",
 							Attributes: map[string]schema.Attribute{
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Value. Search for values matching this regular expression.",
+									MarkdownDescription: "Search for values matching this regular expression.",
 									Optional:            true,
 								},
 								"substring_value": schema.StringAttribute{
-									MarkdownDescription: "Substring Search. Search for values that include this substring.",
+									MarkdownDescription: "Search for values that include this substring.",
 									Optional:            true,
 								},
 							},
@@ -293,7 +293,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Exact Values. List of exact values to match.",
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
-											MarkdownDescription: "Exact Values. List of exact values to match.",
+											MarkdownDescription: "List of exact values to match.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
@@ -302,18 +302,18 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 							},
 						},
 						"key_value_pattern": schema.SingleNestedBlock{
-							MarkdownDescription: "Key & Value Pattern. Search for specific key & value patterns in the specified sections.",
+							MarkdownDescription: "Search for specific key & value patterns in the specified sections.",
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"key_pattern": schema.SingleNestedBlock{
 									MarkdownDescription: "Rule Pattern Type. Test",
 									Attributes: map[string]schema.Attribute{
 										"regex_value": schema.StringAttribute{
-											MarkdownDescription: "Regex Value. Search for values matching this regular expression.",
+											MarkdownDescription: "Search for values matching this regular expression.",
 											Optional:            true,
 										},
 										"substring_value": schema.StringAttribute{
-											MarkdownDescription: "Substring Search. Search for values that include this substring.",
+											MarkdownDescription: "Search for values that include this substring.",
 											Optional:            true,
 										},
 									},
@@ -322,7 +322,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Exact Values. List of exact values to match.",
 											Attributes: map[string]schema.Attribute{
 												"exact_values": schema.ListAttribute{
-													MarkdownDescription: "Exact Values. List of exact values to match.",
+													MarkdownDescription: "List of exact values to match.",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
@@ -334,11 +334,11 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Rule Pattern Type. Test",
 									Attributes: map[string]schema.Attribute{
 										"regex_value": schema.StringAttribute{
-											MarkdownDescription: "Regex Value. Search for values matching this regular expression.",
+											MarkdownDescription: "Search for values matching this regular expression.",
 											Optional:            true,
 										},
 										"substring_value": schema.StringAttribute{
-											MarkdownDescription: "Substring Search. Search for values that include this substring.",
+											MarkdownDescription: "Search for values that include this substring.",
 											Optional:            true,
 										},
 									},
@@ -347,7 +347,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Exact Values. List of exact values to match.",
 											Attributes: map[string]schema.Attribute{
 												"exact_values": schema.ListAttribute{
-													MarkdownDescription: "Exact Values. List of exact values to match.",
+													MarkdownDescription: "List of exact values to match.",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
@@ -361,11 +361,11 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 							MarkdownDescription: "Rule Pattern Type. Test",
 							Attributes: map[string]schema.Attribute{
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Value. Search for values matching this regular expression.",
+									MarkdownDescription: "Search for values matching this regular expression.",
 									Optional:            true,
 								},
 								"substring_value": schema.StringAttribute{
-									MarkdownDescription: "Substring Search. Search for values that include this substring.",
+									MarkdownDescription: "Search for values that include this substring.",
 									Optional:            true,
 								},
 							},
@@ -374,7 +374,7 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Exact Values. List of exact values to match.",
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
-											MarkdownDescription: "Exact Values. List of exact values to match.",
+											MarkdownDescription: "List of exact values to match.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},

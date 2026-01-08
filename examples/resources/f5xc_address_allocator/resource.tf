@@ -16,7 +16,7 @@ resource "f5xc_address_allocator" "example" {
   }
 
   # Resource-specific configuration
-  # Address Allocation Scheme. Decides the scheme to be used ...
+  # Decides the scheme to be used to allocate addresses from ...
   address_allocation_scheme {
     # Configure address_allocation_scheme settings
   }

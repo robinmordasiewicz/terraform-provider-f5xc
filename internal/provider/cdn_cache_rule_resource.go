@@ -368,7 +368,7 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 				Blocks: map[string]schema.Block{
 					"cache_bypass": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"eligible_for_cache": schema.SingleNestedBlock{
 						MarkdownDescription: "Cache Action OPTIONS. List of OPTIONS for Cache Action.",
@@ -382,11 +382,11 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 										Optional:            true,
 									},
 									"cache_ttl": schema.StringAttribute{
-										MarkdownDescription: "Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days .",
+										MarkdownDescription: "Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days .",
 										Optional:            true,
 									},
 									"ignore_response_cookie": schema.BoolAttribute{
-										MarkdownDescription: "Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present.",
+										MarkdownDescription: "By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present.",
 										Optional:            true,
 									},
 								},
@@ -399,11 +399,11 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 										Optional:            true,
 									},
 									"cache_ttl": schema.StringAttribute{
-										MarkdownDescription: "Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days .",
+										MarkdownDescription: "Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days .",
 										Optional:            true,
 									},
 									"ignore_response_cookie": schema.BoolAttribute{
-										MarkdownDescription: "Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present.",
+										MarkdownDescription: "By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present.",
 										Optional:            true,
 									},
 								},
@@ -411,67 +411,67 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 						},
 					},
 					"rule_expression_list": schema.ListNestedBlock{
-						MarkdownDescription: "Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs. .",
+						MarkdownDescription: "Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs. .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"expression_name": schema.StringAttribute{
-									MarkdownDescription: "Expression Name. Name of the Expressions items that are ANDed .",
+									MarkdownDescription: "Name of the Expressions items that are ANDed .",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"cache_rule_expression": schema.ListNestedBlock{
-									MarkdownDescription: "Terms. The Cache Rule Expression Terms that are ANDed .",
+									MarkdownDescription: "The Cache Rule Expression Terms that are ANDed .",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"cache_headers": schema.ListNestedBlock{
-												MarkdownDescription: "Cache Headers. Configure cache rule headers to match the criteria.",
+												MarkdownDescription: "Configure cache rule headers to match the criteria.",
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "[Enum: PROXY_HOST|REFERER|SCHEME|USER_AGENT] Header OPTIONS. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The HTTP scheme used: HTTP or HTTPS - USER_AGENT: User Agent The user agent string of the user agent. Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`. Defaults to `PROXY_HOST`.",
+															MarkdownDescription: "[Enum: PROXY_HOST|REFERER|SCHEME|USER_AGENT] - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The HTTP scheme used: HTTP or HTTPS - USER_AGENT: User Agent The user agent string of the user agent. Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`. Defaults to `PROXY_HOST`.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"operator": schema.SingleNestedBlock{
-															MarkdownDescription: "Operator.",
+															MarkdownDescription: "Operator",
 															Attributes: map[string]schema.Attribute{
 																"contains": schema.StringAttribute{
-																	MarkdownDescription: "Contains. Field must contain.",
+																	MarkdownDescription: "Field must contain.",
 																	Optional:            true,
 																},
 																"does_not_contain": schema.StringAttribute{
-																	MarkdownDescription: "Does Not Contain. Field must not contain.",
+																	MarkdownDescription: "Field must not contain.",
 																	Optional:            true,
 																},
 																"does_not_end_with": schema.StringAttribute{
-																	MarkdownDescription: "Does Not End With. Field must not end with.",
+																	MarkdownDescription: "Field must not end with.",
 																	Optional:            true,
 																},
 																"does_not_equal": schema.StringAttribute{
-																	MarkdownDescription: "Does Not Equal. Field must not equal.",
+																	MarkdownDescription: "Field must not equal.",
 																	Optional:            true,
 																},
 																"does_not_start_with": schema.StringAttribute{
-																	MarkdownDescription: "Does Not Start With. Field must not start with.",
+																	MarkdownDescription: "Field must not start with.",
 																	Optional:            true,
 																},
 																"endswith": schema.StringAttribute{
-																	MarkdownDescription: "Ends With. Field must end with.",
+																	MarkdownDescription: "Field must end with.",
 																	Optional:            true,
 																},
 																"equals": schema.StringAttribute{
-																	MarkdownDescription: "Equals. Field must exactly match.",
+																	MarkdownDescription: "Field must exactly match.",
 																	Optional:            true,
 																},
 																"match_regex": schema.StringAttribute{
-																	MarkdownDescription: "Matches Regex. Field matches PCRE 1 compliant regular expression.",
+																	MarkdownDescription: "Field matches PCRE 1 compliant regular expression.",
 																	Optional:            true,
 																},
 																"startswith": schema.StringAttribute{
-																	MarkdownDescription: "Starts With. Field must start with.",
+																	MarkdownDescription: "Field must start with.",
 																	Optional:            true,
 																},
 															},
@@ -480,52 +480,52 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 												},
 											},
 											"cookie_matcher": schema.ListNestedBlock{
-												MarkdownDescription: "Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true.",
+												MarkdownDescription: "List of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name.",
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Cookie Name. A case-sensitive cookie name.",
+															MarkdownDescription: "Case-sensitive cookie name.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"operator": schema.SingleNestedBlock{
-															MarkdownDescription: "Operator.",
+															MarkdownDescription: "Operator",
 															Attributes: map[string]schema.Attribute{
 																"contains": schema.StringAttribute{
-																	MarkdownDescription: "Contains. Field must contain.",
+																	MarkdownDescription: "Field must contain.",
 																	Optional:            true,
 																},
 																"does_not_contain": schema.StringAttribute{
-																	MarkdownDescription: "Does Not Contain. Field must not contain.",
+																	MarkdownDescription: "Field must not contain.",
 																	Optional:            true,
 																},
 																"does_not_end_with": schema.StringAttribute{
-																	MarkdownDescription: "Does Not End With. Field must not end with.",
+																	MarkdownDescription: "Field must not end with.",
 																	Optional:            true,
 																},
 																"does_not_equal": schema.StringAttribute{
-																	MarkdownDescription: "Does Not Equal. Field must not equal.",
+																	MarkdownDescription: "Field must not equal.",
 																	Optional:            true,
 																},
 																"does_not_start_with": schema.StringAttribute{
-																	MarkdownDescription: "Does Not Start With. Field must not start with.",
+																	MarkdownDescription: "Field must not start with.",
 																	Optional:            true,
 																},
 																"endswith": schema.StringAttribute{
-																	MarkdownDescription: "Ends With. Field must end with.",
+																	MarkdownDescription: "Field must end with.",
 																	Optional:            true,
 																},
 																"equals": schema.StringAttribute{
-																	MarkdownDescription: "Equals. Field must exactly match.",
+																	MarkdownDescription: "Field must exactly match.",
 																	Optional:            true,
 																},
 																"match_regex": schema.StringAttribute{
-																	MarkdownDescription: "Matches Regex. Field matches PCRE 1 compliant regular expression.",
+																	MarkdownDescription: "Field matches PCRE 1 compliant regular expression.",
 																	Optional:            true,
 																},
 																"startswith": schema.StringAttribute{
-																	MarkdownDescription: "Starts With. Field must start with.",
+																	MarkdownDescription: "Field must start with.",
 																	Optional:            true,
 																},
 															},
@@ -534,46 +534,46 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 												},
 											},
 											"path_match": schema.SingleNestedBlock{
-												MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
+												MarkdownDescription: "Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"operator": schema.SingleNestedBlock{
-														MarkdownDescription: "Operator.",
+														MarkdownDescription: "Operator",
 														Attributes: map[string]schema.Attribute{
 															"contains": schema.StringAttribute{
-																MarkdownDescription: "Contains. Field must contain.",
+																MarkdownDescription: "Field must contain.",
 																Optional:            true,
 															},
 															"does_not_contain": schema.StringAttribute{
-																MarkdownDescription: "Does Not Contain. Field must not contain.",
+																MarkdownDescription: "Field must not contain.",
 																Optional:            true,
 															},
 															"does_not_end_with": schema.StringAttribute{
-																MarkdownDescription: "Does Not End With. Field must not end with.",
+																MarkdownDescription: "Field must not end with.",
 																Optional:            true,
 															},
 															"does_not_equal": schema.StringAttribute{
-																MarkdownDescription: "Does Not Equal. Field must not equal.",
+																MarkdownDescription: "Field must not equal.",
 																Optional:            true,
 															},
 															"does_not_start_with": schema.StringAttribute{
-																MarkdownDescription: "Does Not Start With. Field must not start with.",
+																MarkdownDescription: "Field must not start with.",
 																Optional:            true,
 															},
 															"endswith": schema.StringAttribute{
-																MarkdownDescription: "Ends With. Field must end with.",
+																MarkdownDescription: "Field must end with.",
 																Optional:            true,
 															},
 															"equals": schema.StringAttribute{
-																MarkdownDescription: "Equals. Field must exactly match.",
+																MarkdownDescription: "Field must exactly match.",
 																Optional:            true,
 															},
 															"match_regex": schema.StringAttribute{
-																MarkdownDescription: "Matches Regex. Field matches PCRE 1 compliant regular expression.",
+																MarkdownDescription: "Field matches PCRE 1 compliant regular expression.",
 																Optional:            true,
 															},
 															"startswith": schema.StringAttribute{
-																MarkdownDescription: "Starts With. Field must start with.",
+																MarkdownDescription: "Field must start with.",
 																Optional:            true,
 															},
 														},
@@ -585,48 +585,48 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{
 														"key": schema.StringAttribute{
-															MarkdownDescription: "Key. Query parameter key In the above example, assignee_username is the key .",
+															MarkdownDescription: "Query parameter key In the above example, assignee_username is the key .",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"operator": schema.SingleNestedBlock{
-															MarkdownDescription: "Operator.",
+															MarkdownDescription: "Operator",
 															Attributes: map[string]schema.Attribute{
 																"contains": schema.StringAttribute{
-																	MarkdownDescription: "Contains. Field must contain.",
+																	MarkdownDescription: "Field must contain.",
 																	Optional:            true,
 																},
 																"does_not_contain": schema.StringAttribute{
-																	MarkdownDescription: "Does Not Contain. Field must not contain.",
+																	MarkdownDescription: "Field must not contain.",
 																	Optional:            true,
 																},
 																"does_not_end_with": schema.StringAttribute{
-																	MarkdownDescription: "Does Not End With. Field must not end with.",
+																	MarkdownDescription: "Field must not end with.",
 																	Optional:            true,
 																},
 																"does_not_equal": schema.StringAttribute{
-																	MarkdownDescription: "Does Not Equal. Field must not equal.",
+																	MarkdownDescription: "Field must not equal.",
 																	Optional:            true,
 																},
 																"does_not_start_with": schema.StringAttribute{
-																	MarkdownDescription: "Does Not Start With. Field must not start with.",
+																	MarkdownDescription: "Field must not start with.",
 																	Optional:            true,
 																},
 																"endswith": schema.StringAttribute{
-																	MarkdownDescription: "Ends With. Field must end with.",
+																	MarkdownDescription: "Field must end with.",
 																	Optional:            true,
 																},
 																"equals": schema.StringAttribute{
-																	MarkdownDescription: "Equals. Field must exactly match.",
+																	MarkdownDescription: "Field must exactly match.",
 																	Optional:            true,
 																},
 																"match_regex": schema.StringAttribute{
-																	MarkdownDescription: "Matches Regex. Field matches PCRE 1 compliant regular expression.",
+																	MarkdownDescription: "Field matches PCRE 1 compliant regular expression.",
 																	Optional:            true,
 																},
 																"startswith": schema.StringAttribute{
-																	MarkdownDescription: "Starts With. Field must start with.",
+																	MarkdownDescription: "Field must start with.",
 																	Optional:            true,
 																},
 															},

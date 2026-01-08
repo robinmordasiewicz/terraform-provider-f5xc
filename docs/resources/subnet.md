@@ -36,11 +36,11 @@ resource "f5xc_subnet" "example" {
   connect_to_layer2 {
     # Configure connect_to_layer2 settings
   }
-  # Object reference. This type establishes a direct referenc...
+  # Type establishes a direct reference from one object(the r...
   layer2_intf_ref {
     # Configure layer2_intf_ref settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   connect_to_slo {
     # Configure connect_to_slo settings
   }
@@ -68,10 +68,10 @@ resource "f5xc_subnet" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="connect-to-layer2"></a>[`connect_to_layer2`](#connect-to-layer2) - Optional Block<br>Subnet connection to Layer2 Interface<br>See [Connect To Layer2](#connect-to-layer2) below for details.
-<br><br>&#x2022; <a id="connect-to-slo"></a>[`connect_to_slo`](#connect-to-slo) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="isolated-nw"></a>[`isolated_nw`](#isolated-nw) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="connect-to-slo"></a>[`connect_to_slo`](#connect-to-slo) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="isolated-nw"></a>[`isolated_nw`](#isolated-nw) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="site-subnet-params"></a>&#x2022; [`site_subnet_params`](#site-subnet-params) - Optional Block<br>Site Subnet Parameters. Configure subnet parameters per site<br>See [Site Subnet Params](#site-subnet-params) below for details.
+<a id="site-subnet-params"></a>&#x2022; [`site_subnet_params`](#site-subnet-params) - Optional Block<br>Configure subnet parameters per site<br>See [Site Subnet Params](#site-subnet-params) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -87,45 +87,45 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`connect_to_layer2`](#connect-to-layer2) block supports the following:
 
-<a id="connect-to-layer2-layer2-intf-ref"></a>&#x2022; [`layer2_intf_ref`](#connect-to-layer2-layer2-intf-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Layer2 Intf Ref](#connect-to-layer2-layer2-intf-ref) below.
+<a id="connect-to-layer2-layer2-intf-ref"></a>&#x2022; [`layer2_intf_ref`](#connect-to-layer2-layer2-intf-ref) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Layer2 Intf Ref](#connect-to-layer2-layer2-intf-ref) below.
 
 #### Connect To Layer2 Layer2 Intf Ref
 
 A [`layer2_intf_ref`](#connect-to-layer2-layer2-intf-ref) block (within [`connect_to_layer2`](#connect-to-layer2)) supports the following:
 
-<a id="connect-to-layer2-layer2-intf-ref-name"></a>&#x2022; [`name`](#connect-to-layer2-layer2-intf-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="connect-to-layer2-layer2-intf-ref-name"></a>&#x2022; [`name`](#connect-to-layer2-layer2-intf-ref-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-afda4a"></a>&#x2022; [`namespace`](#namespace-afda4a) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-afda4a"></a>&#x2022; [`namespace`](#namespace-afda4a) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-0fab0d"></a>&#x2022; [`tenant`](#tenant-0fab0d) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-0fab0d"></a>&#x2022; [`tenant`](#tenant-0fab0d) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Site Subnet Params
 
 A [`site_subnet_params`](#site-subnet-params) block supports the following:
 
-<a id="site-subnet-params-dhcp"></a>&#x2022; [`dhcp`](#site-subnet-params-dhcp) - Optional Block<br>Enable this option
+<a id="site-subnet-params-dhcp"></a>&#x2022; [`dhcp`](#site-subnet-params-dhcp) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="site-subnet-params-site"></a>&#x2022; [`site`](#site-subnet-params-site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-subnet-params-site) below.
+<a id="site-subnet-params-site"></a>&#x2022; [`site`](#site-subnet-params-site) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-subnet-params-site) below.
 
-<a id="site-subnet-params-static-ip"></a>&#x2022; [`static_ip`](#site-subnet-params-static-ip) - Optional Block<br>Enable this option
+<a id="site-subnet-params-static-ip"></a>&#x2022; [`static_ip`](#site-subnet-params-static-ip) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="params-2a5102"></a>&#x2022; [`subnet_dhcp_server_params`](#params-2a5102) - Optional Block<br>Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.dhcpserverparameterstype as all features in network_interface.dhcpserverparameterstype may not be supported in a subnet<br>See [Subnet DHCP Server Params](#params-2a5102) below.
+<a id="params-2a5102"></a>&#x2022; [`subnet_dhcp_server_params`](#params-2a5102) - Optional Block<br>Subnet DHCP parameters will be a subset of network_interface.dhcpserverparameterstype as all features in network_interface.dhcpserverparameterstype may not be supported in a subnet<br>See [Subnet DHCP Server Params](#params-2a5102) below.
 
 #### Site Subnet Params Site
 
 A [`site`](#site-subnet-params-site) block (within [`site_subnet_params`](#site-subnet-params)) supports the following:
 
-<a id="site-subnet-params-site-name"></a>&#x2022; [`name`](#site-subnet-params-site-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="site-subnet-params-site-name"></a>&#x2022; [`name`](#site-subnet-params-site-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="site-subnet-params-site-namespace"></a>&#x2022; [`namespace`](#site-subnet-params-site-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="site-subnet-params-site-namespace"></a>&#x2022; [`namespace`](#site-subnet-params-site-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="site-subnet-params-site-tenant"></a>&#x2022; [`tenant`](#site-subnet-params-site-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="site-subnet-params-site-tenant"></a>&#x2022; [`tenant`](#site-subnet-params-site-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Site Subnet Params Subnet DHCP Server Params
 
 A [`subnet_dhcp_server_params`](#params-2a5102) block (within [`site_subnet_params`](#site-subnet-params)) supports the following:
 
-<a id="networks-b234bf"></a>&#x2022; [`dhcp_networks`](#networks-b234bf) - Optional Block<br>Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-b234bf) below.
+<a id="networks-b234bf"></a>&#x2022; [`dhcp_networks`](#networks-b234bf) - Optional Block<br>List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-b234bf) below.
 
 #### Site Subnet Params Subnet DHCP Server Params DHCP Networks
 

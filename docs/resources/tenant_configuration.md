@@ -86,33 +86,33 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`basic_configuration`](#basic-configuration) block supports the following:
 
-<a id="basic-configuration-display-name"></a>&#x2022; [`display_name`](#basic-configuration-display-name) - Optional String<br>Display Name. Tenant display name in the login screen
+<a id="basic-configuration-display-name"></a>&#x2022; [`display_name`](#basic-configuration-display-name) - Optional String<br>Tenant display name in the login screen
 
 #### Brute Force Detection Settings
 
 A [`brute_force_detection_settings`](#brute-force-detection-settings) block supports the following:
 
-<a id="failures-2f4305"></a>&#x2022; [`max_login_failures`](#failures-2f4305) - Optional Number<br>Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes
+<a id="failures-2f4305"></a>&#x2022; [`max_login_failures`](#failures-2f4305) - Optional Number<br>How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes
 
 #### Password Policy
 
 A [`password_policy`](#password-policy) block supports the following:
 
-<a id="password-policy-digits"></a>&#x2022; [`digits`](#password-policy-digits) - Optional Number<br>Min Number Of Digits. The number of digits required to be in the password string
+<a id="password-policy-digits"></a>&#x2022; [`digits`](#password-policy-digits) - Optional Number<br>The number of digits required to be in the password string
 
-<a id="password-policy-expire-password"></a>&#x2022; [`expire_password`](#password-policy-expire-password) - Optional Number<br>Expire Password. The number of days for which the password is valid. After the number of days has expired, the user is required to change their password
+<a id="password-policy-expire-password"></a>&#x2022; [`expire_password`](#password-policy-expire-password) - Optional Number<br>The number of days for which the password is valid. After the number of days has expired, the user is required to change their password
 
-<a id="password-policy-lowercase-characters"></a>&#x2022; [`lowercase_characters`](#password-policy-lowercase-characters) - Optional Number<br>Min Number Of Lowercase Characters. The number of lower case letters required to be in the password string
+<a id="password-policy-lowercase-characters"></a>&#x2022; [`lowercase_characters`](#password-policy-lowercase-characters) - Optional Number<br>The number of lower case letters required to be in the password string
 
-<a id="password-policy-minimum-length"></a>&#x2022; [`minimum_length`](#password-policy-minimum-length) - Optional Number<br>Minimum Length. Minimum length of password
+<a id="password-policy-minimum-length"></a>&#x2022; [`minimum_length`](#password-policy-minimum-length) - Optional Number<br>Minimum length of password
 
-<a id="password-policy-not-recently-used"></a>&#x2022; [`not_recently_used`](#password-policy-not-recently-used) - Optional Number<br>Not Recently Used. This policy is used to restrict user from using previously used passwords. Number that's set determines number of last passwords which user cannot use as new password
+<a id="password-policy-not-recently-used"></a>&#x2022; [`not_recently_used`](#password-policy-not-recently-used) - Optional Number<br>Policy is used to restrict user from using previously used passwords. Number that's set determines number of last passwords which user cannot use as new password
 
-<a id="password-policy-not-username"></a>&#x2022; [`not_username`](#password-policy-not-username) - Optional Bool<br>Not Username. When set, the password is not allowed to be the same as the username
+<a id="password-policy-not-username"></a>&#x2022; [`not_username`](#password-policy-not-username) - Optional Bool<br>When set, the password is not allowed to be the same as the username
 
-<a id="password-policy-special-characters"></a>&#x2022; [`special_characters`](#password-policy-special-characters) - Optional Number<br>Min Number Of Special Characters. The number of special characters like '?!#%$' required to be in the password string
+<a id="password-policy-special-characters"></a>&#x2022; [`special_characters`](#password-policy-special-characters) - Optional Number<br>The number of special characters like '?!#%$' required to be in the password string
 
-<a id="password-policy-uppercase-characters"></a>&#x2022; [`uppercase_characters`](#password-policy-uppercase-characters) - Optional Number<br>Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string
+<a id="password-policy-uppercase-characters"></a>&#x2022; [`uppercase_characters`](#password-policy-uppercase-characters) - Optional Number<br>The number of upper case letters required to be in the password string
 
 #### Timeouts
 

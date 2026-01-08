@@ -64,7 +64,7 @@ resource "f5xc_malicious_user_mitigation" "example" {
 
 ### Spec Argument Reference
 
-<a id="mitigation-type"></a>&#x2022; [`mitigation_type`](#mitigation-type) - Optional Block<br>Malicious User Mitigation Settings. Settings that specify the actions to be taken when malicious users are determined to be at different threat levels. User's activity is monitored and continuously analyzed for malicious behavior. From this analysis, a threat-level is assigned to each user. The settings defined in malicious user mitigation specify what mitigation actions to take for user determined to be at different threat levels<br>See [Mitigation Type](#mitigation-type) below for details.
+<a id="mitigation-type"></a>&#x2022; [`mitigation_type`](#mitigation-type) - Optional Block<br>Settings that specify the actions to be taken when malicious users are determined to be at different threat levels. User's activity is monitored and continuously analyzed for malicious behavior. From this analysis, a threat-level is assigned to each user<br>See [Mitigation Type](#mitigation-type) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -80,35 +80,35 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`mitigation_type`](#mitigation-type) block supports the following:
 
-<a id="mitigation-type-rules"></a>&#x2022; [`rules`](#mitigation-type-rules) - Optional Block<br>Rules. Define the threat levels and the corresponding mitigation actions to be taken<br>See [Rules](#mitigation-type-rules) below.
+<a id="mitigation-type-rules"></a>&#x2022; [`rules`](#mitigation-type-rules) - Optional Block<br>Define the threat levels and the corresponding mitigation actions to be taken<br>See [Rules](#mitigation-type-rules) below.
 
 #### Mitigation Type Rules
 
 A [`rules`](#mitigation-type-rules) block (within [`mitigation_type`](#mitigation-type)) supports the following:
 
-<a id="mitigation-type-rules-mitigation-action"></a>&#x2022; [`mitigation_action`](#mitigation-type-rules-mitigation-action) - Optional Block<br>Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user<br>See [Mitigation Action](#mitigation-type-rules-mitigation-action) below.
+<a id="mitigation-type-rules-mitigation-action"></a>&#x2022; [`mitigation_action`](#mitigation-type-rules-mitigation-action) - Optional Block<br>Supported actions that can be taken to mitigate malicious activity from a user<br>See [Mitigation Action](#mitigation-type-rules-mitigation-action) below.
 
-<a id="mitigation-type-rules-threat-level"></a>&#x2022; [`threat_level`](#mitigation-type-rules-threat-level) - Optional Block<br>Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation<br>See [Threat Level](#mitigation-type-rules-threat-level) below.
+<a id="mitigation-type-rules-threat-level"></a>&#x2022; [`threat_level`](#mitigation-type-rules-threat-level) - Optional Block<br>Threat level estimated for each user based on the user's activity and reputation<br>See [Threat Level](#mitigation-type-rules-threat-level) below.
 
 #### Mitigation Type Rules Mitigation Action
 
 A [`mitigation_action`](#mitigation-type-rules-mitigation-action) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
 
-<a id="temporarily-ae6df1"></a>&#x2022; [`block_temporarily`](#temporarily-ae6df1) - Optional Block<br>Enable this option
+<a id="temporarily-ae6df1"></a>&#x2022; [`block_temporarily`](#temporarily-ae6df1) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="challenge-783e81"></a>&#x2022; [`captcha_challenge`](#challenge-783e81) - Optional Block<br>Enable this option
+<a id="challenge-783e81"></a>&#x2022; [`captcha_challenge`](#challenge-783e81) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="challenge-784169"></a>&#x2022; [`javascript_challenge`](#challenge-784169) - Optional Block<br>Enable this option
+<a id="challenge-784169"></a>&#x2022; [`javascript_challenge`](#challenge-784169) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Mitigation Type Rules Threat Level
 
 A [`threat_level`](#mitigation-type-rules-threat-level) block (within [`mitigation_type.rules`](#mitigation-type-rules)) supports the following:
 
-<a id="mitigation-type-rules-threat-level-high"></a>&#x2022; [`high`](#mitigation-type-rules-threat-level-high) - Optional Block<br>Enable this option
+<a id="mitigation-type-rules-threat-level-high"></a>&#x2022; [`high`](#mitigation-type-rules-threat-level-high) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="mitigation-type-rules-threat-level-low"></a>&#x2022; [`low`](#mitigation-type-rules-threat-level-low) - Optional Block<br>Enable this option
+<a id="mitigation-type-rules-threat-level-low"></a>&#x2022; [`low`](#mitigation-type-rules-threat-level-low) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="medium-bfd9e9"></a>&#x2022; [`medium`](#medium-bfd9e9) - Optional Block<br>Enable this option
+<a id="medium-bfd9e9"></a>&#x2022; [`medium`](#medium-bfd9e9) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Timeouts
 

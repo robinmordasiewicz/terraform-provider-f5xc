@@ -16,7 +16,7 @@ resource "f5xc_external_connector" "example" {
   }
 
   # Resource-specific configuration
-  # Object reference. This type establishes a direct referenc...
+  # Type establishes a direct reference from one object(the r...
   ce_site_reference {
     # Configure ce_site_reference settings
   }
@@ -24,7 +24,7 @@ resource "f5xc_external_connector" "example" {
   ipsec {
     # Configure ipsec settings
   }
-  # IKE Parameters. IKE configuration parameters required for...
+  # IKE configuration parameters required for IPsec Connectio...
   ike_parameters {
     # Configure ike_parameters settings
   }

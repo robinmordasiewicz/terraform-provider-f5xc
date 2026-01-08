@@ -117,7 +117,7 @@ func (r *DNSDomainResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"dnssec_mode": schema.StringAttribute{
-				MarkdownDescription: "[Enum: DNSSEC_DISABLE|DNSSEC_ENABLE] DNSSEC Mode. Enable or disable DNSSEC on the DNS Domain DNSSEC is disabled DNSSEC is enabled. Possible values are `DNSSEC_DISABLE`, `DNSSEC_ENABLE`. Defaults to `DNSSEC_DISABLE`.",
+				MarkdownDescription: "[Enum: DNSSEC_DISABLE|DNSSEC_ENABLE] Enable or disable DNSSEC on the DNS Domain DNSSEC is disabled DNSSEC is enabled. Possible values are `DNSSEC_DISABLE`, `DNSSEC_ENABLE`. Defaults to `DNSSEC_DISABLE`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -133,7 +133,7 @@ func (r *DNSDomainResource) Schema(ctx context.Context, req resource.SchemaReque
 				Delete: true,
 			}),
 			"volterra_managed": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 		},
 	}

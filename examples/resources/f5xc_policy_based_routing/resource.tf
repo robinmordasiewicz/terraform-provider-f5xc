@@ -24,7 +24,7 @@ resource "f5xc_policy_based_routing" "example" {
   forward_proxy_pbr_rules {
     # Configure forward_proxy_pbr_rules settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   all_destinations {
     # Configure all_destinations settings
   }

@@ -32,15 +32,15 @@ resource "f5xc_filter_set" "example" {
   }
 
   # Resource-specific configuration
-  # Filter Fields. List of fields and their values selected b...
+  # List of fields and their values selected by the user .
   filter_fields {
     # Configure filter_fields settings
   }
-  # Filter Date/Time Range Field. Either an absolute time ran...
+  # Either an absolute time range or a relative time interval.
   date_field {
     # Configure date_field settings
   }
-  # Date Range. Date range is for selecting a date range.
+  # Date range is for selecting a date range.
   absolute {
     # Configure absolute settings
   }
@@ -66,9 +66,9 @@ resource "f5xc_filter_set" "example" {
 
 ### Spec Argument Reference
 
-<a id="context-key"></a>&#x2022; [`context_key`](#context-key) - Optional String<br>Context Key. Indexable context key that identifies a page or page type for which the FilterSet is applicable
+<a id="context-key"></a>&#x2022; [`context_key`](#context-key) - Optional String<br>Indexable context key that identifies a page or page type for which the FilterSet is applicable
 
-<a id="filter-fields"></a>&#x2022; [`filter_fields`](#filter-fields) - Optional Block<br>Filter Fields. List of fields and their values selected by the user<br>See [Filter Fields](#filter-fields) below for details.
+<a id="filter-fields"></a>&#x2022; [`filter_fields`](#filter-fields) - Optional Block<br>List of fields and their values selected by the user<br>See [Filter Fields](#filter-fields) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -84,9 +84,9 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`filter_fields`](#filter-fields) block supports the following:
 
-<a id="filter-fields-date-field"></a>&#x2022; [`date_field`](#filter-fields-date-field) - Optional Block<br>Filter Date/Time Range Field. Either an absolute time range or a relative time interval<br>See [Date Field](#filter-fields-date-field) below.
+<a id="filter-fields-date-field"></a>&#x2022; [`date_field`](#filter-fields-date-field) - Optional Block<br>Either an absolute time range or a relative time interval<br>See [Date Field](#filter-fields-date-field) below.
 
-<a id="filter-fields-field-id"></a>&#x2022; [`field_id`](#filter-fields-field-id) - Optional String<br>Field ID. An identifier for the field that maps to some UI filter component
+<a id="filter-fields-field-id"></a>&#x2022; [`field_id`](#filter-fields-field-id) - Optional String<br>Identifier for the field that maps to some UI filter component
 
 <a id="filter-fields-filter-expression-field"></a>&#x2022; [`filter_expression_field`](#filter-fields-filter-expression-field) - Optional Block<br>Filter Expression Field<br>See [Filter Expression Field](#filter-fields-filter-expression-field) below.
 
@@ -96,9 +96,9 @@ A [`filter_fields`](#filter-fields) block supports the following:
 
 A [`date_field`](#filter-fields-date-field) block (within [`filter_fields`](#filter-fields)) supports the following:
 
-<a id="filter-fields-date-field-absolute"></a>&#x2022; [`absolute`](#filter-fields-date-field-absolute) - Optional Block<br>Date Range. Date range is for selecting a date range<br>See [Absolute](#filter-fields-date-field-absolute) below.
+<a id="filter-fields-date-field-absolute"></a>&#x2022; [`absolute`](#filter-fields-date-field-absolute) - Optional Block<br>Date range is for selecting a date range<br>See [Absolute](#filter-fields-date-field-absolute) below.
 
-<a id="filter-fields-date-field-relative"></a>&#x2022; [`relative`](#filter-fields-date-field-relative) - Optional String<br>Relative. relative time duration
+<a id="filter-fields-date-field-relative"></a>&#x2022; [`relative`](#filter-fields-date-field-relative) - Optional String<br>relative time duration
 
 #### Filter Fields Date Field Absolute
 
@@ -112,7 +112,7 @@ An [`absolute`](#filter-fields-date-field-absolute) block (within [`filter_field
 
 A [`filter_expression_field`](#filter-fields-filter-expression-field) block (within [`filter_fields`](#filter-fields)) supports the following:
 
-<a id="expression-7b0f3e"></a>&#x2022; [`expression`](#expression-7b0f3e) - Optional String<br>Expression Value. Expression is a Kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values
+<a id="expression-7b0f3e"></a>&#x2022; [`expression`](#expression-7b0f3e) - Optional String<br>Expression is a Kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values
 
 #### Filter Fields String Field
 

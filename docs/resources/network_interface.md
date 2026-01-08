@@ -36,11 +36,11 @@ resource "f5xc_network_interface" "example" {
   dedicated_interface {
     # Configure dedicated_interface settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   cluster {
     # Configure cluster settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   is_primary {
     # Configure is_primary settings
   }
@@ -87,91 +87,91 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`dedicated_interface`](#dedicated-interface) block supports the following:
 
-<a id="dedicated-interface-cluster"></a>&#x2022; [`cluster`](#dedicated-interface-cluster) - Optional Block<br>Enable this option
+<a id="dedicated-interface-cluster"></a>&#x2022; [`cluster`](#dedicated-interface-cluster) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="dedicated-interface-device"></a>&#x2022; [`device`](#dedicated-interface-device) - Optional String<br>Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE
+<a id="dedicated-interface-device"></a>&#x2022; [`device`](#dedicated-interface-device) - Optional String<br>Name of the device for which interface is configured. Use wwan0 for 4G/LTE
 
-<a id="dedicated-interface-is-primary"></a>&#x2022; [`is_primary`](#dedicated-interface-is-primary) - Optional Block<br>Enable this option
+<a id="dedicated-interface-is-primary"></a>&#x2022; [`is_primary`](#dedicated-interface-is-primary) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="dedicated-interface-monitor"></a>&#x2022; [`monitor`](#dedicated-interface-monitor) - Optional Block<br>Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface
+<a id="dedicated-interface-monitor"></a>&#x2022; [`monitor`](#dedicated-interface-monitor) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="dedicated-interface-monitor-disabled"></a>&#x2022; [`monitor_disabled`](#dedicated-interface-monitor-disabled) - Optional Block<br>Enable this option
+<a id="dedicated-interface-monitor-disabled"></a>&#x2022; [`monitor_disabled`](#dedicated-interface-monitor-disabled) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="dedicated-interface-mtu"></a>&#x2022; [`mtu`](#dedicated-interface-mtu) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
+<a id="dedicated-interface-mtu"></a>&#x2022; [`mtu`](#dedicated-interface-mtu) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-<a id="dedicated-interface-node"></a>&#x2022; [`node`](#dedicated-interface-node) - Optional String<br>Specific Node. Configuration will apply to a device on the given node of the site
+<a id="dedicated-interface-node"></a>&#x2022; [`node`](#dedicated-interface-node) - Optional String<br>Configuration will apply to a device on the given node of the site
 
-<a id="dedicated-interface-not-primary"></a>&#x2022; [`not_primary`](#dedicated-interface-not-primary) - Optional Block<br>Enable this option
+<a id="dedicated-interface-not-primary"></a>&#x2022; [`not_primary`](#dedicated-interface-not-primary) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="dedicated-interface-priority"></a>&#x2022; [`priority`](#dedicated-interface-priority) - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
+<a id="dedicated-interface-priority"></a>&#x2022; [`priority`](#dedicated-interface-priority) - Optional Number<br>Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
 
 #### Dedicated Management Interface
 
 A [`dedicated_management_interface`](#dedicated-management-interface) block supports the following:
 
-<a id="dedicated-management-interface-cluster"></a>&#x2022; [`cluster`](#dedicated-management-interface-cluster) - Optional Block<br>Enable this option
+<a id="dedicated-management-interface-cluster"></a>&#x2022; [`cluster`](#dedicated-management-interface-cluster) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="dedicated-management-interface-device"></a>&#x2022; [`device`](#dedicated-management-interface-device) - Optional String<br>Interface Device. Name of the device for which interface is configured
+<a id="dedicated-management-interface-device"></a>&#x2022; [`device`](#dedicated-management-interface-device) - Optional String<br>Name of the device for which interface is configured
 
-<a id="dedicated-management-interface-mtu"></a>&#x2022; [`mtu`](#dedicated-management-interface-mtu) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
+<a id="dedicated-management-interface-mtu"></a>&#x2022; [`mtu`](#dedicated-management-interface-mtu) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-<a id="dedicated-management-interface-node"></a>&#x2022; [`node`](#dedicated-management-interface-node) - Optional String<br>Specific Node. Configuration will apply to a device on the given node of the site
+<a id="dedicated-management-interface-node"></a>&#x2022; [`node`](#dedicated-management-interface-node) - Optional String<br>Configuration will apply to a device on the given node of the site
 
 #### Ethernet Interface
 
 An [`ethernet_interface`](#ethernet-interface) block supports the following:
 
-<a id="ethernet-interface-cluster"></a>&#x2022; [`cluster`](#ethernet-interface-cluster) - Optional Block<br>Enable this option
+<a id="ethernet-interface-cluster"></a>&#x2022; [`cluster`](#ethernet-interface-cluster) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="ethernet-interface-device"></a>&#x2022; [`device`](#ethernet-interface-device) - Optional String<br>Ethernet Device. Interface configuration for the ethernet device
+<a id="ethernet-interface-device"></a>&#x2022; [`device`](#ethernet-interface-device) - Optional String<br>Interface configuration for the ethernet device
 
-<a id="ethernet-interface-dhcp-client"></a>&#x2022; [`dhcp_client`](#ethernet-interface-dhcp-client) - Optional Block<br>Enable this option
+<a id="ethernet-interface-dhcp-client"></a>&#x2022; [`dhcp_client`](#ethernet-interface-dhcp-client) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="ethernet-interface-dhcp-server"></a>&#x2022; [`dhcp_server`](#ethernet-interface-dhcp-server) - Optional Block<br>DHCPServerParametersType<br>See [DHCP Server](#ethernet-interface-dhcp-server) below.
 
 <a id="ethernet-interface-ipv6-auto-config"></a>&#x2022; [`ipv6_auto_config`](#ethernet-interface-ipv6-auto-config) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#ethernet-interface-ipv6-auto-config) below.
 
-<a id="ethernet-interface-is-primary"></a>&#x2022; [`is_primary`](#ethernet-interface-is-primary) - Optional Block<br>Enable this option
+<a id="ethernet-interface-is-primary"></a>&#x2022; [`is_primary`](#ethernet-interface-is-primary) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="ethernet-interface-monitor"></a>&#x2022; [`monitor`](#ethernet-interface-monitor) - Optional Block<br>Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface
+<a id="ethernet-interface-monitor"></a>&#x2022; [`monitor`](#ethernet-interface-monitor) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="ethernet-interface-monitor-disabled"></a>&#x2022; [`monitor_disabled`](#ethernet-interface-monitor-disabled) - Optional Block<br>Enable this option
+<a id="ethernet-interface-monitor-disabled"></a>&#x2022; [`monitor_disabled`](#ethernet-interface-monitor-disabled) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="ethernet-interface-mtu"></a>&#x2022; [`mtu`](#ethernet-interface-mtu) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
+<a id="ethernet-interface-mtu"></a>&#x2022; [`mtu`](#ethernet-interface-mtu) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-<a id="ethernet-interface-no-ipv6-address"></a>&#x2022; [`no_ipv6_address`](#ethernet-interface-no-ipv6-address) - Optional Block<br>Enable this option
+<a id="ethernet-interface-no-ipv6-address"></a>&#x2022; [`no_ipv6_address`](#ethernet-interface-no-ipv6-address) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="ethernet-interface-node"></a>&#x2022; [`node`](#ethernet-interface-node) - Optional String<br>Specific Node. Configuration will apply to a device on the given node
+<a id="ethernet-interface-node"></a>&#x2022; [`node`](#ethernet-interface-node) - Optional String<br>Configuration will apply to a device on the given node
 
-<a id="ethernet-interface-not-primary"></a>&#x2022; [`not_primary`](#ethernet-interface-not-primary) - Optional Block<br>Enable this option
+<a id="ethernet-interface-not-primary"></a>&#x2022; [`not_primary`](#ethernet-interface-not-primary) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="ethernet-interface-priority"></a>&#x2022; [`priority`](#ethernet-interface-priority) - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
+<a id="ethernet-interface-priority"></a>&#x2022; [`priority`](#ethernet-interface-priority) - Optional Number<br>Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
 
-<a id="network-4d060f"></a>&#x2022; [`site_local_inside_network`](#network-4d060f) - Optional Block<br>Enable this option
+<a id="network-4d060f"></a>&#x2022; [`site_local_inside_network`](#network-4d060f) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="ethernet-interface-site-local-network"></a>&#x2022; [`site_local_network`](#ethernet-interface-site-local-network) - Optional Block<br>Enable this option
+<a id="ethernet-interface-site-local-network"></a>&#x2022; [`site_local_network`](#ethernet-interface-site-local-network) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="ethernet-interface-static-ip"></a>&#x2022; [`static_ip`](#ethernet-interface-static-ip) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IP](#ethernet-interface-static-ip) below.
 
 <a id="ethernet-interface-static-ipv6-address"></a>&#x2022; [`static_ipv6_address`](#ethernet-interface-static-ipv6-address) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#ethernet-interface-static-ipv6-address) below.
 
-<a id="ethernet-interface-storage-network"></a>&#x2022; [`storage_network`](#ethernet-interface-storage-network) - Optional Block<br>Enable this option
+<a id="ethernet-interface-storage-network"></a>&#x2022; [`storage_network`](#ethernet-interface-storage-network) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="ethernet-interface-untagged"></a>&#x2022; [`untagged`](#ethernet-interface-untagged) - Optional Block<br>Enable this option
+<a id="ethernet-interface-untagged"></a>&#x2022; [`untagged`](#ethernet-interface-untagged) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="ethernet-interface-vlan-id"></a>&#x2022; [`vlan_id`](#ethernet-interface-vlan-id) - Optional Number<br>VLAN ID. Configure a VLAN tagged ethernet interface
+<a id="ethernet-interface-vlan-id"></a>&#x2022; [`vlan_id`](#ethernet-interface-vlan-id) - Optional Number<br>Configure a VLAN tagged ethernet interface
 
 #### Ethernet Interface DHCP Server
 
 A [`dhcp_server`](#ethernet-interface-dhcp-server) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
 
-<a id="end-1864de"></a>&#x2022; [`automatic_from_end`](#end-1864de) - Optional Block<br>Enable this option
+<a id="end-1864de"></a>&#x2022; [`automatic_from_end`](#end-1864de) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="start-872fa5"></a>&#x2022; [`automatic_from_start`](#start-872fa5) - Optional Block<br>Enable this option
+<a id="start-872fa5"></a>&#x2022; [`automatic_from_start`](#start-872fa5) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="networks-684a1f"></a>&#x2022; [`dhcp_networks`](#networks-684a1f) - Optional Block<br>DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses<br>See [DHCP Networks](#networks-684a1f) below.
+<a id="networks-684a1f"></a>&#x2022; [`dhcp_networks`](#networks-684a1f) - Optional Block<br>List of networks from which DHCP Server can allocate IPv4 Addresses<br>See [DHCP Networks](#networks-684a1f) below.
 
-<a id="map-a0e2c7"></a>&#x2022; [`fixed_ip_map`](#map-a0e2c7) - Optional Block<br>Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client
+<a id="map-a0e2c7"></a>&#x2022; [`fixed_ip_map`](#map-a0e2c7) - Optional Block<br>Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client
 
 <a id="map-2f2804"></a>&#x2022; [`interface_ip_map`](#map-2f2804) - Optional Block<br>Interface IPv4 Assignments. Specify static IPv4 addresses per node<br>See [Interface IP Map](#map-2f2804) below.
 
@@ -179,41 +179,41 @@ A [`dhcp_server`](#ethernet-interface-dhcp-server) block (within [`ethernet_inte
 
 A [`dhcp_networks`](#networks-684a1f) block (within [`ethernet_interface.dhcp_server`](#ethernet-interface-dhcp-server)) supports the following:
 
-<a id="address-ff98c3"></a>&#x2022; [`dgw_address`](#address-ff98c3) - Optional String<br>Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway
+<a id="address-ff98c3"></a>&#x2022; [`dgw_address`](#address-ff98c3) - Optional String<br>Enter a IPv4 address from the network prefix to be used as the default gateway
 
-<a id="address-4b47d5"></a>&#x2022; [`dns_address`](#address-4b47d5) - Optional String<br>Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server
+<a id="address-4b47d5"></a>&#x2022; [`dns_address`](#address-4b47d5) - Optional String<br>Enter a IPv4 address from the network prefix to be used as the DNS server
 
-<a id="address-6f7c99"></a>&#x2022; [`first_address`](#address-6f7c99) - Optional Block<br>Enable this option
+<a id="address-6f7c99"></a>&#x2022; [`first_address`](#address-6f7c99) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="address-d4b422"></a>&#x2022; [`last_address`](#address-d4b422) - Optional Block<br>Enable this option
+<a id="address-d4b422"></a>&#x2022; [`last_address`](#address-d4b422) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="prefix-e81d96"></a>&#x2022; [`network_prefix`](#prefix-e81d96) - Optional String<br>Network Prefix. Set the network prefix for the site. Ex: 10.1.1.0/24
+<a id="prefix-e81d96"></a>&#x2022; [`network_prefix`](#prefix-e81d96) - Optional String<br>Set the network prefix for the site. Ex: 10.1.1.0/24
 
-<a id="settings-b06877"></a>&#x2022; [`pool_settings`](#settings-b06877) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
+<a id="settings-b06877"></a>&#x2022; [`pool_settings`](#settings-b06877) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
-<a id="pools-09599a"></a>&#x2022; [`pools`](#pools-09599a) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-09599a) below.
+<a id="pools-09599a"></a>&#x2022; [`pools`](#pools-09599a) - Optional Block<br>List of non overlapping IP address ranges<br>See [Pools](#pools-09599a) below.
 
-<a id="dgw-01ab3b"></a>&#x2022; [`same_as_dgw`](#dgw-01ab3b) - Optional Block<br>Enable this option
+<a id="dgw-01ab3b"></a>&#x2022; [`same_as_dgw`](#dgw-01ab3b) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Ethernet Interface DHCP Server DHCP Networks Pools
 
 A [`pools`](#pools-09599a) block (within [`ethernet_interface.dhcp_server.dhcp_networks`](#networks-684a1f)) supports the following:
 
-<a id="end-ip-c2fe97"></a>&#x2022; [`end_ip`](#end-ip-c2fe97) - Optional String<br>Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200
+<a id="end-ip-c2fe97"></a>&#x2022; [`end_ip`](#end-ip-c2fe97) - Optional String<br>Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200
 
-<a id="start-ip-fce2c1"></a>&#x2022; [`start_ip`](#start-ip-fce2c1) - Optional String<br>Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5
+<a id="start-ip-fce2c1"></a>&#x2022; [`start_ip`](#start-ip-fce2c1) - Optional String<br>Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5
 
 #### Ethernet Interface DHCP Server Interface IP Map
 
 An [`interface_ip_map`](#map-2f2804) block (within [`ethernet_interface.dhcp_server`](#ethernet-interface-dhcp-server)) supports the following:
 
-<a id="map-9bc838"></a>&#x2022; [`interface_ip_map`](#map-9bc838) - Optional Block<br>Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node
+<a id="map-9bc838"></a>&#x2022; [`interface_ip_map`](#map-9bc838) - Optional Block<br>Specify static IPv4 addresses per site:node
 
 #### Ethernet Interface IPv6 Auto Config
 
 An [`ipv6_auto_config`](#ethernet-interface-ipv6-auto-config) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
 
-<a id="host-7f4919"></a>&#x2022; [`host`](#host-7f4919) - Optional Block<br>Enable this option
+<a id="host-7f4919"></a>&#x2022; [`host`](#host-7f4919) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="router-6def67"></a>&#x2022; [`router`](#router-6def67) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#router-6def67) below.
 
@@ -223,7 +223,7 @@ A [`router`](#router-6def67) block (within [`ethernet_interface.ipv6_auto_config
 
 <a id="config-158527"></a>&#x2022; [`dns_config`](#config-158527) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#config-158527) below.
 
-<a id="prefix-ce87e6"></a>&#x2022; [`network_prefix`](#prefix-ce87e6) - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
+<a id="prefix-ce87e6"></a>&#x2022; [`network_prefix`](#prefix-ce87e6) - Optional String<br>Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
 
 <a id="stateful-79d901"></a>&#x2022; [`stateful`](#stateful-79d901) - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#stateful-79d901) below.
 
@@ -243,15 +243,15 @@ A [`router`](#router-6def67) block (within [`ethernet_interface.ipv6_auto_config
 
 A [`stateful`](#stateful-79d901) block (within [`ethernet_interface.ipv6_auto_config.router`](#router-6def67)) supports the following:
 
-<a id="end-198d9e"></a>&#x2022; [`automatic_from_end`](#end-198d9e) - Optional Block<br>Enable this option
+<a id="end-198d9e"></a>&#x2022; [`automatic_from_end`](#end-198d9e) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="start-025a8d"></a>&#x2022; [`automatic_from_start`](#start-025a8d) - Optional Block<br>Enable this option
+<a id="start-025a8d"></a>&#x2022; [`automatic_from_start`](#start-025a8d) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="networks-d6f901"></a>&#x2022; [`dhcp_networks`](#networks-d6f901) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-d6f901) below.
+<a id="networks-d6f901"></a>&#x2022; [`dhcp_networks`](#networks-d6f901) - Optional Block<br>List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-d6f901) below.
 
-<a id="map-d04c19"></a>&#x2022; [`fixed_ip_map`](#map-d04c19) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: MAC address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
+<a id="map-d04c19"></a>&#x2022; [`fixed_ip_map`](#map-d04c19) - Optional Block<br>Fixed MAC address to IPv6 assignments, Key: MAC address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
 
-<a id="map-f0bf9b"></a>&#x2022; [`interface_ip_map`](#map-f0bf9b) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-f0bf9b) below.
+<a id="map-f0bf9b"></a>&#x2022; [`interface_ip_map`](#map-f0bf9b) - Optional Block<br>Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-f0bf9b) below.
 
 #### Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks
 
@@ -269,15 +269,15 @@ A [`stateful`](#stateful-79d901) block (within [`ethernet_interface.ipv6_auto_co
 
 A [`static_ip`](#ethernet-interface-static-ip) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
 
-<a id="static-ip-066f4c"></a>&#x2022; [`cluster_static_ip`](#static-ip-066f4c) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-066f4c) below.
+<a id="static-ip-066f4c"></a>&#x2022; [`cluster_static_ip`](#static-ip-066f4c) - Optional Block<br>Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-066f4c) below.
 
-<a id="static-ip-a58157"></a>&#x2022; [`node_static_ip`](#static-ip-a58157) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-a58157) below.
+<a id="static-ip-a58157"></a>&#x2022; [`node_static_ip`](#static-ip-a58157) - Optional Block<br>Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-a58157) below.
 
 #### Ethernet Interface Static IP Cluster Static IP
 
 A [`cluster_static_ip`](#static-ip-066f4c) block (within [`ethernet_interface.static_ip`](#ethernet-interface-static-ip)) supports the following:
 
-<a id="map-d7fd08"></a>&#x2022; [`interface_ip_map`](#map-d7fd08) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="map-d7fd08"></a>&#x2022; [`interface_ip_map`](#map-d7fd08) - Optional Block<br>Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 #### Ethernet Interface Static IP Node Static IP
 
@@ -285,15 +285,15 @@ A [`node_static_ip`](#static-ip-a58157) block (within [`ethernet_interface.stati
 
 <a id="default-gw-2a2725"></a>&#x2022; [`default_gw`](#default-gw-2a2725) - Optional String<br>Default Gateway. IP address of the default gateway
 
-<a id="address-c4c757"></a>&#x2022; [`ip_address`](#address-c4c757) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="address-c4c757"></a>&#x2022; [`ip_address`](#address-c4c757) - Optional String<br>IP address of the interface and prefix length
 
 #### Ethernet Interface Static IPv6 Address
 
 A [`static_ipv6_address`](#ethernet-interface-static-ipv6-address) block (within [`ethernet_interface`](#ethernet-interface)) supports the following:
 
-<a id="static-ip-b271a0"></a>&#x2022; [`cluster_static_ip`](#static-ip-b271a0) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-b271a0) below.
+<a id="static-ip-b271a0"></a>&#x2022; [`cluster_static_ip`](#static-ip-b271a0) - Optional Block<br>Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-b271a0) below.
 
-<a id="static-ip-638f79"></a>&#x2022; [`node_static_ip`](#static-ip-638f79) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-638f79) below.
+<a id="static-ip-638f79"></a>&#x2022; [`node_static_ip`](#static-ip-638f79) - Optional Block<br>Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-638f79) below.
 
 #### Ethernet Interface Static IPv6 Address Cluster Static IP
 
@@ -311,23 +311,23 @@ A [`layer2_interface`](#layer2-interface) block supports the following:
 
 <a id="layer2-interface-l2vlan-interface"></a>&#x2022; [`l2vlan_interface`](#layer2-interface-l2vlan-interface) - Optional Block<br>Layer2 VLAN Interface. Layer2 VLAN Interface Configuration<br>See [L2vlan Interface](#layer2-interface-l2vlan-interface) below.
 
-<a id="layer2-interface-l2vlan-slo-interface"></a>&#x2022; [`l2vlan_slo_interface`](#layer2-interface-l2vlan-slo-interface) - Optional Block<br>VLAN on Site Local Outside Interface. Layer2 Site Local Outside VLAN Interface Configuration<br>See [L2vlan Slo Interface](#layer2-interface-l2vlan-slo-interface) below.
+<a id="layer2-interface-l2vlan-slo-interface"></a>&#x2022; [`l2vlan_slo_interface`](#layer2-interface-l2vlan-slo-interface) - Optional Block<br>Layer2 Site Local Outside VLAN Interface Configuration<br>See [L2vlan Slo Interface](#layer2-interface-l2vlan-slo-interface) below.
 
 #### Layer2 Interface L2sriov Interface
 
 A [`l2sriov_interface`](#layer2-interface-l2sriov-interface) block (within [`layer2_interface`](#layer2-interface)) supports the following:
 
-<a id="device-493f29"></a>&#x2022; [`device`](#device-493f29) - Optional String<br>Ethernet Device. Physical ethernet interface
+<a id="device-493f29"></a>&#x2022; [`device`](#device-493f29) - Optional String<br>Physical ethernet interface
 
-<a id="untagged-3d16a0"></a>&#x2022; [`untagged`](#untagged-3d16a0) - Optional Block<br>Enable this option
+<a id="untagged-3d16a0"></a>&#x2022; [`untagged`](#untagged-3d16a0) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="vlan-id-1138ca"></a>&#x2022; [`vlan_id`](#vlan-id-1138ca) - Optional Number<br>VLAN ID. Configure a VLAN tagged interface
+<a id="vlan-id-1138ca"></a>&#x2022; [`vlan_id`](#vlan-id-1138ca) - Optional Number<br>Configure a VLAN tagged interface
 
 #### Layer2 Interface L2vlan Interface
 
 A [`l2vlan_interface`](#layer2-interface-l2vlan-interface) block (within [`layer2_interface`](#layer2-interface)) supports the following:
 
-<a id="device-5d2d98"></a>&#x2022; [`device`](#device-5d2d98) - Optional String<br>Ethernet Device. Physical ethernet interface
+<a id="device-5d2d98"></a>&#x2022; [`device`](#device-5d2d98) - Optional String<br>Physical ethernet interface
 
 <a id="vlan-id-04713c"></a>&#x2022; [`vlan_id`](#vlan-id-04713c) - Optional Number<br>VLAN ID. VLAN ID
 
@@ -353,33 +353,33 @@ A [`timeouts`](#timeouts) block supports the following:
 
 A [`tunnel_interface`](#tunnel-interface) block supports the following:
 
-<a id="tunnel-interface-mtu"></a>&#x2022; [`mtu`](#tunnel-interface-mtu) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
+<a id="tunnel-interface-mtu"></a>&#x2022; [`mtu`](#tunnel-interface-mtu) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-<a id="tunnel-interface-node"></a>&#x2022; [`node`](#tunnel-interface-node) - Optional String<br>Specific Node. Configuration will apply to a given device on the given node
+<a id="tunnel-interface-node"></a>&#x2022; [`node`](#tunnel-interface-node) - Optional String<br>Configuration will apply to a given device on the given node
 
-<a id="tunnel-interface-priority"></a>&#x2022; [`priority`](#tunnel-interface-priority) - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
+<a id="tunnel-interface-priority"></a>&#x2022; [`priority`](#tunnel-interface-priority) - Optional Number<br>Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
 
-<a id="network-25dbfd"></a>&#x2022; [`site_local_inside_network`](#network-25dbfd) - Optional Block<br>Enable this option
+<a id="network-25dbfd"></a>&#x2022; [`site_local_inside_network`](#network-25dbfd) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="tunnel-interface-site-local-network"></a>&#x2022; [`site_local_network`](#tunnel-interface-site-local-network) - Optional Block<br>Enable this option
+<a id="tunnel-interface-site-local-network"></a>&#x2022; [`site_local_network`](#tunnel-interface-site-local-network) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="tunnel-interface-static-ip"></a>&#x2022; [`static_ip`](#tunnel-interface-static-ip) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IP](#tunnel-interface-static-ip) below.
 
-<a id="tunnel-interface-tunnel"></a>&#x2022; [`tunnel`](#tunnel-interface-tunnel) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Tunnel](#tunnel-interface-tunnel) below.
+<a id="tunnel-interface-tunnel"></a>&#x2022; [`tunnel`](#tunnel-interface-tunnel) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Tunnel](#tunnel-interface-tunnel) below.
 
 #### Tunnel Interface Static IP
 
 A [`static_ip`](#tunnel-interface-static-ip) block (within [`tunnel_interface`](#tunnel-interface)) supports the following:
 
-<a id="static-ip-b2c112"></a>&#x2022; [`cluster_static_ip`](#static-ip-b2c112) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-b2c112) below.
+<a id="static-ip-b2c112"></a>&#x2022; [`cluster_static_ip`](#static-ip-b2c112) - Optional Block<br>Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-b2c112) below.
 
-<a id="static-ip-b510ab"></a>&#x2022; [`node_static_ip`](#static-ip-b510ab) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-b510ab) below.
+<a id="static-ip-b510ab"></a>&#x2022; [`node_static_ip`](#static-ip-b510ab) - Optional Block<br>Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-b510ab) below.
 
 #### Tunnel Interface Static IP Cluster Static IP
 
 A [`cluster_static_ip`](#static-ip-b2c112) block (within [`tunnel_interface.static_ip`](#tunnel-interface-static-ip)) supports the following:
 
-<a id="map-024d15"></a>&#x2022; [`interface_ip_map`](#map-024d15) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="map-024d15"></a>&#x2022; [`interface_ip_map`](#map-024d15) - Optional Block<br>Map of Node to Static IP configuration value, Key:Node, Value:IP Address
 
 #### Tunnel Interface Static IP Node Static IP
 
@@ -387,17 +387,17 @@ A [`node_static_ip`](#static-ip-b510ab) block (within [`tunnel_interface.static_
 
 <a id="default-gw-9338b4"></a>&#x2022; [`default_gw`](#default-gw-9338b4) - Optional String<br>Default Gateway. IP address of the default gateway
 
-<a id="address-a55f70"></a>&#x2022; [`ip_address`](#address-a55f70) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="address-a55f70"></a>&#x2022; [`ip_address`](#address-a55f70) - Optional String<br>IP address of the interface and prefix length
 
 #### Tunnel Interface Tunnel
 
 A [`tunnel`](#tunnel-interface-tunnel) block (within [`tunnel_interface`](#tunnel-interface)) supports the following:
 
-<a id="tunnel-interface-tunnel-name"></a>&#x2022; [`name`](#tunnel-interface-tunnel-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="tunnel-interface-tunnel-name"></a>&#x2022; [`name`](#tunnel-interface-tunnel-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="tunnel-interface-tunnel-namespace"></a>&#x2022; [`namespace`](#tunnel-interface-tunnel-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="tunnel-interface-tunnel-namespace"></a>&#x2022; [`namespace`](#tunnel-interface-tunnel-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tunnel-interface-tunnel-tenant"></a>&#x2022; [`tenant`](#tunnel-interface-tunnel-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tunnel-interface-tunnel-tenant"></a>&#x2022; [`tenant`](#tunnel-interface-tunnel-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 ---
 

@@ -36,7 +36,7 @@ resource "f5xc_cdn_cache_rule" "example" {
   cache_rules {
     # Configure cache_rules settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   cache_bypass {
     # Configure cache_bypass settings
   }
@@ -82,11 +82,11 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`cache_rules`](#cache-rules) block supports the following:
 
-<a id="cache-rules-cache-bypass"></a>&#x2022; [`cache_bypass`](#cache-rules-cache-bypass) - Optional Block<br>Enable this option
+<a id="cache-rules-cache-bypass"></a>&#x2022; [`cache_bypass`](#cache-rules-cache-bypass) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="cache-rules-eligible-for-cache"></a>&#x2022; [`eligible_for_cache`](#cache-rules-eligible-for-cache) - Optional Block<br>Cache Action OPTIONS. List of OPTIONS for Cache Action<br>See [Eligible For Cache](#cache-rules-eligible-for-cache) below.
 
-<a id="cache-rules-rule-expression-list"></a>&#x2022; [`rule_expression_list`](#cache-rules-rule-expression-list) - Optional Block<br>Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs<br>See [Rule Expression List](#cache-rules-rule-expression-list) below.
+<a id="cache-rules-rule-expression-list"></a>&#x2022; [`rule_expression_list`](#cache-rules-rule-expression-list) - Optional Block<br>Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs<br>See [Rule Expression List](#cache-rules-rule-expression-list) below.
 
 <a id="cache-rules-rule-name"></a>&#x2022; [`rule_name`](#cache-rules-rule-name) - Optional String<br>Rule Name. Name of the Cache Rule
 
@@ -110,9 +110,9 @@ An [`eligible_for_cache`](#cache-rules-eligible-for-cache) block (within [`cache
 
 A [`rule_expression_list`](#cache-rules-rule-expression-list) block (within [`cache_rules`](#cache-rules)) supports the following:
 
-<a id="expression-140547"></a>&#x2022; [`cache_rule_expression`](#expression-140547) - Optional Block<br>Terms. The Cache Rule Expression Terms that are ANDed<br>See [Cache Rule Expression](#expression-140547) below.
+<a id="expression-140547"></a>&#x2022; [`cache_rule_expression`](#expression-140547) - Optional Block<br>The Cache Rule Expression Terms that are ANDed<br>See [Cache Rule Expression](#expression-140547) below.
 
-<a id="name-621897"></a>&#x2022; [`expression_name`](#name-621897) - Optional String<br>Expression Name. Name of the Expressions items that are ANDed
+<a id="name-621897"></a>&#x2022; [`expression_name`](#name-621897) - Optional String<br>Name of the Expressions items that are ANDed
 
 #### Cache Rules Rule Expression List Cache Rule Expression
 

@@ -174,7 +174,7 @@ func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.S
 				MarkdownDescription: "BasicConfiguration.",
 				Attributes: map[string]schema.Attribute{
 					"display_name": schema.StringAttribute{
-						MarkdownDescription: "Display Name. Tenant display name in the login screen.",
+						MarkdownDescription: "Tenant display name in the login screen.",
 						Optional:            true,
 					},
 				},
@@ -183,7 +183,7 @@ func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.S
 				MarkdownDescription: "BruteForceDetectionSettings.",
 				Attributes: map[string]schema.Attribute{
 					"max_login_failures": schema.Int64Attribute{
-						MarkdownDescription: "Max Login Failures. How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes.",
+						MarkdownDescription: "How many failures before wait is triggered. When login failure count is hit, user will be temporarily locked for a max duration of 15 minutes.",
 						Optional:            true,
 					},
 				},
@@ -192,35 +192,35 @@ func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.S
 				MarkdownDescription: "PasswordPolicy.",
 				Attributes: map[string]schema.Attribute{
 					"digits": schema.Int64Attribute{
-						MarkdownDescription: "Min Number Of Digits. The number of digits required to be in the password string.",
+						MarkdownDescription: "The number of digits required to be in the password string.",
 						Optional:            true,
 					},
 					"expire_password": schema.Int64Attribute{
-						MarkdownDescription: "Expire Password. The number of days for which the password is valid. After the number of days has expired, the user is required to change their password.",
+						MarkdownDescription: "The number of days for which the password is valid. After the number of days has expired, the user is required to change their password.",
 						Optional:            true,
 					},
 					"lowercase_characters": schema.Int64Attribute{
-						MarkdownDescription: "Min Number Of Lowercase Characters. The number of lower case letters required to be in the password string.",
+						MarkdownDescription: "The number of lower case letters required to be in the password string.",
 						Optional:            true,
 					},
 					"minimum_length": schema.Int64Attribute{
-						MarkdownDescription: "Minimum Length. Minimum length of password.",
+						MarkdownDescription: "Minimum length of password.",
 						Optional:            true,
 					},
 					"not_recently_used": schema.Int64Attribute{
-						MarkdownDescription: "Not Recently Used. This policy is used to restrict user from using previously used passwords. Number that's set determines number of last passwords which user cannot use as new password.",
+						MarkdownDescription: "Policy is used to restrict user from using previously used passwords. Number that's set determines number of last passwords which user cannot use as new password.",
 						Optional:            true,
 					},
 					"not_username": schema.BoolAttribute{
-						MarkdownDescription: "Not Username. When set, the password is not allowed to be the same as the username.",
+						MarkdownDescription: "When set, the password is not allowed to be the same as the username.",
 						Optional:            true,
 					},
 					"special_characters": schema.Int64Attribute{
-						MarkdownDescription: "Min Number Of Special Characters. The number of special characters like '?!#%$' required to be in the password string.",
+						MarkdownDescription: "The number of special characters like '?!#%$' required to be in the password string.",
 						Optional:            true,
 					},
 					"uppercase_characters": schema.Int64Attribute{
-						MarkdownDescription: "Min Number Of Uppercase Characters. The number of upper case letters required to be in the password string.",
+						MarkdownDescription: "The number of upper case letters required to be in the password string.",
 						Optional:            true,
 					},
 				},

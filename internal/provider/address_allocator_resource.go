@@ -108,7 +108,7 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"address_pool": schema.ListAttribute{
-				MarkdownDescription: "Address Pool. Address pool from which the allocator carves out subnets or addresses to its clients.",
+				MarkdownDescription: "Address pool from which the allocator carves out subnets or addresses to its clients.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
@@ -138,7 +138,7 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"mode": schema.StringAttribute{
-				MarkdownDescription: "[Enum: LOCAL|GLOBAL_PER_SITE_NODE] Allocator Mode. Mode of the address allocator Address allocator is for VERs within the local cluster or site Allocation is per site and then per node. Possible values are `LOCAL`, `GLOBAL_PER_SITE_NODE`. Defaults to `LOCAL`.",
+				MarkdownDescription: "[Enum: LOCAL|GLOBAL_PER_SITE_NODE] Mode of the address allocator Address allocator is for VERs within the local cluster or site Allocation is per site and then per node. Possible values are `LOCAL`, `GLOBAL_PER_SITE_NODE`. Defaults to `LOCAL`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -154,18 +154,18 @@ func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.Sche
 				Delete: true,
 			}),
 			"address_allocation_scheme": schema.SingleNestedBlock{
-				MarkdownDescription: "Address Allocation Scheme. Decides the scheme to be used to allocate addresses from the configured address pool.",
+				MarkdownDescription: "Decides the scheme to be used to allocate addresses from the configured address pool.",
 				Attributes: map[string]schema.Attribute{
 					"allocation_unit": schema.Int64Attribute{
-						MarkdownDescription: "Allocation Unit. Prefix length indicating the size of each allocated subnet. For example, if this is specified as 30, subnets of /30 will be allocated from the given address pool.",
+						MarkdownDescription: "Prefix length indicating the size of each allocated subnet. For example, if this is specified as 30, subnets of /30 will be allocated from the given address pool.",
 						Optional:            true,
 					},
 					"local_interface_address_offset": schema.Int64Attribute{
-						MarkdownDescription: "Local Interface Address Offset. This is used to derive address for the local interface from the allocated subnet. If Local Interface Address Type is set to 'Offset from beginning of Subnet', this offset value is added to the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 2 with Local Interface Address Type set to 'Offset from beginning of Subnet', local interface address of 169.254.0.2 is used. If Local Interface Address Type is set to 'Offset from end of Subnet', this offset value is subtracted from the end of the allocated subnet and used as the local interface address. For example, if the allocated subnet is 169.254.0.0/30 and offset is set to 1 with Local Interface Address Type set to 'Offset from end of Subnet', local interface address of 169.254.0.2 is used.",
+						MarkdownDescription: "Used to derive address for the local interface from the allocated subnet. If Local Interface Address Type is set to 'Offset from beginning of Subnet', this offset value is added to the allocated subnet and used as the local interface address. For example, if the allocated subnet is..",
 						Optional:            true,
 					},
 					"local_interface_address_type": schema.StringAttribute{
-						MarkdownDescription: "[Enum: LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN|LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END|LOCAL_INTERFACE_ADDRESS_FROM_PREFIX] Local Interface Address Type. Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 2 and Local Interface Address Type is set to 'Offset from beginning of Subnet', local address of 169.254.0.2 is used. Use Nth last address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 1 and Local Interface Address Type is set to 'Offset from end of Subnet', local address of 169.254.0.2 is used. This case is used for external_connector. Possible values are `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`, `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END`, `LOCAL_INTERFACE_ADDRESS_FROM_PREFIX`. Defaults to `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`.",
+						MarkdownDescription: "[Enum: LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN|LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END|LOCAL_INTERFACE_ADDRESS_FROM_PREFIX] Dictates how local interface address is derived from the allocated subnet Use Nth address of the allocated subnet as the local interface address, N being the Local Interface Address Offset. For example, if the allocated subnet is 169.254.0.0/30, Local Interface Address Offset is set to 2 and.. Possible values are `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`, `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_END`, `LOCAL_INTERFACE_ADDRESS_FROM_PREFIX`. Defaults to `LOCAL_INTERFACE_ADDRESS_OFFSET_FROM_SUBNET_BEGIN`.",
 						Optional:            true,
 					},
 				},

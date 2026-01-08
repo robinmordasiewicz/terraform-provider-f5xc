@@ -69,17 +69,17 @@ resource "f5xc_service_policy" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="allow-all-requests"></a>[`allow_all_requests`](#allow-all-requests) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="allow-list"></a>[`allow_list`](#allow-list) - Optional Block<br>Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria<br>See [Allow List](#allow-list) below for details.
-<br><br>&#x2022; <a id="deny-all-requests"></a>[`deny_all_requests`](#deny-all-requests) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="deny-list"></a>[`deny_list`](#deny-list) - Optional Block<br>Source List. List of sources. A request belongs to this list if it satisfies any of the match criteria<br>See [Deny List](#deny-list) below for details.
-<br><br>&#x2022; <a id="rule-list"></a>[`rule_list`](#rule-list) - Optional Block<br>Rule List. A list of rules. The order of evaluation of the rules depends on the rule combining algorithm<br>See [Rule List](#rule-list) below for details.
+&#x2022; <a id="allow-all-requests"></a>[`allow_all_requests`](#allow-all-requests) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="allow-list"></a>[`allow_list`](#allow-list) - Optional Block<br>List of sources. A request belongs to this list if it satisfies any of the match criteria<br>See [Allow List](#allow-list) below for details.
+<br><br>&#x2022; <a id="deny-all-requests"></a>[`deny_all_requests`](#deny-all-requests) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="deny-list"></a>[`deny_list`](#deny-list) - Optional Block<br>List of sources. A request belongs to this list if it satisfies any of the match criteria<br>See [Deny List](#deny-list) below for details.
+<br><br>&#x2022; <a id="rule-list"></a>[`rule_list`](#rule-list) - Optional Block<br>List of rules. The order of evaluation of the rules depends on the rule combining algorithm<br>See [Rule List](#rule-list) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="any-server"></a>[`any_server`](#any-server) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="server-name"></a>[`server_name`](#server-name) - Optional String<br>Server Name. The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is directed to a virtual K8S service, the actual names also contain the name of that service. The predicate evaluates to true if any of the actual names is the same as the expected server name
-<br><br>&#x2022; <a id="server-name-matcher"></a>[`server_name_matcher`](#server-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions
-<br><br>&#x2022; <a id="server-selector"></a>[`server_selector`](#server-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE
+&#x2022; <a id="any-server"></a>[`any_server`](#any-server) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="server-name"></a>[`server_name`](#server-name) - Optional String<br>The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is
+<br><br>&#x2022; <a id="server-name-matcher"></a>[`server_name_matcher`](#server-name-matcher) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions
+<br><br>&#x2022; <a id="server-selector"></a>[`server_selector`](#server-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
@@ -95,127 +95,127 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`allow_list`](#allow-list) block supports the following:
 
-<a id="allow-list-asn-list"></a>&#x2022; [`asn_list`](#allow-list-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#allow-list-asn-list) below.
+<a id="allow-list-asn-list"></a>&#x2022; [`asn_list`](#allow-list-asn-list) - Optional Block<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#allow-list-asn-list) below.
 
-<a id="allow-list-asn-set"></a>&#x2022; [`asn_set`](#allow-list-asn-set) - Optional Block<br>BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB<br>See [Asn Set](#allow-list-asn-set) below.
+<a id="allow-list-asn-set"></a>&#x2022; [`asn_set`](#allow-list-asn-set) - Optional Block<br>Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB<br>See [Asn Set](#allow-list-asn-set) below.
 
-<a id="allow-list-country-list"></a>&#x2022; [`country_list`](#allow-list-country-list) - Optional List  Defaults to `COUNTRY_NONE`<br>Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`<br>[Enum: COUNTRY_NONE|COUNTRY_AD|COUNTRY_AE|COUNTRY_AF|COUNTRY_AG|COUNTRY_AI|COUNTRY_AL|COUNTRY_AM|COUNTRY_AN|COUNTRY_AO|COUNTRY_AQ|COUNTRY_AR|COUNTRY_AS|COUNTRY_AT|COUNTRY_AU|COUNTRY_AW|COUNTRY_AX|COUNTRY_AZ|COUNTRY_BA|COUNTRY_BB|COUNTRY_BD|COUNTRY_BE|COUNTRY_BF|COUNTRY_BG|COUNTRY_BH|COUNTRY_BI|COUNTRY_BJ|COUNTRY_BL|COUNTRY_BM|COUNTRY_BN|COUNTRY_BO|COUNTRY_BQ|COUNTRY_BR|COUNTRY_BS|COUNTRY_BT|COUNTRY_BV|COUNTRY_BW|COUNTRY_BY|COUNTRY_BZ|COUNTRY_CA|COUNTRY_CC|COUNTRY_CD|COUNTRY_CF|COUNTRY_CG|COUNTRY_CH|COUNTRY_CI|COUNTRY_CK|COUNTRY_CL|COUNTRY_CM|COUNTRY_CN|COUNTRY_CO|COUNTRY_CR|COUNTRY_CS|COUNTRY_CU|COUNTRY_CV|COUNTRY_CW|COUNTRY_CX|COUNTRY_CY|COUNTRY_CZ|COUNTRY_DE|COUNTRY_DJ|COUNTRY_DK|COUNTRY_DM|COUNTRY_DO|COUNTRY_DZ|COUNTRY_EC|COUNTRY_EE|COUNTRY_EG|COUNTRY_EH|COUNTRY_ER|COUNTRY_ES|COUNTRY_ET|COUNTRY_FI|COUNTRY_FJ|COUNTRY_FK|COUNTRY_FM|COUNTRY_FO|COUNTRY_FR|COUNTRY_GA|COUNTRY_GB|COUNTRY_GD|COUNTRY_GE|COUNTRY_GF|COUNTRY_GG|COUNTRY_GH|COUNTRY_GI|COUNTRY_GL|COUNTRY_GM|COUNTRY_GN|COUNTRY_GP|COUNTRY_GQ|COUNTRY_GR|COUNTRY_GS|COUNTRY_GT|COUNTRY_GU|COUNTRY_GW|COUNTRY_GY|COUNTRY_HK|COUNTRY_HM|COUNTRY_HN|COUNTRY_HR|COUNTRY_HT|COUNTRY_HU|COUNTRY_ID|COUNTRY_IE|COUNTRY_IL|COUNTRY_IM|COUNTRY_IN|COUNTRY_IO|COUNTRY_IQ|COUNTRY_IR|COUNTRY_IS|COUNTRY_IT|COUNTRY_JE|COUNTRY_JM|COUNTRY_JO|COUNTRY_JP|COUNTRY_KE|COUNTRY_KG|COUNTRY_KH|COUNTRY_KI|COUNTRY_KM|COUNTRY_KN|COUNTRY_KP|COUNTRY_KR|COUNTRY_KW|COUNTRY_KY|COUNTRY_KZ|COUNTRY_LA|COUNTRY_LB|COUNTRY_LC|COUNTRY_LI|COUNTRY_LK|COUNTRY_LR|COUNTRY_LS|COUNTRY_LT|COUNTRY_LU|COUNTRY_LV|COUNTRY_LY|COUNTRY_MA|COUNTRY_MC|COUNTRY_MD|COUNTRY_ME|COUNTRY_MF|COUNTRY_MG|COUNTRY_MH|COUNTRY_MK|COUNTRY_ML|COUNTRY_MM|COUNTRY_MN|COUNTRY_MO|COUNTRY_MP|COUNTRY_MQ|COUNTRY_MR|COUNTRY_MS|COUNTRY_MT|COUNTRY_MU|COUNTRY_MV|COUNTRY_MW|COUNTRY_MX|COUNTRY_MY|COUNTRY_MZ|COUNTRY_NA|COUNTRY_NC|COUNTRY_NE|COUNTRY_NF|COUNTRY_NG|COUNTRY_NI|COUNTRY_NL|COUNTRY_NO|COUNTRY_NP|COUNTRY_NR|COUNTRY_NU|COUNTRY_NZ|COUNTRY_OM|COUNTRY_PA|COUNTRY_PE|COUNTRY_PF|COUNTRY_PG|COUNTRY_PH|COUNTRY_PK|COUNTRY_PL|COUNTRY_PM|COUNTRY_PN|COUNTRY_PR|COUNTRY_PS|COUNTRY_PT|COUNTRY_PW|COUNTRY_PY|COUNTRY_QA|COUNTRY_RE|COUNTRY_RO|COUNTRY_RS|COUNTRY_RU|COUNTRY_RW|COUNTRY_SA|COUNTRY_SB|COUNTRY_SC|COUNTRY_SD|COUNTRY_SE|COUNTRY_SG|COUNTRY_SH|COUNTRY_SI|COUNTRY_SJ|COUNTRY_SK|COUNTRY_SL|COUNTRY_SM|COUNTRY_SN|COUNTRY_SO|COUNTRY_SR|COUNTRY_SS|COUNTRY_ST|COUNTRY_SV|COUNTRY_SX|COUNTRY_SY|COUNTRY_SZ|COUNTRY_TC|COUNTRY_TD|COUNTRY_TF|COUNTRY_TG|COUNTRY_TH|COUNTRY_TJ|COUNTRY_TK|COUNTRY_TL|COUNTRY_TM|COUNTRY_TN|COUNTRY_TO|COUNTRY_TR|COUNTRY_TT|COUNTRY_TV|COUNTRY_TW|COUNTRY_TZ|COUNTRY_UA|COUNTRY_UG|COUNTRY_UM|COUNTRY_US|COUNTRY_UY|COUNTRY_UZ|COUNTRY_VA|COUNTRY_VC|COUNTRY_VE|COUNTRY_VG|COUNTRY_VI|COUNTRY_VN|COUNTRY_VU|COUNTRY_WF|COUNTRY_WS|COUNTRY_XK|COUNTRY_XT|COUNTRY_YE|COUNTRY_YT|COUNTRY_ZA|COUNTRY_ZM|COUNTRY_ZW] Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB
+<a id="allow-list-country-list"></a>&#x2022; [`country_list`](#allow-list-country-list) - Optional List  Defaults to `COUNTRY_NONE`<br>Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`<br>[Enum: COUNTRY_NONE|COUNTRY_AD|COUNTRY_AE|COUNTRY_AF|COUNTRY_AG|COUNTRY_AI|COUNTRY_AL|COUNTRY_AM|COUNTRY_AN|COUNTRY_AO|COUNTRY_AQ|COUNTRY_AR|COUNTRY_AS|COUNTRY_AT|COUNTRY_AU|COUNTRY_AW|COUNTRY_AX|COUNTRY_AZ|COUNTRY_BA|COUNTRY_BB|COUNTRY_BD|COUNTRY_BE|COUNTRY_BF|COUNTRY_BG|COUNTRY_BH|COUNTRY_BI|COUNTRY_BJ|COUNTRY_BL|COUNTRY_BM|COUNTRY_BN|COUNTRY_BO|COUNTRY_BQ|COUNTRY_BR|COUNTRY_BS|COUNTRY_BT|COUNTRY_BV|COUNTRY_BW|COUNTRY_BY|COUNTRY_BZ|COUNTRY_CA|COUNTRY_CC|COUNTRY_CD|COUNTRY_CF|COUNTRY_CG|COUNTRY_CH|COUNTRY_CI|COUNTRY_CK|COUNTRY_CL|COUNTRY_CM|COUNTRY_CN|COUNTRY_CO|COUNTRY_CR|COUNTRY_CS|COUNTRY_CU|COUNTRY_CV|COUNTRY_CW|COUNTRY_CX|COUNTRY_CY|COUNTRY_CZ|COUNTRY_DE|COUNTRY_DJ|COUNTRY_DK|COUNTRY_DM|COUNTRY_DO|COUNTRY_DZ|COUNTRY_EC|COUNTRY_EE|COUNTRY_EG|COUNTRY_EH|COUNTRY_ER|COUNTRY_ES|COUNTRY_ET|COUNTRY_FI|COUNTRY_FJ|COUNTRY_FK|COUNTRY_FM|COUNTRY_FO|COUNTRY_FR|COUNTRY_GA|COUNTRY_GB|COUNTRY_GD|COUNTRY_GE|COUNTRY_GF|COUNTRY_GG|COUNTRY_GH|COUNTRY_GI|COUNTRY_GL|COUNTRY_GM|COUNTRY_GN|COUNTRY_GP|COUNTRY_GQ|COUNTRY_GR|COUNTRY_GS|COUNTRY_GT|COUNTRY_GU|COUNTRY_GW|COUNTRY_GY|COUNTRY_HK|COUNTRY_HM|COUNTRY_HN|COUNTRY_HR|COUNTRY_HT|COUNTRY_HU|COUNTRY_ID|COUNTRY_IE|COUNTRY_IL|COUNTRY_IM|COUNTRY_IN|COUNTRY_IO|COUNTRY_IQ|COUNTRY_IR|COUNTRY_IS|COUNTRY_IT|COUNTRY_JE|COUNTRY_JM|COUNTRY_JO|COUNTRY_JP|COUNTRY_KE|COUNTRY_KG|COUNTRY_KH|COUNTRY_KI|COUNTRY_KM|COUNTRY_KN|COUNTRY_KP|COUNTRY_KR|COUNTRY_KW|COUNTRY_KY|COUNTRY_KZ|COUNTRY_LA|COUNTRY_LB|COUNTRY_LC|COUNTRY_LI|COUNTRY_LK|COUNTRY_LR|COUNTRY_LS|COUNTRY_LT|COUNTRY_LU|COUNTRY_LV|COUNTRY_LY|COUNTRY_MA|COUNTRY_MC|COUNTRY_MD|COUNTRY_ME|COUNTRY_MF|COUNTRY_MG|COUNTRY_MH|COUNTRY_MK|COUNTRY_ML|COUNTRY_MM|COUNTRY_MN|COUNTRY_MO|COUNTRY_MP|COUNTRY_MQ|COUNTRY_MR|COUNTRY_MS|COUNTRY_MT|COUNTRY_MU|COUNTRY_MV|COUNTRY_MW|COUNTRY_MX|COUNTRY_MY|COUNTRY_MZ|COUNTRY_NA|COUNTRY_NC|COUNTRY_NE|COUNTRY_NF|COUNTRY_NG|COUNTRY_NI|COUNTRY_NL|COUNTRY_NO|COUNTRY_NP|COUNTRY_NR|COUNTRY_NU|COUNTRY_NZ|COUNTRY_OM|COUNTRY_PA|COUNTRY_PE|COUNTRY_PF|COUNTRY_PG|COUNTRY_PH|COUNTRY_PK|COUNTRY_PL|COUNTRY_PM|COUNTRY_PN|COUNTRY_PR|COUNTRY_PS|COUNTRY_PT|COUNTRY_PW|COUNTRY_PY|COUNTRY_QA|COUNTRY_RE|COUNTRY_RO|COUNTRY_RS|COUNTRY_RU|COUNTRY_RW|COUNTRY_SA|COUNTRY_SB|COUNTRY_SC|COUNTRY_SD|COUNTRY_SE|COUNTRY_SG|COUNTRY_SH|COUNTRY_SI|COUNTRY_SJ|COUNTRY_SK|COUNTRY_SL|COUNTRY_SM|COUNTRY_SN|COUNTRY_SO|COUNTRY_SR|COUNTRY_SS|COUNTRY_ST|COUNTRY_SV|COUNTRY_SX|COUNTRY_SY|COUNTRY_SZ|COUNTRY_TC|COUNTRY_TD|COUNTRY_TF|COUNTRY_TG|COUNTRY_TH|COUNTRY_TJ|COUNTRY_TK|COUNTRY_TL|COUNTRY_TM|COUNTRY_TN|COUNTRY_TO|COUNTRY_TR|COUNTRY_TT|COUNTRY_TV|COUNTRY_TW|COUNTRY_TZ|COUNTRY_UA|COUNTRY_UG|COUNTRY_UM|COUNTRY_US|COUNTRY_UY|COUNTRY_UZ|COUNTRY_VA|COUNTRY_VC|COUNTRY_VE|COUNTRY_VG|COUNTRY_VI|COUNTRY_VN|COUNTRY_VU|COUNTRY_WF|COUNTRY_WS|COUNTRY_XK|COUNTRY_XT|COUNTRY_YE|COUNTRY_YT|COUNTRY_ZA|COUNTRY_ZM|COUNTRY_ZW] Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB
 
-<a id="allow-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#allow-list-default-action-allow) - Optional Block<br>Enable this option
+<a id="allow-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#allow-list-default-action-allow) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="allow-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#allow-list-default-action-deny) - Optional Block<br>Enable this option
+<a id="allow-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#allow-list-default-action-deny) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="allow-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#allow-list-default-action-next-policy) - Optional Block<br>Enable this option
+<a id="allow-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#allow-list-default-action-next-policy) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="allow-list-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#allow-list-ip-prefix-set) - Optional Block<br>IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set<br>See [IP Prefix Set](#allow-list-ip-prefix-set) below.
+<a id="allow-list-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#allow-list-ip-prefix-set) - Optional Block<br>Addresses that are covered by the prefixes in the given ip_prefix_set<br>See [IP Prefix Set](#allow-list-ip-prefix-set) below.
 
-<a id="allow-list-prefix-list"></a>&#x2022; [`prefix_list`](#allow-list-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#allow-list-prefix-list) below.
+<a id="allow-list-prefix-list"></a>&#x2022; [`prefix_list`](#allow-list-prefix-list) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#allow-list-prefix-list) below.
 
-<a id="allow-list-tls-fingerprint-classes"></a>&#x2022; [`tls_fingerprint_classes`](#allow-list-tls-fingerprint-classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>See [TLS Fingerprints](#common-tls-fingerprints)<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
+<a id="allow-list-tls-fingerprint-classes"></a>&#x2022; [`tls_fingerprint_classes`](#allow-list-tls-fingerprint-classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>See [TLS Fingerprints](#common-tls-fingerprints)<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] List of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
-<a id="allow-list-tls-fingerprint-values"></a>&#x2022; [`tls_fingerprint_values`](#allow-list-tls-fingerprint-values) - Optional List<br>TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
+<a id="allow-list-tls-fingerprint-values"></a>&#x2022; [`tls_fingerprint_values`](#allow-list-tls-fingerprint-values) - Optional List<br>List of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
 
 #### Allow List Asn List
 
 An [`asn_list`](#allow-list-asn-list) block (within [`allow_list`](#allow-list)) supports the following:
 
-<a id="allow-list-asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#allow-list-asn-list-as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
+<a id="allow-list-asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#allow-list-asn-list-as-numbers) - Optional List<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 #### Allow List Asn Set
 
 An [`asn_set`](#allow-list-asn-set) block (within [`allow_list`](#allow-list)) supports the following:
 
-<a id="allow-list-asn-set-name"></a>&#x2022; [`name`](#allow-list-asn-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="allow-list-asn-set-name"></a>&#x2022; [`name`](#allow-list-asn-set-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="allow-list-asn-set-namespace"></a>&#x2022; [`namespace`](#allow-list-asn-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="allow-list-asn-set-namespace"></a>&#x2022; [`namespace`](#allow-list-asn-set-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="allow-list-asn-set-tenant"></a>&#x2022; [`tenant`](#allow-list-asn-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="allow-list-asn-set-tenant"></a>&#x2022; [`tenant`](#allow-list-asn-set-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Allow List IP Prefix Set
 
 An [`ip_prefix_set`](#allow-list-ip-prefix-set) block (within [`allow_list`](#allow-list)) supports the following:
 
-<a id="allow-list-ip-prefix-set-name"></a>&#x2022; [`name`](#allow-list-ip-prefix-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="allow-list-ip-prefix-set-name"></a>&#x2022; [`name`](#allow-list-ip-prefix-set-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="allow-list-ip-prefix-set-namespace"></a>&#x2022; [`namespace`](#allow-list-ip-prefix-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="allow-list-ip-prefix-set-namespace"></a>&#x2022; [`namespace`](#allow-list-ip-prefix-set-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="allow-list-ip-prefix-set-tenant"></a>&#x2022; [`tenant`](#allow-list-ip-prefix-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="allow-list-ip-prefix-set-tenant"></a>&#x2022; [`tenant`](#allow-list-ip-prefix-set-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Allow List Prefix List
 
 A [`prefix_list`](#allow-list-prefix-list) block (within [`allow_list`](#allow-list)) supports the following:
 
-<a id="allow-list-prefix-list-prefixes"></a>&#x2022; [`prefixes`](#allow-list-prefix-list-prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+<a id="allow-list-prefix-list-prefixes"></a>&#x2022; [`prefixes`](#allow-list-prefix-list-prefixes) - Optional List<br>List of IPv4 prefixes that represent an endpoint
 
 #### Deny List
 
 A [`deny_list`](#deny-list) block supports the following:
 
-<a id="deny-list-asn-list"></a>&#x2022; [`asn_list`](#deny-list-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#deny-list-asn-list) below.
+<a id="deny-list-asn-list"></a>&#x2022; [`asn_list`](#deny-list-asn-list) - Optional Block<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#deny-list-asn-list) below.
 
-<a id="deny-list-asn-set"></a>&#x2022; [`asn_set`](#deny-list-asn-set) - Optional Block<br>BGP ASN Set. Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB<br>See [Asn Set](#deny-list-asn-set) below.
+<a id="deny-list-asn-set"></a>&#x2022; [`asn_set`](#deny-list-asn-set) - Optional Block<br>Addresses that belong to the ASNs in the given bgp_asn_set The ASN is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB<br>See [Asn Set](#deny-list-asn-set) below.
 
-<a id="deny-list-country-list"></a>&#x2022; [`country_list`](#deny-list-country-list) - Optional List  Defaults to `COUNTRY_NONE`<br>Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`<br>[Enum: COUNTRY_NONE|COUNTRY_AD|COUNTRY_AE|COUNTRY_AF|COUNTRY_AG|COUNTRY_AI|COUNTRY_AL|COUNTRY_AM|COUNTRY_AN|COUNTRY_AO|COUNTRY_AQ|COUNTRY_AR|COUNTRY_AS|COUNTRY_AT|COUNTRY_AU|COUNTRY_AW|COUNTRY_AX|COUNTRY_AZ|COUNTRY_BA|COUNTRY_BB|COUNTRY_BD|COUNTRY_BE|COUNTRY_BF|COUNTRY_BG|COUNTRY_BH|COUNTRY_BI|COUNTRY_BJ|COUNTRY_BL|COUNTRY_BM|COUNTRY_BN|COUNTRY_BO|COUNTRY_BQ|COUNTRY_BR|COUNTRY_BS|COUNTRY_BT|COUNTRY_BV|COUNTRY_BW|COUNTRY_BY|COUNTRY_BZ|COUNTRY_CA|COUNTRY_CC|COUNTRY_CD|COUNTRY_CF|COUNTRY_CG|COUNTRY_CH|COUNTRY_CI|COUNTRY_CK|COUNTRY_CL|COUNTRY_CM|COUNTRY_CN|COUNTRY_CO|COUNTRY_CR|COUNTRY_CS|COUNTRY_CU|COUNTRY_CV|COUNTRY_CW|COUNTRY_CX|COUNTRY_CY|COUNTRY_CZ|COUNTRY_DE|COUNTRY_DJ|COUNTRY_DK|COUNTRY_DM|COUNTRY_DO|COUNTRY_DZ|COUNTRY_EC|COUNTRY_EE|COUNTRY_EG|COUNTRY_EH|COUNTRY_ER|COUNTRY_ES|COUNTRY_ET|COUNTRY_FI|COUNTRY_FJ|COUNTRY_FK|COUNTRY_FM|COUNTRY_FO|COUNTRY_FR|COUNTRY_GA|COUNTRY_GB|COUNTRY_GD|COUNTRY_GE|COUNTRY_GF|COUNTRY_GG|COUNTRY_GH|COUNTRY_GI|COUNTRY_GL|COUNTRY_GM|COUNTRY_GN|COUNTRY_GP|COUNTRY_GQ|COUNTRY_GR|COUNTRY_GS|COUNTRY_GT|COUNTRY_GU|COUNTRY_GW|COUNTRY_GY|COUNTRY_HK|COUNTRY_HM|COUNTRY_HN|COUNTRY_HR|COUNTRY_HT|COUNTRY_HU|COUNTRY_ID|COUNTRY_IE|COUNTRY_IL|COUNTRY_IM|COUNTRY_IN|COUNTRY_IO|COUNTRY_IQ|COUNTRY_IR|COUNTRY_IS|COUNTRY_IT|COUNTRY_JE|COUNTRY_JM|COUNTRY_JO|COUNTRY_JP|COUNTRY_KE|COUNTRY_KG|COUNTRY_KH|COUNTRY_KI|COUNTRY_KM|COUNTRY_KN|COUNTRY_KP|COUNTRY_KR|COUNTRY_KW|COUNTRY_KY|COUNTRY_KZ|COUNTRY_LA|COUNTRY_LB|COUNTRY_LC|COUNTRY_LI|COUNTRY_LK|COUNTRY_LR|COUNTRY_LS|COUNTRY_LT|COUNTRY_LU|COUNTRY_LV|COUNTRY_LY|COUNTRY_MA|COUNTRY_MC|COUNTRY_MD|COUNTRY_ME|COUNTRY_MF|COUNTRY_MG|COUNTRY_MH|COUNTRY_MK|COUNTRY_ML|COUNTRY_MM|COUNTRY_MN|COUNTRY_MO|COUNTRY_MP|COUNTRY_MQ|COUNTRY_MR|COUNTRY_MS|COUNTRY_MT|COUNTRY_MU|COUNTRY_MV|COUNTRY_MW|COUNTRY_MX|COUNTRY_MY|COUNTRY_MZ|COUNTRY_NA|COUNTRY_NC|COUNTRY_NE|COUNTRY_NF|COUNTRY_NG|COUNTRY_NI|COUNTRY_NL|COUNTRY_NO|COUNTRY_NP|COUNTRY_NR|COUNTRY_NU|COUNTRY_NZ|COUNTRY_OM|COUNTRY_PA|COUNTRY_PE|COUNTRY_PF|COUNTRY_PG|COUNTRY_PH|COUNTRY_PK|COUNTRY_PL|COUNTRY_PM|COUNTRY_PN|COUNTRY_PR|COUNTRY_PS|COUNTRY_PT|COUNTRY_PW|COUNTRY_PY|COUNTRY_QA|COUNTRY_RE|COUNTRY_RO|COUNTRY_RS|COUNTRY_RU|COUNTRY_RW|COUNTRY_SA|COUNTRY_SB|COUNTRY_SC|COUNTRY_SD|COUNTRY_SE|COUNTRY_SG|COUNTRY_SH|COUNTRY_SI|COUNTRY_SJ|COUNTRY_SK|COUNTRY_SL|COUNTRY_SM|COUNTRY_SN|COUNTRY_SO|COUNTRY_SR|COUNTRY_SS|COUNTRY_ST|COUNTRY_SV|COUNTRY_SX|COUNTRY_SY|COUNTRY_SZ|COUNTRY_TC|COUNTRY_TD|COUNTRY_TF|COUNTRY_TG|COUNTRY_TH|COUNTRY_TJ|COUNTRY_TK|COUNTRY_TL|COUNTRY_TM|COUNTRY_TN|COUNTRY_TO|COUNTRY_TR|COUNTRY_TT|COUNTRY_TV|COUNTRY_TW|COUNTRY_TZ|COUNTRY_UA|COUNTRY_UG|COUNTRY_UM|COUNTRY_US|COUNTRY_UY|COUNTRY_UZ|COUNTRY_VA|COUNTRY_VC|COUNTRY_VE|COUNTRY_VG|COUNTRY_VI|COUNTRY_VN|COUNTRY_VU|COUNTRY_WF|COUNTRY_WS|COUNTRY_XK|COUNTRY_XT|COUNTRY_YE|COUNTRY_YT|COUNTRY_ZA|COUNTRY_ZM|COUNTRY_ZW] Country List. Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB
+<a id="deny-list-country-list"></a>&#x2022; [`country_list`](#deny-list-country-list) - Optional List  Defaults to `COUNTRY_NONE`<br>Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`<br>[Enum: COUNTRY_NONE|COUNTRY_AD|COUNTRY_AE|COUNTRY_AF|COUNTRY_AG|COUNTRY_AI|COUNTRY_AL|COUNTRY_AM|COUNTRY_AN|COUNTRY_AO|COUNTRY_AQ|COUNTRY_AR|COUNTRY_AS|COUNTRY_AT|COUNTRY_AU|COUNTRY_AW|COUNTRY_AX|COUNTRY_AZ|COUNTRY_BA|COUNTRY_BB|COUNTRY_BD|COUNTRY_BE|COUNTRY_BF|COUNTRY_BG|COUNTRY_BH|COUNTRY_BI|COUNTRY_BJ|COUNTRY_BL|COUNTRY_BM|COUNTRY_BN|COUNTRY_BO|COUNTRY_BQ|COUNTRY_BR|COUNTRY_BS|COUNTRY_BT|COUNTRY_BV|COUNTRY_BW|COUNTRY_BY|COUNTRY_BZ|COUNTRY_CA|COUNTRY_CC|COUNTRY_CD|COUNTRY_CF|COUNTRY_CG|COUNTRY_CH|COUNTRY_CI|COUNTRY_CK|COUNTRY_CL|COUNTRY_CM|COUNTRY_CN|COUNTRY_CO|COUNTRY_CR|COUNTRY_CS|COUNTRY_CU|COUNTRY_CV|COUNTRY_CW|COUNTRY_CX|COUNTRY_CY|COUNTRY_CZ|COUNTRY_DE|COUNTRY_DJ|COUNTRY_DK|COUNTRY_DM|COUNTRY_DO|COUNTRY_DZ|COUNTRY_EC|COUNTRY_EE|COUNTRY_EG|COUNTRY_EH|COUNTRY_ER|COUNTRY_ES|COUNTRY_ET|COUNTRY_FI|COUNTRY_FJ|COUNTRY_FK|COUNTRY_FM|COUNTRY_FO|COUNTRY_FR|COUNTRY_GA|COUNTRY_GB|COUNTRY_GD|COUNTRY_GE|COUNTRY_GF|COUNTRY_GG|COUNTRY_GH|COUNTRY_GI|COUNTRY_GL|COUNTRY_GM|COUNTRY_GN|COUNTRY_GP|COUNTRY_GQ|COUNTRY_GR|COUNTRY_GS|COUNTRY_GT|COUNTRY_GU|COUNTRY_GW|COUNTRY_GY|COUNTRY_HK|COUNTRY_HM|COUNTRY_HN|COUNTRY_HR|COUNTRY_HT|COUNTRY_HU|COUNTRY_ID|COUNTRY_IE|COUNTRY_IL|COUNTRY_IM|COUNTRY_IN|COUNTRY_IO|COUNTRY_IQ|COUNTRY_IR|COUNTRY_IS|COUNTRY_IT|COUNTRY_JE|COUNTRY_JM|COUNTRY_JO|COUNTRY_JP|COUNTRY_KE|COUNTRY_KG|COUNTRY_KH|COUNTRY_KI|COUNTRY_KM|COUNTRY_KN|COUNTRY_KP|COUNTRY_KR|COUNTRY_KW|COUNTRY_KY|COUNTRY_KZ|COUNTRY_LA|COUNTRY_LB|COUNTRY_LC|COUNTRY_LI|COUNTRY_LK|COUNTRY_LR|COUNTRY_LS|COUNTRY_LT|COUNTRY_LU|COUNTRY_LV|COUNTRY_LY|COUNTRY_MA|COUNTRY_MC|COUNTRY_MD|COUNTRY_ME|COUNTRY_MF|COUNTRY_MG|COUNTRY_MH|COUNTRY_MK|COUNTRY_ML|COUNTRY_MM|COUNTRY_MN|COUNTRY_MO|COUNTRY_MP|COUNTRY_MQ|COUNTRY_MR|COUNTRY_MS|COUNTRY_MT|COUNTRY_MU|COUNTRY_MV|COUNTRY_MW|COUNTRY_MX|COUNTRY_MY|COUNTRY_MZ|COUNTRY_NA|COUNTRY_NC|COUNTRY_NE|COUNTRY_NF|COUNTRY_NG|COUNTRY_NI|COUNTRY_NL|COUNTRY_NO|COUNTRY_NP|COUNTRY_NR|COUNTRY_NU|COUNTRY_NZ|COUNTRY_OM|COUNTRY_PA|COUNTRY_PE|COUNTRY_PF|COUNTRY_PG|COUNTRY_PH|COUNTRY_PK|COUNTRY_PL|COUNTRY_PM|COUNTRY_PN|COUNTRY_PR|COUNTRY_PS|COUNTRY_PT|COUNTRY_PW|COUNTRY_PY|COUNTRY_QA|COUNTRY_RE|COUNTRY_RO|COUNTRY_RS|COUNTRY_RU|COUNTRY_RW|COUNTRY_SA|COUNTRY_SB|COUNTRY_SC|COUNTRY_SD|COUNTRY_SE|COUNTRY_SG|COUNTRY_SH|COUNTRY_SI|COUNTRY_SJ|COUNTRY_SK|COUNTRY_SL|COUNTRY_SM|COUNTRY_SN|COUNTRY_SO|COUNTRY_SR|COUNTRY_SS|COUNTRY_ST|COUNTRY_SV|COUNTRY_SX|COUNTRY_SY|COUNTRY_SZ|COUNTRY_TC|COUNTRY_TD|COUNTRY_TF|COUNTRY_TG|COUNTRY_TH|COUNTRY_TJ|COUNTRY_TK|COUNTRY_TL|COUNTRY_TM|COUNTRY_TN|COUNTRY_TO|COUNTRY_TR|COUNTRY_TT|COUNTRY_TV|COUNTRY_TW|COUNTRY_TZ|COUNTRY_UA|COUNTRY_UG|COUNTRY_UM|COUNTRY_US|COUNTRY_UY|COUNTRY_UZ|COUNTRY_VA|COUNTRY_VC|COUNTRY_VE|COUNTRY_VG|COUNTRY_VI|COUNTRY_VN|COUNTRY_VU|COUNTRY_WF|COUNTRY_WS|COUNTRY_XK|COUNTRY_XT|COUNTRY_YE|COUNTRY_YT|COUNTRY_ZA|COUNTRY_ZM|COUNTRY_ZW] Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB
 
-<a id="deny-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#deny-list-default-action-allow) - Optional Block<br>Enable this option
+<a id="deny-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#deny-list-default-action-allow) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="deny-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#deny-list-default-action-deny) - Optional Block<br>Enable this option
+<a id="deny-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#deny-list-default-action-deny) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="deny-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#deny-list-default-action-next-policy) - Optional Block<br>Enable this option
+<a id="deny-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#deny-list-default-action-next-policy) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="deny-list-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#deny-list-ip-prefix-set) - Optional Block<br>IP Prefix Set. Addresses that are covered by the prefixes in the given ip_prefix_set<br>See [IP Prefix Set](#deny-list-ip-prefix-set) below.
+<a id="deny-list-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#deny-list-ip-prefix-set) - Optional Block<br>Addresses that are covered by the prefixes in the given ip_prefix_set<br>See [IP Prefix Set](#deny-list-ip-prefix-set) below.
 
-<a id="deny-list-prefix-list"></a>&#x2022; [`prefix_list`](#deny-list-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#deny-list-prefix-list) below.
+<a id="deny-list-prefix-list"></a>&#x2022; [`prefix_list`](#deny-list-prefix-list) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#deny-list-prefix-list) below.
 
-<a id="deny-list-tls-fingerprint-classes"></a>&#x2022; [`tls_fingerprint_classes`](#deny-list-tls-fingerprint-classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>See [TLS Fingerprints](#common-tls-fingerprints)<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
+<a id="deny-list-tls-fingerprint-classes"></a>&#x2022; [`tls_fingerprint_classes`](#deny-list-tls-fingerprint-classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>See [TLS Fingerprints](#common-tls-fingerprints)<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] List of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
-<a id="deny-list-tls-fingerprint-values"></a>&#x2022; [`tls_fingerprint_values`](#deny-list-tls-fingerprint-values) - Optional List<br>TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
+<a id="deny-list-tls-fingerprint-values"></a>&#x2022; [`tls_fingerprint_values`](#deny-list-tls-fingerprint-values) - Optional List<br>List of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
 
 #### Deny List Asn List
 
 An [`asn_list`](#deny-list-asn-list) block (within [`deny_list`](#deny-list)) supports the following:
 
-<a id="deny-list-asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#deny-list-asn-list-as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
+<a id="deny-list-asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#deny-list-asn-list-as-numbers) - Optional List<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 #### Deny List Asn Set
 
 An [`asn_set`](#deny-list-asn-set) block (within [`deny_list`](#deny-list)) supports the following:
 
-<a id="deny-list-asn-set-name"></a>&#x2022; [`name`](#deny-list-asn-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="deny-list-asn-set-name"></a>&#x2022; [`name`](#deny-list-asn-set-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="deny-list-asn-set-namespace"></a>&#x2022; [`namespace`](#deny-list-asn-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="deny-list-asn-set-namespace"></a>&#x2022; [`namespace`](#deny-list-asn-set-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="deny-list-asn-set-tenant"></a>&#x2022; [`tenant`](#deny-list-asn-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="deny-list-asn-set-tenant"></a>&#x2022; [`tenant`](#deny-list-asn-set-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Deny List IP Prefix Set
 
 An [`ip_prefix_set`](#deny-list-ip-prefix-set) block (within [`deny_list`](#deny-list)) supports the following:
 
-<a id="deny-list-ip-prefix-set-name"></a>&#x2022; [`name`](#deny-list-ip-prefix-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="deny-list-ip-prefix-set-name"></a>&#x2022; [`name`](#deny-list-ip-prefix-set-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="deny-list-ip-prefix-set-namespace"></a>&#x2022; [`namespace`](#deny-list-ip-prefix-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="deny-list-ip-prefix-set-namespace"></a>&#x2022; [`namespace`](#deny-list-ip-prefix-set-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="deny-list-ip-prefix-set-tenant"></a>&#x2022; [`tenant`](#deny-list-ip-prefix-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="deny-list-ip-prefix-set-tenant"></a>&#x2022; [`tenant`](#deny-list-ip-prefix-set-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Deny List Prefix List
 
 A [`prefix_list`](#deny-list-prefix-list) block (within [`deny_list`](#deny-list)) supports the following:
 
-<a id="deny-list-prefix-list-prefixes"></a>&#x2022; [`prefixes`](#deny-list-prefix-list-prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+<a id="deny-list-prefix-list-prefixes"></a>&#x2022; [`prefixes`](#deny-list-prefix-list-prefixes) - Optional List<br>List of IPv4 prefixes that represent an endpoint
 
 #### Rule List
 
 A [`rule_list`](#rule-list) block supports the following:
 
-<a id="rule-list-rules"></a>&#x2022; [`rules`](#rule-list-rules) - Optional Block<br>Rules. Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list<br>See [Rules](#rule-list-rules) below.
+<a id="rule-list-rules"></a>&#x2022; [`rules`](#rule-list-rules) - Optional Block<br>Define the list of rules (with an order) that should be evaluated by this service policy. Rules are evaluated from top to bottom in the list<br>See [Rules](#rule-list-rules) below.
 
 #### Rule List Rules
 
 A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports the following:
 
-<a id="rule-list-rules-metadata"></a>&#x2022; [`metadata`](#rule-list-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#rule-list-rules-metadata) below.
+<a id="rule-list-rules-metadata"></a>&#x2022; [`metadata`](#rule-list-rules-metadata) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#rule-list-rules-metadata) below.
 
-<a id="rule-list-rules-spec"></a>&#x2022; [`spec`](#rule-list-rules-spec) - Optional Block<br>Specification. Shape of service_policy_rule in the storage backend<br>See [Spec](#rule-list-rules-spec) below.
+<a id="rule-list-rules-spec"></a>&#x2022; [`spec`](#rule-list-rules-spec) - Optional Block<br>Shape of service_policy_rule in the storage backend<br>See [Spec](#rule-list-rules-spec) below.
 
 #### Rule List Rules Metadata
 
@@ -223,77 +223,77 @@ A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rul
 
 <a id="spec-118a99"></a>&#x2022; [`description_spec`](#spec-118a99) - Optional String<br>Description. Human readable description
 
-<a id="rule-list-rules-metadata-name"></a>&#x2022; [`name`](#rule-list-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="rule-list-rules-metadata-name"></a>&#x2022; [`name`](#rule-list-rules-metadata-name) - Optional String<br>Name of the message. The value of name has to follow DNS-1035 format
 
 #### Rule List Rules Spec
 
 A [`spec`](#rule-list-rules-spec) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="rule-list-rules-spec-action"></a>&#x2022; [`action`](#rule-list-rules-spec-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>[Enum: DENY|ALLOW|NEXT_POLICY] Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
+<a id="rule-list-rules-spec-action"></a>&#x2022; [`action`](#rule-list-rules-spec-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>[Enum: DENY|ALLOW|NEXT_POLICY] The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to
 
-<a id="rule-list-rules-spec-any-asn"></a>&#x2022; [`any_asn`](#rule-list-rules-spec-any-asn) - Optional Block<br>Enable this option
+<a id="rule-list-rules-spec-any-asn"></a>&#x2022; [`any_asn`](#rule-list-rules-spec-any-asn) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="rule-list-rules-spec-any-client"></a>&#x2022; [`any_client`](#rule-list-rules-spec-any-client) - Optional Block<br>Enable this option
+<a id="rule-list-rules-spec-any-client"></a>&#x2022; [`any_client`](#rule-list-rules-spec-any-client) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="rule-list-rules-spec-any-ip"></a>&#x2022; [`any_ip`](#rule-list-rules-spec-any-ip) - Optional Block<br>Enable this option
+<a id="rule-list-rules-spec-any-ip"></a>&#x2022; [`any_ip`](#rule-list-rules-spec-any-ip) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="rule-list-rules-spec-api-group-matcher"></a>&#x2022; [`api_group_matcher`](#rule-list-rules-spec-api-group-matcher) - Optional Block<br>String Matcher. A matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true<br>See [API Group Matcher](#rule-list-rules-spec-api-group-matcher) below.
+<a id="rule-list-rules-spec-api-group-matcher"></a>&#x2022; [`api_group_matcher`](#rule-list-rules-spec-api-group-matcher) - Optional Block<br>Matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true<br>See [API Group Matcher](#rule-list-rules-spec-api-group-matcher) below.
 
-<a id="rule-list-rules-spec-arg-matchers"></a>&#x2022; [`arg_matchers`](#rule-list-rules-spec-arg-matchers) - Optional Block<br>Argument Matchers. A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true<br>See [Arg Matchers](#rule-list-rules-spec-arg-matchers) below.
+<a id="rule-list-rules-spec-arg-matchers"></a>&#x2022; [`arg_matchers`](#rule-list-rules-spec-arg-matchers) - Optional Block<br>List of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name<br>See [Arg Matchers](#rule-list-rules-spec-arg-matchers) below.
 
-<a id="rule-list-rules-spec-asn-list"></a>&#x2022; [`asn_list`](#rule-list-rules-spec-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#rule-list-rules-spec-asn-list) below.
+<a id="rule-list-rules-spec-asn-list"></a>&#x2022; [`asn_list`](#rule-list-rules-spec-asn-list) - Optional Block<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#rule-list-rules-spec-asn-list) below.
 
-<a id="rule-list-rules-spec-asn-matcher"></a>&#x2022; [`asn_matcher`](#rule-list-rules-spec-asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#rule-list-rules-spec-asn-matcher) below.
+<a id="rule-list-rules-spec-asn-matcher"></a>&#x2022; [`asn_matcher`](#rule-list-rules-spec-asn-matcher) - Optional Block<br>Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#rule-list-rules-spec-asn-matcher) below.
 
-<a id="rule-list-rules-spec-body-matcher"></a>&#x2022; [`body_matcher`](#rule-list-rules-spec-body-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Body Matcher](#rule-list-rules-spec-body-matcher) below.
+<a id="rule-list-rules-spec-body-matcher"></a>&#x2022; [`body_matcher`](#rule-list-rules-spec-body-matcher) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Body Matcher](#rule-list-rules-spec-body-matcher) below.
 
-<a id="rule-list-rules-spec-bot-action"></a>&#x2022; [`bot_action`](#rule-list-rules-spec-bot-action) - Optional Block<br>Bot Action. Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing<br>See [Bot Action](#rule-list-rules-spec-bot-action) below.
+<a id="rule-list-rules-spec-bot-action"></a>&#x2022; [`bot_action`](#rule-list-rules-spec-bot-action) - Optional Block<br>Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing<br>See [Bot Action](#rule-list-rules-spec-bot-action) below.
 
-<a id="rule-list-rules-spec-client-name"></a>&#x2022; [`client_name`](#rule-list-rules-spec-client-name) - Optional String<br>Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name
+<a id="rule-list-rules-spec-client-name"></a>&#x2022; [`client_name`](#rule-list-rules-spec-client-name) - Optional String<br>The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name
 
-<a id="matcher-ded25d"></a>&#x2022; [`client_name_matcher`](#matcher-ded25d) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Client Name Matcher](#matcher-ded25d) below.
+<a id="matcher-ded25d"></a>&#x2022; [`client_name_matcher`](#matcher-ded25d) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Client Name Matcher](#matcher-ded25d) below.
 
-<a id="rule-list-rules-spec-client-selector"></a>&#x2022; [`client_selector`](#rule-list-rules-spec-client-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Client Selector](#rule-list-rules-spec-client-selector) below.
+<a id="rule-list-rules-spec-client-selector"></a>&#x2022; [`client_selector`](#rule-list-rules-spec-client-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects<br>See [Client Selector](#rule-list-rules-spec-client-selector) below.
 
-<a id="rule-list-rules-spec-cookie-matchers"></a>&#x2022; [`cookie_matchers`](#rule-list-rules-spec-cookie-matchers) - Optional Block<br>Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matchers](#rule-list-rules-spec-cookie-matchers) below.
+<a id="rule-list-rules-spec-cookie-matchers"></a>&#x2022; [`cookie_matchers`](#rule-list-rules-spec-cookie-matchers) - Optional Block<br>List of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name<br>See [Cookie Matchers](#rule-list-rules-spec-cookie-matchers) below.
 
-<a id="rule-list-rules-spec-domain-matcher"></a>&#x2022; [`domain_matcher`](#rule-list-rules-spec-domain-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Domain Matcher](#rule-list-rules-spec-domain-matcher) below.
+<a id="rule-list-rules-spec-domain-matcher"></a>&#x2022; [`domain_matcher`](#rule-list-rules-spec-domain-matcher) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Domain Matcher](#rule-list-rules-spec-domain-matcher) below.
 
-<a id="timestamp-8e9743"></a>&#x2022; [`expiration_timestamp`](#timestamp-8e9743) - Optional String<br>Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore
+<a id="timestamp-8e9743"></a>&#x2022; [`expiration_timestamp`](#timestamp-8e9743) - Optional String<br>Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore
 
-<a id="rule-list-rules-spec-headers"></a>&#x2022; [`headers`](#rule-list-rules-spec-headers) - Optional Block<br>HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true<br>See [Headers](#rule-list-rules-spec-headers) below.
+<a id="rule-list-rules-spec-headers"></a>&#x2022; [`headers`](#rule-list-rules-spec-headers) - Optional Block<br>List of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type<br>See [Headers](#rule-list-rules-spec-headers) below.
 
-<a id="rule-list-rules-spec-http-method"></a>&#x2022; [`http_method`](#rule-list-rules-spec-http-method) - Optional Block<br>HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true<br>See [HTTP Method](#rule-list-rules-spec-http-method) below.
+<a id="rule-list-rules-spec-http-method"></a>&#x2022; [`http_method`](#rule-list-rules-spec-http-method) - Optional Block<br>HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true<br>See [HTTP Method](#rule-list-rules-spec-http-method) below.
 
-<a id="rule-list-rules-spec-ip-matcher"></a>&#x2022; [`ip_matcher`](#rule-list-rules-spec-ip-matcher) - Optional Block<br>IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#rule-list-rules-spec-ip-matcher) below.
+<a id="rule-list-rules-spec-ip-matcher"></a>&#x2022; [`ip_matcher`](#rule-list-rules-spec-ip-matcher) - Optional Block<br>Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#rule-list-rules-spec-ip-matcher) below.
 
-<a id="rule-list-rules-spec-ip-prefix-list"></a>&#x2022; [`ip_prefix_list`](#rule-list-rules-spec-ip-prefix-list) - Optional Block<br>IP Prefix Match List. List of IP Prefix strings to match against<br>See [IP Prefix List](#rule-list-rules-spec-ip-prefix-list) below.
+<a id="rule-list-rules-spec-ip-prefix-list"></a>&#x2022; [`ip_prefix_list`](#rule-list-rules-spec-ip-prefix-list) - Optional Block<br>List of IP Prefix strings to match against<br>See [IP Prefix List](#rule-list-rules-spec-ip-prefix-list) below.
 
 <a id="list-f2b1f3"></a>&#x2022; [`ip_threat_category_list`](#list-f2b1f3) - Optional Block<br>IP Threat Category List Type. List of IP threat categories<br>See [IP Threat Category List](#list-f2b1f3) below.
 
-<a id="fingerprint-dfb868"></a>&#x2022; [`ja4_tls_fingerprint`](#fingerprint-dfb868) - Optional Block<br>JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length<br>See [Ja4 TLS Fingerprint](#fingerprint-dfb868) below.
+<a id="fingerprint-dfb868"></a>&#x2022; [`ja4_tls_fingerprint`](#fingerprint-dfb868) - Optional Block<br>Extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length<br>See [Ja4 TLS Fingerprint](#fingerprint-dfb868) below.
 
-<a id="rule-list-rules-spec-jwt-claims"></a>&#x2022; [`jwt_claims`](#rule-list-rules-spec-jwt-claims) - Optional Block<br>JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true<br>See [JWT Claims](#rule-list-rules-spec-jwt-claims) below.
+<a id="rule-list-rules-spec-jwt-claims"></a>&#x2022; [`jwt_claims`](#rule-list-rules-spec-jwt-claims) - Optional Block<br>List of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings<br>See [JWT Claims](#rule-list-rules-spec-jwt-claims) below.
 
-<a id="rule-list-rules-spec-label-matcher"></a>&#x2022; [`label_matcher`](#rule-list-rules-spec-label-matcher) - Optional Block<br>Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name<br>See [Label Matcher](#rule-list-rules-spec-label-matcher) below.
+<a id="rule-list-rules-spec-label-matcher"></a>&#x2022; [`label_matcher`](#rule-list-rules-spec-label-matcher) - Optional Block<br>Label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name<br>See [Label Matcher](#rule-list-rules-spec-label-matcher) below.
 
-<a id="rule-list-rules-spec-mum-action"></a>&#x2022; [`mum_action`](#rule-list-rules-spec-mum-action) - Optional Block<br>Select Modification Action. Modify behavior for a matching request. The modification could be to entirely skip processing<br>See [Mum Action](#rule-list-rules-spec-mum-action) below.
+<a id="rule-list-rules-spec-mum-action"></a>&#x2022; [`mum_action`](#rule-list-rules-spec-mum-action) - Optional Block<br>Modify behavior for a matching request. The modification could be to entirely skip processing<br>See [Mum Action](#rule-list-rules-spec-mum-action) below.
 
-<a id="rule-list-rules-spec-path"></a>&#x2022; [`path`](#rule-list-rules-spec-path) - Optional Block<br>Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions<br>See [Path](#rule-list-rules-spec-path) below.
+<a id="rule-list-rules-spec-path"></a>&#x2022; [`path`](#rule-list-rules-spec-path) - Optional Block<br>Path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions<br>See [Path](#rule-list-rules-spec-path) below.
 
-<a id="rule-list-rules-spec-port-matcher"></a>&#x2022; [`port_matcher`](#rule-list-rules-spec-port-matcher) - Optional Block<br>Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true<br>See [Port Matcher](#rule-list-rules-spec-port-matcher) below.
+<a id="rule-list-rules-spec-port-matcher"></a>&#x2022; [`port_matcher`](#rule-list-rules-spec-port-matcher) - Optional Block<br>Port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true<br>See [Port Matcher](#rule-list-rules-spec-port-matcher) below.
 
-<a id="rule-list-rules-spec-query-params"></a>&#x2022; [`query_params`](#rule-list-rules-spec-query-params) - Optional Block<br>HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true<br>See [Query Params](#rule-list-rules-spec-query-params) below.
+<a id="rule-list-rules-spec-query-params"></a>&#x2022; [`query_params`](#rule-list-rules-spec-query-params) - Optional Block<br>List of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query<br>See [Query Params](#rule-list-rules-spec-query-params) below.
 
 <a id="constraints-a447da"></a>&#x2022; [`request_constraints`](#constraints-a447da) - Optional Block<br>Request Constraints<br>See [Request Constraints](#constraints-a447da) below.
 
 <a id="rule-list-rules-spec-segment-policy"></a>&#x2022; [`segment_policy`](#rule-list-rules-spec-segment-policy) - Optional Block<br>X-displayName: 'Configure Segments' Configure source and destination segment for policy<br>See [Segment Policy](#rule-list-rules-spec-segment-policy) below.
 
-<a id="matcher-95ee34"></a>&#x2022; [`tls_fingerprint_matcher`](#matcher-95ee34) - Optional Block<br>TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values<br>See [TLS Fingerprint Matcher](#matcher-95ee34) below.
+<a id="matcher-95ee34"></a>&#x2022; [`tls_fingerprint_matcher`](#matcher-95ee34) - Optional Block<br>TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied<br>See [TLS Fingerprint Matcher](#matcher-95ee34) below.
 
-<a id="matcher-744036"></a>&#x2022; [`user_identity_matcher`](#matcher-744036) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [User Identity Matcher](#matcher-744036) below.
+<a id="matcher-744036"></a>&#x2022; [`user_identity_matcher`](#matcher-744036) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [User Identity Matcher](#matcher-744036) below.
 
-<a id="rule-list-rules-spec-waf-action"></a>&#x2022; [`waf_action`](#rule-list-rules-spec-waf-action) - Optional Block<br>App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings<br>See [WAF Action](#rule-list-rules-spec-waf-action) below.
+<a id="rule-list-rules-spec-waf-action"></a>&#x2022; [`waf_action`](#rule-list-rules-spec-waf-action) - Optional Block<br>Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings<br>See [WAF Action](#rule-list-rules-spec-waf-action) below.
 
 #### Rule List Rules Spec API Group Matcher
 
@@ -301,43 +301,43 @@ An [`api_group_matcher`](#rule-list-rules-spec-api-group-matcher) block (within 
 
 <a id="matcher-2a47df"></a>&#x2022; [`invert_matcher`](#matcher-2a47df) - Optional Bool<br>Invert String Matcher. Invert the match result
 
-<a id="match-614318"></a>&#x2022; [`match`](#match-614318) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="match-614318"></a>&#x2022; [`match`](#match-614318) - Optional List<br>List of exact values to match the input against
 
 #### Rule List Rules Spec Arg Matchers
 
 An [`arg_matchers`](#rule-list-rules-spec-arg-matchers) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="present-2c642d"></a>&#x2022; [`check_not_present`](#present-2c642d) - Optional Block<br>Enable this option
+<a id="present-2c642d"></a>&#x2022; [`check_not_present`](#present-2c642d) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="present-643cdb"></a>&#x2022; [`check_present`](#present-643cdb) - Optional Block<br>Enable this option
+<a id="present-643cdb"></a>&#x2022; [`check_present`](#present-643cdb) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="matcher-0461ac"></a>&#x2022; [`invert_matcher`](#matcher-0461ac) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
 
-<a id="rule-list-rules-spec-arg-matchers-item"></a>&#x2022; [`item`](#rule-list-rules-spec-arg-matchers-item) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#rule-list-rules-spec-arg-matchers-item) below.
+<a id="rule-list-rules-spec-arg-matchers-item"></a>&#x2022; [`item`](#rule-list-rules-spec-arg-matchers-item) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#rule-list-rules-spec-arg-matchers-item) below.
 
-<a id="rule-list-rules-spec-arg-matchers-name"></a>&#x2022; [`name`](#rule-list-rules-spec-arg-matchers-name) - Optional String<br>Argument Name. A case-sensitive JSON path in the HTTP request body
+<a id="rule-list-rules-spec-arg-matchers-name"></a>&#x2022; [`name`](#rule-list-rules-spec-arg-matchers-name) - Optional String<br>Case-sensitive JSON path in the HTTP request body
 
 #### Rule List Rules Spec Arg Matchers Item
 
 An [`item`](#rule-list-rules-spec-arg-matchers-item) block (within [`rule_list.rules.spec.arg_matchers`](#rule-list-rules-spec-arg-matchers)) supports the following:
 
-<a id="values-c7a648"></a>&#x2022; [`exact_values`](#values-c7a648) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="values-c7a648"></a>&#x2022; [`exact_values`](#values-c7a648) - Optional List<br>List of exact values to match the input against
 
-<a id="values-8f2f21"></a>&#x2022; [`regex_values`](#values-8f2f21) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="values-8f2f21"></a>&#x2022; [`regex_values`](#values-8f2f21) - Optional List<br>List of regular expressions to match the input against
 
-<a id="transformers-0078cd"></a>&#x2022; [`transformers`](#transformers-0078cd) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-0078cd"></a>&#x2022; [`transformers`](#transformers-0078cd) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Asn List
 
 An [`asn_list`](#rule-list-rules-spec-asn-list) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="numbers-bc48fc"></a>&#x2022; [`as_numbers`](#numbers-bc48fc) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
+<a id="numbers-bc48fc"></a>&#x2022; [`as_numbers`](#numbers-bc48fc) - Optional List<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 #### Rule List Rules Spec Asn Matcher
 
 An [`asn_matcher`](#rule-list-rules-spec-asn-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="sets-0b3475"></a>&#x2022; [`asn_sets`](#sets-0b3475) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#sets-0b3475) below.
+<a id="sets-0b3475"></a>&#x2022; [`asn_sets`](#sets-0b3475) - Optional Block<br>List of references to bgp_asn_set objects<br>See [Asn Sets](#sets-0b3475) below.
 
 #### Rule List Rules Spec Asn Matcher Asn Sets
 
@@ -347,93 +347,93 @@ An [`asn_matcher`](#rule-list-rules-spec-asn-matcher) block (within [`rule_list.
 
 A [`body_matcher`](#rule-list-rules-spec-body-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="values-e56a42"></a>&#x2022; [`exact_values`](#values-e56a42) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="values-e56a42"></a>&#x2022; [`exact_values`](#values-e56a42) - Optional List<br>List of exact values to match the input against
 
-<a id="values-156f80"></a>&#x2022; [`regex_values`](#values-156f80) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="values-156f80"></a>&#x2022; [`regex_values`](#values-156f80) - Optional List<br>List of regular expressions to match the input against
 
-<a id="transformers-8d4f75"></a>&#x2022; [`transformers`](#transformers-8d4f75) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-8d4f75"></a>&#x2022; [`transformers`](#transformers-8d4f75) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Bot Action
 
 A [`bot_action`](#rule-list-rules-spec-bot-action) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="processing-583231"></a>&#x2022; [`bot_skip_processing`](#processing-583231) - Optional Block<br>Enable this option
+<a id="processing-583231"></a>&#x2022; [`bot_skip_processing`](#processing-583231) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="rule-list-rules-spec-bot-action-none"></a>&#x2022; [`none`](#rule-list-rules-spec-bot-action-none) - Optional Block<br>Enable this option
+<a id="rule-list-rules-spec-bot-action-none"></a>&#x2022; [`none`](#rule-list-rules-spec-bot-action-none) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Rule List Rules Spec Client Name Matcher
 
 A [`client_name_matcher`](#matcher-ded25d) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="values-835b8f"></a>&#x2022; [`exact_values`](#values-835b8f) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="values-835b8f"></a>&#x2022; [`exact_values`](#values-835b8f) - Optional List<br>List of exact values to match the input against
 
-<a id="values-4b3791"></a>&#x2022; [`regex_values`](#values-4b3791) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="values-4b3791"></a>&#x2022; [`regex_values`](#values-4b3791) - Optional List<br>List of regular expressions to match the input against
 
-<a id="transformers-fd5b88"></a>&#x2022; [`transformers`](#transformers-fd5b88) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-fd5b88"></a>&#x2022; [`transformers`](#transformers-fd5b88) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Client Selector
 
 A [`client_selector`](#rule-list-rules-spec-client-selector) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="expressions-248d45"></a>&#x2022; [`expressions`](#expressions-248d45) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
+<a id="expressions-248d45"></a>&#x2022; [`expressions`](#expressions-248d45) - Optional List<br>Expressions contains the Kubernetes style label expression for selections
 
 #### Rule List Rules Spec Cookie Matchers
 
 A [`cookie_matchers`](#rule-list-rules-spec-cookie-matchers) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="present-485b0a"></a>&#x2022; [`check_not_present`](#present-485b0a) - Optional Block<br>Enable this option
+<a id="present-485b0a"></a>&#x2022; [`check_not_present`](#present-485b0a) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="present-459192"></a>&#x2022; [`check_present`](#present-459192) - Optional Block<br>Enable this option
+<a id="present-459192"></a>&#x2022; [`check_present`](#present-459192) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="matcher-c32a99"></a>&#x2022; [`invert_matcher`](#matcher-c32a99) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
 
-<a id="item-ab8ab4"></a>&#x2022; [`item`](#item-ab8ab4) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-ab8ab4) below.
+<a id="item-ab8ab4"></a>&#x2022; [`item`](#item-ab8ab4) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-ab8ab4) below.
 
-<a id="name-6a6bd0"></a>&#x2022; [`name`](#name-6a6bd0) - Optional String<br>Cookie Name. A case-sensitive cookie name
+<a id="name-6a6bd0"></a>&#x2022; [`name`](#name-6a6bd0) - Optional String<br>Case-sensitive cookie name
 
 #### Rule List Rules Spec Cookie Matchers Item
 
 An [`item`](#item-ab8ab4) block (within [`rule_list.rules.spec.cookie_matchers`](#rule-list-rules-spec-cookie-matchers)) supports the following:
 
-<a id="values-c48c4e"></a>&#x2022; [`exact_values`](#values-c48c4e) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="values-c48c4e"></a>&#x2022; [`exact_values`](#values-c48c4e) - Optional List<br>List of exact values to match the input against
 
-<a id="values-8e4fe5"></a>&#x2022; [`regex_values`](#values-8e4fe5) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="values-8e4fe5"></a>&#x2022; [`regex_values`](#values-8e4fe5) - Optional List<br>List of regular expressions to match the input against
 
-<a id="transformers-c061db"></a>&#x2022; [`transformers`](#transformers-c061db) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-c061db"></a>&#x2022; [`transformers`](#transformers-c061db) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Domain Matcher
 
 A [`domain_matcher`](#rule-list-rules-spec-domain-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="values-4e4043"></a>&#x2022; [`exact_values`](#values-4e4043) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="values-4e4043"></a>&#x2022; [`exact_values`](#values-4e4043) - Optional List<br>List of exact values to match the input against
 
-<a id="values-e318f7"></a>&#x2022; [`regex_values`](#values-e318f7) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="values-e318f7"></a>&#x2022; [`regex_values`](#values-e318f7) - Optional List<br>List of regular expressions to match the input against
 
-<a id="transformers-f69aff"></a>&#x2022; [`transformers`](#transformers-f69aff) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-f69aff"></a>&#x2022; [`transformers`](#transformers-f69aff) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Headers
 
 A [`headers`](#rule-list-rules-spec-headers) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="present-652e97"></a>&#x2022; [`check_not_present`](#present-652e97) - Optional Block<br>Enable this option
+<a id="present-652e97"></a>&#x2022; [`check_not_present`](#present-652e97) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="present-fe2629"></a>&#x2022; [`check_present`](#present-fe2629) - Optional Block<br>Enable this option
+<a id="present-fe2629"></a>&#x2022; [`check_present`](#present-fe2629) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="matcher-0d0548"></a>&#x2022; [`invert_matcher`](#matcher-0d0548) - Optional Bool<br>Invert Header Matcher. Invert the match result
 
-<a id="rule-list-rules-spec-headers-item"></a>&#x2022; [`item`](#rule-list-rules-spec-headers-item) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#rule-list-rules-spec-headers-item) below.
+<a id="rule-list-rules-spec-headers-item"></a>&#x2022; [`item`](#rule-list-rules-spec-headers-item) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#rule-list-rules-spec-headers-item) below.
 
-<a id="rule-list-rules-spec-headers-name"></a>&#x2022; [`name`](#rule-list-rules-spec-headers-name) - Optional String<br>Header Name. A case-insensitive HTTP header name
+<a id="rule-list-rules-spec-headers-name"></a>&#x2022; [`name`](#rule-list-rules-spec-headers-name) - Optional String<br>Case-insensitive HTTP header name
 
 #### Rule List Rules Spec Headers Item
 
 An [`item`](#rule-list-rules-spec-headers-item) block (within [`rule_list.rules.spec.headers`](#rule-list-rules-spec-headers)) supports the following:
 
-<a id="values-781f57"></a>&#x2022; [`exact_values`](#values-781f57) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="values-781f57"></a>&#x2022; [`exact_values`](#values-781f57) - Optional List<br>List of exact values to match the input against
 
-<a id="values-0db8b4"></a>&#x2022; [`regex_values`](#values-0db8b4) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="values-0db8b4"></a>&#x2022; [`regex_values`](#values-0db8b4) - Optional List<br>List of regular expressions to match the input against
 
-<a id="transformers-a3008a"></a>&#x2022; [`transformers`](#transformers-a3008a) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-a3008a"></a>&#x2022; [`transformers`](#transformers-a3008a) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec HTTP Method
 
@@ -441,7 +441,7 @@ A [`http_method`](#rule-list-rules-spec-http-method) block (within [`rule_list.r
 
 <a id="matcher-ea16cd"></a>&#x2022; [`invert_matcher`](#matcher-ea16cd) - Optional Bool<br>Invert Method Matcher. Invert the match result
 
-<a id="methods-7419c4"></a>&#x2022; [`methods`](#methods-7419c4) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> Method List. List of methods values to match against
+<a id="methods-7419c4"></a>&#x2022; [`methods`](#methods-7419c4) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> List of methods values to match against
 
 #### Rule List Rules Spec IP Matcher
 
@@ -449,7 +449,7 @@ An [`ip_matcher`](#rule-list-rules-spec-ip-matcher) block (within [`rule_list.ru
 
 <a id="matcher-fb6425"></a>&#x2022; [`invert_matcher`](#matcher-fb6425) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
-<a id="sets-e4318a"></a>&#x2022; [`prefix_sets`](#sets-e4318a) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#sets-e4318a) below.
+<a id="sets-e4318a"></a>&#x2022; [`prefix_sets`](#sets-e4318a) - Optional Block<br>List of references to ip_prefix_set objects<br>See [Prefix Sets](#sets-e4318a) below.
 
 #### Rule List Rules Spec IP Matcher Prefix Sets
 
@@ -471,19 +471,19 @@ An [`ip_prefix_list`](#rule-list-rules-spec-ip-prefix-list) block (within [`rule
 
 A [`ja4_tls_fingerprint`](#fingerprint-dfb868) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="values-1d5d4e"></a>&#x2022; [`exact_values`](#values-1d5d4e) - Optional List<br>Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against
+<a id="values-1d5d4e"></a>&#x2022; [`exact_values`](#values-1d5d4e) - Optional List<br>List of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against
 
 #### Rule List Rules Spec JWT Claims
 
 A [`jwt_claims`](#rule-list-rules-spec-jwt-claims) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="present-2d6113"></a>&#x2022; [`check_not_present`](#present-2d6113) - Optional Block<br>Enable this option
+<a id="present-2d6113"></a>&#x2022; [`check_not_present`](#present-2d6113) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="present-4eb640"></a>&#x2022; [`check_present`](#present-4eb640) - Optional Block<br>Enable this option
+<a id="present-4eb640"></a>&#x2022; [`check_present`](#present-4eb640) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="matcher-03ed8d"></a>&#x2022; [`invert_matcher`](#matcher-03ed8d) - Optional Bool<br>Invert Matcher. Invert the match result
 
-<a id="rule-list-rules-spec-jwt-claims-item"></a>&#x2022; [`item`](#rule-list-rules-spec-jwt-claims-item) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#rule-list-rules-spec-jwt-claims-item) below.
+<a id="rule-list-rules-spec-jwt-claims-item"></a>&#x2022; [`item`](#rule-list-rules-spec-jwt-claims-item) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#rule-list-rules-spec-jwt-claims-item) below.
 
 <a id="rule-list-rules-spec-jwt-claims-name"></a>&#x2022; [`name`](#rule-list-rules-spec-jwt-claims-name) - Optional String<br>JWT Claim Name. JWT claim name
 
@@ -491,41 +491,41 @@ A [`jwt_claims`](#rule-list-rules-spec-jwt-claims) block (within [`rule_list.rul
 
 An [`item`](#rule-list-rules-spec-jwt-claims-item) block (within [`rule_list.rules.spec.jwt_claims`](#rule-list-rules-spec-jwt-claims)) supports the following:
 
-<a id="values-5cab64"></a>&#x2022; [`exact_values`](#values-5cab64) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="values-5cab64"></a>&#x2022; [`exact_values`](#values-5cab64) - Optional List<br>List of exact values to match the input against
 
-<a id="values-abf135"></a>&#x2022; [`regex_values`](#values-abf135) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="values-abf135"></a>&#x2022; [`regex_values`](#values-abf135) - Optional List<br>List of regular expressions to match the input against
 
-<a id="transformers-365d8a"></a>&#x2022; [`transformers`](#transformers-365d8a) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-365d8a"></a>&#x2022; [`transformers`](#transformers-365d8a) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Label Matcher
 
 A [`label_matcher`](#rule-list-rules-spec-label-matcher) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="rule-list-rules-spec-label-matcher-keys"></a>&#x2022; [`keys`](#rule-list-rules-spec-label-matcher-keys) - Optional List<br>Keys. The list of label key names that have to match
+<a id="rule-list-rules-spec-label-matcher-keys"></a>&#x2022; [`keys`](#rule-list-rules-spec-label-matcher-keys) - Optional List<br>The list of label key names that have to match
 
 #### Rule List Rules Spec Mum Action
 
 A [`mum_action`](#rule-list-rules-spec-mum-action) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="rule-list-rules-spec-mum-action-default"></a>&#x2022; [`default`](#rule-list-rules-spec-mum-action-default) - Optional Block<br>Enable this option
+<a id="rule-list-rules-spec-mum-action-default"></a>&#x2022; [`default`](#rule-list-rules-spec-mum-action-default) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="processing-d7aff9"></a>&#x2022; [`skip_processing`](#processing-d7aff9) - Optional Block<br>Enable this option
+<a id="processing-d7aff9"></a>&#x2022; [`skip_processing`](#processing-d7aff9) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Rule List Rules Spec Path
 
 A [`path`](#rule-list-rules-spec-path) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="rule-list-rules-spec-path-exact-values"></a>&#x2022; [`exact_values`](#rule-list-rules-spec-path-exact-values) - Optional List<br>Exact Values. A list of exact path values to match the input HTTP path against
+<a id="rule-list-rules-spec-path-exact-values"></a>&#x2022; [`exact_values`](#rule-list-rules-spec-path-exact-values) - Optional List<br>List of exact path values to match the input HTTP path against
 
 <a id="matcher-895246"></a>&#x2022; [`invert_matcher`](#matcher-895246) - Optional Bool<br>Invert Path Matcher. Invert the match result
 
-<a id="rule-list-rules-spec-path-prefix-values"></a>&#x2022; [`prefix_values`](#rule-list-rules-spec-path-prefix-values) - Optional List<br>Prefix Values. A list of path prefix values to match the input HTTP path against
+<a id="rule-list-rules-spec-path-prefix-values"></a>&#x2022; [`prefix_values`](#rule-list-rules-spec-path-prefix-values) - Optional List<br>List of path prefix values to match the input HTTP path against
 
-<a id="rule-list-rules-spec-path-regex-values"></a>&#x2022; [`regex_values`](#rule-list-rules-spec-path-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input HTTP path against
+<a id="rule-list-rules-spec-path-regex-values"></a>&#x2022; [`regex_values`](#rule-list-rules-spec-path-regex-values) - Optional List<br>List of regular expressions to match the input HTTP path against
 
-<a id="rule-list-rules-spec-path-suffix-values"></a>&#x2022; [`suffix_values`](#rule-list-rules-spec-path-suffix-values) - Optional List<br>Suffix Values. A list of path suffix values to match the input HTTP path against
+<a id="rule-list-rules-spec-path-suffix-values"></a>&#x2022; [`suffix_values`](#rule-list-rules-spec-path-suffix-values) - Optional List<br>List of path suffix values to match the input HTTP path against
 
-<a id="rule-list-rules-spec-path-transformers"></a>&#x2022; [`transformers`](#rule-list-rules-spec-path-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="rule-list-rules-spec-path-transformers"></a>&#x2022; [`transformers`](#rule-list-rules-spec-path-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Port Matcher
 
@@ -533,31 +533,31 @@ A [`port_matcher`](#rule-list-rules-spec-port-matcher) block (within [`rule_list
 
 <a id="matcher-aee96e"></a>&#x2022; [`invert_matcher`](#matcher-aee96e) - Optional Bool<br>Invert Port Matcher. Invert the match result
 
-<a id="rule-list-rules-spec-port-matcher-ports"></a>&#x2022; [`ports`](#rule-list-rules-spec-port-matcher-ports) - Optional List<br>Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range
+<a id="rule-list-rules-spec-port-matcher-ports"></a>&#x2022; [`ports`](#rule-list-rules-spec-port-matcher-ports) - Optional List<br>List of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range
 
 #### Rule List Rules Spec Query Params
 
 A [`query_params`](#rule-list-rules-spec-query-params) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="present-d92889"></a>&#x2022; [`check_not_present`](#present-d92889) - Optional Block<br>Enable this option
+<a id="present-d92889"></a>&#x2022; [`check_not_present`](#present-d92889) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="present-bd865e"></a>&#x2022; [`check_present`](#present-bd865e) - Optional Block<br>Enable this option
+<a id="present-bd865e"></a>&#x2022; [`check_present`](#present-bd865e) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="matcher-ea3b3a"></a>&#x2022; [`invert_matcher`](#matcher-ea3b3a) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
 
-<a id="rule-list-rules-spec-query-params-item"></a>&#x2022; [`item`](#rule-list-rules-spec-query-params-item) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#rule-list-rules-spec-query-params-item) below.
+<a id="rule-list-rules-spec-query-params-item"></a>&#x2022; [`item`](#rule-list-rules-spec-query-params-item) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#rule-list-rules-spec-query-params-item) below.
 
-<a id="rule-list-rules-spec-query-params-key"></a>&#x2022; [`key`](#rule-list-rules-spec-query-params-key) - Optional String<br>Query Parameter Name. A case-sensitive HTTP query parameter name
+<a id="rule-list-rules-spec-query-params-key"></a>&#x2022; [`key`](#rule-list-rules-spec-query-params-key) - Optional String<br>Case-sensitive HTTP query parameter name
 
 #### Rule List Rules Spec Query Params Item
 
 An [`item`](#rule-list-rules-spec-query-params-item) block (within [`rule_list.rules.spec.query_params`](#rule-list-rules-spec-query-params)) supports the following:
 
-<a id="values-0c3add"></a>&#x2022; [`exact_values`](#values-0c3add) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="values-0c3add"></a>&#x2022; [`exact_values`](#values-0c3add) - Optional List<br>List of exact values to match the input against
 
-<a id="values-b50c1e"></a>&#x2022; [`regex_values`](#values-b50c1e) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="values-b50c1e"></a>&#x2022; [`regex_values`](#values-b50c1e) - Optional List<br>List of regular expressions to match the input against
 
-<a id="transformers-499060"></a>&#x2022; [`transformers`](#transformers-499060) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-499060"></a>&#x2022; [`transformers`](#transformers-499060) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Request Constraints
 
@@ -565,67 +565,67 @@ A [`request_constraints`](#constraints-a447da) block (within [`rule_list.rules.s
 
 <a id="exceeds-88210d"></a>&#x2022; [`max_cookie_count_exceeds`](#exceeds-88210d) - Optional Number<br>Match on the Count for all Cookies that exceed this value
 
-<a id="none-3e70e3"></a>&#x2022; [`max_cookie_count_none`](#none-3e70e3) - Optional Block<br>Enable this option
+<a id="none-3e70e3"></a>&#x2022; [`max_cookie_count_none`](#none-3e70e3) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-a151df"></a>&#x2022; [`max_cookie_key_size_exceeds`](#exceeds-a151df) - Optional Number<br>Match on the Name Size per Cookie that exceed this value
+<a id="exceeds-a151df"></a>&#x2022; [`max_cookie_key_size_exceeds`](#exceeds-a151df) - Optional Number
 
-<a id="none-9984be"></a>&#x2022; [`max_cookie_key_size_none`](#none-9984be) - Optional Block<br>Enable this option
+<a id="none-9984be"></a>&#x2022; [`max_cookie_key_size_none`](#none-9984be) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-8f6fd2"></a>&#x2022; [`max_cookie_value_size_exceeds`](#exceeds-8f6fd2) - Optional Number<br>Match on the Value Size per Cookie that exceed this value
+<a id="exceeds-8f6fd2"></a>&#x2022; [`max_cookie_value_size_exceeds`](#exceeds-8f6fd2) - Optional Number
 
-<a id="none-7f78ad"></a>&#x2022; [`max_cookie_value_size_none`](#none-7f78ad) - Optional Block<br>Enable this option
+<a id="none-7f78ad"></a>&#x2022; [`max_cookie_value_size_none`](#none-7f78ad) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="exceeds-5dc80b"></a>&#x2022; [`max_header_count_exceeds`](#exceeds-5dc80b) - Optional Number<br>Match on the Count for all Headers that exceed this value
 
-<a id="none-162eb4"></a>&#x2022; [`max_header_count_none`](#none-162eb4) - Optional Block<br>Enable this option
+<a id="none-162eb4"></a>&#x2022; [`max_header_count_none`](#none-162eb4) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-e960c1"></a>&#x2022; [`max_header_key_size_exceeds`](#exceeds-e960c1) - Optional Number<br>Match on the Name Size per Header that exceed this value
+<a id="exceeds-e960c1"></a>&#x2022; [`max_header_key_size_exceeds`](#exceeds-e960c1) - Optional Number
 
-<a id="none-b86486"></a>&#x2022; [`max_header_key_size_none`](#none-b86486) - Optional Block<br>Enable this option
+<a id="none-b86486"></a>&#x2022; [`max_header_key_size_none`](#none-b86486) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-2f6bfd"></a>&#x2022; [`max_header_value_size_exceeds`](#exceeds-2f6bfd) - Optional Number<br>Match on the Value Size per Header that exceed this value
+<a id="exceeds-2f6bfd"></a>&#x2022; [`max_header_value_size_exceeds`](#exceeds-2f6bfd) - Optional Number
 
-<a id="none-e5927d"></a>&#x2022; [`max_header_value_size_none`](#none-e5927d) - Optional Block<br>Enable this option
+<a id="none-e5927d"></a>&#x2022; [`max_header_value_size_none`](#none-e5927d) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-c0dcef"></a>&#x2022; [`max_parameter_count_exceeds`](#exceeds-c0dcef) - Optional Number<br>Match on the Parameter Count that exceed this value
+<a id="exceeds-c0dcef"></a>&#x2022; [`max_parameter_count_exceeds`](#exceeds-c0dcef) - Optional Number
 
-<a id="none-6a4f57"></a>&#x2022; [`max_parameter_count_none`](#none-6a4f57) - Optional Block<br>Enable this option
+<a id="none-6a4f57"></a>&#x2022; [`max_parameter_count_none`](#none-6a4f57) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-878a8c"></a>&#x2022; [`max_parameter_name_size_exceeds`](#exceeds-878a8c) - Optional Number<br>Match on the Parameter Name Size that exceed this value
+<a id="exceeds-878a8c"></a>&#x2022; [`max_parameter_name_size_exceeds`](#exceeds-878a8c) - Optional Number
 
-<a id="none-ed3f5c"></a>&#x2022; [`max_parameter_name_size_none`](#none-ed3f5c) - Optional Block<br>Enable this option
+<a id="none-ed3f5c"></a>&#x2022; [`max_parameter_name_size_none`](#none-ed3f5c) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-2753a2"></a>&#x2022; [`max_parameter_value_size_exceeds`](#exceeds-2753a2) - Optional Number<br>Match on the Parameter Value Size that exceed this value
+<a id="exceeds-2753a2"></a>&#x2022; [`max_parameter_value_size_exceeds`](#exceeds-2753a2) - Optional Number
 
-<a id="none-aa518b"></a>&#x2022; [`max_parameter_value_size_none`](#none-aa518b) - Optional Block<br>Enable this option
+<a id="none-aa518b"></a>&#x2022; [`max_parameter_value_size_none`](#none-aa518b) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="exceeds-09d792"></a>&#x2022; [`max_query_size_exceeds`](#exceeds-09d792) - Optional Number<br>Match on the URL Query Size that exceed this value
 
-<a id="none-420f9c"></a>&#x2022; [`max_query_size_none`](#none-420f9c) - Optional Block<br>Enable this option
+<a id="none-420f9c"></a>&#x2022; [`max_query_size_none`](#none-420f9c) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-e9386b"></a>&#x2022; [`max_request_line_size_exceeds`](#exceeds-e9386b) - Optional Number<br>Match on the Request Line Size that exceed this value
+<a id="exceeds-e9386b"></a>&#x2022; [`max_request_line_size_exceeds`](#exceeds-e9386b) - Optional Number
 
-<a id="none-c1b4c5"></a>&#x2022; [`max_request_line_size_none`](#none-c1b4c5) - Optional Block<br>Enable this option
+<a id="none-c1b4c5"></a>&#x2022; [`max_request_line_size_none`](#none-c1b4c5) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="exceeds-c9584b"></a>&#x2022; [`max_request_size_exceeds`](#exceeds-c9584b) - Optional Number<br>Match on the Request Size that exceed this value
 
-<a id="none-a7d587"></a>&#x2022; [`max_request_size_none`](#none-a7d587) - Optional Block<br>Enable this option
+<a id="none-a7d587"></a>&#x2022; [`max_request_size_none`](#none-a7d587) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="exceeds-36b3ef"></a>&#x2022; [`max_url_size_exceeds`](#exceeds-36b3ef) - Optional Number<br>Match on the URL Size that exceed this value
 
-<a id="none-ce96c1"></a>&#x2022; [`max_url_size_none`](#none-ce96c1) - Optional Block<br>Enable this option
+<a id="none-ce96c1"></a>&#x2022; [`max_url_size_none`](#none-ce96c1) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Rule List Rules Spec Segment Policy
 
 A [`segment_policy`](#rule-list-rules-spec-segment-policy) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="any-9c58b4"></a>&#x2022; [`dst_any`](#any-9c58b4) - Optional Block<br>Enable this option
+<a id="any-9c58b4"></a>&#x2022; [`dst_any`](#any-9c58b4) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="segments-478f34"></a>&#x2022; [`dst_segments`](#segments-478f34) - Optional Block<br>X-displayName: 'Segment List' List of references to Segments<br>See [Dst Segments](#segments-478f34) below.
 
-<a id="segment-431a3a"></a>&#x2022; [`intra_segment`](#segment-431a3a) - Optional Block<br>Enable this option
+<a id="segment-431a3a"></a>&#x2022; [`intra_segment`](#segment-431a3a) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="any-f3d551"></a>&#x2022; [`src_any`](#any-f3d551) - Optional Block<br>Enable this option
+<a id="any-f3d551"></a>&#x2022; [`src_any`](#any-f3d551) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="segments-191ada"></a>&#x2022; [`src_segments`](#segments-191ada) - Optional Block<br>X-displayName: 'Segment List' List of references to Segments<br>See [Src Segments](#segments-191ada) below.
 
@@ -649,29 +649,29 @@ A [`segment_policy`](#rule-list-rules-spec-segment-policy) block (within [`rule_
 
 A [`tls_fingerprint_matcher`](#matcher-95ee34) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="classes-8d3695"></a>&#x2022; [`classes`](#classes-8d3695) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>See [TLS Fingerprints](#common-tls-fingerprints)<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
+<a id="classes-8d3695"></a>&#x2022; [`classes`](#classes-8d3695) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>See [TLS Fingerprints](#common-tls-fingerprints)<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] List of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
-<a id="values-e523b3"></a>&#x2022; [`exact_values`](#values-e523b3) - Optional List<br>Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
+<a id="values-e523b3"></a>&#x2022; [`exact_values`](#values-e523b3) - Optional List<br>List of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
 
-<a id="values-8723e5"></a>&#x2022; [`excluded_values`](#values-8723e5) - Optional List<br>Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher
+<a id="values-8723e5"></a>&#x2022; [`excluded_values`](#values-8723e5) - Optional List<br>List of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher
 
 #### Rule List Rules Spec User Identity Matcher
 
 An [`user_identity_matcher`](#matcher-744036) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="values-b8a285"></a>&#x2022; [`exact_values`](#values-b8a285) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="values-b8a285"></a>&#x2022; [`exact_values`](#values-b8a285) - Optional List<br>List of exact values to match the input against
 
-<a id="values-f0a0b2"></a>&#x2022; [`regex_values`](#values-f0a0b2) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="values-f0a0b2"></a>&#x2022; [`regex_values`](#values-f0a0b2) - Optional List<br>List of regular expressions to match the input against
 
 #### Rule List Rules Spec WAF Action
 
 A [`waf_action`](#rule-list-rules-spec-waf-action) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="control-4fbf89"></a>&#x2022; [`app_firewall_detection_control`](#control-4fbf89) - Optional Block<br>App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#control-4fbf89) below.
+<a id="control-4fbf89"></a>&#x2022; [`app_firewall_detection_control`](#control-4fbf89) - Optional Block<br>Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#control-4fbf89) below.
 
-<a id="rule-list-rules-spec-waf-action-none"></a>&#x2022; [`none`](#rule-list-rules-spec-waf-action-none) - Optional Block<br>Enable this option
+<a id="rule-list-rules-spec-waf-action-none"></a>&#x2022; [`none`](#rule-list-rules-spec-waf-action-none) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="processing-e97520"></a>&#x2022; [`waf_skip_processing`](#processing-e97520) - Optional Block<br>Enable this option
+<a id="processing-e97520"></a>&#x2022; [`waf_skip_processing`](#processing-e97520) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Rule List Rules Spec WAF Action App Firewall Detection Control
 
@@ -697,15 +697,15 @@ A [`waf_action`](#rule-list-rules-spec-waf-action) block (within [`rule_list.rul
 
 A [`server_name_matcher`](#server-name-matcher) block supports the following:
 
-<a id="server-name-matcher-exact-values"></a>&#x2022; [`exact_values`](#server-name-matcher-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="server-name-matcher-exact-values"></a>&#x2022; [`exact_values`](#server-name-matcher-exact-values) - Optional List<br>List of exact values to match the input against
 
-<a id="server-name-matcher-regex-values"></a>&#x2022; [`regex_values`](#server-name-matcher-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="server-name-matcher-regex-values"></a>&#x2022; [`regex_values`](#server-name-matcher-regex-values) - Optional List<br>List of regular expressions to match the input against
 
 #### Server Selector
 
 A [`server_selector`](#server-selector) block supports the following:
 
-<a id="server-selector-expressions"></a>&#x2022; [`expressions`](#server-selector-expressions) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
+<a id="server-selector-expressions"></a>&#x2022; [`expressions`](#server-selector-expressions) - Optional List<br>Expressions contains the Kubernetes style label expression for selections
 
 #### Timeouts
 

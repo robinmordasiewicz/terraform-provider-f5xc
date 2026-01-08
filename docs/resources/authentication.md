@@ -32,15 +32,15 @@ resource "f5xc_authentication" "example" {
   }
 
   # Resource-specific configuration
-  # Cookie Parameters. Specifies different cookie related con...
+  # Specifies different cookie related config parameters for ...
   cookie_params {
     # Configure cookie_params settings
   }
-  # HMAC Key Pair. HMAC primary and secondary keys to be used...
+  # HMAC primary and secondary keys to be used for hashing th...
   auth_hmac {
     # Configure auth_hmac settings
   }
-  # Secret. SecretType is used in an object to indicate a sen...
+  # SecretType is used in an object to indicate a sensitive/c...
   prim_key {
     # Configure prim_key settings
   }
@@ -66,7 +66,7 @@ resource "f5xc_authentication" "example" {
 
 ### Spec Argument Reference
 
-<a id="cookie-params"></a>&#x2022; [`cookie_params`](#cookie-params) - Optional Block<br>Cookie Parameters. Specifies different cookie related config parameters for authentication<br>See [Cookie Params](#cookie-params) below for details.
+<a id="cookie-params"></a>&#x2022; [`cookie_params`](#cookie-params) - Optional Block<br>Specifies different cookie related config parameters for authentication<br>See [Cookie Params](#cookie-params) below for details.
 
 <a id="oidc-auth"></a>&#x2022; [`oidc_auth`](#oidc-auth) - Optional Block<br>OIDCAuthType<br>See [OIDC Auth](#oidc-auth) below for details.
 
@@ -84,35 +84,35 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`cookie_params`](#cookie-params) block supports the following:
 
-<a id="cookie-params-auth-hmac"></a>&#x2022; [`auth_hmac`](#cookie-params-auth-hmac) - Optional Block<br>HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid<br>See [Auth HMAC](#cookie-params-auth-hmac) below.
+<a id="cookie-params-auth-hmac"></a>&#x2022; [`auth_hmac`](#cookie-params-auth-hmac) - Optional Block<br>HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid<br>See [Auth HMAC](#cookie-params-auth-hmac) below.
 
-<a id="cookie-params-cookie-expiry"></a>&#x2022; [`cookie_expiry`](#cookie-params-cookie-expiry) - Optional Number<br>Cookie Expiry duration. Specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds
+<a id="cookie-params-cookie-expiry"></a>&#x2022; [`cookie_expiry`](#cookie-params-cookie-expiry) - Optional Number<br>Specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request
 
-<a id="cookie-params-cookie-refresh-interval"></a>&#x2022; [`cookie_refresh_interval`](#cookie-params-cookie-refresh-interval) - Optional Number<br>Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce RE-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, RE-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds
+<a id="cookie-params-cookie-refresh-interval"></a>&#x2022; [`cookie_refresh_interval`](#cookie-params-cookie-refresh-interval) - Optional Number<br>Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce RE-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, RE-issue a cookie with new expiry and with the same original session
 
 <a id="cookie-params-kms-key-hmac"></a>&#x2022; [`kms_key_hmac`](#cookie-params-kms-key-hmac) - Optional Block<br>KMS Key Reference. Reference to KMS Key Object
 
-<a id="cookie-params-session-expiry"></a>&#x2022; [`session_expiry`](#cookie-params-session-expiry) - Optional Number<br>Session Expiry duration. Specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours)
+<a id="cookie-params-session-expiry"></a>&#x2022; [`session_expiry`](#cookie-params-session-expiry) - Optional Number<br>Specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours)
 
 #### Cookie Params Auth HMAC
 
 An [`auth_hmac`](#cookie-params-auth-hmac) block (within [`cookie_params`](#cookie-params)) supports the following:
 
-<a id="cookie-params-auth-hmac-prim-key"></a>&#x2022; [`prim_key`](#cookie-params-auth-hmac-prim-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Prim Key](#cookie-params-auth-hmac-prim-key) below.
+<a id="cookie-params-auth-hmac-prim-key"></a>&#x2022; [`prim_key`](#cookie-params-auth-hmac-prim-key) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Prim Key](#cookie-params-auth-hmac-prim-key) below.
 
-<a id="cookie-params-auth-hmac-prim-key-expiry"></a>&#x2022; [`prim_key_expiry`](#cookie-params-auth-hmac-prim-key-expiry) - Optional String<br>HMAC Primary Key Expiry. Primary HMAC Key Expiry time
+<a id="cookie-params-auth-hmac-prim-key-expiry"></a>&#x2022; [`prim_key_expiry`](#cookie-params-auth-hmac-prim-key-expiry) - Optional String<br>Primary HMAC Key Expiry time
 
-<a id="cookie-params-auth-hmac-sec-key"></a>&#x2022; [`sec_key`](#cookie-params-auth-hmac-sec-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Sec Key](#cookie-params-auth-hmac-sec-key) below.
+<a id="cookie-params-auth-hmac-sec-key"></a>&#x2022; [`sec_key`](#cookie-params-auth-hmac-sec-key) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Sec Key](#cookie-params-auth-hmac-sec-key) below.
 
-<a id="cookie-params-auth-hmac-sec-key-expiry"></a>&#x2022; [`sec_key_expiry`](#cookie-params-auth-hmac-sec-key-expiry) - Optional String<br>HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time
+<a id="cookie-params-auth-hmac-sec-key-expiry"></a>&#x2022; [`sec_key_expiry`](#cookie-params-auth-hmac-sec-key-expiry) - Optional String<br>Secondary HMAC Key Expiry time
 
 #### Cookie Params Auth HMAC Prim Key
 
 A [`prim_key`](#cookie-params-auth-hmac-prim-key) block (within [`cookie_params.auth_hmac`](#cookie-params-auth-hmac)) supports the following:
 
-<a id="info-6001c9"></a>&#x2022; [`blindfold_secret_info`](#info-6001c9) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-6001c9) below.
+<a id="info-6001c9"></a>&#x2022; [`blindfold_secret_info`](#info-6001c9) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-6001c9) below.
 
-<a id="info-73f0e1"></a>&#x2022; [`clear_secret_info`](#info-73f0e1) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-73f0e1) below.
+<a id="info-73f0e1"></a>&#x2022; [`clear_secret_info`](#info-73f0e1) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-73f0e1) below.
 
 #### Cookie Params Auth HMAC Prim Key Blindfold Secret Info
 
@@ -126,9 +126,9 @@ A [`prim_key`](#cookie-params-auth-hmac-prim-key) block (within [`cookie_params.
 
 A [`sec_key`](#cookie-params-auth-hmac-sec-key) block (within [`cookie_params.auth_hmac`](#cookie-params-auth-hmac)) supports the following:
 
-<a id="info-e2433d"></a>&#x2022; [`blindfold_secret_info`](#info-e2433d) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e2433d) below.
+<a id="info-e2433d"></a>&#x2022; [`blindfold_secret_info`](#info-e2433d) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e2433d) below.
 
-<a id="info-15d634"></a>&#x2022; [`clear_secret_info`](#info-15d634) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-15d634) below.
+<a id="info-15d634"></a>&#x2022; [`clear_secret_info`](#info-15d634) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-15d634) below.
 
 #### Cookie Params Auth HMAC Sec Key Blindfold Secret Info
 
@@ -142,49 +142,49 @@ A [`sec_key`](#cookie-params-auth-hmac-sec-key) block (within [`cookie_params.au
 
 An [`oidc_auth`](#oidc-auth) block supports the following:
 
-<a id="oidc-auth-client-secret"></a>&#x2022; [`client_secret`](#oidc-auth-client-secret) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Client Secret](#oidc-auth-client-secret) below.
+<a id="oidc-auth-client-secret"></a>&#x2022; [`client_secret`](#oidc-auth-client-secret) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Client Secret](#oidc-auth-client-secret) below.
 
 <a id="oidc-auth-oidc-auth-params"></a>&#x2022; [`oidc_auth_params`](#oidc-auth-oidc-auth-params) - Optional Block<br>OIDCAuthParams<br>See [OIDC Auth Params](#oidc-auth-oidc-auth-params) below.
 
-<a id="oidc-auth-oidc-client-id"></a>&#x2022; [`oidc_client_id`](#oidc-auth-oidc-client-id) - Optional String<br>OIDC Client ID. Client ID used while sending the Authorization Request to OIDC server
+<a id="oidc-auth-oidc-client-id"></a>&#x2022; [`oidc_client_id`](#oidc-auth-oidc-client-id) - Optional String<br>Client ID used while sending the Authorization Request to OIDC server
 
-<a id="oidc-auth-oidc-well-known-config-url"></a>&#x2022; [`oidc_well_known_config_url`](#oidc-auth-oidc-well-known-config-url) - Optional String<br>Well-known Configuration URL. An OIDC well-known configuration URL that will be used to fetch authentication related endpoints
+<a id="oidc-auth-oidc-well-known-config-url"></a>&#x2022; [`oidc_well_known_config_url`](#oidc-auth-oidc-well-known-config-url) - Optional String<br>An OIDC well-known configuration URL that will be used to fetch authentication related endpoints
 
 #### OIDC Auth Client Secret
 
 A [`client_secret`](#oidc-auth-client-secret) block (within [`oidc_auth`](#oidc-auth)) supports the following:
 
-<a id="info-672642"></a>&#x2022; [`blindfold_secret_info`](#info-672642) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-672642) below.
+<a id="info-672642"></a>&#x2022; [`blindfold_secret_info`](#info-672642) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-672642) below.
 
-<a id="info-b8137a"></a>&#x2022; [`clear_secret_info`](#info-b8137a) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b8137a) below.
+<a id="info-b8137a"></a>&#x2022; [`clear_secret_info`](#info-b8137a) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b8137a) below.
 
 #### OIDC Auth Client Secret Blindfold Secret Info
 
 A [`blindfold_secret_info`](#info-672642) block (within [`oidc_auth.client_secret`](#oidc-auth-client-secret)) supports the following:
 
-<a id="provider-0b6f3e"></a>&#x2022; [`decryption_provider`](#provider-0b6f3e) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-0b6f3e"></a>&#x2022; [`decryption_provider`](#provider-0b6f3e) - Optional String<br>Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="location-102885"></a>&#x2022; [`location`](#location-102885) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-102885"></a>&#x2022; [`location`](#location-102885) - Optional String<br>Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-3da802"></a>&#x2022; [`store_provider`](#provider-3da802) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-3da802"></a>&#x2022; [`store_provider`](#provider-3da802) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### OIDC Auth Client Secret Clear Secret Info
 
 A [`clear_secret_info`](#info-b8137a) block (within [`oidc_auth.client_secret`](#oidc-auth-client-secret)) supports the following:
 
-<a id="ref-4470bf"></a>&#x2022; [`provider_ref`](#ref-4470bf) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-4470bf"></a>&#x2022; [`provider_ref`](#ref-4470bf) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="url-6086d3"></a>&#x2022; [`url`](#url-6086d3) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
+<a id="url-6086d3"></a>&#x2022; [`url`](#url-6086d3) - Optional String<br>URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### OIDC Auth OIDC Auth Params
 
 An [`oidc_auth_params`](#oidc-auth-oidc-auth-params) block (within [`oidc_auth`](#oidc-auth)) supports the following:
 
-<a id="url-f36686"></a>&#x2022; [`auth_endpoint_url`](#url-f36686) - Optional String<br>Authorization Endpoint. URL of the authorization server's authorization endpoint
+<a id="url-f36686"></a>&#x2022; [`auth_endpoint_url`](#url-f36686) - Optional String<br>URL of the authorization server's authorization endpoint
 
-<a id="url-e9b22b"></a>&#x2022; [`end_session_endpoint_url`](#url-e9b22b) - Optional String<br>Logout Endpoint. URL of the authorization server's Logout endpoint
+<a id="url-e9b22b"></a>&#x2022; [`end_session_endpoint_url`](#url-e9b22b) - Optional String<br>URL of the authorization server's Logout endpoint
 
-<a id="url-75b563"></a>&#x2022; [`token_endpoint_url`](#url-75b563) - Optional String<br>Token Endpoint. URL of the authorization server's Token endpoint
+<a id="url-75b563"></a>&#x2022; [`token_endpoint_url`](#url-75b563) - Optional String<br>URL of the authorization server's Token endpoint
 
 #### Timeouts
 

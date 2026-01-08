@@ -32,7 +32,7 @@ resource "f5xc_service_policy_rule" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: any_asn, asn_list, asn_matcher] Enable this option
+  # [OneOf: any_asn, asn_list, asn_matcher] Can be used for m...
   any_asn {
     # Configure any_asn settings
   }
@@ -40,7 +40,7 @@ resource "f5xc_service_policy_rule" "example" {
   any_client {
     # Configure any_client settings
   }
-  # [OneOf: any_ip, ip_matcher, ip_prefix_list] Enable this o...
+  # [OneOf: any_ip, ip_matcher, ip_prefix_list] Can be used f...
   any_ip {
     # Configure any_ip settings
   }
@@ -66,66 +66,66 @@ resource "f5xc_service_policy_rule" "example" {
 
 ### Spec Argument Reference
 
-<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>[Enum: DENY|ALLOW|NEXT_POLICY] Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
+<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>[Enum: DENY|ALLOW|NEXT_POLICY] The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to
 
 -> **One of the following:**
-&#x2022; <a id="any-asn"></a>[`any_asn`](#any-asn) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="asn-list"></a>[`asn_list`](#asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#asn-list) below for details.
-<br><br>&#x2022; <a id="asn-matcher"></a>[`asn_matcher`](#asn-matcher) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#asn-matcher) below for details.
+&#x2022; <a id="any-asn"></a>[`any_asn`](#any-asn) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="asn-list"></a>[`asn_list`](#asn-list) - Optional Block<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#asn-list) below for details.
+<br><br>&#x2022; <a id="asn-matcher"></a>[`asn_matcher`](#asn-matcher) - Optional Block<br>Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#asn-matcher) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="any-client"></a>[`any_client`](#any-client) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="client-name"></a>[`client_name`](#client-name) - Optional String<br>Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name
-<br><br>&#x2022; <a id="client-name-matcher"></a>[`client_name_matcher`](#client-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Client Name Matcher](#client-name-matcher) below for details.
-<br><br>&#x2022; <a id="client-selector"></a>[`client_selector`](#client-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Client Selector](#client-selector) below for details.
+&#x2022; <a id="any-client"></a>[`any_client`](#any-client) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="client-name"></a>[`client_name`](#client-name) - Optional String<br>The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name
+<br><br>&#x2022; <a id="client-name-matcher"></a>[`client_name_matcher`](#client-name-matcher) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Client Name Matcher](#client-name-matcher) below for details.
+<br><br>&#x2022; <a id="client-selector"></a>[`client_selector`](#client-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects<br>See [Client Selector](#client-selector) below for details.
 <br><br>&#x2022; <a id="ip-threat-category-list"></a>[`ip_threat_category_list`](#ip-threat-category-list) - Optional Block<br>IP Threat Category List Type. List of IP threat categories<br>See [IP Threat Category List](#ip-threat-category-list) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="any-ip"></a>[`any_ip`](#any-ip) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="ip-matcher"></a>[`ip_matcher`](#ip-matcher) - Optional Block<br>IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#ip-matcher) below for details.
-<br><br>&#x2022; <a id="ip-prefix-list"></a>[`ip_prefix_list`](#ip-prefix-list) - Optional Block<br>IP Prefix Match List. List of IP Prefix strings to match against<br>See [IP Prefix List](#ip-prefix-list) below for details.
+&#x2022; <a id="any-ip"></a>[`any_ip`](#any-ip) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="ip-matcher"></a>[`ip_matcher`](#ip-matcher) - Optional Block<br>Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#ip-matcher) below for details.
+<br><br>&#x2022; <a id="ip-prefix-list"></a>[`ip_prefix_list`](#ip-prefix-list) - Optional Block<br>List of IP Prefix strings to match against<br>See [IP Prefix List](#ip-prefix-list) below for details.
 
-<a id="api-group-matcher"></a>&#x2022; [`api_group_matcher`](#api-group-matcher) - Optional Block<br>String Matcher. A matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true<br>See [API Group Matcher](#api-group-matcher) below for details.
+<a id="api-group-matcher"></a>&#x2022; [`api_group_matcher`](#api-group-matcher) - Optional Block<br>Matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true<br>See [API Group Matcher](#api-group-matcher) below for details.
 
-<a id="arg-matchers"></a>&#x2022; [`arg_matchers`](#arg-matchers) - Optional Block<br>Argument Matchers. A list of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name. Note that all specified arg matcher predicates must evaluate to true<br>See [Arg Matchers](#arg-matchers) below for details.
+<a id="arg-matchers"></a>&#x2022; [`arg_matchers`](#arg-matchers) - Optional Block<br>List of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name<br>See [Arg Matchers](#arg-matchers) below for details.
 
-<a id="body-matcher"></a>&#x2022; [`body_matcher`](#body-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Body Matcher](#body-matcher) below for details.
+<a id="body-matcher"></a>&#x2022; [`body_matcher`](#body-matcher) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Body Matcher](#body-matcher) below for details.
 
-<a id="bot-action"></a>&#x2022; [`bot_action`](#bot-action) - Optional Block<br>Bot Action. Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing<br>See [Bot Action](#bot-action) below for details.
+<a id="bot-action"></a>&#x2022; [`bot_action`](#bot-action) - Optional Block<br>Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing<br>See [Bot Action](#bot-action) below for details.
 
-<a id="cookie-matchers"></a>&#x2022; [`cookie_matchers`](#cookie-matchers) - Optional Block<br>Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matchers](#cookie-matchers) below for details.
+<a id="cookie-matchers"></a>&#x2022; [`cookie_matchers`](#cookie-matchers) - Optional Block<br>List of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name<br>See [Cookie Matchers](#cookie-matchers) below for details.
 
-<a id="domain-matcher"></a>&#x2022; [`domain_matcher`](#domain-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Domain Matcher](#domain-matcher) below for details.
+<a id="domain-matcher"></a>&#x2022; [`domain_matcher`](#domain-matcher) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Domain Matcher](#domain-matcher) below for details.
 
-<a id="expiration-timestamp"></a>&#x2022; [`expiration_timestamp`](#expiration-timestamp) - Optional String<br>Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore
+<a id="expiration-timestamp"></a>&#x2022; [`expiration_timestamp`](#expiration-timestamp) - Optional String<br>Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore
 
-<a id="headers"></a>&#x2022; [`headers`](#headers) - Optional Block<br>HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true<br>See [Headers](#headers) below for details.
+<a id="headers"></a>&#x2022; [`headers`](#headers) - Optional Block<br>List of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type<br>See [Headers](#headers) below for details.
 
-<a id="http-method"></a>&#x2022; [`http_method`](#http-method) - Optional Block<br>HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true<br>See [HTTP Method](#http-method) below for details.
+<a id="http-method"></a>&#x2022; [`http_method`](#http-method) - Optional Block<br>HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true<br>See [HTTP Method](#http-method) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="ja4-tls-fingerprint"></a>[`ja4_tls_fingerprint`](#ja4-tls-fingerprint) - Optional Block<br>JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length<br>See [Ja4 TLS Fingerprint](#ja4-tls-fingerprint) below for details.
-<br><br>&#x2022; <a id="tls-fingerprint-matcher"></a>[`tls_fingerprint_matcher`](#tls-fingerprint-matcher) - Optional Block<br>TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values
+&#x2022; <a id="ja4-tls-fingerprint"></a>[`ja4_tls_fingerprint`](#ja4-tls-fingerprint) - Optional Block<br>Extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length<br>See [Ja4 TLS Fingerprint](#ja4-tls-fingerprint) below for details.
+<br><br>&#x2022; <a id="tls-fingerprint-matcher"></a>[`tls_fingerprint_matcher`](#tls-fingerprint-matcher) - Optional Block<br>TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied
 
-<a id="jwt-claims"></a>&#x2022; [`jwt_claims`](#jwt-claims) - Optional Block<br>JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true<br>See [JWT Claims](#jwt-claims) below for details.
+<a id="jwt-claims"></a>&#x2022; [`jwt_claims`](#jwt-claims) - Optional Block<br>List of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings<br>See [JWT Claims](#jwt-claims) below for details.
 
-<a id="label-matcher"></a>&#x2022; [`label_matcher`](#label-matcher) - Optional Block<br>Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name<br>See [Label Matcher](#label-matcher) below for details.
+<a id="label-matcher"></a>&#x2022; [`label_matcher`](#label-matcher) - Optional Block<br>Label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name<br>See [Label Matcher](#label-matcher) below for details.
 
-<a id="mum-action"></a>&#x2022; [`mum_action`](#mum-action) - Optional Block<br>Select Modification Action. Modify behavior for a matching request. The modification could be to entirely skip processing<br>See [Mum Action](#mum-action) below for details.
+<a id="mum-action"></a>&#x2022; [`mum_action`](#mum-action) - Optional Block<br>Modify behavior for a matching request. The modification could be to entirely skip processing<br>See [Mum Action](#mum-action) below for details.
 
-<a id="path"></a>&#x2022; [`path`](#path) - Optional Block<br>Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions<br>See [Path](#path) below for details.
+<a id="path"></a>&#x2022; [`path`](#path) - Optional Block<br>Path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions<br>See [Path](#path) below for details.
 
-<a id="port-matcher"></a>&#x2022; [`port_matcher`](#port-matcher) - Optional Block<br>Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true<br>See [Port Matcher](#port-matcher) below for details.
+<a id="port-matcher"></a>&#x2022; [`port_matcher`](#port-matcher) - Optional Block<br>Port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true<br>See [Port Matcher](#port-matcher) below for details.
 
-<a id="query-params"></a>&#x2022; [`query_params`](#query-params) - Optional Block<br>HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true<br>See [Query Params](#query-params) below for details.
+<a id="query-params"></a>&#x2022; [`query_params`](#query-params) - Optional Block<br>List of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query<br>See [Query Params](#query-params) below for details.
 
 <a id="request-constraints"></a>&#x2022; [`request_constraints`](#request-constraints) - Optional Block<br>Request Constraints<br>See [Request Constraints](#request-constraints) below for details.
 
-<a id="segment-policy"></a>&#x2022; [`segment_policy`](#segment-policy) - Optional Block<br>Configure Segments. Configure source and destination segment for policy
+<a id="segment-policy"></a>&#x2022; [`segment_policy`](#segment-policy) - Optional Block<br>Configure source and destination segment for policy
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
-<a id="waf-action"></a>&#x2022; [`waf_action`](#waf-action) - Optional Block<br>App Firewall Action. Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings
+<a id="waf-action"></a>&#x2022; [`waf_action`](#waf-action) - Optional Block<br>Modify App Firewall behavior for a matching request. The modification could either be to entirely skip firewall processing or to customize the firewall rules to be applied as defined by App Firewall Rule Control settings
 
 ### Attributes Reference
 
@@ -141,145 +141,145 @@ An [`api_group_matcher`](#api-group-matcher) block supports the following:
 
 <a id="api-group-matcher-invert-matcher"></a>&#x2022; [`invert_matcher`](#api-group-matcher-invert-matcher) - Optional Bool<br>Invert String Matcher. Invert the match result
 
-<a id="api-group-matcher-match"></a>&#x2022; [`match`](#api-group-matcher-match) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="api-group-matcher-match"></a>&#x2022; [`match`](#api-group-matcher-match) - Optional List<br>List of exact values to match the input against
 
 #### Arg Matchers
 
 An [`arg_matchers`](#arg-matchers) block supports the following:
 
-<a id="arg-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#arg-matchers-check-not-present) - Optional Block<br>Enable this option
+<a id="arg-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#arg-matchers-check-not-present) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="arg-matchers-check-present"></a>&#x2022; [`check_present`](#arg-matchers-check-present) - Optional Block<br>Enable this option
+<a id="arg-matchers-check-present"></a>&#x2022; [`check_present`](#arg-matchers-check-present) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="arg-matchers-invert-matcher"></a>&#x2022; [`invert_matcher`](#arg-matchers-invert-matcher) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
 
-<a id="arg-matchers-item"></a>&#x2022; [`item`](#arg-matchers-item) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#arg-matchers-item) below.
+<a id="arg-matchers-item"></a>&#x2022; [`item`](#arg-matchers-item) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#arg-matchers-item) below.
 
-<a id="arg-matchers-name"></a>&#x2022; [`name`](#arg-matchers-name) - Optional String<br>Argument Name. A case-sensitive JSON path in the HTTP request body
+<a id="arg-matchers-name"></a>&#x2022; [`name`](#arg-matchers-name) - Optional String<br>Case-sensitive JSON path in the HTTP request body
 
 #### Arg Matchers Item
 
 An [`item`](#arg-matchers-item) block (within [`arg_matchers`](#arg-matchers)) supports the following:
 
-<a id="arg-matchers-item-exact-values"></a>&#x2022; [`exact_values`](#arg-matchers-item-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="arg-matchers-item-exact-values"></a>&#x2022; [`exact_values`](#arg-matchers-item-exact-values) - Optional List<br>List of exact values to match the input against
 
-<a id="arg-matchers-item-regex-values"></a>&#x2022; [`regex_values`](#arg-matchers-item-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="arg-matchers-item-regex-values"></a>&#x2022; [`regex_values`](#arg-matchers-item-regex-values) - Optional List<br>List of regular expressions to match the input against
 
-<a id="arg-matchers-item-transformers"></a>&#x2022; [`transformers`](#arg-matchers-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="arg-matchers-item-transformers"></a>&#x2022; [`transformers`](#arg-matchers-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Asn List
 
 An [`asn_list`](#asn-list) block supports the following:
 
-<a id="asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#asn-list-as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
+<a id="asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#asn-list-as-numbers) - Optional List<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 #### Asn Matcher
 
 An [`asn_matcher`](#asn-matcher) block supports the following:
 
-<a id="asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#asn-matcher-asn-sets) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#asn-matcher-asn-sets) below.
+<a id="asn-matcher-asn-sets"></a>&#x2022; [`asn_sets`](#asn-matcher-asn-sets) - Optional Block<br>List of references to bgp_asn_set objects<br>See [Asn Sets](#asn-matcher-asn-sets) below.
 
 #### Asn Matcher Asn Sets
 
 An [`asn_sets`](#asn-matcher-asn-sets) block (within [`asn_matcher`](#asn-matcher)) supports the following:
 
-<a id="asn-matcher-asn-sets-kind"></a>&#x2022; [`kind`](#asn-matcher-asn-sets-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="asn-matcher-asn-sets-kind"></a>&#x2022; [`kind`](#asn-matcher-asn-sets-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="asn-matcher-asn-sets-name"></a>&#x2022; [`name`](#asn-matcher-asn-sets-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="asn-matcher-asn-sets-name"></a>&#x2022; [`name`](#asn-matcher-asn-sets-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="asn-matcher-asn-sets-namespace"></a>&#x2022; [`namespace`](#asn-matcher-asn-sets-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="asn-matcher-asn-sets-namespace"></a>&#x2022; [`namespace`](#asn-matcher-asn-sets-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="asn-matcher-asn-sets-tenant"></a>&#x2022; [`tenant`](#asn-matcher-asn-sets-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="asn-matcher-asn-sets-tenant"></a>&#x2022; [`tenant`](#asn-matcher-asn-sets-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="asn-matcher-asn-sets-uid"></a>&#x2022; [`uid`](#asn-matcher-asn-sets-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="asn-matcher-asn-sets-uid"></a>&#x2022; [`uid`](#asn-matcher-asn-sets-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Body Matcher
 
 A [`body_matcher`](#body-matcher) block supports the following:
 
-<a id="body-matcher-exact-values"></a>&#x2022; [`exact_values`](#body-matcher-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="body-matcher-exact-values"></a>&#x2022; [`exact_values`](#body-matcher-exact-values) - Optional List<br>List of exact values to match the input against
 
-<a id="body-matcher-regex-values"></a>&#x2022; [`regex_values`](#body-matcher-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="body-matcher-regex-values"></a>&#x2022; [`regex_values`](#body-matcher-regex-values) - Optional List<br>List of regular expressions to match the input against
 
-<a id="body-matcher-transformers"></a>&#x2022; [`transformers`](#body-matcher-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="body-matcher-transformers"></a>&#x2022; [`transformers`](#body-matcher-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Bot Action
 
 A [`bot_action`](#bot-action) block supports the following:
 
-<a id="bot-action-bot-skip-processing"></a>&#x2022; [`bot_skip_processing`](#bot-action-bot-skip-processing) - Optional Block<br>Enable this option
+<a id="bot-action-bot-skip-processing"></a>&#x2022; [`bot_skip_processing`](#bot-action-bot-skip-processing) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="bot-action-none"></a>&#x2022; [`none`](#bot-action-none) - Optional Block<br>Enable this option
+<a id="bot-action-none"></a>&#x2022; [`none`](#bot-action-none) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Client Name Matcher
 
 A [`client_name_matcher`](#client-name-matcher) block supports the following:
 
-<a id="client-name-matcher-exact-values"></a>&#x2022; [`exact_values`](#client-name-matcher-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="client-name-matcher-exact-values"></a>&#x2022; [`exact_values`](#client-name-matcher-exact-values) - Optional List<br>List of exact values to match the input against
 
-<a id="client-name-matcher-regex-values"></a>&#x2022; [`regex_values`](#client-name-matcher-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="client-name-matcher-regex-values"></a>&#x2022; [`regex_values`](#client-name-matcher-regex-values) - Optional List<br>List of regular expressions to match the input against
 
 #### Client Selector
 
 A [`client_selector`](#client-selector) block supports the following:
 
-<a id="client-selector-expressions"></a>&#x2022; [`expressions`](#client-selector-expressions) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
+<a id="client-selector-expressions"></a>&#x2022; [`expressions`](#client-selector-expressions) - Optional List<br>Expressions contains the Kubernetes style label expression for selections
 
 #### Cookie Matchers
 
 A [`cookie_matchers`](#cookie-matchers) block supports the following:
 
-<a id="cookie-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#cookie-matchers-check-not-present) - Optional Block<br>Enable this option
+<a id="cookie-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#cookie-matchers-check-not-present) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="cookie-matchers-check-present"></a>&#x2022; [`check_present`](#cookie-matchers-check-present) - Optional Block<br>Enable this option
+<a id="cookie-matchers-check-present"></a>&#x2022; [`check_present`](#cookie-matchers-check-present) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="cookie-matchers-invert-matcher"></a>&#x2022; [`invert_matcher`](#cookie-matchers-invert-matcher) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
 
-<a id="cookie-matchers-item"></a>&#x2022; [`item`](#cookie-matchers-item) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#cookie-matchers-item) below.
+<a id="cookie-matchers-item"></a>&#x2022; [`item`](#cookie-matchers-item) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#cookie-matchers-item) below.
 
-<a id="cookie-matchers-name"></a>&#x2022; [`name`](#cookie-matchers-name) - Optional String<br>Cookie Name. A case-sensitive cookie name
+<a id="cookie-matchers-name"></a>&#x2022; [`name`](#cookie-matchers-name) - Optional String<br>Case-sensitive cookie name
 
 #### Cookie Matchers Item
 
 An [`item`](#cookie-matchers-item) block (within [`cookie_matchers`](#cookie-matchers)) supports the following:
 
-<a id="cookie-matchers-item-exact-values"></a>&#x2022; [`exact_values`](#cookie-matchers-item-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="cookie-matchers-item-exact-values"></a>&#x2022; [`exact_values`](#cookie-matchers-item-exact-values) - Optional List<br>List of exact values to match the input against
 
-<a id="cookie-matchers-item-regex-values"></a>&#x2022; [`regex_values`](#cookie-matchers-item-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="cookie-matchers-item-regex-values"></a>&#x2022; [`regex_values`](#cookie-matchers-item-regex-values) - Optional List<br>List of regular expressions to match the input against
 
-<a id="cookie-matchers-item-transformers"></a>&#x2022; [`transformers`](#cookie-matchers-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="cookie-matchers-item-transformers"></a>&#x2022; [`transformers`](#cookie-matchers-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Domain Matcher
 
 A [`domain_matcher`](#domain-matcher) block supports the following:
 
-<a id="domain-matcher-exact-values"></a>&#x2022; [`exact_values`](#domain-matcher-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="domain-matcher-exact-values"></a>&#x2022; [`exact_values`](#domain-matcher-exact-values) - Optional List<br>List of exact values to match the input against
 
-<a id="domain-matcher-regex-values"></a>&#x2022; [`regex_values`](#domain-matcher-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="domain-matcher-regex-values"></a>&#x2022; [`regex_values`](#domain-matcher-regex-values) - Optional List<br>List of regular expressions to match the input against
 
 #### Headers
 
 A [`headers`](#headers) block supports the following:
 
-<a id="headers-check-not-present"></a>&#x2022; [`check_not_present`](#headers-check-not-present) - Optional Block<br>Enable this option
+<a id="headers-check-not-present"></a>&#x2022; [`check_not_present`](#headers-check-not-present) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="headers-check-present"></a>&#x2022; [`check_present`](#headers-check-present) - Optional Block<br>Enable this option
+<a id="headers-check-present"></a>&#x2022; [`check_present`](#headers-check-present) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="headers-invert-matcher"></a>&#x2022; [`invert_matcher`](#headers-invert-matcher) - Optional Bool<br>Invert Header Matcher. Invert the match result
 
-<a id="headers-item"></a>&#x2022; [`item`](#headers-item) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#headers-item) below.
+<a id="headers-item"></a>&#x2022; [`item`](#headers-item) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#headers-item) below.
 
-<a id="headers-name"></a>&#x2022; [`name`](#headers-name) - Optional String<br>Header Name. A case-insensitive HTTP header name
+<a id="headers-name"></a>&#x2022; [`name`](#headers-name) - Optional String<br>Case-insensitive HTTP header name
 
 #### Headers Item
 
 An [`item`](#headers-item) block (within [`headers`](#headers)) supports the following:
 
-<a id="headers-item-exact-values"></a>&#x2022; [`exact_values`](#headers-item-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="headers-item-exact-values"></a>&#x2022; [`exact_values`](#headers-item-exact-values) - Optional List<br>List of exact values to match the input against
 
-<a id="headers-item-regex-values"></a>&#x2022; [`regex_values`](#headers-item-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="headers-item-regex-values"></a>&#x2022; [`regex_values`](#headers-item-regex-values) - Optional List<br>List of regular expressions to match the input against
 
-<a id="headers-item-transformers"></a>&#x2022; [`transformers`](#headers-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="headers-item-transformers"></a>&#x2022; [`transformers`](#headers-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### HTTP Method
 
@@ -287,7 +287,7 @@ A [`http_method`](#http-method) block supports the following:
 
 <a id="http-method-invert-matcher"></a>&#x2022; [`invert_matcher`](#http-method-invert-matcher) - Optional Bool<br>Invert Method Matcher. Invert the match result
 
-<a id="http-method-methods"></a>&#x2022; [`methods`](#http-method-methods) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> Method List. List of methods values to match against
+<a id="http-method-methods"></a>&#x2022; [`methods`](#http-method-methods) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> List of methods values to match against
 
 #### IP Matcher
 
@@ -295,21 +295,21 @@ An [`ip_matcher`](#ip-matcher) block supports the following:
 
 <a id="ip-matcher-invert-matcher"></a>&#x2022; [`invert_matcher`](#ip-matcher-invert-matcher) - Optional Bool<br>Invert IP Matcher. Invert the match result
 
-<a id="ip-matcher-prefix-sets"></a>&#x2022; [`prefix_sets`](#ip-matcher-prefix-sets) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#ip-matcher-prefix-sets) below.
+<a id="ip-matcher-prefix-sets"></a>&#x2022; [`prefix_sets`](#ip-matcher-prefix-sets) - Optional Block<br>List of references to ip_prefix_set objects<br>See [Prefix Sets](#ip-matcher-prefix-sets) below.
 
 #### IP Matcher Prefix Sets
 
 A [`prefix_sets`](#ip-matcher-prefix-sets) block (within [`ip_matcher`](#ip-matcher)) supports the following:
 
-<a id="ip-matcher-prefix-sets-kind"></a>&#x2022; [`kind`](#ip-matcher-prefix-sets-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="ip-matcher-prefix-sets-kind"></a>&#x2022; [`kind`](#ip-matcher-prefix-sets-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="ip-matcher-prefix-sets-name"></a>&#x2022; [`name`](#ip-matcher-prefix-sets-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="ip-matcher-prefix-sets-name"></a>&#x2022; [`name`](#ip-matcher-prefix-sets-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="ip-matcher-prefix-sets-namespace"></a>&#x2022; [`namespace`](#ip-matcher-prefix-sets-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="ip-matcher-prefix-sets-namespace"></a>&#x2022; [`namespace`](#ip-matcher-prefix-sets-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="ip-matcher-prefix-sets-tenant"></a>&#x2022; [`tenant`](#ip-matcher-prefix-sets-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="ip-matcher-prefix-sets-tenant"></a>&#x2022; [`tenant`](#ip-matcher-prefix-sets-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="ip-matcher-prefix-sets-uid"></a>&#x2022; [`uid`](#ip-matcher-prefix-sets-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="ip-matcher-prefix-sets-uid"></a>&#x2022; [`uid`](#ip-matcher-prefix-sets-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### IP Prefix List
 
@@ -323,25 +323,25 @@ An [`ip_prefix_list`](#ip-prefix-list) block supports the following:
 
 An [`ip_threat_category_list`](#ip-threat-category-list) block supports the following:
 
-<a id="categories-f2b328"></a>&#x2022; [`ip_threat_categories`](#categories-f2b328) - Optional List  Defaults to `SPAM_SOURCES`<br>See [IP Threat Categories](#common-ip-threat-categories)<br>[Enum: SPAM_SOURCES|WINDOWS_EXPLOITS|WEB_ATTACKS|BOTNETS|SCANNERS|REPUTATION|PHISHING|PROXY|MOBILE_THREATS|TOR_PROXY|DENIAL_OF_SERVICE|NETWORK] List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
+<a id="categories-f2b328"></a>&#x2022; [`ip_threat_categories`](#categories-f2b328) - Optional List  Defaults to `SPAM_SOURCES`<br>See [IP Threat Categories](#common-ip-threat-categories)<br>[Enum: SPAM_SOURCES|WINDOWS_EXPLOITS|WEB_ATTACKS|BOTNETS|SCANNERS|REPUTATION|PHISHING|PROXY|MOBILE_THREATS|TOR_PROXY|DENIAL_OF_SERVICE|NETWORK] The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
 
 #### Ja4 TLS Fingerprint
 
 A [`ja4_tls_fingerprint`](#ja4-tls-fingerprint) block supports the following:
 
-<a id="ja4-tls-fingerprint-exact-values"></a>&#x2022; [`exact_values`](#ja4-tls-fingerprint-exact-values) - Optional List<br>Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against
+<a id="ja4-tls-fingerprint-exact-values"></a>&#x2022; [`exact_values`](#ja4-tls-fingerprint-exact-values) - Optional List<br>List of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against
 
 #### JWT Claims
 
 A [`jwt_claims`](#jwt-claims) block supports the following:
 
-<a id="jwt-claims-check-not-present"></a>&#x2022; [`check_not_present`](#jwt-claims-check-not-present) - Optional Block<br>Enable this option
+<a id="jwt-claims-check-not-present"></a>&#x2022; [`check_not_present`](#jwt-claims-check-not-present) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="jwt-claims-check-present"></a>&#x2022; [`check_present`](#jwt-claims-check-present) - Optional Block<br>Enable this option
+<a id="jwt-claims-check-present"></a>&#x2022; [`check_present`](#jwt-claims-check-present) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="jwt-claims-invert-matcher"></a>&#x2022; [`invert_matcher`](#jwt-claims-invert-matcher) - Optional Bool<br>Invert Matcher. Invert the match result
 
-<a id="jwt-claims-item"></a>&#x2022; [`item`](#jwt-claims-item) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#jwt-claims-item) below.
+<a id="jwt-claims-item"></a>&#x2022; [`item`](#jwt-claims-item) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#jwt-claims-item) below.
 
 <a id="jwt-claims-name"></a>&#x2022; [`name`](#jwt-claims-name) - Optional String<br>JWT Claim Name. JWT claim name
 
@@ -349,41 +349,41 @@ A [`jwt_claims`](#jwt-claims) block supports the following:
 
 An [`item`](#jwt-claims-item) block (within [`jwt_claims`](#jwt-claims)) supports the following:
 
-<a id="jwt-claims-item-exact-values"></a>&#x2022; [`exact_values`](#jwt-claims-item-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="jwt-claims-item-exact-values"></a>&#x2022; [`exact_values`](#jwt-claims-item-exact-values) - Optional List<br>List of exact values to match the input against
 
-<a id="jwt-claims-item-regex-values"></a>&#x2022; [`regex_values`](#jwt-claims-item-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="jwt-claims-item-regex-values"></a>&#x2022; [`regex_values`](#jwt-claims-item-regex-values) - Optional List<br>List of regular expressions to match the input against
 
-<a id="jwt-claims-item-transformers"></a>&#x2022; [`transformers`](#jwt-claims-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="jwt-claims-item-transformers"></a>&#x2022; [`transformers`](#jwt-claims-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Label Matcher
 
 A [`label_matcher`](#label-matcher) block supports the following:
 
-<a id="label-matcher-keys"></a>&#x2022; [`keys`](#label-matcher-keys) - Optional List<br>Keys. The list of label key names that have to match
+<a id="label-matcher-keys"></a>&#x2022; [`keys`](#label-matcher-keys) - Optional List<br>The list of label key names that have to match
 
 #### Mum Action
 
 A [`mum_action`](#mum-action) block supports the following:
 
-<a id="mum-action-default"></a>&#x2022; [`default`](#mum-action-default) - Optional Block<br>Enable this option
+<a id="mum-action-default"></a>&#x2022; [`default`](#mum-action-default) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="mum-action-skip-processing"></a>&#x2022; [`skip_processing`](#mum-action-skip-processing) - Optional Block<br>Enable this option
+<a id="mum-action-skip-processing"></a>&#x2022; [`skip_processing`](#mum-action-skip-processing) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Path
 
 A [`path`](#path) block supports the following:
 
-<a id="path-exact-values"></a>&#x2022; [`exact_values`](#path-exact-values) - Optional List<br>Exact Values. A list of exact path values to match the input HTTP path against
+<a id="path-exact-values"></a>&#x2022; [`exact_values`](#path-exact-values) - Optional List<br>List of exact path values to match the input HTTP path against
 
 <a id="path-invert-matcher"></a>&#x2022; [`invert_matcher`](#path-invert-matcher) - Optional Bool<br>Invert Path Matcher. Invert the match result
 
-<a id="path-prefix-values"></a>&#x2022; [`prefix_values`](#path-prefix-values) - Optional List<br>Prefix Values. A list of path prefix values to match the input HTTP path against
+<a id="path-prefix-values"></a>&#x2022; [`prefix_values`](#path-prefix-values) - Optional List<br>List of path prefix values to match the input HTTP path against
 
-<a id="path-regex-values"></a>&#x2022; [`regex_values`](#path-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input HTTP path against
+<a id="path-regex-values"></a>&#x2022; [`regex_values`](#path-regex-values) - Optional List<br>List of regular expressions to match the input HTTP path against
 
-<a id="path-suffix-values"></a>&#x2022; [`suffix_values`](#path-suffix-values) - Optional List<br>Suffix Values. A list of path suffix values to match the input HTTP path against
+<a id="path-suffix-values"></a>&#x2022; [`suffix_values`](#path-suffix-values) - Optional List<br>List of path suffix values to match the input HTTP path against
 
-<a id="path-transformers"></a>&#x2022; [`transformers`](#path-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="path-transformers"></a>&#x2022; [`transformers`](#path-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Port Matcher
 
@@ -391,31 +391,31 @@ A [`port_matcher`](#port-matcher) block supports the following:
 
 <a id="port-matcher-invert-matcher"></a>&#x2022; [`invert_matcher`](#port-matcher-invert-matcher) - Optional Bool<br>Invert Port Matcher. Invert the match result
 
-<a id="port-matcher-ports"></a>&#x2022; [`ports`](#port-matcher-ports) - Optional List<br>Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range
+<a id="port-matcher-ports"></a>&#x2022; [`ports`](#port-matcher-ports) - Optional List<br>List of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range
 
 #### Query Params
 
 A [`query_params`](#query-params) block supports the following:
 
-<a id="query-params-check-not-present"></a>&#x2022; [`check_not_present`](#query-params-check-not-present) - Optional Block<br>Enable this option
+<a id="query-params-check-not-present"></a>&#x2022; [`check_not_present`](#query-params-check-not-present) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="query-params-check-present"></a>&#x2022; [`check_present`](#query-params-check-present) - Optional Block<br>Enable this option
+<a id="query-params-check-present"></a>&#x2022; [`check_present`](#query-params-check-present) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="query-params-invert-matcher"></a>&#x2022; [`invert_matcher`](#query-params-invert-matcher) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
 
-<a id="query-params-item"></a>&#x2022; [`item`](#query-params-item) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#query-params-item) below.
+<a id="query-params-item"></a>&#x2022; [`item`](#query-params-item) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#query-params-item) below.
 
-<a id="query-params-key"></a>&#x2022; [`key`](#query-params-key) - Optional String<br>Query Parameter Name. A case-sensitive HTTP query parameter name
+<a id="query-params-key"></a>&#x2022; [`key`](#query-params-key) - Optional String<br>Case-sensitive HTTP query parameter name
 
 #### Query Params Item
 
 An [`item`](#query-params-item) block (within [`query_params`](#query-params)) supports the following:
 
-<a id="query-params-item-exact-values"></a>&#x2022; [`exact_values`](#query-params-item-exact-values) - Optional List<br>Exact Values. A list of exact values to match the input against
+<a id="query-params-item-exact-values"></a>&#x2022; [`exact_values`](#query-params-item-exact-values) - Optional List<br>List of exact values to match the input against
 
-<a id="query-params-item-regex-values"></a>&#x2022; [`regex_values`](#query-params-item-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="query-params-item-regex-values"></a>&#x2022; [`regex_values`](#query-params-item-regex-values) - Optional List<br>List of regular expressions to match the input against
 
-<a id="query-params-item-transformers"></a>&#x2022; [`transformers`](#query-params-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="query-params-item-transformers"></a>&#x2022; [`transformers`](#query-params-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Request Constraints
 
@@ -423,67 +423,67 @@ A [`request_constraints`](#request-constraints) block supports the following:
 
 <a id="exceeds-0e8746"></a>&#x2022; [`max_cookie_count_exceeds`](#exceeds-0e8746) - Optional Number<br>Match on the Count for all Cookies that exceed this value
 
-<a id="none-291d57"></a>&#x2022; [`max_cookie_count_none`](#none-291d57) - Optional Block<br>Enable this option
+<a id="none-291d57"></a>&#x2022; [`max_cookie_count_none`](#none-291d57) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-7352a4"></a>&#x2022; [`max_cookie_key_size_exceeds`](#exceeds-7352a4) - Optional Number<br>Match on the Name Size per Cookie that exceed this value
+<a id="exceeds-7352a4"></a>&#x2022; [`max_cookie_key_size_exceeds`](#exceeds-7352a4) - Optional Number
 
-<a id="none-0c2b38"></a>&#x2022; [`max_cookie_key_size_none`](#none-0c2b38) - Optional Block<br>Enable this option
+<a id="none-0c2b38"></a>&#x2022; [`max_cookie_key_size_none`](#none-0c2b38) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-ec487d"></a>&#x2022; [`max_cookie_value_size_exceeds`](#exceeds-ec487d) - Optional Number<br>Match on the Value Size per Cookie that exceed this value
+<a id="exceeds-ec487d"></a>&#x2022; [`max_cookie_value_size_exceeds`](#exceeds-ec487d) - Optional Number
 
-<a id="none-cfea13"></a>&#x2022; [`max_cookie_value_size_none`](#none-cfea13) - Optional Block<br>Enable this option
+<a id="none-cfea13"></a>&#x2022; [`max_cookie_value_size_none`](#none-cfea13) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="exceeds-d461a1"></a>&#x2022; [`max_header_count_exceeds`](#exceeds-d461a1) - Optional Number<br>Match on the Count for all Headers that exceed this value
 
-<a id="none-d12b83"></a>&#x2022; [`max_header_count_none`](#none-d12b83) - Optional Block<br>Enable this option
+<a id="none-d12b83"></a>&#x2022; [`max_header_count_none`](#none-d12b83) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-87df1c"></a>&#x2022; [`max_header_key_size_exceeds`](#exceeds-87df1c) - Optional Number<br>Match on the Name Size per Header that exceed this value
+<a id="exceeds-87df1c"></a>&#x2022; [`max_header_key_size_exceeds`](#exceeds-87df1c) - Optional Number
 
-<a id="none-6ea93c"></a>&#x2022; [`max_header_key_size_none`](#none-6ea93c) - Optional Block<br>Enable this option
+<a id="none-6ea93c"></a>&#x2022; [`max_header_key_size_none`](#none-6ea93c) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-883323"></a>&#x2022; [`max_header_value_size_exceeds`](#exceeds-883323) - Optional Number<br>Match on the Value Size per Header that exceed this value
+<a id="exceeds-883323"></a>&#x2022; [`max_header_value_size_exceeds`](#exceeds-883323) - Optional Number
 
-<a id="none-d2e74f"></a>&#x2022; [`max_header_value_size_none`](#none-d2e74f) - Optional Block<br>Enable this option
+<a id="none-d2e74f"></a>&#x2022; [`max_header_value_size_none`](#none-d2e74f) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-480590"></a>&#x2022; [`max_parameter_count_exceeds`](#exceeds-480590) - Optional Number<br>Match on the Parameter Count that exceed this value
+<a id="exceeds-480590"></a>&#x2022; [`max_parameter_count_exceeds`](#exceeds-480590) - Optional Number
 
-<a id="none-cea22c"></a>&#x2022; [`max_parameter_count_none`](#none-cea22c) - Optional Block<br>Enable this option
+<a id="none-cea22c"></a>&#x2022; [`max_parameter_count_none`](#none-cea22c) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-c96298"></a>&#x2022; [`max_parameter_name_size_exceeds`](#exceeds-c96298) - Optional Number<br>Match on the Parameter Name Size that exceed this value
+<a id="exceeds-c96298"></a>&#x2022; [`max_parameter_name_size_exceeds`](#exceeds-c96298) - Optional Number
 
-<a id="none-b2e47d"></a>&#x2022; [`max_parameter_name_size_none`](#none-b2e47d) - Optional Block<br>Enable this option
+<a id="none-b2e47d"></a>&#x2022; [`max_parameter_name_size_none`](#none-b2e47d) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-c345d4"></a>&#x2022; [`max_parameter_value_size_exceeds`](#exceeds-c345d4) - Optional Number<br>Match on the Parameter Value Size that exceed this value
+<a id="exceeds-c345d4"></a>&#x2022; [`max_parameter_value_size_exceeds`](#exceeds-c345d4) - Optional Number
 
-<a id="none-bd1b4b"></a>&#x2022; [`max_parameter_value_size_none`](#none-bd1b4b) - Optional Block<br>Enable this option
+<a id="none-bd1b4b"></a>&#x2022; [`max_parameter_value_size_none`](#none-bd1b4b) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="exceeds-a9b09b"></a>&#x2022; [`max_query_size_exceeds`](#exceeds-a9b09b) - Optional Number<br>Match on the URL Query Size that exceed this value
 
-<a id="request-constraints-max-query-size-none"></a>&#x2022; [`max_query_size_none`](#request-constraints-max-query-size-none) - Optional Block<br>Enable this option
+<a id="request-constraints-max-query-size-none"></a>&#x2022; [`max_query_size_none`](#request-constraints-max-query-size-none) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="exceeds-80bd97"></a>&#x2022; [`max_request_line_size_exceeds`](#exceeds-80bd97) - Optional Number<br>Match on the Request Line Size that exceed this value
+<a id="exceeds-80bd97"></a>&#x2022; [`max_request_line_size_exceeds`](#exceeds-80bd97) - Optional Number
 
-<a id="none-76b27d"></a>&#x2022; [`max_request_line_size_none`](#none-76b27d) - Optional Block<br>Enable this option
+<a id="none-76b27d"></a>&#x2022; [`max_request_line_size_none`](#none-76b27d) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="exceeds-2156ce"></a>&#x2022; [`max_request_size_exceeds`](#exceeds-2156ce) - Optional Number<br>Match on the Request Size that exceed this value
 
-<a id="none-250223"></a>&#x2022; [`max_request_size_none`](#none-250223) - Optional Block<br>Enable this option
+<a id="none-250223"></a>&#x2022; [`max_request_size_none`](#none-250223) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="exceeds-4ce081"></a>&#x2022; [`max_url_size_exceeds`](#exceeds-4ce081) - Optional Number<br>Match on the URL Size that exceed this value
 
-<a id="request-constraints-max-url-size-none"></a>&#x2022; [`max_url_size_none`](#request-constraints-max-url-size-none) - Optional Block<br>Enable this option
+<a id="request-constraints-max-url-size-none"></a>&#x2022; [`max_url_size_none`](#request-constraints-max-url-size-none) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Segment Policy
 
 A [`segment_policy`](#segment-policy) block supports the following:
 
-<a id="segment-policy-dst-any"></a>&#x2022; [`dst_any`](#segment-policy-dst-any) - Optional Block<br>Enable this option
+<a id="segment-policy-dst-any"></a>&#x2022; [`dst_any`](#segment-policy-dst-any) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="segment-policy-dst-segments"></a>&#x2022; [`dst_segments`](#segment-policy-dst-segments) - Optional Block<br>Segment List. List of references to Segments<br>See [Dst Segments](#segment-policy-dst-segments) below.
 
-<a id="segment-policy-intra-segment"></a>&#x2022; [`intra_segment`](#segment-policy-intra-segment) - Optional Block<br>Enable this option
+<a id="segment-policy-intra-segment"></a>&#x2022; [`intra_segment`](#segment-policy-intra-segment) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="segment-policy-src-any"></a>&#x2022; [`src_any`](#segment-policy-src-any) - Optional Block<br>Enable this option
+<a id="segment-policy-src-any"></a>&#x2022; [`src_any`](#segment-policy-src-any) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="segment-policy-src-segments"></a>&#x2022; [`src_segments`](#segment-policy-src-segments) - Optional Block<br>Segment List. List of references to Segments<br>See [Src Segments](#segment-policy-src-segments) below.
 
@@ -497,11 +497,11 @@ A [`dst_segments`](#segment-policy-dst-segments) block (within [`segment_policy`
 
 A [`segments`](#segment-policy-dst-segments-segments) block (within [`segment_policy.dst_segments`](#segment-policy-dst-segments)) supports the following:
 
-<a id="name-f84b81"></a>&#x2022; [`name`](#name-f84b81) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-f84b81"></a>&#x2022; [`name`](#name-f84b81) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-6bd8a4"></a>&#x2022; [`namespace`](#namespace-6bd8a4) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-6bd8a4"></a>&#x2022; [`namespace`](#namespace-6bd8a4) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-0605a6"></a>&#x2022; [`tenant`](#tenant-0605a6) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-0605a6"></a>&#x2022; [`tenant`](#tenant-0605a6) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Segment Policy Src Segments
 
@@ -513,11 +513,11 @@ A [`src_segments`](#segment-policy-src-segments) block (within [`segment_policy`
 
 A [`segments`](#segment-policy-src-segments-segments) block (within [`segment_policy.src_segments`](#segment-policy-src-segments)) supports the following:
 
-<a id="name-cd8043"></a>&#x2022; [`name`](#name-cd8043) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-cd8043"></a>&#x2022; [`name`](#name-cd8043) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-692ca8"></a>&#x2022; [`namespace`](#namespace-692ca8) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-692ca8"></a>&#x2022; [`namespace`](#namespace-692ca8) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-b9608a"></a>&#x2022; [`tenant`](#tenant-b9608a) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-b9608a"></a>&#x2022; [`tenant`](#tenant-b9608a) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 
@@ -535,33 +535,33 @@ A [`timeouts`](#timeouts) block supports the following:
 
 A [`tls_fingerprint_matcher`](#tls-fingerprint-matcher) block supports the following:
 
-<a id="tls-fingerprint-matcher-classes"></a>&#x2022; [`classes`](#tls-fingerprint-matcher-classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>See [TLS Fingerprints](#common-tls-fingerprints)<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
+<a id="tls-fingerprint-matcher-classes"></a>&#x2022; [`classes`](#tls-fingerprint-matcher-classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>See [TLS Fingerprints](#common-tls-fingerprints)<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] List of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
-<a id="tls-fingerprint-matcher-exact-values"></a>&#x2022; [`exact_values`](#tls-fingerprint-matcher-exact-values) - Optional List<br>Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
+<a id="tls-fingerprint-matcher-exact-values"></a>&#x2022; [`exact_values`](#tls-fingerprint-matcher-exact-values) - Optional List<br>List of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
 
-<a id="tls-fingerprint-matcher-excluded-values"></a>&#x2022; [`excluded_values`](#tls-fingerprint-matcher-excluded-values) - Optional List<br>Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher
+<a id="tls-fingerprint-matcher-excluded-values"></a>&#x2022; [`excluded_values`](#tls-fingerprint-matcher-excluded-values) - Optional List<br>List of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher
 
 #### WAF Action
 
 A [`waf_action`](#waf-action) block supports the following:
 
-<a id="control-b9f62f"></a>&#x2022; [`app_firewall_detection_control`](#control-b9f62f) - Optional Block<br>App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#control-b9f62f) below.
+<a id="control-b9f62f"></a>&#x2022; [`app_firewall_detection_control`](#control-b9f62f) - Optional Block<br>Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#control-b9f62f) below.
 
-<a id="waf-action-none"></a>&#x2022; [`none`](#waf-action-none) - Optional Block<br>Enable this option
+<a id="waf-action-none"></a>&#x2022; [`none`](#waf-action-none) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="waf-action-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#waf-action-waf-skip-processing) - Optional Block<br>Enable this option
+<a id="waf-action-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#waf-action-waf-skip-processing) - Optional Block<br>Can be used for messages where no values are needed
 
 #### WAF Action App Firewall Detection Control
 
 An [`app_firewall_detection_control`](#control-b9f62f) block (within [`waf_action`](#waf-action)) supports the following:
 
-<a id="contexts-69b36c"></a>&#x2022; [`exclude_attack_type_contexts`](#contexts-69b36c) - Optional Block<br>Attack Types. Attack Types to be excluded for the defined match criteria<br>See [Exclude Attack Type Contexts](#contexts-69b36c) below.
+<a id="contexts-69b36c"></a>&#x2022; [`exclude_attack_type_contexts`](#contexts-69b36c) - Optional Block<br>Attack Types to be excluded for the defined match criteria<br>See [Exclude Attack Type Contexts](#contexts-69b36c) below.
 
-<a id="contexts-08d37e"></a>&#x2022; [`exclude_bot_name_contexts`](#contexts-08d37e) - Optional Block<br>Bot Names. Bot Names to be excluded for the defined match criteria<br>See [Exclude Bot Name Contexts](#contexts-08d37e) below.
+<a id="contexts-08d37e"></a>&#x2022; [`exclude_bot_name_contexts`](#contexts-08d37e) - Optional Block<br>Bot Names to be excluded for the defined match criteria<br>See [Exclude Bot Name Contexts](#contexts-08d37e) below.
 
-<a id="contexts-6b7dbc"></a>&#x2022; [`exclude_signature_contexts`](#contexts-6b7dbc) - Optional Block<br>Signature IDs. Signature IDs to be excluded for the defined match criteria<br>See [Exclude Signature Contexts](#contexts-6b7dbc) below.
+<a id="contexts-6b7dbc"></a>&#x2022; [`exclude_signature_contexts`](#contexts-6b7dbc) - Optional Block<br>Signature IDs to be excluded for the defined match criteria<br>See [Exclude Signature Contexts](#contexts-6b7dbc) below.
 
-<a id="contexts-af5804"></a>&#x2022; [`exclude_violation_contexts`](#contexts-af5804) - Optional Block<br>Violations. Violations to be excluded for the defined match criteria<br>See [Exclude Violation Contexts](#contexts-af5804) below.
+<a id="contexts-af5804"></a>&#x2022; [`exclude_violation_contexts`](#contexts-af5804) - Optional Block<br>Violations to be excluded for the defined match criteria<br>See [Exclude Violation Contexts](#contexts-af5804) below.
 
 #### WAF Action App Firewall Detection Control Exclude Attack Type Contexts
 

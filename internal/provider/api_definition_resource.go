@@ -151,7 +151,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				ElementType:         types.StringType,
 			},
 			"swagger_specs": schema.ListAttribute{
-				MarkdownDescription: "File Path. Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files. Notice file versions. If OpenAPI file is updated, need to select a new version here to redefine the API.",
+				MarkdownDescription: "Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
@@ -171,55 +171,55 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				Delete: true,
 			}),
 			"api_inventory_exclusion_list": schema.ListNestedBlock{
-				MarkdownDescription: "API Inventory Exclusion List. List of API Endpoints excluded from the API Inventory.",
+				MarkdownDescription: "List of API Endpoints excluded from the API Inventory.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"method": schema.StringAttribute{
-							MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+							MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 							Optional:            true,
 						},
 						"path": schema.StringAttribute{
-							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification .",
+							MarkdownDescription: "Endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification .",
 							Optional:            true,
 						},
 					},
 				},
 			},
 			"api_inventory_inclusion_list": schema.ListNestedBlock{
-				MarkdownDescription: "API Inventory Inclusion List. List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list.",
+				MarkdownDescription: "List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"method": schema.StringAttribute{
-							MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+							MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 							Optional:            true,
 						},
 						"path": schema.StringAttribute{
-							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification .",
+							MarkdownDescription: "Endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification .",
 							Optional:            true,
 						},
 					},
 				},
 			},
 			"mixed_schema_origin": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: mixed_schema_origin, strict_schema_origin] Enable this option",
+				MarkdownDescription: "[OneOf: mixed_schema_origin, strict_schema_origin] Can be used for messages where no values are needed.",
 			},
 			"non_api_endpoints": schema.ListNestedBlock{
 				MarkdownDescription: "API Discovery Exclusion List. List of Non-API Endpoints.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"method": schema.StringAttribute{
-							MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+							MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 							Optional:            true,
 						},
 						"path": schema.StringAttribute{
-							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification .",
+							MarkdownDescription: "Endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification .",
 							Optional:            true,
 						},
 					},
 				},
 			},
 			"strict_schema_origin": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 		},
 	}

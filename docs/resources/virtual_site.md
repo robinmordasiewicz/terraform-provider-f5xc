@@ -60,9 +60,9 @@ resource "f5xc_virtual_site" "example" {
 
 ### Spec Argument Reference
 
-<a id="site-selector"></a>&#x2022; [`site_selector`](#site-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Site Selector](#site-selector) below for details.
+<a id="site-selector"></a>&#x2022; [`site_selector`](#site-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects<br>See [Site Selector](#site-selector) below for details.
 
-<a id="site-type"></a>&#x2022; [`site_type`](#site-type) - Optional String<br>Possible values are `INVALID`, `REGIONAL_EDGE`, `CUSTOMER_EDGE`, `NGINX_ONE`<br>[Enum: INVALID|REGIONAL_EDGE|CUSTOMER_EDGE|NGINX_ONE] Site Type. Site Type which can either RE or CE Invalid type of site Regional Edge site Customer Edge site
+<a id="site-type"></a>&#x2022; [`site_type`](#site-type) - Optional String<br>Possible values are `INVALID`, `REGIONAL_EDGE`, `CUSTOMER_EDGE`, `NGINX_ONE`<br>[Enum: INVALID|REGIONAL_EDGE|CUSTOMER_EDGE|NGINX_ONE] Site Type which can either RE or CE Invalid type of site Regional Edge site Customer Edge site
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -78,7 +78,7 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`site_selector`](#site-selector) block supports the following:
 
-<a id="site-selector-expressions"></a>&#x2022; [`expressions`](#site-selector-expressions) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
+<a id="site-selector-expressions"></a>&#x2022; [`expressions`](#site-selector-expressions) - Optional List<br>Expressions contains the Kubernetes style label expression for selections
 
 #### Timeouts
 

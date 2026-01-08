@@ -76,22 +76,22 @@ resource "f5xc_voltstack_site" "example" {
 
 ### Spec Argument Reference
 
-<a id="address"></a>&#x2022; [`address`](#address) - Optional String<br>Geographical Address. Site's geographical address that can be used to determine its latitude and longitude
+<a id="address"></a>&#x2022; [`address`](#address) - Optional String<br>Site's geographical address that can be used to determine its latitude and longitude
 
 -> **One of the following:**
-&#x2022; <a id="allow-all-usb"></a>[`allow_all_usb`](#allow-all-usb) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="deny-all-usb"></a>[`deny_all_usb`](#deny-all-usb) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="usb-policy"></a>[`usb_policy`](#usb-policy) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
+&#x2022; <a id="allow-all-usb"></a>[`allow_all_usb`](#allow-all-usb) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="deny-all-usb"></a>[`deny_all_usb`](#deny-all-usb) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="usb-policy"></a>[`usb_policy`](#usb-policy) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 
 -> **One of the following:**
-&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will GET disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
+&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable node local services on this site<br>See [Blocked Services](#blocked-services) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="bond-device-list"></a>[`bond_device_list`](#bond-device-list) - Optional Block<br>Bond Devices List. List of bond devices for this fleet<br>See [Bond Device List](#bond-device-list) below for details.
 
-<a id="coordinates"></a>&#x2022; [`coordinates`](#coordinates) - Optional Block<br>Site Coordinates. Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
+<a id="coordinates"></a>&#x2022; [`coordinates`](#coordinates) - Optional Block<br>Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
 
-<a id="custom-dns"></a>&#x2022; [`custom_dns`](#custom-dns) - Optional Block<br>Custom DNS. Custom DNS is the configured for specify CE site<br>See [Custom DNS](#custom-dns) below for details.
+<a id="custom-dns"></a>&#x2022; [`custom_dns`](#custom-dns) - Optional Block<br>Custom DNS is the configured for specify CE site<br>See [Custom DNS](#custom-dns) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="custom-network-config"></a>[`custom_network_config`](#custom-network-config) - Optional Block<br>VssNetworkConfiguration<br>See [Custom Network Config](#custom-network-config) below for details.
@@ -99,57 +99,57 @@ resource "f5xc_voltstack_site" "example" {
 -> **One of the following:**
 &#x2022; <a id="custom-storage-config"></a>[`custom_storage_config`](#custom-storage-config) - Optional Block<br>VssStorageConfiguration
 
-<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Enable this option
+<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="default-network-config"></a>&#x2022; [`default_network_config`](#default-network-config) - Optional Block<br>Enable this option
-
--> **One of the following:**
-&#x2022; <a id="default-sriov-interface"></a>[`default_sriov_interface`](#default-sriov-interface) - Optional Block<br>Enable this option
-
-<a id="default-storage-config"></a>&#x2022; [`default_storage_config`](#default-storage-config) - Optional Block<br>Enable this option
+<a id="default-network-config"></a>&#x2022; [`default_network_config`](#default-network-config) - Optional Block<br>Can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="disable-gpu"></a>[`disable_gpu`](#disable-gpu) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="enable-gpu"></a>[`enable_gpu`](#enable-gpu) - Optional Block<br>Enable this option
+&#x2022; <a id="default-sriov-interface"></a>[`default_sriov_interface`](#default-sriov-interface) - Optional Block<br>Can be used for messages where no values are needed
+
+<a id="default-storage-config"></a>&#x2022; [`default_storage_config`](#default-storage-config) - Optional Block<br>Can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="disable-vm"></a>[`disable_vm`](#disable-vm) - Optional Block<br>Enable this option
+&#x2022; <a id="disable-gpu"></a>[`disable_gpu`](#disable-gpu) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="enable-gpu"></a>[`enable_gpu`](#enable-gpu) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="enable-vgpu"></a>&#x2022; [`enable_vgpu`](#enable-vgpu) - Optional Block<br>VGPU Configuration. Licensing configuration for NVIDIA vGPU
+-> **One of the following:**
+&#x2022; <a id="disable-vm"></a>[`disable_vm`](#disable-vm) - Optional Block<br>Can be used for messages where no values are needed
+
+<a id="enable-vgpu"></a>&#x2022; [`enable_vgpu`](#enable-vgpu) - Optional Block<br>Licensing configuration for NVIDIA vGPU
 
 <a id="enable-vm"></a>&#x2022; [`enable_vm`](#enable-vm) - Optional Block<br>VM Configuration. VMs support configuration
 
 -> **One of the following:**
-&#x2022; <a id="k8s-cluster"></a>[`k8s_cluster`](#k8s-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
+&#x2022; <a id="k8s-cluster"></a>[`k8s_cluster`](#k8s-cluster) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 
-<a id="kubernetes-upgrade-drain"></a>&#x2022; [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) - Optional Block<br>Node by Node Upgrade. Specify how worker nodes within a site will be upgraded
-
--> **One of the following:**
-&#x2022; <a id="local-control-plane"></a>[`local_control_plane`](#local-control-plane) - Optional Block<br>Local Control Plane. Enable local control plane for L3VPN, SRV6, EVPN etc
+<a id="kubernetes-upgrade-drain"></a>&#x2022; [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) - Optional Block<br>Specify how worker nodes within a site will be upgraded
 
 -> **One of the following:**
-&#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Enable this option
+&#x2022; <a id="local-control-plane"></a>[`local_control_plane`](#local-control-plane) - Optional Block<br>Enable local control plane for L3VPN, SRV6, EVPN etc
 
-<a id="master-node-configuration"></a>&#x2022; [`master_node_configuration`](#master-node-configuration) - Optional Block<br>Master Nodes. Configuration of master nodes
+-> **One of the following:**
+&#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
+<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="no-bond-devices"></a>&#x2022; [`no_bond_devices`](#no-bond-devices) - Optional Block<br>Enable this option
+<a id="master-node-configuration"></a>&#x2022; [`master_node_configuration`](#master-node-configuration) - Optional Block<br>Configuration of master nodes
 
-<a id="no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#no-k8s-cluster) - Optional Block<br>Enable this option
+<a id="no-bond-devices"></a>&#x2022; [`no_bond_devices`](#no-bond-devices) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="no-local-control-plane"></a>&#x2022; [`no_local_control_plane`](#no-local-control-plane) - Optional Block<br>Enable this option
+<a id="no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#no-k8s-cluster) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen
+<a id="no-local-control-plane"></a>&#x2022; [`no_local_control_plane`](#no-local-control-plane) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="os"></a>&#x2022; [`os`](#os) - Optional Block<br>Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions
+<a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7
 
-<a id="sriov-interfaces"></a>&#x2022; [`sriov_interfaces`](#sriov-interfaces) - Optional Block<br>Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration
+<a id="os"></a>&#x2022; [`os`](#os) - Optional Block<br>Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions
 
-<a id="sw"></a>&#x2022; [`sw`](#sw) - Optional Block<br>F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions
+<a id="sriov-interfaces"></a>&#x2022; [`sriov_interfaces`](#sriov-interfaces) - Optional Block<br>List of all custom SR-IOV interfaces configuration
+
+<a id="sw"></a>&#x2022; [`sw`](#sw) - Optional Block<br>Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
-<a id="volterra-certified-hw"></a>&#x2022; [`volterra_certified_hw`](#volterra-certified-hw) - Optional String<br>Generic Server Certified Hardware. Name for generic server certified hardware to form this App Stack site
+<a id="volterra-certified-hw"></a>&#x2022; [`volterra_certified_hw`](#volterra-certified-hw) - Optional String<br>Name for generic server certified hardware to form this App Stack site
 
 <a id="worker-nodes"></a>&#x2022; [`worker_nodes`](#worker-nodes) - Optional List<br>Worker Nodes. Names of worker nodes
 
@@ -171,13 +171,13 @@ A [`blocked_services`](#blocked-services) block supports the following:
 
 A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_services`](#blocked-services)) supports the following:
 
-<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Enable this option
+<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="type-808ec9"></a>&#x2022; [`network_type`](#type-808ec9) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. For F5 Distributed Cloud fabric Constraints: It is currently only supported as internally created by the system. VK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on F5 Distributed Cloud RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<a id="type-808ec9"></a>&#x2022; [`network_type`](#type-808ec9) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
 
-<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Enable this option
+<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="interface-e57e21"></a>&#x2022; [`web_user_interface`](#interface-e57e21) - Optional Block<br>Enable this option
+<a id="interface-e57e21"></a>&#x2022; [`web_user_interface`](#interface-e57e21) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Bond Device List
 
@@ -189,23 +189,23 @@ A [`bond_device_list`](#bond-device-list) block supports the following:
 
 A [`bond_devices`](#bond-device-list-bond-devices) block (within [`bond_device_list`](#bond-device-list)) supports the following:
 
-<a id="backup-c22794"></a>&#x2022; [`active_backup`](#backup-c22794) - Optional Block<br>Enable this option
+<a id="backup-c22794"></a>&#x2022; [`active_backup`](#backup-c22794) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="bond-device-list-bond-devices-devices"></a>&#x2022; [`devices`](#bond-device-list-bond-devices-devices) - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
+<a id="bond-device-list-bond-devices-devices"></a>&#x2022; [`devices`](#bond-device-list-bond-devices-devices) - Optional List<br>Ethernet devices that will make up this bond
 
 <a id="bond-device-list-bond-devices-lacp"></a>&#x2022; [`lacp`](#bond-device-list-bond-devices-lacp) - Optional Block<br>LACP parameters. LACP parameters for the bond device<br>See [Lacp](#bond-device-list-bond-devices-lacp) below.
 
-<a id="interval-0b4c96"></a>&#x2022; [`link_polling_interval`](#interval-0b4c96) - Optional Number<br>Link Polling Interval. Link polling interval in milliseconds
+<a id="interval-0b4c96"></a>&#x2022; [`link_polling_interval`](#interval-0b4c96) - Optional Number<br>Link polling interval in milliseconds
 
-<a id="delay-b1200b"></a>&#x2022; [`link_up_delay`](#delay-b1200b) - Optional Number<br>Link Up Delay. Milliseconds wait before link is declared up
+<a id="delay-b1200b"></a>&#x2022; [`link_up_delay`](#delay-b1200b) - Optional Number<br>Milliseconds wait before link is declared up
 
-<a id="bond-device-list-bond-devices-name"></a>&#x2022; [`name`](#bond-device-list-bond-devices-name) - Optional String<br>Bond Device Name. Name for the Bond. Ex 'bond0'
+<a id="bond-device-list-bond-devices-name"></a>&#x2022; [`name`](#bond-device-list-bond-devices-name) - Optional String<br>Name for the Bond. Ex 'bond0'
 
 #### Bond Device List Bond Devices Lacp
 
 A [`lacp`](#bond-device-list-bond-devices-lacp) block (within [`bond_device_list.bond_devices`](#bond-device-list-bond-devices)) supports the following:
 
-<a id="bond-device-list-bond-devices-lacp-rate"></a>&#x2022; [`rate`](#bond-device-list-bond-devices-lacp-rate) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
+<a id="bond-device-list-bond-devices-lacp-rate"></a>&#x2022; [`rate`](#bond-device-list-bond-devices-lacp-rate) - Optional Number<br>Interval in seconds to transmit LACP packets
 
 #### Coordinates
 
@@ -219,65 +219,65 @@ A [`coordinates`](#coordinates) block supports the following:
 
 A [`custom_dns`](#custom-dns) block supports the following:
 
-<a id="custom-dns-inside-nameserver"></a>&#x2022; [`inside_nameserver`](#custom-dns-inside-nameserver) - Optional String<br>DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network
+<a id="custom-dns-inside-nameserver"></a>&#x2022; [`inside_nameserver`](#custom-dns-inside-nameserver) - Optional String<br>Optional DNS server IP to be used for name resolution in inside network
 
-<a id="custom-dns-outside-nameserver"></a>&#x2022; [`outside_nameserver`](#custom-dns-outside-nameserver) - Optional String<br>DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network
+<a id="custom-dns-outside-nameserver"></a>&#x2022; [`outside_nameserver`](#custom-dns-outside-nameserver) - Optional String<br>Optional DNS server IP to be used for name resolution in outside network
 
 #### Custom Network Config
 
 A [`custom_network_config`](#custom-network-config) block supports the following:
 
-<a id="policies-c4c984"></a>&#x2022; [`active_enhanced_firewall_policies`](#policies-c4c984) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#policies-c4c984) below.
+<a id="policies-c4c984"></a>&#x2022; [`active_enhanced_firewall_policies`](#policies-c4c984) - Optional Block<br>List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#policies-c4c984) below.
 
-<a id="policies-fbbf75"></a>&#x2022; [`active_forward_proxy_policies`](#policies-fbbf75) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#policies-fbbf75) below.
+<a id="policies-fbbf75"></a>&#x2022; [`active_forward_proxy_policies`](#policies-fbbf75) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#policies-fbbf75) below.
 
 <a id="policies-e8cb6b"></a>&#x2022; [`active_network_policies`](#policies-e8cb6b) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#policies-e8cb6b) below.
 
-<a id="custom-network-config-bgp-peer-address"></a>&#x2022; [`bgp_peer_address`](#custom-network-config-bgp-peer-address) - Optional String<br>BGP Peer Address. Optional BGP peer address that can be used as parameter for BGP configuration when BGP is configured to fetch BGP peer address from site Object. This can be used to change peer address per site in fleet
+<a id="custom-network-config-bgp-peer-address"></a>&#x2022; [`bgp_peer_address`](#custom-network-config-bgp-peer-address) - Optional String<br>Optional BGP peer address that can be used as parameter for BGP configuration when BGP is configured to fetch BGP peer address from site Object. This can be used to change peer address per site in fleet
 
-<a id="custom-network-config-bgp-router-id"></a>&#x2022; [`bgp_router_id`](#custom-network-config-bgp-router-id) - Optional String<br>BGP Router ID. Optional BGP router ID that can be used as parameter for BGP configuration when BGP is configured to fetch BGP router ID from site object
+<a id="custom-network-config-bgp-router-id"></a>&#x2022; [`bgp_router_id`](#custom-network-config-bgp-router-id) - Optional String<br>Optional BGP router ID that can be used as parameter for BGP configuration when BGP is configured to fetch BGP router ID from site object
 
-<a id="custom-network-config-default-config"></a>&#x2022; [`default_config`](#custom-network-config-default-config) - Optional Block<br>Enable this option
+<a id="custom-network-config-default-config"></a>&#x2022; [`default_config`](#custom-network-config-default-config) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="config-226341"></a>&#x2022; [`default_interface_config`](#config-226341) - Optional Block<br>Enable this option
+<a id="config-226341"></a>&#x2022; [`default_interface_config`](#config-226341) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="config-ac20e7"></a>&#x2022; [`default_sli_config`](#config-ac20e7) - Optional Block<br>Enable this option
+<a id="config-ac20e7"></a>&#x2022; [`default_sli_config`](#config-ac20e7) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="all-1d28e8"></a>&#x2022; [`forward_proxy_allow_all`](#all-1d28e8) - Optional Block<br>Enable this option
+<a id="all-1d28e8"></a>&#x2022; [`forward_proxy_allow_all`](#all-1d28e8) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="list-452116"></a>&#x2022; [`global_network_list`](#list-452116) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#list-452116) below.
 
-<a id="custom-network-config-interface-list"></a>&#x2022; [`interface_list`](#custom-network-config-interface-list) - Optional Block<br>List of Interface. Configure network interfaces for this App Stack site<br>See [Interface List](#custom-network-config-interface-list) below.
+<a id="custom-network-config-interface-list"></a>&#x2022; [`interface_list`](#custom-network-config-interface-list) - Optional Block<br>Configure network interfaces for this App Stack site<br>See [Interface List](#custom-network-config-interface-list) below.
 
-<a id="custom-network-config-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#custom-network-config-no-forward-proxy) - Optional Block<br>Enable this option
+<a id="custom-network-config-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#custom-network-config-no-forward-proxy) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="custom-network-config-no-global-network"></a>&#x2022; [`no_global_network`](#custom-network-config-no-global-network) - Optional Block<br>Enable this option
+<a id="custom-network-config-no-global-network"></a>&#x2022; [`no_global_network`](#custom-network-config-no-global-network) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="custom-network-config-no-network-policy"></a>&#x2022; [`no_network_policy`](#custom-network-config-no-network-policy) - Optional Block<br>Enable this option
+<a id="custom-network-config-no-network-policy"></a>&#x2022; [`no_network_policy`](#custom-network-config-no-network-policy) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="nameserver-8c35de"></a>&#x2022; [`outside_nameserver`](#nameserver-8c35de) - Optional String<br>DNS V4 Server for Local Network. Optional DNS server V4 IP to be used for name resolution in local network
+<a id="nameserver-8c35de"></a>&#x2022; [`outside_nameserver`](#nameserver-8c35de) - Optional String<br>Optional DNS server V4 IP to be used for name resolution in local network
 
-<a id="custom-network-config-outside-vip"></a>&#x2022; [`outside_vip`](#custom-network-config-outside-vip) - Optional String<br>Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP for site local network
+<a id="custom-network-config-outside-vip"></a>&#x2022; [`outside_vip`](#custom-network-config-outside-vip) - Optional String<br>Optional common virtual V4 IP across all nodes to be used as automatic VIP for site local network
 
-<a id="tunnel-ip-7f6123"></a>&#x2022; [`site_to_site_tunnel_ip`](#tunnel-ip-7f6123) - Optional String<br>Site Mesh Group Connection Via Virtual IP. Site Mesh Group Connection Via Virtual IP. This option will use the Virtual IP provided for creating IPsec between two sites which are part of the site mesh group
+<a id="tunnel-ip-7f6123"></a>&#x2022; [`site_to_site_tunnel_ip`](#tunnel-ip-7f6123) - Optional String<br>Site Mesh Group Connection Via Virtual IP. This option will use the Virtual IP provided for creating IPsec between two sites which are part of the site mesh group
 
-<a id="custom-network-config-sli-config"></a>&#x2022; [`sli_config`](#custom-network-config-sli-config) - Optional Block<br>Site Local Inside Network Configuration. Site local inside network configuration<br>See [SLI Config](#custom-network-config-sli-config) below.
+<a id="custom-network-config-sli-config"></a>&#x2022; [`sli_config`](#custom-network-config-sli-config) - Optional Block<br>Site local inside network configuration<br>See [SLI Config](#custom-network-config-sli-config) below.
 
 <a id="custom-network-config-slo-config"></a>&#x2022; [`slo_config`](#custom-network-config-slo-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [Slo Config](#custom-network-config-slo-config) below.
 
-<a id="public-ip-5fd49f"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-5fd49f) - Optional Block<br>Enable this option
+<a id="public-ip-5fd49f"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-5fd49f) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="pvt-ip-892ce0"></a>&#x2022; [`sm_connection_pvt_ip`](#pvt-ip-892ce0) - Optional Block<br>Enable this option
+<a id="pvt-ip-892ce0"></a>&#x2022; [`sm_connection_pvt_ip`](#pvt-ip-892ce0) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="timeout-1607a1"></a>&#x2022; [`tunnel_dead_timeout`](#timeout-1607a1) - Optional Number<br>Tunnel Dead Timeout (msec). Time interval, in millisec, within which any IPsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used
+<a id="timeout-1607a1"></a>&#x2022; [`tunnel_dead_timeout`](#timeout-1607a1) - Optional Number<br>Time interval, in millisec, within which any IPsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used
 
-<a id="custom-network-config-vip-vrrp-mode"></a>&#x2022; [`vip_vrrp_mode`](#custom-network-config-vip-vrrp-mode) - Optional String  Defaults to `VIP_VRRP_INVALID`<br>Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`<br>[Enum: VIP_VRRP_INVALID|VIP_VRRP_ENABLE|VIP_VRRP_DISABLE] VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode
+<a id="custom-network-config-vip-vrrp-mode"></a>&#x2022; [`vip_vrrp_mode`](#custom-network-config-vip-vrrp-mode) - Optional String  Defaults to `VIP_VRRP_INVALID`<br>Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`<br>[Enum: VIP_VRRP_INVALID|VIP_VRRP_ENABLE|VIP_VRRP_DISABLE] VRRP advertisement mode for VIP Invalid VRRP mode
 
 #### Custom Network Config Active Enhanced Firewall Policies
 
 An [`active_enhanced_firewall_policies`](#policies-c4c984) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
-<a id="policies-d28848"></a>&#x2022; [`enhanced_firewall_policies`](#policies-d28848) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#policies-d28848) below.
+<a id="policies-d28848"></a>&#x2022; [`enhanced_firewall_policies`](#policies-d28848) - Optional Block<br>Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#policies-d28848) below.
 
 #### Custom Network Config Active Enhanced Firewall Policies Enhanced Firewall Policies
 
@@ -287,7 +287,7 @@ An [`active_enhanced_firewall_policies`](#policies-c4c984) block (within [`custo
 
 An [`active_forward_proxy_policies`](#policies-fbbf75) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
-<a id="policies-3c82d8"></a>&#x2022; [`forward_proxy_policies`](#policies-3c82d8) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#policies-3c82d8) below.
+<a id="policies-3c82d8"></a>&#x2022; [`forward_proxy_policies`](#policies-3c82d8) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#policies-3c82d8) below.
 
 #### Custom Network Config Active Forward Proxy Policies Forward Proxy Policies
 
@@ -297,7 +297,7 @@ An [`active_forward_proxy_policies`](#policies-fbbf75) block (within [`custom_ne
 
 An [`active_network_policies`](#policies-e8cb6b) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
-<a id="policies-461fea"></a>&#x2022; [`network_policies`](#policies-461fea) - Optional Block<br>Firewall Policy. Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#policies-461fea) below.
+<a id="policies-461fea"></a>&#x2022; [`network_policies`](#policies-461fea) - Optional Block<br>Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#policies-461fea) below.
 
 #### Custom Network Config Active Network Policies Network Policies
 
@@ -307,7 +307,7 @@ An [`active_network_policies`](#policies-e8cb6b) block (within [`custom_network_
 
 A [`global_network_list`](#list-452116) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
-<a id="connections-1d58e6"></a>&#x2022; [`global_network_connections`](#connections-1d58e6) - Optional Block<br>Global Network Connections. Global network connections<br>See [Global Network Connections](#connections-1d58e6) below.
+<a id="connections-1d58e6"></a>&#x2022; [`global_network_connections`](#connections-1d58e6) - Optional Block<br>Global network connections<br>See [Global Network Connections](#connections-1d58e6) below.
 
 #### Custom Network Config Global Network List Global Network Connections
 
@@ -333,15 +333,15 @@ A [`global_network_list`](#list-452116) block (within [`custom_network_config`](
 
 An [`interface_list`](#custom-network-config-interface-list) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
-<a id="interfaces-e1b75d"></a>&#x2022; [`interfaces`](#interfaces-e1b75d) - Optional Block<br>List of Interface. Configure network interfaces for this App Stack site<br>See [Interfaces](#interfaces-e1b75d) below.
+<a id="interfaces-e1b75d"></a>&#x2022; [`interfaces`](#interfaces-e1b75d) - Optional Block<br>Configure network interfaces for this App Stack site<br>See [Interfaces](#interfaces-e1b75d) below.
 
 #### Custom Network Config Interface List Interfaces
 
 An [`interfaces`](#interfaces-e1b75d) block (within [`custom_network_config.interface_list`](#custom-network-config-interface-list)) supports the following:
 
-<a id="disabled-8e6c58"></a>&#x2022; [`dc_cluster_group_connectivity_interface_disabled`](#disabled-8e6c58) - Optional Block<br>Enable this option
+<a id="disabled-8e6c58"></a>&#x2022; [`dc_cluster_group_connectivity_interface_disabled`](#disabled-8e6c58) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="enabled-976919"></a>&#x2022; [`dc_cluster_group_connectivity_interface_enabled`](#enabled-976919) - Optional Block<br>Enable this option
+<a id="enabled-976919"></a>&#x2022; [`dc_cluster_group_connectivity_interface_enabled`](#enabled-976919) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="interface-5e9f68"></a>&#x2022; [`dedicated_interface`](#interface-5e9f68) - Optional Block<br>Dedicated Interface. Dedicated Interface Configuration<br>See [Dedicated Interface](#interface-5e9f68) below.
 
@@ -351,7 +351,7 @@ An [`interfaces`](#interfaces-e1b75d) block (within [`custom_network_config.inte
 
 <a id="interface-40e35f"></a>&#x2022; [`ethernet_interface`](#interface-40e35f) - Optional Block<br>Ethernet Interface. Ethernet Interface Configuration<br>See [Ethernet Interface](#interface-40e35f) below.
 
-<a id="labels-eb9e14"></a>&#x2022; [`labels`](#labels-eb9e14) - Optional Block<br>Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy
+<a id="labels-eb9e14"></a>&#x2022; [`labels`](#labels-eb9e14) - Optional Block<br>Add Labels for this Interface, these labels can be used in firewall policy
 
 <a id="interface-b0b4f4"></a>&#x2022; [`tunnel_interface`](#interface-b0b4f4) - Optional Block<br>Tunnel Interface. Tunnel Interface Configuration<br>See [Tunnel Interface](#interface-b0b4f4) below.
 
@@ -467,9 +467,9 @@ An [`interfaces`](#interfaces-e1b75d) block (within [`custom_network_config.inte
 
 A [`sli_config`](#custom-network-config-sli-config) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
-<a id="routes-ece448"></a>&#x2022; [`no_static_routes`](#routes-ece448) - Optional Block<br>Enable this option
+<a id="routes-ece448"></a>&#x2022; [`no_static_routes`](#routes-ece448) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="routes-ef5627"></a>&#x2022; [`no_v6_static_routes`](#routes-ef5627) - Optional Block<br>Enable this option
+<a id="routes-ef5627"></a>&#x2022; [`no_v6_static_routes`](#routes-ef5627) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="routes-766a73"></a>&#x2022; [`static_routes`](#routes-766a73) - Optional Block<br>Static Routes List. List of static routes<br>See [Static Routes](#routes-766a73) below.
 
@@ -521,15 +521,15 @@ A [`static_routes`](#routes-766a73) block (within [`custom_network_config.sli_co
 
 A [`slo_config`](#custom-network-config-slo-config) block (within [`custom_network_config`](#custom-network-config)) supports the following:
 
-<a id="group-4f2dd5"></a>&#x2022; [`dc_cluster_group`](#group-4f2dd5) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#group-4f2dd5) below.
+<a id="group-4f2dd5"></a>&#x2022; [`dc_cluster_group`](#group-4f2dd5) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#group-4f2dd5) below.
 
-<a id="custom-network-config-slo-config-labels"></a>&#x2022; [`labels`](#custom-network-config-slo-config-labels) - Optional Block<br>Network Labels. Add Labels for this network, these labels can be used in firewall policy
+<a id="custom-network-config-slo-config-labels"></a>&#x2022; [`labels`](#custom-network-config-slo-config-labels) - Optional Block<br>Add Labels for this network, these labels can be used in firewall policy
 
-<a id="group-babd4e"></a>&#x2022; [`no_dc_cluster_group`](#group-babd4e) - Optional Block<br>Enable this option
+<a id="group-babd4e"></a>&#x2022; [`no_dc_cluster_group`](#group-babd4e) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="routes-9a2e74"></a>&#x2022; [`no_static_routes`](#routes-9a2e74) - Optional Block<br>Enable this option
+<a id="routes-9a2e74"></a>&#x2022; [`no_static_routes`](#routes-9a2e74) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="routes-d536d3"></a>&#x2022; [`no_static_v6_routes`](#routes-d536d3) - Optional Block<br>Enable this option
+<a id="routes-d536d3"></a>&#x2022; [`no_static_v6_routes`](#routes-d536d3) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="routes-f61105"></a>&#x2022; [`static_routes`](#routes-f61105) - Optional Block<br>Static Routes List. List of static routes<br>See [Static Routes](#routes-f61105) below.
 
@@ -585,21 +585,21 @@ A [`static_routes`](#routes-f61105) block (within [`custom_network_config.slo_co
 
 A [`custom_storage_config`](#custom-storage-config) block supports the following:
 
-<a id="class-8a4650"></a>&#x2022; [`default_storage_class`](#class-8a4650) - Optional Block<br>Enable this option
+<a id="class-8a4650"></a>&#x2022; [`default_storage_class`](#class-8a4650) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="custom-storage-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#custom-storage-config-no-static-routes) - Optional Block<br>Enable this option
+<a id="custom-storage-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#custom-storage-config-no-static-routes) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="custom-storage-config-no-storage-device"></a>&#x2022; [`no_storage_device`](#custom-storage-config-no-storage-device) - Optional Block<br>Enable this option
+<a id="custom-storage-config-no-storage-device"></a>&#x2022; [`no_storage_device`](#custom-storage-config-no-storage-device) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="interfaces-a4a448"></a>&#x2022; [`no_storage_interfaces`](#interfaces-a4a448) - Optional Block<br>Enable this option
+<a id="interfaces-a4a448"></a>&#x2022; [`no_storage_interfaces`](#interfaces-a4a448) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="custom-storage-config-static-routes"></a>&#x2022; [`static_routes`](#custom-storage-config-static-routes) - Optional Block<br>Static Routes List. List of static routes<br>See [Static Routes](#custom-storage-config-static-routes) below.
 
-<a id="list-268762"></a>&#x2022; [`storage_class_list`](#list-268762) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in Kubernetes for this fleet<br>See [Storage Class List](#list-268762) below.
+<a id="list-268762"></a>&#x2022; [`storage_class_list`](#list-268762) - Optional Block<br>Add additional custom storage classes in Kubernetes for this fleet<br>See [Storage Class List](#list-268762) below.
 
-<a id="list-650498"></a>&#x2022; [`storage_device_list`](#list-650498) - Optional Block<br>Custom Storage Device List. Add additional custom storage classes in Kubernetes for this fleet<br>See [Storage Device List](#list-650498) below.
+<a id="list-650498"></a>&#x2022; [`storage_device_list`](#list-650498) - Optional Block<br>Add additional custom storage classes in Kubernetes for this fleet<br>See [Storage Device List](#list-650498) below.
 
-<a id="list-c6bbef"></a>&#x2022; [`storage_interface_list`](#list-c6bbef) - Optional Block<br>List of Interface. Configure storage interfaces for this App Stack site<br>See [Storage Interface List](#list-c6bbef) below.
+<a id="list-c6bbef"></a>&#x2022; [`storage_interface_list`](#list-c6bbef) - Optional Block<br>Configure storage interfaces for this App Stack site<br>See [Storage Interface List](#list-c6bbef) below.
 
 #### Custom Storage Config Static Routes
 
@@ -611,15 +611,15 @@ A [`static_routes`](#custom-storage-config-static-routes) block (within [`custom
 
 A [`static_routes`](#routes-38e4c5) block (within [`custom_storage_config.static_routes`](#custom-storage-config-static-routes)) supports the following:
 
-<a id="attrs-017f7f"></a>&#x2022; [`attrs`](#attrs-017f7f) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
+<a id="attrs-017f7f"></a>&#x2022; [`attrs`](#attrs-017f7f) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] List of attributes that control forwarding, dynamic routing and control plane (host) reachability
 
-<a id="gateway-64b546"></a>&#x2022; [`default_gateway`](#gateway-64b546) - Optional Block<br>Enable this option
+<a id="gateway-64b546"></a>&#x2022; [`default_gateway`](#gateway-64b546) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="address-3bde3d"></a>&#x2022; [`ip_address`](#address-3bde3d) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
+<a id="address-3bde3d"></a>&#x2022; [`ip_address`](#address-3bde3d) - Optional String<br>Traffic matching the IP prefixes is sent to this IP Address
 
-<a id="prefixes-277476"></a>&#x2022; [`ip_prefixes`](#prefixes-277476) - Optional List<br>IP Prefixes. List of route prefixes that have common next hop and attributes
+<a id="prefixes-277476"></a>&#x2022; [`ip_prefixes`](#prefixes-277476) - Optional List<br>List of route prefixes that have common next hop and attributes
 
-<a id="interface-9c7667"></a>&#x2022; [`node_interface`](#interface-9c7667) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#interface-9c7667) below.
+<a id="interface-9c7667"></a>&#x2022; [`node_interface`](#interface-9c7667) - Optional Block<br>On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#interface-9c7667) below.
 
 #### Custom Storage Config Static Routes Static Routes Node Interface
 
@@ -865,7 +865,7 @@ A [`storage_device_list`](#list-650498) block (within [`custom_storage_config`](
 
 A [`storage_interface_list`](#list-c6bbef) block (within [`custom_storage_config`](#custom-storage-config)) supports the following:
 
-<a id="interfaces-b05461"></a>&#x2022; [`storage_interfaces`](#interfaces-b05461) - Optional Block<br>List of Interface. Configure storage interfaces for this App Stack site<br>See [Storage Interfaces](#interfaces-b05461) below.
+<a id="interfaces-b05461"></a>&#x2022; [`storage_interfaces`](#interfaces-b05461) - Optional Block<br>Configure storage interfaces for this App Stack site<br>See [Storage Interfaces](#interfaces-b05461) below.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces
 
@@ -955,7 +955,7 @@ A [`storage_interface_list`](#list-c6bbef) block (within [`custom_storage_config
 
 An [`enable_vgpu`](#enable-vgpu) block supports the following:
 
-<a id="enable-vgpu-feature-type"></a>&#x2022; [`feature_type`](#enable-vgpu-feature-type) - Optional String  Defaults to `UNLICENSED`<br>Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`<br>[Enum: UNLICENSED|VGPU|VWS|VCS] Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server
+<a id="enable-vgpu-feature-type"></a>&#x2022; [`feature_type`](#enable-vgpu-feature-type) - Optional String  Defaults to `UNLICENSED`<br>Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`<br>[Enum: UNLICENSED|VGPU|VWS|VCS] Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server
 
 <a id="enable-vgpu-server-address"></a>&#x2022; [`server_address`](#enable-vgpu-server-address) - Optional String<br>License Server Address. Set License Server Address
 
@@ -965,31 +965,31 @@ An [`enable_vgpu`](#enable-vgpu) block supports the following:
 
 A [`k8s_cluster`](#k8s-cluster) block supports the following:
 
-<a id="k8s-cluster-name"></a>&#x2022; [`name`](#k8s-cluster-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="k8s-cluster-name"></a>&#x2022; [`name`](#k8s-cluster-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="k8s-cluster-namespace"></a>&#x2022; [`namespace`](#k8s-cluster-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="k8s-cluster-namespace"></a>&#x2022; [`namespace`](#k8s-cluster-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="k8s-cluster-tenant"></a>&#x2022; [`tenant`](#k8s-cluster-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="k8s-cluster-tenant"></a>&#x2022; [`tenant`](#k8s-cluster-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Kubernetes Upgrade Drain
 
 A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the following:
 
-<a id="drain-0d0936"></a>&#x2022; [`disable_upgrade_drain`](#drain-0d0936) - Optional Block<br>Enable this option
+<a id="drain-0d0936"></a>&#x2022; [`disable_upgrade_drain`](#drain-0d0936) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="drain-7e30d4"></a>&#x2022; [`enable_upgrade_drain`](#drain-7e30d4) - Optional Block<br>Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#drain-7e30d4) below.
+<a id="drain-7e30d4"></a>&#x2022; [`enable_upgrade_drain`](#drain-7e30d4) - Optional Block<br>Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#drain-7e30d4) below.
 
 #### Kubernetes Upgrade Drain Enable Upgrade Drain
 
 An [`enable_upgrade_drain`](#drain-7e30d4) block (within [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain)) supports the following:
 
-<a id="mode-668699"></a>&#x2022; [`disable_vega_upgrade_mode`](#mode-668699) - Optional Block<br>Enable this option
+<a id="mode-668699"></a>&#x2022; [`disable_vega_upgrade_mode`](#mode-668699) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="count-3aa796"></a>&#x2022; [`drain_max_unavailable_node_count`](#count-3aa796) - Optional Number<br>Node Batch Size Count
 
-<a id="timeout-ac4ee9"></a>&#x2022; [`drain_node_timeout`](#timeout-ac4ee9) - Optional Number<br>Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value)
+<a id="timeout-ac4ee9"></a>&#x2022; [`drain_node_timeout`](#timeout-ac4ee9) - Optional Number<br>Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is
 
-<a id="mode-9c557b"></a>&#x2022; [`enable_vega_upgrade_mode`](#mode-9c557b) - Optional Block<br>Enable this option
+<a id="mode-9c557b"></a>&#x2022; [`enable_vega_upgrade_mode`](#mode-9c557b) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Local Control Plane
 
@@ -997,9 +997,9 @@ A [`local_control_plane`](#local-control-plane) block supports the following:
 
 <a id="local-control-plane-bgp-config"></a>&#x2022; [`bgp_config`](#local-control-plane-bgp-config) - Optional Block<br>BGP Configuration. BGP configuration parameters<br>See [BGP Config](#local-control-plane-bgp-config) below.
 
-<a id="local-control-plane-inside-vn"></a>&#x2022; [`inside_vn`](#local-control-plane-inside-vn) - Optional Block<br>Enable this option
+<a id="local-control-plane-inside-vn"></a>&#x2022; [`inside_vn`](#local-control-plane-inside-vn) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="local-control-plane-outside-vn"></a>&#x2022; [`outside_vn`](#local-control-plane-outside-vn) - Optional Block<br>Enable this option
+<a id="local-control-plane-outside-vn"></a>&#x2022; [`outside_vn`](#local-control-plane-outside-vn) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Local Control Plane BGP Config
 
@@ -1013,23 +1013,23 @@ A [`bgp_config`](#local-control-plane-bgp-config) block (within [`local_control_
 
 A [`peers`](#local-control-plane-bgp-config-peers) block (within [`local_control_plane.bgp_config`](#local-control-plane-bgp-config)) supports the following:
 
-<a id="disabled-1a15e3"></a>&#x2022; [`bfd_disabled`](#disabled-1a15e3) - Optional Block<br>Enable this option
+<a id="disabled-1a15e3"></a>&#x2022; [`bfd_disabled`](#disabled-1a15e3) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="enabled-26ad69"></a>&#x2022; [`bfd_enabled`](#enabled-26ad69) - Optional Block<br>BFD. BFD parameters<br>See [Bfd Enabled](#enabled-26ad69) below.
 
-<a id="disable-4f02ea"></a>&#x2022; [`disable`](#disable-4f02ea) - Optional Block<br>Enable this option
+<a id="disable-4f02ea"></a>&#x2022; [`disable`](#disable-4f02ea) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="external-a31b05"></a>&#x2022; [`external`](#external-a31b05) - Optional Block<br>External BGP Peer. External BGP Peer parameters<br>See [External](#external-a31b05) below.
 
 <a id="label-83d47a"></a>&#x2022; [`label`](#label-83d47a) - Optional String<br>Label. Specify whether this peer should be
 
-<a id="metadata-fc2912"></a>&#x2022; [`metadata`](#metadata-fc2912) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#metadata-fc2912) below.
+<a id="metadata-fc2912"></a>&#x2022; [`metadata`](#metadata-fc2912) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#metadata-fc2912) below.
 
-<a id="disabled-002c76"></a>&#x2022; [`passive_mode_disabled`](#disabled-002c76) - Optional Block<br>Enable this option
+<a id="disabled-002c76"></a>&#x2022; [`passive_mode_disabled`](#disabled-002c76) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="enabled-9a2bed"></a>&#x2022; [`passive_mode_enabled`](#enabled-9a2bed) - Optional Block<br>Enable this option
+<a id="enabled-9a2bed"></a>&#x2022; [`passive_mode_enabled`](#enabled-9a2bed) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="policies-2724a9"></a>&#x2022; [`routing_policies`](#policies-2724a9) - Optional Block<br>BGP Routing Policy. List of rules which can be applied on all or particular nodes<br>See [Routing Policies](#policies-2724a9) below.
+<a id="policies-2724a9"></a>&#x2022; [`routing_policies`](#policies-2724a9) - Optional Block<br>List of rules which can be applied on all or particular nodes<br>See [Routing Policies](#policies-2724a9) below.
 
 #### Local Control Plane BGP Config Peers Bfd Enabled
 
@@ -1039,45 +1039,45 @@ A [`peers`](#local-control-plane-bgp-config-peers) block (within [`local_control
 
 An [`external`](#external-a31b05) block (within [`local_control_plane.bgp_config.peers`](#local-control-plane-bgp-config-peers)) supports the following:
 
-<a id="address-267ce4"></a>&#x2022; [`address`](#address-267ce4) - Optional String<br>Peer Address. Specify IPv4 peer address
+<a id="address-267ce4"></a>&#x2022; [`address`](#address-267ce4) - Optional String<br>Specify IPv4 peer address
 
-<a id="ipv6-b7bcf7"></a>&#x2022; [`address_ipv6`](#ipv6-b7bcf7) - Optional String<br>Peer IPv6 Address. Specify peer IPv6 address
+<a id="ipv6-b7bcf7"></a>&#x2022; [`address_ipv6`](#ipv6-b7bcf7) - Optional String<br>Specify peer IPv6 address
 
-<a id="asn-85f2ad"></a>&#x2022; [`asn`](#asn-85f2ad) - Optional Number<br>ASN. Autonomous System Number for BGP peer
+<a id="asn-85f2ad"></a>&#x2022; [`asn`](#asn-85f2ad) - Optional Number<br>Autonomous System Number for BGP peer
 
-<a id="gateway-546434"></a>&#x2022; [`default_gateway`](#gateway-546434) - Optional Block<br>Enable this option
+<a id="gateway-546434"></a>&#x2022; [`default_gateway`](#gateway-546434) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="gateway-v6-475482"></a>&#x2022; [`default_gateway_v6`](#gateway-v6-475482) - Optional Block<br>Enable this option
+<a id="gateway-v6-475482"></a>&#x2022; [`default_gateway_v6`](#gateway-v6-475482) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="disable-b2f80e"></a>&#x2022; [`disable`](#disable-b2f80e) - Optional Block<br>Enable this option
+<a id="disable-b2f80e"></a>&#x2022; [`disable`](#disable-b2f80e) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="disable-v6-d0e9ac"></a>&#x2022; [`disable_v6`](#disable-v6-d0e9ac) - Optional Block<br>Enable this option
+<a id="disable-v6-d0e9ac"></a>&#x2022; [`disable_v6`](#disable-v6-d0e9ac) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="connector-4797fa"></a>&#x2022; [`external_connector`](#connector-4797fa) - Optional Block<br>Enable this option
+<a id="connector-4797fa"></a>&#x2022; [`external_connector`](#connector-4797fa) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="inet-10a45f"></a>&#x2022; [`family_inet`](#inet-10a45f) - Optional Block<br>BGP Family Inet. Parameters for inet family<br>See [Family Inet](#inet-10a45f) below.
 
-<a id="site-47677d"></a>&#x2022; [`from_site`](#site-47677d) - Optional Block<br>Enable this option
+<a id="site-47677d"></a>&#x2022; [`from_site`](#site-47677d) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="site-v6-f9f6c0"></a>&#x2022; [`from_site_v6`](#site-v6-f9f6c0) - Optional Block<br>Enable this option
+<a id="site-v6-f9f6c0"></a>&#x2022; [`from_site_v6`](#site-v6-f9f6c0) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="interface-5533f3"></a>&#x2022; [`interface`](#interface-5533f3) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Interface](#interface-5533f3) below.
+<a id="interface-5533f3"></a>&#x2022; [`interface`](#interface-5533f3) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Interface](#interface-5533f3) below.
 
 <a id="list-b600b7"></a>&#x2022; [`interface_list`](#list-b600b7) - Optional Block<br>Interface List. List of network interfaces<br>See [Interface List](#list-b600b7) below.
 
-<a id="key-766f91"></a>&#x2022; [`md5_auth_key`](#key-766f91) - Optional String<br>MD5 Authentication Key. MD5 key for protecting BGP Sessions (RFC 2385)
+<a id="key-766f91"></a>&#x2022; [`md5_auth_key`](#key-766f91) - Optional String<br>MD5 key for protecting BGP Sessions (RFC 2385)
 
-<a id="authentication-089c59"></a>&#x2022; [`no_authentication`](#authentication-089c59) - Optional Block<br>Enable this option
+<a id="authentication-089c59"></a>&#x2022; [`no_authentication`](#authentication-089c59) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="port-3f6206"></a>&#x2022; [`port`](#port-3f6206) - Optional Number<br>Peer Port. Peer TCP port number
 
-<a id="offset-b3df90"></a>&#x2022; [`subnet_begin_offset`](#offset-b3df90) - Optional Number<br>Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet
+<a id="offset-b3df90"></a>&#x2022; [`subnet_begin_offset`](#offset-b3df90) - Optional Number<br>Calculate peer address using offset from the beginning of the subnet
 
-<a id="offset-v6-f6832a"></a>&#x2022; [`subnet_begin_offset_v6`](#offset-v6-f6832a) - Optional Number<br>Offset From Beginning Of Subnet. Calculate peer address using offset from the beginning of the subnet
+<a id="offset-v6-f6832a"></a>&#x2022; [`subnet_begin_offset_v6`](#offset-v6-f6832a) - Optional Number<br>Calculate peer address using offset from the beginning of the subnet
 
-<a id="offset-82ad06"></a>&#x2022; [`subnet_end_offset`](#offset-82ad06) - Optional Number<br>Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet
+<a id="offset-82ad06"></a>&#x2022; [`subnet_end_offset`](#offset-82ad06) - Optional Number<br>Calculate peer address using offset from the end of the subnet
 
-<a id="offset-v6-1ec41a"></a>&#x2022; [`subnet_end_offset_v6`](#offset-v6-1ec41a) - Optional Number<br>Offset From End Of Subnet. Calculate peer address using offset from the end of the subnet
+<a id="offset-v6-1ec41a"></a>&#x2022; [`subnet_end_offset_v6`](#offset-v6-1ec41a) - Optional Number<br>Calculate peer address using offset from the end of the subnet
 
 #### Local Control Plane BGP Config Peers External Family Inet
 
@@ -1101,7 +1101,7 @@ A [`metadata`](#metadata-fc2912) block (within [`local_control_plane.bgp_config.
 
 <a id="spec-61f831"></a>&#x2022; [`description_spec`](#spec-61f831) - Optional String<br>Description. Human readable description
 
-<a id="name-858922"></a>&#x2022; [`name`](#name-858922) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="name-858922"></a>&#x2022; [`name`](#name-858922) - Optional String<br>Name of the message. The value of name has to follow DNS-1035 format
 
 #### Local Control Plane BGP Config Peers Routing Policies
 
@@ -1123,11 +1123,11 @@ A [`metadata`](#metadata-fc2912) block (within [`local_control_plane.bgp_config.
 
 A [`log_receiver`](#log-receiver) block supports the following:
 
-<a id="log-receiver-name"></a>&#x2022; [`name`](#log-receiver-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="log-receiver-name"></a>&#x2022; [`name`](#log-receiver-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="log-receiver-namespace"></a>&#x2022; [`namespace`](#log-receiver-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="log-receiver-namespace"></a>&#x2022; [`namespace`](#log-receiver-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="log-receiver-tenant"></a>&#x2022; [`tenant`](#log-receiver-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="log-receiver-tenant"></a>&#x2022; [`tenant`](#log-receiver-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Master Node Configuration
 
@@ -1135,47 +1135,47 @@ A [`master_node_configuration`](#master-node-configuration) block supports the f
 
 <a id="master-node-configuration-name"></a>&#x2022; [`name`](#master-node-configuration-name) - Optional String<br>Name. Names of master node
 
-<a id="master-node-configuration-public-ip"></a>&#x2022; [`public_ip`](#master-node-configuration-public-ip) - Optional String<br>Public IP. IP Address of the master node. This IP will be used when other sites connect via Site Mesh Group
+<a id="master-node-configuration-public-ip"></a>&#x2022; [`public_ip`](#master-node-configuration-public-ip) - Optional String<br>IP Address of the master node. This IP will be used when other sites connect via Site Mesh Group
 
 #### Offline Survivability Mode
 
 An [`offline_survivability_mode`](#offline-survivability-mode) block supports the following:
 
-<a id="mode-565021"></a>&#x2022; [`enable_offline_survivability_mode`](#mode-565021) - Optional Block<br>Enable this option
+<a id="mode-565021"></a>&#x2022; [`enable_offline_survivability_mode`](#mode-565021) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="mode-02f0c8"></a>&#x2022; [`no_offline_survivability_mode`](#mode-02f0c8) - Optional Block<br>Enable this option
+<a id="mode-02f0c8"></a>&#x2022; [`no_offline_survivability_mode`](#mode-02f0c8) - Optional Block<br>Can be used for messages where no values are needed
 
 #### OS
 
 An [`os`](#os) block supports the following:
 
-<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Enable this option
+<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="os-operating-system-version"></a>&#x2022; [`operating_system_version`](#os-operating-system-version) - Optional String<br>Operating System Version. Specify a OS version to be used e.g. 9.2024.6
+<a id="os-operating-system-version"></a>&#x2022; [`operating_system_version`](#os-operating-system-version) - Optional String<br>Specify a OS version to be used e.g. 9.2024.6
 
 #### Sriov Interfaces
 
 A [`sriov_interfaces`](#sriov-interfaces) block supports the following:
 
-<a id="sriov-interfaces-sriov-interface"></a>&#x2022; [`sriov_interface`](#sriov-interfaces-sriov-interface) - Optional Block<br>Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration<br>See [Sriov Interface](#sriov-interfaces-sriov-interface) below.
+<a id="sriov-interfaces-sriov-interface"></a>&#x2022; [`sriov_interface`](#sriov-interfaces-sriov-interface) - Optional Block<br>Use custom SR-IOV interfaces Configuration<br>See [Sriov Interface](#sriov-interfaces-sriov-interface) below.
 
 #### Sriov Interfaces Sriov Interface
 
 A [`sriov_interface`](#sriov-interfaces-sriov-interface) block (within [`sriov_interfaces`](#sriov-interfaces)) supports the following:
 
-<a id="name-6aa533"></a>&#x2022; [`interface_name`](#name-6aa533) - Optional String<br>Name of physical interface. Name of SR-IOV physical interface
+<a id="name-6aa533"></a>&#x2022; [`interface_name`](#name-6aa533) - Optional String<br>Name of SR-IOV physical interface
 
-<a id="vfs-4b661e"></a>&#x2022; [`number_of_vfio_vfs`](#vfs-4b661e) - Optional Number<br>Number of virtual functions reserved for vfio. Number of virtual functions reserved for VNFs and DPDK-based CNFs
+<a id="vfs-4b661e"></a>&#x2022; [`number_of_vfio_vfs`](#vfs-4b661e) - Optional Number<br>Number of virtual functions reserved for VNFs and DPDK-based CNFs
 
-<a id="vfs-bf237a"></a>&#x2022; [`number_of_vfs`](#vfs-bf237a) - Optional Number<br>Total number of virtual functions. Total number of virtual functions
+<a id="vfs-bf237a"></a>&#x2022; [`number_of_vfs`](#vfs-bf237a) - Optional Number<br>Total number of virtual functions
 
 #### Sw
 
 A [`sw`](#sw) block supports the following:
 
-<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Enable this option
+<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. Crt-20210329-1002
+<a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>Specify a F5XC Software Version to be used e.g. Crt-20210329-1002
 
 #### Timeouts
 
@@ -1193,11 +1193,11 @@ A [`timeouts`](#timeouts) block supports the following:
 
 An [`usb_policy`](#usb-policy) block supports the following:
 
-<a id="usb-policy-name"></a>&#x2022; [`name`](#usb-policy-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="usb-policy-name"></a>&#x2022; [`name`](#usb-policy-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="usb-policy-namespace"></a>&#x2022; [`namespace`](#usb-policy-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="usb-policy-namespace"></a>&#x2022; [`namespace`](#usb-policy-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="usb-policy-tenant"></a>&#x2022; [`tenant`](#usb-policy-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="usb-policy-tenant"></a>&#x2022; [`tenant`](#usb-policy-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 ---
 

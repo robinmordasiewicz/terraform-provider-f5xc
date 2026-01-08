@@ -151,7 +151,7 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"interface_group": schema.StringAttribute{
-				MarkdownDescription: "[Enum: ANY_AVAILABLE_INTERFACE|INTERFACE_GROUP1|INTERFACE_GROUP2|INTERFACE_GROUP3] Interface Group. Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3. Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`. Defaults to `ANY_AVAILABLE_INTERFACE`.",
+				MarkdownDescription: "[Enum: ANY_AVAILABLE_INTERFACE|INTERFACE_GROUP1|INTERFACE_GROUP2|INTERFACE_GROUP3] Interface group, group membership by adding group label to interface Choose any of the available interfaces Choose all interfaces with label group1 Choose all interfaces with label group2 Choose all interfaces with label group3. Possible values are `ANY_AVAILABLE_INTERFACE`, `INTERFACE_GROUP1`, `INTERFACE_GROUP2`, `INTERFACE_GROUP3`. Defaults to `ANY_AVAILABLE_INTERFACE`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -159,7 +159,7 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"queue_id_to_use": schema.StringAttribute{
-				MarkdownDescription: "[Enum: DSCP_BEST_EFFORT|DSCP_CLASS1|DSCP_CLASS2|DSCP_CLASS3|DSCP_CLASS4|DSCP_EXPRESS_FORWARDING|DSCP_CONTROL_L3|DSCP_CONTROL_L2] Precedence Level Values. DSCP Precedence Level Values Best Effort service will GET any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT`.",
+				MarkdownDescription: "[Enum: DSCP_BEST_EFFORT|DSCP_CLASS1|DSCP_CLASS2|DSCP_CLASS3|DSCP_CLASS4|DSCP_EXPRESS_FORWARDING|DSCP_CONTROL_L3|DSCP_CONTROL_L2] DSCP Precedence Level Values Best Effort service will GET any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like.. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -167,7 +167,7 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"tos_value": schema.Int64Attribute{
-				MarkdownDescription: "TOS value. Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low.",
+				MarkdownDescription: "Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -186,37 +186,37 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				MarkdownDescription: "[OneOf: dscp, no_marking, tos_value; Default: no_marking] DSCP Marking setting. DSCP marking setting as per RFC 2475.",
 				Attributes: map[string]schema.Attribute{
 					"drop_precedence": schema.StringAttribute{
-						MarkdownDescription: "[Enum: DSCP_AF_LOW|DSCP_AF_MEDIUM|DSCP_AF_HIGH|DSCP_AF_POLICER] DSCP AF Drop Precedence. DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer. Possible values are `DSCP_AF_LOW`, `DSCP_AF_MEDIUM`, `DSCP_AF_HIGH`, `DSCP_AF_POLICER`. Defaults to `DSCP_AF_FAKE`.",
+						MarkdownDescription: "[Enum: DSCP_AF_LOW|DSCP_AF_MEDIUM|DSCP_AF_HIGH|DSCP_AF_POLICER] DSCP Assured forwarding drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP Low drop precedence DSCP drop precedence value is taken from output of policer. Possible values are `DSCP_AF_LOW`, `DSCP_AF_MEDIUM`, `DSCP_AF_HIGH`, `DSCP_AF_POLICER`. Defaults to `DSCP_AF_FAKE`.",
 						Optional:            true,
 					},
 					"dscp_class": schema.StringAttribute{
-						MarkdownDescription: "[Enum: DSCP_BEST_EFFORT|DSCP_CLASS1|DSCP_CLASS2|DSCP_CLASS3|DSCP_CLASS4|DSCP_EXPRESS_FORWARDING|DSCP_CONTROL_L3|DSCP_CONTROL_L2] Precedence Level Values. DSCP Precedence Level Values Best Effort service will GET any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like LACP or keepalive, not recommended. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT`.",
+						MarkdownDescription: "[Enum: DSCP_BEST_EFFORT|DSCP_CLASS1|DSCP_CLASS2|DSCP_CLASS3|DSCP_CLASS4|DSCP_EXPRESS_FORWARDING|DSCP_CONTROL_L3|DSCP_CONTROL_L2] DSCP Precedence Level Values Best Effort service will GET any available bandwidth DSCP Class 1 service DSCP Class 2 service DSCP Class 3 service DSCP Class 4 service Express Forwarding is used for low latency traffic Control is used for routing traffic, not recommended Link Layer traffic like.. Possible values are `DSCP_BEST_EFFORT`, `DSCP_CLASS1`, `DSCP_CLASS2`, `DSCP_CLASS3`, `DSCP_CLASS4`, `DSCP_EXPRESS_FORWARDING`, `DSCP_CONTROL_L3`, `DSCP_CONTROL_L2`. Defaults to `DSCP_BEST_EFFORT`.",
 						Optional:            true,
 					},
 				},
 			},
 			"dscp_based_queue": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: dscp_based_queue, queue_id_to_use] Enable this option",
+				MarkdownDescription: "[OneOf: dscp_based_queue, queue_id_to_use] Can be used for messages where no values are needed.",
 			},
 			"no_marking": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"no_policer": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_policer, policer; Default: no_policer] Enable this option",
+				MarkdownDescription: "[OneOf: no_policer, policer; Default: no_policer] Can be used for messages where no values are needed.",
 			},
 			"policer": schema.SingleNestedBlock{
-				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+				MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{

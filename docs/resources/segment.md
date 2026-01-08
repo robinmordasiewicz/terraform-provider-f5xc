@@ -32,11 +32,11 @@ resource "f5xc_segment" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: disable, enable] Enable this option
+  # [OneOf: disable, enable] Can be used for messages where n...
   disable {
     # Configure disable settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   enable {
     # Configure enable settings
   }
@@ -56,14 +56,14 @@ resource "f5xc_segment" "example" {
 
 <a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
 
-<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Block<br>Enable this option
+<a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="enable"></a>[`enable`](#enable) - Optional Block<br>Enable this option
+&#x2022; <a id="enable"></a>[`enable`](#enable) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

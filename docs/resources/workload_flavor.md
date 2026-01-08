@@ -52,13 +52,13 @@ resource "f5xc_workload_flavor" "example" {
 
 ### Spec Argument Reference
 
-<a id="ephemeral-storage"></a>&#x2022; [`ephemeral_storage`](#ephemeral-storage) - Optional String<br>Ephemeral Storage (MiB). Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor
+<a id="ephemeral-storage"></a>&#x2022; [`ephemeral_storage`](#ephemeral-storage) - Optional String<br>Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor
 
-<a id="memory"></a>&#x2022; [`memory`](#memory) - Optional String<br>Memory (MiB). Memory in MiB (mebibyte) allocated for the workload_flavor
+<a id="memory"></a>&#x2022; [`memory`](#memory) - Optional String<br>Memory in MiB (mebibyte) allocated for the workload_flavor
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="vcpus"></a>&#x2022; [`vcpus`](#vcpus) - Optional Number<br>VCPUs. Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core
+<a id="vcpus"></a>&#x2022; [`vcpus`](#vcpus) - Optional Number<br>Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core
 
 ### Attributes Reference
 

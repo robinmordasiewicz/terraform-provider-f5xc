@@ -175,41 +175,41 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 				Delete: true,
 			}),
 			"mitigation_type": schema.SingleNestedBlock{
-				MarkdownDescription: "Malicious User Mitigation Settings. Settings that specify the actions to be taken when malicious users are determined to be at different threat levels. User's activity is monitored and continuously analyzed for malicious behavior. From this analysis, a threat-level is assigned to each user. The settings defined in malicious user mitigation specify what mitigation actions to take for user determined to be at different threat levels.",
+				MarkdownDescription: "Settings that specify the actions to be taken when malicious users are determined to be at different threat levels. User's activity is monitored and continuously analyzed for malicious behavior. From this analysis, a threat-level is assigned to each user.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
-						MarkdownDescription: "Rules. Define the threat levels and the corresponding mitigation actions to be taken .",
+						MarkdownDescription: "Define the threat levels and the corresponding mitigation actions to be taken .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"mitigation_action": schema.SingleNestedBlock{
-									MarkdownDescription: "Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user.",
+									MarkdownDescription: "Supported actions that can be taken to mitigate malicious activity from a user.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"block_temporarily": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"captcha_challenge": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"javascript_challenge": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 									},
 								},
 								"threat_level": schema.SingleNestedBlock{
-									MarkdownDescription: "Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation.",
+									MarkdownDescription: "Threat level estimated for each user based on the user's activity and reputation.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"high": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"low": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"medium": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 									},
 								},

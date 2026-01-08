@@ -116,7 +116,7 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"burst_size": schema.Int64Attribute{
-				MarkdownDescription: "Burst Size(pps). The maximum size permitted for bursts of data. E.g. 10000 pps burst .",
+				MarkdownDescription: "The maximum size permitted for bursts of data. E.g. 10000 pps burst .",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -124,7 +124,7 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"committed_information_rate": schema.Int64Attribute{
-				MarkdownDescription: "Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps .",
+				MarkdownDescription: "The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps .",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -132,7 +132,7 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"policer_mode": schema.StringAttribute{
-				MarkdownDescription: "[Enum: POLICER_MODE_NOT_SHARED|POLICER_MODE_SHARED] Policer Mode. - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`. Defaults to `POLICER_MODE_NOT_SHARED`.",
+				MarkdownDescription: "[Enum: POLICER_MODE_NOT_SHARED|POLICER_MODE_SHARED] - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`. Defaults to `POLICER_MODE_NOT_SHARED`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -140,7 +140,7 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"policer_type": schema.StringAttribute{
-				MarkdownDescription: "[Enum: POLICER_SINGLE_RATE_TWO_COLOR] Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`. Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`.",
+				MarkdownDescription: "[Enum: POLICER_SINGLE_RATE_TWO_COLOR] Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`. Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{

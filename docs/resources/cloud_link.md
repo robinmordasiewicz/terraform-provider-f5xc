@@ -36,7 +36,7 @@ resource "f5xc_cloud_link" "example" {
   aws {
     # Configure aws settings
   }
-  # Object reference. This type establishes a direct referenc...
+  # Type establishes a direct reference from one object(the r...
   aws_cred {
     # Configure aws_cred settings
   }
@@ -71,7 +71,7 @@ resource "f5xc_cloud_link" "example" {
 <br><br>&#x2022; <a id="gcp"></a>[`gcp`](#gcp) - Optional Block<br>Google Cloud Platform (GCP) CloudLink Provider. CloudLink for GCP Cloud Provider<br>See [GCP](#gcp) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="disabled"></a>[`disabled`](#disabled) - Optional Block<br>Enable this option
+&#x2022; <a id="disabled"></a>[`disabled`](#disabled) - Optional Block<br>Can be used for messages where no values are needed
 <br><br>&#x2022; <a id="enabled"></a>[`enabled`](#enabled) - Optional Block<br>CloudLink ADN Network Config<br>See [Enabled](#enabled) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
@@ -88,61 +88,61 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`aws`](#aws) block supports the following:
 
-<a id="aws-aws-cred"></a>&#x2022; [`aws_cred`](#aws-aws-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [AWS Cred](#aws-aws-cred) below.
+<a id="aws-aws-cred"></a>&#x2022; [`aws_cred`](#aws-aws-cred) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [AWS Cred](#aws-aws-cred) below.
 
 <a id="aws-byoc"></a>&#x2022; [`byoc`](#aws-byoc) - Optional Block<br>Bring Your Own Connections. List of Bring You Own Connection<br>See [Byoc](#aws-byoc) below.
 
-<a id="aws-custom-asn"></a>&#x2022; [`custom_asn`](#aws-custom-asn) - Optional Number<br>Custom ASN. F5XC will use custom ASN to create a Direct Connect Gateway
+<a id="aws-custom-asn"></a>&#x2022; [`custom_asn`](#aws-custom-asn) - Optional Number<br>F5XC will use custom ASN to create a Direct Connect Gateway
 
 #### AWS AWS Cred
 
 An [`aws_cred`](#aws-aws-cred) block (within [`aws`](#aws)) supports the following:
 
-<a id="aws-aws-cred-name"></a>&#x2022; [`name`](#aws-aws-cred-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="aws-aws-cred-name"></a>&#x2022; [`name`](#aws-aws-cred-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="aws-aws-cred-namespace"></a>&#x2022; [`namespace`](#aws-aws-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="aws-aws-cred-namespace"></a>&#x2022; [`namespace`](#aws-aws-cred-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="aws-aws-cred-tenant"></a>&#x2022; [`tenant`](#aws-aws-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="aws-aws-cred-tenant"></a>&#x2022; [`tenant`](#aws-aws-cred-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### AWS Byoc
 
 A [`byoc`](#aws-byoc) block (within [`aws`](#aws)) supports the following:
 
-<a id="aws-byoc-connections"></a>&#x2022; [`connections`](#aws-byoc-connections) - Optional Block<br>Bring Your Own Connections. List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs<br>See [Connections](#aws-byoc-connections) below.
+<a id="aws-byoc-connections"></a>&#x2022; [`connections`](#aws-byoc-connections) - Optional Block<br>List of Bring You Own Connections. These AWS Direct Connect connections are not managed by F5XC but will be used for connecting sites and REs<br>See [Connections](#aws-byoc-connections) below.
 
 #### AWS Byoc Connections
 
 A [`connections`](#aws-byoc-connections) block (within [`aws.byoc`](#aws-byoc)) supports the following:
 
-<a id="aws-byoc-connections-auth-key"></a>&#x2022; [`auth_key`](#aws-byoc-connections-auth-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Auth Key](#aws-byoc-connections-auth-key) below.
+<a id="aws-byoc-connections-auth-key"></a>&#x2022; [`auth_key`](#aws-byoc-connections-auth-key) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Auth Key](#aws-byoc-connections-auth-key) below.
 
-<a id="aws-byoc-connections-bgp-asn"></a>&#x2022; [`bgp_asn`](#aws-byoc-connections-bgp-asn) - Optional Number<br>BGP ASN. The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS
+<a id="aws-byoc-connections-bgp-asn"></a>&#x2022; [`bgp_asn`](#aws-byoc-connections-bgp-asn) - Optional Number<br>The Border Gateway Protocol (BGP) Autonomous System Number (ASN) of your on-premises router for the new virtual interface to be configured on AWS
 
-<a id="aws-byoc-connections-connection-id"></a>&#x2022; [`connection_id`](#aws-byoc-connections-connection-id) - Optional String<br>Direct Connect Connection ID. ID of the existing AWS Direct Connect Connection
+<a id="aws-byoc-connections-connection-id"></a>&#x2022; [`connection_id`](#aws-byoc-connections-connection-id) - Optional String<br>ID of the existing AWS Direct Connect Connection
 
-<a id="aws-byoc-connections-ipv4"></a>&#x2022; [`ipv4`](#aws-byoc-connections-ipv4) - Optional Block<br>IPv4 Peering. Configure BGP IPv4 peering for endpoints<br>See [IPv4](#aws-byoc-connections-ipv4) below.
+<a id="aws-byoc-connections-ipv4"></a>&#x2022; [`ipv4`](#aws-byoc-connections-ipv4) - Optional Block<br>Configure BGP IPv4 peering for endpoints<br>See [IPv4](#aws-byoc-connections-ipv4) below.
 
-<a id="aws-byoc-connections-metadata"></a>&#x2022; [`metadata`](#aws-byoc-connections-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#aws-byoc-connections-metadata) below.
+<a id="aws-byoc-connections-metadata"></a>&#x2022; [`metadata`](#aws-byoc-connections-metadata) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#aws-byoc-connections-metadata) below.
 
-<a id="aws-byoc-connections-region"></a>&#x2022; [`region`](#aws-byoc-connections-region) - Optional String<br>Region. Region where the connection is setup
+<a id="aws-byoc-connections-region"></a>&#x2022; [`region`](#aws-byoc-connections-region) - Optional String<br>Region where the connection is setup
 
-<a id="name-ebc6a3"></a>&#x2022; [`system_generated_name`](#name-ebc6a3) - Optional Block<br>Enable this option
+<a id="name-ebc6a3"></a>&#x2022; [`system_generated_name`](#name-ebc6a3) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="aws-byoc-connections-tags"></a>&#x2022; [`tags`](#aws-byoc-connections-tags) - Optional Block<br>AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags
+<a id="aws-byoc-connections-tags"></a>&#x2022; [`tags`](#aws-byoc-connections-tags) - Optional Block<br>AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags
 
-<a id="aws-byoc-connections-user-assigned-name"></a>&#x2022; [`user_assigned_name`](#aws-byoc-connections-user-assigned-name) - Optional String<br>User Assigned. User is managing the AWS resource name
+<a id="aws-byoc-connections-user-assigned-name"></a>&#x2022; [`user_assigned_name`](#aws-byoc-connections-user-assigned-name) - Optional String<br>User is managing the AWS resource name
 
-<a id="type-228d5c"></a>&#x2022; [`virtual_interface_type`](#type-228d5c) - Optional String  Defaults to `PRIVATE`<br>[Enum: PRIVATE] Virtual Interface Type. Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. The only possible value is `PRIVATE`
+<a id="type-228d5c"></a>&#x2022; [`virtual_interface_type`](#type-228d5c) - Optional String  Defaults to `PRIVATE`<br>[Enum: PRIVATE] Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect.. The only possible value is `PRIVATE`
 
-<a id="aws-byoc-connections-vlan"></a>&#x2022; [`vlan`](#aws-byoc-connections-vlan) - Optional Number<br>Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection
+<a id="aws-byoc-connections-vlan"></a>&#x2022; [`vlan`](#aws-byoc-connections-vlan) - Optional Number<br>Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection
 
 #### AWS Byoc Connections Auth Key
 
 An [`auth_key`](#aws-byoc-connections-auth-key) block (within [`aws.byoc.connections`](#aws-byoc-connections)) supports the following:
 
-<a id="info-79ff82"></a>&#x2022; [`blindfold_secret_info`](#info-79ff82) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-79ff82) below.
+<a id="info-79ff82"></a>&#x2022; [`blindfold_secret_info`](#info-79ff82) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-79ff82) below.
 
-<a id="info-dc68b3"></a>&#x2022; [`clear_secret_info`](#info-dc68b3) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-dc68b3) below.
+<a id="info-dc68b3"></a>&#x2022; [`clear_secret_info`](#info-dc68b3) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-dc68b3) below.
 
 #### AWS Byoc Connections Auth Key Blindfold Secret Info
 
@@ -156,9 +156,9 @@ An [`auth_key`](#aws-byoc-connections-auth-key) block (within [`aws.byoc.connect
 
 An [`ipv4`](#aws-byoc-connections-ipv4) block (within [`aws.byoc.connections`](#aws-byoc-connections)) supports the following:
 
-<a id="address-e6b5fb"></a>&#x2022; [`aws_router_peer_address`](#address-e6b5fb) - Optional String<br>AWS Router IP/Prefix. The BGP peer IP configured on the AWS endpoint
+<a id="address-e6b5fb"></a>&#x2022; [`aws_router_peer_address`](#address-e6b5fb) - Optional String<br>The BGP peer IP configured on the AWS endpoint
 
-<a id="address-f93baf"></a>&#x2022; [`router_peer_address`](#address-f93baf) - Optional String<br>Customer Router IP/Prefix. The BGP peer IP configured on your (customer) endpoint
+<a id="address-f93baf"></a>&#x2022; [`router_peer_address`](#address-f93baf) - Optional String<br>The BGP peer IP configured on your (customer) endpoint
 
 #### AWS Byoc Connections Metadata
 
@@ -166,13 +166,13 @@ A [`metadata`](#aws-byoc-connections-metadata) block (within [`aws.byoc.connecti
 
 <a id="spec-644d4f"></a>&#x2022; [`description_spec`](#spec-644d4f) - Optional String<br>Description. Human readable description
 
-<a id="aws-byoc-connections-metadata-name"></a>&#x2022; [`name`](#aws-byoc-connections-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="aws-byoc-connections-metadata-name"></a>&#x2022; [`name`](#aws-byoc-connections-metadata-name) - Optional String<br>Name of the message. The value of name has to follow DNS-1035 format
 
 #### Enabled
 
 An [`enabled`](#enabled) block supports the following:
 
-<a id="enabled-cloudlink-network-name"></a>&#x2022; [`cloudlink_network_name`](#enabled-cloudlink-network-name) - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
+<a id="enabled-cloudlink-network-name"></a>&#x2022; [`cloudlink_network_name`](#enabled-cloudlink-network-name) - Optional String<br>Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
 
 #### GCP
 
@@ -180,27 +180,27 @@ A [`gcp`](#gcp) block supports the following:
 
 <a id="gcp-byoc"></a>&#x2022; [`byoc`](#gcp-byoc) - Optional Block<br>GCP Bring Your Own Connections. List of GCP Bring You Own Connections<br>See [Byoc](#gcp-byoc) below.
 
-<a id="gcp-gcp-cred"></a>&#x2022; [`gcp_cred`](#gcp-gcp-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [GCP Cred](#gcp-gcp-cred) below.
+<a id="gcp-gcp-cred"></a>&#x2022; [`gcp_cred`](#gcp-gcp-cred) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [GCP Cred](#gcp-gcp-cred) below.
 
 #### GCP Byoc
 
 A [`byoc`](#gcp-byoc) block (within [`gcp`](#gcp)) supports the following:
 
-<a id="gcp-byoc-connections"></a>&#x2022; [`connections`](#gcp-byoc-connections) - Optional Block<br>Bring Your Own Connections. Each 'Bring Your Own Connection' represents a virtual connection that the customer has provisioned in the Cloud (example: AWS Direct Connect). F5XC will orchestrate networking resources in the cloud to facilitate seamless private connectivity<br>See [Connections](#gcp-byoc-connections) below.
+<a id="gcp-byoc-connections"></a>&#x2022; [`connections`](#gcp-byoc-connections) - Optional Block<br>Each 'Bring Your Own Connection' represents a virtual connection that the customer has provisioned in the Cloud (<br>See [Connections](#gcp-byoc-connections) below.
 
 #### GCP Byoc Connections
 
 A [`connections`](#gcp-byoc-connections) block (within [`gcp.byoc`](#gcp-byoc)) supports the following:
 
-<a id="name-35ddb5"></a>&#x2022; [`interconnect_attachment_name`](#name-35ddb5) - Optional String<br>Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment
+<a id="name-35ddb5"></a>&#x2022; [`interconnect_attachment_name`](#name-35ddb5) - Optional String<br>Name of already-existing GCP Cloud Interconnect Attachment
 
-<a id="gcp-byoc-connections-metadata"></a>&#x2022; [`metadata`](#gcp-byoc-connections-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#gcp-byoc-connections-metadata) below.
+<a id="gcp-byoc-connections-metadata"></a>&#x2022; [`metadata`](#gcp-byoc-connections-metadata) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#gcp-byoc-connections-metadata) below.
 
-<a id="gcp-byoc-connections-project"></a>&#x2022; [`project`](#gcp-byoc-connections-project) - Optional String<br>Specified Project. Specify a GCP Project for the interconnect attachment
+<a id="gcp-byoc-connections-project"></a>&#x2022; [`project`](#gcp-byoc-connections-project) - Optional String<br>Specify a GCP Project for the interconnect attachment
 
-<a id="gcp-byoc-connections-region"></a>&#x2022; [`region`](#gcp-byoc-connections-region) - Optional String<br>Region. GCP Region in which the GCP Cloud Interconnect attachment is configured
+<a id="gcp-byoc-connections-region"></a>&#x2022; [`region`](#gcp-byoc-connections-region) - Optional String<br>GCP Region in which the GCP Cloud Interconnect attachment is configured
 
-<a id="gcp-byoc-connections-same-as-credential"></a>&#x2022; [`same_as_credential`](#gcp-byoc-connections-same-as-credential) - Optional Block<br>Enable this option
+<a id="gcp-byoc-connections-same-as-credential"></a>&#x2022; [`same_as_credential`](#gcp-byoc-connections-same-as-credential) - Optional Block<br>Can be used for messages where no values are needed
 
 #### GCP Byoc Connections Metadata
 
@@ -208,17 +208,17 @@ A [`metadata`](#gcp-byoc-connections-metadata) block (within [`gcp.byoc.connecti
 
 <a id="spec-5e10f2"></a>&#x2022; [`description_spec`](#spec-5e10f2) - Optional String<br>Description. Human readable description
 
-<a id="gcp-byoc-connections-metadata-name"></a>&#x2022; [`name`](#gcp-byoc-connections-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="gcp-byoc-connections-metadata-name"></a>&#x2022; [`name`](#gcp-byoc-connections-metadata-name) - Optional String<br>Name of the message. The value of name has to follow DNS-1035 format
 
 #### GCP GCP Cred
 
 A [`gcp_cred`](#gcp-gcp-cred) block (within [`gcp`](#gcp)) supports the following:
 
-<a id="gcp-gcp-cred-name"></a>&#x2022; [`name`](#gcp-gcp-cred-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="gcp-gcp-cred-name"></a>&#x2022; [`name`](#gcp-gcp-cred-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="gcp-gcp-cred-namespace"></a>&#x2022; [`namespace`](#gcp-gcp-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="gcp-gcp-cred-namespace"></a>&#x2022; [`namespace`](#gcp-gcp-cred-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="gcp-gcp-cred-tenant"></a>&#x2022; [`tenant`](#gcp-gcp-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="gcp-gcp-cred-tenant"></a>&#x2022; [`tenant`](#gcp-gcp-cred-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

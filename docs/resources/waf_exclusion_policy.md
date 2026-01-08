@@ -36,11 +36,11 @@ resource "f5xc_waf_exclusion_policy" "example" {
   waf_exclusion_rules {
     # Configure waf_exclusion_rules settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   any_domain {
     # Configure any_domain settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   any_path {
     # Configure any_path settings
   }
@@ -94,39 +94,39 @@ A [`timeouts`](#timeouts) block supports the following:
 
 A [`waf_exclusion_rules`](#waf-exclusion-rules) block supports the following:
 
-<a id="waf-exclusion-rules-any-domain"></a>&#x2022; [`any_domain`](#waf-exclusion-rules-any-domain) - Optional Block<br>Enable this option
+<a id="waf-exclusion-rules-any-domain"></a>&#x2022; [`any_domain`](#waf-exclusion-rules-any-domain) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="waf-exclusion-rules-any-path"></a>&#x2022; [`any_path`](#waf-exclusion-rules-any-path) - Optional Block<br>Enable this option
+<a id="waf-exclusion-rules-any-path"></a>&#x2022; [`any_path`](#waf-exclusion-rules-any-path) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="control-b277f9"></a>&#x2022; [`app_firewall_detection_control`](#control-b277f9) - Optional Block<br>App Firewall Detection Control. Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#control-b277f9) below.
+<a id="control-b277f9"></a>&#x2022; [`app_firewall_detection_control`](#control-b277f9) - Optional Block<br>Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#control-b277f9) below.
 
-<a id="waf-exclusion-rules-exact-value"></a>&#x2022; [`exact_value`](#waf-exclusion-rules-exact-value) - Optional String<br>Exact Value. Exact domain name
+<a id="waf-exclusion-rules-exact-value"></a>&#x2022; [`exact_value`](#waf-exclusion-rules-exact-value) - Optional String<br>Exact domain name
 
-<a id="timestamp-e96351"></a>&#x2022; [`expiration_timestamp`](#timestamp-e96351) - Optional String<br>Expiration Timestamp. The expiration_timestamp is the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore
+<a id="timestamp-e96351"></a>&#x2022; [`expiration_timestamp`](#timestamp-e96351) - Optional String<br>Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore
 
-<a id="waf-exclusion-rules-metadata"></a>&#x2022; [`metadata`](#waf-exclusion-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#waf-exclusion-rules-metadata) below.
+<a id="waf-exclusion-rules-metadata"></a>&#x2022; [`metadata`](#waf-exclusion-rules-metadata) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#waf-exclusion-rules-metadata) below.
 
 <a id="waf-exclusion-rules-methods"></a>&#x2022; [`methods`](#waf-exclusion-rules-methods) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> Methods. Methods to be matched
 
-<a id="waf-exclusion-rules-path-prefix"></a>&#x2022; [`path_prefix`](#waf-exclusion-rules-path-prefix) - Optional String<br>Prefix. Path prefix to match (e.g. The value / will match on all paths)
+<a id="waf-exclusion-rules-path-prefix"></a>&#x2022; [`path_prefix`](#waf-exclusion-rules-path-prefix) - Optional String<br>Path prefix to match (e.g. The value / will match on all paths)
 
-<a id="waf-exclusion-rules-path-regex"></a>&#x2022; [`path_regex`](#waf-exclusion-rules-path-regex) - Optional String<br>Path Regex. Define the regex for the path. For example, the regex ^/.*$ will match on all paths
+<a id="waf-exclusion-rules-path-regex"></a>&#x2022; [`path_regex`](#waf-exclusion-rules-path-regex) - Optional String<br>Define the regex for the path. For example, the regex ^/.*$ will match on all paths
 
-<a id="waf-exclusion-rules-suffix-value"></a>&#x2022; [`suffix_value`](#waf-exclusion-rules-suffix-value) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+<a id="waf-exclusion-rules-suffix-value"></a>&#x2022; [`suffix_value`](#waf-exclusion-rules-suffix-value) - Optional String<br>Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
-<a id="waf-exclusion-rules-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#waf-exclusion-rules-waf-skip-processing) - Optional Block<br>Enable this option
+<a id="waf-exclusion-rules-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#waf-exclusion-rules-waf-skip-processing) - Optional Block<br>Can be used for messages where no values are needed
 
 #### WAF Exclusion Rules App Firewall Detection Control
 
 An [`app_firewall_detection_control`](#control-b277f9) block (within [`waf_exclusion_rules`](#waf-exclusion-rules)) supports the following:
 
-<a id="contexts-73e1d1"></a>&#x2022; [`exclude_attack_type_contexts`](#contexts-73e1d1) - Optional Block<br>Attack Types. Attack Types to be excluded for the defined match criteria<br>See [Exclude Attack Type Contexts](#contexts-73e1d1) below.
+<a id="contexts-73e1d1"></a>&#x2022; [`exclude_attack_type_contexts`](#contexts-73e1d1) - Optional Block<br>Attack Types to be excluded for the defined match criteria<br>See [Exclude Attack Type Contexts](#contexts-73e1d1) below.
 
-<a id="contexts-c4dd1b"></a>&#x2022; [`exclude_bot_name_contexts`](#contexts-c4dd1b) - Optional Block<br>Bot Names. Bot Names to be excluded for the defined match criteria<br>See [Exclude Bot Name Contexts](#contexts-c4dd1b) below.
+<a id="contexts-c4dd1b"></a>&#x2022; [`exclude_bot_name_contexts`](#contexts-c4dd1b) - Optional Block<br>Bot Names to be excluded for the defined match criteria<br>See [Exclude Bot Name Contexts](#contexts-c4dd1b) below.
 
-<a id="contexts-5bc5d9"></a>&#x2022; [`exclude_signature_contexts`](#contexts-5bc5d9) - Optional Block<br>Signature IDs. Signature IDs to be excluded for the defined match criteria<br>See [Exclude Signature Contexts](#contexts-5bc5d9) below.
+<a id="contexts-5bc5d9"></a>&#x2022; [`exclude_signature_contexts`](#contexts-5bc5d9) - Optional Block<br>Signature IDs to be excluded for the defined match criteria<br>See [Exclude Signature Contexts](#contexts-5bc5d9) below.
 
-<a id="contexts-f20556"></a>&#x2022; [`exclude_violation_contexts`](#contexts-f20556) - Optional Block<br>Violations. Violations to be excluded for the defined match criteria<br>See [Exclude Violation Contexts](#contexts-f20556) below.
+<a id="contexts-f20556"></a>&#x2022; [`exclude_violation_contexts`](#contexts-f20556) - Optional Block<br>Violations to be excluded for the defined match criteria<br>See [Exclude Violation Contexts](#contexts-f20556) below.
 
 #### WAF Exclusion Rules App Firewall Detection Control Exclude Attack Type Contexts
 
@@ -150,7 +150,7 @@ A [`metadata`](#waf-exclusion-rules-metadata) block (within [`waf_exclusion_rule
 
 <a id="spec-9494c5"></a>&#x2022; [`description_spec`](#spec-9494c5) - Optional String<br>Description. Human readable description
 
-<a id="waf-exclusion-rules-metadata-name"></a>&#x2022; [`name`](#waf-exclusion-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="waf-exclusion-rules-metadata-name"></a>&#x2022; [`name`](#waf-exclusion-rules-metadata-name) - Optional String<br>Name of the message. The value of name has to follow DNS-1035 format
 
 ---
 

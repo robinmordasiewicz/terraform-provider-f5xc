@@ -52,7 +52,7 @@ resource "f5xc_certificate_chain" "example" {
 
 ### Spec Argument Reference
 
-<a id="certificate-url"></a>&#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificates. Certificate chain is the list of intermediate certificates in PEM format including the PEM headers
+<a id="certificate-url"></a>&#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate chain is the list of intermediate certificates in PEM format including the PEM headers
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

@@ -141,10 +141,10 @@ func (r *DcClusterGroupResource) Schema(ctx context.Context, req resource.Schema
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"control_and_data_plane_mesh": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"data_plane_mesh": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 				},
 			},

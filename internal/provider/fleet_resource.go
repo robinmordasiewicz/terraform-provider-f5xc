@@ -1610,7 +1610,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"enable_default_fleet_config_download": schema.BoolAttribute{
-				MarkdownDescription: "Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and GPU config.",
+				MarkdownDescription: "Enable default fleet config, It must be set for storage config and GPU config.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Bool{
@@ -1618,7 +1618,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"fleet_label": schema.StringAttribute{
-				MarkdownDescription: "Fleet Label Value. Fleet_label value is used to create known_label 'F5 XC/fleet=<fleet_label>' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name <fleet_label> is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'F5 XC/fleet=sfo' in tenant for the fleet .",
+				MarkdownDescription: "Fleet_label value is used to create known_label 'F5 XC/fleet=<fleet_label>' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name <fleet_label> is also created in 'shared' namespace for tenant. The virtual_site object will select all sites..",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -1626,7 +1626,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"operating_system_version": schema.StringAttribute{
-				MarkdownDescription: "Operating System Version. Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config.",
+				MarkdownDescription: "Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -1634,7 +1634,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"volterra_software_version": schema.StringAttribute{
-				MarkdownDescription: "Software Version. F5XC software version is human readable string matching released set of version components. The given software version is applied to all sites that are member of the fleet. Current software installed can be overridden via site config.",
+				MarkdownDescription: "F5XC software version is human readable string matching released set of version components. The given software version is applied to all sites that are member of the fleet. Current software installed can be overridden via site config.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -1650,26 +1650,26 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				Delete: true,
 			}),
 			"allow_all_usb": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: allow_all_usb, deny_all_usb, usb_policy] Enable this option",
+				MarkdownDescription: "[OneOf: allow_all_usb, deny_all_usb, usb_policy] Can be used for messages where no values are needed.",
 			},
 			"blocked_services": schema.ListNestedBlock{
-				MarkdownDescription: "Disable Node Local Services. Disable node local services on this site.",
+				MarkdownDescription: "Disable node local services on this site.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"network_type": schema.StringAttribute{
-							MarkdownDescription: "[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. For F5 Distributed Cloud fabric Constraints: It is currently only supported as internally created by the system. VK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on F5 Distributed Cloud RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
+							MarkdownDescription: "[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to.. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
 							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
 						"dns": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"ssh": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"web_user_interface": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 					},
 				},
@@ -1683,32 +1683,32 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"devices": schema.ListAttribute{
-									MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond .",
+									MarkdownDescription: "Ethernet devices that will make up this bond .",
 									Optional:            true,
 									ElementType:         types.StringType,
 								},
 								"link_polling_interval": schema.Int64Attribute{
-									MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds .",
+									MarkdownDescription: "Link polling interval in milliseconds .",
 									Optional:            true,
 								},
 								"link_up_delay": schema.Int64Attribute{
-									MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up .",
+									MarkdownDescription: "Milliseconds wait before link is declared up .",
 									Optional:            true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0' .",
+									MarkdownDescription: "Name for the Bond. Ex 'bond0' .",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"active_backup": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"lacp": schema.SingleNestedBlock{
 									MarkdownDescription: "LACP parameters. LACP parameters for the bond device.",
 									Attributes: map[string]schema.Attribute{
 										"rate": schema.Int64Attribute{
-											MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets.",
+											MarkdownDescription: "Interval in seconds to transmit LACP packets.",
 											Optional:            true,
 										},
 									},
@@ -1719,18 +1719,18 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"dc_cluster_group": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: dc_cluster_group, dc_cluster_group_inside, no_dc_cluster_group; Default: no_dc_cluster_group] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+				MarkdownDescription: "[OneOf: dc_cluster_group, dc_cluster_group_inside, no_dc_cluster_group; Default: no_dc_cluster_group] Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{
@@ -1740,18 +1740,18 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"dc_cluster_group_inside": schema.SingleNestedBlock{
-				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+				MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{
@@ -1761,50 +1761,50 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"default_config": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: default_config, device_list, interface_list; Default: default_config] Enable this option",
+				MarkdownDescription: "[OneOf: default_config, device_list, interface_list; Default: default_config] Can be used for messages where no values are needed.",
 			},
 			"default_sriov_interface": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: default_sriov_interface, sriov_interfaces; Default: default_sriov_interface] Enable this option",
+				MarkdownDescription: "[OneOf: default_sriov_interface, sriov_interfaces; Default: default_sriov_interface] Can be used for messages where no values are needed.",
 			},
 			"default_storage_class": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: default_storage_class, storage_class_list; Default: default_storage_class] Enable this option",
+				MarkdownDescription: "[OneOf: default_storage_class, storage_class_list; Default: default_storage_class] Can be used for messages where no values are needed.",
 			},
 			"deny_all_usb": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"device_list": schema.SingleNestedBlock{
-				MarkdownDescription: "List of Devices. Add device for all interfaces belonging to this fleet.",
+				MarkdownDescription: "Add device for all interfaces belonging to this fleet.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"devices": schema.ListNestedBlock{
-						MarkdownDescription: "Devices. Configuration for all devices in the fleet. Examples of devices are - network interfaces, cameras, scanners etc. Configuration a device is applied on VER node if the VER node is member of this fleet and has an corresponding interface/device. The mapping from device configured in fleet with interface/device in VER node depends on the type of device and is documented in device instance specific sections.",
+						MarkdownDescription: "Configuration for all devices in the fleet. Examples of devices are - network interfaces, cameras, scanners etc. Configuration a device is applied on VER node if the VER node is member of this fleet and has an corresponding interface/device.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Device Name. Name of the device including the unit number (e.g. Eth0 or disk1). The name must match name of device in host-OS of node.",
+									MarkdownDescription: "Name of the device including the unit number (e.g. Eth0 or disk1). The name must match name of device in host-OS of node.",
 									Optional:            true,
 								},
 								"owner": schema.StringAttribute{
-									MarkdownDescription: "[Enum: DEVICE_OWNER_INVALID|DEVICE_OWNER_VER|DEVICE_OWNER_VK8S_WORK_LOAD|DEVICE_OWNER_HOST] Device Owner Type. Defines ownership for a device. Device owner is invalid Device is owned by VER pod. Usually it will be network interface device or accelerator like crypto engine. Device is available to be owned by vK8s workload on the site, like camera GPU etc. Device is not available to be owned by vK8s or VER. Can be exposed via some other service. Like TPM. Possible values are `DEVICE_OWNER_INVALID`, `DEVICE_OWNER_VER`, `DEVICE_OWNER_VK8S_WORK_LOAD`, `DEVICE_OWNER_HOST`. Defaults to `DEVICE_OWNER_INVALID`.",
+									MarkdownDescription: "[Enum: DEVICE_OWNER_INVALID|DEVICE_OWNER_VER|DEVICE_OWNER_VK8S_WORK_LOAD|DEVICE_OWNER_HOST] Defines ownership for a device. Device owner is invalid Device is owned by VER pod. Usually it will be network interface device or accelerator like crypto engine. Possible values are `DEVICE_OWNER_INVALID`, `DEVICE_OWNER_VER`, `DEVICE_OWNER_VK8S_WORK_LOAD`, `DEVICE_OWNER_HOST`. Defaults to `DEVICE_OWNER_INVALID`.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"network_device": schema.SingleNestedBlock{
-									MarkdownDescription: "Network Device Type. Represents physical network interface. The 'interface' reference points to a Network Interface object. Attributes such as Labels, MTU from Network Interface must be applied to the device. Device mapping to nodes A fleet can have many devices and nodes in VER customer edge site can have many interfaces. An interface in node inherits configuration from a device by matching, - device_name in Network Interface for the device - device name for physical-interface in the node.",
+									MarkdownDescription: "Represents physical network interface. The 'interface' reference points to a Network Interface object. Attributes such as Labels, MTU from Network Interface must be applied to the device.",
 									Attributes: map[string]schema.Attribute{
 										"use": schema.StringAttribute{
-											MarkdownDescription: "[Enum: NETWORK_INTERFACE_USE_REGULAR|NETWORK_INTERFACE_USE_OUTSIDE|NETWORK_INTERFACE_USE_INSIDE] Network Device Use. Defines how the device is used If networking device is owned by VER, it is available for users to configure as required If networking device is owned by VER, it is included in bootstrap config and member of outside network. If networking device is owned by VER, it is included in bootstrap config and member of inside network. Possible values are `NETWORK_INTERFACE_USE_REGULAR`, `NETWORK_INTERFACE_USE_OUTSIDE`, `NETWORK_INTERFACE_USE_INSIDE`. Defaults to `NETWORK_INTERFACE_USE_REGULAR`.",
+											MarkdownDescription: "[Enum: NETWORK_INTERFACE_USE_REGULAR|NETWORK_INTERFACE_USE_OUTSIDE|NETWORK_INTERFACE_USE_INSIDE] Defines how the device is used If networking device is owned by VER, it is available for users to configure as required If networking device is owned by VER, it is included in bootstrap config and member of outside network. If networking device is owned by VER, it is included in bootstrap config.. Possible values are `NETWORK_INTERFACE_USE_REGULAR`, `NETWORK_INTERFACE_USE_OUTSIDE`, `NETWORK_INTERFACE_USE_INSIDE`. Defaults to `NETWORK_INTERFACE_USE_REGULAR`.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"interface": schema.ListNestedBlock{
-											MarkdownDescription: "Network Interface. Network Interface attributes for the device. User network interface configuration for this network device. Attributes like labels, MTU from the 'interface' are applied to corresponding interface in VER node If network interface refers to a virtual-network, the virtual-netowrk type must be consistent with use attribute given below If use is NETWORK_INTERFACE_USE_REGULAR, the virtual-network must be of type VIRTUAL_NETWORK_SITE_LOCAL or VIRTUAL_NETWORK_SITE_LOCAL_INSIDE if use is NETWORK_INTERFACE_USE_OUTSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL if use is NETWORK_INTERFACE_USE_INSIDE, the virtual-network must of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE .",
+											MarkdownDescription: "Network Interface attributes for the device. User network interface configuration for this network device. Attributes like labels, MTU from the 'interface' are applied to corresponding interface in VER node If network interface refers to a virtual-network, the virtual-netowrk type must be..",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
-														MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -1812,15 +1812,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														},
 													},
 													"name": schema.StringAttribute{
-														MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
-														MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
-														MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -1828,7 +1828,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														},
 													},
 													"uid": schema.StringAttribute{
-														MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -1846,19 +1846,19 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"disable_gpu": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_gpu, enable_gpu, enable_vgpu; Default: disable_gpu] Enable this option",
+				MarkdownDescription: "[OneOf: disable_gpu, enable_gpu, enable_vgpu; Default: disable_gpu] Can be used for messages where no values are needed.",
 			},
 			"disable_vm": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_vm, enable_vm; Default: disable_vm] Enable this option",
+				MarkdownDescription: "[OneOf: disable_vm, enable_vm; Default: disable_vm] Can be used for messages where no values are needed.",
 			},
 			"enable_gpu": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"enable_vgpu": schema.SingleNestedBlock{
-				MarkdownDescription: "VGPU Configuration. Licensing configuration for NVIDIA vGPU.",
+				MarkdownDescription: "Licensing configuration for NVIDIA vGPU.",
 				Attributes: map[string]schema.Attribute{
 					"feature_type": schema.StringAttribute{
-						MarkdownDescription: "[Enum: UNLICENSED|VGPU|VWS|VCS] Feature Type. Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server. Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`. Defaults to `UNLICENSED`.",
+						MarkdownDescription: "[Enum: UNLICENSED|VGPU|VWS|VCS] Set feature to be enabled Operate with a degraded vGPU performance Enable NVIDIA vGPU Enable NVIDIA RTX Virtual Workstation Enable NVIDIA Virtual Compute Server. Possible values are `UNLICENSED`, `VGPU`, `VWS`, `VCS`. Defaults to `UNLICENSED`.",
 						Optional:            true,
 					},
 					"server_address": schema.StringAttribute{
@@ -1875,11 +1875,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				MarkdownDescription: "VM Configuration. VMs support configuration.",
 			},
 			"inside_virtual_network": schema.ListNestedBlock{
-				MarkdownDescription: "Site Local Inside Virtual Network. Default inside (site local) virtual network for the fleet.",
+				MarkdownDescription: "Default inside (site local) virtual network for the fleet.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
-							MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -1887,15 +1887,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -1903,7 +1903,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 						},
 						"uid": schema.StringAttribute{
-							MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -1914,23 +1914,23 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"interface_list": schema.SingleNestedBlock{
-				MarkdownDescription: "List of Interfaces. Add all interfaces belonging to this fleet.",
+				MarkdownDescription: "Add all interfaces belonging to this fleet.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"interfaces": schema.ListNestedBlock{
-						MarkdownDescription: "List of Interfaces. Add all interfaces belonging to this fleet .",
+						MarkdownDescription: "Add all interfaces belonging to this fleet .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -1943,48 +1943,48 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"kubernetes_upgrade_drain": schema.SingleNestedBlock{
-				MarkdownDescription: "Node by Node Upgrade. Specify how worker nodes within a site will be upgraded.",
+				MarkdownDescription: "Specify how worker nodes within a site will be upgraded.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_upgrade_drain": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"enable_upgrade_drain": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site.",
+						MarkdownDescription: "Specify batch upgrade settings for worker nodes within a site.",
 						Attributes: map[string]schema.Attribute{
 							"drain_max_unavailable_node_count": schema.Int64Attribute{
 								MarkdownDescription: "Node Batch Size Count.",
 								Optional:            true,
 							},
 							"drain_node_timeout": schema.Int64Attribute{
-								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value).",
+								MarkdownDescription: "Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is..",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"disable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"enable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 						},
 					},
 				},
 			},
 			"log_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{
@@ -1994,14 +1994,14 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"network_connectors": schema.ListNestedBlock{
-				MarkdownDescription: "Network Connectors. Network Connector defines connection between two virtual networks in a given site. Fleet defines one or more such network connectors. The network connectors configuration is applied on all sites that are member of the fleet.",
+				MarkdownDescription: "Network Connector defines connection between two virtual networks in a given site. Fleet defines one or more such network connectors. The network connectors configuration is applied on all sites that are member of the fleet.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
-							MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -2009,15 +2009,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -2025,7 +2025,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 						},
 						"uid": schema.StringAttribute{
-							MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -2036,11 +2036,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"network_firewall": schema.ListNestedBlock{
-				MarkdownDescription: "Network Firewall. Network Firewall defines firewall to be applied for the virtual networks in the fleet. The network firewall configuration is applied on all sites that are member of the fleet. Constraints The Network Firewall is applied on Virtual Networks of type site local network and site local inside network.",
+				MarkdownDescription: "Network Firewall defines firewall to be applied for the virtual networks in the fleet. The network firewall configuration is applied on all sites that are member of the fleet. Constraints The Network Firewall is applied on Virtual Networks of type site local network and site local inside network.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
-							MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -2048,15 +2048,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -2064,7 +2064,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 						},
 						"uid": schema.StringAttribute{
-							MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -2075,26 +2075,26 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"no_bond_devices": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"no_dc_cluster_group": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"no_storage_device": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_storage_device, storage_device_list; Default: no_storage_device] Enable this option",
+				MarkdownDescription: "[OneOf: no_storage_device, storage_device_list; Default: no_storage_device] Can be used for messages where no values are needed.",
 			},
 			"no_storage_interfaces": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_storage_interfaces, storage_interface_list; Default: no_storage_interfaces] Enable this option",
+				MarkdownDescription: "[OneOf: no_storage_interfaces, storage_interface_list; Default: no_storage_interfaces] Can be used for messages where no values are needed.",
 			},
 			"no_storage_static_routes": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_storage_static_routes, storage_static_routes; Default: no_storage_static_routes] Enable this option",
+				MarkdownDescription: "[OneOf: no_storage_static_routes, storage_static_routes; Default: no_storage_static_routes] Can be used for messages where no values are needed.",
 			},
 			"outside_virtual_network": schema.ListNestedBlock{
-				MarkdownDescription: "Outside (Site Local) Virtual Network. Default outside (site local) virtual network for the fleet.",
+				MarkdownDescription: "Default outside (site local) virtual network for the fleet.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
-							MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -2102,15 +2102,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -2118,7 +2118,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 						},
 						"uid": schema.StringAttribute{
-							MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -2129,7 +2129,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"performance_enhancement_mode": schema.SingleNestedBlock{
-				MarkdownDescription: "Performance Enhancement Mode. Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+				MarkdownDescription: "Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"perf_mode_l3_enhanced": schema.SingleNestedBlock{
@@ -2137,36 +2137,36 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"jumbo": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"no_jumbo": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 						},
 					},
 					"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 				},
 			},
 			"sriov_interfaces": schema.SingleNestedBlock{
-				MarkdownDescription: "Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration.",
+				MarkdownDescription: "List of all custom SR-IOV interfaces configuration.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"sriov_interface": schema.ListNestedBlock{
-						MarkdownDescription: "Custom SR-IOV interfaces Configuration. Use custom SR-IOV interfaces Configuration.",
+						MarkdownDescription: "Use custom SR-IOV interfaces Configuration.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"interface_name": schema.StringAttribute{
-									MarkdownDescription: "Name of physical interface. Name of SR-IOV physical interface .",
+									MarkdownDescription: "Name of SR-IOV physical interface .",
 									Optional:            true,
 								},
 								"number_of_vfio_vfs": schema.Int64Attribute{
-									MarkdownDescription: "Number of virtual functions reserved for vfio. Number of virtual functions reserved for VNFs and DPDK-based CNFs.",
+									MarkdownDescription: "Number of virtual functions reserved for VNFs and DPDK-based CNFs.",
 									Optional:            true,
 								},
 								"number_of_vfs": schema.Int64Attribute{
-									MarkdownDescription: "Total number of virtual functions. Total number of virtual functions .",
+									MarkdownDescription: "Total number of virtual functions .",
 									Optional:            true,
 								},
 							},
@@ -2175,7 +2175,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"storage_class_list": schema.SingleNestedBlock{
-				MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in Kubernetes for this fleet.",
+				MarkdownDescription: "Add additional custom storage classes in Kubernetes for this fleet.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"storage_classes": schema.ListNestedBlock{
@@ -2187,7 +2187,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Optional:            true,
 								},
 								"default_storage_class": schema.BoolAttribute{
-									MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster.",
+									MarkdownDescription: "Make this storage class default storage class for the K8s cluster.",
 									Optional:            true,
 								},
 								"description_spec": schema.StringAttribute{
@@ -2195,15 +2195,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Optional:            true,
 								},
 								"reclaim_policy": schema.StringAttribute{
-									MarkdownDescription: "Reclaim Policy. Reclaim Policy.",
+									MarkdownDescription: "Policy configuration for this feature.",
 									Optional:            true,
 								},
 								"storage_class_name": schema.StringAttribute{
-									MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s.",
+									MarkdownDescription: "Name of the storage class as it will appear in K8s.",
 									Optional:            true,
 								},
 								"storage_device": schema.StringAttribute{
-									MarkdownDescription: "Storage Device. Storage device that this class will use. The Device name defined at previous step.",
+									MarkdownDescription: "Storage device that this class will use. The Device name defined at previous step.",
 									Optional:            true,
 								},
 							},
@@ -2212,7 +2212,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "Advanced Parameters. Map of parameter name and string value.",
 								},
 								"custom_storage": schema.SingleNestedBlock{
-									MarkdownDescription: "Custom StorageClass. Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site.",
+									MarkdownDescription: "Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site.",
 									Attributes: map[string]schema.Attribute{
 										"yaml": schema.StringAttribute{
 											MarkdownDescription: "Storage Class YAML. K8s YAML for StorageClass.",
@@ -2221,10 +2221,10 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 								},
 								"hpe_storage": schema.SingleNestedBlock{
-									MarkdownDescription: "HPE Storage. Storage class Device configuration for HPE Storage.",
+									MarkdownDescription: "Storage class Device configuration for HPE Storage.",
 									Attributes: map[string]schema.Attribute{
 										"allow_mutations": schema.StringAttribute{
-											MarkdownDescription: "AllowMutations. Mutation can override specified parameters.",
+											MarkdownDescription: "Mutation can override specified parameters.",
 											Optional:            true,
 										},
 										"allow_overrides": schema.StringAttribute{
@@ -2232,23 +2232,23 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional:            true,
 										},
 										"dedupe_enabled": schema.BoolAttribute{
-											MarkdownDescription: "DedupeEnabled. Indicates that the volume should enable deduplication.",
+											MarkdownDescription: "Indicates that the volume should enable deduplication.",
 											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
-											MarkdownDescription: "Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information.",
+											MarkdownDescription: "The SecretName parameter is used to identify name of secret to identify backend storage's auth information.",
 											Optional:            true,
 										},
 										"destroy_on_delete": schema.BoolAttribute{
-											MarkdownDescription: "DestroyOnDelete. Indicates the backing Nimble volume (including snapshots) should be destroyed when the PVC is deleted.",
+											MarkdownDescription: "Indicates the backing Nimble volume (including snapshots) should be destroyed when the PVC is deleted.",
 											Optional:            true,
 										},
 										"encrypted": schema.BoolAttribute{
-											MarkdownDescription: "Encrypted. Indicates that the volume should be encrypted.",
+											MarkdownDescription: "Indicates that the volume should be encrypted.",
 											Optional:            true,
 										},
 										"folder": schema.StringAttribute{
-											MarkdownDescription: "Folder. The name of the folder in which to place the volume.",
+											MarkdownDescription: "The name of the folder in which to place the volume.",
 											Optional:            true,
 										},
 										"limit_iops": schema.StringAttribute{
@@ -2260,62 +2260,62 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional:            true,
 										},
 										"performance_policy": schema.StringAttribute{
-											MarkdownDescription: "PerformancePolicy. The name of the performance policy to assign to the volume.",
+											MarkdownDescription: "Policy configuration for this feature.",
 											Optional:            true,
 										},
 										"pool": schema.StringAttribute{
-											MarkdownDescription: "Pool. The name of the pool in which to place the volume.",
+											MarkdownDescription: "The name of the pool in which to place the volume.",
 											Optional:            true,
 										},
 										"protection_template": schema.StringAttribute{
-											MarkdownDescription: "ProtectionTemplate. The name of the performance policy to assign to the volume.",
+											MarkdownDescription: "The name of the performance policy to assign to the volume.",
 											Optional:            true,
 										},
 										"secret_name": schema.StringAttribute{
-											MarkdownDescription: "Secret Name. The SecretName parameter is used to identify name of secret to identify backend storage's auth information.",
+											MarkdownDescription: "The SecretName parameter is used to identify name of secret to identify backend storage's auth information.",
 											Optional:            true,
 										},
 										"secret_namespace": schema.StringAttribute{
-											MarkdownDescription: "Secret Namespace. The SecretNamespace parameter is used to identify name of namespace where secret resides.",
+											MarkdownDescription: "The SecretNamespace parameter is used to identify name of namespace where secret resides.",
 											Optional:            true,
 										},
 										"sync_on_detach": schema.BoolAttribute{
-											MarkdownDescription: "SyncOnDetach. Indicates that a snapshot of the volume should be synced to the replication partner each time it is detached from a node.",
+											MarkdownDescription: "Indicates that a snapshot of the volume should be synced to the replication partner each time it is detached from a node.",
 											Optional:            true,
 										},
 										"thick": schema.BoolAttribute{
-											MarkdownDescription: "Thick. Indicates that the volume should be thick provisioned.",
+											MarkdownDescription: "Indicates that the volume should be thick provisioned.",
 											Optional:            true,
 										},
 									},
 								},
 								"netapp_trident": schema.SingleNestedBlock{
-									MarkdownDescription: "NetApp Trident Storage. Storage class Device configuration for NetApp Trident.",
+									MarkdownDescription: "Storage class Device configuration for NetApp Trident.",
 									Attributes: map[string]schema.Attribute{
 										"storage_pools": schema.StringAttribute{
-											MarkdownDescription: "Storage Pools. The storagePools parameter is used to further restrict the set of pools that match any specified attributes.",
+											MarkdownDescription: "The storagePools parameter is used to further restrict the set of pools that match any specified attributes.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"selector": schema.SingleNestedBlock{
-											MarkdownDescription: "Selector. Using the Selector field, each StorageClass calls out which virtual pool(s) may be used to host a volume. The volume will have the aspects defined in the chosen virtual pool.",
+											MarkdownDescription: "Using the Selector field, each StorageClass calls out which virtual pool(s) may be used to host a volume. The volume will have the aspects defined in the chosen virtual pool.",
 										},
 									},
 								},
 								"pure_service_orchestrator": schema.SingleNestedBlock{
-									MarkdownDescription: "Pure Storage Service Orchestrator. Storage class Device configuration for Pure Service Orchestrator.",
+									MarkdownDescription: "Storage class Device configuration for Pure Service Orchestrator.",
 									Attributes: map[string]schema.Attribute{
 										"backend": schema.StringAttribute{
-											MarkdownDescription: "Backend. Defines type of Pure storage backend block or file. The volume will have the aspects defined in the chosen virtual pool.",
+											MarkdownDescription: "Defines type of Pure storage backend block or file. The volume will have the aspects defined in the chosen virtual pool.",
 											Optional:            true,
 										},
 										"bandwidth_limit": schema.StringAttribute{
-											MarkdownDescription: "Bandwidth Limit. It must be between 1 MB/s and 512 GB/s. Enter the size as a number (bytes must be multiple of 512) or number with a single character unit symbol. Valid unit symbols are K, M, G, representing KiB, MiB, and GiB.",
+											MarkdownDescription: "It must be between 1 MB/s and 512 GB/s. Enter the size as a number (bytes must be multiple of 512) or number with a single character unit symbol. Valid unit symbols are K, M, G, representing KiB, MiB, and GiB.",
 											Optional:            true,
 										},
 										"iops_limit": schema.Int64Attribute{
-											MarkdownDescription: "IOPS Limit. Enable IOPS limitation. It must be between 100 and 100 million. If value is 0, IOPS limit is not defined.",
+											MarkdownDescription: "Enable IOPS limitation. It must be between 100 and 100 million. If value is 0, IOPS limit is not defined.",
 											Optional:            true,
 										},
 									},
@@ -2326,7 +2326,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"storage_device_list": schema.SingleNestedBlock{
-				MarkdownDescription: "Custom Storage Device List. Add additional custom storage classes in Kubernetes for this fleet.",
+				MarkdownDescription: "Add additional custom storage classes in Kubernetes for this fleet.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"storage_devices": schema.ListNestedBlock{
@@ -2334,7 +2334,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"storage_device": schema.StringAttribute{
-									MarkdownDescription: "Storage Device. Storage device and device unit .",
+									MarkdownDescription: "Storage device and device unit .",
 									Optional:            true,
 								},
 							},
@@ -2343,7 +2343,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "Advanced Parameters. Map of parameter name and string value.",
 								},
 								"custom_storage": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"hpe_storage": schema.SingleNestedBlock{
 									MarkdownDescription: "HPE Storage. Device configuration for HPE Storage.",
@@ -2353,7 +2353,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional:            true,
 										},
 										"iscsi_chap_user": schema.StringAttribute{
-											MarkdownDescription: "Iscsi chapUser. Chap Username to connect to the HPE storage.",
+											MarkdownDescription: "Chap Username to connect to the HPE storage.",
 											Optional:            true,
 										},
 										"storage_server_ip_address": schema.StringAttribute{
@@ -2365,41 +2365,41 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Optional:            true,
 										},
 										"username": schema.StringAttribute{
-											MarkdownDescription: "Username. Username to connect to the HPE storage management IP .",
+											MarkdownDescription: "Username to connect to the HPE storage management IP .",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"iscsi_chap_password": schema.SingleNestedBlock{
-											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
-													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+													MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
-															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+															MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 															Optional:            true,
 														},
 														"location": schema.StringAttribute{
-															MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+															MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
-															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+															MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 													},
 												},
 												"clear_secret_info": schema.SingleNestedBlock{
-													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+													MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
-															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+															MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 														"url": schema.StringAttribute{
-															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+															MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 															Optional:            true,
 														},
 													},
@@ -2407,35 +2407,35 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											},
 										},
 										"password": schema.SingleNestedBlock{
-											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
-													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+													MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
-															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+															MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 															Optional:            true,
 														},
 														"location": schema.StringAttribute{
-															MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+															MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
-															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+															MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 													},
 												},
 												"clear_secret_info": schema.SingleNestedBlock{
-													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+													MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
-															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+															MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 														"url": schema.StringAttribute{
-															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+															MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 															Optional:            true,
 														},
 													},
@@ -2445,50 +2445,50 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 								},
 								"netapp_trident": schema.SingleNestedBlock{
-									MarkdownDescription: "NetApp Trident. Device configuration for NetApp Trident Storage.",
+									MarkdownDescription: "Device configuration for NetApp Trident Storage.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"netapp_backend_ontap_nas": schema.SingleNestedBlock{
-											MarkdownDescription: "Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS.",
+											MarkdownDescription: "Configuration of storage backend for NetApp ONTAP NAS.",
 											Attributes: map[string]schema.Attribute{
 												"auto_export_policy": schema.BoolAttribute{
-													MarkdownDescription: "Auto Export Policy. Enable automatic export policy creation and updating.",
+													MarkdownDescription: "Policy configuration for this feature.",
 													Optional:            true,
 												},
 												"backend_name": schema.StringAttribute{
-													MarkdownDescription: "Storage Backend Name. Configuration of Backend Name. Driver is name + '_' + dataLIF.",
+													MarkdownDescription: "Configuration of Backend Name. Driver is name + '_' + dataLIF.",
 													Optional:            true,
 												},
 												"client_certificate": schema.StringAttribute{
-													MarkdownDescription: "Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth.",
+													MarkdownDescription: "Please Enter Base64-encoded value of client certificate. Used for certificate-based auth.",
 													Optional:            true,
 												},
 												"data_lif_dns_name": schema.StringAttribute{
-													MarkdownDescription: "Backend Data LIF Name. Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+													MarkdownDescription: "Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 													Optional:            true,
 												},
 												"data_lif_ip": schema.StringAttribute{
-													MarkdownDescription: "Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given IP address.",
+													MarkdownDescription: "Backend Data LIF IP Address is reachable at the given IP address.",
 													Optional:            true,
 												},
 												"limit_aggregate_usage": schema.StringAttribute{
-													MarkdownDescription: "Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default.",
+													MarkdownDescription: "Fail provisioning if usage is above this percentage. Not enforced by default.",
 													Optional:            true,
 												},
 												"limit_volume_size": schema.StringAttribute{
-													MarkdownDescription: "Limit Volume Size. Fail provisioning if requested volume size is above this value. Not enforced by default.",
+													MarkdownDescription: "Fail provisioning if requested volume size is above this value. Not enforced by default.",
 													Optional:            true,
 												},
 												"management_lif_dns_name": schema.StringAttribute{
-													MarkdownDescription: "Backend Management LIF Name. Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+													MarkdownDescription: "Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 													Optional:            true,
 												},
 												"management_lif_ip": schema.StringAttribute{
-													MarkdownDescription: "Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given IP address.",
+													MarkdownDescription: "Backend Management LIF IP Address is reachable at the given IP address.",
 													Optional:            true,
 												},
 												"nfs_mount_options": schema.StringAttribute{
-													MarkdownDescription: "NFS Mount OPTIONS. Comma-separated list of NFS mount OPTIONS. Not enforced by default.",
+													MarkdownDescription: "Comma-separated list of NFS mount OPTIONS. Not enforced by default.",
 													Optional:            true,
 												},
 												"region": schema.StringAttribute{
@@ -2496,67 +2496,67 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Optional:            true,
 												},
 												"storage_driver_name": schema.StringAttribute{
-													MarkdownDescription: "Storage Backend Driver. Configuration of Backend Name .",
+													MarkdownDescription: "Configuration of Backend Name .",
 													Optional:            true,
 												},
 												"storage_prefix": schema.StringAttribute{
-													MarkdownDescription: "Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated.",
+													MarkdownDescription: "Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated.",
 													Optional:            true,
 												},
 												"svm": schema.StringAttribute{
-													MarkdownDescription: "Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified.",
+													MarkdownDescription: "Storage virtual machine to use. Derived if an SVM managementLIF is specified.",
 													Optional:            true,
 												},
 												"trusted_ca_certificate": schema.StringAttribute{
-													MarkdownDescription: "Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth.",
+													MarkdownDescription: "Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth.",
 													Optional:            true,
 												},
 												"username": schema.StringAttribute{
-													MarkdownDescription: "Username. Username to connect to the cluster/SVM .",
+													MarkdownDescription: "Username to connect to the cluster/SVM .",
 													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"auto_export_cidrs": schema.SingleNestedBlock{
-													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
+													MarkdownDescription: "List of IPv4 prefixes that represent an endpoint.",
 													Attributes: map[string]schema.Attribute{
 														"prefixes": schema.ListAttribute{
-															MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
+															MarkdownDescription: "List of IPv4 prefixes that represent an endpoint.",
 															Optional:            true,
 															ElementType:         types.StringType,
 														},
 													},
 												},
 												"client_private_key": schema.SingleNestedBlock{
-													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+													MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
-															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+															MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
-																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
-																	MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+																	MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
-																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																	MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																	Optional:            true,
 																},
 															},
 														},
 														"clear_secret_info": schema.SingleNestedBlock{
-															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
-																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																	MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
-																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+																	MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																	Optional:            true,
 																},
 															},
@@ -2564,38 +2564,38 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													},
 												},
 												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection.",
+													MarkdownDescription: "List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection.",
 												},
 												"password": schema.SingleNestedBlock{
-													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+													MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
-															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+															MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
-																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
-																	MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+																	MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
-																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																	MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																	Optional:            true,
 																},
 															},
 														},
 														"clear_secret_info": schema.SingleNestedBlock{
-															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
-																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																	MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
-																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+																	MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																	Optional:            true,
 																},
 															},
@@ -2603,7 +2603,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													},
 												},
 												"storage": schema.ListNestedBlock{
-													MarkdownDescription: "Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection.",
+													MarkdownDescription: "List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection.",
 													NestedObject: schema.NestedBlockObject{
 														Attributes: map[string]schema.Attribute{
 															"zone": schema.StringAttribute{
@@ -2613,13 +2613,13 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														},
 														Blocks: map[string]schema.Block{
 															"labels": schema.SingleNestedBlock{
-																MarkdownDescription: "Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection.",
+																MarkdownDescription: "List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection.",
 															},
 															"volume_defaults": schema.SingleNestedBlock{
-																MarkdownDescription: "Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these OPTIONS in a special section of the configuration.",
+																MarkdownDescription: "It controls how each volume is provisioned by default using these OPTIONS in a special section of the configuration.",
 																Attributes: map[string]schema.Attribute{
 																	"adaptive_qos_policy": schema.StringAttribute{
-																		MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name.",
+																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
 																	},
 																	"encryption": schema.BoolAttribute{
@@ -2627,11 +2627,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																		Optional:            true,
 																	},
 																	"export_policy": schema.StringAttribute{
-																		MarkdownDescription: "Export Policy. Export policy to use.",
+																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
 																	},
 																	"qos_policy": schema.StringAttribute{
-																		MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name.",
+																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
 																	},
 																	"security_style": schema.StringAttribute{
@@ -2643,33 +2643,33 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																		Optional:            true,
 																	},
 																	"snapshot_policy": schema.StringAttribute{
-																		MarkdownDescription: "Snapshot Policy. Snapshot policy to use.",
+																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
 																	},
 																	"snapshot_reserve": schema.StringAttribute{
-																		MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
+																		MarkdownDescription: "Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''.",
 																		Optional:            true,
 																	},
 																	"space_reserve": schema.StringAttribute{
-																		MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
+																		MarkdownDescription: "Space reservation mode; “none” (thin) or “volume” (thick).",
 																		Optional:            true,
 																	},
 																	"split_on_clone": schema.BoolAttribute{
-																		MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
+																		MarkdownDescription: "Split a clone from its parent upon creation.",
 																		Optional:            true,
 																	},
 																	"tiering_policy": schema.StringAttribute{
-																		MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
+																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
 																	},
 																	"unix_permissions": schema.Int64Attribute{
-																		MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777.",
+																		MarkdownDescription: "Unix permission mode for new volumes. All allowed 777.",
 																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"no_qos": schema.SingleNestedBlock{
-																		MarkdownDescription: "Enable this option",
+																		MarkdownDescription: "Can be used for messages where no values are needed.",
 																	},
 																},
 															},
@@ -2677,10 +2677,10 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													},
 												},
 												"volume_defaults": schema.SingleNestedBlock{
-													MarkdownDescription: "Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these OPTIONS in a special section of the configuration.",
+													MarkdownDescription: "It controls how each volume is provisioned by default using these OPTIONS in a special section of the configuration.",
 													Attributes: map[string]schema.Attribute{
 														"adaptive_qos_policy": schema.StringAttribute{
-															MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name.",
+															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
 														},
 														"encryption": schema.BoolAttribute{
@@ -2688,11 +2688,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Optional:            true,
 														},
 														"export_policy": schema.StringAttribute{
-															MarkdownDescription: "Export Policy. Export policy to use.",
+															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
 														},
 														"qos_policy": schema.StringAttribute{
-															MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name.",
+															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
 														},
 														"security_style": schema.StringAttribute{
@@ -2704,71 +2704,71 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Optional:            true,
 														},
 														"snapshot_policy": schema.StringAttribute{
-															MarkdownDescription: "Snapshot Policy. Snapshot policy to use.",
+															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
 														},
 														"snapshot_reserve": schema.StringAttribute{
-															MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
+															MarkdownDescription: "Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''.",
 															Optional:            true,
 														},
 														"space_reserve": schema.StringAttribute{
-															MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
+															MarkdownDescription: "Space reservation mode; “none” (thin) or “volume” (thick).",
 															Optional:            true,
 														},
 														"split_on_clone": schema.BoolAttribute{
-															MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
+															MarkdownDescription: "Split a clone from its parent upon creation.",
 															Optional:            true,
 														},
 														"tiering_policy": schema.StringAttribute{
-															MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
+															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
 														},
 														"unix_permissions": schema.Int64Attribute{
-															MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777.",
+															MarkdownDescription: "Unix permission mode for new volumes. All allowed 777.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"no_qos": schema.SingleNestedBlock{
-															MarkdownDescription: "Enable this option",
+															MarkdownDescription: "Can be used for messages where no values are needed.",
 														},
 													},
 												},
 											},
 										},
 										"netapp_backend_ontap_san": schema.SingleNestedBlock{
-											MarkdownDescription: "Storage Backend NetApp ONTAP SAN. Configuration of storage backend for NetApp ONTAP SAN.",
+											MarkdownDescription: "Configuration of storage backend for NetApp ONTAP SAN.",
 											Attributes: map[string]schema.Attribute{
 												"client_certificate": schema.StringAttribute{
-													MarkdownDescription: "Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth.",
+													MarkdownDescription: "Please Enter Base64-encoded value of client certificate. Used for certificate-based auth.",
 													Optional:            true,
 												},
 												"data_lif_dns_name": schema.StringAttribute{
-													MarkdownDescription: "Backend Data LIF Name. Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+													MarkdownDescription: "Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 													Optional:            true,
 												},
 												"data_lif_ip": schema.StringAttribute{
-													MarkdownDescription: "Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given IP address.",
+													MarkdownDescription: "Backend Data LIF IP Address is reachable at the given IP address.",
 													Optional:            true,
 												},
 												"igroup_name": schema.StringAttribute{
-													MarkdownDescription: "IGroup Name. Name of the igroup for SAN volumes to use.",
+													MarkdownDescription: "Name of the igroup for SAN volumes to use.",
 													Optional:            true,
 												},
 												"limit_aggregate_usage": schema.Int64Attribute{
-													MarkdownDescription: "Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default.",
+													MarkdownDescription: "Fail provisioning if usage is above this percentage. Not enforced by default.",
 													Optional:            true,
 												},
 												"limit_volume_size": schema.Int64Attribute{
-													MarkdownDescription: "Limit Volume Size. Fail provisioning if requested volume size in GBi is above this value. Not enforced by default.",
+													MarkdownDescription: "Fail provisioning if requested volume size in GBi is above this value. Not enforced by default.",
 													Optional:            true,
 												},
 												"management_lif_dns_name": schema.StringAttribute{
-													MarkdownDescription: "Backend Management LIF Name. Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+													MarkdownDescription: "Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 													Optional:            true,
 												},
 												"management_lif_ip": schema.StringAttribute{
-													MarkdownDescription: "Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given IP address.",
+													MarkdownDescription: "Backend Management LIF IP Address is reachable at the given IP address.",
 													Optional:            true,
 												},
 												"region": schema.StringAttribute{
@@ -2776,57 +2776,57 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													Optional:            true,
 												},
 												"storage_driver_name": schema.StringAttribute{
-													MarkdownDescription: "Storage Backend Driver. Configuration of Backend Name .",
+													MarkdownDescription: "Configuration of Backend Name .",
 													Optional:            true,
 												},
 												"storage_prefix": schema.StringAttribute{
-													MarkdownDescription: "Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated.",
+													MarkdownDescription: "Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated.",
 													Optional:            true,
 												},
 												"svm": schema.StringAttribute{
-													MarkdownDescription: "Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified.",
+													MarkdownDescription: "Storage virtual machine to use. Derived if an SVM managementLIF is specified.",
 													Optional:            true,
 												},
 												"trusted_ca_certificate": schema.StringAttribute{
-													MarkdownDescription: "Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth.",
+													MarkdownDescription: "Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth.",
 													Optional:            true,
 												},
 												"username": schema.StringAttribute{
-													MarkdownDescription: "Username. Username to connect to the cluster/SVM .",
+													MarkdownDescription: "Username to connect to the cluster/SVM .",
 													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"client_private_key": schema.SingleNestedBlock{
-													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+													MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
-															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+															MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
-																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
-																	MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+																	MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
-																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																	MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																	Optional:            true,
 																},
 															},
 														},
 														"clear_secret_info": schema.SingleNestedBlock{
-															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
-																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																	MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
-																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+																	MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																	Optional:            true,
 																},
 															},
@@ -2834,41 +2834,41 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													},
 												},
 												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection.",
+													MarkdownDescription: "List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection.",
 												},
 												"no_chap": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
+													MarkdownDescription: "Can be used for messages where no values are needed.",
 												},
 												"password": schema.SingleNestedBlock{
-													MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+													MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"blindfold_secret_info": schema.SingleNestedBlock{
-															MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+															MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 															Attributes: map[string]schema.Attribute{
 																"decryption_provider": schema.StringAttribute{
-																	MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																	MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																	Optional:            true,
 																},
 																"location": schema.StringAttribute{
-																	MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+																	MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																	Optional:            true,
 																},
 																"store_provider": schema.StringAttribute{
-																	MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																	MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																	Optional:            true,
 																},
 															},
 														},
 														"clear_secret_info": schema.SingleNestedBlock{
-															MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+															MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 															Attributes: map[string]schema.Attribute{
 																"provider_ref": schema.StringAttribute{
-																	MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																	MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																	Optional:            true,
 																},
 																"url": schema.StringAttribute{
-																	MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+																	MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																	Optional:            true,
 																},
 															},
@@ -2876,7 +2876,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													},
 												},
 												"storage": schema.ListNestedBlock{
-													MarkdownDescription: "Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection.",
+													MarkdownDescription: "List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection.",
 													NestedObject: schema.NestedBlockObject{
 														Attributes: map[string]schema.Attribute{
 															"zone": schema.StringAttribute{
@@ -2886,13 +2886,13 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														},
 														Blocks: map[string]schema.Block{
 															"labels": schema.SingleNestedBlock{
-																MarkdownDescription: "Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection.",
+																MarkdownDescription: "List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection.",
 															},
 															"volume_defaults": schema.SingleNestedBlock{
-																MarkdownDescription: "Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these OPTIONS in a special section of the configuration.",
+																MarkdownDescription: "It controls how each volume is provisioned by default using these OPTIONS in a special section of the configuration.",
 																Attributes: map[string]schema.Attribute{
 																	"adaptive_qos_policy": schema.StringAttribute{
-																		MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name.",
+																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
 																	},
 																	"encryption": schema.BoolAttribute{
@@ -2900,11 +2900,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																		Optional:            true,
 																	},
 																	"export_policy": schema.StringAttribute{
-																		MarkdownDescription: "Export Policy. Export policy to use.",
+																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
 																	},
 																	"qos_policy": schema.StringAttribute{
-																		MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name.",
+																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
 																	},
 																	"security_style": schema.StringAttribute{
@@ -2916,33 +2916,33 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																		Optional:            true,
 																	},
 																	"snapshot_policy": schema.StringAttribute{
-																		MarkdownDescription: "Snapshot Policy. Snapshot policy to use.",
+																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
 																	},
 																	"snapshot_reserve": schema.StringAttribute{
-																		MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
+																		MarkdownDescription: "Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''.",
 																		Optional:            true,
 																	},
 																	"space_reserve": schema.StringAttribute{
-																		MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
+																		MarkdownDescription: "Space reservation mode; “none” (thin) or “volume” (thick).",
 																		Optional:            true,
 																	},
 																	"split_on_clone": schema.BoolAttribute{
-																		MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
+																		MarkdownDescription: "Split a clone from its parent upon creation.",
 																		Optional:            true,
 																	},
 																	"tiering_policy": schema.StringAttribute{
-																		MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
+																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
 																	},
 																	"unix_permissions": schema.Int64Attribute{
-																		MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777.",
+																		MarkdownDescription: "Unix permission mode for new volumes. All allowed 777.",
 																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"no_qos": schema.SingleNestedBlock{
-																		MarkdownDescription: "Enable this option",
+																		MarkdownDescription: "Can be used for messages where no values are needed.",
 																	},
 																},
 															},
@@ -2950,48 +2950,48 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													},
 												},
 												"use_chap": schema.SingleNestedBlock{
-													MarkdownDescription: "Device NetApp Backend ONTAP SAN CHAP Configuration. Device NetApp Backend ONTAP SAN CHAP configuration OPTIONS for enabled CHAP.",
+													MarkdownDescription: "Device NetApp Backend ONTAP SAN CHAP configuration OPTIONS for enabled CHAP.",
 													Attributes: map[string]schema.Attribute{
 														"chap_target_username": schema.StringAttribute{
-															MarkdownDescription: "CHAP Target Username. Target username. Required if useCHAP=true.",
+															MarkdownDescription: "Target username. Required if useCHAP=true.",
 															Optional:            true,
 														},
 														"chap_username": schema.StringAttribute{
-															MarkdownDescription: "CHAP Username. Inbound username. Required if useCHAP=true.",
+															MarkdownDescription: "Inbound username. Required if useCHAP=true.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"chap_initiator_secret": schema.SingleNestedBlock{
-															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+															MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"blindfold_secret_info": schema.SingleNestedBlock{
-																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+																	MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 																	Attributes: map[string]schema.Attribute{
 																		"decryption_provider": schema.StringAttribute{
-																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																			MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																			Optional:            true,
 																		},
 																		"location": schema.StringAttribute{
-																			MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+																			MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																			Optional:            true,
 																		},
 																		"store_provider": schema.StringAttribute{
-																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																			MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																			Optional:            true,
 																		},
 																	},
 																},
 																"clear_secret_info": schema.SingleNestedBlock{
-																	MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																	MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 																	Attributes: map[string]schema.Attribute{
 																		"provider_ref": schema.StringAttribute{
-																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																			MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																			Optional:            true,
 																		},
 																		"url": schema.StringAttribute{
-																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+																			MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																			Optional:            true,
 																		},
 																	},
@@ -2999,35 +2999,35 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															},
 														},
 														"chap_target_initiator_secret": schema.SingleNestedBlock{
-															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+															MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"blindfold_secret_info": schema.SingleNestedBlock{
-																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+																	MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 																	Attributes: map[string]schema.Attribute{
 																		"decryption_provider": schema.StringAttribute{
-																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																			MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																			Optional:            true,
 																		},
 																		"location": schema.StringAttribute{
-																			MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+																			MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																			Optional:            true,
 																		},
 																		"store_provider": schema.StringAttribute{
-																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																			MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																			Optional:            true,
 																		},
 																	},
 																},
 																"clear_secret_info": schema.SingleNestedBlock{
-																	MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																	MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 																	Attributes: map[string]schema.Attribute{
 																		"provider_ref": schema.StringAttribute{
-																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																			MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																			Optional:            true,
 																		},
 																		"url": schema.StringAttribute{
-																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+																			MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																			Optional:            true,
 																		},
 																	},
@@ -3037,10 +3037,10 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													},
 												},
 												"volume_defaults": schema.SingleNestedBlock{
-													MarkdownDescription: "Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these OPTIONS in a special section of the configuration.",
+													MarkdownDescription: "It controls how each volume is provisioned by default using these OPTIONS in a special section of the configuration.",
 													Attributes: map[string]schema.Attribute{
 														"adaptive_qos_policy": schema.StringAttribute{
-															MarkdownDescription: "Adaptive QoS Policy name. Enter Adaptive QoS Policy Name.",
+															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
 														},
 														"encryption": schema.BoolAttribute{
@@ -3048,11 +3048,11 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Optional:            true,
 														},
 														"export_policy": schema.StringAttribute{
-															MarkdownDescription: "Export Policy. Export policy to use.",
+															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
 														},
 														"qos_policy": schema.StringAttribute{
-															MarkdownDescription: "QoS Policy Name. Enter QoS Policy Name.",
+															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
 														},
 														"security_style": schema.StringAttribute{
@@ -3064,33 +3064,33 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Optional:            true,
 														},
 														"snapshot_policy": schema.StringAttribute{
-															MarkdownDescription: "Snapshot Policy. Snapshot policy to use.",
+															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
 														},
 														"snapshot_reserve": schema.StringAttribute{
-															MarkdownDescription: "Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''",
+															MarkdownDescription: "Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''.",
 															Optional:            true,
 														},
 														"space_reserve": schema.StringAttribute{
-															MarkdownDescription: "Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)",
+															MarkdownDescription: "Space reservation mode; “none” (thin) or “volume” (thick).",
 															Optional:            true,
 														},
 														"split_on_clone": schema.BoolAttribute{
-															MarkdownDescription: "Split on Clone. Split a clone from its parent upon creation.",
+															MarkdownDescription: "Split a clone from its parent upon creation.",
 															Optional:            true,
 														},
 														"tiering_policy": schema.StringAttribute{
-															MarkdownDescription: "Tiering Policy. Tiering policy to use. 'none' is default.",
+															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
 														},
 														"unix_permissions": schema.Int64Attribute{
-															MarkdownDescription: "Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777.",
+															MarkdownDescription: "Unix permission mode for new volumes. All allowed 777.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"no_qos": schema.SingleNestedBlock{
-															MarkdownDescription: "Enable this option",
+															MarkdownDescription: "Can be used for messages where no values are needed.",
 														},
 													},
 												},
@@ -3099,18 +3099,18 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 								},
 								"pure_service_orchestrator": schema.SingleNestedBlock{
-									MarkdownDescription: "Pure Storage Service Orchestrator. Device configuration for Pure Storage Service Orchestrator.",
+									MarkdownDescription: "Device configuration for Pure Storage Service Orchestrator.",
 									Attributes: map[string]schema.Attribute{
 										"cluster_id": schema.StringAttribute{
-											MarkdownDescription: "Cluster ID. ClusterID is added as a prefix for all volumes created by this PSO installation. ClusterID is also used to identify the volumes used by the datastore, pso-db. ClusterID MUST BE UNIQUE for multiple K8s clusters running on top of the same storage arrays. Characters allowed: alphanumeric and underscores .",
+											MarkdownDescription: "ClusterID is added as a prefix for all volumes created by this PSO installation. ClusterID is also used to identify the volumes used by the datastore, pso-db. ClusterID MUST BE UNIQUE for multiple K8s clusters running on top of the same storage arrays.",
 											Optional:            true,
 										},
 										"enable_storage_topology": schema.BoolAttribute{
-											MarkdownDescription: "Enable Storage Topology. This option is to enable/disable the csi topology feature for pso-csi.",
+											MarkdownDescription: "Option is to enable/disable the csi topology feature for pso-csi.",
 											Optional:            true,
 										},
 										"enable_strict_topology": schema.BoolAttribute{
-											MarkdownDescription: "Enable Strict Topology. This option is to enable/disable the strict csi topology feature for pso-csi.",
+											MarkdownDescription: "Option is to enable/disable the strict csi topology feature for pso-csi.",
 											Optional:            true,
 										},
 									},
@@ -3120,18 +3120,18 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"flash_array": schema.SingleNestedBlock{
-													MarkdownDescription: "Flash Arrays. Specify what storage flash arrays should be managed the plugin.",
+													MarkdownDescription: "Specify what storage flash arrays should be managed the plugin.",
 													Attributes: map[string]schema.Attribute{
 														"default_fs_opt": schema.StringAttribute{
-															MarkdownDescription: "Default Filesystem OPTIONS. Block volume default mkfs OPTIONS. Not recommended to change!",
+															MarkdownDescription: "Block volume default mkfs OPTIONS. Not recommended to change!",
 															Optional:            true,
 														},
 														"default_fs_type": schema.StringAttribute{
-															MarkdownDescription: "Default Filesystem Type. Block volume default filesystem type. Not recommended to change! .",
+															MarkdownDescription: "Block volume default filesystem type. Not recommended to change!",
 															Optional:            true,
 														},
 														"default_mount_opts": schema.ListAttribute{
-															MarkdownDescription: "Default Mount OPTIONS. Block volume default filesystem mount OPTIONS. Not recommended to change!",
+															MarkdownDescription: "Block volume default filesystem mount OPTIONS. Not recommended to change!",
 															Optional:            true,
 															ElementType:         types.StringType,
 														},
@@ -3140,59 +3140,59 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 															Optional:            true,
 														},
 														"iscsi_login_timeout": schema.Int64Attribute{
-															MarkdownDescription: "ISCSI Login Timeout. ISCSI login timeout in seconds. Not recommended to change! .",
+															MarkdownDescription: "ISCSI login timeout in seconds. Not recommended to change!",
 															Optional:            true,
 														},
 														"san_type": schema.StringAttribute{
-															MarkdownDescription: "SAN Type. Block volume access protocol, either ISCSI or FC .",
+															MarkdownDescription: "Block volume access protocol, either ISCSI or FC .",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"flash_arrays": schema.ListNestedBlock{
-															MarkdownDescription: "Flash Arrays. For FlashArrays you must set the 'mgmt_endpoint' and 'api_token' .",
+															MarkdownDescription: "For FlashArrays you must set the 'mgmt_endpoint' and 'api_token' .",
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"mgmt_dns_name": schema.StringAttribute{
-																		MarkdownDescription: "Management Endpoint Name. Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+																		MarkdownDescription: "Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 																		Optional:            true,
 																	},
 																	"mgmt_ip": schema.StringAttribute{
-																		MarkdownDescription: "Management Endpoint IP Address. Management Endpoint is reachable at the given IP address.",
+																		MarkdownDescription: "Management Endpoint is reachable at the given IP address.",
 																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"api_token": schema.SingleNestedBlock{
-																		MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+																		MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"blindfold_secret_info": schema.SingleNestedBlock{
-																				MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+																				MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 																				Attributes: map[string]schema.Attribute{
 																					"decryption_provider": schema.StringAttribute{
-																						MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																						MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																						Optional:            true,
 																					},
 																					"location": schema.StringAttribute{
-																						MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+																						MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																						Optional:            true,
 																					},
 																					"store_provider": schema.StringAttribute{
-																						MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																						MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																						Optional:            true,
 																					},
 																				},
 																			},
 																			"clear_secret_info": schema.SingleNestedBlock{
-																				MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																				MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 																				Attributes: map[string]schema.Attribute{
 																					"provider_ref": schema.StringAttribute{
-																						MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																						MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																						Optional:            true,
 																					},
 																					"url": schema.StringAttribute{
-																						MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+																						MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																						Optional:            true,
 																					},
 																				},
@@ -3200,7 +3200,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																		},
 																	},
 																	"labels": schema.SingleNestedBlock{
-																		MarkdownDescription: "Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner.",
+																		MarkdownDescription: "Specifies labels optional, and can be any key-value pair for use with the PSO 'fleet' provisioner.",
 																	},
 																},
 															},
@@ -3208,7 +3208,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													},
 												},
 												"flash_blade": schema.SingleNestedBlock{
-													MarkdownDescription: "Flash Blades. Specify what storage flash blades should be managed the plugin.",
+													MarkdownDescription: "Specify what storage flash blades should be managed the plugin.",
 													Attributes: map[string]schema.Attribute{
 														"enable_snapshot_directory": schema.BoolAttribute{
 															MarkdownDescription: "Enable Snapshot Directory. Enable/Disable FlashBlade snapshots.",
@@ -3221,57 +3221,57 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													},
 													Blocks: map[string]schema.Block{
 														"flash_blades": schema.ListNestedBlock{
-															MarkdownDescription: "Flash Blades. For FlashBlades you must set the 'mgmt_endpoint', 'api_token' and nfs_endpoint .",
+															MarkdownDescription: "For FlashBlades you must set the 'mgmt_endpoint', 'api_token' and nfs_endpoint .",
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"mgmt_dns_name": schema.StringAttribute{
-																		MarkdownDescription: "Management Endpoint Name. Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+																		MarkdownDescription: "Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 																		Optional:            true,
 																	},
 																	"mgmt_ip": schema.StringAttribute{
-																		MarkdownDescription: "Management Endpoint IP Address. Management Endpoint is reachable at the given IP address.",
+																		MarkdownDescription: "Management Endpoint is reachable at the given IP address.",
 																		Optional:            true,
 																	},
 																	"nfs_endpoint_dns_name": schema.StringAttribute{
-																		MarkdownDescription: "NFS DNS Name. Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+																		MarkdownDescription: "Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 																		Optional:            true,
 																	},
 																	"nfs_endpoint_ip": schema.StringAttribute{
-																		MarkdownDescription: "NFS IP Address. Endpoint is reachable at the given IP address.",
+																		MarkdownDescription: "Endpoint is reachable at the given IP address.",
 																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"api_token": schema.SingleNestedBlock{
-																		MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+																		MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"blindfold_secret_info": schema.SingleNestedBlock{
-																				MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+																				MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 																				Attributes: map[string]schema.Attribute{
 																					"decryption_provider": schema.StringAttribute{
-																						MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																						MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																						Optional:            true,
 																					},
 																					"location": schema.StringAttribute{
-																						MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+																						MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																						Optional:            true,
 																					},
 																					"store_provider": schema.StringAttribute{
-																						MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																						MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																						Optional:            true,
 																					},
 																				},
 																			},
 																			"clear_secret_info": schema.SingleNestedBlock{
-																				MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+																				MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 																				Attributes: map[string]schema.Attribute{
 																					"provider_ref": schema.StringAttribute{
-																						MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																						MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																						Optional:            true,
 																					},
 																					"url": schema.StringAttribute{
-																						MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+																						MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																						Optional:            true,
 																					},
 																				},
@@ -3279,7 +3279,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																		},
 																	},
 																	"lables": schema.SingleNestedBlock{
-																		MarkdownDescription: "Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner.",
+																		MarkdownDescription: "Specifies labels optional, and can be any key-value pair for use with the PSO 'fleet' provisioner.",
 																	},
 																},
 															},
@@ -3296,23 +3296,23 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"storage_interface_list": schema.SingleNestedBlock{
-				MarkdownDescription: "List of Interfaces. Add all interfaces belonging to this fleet.",
+				MarkdownDescription: "Add all interfaces belonging to this fleet.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"interfaces": schema.ListNestedBlock{
-						MarkdownDescription: "List of Interfaces. Add all interfaces belonging to this fleet .",
+						MarkdownDescription: "Add all interfaces belonging to this fleet .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -3329,34 +3329,34 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"storage_routes": schema.ListNestedBlock{
-						MarkdownDescription: "List of Static Routes. List of storage static routes .",
+						MarkdownDescription: "List of storage static routes .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"attrs": schema.ListAttribute{
-									MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+									MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
 									Optional:            true,
 									ElementType:         types.StringType,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"labels": schema.SingleNestedBlock{
-									MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy.",
+									MarkdownDescription: "Add Labels for this Static Route, these labels can be used in network policy.",
 								},
 								"nexthop": schema.SingleNestedBlock{
 									MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
 									Attributes: map[string]schema.Attribute{
 										"type": schema.StringAttribute{
-											MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
+											MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN.. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"interface": schema.ListNestedBlock{
-											MarkdownDescription: "Network Interface. Nexthop is network interface when type is 'Network-Interface'",
+											MarkdownDescription: "Nexthop is network interface when type is 'Network-Interface'.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
-														MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -3364,15 +3364,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														},
 													},
 													"name": schema.StringAttribute{
-														MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
-														MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
-														MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -3380,7 +3380,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														},
 													},
 													"uid": schema.StringAttribute{
-														MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -3391,23 +3391,23 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											},
 										},
 										"nexthop_address": schema.SingleNestedBlock{
-											MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
+											MarkdownDescription: "IP Address used to specify an IPv4 or IPv6 address.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"ipv4": schema.SingleNestedBlock{
 													MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 													Attributes: map[string]schema.Attribute{
 														"addr": schema.StringAttribute{
-															MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
+															MarkdownDescription: "IPv4 Address in string form with dot-decimal notation.",
 															Optional:            true,
 														},
 													},
 												},
 												"ipv6": schema.SingleNestedBlock{
-													MarkdownDescription: "IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'",
+													MarkdownDescription: "IPv6 Address specified as hexadecimal numbers separated by ':'.",
 													Attributes: map[string]schema.Attribute{
 														"addr": schema.StringAttribute{
-															MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
+															MarkdownDescription: "IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'.",
 															Optional:            true,
 														},
 													},
@@ -3422,27 +3422,27 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										Attributes: map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"ipv4": schema.SingleNestedBlock{
-												MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
+												MarkdownDescription: "IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
 												Attributes: map[string]schema.Attribute{
 													"plen": schema.Int64Attribute{
-														MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32.",
+														MarkdownDescription: "Prefix-length of the IPv4 subnet. Must be <= 32.",
 														Optional:            true,
 													},
 													"prefix": schema.StringAttribute{
-														MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
+														MarkdownDescription: "Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
 														Optional:            true,
 													},
 												},
 											},
 											"ipv6": schema.SingleNestedBlock{
-												MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
+												MarkdownDescription: "IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
 												Attributes: map[string]schema.Attribute{
 													"plen": schema.Int64Attribute{
-														MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128.",
+														MarkdownDescription: "Prefix length of the IPv6 subnet. Must be <= 128.",
 														Optional:            true,
 													},
 													"prefix": schema.StringAttribute{
-														MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
+														MarkdownDescription: "Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'.",
 														Optional:            true,
 													},
 												},
@@ -3456,18 +3456,18 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"usb_policy": schema.SingleNestedBlock{
-				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+				MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{

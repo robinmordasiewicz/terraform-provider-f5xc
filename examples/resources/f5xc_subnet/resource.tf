@@ -20,11 +20,11 @@ resource "f5xc_subnet" "example" {
   connect_to_layer2 {
     # Configure connect_to_layer2 settings
   }
-  # Object reference. This type establishes a direct referenc...
+  # Type establishes a direct reference from one object(the r...
   layer2_intf_ref {
     # Configure layer2_intf_ref settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   connect_to_slo {
     # Configure connect_to_slo settings
   }

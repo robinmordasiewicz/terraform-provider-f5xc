@@ -159,7 +159,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"healthy_threshold": schema.Int64Attribute{
-				MarkdownDescription: "Healthy Threshold. Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy. Note that during startup, only a single successful health check is required to mark a host healthy.",
+				MarkdownDescription: "Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy. Note that during startup, only a single successful health check is required to mark a host healthy.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -167,7 +167,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"interval": schema.Int64Attribute{
-				MarkdownDescription: "Interval. Time interval in seconds between two healthcheck requests.",
+				MarkdownDescription: "Time interval in seconds between two healthcheck requests.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -175,7 +175,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"jitter_percent": schema.Int64Attribute{
-				MarkdownDescription: "Jitter Percent. Add a random amount of time as a percent value to the interval between successive healthcheck requests.",
+				MarkdownDescription: "Add a random amount of time as a percent value to the interval between successive healthcheck requests.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -183,7 +183,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"timeout": schema.Int64Attribute{
-				MarkdownDescription: "Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure.",
+				MarkdownDescription: "Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -191,7 +191,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"unhealthy_threshold": schema.Int64Attribute{
-				MarkdownDescription: "Unhealthy Threshold. Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy. Note that for HTTP health checking if a host responds with 503 this threshold is ignored and the host is considered unhealthy immediately.",
+				MarkdownDescription: "Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy. Note that for HTTP health checking if a host responds with 503 this threshold is ignored and the host is considered unhealthy immediately.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -207,55 +207,55 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				Delete: true,
 			}),
 			"http_health_check": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: http_health_check, tcp_health_check, udp_icmp_health_check] HTTP Health Check. Healthy if 'GET' method on URL 'HTTP(s)://<host>/<path>' with optional '<header>' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request.",
+				MarkdownDescription: "[OneOf: http_health_check, tcp_health_check, udp_icmp_health_check] Healthy if 'GET' method on URL 'HTTP(s)://<host>/<path>' with optional '<header>' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request.",
 				Attributes: map[string]schema.Attribute{
 					"expected_status_codes": schema.ListAttribute{
-						MarkdownDescription: "Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-'.",
+						MarkdownDescription: "Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-'.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
 					"host_header": schema.StringAttribute{
-						MarkdownDescription: "Host Header Value. The value of the host header.",
+						MarkdownDescription: "The value of the host header.",
 						Optional:            true,
 					},
 					"path": schema.StringAttribute{
-						MarkdownDescription: "Path. Specifies the HTTP path that will be requested during health checking.",
+						MarkdownDescription: "Specifies the HTTP path that will be requested during health checking.",
 						Optional:            true,
 					},
 					"request_headers_to_remove": schema.ListAttribute{
-						MarkdownDescription: "Request Headers to Remove. Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers.",
+						MarkdownDescription: "Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
 					"use_http2": schema.BoolAttribute{
-						MarkdownDescription: "Use HTTP2. If set, health checks will be made using HTTP/2.",
+						MarkdownDescription: "If set, health checks will be made using HTTP/2.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"headers": schema.SingleNestedBlock{
-						MarkdownDescription: "Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs.",
+						MarkdownDescription: "Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs.",
 					},
 					"use_origin_server_name": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 				},
 			},
 			"tcp_health_check": schema.SingleNestedBlock{
-				MarkdownDescription: "TCP Health Check. Healthy if TCP connection is successful and response payload matches <expected_response>",
+				MarkdownDescription: "Healthy if TCP connection is successful and response payload matches <expected_response>.",
 				Attributes: map[string]schema.Attribute{
 					"expected_response": schema.StringAttribute{
-						MarkdownDescription: "Expected Response. Raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload.",
+						MarkdownDescription: "Raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload.",
 						Optional:            true,
 					},
 					"send_payload": schema.StringAttribute{
-						MarkdownDescription: "Send Payload. Raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload.",
+						MarkdownDescription: "Raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload.",
 						Optional:            true,
 					},
 				},
 			},
 			"udp_icmp_health_check": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 		},
 	}

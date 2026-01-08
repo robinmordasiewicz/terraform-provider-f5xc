@@ -57,11 +57,11 @@ resource "f5xc_rate_limiter" "example" {
 
 ### Spec Argument Reference
 
-<a id="limits"></a>&#x2022; [`limits`](#limits) - Optional Block<br>Rate Limit Values. A list of RateLimitValues that specifies the total number of allowed requests for each specified period<br>See [Limits](#limits) below for details.
+<a id="limits"></a>&#x2022; [`limits`](#limits) - Optional Block<br>List of RateLimitValues that specifies the total number of allowed requests for each specified period<br>See [Limits](#limits) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="user-identification"></a>&#x2022; [`user_identification`](#user-identification) - Optional Block<br>User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited<br>See [User Identification](#user-identification) below for details.
+<a id="user-identification"></a>&#x2022; [`user_identification`](#user-identification) - Optional Block<br>Reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited<br>See [User Identification](#user-identification) below for details.
 
 ### Attributes Reference
 
@@ -75,21 +75,21 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`limits`](#limits) block supports the following:
 
-<a id="limits-action-block"></a>&#x2022; [`action_block`](#limits-action-block) - Optional Block<br>Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold<br>See [Action Block](#limits-action-block) below.
+<a id="limits-action-block"></a>&#x2022; [`action_block`](#limits-action-block) - Optional Block<br>Action where a user is blocked from making further requests after exceeding rate limit threshold<br>See [Action Block](#limits-action-block) below.
 
-<a id="limits-burst-multiplier"></a>&#x2022; [`burst_multiplier`](#limits-burst-multiplier) - Optional Number<br>Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate
+<a id="limits-burst-multiplier"></a>&#x2022; [`burst_multiplier`](#limits-burst-multiplier) - Optional Number<br>The maximum burst of requests to accommodate, expressed as a multiple of the rate
 
-<a id="limits-disabled"></a>&#x2022; [`disabled`](#limits-disabled) - Optional Block<br>Enable this option
+<a id="limits-disabled"></a>&#x2022; [`disabled`](#limits-disabled) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="limits-leaky-bucket"></a>&#x2022; [`leaky_bucket`](#limits-leaky-bucket) - Optional Block<br>Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5
+<a id="limits-leaky-bucket"></a>&#x2022; [`leaky_bucket`](#limits-leaky-bucket) - Optional Block<br>Leaky-Bucket is the default rate limiter algorithm for F5
 
-<a id="limits-period-multiplier"></a>&#x2022; [`period_multiplier`](#limits-period-multiplier) - Optional Number<br>Periods. This setting, combined with Per Period units, provides a duration
+<a id="limits-period-multiplier"></a>&#x2022; [`period_multiplier`](#limits-period-multiplier) - Optional Number<br>Setting, combined with Per Period units, provides a duration
 
-<a id="limits-token-bucket"></a>&#x2022; [`token_bucket`](#limits-token-bucket) - Optional Block<br>Token Bucket Rate Limiter. Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits
+<a id="limits-token-bucket"></a>&#x2022; [`token_bucket`](#limits-token-bucket) - Optional Block<br>Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits
 
-<a id="limits-total-number"></a>&#x2022; [`total_number`](#limits-total-number) - Optional Number<br>Number Of Requests. The total number of allowed requests per rate-limiting period
+<a id="limits-total-number"></a>&#x2022; [`total_number`](#limits-total-number) - Optional Number<br>The total number of allowed requests per rate-limiting period
 
-<a id="limits-unit"></a>&#x2022; [`unit`](#limits-unit) - Optional String  Defaults to `SECOND`<br>Possible values are `SECOND`, `MINUTE`, `HOUR`<br>[Enum: SECOND|MINUTE|HOUR] Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days
+<a id="limits-unit"></a>&#x2022; [`unit`](#limits-unit) - Optional String  Defaults to `SECOND`<br>Possible values are `SECOND`, `MINUTE`, `HOUR`<br>[Enum: SECOND|MINUTE|HOUR] Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days
 
 #### Limits Action Block
 
@@ -135,15 +135,15 @@ A [`timeouts`](#timeouts) block supports the following:
 
 An [`user_identification`](#user-identification) block supports the following:
 
-<a id="user-identification-kind"></a>&#x2022; [`kind`](#user-identification-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="user-identification-kind"></a>&#x2022; [`kind`](#user-identification-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="user-identification-name"></a>&#x2022; [`name`](#user-identification-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="user-identification-name"></a>&#x2022; [`name`](#user-identification-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="user-identification-namespace"></a>&#x2022; [`namespace`](#user-identification-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="user-identification-namespace"></a>&#x2022; [`namespace`](#user-identification-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="user-identification-tenant"></a>&#x2022; [`tenant`](#user-identification-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="user-identification-tenant"></a>&#x2022; [`tenant`](#user-identification-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="user-identification-uid"></a>&#x2022; [`uid`](#user-identification-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="user-identification-uid"></a>&#x2022; [`uid`](#user-identification-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 ---
 

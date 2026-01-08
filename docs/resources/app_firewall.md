@@ -77,16 +77,16 @@ resource "f5xc_app_firewall" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="ai-risk-based-blocking"></a>[`ai_risk_based_blocking`](#ai-risk-based-blocking) - Optional Block<br>Risk-Based Blocking (Powered by AI) - Preview. All Attack Types, including high, medium, and low accuracy signatures, automatic Attack Signature tuning, Threat Campaigns, and all Violations will be enabled. AI and ML algorithms will assess request risk, and only high-risk requests will be blocked by default. This feature is in preview mode<br>See [Ai Risk Based Blocking](#ai-risk-based-blocking) below for details.
-<br><br>&#x2022; <a id="default-detection-settings"></a>[`default_detection_settings`](#default-detection-settings) - Optional Block<br>Enable this option
+&#x2022; <a id="ai-risk-based-blocking"></a>[`ai_risk_based_blocking`](#ai-risk-based-blocking) - Optional Block<br>All Attack Types, including high, medium, and low accuracy signatures, automatic Attack Signature tuning, Threat Campaigns, and all Violations will be enabled. AI and ML algorithms will assess request risk, and only high-risk requests will be blocked by default. This feature is in preview mode<br>See [Ai Risk Based Blocking](#ai-risk-based-blocking) below for details.
+<br><br>&#x2022; <a id="default-detection-settings"></a>[`default_detection_settings`](#default-detection-settings) - Optional Block<br>Can be used for messages where no values are needed
 
 -> **One of the following:**
-&#x2022; <a id="allow-all-response-codes"></a>[`allow_all_response_codes`](#allow-all-response-codes) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="allowed-response-codes"></a>[`allowed_response_codes`](#allowed-response-codes) - Optional Block<br>Allowed Response Codes. List of HTTP response status codes that are allowed<br>See [Allowed Response Codes](#allowed-response-codes) below for details.
+&#x2022; <a id="allow-all-response-codes"></a>[`allow_all_response_codes`](#allow-all-response-codes) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="allowed-response-codes"></a>[`allowed_response_codes`](#allowed-response-codes) - Optional Block<br>List of HTTP response status codes that are allowed<br>See [Allowed Response Codes](#allowed-response-codes) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="blocking"></a>[`blocking`](#blocking) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="monitoring"></a>[`monitoring`](#monitoring) - Optional Block<br>Enable this option
+&#x2022; <a id="blocking"></a>[`blocking`](#blocking) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="monitoring"></a>[`monitoring`](#monitoring) - Optional Block<br>Can be used for messages where no values are needed
 
 -> **One of the following:**
 &#x2022; <a id="blocking-page"></a>[`blocking_page`](#blocking-page) - Optional Block<br>Custom Blocking Response Page. Custom blocking response page body<br>See [Blocking Page](#blocking-page) below for details.
@@ -95,18 +95,18 @@ resource "f5xc_app_firewall" "example" {
 &#x2022; <a id="bot-protection-setting"></a>[`bot_protection_setting`](#bot-protection-setting) - Optional Block<br>Bot Protection. Configuration of WAF Bot Protection<br>See [Bot Protection Setting](#bot-protection-setting) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="custom-anonymization"></a>[`custom_anonymization`](#custom-anonymization) - Optional Block<br>Anonymization Configuration. Anonymization settings which is a list of HTTP headers, parameters and cookies<br>See [Custom Anonymization](#custom-anonymization) below for details.
-<br><br>&#x2022; <a id="default-anonymization"></a>[`default_anonymization`](#default-anonymization) - Optional Block<br>Enable this option
+&#x2022; <a id="custom-anonymization"></a>[`custom_anonymization`](#custom-anonymization) - Optional Block<br>Anonymization settings which is a list of HTTP headers, parameters and cookies<br>See [Custom Anonymization](#custom-anonymization) below for details.
+<br><br>&#x2022; <a id="default-anonymization"></a>[`default_anonymization`](#default-anonymization) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="default-bot-setting"></a>&#x2022; [`default_bot_setting`](#default-bot-setting) - Optional Block<br>Enable this option
+<a id="default-bot-setting"></a>&#x2022; [`default_bot_setting`](#default-bot-setting) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="detection-settings"></a>&#x2022; [`detection_settings`](#detection-settings) - Optional Block<br>Detection Settings. Specifies detection settings to be used by WAF<br>See [Detection Settings](#detection-settings) below for details.
+<a id="detection-settings"></a>&#x2022; [`detection_settings`](#detection-settings) - Optional Block<br>Specifies detection settings to be used by WAF<br>See [Detection Settings](#detection-settings) below for details.
 
-<a id="disable-anonymization"></a>&#x2022; [`disable_anonymization`](#disable-anonymization) - Optional Block<br>Enable this option
+<a id="disable-anonymization"></a>&#x2022; [`disable_anonymization`](#disable-anonymization) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="use-default-blocking-page"></a>&#x2022; [`use_default_blocking_page`](#use-default-blocking-page) - Optional Block<br>Enable this option
+<a id="use-default-blocking-page"></a>&#x2022; [`use_default_blocking_page`](#use-default-blocking-page) - Optional Block<br>Can be used for messages where no values are needed
 
 ### Attributes Reference
 
@@ -120,69 +120,69 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`ai_risk_based_blocking`](#ai-risk-based-blocking) block supports the following:
 
-<a id="ai-risk-based-blocking-high-risk-action"></a>&#x2022; [`high_risk_action`](#ai-risk-based-blocking-high-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>[Enum: AI_BLOCK|AI_REPORT] Risk Based Blocking Action. Action to be performed on the request Log and block Log only
+<a id="ai-risk-based-blocking-high-risk-action"></a>&#x2022; [`high_risk_action`](#ai-risk-based-blocking-high-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>[Enum: AI_BLOCK|AI_REPORT] Action to be performed on the request Log and block Log only
 
-<a id="ai-risk-based-blocking-low-risk-action"></a>&#x2022; [`low_risk_action`](#ai-risk-based-blocking-low-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>[Enum: AI_BLOCK|AI_REPORT] Risk Based Blocking Action. Action to be performed on the request Log and block Log only
+<a id="ai-risk-based-blocking-low-risk-action"></a>&#x2022; [`low_risk_action`](#ai-risk-based-blocking-low-risk-action) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>[Enum: AI_BLOCK|AI_REPORT] Action to be performed on the request Log and block Log only
 
-<a id="action-da1a5e"></a>&#x2022; [`medium_risk_action`](#action-da1a5e) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>[Enum: AI_BLOCK|AI_REPORT] Risk Based Blocking Action. Action to be performed on the request Log and block Log only
+<a id="action-da1a5e"></a>&#x2022; [`medium_risk_action`](#action-da1a5e) - Optional String  Defaults to `AI_BLOCK`<br>Possible values are `AI_BLOCK`, `AI_REPORT`<br>[Enum: AI_BLOCK|AI_REPORT] Action to be performed on the request Log and block Log only
 
 #### Allowed Response Codes
 
 An [`allowed_response_codes`](#allowed-response-codes) block supports the following:
 
-<a id="allowed-response-codes-response-code"></a>&#x2022; [`response_code`](#allowed-response-codes-response-code) - Optional List<br>Response Code. List of HTTP response status codes that are allowed
+<a id="allowed-response-codes-response-code"></a>&#x2022; [`response_code`](#allowed-response-codes-response-code) - Optional List<br>List of HTTP response status codes that are allowed
 
 #### Blocking Page
 
 A [`blocking_page`](#blocking-page) block supports the following:
 
-<a id="blocking-page-blocking-page"></a>&#x2022; [`blocking_page`](#blocking-page-blocking-page) - Optional String<br>Blocking Response Page Body. Define the content of the response page (e.g., an HTML document or a JSON object), use the {{request_id}} placeholder to provide users with a unique identifier to be able to trace the blocked request in the logs. The maximum allowed size of response body is 4096 bytes after base64 encoding, which would be about 3070 bytes in plain text
+<a id="blocking-page-blocking-page"></a>&#x2022; [`blocking_page`](#blocking-page-blocking-page) - Optional String<br>Define the content of the response page (e.g., an HTML document or a JSON object), use the {{request_id}} placeholder to provide users with a unique identifier to be able to trace the blocked request in the logs. The maximum allowed size of response body is 4096 bytes after base64 encoding
 
-<a id="blocking-page-response-code"></a>&#x2022; [`response_code`](#blocking-page-response-code) - Optional String  Defaults to `EmptyStatusCode`<br>Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`<br>[Enum: EmptyStatusCode|Continue|OK|Created|Accepted|NonAuthoritativeInformation|NoContent|ResetContent|PartialContent|MultiStatus|AlreadyReported|IMUsed|MultipleChoices|MovedPermanently|Found|SeeOther|NotModified|UseProxy|TemporaryRedirect|PermanentRedirect|BadRequest|Unauthorized|PaymentRequired|Forbidden|NotFound|MethodNotAllowed|NotAcceptable|ProxyAuthenticationRequired|RequestTimeout|Conflict|Gone|LengthRequired|PreconditionFailed|PayloadTooLarge|URITooLong|UnsupportedMediaType|RangeNotSatisfiable|ExpectationFailed|MisdirectedRequest|UnprocessableEntity|Locked|FailedDependency|UpgradeRequired|PreconditionRequired|TooManyRequests|RequestHeaderFieldsTooLarge|InternalServerError|NotImplemented|BadGateway|ServiceUnavailable|GatewayTimeout|HTTPVersionNotSupported|VariantAlsoNegotiates|InsufficientStorage|LoopDetected|NotExtended|NetworkAuthenticationRequired] HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code URI Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code HTTP Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code
+<a id="blocking-page-response-code"></a>&#x2022; [`response_code`](#blocking-page-response-code) - Optional String  Defaults to `EmptyStatusCode`<br>Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`<br>[Enum: EmptyStatusCode|Continue|OK|Created|Accepted|NonAuthoritativeInformation|NoContent|ResetContent|PartialContent|MultiStatus|AlreadyReported|IMUsed|MultipleChoices|MovedPermanently|Found|SeeOther|NotModified|UseProxy|TemporaryRedirect|PermanentRedirect|BadRequest|Unauthorized|PaymentRequired|Forbidden|NotFound|MethodNotAllowed|NotAcceptable|ProxyAuthenticationRequired|RequestTimeout|Conflict|Gone|LengthRequired|PreconditionFailed|PayloadTooLarge|URITooLong|UnsupportedMediaType|RangeNotSatisfiable|ExpectationFailed|MisdirectedRequest|UnprocessableEntity|Locked|FailedDependency|UpgradeRequired|PreconditionRequired|TooManyRequests|RequestHeaderFieldsTooLarge|InternalServerError|NotImplemented|BadGateway|ServiceUnavailable|GatewayTimeout|HTTPVersionNotSupported|VariantAlsoNegotiates|InsufficientStorage|LoopDetected|NotExtended|NetworkAuthenticationRequired] HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status
 
 #### Bot Protection Setting
 
 A [`bot_protection_setting`](#bot-protection-setting) block supports the following:
 
-<a id="bot-protection-setting-good-bot-action"></a>&#x2022; [`good_bot_action`](#bot-protection-setting-good-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="bot-protection-setting-good-bot-action"></a>&#x2022; [`good_bot_action`](#bot-protection-setting-good-bot-action) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Action to be performed on the request Log and block Log only Disable detection
 
-<a id="action-a39578"></a>&#x2022; [`malicious_bot_action`](#action-a39578) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="action-a39578"></a>&#x2022; [`malicious_bot_action`](#action-a39578) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Action to be performed on the request Log and block Log only Disable detection
 
-<a id="action-7e372f"></a>&#x2022; [`suspicious_bot_action`](#action-7e372f) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="action-7e372f"></a>&#x2022; [`suspicious_bot_action`](#action-7e372f) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Action to be performed on the request Log and block Log only Disable detection
 
 #### Custom Anonymization
 
 A [`custom_anonymization`](#custom-anonymization) block supports the following:
 
-<a id="config-0b4528"></a>&#x2022; [`anonymization_config`](#config-0b4528) - Optional Block<br>Configuration. List of HTTP headers, cookies and query parameters whose values will be masked<br>See [Anonymization Config](#config-0b4528) below.
+<a id="config-0b4528"></a>&#x2022; [`anonymization_config`](#config-0b4528) - Optional Block<br>List of HTTP headers, cookies and query parameters whose values will be masked<br>See [Anonymization Config](#config-0b4528) below.
 
 #### Custom Anonymization Anonymization Config
 
 An [`anonymization_config`](#config-0b4528) block (within [`custom_anonymization`](#custom-anonymization)) supports the following:
 
-<a id="cookie-df02b1"></a>&#x2022; [`cookie`](#cookie-df02b1) - Optional Block<br>Anonymize HTTP Cookie. Configure anonymization for HTTP Cookies<br>See [Cookie](#cookie-df02b1) below.
+<a id="cookie-df02b1"></a>&#x2022; [`cookie`](#cookie-df02b1) - Optional Block<br>Configure anonymization for HTTP Cookies<br>See [Cookie](#cookie-df02b1) below.
 
-<a id="header-65f784"></a>&#x2022; [`http_header`](#header-65f784) - Optional Block<br>Anonymize HTTP Header. Configure anonymization for HTTP Headers<br>See [HTTP Header](#header-65f784) below.
+<a id="header-65f784"></a>&#x2022; [`http_header`](#header-65f784) - Optional Block<br>Configure anonymization for HTTP Headers<br>See [HTTP Header](#header-65f784) below.
 
-<a id="parameter-dd1b2a"></a>&#x2022; [`query_parameter`](#parameter-dd1b2a) - Optional Block<br>Anonymize HTTP Query Parameter. Configure anonymization for HTTP Parameters<br>See [Query Parameter](#parameter-dd1b2a) below.
+<a id="parameter-dd1b2a"></a>&#x2022; [`query_parameter`](#parameter-dd1b2a) - Optional Block<br>Configure anonymization for HTTP Parameters<br>See [Query Parameter](#parameter-dd1b2a) below.
 
 #### Custom Anonymization Anonymization Config Cookie
 
 A [`cookie`](#cookie-df02b1) block (within [`custom_anonymization.anonymization_config`](#config-0b4528)) supports the following:
 
-<a id="name-856338"></a>&#x2022; [`cookie_name`](#name-856338) - Optional String<br>Cookie Name. Masks the cookie value. The setting does not mask the cookie name
+<a id="name-856338"></a>&#x2022; [`cookie_name`](#name-856338) - Optional String<br>Masks the cookie value. The setting does not mask the cookie name
 
 #### Custom Anonymization Anonymization Config HTTP Header
 
 A [`http_header`](#header-65f784) block (within [`custom_anonymization.anonymization_config`](#config-0b4528)) supports the following:
 
-<a id="name-ace46c"></a>&#x2022; [`header_name`](#name-ace46c) - Optional String<br>Header Name. Masks the HTTP header value. The setting does not mask the HTTP header name
+<a id="name-ace46c"></a>&#x2022; [`header_name`](#name-ace46c) - Optional String<br>Masks the HTTP header value. The setting does not mask the HTTP header name
 
 #### Custom Anonymization Anonymization Config Query Parameter
 
 A [`query_parameter`](#parameter-dd1b2a) block (within [`custom_anonymization.anonymization_config`](#config-0b4528)) supports the following:
 
-<a id="name-043171"></a>&#x2022; [`query_param_name`](#name-043171) - Optional String<br>Query Parameter Name. Masks the query parameter value. The setting does not mask the query parameter name
+<a id="name-043171"></a>&#x2022; [`query_param_name`](#name-043171) - Optional String<br>Masks the query parameter value. The setting does not mask the query parameter name
 
 #### Detection Settings
 
@@ -190,51 +190,51 @@ A [`detection_settings`](#detection-settings) block supports the following:
 
 <a id="setting-37e8d9"></a>&#x2022; [`bot_protection_setting`](#setting-37e8d9) - Optional Block<br>Bot Protection. Configuration of WAF Bot Protection<br>See [Bot Protection Setting](#setting-37e8d9) below.
 
-<a id="detection-settings-default-bot-setting"></a>&#x2022; [`default_bot_setting`](#detection-settings-default-bot-setting) - Optional Block<br>Enable this option
+<a id="detection-settings-default-bot-setting"></a>&#x2022; [`default_bot_setting`](#detection-settings-default-bot-setting) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="settings-da3fa7"></a>&#x2022; [`default_violation_settings`](#settings-da3fa7) - Optional Block<br>Enable this option
+<a id="settings-da3fa7"></a>&#x2022; [`default_violation_settings`](#settings-da3fa7) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="detection-settings-disable-staging"></a>&#x2022; [`disable_staging`](#detection-settings-disable-staging) - Optional Block<br>Enable this option
+<a id="detection-settings-disable-staging"></a>&#x2022; [`disable_staging`](#detection-settings-disable-staging) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="detection-settings-disable-suppression"></a>&#x2022; [`disable_suppression`](#detection-settings-disable-suppression) - Optional Block<br>Enable this option
+<a id="detection-settings-disable-suppression"></a>&#x2022; [`disable_suppression`](#detection-settings-disable-suppression) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="campaigns-7bf1af"></a>&#x2022; [`disable_threat_campaigns`](#campaigns-7bf1af) - Optional Block<br>Enable this option
+<a id="campaigns-7bf1af"></a>&#x2022; [`disable_threat_campaigns`](#campaigns-7bf1af) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="detection-settings-enable-suppression"></a>&#x2022; [`enable_suppression`](#detection-settings-enable-suppression) - Optional Block<br>Enable this option
+<a id="detection-settings-enable-suppression"></a>&#x2022; [`enable_suppression`](#detection-settings-enable-suppression) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="campaigns-16aa5e"></a>&#x2022; [`enable_threat_campaigns`](#campaigns-16aa5e) - Optional Block<br>Enable this option
+<a id="campaigns-16aa5e"></a>&#x2022; [`enable_threat_campaigns`](#campaigns-16aa5e) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="setting-306450"></a>&#x2022; [`signature_selection_setting`](#setting-306450) - Optional Block<br>Attack Signatures. Attack Signatures are patterns that identify attacks on a web application and its components<br>See [Signature Selection Setting](#setting-306450) below.
+<a id="setting-306450"></a>&#x2022; [`signature_selection_setting`](#setting-306450) - Optional Block<br>Attack Signatures are patterns that identify attacks on a web application and its components<br>See [Signature Selection Setting](#setting-306450) below.
 
-<a id="signatures-2278ab"></a>&#x2022; [`stage_new_and_updated_signatures`](#signatures-2278ab) - Optional Block<br>Attack Signatures Staging Settings. Attack Signatures staging configuration<br>See [Stage New And Updated Signatures](#signatures-2278ab) below.
+<a id="signatures-2278ab"></a>&#x2022; [`stage_new_and_updated_signatures`](#signatures-2278ab) - Optional Block<br>Attack Signatures staging configuration<br>See [Stage New And Updated Signatures](#signatures-2278ab) below.
 
-<a id="detection-settings-stage-new-signatures"></a>&#x2022; [`stage_new_signatures`](#detection-settings-stage-new-signatures) - Optional Block<br>Attack Signatures Staging Settings. Attack Signatures staging configuration<br>See [Stage New Signatures](#detection-settings-stage-new-signatures) below.
+<a id="detection-settings-stage-new-signatures"></a>&#x2022; [`stage_new_signatures`](#detection-settings-stage-new-signatures) - Optional Block<br>Attack Signatures staging configuration<br>See [Stage New Signatures](#detection-settings-stage-new-signatures) below.
 
-<a id="detection-settings-violation-settings"></a>&#x2022; [`violation_settings`](#detection-settings-violation-settings) - Optional Block<br>Violation Settings. Specifies violation settings to be used by WAF<br>See [Violation Settings](#detection-settings-violation-settings) below.
+<a id="detection-settings-violation-settings"></a>&#x2022; [`violation_settings`](#detection-settings-violation-settings) - Optional Block<br>Specifies violation settings to be used by WAF<br>See [Violation Settings](#detection-settings-violation-settings) below.
 
 #### Detection Settings Bot Protection Setting
 
 A [`bot_protection_setting`](#setting-37e8d9) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-<a id="action-1a1e0b"></a>&#x2022; [`good_bot_action`](#action-1a1e0b) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="action-1a1e0b"></a>&#x2022; [`good_bot_action`](#action-1a1e0b) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Action to be performed on the request Log and block Log only Disable detection
 
-<a id="action-321642"></a>&#x2022; [`malicious_bot_action`](#action-321642) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="action-321642"></a>&#x2022; [`malicious_bot_action`](#action-321642) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Action to be performed on the request Log and block Log only Disable detection
 
-<a id="action-223ae0"></a>&#x2022; [`suspicious_bot_action`](#action-223ae0) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Bot Action. Action to be performed on the request Log and block Log only Disable detection
+<a id="action-223ae0"></a>&#x2022; [`suspicious_bot_action`](#action-223ae0) - Optional String  Defaults to `BLOCK`<br>Possible values are `BLOCK`, `REPORT`, `IGNORE`<br>[Enum: BLOCK|REPORT|IGNORE] Action to be performed on the request Log and block Log only Disable detection
 
 #### Detection Settings Signature Selection Setting
 
 A [`signature_selection_setting`](#setting-306450) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-<a id="settings-72f64b"></a>&#x2022; [`attack_type_settings`](#settings-72f64b) - Optional Block<br>Attack Type Settings. Specifies attack-type settings to be used by WAF<br>See [Attack Type Settings](#settings-72f64b) below.
+<a id="settings-72f64b"></a>&#x2022; [`attack_type_settings`](#settings-72f64b) - Optional Block<br>Specifies attack-type settings to be used by WAF<br>See [Attack Type Settings](#settings-72f64b) below.
 
-<a id="settings-067018"></a>&#x2022; [`default_attack_type_settings`](#settings-067018) - Optional Block<br>Enable this option
+<a id="settings-067018"></a>&#x2022; [`default_attack_type_settings`](#settings-067018) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="signatures-38e545"></a>&#x2022; [`high_medium_accuracy_signatures`](#signatures-38e545) - Optional Block<br>Enable this option
+<a id="signatures-38e545"></a>&#x2022; [`high_medium_accuracy_signatures`](#signatures-38e545) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="signatures-b902f3"></a>&#x2022; [`high_medium_low_accuracy_signatures`](#signatures-b902f3) - Optional Block<br>Enable this option
+<a id="signatures-b902f3"></a>&#x2022; [`high_medium_low_accuracy_signatures`](#signatures-b902f3) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="signatures-a0c47d"></a>&#x2022; [`only_high_accuracy_signatures`](#signatures-a0c47d) - Optional Block<br>Enable this option
+<a id="signatures-a0c47d"></a>&#x2022; [`only_high_accuracy_signatures`](#signatures-a0c47d) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Detection Settings Signature Selection Setting Attack Type Settings
 
@@ -244,19 +244,19 @@ A [`signature_selection_setting`](#setting-306450) block (within [`detection_set
 
 A [`stage_new_and_updated_signatures`](#signatures-2278ab) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-<a id="period-dbffd2"></a>&#x2022; [`staging_period`](#period-dbffd2) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
+<a id="period-dbffd2"></a>&#x2022; [`staging_period`](#period-dbffd2) - Optional Number<br>Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
 
 #### Detection Settings Stage New Signatures
 
 A [`stage_new_signatures`](#detection-settings-stage-new-signatures) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-<a id="period-627ff7"></a>&#x2022; [`staging_period`](#period-627ff7) - Optional Number<br>Staging Period. Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
+<a id="period-627ff7"></a>&#x2022; [`staging_period`](#period-627ff7) - Optional Number<br>Define staging period in days. The default staging period is 7 days and the max supported staging period is 20 days
 
 #### Detection Settings Violation Settings
 
 A [`violation_settings`](#detection-settings-violation-settings) block (within [`detection_settings`](#detection-settings)) supports the following:
 
-<a id="types-5a07a0"></a>&#x2022; [`disabled_violation_types`](#types-5a07a0) - Optional List  Defaults to `VIOL_NONE`<br>Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`<br>[Enum: VIOL_NONE|VIOL_FILETYPE|VIOL_METHOD|VIOL_MANDATORY_HEADER|VIOL_HTTP_RESPONSE_STATUS|VIOL_REQUEST_MAX_LENGTH|VIOL_FILE_UPLOAD|VIOL_FILE_UPLOAD_IN_BODY|VIOL_XML_MALFORMED|VIOL_JSON_MALFORMED|VIOL_ASM_COOKIE_MODIFIED|VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS|VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE|VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT|VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST|VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION|VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS|VIOL_EVASION_DIRECTORY_TRAVERSALS|VIOL_MALFORMED_REQUEST|VIOL_EVASION_MULTIPLE_DECODING|VIOL_DATA_GUARD|VIOL_EVASION_APACHE_WHITESPACE|VIOL_COOKIE_MODIFIED|VIOL_EVASION_IIS_UNICODE_CODEPOINTS|VIOL_EVASION_IIS_BACKSLASHES|VIOL_EVASION_PERCENT_U_DECODING|VIOL_EVASION_BARE_BYTE_DECODING|VIOL_EVASION_BAD_UNESCAPE|VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST|VIOL_ENCODING|VIOL_COOKIE_MALFORMED|VIOL_GRAPHQL_FORMAT|VIOL_GRAPHQL_MALFORMED|VIOL_GRAPHQL_INTROSPECTION_QUERY] Disabled Violations. List of violations to be excluded
+<a id="types-5a07a0"></a>&#x2022; [`disabled_violation_types`](#types-5a07a0) - Optional List  Defaults to `VIOL_NONE`<br>Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`<br>[Enum: VIOL_NONE|VIOL_FILETYPE|VIOL_METHOD|VIOL_MANDATORY_HEADER|VIOL_HTTP_RESPONSE_STATUS|VIOL_REQUEST_MAX_LENGTH|VIOL_FILE_UPLOAD|VIOL_FILE_UPLOAD_IN_BODY|VIOL_XML_MALFORMED|VIOL_JSON_MALFORMED|VIOL_ASM_COOKIE_MODIFIED|VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS|VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE|VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT|VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST|VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION|VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS|VIOL_EVASION_DIRECTORY_TRAVERSALS|VIOL_MALFORMED_REQUEST|VIOL_EVASION_MULTIPLE_DECODING|VIOL_DATA_GUARD|VIOL_EVASION_APACHE_WHITESPACE|VIOL_COOKIE_MODIFIED|VIOL_EVASION_IIS_UNICODE_CODEPOINTS|VIOL_EVASION_IIS_BACKSLASHES|VIOL_EVASION_PERCENT_U_DECODING|VIOL_EVASION_BARE_BYTE_DECODING|VIOL_EVASION_BAD_UNESCAPE|VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST|VIOL_ENCODING|VIOL_COOKIE_MALFORMED|VIOL_GRAPHQL_FORMAT|VIOL_GRAPHQL_MALFORMED|VIOL_GRAPHQL_INTROSPECTION_QUERY] List of violations to be excluded
 
 #### Timeouts
 

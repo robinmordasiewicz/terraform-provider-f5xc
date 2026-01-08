@@ -64,10 +64,10 @@ resource "f5xc_cloud_credentials" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="aws-assume-role"></a>[`aws_assume_role`](#aws-assume-role) - Optional Block<br>AWS Assume Role to Handle Delegated Access. AWS Assume Role to Handle Delegated Access<br>See [AWS Assume Role](#aws-assume-role) below for details.
-<br><br>&#x2022; <a id="aws-secret-key"></a>[`aws_secret_key`](#aws-secret-key) - Optional Block<br>AWS Programmatic Access Credentials. AWS Programmatic Access Credentials type<br>See [AWS Secret Key](#aws-secret-key) below for details.
+&#x2022; <a id="aws-assume-role"></a>[`aws_assume_role`](#aws-assume-role) - Optional Block<br>AWS Assume Role to Handle Delegated Access<br>See [AWS Assume Role](#aws-assume-role) below for details.
+<br><br>&#x2022; <a id="aws-secret-key"></a>[`aws_secret_key`](#aws-secret-key) - Optional Block<br>AWS Programmatic Access Credentials type<br>See [AWS Secret Key](#aws-secret-key) below for details.
 <br><br>&#x2022; <a id="azure-client-secret"></a>[`azure_client_secret`](#azure-client-secret) - Optional Block<br>Azure Client Secret. Azure Credentials Client Secret type<br>See [Azure Client Secret](#azure-client-secret) below for details.
-<br><br>&#x2022; <a id="azure-pfx-certificate"></a>[`azure_pfx_certificate`](#azure-pfx-certificate) - Optional Block<br>Client Certificate. Azure Credentials Client Certificate type<br>See [Azure Pfx Certificate](#azure-pfx-certificate) below for details.
+<br><br>&#x2022; <a id="azure-pfx-certificate"></a>[`azure_pfx_certificate`](#azure-pfx-certificate) - Optional Block<br>Azure Credentials Client Certificate type<br>See [Azure Pfx Certificate](#azure-pfx-certificate) below for details.
 <br><br>&#x2022; <a id="gcp-cred-file"></a>[`gcp_cred_file`](#gcp-cred-file) - Optional Block<br>GCP Credentials. GCP Credentials type<br>See [GCP Cred File](#gcp-cred-file) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
@@ -84,35 +84,35 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`aws_assume_role`](#aws-assume-role) block supports the following:
 
-<a id="aws-assume-role-custom-external-id"></a>&#x2022; [`custom_external_id`](#aws-assume-role-custom-external-id) - Optional String<br>External ID is Custom ID. External ID is Custom ID
+<a id="aws-assume-role-custom-external-id"></a>&#x2022; [`custom_external_id`](#aws-assume-role-custom-external-id) - Optional String<br>External ID is Custom ID
 
-<a id="aws-assume-role-duration-seconds"></a>&#x2022; [`duration_seconds`](#aws-assume-role-duration-seconds) - Optional Number<br>Role Session Duration Seconds. The duration, in seconds of the role session
+<a id="aws-assume-role-duration-seconds"></a>&#x2022; [`duration_seconds`](#aws-assume-role-duration-seconds) - Optional Number<br>The duration, in seconds of the role session
 
-<a id="aws-assume-role-external-id-is-optional"></a>&#x2022; [`external_id_is_optional`](#aws-assume-role-external-id-is-optional) - Optional Block<br>Enable this option
+<a id="aws-assume-role-external-id-is-optional"></a>&#x2022; [`external_id_is_optional`](#aws-assume-role-external-id-is-optional) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="tenant-id-b8874c"></a>&#x2022; [`external_id_is_tenant_id`](#tenant-id-b8874c) - Optional Block<br>Enable this option
+<a id="tenant-id-b8874c"></a>&#x2022; [`external_id_is_tenant_id`](#tenant-id-b8874c) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="aws-assume-role-role-arn"></a>&#x2022; [`role_arn`](#aws-assume-role-role-arn) - Optional String<br>IAM Role ARN. IAM Role ARN to assume the role
+<a id="aws-assume-role-role-arn"></a>&#x2022; [`role_arn`](#aws-assume-role-role-arn) - Optional String<br>IAM Role ARN to assume the role
 
-<a id="aws-assume-role-session-name"></a>&#x2022; [`session_name`](#aws-assume-role-session-name) - Optional String<br>Role Session Name. Use the role session name to uniquely identify a session, which will be used for deploy, monitor from F5XC console
+<a id="aws-assume-role-session-name"></a>&#x2022; [`session_name`](#aws-assume-role-session-name) - Optional String<br>Use the role session name to uniquely identify a session, which will be used for deploy, monitor from F5XC console
 
-<a id="aws-assume-role-session-tags"></a>&#x2022; [`session_tags`](#aws-assume-role-session-tags) - Optional Block<br>Role Session Tags. Session tags are key-value pair attributes that you pass when you assume an IAM role
+<a id="aws-assume-role-session-tags"></a>&#x2022; [`session_tags`](#aws-assume-role-session-tags) - Optional Block<br>Session tags are key-value pair attributes that you pass when you assume an IAM role
 
 #### AWS Secret Key
 
 An [`aws_secret_key`](#aws-secret-key) block supports the following:
 
-<a id="aws-secret-key-access-key"></a>&#x2022; [`access_key`](#aws-secret-key-access-key) - Optional String<br>Access Key ID. Access key ID for your AWS account
+<a id="aws-secret-key-access-key"></a>&#x2022; [`access_key`](#aws-secret-key-access-key) - Optional String<br>Access key ID for your AWS account
 
-<a id="aws-secret-key-secret-key"></a>&#x2022; [`secret_key`](#aws-secret-key-secret-key) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Key](#aws-secret-key-secret-key) below.
+<a id="aws-secret-key-secret-key"></a>&#x2022; [`secret_key`](#aws-secret-key-secret-key) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Key](#aws-secret-key-secret-key) below.
 
 #### AWS Secret Key Secret Key
 
 A [`secret_key`](#aws-secret-key-secret-key) block (within [`aws_secret_key`](#aws-secret-key)) supports the following:
 
-<a id="info-9190c7"></a>&#x2022; [`blindfold_secret_info`](#info-9190c7) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-9190c7) below.
+<a id="info-9190c7"></a>&#x2022; [`blindfold_secret_info`](#info-9190c7) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-9190c7) below.
 
-<a id="info-498ec7"></a>&#x2022; [`clear_secret_info`](#info-498ec7) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-498ec7) below.
+<a id="info-498ec7"></a>&#x2022; [`clear_secret_info`](#info-498ec7) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-498ec7) below.
 
 #### AWS Secret Key Secret Key Blindfold Secret Info
 
@@ -126,21 +126,21 @@ A [`secret_key`](#aws-secret-key-secret-key) block (within [`aws_secret_key`](#a
 
 An [`azure_client_secret`](#azure-client-secret) block supports the following:
 
-<a id="azure-client-secret-client-id"></a>&#x2022; [`client_id`](#azure-client-secret-client-id) - Optional String<br>Client ID. Client ID for your Azure service principal
+<a id="azure-client-secret-client-id"></a>&#x2022; [`client_id`](#azure-client-secret-client-id) - Optional String<br>Client ID for your Azure service principal
 
-<a id="azure-client-secret-client-secret"></a>&#x2022; [`client_secret`](#azure-client-secret-client-secret) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Client Secret](#azure-client-secret-client-secret) below.
+<a id="azure-client-secret-client-secret"></a>&#x2022; [`client_secret`](#azure-client-secret-client-secret) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Client Secret](#azure-client-secret-client-secret) below.
 
-<a id="azure-client-secret-subscription-id"></a>&#x2022; [`subscription_id`](#azure-client-secret-subscription-id) - Optional String<br>Subscription ID. Subscription ID for your Azure service principal
+<a id="azure-client-secret-subscription-id"></a>&#x2022; [`subscription_id`](#azure-client-secret-subscription-id) - Optional String<br>Subscription ID for your Azure service principal
 
-<a id="azure-client-secret-tenant-id"></a>&#x2022; [`tenant_id`](#azure-client-secret-tenant-id) - Optional String<br>Tenant ID. Tenant ID for your Azure service principal
+<a id="azure-client-secret-tenant-id"></a>&#x2022; [`tenant_id`](#azure-client-secret-tenant-id) - Optional String<br>Tenant ID for your Azure service principal
 
 #### Azure Client Secret Client Secret
 
 A [`client_secret`](#azure-client-secret-client-secret) block (within [`azure_client_secret`](#azure-client-secret)) supports the following:
 
-<a id="info-2956b6"></a>&#x2022; [`blindfold_secret_info`](#info-2956b6) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-2956b6) below.
+<a id="info-2956b6"></a>&#x2022; [`blindfold_secret_info`](#info-2956b6) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-2956b6) below.
 
-<a id="info-3d8384"></a>&#x2022; [`clear_secret_info`](#info-3d8384) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-3d8384) below.
+<a id="info-3d8384"></a>&#x2022; [`clear_secret_info`](#info-3d8384) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-3d8384) below.
 
 #### Azure Client Secret Client Secret Blindfold Secret Info
 
@@ -154,55 +154,55 @@ A [`client_secret`](#azure-client-secret-client-secret) block (within [`azure_cl
 
 An [`azure_pfx_certificate`](#azure-pfx-certificate) block supports the following:
 
-<a id="azure-pfx-certificate-certificate-url"></a>&#x2022; [`certificate_url`](#azure-pfx-certificate-certificate-url) - Optional String<br>URL for Client Certificate. URL for Client Certificate in '.pfx' or '.p12' whose certificate is linked to service principal object Certificate URL can contain client certificate in string:///`<Base64 of certificate>` format. Here `<Base64 of certificate>` is base64 of '.pfx' or '.p12' binary file
+<a id="azure-pfx-certificate-certificate-url"></a>&#x2022; [`certificate_url`](#azure-pfx-certificate-certificate-url) - Optional String<br>URL for Client Certificate in '.pfx' or '.p12' whose certificate is linked to service principal object Certificate URL can contain client certificate in string:///`<Base64 of certificate>` format. Here `<Base64 of certificate>` is base64 of '.pfx' or '.p12' binary file
 
-<a id="azure-pfx-certificate-client-id"></a>&#x2022; [`client_id`](#azure-pfx-certificate-client-id) - Optional String<br>Client ID. Client ID for your Azure service principal
+<a id="azure-pfx-certificate-client-id"></a>&#x2022; [`client_id`](#azure-pfx-certificate-client-id) - Optional String<br>Client ID for your Azure service principal
 
-<a id="azure-pfx-certificate-password"></a>&#x2022; [`password`](#azure-pfx-certificate-password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#azure-pfx-certificate-password) below.
+<a id="azure-pfx-certificate-password"></a>&#x2022; [`password`](#azure-pfx-certificate-password) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#azure-pfx-certificate-password) below.
 
-<a id="azure-pfx-certificate-subscription-id"></a>&#x2022; [`subscription_id`](#azure-pfx-certificate-subscription-id) - Optional String<br>Subscription ID. Subscription ID for your Azure service principal
+<a id="azure-pfx-certificate-subscription-id"></a>&#x2022; [`subscription_id`](#azure-pfx-certificate-subscription-id) - Optional String<br>Subscription ID for your Azure service principal
 
-<a id="azure-pfx-certificate-tenant-id"></a>&#x2022; [`tenant_id`](#azure-pfx-certificate-tenant-id) - Optional String<br>Tenant ID. Tenant ID for your Azure service principal
+<a id="azure-pfx-certificate-tenant-id"></a>&#x2022; [`tenant_id`](#azure-pfx-certificate-tenant-id) - Optional String<br>Tenant ID for your Azure service principal
 
 #### Azure Pfx Certificate Password
 
 A [`password`](#azure-pfx-certificate-password) block (within [`azure_pfx_certificate`](#azure-pfx-certificate)) supports the following:
 
-<a id="info-86ae9f"></a>&#x2022; [`blindfold_secret_info`](#info-86ae9f) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-86ae9f) below.
+<a id="info-86ae9f"></a>&#x2022; [`blindfold_secret_info`](#info-86ae9f) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-86ae9f) below.
 
-<a id="info-b6797c"></a>&#x2022; [`clear_secret_info`](#info-b6797c) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b6797c) below.
+<a id="info-b6797c"></a>&#x2022; [`clear_secret_info`](#info-b6797c) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b6797c) below.
 
 #### Azure Pfx Certificate Password Blindfold Secret Info
 
 A [`blindfold_secret_info`](#info-86ae9f) block (within [`azure_pfx_certificate.password`](#azure-pfx-certificate-password)) supports the following:
 
-<a id="provider-669799"></a>&#x2022; [`decryption_provider`](#provider-669799) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-669799"></a>&#x2022; [`decryption_provider`](#provider-669799) - Optional String<br>Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="location-24612c"></a>&#x2022; [`location`](#location-24612c) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="location-24612c"></a>&#x2022; [`location`](#location-24612c) - Optional String<br>Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-65421b"></a>&#x2022; [`store_provider`](#provider-65421b) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-65421b"></a>&#x2022; [`store_provider`](#provider-65421b) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Azure Pfx Certificate Password Clear Secret Info
 
 A [`clear_secret_info`](#info-b6797c) block (within [`azure_pfx_certificate.password`](#azure-pfx-certificate-password)) supports the following:
 
-<a id="ref-9cabcd"></a>&#x2022; [`provider_ref`](#ref-9cabcd) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-9cabcd"></a>&#x2022; [`provider_ref`](#ref-9cabcd) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="url-fdff02"></a>&#x2022; [`url`](#url-fdff02) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
+<a id="url-fdff02"></a>&#x2022; [`url`](#url-fdff02) - Optional String<br>URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### GCP Cred File
 
 A [`gcp_cred_file`](#gcp-cred-file) block supports the following:
 
-<a id="gcp-cred-file-credential-file"></a>&#x2022; [`credential_file`](#gcp-cred-file-credential-file) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Credential File](#gcp-cred-file-credential-file) below.
+<a id="gcp-cred-file-credential-file"></a>&#x2022; [`credential_file`](#gcp-cred-file-credential-file) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Credential File](#gcp-cred-file-credential-file) below.
 
 #### GCP Cred File Credential File
 
 A [`credential_file`](#gcp-cred-file-credential-file) block (within [`gcp_cred_file`](#gcp-cred-file)) supports the following:
 
-<a id="info-3869e4"></a>&#x2022; [`blindfold_secret_info`](#info-3869e4) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-3869e4) below.
+<a id="info-3869e4"></a>&#x2022; [`blindfold_secret_info`](#info-3869e4) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-3869e4) below.
 
-<a id="info-226bef"></a>&#x2022; [`clear_secret_info`](#info-226bef) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-226bef) below.
+<a id="info-226bef"></a>&#x2022; [`clear_secret_info`](#info-226bef) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-226bef) below.
 
 #### GCP Cred File Credential File Blindfold Secret Info
 

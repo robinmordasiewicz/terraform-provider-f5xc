@@ -73,34 +73,34 @@ resource "f5xc_udp_loadbalancer" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="advertise-custom"></a>[`advertise_custom`](#advertise-custom) - Optional Block<br>Advertise Custom. This defines a way to advertise a VIP on specific sites<br>See [Advertise Custom](#advertise-custom) below for details.
-<br><br>&#x2022; <a id="advertise-on-public"></a>[`advertise_on_public`](#advertise-on-public) - Optional Block<br>Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Public](#advertise-on-public) below for details.
-<br><br>&#x2022; <a id="advertise-on-public-default-vip"></a>[`advertise_on_public_default_vip`](#advertise-on-public-default-vip) - Optional Block<br>Enable this option
+&#x2022; <a id="advertise-custom"></a>[`advertise_custom`](#advertise-custom) - Optional Block<br>Defines a way to advertise a VIP on specific sites<br>See [Advertise Custom](#advertise-custom) below for details.
+<br><br>&#x2022; <a id="advertise-on-public"></a>[`advertise_on_public`](#advertise-on-public) - Optional Block<br>Defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Public](#advertise-on-public) below for details.
+<br><br>&#x2022; <a id="advertise-on-public-default-vip"></a>[`advertise_on_public_default_vip`](#advertise-on-public-default-vip) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="dns-volterra-managed"></a>&#x2022; [`dns_volterra_managed`](#dns-volterra-managed) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain to be delegated to F5 Distributed Cloud using the Delegated Domain feature or a DNS CNAME record must be created in your DNS provider's portal
+<a id="dns-volterra-managed"></a>&#x2022; [`dns_volterra_managed`](#dns-volterra-managed) - Optional Bool<br>DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain to be delegated to F5 Distributed Cloud using the Delegated Domain feature or a DNS CNAME record must be created in your DNS provider's portal
 
-<a id="do-not-advertise"></a>&#x2022; [`do_not_advertise`](#do-not-advertise) - Optional Block<br>Enable this option
+<a id="do-not-advertise"></a>&#x2022; [`do_not_advertise`](#do-not-advertise) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="domains"></a>&#x2022; [`domains`](#domains) - Optional List<br>Domains. A list of domains (host/authority header) that will be matched to this load balancer
+<a id="domains"></a>&#x2022; [`domains`](#domains) - Optional List<br>List of domains (host/authority header) that will be matched to this load balancer
 
-<a id="enable-per-packet-load-balancing"></a>&#x2022; [`enable_per_packet_load_balancing`](#enable-per-packet-load-balancing) - Optional Bool<br>Per Packet Load Balancing. Per packet load balancing: If disabled (default): First packet identified by source IP/port and local IP/port is sent to an upstream server as the load balancing algorithm dictates, and subsequent packets with the same identity are forwarded to the same upstream server without rechecking the algorithm If enabled: Each packet is directed to an upstream server as the load balancing algorithm dictates
-
--> **One of the following:**
-&#x2022; <a id="hash-policy-choice-random"></a>[`hash_policy_choice_random`](#hash-policy-choice-random) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="hash-policy-choice-round-robin"></a>[`hash_policy_choice_round_robin`](#hash-policy-choice-round-robin) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="hash-policy-choice-source-ip-stickiness"></a>[`hash_policy_choice_source_ip_stickiness`](#hash-policy-choice-source-ip-stickiness) - Optional Block<br>Enable this option
-
-<a id="idle-timeout"></a>&#x2022; [`idle_timeout`](#idle-timeout) - Optional Number<br>Idle Timeout. The amount of time that a session can exist without upstream or downstream activity, in milliseconds
+<a id="enable-per-packet-load-balancing"></a>&#x2022; [`enable_per_packet_load_balancing`](#enable-per-packet-load-balancing) - Optional Bool<br>Per packet load balancing: If disabled (default): First packet identified by source IP/port and local IP/port is sent to an upstream server as the load balancing algorithm dictates, and subsequent packets with the same identity are forwarded to the same upstream server without rechecking the
 
 -> **One of the following:**
-&#x2022; <a id="listen-port"></a>[`listen_port`](#listen-port) - Optional Number<br>Listen Port. Listen Port for this load balancer
-<br><br>&#x2022; <a id="port-ranges"></a>[`port_ranges`](#port-ranges) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+&#x2022; <a id="hash-policy-choice-random"></a>[`hash_policy_choice_random`](#hash-policy-choice-random) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="hash-policy-choice-round-robin"></a>[`hash_policy_choice_round_robin`](#hash-policy-choice-round-robin) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="hash-policy-choice-source-ip-stickiness"></a>[`hash_policy_choice_source_ip_stickiness`](#hash-policy-choice-source-ip-stickiness) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="origin-pools-weights"></a>&#x2022; [`origin_pools_weights`](#origin-pools-weights) - Optional Block<br>Origin Pools. Origin pools with weights and priorities used for this load balancer<br>See [Origin Pools Weights](#origin-pools-weights) below for details.
+<a id="idle-timeout"></a>&#x2022; [`idle_timeout`](#idle-timeout) - Optional Number<br>The amount of time that a session can exist without upstream or downstream activity, in milliseconds
+
+-> **One of the following:**
+&#x2022; <a id="listen-port"></a>[`listen_port`](#listen-port) - Optional Number<br>Listen Port for this load balancer
+<br><br>&#x2022; <a id="port-ranges"></a>[`port_ranges`](#port-ranges) - Optional String<br>A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+
+<a id="origin-pools-weights"></a>&#x2022; [`origin_pools_weights`](#origin-pools-weights) - Optional Block<br>Origin pools with weights and priorities used for this load balancer<br>See [Origin Pools Weights](#origin-pools-weights) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="udp"></a>&#x2022; [`udp`](#udp) - Optional Block<br>Enable this option
+<a id="udp"></a>&#x2022; [`udp`](#udp) - Optional Block<br>Can be used for messages where no values are needed
 
 ### Attributes Reference
 
@@ -114,35 +114,35 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`advertise_custom`](#advertise-custom) block supports the following:
 
-<a id="advertise-custom-advertise-where"></a>&#x2022; [`advertise_where`](#advertise-custom-advertise-where) - Optional Block<br>List of Sites to Advertise. Where should this load balancer be available<br>See [Advertise Where](#advertise-custom-advertise-where) below.
+<a id="advertise-custom-advertise-where"></a>&#x2022; [`advertise_where`](#advertise-custom-advertise-where) - Optional Block<br>Where should this load balancer be available<br>See [Advertise Where](#advertise-custom-advertise-where) below.
 
 #### Advertise Custom Advertise Where
 
 An [`advertise_where`](#advertise-custom-advertise-where) block (within [`advertise_custom`](#advertise-custom)) supports the following:
 
-<a id="public-618a99"></a>&#x2022; [`advertise_on_public`](#public-618a99) - Optional Block<br>Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Public](#public-618a99) below.
+<a id="public-618a99"></a>&#x2022; [`advertise_on_public`](#public-618a99) - Optional Block<br>Defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Public](#public-618a99) below.
 
-<a id="advertise-custom-advertise-where-port"></a>&#x2022; [`port`](#advertise-custom-advertise-where-port) - Optional Number<br>Listen Port. Port to Listen
+<a id="advertise-custom-advertise-where-port"></a>&#x2022; [`port`](#advertise-custom-advertise-where-port) - Optional Number<br>Port to Listen
 
-<a id="ranges-7cbec3"></a>&#x2022; [`port_ranges`](#ranges-7cbec3) - Optional String<br>Listen Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+<a id="ranges-7cbec3"></a>&#x2022; [`port_ranges`](#ranges-7cbec3) - Optional String<br>A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
 
-<a id="advertise-custom-advertise-where-site"></a>&#x2022; [`site`](#advertise-custom-advertise-where-site) - Optional Block<br>Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised<br>See [Site](#advertise-custom-advertise-where-site) below.
+<a id="advertise-custom-advertise-where-site"></a>&#x2022; [`site`](#advertise-custom-advertise-where-site) - Optional Block<br>Defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised<br>See [Site](#advertise-custom-advertise-where-site) below.
 
-<a id="port-b19c4f"></a>&#x2022; [`use_default_port`](#port-b19c4f) - Optional Block<br>Enable this option
+<a id="port-b19c4f"></a>&#x2022; [`use_default_port`](#port-b19c4f) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="network-a20be3"></a>&#x2022; [`virtual_network`](#network-a20be3) - Optional Block<br>Virtual Network. Parameters to advertise on a given virtual network<br>See [Virtual Network](#network-a20be3) below.
+<a id="network-a20be3"></a>&#x2022; [`virtual_network`](#network-a20be3) - Optional Block<br>Parameters to advertise on a given virtual network<br>See [Virtual Network](#network-a20be3) below.
 
-<a id="site-5d39fd"></a>&#x2022; [`virtual_site`](#site-5d39fd) - Optional Block<br>Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised<br>See [Virtual Site](#site-5d39fd) below.
+<a id="site-5d39fd"></a>&#x2022; [`virtual_site`](#site-5d39fd) - Optional Block<br>Defines a reference to a customer site virtual site along with network type where a load balancer could be advertised<br>See [Virtual Site](#site-5d39fd) below.
 
-<a id="vip-870b0b"></a>&#x2022; [`virtual_site_with_vip`](#vip-870b0b) - Optional Block<br>Virtual Site with Specified VIP. This defines a reference to a customer site virtual site along with network type and IP where a load balancer could be advertised<br>See [Virtual Site With VIP](#vip-870b0b) below.
+<a id="vip-870b0b"></a>&#x2022; [`virtual_site_with_vip`](#vip-870b0b) - Optional Block<br>Defines a reference to a customer site virtual site along with network type and IP where a load balancer could be advertised<br>See [Virtual Site With VIP](#vip-870b0b) below.
 
-<a id="service-1fdc7a"></a>&#x2022; [`vk8s_service`](#service-1fdc7a) - Optional Block<br>VK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network<br>See [Vk8s Service](#service-1fdc7a) below.
+<a id="service-1fdc7a"></a>&#x2022; [`vk8s_service`](#service-1fdc7a) - Optional Block<br>Defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network<br>See [Vk8s Service](#service-1fdc7a) below.
 
 #### Advertise Custom Advertise Where Advertise On Public
 
 An [`advertise_on_public`](#public-618a99) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
-<a id="public-ip-d10b09"></a>&#x2022; [`public_ip`](#public-ip-d10b09) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Public IP](#public-ip-d10b09) below.
+<a id="public-ip-d10b09"></a>&#x2022; [`public_ip`](#public-ip-d10b09) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Public IP](#public-ip-d10b09) below.
 
 #### Advertise Custom Advertise Where Advertise On Public Public IP
 
@@ -152,35 +152,35 @@ An [`advertise_on_public`](#public-618a99) block (within [`advertise_custom.adve
 
 A [`site`](#advertise-custom-advertise-where-site) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
-<a id="site-ip-78faa1"></a>&#x2022; [`ip`](#site-ip-78faa1) - Optional String<br>IP Address. Use given IP address as VIP on the site
+<a id="site-ip-78faa1"></a>&#x2022; [`ip`](#site-ip-78faa1) - Optional String<br>Use given IP address as VIP on the site
 
-<a id="network-5811a4"></a>&#x2022; [`network`](#network-5811a4) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. VK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
+<a id="network-5811a4"></a>&#x2022; [`network`](#network-5811a4) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks
 
-<a id="site-7ecf1d"></a>&#x2022; [`site`](#site-7ecf1d) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-7ecf1d) below.
+<a id="site-7ecf1d"></a>&#x2022; [`site`](#site-7ecf1d) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-7ecf1d) below.
 
 #### Advertise Custom Advertise Where Site Site
 
 A [`site`](#site-7ecf1d) block (within [`advertise_custom.advertise_where.site`](#advertise-custom-advertise-where-site)) supports the following:
 
-<a id="name-201d26"></a>&#x2022; [`name`](#name-201d26) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-201d26"></a>&#x2022; [`name`](#name-201d26) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-c3f40d"></a>&#x2022; [`namespace`](#namespace-c3f40d) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-c3f40d"></a>&#x2022; [`namespace`](#namespace-c3f40d) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-8a632a"></a>&#x2022; [`tenant`](#tenant-8a632a) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-8a632a"></a>&#x2022; [`tenant`](#tenant-8a632a) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Advertise Custom Advertise Where Virtual Network
 
 A [`virtual_network`](#network-a20be3) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
-<a id="vip-26d874"></a>&#x2022; [`default_v6_vip`](#vip-26d874) - Optional Block<br>Enable this option
+<a id="vip-26d874"></a>&#x2022; [`default_v6_vip`](#vip-26d874) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="vip-c51931"></a>&#x2022; [`default_vip`](#vip-c51931) - Optional Block<br>Enable this option
+<a id="vip-c51931"></a>&#x2022; [`default_vip`](#vip-c51931) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="vip-bb67d7"></a>&#x2022; [`specific_v6_vip`](#vip-bb67d7) - Optional String<br>Specific V6 VIP. Use given IPv6 address as VIP on virtual Network
+<a id="vip-bb67d7"></a>&#x2022; [`specific_v6_vip`](#vip-bb67d7) - Optional String<br>Use given IPv6 address as VIP on virtual Network
 
-<a id="vip-943090"></a>&#x2022; [`specific_vip`](#vip-943090) - Optional String<br>Specific V4 VIP. Use given IPv4 address as VIP on virtual Network
+<a id="vip-943090"></a>&#x2022; [`specific_vip`](#vip-943090) - Optional String<br>Use given IPv4 address as VIP on virtual Network
 
-<a id="network-bff334"></a>&#x2022; [`virtual_network`](#network-bff334) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Network](#network-bff334) below.
+<a id="network-bff334"></a>&#x2022; [`virtual_network`](#network-bff334) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Network](#network-bff334) below.
 
 #### Advertise Custom Advertise Where Virtual Network Virtual Network
 
@@ -190,9 +190,9 @@ A [`virtual_network`](#network-a20be3) block (within [`advertise_custom.advertis
 
 A [`virtual_site`](#site-5d39fd) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
-<a id="network-15aca4"></a>&#x2022; [`network`](#network-15aca4) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. VK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
+<a id="network-15aca4"></a>&#x2022; [`network`](#network-15aca4) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks
 
-<a id="site-04fd53"></a>&#x2022; [`virtual_site`](#site-04fd53) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-04fd53) below.
+<a id="site-04fd53"></a>&#x2022; [`virtual_site`](#site-04fd53) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-04fd53) below.
 
 #### Advertise Custom Advertise Where Virtual Site Virtual Site
 
@@ -210,19 +210,19 @@ A [`virtual_site`](#site-5d39fd) block (within [`advertise_custom.advertise_wher
 
 A [`vk8s_service`](#service-1fdc7a) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
-<a id="site-ec8d32"></a>&#x2022; [`site`](#site-ec8d32) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-ec8d32) below.
+<a id="site-ec8d32"></a>&#x2022; [`site`](#site-ec8d32) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-ec8d32) below.
 
-<a id="site-5fcbf9"></a>&#x2022; [`virtual_site`](#site-5fcbf9) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-5fcbf9) below.
+<a id="site-5fcbf9"></a>&#x2022; [`virtual_site`](#site-5fcbf9) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-5fcbf9) below.
 
 #### Advertise Custom Advertise Where Vk8s Service Site
 
 A [`site`](#site-ec8d32) block (within [`advertise_custom.advertise_where.vk8s_service`](#service-1fdc7a)) supports the following:
 
-<a id="name-950776"></a>&#x2022; [`name`](#name-950776) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-950776"></a>&#x2022; [`name`](#name-950776) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-1faf25"></a>&#x2022; [`namespace`](#namespace-1faf25) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-1faf25"></a>&#x2022; [`namespace`](#namespace-1faf25) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-98cf6a"></a>&#x2022; [`tenant`](#tenant-98cf6a) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-98cf6a"></a>&#x2022; [`tenant`](#tenant-98cf6a) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Advertise Custom Advertise Where Vk8s Service Virtual Site
 
@@ -232,51 +232,51 @@ A [`site`](#site-ec8d32) block (within [`advertise_custom.advertise_where.vk8s_s
 
 An [`advertise_on_public`](#advertise-on-public) block supports the following:
 
-<a id="advertise-on-public-public-ip"></a>&#x2022; [`public_ip`](#advertise-on-public-public-ip) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Public IP](#advertise-on-public-public-ip) below.
+<a id="advertise-on-public-public-ip"></a>&#x2022; [`public_ip`](#advertise-on-public-public-ip) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Public IP](#advertise-on-public-public-ip) below.
 
 #### Advertise On Public Public IP
 
 A [`public_ip`](#advertise-on-public-public-ip) block (within [`advertise_on_public`](#advertise-on-public)) supports the following:
 
-<a id="advertise-on-public-public-ip-name"></a>&#x2022; [`name`](#advertise-on-public-public-ip-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="advertise-on-public-public-ip-name"></a>&#x2022; [`name`](#advertise-on-public-public-ip-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="advertise-on-public-public-ip-namespace"></a>&#x2022; [`namespace`](#advertise-on-public-public-ip-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="advertise-on-public-public-ip-namespace"></a>&#x2022; [`namespace`](#advertise-on-public-public-ip-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="advertise-on-public-public-ip-tenant"></a>&#x2022; [`tenant`](#advertise-on-public-public-ip-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="advertise-on-public-public-ip-tenant"></a>&#x2022; [`tenant`](#advertise-on-public-public-ip-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Pools Weights
 
 An [`origin_pools_weights`](#origin-pools-weights) block supports the following:
 
-<a id="origin-pools-weights-cluster"></a>&#x2022; [`cluster`](#origin-pools-weights-cluster) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cluster](#origin-pools-weights-cluster) below.
+<a id="origin-pools-weights-cluster"></a>&#x2022; [`cluster`](#origin-pools-weights-cluster) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cluster](#origin-pools-weights-cluster) below.
 
-<a id="origin-pools-weights-endpoint-subsets"></a>&#x2022; [`endpoint_subsets`](#origin-pools-weights-endpoint-subsets) - Optional Block<br>Origin Servers Subsets. Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul cluster, the label of the service is merged with endpoint's labels. In case of Consul, the label is derived from the 'Tag' field. For labels that are common between configured endpoint and discovered service, labels from discovered service takes precedence. List of key-value pairs that will be used as matching metadata. Only those origin servers of upstream origin pool which match this metadata will be selected for load balancing
+<a id="origin-pools-weights-endpoint-subsets"></a>&#x2022; [`endpoint_subsets`](#origin-pools-weights-endpoint-subsets) - Optional Block<br>Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul
 
-<a id="origin-pools-weights-pool"></a>&#x2022; [`pool`](#origin-pools-weights-pool) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Pool](#origin-pools-weights-pool) below.
+<a id="origin-pools-weights-pool"></a>&#x2022; [`pool`](#origin-pools-weights-pool) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Pool](#origin-pools-weights-pool) below.
 
-<a id="origin-pools-weights-priority"></a>&#x2022; [`priority`](#origin-pools-weights-priority) - Optional Number<br>Priority. Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the increasing priority
+<a id="origin-pools-weights-priority"></a>&#x2022; [`priority`](#origin-pools-weights-priority) - Optional Number<br>Priority of this origin pool, valid only with multiple origin pools. Value of 0 will make the pool as lowest priority origin pool Priority of 1 means highest priority and is considered active. When active origin pool is not available, lower priority origin pools are made active as per the
 
-<a id="origin-pools-weights-weight"></a>&#x2022; [`weight`](#origin-pools-weights-weight) - Optional Number<br>Weight. Weight of this origin pool, valid only with multiple origin pool. Value of 0 will disable the pool
+<a id="origin-pools-weights-weight"></a>&#x2022; [`weight`](#origin-pools-weights-weight) - Optional Number<br>Weight of this origin pool, valid only with multiple origin pool. Value of 0 will disable the pool
 
 #### Origin Pools Weights Cluster
 
 A [`cluster`](#origin-pools-weights-cluster) block (within [`origin_pools_weights`](#origin-pools-weights)) supports the following:
 
-<a id="origin-pools-weights-cluster-name"></a>&#x2022; [`name`](#origin-pools-weights-cluster-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="origin-pools-weights-cluster-name"></a>&#x2022; [`name`](#origin-pools-weights-cluster-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="origin-pools-weights-cluster-namespace"></a>&#x2022; [`namespace`](#origin-pools-weights-cluster-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="origin-pools-weights-cluster-namespace"></a>&#x2022; [`namespace`](#origin-pools-weights-cluster-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="origin-pools-weights-cluster-tenant"></a>&#x2022; [`tenant`](#origin-pools-weights-cluster-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="origin-pools-weights-cluster-tenant"></a>&#x2022; [`tenant`](#origin-pools-weights-cluster-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Pools Weights Pool
 
 A [`pool`](#origin-pools-weights-pool) block (within [`origin_pools_weights`](#origin-pools-weights)) supports the following:
 
-<a id="origin-pools-weights-pool-name"></a>&#x2022; [`name`](#origin-pools-weights-pool-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="origin-pools-weights-pool-name"></a>&#x2022; [`name`](#origin-pools-weights-pool-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="origin-pools-weights-pool-namespace"></a>&#x2022; [`namespace`](#origin-pools-weights-pool-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="origin-pools-weights-pool-namespace"></a>&#x2022; [`namespace`](#origin-pools-weights-pool-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="origin-pools-weights-pool-tenant"></a>&#x2022; [`tenant`](#origin-pools-weights-pool-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="origin-pools-weights-pool-tenant"></a>&#x2022; [`tenant`](#origin-pools-weights-pool-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

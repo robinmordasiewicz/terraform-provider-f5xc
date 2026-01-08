@@ -32,15 +32,15 @@ resource "f5xc_container_registry" "example" {
   }
 
   # Resource-specific configuration
-  # Secret. SecretType is used in an object to indicate a sen...
+  # SecretType is used in an object to indicate a sensitive/c...
   password {
     # Configure password settings
   }
-  # Blindfold Secret. BlindfoldSecretInfoType specifies infor...
+  # BlindfoldSecretInfoType specifies information about the S...
   blindfold_secret_info {
     # Configure blindfold_secret_info settings
   }
-  # In-Clear Secret. ClearSecretInfoType specifies informatio...
+  # ClearSecretInfoType specifies information about the Secre...
   clear_secret_info {
     # Configure clear_secret_info settings
   }
@@ -68,13 +68,13 @@ resource "f5xc_container_registry" "example" {
 
 <a id="email"></a>&#x2022; [`email`](#email) - Optional String<br>Email. Email used for the registry
 
-<a id="password"></a>&#x2022; [`password`](#password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#password) below for details.
+<a id="password"></a>&#x2022; [`password`](#password) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#password) below for details.
 
-<a id="registry"></a>&#x2022; [`registry`](#registry) - Optional String<br>Server FQDN. Fully qualified name of the registry login server
+<a id="registry"></a>&#x2022; [`registry`](#registry) - Optional String<br>Fully qualified name of the registry login server
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="user-name"></a>&#x2022; [`user_name`](#user-name) - Optional String<br>User Name. Username used to access the registry
+<a id="user-name"></a>&#x2022; [`user_name`](#user-name) - Optional String<br>Username used to access the registry
 
 ### Attributes Reference
 
@@ -88,27 +88,27 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`password`](#password) block supports the following:
 
-<a id="password-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#password-blindfold-secret-info) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#password-blindfold-secret-info) below.
+<a id="password-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#password-blindfold-secret-info) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#password-blindfold-secret-info) below.
 
-<a id="password-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#password-clear-secret-info) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#password-clear-secret-info) below.
+<a id="password-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#password-clear-secret-info) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#password-clear-secret-info) below.
 
 #### Password Blindfold Secret Info
 
 A [`blindfold_secret_info`](#password-blindfold-secret-info) block (within [`password`](#password)) supports the following:
 
-<a id="provider-f3d5d2"></a>&#x2022; [`decryption_provider`](#provider-f3d5d2) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="provider-f3d5d2"></a>&#x2022; [`decryption_provider`](#provider-f3d5d2) - Optional String<br>Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="password-blindfold-secret-info-location"></a>&#x2022; [`location`](#password-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="password-blindfold-secret-info-location"></a>&#x2022; [`location`](#password-blindfold-secret-info-location) - Optional String<br>Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-0e4651"></a>&#x2022; [`store_provider`](#provider-0e4651) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-0e4651"></a>&#x2022; [`store_provider`](#provider-0e4651) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Password Clear Secret Info
 
 A [`clear_secret_info`](#password-clear-secret-info) block (within [`password`](#password)) supports the following:
 
-<a id="password-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#password-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="password-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#password-clear-secret-info-provider-ref) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="password-clear-secret-info-url"></a>&#x2022; [`url`](#password-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
+<a id="password-clear-secret-info-url"></a>&#x2022; [`url`](#password-clear-secret-info-url) - Optional String<br>URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### Timeouts
 

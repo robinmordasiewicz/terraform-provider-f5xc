@@ -62,7 +62,7 @@ resource "f5xc_crl" "example" {
 
 <a id="refresh-interval"></a>&#x2022; [`refresh_interval`](#refresh-interval) - Optional Number<br>CRL Refresh interval. CRL refresh interval, in hours
 
-<a id="server-address"></a>&#x2022; [`server_address`](#server-address) - Optional String<br>CRL Server address. CRL server address or hostname
+<a id="server-address"></a>&#x2022; [`server_address`](#server-address) - Optional String<br>CRL server address or hostname
 
 <a id="server-port"></a>&#x2022; [`server_port`](#server-port) - Optional Number<br>CRL Server Port. Set CRL Server port number
 

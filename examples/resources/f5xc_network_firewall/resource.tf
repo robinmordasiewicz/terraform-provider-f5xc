@@ -20,7 +20,7 @@ resource "f5xc_network_firewall" "example" {
   active_enhanced_firewall_policies {
     # Configure active_enhanced_firewall_policies settings
   }
-  # Enhanced Firewall Policy. Ordered List of Enhanced Firewa...
+  # Ordered List of Enhanced Firewall Policies active .
   enhanced_firewall_policies {
     # Configure enhanced_firewall_policies settings
   }

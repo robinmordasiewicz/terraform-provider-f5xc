@@ -32,15 +32,15 @@ resource "f5xc_api_testing" "example" {
   }
 
   # Resource-specific configuration
-  # Testing Environments. Add and configure testing domains a...
+  # Add and configure testing domains and credentials .
   domains {
     # Configure domains settings
   }
-  # Credentials. Add credentials for API testing to use in th...
+  # Add credentials for API testing to use in the selected en...
   credentials {
     # Configure credentials settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   admin {
     # Configure admin settings
   }
@@ -66,14 +66,14 @@ resource "f5xc_api_testing" "example" {
 
 ### Spec Argument Reference
 
-<a id="custom-header-value"></a>&#x2022; [`custom_header_value`](#custom-header-value) - Optional String<br>Custom Header. Add x-F5-API-testing-identifier header value to prevent security flags on API testing traffic
+<a id="custom-header-value"></a>&#x2022; [`custom_header_value`](#custom-header-value) - Optional String<br>Add x-F5-API-testing-identifier header value to prevent security flags on API testing traffic
 
-<a id="domains"></a>&#x2022; [`domains`](#domains) - Optional Block<br>Testing Environments. Add and configure testing domains and credentials<br>See [Domains](#domains) below for details.
+<a id="domains"></a>&#x2022; [`domains`](#domains) - Optional Block<br>Add and configure testing domains and credentials<br>See [Domains](#domains) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="every-day"></a>[`every_day`](#every-day) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="every-month"></a>[`every_month`](#every-month) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="every-week"></a>[`every_week`](#every-week) - Optional Block<br>Enable this option
+&#x2022; <a id="every-day"></a>[`every_day`](#every-day) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="every-month"></a>[`every_month`](#every-month) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="every-week"></a>[`every_week`](#every-week) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -89,17 +89,17 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`domains`](#domains) block supports the following:
 
-<a id="domains-allow-destructive-methods"></a>&#x2022; [`allow_destructive_methods`](#domains-allow-destructive-methods) - Optional Bool<br>Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or DELETE data
+<a id="domains-allow-destructive-methods"></a>&#x2022; [`allow_destructive_methods`](#domains-allow-destructive-methods) - Optional Bool<br>Enable to allow API test to execute destructive methods. Be cautious as these can alter or DELETE data
 
-<a id="domains-credentials"></a>&#x2022; [`credentials`](#domains-credentials) - Optional Block<br>Credentials. Add credentials for API testing to use in the selected environment<br>See [Credentials](#domains-credentials) below.
+<a id="domains-credentials"></a>&#x2022; [`credentials`](#domains-credentials) - Optional Block<br>Add credentials for API testing to use in the selected environment<br>See [Credentials](#domains-credentials) below.
 
-<a id="domains-domain"></a>&#x2022; [`domain`](#domains-domain) - Optional String<br>Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments
+<a id="domains-domain"></a>&#x2022; [`domain`](#domains-domain) - Optional String<br>Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments
 
 #### Domains Credentials
 
 A [`credentials`](#domains-credentials) block (within [`domains`](#domains)) supports the following:
 
-<a id="domains-credentials-admin"></a>&#x2022; [`admin`](#domains-credentials-admin) - Optional Block<br>Enable this option
+<a id="domains-credentials-admin"></a>&#x2022; [`admin`](#domains-credentials-admin) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="domains-credentials-api-key"></a>&#x2022; [`api_key`](#domains-credentials-api-key) - Optional Block<br>API Key<br>See [API Key](#domains-credentials-api-key) below.
 
@@ -107,11 +107,11 @@ A [`credentials`](#domains-credentials) block (within [`domains`](#domains)) sup
 
 <a id="domains-credentials-bearer-token"></a>&#x2022; [`bearer_token`](#domains-credentials-bearer-token) - Optional Block<br>Bearer<br>See [Bearer Token](#domains-credentials-bearer-token) below.
 
-<a id="domains-credentials-credential-name"></a>&#x2022; [`credential_name`](#domains-credentials-credential-name) - Optional String<br>Name. Enter a unique name for the credentials used in API testing
+<a id="domains-credentials-credential-name"></a>&#x2022; [`credential_name`](#domains-credentials-credential-name) - Optional String<br>Enter a unique name for the credentials used in API testing
 
 <a id="domains-credentials-login-endpoint"></a>&#x2022; [`login_endpoint`](#domains-credentials-login-endpoint) - Optional Block<br>Login Endpoint<br>See [Login Endpoint](#domains-credentials-login-endpoint) below.
 
-<a id="domains-credentials-standard"></a>&#x2022; [`standard`](#domains-credentials-standard) - Optional Block<br>Enable this option
+<a id="domains-credentials-standard"></a>&#x2022; [`standard`](#domains-credentials-standard) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Domains Credentials API Key
 
@@ -119,15 +119,15 @@ An [`api_key`](#domains-credentials-api-key) block (within [`domains.credentials
 
 <a id="domains-credentials-api-key-key"></a>&#x2022; [`key`](#domains-credentials-api-key-key) - Optional String<br>Key
 
-<a id="domains-credentials-api-key-value"></a>&#x2022; [`value`](#domains-credentials-api-key-value) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Value](#domains-credentials-api-key-value) below.
+<a id="domains-credentials-api-key-value"></a>&#x2022; [`value`](#domains-credentials-api-key-value) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Value](#domains-credentials-api-key-value) below.
 
 #### Domains Credentials API Key Value
 
 A [`value`](#domains-credentials-api-key-value) block (within [`domains.credentials.api_key`](#domains-credentials-api-key)) supports the following:
 
-<a id="info-bf6763"></a>&#x2022; [`blindfold_secret_info`](#info-bf6763) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-bf6763) below.
+<a id="info-bf6763"></a>&#x2022; [`blindfold_secret_info`](#info-bf6763) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-bf6763) below.
 
-<a id="info-b50323"></a>&#x2022; [`clear_secret_info`](#info-b50323) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b50323) below.
+<a id="info-b50323"></a>&#x2022; [`clear_secret_info`](#info-b50323) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b50323) below.
 
 #### Domains Credentials API Key Value Blindfold Secret Info
 
@@ -141,7 +141,7 @@ A [`value`](#domains-credentials-api-key-value) block (within [`domains.credenti
 
 A [`basic_auth`](#domains-credentials-basic-auth) block (within [`domains.credentials`](#domains-credentials)) supports the following:
 
-<a id="domains-credentials-basic-auth-password"></a>&#x2022; [`password`](#domains-credentials-basic-auth-password) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#domains-credentials-basic-auth-password) below.
+<a id="domains-credentials-basic-auth-password"></a>&#x2022; [`password`](#domains-credentials-basic-auth-password) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#domains-credentials-basic-auth-password) below.
 
 <a id="domains-credentials-basic-auth-user"></a>&#x2022; [`user`](#domains-credentials-basic-auth-user) - Optional String<br>User
 
@@ -149,9 +149,9 @@ A [`basic_auth`](#domains-credentials-basic-auth) block (within [`domains.creden
 
 A [`password`](#domains-credentials-basic-auth-password) block (within [`domains.credentials.basic_auth`](#domains-credentials-basic-auth)) supports the following:
 
-<a id="info-8ba200"></a>&#x2022; [`blindfold_secret_info`](#info-8ba200) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-8ba200) below.
+<a id="info-8ba200"></a>&#x2022; [`blindfold_secret_info`](#info-8ba200) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-8ba200) below.
 
-<a id="info-1c1b32"></a>&#x2022; [`clear_secret_info`](#info-1c1b32) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-1c1b32) below.
+<a id="info-1c1b32"></a>&#x2022; [`clear_secret_info`](#info-1c1b32) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-1c1b32) below.
 
 #### Domains Credentials Basic Auth Password Blindfold Secret Info
 
@@ -165,15 +165,15 @@ A [`password`](#domains-credentials-basic-auth-password) block (within [`domains
 
 A [`bearer_token`](#domains-credentials-bearer-token) block (within [`domains.credentials`](#domains-credentials)) supports the following:
 
-<a id="domains-credentials-bearer-token-token"></a>&#x2022; [`token`](#domains-credentials-bearer-token-token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Token](#domains-credentials-bearer-token-token) below.
+<a id="domains-credentials-bearer-token-token"></a>&#x2022; [`token`](#domains-credentials-bearer-token-token) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Token](#domains-credentials-bearer-token-token) below.
 
 #### Domains Credentials Bearer Token Token
 
 A [`token`](#domains-credentials-bearer-token-token) block (within [`domains.credentials.bearer_token`](#domains-credentials-bearer-token)) supports the following:
 
-<a id="info-961400"></a>&#x2022; [`blindfold_secret_info`](#info-961400) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-961400) below.
+<a id="info-961400"></a>&#x2022; [`blindfold_secret_info`](#info-961400) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-961400) below.
 
-<a id="info-35b8eb"></a>&#x2022; [`clear_secret_info`](#info-35b8eb) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-35b8eb) below.
+<a id="info-35b8eb"></a>&#x2022; [`clear_secret_info`](#info-35b8eb) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-35b8eb) below.
 
 #### Domains Credentials Bearer Token Token Blindfold Secret Info
 
@@ -187,9 +187,9 @@ A [`token`](#domains-credentials-bearer-token-token) block (within [`domains.cre
 
 A [`login_endpoint`](#domains-credentials-login-endpoint) block (within [`domains.credentials`](#domains-credentials)) supports the following:
 
-<a id="payload-c266f9"></a>&#x2022; [`json_payload`](#payload-c266f9) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [JSON Payload](#payload-c266f9) below.
+<a id="payload-c266f9"></a>&#x2022; [`json_payload`](#payload-c266f9) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [JSON Payload](#payload-c266f9) below.
 
-<a id="method-967184"></a>&#x2022; [`method`](#method-967184) - Optional String  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+<a id="method-967184"></a>&#x2022; [`method`](#method-967184) - Optional String  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> Specifies the HTTP method used to access a resource. Any HTTP Method
 
 <a id="domains-credentials-login-endpoint-path"></a>&#x2022; [`path`](#domains-credentials-login-endpoint-path) - Optional String<br>Path
 
@@ -199,9 +199,9 @@ A [`login_endpoint`](#domains-credentials-login-endpoint) block (within [`domain
 
 A [`json_payload`](#payload-c266f9) block (within [`domains.credentials.login_endpoint`](#domains-credentials-login-endpoint)) supports the following:
 
-<a id="info-a09a15"></a>&#x2022; [`blindfold_secret_info`](#info-a09a15) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-a09a15) below.
+<a id="info-a09a15"></a>&#x2022; [`blindfold_secret_info`](#info-a09a15) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-a09a15) below.
 
-<a id="info-cd9709"></a>&#x2022; [`clear_secret_info`](#info-cd9709) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-cd9709) below.
+<a id="info-cd9709"></a>&#x2022; [`clear_secret_info`](#info-cd9709) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-cd9709) below.
 
 #### Domains Credentials Login Endpoint JSON Payload Blindfold Secret Info
 

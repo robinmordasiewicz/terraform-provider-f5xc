@@ -137,15 +137,15 @@ func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRe
 				Delete: true,
 			}),
 			"custom_auth_types": schema.ListNestedBlock{
-				MarkdownDescription: "Custom Authentication Types. Select your custom authentication types to be detected in the API discovery.",
+				MarkdownDescription: "Select your custom authentication types to be detected in the API discovery.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"parameter_name": schema.StringAttribute{
-							MarkdownDescription: "Parameter Name. The authentication parameter name.",
+							MarkdownDescription: "The authentication parameter name.",
 							Optional:            true,
 						},
 						"parameter_type": schema.StringAttribute{
-							MarkdownDescription: "[Enum: QUERY_PARAMETER|HEADER|COOKIE] Authentication Parameter Type. Enumeration for authentication parameter types. Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`. Defaults to `QUERY_PARAMETER`.",
+							MarkdownDescription: "[Enum: QUERY_PARAMETER|HEADER|COOKIE] Enumeration for authentication parameter types. Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`. Defaults to `QUERY_PARAMETER`.",
 							Optional:            true,
 						},
 					},

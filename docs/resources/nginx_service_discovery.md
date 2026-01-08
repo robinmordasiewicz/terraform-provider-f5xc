@@ -68,7 +68,7 @@ resource "f5xc_nginx_service_discovery" "example" {
 
 <a id="discovery-target"></a>&#x2022; [`discovery_target`](#discovery-target) - Optional Block<br>Discovery Target<br>See [Discovery Target](#discovery-target) below for details.
 
-<a id="server-block-filters"></a>&#x2022; [`server_block_filters`](#server-block-filters) - Optional Block<br>Server Block Filter. Filters discovered server blocks based on server name, domain and ports. Atleast, one field should be populated for each filter. X-textBlockContent: If no filters are specified, all server blocks will be discovered by default<br>See [Server Block Filters](#server-block-filters) below for details.
+<a id="server-block-filters"></a>&#x2022; [`server_block_filters`](#server-block-filters) - Optional Block<br>Filters discovered server blocks based on server name, domain and ports. Atleast, one field should be populated for each filter. X-textBlockContent: If no filters are specified, all server blocks will be discovered by default<br>See [Server Block Filters](#server-block-filters) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -92,7 +92,7 @@ A [`discovery_target`](#discovery-target) block supports the following:
 
 A [`config_sync_group`](#discovery-target-config-sync-group) block (within [`discovery_target`](#discovery-target)) supports the following:
 
-<a id="group-141170"></a>&#x2022; [`config_sync_group`](#group-141170) - Optional Block<br>Reference. Select new ConfigSyncGroup<br>See [Config Sync Group](#group-141170) below.
+<a id="group-141170"></a>&#x2022; [`config_sync_group`](#group-141170) - Optional Block<br>Select new ConfigSyncGroup<br>See [Config Sync Group](#group-141170) below.
 
 #### Discovery Target Config Sync Group Config Sync Group
 
@@ -102,29 +102,29 @@ A [`config_sync_group`](#discovery-target-config-sync-group) block (within [`dis
 
 A [`nginx_instance`](#discovery-target-nginx-instance) block (within [`discovery_target`](#discovery-target)) supports the following:
 
-<a id="instance-164b57"></a>&#x2022; [`nginx_instance`](#instance-164b57) - Optional Block<br>Reference. Select new NGINX Instance<br>See [Nginx Instance](#instance-164b57) below.
+<a id="instance-164b57"></a>&#x2022; [`nginx_instance`](#instance-164b57) - Optional Block<br>Select new NGINX Instance<br>See [Nginx Instance](#instance-164b57) below.
 
 #### Discovery Target Nginx Instance Nginx Instance
 
 A [`nginx_instance`](#instance-164b57) block (within [`discovery_target.nginx_instance`](#discovery-target-nginx-instance)) supports the following:
 
-<a id="kind-c34cb7"></a>&#x2022; [`kind`](#kind-c34cb7) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="kind-c34cb7"></a>&#x2022; [`kind`](#kind-c34cb7) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="name-e24512"></a>&#x2022; [`name`](#name-e24512) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-e24512"></a>&#x2022; [`name`](#name-e24512) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-b0329a"></a>&#x2022; [`namespace`](#namespace-b0329a) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-b0329a"></a>&#x2022; [`namespace`](#namespace-b0329a) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-a0725b"></a>&#x2022; [`tenant`](#tenant-a0725b) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-a0725b"></a>&#x2022; [`tenant`](#tenant-a0725b) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="uid-3b24ab"></a>&#x2022; [`uid`](#uid-3b24ab) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="uid-3b24ab"></a>&#x2022; [`uid`](#uid-3b24ab) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Server Block Filters
 
 A [`server_block_filters`](#server-block-filters) block supports the following:
 
-<a id="server-block-filters-name-regex"></a>&#x2022; [`name_regex`](#server-block-filters-name-regex) - Optional String<br>Regex To Match Server name or Domain. Regular expression to match the server name or domain that must be discovered
+<a id="server-block-filters-name-regex"></a>&#x2022; [`name_regex`](#server-block-filters-name-regex) - Optional String<br>Regular expression to match the server name or domain that must be discovered
 
-<a id="server-block-filters-port-ranges"></a>&#x2022; [`port_ranges`](#server-block-filters-port-ranges) - Optional String<br>Port Ranges. A string containing a comma separated list of individual service ports or port ranges. Each port range consists of a single port or two ports separated by '-'. For example, 8000-8191. Maximum number of ports allowed is 1024
+<a id="server-block-filters-port-ranges"></a>&#x2022; [`port_ranges`](#server-block-filters-port-ranges) - Optional String<br>String containing a comma separated list of individual service ports or port ranges. Each port range consists of a single port or two ports separated by '-'. For example, 8000-8191
 
 #### Timeouts
 

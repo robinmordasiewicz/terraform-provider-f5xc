@@ -145,7 +145,7 @@ func (r *UsbPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 				Delete: true,
 			}),
 			"allowed_devices": schema.ListNestedBlock{
-				MarkdownDescription: "Allowed USB devices. List of allowed USB devices .",
+				MarkdownDescription: "List of allowed USB devices .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"b_device_class": schema.StringAttribute{
@@ -153,19 +153,19 @@ func (r *UsbPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 							Optional:            true,
 						},
 						"b_device_protocol": schema.StringAttribute{
-							MarkdownDescription: "Protocol. The protocol (within the sub-class) of this device.",
+							MarkdownDescription: "The protocol (within the sub-class) of this device.",
 							Optional:            true,
 						},
 						"b_device_sub_class": schema.StringAttribute{
-							MarkdownDescription: "Subclass. The sub-class (within the class) of this device.",
+							MarkdownDescription: "The sub-class (within the class) of this device.",
 							Optional:            true,
 						},
 						"i_serial": schema.StringAttribute{
-							MarkdownDescription: "ISerialNumber. Index of Serial Number String Descriptor.",
+							MarkdownDescription: "Index of Serial Number String Descriptor.",
 							Optional:            true,
 						},
 						"id_product": schema.StringAttribute{
-							MarkdownDescription: "Product ID. Product ID (Assigned by Manufacturer) in hex.",
+							MarkdownDescription: "Product ID (Assigned by Manufacturer) in hex.",
 							Optional:            true,
 						},
 						"id_vendor": schema.StringAttribute{

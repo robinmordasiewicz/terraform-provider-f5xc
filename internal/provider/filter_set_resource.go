@@ -178,7 +178,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"context_key": schema.StringAttribute{
-				MarkdownDescription: "Context Key. Indexable context key that identifies a page or page type for which the FilterSet is applicable .",
+				MarkdownDescription: "Indexable context key that identifies a page or page type for which the FilterSet is applicable .",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -194,26 +194,26 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 				Delete: true,
 			}),
 			"filter_fields": schema.ListNestedBlock{
-				MarkdownDescription: "Filter Fields. List of fields and their values selected by the user .",
+				MarkdownDescription: "List of fields and their values selected by the user .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"field_id": schema.StringAttribute{
-							MarkdownDescription: "Field ID. An identifier for the field that maps to some UI filter component .",
+							MarkdownDescription: "Identifier for the field that maps to some UI filter component .",
 							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
 						"date_field": schema.SingleNestedBlock{
-							MarkdownDescription: "Filter Date/Time Range Field. Either an absolute time range or a relative time interval.",
+							MarkdownDescription: "Either an absolute time range or a relative time interval.",
 							Attributes: map[string]schema.Attribute{
 								"relative": schema.StringAttribute{
-									MarkdownDescription: "Relative. relative time duration.",
+									MarkdownDescription: "relative time duration.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"absolute": schema.SingleNestedBlock{
-									MarkdownDescription: "Date Range. Date range is for selecting a date range.",
+									MarkdownDescription: "Date range is for selecting a date range.",
 									Attributes: map[string]schema.Attribute{
 										"end_date": schema.StringAttribute{
 											MarkdownDescription: "End Date. Contains end date .",
@@ -231,7 +231,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 							MarkdownDescription: "Filter Expression Field.",
 							Attributes: map[string]schema.Attribute{
 								"expression": schema.StringAttribute{
-									MarkdownDescription: "Expression Value. Expression is a Kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values .",
+									MarkdownDescription: "Expression is a Kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values .",
 									Optional:            true,
 								},
 							},

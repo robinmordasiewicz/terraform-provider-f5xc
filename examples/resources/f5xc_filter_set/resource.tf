@@ -16,15 +16,15 @@ resource "f5xc_filter_set" "example" {
   }
 
   # Resource-specific configuration
-  # Filter Fields. List of fields and their values selected b...
+  # List of fields and their values selected by the user .
   filter_fields {
     # Configure filter_fields settings
   }
-  # Filter Date/Time Range Field. Either an absolute time ran...
+  # Either an absolute time range or a relative time interval.
   date_field {
     # Configure date_field settings
   }
-  # Date Range. Date range is for selecting a date range.
+  # Date range is for selecting a date range.
   absolute {
     # Configure absolute settings
   }

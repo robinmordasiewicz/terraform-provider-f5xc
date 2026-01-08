@@ -92,7 +92,7 @@ func (r *BGPAsnSetResource) Schema(ctx context.Context, req resource.SchemaReque
 				ElementType:         types.StringType,
 			},
 			"as_numbers": schema.ListAttribute{
-				MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy.",
+				MarkdownDescription: "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy.",
 				Optional:            true,
 				ElementType:         types.Int64Type,
 			},

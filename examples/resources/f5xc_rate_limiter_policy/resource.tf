@@ -20,7 +20,7 @@ resource "f5xc_rate_limiter_policy" "example" {
   any_server {
     # Configure any_server settings
   }
-  # Rules. A list of RateLimiterRules that are evaluated sequ...
+  # List of RateLimiterRules that are evaluated sequentially ...
   rules {
     # Configure rules settings
   }

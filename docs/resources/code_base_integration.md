@@ -32,7 +32,7 @@ resource "f5xc_code_base_integration" "example" {
   }
 
   # Resource-specific configuration
-  # Integration Data. Choose your code base (e.g. GitHub, Git...
+  # Choose your code base (e.g. GitHub, GitLab, Bitbucket, Az...
   code_base_integration {
     # Configure code_base_integration settings
   }
@@ -40,7 +40,7 @@ resource "f5xc_code_base_integration" "example" {
   azure_repos {
     # Configure azure_repos settings
   }
-  # Secret. SecretType is used in an object to indicate a sen...
+  # SecretType is used in an object to indicate a sensitive/c...
   access_token {
     # Configure access_token settings
   }
@@ -66,7 +66,7 @@ resource "f5xc_code_base_integration" "example" {
 
 ### Spec Argument Reference
 
-<a id="code-base-integration"></a>&#x2022; [`code_base_integration`](#code-base-integration) - Optional Block<br>Integration Data. Choose your code base (e.g. GitHub, GitLab, Bitbucket, Azure) and provide credentials and connection details<br>See [Code Base Integration](#code-base-integration) below for details.
+<a id="code-base-integration"></a>&#x2022; [`code_base_integration`](#code-base-integration) - Optional Block<br>Choose your code base (e.g. GitHub, GitLab, Bitbucket, Azure) and provide credentials and connection details<br>See [Code Base Integration](#code-base-integration) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -100,15 +100,15 @@ A [`code_base_integration`](#code-base-integration) block supports the following
 
 An [`azure_repos`](#code-base-integration-azure-repos) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
-<a id="token-d4247d"></a>&#x2022; [`access_token`](#token-d4247d) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#token-d4247d) below.
+<a id="token-d4247d"></a>&#x2022; [`access_token`](#token-d4247d) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#token-d4247d) below.
 
 #### Code Base Integration Azure Repos Access Token
 
 An [`access_token`](#token-d4247d) block (within [`code_base_integration.azure_repos`](#code-base-integration-azure-repos)) supports the following:
 
-<a id="info-088938"></a>&#x2022; [`blindfold_secret_info`](#info-088938) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-088938) below.
+<a id="info-088938"></a>&#x2022; [`blindfold_secret_info`](#info-088938) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-088938) below.
 
-<a id="info-8fbdd3"></a>&#x2022; [`clear_secret_info`](#info-8fbdd3) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-8fbdd3) below.
+<a id="info-8fbdd3"></a>&#x2022; [`clear_secret_info`](#info-8fbdd3) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-8fbdd3) below.
 
 #### Code Base Integration Azure Repos Access Token Blindfold Secret Info
 
@@ -122,7 +122,7 @@ An [`access_token`](#token-d4247d) block (within [`code_base_integration.azure_r
 
 A [`bitbucket`](#code-base-integration-bitbucket) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
-<a id="code-base-integration-bitbucket-passwd"></a>&#x2022; [`passwd`](#code-base-integration-bitbucket-passwd) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Passwd](#code-base-integration-bitbucket-passwd) below.
+<a id="code-base-integration-bitbucket-passwd"></a>&#x2022; [`passwd`](#code-base-integration-bitbucket-passwd) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Passwd](#code-base-integration-bitbucket-passwd) below.
 
 <a id="username-d6a1e1"></a>&#x2022; [`username`](#username-d6a1e1) - Optional String<br>BitBucket Username
 
@@ -130,9 +130,9 @@ A [`bitbucket`](#code-base-integration-bitbucket) block (within [`code_base_inte
 
 A [`passwd`](#code-base-integration-bitbucket-passwd) block (within [`code_base_integration.bitbucket`](#code-base-integration-bitbucket)) supports the following:
 
-<a id="info-6400a1"></a>&#x2022; [`blindfold_secret_info`](#info-6400a1) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-6400a1) below.
+<a id="info-6400a1"></a>&#x2022; [`blindfold_secret_info`](#info-6400a1) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-6400a1) below.
 
-<a id="info-3c272b"></a>&#x2022; [`clear_secret_info`](#info-3c272b) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-3c272b) below.
+<a id="info-3c272b"></a>&#x2022; [`clear_secret_info`](#info-3c272b) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-3c272b) below.
 
 #### Code Base Integration Bitbucket Passwd Blindfold Secret Info
 
@@ -146,7 +146,7 @@ A [`passwd`](#code-base-integration-bitbucket-passwd) block (within [`code_base_
 
 A [`bitbucket_server`](#code-base-integration-bitbucket-server) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
-<a id="passwd-13127c"></a>&#x2022; [`passwd`](#passwd-13127c) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Passwd](#passwd-13127c) below.
+<a id="passwd-13127c"></a>&#x2022; [`passwd`](#passwd-13127c) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Passwd](#passwd-13127c) below.
 
 <a id="url-2b7ca9"></a>&#x2022; [`url`](#url-2b7ca9) - Optional String<br>BitBucket Server URL
 
@@ -158,9 +158,9 @@ A [`bitbucket_server`](#code-base-integration-bitbucket-server) block (within [`
 
 A [`passwd`](#passwd-13127c) block (within [`code_base_integration.bitbucket_server`](#code-base-integration-bitbucket-server)) supports the following:
 
-<a id="info-e29dd9"></a>&#x2022; [`blindfold_secret_info`](#info-e29dd9) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e29dd9) below.
+<a id="info-e29dd9"></a>&#x2022; [`blindfold_secret_info`](#info-e29dd9) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e29dd9) below.
 
-<a id="info-38f71d"></a>&#x2022; [`clear_secret_info`](#info-38f71d) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-38f71d) below.
+<a id="info-38f71d"></a>&#x2022; [`clear_secret_info`](#info-38f71d) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-38f71d) below.
 
 #### Code Base Integration Bitbucket Server Passwd Blindfold Secret Info
 
@@ -174,7 +174,7 @@ A [`passwd`](#passwd-13127c) block (within [`code_base_integration.bitbucket_ser
 
 A [`github`](#code-base-integration-github) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
-<a id="token-b77f94"></a>&#x2022; [`access_token`](#token-b77f94) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#token-b77f94) below.
+<a id="token-b77f94"></a>&#x2022; [`access_token`](#token-b77f94) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#token-b77f94) below.
 
 <a id="code-base-integration-github-username"></a>&#x2022; [`username`](#code-base-integration-github-username) - Optional String<br>GitHub Username
 
@@ -184,9 +184,9 @@ A [`github`](#code-base-integration-github) block (within [`code_base_integratio
 
 An [`access_token`](#token-b77f94) block (within [`code_base_integration.github`](#code-base-integration-github)) supports the following:
 
-<a id="info-a74f41"></a>&#x2022; [`blindfold_secret_info`](#info-a74f41) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-a74f41) below.
+<a id="info-a74f41"></a>&#x2022; [`blindfold_secret_info`](#info-a74f41) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-a74f41) below.
 
-<a id="info-4afb31"></a>&#x2022; [`clear_secret_info`](#info-4afb31) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-4afb31) below.
+<a id="info-4afb31"></a>&#x2022; [`clear_secret_info`](#info-4afb31) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-4afb31) below.
 
 #### Code Base Integration Github Access Token Blindfold Secret Info
 
@@ -200,7 +200,7 @@ An [`access_token`](#token-b77f94) block (within [`code_base_integration.github`
 
 A [`github_enterprise`](#code-base-integration-github-enterprise) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
-<a id="token-c0b5c1"></a>&#x2022; [`access_token`](#token-c0b5c1) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#token-c0b5c1) below.
+<a id="token-c0b5c1"></a>&#x2022; [`access_token`](#token-c0b5c1) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#token-c0b5c1) below.
 
 <a id="hostname-b59154"></a>&#x2022; [`hostname`](#hostname-b59154) - Optional String<br>GitHub Hostname
 
@@ -210,9 +210,9 @@ A [`github_enterprise`](#code-base-integration-github-enterprise) block (within 
 
 An [`access_token`](#token-c0b5c1) block (within [`code_base_integration.github_enterprise`](#code-base-integration-github-enterprise)) supports the following:
 
-<a id="info-113b2a"></a>&#x2022; [`blindfold_secret_info`](#info-113b2a) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-113b2a) below.
+<a id="info-113b2a"></a>&#x2022; [`blindfold_secret_info`](#info-113b2a) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-113b2a) below.
 
-<a id="info-f7aaa0"></a>&#x2022; [`clear_secret_info`](#info-f7aaa0) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-f7aaa0) below.
+<a id="info-f7aaa0"></a>&#x2022; [`clear_secret_info`](#info-f7aaa0) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-f7aaa0) below.
 
 #### Code Base Integration Github Enterprise Access Token Blindfold Secret Info
 
@@ -226,15 +226,15 @@ An [`access_token`](#token-c0b5c1) block (within [`code_base_integration.github_
 
 A [`gitlab`](#code-base-integration-gitlab) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
-<a id="token-5d157b"></a>&#x2022; [`access_token`](#token-5d157b) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#token-5d157b) below.
+<a id="token-5d157b"></a>&#x2022; [`access_token`](#token-5d157b) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#token-5d157b) below.
 
 #### Code Base Integration Gitlab Access Token
 
 An [`access_token`](#token-5d157b) block (within [`code_base_integration.gitlab`](#code-base-integration-gitlab)) supports the following:
 
-<a id="info-ceae94"></a>&#x2022; [`blindfold_secret_info`](#info-ceae94) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-ceae94) below.
+<a id="info-ceae94"></a>&#x2022; [`blindfold_secret_info`](#info-ceae94) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-ceae94) below.
 
-<a id="info-6cbf02"></a>&#x2022; [`clear_secret_info`](#info-6cbf02) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-6cbf02) below.
+<a id="info-6cbf02"></a>&#x2022; [`clear_secret_info`](#info-6cbf02) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-6cbf02) below.
 
 #### Code Base Integration Gitlab Access Token Blindfold Secret Info
 
@@ -248,7 +248,7 @@ An [`access_token`](#token-5d157b) block (within [`code_base_integration.gitlab`
 
 A [`gitlab_enterprise`](#code-base-integration-gitlab-enterprise) block (within [`code_base_integration`](#code-base-integration)) supports the following:
 
-<a id="token-b5c2b4"></a>&#x2022; [`access_token`](#token-b5c2b4) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#token-b5c2b4) below.
+<a id="token-b5c2b4"></a>&#x2022; [`access_token`](#token-b5c2b4) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Access Token](#token-b5c2b4) below.
 
 <a id="url-5e31c3"></a>&#x2022; [`url`](#url-5e31c3) - Optional String<br>GitLab URL
 
@@ -256,9 +256,9 @@ A [`gitlab_enterprise`](#code-base-integration-gitlab-enterprise) block (within 
 
 An [`access_token`](#token-b5c2b4) block (within [`code_base_integration.gitlab_enterprise`](#code-base-integration-gitlab-enterprise)) supports the following:
 
-<a id="info-f6945e"></a>&#x2022; [`blindfold_secret_info`](#info-f6945e) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-f6945e) below.
+<a id="info-f6945e"></a>&#x2022; [`blindfold_secret_info`](#info-f6945e) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-f6945e) below.
 
-<a id="info-040ff9"></a>&#x2022; [`clear_secret_info`](#info-040ff9) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-040ff9) below.
+<a id="info-040ff9"></a>&#x2022; [`clear_secret_info`](#info-040ff9) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-040ff9) below.
 
 #### Code Base Integration Gitlab Enterprise Access Token Blindfold Secret Info
 

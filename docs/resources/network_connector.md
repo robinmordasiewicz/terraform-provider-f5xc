@@ -65,14 +65,14 @@ resource "f5xc_network_connector" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="disable-forward-proxy"></a>[`disable_forward_proxy`](#disable-forward-proxy) - Optional Block<br>Enable this option
+&#x2022; <a id="disable-forward-proxy"></a>[`disable_forward_proxy`](#disable-forward-proxy) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="enable-forward-proxy"></a>&#x2022; [`enable_forward_proxy`](#enable-forward-proxy) - Optional Block<br>Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted IP-prefix-list and ports connection_timeout: The timeout for new network connections to upstream server. Max_connect_attempts: Maximum number of attempts made to make new network connection to upstream server<br>See [Enable Forward Proxy](#enable-forward-proxy) below for details.
+<a id="enable-forward-proxy"></a>&#x2022; [`enable_forward_proxy`](#enable-forward-proxy) - Optional Block<br>Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the<br>See [Enable Forward Proxy](#enable-forward-proxy) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="sli-to-global-dr"></a>[`sli_to_global_dr`](#sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#sli-to-global-dr) below for details.
+&#x2022; <a id="sli-to-global-dr"></a>[`sli_to_global_dr`](#sli-to-global-dr) - Optional Block<br>Global network reference for direct connection<br>See [SLI To Global DR](#sli-to-global-dr) below for details.
 <br><br>&#x2022; <a id="sli-to-slo-snat"></a>[`sli_to_slo_snat`](#sli-to-slo-snat) - Optional Block<br>SNAT Configuration. X-example: '' description<br>See [SLI To Slo Snat](#sli-to-slo-snat) below for details.
-<br><br>&#x2022; <a id="slo-to-global-dr"></a>[`slo_to_global_dr`](#slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#slo-to-global-dr) below for details.
+<br><br>&#x2022; <a id="slo-to-global-dr"></a>[`slo_to_global_dr`](#slo-to-global-dr) - Optional Block<br>Global network reference for direct connection<br>See [Slo To Global DR](#slo-to-global-dr) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -88,17 +88,17 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`enable_forward_proxy`](#enable-forward-proxy) block supports the following:
 
-<a id="enable-forward-proxy-connection-timeout"></a>&#x2022; [`connection_timeout`](#enable-forward-proxy-connection-timeout) - Optional Number  Defaults to `2000`  Specified in milliseconds<br>Connection Timeout. The timeout for new network connections to upstream server.  The (2 seconds)
+<a id="enable-forward-proxy-connection-timeout"></a>&#x2022; [`connection_timeout`](#enable-forward-proxy-connection-timeout) - Optional Number  Defaults to `2000`  Specified in milliseconds<br>The timeout for new network connections to upstream server.  The (2 seconds)
 
-<a id="attempts-e04850"></a>&#x2022; [`max_connect_attempts`](#attempts-e04850) - Optional Number  Defaults to `1`<br>Number of connect attempts. Specifies the allowed number of retries on connect failure to upstream server
+<a id="attempts-e04850"></a>&#x2022; [`max_connect_attempts`](#attempts-e04850) - Optional Number  Defaults to `1`<br>Specifies the allowed number of retries on connect failure to upstream server
 
-<a id="enable-forward-proxy-no-interception"></a>&#x2022; [`no_interception`](#enable-forward-proxy-no-interception) - Optional Block<br>Enable this option
+<a id="enable-forward-proxy-no-interception"></a>&#x2022; [`no_interception`](#enable-forward-proxy-no-interception) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="enable-forward-proxy-tls-intercept"></a>&#x2022; [`tls_intercept`](#enable-forward-proxy-tls-intercept) - Optional Block<br>Configuration for TLS interception. Configuration to enable TLS interception<br>See [TLS Intercept](#enable-forward-proxy-tls-intercept) below.
+<a id="enable-forward-proxy-tls-intercept"></a>&#x2022; [`tls_intercept`](#enable-forward-proxy-tls-intercept) - Optional Block<br>Configuration to enable TLS interception<br>See [TLS Intercept](#enable-forward-proxy-tls-intercept) below.
 
-<a id="enable-forward-proxy-white-listed-ports"></a>&#x2022; [`white_listed_ports`](#enable-forward-proxy-white-listed-ports) - Optional List<br>TCP Ports to Skip Protocol Parsing. Traffic to these destination TCP ports is not subjected to protocol parsing Example 'tmate' server port
+<a id="enable-forward-proxy-white-listed-ports"></a>&#x2022; [`white_listed_ports`](#enable-forward-proxy-white-listed-ports) - Optional List<br>Traffic to these destination TCP ports is not subjected to protocol parsing Example 'tmate' server port
 
-<a id="prefixes-f83493"></a>&#x2022; [`white_listed_prefixes`](#prefixes-f83493) - Optional List<br>IP Prefixes to Skip Protocol Parsing. Traffic to these destination IP prefixes is not subjected to protocol parsing Example 'tmate' server IP
+<a id="prefixes-f83493"></a>&#x2022; [`white_listed_prefixes`](#prefixes-f83493) - Optional List<br>Traffic to these destination IP prefixes is not subjected to protocol parsing Example 'tmate' server IP
 
 #### Enable Forward Proxy TLS Intercept
 
@@ -106,31 +106,31 @@ A [`tls_intercept`](#enable-forward-proxy-tls-intercept) block (within [`enable_
 
 <a id="certificate-1f025c"></a>&#x2022; [`custom_certificate`](#certificate-1f025c) - Optional Block<br>TLS Certificate. Handle to fetch certificate and key<br>See [Custom Certificate](#certificate-1f025c) below.
 
-<a id="domains-448895"></a>&#x2022; [`enable_for_all_domains`](#domains-448895) - Optional Block<br>Enable this option
+<a id="domains-448895"></a>&#x2022; [`enable_for_all_domains`](#domains-448895) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="policy-3a19ff"></a>&#x2022; [`policy`](#policy-3a19ff) - Optional Block<br>TLS Interception Policy. Policy to enable or disable TLS interception<br>See [Policy](#policy-3a19ff) below.
+<a id="policy-3a19ff"></a>&#x2022; [`policy`](#policy-3a19ff) - Optional Block<br>Policy to enable or disable TLS interception<br>See [Policy](#policy-3a19ff) below.
 
-<a id="url-498586"></a>&#x2022; [`trusted_ca_url`](#url-498586) - Optional String<br>Custom Root CA Certificate. Custom Root CA Certificate for validating upstream server certificate
+<a id="url-498586"></a>&#x2022; [`trusted_ca_url`](#url-498586) - Optional String<br>Custom Root CA Certificate for validating upstream server certificate
 
-<a id="certificate-028e29"></a>&#x2022; [`volterra_certificate`](#certificate-028e29) - Optional Block<br>Enable this option
+<a id="certificate-028e29"></a>&#x2022; [`volterra_certificate`](#certificate-028e29) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="trusted-ca-89cb15"></a>&#x2022; [`volterra_trusted_ca`](#trusted-ca-89cb15) - Optional Block<br>Enable this option
+<a id="trusted-ca-89cb15"></a>&#x2022; [`volterra_trusted_ca`](#trusted-ca-89cb15) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate
 
 A [`custom_certificate`](#certificate-1f025c) block (within [`enable_forward_proxy.tls_intercept`](#enable-forward-proxy-tls-intercept)) supports the following:
 
-<a id="url-4c4a3a"></a>&#x2022; [`certificate_url`](#url-4c4a3a) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
+<a id="url-4c4a3a"></a>&#x2022; [`certificate_url`](#url-4c4a3a) - Optional String<br>TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
-<a id="algorithms-5c3932"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-5c3932) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-5c3932) below.
+<a id="algorithms-5c3932"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-5c3932) - Optional Block<br>Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-5c3932) below.
 
 <a id="spec-00ecd4"></a>&#x2022; [`description_spec`](#spec-00ecd4) - Optional String<br>Description. Description for the certificate
 
-<a id="stapling-c941e6"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-c941e6) - Optional Block<br>Enable this option
+<a id="stapling-c941e6"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-c941e6) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="key-363f83"></a>&#x2022; [`private_key`](#key-363f83) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-363f83) below.
+<a id="key-363f83"></a>&#x2022; [`private_key`](#key-363f83) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-363f83) below.
 
-<a id="defaults-cf3fd3"></a>&#x2022; [`use_system_defaults`](#defaults-cf3fd3) - Optional Block<br>Enable this option
+<a id="defaults-cf3fd3"></a>&#x2022; [`use_system_defaults`](#defaults-cf3fd3) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate Custom Hash Algorithms
 
@@ -152,7 +152,7 @@ A [`custom_certificate`](#certificate-1f025c) block (within [`enable_forward_pro
 
 A [`policy`](#policy-3a19ff) block (within [`enable_forward_proxy.tls_intercept`](#enable-forward-proxy-tls-intercept)) supports the following:
 
-<a id="rules-e7522a"></a>&#x2022; [`interception_rules`](#rules-e7522a) - Optional Block<br>TLS Interception Rules. List of ordered rules to enable or disable for TLS interception<br>See [Interception Rules](#rules-e7522a) below.
+<a id="rules-e7522a"></a>&#x2022; [`interception_rules`](#rules-e7522a) - Optional Block<br>List of ordered rules to enable or disable for TLS interception<br>See [Interception Rules](#rules-e7522a) below.
 
 #### Enable Forward Proxy TLS Intercept Policy Interception Rules
 
@@ -166,41 +166,41 @@ A [`policy`](#policy-3a19ff) block (within [`enable_forward_proxy.tls_intercept`
 
 A [`sli_to_global_dr`](#sli-to-global-dr) block supports the following:
 
-<a id="sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#sli-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#sli-to-global-dr-global-vn) below.
+<a id="sli-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#sli-to-global-dr-global-vn) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#sli-to-global-dr-global-vn) below.
 
 #### SLI To Global DR Global Vn
 
 A [`global_vn`](#sli-to-global-dr-global-vn) block (within [`sli_to_global_dr`](#sli-to-global-dr)) supports the following:
 
-<a id="sli-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#sli-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="sli-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#sli-to-global-dr-global-vn-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="sli-to-global-dr-global-vn-namespace"></a>&#x2022; [`namespace`](#sli-to-global-dr-global-vn-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="sli-to-global-dr-global-vn-namespace"></a>&#x2022; [`namespace`](#sli-to-global-dr-global-vn-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="sli-to-global-dr-global-vn-tenant"></a>&#x2022; [`tenant`](#sli-to-global-dr-global-vn-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="sli-to-global-dr-global-vn-tenant"></a>&#x2022; [`tenant`](#sli-to-global-dr-global-vn-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### SLI To Slo Snat
 
 A [`sli_to_slo_snat`](#sli-to-slo-snat) block supports the following:
 
-<a id="sli-to-slo-snat-default-gw-snat"></a>&#x2022; [`default_gw_snat`](#sli-to-slo-snat-default-gw-snat) - Optional Block<br>Enable this option
+<a id="sli-to-slo-snat-default-gw-snat"></a>&#x2022; [`default_gw_snat`](#sli-to-slo-snat-default-gw-snat) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="sli-to-slo-snat-interface-ip"></a>&#x2022; [`interface_ip`](#sli-to-slo-snat-interface-ip) - Optional Block<br>Enable this option
+<a id="sli-to-slo-snat-interface-ip"></a>&#x2022; [`interface_ip`](#sli-to-slo-snat-interface-ip) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Slo To Global DR
 
 A [`slo_to_global_dr`](#slo-to-global-dr) block supports the following:
 
-<a id="slo-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#slo-to-global-dr-global-vn) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#slo-to-global-dr-global-vn) below.
+<a id="slo-to-global-dr-global-vn"></a>&#x2022; [`global_vn`](#slo-to-global-dr-global-vn) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#slo-to-global-dr-global-vn) below.
 
 #### Slo To Global DR Global Vn
 
 A [`global_vn`](#slo-to-global-dr-global-vn) block (within [`slo_to_global_dr`](#slo-to-global-dr)) supports the following:
 
-<a id="slo-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#slo-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="slo-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#slo-to-global-dr-global-vn-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="slo-to-global-dr-global-vn-namespace"></a>&#x2022; [`namespace`](#slo-to-global-dr-global-vn-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="slo-to-global-dr-global-vn-namespace"></a>&#x2022; [`namespace`](#slo-to-global-dr-global-vn-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="slo-to-global-dr-global-vn-tenant"></a>&#x2022; [`tenant`](#slo-to-global-dr-global-vn-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="slo-to-global-dr-global-vn-tenant"></a>&#x2022; [`tenant`](#slo-to-global-dr-global-vn-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

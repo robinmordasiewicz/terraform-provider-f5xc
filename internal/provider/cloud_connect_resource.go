@@ -312,10 +312,11 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the Cloud Connect will be created.",
-				Required:            true,
+				MarkdownDescription: "Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted.",
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.UseStateForUnknown(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -359,18 +360,18 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"cred": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -380,18 +381,18 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 						},
 					},
 					"site": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -409,7 +410,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"vpc_id": schema.StringAttribute{
-											MarkdownDescription: "VPC ID. Enter the VPC ID of the VPC to be attached .",
+											MarkdownDescription: "Enter the VPC ID of the VPC to be attached .",
 											Optional:            true,
 										},
 									},
@@ -441,7 +442,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"all_route_tables": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
+													MarkdownDescription: "Can be used for messages where no values are needed.",
 												},
 												"selective_route_tables": schema.SingleNestedBlock{
 													MarkdownDescription: "AWS Route Table. AWS Route Table.",
@@ -456,10 +457,10 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 											},
 										},
 										"labels": schema.SingleNestedBlock{
-											MarkdownDescription: "Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall.",
+											MarkdownDescription: "Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall.",
 										},
 										"manual_routing": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 									},
 								},
@@ -473,18 +474,18 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"site": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -502,25 +503,25 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"subscription_id": schema.StringAttribute{
-											MarkdownDescription: "Subscription ID. Enter the Subscription ID of the VNet to be attached .",
+											MarkdownDescription: "Enter the Subscription ID of the VNet to be attached .",
 											Optional:            true,
 										},
 										"vnet_id": schema.StringAttribute{
-											MarkdownDescription: "VNet ID. Enter the VNet ID of the VNet to be attached in format /<resource-group-name>/<VNet-name> .",
+											MarkdownDescription: "Enter the VNet ID of the VNet to be attached in format /<resource-group-name>/<VNet-name> .",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_routing": schema.SingleNestedBlock{
-											MarkdownDescription: "List Azure Route Table with Static Route. List Azure Route Table with Static Route.",
+											MarkdownDescription: "List Azure Route Table with Static Route.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"route_tables": schema.ListNestedBlock{
-													MarkdownDescription: "List of route tables with static routes. Route Tables with static routes .",
+													MarkdownDescription: "Route Tables with static routes .",
 													NestedObject: schema.NestedBlockObject{
 														Attributes: map[string]schema.Attribute{
 															"route_table_id": schema.StringAttribute{
-																MarkdownDescription: "Route table ID. Route table ID in the format /<resource-group-name>/<route-table-name>",
+																MarkdownDescription: "Route table ID in the format /<resource-group-name>/<route-table-name>.",
 																Optional:            true,
 															},
 															"static_routes": schema.ListAttribute{
@@ -538,13 +539,13 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"all_route_tables": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
+													MarkdownDescription: "Can be used for messages where no values are needed.",
 												},
 												"selective_route_tables": schema.SingleNestedBlock{
 													MarkdownDescription: "Azure Route Table. Azure Route Table.",
 													Attributes: map[string]schema.Attribute{
 														"route_table_id": schema.ListAttribute{
-															MarkdownDescription: "Route table ID. Route table ID in the format /<resource-group-name>/<route-table-name>",
+															MarkdownDescription: "Route table ID in the format /<resource-group-name>/<route-table-name>.",
 															Optional:            true,
 															ElementType:         types.StringType,
 														},
@@ -553,10 +554,10 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 											},
 										},
 										"labels": schema.SingleNestedBlock{
-											MarkdownDescription: "Labels. Add labels for the VNet attachments. These labels can then be used in policies such as enhanced firewall policies.",
+											MarkdownDescription: "Add labels for the VNet attachments. These labels can then be used in policies such as enhanced firewall policies.",
 										},
 										"manual_routing": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 									},
 								},
@@ -566,18 +567,18 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"segment": schema.SingleNestedBlock{
-				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+				MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{

@@ -32,7 +32,7 @@ resource "f5xc_dns_domain" "example" {
   }
 
   # Resource-specific configuration
-  # Enable this option
+  # Can be used for messages where no values are needed.
   volterra_managed {
     # Configure volterra_managed settings
   }
@@ -58,11 +58,11 @@ resource "f5xc_dns_domain" "example" {
 
 ### Spec Argument Reference
 
-<a id="dnssec-mode"></a>&#x2022; [`dnssec_mode`](#dnssec-mode) - Optional String  Defaults to `DNSSEC_DISABLE`<br>Possible values are `DNSSEC_DISABLE`, `DNSSEC_ENABLE`<br>[Enum: DNSSEC_DISABLE|DNSSEC_ENABLE] DNSSEC Mode. Enable or disable DNSSEC on the DNS Domain DNSSEC is disabled DNSSEC is enabled
+<a id="dnssec-mode"></a>&#x2022; [`dnssec_mode`](#dnssec-mode) - Optional String  Defaults to `DNSSEC_DISABLE`<br>Possible values are `DNSSEC_DISABLE`, `DNSSEC_ENABLE`<br>[Enum: DNSSEC_DISABLE|DNSSEC_ENABLE] Enable or disable DNSSEC on the DNS Domain DNSSEC is disabled DNSSEC is enabled
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="volterra-managed"></a>&#x2022; [`volterra_managed`](#volterra-managed) - Optional Block<br>Enable this option
+<a id="volterra-managed"></a>&#x2022; [`volterra_managed`](#volterra-managed) - Optional Block<br>Can be used for messages where no values are needed
 
 ### Attributes Reference
 

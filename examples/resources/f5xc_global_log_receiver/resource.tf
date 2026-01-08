@@ -24,7 +24,7 @@ resource "f5xc_global_log_receiver" "example" {
   aws_cloud_watch_receiver {
     # Configure aws_cloud_watch_receiver settings
   }
-  # Object reference. This type establishes a direct referenc...
+  # Type establishes a direct reference from one object(the r...
   aws_cred {
     # Configure aws_cred settings
   }

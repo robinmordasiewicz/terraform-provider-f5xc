@@ -307,49 +307,49 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 				Delete: true,
 			}),
 			"notification_parameters": schema.SingleNestedBlock{
-				MarkdownDescription: "Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers.",
+				MarkdownDescription: "Set of notification parameters to decide how and when the alert notifications should be sent to the receivers.",
 				Attributes: map[string]schema.Attribute{
 					"group_interval": schema.StringAttribute{
-						MarkdownDescription: "Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m'",
+						MarkdownDescription: "Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval..",
 						Optional:            true,
 					},
 					"group_wait": schema.StringAttribute{
-						MarkdownDescription: "Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s'",
+						MarkdownDescription: "Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s'.",
 						Optional:            true,
 					},
 					"repeat_interval": schema.StringAttribute{
-						MarkdownDescription: "Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'",
+						MarkdownDescription: "Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"custom": schema.SingleNestedBlock{
-						MarkdownDescription: "Custom Group By. Specify list of custom labels to group/aggregate the alerts.",
+						MarkdownDescription: "Specify list of custom labels to group/aggregate the alerts.",
 						Attributes: map[string]schema.Attribute{
 							"labels": schema.ListAttribute{
-								MarkdownDescription: "Labels. Name of labels to group/aggregate the alerts.",
+								MarkdownDescription: "Name of labels to group/aggregate the alerts.",
 								Optional:            true,
 								ElementType:         types.StringType,
 							},
 						},
 					},
 					"default": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"individual": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"ves_io_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 				},
 			},
 			"receivers": schema.ListNestedBlock{
-				MarkdownDescription: "Alert Receivers. List of Alert Receivers where the alerts will be sent .",
+				MarkdownDescription: "List of Alert Receivers where the alerts will be sent .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
-							MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -357,15 +357,15 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -373,7 +373,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"uid": schema.StringAttribute{
-							MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -384,38 +384,38 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"routes": schema.ListNestedBlock{
-				MarkdownDescription: "Policy Rules. Set of routes to match the incoming alert. The routes are evaluated in the specified order and terminates on the first match.",
+				MarkdownDescription: "Set of routes to match the incoming alert. The routes are evaluated in the specified order and terminates on the first match.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"alertname": schema.StringAttribute{
-							MarkdownDescription: "[Enum: SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN|SITE_PHYSICAL_INTERFACE_DOWN|TUNNELS_TO_CUSTOMER_SITE_DOWN|SERVICE_SERVER_ERROR|SERVICE_CLIENT_ERROR|SERVICE_HEALTH_LOW|SERVICE_UNAVAILABLE|SERVICE_SERVER_ERROR_PER_SOURCE_SITE|SERVICE_CLIENT_ERROR_PER_SOURCE_SITE|SERVICE_ENDPOINT_HEALTHCHECK_FAILURE|SYNTHETIC_MONITOR_HEALTH_CRITICAL|MALICIOUS_USER_DETECTED|WAF_TOO_MANY_ATTACKS|API_SECURITY_TOO_MANY_ATTACKS|SERVICE_POLICY_TOO_MANY_ATTACKS|WAF_TOO_MANY_MALICIOUS_BOTS|BOT_DEFENSE_TOO_MANY_SECURITY_EVENTS|THREAT_CAMPAIGN|VES_CLIENT_SIDE_DEFENSE_SUSPICIOUS_DOMAIN|VES_CLIENT_SIDE_DEFENSE_SENSITIVE_FIELD_READ|ERROR_RATE_ANOMALY|REQUEST_RATE_ANOMALY|REQUEST_THROUGHPUT_ANOMALY|RESPONSE_LATENCY_ANOMALY|RESPONSE_THROUGHPUT_ANOMALY|TLS_AUTOMATIC_CERTIFICATE_RENEWAL_FAILURE|TLS_AUTOMATIC_CERTIFICATE_RENEWAL_STILL_FAILING|TLS_AUTOMATIC_CERTIFICATE_EXPIRED|TLS_CUSTOM_CERTIFICATE_EXPIRING|TLS_CUSTOM_CERTIFICATE_EXPIRING_SOON|TLS_CUSTOM_CERTIFICATE_EXPIRED|L7DDOS|DNS_ZONE_IGNORED_DUPLICATE_RECORD|API_SECURITY_UNUSED_API_DETECTED|API_SECURITY_SHADOW_API_DETECTED|API_SECURITY_SENSITIVE_DATA_IN_RESPONSE_DETECTED|API_SECURITY_RISK_SCORE_HIGH_DETECTED|ROUTED_DDOS_ALERT_NOTIFICATION|ROUTED_DDOS_MITIGATION_NOTIFICATION] AlertName. List of Alert Names Customer tunnel interface down Physical Interface down Tunnel Interfaces to Customer Site Down Virutal Host server error Virtual Host client error Service Health Low Service Unavailable Virtual Host server error Virtual Host client error Endpoint Healthcheck failure Synthetic monitor health critical Malicious user detected Virtual Host WAF security events detected Virtual Host API security events detected Virtual Host Service Policy security events detected Virtual Host Many Malicious Bots based WAF security events detected Virtual Host Many Malicious Bots based Bot Defense security events detected Virtual Host Many Threat campaign based WAF security events detected Suspicious domain identified by Client-Side Defense service Client-Side Defense has identified a suspicious script that is reading sensitive form field Error rate anomaly detected Request rate anomaly detected Request throughput anomaly detected Response latency anomaly detected Response throughput anomaly detected TLS Automatic Certificate renewal is failing TLS Automatic Certificate renewal is still failing after multiple retries TLS Automatic Certificate has expired TLS Custom Certificate will expire in less than 28 days TLS Custom Certificate will expire in less than 15 days TLS Custom Certificate has expired DDoS security event detected DNS Zone Ignored a Duplicate Record Create Request Unused APIs Detected Shadow APIs Detected Endpoints With Sensitive Data In Response Detected High Risk Score Endpoints Detected A routed DDoS traffic anomaly has been detected A routed DDoS mitigation has been implemented to block malicious traffic. Possible values are `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`, `SITE_PHYSICAL_INTERFACE_DOWN`, `TUNNELS_TO_CUSTOMER_SITE_DOWN`, `SERVICE_SERVER_ERROR`, `SERVICE_CLIENT_ERROR`, `SERVICE_HEALTH_LOW`, `SERVICE_UNAVAILABLE`, `SERVICE_SERVER_ERROR_PER_SOURCE_SITE`, `SERVICE_CLIENT_ERROR_PER_SOURCE_SITE`, `SERVICE_ENDPOINT_HEALTHCHECK_FAILURE`, `SYNTHETIC_MONITOR_HEALTH_CRITICAL`, `MALICIOUS_USER_DETECTED`, `WAF_TOO_MANY_ATTACKS`, `API_SECURITY_TOO_MANY_ATTACKS`, `SERVICE_POLICY_TOO_MANY_ATTACKS`, `WAF_TOO_MANY_MALICIOUS_BOTS`, `BOT_DEFENSE_TOO_MANY_SECURITY_EVENTS`, `THREAT_CAMPAIGN`, `VES_CLIENT_SIDE_DEFENSE_SUSPICIOUS_DOMAIN`, `VES_CLIENT_SIDE_DEFENSE_SENSITIVE_FIELD_READ`, `ERROR_RATE_ANOMALY`, `REQUEST_RATE_ANOMALY`, `REQUEST_THROUGHPUT_ANOMALY`, `RESPONSE_LATENCY_ANOMALY`, `RESPONSE_THROUGHPUT_ANOMALY`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_FAILURE`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_STILL_FAILING`, `TLS_AUTOMATIC_CERTIFICATE_EXPIRED`, `TLS_CUSTOM_CERTIFICATE_EXPIRING`, `TLS_CUSTOM_CERTIFICATE_EXPIRING_SOON`, `TLS_CUSTOM_CERTIFICATE_EXPIRED`, `L7DDOS`, `DNS_ZONE_IGNORED_DUPLICATE_RECORD`, `API_SECURITY_UNUSED_API_DETECTED`, `API_SECURITY_SHADOW_API_DETECTED`, `API_SECURITY_SENSITIVE_DATA_IN_RESPONSE_DETECTED`, `API_SECURITY_RISK_SCORE_HIGH_DETECTED`, `ROUTED_DDOS_ALERT_NOTIFICATION`, `ROUTED_DDOS_MITIGATION_NOTIFICATION`. Defaults to `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`.",
+							MarkdownDescription: "[Enum: SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN|SITE_PHYSICAL_INTERFACE_DOWN|TUNNELS_TO_CUSTOMER_SITE_DOWN|SERVICE_SERVER_ERROR|SERVICE_CLIENT_ERROR|SERVICE_HEALTH_LOW|SERVICE_UNAVAILABLE|SERVICE_SERVER_ERROR_PER_SOURCE_SITE|SERVICE_CLIENT_ERROR_PER_SOURCE_SITE|SERVICE_ENDPOINT_HEALTHCHECK_FAILURE|SYNTHETIC_MONITOR_HEALTH_CRITICAL|MALICIOUS_USER_DETECTED|WAF_TOO_MANY_ATTACKS|API_SECURITY_TOO_MANY_ATTACKS|SERVICE_POLICY_TOO_MANY_ATTACKS|WAF_TOO_MANY_MALICIOUS_BOTS|BOT_DEFENSE_TOO_MANY_SECURITY_EVENTS|THREAT_CAMPAIGN|VES_CLIENT_SIDE_DEFENSE_SUSPICIOUS_DOMAIN|VES_CLIENT_SIDE_DEFENSE_SENSITIVE_FIELD_READ|ERROR_RATE_ANOMALY|REQUEST_RATE_ANOMALY|REQUEST_THROUGHPUT_ANOMALY|RESPONSE_LATENCY_ANOMALY|RESPONSE_THROUGHPUT_ANOMALY|TLS_AUTOMATIC_CERTIFICATE_RENEWAL_FAILURE|TLS_AUTOMATIC_CERTIFICATE_RENEWAL_STILL_FAILING|TLS_AUTOMATIC_CERTIFICATE_EXPIRED|TLS_CUSTOM_CERTIFICATE_EXPIRING|TLS_CUSTOM_CERTIFICATE_EXPIRING_SOON|TLS_CUSTOM_CERTIFICATE_EXPIRED|L7DDOS|DNS_ZONE_IGNORED_DUPLICATE_RECORD|API_SECURITY_UNUSED_API_DETECTED|API_SECURITY_SHADOW_API_DETECTED|API_SECURITY_SENSITIVE_DATA_IN_RESPONSE_DETECTED|API_SECURITY_RISK_SCORE_HIGH_DETECTED|ROUTED_DDOS_ALERT_NOTIFICATION|ROUTED_DDOS_MITIGATION_NOTIFICATION] List of Alert Names Customer tunnel interface down Physical Interface down Tunnel Interfaces to Customer Site Down Virutal Host server error Virtual Host client error Service Health Low Service Unavailable Virtual Host server error Virtual Host client error Endpoint Healthcheck failure Synthetic.. Possible values are `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`, `SITE_PHYSICAL_INTERFACE_DOWN`, `TUNNELS_TO_CUSTOMER_SITE_DOWN`, `SERVICE_SERVER_ERROR`, `SERVICE_CLIENT_ERROR`, `SERVICE_HEALTH_LOW`, `SERVICE_UNAVAILABLE`, `SERVICE_SERVER_ERROR_PER_SOURCE_SITE`, `SERVICE_CLIENT_ERROR_PER_SOURCE_SITE`, `SERVICE_ENDPOINT_HEALTHCHECK_FAILURE`, `SYNTHETIC_MONITOR_HEALTH_CRITICAL`, `MALICIOUS_USER_DETECTED`, `WAF_TOO_MANY_ATTACKS`, `API_SECURITY_TOO_MANY_ATTACKS`, `SERVICE_POLICY_TOO_MANY_ATTACKS`, `WAF_TOO_MANY_MALICIOUS_BOTS`, `BOT_DEFENSE_TOO_MANY_SECURITY_EVENTS`, `THREAT_CAMPAIGN`, `VES_CLIENT_SIDE_DEFENSE_SUSPICIOUS_DOMAIN`, `VES_CLIENT_SIDE_DEFENSE_SENSITIVE_FIELD_READ`, `ERROR_RATE_ANOMALY`, `REQUEST_RATE_ANOMALY`, `REQUEST_THROUGHPUT_ANOMALY`, `RESPONSE_LATENCY_ANOMALY`, `RESPONSE_THROUGHPUT_ANOMALY`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_FAILURE`, `TLS_AUTOMATIC_CERTIFICATE_RENEWAL_STILL_FAILING`, `TLS_AUTOMATIC_CERTIFICATE_EXPIRED`, `TLS_CUSTOM_CERTIFICATE_EXPIRING`, `TLS_CUSTOM_CERTIFICATE_EXPIRING_SOON`, `TLS_CUSTOM_CERTIFICATE_EXPIRED`, `L7DDOS`, `DNS_ZONE_IGNORED_DUPLICATE_RECORD`, `API_SECURITY_UNUSED_API_DETECTED`, `API_SECURITY_SHADOW_API_DETECTED`, `API_SECURITY_SENSITIVE_DATA_IN_RESPONSE_DETECTED`, `API_SECURITY_RISK_SCORE_HIGH_DETECTED`, `ROUTED_DDOS_ALERT_NOTIFICATION`, `ROUTED_DDOS_MITIGATION_NOTIFICATION`. Defaults to `SITE_CUSTOMER_TUNNEL_INTERFACE_DOWN`.",
 							Optional:            true,
 						},
 						"alertname_regex": schema.StringAttribute{
-							MarkdownDescription: "Matching RegEx of Alertname. Regular Expression match for the alertname.",
+							MarkdownDescription: "Regular Expression match for the alertname.",
 							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
 						"any": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"custom": schema.SingleNestedBlock{
-							MarkdownDescription: "Custom Matcher. A set of matchers an alert has to fulfill to match the route.",
+							MarkdownDescription: "Set of matchers an alert has to fulfill to match the route.",
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"alertlabel": schema.SingleNestedBlock{
-									MarkdownDescription: "AlertLabel. AlertLabel to configure the alert policy rule.",
+									MarkdownDescription: "AlertLabel to configure the alert policy rule.",
 								},
 								"alertname": schema.SingleNestedBlock{
 									MarkdownDescription: "Label Matcher.",
 									Attributes: map[string]schema.Attribute{
 										"exact_match": schema.StringAttribute{
-											MarkdownDescription: "Exact Match. Equality match value for the label.",
+											MarkdownDescription: "Equality match value for the label.",
 											Optional:            true,
 										},
 										"regex_match": schema.StringAttribute{
-											MarkdownDescription: "RegEx Match. Regular expression match value for the label.",
+											MarkdownDescription: "Regular expression match value for the label.",
 											Optional:            true,
 										},
 									},
@@ -424,11 +424,11 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Label Matcher.",
 									Attributes: map[string]schema.Attribute{
 										"exact_match": schema.StringAttribute{
-											MarkdownDescription: "Exact Match. Equality match value for the label.",
+											MarkdownDescription: "Equality match value for the label.",
 											Optional:            true,
 										},
 										"regex_match": schema.StringAttribute{
-											MarkdownDescription: "RegEx Match. Regular expression match value for the label.",
+											MarkdownDescription: "Regular expression match value for the label.",
 											Optional:            true,
 										},
 									},
@@ -437,11 +437,11 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Label Matcher.",
 									Attributes: map[string]schema.Attribute{
 										"exact_match": schema.StringAttribute{
-											MarkdownDescription: "Exact Match. Equality match value for the label.",
+											MarkdownDescription: "Equality match value for the label.",
 											Optional:            true,
 										},
 										"regex_match": schema.StringAttribute{
-											MarkdownDescription: "RegEx Match. Regular expression match value for the label.",
+											MarkdownDescription: "Regular expression match value for the label.",
 											Optional:            true,
 										},
 									},
@@ -449,10 +449,10 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"dont_send": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"group": schema.SingleNestedBlock{
-							MarkdownDescription: "Group Matcher. Select one or more known group names to match the incoming alert.",
+							MarkdownDescription: "Select one or more known group names to match the incoming alert.",
 							Attributes: map[string]schema.Attribute{
 								"groups": schema.ListAttribute{
 									MarkdownDescription: "[Enum: INFRASTRUCTURE|IAAS_CAAS|VIRTUAL_HOST|VOLT_SHARE|UAM|SECURITY|TIMESERIES_ANOMALY|SHAPE_SECURITY|SECURITY_CSD|CDN|SYNTHETIC_MONITORS|TLS|SECURITY_BOT_DEFENSE|CLOUD_LINK|DNS|ROUTED_DDOS] Groups. Name of groups to match the alert. Possible values are `INFRASTRUCTURE`, `IAAS_CAAS`, `VIRTUAL_HOST`, `VOLT_SHARE`, `UAM`, `SECURITY`, `TIMESERIES_ANOMALY`, `SHAPE_SECURITY`, `SECURITY_CSD`, `CDN`, `SYNTHETIC_MONITORS`, `TLS`, `SECURITY_BOT_DEFENSE`, `CLOUD_LINK`, `DNS`, `ROUTED_DDOS`. Defaults to `INFRASTRUCTURE`.",
@@ -462,48 +462,48 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"notification_parameters": schema.SingleNestedBlock{
-							MarkdownDescription: "Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers.",
+							MarkdownDescription: "Set of notification parameters to decide how and when the alert notifications should be sent to the receivers.",
 							Attributes: map[string]schema.Attribute{
 								"group_interval": schema.StringAttribute{
-									MarkdownDescription: "Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m'",
+									MarkdownDescription: "Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval..",
 									Optional:            true,
 								},
 								"group_wait": schema.StringAttribute{
-									MarkdownDescription: "Wait to Notify. Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s'",
+									MarkdownDescription: "Time value used to specify how long to initially wait for an inhibiting alert to arrive or collect more alerts for the same group. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_wait defaults to '30s'.",
 									Optional:            true,
 								},
 								"repeat_interval": schema.StringAttribute{
-									MarkdownDescription: "Notify Interval For a Alert. Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'",
+									MarkdownDescription: "Repeat Interval is used to specify how long to wait before sending a notification again if it has already been sent successfully. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '4h'.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"custom": schema.SingleNestedBlock{
-									MarkdownDescription: "Custom Group By. Specify list of custom labels to group/aggregate the alerts.",
+									MarkdownDescription: "Specify list of custom labels to group/aggregate the alerts.",
 									Attributes: map[string]schema.Attribute{
 										"labels": schema.ListAttribute{
-											MarkdownDescription: "Labels. Name of labels to group/aggregate the alerts.",
+											MarkdownDescription: "Name of labels to group/aggregate the alerts.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 									},
 								},
 								"default": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"individual": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"ves_io_group": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 							},
 						},
 						"send": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"severity": schema.SingleNestedBlock{
-							MarkdownDescription: "Severity Matcher. Select one or more severity levels to match the incoming alert.",
+							MarkdownDescription: "Select one or more severity levels to match the incoming alert.",
 							Attributes: map[string]schema.Attribute{
 								"severities": schema.ListAttribute{
 									MarkdownDescription: "[Enum: MINOR|MAJOR|CRITICAL] Severities. List of severity levels. Possible values are `MINOR`, `MAJOR`, `CRITICAL`. Defaults to `MINOR`.",

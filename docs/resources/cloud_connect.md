@@ -36,11 +36,11 @@ resource "f5xc_cloud_connect" "example" {
   aws_tgw_site {
     # Configure aws_tgw_site settings
   }
-  # Object reference. This type establishes a direct referenc...
+  # Type establishes a direct reference from one object(the r...
   cred {
     # Configure cred settings
   }
-  # Object reference. This type establishes a direct referenc...
+  # Type establishes a direct reference from one object(the r...
   site {
     # Configure site settings
   }
@@ -54,8 +54,6 @@ resource "f5xc_cloud_connect" "example" {
 
 <a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Cloud Connect. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Cloud Connect will be created
-
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
 <a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
@@ -64,13 +62,15 @@ resource "f5xc_cloud_connect" "example" {
 
 <a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
 
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted
+
 ### Spec Argument Reference
 
 -> **One of the following:**
 &#x2022; <a id="aws-tgw-site"></a>[`aws_tgw_site`](#aws-tgw-site) - Optional Block<br>AWS TGW Site Type. Cloud Connect AWS TGW Site Type<br>See [AWS TGW Site](#aws-tgw-site) below for details.
 <br><br>&#x2022; <a id="azure-vnet-site"></a>[`azure_vnet_site`](#azure-vnet-site) - Optional Block<br>Azure VNET Site Type. Cloud Connect Azure VNET Site Type<br>See [Azure VNET Site](#azure-vnet-site) below for details.
 
-<a id="segment"></a>&#x2022; [`segment`](#segment) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Segment](#segment) below for details.
+<a id="segment"></a>&#x2022; [`segment`](#segment) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Segment](#segment) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -86,9 +86,9 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`aws_tgw_site`](#aws-tgw-site) block supports the following:
 
-<a id="aws-tgw-site-cred"></a>&#x2022; [`cred`](#aws-tgw-site-cred) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cred](#aws-tgw-site-cred) below.
+<a id="aws-tgw-site-cred"></a>&#x2022; [`cred`](#aws-tgw-site-cred) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cred](#aws-tgw-site-cred) below.
 
-<a id="aws-tgw-site-site"></a>&#x2022; [`site`](#aws-tgw-site-site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#aws-tgw-site-site) below.
+<a id="aws-tgw-site-site"></a>&#x2022; [`site`](#aws-tgw-site-site) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#aws-tgw-site-site) below.
 
 <a id="aws-tgw-site-vpc-attachments"></a>&#x2022; [`vpc_attachments`](#aws-tgw-site-vpc-attachments) - Optional Block<br>VPC Attachments<br>See [VPC Attachments](#aws-tgw-site-vpc-attachments) below.
 
@@ -96,21 +96,21 @@ An [`aws_tgw_site`](#aws-tgw-site) block supports the following:
 
 A [`cred`](#aws-tgw-site-cred) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
 
-<a id="aws-tgw-site-cred-name"></a>&#x2022; [`name`](#aws-tgw-site-cred-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="aws-tgw-site-cred-name"></a>&#x2022; [`name`](#aws-tgw-site-cred-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="aws-tgw-site-cred-namespace"></a>&#x2022; [`namespace`](#aws-tgw-site-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="aws-tgw-site-cred-namespace"></a>&#x2022; [`namespace`](#aws-tgw-site-cred-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="aws-tgw-site-cred-tenant"></a>&#x2022; [`tenant`](#aws-tgw-site-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="aws-tgw-site-cred-tenant"></a>&#x2022; [`tenant`](#aws-tgw-site-cred-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### AWS TGW Site Site
 
 A [`site`](#aws-tgw-site-site) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
 
-<a id="aws-tgw-site-site-name"></a>&#x2022; [`name`](#aws-tgw-site-site-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="aws-tgw-site-site-name"></a>&#x2022; [`name`](#aws-tgw-site-site-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="aws-tgw-site-site-namespace"></a>&#x2022; [`namespace`](#aws-tgw-site-site-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="aws-tgw-site-site-namespace"></a>&#x2022; [`namespace`](#aws-tgw-site-site-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="aws-tgw-site-site-tenant"></a>&#x2022; [`tenant`](#aws-tgw-site-site-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="aws-tgw-site-site-tenant"></a>&#x2022; [`tenant`](#aws-tgw-site-site-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### AWS TGW Site VPC Attachments
 
@@ -126,11 +126,11 @@ A [`vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list) block (within [`aws_tgw_s
 
 <a id="route-44d7f5"></a>&#x2022; [`default_route`](#route-44d7f5) - Optional Block<br>Override Default Route Choice. Select Override Default Route Choice<br>See [Default Route](#route-44d7f5) below.
 
-<a id="labels-3555f3"></a>&#x2022; [`labels`](#labels-3555f3) - Optional Block<br>Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall
+<a id="labels-3555f3"></a>&#x2022; [`labels`](#labels-3555f3) - Optional Block<br>Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall
 
-<a id="routing-97ae2a"></a>&#x2022; [`manual_routing`](#routing-97ae2a) - Optional Block<br>Enable this option
+<a id="routing-97ae2a"></a>&#x2022; [`manual_routing`](#routing-97ae2a) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="vpc-id-318c59"></a>&#x2022; [`vpc_id`](#vpc-id-318c59) - Optional String<br>VPC ID. Enter the VPC ID of the VPC to be attached
+<a id="vpc-id-318c59"></a>&#x2022; [`vpc_id`](#vpc-id-318c59) - Optional String<br>Enter the VPC ID of the VPC to be attached
 
 #### AWS TGW Site VPC Attachments VPC List Custom Routing
 
@@ -152,7 +152,7 @@ A [`vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list) block (within [`aws_tgw_s
 
 An [`azure_vnet_site`](#azure-vnet-site) block supports the following:
 
-<a id="azure-vnet-site-site"></a>&#x2022; [`site`](#azure-vnet-site-site) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#azure-vnet-site-site) below.
+<a id="azure-vnet-site-site"></a>&#x2022; [`site`](#azure-vnet-site-site) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#azure-vnet-site-site) below.
 
 <a id="azure-vnet-site-vnet-attachments"></a>&#x2022; [`vnet_attachments`](#azure-vnet-site-vnet-attachments) - Optional Block<br>VNET Attachments<br>See [VNET Attachments](#azure-vnet-site-vnet-attachments) below.
 
@@ -160,11 +160,11 @@ An [`azure_vnet_site`](#azure-vnet-site) block supports the following:
 
 A [`site`](#azure-vnet-site-site) block (within [`azure_vnet_site`](#azure-vnet-site)) supports the following:
 
-<a id="azure-vnet-site-site-name"></a>&#x2022; [`name`](#azure-vnet-site-site-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="azure-vnet-site-site-name"></a>&#x2022; [`name`](#azure-vnet-site-site-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="azure-vnet-site-site-namespace"></a>&#x2022; [`namespace`](#azure-vnet-site-site-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="azure-vnet-site-site-namespace"></a>&#x2022; [`namespace`](#azure-vnet-site-site-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="azure-vnet-site-site-tenant"></a>&#x2022; [`tenant`](#azure-vnet-site-site-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="azure-vnet-site-site-tenant"></a>&#x2022; [`tenant`](#azure-vnet-site-site-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Azure VNET Site VNET Attachments
 
@@ -176,17 +176,17 @@ A [`vnet_attachments`](#azure-vnet-site-vnet-attachments) block (within [`azure_
 
 A [`vnet_list`](#list-5826e3) block (within [`azure_vnet_site.vnet_attachments`](#azure-vnet-site-vnet-attachments)) supports the following:
 
-<a id="routing-724341"></a>&#x2022; [`custom_routing`](#routing-724341) - Optional Block<br>List Azure Route Table with Static Route. List Azure Route Table with Static Route<br>See [Custom Routing](#routing-724341) below.
+<a id="routing-724341"></a>&#x2022; [`custom_routing`](#routing-724341) - Optional Block<br>List Azure Route Table with Static Route<br>See [Custom Routing](#routing-724341) below.
 
 <a id="route-fd5eea"></a>&#x2022; [`default_route`](#route-fd5eea) - Optional Block<br>Override Default Route Choice. Select Override Default Route Choice<br>See [Default Route](#route-fd5eea) below.
 
-<a id="labels-e777f2"></a>&#x2022; [`labels`](#labels-e777f2) - Optional Block<br>Labels. Add labels for the VNET attachments. These labels can then be used in policies such as enhanced firewall policies
+<a id="labels-e777f2"></a>&#x2022; [`labels`](#labels-e777f2) - Optional Block<br>Add labels for the VNET attachments. These labels can then be used in policies such as enhanced firewall policies
 
-<a id="routing-e423fa"></a>&#x2022; [`manual_routing`](#routing-e423fa) - Optional Block<br>Enable this option
+<a id="routing-e423fa"></a>&#x2022; [`manual_routing`](#routing-e423fa) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="subscription-id-9a0b4f"></a>&#x2022; [`subscription_id`](#subscription-id-9a0b4f) - Optional String<br>Subscription ID. Enter the Subscription ID of the VNET to be attached
+<a id="subscription-id-9a0b4f"></a>&#x2022; [`subscription_id`](#subscription-id-9a0b4f) - Optional String<br>Enter the Subscription ID of the VNET to be attached
 
-<a id="vnet-id-6eb10e"></a>&#x2022; [`vnet_id`](#vnet-id-6eb10e) - Optional String<br>VNET ID. Enter the VNET ID of the VNET to be attached in format /`<resource-group-name>`/`<VNET-name>`
+<a id="vnet-id-6eb10e"></a>&#x2022; [`vnet_id`](#vnet-id-6eb10e) - Optional String<br>Enter the VNET ID of the VNET to be attached in format /`<resource-group-name>`/`<VNET-name>`
 
 #### Azure VNET Site VNET Attachments VNET List Custom Routing
 
@@ -208,11 +208,11 @@ A [`vnet_list`](#list-5826e3) block (within [`azure_vnet_site.vnet_attachments`]
 
 A [`segment`](#segment) block supports the following:
 
-<a id="segment-name"></a>&#x2022; [`name`](#segment-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="segment-name"></a>&#x2022; [`name`](#segment-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="segment-namespace"></a>&#x2022; [`namespace`](#segment-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="segment-namespace"></a>&#x2022; [`namespace`](#segment-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="segment-tenant"></a>&#x2022; [`tenant`](#segment-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="segment-tenant"></a>&#x2022; [`tenant`](#segment-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

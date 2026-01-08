@@ -20,11 +20,11 @@ resource "f5xc_app_api_group" "example" {
   bigip_virtual_server {
     # Configure bigip_virtual_server settings
   }
-  # API Group Scope CDN Loadbalancer. Set the scope of the AP...
+  # Set the scope of the API Group to a specific CDN Loadbala...
   cdn_loadbalancer {
     # Configure cdn_loadbalancer settings
   }
-  # API Group Elements. List of API group elements with metho...
+  # List of API group elements with methods and path regex fo...
   elements {
     # Configure elements settings
   }

@@ -32,7 +32,7 @@ resource "f5xc_api_discovery" "example" {
   }
 
   # Resource-specific configuration
-  # Custom Authentication Types. Select your custom authentic...
+  # Select your custom authentication types to be detected in...
   custom_auth_types {
     # Configure custom_auth_types settings
   }
@@ -58,7 +58,7 @@ resource "f5xc_api_discovery" "example" {
 
 ### Spec Argument Reference
 
-<a id="custom-auth-types"></a>&#x2022; [`custom_auth_types`](#custom-auth-types) - Optional Block<br>Custom Authentication Types. Select your custom authentication types to be detected in the API discovery<br>See [Custom Auth Types](#custom-auth-types) below for details.
+<a id="custom-auth-types"></a>&#x2022; [`custom_auth_types`](#custom-auth-types) - Optional Block<br>Select your custom authentication types to be detected in the API discovery<br>See [Custom Auth Types](#custom-auth-types) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -74,9 +74,9 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`custom_auth_types`](#custom-auth-types) block supports the following:
 
-<a id="custom-auth-types-parameter-name"></a>&#x2022; [`parameter_name`](#custom-auth-types-parameter-name) - Optional String<br>Parameter Name. The authentication parameter name
+<a id="custom-auth-types-parameter-name"></a>&#x2022; [`parameter_name`](#custom-auth-types-parameter-name) - Optional String<br>The authentication parameter name
 
-<a id="custom-auth-types-parameter-type"></a>&#x2022; [`parameter_type`](#custom-auth-types-parameter-type) - Optional String  Defaults to `QUERY_PARAMETER`<br>Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`<br>[Enum: QUERY_PARAMETER|HEADER|COOKIE] Authentication Parameter Type. Enumeration for authentication parameter types
+<a id="custom-auth-types-parameter-type"></a>&#x2022; [`parameter_type`](#custom-auth-types-parameter-type) - Optional String  Defaults to `QUERY_PARAMETER`<br>Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`<br>[Enum: QUERY_PARAMETER|HEADER|COOKIE] Enumeration for authentication parameter types
 
 #### Timeouts
 

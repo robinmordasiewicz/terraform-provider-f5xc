@@ -128,7 +128,7 @@ func (r *VirtualSiteResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"site_type": schema.StringAttribute{
-				MarkdownDescription: "[Enum: INVALID|REGIONAL_EDGE|CUSTOMER_EDGE|NGINX_ONE] Site Type. Site Type which can either RE or CE Invalid type of site Regional Edge site Customer Edge site. Possible values are `INVALID`, `REGIONAL_EDGE`, `CUSTOMER_EDGE`, `NGINX_ONE`.",
+				MarkdownDescription: "[Enum: INVALID|REGIONAL_EDGE|CUSTOMER_EDGE|NGINX_ONE] Site Type which can either RE or CE Invalid type of site Regional Edge site Customer Edge site. Possible values are `INVALID`, `REGIONAL_EDGE`, `CUSTOMER_EDGE`, `NGINX_ONE`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -144,10 +144,10 @@ func (r *VirtualSiteResource) Schema(ctx context.Context, req resource.SchemaReq
 				Delete: true,
 			}),
 			"site_selector": schema.SingleNestedBlock{
-				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE.",
+				MarkdownDescription: "Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects.",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
-						MarkdownDescription: "Selector Expression. Expressions contains the Kubernetes style label expression for selections.",
+						MarkdownDescription: "Expressions contains the Kubernetes style label expression for selections.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},

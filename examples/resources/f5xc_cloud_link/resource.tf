@@ -20,7 +20,7 @@ resource "f5xc_cloud_link" "example" {
   aws {
     # Configure aws settings
   }
-  # Object reference. This type establishes a direct referenc...
+  # Type establishes a direct reference from one object(the r...
   aws_cred {
     # Configure aws_cred settings
   }

@@ -387,7 +387,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"server_name": schema.StringAttribute{
-				MarkdownDescription: "Server Name. The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request.",
+				MarkdownDescription: "The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -403,22 +403,22 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 				Delete: true,
 			}),
 			"any_server": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: any_server, server_name, server_name_matcher, server_selector] Enable this option",
+				MarkdownDescription: "[OneOf: any_server, server_name, server_name_matcher, server_selector] Can be used for messages where no values are needed.",
 			},
 			"rules": schema.ListNestedBlock{
-				MarkdownDescription: "Rules. A list of RateLimiterRules that are evaluated sequentially till a matching rule is identified.",
+				MarkdownDescription: "List of RateLimiterRules that are evaluated sequentially till a matching rule is identified.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"metadata": schema.SingleNestedBlock{
-							MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+							MarkdownDescription: "MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create..",
 							Attributes: map[string]schema.Attribute{
 								"description_spec": schema.StringAttribute{
 									MarkdownDescription: "Description. Human readable description.",
 									Optional:            true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+									MarkdownDescription: "Name of the message. The value of name has to follow DNS-1035 format.",
 									Optional:            true,
 								},
 							},
@@ -428,37 +428,37 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"any_asn": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"any_country": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"any_ip": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"apply_rate_limiter": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"asn_list": schema.SingleNestedBlock{
-									MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+									MarkdownDescription: "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 									Attributes: map[string]schema.Attribute{
 										"as_numbers": schema.ListAttribute{
-											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+											MarkdownDescription: "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 											Optional:            true,
 											ElementType:         types.Int64Type,
 										},
 									},
 								},
 								"asn_matcher": schema.SingleNestedBlock{
-									MarkdownDescription: "ASN Matcher. Match any AS number contained in the list of bgp_asn_sets.",
+									MarkdownDescription: "Match any AS number contained in the list of bgp_asn_sets.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"asn_sets": schema.ListNestedBlock{
-											MarkdownDescription: "BGP ASN Sets. A list of references to bgp_asn_set objects.",
+											MarkdownDescription: "List of references to bgp_asn_set objects.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
-														MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -466,15 +466,15 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 														},
 													},
 													"name": schema.StringAttribute{
-														MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
-														MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
-														MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -482,7 +482,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 														},
 													},
 													"uid": schema.StringAttribute{
-														MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -495,7 +495,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									},
 								},
 								"bypass_rate_limiter": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"country_list": schema.SingleNestedBlock{
 									MarkdownDescription: "Country Codes List. List of Country Codes to match against.",
@@ -512,18 +512,18 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									},
 								},
 								"custom_rate_limiter": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+									MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -533,22 +533,22 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									},
 								},
 								"domain_matcher": schema.SingleNestedBlock{
-									MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+									MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
-											MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+											MarkdownDescription: "List of exact values to match the input against.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 										"regex_values": schema.ListAttribute{
-											MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+											MarkdownDescription: "List of regular expressions to match the input against.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 									},
 								},
 								"headers": schema.ListNestedBlock{
-									MarkdownDescription: "A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true.",
+									MarkdownDescription: "List of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type.",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"invert_matcher": schema.BoolAttribute{
@@ -556,32 +556,32 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 												Optional:            true,
 											},
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Header Name. A case-insensitive HTTP header name.",
+												MarkdownDescription: "Case-insensitive HTTP header name.",
 												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
 											"check_not_present": schema.SingleNestedBlock{
-												MarkdownDescription: "Enable this option",
+												MarkdownDescription: "Can be used for messages where no values are needed.",
 											},
 											"check_present": schema.SingleNestedBlock{
-												MarkdownDescription: "Enable this option",
+												MarkdownDescription: "Can be used for messages where no values are needed.",
 											},
 											"item": schema.SingleNestedBlock{
-												MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+												MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
 												Attributes: map[string]schema.Attribute{
 													"exact_values": schema.ListAttribute{
-														MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+														MarkdownDescription: "List of exact values to match the input against.",
 														Optional:            true,
 														ElementType:         types.StringType,
 													},
 													"regex_values": schema.ListAttribute{
-														MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+														MarkdownDescription: "List of regular expressions to match the input against.",
 														Optional:            true,
 														ElementType:         types.StringType,
 													},
 													"transformers": schema.ListAttribute{
-														MarkdownDescription: "[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+														MarkdownDescription: "[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
 														Optional:            true,
 														ElementType:         types.StringType,
 													},
@@ -591,21 +591,21 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									},
 								},
 								"http_method": schema.SingleNestedBlock{
-									MarkdownDescription: "HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true.",
+									MarkdownDescription: "HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true.",
 									Attributes: map[string]schema.Attribute{
 										"invert_matcher": schema.BoolAttribute{
 											MarkdownDescription: "Invert Method Matcher. Invert the match result.",
 											Optional:            true,
 										},
 										"methods": schema.ListAttribute{
-											MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Method List. List of methods values to match against. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+											MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] List of methods values to match against. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 									},
 								},
 								"ip_matcher": schema.SingleNestedBlock{
-									MarkdownDescription: "IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true.",
+									MarkdownDescription: "Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true.",
 									Attributes: map[string]schema.Attribute{
 										"invert_matcher": schema.BoolAttribute{
 											MarkdownDescription: "Invert IP Matcher. Invert the match result.",
@@ -614,11 +614,11 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									},
 									Blocks: map[string]schema.Block{
 										"prefix_sets": schema.ListNestedBlock{
-											MarkdownDescription: "IP Prefix Sets. A list of references to ip_prefix_set objects.",
+											MarkdownDescription: "List of references to ip_prefix_set objects.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
-														MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -626,15 +626,15 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 														},
 													},
 													"name": schema.StringAttribute{
-														MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
-														MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
-														MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -642,7 +642,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 														},
 													},
 													"uid": schema.StringAttribute{
-														MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -655,7 +655,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									},
 								},
 								"ip_prefix_list": schema.SingleNestedBlock{
-									MarkdownDescription: "IP Prefix Match List. List of IP Prefix strings to match against.",
+									MarkdownDescription: "List of IP Prefix strings to match against.",
 									Attributes: map[string]schema.Attribute{
 										"invert_match": schema.BoolAttribute{
 											MarkdownDescription: "Invert Match Result. Invert the match result.",
@@ -669,10 +669,10 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 									},
 								},
 								"path": schema.SingleNestedBlock{
-									MarkdownDescription: "Path Matcher. A path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions.",
+									MarkdownDescription: "Path matcher specifies multiple criteria for matching an HTTP path string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of path prefixes, a list of exact path values and a list of regular expressions.",
 									Attributes: map[string]schema.Attribute{
 										"exact_values": schema.ListAttribute{
-											MarkdownDescription: "Exact Values. A list of exact path values to match the input HTTP path against.",
+											MarkdownDescription: "List of exact path values to match the input HTTP path against.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
@@ -681,22 +681,22 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 											Optional:            true,
 										},
 										"prefix_values": schema.ListAttribute{
-											MarkdownDescription: "Prefix Values. A list of path prefix values to match the input HTTP path against.",
+											MarkdownDescription: "List of path prefix values to match the input HTTP path against.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 										"regex_values": schema.ListAttribute{
-											MarkdownDescription: "Regex Values. A list of regular expressions to match the input HTTP path against.",
+											MarkdownDescription: "List of regular expressions to match the input HTTP path against.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 										"suffix_values": schema.ListAttribute{
-											MarkdownDescription: "Suffix Values. A list of path suffix values to match the input HTTP path against.",
+											MarkdownDescription: "List of path suffix values to match the input HTTP path against.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 										"transformers": schema.ListAttribute{
-											MarkdownDescription: "[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
+											MarkdownDescription: "[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Ordered list of transformers (starting from index 0) to be applied to the path before matching. Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`. Defaults to `TRANSFORMER_NONE`.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
@@ -708,25 +708,25 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"server_name_matcher": schema.SingleNestedBlock{
-				MarkdownDescription: "Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
+				MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
 				Attributes: map[string]schema.Attribute{
 					"exact_values": schema.ListAttribute{
-						MarkdownDescription: "Exact Values. A list of exact values to match the input against.",
+						MarkdownDescription: "List of exact values to match the input against.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
 					"regex_values": schema.ListAttribute{
-						MarkdownDescription: "Regex Values. A list of regular expressions to match the input against.",
+						MarkdownDescription: "List of regular expressions to match the input against.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
 				},
 			},
 			"server_selector": schema.SingleNestedBlock{
-				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE.",
+				MarkdownDescription: "Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects.",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
-						MarkdownDescription: "Selector Expression. Expressions contains the Kubernetes style label expression for selections.",
+						MarkdownDescription: "Expressions contains the Kubernetes style label expression for selections.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},

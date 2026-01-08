@@ -326,18 +326,18 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 				Delete: true,
 			}),
 			"ce_site_reference": schema.SingleNestedBlock{
-				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+				MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{
@@ -351,16 +351,16 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"ike_parameters": schema.SingleNestedBlock{
-						MarkdownDescription: "IKE Parameters. IKE configuration parameters required for IPsec Connection type.",
+						MarkdownDescription: "IKE configuration parameters required for IPsec Connection type.",
 						Attributes: map[string]schema.Attribute{
 							"rm_hostname": schema.StringAttribute{
-								MarkdownDescription: "Hostname. Configure an hostname Remote IKE ID.",
+								MarkdownDescription: "Configure an hostname Remote IKE ID.",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"dpd_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"dpd_keep_alive_timer": schema.SingleNestedBlock{
 								MarkdownDescription: "Keepalive Timer.",
@@ -372,18 +372,18 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"ike_phase1_profile": schema.SingleNestedBlock{
-								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+								MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -393,18 +393,18 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"ike_phase2_profile": schema.SingleNestedBlock{
-								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+								MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -414,29 +414,29 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"initiator": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"responder": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"rm_ip_address": schema.SingleNestedBlock{
-								MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
+								MarkdownDescription: "IP Address used to specify an IPv4 or IPv6 address.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"ipv4": schema.SingleNestedBlock{
 										MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 										Attributes: map[string]schema.Attribute{
 											"addr": schema.StringAttribute{
-												MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
+												MarkdownDescription: "IPv4 Address in string form with dot-decimal notation.",
 												Optional:            true,
 											},
 										},
 									},
 									"ipv6": schema.SingleNestedBlock{
-										MarkdownDescription: "IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'",
+										MarkdownDescription: "IPv6 Address specified as hexadecimal numbers separated by ':'.",
 										Attributes: map[string]schema.Attribute{
 											"addr": schema.StringAttribute{
-												MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
+												MarkdownDescription: "IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'.",
 												Optional:            true,
 											},
 										},
@@ -444,22 +444,22 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"use_default_local_ike_id": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"use_default_remote_ike_id": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 						},
 					},
 					"ipsec_tunnel_parameters": schema.SingleNestedBlock{
-						MarkdownDescription: "Configure IPsec Tunnel Parameters. In this section, we will configure the tunnel parameters, source, destination, IP addresses, and segment.",
+						MarkdownDescription: "In this section, we will configure the tunnel parameters, source, destination, IP addresses, and segment.",
 						Attributes: map[string]schema.Attribute{
 							"psk": schema.StringAttribute{
-								MarkdownDescription: "Pre-Shared Key. The IKE pre-shared key (PSK) is required to ensure the IKE peers can authenticate one another within IKE phase 1 negotiation.",
+								MarkdownDescription: "The IKE pre-shared key (PSK) is required to ensure the IKE peers can authenticate one another within IKE phase 1 negotiation.",
 								Optional:            true,
 							},
 							"tunnel_mtu": schema.Int64Attribute{
-								MarkdownDescription: "MTU. The tunnel MTU defines the maximum size of the packet that can be sent through the tunnel without needing to be fragmented .",
+								MarkdownDescription: "The tunnel MTU defines the maximum size of the packet that can be sent through the tunnel without needing to be fragmented .",
 								Optional:            true,
 							},
 						},
@@ -468,7 +468,7 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 								Attributes: map[string]schema.Attribute{
 									"addr": schema.StringAttribute{
-										MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
+										MarkdownDescription: "IPv4 Address in string form with dot-decimal notation.",
 										Optional:            true,
 									},
 								},
@@ -478,11 +478,11 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"refs": schema.ListNestedBlock{
-										MarkdownDescription: "Segment. Reference to Segment Object .",
+										MarkdownDescription: "Reference to Segment Object .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"kind": schema.StringAttribute{
-													MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -490,15 +490,15 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 													},
 												},
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -506,7 +506,7 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 													},
 												},
 												"uid": schema.StringAttribute{
-													MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+													MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -519,29 +519,29 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"site_local_inside_network": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"site_local_network": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"tunnel_eps": schema.ListNestedBlock{
-								MarkdownDescription: "Tunnel Endpoint. Configure tunnel parameters, local and remote IP addresses .",
+								MarkdownDescription: "Configure tunnel parameters, local and remote IP addresses .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"interface": schema.StringAttribute{
-											MarkdownDescription: "Interface. For the chosen node, specify the interface that will be the tunnel source.",
+											MarkdownDescription: "For the chosen node, specify the interface that will be the tunnel source.",
 											Optional:            true,
 										},
 										"local_tunnel_ip": schema.StringAttribute{
-											MarkdownDescription: "Local Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the local tunnel IP Address i.e. The IP address of the tunnel on the CE node itself and a subnet prefix length .",
+											MarkdownDescription: "For a particular tunnel on a node, specify the local tunnel IP Address i.e. The IP address of the tunnel on the CE node itself and a subnet prefix length .",
 											Optional:            true,
 										},
 										"node": schema.StringAttribute{
-											MarkdownDescription: "Node. A CE site is composed of multiple nodes. Choose a node that will be part of this external connection.",
+											MarkdownDescription: "CE site is composed of multiple nodes. Choose a node that will be part of this external connection.",
 											Optional:            true,
 										},
 										"remote_tunnel_ip": schema.StringAttribute{
-											MarkdownDescription: "Remote Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the remote tunnel IP Address i.e. The IP address of the tunnel on the remote gateway and a subnet prefix length .",
+											MarkdownDescription: "For a particular tunnel on a node, specify the remote tunnel IP Address i.e. The IP address of the tunnel on the remote gateway and a subnet prefix length .",
 											Optional:            true,
 										},
 									},

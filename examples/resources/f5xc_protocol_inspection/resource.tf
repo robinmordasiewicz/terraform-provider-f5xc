@@ -16,15 +16,15 @@ resource "f5xc_protocol_inspection" "example" {
   }
 
   # Resource-specific configuration
-  # Enable/Disable Compliance Checks. Enable Disable Complian...
+  # Enable Disable Compliance Checks Choice.
   enable_disable_compliance_checks {
     # Configure enable_disable_compliance_checks settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   disable_compliance_checks {
     # Configure disable_compliance_checks settings
   }
-  # Object reference. This type establishes a direct referenc...
+  # Type establishes a direct reference from one object(the r...
   enable_compliance_checks {
     # Configure enable_compliance_checks settings
   }

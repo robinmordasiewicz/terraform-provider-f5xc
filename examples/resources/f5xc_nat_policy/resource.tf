@@ -16,11 +16,11 @@ resource "f5xc_nat_policy" "example" {
   }
 
   # Resource-specific configuration
-  # Rule. List of rules to apply under the NAT Policy. Rule t...
+  # List of rules to apply under the NAT Policy. Rule that ma...
   rules {
     # Configure rules settings
   }
-  # Action. Action to apply on the packet if the NAT rule is ...
+  # Action to apply on the packet if the NAT rule is applied.
   action {
     # Configure action settings
   }

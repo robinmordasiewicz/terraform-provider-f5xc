@@ -16,15 +16,15 @@ resource "f5xc_protocol_policer" "example" {
   }
 
   # Resource-specific configuration
-  # Protocol Policer. List of L4 protocol match condition and...
+  # List of L4 protocol match condition and associated traffi...
   protocol_policer {
     # Configure protocol_policer settings
   }
-  # Policer. Reference to policer object to apply traffic rat...
+  # Reference to policer object to apply traffic rate limits .
   policer {
     # Configure policer settings
   }
-  # Protocol Type. Protocol and protocol specific flags to be...
+  # Protocol and protocol specific flags to be matched in pac...
   protocol {
     # Configure protocol settings
   }

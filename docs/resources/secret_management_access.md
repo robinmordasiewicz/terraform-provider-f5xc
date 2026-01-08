@@ -32,15 +32,15 @@ resource "f5xc_secret_management_access" "example" {
   }
 
   # Resource-specific configuration
-  # Host Access Information. HostAccessInfoType contains the ...
+  # HostAccessInfoType contains the information about how to ...
   access_info {
     # Configure access_info settings
   }
-  # REST Authentication Parameters. Authentication parameters...
+  # Authentication parameters for REST based hosts.
   rest_auth_info {
     # Configure rest_auth_info settings
   }
-  # BasicAuth Authentication Parameters. AuthnTypeBasicAuth i...
+  # AuthnTypeBasicAuth is used for using basic_auth mode of H...
   basic_auth {
     # Configure basic_auth settings
   }
@@ -66,13 +66,13 @@ resource "f5xc_secret_management_access" "example" {
 
 ### Spec Argument Reference
 
-<a id="access-info"></a>&#x2022; [`access_info`](#access-info) - Optional Block<br>Host Access Information. HostAccessInfoType contains the information about how to connect to the remote host<br>See [Access Info](#access-info) below for details.
+<a id="access-info"></a>&#x2022; [`access_info`](#access-info) - Optional Block<br>HostAccessInfoType contains the information about how to connect to the remote host<br>See [Access Info](#access-info) below for details.
 
-<a id="provider-name"></a>&#x2022; [`provider_name`](#provider-name) - Optional String<br>Provider Name. Name given to this secret management backend. site.provider needs to be unique, and will be referenced for using this object
+<a id="provider-name"></a>&#x2022; [`provider_name`](#provider-name) - Optional String<br>Name given to this secret management backend. site.provider needs to be unique, and will be referenced for using this object
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="where"></a>&#x2022; [`where`](#where) - Optional Block<br>Network or Site Reference. NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using following rules \* Direct reference to virtual_network object \* Site local network when refering to site object \* All site local networks for sites selected by refering to virtual_site object<br>See [Where](#where) below for details.
+<a id="where"></a>&#x2022; [`where`](#where) - Optional Block<br>NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using following rules \* Direct reference to virtual_network object \* Site local network when refering to site object \* All site local<br>See [Where](#where) below for details.
 
 ### Attributes Reference
 
@@ -86,33 +86,33 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`access_info`](#access-info) block supports the following:
 
-<a id="access-info-rest-auth-info"></a>&#x2022; [`rest_auth_info`](#access-info-rest-auth-info) - Optional Block<br>REST Authentication Parameters. Authentication parameters for REST based hosts<br>See [REST Auth Info](#access-info-rest-auth-info) below.
+<a id="access-info-rest-auth-info"></a>&#x2022; [`rest_auth_info`](#access-info-rest-auth-info) - Optional Block<br>Authentication parameters for REST based hosts<br>See [REST Auth Info](#access-info-rest-auth-info) below.
 
-<a id="access-info-scheme"></a>&#x2022; [`scheme`](#access-info-scheme) - Optional String  Defaults to `HTTP`<br>Possible values are `HTTP`, `HTTPS`<br>[Enum: HTTP|HTTPS] URL Scheme. SchemeType is used to indicate URL scheme HTTP:// scheme HTTPS:// scheme
+<a id="access-info-scheme"></a>&#x2022; [`scheme`](#access-info-scheme) - Optional String  Defaults to `HTTP`<br>Possible values are `HTTP`, `HTTPS`<br>[Enum: HTTP|HTTPS] SchemeType is used to indicate URL scheme HTTP:// scheme HTTPS:// scheme
 
-<a id="access-info-server-endpoint"></a>&#x2022; [`server_endpoint`](#access-info-server-endpoint) - Optional String<br>Server Endpoint and Port. Endpoint to connect to, in host:port format
+<a id="access-info-server-endpoint"></a>&#x2022; [`server_endpoint`](#access-info-server-endpoint) - Optional String<br>Endpoint to connect to, in host:port format
 
-<a id="access-info-tls-config"></a>&#x2022; [`tls_config`](#access-info-tls-config) - Optional Block<br>Upstream TLS Parameters. TLS configuration for upstream connections<br>See [TLS Config](#access-info-tls-config) below.
+<a id="access-info-tls-config"></a>&#x2022; [`tls_config`](#access-info-tls-config) - Optional Block<br>TLS configuration for upstream connections<br>See [TLS Config](#access-info-tls-config) below.
 
-<a id="access-info-vault-auth-info"></a>&#x2022; [`vault_auth_info`](#access-info-vault-auth-info) - Optional Block<br>Vault Authentication Parameters. Authentication parameters for Hashicorp Vault hosts<br>See [Vault Auth Info](#access-info-vault-auth-info) below.
+<a id="access-info-vault-auth-info"></a>&#x2022; [`vault_auth_info`](#access-info-vault-auth-info) - Optional Block<br>Authentication parameters for Hashicorp Vault hosts<br>See [Vault Auth Info](#access-info-vault-auth-info) below.
 
 #### Access Info REST Auth Info
 
 A [`rest_auth_info`](#access-info-rest-auth-info) block (within [`access_info`](#access-info)) supports the following:
 
-<a id="access-info-rest-auth-info-basic-auth"></a>&#x2022; [`basic_auth`](#access-info-rest-auth-info-basic-auth) - Optional Block<br>BasicAuth Authentication Parameters. AuthnTypeBasicAuth is used for using basic_auth mode of HTTP authentication<br>See [Basic Auth](#access-info-rest-auth-info-basic-auth) below.
+<a id="access-info-rest-auth-info-basic-auth"></a>&#x2022; [`basic_auth`](#access-info-rest-auth-info-basic-auth) - Optional Block<br>AuthnTypeBasicAuth is used for using basic_auth mode of HTTP authentication<br>See [Basic Auth](#access-info-rest-auth-info-basic-auth) below.
 
-<a id="access-info-rest-auth-info-headers-auth"></a>&#x2022; [`headers_auth`](#access-info-rest-auth-info-headers-auth) - Optional Block<br>Authentication Headers. AuthnTypeHeaders is used for setting headers for authentication<br>See [Headers Auth](#access-info-rest-auth-info-headers-auth) below.
+<a id="access-info-rest-auth-info-headers-auth"></a>&#x2022; [`headers_auth`](#access-info-rest-auth-info-headers-auth) - Optional Block<br>AuthnTypeHeaders is used for setting headers for authentication<br>See [Headers Auth](#access-info-rest-auth-info-headers-auth) below.
 
-<a id="auth-f1c802"></a>&#x2022; [`query_params_auth`](#auth-f1c802) - Optional Block<br>Authentication QueryParams. AuthnTypeQueryParams is used for setting query_params for authentication<br>See [Query Params Auth](#auth-f1c802) below.
+<a id="auth-f1c802"></a>&#x2022; [`query_params_auth`](#auth-f1c802) - Optional Block<br>AuthnTypeQueryParams is used for setting query_params for authentication<br>See [Query Params Auth](#auth-f1c802) below.
 
 #### Access Info REST Auth Info Basic Auth
 
 A [`basic_auth`](#access-info-rest-auth-info-basic-auth) block (within [`access_info.rest_auth_info`](#access-info-rest-auth-info)) supports the following:
 
-<a id="password-969177"></a>&#x2022; [`password`](#password-969177) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#password-969177) below.
+<a id="password-969177"></a>&#x2022; [`password`](#password-969177) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#password-969177) below.
 
-<a id="username-8c2ad8"></a>&#x2022; [`username`](#username-8c2ad8) - Optional String<br>Username. The username to encode in Basic Auth scheme
+<a id="username-8c2ad8"></a>&#x2022; [`username`](#username-8c2ad8) - Optional String<br>The username to encode in Basic Auth scheme
 
 #### Access Info REST Auth Info Basic Auth Password
 
@@ -130,7 +130,7 @@ A [`basic_auth`](#access-info-rest-auth-info-basic-auth) block (within [`access_
 
 A [`headers_auth`](#access-info-rest-auth-info-headers-auth) block (within [`access_info.rest_auth_info`](#access-info-rest-auth-info)) supports the following:
 
-<a id="headers-8b271f"></a>&#x2022; [`headers`](#headers-8b271f) - Optional Block<br>Headers. The set of authentication headers to pass in HTTP request
+<a id="headers-8b271f"></a>&#x2022; [`headers`](#headers-8b271f) - Optional Block<br>The set of authentication headers to pass in HTTP request
 
 #### Access Info REST Auth Info Query Params Auth
 
@@ -140,49 +140,49 @@ A [`headers_auth`](#access-info-rest-auth-info-headers-auth) block (within [`acc
 
 A [`tls_config`](#access-info-tls-config) block (within [`access_info`](#access-info)) supports the following:
 
-<a id="access-info-tls-config-cert-params"></a>&#x2022; [`cert_params`](#access-info-tls-config-cert-params) - Optional Block<br>Upstream Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store<br>See [Cert Params](#access-info-tls-config-cert-params) below.
+<a id="access-info-tls-config-cert-params"></a>&#x2022; [`cert_params`](#access-info-tls-config-cert-params) - Optional Block<br>Certificate Parameters for authentication, TLS ciphers, and trust store<br>See [Cert Params](#access-info-tls-config-cert-params) below.
 
-<a id="access-info-tls-config-common-params"></a>&#x2022; [`common_params`](#access-info-tls-config-common-params) - Optional Block<br>TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store<br>See [Common Params](#access-info-tls-config-common-params) below.
+<a id="access-info-tls-config-common-params"></a>&#x2022; [`common_params`](#access-info-tls-config-common-params) - Optional Block<br>Information of different aspects for TLS authentication related to ciphers, certificates and trust store<br>See [Common Params](#access-info-tls-config-common-params) below.
 
-<a id="caching-0f2bd1"></a>&#x2022; [`default_session_key_caching`](#caching-0f2bd1) - Optional Block<br>Enable this option
+<a id="caching-0f2bd1"></a>&#x2022; [`default_session_key_caching`](#caching-0f2bd1) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="caching-c17b8f"></a>&#x2022; [`disable_session_key_caching`](#caching-c17b8f) - Optional Block<br>Enable this option
+<a id="caching-c17b8f"></a>&#x2022; [`disable_session_key_caching`](#caching-c17b8f) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="access-info-tls-config-disable-sni"></a>&#x2022; [`disable_sni`](#access-info-tls-config-disable-sni) - Optional Block<br>Enable this option
+<a id="access-info-tls-config-disable-sni"></a>&#x2022; [`disable_sni`](#access-info-tls-config-disable-sni) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="access-info-tls-config-max-session-keys"></a>&#x2022; [`max_session_keys`](#access-info-tls-config-max-session-keys) - Optional Number<br>Max Session Keys Cached. Number of session keys that are cached
+<a id="access-info-tls-config-max-session-keys"></a>&#x2022; [`max_session_keys`](#access-info-tls-config-max-session-keys) - Optional Number<br>Number of session keys that are cached
 
-<a id="access-info-tls-config-sni"></a>&#x2022; [`sni`](#access-info-tls-config-sni) - Optional String<br>SNI Value. SNI value to be used
+<a id="access-info-tls-config-sni"></a>&#x2022; [`sni`](#access-info-tls-config-sni) - Optional String<br>SNI value to be used
 
-<a id="sni-493d0a"></a>&#x2022; [`use_host_header_as_sni`](#sni-493d0a) - Optional Block<br>Enable this option
+<a id="sni-493d0a"></a>&#x2022; [`use_host_header_as_sni`](#sni-493d0a) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Access Info TLS Config Cert Params
 
 A [`cert_params`](#access-info-tls-config-cert-params) block (within [`access_info.tls_config`](#access-info-tls-config)) supports the following:
 
-<a id="certificates-817e4b"></a>&#x2022; [`certificates`](#certificates-817e4b) - Optional Block<br>Client Certificate. Client TLS Certificate required for mTLS authentication<br>See [Certificates](#certificates-817e4b) below.
+<a id="certificates-817e4b"></a>&#x2022; [`certificates`](#certificates-817e4b) - Optional Block<br>Client TLS Certificate required for mTLS authentication<br>See [Certificates](#certificates-817e4b) below.
 
-<a id="suites-b1a0f8"></a>&#x2022; [`cipher_suites`](#suites-b1a0f8) - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used
+<a id="suites-b1a0f8"></a>&#x2022; [`cipher_suites`](#suites-b1a0f8) - Optional List<br>The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 
-<a id="version-39c150"></a>&#x2022; [`maximum_protocol_version`](#version-39c150) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="version-39c150"></a>&#x2022; [`maximum_protocol_version`](#version-39c150) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="version-0f4479"></a>&#x2022; [`minimum_protocol_version`](#version-0f4479) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="version-0f4479"></a>&#x2022; [`minimum_protocol_version`](#version-0f4479) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="params-e516d2"></a>&#x2022; [`validation_params`](#params-e516d2) - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#params-e516d2) below.
+<a id="params-e516d2"></a>&#x2022; [`validation_params`](#params-e516d2) - Optional Block<br>Includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#params-e516d2) below.
 
 #### Access Info TLS Config Cert Params Certificates
 
 A [`certificates`](#certificates-817e4b) block (within [`access_info.tls_config.cert_params`](#access-info-tls-config-cert-params)) supports the following:
 
-<a id="kind-aa6391"></a>&#x2022; [`kind`](#kind-aa6391) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="kind-aa6391"></a>&#x2022; [`kind`](#kind-aa6391) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="name-b60acc"></a>&#x2022; [`name`](#name-b60acc) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-b60acc"></a>&#x2022; [`name`](#name-b60acc) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-5cf8ce"></a>&#x2022; [`namespace`](#namespace-5cf8ce) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-5cf8ce"></a>&#x2022; [`namespace`](#namespace-5cf8ce) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-e34095"></a>&#x2022; [`tenant`](#tenant-e34095) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-e34095"></a>&#x2022; [`tenant`](#tenant-e34095) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="uid-9b9cc6"></a>&#x2022; [`uid`](#uid-9b9cc6) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="uid-9b9cc6"></a>&#x2022; [`uid`](#uid-9b9cc6) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Access Info TLS Config Cert Params Validation Params
 
@@ -200,15 +200,15 @@ A [`certificates`](#certificates-817e4b) block (within [`access_info.tls_config.
 
 A [`common_params`](#access-info-tls-config-common-params) block (within [`access_info.tls_config`](#access-info-tls-config)) supports the following:
 
-<a id="suites-f2e231"></a>&#x2022; [`cipher_suites`](#suites-f2e231) - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used
+<a id="suites-f2e231"></a>&#x2022; [`cipher_suites`](#suites-f2e231) - Optional List<br>The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 
-<a id="version-af11d8"></a>&#x2022; [`maximum_protocol_version`](#version-af11d8) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="version-af11d8"></a>&#x2022; [`maximum_protocol_version`](#version-af11d8) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="version-5a0b3d"></a>&#x2022; [`minimum_protocol_version`](#version-5a0b3d) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="version-5a0b3d"></a>&#x2022; [`minimum_protocol_version`](#version-5a0b3d) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 <a id="certificates-15ac8c"></a>&#x2022; [`tls_certificates`](#certificates-15ac8c) - Optional Block<br>TLS Certificates. Set of TLS certificates<br>See [TLS Certificates](#certificates-15ac8c) below.
 
-<a id="params-952d2c"></a>&#x2022; [`validation_params`](#params-952d2c) - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#params-952d2c) below.
+<a id="params-952d2c"></a>&#x2022; [`validation_params`](#params-952d2c) - Optional Block<br>Includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#params-952d2c) below.
 
 #### Access Info TLS Config Common Params TLS Certificates
 
@@ -246,9 +246,9 @@ A [`common_params`](#access-info-tls-config-common-params) block (within [`acces
 
 A [`vault_auth_info`](#access-info-vault-auth-info) block (within [`access_info`](#access-info)) supports the following:
 
-<a id="auth-69347c"></a>&#x2022; [`app_role_auth`](#auth-69347c) - Optional Block<br>Vault AppRole Authentication Parameters. AppRoleAuthInfoType contains parameters for AppRole authentication in Hashicorp Vault<br>See [App Role Auth](#auth-69347c) below.
+<a id="auth-69347c"></a>&#x2022; [`app_role_auth`](#auth-69347c) - Optional Block<br>AppRoleAuthInfoType contains parameters for AppRole authentication in Hashicorp Vault<br>See [App Role Auth](#auth-69347c) below.
 
-<a id="access-info-vault-auth-info-token"></a>&#x2022; [`token`](#access-info-vault-auth-info-token) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Token](#access-info-vault-auth-info-token) below.
+<a id="access-info-vault-auth-info-token"></a>&#x2022; [`token`](#access-info-vault-auth-info-token) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Token](#access-info-vault-auth-info-token) below.
 
 #### Access Info Vault Auth Info App Role Auth
 
@@ -270,9 +270,9 @@ A [`vault_auth_info`](#access-info-vault-auth-info) block (within [`access_info`
 
 A [`token`](#access-info-vault-auth-info-token) block (within [`access_info.vault_auth_info`](#access-info-vault-auth-info)) supports the following:
 
-<a id="info-8a86e5"></a>&#x2022; [`blindfold_secret_info`](#info-8a86e5) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-8a86e5) below.
+<a id="info-8a86e5"></a>&#x2022; [`blindfold_secret_info`](#info-8a86e5) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-8a86e5) below.
 
-<a id="info-d906d4"></a>&#x2022; [`clear_secret_info`](#info-d906d4) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-d906d4) below.
+<a id="info-d906d4"></a>&#x2022; [`clear_secret_info`](#info-d906d4) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-d906d4) below.
 
 #### Access Info Vault Auth Info Token Blindfold Secret Info
 
@@ -298,9 +298,9 @@ A [`timeouts`](#timeouts) block supports the following:
 
 A [`where`](#where) block supports the following:
 
-<a id="where-site"></a>&#x2022; [`site`](#where-site) - Optional Block<br>Site Reference. This specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
+<a id="where-site"></a>&#x2022; [`site`](#where-site) - Optional Block<br>Specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
 
-<a id="where-virtual-network"></a>&#x2022; [`virtual_network`](#where-virtual-network) - Optional Block<br>Network Reference. This specifies a direct reference to a network configuration object<br>See [Virtual Network](#where-virtual-network) below.
+<a id="where-virtual-network"></a>&#x2022; [`virtual_network`](#where-virtual-network) - Optional Block<br>Specifies a direct reference to a network configuration object<br>See [Virtual Network](#where-virtual-network) below.
 
 <a id="where-virtual-site"></a>&#x2022; [`virtual_site`](#where-virtual-site) - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
 
@@ -308,11 +308,11 @@ A [`where`](#where) block supports the following:
 
 A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Enable this option
+<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Enable this option
+<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="where-site-network-type"></a>&#x2022; [`network_type`](#where-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. For F5 Distributed Cloud fabric Constraints: It is currently only supported as internally created by the system. VK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on F5 Distributed Cloud RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<a id="where-site-network-type"></a>&#x2022; [`network_type`](#where-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
 
 <a id="where-site-ref"></a>&#x2022; [`ref`](#where-site-ref) - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
 
@@ -320,61 +320,61 @@ A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
 A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports the following:
 
-<a id="where-site-ref-kind"></a>&#x2022; [`kind`](#where-site-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="where-site-ref-kind"></a>&#x2022; [`kind`](#where-site-ref-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="where-site-ref-name"></a>&#x2022; [`name`](#where-site-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="where-site-ref-name"></a>&#x2022; [`name`](#where-site-ref-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="where-site-ref-namespace"></a>&#x2022; [`namespace`](#where-site-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="where-site-ref-namespace"></a>&#x2022; [`namespace`](#where-site-ref-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="where-site-ref-tenant"></a>&#x2022; [`tenant`](#where-site-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="where-site-ref-tenant"></a>&#x2022; [`tenant`](#where-site-ref-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="where-site-ref-uid"></a>&#x2022; [`uid`](#where-site-ref-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="where-site-ref-uid"></a>&#x2022; [`uid`](#where-site-ref-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Where Virtual Network
 
 A [`virtual_network`](#where-virtual-network) block (within [`where`](#where)) supports the following:
 
-<a id="where-virtual-network-ref"></a>&#x2022; [`ref`](#where-virtual-network-ref) - Optional Block<br>Reference. A virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
+<a id="where-virtual-network-ref"></a>&#x2022; [`ref`](#where-virtual-network-ref) - Optional Block<br>Virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
 
 #### Where Virtual Network Ref
 
 A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#where-virtual-network)) supports the following:
 
-<a id="where-virtual-network-ref-kind"></a>&#x2022; [`kind`](#where-virtual-network-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="where-virtual-network-ref-kind"></a>&#x2022; [`kind`](#where-virtual-network-ref-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="where-virtual-network-ref-name"></a>&#x2022; [`name`](#where-virtual-network-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="where-virtual-network-ref-name"></a>&#x2022; [`name`](#where-virtual-network-ref-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="where-virtual-network-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-network-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="where-virtual-network-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-network-ref-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="where-virtual-network-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-network-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="where-virtual-network-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-network-ref-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="where-virtual-network-ref-uid"></a>&#x2022; [`uid`](#where-virtual-network-ref-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="where-virtual-network-ref-uid"></a>&#x2022; [`uid`](#where-virtual-network-ref-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Where Virtual Site
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Enable this option
+<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Enable this option
+<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="where-virtual-site-network-type"></a>&#x2022; [`network_type`](#where-virtual-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. For F5 Distributed Cloud fabric Constraints: It is currently only supported as internally created by the system. VK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on F5 Distributed Cloud RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<a id="where-virtual-site-network-type"></a>&#x2022; [`network_type`](#where-virtual-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
 
-<a id="where-virtual-site-ref"></a>&#x2022; [`ref`](#where-virtual-site-ref) - Optional Block<br>Reference. A virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
+<a id="where-virtual-site-ref"></a>&#x2022; [`ref`](#where-virtual-site-ref) - Optional Block<br>Virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
 
 #### Where Virtual Site Ref
 
 A [`ref`](#where-virtual-site-ref) block (within [`where.virtual_site`](#where-virtual-site)) supports the following:
 
-<a id="where-virtual-site-ref-kind"></a>&#x2022; [`kind`](#where-virtual-site-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="where-virtual-site-ref-kind"></a>&#x2022; [`kind`](#where-virtual-site-ref-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="where-virtual-site-ref-name"></a>&#x2022; [`name`](#where-virtual-site-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="where-virtual-site-ref-name"></a>&#x2022; [`name`](#where-virtual-site-ref-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="where-virtual-site-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-site-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="where-virtual-site-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-site-ref-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="where-virtual-site-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-site-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="where-virtual-site-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-site-ref-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="where-virtual-site-ref-uid"></a>&#x2022; [`uid`](#where-virtual-site-ref-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="where-virtual-site-ref-uid"></a>&#x2022; [`uid`](#where-virtual-site-ref-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 ---
 

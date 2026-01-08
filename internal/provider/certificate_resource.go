@@ -112,7 +112,7 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"certificate_url": schema.StringAttribute{
-				MarkdownDescription: "Certificates. Certificate chain is the list of intermediate certificates in PEM format including the PEM headers.",
+				MarkdownDescription: "Certificate chain is the list of intermediate certificates in PEM format including the PEM headers.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{

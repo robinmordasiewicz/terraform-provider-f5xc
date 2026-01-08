@@ -32,7 +32,7 @@ resource "f5xc_usb_policy" "example" {
   }
 
   # Resource-specific configuration
-  # Allowed USB devices. List of allowed USB devices .
+  # List of allowed USB devices .
   allowed_devices {
     # Configure allowed_devices settings
   }
@@ -58,7 +58,7 @@ resource "f5xc_usb_policy" "example" {
 
 ### Spec Argument Reference
 
-<a id="allowed-devices"></a>&#x2022; [`allowed_devices`](#allowed-devices) - Optional Block<br>Allowed USB devices. List of allowed USB devices<br>See [Allowed Devices](#allowed-devices) below for details.
+<a id="allowed-devices"></a>&#x2022; [`allowed_devices`](#allowed-devices) - Optional Block<br>List of allowed USB devices<br>See [Allowed Devices](#allowed-devices) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -76,13 +76,13 @@ An [`allowed_devices`](#allowed-devices) block supports the following:
 
 <a id="allowed-devices-b-device-class"></a>&#x2022; [`b_device_class`](#allowed-devices-b-device-class) - Optional String<br>Class. The class of this device
 
-<a id="allowed-devices-b-device-protocol"></a>&#x2022; [`b_device_protocol`](#allowed-devices-b-device-protocol) - Optional String<br>Protocol. The protocol (within the sub-class) of this device
+<a id="allowed-devices-b-device-protocol"></a>&#x2022; [`b_device_protocol`](#allowed-devices-b-device-protocol) - Optional String<br>The protocol (within the sub-class) of this device
 
-<a id="allowed-devices-b-device-sub-class"></a>&#x2022; [`b_device_sub_class`](#allowed-devices-b-device-sub-class) - Optional String<br>Subclass. The sub-class (within the class) of this device
+<a id="allowed-devices-b-device-sub-class"></a>&#x2022; [`b_device_sub_class`](#allowed-devices-b-device-sub-class) - Optional String<br>The sub-class (within the class) of this device
 
-<a id="allowed-devices-i-serial"></a>&#x2022; [`i_serial`](#allowed-devices-i-serial) - Optional String<br>ISerialNumber. Index of Serial Number String Descriptor
+<a id="allowed-devices-i-serial"></a>&#x2022; [`i_serial`](#allowed-devices-i-serial) - Optional String<br>Index of Serial Number String Descriptor
 
-<a id="allowed-devices-id-product"></a>&#x2022; [`id_product`](#allowed-devices-id-product) - Optional String<br>Product ID. Product ID (Assigned by Manufacturer) in hex
+<a id="allowed-devices-id-product"></a>&#x2022; [`id_product`](#allowed-devices-id-product) - Optional String<br>Product ID (Assigned by Manufacturer) in hex
 
 <a id="allowed-devices-id-vendor"></a>&#x2022; [`id_vendor`](#allowed-devices-id-vendor) - Optional String<br>Vendor ID. Vendor ID (Assigned by USB Org) in hex
 

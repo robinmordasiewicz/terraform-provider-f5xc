@@ -72,10 +72,10 @@ resource "f5xc_workload" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="job"></a>[`job`](#job) - Optional Block<br>Job Type. Jobs are used for running batch processing tasks and run to completion. Jobs are generally used for tasks like report generation, billing, parallel data processing, ETL processing, etc<br>See [Job](#job) below for details.
-<br><br>&#x2022; <a id="service"></a>[`service`](#service) - Optional Block<br>ServiceType. Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. Replicas of a service are fungible and do not have a stable network identity or storage. Common examples of services are web servers, application servers, traditional SQL databases, etc<br>See [Service](#service) below for details.
-<br><br>&#x2022; <a id="simple-service"></a>[`simple_service`](#simple-service) - Optional Block<br>SimpleServiceType. SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP
-<br><br>&#x2022; <a id="stateful-service"></a>[`stateful_service`](#stateful-service) - Optional Block<br>StatefulServiceType. StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. Stateful service are used for distributed stateful applications like cassandra, mongodb, redis, etc
+&#x2022; <a id="job"></a>[`job`](#job) - Optional Block<br>Jobs are used for running batch processing tasks and run to completion. Jobs are generally used for tasks like report generation, billing, parallel data processing, ETL processing, etc<br>See [Job](#job) below for details.
+<br><br>&#x2022; <a id="service"></a>[`service`](#service) - Optional Block<br>Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. Replicas of a service are fungible and do not have a stable network identity or storage. Common examples of services are web servers, application servers<br>See [Service](#service) below for details.
+<br><br>&#x2022; <a id="simple-service"></a>[`simple_service`](#simple-service) - Optional Block<br>SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP
+<br><br>&#x2022; <a id="stateful-service"></a>[`stateful_service`](#stateful-service) - Optional Block<br>StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. Stateful service are used for distributed stateful applications like cassandra, mongodb, redis, etc
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
@@ -91,13 +91,13 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`job`](#job) block supports the following:
 
-<a id="job-configuration"></a>&#x2022; [`configuration`](#job-configuration) - Optional Block<br>Configuration Parameters. Configuration parameters of the workload<br>See [Configuration](#job-configuration) below.
+<a id="job-configuration"></a>&#x2022; [`configuration`](#job-configuration) - Optional Block<br>Configuration parameters of the workload<br>See [Configuration](#job-configuration) below.
 
-<a id="job-containers"></a>&#x2022; [`containers`](#job-containers) - Optional Block<br>Containers. Containers to use for the job<br>See [Containers](#job-containers) below.
+<a id="job-containers"></a>&#x2022; [`containers`](#job-containers) - Optional Block<br>Containers to use for the job<br>See [Containers](#job-containers) below.
 
-<a id="job-deploy-options"></a>&#x2022; [`deploy_options`](#job-deploy-options) - Optional Block<br>Deploy OPTIONS. Deploy OPTIONS are used to configure the workload deployment OPTIONS<br>See [Deploy Options](#job-deploy-options) below.
+<a id="job-deploy-options"></a>&#x2022; [`deploy_options`](#job-deploy-options) - Optional Block<br>Deploy OPTIONS are used to configure the workload deployment OPTIONS<br>See [Deploy Options](#job-deploy-options) below.
 
-<a id="job-num-replicas"></a>&#x2022; [`num_replicas`](#job-num-replicas) - Optional Number<br>Number of Replicas. Number of replicas of the batch job to spawn per site
+<a id="job-num-replicas"></a>&#x2022; [`num_replicas`](#job-num-replicas) - Optional Number<br>Number of replicas of the batch job to spawn per site
 
 <a id="job-volumes"></a>&#x2022; [`volumes`](#job-volumes) - Optional Block<br>Volumes. Volumes for the job<br>See [Volumes](#job-volumes) below.
 
@@ -129,7 +129,7 @@ A [`file`](#job-configuration-parameters-file) block (within [`job.configuration
 
 <a id="job-configuration-parameters-file-data"></a>&#x2022; [`data`](#job-configuration-parameters-file-data) - Optional String<br>Data. File data
 
-<a id="job-configuration-parameters-file-mount"></a>&#x2022; [`mount`](#job-configuration-parameters-file-mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-configuration-parameters-file-mount) below.
+<a id="job-configuration-parameters-file-mount"></a>&#x2022; [`mount`](#job-configuration-parameters-file-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-configuration-parameters-file-mount) below.
 
 <a id="job-configuration-parameters-file-name"></a>&#x2022; [`name`](#job-configuration-parameters-file-name) - Optional String<br>Name. Name of the file
 
@@ -139,103 +139,103 @@ A [`file`](#job-configuration-parameters-file) block (within [`job.configuration
 
 A [`mount`](#job-configuration-parameters-file-mount) block (within [`job.configuration.parameters.file`](#job-configuration-parameters-file)) supports the following:
 
-<a id="mode-8141d6"></a>&#x2022; [`mode`](#mode-8141d6) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="mode-8141d6"></a>&#x2022; [`mode`](#mode-8141d6) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="path-4baddf"></a>&#x2022; [`mount_path`](#path-4baddf) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="path-4baddf"></a>&#x2022; [`mount_path`](#path-4baddf) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="path-5fe649"></a>&#x2022; [`sub_path`](#path-5fe649) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="path-5fe649"></a>&#x2022; [`sub_path`](#path-5fe649) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Job Containers
 
 A [`containers`](#job-containers) block (within [`job`](#job)) supports the following:
 
-<a id="job-containers-args"></a>&#x2022; [`args`](#job-containers-args) - Optional List<br>Arguments. Arguments to the entrypoint. Overrides the docker image's CMD
+<a id="job-containers-args"></a>&#x2022; [`args`](#job-containers-args) - Optional List<br>Arguments to the entrypoint. Overrides the docker image's CMD
 
-<a id="job-containers-command"></a>&#x2022; [`command`](#job-containers-command) - Optional List<br>Command. Command to execute. Overrides the docker image's ENTRYPOINT
+<a id="job-containers-command"></a>&#x2022; [`command`](#job-containers-command) - Optional List<br>Command to execute. Overrides the docker image's ENTRYPOINT
 
-<a id="job-containers-custom-flavor"></a>&#x2022; [`custom_flavor`](#job-containers-custom-flavor) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#job-containers-custom-flavor) below.
+<a id="job-containers-custom-flavor"></a>&#x2022; [`custom_flavor`](#job-containers-custom-flavor) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#job-containers-custom-flavor) below.
 
-<a id="job-containers-default-flavor"></a>&#x2022; [`default_flavor`](#job-containers-default-flavor) - Optional Block<br>Enable this option
+<a id="job-containers-default-flavor"></a>&#x2022; [`default_flavor`](#job-containers-default-flavor) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="job-containers-flavor"></a>&#x2022; [`flavor`](#job-containers-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory
+<a id="job-containers-flavor"></a>&#x2022; [`flavor`](#job-containers-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have
 
-<a id="job-containers-image"></a>&#x2022; [`image`](#job-containers-image) - Optional Block<br>Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any<br>See [Image](#job-containers-image) below.
+<a id="job-containers-image"></a>&#x2022; [`image`](#job-containers-image) - Optional Block<br>ImageType configures the image to use, how to pull the image, and the associated secrets to use if any<br>See [Image](#job-containers-image) below.
 
-<a id="job-containers-init-container"></a>&#x2022; [`init_container`](#job-containers-init-container) - Optional Bool<br>Initialization Container. Specialized container that runs before application container and runs to completion
+<a id="job-containers-init-container"></a>&#x2022; [`init_container`](#job-containers-init-container) - Optional Bool<br>Specialized container that runs before application container and runs to completion
 
-<a id="job-containers-liveness-check"></a>&#x2022; [`liveness_check`](#job-containers-liveness-check) - Optional Block<br>Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Liveness Check](#job-containers-liveness-check) below.
+<a id="job-containers-liveness-check"></a>&#x2022; [`liveness_check`](#job-containers-liveness-check) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Liveness Check](#job-containers-liveness-check) below.
 
 <a id="job-containers-name"></a>&#x2022; [`name`](#job-containers-name) - Optional String<br>Name. Name of the container
 
-<a id="job-containers-readiness-check"></a>&#x2022; [`readiness_check`](#job-containers-readiness-check) - Optional Block<br>Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Readiness Check](#job-containers-readiness-check) below.
+<a id="job-containers-readiness-check"></a>&#x2022; [`readiness_check`](#job-containers-readiness-check) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Readiness Check](#job-containers-readiness-check) below.
 
 #### Job Containers Custom Flavor
 
 A [`custom_flavor`](#job-containers-custom-flavor) block (within [`job.containers`](#job-containers)) supports the following:
 
-<a id="job-containers-custom-flavor-name"></a>&#x2022; [`name`](#job-containers-custom-flavor-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="job-containers-custom-flavor-name"></a>&#x2022; [`name`](#job-containers-custom-flavor-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="job-containers-custom-flavor-namespace"></a>&#x2022; [`namespace`](#job-containers-custom-flavor-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="job-containers-custom-flavor-namespace"></a>&#x2022; [`namespace`](#job-containers-custom-flavor-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="job-containers-custom-flavor-tenant"></a>&#x2022; [`tenant`](#job-containers-custom-flavor-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="job-containers-custom-flavor-tenant"></a>&#x2022; [`tenant`](#job-containers-custom-flavor-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Job Containers Image
 
 An [`image`](#job-containers-image) block (within [`job.containers`](#job-containers)) supports the following:
 
-<a id="job-containers-image-container-registry"></a>&#x2022; [`container_registry`](#job-containers-image-container-registry) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#job-containers-image-container-registry) below.
+<a id="job-containers-image-container-registry"></a>&#x2022; [`container_registry`](#job-containers-image-container-registry) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#job-containers-image-container-registry) below.
 
-<a id="job-containers-image-name"></a>&#x2022; [`name`](#job-containers-image-name) - Optional String<br>Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed
+<a id="job-containers-image-name"></a>&#x2022; [`name`](#job-containers-image-name) - Optional String<br>Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed
 
-<a id="job-containers-image-public"></a>&#x2022; [`public`](#job-containers-image-public) - Optional Block<br>Enable this option
+<a id="job-containers-image-public"></a>&#x2022; [`public`](#job-containers-image-public) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="job-containers-image-pull-policy"></a>&#x2022; [`pull_policy`](#job-containers-image-pull-policy) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image
+<a id="job-containers-image-pull-policy"></a>&#x2022; [`pull_policy`](#job-containers-image-pull-policy) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only
 
 #### Job Containers Image Container Registry
 
 A [`container_registry`](#job-containers-image-container-registry) block (within [`job.containers.image`](#job-containers-image)) supports the following:
 
-<a id="name-d8aa8e"></a>&#x2022; [`name`](#name-d8aa8e) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-d8aa8e"></a>&#x2022; [`name`](#name-d8aa8e) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-0744ae"></a>&#x2022; [`namespace`](#namespace-0744ae) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-0744ae"></a>&#x2022; [`namespace`](#namespace-0744ae) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-a2bf58"></a>&#x2022; [`tenant`](#tenant-a2bf58) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-a2bf58"></a>&#x2022; [`tenant`](#tenant-a2bf58) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Job Containers Liveness Check
 
 A [`liveness_check`](#job-containers-liveness-check) block (within [`job.containers`](#job-containers)) supports the following:
 
-<a id="check-738ef8"></a>&#x2022; [`exec_health_check`](#check-738ef8) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-738ef8) below.
+<a id="check-738ef8"></a>&#x2022; [`exec_health_check`](#check-738ef8) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-738ef8) below.
 
-<a id="threshold-1e3058"></a>&#x2022; [`healthy_threshold`](#threshold-1e3058) - Optional Number<br>Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy
+<a id="threshold-1e3058"></a>&#x2022; [`healthy_threshold`](#threshold-1e3058) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
 
-<a id="check-052b16"></a>&#x2022; [`http_health_check`](#check-052b16) - Optional Block<br>HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-052b16) below.
+<a id="check-052b16"></a>&#x2022; [`http_health_check`](#check-052b16) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-052b16) below.
 
-<a id="delay-3382ba"></a>&#x2022; [`initial_delay`](#delay-3382ba) - Optional Number<br>Initial Delay. Number of seconds after the container has started before health checks are initiated
+<a id="delay-3382ba"></a>&#x2022; [`initial_delay`](#delay-3382ba) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
 
-<a id="job-containers-liveness-check-interval"></a>&#x2022; [`interval`](#job-containers-liveness-check-interval) - Optional Number<br>Interval. Time interval in seconds between two health check requests
+<a id="job-containers-liveness-check-interval"></a>&#x2022; [`interval`](#job-containers-liveness-check-interval) - Optional Number<br>Time interval in seconds between two health check requests
 
-<a id="check-71da8e"></a>&#x2022; [`tcp_health_check`](#check-71da8e) - Optional Block<br>TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-71da8e) below.
+<a id="check-71da8e"></a>&#x2022; [`tcp_health_check`](#check-71da8e) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-71da8e) below.
 
-<a id="job-containers-liveness-check-timeout"></a>&#x2022; [`timeout`](#job-containers-liveness-check-timeout) - Optional Number<br>Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+<a id="job-containers-liveness-check-timeout"></a>&#x2022; [`timeout`](#job-containers-liveness-check-timeout) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
 
-<a id="threshold-3d7b0c"></a>&#x2022; [`unhealthy_threshold`](#threshold-3d7b0c) - Optional Number<br>Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+<a id="threshold-3d7b0c"></a>&#x2022; [`unhealthy_threshold`](#threshold-3d7b0c) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
 
 #### Job Containers Liveness Check Exec Health Check
 
 An [`exec_health_check`](#check-738ef8) block (within [`job.containers.liveness_check`](#job-containers-liveness-check)) supports the following:
 
-<a id="command-e9b078"></a>&#x2022; [`command`](#command-e9b078) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
+<a id="command-e9b078"></a>&#x2022; [`command`](#command-e9b078) - Optional List<br>Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to
 
 #### Job Containers Liveness Check HTTP Health Check
 
 A [`http_health_check`](#check-052b16) block (within [`job.containers.liveness_check`](#job-containers-liveness-check)) supports the following:
 
-<a id="headers-202d31"></a>&#x2022; [`headers`](#headers-202d31) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
+<a id="headers-202d31"></a>&#x2022; [`headers`](#headers-202d31) - Optional Block<br>Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
 
-<a id="header-2aa0a5"></a>&#x2022; [`host_header`](#header-2aa0a5) - Optional String<br>Host Header. The value of the host header in the HTTP health check request
+<a id="header-2aa0a5"></a>&#x2022; [`host_header`](#header-2aa0a5) - Optional String<br>The value of the host header in the HTTP health check request
 
-<a id="path-c81de3"></a>&#x2022; [`path`](#path-c81de3) - Optional String<br>Path. Path to access on the HTTP server
+<a id="path-c81de3"></a>&#x2022; [`path`](#path-c81de3) - Optional String<br>Path to access on the HTTP server
 
 <a id="port-3d627c"></a>&#x2022; [`port`](#port-3d627c) - Optional Block<br>Port. Port<br>See [Port](#port-3d627c) below.
 
@@ -257,37 +257,37 @@ A [`tcp_health_check`](#check-71da8e) block (within [`job.containers.liveness_ch
 
 A [`readiness_check`](#job-containers-readiness-check) block (within [`job.containers`](#job-containers)) supports the following:
 
-<a id="check-ce28eb"></a>&#x2022; [`exec_health_check`](#check-ce28eb) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-ce28eb) below.
+<a id="check-ce28eb"></a>&#x2022; [`exec_health_check`](#check-ce28eb) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-ce28eb) below.
 
-<a id="threshold-c93f46"></a>&#x2022; [`healthy_threshold`](#threshold-c93f46) - Optional Number<br>Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy
+<a id="threshold-c93f46"></a>&#x2022; [`healthy_threshold`](#threshold-c93f46) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
 
-<a id="check-c5bafc"></a>&#x2022; [`http_health_check`](#check-c5bafc) - Optional Block<br>HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-c5bafc) below.
+<a id="check-c5bafc"></a>&#x2022; [`http_health_check`](#check-c5bafc) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-c5bafc) below.
 
-<a id="delay-cbd49d"></a>&#x2022; [`initial_delay`](#delay-cbd49d) - Optional Number<br>Initial Delay. Number of seconds after the container has started before health checks are initiated
+<a id="delay-cbd49d"></a>&#x2022; [`initial_delay`](#delay-cbd49d) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
 
-<a id="job-containers-readiness-check-interval"></a>&#x2022; [`interval`](#job-containers-readiness-check-interval) - Optional Number<br>Interval. Time interval in seconds between two health check requests
+<a id="job-containers-readiness-check-interval"></a>&#x2022; [`interval`](#job-containers-readiness-check-interval) - Optional Number<br>Time interval in seconds between two health check requests
 
-<a id="check-df7310"></a>&#x2022; [`tcp_health_check`](#check-df7310) - Optional Block<br>TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-df7310) below.
+<a id="check-df7310"></a>&#x2022; [`tcp_health_check`](#check-df7310) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-df7310) below.
 
-<a id="job-containers-readiness-check-timeout"></a>&#x2022; [`timeout`](#job-containers-readiness-check-timeout) - Optional Number<br>Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+<a id="job-containers-readiness-check-timeout"></a>&#x2022; [`timeout`](#job-containers-readiness-check-timeout) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
 
-<a id="threshold-9e6547"></a>&#x2022; [`unhealthy_threshold`](#threshold-9e6547) - Optional Number<br>Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+<a id="threshold-9e6547"></a>&#x2022; [`unhealthy_threshold`](#threshold-9e6547) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
 
 #### Job Containers Readiness Check Exec Health Check
 
 An [`exec_health_check`](#check-ce28eb) block (within [`job.containers.readiness_check`](#job-containers-readiness-check)) supports the following:
 
-<a id="command-c7bef1"></a>&#x2022; [`command`](#command-c7bef1) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
+<a id="command-c7bef1"></a>&#x2022; [`command`](#command-c7bef1) - Optional List<br>Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to
 
 #### Job Containers Readiness Check HTTP Health Check
 
 A [`http_health_check`](#check-c5bafc) block (within [`job.containers.readiness_check`](#job-containers-readiness-check)) supports the following:
 
-<a id="headers-16116f"></a>&#x2022; [`headers`](#headers-16116f) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
+<a id="headers-16116f"></a>&#x2022; [`headers`](#headers-16116f) - Optional Block<br>Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
 
-<a id="header-389f08"></a>&#x2022; [`host_header`](#header-389f08) - Optional String<br>Host Header. The value of the host header in the HTTP health check request
+<a id="header-389f08"></a>&#x2022; [`host_header`](#header-389f08) - Optional String<br>The value of the host header in the HTTP health check request
 
-<a id="path-c89875"></a>&#x2022; [`path`](#path-c89875) - Optional String<br>Path. Path to access on the HTTP server
+<a id="path-c89875"></a>&#x2022; [`path`](#path-c89875) - Optional String<br>Path to access on the HTTP server
 
 <a id="port-3b8b2e"></a>&#x2022; [`port`](#port-3b8b2e) - Optional Block<br>Port. Port<br>See [Port](#port-3b8b2e) below.
 
@@ -309,39 +309,39 @@ A [`tcp_health_check`](#check-df7310) block (within [`job.containers.readiness_c
 
 A [`deploy_options`](#job-deploy-options) block (within [`job`](#job)) supports the following:
 
-<a id="job-deploy-options-all-res"></a>&#x2022; [`all_res`](#job-deploy-options-all-res) - Optional Block<br>Enable this option
+<a id="job-deploy-options-all-res"></a>&#x2022; [`all_res`](#job-deploy-options-all-res) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="sites-7d16a9"></a>&#x2022; [`default_virtual_sites`](#sites-7d16a9) - Optional Block<br>Enable this option
+<a id="sites-7d16a9"></a>&#x2022; [`default_virtual_sites`](#sites-7d16a9) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="job-deploy-options-deploy-ce-sites"></a>&#x2022; [`deploy_ce_sites`](#job-deploy-options-deploy-ce-sites) - Optional Block<br>Customer Sites. This defines a way to deploy a workload on specific Customer sites<br>See [Deploy CE Sites](#job-deploy-options-deploy-ce-sites) below.
+<a id="job-deploy-options-deploy-ce-sites"></a>&#x2022; [`deploy_ce_sites`](#job-deploy-options-deploy-ce-sites) - Optional Block<br>Defines a way to deploy a workload on specific Customer sites<br>See [Deploy CE Sites](#job-deploy-options-deploy-ce-sites) below.
 
-<a id="sites-f9f96a"></a>&#x2022; [`deploy_ce_virtual_sites`](#sites-f9f96a) - Optional Block<br>Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites<br>See [Deploy CE Virtual Sites](#sites-f9f96a) below.
+<a id="sites-f9f96a"></a>&#x2022; [`deploy_ce_virtual_sites`](#sites-f9f96a) - Optional Block<br>Defines a way to deploy a workload on specific Customer virtual sites<br>See [Deploy CE Virtual Sites](#sites-f9f96a) below.
 
-<a id="job-deploy-options-deploy-re-sites"></a>&#x2022; [`deploy_re_sites`](#job-deploy-options-deploy-re-sites) - Optional Block<br>Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites<br>See [Deploy RE Sites](#job-deploy-options-deploy-re-sites) below.
+<a id="job-deploy-options-deploy-re-sites"></a>&#x2022; [`deploy_re_sites`](#job-deploy-options-deploy-re-sites) - Optional Block<br>Defines a way to deploy a workload on specific Regional Edge sites<br>See [Deploy RE Sites](#job-deploy-options-deploy-re-sites) below.
 
-<a id="sites-178ece"></a>&#x2022; [`deploy_re_virtual_sites`](#sites-178ece) - Optional Block<br>Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites<br>See [Deploy RE Virtual Sites](#sites-178ece) below.
+<a id="sites-178ece"></a>&#x2022; [`deploy_re_virtual_sites`](#sites-178ece) - Optional Block<br>Defines a way to deploy a workload on specific Regional Edge virtual sites<br>See [Deploy RE Virtual Sites](#sites-178ece) below.
 
 #### Job Deploy Options Deploy CE Sites
 
 A [`deploy_ce_sites`](#job-deploy-options-deploy-ce-sites) block (within [`job.deploy_options`](#job-deploy-options)) supports the following:
 
-<a id="job-deploy-options-deploy-ce-sites-site"></a>&#x2022; [`site`](#job-deploy-options-deploy-ce-sites-site) - Optional Block<br>List of Customer Sites to Deploy. Which customer sites should this workload be deployed<br>See [Site](#job-deploy-options-deploy-ce-sites-site) below.
+<a id="job-deploy-options-deploy-ce-sites-site"></a>&#x2022; [`site`](#job-deploy-options-deploy-ce-sites-site) - Optional Block<br>Which customer sites should this workload be deployed<br>See [Site](#job-deploy-options-deploy-ce-sites-site) below.
 
 #### Job Deploy Options Deploy CE Sites Site
 
 A [`site`](#job-deploy-options-deploy-ce-sites-site) block (within [`job.deploy_options.deploy_ce_sites`](#job-deploy-options-deploy-ce-sites)) supports the following:
 
-<a id="name-e258db"></a>&#x2022; [`name`](#name-e258db) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-e258db"></a>&#x2022; [`name`](#name-e258db) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-064f53"></a>&#x2022; [`namespace`](#namespace-064f53) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-064f53"></a>&#x2022; [`namespace`](#namespace-064f53) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-d6cc86"></a>&#x2022; [`tenant`](#tenant-d6cc86) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-d6cc86"></a>&#x2022; [`tenant`](#tenant-d6cc86) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Job Deploy Options Deploy CE Virtual Sites
 
 A [`deploy_ce_virtual_sites`](#sites-f9f96a) block (within [`job.deploy_options`](#job-deploy-options)) supports the following:
 
-<a id="site-0c4045"></a>&#x2022; [`virtual_site`](#site-0c4045) - Optional Block<br>List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed<br>See [Virtual Site](#site-0c4045) below.
+<a id="site-0c4045"></a>&#x2022; [`virtual_site`](#site-0c4045) - Optional Block<br>Which customer virtual sites should this workload be deployed<br>See [Virtual Site](#site-0c4045) below.
 
 #### Job Deploy Options Deploy CE Virtual Sites Virtual Site
 
@@ -351,23 +351,23 @@ A [`deploy_ce_virtual_sites`](#sites-f9f96a) block (within [`job.deploy_options`
 
 A [`deploy_re_sites`](#job-deploy-options-deploy-re-sites) block (within [`job.deploy_options`](#job-deploy-options)) supports the following:
 
-<a id="job-deploy-options-deploy-re-sites-site"></a>&#x2022; [`site`](#job-deploy-options-deploy-re-sites-site) - Optional Block<br>List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed<br>See [Site](#job-deploy-options-deploy-re-sites-site) below.
+<a id="job-deploy-options-deploy-re-sites-site"></a>&#x2022; [`site`](#job-deploy-options-deploy-re-sites-site) - Optional Block<br>Which regional edge sites should this workload be deployed<br>See [Site](#job-deploy-options-deploy-re-sites-site) below.
 
 #### Job Deploy Options Deploy RE Sites Site
 
 A [`site`](#job-deploy-options-deploy-re-sites-site) block (within [`job.deploy_options.deploy_re_sites`](#job-deploy-options-deploy-re-sites)) supports the following:
 
-<a id="name-03e074"></a>&#x2022; [`name`](#name-03e074) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-03e074"></a>&#x2022; [`name`](#name-03e074) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-f7dfa3"></a>&#x2022; [`namespace`](#namespace-f7dfa3) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-f7dfa3"></a>&#x2022; [`namespace`](#namespace-f7dfa3) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-2ce318"></a>&#x2022; [`tenant`](#tenant-2ce318) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-2ce318"></a>&#x2022; [`tenant`](#tenant-2ce318) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Job Deploy Options Deploy RE Virtual Sites
 
 A [`deploy_re_virtual_sites`](#sites-178ece) block (within [`job.deploy_options`](#job-deploy-options)) supports the following:
 
-<a id="site-3ec46d"></a>&#x2022; [`virtual_site`](#site-3ec46d) - Optional Block<br>List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed<br>See [Virtual Site](#site-3ec46d) below.
+<a id="site-3ec46d"></a>&#x2022; [`virtual_site`](#site-3ec46d) - Optional Block<br>Which regional edge virtual sites should this workload be deployed<br>See [Virtual Site](#site-3ec46d) below.
 
 #### Job Deploy Options Deploy RE Virtual Sites Virtual Site
 
@@ -377,19 +377,19 @@ A [`deploy_re_virtual_sites`](#sites-178ece) block (within [`job.deploy_options`
 
 A [`volumes`](#job-volumes) block (within [`job`](#job)) supports the following:
 
-<a id="job-volumes-empty-dir"></a>&#x2022; [`empty_dir`](#job-volumes-empty-dir) - Optional Block<br>Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload<br>See [Empty Dir](#job-volumes-empty-dir) below.
+<a id="job-volumes-empty-dir"></a>&#x2022; [`empty_dir`](#job-volumes-empty-dir) - Optional Block<br>Volume containing a temporary directory whose lifetime is the same as a replica of a workload<br>See [Empty Dir](#job-volumes-empty-dir) below.
 
-<a id="job-volumes-host-path"></a>&#x2022; [`host_path`](#job-volumes-host-path) - Optional Block<br>HostPath Volume. Volume containing a host mapped path into the workload<br>See [Host Path](#job-volumes-host-path) below.
+<a id="job-volumes-host-path"></a>&#x2022; [`host_path`](#job-volumes-host-path) - Optional Block<br>Volume containing a host mapped path into the workload<br>See [Host Path](#job-volumes-host-path) below.
 
 <a id="job-volumes-name"></a>&#x2022; [`name`](#job-volumes-name) - Optional String<br>Name. Name of the volume
 
-<a id="job-volumes-persistent-volume"></a>&#x2022; [`persistent_volume`](#job-volumes-persistent-volume) - Optional Block<br>Persistent Storage Volume. Volume containing the Persistent Storage for the workload<br>See [Persistent Volume](#job-volumes-persistent-volume) below.
+<a id="job-volumes-persistent-volume"></a>&#x2022; [`persistent_volume`](#job-volumes-persistent-volume) - Optional Block<br>Volume containing the Persistent Storage for the workload<br>See [Persistent Volume](#job-volumes-persistent-volume) below.
 
 #### Job Volumes Empty Dir
 
 An [`empty_dir`](#job-volumes-empty-dir) block (within [`job.volumes`](#job-volumes)) supports the following:
 
-<a id="job-volumes-empty-dir-mount"></a>&#x2022; [`mount`](#job-volumes-empty-dir-mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-volumes-empty-dir-mount) below.
+<a id="job-volumes-empty-dir-mount"></a>&#x2022; [`mount`](#job-volumes-empty-dir-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-volumes-empty-dir-mount) below.
 
 <a id="job-volumes-empty-dir-size-limit"></a>&#x2022; [`size_limit`](#job-volumes-empty-dir-size-limit) - Optional Number<br>Size Limit (in GiB)
 
@@ -397,75 +397,75 @@ An [`empty_dir`](#job-volumes-empty-dir) block (within [`job.volumes`](#job-volu
 
 A [`mount`](#job-volumes-empty-dir-mount) block (within [`job.volumes.empty_dir`](#job-volumes-empty-dir)) supports the following:
 
-<a id="job-volumes-empty-dir-mount-mode"></a>&#x2022; [`mode`](#job-volumes-empty-dir-mount-mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="job-volumes-empty-dir-mount-mode"></a>&#x2022; [`mode`](#job-volumes-empty-dir-mount-mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="job-volumes-empty-dir-mount-mount-path"></a>&#x2022; [`mount_path`](#job-volumes-empty-dir-mount-mount-path) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="job-volumes-empty-dir-mount-mount-path"></a>&#x2022; [`mount_path`](#job-volumes-empty-dir-mount-mount-path) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="job-volumes-empty-dir-mount-sub-path"></a>&#x2022; [`sub_path`](#job-volumes-empty-dir-mount-sub-path) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="job-volumes-empty-dir-mount-sub-path"></a>&#x2022; [`sub_path`](#job-volumes-empty-dir-mount-sub-path) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Job Volumes Host Path
 
 A [`host_path`](#job-volumes-host-path) block (within [`job.volumes`](#job-volumes)) supports the following:
 
-<a id="job-volumes-host-path-mount"></a>&#x2022; [`mount`](#job-volumes-host-path-mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-volumes-host-path-mount) below.
+<a id="job-volumes-host-path-mount"></a>&#x2022; [`mount`](#job-volumes-host-path-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-volumes-host-path-mount) below.
 
-<a id="job-volumes-host-path-path"></a>&#x2022; [`path`](#job-volumes-host-path-path) - Optional String<br>Path. Path of the directory on the host
+<a id="job-volumes-host-path-path"></a>&#x2022; [`path`](#job-volumes-host-path-path) - Optional String<br>Path of the directory on the host
 
 #### Job Volumes Host Path Mount
 
 A [`mount`](#job-volumes-host-path-mount) block (within [`job.volumes.host_path`](#job-volumes-host-path)) supports the following:
 
-<a id="job-volumes-host-path-mount-mode"></a>&#x2022; [`mode`](#job-volumes-host-path-mount-mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="job-volumes-host-path-mount-mode"></a>&#x2022; [`mode`](#job-volumes-host-path-mount-mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="job-volumes-host-path-mount-mount-path"></a>&#x2022; [`mount_path`](#job-volumes-host-path-mount-mount-path) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="job-volumes-host-path-mount-mount-path"></a>&#x2022; [`mount_path`](#job-volumes-host-path-mount-mount-path) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="job-volumes-host-path-mount-sub-path"></a>&#x2022; [`sub_path`](#job-volumes-host-path-mount-sub-path) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="job-volumes-host-path-mount-sub-path"></a>&#x2022; [`sub_path`](#job-volumes-host-path-mount-sub-path) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Job Volumes Persistent Volume
 
 A [`persistent_volume`](#job-volumes-persistent-volume) block (within [`job.volumes`](#job-volumes)) supports the following:
 
-<a id="job-volumes-persistent-volume-mount"></a>&#x2022; [`mount`](#job-volumes-persistent-volume-mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-volumes-persistent-volume-mount) below.
+<a id="job-volumes-persistent-volume-mount"></a>&#x2022; [`mount`](#job-volumes-persistent-volume-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-volumes-persistent-volume-mount) below.
 
-<a id="job-volumes-persistent-volume-storage"></a>&#x2022; [`storage`](#job-volumes-persistent-volume-storage) - Optional Block<br>Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC)<br>See [Storage](#job-volumes-persistent-volume-storage) below.
+<a id="job-volumes-persistent-volume-storage"></a>&#x2022; [`storage`](#job-volumes-persistent-volume-storage) - Optional Block<br>Persistent storage configuration is used to configure Persistent Volume Claim (PVC)<br>See [Storage](#job-volumes-persistent-volume-storage) below.
 
 #### Job Volumes Persistent Volume Mount
 
 A [`mount`](#job-volumes-persistent-volume-mount) block (within [`job.volumes.persistent_volume`](#job-volumes-persistent-volume)) supports the following:
 
-<a id="mode-f3adb7"></a>&#x2022; [`mode`](#mode-f3adb7) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="mode-f3adb7"></a>&#x2022; [`mode`](#mode-f3adb7) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="path-fda002"></a>&#x2022; [`mount_path`](#path-fda002) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="path-fda002"></a>&#x2022; [`mount_path`](#path-fda002) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="path-a2ee82"></a>&#x2022; [`sub_path`](#path-a2ee82) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="path-a2ee82"></a>&#x2022; [`sub_path`](#path-a2ee82) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Job Volumes Persistent Volume Storage
 
 A [`storage`](#job-volumes-persistent-volume-storage) block (within [`job.volumes.persistent_volume`](#job-volumes-persistent-volume)) supports the following:
 
-<a id="mode-a09ded"></a>&#x2022; [`access_mode`](#mode-a09ded) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts
+<a id="mode-a09ded"></a>&#x2022; [`access_mode`](#mode-a09ded) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used
 
-<a id="name-a51d52"></a>&#x2022; [`class_name`](#name-a51d52) - Optional String<br>Class Name. Use the specified class name
+<a id="name-a51d52"></a>&#x2022; [`class_name`](#name-a51d52) - Optional String<br>Use the specified class name
 
-<a id="default-3128b0"></a>&#x2022; [`default`](#default-3128b0) - Optional Block<br>Enable this option
+<a id="default-3128b0"></a>&#x2022; [`default`](#default-3128b0) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="size-81eddf"></a>&#x2022; [`storage_size`](#size-81eddf) - Optional Number<br>Size (in GiB). Size in GiB of the persistent storage
+<a id="size-81eddf"></a>&#x2022; [`storage_size`](#size-81eddf) - Optional Number<br>Size in GiB of the persistent storage
 
 #### Service
 
 A [`service`](#service) block supports the following:
 
-<a id="service-advertise-options"></a>&#x2022; [`advertise_options`](#service-advertise-options) - Optional Block<br>Advertise OPTIONS. Advertise OPTIONS are used to configure how and where to advertise the workload using load balancers<br>See [Advertise Options](#service-advertise-options) below.
+<a id="service-advertise-options"></a>&#x2022; [`advertise_options`](#service-advertise-options) - Optional Block<br>Advertise OPTIONS are used to configure how and where to advertise the workload using load balancers<br>See [Advertise Options](#service-advertise-options) below.
 
-<a id="service-configuration"></a>&#x2022; [`configuration`](#service-configuration) - Optional Block<br>Configuration Parameters. Configuration parameters of the workload<br>See [Configuration](#service-configuration) below.
+<a id="service-configuration"></a>&#x2022; [`configuration`](#service-configuration) - Optional Block<br>Configuration parameters of the workload<br>See [Configuration](#service-configuration) below.
 
-<a id="service-containers"></a>&#x2022; [`containers`](#service-containers) - Optional Block<br>Containers. Containers to use for service<br>See [Containers](#service-containers) below.
+<a id="service-containers"></a>&#x2022; [`containers`](#service-containers) - Optional Block<br>Containers to use for service<br>See [Containers](#service-containers) below.
 
-<a id="service-deploy-options"></a>&#x2022; [`deploy_options`](#service-deploy-options) - Optional Block<br>Deploy OPTIONS. Deploy OPTIONS are used to configure the workload deployment OPTIONS<br>See [Deploy Options](#service-deploy-options) below.
+<a id="service-deploy-options"></a>&#x2022; [`deploy_options`](#service-deploy-options) - Optional Block<br>Deploy OPTIONS are used to configure the workload deployment OPTIONS<br>See [Deploy Options](#service-deploy-options) below.
 
-<a id="service-num-replicas"></a>&#x2022; [`num_replicas`](#service-num-replicas) - Optional Number<br>Number of Replicas. Number of replicas of service to spawn per site
+<a id="service-num-replicas"></a>&#x2022; [`num_replicas`](#service-num-replicas) - Optional Number<br>Number of replicas of service to spawn per site
 
-<a id="service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#service-scale-to-zero) - Optional Block<br>Enable this option
+<a id="service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#service-scale-to-zero) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="service-volumes"></a>&#x2022; [`volumes`](#service-volumes) - Optional Block<br>Volumes. Volumes for the service<br>See [Volumes](#service-volumes) below.
 
@@ -473,19 +473,19 @@ A [`service`](#service) block supports the following:
 
 An [`advertise_options`](#service-advertise-options) block (within [`service`](#service)) supports the following:
 
-<a id="custom-206cd2"></a>&#x2022; [`advertise_custom`](#custom-206cd2) - Optional Block<br>Advertise on specific sites. Advertise this workload via loadbalancer on specific sites<br>See [Advertise Custom](#custom-206cd2) below.
+<a id="custom-206cd2"></a>&#x2022; [`advertise_custom`](#custom-206cd2) - Optional Block<br>Advertise this workload via loadbalancer on specific sites<br>See [Advertise Custom](#custom-206cd2) below.
 
-<a id="cluster-9d3c24"></a>&#x2022; [`advertise_in_cluster`](#cluster-9d3c24) - Optional Block<br>Advertise In Cluster. Advertise the workload locally in-cluster<br>See [Advertise In Cluster](#cluster-9d3c24) below.
+<a id="cluster-9d3c24"></a>&#x2022; [`advertise_in_cluster`](#cluster-9d3c24) - Optional Block<br>Advertise the workload locally in-cluster<br>See [Advertise In Cluster](#cluster-9d3c24) below.
 
-<a id="public-fac1e6"></a>&#x2022; [`advertise_on_public`](#public-fac1e6) - Optional Block<br>Advertise On Internet. Advertise this workload via loadbalancer on Internet with default VIP<br>See [Advertise On Public](#public-fac1e6) below.
+<a id="public-fac1e6"></a>&#x2022; [`advertise_on_public`](#public-fac1e6) - Optional Block<br>Advertise this workload via loadbalancer on Internet with default VIP<br>See [Advertise On Public](#public-fac1e6) below.
 
-<a id="advertise-e33e18"></a>&#x2022; [`do_not_advertise`](#advertise-e33e18) - Optional Block<br>Enable this option
+<a id="advertise-e33e18"></a>&#x2022; [`do_not_advertise`](#advertise-e33e18) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Service Advertise Options Advertise Custom
 
 An [`advertise_custom`](#custom-206cd2) block (within [`service.advertise_options`](#service-advertise-options)) supports the following:
 
-<a id="where-07a5a8"></a>&#x2022; [`advertise_where`](#where-07a5a8) - Optional Block<br>List of Sites to Advertise. Where should this load balancer be available<br>See [Advertise Where](#where-07a5a8) below.
+<a id="where-07a5a8"></a>&#x2022; [`advertise_where`](#where-07a5a8) - Optional Block<br>Where should this load balancer be available<br>See [Advertise Where](#where-07a5a8) below.
 
 <a id="ports-b755b5"></a>&#x2022; [`ports`](#ports-b755b5) - Optional Block<br>Ports. Ports to advertise<br>See [Ports](#ports-b755b5) below.
 
@@ -493,11 +493,11 @@ An [`advertise_custom`](#custom-206cd2) block (within [`service.advertise_option
 
 An [`advertise_where`](#where-07a5a8) block (within [`service.advertise_options.advertise_custom`](#custom-206cd2)) supports the following:
 
-<a id="site-511518"></a>&#x2022; [`site`](#site-511518) - Optional Block<br>Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised<br>See [Site](#site-511518) below.
+<a id="site-511518"></a>&#x2022; [`site`](#site-511518) - Optional Block<br>Defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised<br>See [Site](#site-511518) below.
 
-<a id="site-754a5a"></a>&#x2022; [`virtual_site`](#site-754a5a) - Optional Block<br>Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised<br>See [Virtual Site](#site-754a5a) below.
+<a id="site-754a5a"></a>&#x2022; [`virtual_site`](#site-754a5a) - Optional Block<br>Defines a reference to a customer site virtual site along with network type where a load balancer could be advertised<br>See [Virtual Site](#site-754a5a) below.
 
-<a id="service-1a83c0"></a>&#x2022; [`vk8s_service`](#service-1a83c0) - Optional Block<br>VK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network<br>See [Vk8s Service](#service-1a83c0) below.
+<a id="service-1a83c0"></a>&#x2022; [`vk8s_service`](#service-1a83c0) - Optional Block<br>Defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network<br>See [Vk8s Service](#service-1a83c0) below.
 
 #### Service Advertise Options Advertise Custom Advertise Where Site
 
@@ -1321,7 +1321,7 @@ A [`file`](#service-configuration-parameters-file) block (within [`service.confi
 
 <a id="data-d0d370"></a>&#x2022; [`data`](#data-d0d370) - Optional String<br>Data. File data
 
-<a id="mount-b0c9b7"></a>&#x2022; [`mount`](#mount-b0c9b7) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-b0c9b7) below.
+<a id="mount-b0c9b7"></a>&#x2022; [`mount`](#mount-b0c9b7) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-b0c9b7) below.
 
 <a id="name-a1546d"></a>&#x2022; [`name`](#name-a1546d) - Optional String<br>Name. Name of the file
 
@@ -1331,103 +1331,103 @@ A [`file`](#service-configuration-parameters-file) block (within [`service.confi
 
 A [`mount`](#mount-b0c9b7) block (within [`service.configuration.parameters.file`](#service-configuration-parameters-file)) supports the following:
 
-<a id="mode-ba89fd"></a>&#x2022; [`mode`](#mode-ba89fd) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="mode-ba89fd"></a>&#x2022; [`mode`](#mode-ba89fd) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="path-7998af"></a>&#x2022; [`mount_path`](#path-7998af) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="path-7998af"></a>&#x2022; [`mount_path`](#path-7998af) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="path-98e114"></a>&#x2022; [`sub_path`](#path-98e114) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="path-98e114"></a>&#x2022; [`sub_path`](#path-98e114) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Service Containers
 
 A [`containers`](#service-containers) block (within [`service`](#service)) supports the following:
 
-<a id="service-containers-args"></a>&#x2022; [`args`](#service-containers-args) - Optional List<br>Arguments. Arguments to the entrypoint. Overrides the docker image's CMD
+<a id="service-containers-args"></a>&#x2022; [`args`](#service-containers-args) - Optional List<br>Arguments to the entrypoint. Overrides the docker image's CMD
 
-<a id="service-containers-command"></a>&#x2022; [`command`](#service-containers-command) - Optional List<br>Command. Command to execute. Overrides the docker image's ENTRYPOINT
+<a id="service-containers-command"></a>&#x2022; [`command`](#service-containers-command) - Optional List<br>Command to execute. Overrides the docker image's ENTRYPOINT
 
-<a id="service-containers-custom-flavor"></a>&#x2022; [`custom_flavor`](#service-containers-custom-flavor) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#service-containers-custom-flavor) below.
+<a id="service-containers-custom-flavor"></a>&#x2022; [`custom_flavor`](#service-containers-custom-flavor) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#service-containers-custom-flavor) below.
 
-<a id="service-containers-default-flavor"></a>&#x2022; [`default_flavor`](#service-containers-default-flavor) - Optional Block<br>Enable this option
+<a id="service-containers-default-flavor"></a>&#x2022; [`default_flavor`](#service-containers-default-flavor) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="service-containers-flavor"></a>&#x2022; [`flavor`](#service-containers-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory
+<a id="service-containers-flavor"></a>&#x2022; [`flavor`](#service-containers-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have
 
-<a id="service-containers-image"></a>&#x2022; [`image`](#service-containers-image) - Optional Block<br>Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any<br>See [Image](#service-containers-image) below.
+<a id="service-containers-image"></a>&#x2022; [`image`](#service-containers-image) - Optional Block<br>ImageType configures the image to use, how to pull the image, and the associated secrets to use if any<br>See [Image](#service-containers-image) below.
 
-<a id="service-containers-init-container"></a>&#x2022; [`init_container`](#service-containers-init-container) - Optional Bool<br>Initialization Container. Specialized container that runs before application container and runs to completion
+<a id="service-containers-init-container"></a>&#x2022; [`init_container`](#service-containers-init-container) - Optional Bool<br>Specialized container that runs before application container and runs to completion
 
-<a id="service-containers-liveness-check"></a>&#x2022; [`liveness_check`](#service-containers-liveness-check) - Optional Block<br>Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Liveness Check](#service-containers-liveness-check) below.
+<a id="service-containers-liveness-check"></a>&#x2022; [`liveness_check`](#service-containers-liveness-check) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Liveness Check](#service-containers-liveness-check) below.
 
 <a id="service-containers-name"></a>&#x2022; [`name`](#service-containers-name) - Optional String<br>Name. Name of the container
 
-<a id="service-containers-readiness-check"></a>&#x2022; [`readiness_check`](#service-containers-readiness-check) - Optional Block<br>Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Readiness Check](#service-containers-readiness-check) below.
+<a id="service-containers-readiness-check"></a>&#x2022; [`readiness_check`](#service-containers-readiness-check) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Readiness Check](#service-containers-readiness-check) below.
 
 #### Service Containers Custom Flavor
 
 A [`custom_flavor`](#service-containers-custom-flavor) block (within [`service.containers`](#service-containers)) supports the following:
 
-<a id="service-containers-custom-flavor-name"></a>&#x2022; [`name`](#service-containers-custom-flavor-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="service-containers-custom-flavor-name"></a>&#x2022; [`name`](#service-containers-custom-flavor-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-d5d342"></a>&#x2022; [`namespace`](#namespace-d5d342) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-d5d342"></a>&#x2022; [`namespace`](#namespace-d5d342) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="service-containers-custom-flavor-tenant"></a>&#x2022; [`tenant`](#service-containers-custom-flavor-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="service-containers-custom-flavor-tenant"></a>&#x2022; [`tenant`](#service-containers-custom-flavor-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Service Containers Image
 
 An [`image`](#service-containers-image) block (within [`service.containers`](#service-containers)) supports the following:
 
-<a id="registry-ad1f41"></a>&#x2022; [`container_registry`](#registry-ad1f41) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#registry-ad1f41) below.
+<a id="registry-ad1f41"></a>&#x2022; [`container_registry`](#registry-ad1f41) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#registry-ad1f41) below.
 
-<a id="service-containers-image-name"></a>&#x2022; [`name`](#service-containers-image-name) - Optional String<br>Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed
+<a id="service-containers-image-name"></a>&#x2022; [`name`](#service-containers-image-name) - Optional String<br>Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed
 
-<a id="service-containers-image-public"></a>&#x2022; [`public`](#service-containers-image-public) - Optional Block<br>Enable this option
+<a id="service-containers-image-public"></a>&#x2022; [`public`](#service-containers-image-public) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="service-containers-image-pull-policy"></a>&#x2022; [`pull_policy`](#service-containers-image-pull-policy) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image
+<a id="service-containers-image-pull-policy"></a>&#x2022; [`pull_policy`](#service-containers-image-pull-policy) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only
 
 #### Service Containers Image Container Registry
 
 A [`container_registry`](#registry-ad1f41) block (within [`service.containers.image`](#service-containers-image)) supports the following:
 
-<a id="name-b1a7e7"></a>&#x2022; [`name`](#name-b1a7e7) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-b1a7e7"></a>&#x2022; [`name`](#name-b1a7e7) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-993dc9"></a>&#x2022; [`namespace`](#namespace-993dc9) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-993dc9"></a>&#x2022; [`namespace`](#namespace-993dc9) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-882aa5"></a>&#x2022; [`tenant`](#tenant-882aa5) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-882aa5"></a>&#x2022; [`tenant`](#tenant-882aa5) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Service Containers Liveness Check
 
 A [`liveness_check`](#service-containers-liveness-check) block (within [`service.containers`](#service-containers)) supports the following:
 
-<a id="check-f4a0a5"></a>&#x2022; [`exec_health_check`](#check-f4a0a5) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-f4a0a5) below.
+<a id="check-f4a0a5"></a>&#x2022; [`exec_health_check`](#check-f4a0a5) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-f4a0a5) below.
 
-<a id="threshold-e58da7"></a>&#x2022; [`healthy_threshold`](#threshold-e58da7) - Optional Number<br>Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy
+<a id="threshold-e58da7"></a>&#x2022; [`healthy_threshold`](#threshold-e58da7) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
 
-<a id="check-d4d023"></a>&#x2022; [`http_health_check`](#check-d4d023) - Optional Block<br>HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-d4d023) below.
+<a id="check-d4d023"></a>&#x2022; [`http_health_check`](#check-d4d023) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-d4d023) below.
 
-<a id="delay-5a594c"></a>&#x2022; [`initial_delay`](#delay-5a594c) - Optional Number<br>Initial Delay. Number of seconds after the container has started before health checks are initiated
+<a id="delay-5a594c"></a>&#x2022; [`initial_delay`](#delay-5a594c) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
 
-<a id="interval-84cdc4"></a>&#x2022; [`interval`](#interval-84cdc4) - Optional Number<br>Interval. Time interval in seconds between two health check requests
+<a id="interval-84cdc4"></a>&#x2022; [`interval`](#interval-84cdc4) - Optional Number<br>Time interval in seconds between two health check requests
 
-<a id="check-b2633e"></a>&#x2022; [`tcp_health_check`](#check-b2633e) - Optional Block<br>TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-b2633e) below.
+<a id="check-b2633e"></a>&#x2022; [`tcp_health_check`](#check-b2633e) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-b2633e) below.
 
-<a id="timeout-cea9e6"></a>&#x2022; [`timeout`](#timeout-cea9e6) - Optional Number<br>Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+<a id="timeout-cea9e6"></a>&#x2022; [`timeout`](#timeout-cea9e6) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
 
-<a id="threshold-b85e9e"></a>&#x2022; [`unhealthy_threshold`](#threshold-b85e9e) - Optional Number<br>Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+<a id="threshold-b85e9e"></a>&#x2022; [`unhealthy_threshold`](#threshold-b85e9e) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
 
 #### Service Containers Liveness Check Exec Health Check
 
 An [`exec_health_check`](#check-f4a0a5) block (within [`service.containers.liveness_check`](#service-containers-liveness-check)) supports the following:
 
-<a id="command-2a2705"></a>&#x2022; [`command`](#command-2a2705) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
+<a id="command-2a2705"></a>&#x2022; [`command`](#command-2a2705) - Optional List<br>Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to
 
 #### Service Containers Liveness Check HTTP Health Check
 
 A [`http_health_check`](#check-d4d023) block (within [`service.containers.liveness_check`](#service-containers-liveness-check)) supports the following:
 
-<a id="headers-10e4cf"></a>&#x2022; [`headers`](#headers-10e4cf) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
+<a id="headers-10e4cf"></a>&#x2022; [`headers`](#headers-10e4cf) - Optional Block<br>Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
 
-<a id="header-d00d0a"></a>&#x2022; [`host_header`](#header-d00d0a) - Optional String<br>Host Header. The value of the host header in the HTTP health check request
+<a id="header-d00d0a"></a>&#x2022; [`host_header`](#header-d00d0a) - Optional String<br>The value of the host header in the HTTP health check request
 
-<a id="path-ab95e6"></a>&#x2022; [`path`](#path-ab95e6) - Optional String<br>Path. Path to access on the HTTP server
+<a id="path-ab95e6"></a>&#x2022; [`path`](#path-ab95e6) - Optional String<br>Path to access on the HTTP server
 
 <a id="port-df543d"></a>&#x2022; [`port`](#port-df543d) - Optional Block<br>Port. Port<br>See [Port](#port-df543d) below.
 
@@ -1449,37 +1449,37 @@ A [`tcp_health_check`](#check-b2633e) block (within [`service.containers.livenes
 
 A [`readiness_check`](#service-containers-readiness-check) block (within [`service.containers`](#service-containers)) supports the following:
 
-<a id="check-b467be"></a>&#x2022; [`exec_health_check`](#check-b467be) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-b467be) below.
+<a id="check-b467be"></a>&#x2022; [`exec_health_check`](#check-b467be) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-b467be) below.
 
-<a id="threshold-1015f0"></a>&#x2022; [`healthy_threshold`](#threshold-1015f0) - Optional Number<br>Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy
+<a id="threshold-1015f0"></a>&#x2022; [`healthy_threshold`](#threshold-1015f0) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
 
-<a id="check-2e8715"></a>&#x2022; [`http_health_check`](#check-2e8715) - Optional Block<br>HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-2e8715) below.
+<a id="check-2e8715"></a>&#x2022; [`http_health_check`](#check-2e8715) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-2e8715) below.
 
-<a id="delay-6b92df"></a>&#x2022; [`initial_delay`](#delay-6b92df) - Optional Number<br>Initial Delay. Number of seconds after the container has started before health checks are initiated
+<a id="delay-6b92df"></a>&#x2022; [`initial_delay`](#delay-6b92df) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
 
-<a id="interval-ddc93b"></a>&#x2022; [`interval`](#interval-ddc93b) - Optional Number<br>Interval. Time interval in seconds between two health check requests
+<a id="interval-ddc93b"></a>&#x2022; [`interval`](#interval-ddc93b) - Optional Number<br>Time interval in seconds between two health check requests
 
-<a id="check-6b7ea7"></a>&#x2022; [`tcp_health_check`](#check-6b7ea7) - Optional Block<br>TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-6b7ea7) below.
+<a id="check-6b7ea7"></a>&#x2022; [`tcp_health_check`](#check-6b7ea7) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-6b7ea7) below.
 
-<a id="timeout-3e7e3a"></a>&#x2022; [`timeout`](#timeout-3e7e3a) - Optional Number<br>Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+<a id="timeout-3e7e3a"></a>&#x2022; [`timeout`](#timeout-3e7e3a) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
 
-<a id="threshold-01c2b9"></a>&#x2022; [`unhealthy_threshold`](#threshold-01c2b9) - Optional Number<br>Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+<a id="threshold-01c2b9"></a>&#x2022; [`unhealthy_threshold`](#threshold-01c2b9) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
 
 #### Service Containers Readiness Check Exec Health Check
 
 An [`exec_health_check`](#check-b467be) block (within [`service.containers.readiness_check`](#service-containers-readiness-check)) supports the following:
 
-<a id="command-ad2ba2"></a>&#x2022; [`command`](#command-ad2ba2) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
+<a id="command-ad2ba2"></a>&#x2022; [`command`](#command-ad2ba2) - Optional List<br>Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to
 
 #### Service Containers Readiness Check HTTP Health Check
 
 A [`http_health_check`](#check-2e8715) block (within [`service.containers.readiness_check`](#service-containers-readiness-check)) supports the following:
 
-<a id="headers-eb2094"></a>&#x2022; [`headers`](#headers-eb2094) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
+<a id="headers-eb2094"></a>&#x2022; [`headers`](#headers-eb2094) - Optional Block<br>Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
 
-<a id="header-62e026"></a>&#x2022; [`host_header`](#header-62e026) - Optional String<br>Host Header. The value of the host header in the HTTP health check request
+<a id="header-62e026"></a>&#x2022; [`host_header`](#header-62e026) - Optional String<br>The value of the host header in the HTTP health check request
 
-<a id="path-f132ec"></a>&#x2022; [`path`](#path-f132ec) - Optional String<br>Path. Path to access on the HTTP server
+<a id="path-f132ec"></a>&#x2022; [`path`](#path-f132ec) - Optional String<br>Path to access on the HTTP server
 
 <a id="port-3d625e"></a>&#x2022; [`port`](#port-3d625e) - Optional Block<br>Port. Port<br>See [Port](#port-3d625e) below.
 
@@ -1501,39 +1501,39 @@ A [`tcp_health_check`](#check-6b7ea7) block (within [`service.containers.readine
 
 A [`deploy_options`](#service-deploy-options) block (within [`service`](#service)) supports the following:
 
-<a id="service-deploy-options-all-res"></a>&#x2022; [`all_res`](#service-deploy-options-all-res) - Optional Block<br>Enable this option
+<a id="service-deploy-options-all-res"></a>&#x2022; [`all_res`](#service-deploy-options-all-res) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="sites-736a02"></a>&#x2022; [`default_virtual_sites`](#sites-736a02) - Optional Block<br>Enable this option
+<a id="sites-736a02"></a>&#x2022; [`default_virtual_sites`](#sites-736a02) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="service-deploy-options-deploy-ce-sites"></a>&#x2022; [`deploy_ce_sites`](#service-deploy-options-deploy-ce-sites) - Optional Block<br>Customer Sites. This defines a way to deploy a workload on specific Customer sites<br>See [Deploy CE Sites](#service-deploy-options-deploy-ce-sites) below.
+<a id="service-deploy-options-deploy-ce-sites"></a>&#x2022; [`deploy_ce_sites`](#service-deploy-options-deploy-ce-sites) - Optional Block<br>Defines a way to deploy a workload on specific Customer sites<br>See [Deploy CE Sites](#service-deploy-options-deploy-ce-sites) below.
 
-<a id="sites-d63f27"></a>&#x2022; [`deploy_ce_virtual_sites`](#sites-d63f27) - Optional Block<br>Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites<br>See [Deploy CE Virtual Sites](#sites-d63f27) below.
+<a id="sites-d63f27"></a>&#x2022; [`deploy_ce_virtual_sites`](#sites-d63f27) - Optional Block<br>Defines a way to deploy a workload on specific Customer virtual sites<br>See [Deploy CE Virtual Sites](#sites-d63f27) below.
 
-<a id="service-deploy-options-deploy-re-sites"></a>&#x2022; [`deploy_re_sites`](#service-deploy-options-deploy-re-sites) - Optional Block<br>Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites<br>See [Deploy RE Sites](#service-deploy-options-deploy-re-sites) below.
+<a id="service-deploy-options-deploy-re-sites"></a>&#x2022; [`deploy_re_sites`](#service-deploy-options-deploy-re-sites) - Optional Block<br>Defines a way to deploy a workload on specific Regional Edge sites<br>See [Deploy RE Sites](#service-deploy-options-deploy-re-sites) below.
 
-<a id="sites-e0dada"></a>&#x2022; [`deploy_re_virtual_sites`](#sites-e0dada) - Optional Block<br>Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites<br>See [Deploy RE Virtual Sites](#sites-e0dada) below.
+<a id="sites-e0dada"></a>&#x2022; [`deploy_re_virtual_sites`](#sites-e0dada) - Optional Block<br>Defines a way to deploy a workload on specific Regional Edge virtual sites<br>See [Deploy RE Virtual Sites](#sites-e0dada) below.
 
 #### Service Deploy Options Deploy CE Sites
 
 A [`deploy_ce_sites`](#service-deploy-options-deploy-ce-sites) block (within [`service.deploy_options`](#service-deploy-options)) supports the following:
 
-<a id="site-8d4fa5"></a>&#x2022; [`site`](#site-8d4fa5) - Optional Block<br>List of Customer Sites to Deploy. Which customer sites should this workload be deployed<br>See [Site](#site-8d4fa5) below.
+<a id="site-8d4fa5"></a>&#x2022; [`site`](#site-8d4fa5) - Optional Block<br>Which customer sites should this workload be deployed<br>See [Site](#site-8d4fa5) below.
 
 #### Service Deploy Options Deploy CE Sites Site
 
 A [`site`](#site-8d4fa5) block (within [`service.deploy_options.deploy_ce_sites`](#service-deploy-options-deploy-ce-sites)) supports the following:
 
-<a id="name-48099d"></a>&#x2022; [`name`](#name-48099d) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-48099d"></a>&#x2022; [`name`](#name-48099d) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-23fa32"></a>&#x2022; [`namespace`](#namespace-23fa32) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-23fa32"></a>&#x2022; [`namespace`](#namespace-23fa32) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-75f6c4"></a>&#x2022; [`tenant`](#tenant-75f6c4) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-75f6c4"></a>&#x2022; [`tenant`](#tenant-75f6c4) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Service Deploy Options Deploy CE Virtual Sites
 
 A [`deploy_ce_virtual_sites`](#sites-d63f27) block (within [`service.deploy_options`](#service-deploy-options)) supports the following:
 
-<a id="site-044146"></a>&#x2022; [`virtual_site`](#site-044146) - Optional Block<br>List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed<br>See [Virtual Site](#site-044146) below.
+<a id="site-044146"></a>&#x2022; [`virtual_site`](#site-044146) - Optional Block<br>Which customer virtual sites should this workload be deployed<br>See [Virtual Site](#site-044146) below.
 
 #### Service Deploy Options Deploy CE Virtual Sites Virtual Site
 
@@ -1543,23 +1543,23 @@ A [`deploy_ce_virtual_sites`](#sites-d63f27) block (within [`service.deploy_opti
 
 A [`deploy_re_sites`](#service-deploy-options-deploy-re-sites) block (within [`service.deploy_options`](#service-deploy-options)) supports the following:
 
-<a id="site-e7bf20"></a>&#x2022; [`site`](#site-e7bf20) - Optional Block<br>List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed<br>See [Site](#site-e7bf20) below.
+<a id="site-e7bf20"></a>&#x2022; [`site`](#site-e7bf20) - Optional Block<br>Which regional edge sites should this workload be deployed<br>See [Site](#site-e7bf20) below.
 
 #### Service Deploy Options Deploy RE Sites Site
 
 A [`site`](#site-e7bf20) block (within [`service.deploy_options.deploy_re_sites`](#service-deploy-options-deploy-re-sites)) supports the following:
 
-<a id="name-1ebeb9"></a>&#x2022; [`name`](#name-1ebeb9) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-1ebeb9"></a>&#x2022; [`name`](#name-1ebeb9) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-b4b743"></a>&#x2022; [`namespace`](#namespace-b4b743) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-b4b743"></a>&#x2022; [`namespace`](#namespace-b4b743) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-68f3c1"></a>&#x2022; [`tenant`](#tenant-68f3c1) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-68f3c1"></a>&#x2022; [`tenant`](#tenant-68f3c1) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Service Deploy Options Deploy RE Virtual Sites
 
 A [`deploy_re_virtual_sites`](#sites-e0dada) block (within [`service.deploy_options`](#service-deploy-options)) supports the following:
 
-<a id="site-5bb43f"></a>&#x2022; [`virtual_site`](#site-5bb43f) - Optional Block<br>List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed<br>See [Virtual Site](#site-5bb43f) below.
+<a id="site-5bb43f"></a>&#x2022; [`virtual_site`](#site-5bb43f) - Optional Block<br>Which regional edge virtual sites should this workload be deployed<br>See [Virtual Site](#site-5bb43f) below.
 
 #### Service Deploy Options Deploy RE Virtual Sites Virtual Site
 
@@ -1569,19 +1569,19 @@ A [`deploy_re_virtual_sites`](#sites-e0dada) block (within [`service.deploy_opti
 
 A [`volumes`](#service-volumes) block (within [`service`](#service)) supports the following:
 
-<a id="service-volumes-empty-dir"></a>&#x2022; [`empty_dir`](#service-volumes-empty-dir) - Optional Block<br>Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload<br>See [Empty Dir](#service-volumes-empty-dir) below.
+<a id="service-volumes-empty-dir"></a>&#x2022; [`empty_dir`](#service-volumes-empty-dir) - Optional Block<br>Volume containing a temporary directory whose lifetime is the same as a replica of a workload<br>See [Empty Dir](#service-volumes-empty-dir) below.
 
-<a id="service-volumes-host-path"></a>&#x2022; [`host_path`](#service-volumes-host-path) - Optional Block<br>HostPath Volume. Volume containing a host mapped path into the workload<br>See [Host Path](#service-volumes-host-path) below.
+<a id="service-volumes-host-path"></a>&#x2022; [`host_path`](#service-volumes-host-path) - Optional Block<br>Volume containing a host mapped path into the workload<br>See [Host Path](#service-volumes-host-path) below.
 
 <a id="service-volumes-name"></a>&#x2022; [`name`](#service-volumes-name) - Optional String<br>Name. Name of the volume
 
-<a id="service-volumes-persistent-volume"></a>&#x2022; [`persistent_volume`](#service-volumes-persistent-volume) - Optional Block<br>Persistent Storage Volume. Volume containing the Persistent Storage for the workload<br>See [Persistent Volume](#service-volumes-persistent-volume) below.
+<a id="service-volumes-persistent-volume"></a>&#x2022; [`persistent_volume`](#service-volumes-persistent-volume) - Optional Block<br>Volume containing the Persistent Storage for the workload<br>See [Persistent Volume](#service-volumes-persistent-volume) below.
 
 #### Service Volumes Empty Dir
 
 An [`empty_dir`](#service-volumes-empty-dir) block (within [`service.volumes`](#service-volumes)) supports the following:
 
-<a id="service-volumes-empty-dir-mount"></a>&#x2022; [`mount`](#service-volumes-empty-dir-mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#service-volumes-empty-dir-mount) below.
+<a id="service-volumes-empty-dir-mount"></a>&#x2022; [`mount`](#service-volumes-empty-dir-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#service-volumes-empty-dir-mount) below.
 
 <a id="service-volumes-empty-dir-size-limit"></a>&#x2022; [`size_limit`](#service-volumes-empty-dir-size-limit) - Optional Number<br>Size Limit (in GiB)
 
@@ -1589,75 +1589,75 @@ An [`empty_dir`](#service-volumes-empty-dir) block (within [`service.volumes`](#
 
 A [`mount`](#service-volumes-empty-dir-mount) block (within [`service.volumes.empty_dir`](#service-volumes-empty-dir)) supports the following:
 
-<a id="service-volumes-empty-dir-mount-mode"></a>&#x2022; [`mode`](#service-volumes-empty-dir-mount-mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="service-volumes-empty-dir-mount-mode"></a>&#x2022; [`mode`](#service-volumes-empty-dir-mount-mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="path-db6f81"></a>&#x2022; [`mount_path`](#path-db6f81) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="path-db6f81"></a>&#x2022; [`mount_path`](#path-db6f81) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="path-3009de"></a>&#x2022; [`sub_path`](#path-3009de) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="path-3009de"></a>&#x2022; [`sub_path`](#path-3009de) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Service Volumes Host Path
 
 A [`host_path`](#service-volumes-host-path) block (within [`service.volumes`](#service-volumes)) supports the following:
 
-<a id="service-volumes-host-path-mount"></a>&#x2022; [`mount`](#service-volumes-host-path-mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#service-volumes-host-path-mount) below.
+<a id="service-volumes-host-path-mount"></a>&#x2022; [`mount`](#service-volumes-host-path-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#service-volumes-host-path-mount) below.
 
-<a id="service-volumes-host-path-path"></a>&#x2022; [`path`](#service-volumes-host-path-path) - Optional String<br>Path. Path of the directory on the host
+<a id="service-volumes-host-path-path"></a>&#x2022; [`path`](#service-volumes-host-path-path) - Optional String<br>Path of the directory on the host
 
 #### Service Volumes Host Path Mount
 
 A [`mount`](#service-volumes-host-path-mount) block (within [`service.volumes.host_path`](#service-volumes-host-path)) supports the following:
 
-<a id="service-volumes-host-path-mount-mode"></a>&#x2022; [`mode`](#service-volumes-host-path-mount-mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="service-volumes-host-path-mount-mode"></a>&#x2022; [`mode`](#service-volumes-host-path-mount-mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="path-0b89b4"></a>&#x2022; [`mount_path`](#path-0b89b4) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="path-0b89b4"></a>&#x2022; [`mount_path`](#path-0b89b4) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="path-7cee3d"></a>&#x2022; [`sub_path`](#path-7cee3d) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="path-7cee3d"></a>&#x2022; [`sub_path`](#path-7cee3d) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Service Volumes Persistent Volume
 
 A [`persistent_volume`](#service-volumes-persistent-volume) block (within [`service.volumes`](#service-volumes)) supports the following:
 
-<a id="service-volumes-persistent-volume-mount"></a>&#x2022; [`mount`](#service-volumes-persistent-volume-mount) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#service-volumes-persistent-volume-mount) below.
+<a id="service-volumes-persistent-volume-mount"></a>&#x2022; [`mount`](#service-volumes-persistent-volume-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#service-volumes-persistent-volume-mount) below.
 
-<a id="storage-aa2194"></a>&#x2022; [`storage`](#storage-aa2194) - Optional Block<br>Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC)<br>See [Storage](#storage-aa2194) below.
+<a id="storage-aa2194"></a>&#x2022; [`storage`](#storage-aa2194) - Optional Block<br>Persistent storage configuration is used to configure Persistent Volume Claim (PVC)<br>See [Storage](#storage-aa2194) below.
 
 #### Service Volumes Persistent Volume Mount
 
 A [`mount`](#service-volumes-persistent-volume-mount) block (within [`service.volumes.persistent_volume`](#service-volumes-persistent-volume)) supports the following:
 
-<a id="mode-134e61"></a>&#x2022; [`mode`](#mode-134e61) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="mode-134e61"></a>&#x2022; [`mode`](#mode-134e61) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="path-7af794"></a>&#x2022; [`mount_path`](#path-7af794) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="path-7af794"></a>&#x2022; [`mount_path`](#path-7af794) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="path-18ad39"></a>&#x2022; [`sub_path`](#path-18ad39) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="path-18ad39"></a>&#x2022; [`sub_path`](#path-18ad39) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Service Volumes Persistent Volume Storage
 
 A [`storage`](#storage-aa2194) block (within [`service.volumes.persistent_volume`](#service-volumes-persistent-volume)) supports the following:
 
-<a id="mode-1d091d"></a>&#x2022; [`access_mode`](#mode-1d091d) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts
+<a id="mode-1d091d"></a>&#x2022; [`access_mode`](#mode-1d091d) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used
 
-<a id="name-4c16c5"></a>&#x2022; [`class_name`](#name-4c16c5) - Optional String<br>Class Name. Use the specified class name
+<a id="name-4c16c5"></a>&#x2022; [`class_name`](#name-4c16c5) - Optional String<br>Use the specified class name
 
-<a id="default-36c85c"></a>&#x2022; [`default`](#default-36c85c) - Optional Block<br>Enable this option
+<a id="default-36c85c"></a>&#x2022; [`default`](#default-36c85c) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="size-fea8d4"></a>&#x2022; [`storage_size`](#size-fea8d4) - Optional Number<br>Size (in GiB). Size in GiB of the persistent storage
+<a id="size-fea8d4"></a>&#x2022; [`storage_size`](#size-fea8d4) - Optional Number<br>Size in GiB of the persistent storage
 
 #### Simple Service
 
 A [`simple_service`](#simple-service) block supports the following:
 
-<a id="simple-service-configuration"></a>&#x2022; [`configuration`](#simple-service-configuration) - Optional Block<br>Configuration Parameters. Configuration parameters of the workload<br>See [Configuration](#simple-service-configuration) below.
+<a id="simple-service-configuration"></a>&#x2022; [`configuration`](#simple-service-configuration) - Optional Block<br>Configuration parameters of the workload<br>See [Configuration](#simple-service-configuration) below.
 
-<a id="simple-service-container"></a>&#x2022; [`container`](#simple-service-container) - Optional Block<br>Container Configuration. ContainerType configures the container information<br>See [Container](#simple-service-container) below.
+<a id="simple-service-container"></a>&#x2022; [`container`](#simple-service-container) - Optional Block<br>ContainerType configures the container information<br>See [Container](#simple-service-container) below.
 
-<a id="simple-service-disabled"></a>&#x2022; [`disabled`](#simple-service-disabled) - Optional Block<br>Enable this option
+<a id="simple-service-disabled"></a>&#x2022; [`disabled`](#simple-service-disabled) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="simple-service-do-not-advertise"></a>&#x2022; [`do_not_advertise`](#simple-service-do-not-advertise) - Optional Block<br>Enable this option
+<a id="simple-service-do-not-advertise"></a>&#x2022; [`do_not_advertise`](#simple-service-do-not-advertise) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="simple-service-enabled"></a>&#x2022; [`enabled`](#simple-service-enabled) - Optional Block<br>Persistent Storage Volume. Persistent storage volume configuration for the workload<br>See [Enabled](#simple-service-enabled) below.
+<a id="simple-service-enabled"></a>&#x2022; [`enabled`](#simple-service-enabled) - Optional Block<br>Persistent storage volume configuration for the workload<br>See [Enabled](#simple-service-enabled) below.
 
-<a id="simple-service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#simple-service-scale-to-zero) - Optional Bool<br>Scale Down to Zero. Scale down replicas of the service to zero
+<a id="simple-service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#simple-service-scale-to-zero) - Optional Bool<br>Scale down replicas of the service to zero
 
 <a id="simple-service-simple-advertise"></a>&#x2022; [`simple_advertise`](#simple-service-simple-advertise) - Optional Block<br>Advertise OPTIONS For Simple Service. Advertise OPTIONS for Simple Service<br>See [Simple Advertise](#simple-service-simple-advertise) below.
 
@@ -1689,7 +1689,7 @@ A [`file`](#file-b5c200) block (within [`simple_service.configuration.parameters
 
 <a id="data-5368fd"></a>&#x2022; [`data`](#data-5368fd) - Optional String<br>Data. File data
 
-<a id="mount-decdef"></a>&#x2022; [`mount`](#mount-decdef) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-decdef) below.
+<a id="mount-decdef"></a>&#x2022; [`mount`](#mount-decdef) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-decdef) below.
 
 <a id="name-251776"></a>&#x2022; [`name`](#name-251776) - Optional String<br>Name. Name of the file
 
@@ -1699,87 +1699,87 @@ A [`file`](#file-b5c200) block (within [`simple_service.configuration.parameters
 
 A [`mount`](#mount-decdef) block (within [`simple_service.configuration.parameters.file`](#file-b5c200)) supports the following:
 
-<a id="mode-c071a8"></a>&#x2022; [`mode`](#mode-c071a8) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="mode-c071a8"></a>&#x2022; [`mode`](#mode-c071a8) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="path-8115be"></a>&#x2022; [`mount_path`](#path-8115be) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="path-8115be"></a>&#x2022; [`mount_path`](#path-8115be) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="path-b15eb2"></a>&#x2022; [`sub_path`](#path-b15eb2) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="path-b15eb2"></a>&#x2022; [`sub_path`](#path-b15eb2) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Simple Service Container
 
 A [`container`](#simple-service-container) block (within [`simple_service`](#simple-service)) supports the following:
 
-<a id="simple-service-container-args"></a>&#x2022; [`args`](#simple-service-container-args) - Optional List<br>Arguments. Arguments to the entrypoint. Overrides the docker image's CMD
+<a id="simple-service-container-args"></a>&#x2022; [`args`](#simple-service-container-args) - Optional List<br>Arguments to the entrypoint. Overrides the docker image's CMD
 
-<a id="simple-service-container-command"></a>&#x2022; [`command`](#simple-service-container-command) - Optional List<br>Command. Command to execute. Overrides the docker image's ENTRYPOINT
+<a id="simple-service-container-command"></a>&#x2022; [`command`](#simple-service-container-command) - Optional List<br>Command to execute. Overrides the docker image's ENTRYPOINT
 
-<a id="simple-service-container-custom-flavor"></a>&#x2022; [`custom_flavor`](#simple-service-container-custom-flavor) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#simple-service-container-custom-flavor) below.
+<a id="simple-service-container-custom-flavor"></a>&#x2022; [`custom_flavor`](#simple-service-container-custom-flavor) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#simple-service-container-custom-flavor) below.
 
-<a id="simple-service-container-default-flavor"></a>&#x2022; [`default_flavor`](#simple-service-container-default-flavor) - Optional Block<br>Enable this option
+<a id="simple-service-container-default-flavor"></a>&#x2022; [`default_flavor`](#simple-service-container-default-flavor) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="simple-service-container-flavor"></a>&#x2022; [`flavor`](#simple-service-container-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory
+<a id="simple-service-container-flavor"></a>&#x2022; [`flavor`](#simple-service-container-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have
 
-<a id="simple-service-container-image"></a>&#x2022; [`image`](#simple-service-container-image) - Optional Block<br>Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any<br>See [Image](#simple-service-container-image) below.
+<a id="simple-service-container-image"></a>&#x2022; [`image`](#simple-service-container-image) - Optional Block<br>ImageType configures the image to use, how to pull the image, and the associated secrets to use if any<br>See [Image](#simple-service-container-image) below.
 
-<a id="simple-service-container-init-container"></a>&#x2022; [`init_container`](#simple-service-container-init-container) - Optional Bool<br>Initialization Container. Specialized container that runs before application container and runs to completion
+<a id="simple-service-container-init-container"></a>&#x2022; [`init_container`](#simple-service-container-init-container) - Optional Bool<br>Specialized container that runs before application container and runs to completion
 
-<a id="simple-service-container-liveness-check"></a>&#x2022; [`liveness_check`](#simple-service-container-liveness-check) - Optional Block<br>Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Liveness Check](#simple-service-container-liveness-check) below.
+<a id="simple-service-container-liveness-check"></a>&#x2022; [`liveness_check`](#simple-service-container-liveness-check) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Liveness Check](#simple-service-container-liveness-check) below.
 
 <a id="simple-service-container-name"></a>&#x2022; [`name`](#simple-service-container-name) - Optional String<br>Name. Name of the container
 
-<a id="check-9028f0"></a>&#x2022; [`readiness_check`](#check-9028f0) - Optional Block<br>Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Readiness Check](#check-9028f0) below.
+<a id="check-9028f0"></a>&#x2022; [`readiness_check`](#check-9028f0) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Readiness Check](#check-9028f0) below.
 
 #### Simple Service Container Custom Flavor
 
 A [`custom_flavor`](#simple-service-container-custom-flavor) block (within [`simple_service.container`](#simple-service-container)) supports the following:
 
-<a id="name-256e2d"></a>&#x2022; [`name`](#name-256e2d) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-256e2d"></a>&#x2022; [`name`](#name-256e2d) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-3dbb57"></a>&#x2022; [`namespace`](#namespace-3dbb57) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-3dbb57"></a>&#x2022; [`namespace`](#namespace-3dbb57) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-bf6176"></a>&#x2022; [`tenant`](#tenant-bf6176) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-bf6176"></a>&#x2022; [`tenant`](#tenant-bf6176) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Simple Service Container Image
 
 An [`image`](#simple-service-container-image) block (within [`simple_service.container`](#simple-service-container)) supports the following:
 
-<a id="registry-f7f6d1"></a>&#x2022; [`container_registry`](#registry-f7f6d1) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#registry-f7f6d1) below.
+<a id="registry-f7f6d1"></a>&#x2022; [`container_registry`](#registry-f7f6d1) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#registry-f7f6d1) below.
 
-<a id="simple-service-container-image-name"></a>&#x2022; [`name`](#simple-service-container-image-name) - Optional String<br>Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed
+<a id="simple-service-container-image-name"></a>&#x2022; [`name`](#simple-service-container-image-name) - Optional String<br>Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed
 
-<a id="simple-service-container-image-public"></a>&#x2022; [`public`](#simple-service-container-image-public) - Optional Block<br>Enable this option
+<a id="simple-service-container-image-public"></a>&#x2022; [`public`](#simple-service-container-image-public) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="policy-b2dd3c"></a>&#x2022; [`pull_policy`](#policy-b2dd3c) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image
+<a id="policy-b2dd3c"></a>&#x2022; [`pull_policy`](#policy-b2dd3c) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only
 
 #### Simple Service Container Image Container Registry
 
 A [`container_registry`](#registry-f7f6d1) block (within [`simple_service.container.image`](#simple-service-container-image)) supports the following:
 
-<a id="name-d862eb"></a>&#x2022; [`name`](#name-d862eb) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-d862eb"></a>&#x2022; [`name`](#name-d862eb) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-3251f2"></a>&#x2022; [`namespace`](#namespace-3251f2) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-3251f2"></a>&#x2022; [`namespace`](#namespace-3251f2) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-86a541"></a>&#x2022; [`tenant`](#tenant-86a541) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-86a541"></a>&#x2022; [`tenant`](#tenant-86a541) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Simple Service Container Liveness Check
 
 A [`liveness_check`](#simple-service-container-liveness-check) block (within [`simple_service.container`](#simple-service-container)) supports the following:
 
-<a id="check-16db8f"></a>&#x2022; [`exec_health_check`](#check-16db8f) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-16db8f) below.
+<a id="check-16db8f"></a>&#x2022; [`exec_health_check`](#check-16db8f) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-16db8f) below.
 
-<a id="threshold-b6ea90"></a>&#x2022; [`healthy_threshold`](#threshold-b6ea90) - Optional Number<br>Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy
+<a id="threshold-b6ea90"></a>&#x2022; [`healthy_threshold`](#threshold-b6ea90) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
 
-<a id="check-25986b"></a>&#x2022; [`http_health_check`](#check-25986b) - Optional Block<br>HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-25986b) below.
+<a id="check-25986b"></a>&#x2022; [`http_health_check`](#check-25986b) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-25986b) below.
 
-<a id="delay-758ad8"></a>&#x2022; [`initial_delay`](#delay-758ad8) - Optional Number<br>Initial Delay. Number of seconds after the container has started before health checks are initiated
+<a id="delay-758ad8"></a>&#x2022; [`initial_delay`](#delay-758ad8) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
 
-<a id="interval-a75912"></a>&#x2022; [`interval`](#interval-a75912) - Optional Number<br>Interval. Time interval in seconds between two health check requests
+<a id="interval-a75912"></a>&#x2022; [`interval`](#interval-a75912) - Optional Number<br>Time interval in seconds between two health check requests
 
-<a id="check-f33b9a"></a>&#x2022; [`tcp_health_check`](#check-f33b9a) - Optional Block<br>TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-f33b9a) below.
+<a id="check-f33b9a"></a>&#x2022; [`tcp_health_check`](#check-f33b9a) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-f33b9a) below.
 
-<a id="timeout-cca4da"></a>&#x2022; [`timeout`](#timeout-cca4da) - Optional Number<br>Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+<a id="timeout-cca4da"></a>&#x2022; [`timeout`](#timeout-cca4da) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
 
-<a id="threshold-d8ab4a"></a>&#x2022; [`unhealthy_threshold`](#threshold-d8ab4a) - Optional Number<br>Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+<a id="threshold-d8ab4a"></a>&#x2022; [`unhealthy_threshold`](#threshold-d8ab4a) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
 
 #### Simple Service Container Liveness Check Exec Health Check
 
@@ -1805,21 +1805,21 @@ A [`liveness_check`](#simple-service-container-liveness-check) block (within [`s
 
 A [`readiness_check`](#check-9028f0) block (within [`simple_service.container`](#simple-service-container)) supports the following:
 
-<a id="check-083116"></a>&#x2022; [`exec_health_check`](#check-083116) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-083116) below.
+<a id="check-083116"></a>&#x2022; [`exec_health_check`](#check-083116) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-083116) below.
 
-<a id="threshold-b19598"></a>&#x2022; [`healthy_threshold`](#threshold-b19598) - Optional Number<br>Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy
+<a id="threshold-b19598"></a>&#x2022; [`healthy_threshold`](#threshold-b19598) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
 
-<a id="check-71ae5b"></a>&#x2022; [`http_health_check`](#check-71ae5b) - Optional Block<br>HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-71ae5b) below.
+<a id="check-71ae5b"></a>&#x2022; [`http_health_check`](#check-71ae5b) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-71ae5b) below.
 
-<a id="delay-f56b24"></a>&#x2022; [`initial_delay`](#delay-f56b24) - Optional Number<br>Initial Delay. Number of seconds after the container has started before health checks are initiated
+<a id="delay-f56b24"></a>&#x2022; [`initial_delay`](#delay-f56b24) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
 
-<a id="interval-0aaa38"></a>&#x2022; [`interval`](#interval-0aaa38) - Optional Number<br>Interval. Time interval in seconds between two health check requests
+<a id="interval-0aaa38"></a>&#x2022; [`interval`](#interval-0aaa38) - Optional Number<br>Time interval in seconds between two health check requests
 
-<a id="check-074b55"></a>&#x2022; [`tcp_health_check`](#check-074b55) - Optional Block<br>TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-074b55) below.
+<a id="check-074b55"></a>&#x2022; [`tcp_health_check`](#check-074b55) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-074b55) below.
 
-<a id="timeout-354826"></a>&#x2022; [`timeout`](#timeout-354826) - Optional Number<br>Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+<a id="timeout-354826"></a>&#x2022; [`timeout`](#timeout-354826) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
 
-<a id="threshold-b99edb"></a>&#x2022; [`unhealthy_threshold`](#threshold-b99edb) - Optional Number<br>Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+<a id="threshold-b99edb"></a>&#x2022; [`unhealthy_threshold`](#threshold-b99edb) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
 
 #### Simple Service Container Readiness Check Exec Health Check
 
@@ -1847,63 +1847,63 @@ An [`enabled`](#simple-service-enabled) block (within [`simple_service`](#simple
 
 <a id="simple-service-enabled-name"></a>&#x2022; [`name`](#simple-service-enabled-name) - Optional String<br>Name. Name of the volume
 
-<a id="volume-64b8ac"></a>&#x2022; [`persistent_volume`](#volume-64b8ac) - Optional Block<br>Persistent Storage Volume. Volume containing the Persistent Storage for the workload<br>See [Persistent Volume](#volume-64b8ac) below.
+<a id="volume-64b8ac"></a>&#x2022; [`persistent_volume`](#volume-64b8ac) - Optional Block<br>Volume containing the Persistent Storage for the workload<br>See [Persistent Volume](#volume-64b8ac) below.
 
 #### Simple Service Enabled Persistent Volume
 
 A [`persistent_volume`](#volume-64b8ac) block (within [`simple_service.enabled`](#simple-service-enabled)) supports the following:
 
-<a id="mount-80f853"></a>&#x2022; [`mount`](#mount-80f853) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-80f853) below.
+<a id="mount-80f853"></a>&#x2022; [`mount`](#mount-80f853) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-80f853) below.
 
-<a id="storage-8c6930"></a>&#x2022; [`storage`](#storage-8c6930) - Optional Block<br>Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC)<br>See [Storage](#storage-8c6930) below.
+<a id="storage-8c6930"></a>&#x2022; [`storage`](#storage-8c6930) - Optional Block<br>Persistent storage configuration is used to configure Persistent Volume Claim (PVC)<br>See [Storage](#storage-8c6930) below.
 
 #### Simple Service Enabled Persistent Volume Mount
 
 A [`mount`](#mount-80f853) block (within [`simple_service.enabled.persistent_volume`](#volume-64b8ac)) supports the following:
 
-<a id="mode-c91e4c"></a>&#x2022; [`mode`](#mode-c91e4c) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="mode-c91e4c"></a>&#x2022; [`mode`](#mode-c91e4c) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="path-7949ef"></a>&#x2022; [`mount_path`](#path-7949ef) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="path-7949ef"></a>&#x2022; [`mount_path`](#path-7949ef) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="path-7a72f2"></a>&#x2022; [`sub_path`](#path-7a72f2) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="path-7a72f2"></a>&#x2022; [`sub_path`](#path-7a72f2) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Simple Service Enabled Persistent Volume Storage
 
 A [`storage`](#storage-8c6930) block (within [`simple_service.enabled.persistent_volume`](#volume-64b8ac)) supports the following:
 
-<a id="mode-acb744"></a>&#x2022; [`access_mode`](#mode-acb744) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts
+<a id="mode-acb744"></a>&#x2022; [`access_mode`](#mode-acb744) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used
 
-<a id="name-b14a4c"></a>&#x2022; [`class_name`](#name-b14a4c) - Optional String<br>Class Name. Use the specified class name
+<a id="name-b14a4c"></a>&#x2022; [`class_name`](#name-b14a4c) - Optional String<br>Use the specified class name
 
-<a id="default-f48482"></a>&#x2022; [`default`](#default-f48482) - Optional Block<br>Enable this option
+<a id="default-f48482"></a>&#x2022; [`default`](#default-f48482) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="size-17db0b"></a>&#x2022; [`storage_size`](#size-17db0b) - Optional Number<br>Size (in GiB). Size in GiB of the persistent storage
+<a id="size-17db0b"></a>&#x2022; [`storage_size`](#size-17db0b) - Optional Number<br>Size in GiB of the persistent storage
 
 #### Simple Service Simple Advertise
 
 A [`simple_advertise`](#simple-service-simple-advertise) block (within [`simple_service`](#simple-service)) supports the following:
 
-<a id="simple-service-simple-advertise-domains"></a>&#x2022; [`domains`](#simple-service-simple-advertise-domains) - Optional List<br>Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.example.com.` 2. Domains starting with a Wildcard: \*.example.com. Not supported Domains: - Just a Wildcard: \* - A Wildcard and TLD with no root Domain: \*.com. - A Wildcard not matching a whole DNS label. E.g. \*.example.com and \*.bar.example.com are valid Wildcards however \*bar.example.com, \*-bar.example.com, and bar*.example.com are all invalid. Additional notes: A Wildcard will not match empty string. E.g. \*.example.com will match bar.example.com and baz-bar.example.com but not .example.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on \*. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the Load Balancer type is HTTPS. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system
+<a id="simple-service-simple-advertise-domains"></a>&#x2022; [`domains`](#simple-service-simple-advertise-domains) - Optional List<br>List of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.example.com.` 2
 
-<a id="port-b7cc36"></a>&#x2022; [`service_port`](#port-b7cc36) - Optional Number<br>Service Port. Service port to advertise on Internet via HTTP loadbalancer using port 80
+<a id="port-b7cc36"></a>&#x2022; [`service_port`](#port-b7cc36) - Optional Number<br>Service port to advertise on Internet via HTTP loadbalancer using port 80
 
 #### Stateful Service
 
 A [`stateful_service`](#stateful-service) block supports the following:
 
-<a id="stateful-service-advertise-options"></a>&#x2022; [`advertise_options`](#stateful-service-advertise-options) - Optional Block<br>Advertise OPTIONS. Advertise OPTIONS are used to configure how and where to advertise the workload using load balancers<br>See [Advertise Options](#stateful-service-advertise-options) below.
+<a id="stateful-service-advertise-options"></a>&#x2022; [`advertise_options`](#stateful-service-advertise-options) - Optional Block<br>Advertise OPTIONS are used to configure how and where to advertise the workload using load balancers<br>See [Advertise Options](#stateful-service-advertise-options) below.
 
-<a id="stateful-service-configuration"></a>&#x2022; [`configuration`](#stateful-service-configuration) - Optional Block<br>Configuration Parameters. Configuration parameters of the workload<br>See [Configuration](#stateful-service-configuration) below.
+<a id="stateful-service-configuration"></a>&#x2022; [`configuration`](#stateful-service-configuration) - Optional Block<br>Configuration parameters of the workload<br>See [Configuration](#stateful-service-configuration) below.
 
-<a id="stateful-service-containers"></a>&#x2022; [`containers`](#stateful-service-containers) - Optional Block<br>Containers. Containers to use for service<br>See [Containers](#stateful-service-containers) below.
+<a id="stateful-service-containers"></a>&#x2022; [`containers`](#stateful-service-containers) - Optional Block<br>Containers to use for service<br>See [Containers](#stateful-service-containers) below.
 
-<a id="stateful-service-deploy-options"></a>&#x2022; [`deploy_options`](#stateful-service-deploy-options) - Optional Block<br>Deploy OPTIONS. Deploy OPTIONS are used to configure the workload deployment OPTIONS<br>See [Deploy Options](#stateful-service-deploy-options) below.
+<a id="stateful-service-deploy-options"></a>&#x2022; [`deploy_options`](#stateful-service-deploy-options) - Optional Block<br>Deploy OPTIONS are used to configure the workload deployment OPTIONS<br>See [Deploy Options](#stateful-service-deploy-options) below.
 
-<a id="stateful-service-num-replicas"></a>&#x2022; [`num_replicas`](#stateful-service-num-replicas) - Optional Number<br>Number of Replicas. Number of replicas of service to spawn per site
+<a id="stateful-service-num-replicas"></a>&#x2022; [`num_replicas`](#stateful-service-num-replicas) - Optional Number<br>Number of replicas of service to spawn per site
 
-<a id="stateful-service-persistent-volumes"></a>&#x2022; [`persistent_volumes`](#stateful-service-persistent-volumes) - Optional Block<br>Persistent Storage Configuration. Persistent storage configuration for the service<br>See [Persistent Volumes](#stateful-service-persistent-volumes) below.
+<a id="stateful-service-persistent-volumes"></a>&#x2022; [`persistent_volumes`](#stateful-service-persistent-volumes) - Optional Block<br>Persistent storage configuration for the service<br>See [Persistent Volumes](#stateful-service-persistent-volumes) below.
 
-<a id="stateful-service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#stateful-service-scale-to-zero) - Optional Block<br>Enable this option
+<a id="stateful-service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#stateful-service-scale-to-zero) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="stateful-service-volumes"></a>&#x2022; [`volumes`](#stateful-service-volumes) - Optional Block<br>Ephemeral Volumes. Ephemeral volumes for the service<br>See [Volumes](#stateful-service-volumes) below.
 
@@ -1911,19 +1911,19 @@ A [`stateful_service`](#stateful-service) block supports the following:
 
 An [`advertise_options`](#stateful-service-advertise-options) block (within [`stateful_service`](#stateful-service)) supports the following:
 
-<a id="custom-2e9653"></a>&#x2022; [`advertise_custom`](#custom-2e9653) - Optional Block<br>Advertise on specific sites. Advertise this workload via loadbalancer on specific sites<br>See [Advertise Custom](#custom-2e9653) below.
+<a id="custom-2e9653"></a>&#x2022; [`advertise_custom`](#custom-2e9653) - Optional Block<br>Advertise this workload via loadbalancer on specific sites<br>See [Advertise Custom](#custom-2e9653) below.
 
-<a id="cluster-e091a1"></a>&#x2022; [`advertise_in_cluster`](#cluster-e091a1) - Optional Block<br>Advertise In Cluster. Advertise the workload locally in-cluster<br>See [Advertise In Cluster](#cluster-e091a1) below.
+<a id="cluster-e091a1"></a>&#x2022; [`advertise_in_cluster`](#cluster-e091a1) - Optional Block<br>Advertise the workload locally in-cluster<br>See [Advertise In Cluster](#cluster-e091a1) below.
 
-<a id="public-86b094"></a>&#x2022; [`advertise_on_public`](#public-86b094) - Optional Block<br>Advertise On Internet. Advertise this workload via loadbalancer on Internet with default VIP<br>See [Advertise On Public](#public-86b094) below.
+<a id="public-86b094"></a>&#x2022; [`advertise_on_public`](#public-86b094) - Optional Block<br>Advertise this workload via loadbalancer on Internet with default VIP<br>See [Advertise On Public](#public-86b094) below.
 
-<a id="advertise-a4c726"></a>&#x2022; [`do_not_advertise`](#advertise-a4c726) - Optional Block<br>Enable this option
+<a id="advertise-a4c726"></a>&#x2022; [`do_not_advertise`](#advertise-a4c726) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Stateful Service Advertise Options Advertise Custom
 
 An [`advertise_custom`](#custom-2e9653) block (within [`stateful_service.advertise_options`](#stateful-service-advertise-options)) supports the following:
 
-<a id="where-ecb677"></a>&#x2022; [`advertise_where`](#where-ecb677) - Optional Block<br>List of Sites to Advertise. Where should this load balancer be available<br>See [Advertise Where](#where-ecb677) below.
+<a id="where-ecb677"></a>&#x2022; [`advertise_where`](#where-ecb677) - Optional Block<br>Where should this load balancer be available<br>See [Advertise Where](#where-ecb677) below.
 
 <a id="ports-17a1c0"></a>&#x2022; [`ports`](#ports-17a1c0) - Optional Block<br>Ports. Ports to advertise<br>See [Ports](#ports-17a1c0) below.
 
@@ -2741,7 +2741,7 @@ A [`file`](#file-343e3f) block (within [`stateful_service.configuration.paramete
 
 <a id="data-1a89a8"></a>&#x2022; [`data`](#data-1a89a8) - Optional String<br>Data. File data
 
-<a id="mount-9251c5"></a>&#x2022; [`mount`](#mount-9251c5) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-9251c5) below.
+<a id="mount-9251c5"></a>&#x2022; [`mount`](#mount-9251c5) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-9251c5) below.
 
 <a id="name-0fb42b"></a>&#x2022; [`name`](#name-0fb42b) - Optional String<br>Name. Name of the file
 
@@ -2751,87 +2751,87 @@ A [`file`](#file-343e3f) block (within [`stateful_service.configuration.paramete
 
 A [`mount`](#mount-9251c5) block (within [`stateful_service.configuration.parameters.file`](#file-343e3f)) supports the following:
 
-<a id="mode-744d6b"></a>&#x2022; [`mode`](#mode-744d6b) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="mode-744d6b"></a>&#x2022; [`mode`](#mode-744d6b) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="path-6612e2"></a>&#x2022; [`mount_path`](#path-6612e2) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="path-6612e2"></a>&#x2022; [`mount_path`](#path-6612e2) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="path-1fc41c"></a>&#x2022; [`sub_path`](#path-1fc41c) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="path-1fc41c"></a>&#x2022; [`sub_path`](#path-1fc41c) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Stateful Service Containers
 
 A [`containers`](#stateful-service-containers) block (within [`stateful_service`](#stateful-service)) supports the following:
 
-<a id="stateful-service-containers-args"></a>&#x2022; [`args`](#stateful-service-containers-args) - Optional List<br>Arguments. Arguments to the entrypoint. Overrides the docker image's CMD
+<a id="stateful-service-containers-args"></a>&#x2022; [`args`](#stateful-service-containers-args) - Optional List<br>Arguments to the entrypoint. Overrides the docker image's CMD
 
-<a id="stateful-service-containers-command"></a>&#x2022; [`command`](#stateful-service-containers-command) - Optional List<br>Command. Command to execute. Overrides the docker image's ENTRYPOINT
+<a id="stateful-service-containers-command"></a>&#x2022; [`command`](#stateful-service-containers-command) - Optional List<br>Command to execute. Overrides the docker image's ENTRYPOINT
 
-<a id="flavor-0d2be0"></a>&#x2022; [`custom_flavor`](#flavor-0d2be0) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#flavor-0d2be0) below.
+<a id="flavor-0d2be0"></a>&#x2022; [`custom_flavor`](#flavor-0d2be0) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#flavor-0d2be0) below.
 
-<a id="flavor-c485c6"></a>&#x2022; [`default_flavor`](#flavor-c485c6) - Optional Block<br>Enable this option
+<a id="flavor-c485c6"></a>&#x2022; [`default_flavor`](#flavor-c485c6) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="stateful-service-containers-flavor"></a>&#x2022; [`flavor`](#stateful-service-containers-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor Type. Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have limit of 1 vCPU and 2048 MiB (mebibyte) memory
+<a id="stateful-service-containers-flavor"></a>&#x2022; [`flavor`](#stateful-service-containers-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have
 
-<a id="stateful-service-containers-image"></a>&#x2022; [`image`](#stateful-service-containers-image) - Optional Block<br>Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any<br>See [Image](#stateful-service-containers-image) below.
+<a id="stateful-service-containers-image"></a>&#x2022; [`image`](#stateful-service-containers-image) - Optional Block<br>ImageType configures the image to use, how to pull the image, and the associated secrets to use if any<br>See [Image](#stateful-service-containers-image) below.
 
-<a id="container-7dbf25"></a>&#x2022; [`init_container`](#container-7dbf25) - Optional Bool<br>Initialization Container. Specialized container that runs before application container and runs to completion
+<a id="container-7dbf25"></a>&#x2022; [`init_container`](#container-7dbf25) - Optional Bool<br>Specialized container that runs before application container and runs to completion
 
-<a id="check-82bd07"></a>&#x2022; [`liveness_check`](#check-82bd07) - Optional Block<br>Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Liveness Check](#check-82bd07) below.
+<a id="check-82bd07"></a>&#x2022; [`liveness_check`](#check-82bd07) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Liveness Check](#check-82bd07) below.
 
 <a id="stateful-service-containers-name"></a>&#x2022; [`name`](#stateful-service-containers-name) - Optional String<br>Name. Name of the container
 
-<a id="check-81b532"></a>&#x2022; [`readiness_check`](#check-81b532) - Optional Block<br>Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Readiness Check](#check-81b532) below.
+<a id="check-81b532"></a>&#x2022; [`readiness_check`](#check-81b532) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Readiness Check](#check-81b532) below.
 
 #### Stateful Service Containers Custom Flavor
 
 A [`custom_flavor`](#flavor-0d2be0) block (within [`stateful_service.containers`](#stateful-service-containers)) supports the following:
 
-<a id="name-37698d"></a>&#x2022; [`name`](#name-37698d) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-37698d"></a>&#x2022; [`name`](#name-37698d) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-db9524"></a>&#x2022; [`namespace`](#namespace-db9524) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-db9524"></a>&#x2022; [`namespace`](#namespace-db9524) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-a8296a"></a>&#x2022; [`tenant`](#tenant-a8296a) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-a8296a"></a>&#x2022; [`tenant`](#tenant-a8296a) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Stateful Service Containers Image
 
 An [`image`](#stateful-service-containers-image) block (within [`stateful_service.containers`](#stateful-service-containers)) supports the following:
 
-<a id="registry-78045a"></a>&#x2022; [`container_registry`](#registry-78045a) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#registry-78045a) below.
+<a id="registry-78045a"></a>&#x2022; [`container_registry`](#registry-78045a) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#registry-78045a) below.
 
-<a id="stateful-service-containers-image-name"></a>&#x2022; [`name`](#stateful-service-containers-image-name) - Optional String<br>Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed
+<a id="stateful-service-containers-image-name"></a>&#x2022; [`name`](#stateful-service-containers-image-name) - Optional String<br>Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed
 
-<a id="public-27eb7d"></a>&#x2022; [`public`](#public-27eb7d) - Optional Block<br>Enable this option
+<a id="public-27eb7d"></a>&#x2022; [`public`](#public-27eb7d) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="policy-013972"></a>&#x2022; [`pull_policy`](#policy-013972) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image Pull Policy Type. Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only if it does not already exist on the node - IMAGE_PULL_POLICY_IF_NOT_PRESENT: IfNotPresent Only pull the image if it does not already exist on the node - IMAGE_PULL_POLICY_ALWAYS: Always Always pull the image - IMAGE_PULL_POLICY_NEVER: Never Never pull the image
+<a id="policy-013972"></a>&#x2022; [`pull_policy`](#policy-013972) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only
 
 #### Stateful Service Containers Image Container Registry
 
 A [`container_registry`](#registry-78045a) block (within [`stateful_service.containers.image`](#stateful-service-containers-image)) supports the following:
 
-<a id="name-4d4804"></a>&#x2022; [`name`](#name-4d4804) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-4d4804"></a>&#x2022; [`name`](#name-4d4804) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-f6725d"></a>&#x2022; [`namespace`](#namespace-f6725d) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-f6725d"></a>&#x2022; [`namespace`](#namespace-f6725d) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-1ee737"></a>&#x2022; [`tenant`](#tenant-1ee737) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-1ee737"></a>&#x2022; [`tenant`](#tenant-1ee737) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Stateful Service Containers Liveness Check
 
 A [`liveness_check`](#check-82bd07) block (within [`stateful_service.containers`](#stateful-service-containers)) supports the following:
 
-<a id="check-d745b6"></a>&#x2022; [`exec_health_check`](#check-d745b6) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-d745b6) below.
+<a id="check-d745b6"></a>&#x2022; [`exec_health_check`](#check-d745b6) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-d745b6) below.
 
-<a id="threshold-87f287"></a>&#x2022; [`healthy_threshold`](#threshold-87f287) - Optional Number<br>Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy
+<a id="threshold-87f287"></a>&#x2022; [`healthy_threshold`](#threshold-87f287) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
 
-<a id="check-3fba6e"></a>&#x2022; [`http_health_check`](#check-3fba6e) - Optional Block<br>HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-3fba6e) below.
+<a id="check-3fba6e"></a>&#x2022; [`http_health_check`](#check-3fba6e) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-3fba6e) below.
 
-<a id="delay-58e58a"></a>&#x2022; [`initial_delay`](#delay-58e58a) - Optional Number<br>Initial Delay. Number of seconds after the container has started before health checks are initiated
+<a id="delay-58e58a"></a>&#x2022; [`initial_delay`](#delay-58e58a) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
 
-<a id="interval-2c75b3"></a>&#x2022; [`interval`](#interval-2c75b3) - Optional Number<br>Interval. Time interval in seconds between two health check requests
+<a id="interval-2c75b3"></a>&#x2022; [`interval`](#interval-2c75b3) - Optional Number<br>Time interval in seconds between two health check requests
 
-<a id="check-485f86"></a>&#x2022; [`tcp_health_check`](#check-485f86) - Optional Block<br>TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-485f86) below.
+<a id="check-485f86"></a>&#x2022; [`tcp_health_check`](#check-485f86) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-485f86) below.
 
-<a id="timeout-4a23bd"></a>&#x2022; [`timeout`](#timeout-4a23bd) - Optional Number<br>Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+<a id="timeout-4a23bd"></a>&#x2022; [`timeout`](#timeout-4a23bd) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
 
-<a id="threshold-50b947"></a>&#x2022; [`unhealthy_threshold`](#threshold-50b947) - Optional Number<br>Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+<a id="threshold-50b947"></a>&#x2022; [`unhealthy_threshold`](#threshold-50b947) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
 
 #### Stateful Service Containers Liveness Check Exec Health Check
 
@@ -2857,21 +2857,21 @@ A [`liveness_check`](#check-82bd07) block (within [`stateful_service.containers`
 
 A [`readiness_check`](#check-81b532) block (within [`stateful_service.containers`](#stateful-service-containers)) supports the following:
 
-<a id="check-d067fc"></a>&#x2022; [`exec_health_check`](#check-d067fc) - Optional Block<br>Exec Health Check. ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-d067fc) below.
+<a id="check-d067fc"></a>&#x2022; [`exec_health_check`](#check-d067fc) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-d067fc) below.
 
-<a id="threshold-793b66"></a>&#x2022; [`healthy_threshold`](#threshold-793b66) - Optional Number<br>Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy
+<a id="threshold-793b66"></a>&#x2022; [`healthy_threshold`](#threshold-793b66) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
 
-<a id="check-d4b642"></a>&#x2022; [`http_health_check`](#check-d4b642) - Optional Block<br>HTTP Health Check. HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-d4b642) below.
+<a id="check-d4b642"></a>&#x2022; [`http_health_check`](#check-d4b642) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-d4b642) below.
 
-<a id="delay-e5c176"></a>&#x2022; [`initial_delay`](#delay-e5c176) - Optional Number<br>Initial Delay. Number of seconds after the container has started before health checks are initiated
+<a id="delay-e5c176"></a>&#x2022; [`initial_delay`](#delay-e5c176) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
 
-<a id="interval-b7509d"></a>&#x2022; [`interval`](#interval-b7509d) - Optional Number<br>Interval. Time interval in seconds between two health check requests
+<a id="interval-b7509d"></a>&#x2022; [`interval`](#interval-b7509d) - Optional Number<br>Time interval in seconds between two health check requests
 
-<a id="check-fde4eb"></a>&#x2022; [`tcp_health_check`](#check-fde4eb) - Optional Block<br>TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-fde4eb) below.
+<a id="check-fde4eb"></a>&#x2022; [`tcp_health_check`](#check-fde4eb) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-fde4eb) below.
 
-<a id="timeout-db7e11"></a>&#x2022; [`timeout`](#timeout-db7e11) - Optional Number<br>Timeout. Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+<a id="timeout-db7e11"></a>&#x2022; [`timeout`](#timeout-db7e11) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
 
-<a id="threshold-a50cc0"></a>&#x2022; [`unhealthy_threshold`](#threshold-a50cc0) - Optional Number<br>Unhealthy Threshold. Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+<a id="threshold-a50cc0"></a>&#x2022; [`unhealthy_threshold`](#threshold-a50cc0) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
 
 #### Stateful Service Containers Readiness Check Exec Health Check
 
@@ -2897,23 +2897,23 @@ A [`readiness_check`](#check-81b532) block (within [`stateful_service.containers
 
 A [`deploy_options`](#stateful-service-deploy-options) block (within [`stateful_service`](#stateful-service)) supports the following:
 
-<a id="stateful-service-deploy-options-all-res"></a>&#x2022; [`all_res`](#stateful-service-deploy-options-all-res) - Optional Block<br>Enable this option
+<a id="stateful-service-deploy-options-all-res"></a>&#x2022; [`all_res`](#stateful-service-deploy-options-all-res) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="sites-4ecc3f"></a>&#x2022; [`default_virtual_sites`](#sites-4ecc3f) - Optional Block<br>Enable this option
+<a id="sites-4ecc3f"></a>&#x2022; [`default_virtual_sites`](#sites-4ecc3f) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="sites-6c0f50"></a>&#x2022; [`deploy_ce_sites`](#sites-6c0f50) - Optional Block<br>Customer Sites. This defines a way to deploy a workload on specific Customer sites<br>See [Deploy CE Sites](#sites-6c0f50) below.
+<a id="sites-6c0f50"></a>&#x2022; [`deploy_ce_sites`](#sites-6c0f50) - Optional Block<br>Defines a way to deploy a workload on specific Customer sites<br>See [Deploy CE Sites](#sites-6c0f50) below.
 
-<a id="sites-f4950a"></a>&#x2022; [`deploy_ce_virtual_sites`](#sites-f4950a) - Optional Block<br>Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites<br>See [Deploy CE Virtual Sites](#sites-f4950a) below.
+<a id="sites-f4950a"></a>&#x2022; [`deploy_ce_virtual_sites`](#sites-f4950a) - Optional Block<br>Defines a way to deploy a workload on specific Customer virtual sites<br>See [Deploy CE Virtual Sites](#sites-f4950a) below.
 
-<a id="sites-d00d51"></a>&#x2022; [`deploy_re_sites`](#sites-d00d51) - Optional Block<br>Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites<br>See [Deploy RE Sites](#sites-d00d51) below.
+<a id="sites-d00d51"></a>&#x2022; [`deploy_re_sites`](#sites-d00d51) - Optional Block<br>Defines a way to deploy a workload on specific Regional Edge sites<br>See [Deploy RE Sites](#sites-d00d51) below.
 
-<a id="sites-4ad049"></a>&#x2022; [`deploy_re_virtual_sites`](#sites-4ad049) - Optional Block<br>Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites<br>See [Deploy RE Virtual Sites](#sites-4ad049) below.
+<a id="sites-4ad049"></a>&#x2022; [`deploy_re_virtual_sites`](#sites-4ad049) - Optional Block<br>Defines a way to deploy a workload on specific Regional Edge virtual sites<br>See [Deploy RE Virtual Sites](#sites-4ad049) below.
 
 #### Stateful Service Deploy Options Deploy CE Sites
 
 A [`deploy_ce_sites`](#sites-6c0f50) block (within [`stateful_service.deploy_options`](#stateful-service-deploy-options)) supports the following:
 
-<a id="site-0e137b"></a>&#x2022; [`site`](#site-0e137b) - Optional Block<br>List of Customer Sites to Deploy. Which customer sites should this workload be deployed<br>See [Site](#site-0e137b) below.
+<a id="site-0e137b"></a>&#x2022; [`site`](#site-0e137b) - Optional Block<br>Which customer sites should this workload be deployed<br>See [Site](#site-0e137b) below.
 
 #### Stateful Service Deploy Options Deploy CE Sites Site
 
@@ -2931,7 +2931,7 @@ A [`deploy_ce_sites`](#sites-6c0f50) block (within [`stateful_service.deploy_opt
 
 A [`deploy_re_sites`](#sites-d00d51) block (within [`stateful_service.deploy_options`](#stateful-service-deploy-options)) supports the following:
 
-<a id="site-92faf4"></a>&#x2022; [`site`](#site-92faf4) - Optional Block<br>List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed<br>See [Site](#site-92faf4) below.
+<a id="site-92faf4"></a>&#x2022; [`site`](#site-92faf4) - Optional Block<br>Which regional edge sites should this workload be deployed<br>See [Site](#site-92faf4) below.
 
 #### Stateful Service Deploy Options Deploy RE Sites Site
 
@@ -2951,45 +2951,45 @@ A [`persistent_volumes`](#stateful-service-persistent-volumes) block (within [`s
 
 <a id="name-5e24ab"></a>&#x2022; [`name`](#name-5e24ab) - Optional String<br>Name. Name of the volume
 
-<a id="volume-9c1fa2"></a>&#x2022; [`persistent_volume`](#volume-9c1fa2) - Optional Block<br>Persistent Storage Volume. Volume containing the Persistent Storage for the workload<br>See [Persistent Volume](#volume-9c1fa2) below.
+<a id="volume-9c1fa2"></a>&#x2022; [`persistent_volume`](#volume-9c1fa2) - Optional Block<br>Volume containing the Persistent Storage for the workload<br>See [Persistent Volume](#volume-9c1fa2) below.
 
 #### Stateful Service Persistent Volumes Persistent Volume
 
 A [`persistent_volume`](#volume-9c1fa2) block (within [`stateful_service.persistent_volumes`](#stateful-service-persistent-volumes)) supports the following:
 
-<a id="mount-332197"></a>&#x2022; [`mount`](#mount-332197) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-332197) below.
+<a id="mount-332197"></a>&#x2022; [`mount`](#mount-332197) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-332197) below.
 
-<a id="storage-33a80f"></a>&#x2022; [`storage`](#storage-33a80f) - Optional Block<br>Persistence Storage Configuration. Persistent storage configuration is used to configure Persistent Volume Claim (PVC)<br>See [Storage](#storage-33a80f) below.
+<a id="storage-33a80f"></a>&#x2022; [`storage`](#storage-33a80f) - Optional Block<br>Persistent storage configuration is used to configure Persistent Volume Claim (PVC)<br>See [Storage](#storage-33a80f) below.
 
 #### Stateful Service Persistent Volumes Persistent Volume Mount
 
 A [`mount`](#mount-332197) block (within [`stateful_service.persistent_volumes.persistent_volume`](#volume-9c1fa2)) supports the following:
 
-<a id="mode-90ab42"></a>&#x2022; [`mode`](#mode-90ab42) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="mode-90ab42"></a>&#x2022; [`mode`](#mode-90ab42) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="path-a261fb"></a>&#x2022; [`mount_path`](#path-a261fb) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="path-a261fb"></a>&#x2022; [`mount_path`](#path-a261fb) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="path-056461"></a>&#x2022; [`sub_path`](#path-056461) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="path-056461"></a>&#x2022; [`sub_path`](#path-056461) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Stateful Service Persistent Volumes Persistent Volume Storage
 
 A [`storage`](#storage-33a80f) block (within [`stateful_service.persistent_volumes.persistent_volume`](#volume-9c1fa2)) supports the following:
 
-<a id="mode-04d189"></a>&#x2022; [`access_mode`](#mode-04d189) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistent Storage Access Mode. Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used to mount persistent storage in read/write mode to many hosts - ACCESS_MODE_READ_ONLY_MANY: Read Only Many Read Only Many is used to mount persistent storage in read-only mode to many hosts
+<a id="mode-04d189"></a>&#x2022; [`access_mode`](#mode-04d189) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used
 
-<a id="name-6dd4e7"></a>&#x2022; [`class_name`](#name-6dd4e7) - Optional String<br>Class Name. Use the specified class name
+<a id="name-6dd4e7"></a>&#x2022; [`class_name`](#name-6dd4e7) - Optional String<br>Use the specified class name
 
-<a id="default-def9af"></a>&#x2022; [`default`](#default-def9af) - Optional Block<br>Enable this option
+<a id="default-def9af"></a>&#x2022; [`default`](#default-def9af) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="size-f9136f"></a>&#x2022; [`storage_size`](#size-f9136f) - Optional Number<br>Size (in GiB). Size in GiB of the persistent storage
+<a id="size-f9136f"></a>&#x2022; [`storage_size`](#size-f9136f) - Optional Number<br>Size in GiB of the persistent storage
 
 #### Stateful Service Volumes
 
 A [`volumes`](#stateful-service-volumes) block (within [`stateful_service`](#stateful-service)) supports the following:
 
-<a id="stateful-service-volumes-empty-dir"></a>&#x2022; [`empty_dir`](#stateful-service-volumes-empty-dir) - Optional Block<br>Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload<br>See [Empty Dir](#stateful-service-volumes-empty-dir) below.
+<a id="stateful-service-volumes-empty-dir"></a>&#x2022; [`empty_dir`](#stateful-service-volumes-empty-dir) - Optional Block<br>Volume containing a temporary directory whose lifetime is the same as a replica of a workload<br>See [Empty Dir](#stateful-service-volumes-empty-dir) below.
 
-<a id="stateful-service-volumes-host-path"></a>&#x2022; [`host_path`](#stateful-service-volumes-host-path) - Optional Block<br>HostPath Volume. Volume containing a host mapped path into the workload<br>See [Host Path](#stateful-service-volumes-host-path) below.
+<a id="stateful-service-volumes-host-path"></a>&#x2022; [`host_path`](#stateful-service-volumes-host-path) - Optional Block<br>Volume containing a host mapped path into the workload<br>See [Host Path](#stateful-service-volumes-host-path) below.
 
 <a id="stateful-service-volumes-name"></a>&#x2022; [`name`](#stateful-service-volumes-name) - Optional String<br>Name. Name of the volume
 
@@ -2997,7 +2997,7 @@ A [`volumes`](#stateful-service-volumes) block (within [`stateful_service`](#sta
 
 An [`empty_dir`](#stateful-service-volumes-empty-dir) block (within [`stateful_service.volumes`](#stateful-service-volumes)) supports the following:
 
-<a id="mount-0d2125"></a>&#x2022; [`mount`](#mount-0d2125) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-0d2125) below.
+<a id="mount-0d2125"></a>&#x2022; [`mount`](#mount-0d2125) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-0d2125) below.
 
 <a id="limit-15665a"></a>&#x2022; [`size_limit`](#limit-15665a) - Optional Number<br>Size Limit (in GiB)
 
@@ -3005,29 +3005,29 @@ An [`empty_dir`](#stateful-service-volumes-empty-dir) block (within [`stateful_s
 
 A [`mount`](#mount-0d2125) block (within [`stateful_service.volumes.empty_dir`](#stateful-service-volumes-empty-dir)) supports the following:
 
-<a id="mode-c70f04"></a>&#x2022; [`mode`](#mode-c70f04) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="mode-c70f04"></a>&#x2022; [`mode`](#mode-c70f04) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="path-a872b3"></a>&#x2022; [`mount_path`](#path-a872b3) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="path-a872b3"></a>&#x2022; [`mount_path`](#path-a872b3) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="path-812c0d"></a>&#x2022; [`sub_path`](#path-812c0d) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="path-812c0d"></a>&#x2022; [`sub_path`](#path-812c0d) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Stateful Service Volumes Host Path
 
 A [`host_path`](#stateful-service-volumes-host-path) block (within [`stateful_service.volumes`](#stateful-service-volumes)) supports the following:
 
-<a id="mount-ebf189"></a>&#x2022; [`mount`](#mount-ebf189) - Optional Block<br>Volume Mount. Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-ebf189) below.
+<a id="mount-ebf189"></a>&#x2022; [`mount`](#mount-ebf189) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-ebf189) below.
 
-<a id="stateful-service-volumes-host-path-path"></a>&#x2022; [`path`](#stateful-service-volumes-host-path-path) - Optional String<br>Path. Path of the directory on the host
+<a id="stateful-service-volumes-host-path-path"></a>&#x2022; [`path`](#stateful-service-volumes-host-path-path) - Optional String<br>Path of the directory on the host
 
 #### Stateful Service Volumes Host Path Mount
 
 A [`mount`](#mount-ebf189) block (within [`stateful_service.volumes.host_path`](#stateful-service-volumes-host-path)) supports the following:
 
-<a id="mode-0cbd14"></a>&#x2022; [`mode`](#mode-0cbd14) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+<a id="mode-0cbd14"></a>&#x2022; [`mode`](#mode-0cbd14) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
 
-<a id="path-4fa8ea"></a>&#x2022; [`mount_path`](#path-4fa8ea) - Optional String<br>Mount Path. Path within the workload container at which the volume should be mounted. Must not contain ':'
+<a id="path-4fa8ea"></a>&#x2022; [`mount_path`](#path-4fa8ea) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
 
-<a id="path-acb5bd"></a>&#x2022; [`sub_path`](#path-acb5bd) - Optional String  Defaults to `'' (volume's root)`<br>Sub Path. Path within the volume from which the workload's volume should be mounted
+<a id="path-acb5bd"></a>&#x2022; [`sub_path`](#path-acb5bd) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Timeouts
 

@@ -112,7 +112,7 @@ func (r *TrustedCAListResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"trusted_ca_url": schema.StringAttribute{
-				MarkdownDescription: "Root CA Certificate. Trusted CA certificates for validating certificates.",
+				MarkdownDescription: "Trusted CA certificates for validating certificates.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{

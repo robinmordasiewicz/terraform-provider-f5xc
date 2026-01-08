@@ -530,23 +530,23 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 				Delete: true,
 			}),
 			"allow_all": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: allow_all, allow_list, deny_list, rule_list] Enable this option",
+				MarkdownDescription: "[OneOf: allow_all, allow_list, deny_list, rule_list] Can be used for messages where no values are needed.",
 			},
 			"allow_list": schema.SingleNestedBlock{
-				MarkdownDescription: "Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP)",
+				MarkdownDescription: "URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP).",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_action_allow": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"default_action_deny": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"default_action_next_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"dest_list": schema.ListNestedBlock{
-						MarkdownDescription: "L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI.",
+						MarkdownDescription: "L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"ipv6_prefixes": schema.ListAttribute{
@@ -555,7 +555,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									ElementType:         types.StringType,
 								},
 								"port_ranges": schema.StringAttribute{
-									MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
+									MarkdownDescription: "String containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 									Optional:            true,
 								},
 								"prefixes": schema.ListAttribute{
@@ -571,33 +571,33 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Values. Exact domain name.",
+									MarkdownDescription: "Exact domain name.",
 									Optional:            true,
 								},
 								"path_exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Path. Exact Path to match.",
+									MarkdownDescription: "Exact Path to match.",
 									Optional:            true,
 								},
 								"path_prefix_value": schema.StringAttribute{
-									MarkdownDescription: "Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'",
+									MarkdownDescription: "Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'.",
 									Optional:            true,
 								},
 								"path_regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match.",
+									MarkdownDescription: "Regular Expression value for the Path to match.",
 									Optional:            true,
 								},
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
+									MarkdownDescription: "Regular Expression value for the domain name.",
 									Optional:            true,
 								},
 								"suffix_value": schema.StringAttribute{
-									MarkdownDescription: "Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'",
+									MarkdownDescription: "Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"any_path": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 							},
 						},
@@ -607,15 +607,15 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Value. Exact domain name.",
+									MarkdownDescription: "Exact domain name.",
 									Optional:            true,
 								},
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
+									MarkdownDescription: "Regular Expression value for the domain name.",
 									Optional:            true,
 								},
 								"suffix_value": schema.StringAttribute{
-									MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+									MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 									Optional:            true,
 								},
 							},
@@ -624,23 +624,23 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 				},
 			},
 			"any_proxy": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: any_proxy, drp_http_connect, network_connector, proxy_label_selector] Enable this option",
+				MarkdownDescription: "[OneOf: any_proxy, drp_http_connect, network_connector, proxy_label_selector] Can be used for messages where no values are needed.",
 			},
 			"deny_list": schema.SingleNestedBlock{
-				MarkdownDescription: "Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP)",
+				MarkdownDescription: "URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP).",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_action_allow": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"default_action_deny": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"default_action_next_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"dest_list": schema.ListNestedBlock{
-						MarkdownDescription: "L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI.",
+						MarkdownDescription: "L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"ipv6_prefixes": schema.ListAttribute{
@@ -649,7 +649,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									ElementType:         types.StringType,
 								},
 								"port_ranges": schema.StringAttribute{
-									MarkdownDescription: "Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
+									MarkdownDescription: "String containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 									Optional:            true,
 								},
 								"prefixes": schema.ListAttribute{
@@ -665,33 +665,33 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Values. Exact domain name.",
+									MarkdownDescription: "Exact domain name.",
 									Optional:            true,
 								},
 								"path_exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Path. Exact Path to match.",
+									MarkdownDescription: "Exact Path to match.",
 									Optional:            true,
 								},
 								"path_prefix_value": schema.StringAttribute{
-									MarkdownDescription: "Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'",
+									MarkdownDescription: "Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'.",
 									Optional:            true,
 								},
 								"path_regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match.",
+									MarkdownDescription: "Regular Expression value for the Path to match.",
 									Optional:            true,
 								},
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
+									MarkdownDescription: "Regular Expression value for the domain name.",
 									Optional:            true,
 								},
 								"suffix_value": schema.StringAttribute{
-									MarkdownDescription: "Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'",
+									MarkdownDescription: "Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"any_path": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 							},
 						},
@@ -701,15 +701,15 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Value. Exact domain name.",
+									MarkdownDescription: "Exact domain name.",
 									Optional:            true,
 								},
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
+									MarkdownDescription: "Regular Expression value for the domain name.",
 									Optional:            true,
 								},
 								"suffix_value": schema.StringAttribute{
-									MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+									MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 									Optional:            true,
 								},
 							},
@@ -718,21 +718,21 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 				},
 			},
 			"drp_http_connect": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"network_connector": schema.SingleNestedBlock{
-				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+				MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{
@@ -742,10 +742,10 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 				},
 			},
 			"proxy_label_selector": schema.SingleNestedBlock{
-				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE.",
+				MarkdownDescription: "Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects.",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
-						MarkdownDescription: "Selector Expression. Expressions contains the Kubernetes style label expression for selections.",
+						MarkdownDescription: "Expressions contains the Kubernetes style label expression for selections.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
@@ -760,40 +760,40 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"action": schema.StringAttribute{
-									MarkdownDescription: "[Enum: DENY|ALLOW|NEXT_POLICY] Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set. Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY`.",
+									MarkdownDescription: "[Enum: DENY|ALLOW|NEXT_POLICY] The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to.. Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`. Defaults to `DENY`.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"all_destinations": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"all_sources": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"dst_asn_list": schema.SingleNestedBlock{
-									MarkdownDescription: "ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+									MarkdownDescription: "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 									Attributes: map[string]schema.Attribute{
 										"as_numbers": schema.ListAttribute{
-											MarkdownDescription: "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
+											MarkdownDescription: "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
 											Optional:            true,
 											ElementType:         types.Int64Type,
 										},
 									},
 								},
 								"dst_asn_set": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+									MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -803,18 +803,18 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"dst_ip_prefix_set": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+									MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -824,20 +824,20 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"dst_label_selector": schema.SingleNestedBlock{
-									MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE.",
+									MarkdownDescription: "Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects.",
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
-											MarkdownDescription: "Selector Expression. Expressions contains the Kubernetes style label expression for selections.",
+											MarkdownDescription: "Expressions contains the Kubernetes style label expression for selections.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 									},
 								},
 								"dst_prefix_list": schema.SingleNestedBlock{
-									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
+									MarkdownDescription: "List of IPv4 prefixes that represent an endpoint.",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
+											MarkdownDescription: "List of IPv4 prefixes that represent an endpoint.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
@@ -852,33 +852,33 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
 													"exact_value": schema.StringAttribute{
-														MarkdownDescription: "Exact Values. Exact domain name.",
+														MarkdownDescription: "Exact domain name.",
 														Optional:            true,
 													},
 													"path_exact_value": schema.StringAttribute{
-														MarkdownDescription: "Exact Path. Exact Path to match.",
+														MarkdownDescription: "Exact Path to match.",
 														Optional:            true,
 													},
 													"path_prefix_value": schema.StringAttribute{
-														MarkdownDescription: "Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'",
+														MarkdownDescription: "Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'.",
 														Optional:            true,
 													},
 													"path_regex_value": schema.StringAttribute{
-														MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match.",
+														MarkdownDescription: "Regular Expression value for the Path to match.",
 														Optional:            true,
 													},
 													"regex_value": schema.StringAttribute{
-														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
+														MarkdownDescription: "Regular Expression value for the domain name.",
 														Optional:            true,
 													},
 													"suffix_value": schema.StringAttribute{
-														MarkdownDescription: "Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'",
+														MarkdownDescription: "Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'.",
 														Optional:            true,
 													},
 												},
 												Blocks: map[string]schema.Block{
 													"any_path": schema.SingleNestedBlock{
-														MarkdownDescription: "Enable this option",
+														MarkdownDescription: "Can be used for messages where no values are needed.",
 													},
 												},
 											},
@@ -886,18 +886,18 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"ip_prefix_set": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+									MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -907,50 +907,50 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"label_selector": schema.SingleNestedBlock{
-									MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE.",
+									MarkdownDescription: "Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects.",
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
-											MarkdownDescription: "Selector Expression. Expressions contains the Kubernetes style label expression for selections.",
+											MarkdownDescription: "Expressions contains the Kubernetes style label expression for selections.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 									},
 								},
 								"metadata": schema.SingleNestedBlock{
-									MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
+									MarkdownDescription: "MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create..",
 									Attributes: map[string]schema.Attribute{
 										"description_spec": schema.StringAttribute{
 											MarkdownDescription: "Description. Human readable description.",
 											Optional:            true,
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
+											MarkdownDescription: "Name of the message. The value of name has to follow DNS-1035 format.",
 											Optional:            true,
 										},
 									},
 								},
 								"no_http_connect_port": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"port_matcher": schema.SingleNestedBlock{
-									MarkdownDescription: "Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true.",
+									MarkdownDescription: "Port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true.",
 									Attributes: map[string]schema.Attribute{
 										"invert_matcher": schema.BoolAttribute{
 											MarkdownDescription: "Invert Port Matcher. Invert the match result.",
 											Optional:            true,
 										},
 										"ports": schema.ListAttribute{
-											MarkdownDescription: "Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range.",
+											MarkdownDescription: "List of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 									},
 								},
 								"prefix_list": schema.SingleNestedBlock{
-									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
+									MarkdownDescription: "List of IPv4 prefixes that represent an endpoint.",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
+											MarkdownDescription: "List of IPv4 prefixes that represent an endpoint.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
@@ -965,15 +965,15 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
 													"exact_value": schema.StringAttribute{
-														MarkdownDescription: "Exact Value. Exact domain name.",
+														MarkdownDescription: "Exact domain name.",
 														Optional:            true,
 													},
 													"regex_value": schema.StringAttribute{
-														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
+														MarkdownDescription: "Regular Expression value for the domain name.",
 														Optional:            true,
 													},
 													"suffix_value": schema.StringAttribute{
-														MarkdownDescription: "Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'",
+														MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 														Optional:            true,
 													},
 												},
@@ -985,7 +985,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "URL Category List Type. List of URL categories.",
 									Attributes: map[string]schema.Attribute{
 										"url_categories": schema.ListAttribute{
-											MarkdownDescription: "[Enum: UNCATEGORIZED|REAL_ESTATE|COMPUTER_AND_INTERNET_SECURITY|FINANCIAL_SERVICES|BUSINESS_AND_ECONOMY|COMPUTER_AND_INTERNET_INFO|AUCTIONS|SHOPPING|CULT_AND_OCCULT|TRAVEL|ABUSED_DRUGS|ADULT_AND_PORNOGRAPHY|HOME_AND_GARDEN|MILITARY|SOCIAL_NETWORKING|DEAD_SITES|INDIVIDUAL_STOCK_ADVICE_AND_TOOLS|TRAINING_AND_TOOLS|DATING|SEX_EDUCATION|RELIGION|ENTERTAINMENT_AND_ARTS|PERSONAL_SITES_AND_BLOGS|LEGAL|LOCAL_INFORMATION|STREAMING_MEDIA|JOB_SEARCH|GAMBLING|TRANSLATION|REFERENCE_AND_RESEARCH|SHAREWARE_AND_FREEWARE|PEER_TO_PEER|MARIJUANA|HACKING|GAMES|PHILOSOPHY_AND_POLITICAL_ADVOCACY|WEAPONS|PAY_TO_SURF|HUNTING_AND_FISHING|SOCIETY|EDUCATIONAL_INSTITUTIONS|ONLINE_GREETING_CARDS|SPORTS|SWIMSUITS_AND_INTIMATE_APPAREL|QUESTIONABLE|KIDS|HATE_AND_RACISM|PERSONAL_STORAGE|VIOLENCE|KEYLOGGERS_AND_MONITORING|SEARCH_ENGINES|INTERNET_PORTALS|WEB_ADVERTISEMENTS|CHEATING|GROSS|WEB_BASED_EMAIL|MALWARE_SITES|PHISHING_AND_OTHER_FRAUDS|PROXY_AVOIDANCE_AND_ANONYMIZERS|SPYWARE_AND_ADWARE|MUSIC|GOVERNMENT|NUDITY|NEWS_AND_MEDIA|ILLEGAL|CONTENT_DELIVERY_NETWORKS|INTERNET_COMMUNICATIONS|BOT_NETS|ABORTION|HEALTH_AND_MEDICINE|CONFIRMED_SPAM_SOURCES|SPAM_URLS|UNCONFIRMED_SPAM_SOURCES|OPEN_HTTP_PROXIES|DYNAMICALLY_GENERATED_CONTENT|PARKED_DOMAINS|ALCOHOL_AND_TOBACCO|PRIVATE_IP_ADDRESSES|IMAGE_AND_VIDEO_SEARCH|FASHION_AND_BEAUTY|RECREATION_AND_HOBBIES|MOTOR_VEHICLES|WEB_HOSTING] URL Categories. List of URL categories to be selected . Possible values are `UNCATEGORIZED`, `REAL_ESTATE`, `COMPUTER_AND_INTERNET_SECURITY`, `FINANCIAL_SERVICES`, `BUSINESS_AND_ECONOMY`, `COMPUTER_AND_INTERNET_INFO`, `AUCTIONS`, `SHOPPING`, `CULT_AND_OCCULT`, `TRAVEL`, `ABUSED_DRUGS`, `ADULT_AND_PORNOGRAPHY`, `HOME_AND_GARDEN`, `MILITARY`, `SOCIAL_NETWORKING`, `DEAD_SITES`, `INDIVIDUAL_STOCK_ADVICE_AND_TOOLS`, `TRAINING_AND_TOOLS`, `DATING`, `SEX_EDUCATION`, `RELIGION`, `ENTERTAINMENT_AND_ARTS`, `PERSONAL_SITES_AND_BLOGS`, `LEGAL`, `LOCAL_INFORMATION`, `STREAMING_MEDIA`, `JOB_SEARCH`, `GAMBLING`, `TRANSLATION`, `REFERENCE_AND_RESEARCH`, `SHAREWARE_AND_FREEWARE`, `PEER_TO_PEER`, `MARIJUANA`, `HACKING`, `GAMES`, `PHILOSOPHY_AND_POLITICAL_ADVOCACY`, `WEAPONS`, `PAY_TO_SURF`, `HUNTING_AND_FISHING`, `SOCIETY`, `EDUCATIONAL_INSTITUTIONS`, `ONLINE_GREETING_CARDS`, `SPORTS`, `SWIMSUITS_AND_INTIMATE_APPAREL`, `QUESTIONABLE`, `KIDS`, `HATE_AND_RACISM`, `PERSONAL_STORAGE`, `VIOLENCE`, `KEYLOGGERS_AND_MONITORING`, `SEARCH_ENGINES`, `INTERNET_PORTALS`, `WEB_ADVERTISEMENTS`, `CHEATING`, `GROSS`, `WEB_BASED_EMAIL`, `MALWARE_SITES`, `PHISHING_AND_OTHER_FRAUDS`, `PROXY_AVOIDANCE_AND_ANONYMIZERS`, `SPYWARE_AND_ADWARE`, `MUSIC`, `GOVERNMENT`, `NUDITY`, `NEWS_AND_MEDIA`, `ILLEGAL`, `CONTENT_DELIVERY_NETWORKS`, `INTERNET_COMMUNICATIONS`, `BOT_NETS`, `ABORTION`, `HEALTH_AND_MEDICINE`, `CONFIRMED_SPAM_SOURCES`, `SPAM_URLS`, `UNCONFIRMED_SPAM_SOURCES`, `OPEN_HTTP_PROXIES`, `DYNAMICALLY_GENERATED_CONTENT`, `PARKED_DOMAINS`, `ALCOHOL_AND_TOBACCO`, `PRIVATE_IP_ADDRESSES`, `IMAGE_AND_VIDEO_SEARCH`, `FASHION_AND_BEAUTY`, `RECREATION_AND_HOBBIES`, `MOTOR_VEHICLES`, `WEB_HOSTING`. Defaults to `UNCATEGORIZED`.",
+											MarkdownDescription: "[Enum: UNCATEGORIZED|REAL_ESTATE|COMPUTER_AND_INTERNET_SECURITY|FINANCIAL_SERVICES|BUSINESS_AND_ECONOMY|COMPUTER_AND_INTERNET_INFO|AUCTIONS|SHOPPING|CULT_AND_OCCULT|TRAVEL|ABUSED_DRUGS|ADULT_AND_PORNOGRAPHY|HOME_AND_GARDEN|MILITARY|SOCIAL_NETWORKING|DEAD_SITES|INDIVIDUAL_STOCK_ADVICE_AND_TOOLS|TRAINING_AND_TOOLS|DATING|SEX_EDUCATION|RELIGION|ENTERTAINMENT_AND_ARTS|PERSONAL_SITES_AND_BLOGS|LEGAL|LOCAL_INFORMATION|STREAMING_MEDIA|JOB_SEARCH|GAMBLING|TRANSLATION|REFERENCE_AND_RESEARCH|SHAREWARE_AND_FREEWARE|PEER_TO_PEER|MARIJUANA|HACKING|GAMES|PHILOSOPHY_AND_POLITICAL_ADVOCACY|WEAPONS|PAY_TO_SURF|HUNTING_AND_FISHING|SOCIETY|EDUCATIONAL_INSTITUTIONS|ONLINE_GREETING_CARDS|SPORTS|SWIMSUITS_AND_INTIMATE_APPAREL|QUESTIONABLE|KIDS|HATE_AND_RACISM|PERSONAL_STORAGE|VIOLENCE|KEYLOGGERS_AND_MONITORING|SEARCH_ENGINES|INTERNET_PORTALS|WEB_ADVERTISEMENTS|CHEATING|GROSS|WEB_BASED_EMAIL|MALWARE_SITES|PHISHING_AND_OTHER_FRAUDS|PROXY_AVOIDANCE_AND_ANONYMIZERS|SPYWARE_AND_ADWARE|MUSIC|GOVERNMENT|NUDITY|NEWS_AND_MEDIA|ILLEGAL|CONTENT_DELIVERY_NETWORKS|INTERNET_COMMUNICATIONS|BOT_NETS|ABORTION|HEALTH_AND_MEDICINE|CONFIRMED_SPAM_SOURCES|SPAM_URLS|UNCONFIRMED_SPAM_SOURCES|OPEN_HTTP_PROXIES|DYNAMICALLY_GENERATED_CONTENT|PARKED_DOMAINS|ALCOHOL_AND_TOBACCO|PRIVATE_IP_ADDRESSES|IMAGE_AND_VIDEO_SEARCH|FASHION_AND_BEAUTY|RECREATION_AND_HOBBIES|MOTOR_VEHICLES|WEB_HOSTING] List of URL categories to be selected . Possible values are `UNCATEGORIZED`, `REAL_ESTATE`, `COMPUTER_AND_INTERNET_SECURITY`, `FINANCIAL_SERVICES`, `BUSINESS_AND_ECONOMY`, `COMPUTER_AND_INTERNET_INFO`, `AUCTIONS`, `SHOPPING`, `CULT_AND_OCCULT`, `TRAVEL`, `ABUSED_DRUGS`, `ADULT_AND_PORNOGRAPHY`, `HOME_AND_GARDEN`, `MILITARY`, `SOCIAL_NETWORKING`, `DEAD_SITES`, `INDIVIDUAL_STOCK_ADVICE_AND_TOOLS`, `TRAINING_AND_TOOLS`, `DATING`, `SEX_EDUCATION`, `RELIGION`, `ENTERTAINMENT_AND_ARTS`, `PERSONAL_SITES_AND_BLOGS`, `LEGAL`, `LOCAL_INFORMATION`, `STREAMING_MEDIA`, `JOB_SEARCH`, `GAMBLING`, `TRANSLATION`, `REFERENCE_AND_RESEARCH`, `SHAREWARE_AND_FREEWARE`, `PEER_TO_PEER`, `MARIJUANA`, `HACKING`, `GAMES`, `PHILOSOPHY_AND_POLITICAL_ADVOCACY`, `WEAPONS`, `PAY_TO_SURF`, `HUNTING_AND_FISHING`, `SOCIETY`, `EDUCATIONAL_INSTITUTIONS`, `ONLINE_GREETING_CARDS`, `SPORTS`, `SWIMSUITS_AND_INTIMATE_APPAREL`, `QUESTIONABLE`, `KIDS`, `HATE_AND_RACISM`, `PERSONAL_STORAGE`, `VIOLENCE`, `KEYLOGGERS_AND_MONITORING`, `SEARCH_ENGINES`, `INTERNET_PORTALS`, `WEB_ADVERTISEMENTS`, `CHEATING`, `GROSS`, `WEB_BASED_EMAIL`, `MALWARE_SITES`, `PHISHING_AND_OTHER_FRAUDS`, `PROXY_AVOIDANCE_AND_ANONYMIZERS`, `SPYWARE_AND_ADWARE`, `MUSIC`, `GOVERNMENT`, `NUDITY`, `NEWS_AND_MEDIA`, `ILLEGAL`, `CONTENT_DELIVERY_NETWORKS`, `INTERNET_COMMUNICATIONS`, `BOT_NETS`, `ABORTION`, `HEALTH_AND_MEDICINE`, `CONFIRMED_SPAM_SOURCES`, `SPAM_URLS`, `UNCONFIRMED_SPAM_SOURCES`, `OPEN_HTTP_PROXIES`, `DYNAMICALLY_GENERATED_CONTENT`, `PARKED_DOMAINS`, `ALCOHOL_AND_TOBACCO`, `PRIVATE_IP_ADDRESSES`, `IMAGE_AND_VIDEO_SEARCH`, `FASHION_AND_BEAUTY`, `RECREATION_AND_HOBBIES`, `MOTOR_VEHICLES`, `WEB_HOSTING`. Defaults to `UNCATEGORIZED`.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},

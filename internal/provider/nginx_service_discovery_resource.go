@@ -214,11 +214,11 @@ func (r *NginxServiceDiscoveryResource) Schema(ctx context.Context, req resource
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"config_sync_group": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. Select new ConfigSyncGroup .",
+								MarkdownDescription: "Select new ConfigSyncGroup .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
-											MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -226,15 +226,15 @@ func (r *NginxServiceDiscoveryResource) Schema(ctx context.Context, req resource
 											},
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -242,7 +242,7 @@ func (r *NginxServiceDiscoveryResource) Schema(ctx context.Context, req resource
 											},
 										},
 										"uid": schema.StringAttribute{
-											MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -259,11 +259,11 @@ func (r *NginxServiceDiscoveryResource) Schema(ctx context.Context, req resource
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"nginx_instance": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. Select new NGINX Instance .",
+								MarkdownDescription: "Select new NGINX Instance .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
-											MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -271,15 +271,15 @@ func (r *NginxServiceDiscoveryResource) Schema(ctx context.Context, req resource
 											},
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -287,7 +287,7 @@ func (r *NginxServiceDiscoveryResource) Schema(ctx context.Context, req resource
 											},
 										},
 										"uid": schema.StringAttribute{
-											MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -302,15 +302,15 @@ func (r *NginxServiceDiscoveryResource) Schema(ctx context.Context, req resource
 				},
 			},
 			"server_block_filters": schema.ListNestedBlock{
-				MarkdownDescription: "Server Block Filter. Filters discovered server blocks based on server name, domain and ports. Atleast, one field should be populated for each filter. X-textBlockContent: If no filters are specified, all server blocks will be discovered by default.",
+				MarkdownDescription: "Filters discovered server blocks based on server name, domain and ports. Atleast, one field should be populated for each filter. X-textBlockContent: If no filters are specified, all server blocks will be discovered by default.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"name_regex": schema.StringAttribute{
-							MarkdownDescription: "Regex To Match Server name or Domain. Regular expression to match the server name or domain that must be discovered.",
+							MarkdownDescription: "Regular expression to match the server name or domain that must be discovered.",
 							Optional:            true,
 						},
 						"port_ranges": schema.StringAttribute{
-							MarkdownDescription: "Port Ranges. A string containing a comma separated list of individual service ports or port ranges. Each port range consists of a single port or two ports separated by '-'. For example, 8000-8191. Maximum number of ports allowed is 1024.",
+							MarkdownDescription: "String containing a comma separated list of individual service ports or port ranges. Each port range consists of a single port or two ports separated by '-'. For example, 8000-8191.",
 							Optional:            true,
 						},
 					},

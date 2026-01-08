@@ -2,12 +2,12 @@
 page_title: "f5xc_fast_acl Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages fast_acl object, fast_acl object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to fast_acl_rule in F5 Distributed Cloud.
+  Manages new Fast ACL rule, has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.
 ---
 
 # f5xc_fast_acl (Data Source)
 
-Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
+Manages new Fast ACL rule, has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

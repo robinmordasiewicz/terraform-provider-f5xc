@@ -16,7 +16,7 @@ resource "f5xc_api_crawler" "example" {
   }
 
   # Resource-specific configuration
-  # API Crawler. API Crawler Configuration .
+  # API Crawler Configuration .
   domains {
     # Configure domains settings
   }
@@ -24,7 +24,7 @@ resource "f5xc_api_crawler" "example" {
   simple_login {
     # Configure simple_login settings
   }
-  # Secret. SecretType is used in an object to indicate a sen...
+  # SecretType is used in an object to indicate a sensitive/c...
   password {
     # Configure password settings
   }

@@ -297,16 +297,16 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Delete: true,
 			}),
 			"app_type_settings": schema.ListNestedBlock{
-				MarkdownDescription: "Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace .",
+				MarkdownDescription: "List of settings to enable for each AppType, given instance of AppType Exist in this Namespace .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"app_type_ref": schema.ListNestedBlock{
-							MarkdownDescription: "AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data .",
+							MarkdownDescription: "The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data .",
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"kind": schema.StringAttribute{
-										MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -314,15 +314,15 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -330,7 +330,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"uid": schema.StringAttribute{
-										MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -341,14 +341,14 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 						},
 						"business_logic_markup_setting": schema.SingleNestedBlock{
-							MarkdownDescription: "API Discovery. Settings specifying how API Discovery will be performed.",
+							MarkdownDescription: "Settings specifying how API Discovery will be performed.",
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"disable": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"enable": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 							},
 						},
@@ -357,16 +357,16 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"metric_selectors": schema.ListNestedBlock{
-									MarkdownDescription: "Metric Selectors. Define the metric selection criteria, i.e. The metrics source and the actual metrics that should be included in the detection logic.",
+									MarkdownDescription: "Define the metric selection criteria, i.e. The metrics source and the actual metrics that should be included in the detection logic.",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"metric": schema.ListAttribute{
-												MarkdownDescription: "[Enum: NO_METRICS|REQUEST_RATE|ERROR_RATE|LATENCY|THROUGHPUT] Metrics. Choose one or more metrics to be included in the detection logic. Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`. Defaults to `NO_METRICS`.",
+												MarkdownDescription: "[Enum: NO_METRICS|REQUEST_RATE|ERROR_RATE|LATENCY|THROUGHPUT] Choose one or more metrics to be included in the detection logic. Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`. Defaults to `NO_METRICS`.",
 												Optional:            true,
 												ElementType:         types.StringType,
 											},
 											"metrics_source": schema.StringAttribute{
-												MarkdownDescription: "[Enum: NONE|NODES|EDGES|VIRTUAL_HOSTS] Metrics Source. Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations. Possible values are `NONE`, `NODES`, `EDGES`, `VIRTUAL_HOSTS`.",
+												MarkdownDescription: "[Enum: NONE|NODES|EDGES|VIRTUAL_HOSTS] Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations. Possible values are `NONE`, `NODES`, `EDGES`, `VIRTUAL_HOSTS`.",
 												Optional:            true,
 											},
 										},
@@ -375,87 +375,87 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 						},
 						"user_behavior_analysis_setting": schema.SingleNestedBlock{
-							MarkdownDescription: "User Behavior Analysis Setting. Configuration for user behavior analysis.",
+							MarkdownDescription: "Configuration for user behavior analysis.",
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"disable_detection": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"disable_learning": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"enable_detection": schema.SingleNestedBlock{
-									MarkdownDescription: "Malicious User Detection Settings. Various factors about user activity are monitored and analysed to determine malicious users. These settings allow tuning those factors used by the system to detect malicious users.",
+									MarkdownDescription: "Various factors about user activity are monitored and analysed to determine malicious users. These settings allow tuning those factors used by the system to detect malicious users.",
 									Attributes: map[string]schema.Attribute{
 										"cooling_off_period": schema.Int64Attribute{
-											MarkdownDescription: "Cooling off period. Malicious user detection assigns a threat level to each user based on their activity. Once a threat level is assigned, the system continues tracking activity from this user and if no further malicious activity is seen, it gradually reduces the threat assesment to lower levels. This field specifies the time period, in minutes, used by the system to decay a user's threat level from a high to medium or medium to low or low to none.",
+											MarkdownDescription: "Malicious user detection assigns a threat level to each user based on their activity. Once a threat level is assigned, the system continues tracking activity from this user and if no further malicious activity is seen, it gradually reduces the threat assesment to lower levels..",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"bola_detection_automatic": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"exclude_bola_detection": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"exclude_bot_defense_activity": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"exclude_failed_login_activity": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"exclude_forbidden_activity": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"exclude_ip_reputation": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"exclude_non_existent_url_activity": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"exclude_rate_limit": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"exclude_waf_activity": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"include_bot_defense_activity": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"include_failed_login_activity": schema.SingleNestedBlock{
-											MarkdownDescription: "Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior.",
+											MarkdownDescription: "When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior.",
 											Attributes: map[string]schema.Attribute{
 												"login_failures_threshold": schema.Int64Attribute{
-													MarkdownDescription: "Login Failures Threshold. The number of failed logins beyond which the system will flag this user as malicious .",
+													MarkdownDescription: "The number of failed logins beyond which the system will flag this user as malicious .",
 													Optional:            true,
 												},
 											},
 										},
 										"include_forbidden_activity": schema.SingleNestedBlock{
-											MarkdownDescription: "Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior.",
+											MarkdownDescription: "When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior.",
 											Attributes: map[string]schema.Attribute{
 												"forbidden_requests_threshold": schema.Int64Attribute{
-													MarkdownDescription: "Forbidden Requests Threshold. The number of forbidden requests beyond which the system will flag this user as malicious .",
+													MarkdownDescription: "The number of forbidden requests beyond which the system will flag this user as malicious .",
 													Optional:            true,
 												},
 											},
 										},
 										"include_ip_reputation": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"include_non_existent_url_activity_automatic": schema.SingleNestedBlock{
 											MarkdownDescription: "Non-existent URL Automatic Activity Settings.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"high": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
+													MarkdownDescription: "Can be used for messages where no values are needed.",
 												},
 												"low": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
+													MarkdownDescription: "Can be used for messages where no values are needed.",
 												},
 												"medium": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
+													MarkdownDescription: "Can be used for messages where no values are needed.",
 												},
 											},
 										},
@@ -463,21 +463,21 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Non-existent URL Custom Activity Setting.",
 											Attributes: map[string]schema.Attribute{
 												"nonexistent_requests_threshold": schema.Int64Attribute{
-													MarkdownDescription: "Non-existent URL Custom Threshold (percentage). The percentage of non-existent requests beyond which the system will flag this user as malicious .",
+													MarkdownDescription: "The percentage of non-existent requests beyond which the system will flag this user as malicious .",
 													Optional:            true,
 												},
 											},
 										},
 										"include_rate_limit": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 										"include_waf_activity": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 									},
 								},
 								"enable_learning": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 							},
 						},

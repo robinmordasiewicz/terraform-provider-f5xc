@@ -160,23 +160,23 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Delete: true,
 			}),
 			"business_logic_markup_setting": schema.SingleNestedBlock{
-				MarkdownDescription: "API Discovery Settings. Settings specifying how API Discovery will be performed.",
+				MarkdownDescription: "Settings specifying how API Discovery will be performed.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"discovered_api_settings": schema.SingleNestedBlock{
 						MarkdownDescription: "Discovered API Settings. Configure Discovered API Settings.",
 						Attributes: map[string]schema.Attribute{
 							"purge_duration_for_inactive_discovered_apis": schema.Int64Attribute{
-								MarkdownDescription: "Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration.",
+								MarkdownDescription: "Inactive discovered API will be deleted after configured duration.",
 								Optional:            true,
 							},
 						},
 					},
 					"enable": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 				},
 			},
@@ -185,7 +185,7 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"type": schema.StringAttribute{
-							MarkdownDescription: "[Enum: BUSINESS_LOGIC_MARKUP|TIMESERIES_ANOMALY_DETECTION|PER_REQ_ANOMALY_DETECTION|USER_BEHAVIOR_ANALYSIS] AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. The probability density function (PDF) charts generation for API endpoints Enable user behavior analysis. Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`. Defaults to `BUSINESS_LOGIC_MARKUP`.",
+							MarkdownDescription: "[Enum: BUSINESS_LOGIC_MARKUP|TIMESERIES_ANOMALY_DETECTION|PER_REQ_ANOMALY_DETECTION|USER_BEHAVIOR_ANALYSIS] Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`. Defaults to `BUSINESS_LOGIC_MARKUP`.",
 							Optional:            true,
 						},
 					},

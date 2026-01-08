@@ -1681,7 +1681,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"address": schema.StringAttribute{
-				MarkdownDescription: "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude.",
+				MarkdownDescription: "Site's geographical address that can be used to determine its latitude and longitude.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -1697,7 +1697,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"disk_size": schema.Int64Attribute{
-				MarkdownDescription: "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB.",
+				MarkdownDescription: "Disk size to be used for this instance in GiB. 80 is 80 GiB.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -1705,7 +1705,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"instance_type": schema.StringAttribute{
-				MarkdownDescription: "AWS Instance Type for Node. Select Instance size based on performance needed .",
+				MarkdownDescription: "Select Instance size based on performance needed .",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -1713,7 +1713,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"nodes_per_az": schema.Int64Attribute{
-				MarkdownDescription: "Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21.",
+				MarkdownDescription: "Desired Worker Nodes Per AZ. Max limit is up to 21.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -1721,7 +1721,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"ssh_key": schema.StringAttribute{
-				MarkdownDescription: "Public SSH key. Public SSH key for accessing the site.",
+				MarkdownDescription: "Public SSH key for accessing the site.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -1729,7 +1729,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"total_nodes": schema.Int64Attribute{
-				MarkdownDescription: "Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site.",
+				MarkdownDescription: "Total number of worker nodes to be deployed across all AZ's used in the Site.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -1745,35 +1745,35 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Delete: true,
 			}),
 			"admin_password": schema.SingleNestedBlock{
-				MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+				MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blindfold_secret_info": schema.SingleNestedBlock{
-						MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+						MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 						Attributes: map[string]schema.Attribute{
 							"decryption_provider": schema.StringAttribute{
-								MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+								MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 								Optional:            true,
 							},
 							"location": schema.StringAttribute{
-								MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+								MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 								Optional:            true,
 							},
 							"store_provider": schema.StringAttribute{
-								MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+								MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 								Optional:            true,
 							},
 						},
 					},
 					"clear_secret_info": schema.SingleNestedBlock{
-						MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+						MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 						Attributes: map[string]schema.Attribute{
 							"provider_ref": schema.StringAttribute{
-								MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+								MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 								Optional:            true,
 							},
 							"url": schema.StringAttribute{
-								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+								MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 								Optional:            true,
 							},
 						},
@@ -1781,18 +1781,18 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"aws_cred": schema.SingleNestedBlock{
-				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+				MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{
@@ -1802,10 +1802,10 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"block_all_services": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option",
+				MarkdownDescription: "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Can be used for messages where no values are needed.",
 			},
 			"blocked_services": schema.SingleNestedBlock{
-				MarkdownDescription: "Disable Node Local Services. Disable node local services on this site. Note: The chosen services will GET disabled on all nodes in the site.",
+				MarkdownDescription: "Disable node local services on this site.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blocked_sevice": schema.ListNestedBlock{
@@ -1813,19 +1813,19 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
-									MarkdownDescription: "[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. For F5 Distributed Cloud fabric Constraints: It is currently only supported as internally created by the system. VK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on F5 Distributed Cloud RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
+									MarkdownDescription: "[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to.. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"dns": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"ssh": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"web_user_interface": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 							},
 						},
@@ -1833,7 +1833,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"coordinates": schema.SingleNestedBlock{
-				MarkdownDescription: "Site Coordinates. Coordinates of the site which provides the site physical location.",
+				MarkdownDescription: "Coordinates of the site which provides the site physical location.",
 				Attributes: map[string]schema.Attribute{
 					"latitude": schema.Int64Attribute{
 						MarkdownDescription: "Latitude. Latitude of the site location.",
@@ -1846,81 +1846,81 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"custom_dns": schema.SingleNestedBlock{
-				MarkdownDescription: "Custom DNS. Custom DNS is the configured for specify CE site.",
+				MarkdownDescription: "Custom DNS is the configured for specify CE site.",
 				Attributes: map[string]schema.Attribute{
 					"inside_nameserver": schema.StringAttribute{
-						MarkdownDescription: "DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network.",
+						MarkdownDescription: "Optional DNS server IP to be used for name resolution in inside network.",
 						Optional:            true,
 					},
 					"outside_nameserver": schema.StringAttribute{
-						MarkdownDescription: "DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network.",
+						MarkdownDescription: "Optional DNS server IP to be used for name resolution in outside network.",
 						Optional:            true,
 					},
 				},
 			},
 			"custom_security_group": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: custom_security_group, f5xc_security_group] Security Group IDs. Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC.",
+				MarkdownDescription: "[OneOf: custom_security_group, f5xc_security_group] Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC.",
 				Attributes: map[string]schema.Attribute{
 					"inside_security_group_id": schema.StringAttribute{
-						MarkdownDescription: "Inside Security Group ID. Security Group ID to be attached to SLI(Site Local Inside) Interface.",
+						MarkdownDescription: "Security Group ID to be attached to SLI(Site Local Inside) Interface.",
 						Optional:            true,
 					},
 					"outside_security_group_id": schema.StringAttribute{
-						MarkdownDescription: "Outside Security Group ID. Security Group ID to be attached to SLO(Site Local Outside) Interface.",
+						MarkdownDescription: "Security Group ID to be attached to SLO(Site Local Outside) Interface.",
 						Optional:            true,
 					},
 				},
 			},
 			"default_blocked_services": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"direct_connect_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Enable this option",
+				MarkdownDescription: "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Can be used for messages where no values are needed.",
 			},
 			"direct_connect_enabled": schema.SingleNestedBlock{
 				MarkdownDescription: "Direct Connect Configuration. Direct Connect Configuration.",
 				Attributes: map[string]schema.Attribute{
 					"custom_asn": schema.Int64Attribute{
-						MarkdownDescription: "Custom ASN. Custom Autonomous System Number.",
+						MarkdownDescription: "Custom Autonomous System Number.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"auto_asn": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"hosted_vifs": schema.SingleNestedBlock{
-						MarkdownDescription: "AWS Direct Connect Hosted VIF Config. AWS Direct Connect Hosted VIF Configuration.",
+						MarkdownDescription: "AWS Direct Connect Hosted VIF Configuration.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"site_registration_over_direct_connect": schema.SingleNestedBlock{
 								MarkdownDescription: "CloudLink ADN Network Config.",
 								Attributes: map[string]schema.Attribute{
 									"cloudlink_network_name": schema.StringAttribute{
-										MarkdownDescription: "Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support.",
+										MarkdownDescription: "Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support.",
 										Optional:            true,
 									},
 								},
 							},
 							"site_registration_over_internet": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"vif_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of Hosted VIF Config. List of Hosted VIF Config.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"other_region": schema.StringAttribute{
-											MarkdownDescription: "Other Region. Other Region.",
+											MarkdownDescription: "Other Region.",
 											Optional:            true,
 										},
 										"vif_id": schema.StringAttribute{
-											MarkdownDescription: "VIF ID. AWS Direct Connect VIF ID that needs to be connected to the site .",
+											MarkdownDescription: "AWS Direct Connect VIF ID that needs to be connected to the site .",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"same_as_site_region": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
+											MarkdownDescription: "Can be used for messages where no values are needed.",
 										},
 									},
 								},
@@ -1928,18 +1928,18 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"standard_vifs": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 				},
 			},
 			"disable_internet_vip": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_internet_vip, enable_internet_vip; Default: disable_internet_vip] Enable this option",
+				MarkdownDescription: "[OneOf: disable_internet_vip, enable_internet_vip; Default: disable_internet_vip] Can be used for messages where no values are needed.",
 			},
 			"egress_gateway_default": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: egress_gateway_default, egress_nat_gw, egress_virtual_private_gateway; Default: egress_gateway_default] Enable this option",
+				MarkdownDescription: "[OneOf: egress_gateway_default, egress_nat_gw, egress_virtual_private_gateway; Default: egress_gateway_default] Can be used for messages where no values are needed.",
 			},
 			"egress_nat_gw": schema.SingleNestedBlock{
-				MarkdownDescription: "AWS NAT Gateway choice. With this option, egress site traffic will be routed through an Network Address Translation(NAT) Gateway.",
+				MarkdownDescription: "With this option, egress site traffic will be routed through an Network Address Translation(NAT) Gateway.",
 				Attributes: map[string]schema.Attribute{
 					"nat_gw_id": schema.StringAttribute{
 						MarkdownDescription: "Existing NAT Gateway ID.",
@@ -1948,7 +1948,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"egress_virtual_private_gateway": schema.SingleNestedBlock{
-				MarkdownDescription: "AWS Virtual Private Gateway choice. With this option, egress site traffic will be routed through an Virtual Private Gateway.",
+				MarkdownDescription: "With this option, egress site traffic will be routed through an Virtual Private Gateway.",
 				Attributes: map[string]schema.Attribute{
 					"vgw_id": schema.StringAttribute{
 						MarkdownDescription: "Existing Virtual Private Gateway ID.",
@@ -1957,41 +1957,41 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"enable_internet_vip": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"f5_orchestrated_routing": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: f5_orchestrated_routing, manual_routing] Enable this option",
+				MarkdownDescription: "[OneOf: f5_orchestrated_routing, manual_routing] Can be used for messages where no values are needed.",
 			},
 			"f5xc_security_group": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"ingress_egress_gw": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: ingress_egress_gw, ingress_gw, voltstack_cluster] AWS Ingress/Egress Gateway. Two interface AWS ingress/egress site.",
 				Attributes: map[string]schema.Attribute{
 					"aws_certified_hw": schema.StringAttribute{
-						MarkdownDescription: "AWS Certified Hardware. Name for AWS certified hardware.",
+						MarkdownDescription: "Name for AWS certified hardware.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
+						MarkdownDescription: "List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active .",
+								MarkdownDescription: "Ordered List of Enhanced Firewall Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -2004,23 +2004,23 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active.",
+						MarkdownDescription: "Ordered List of Forward Proxy Policies active.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active .",
+								MarkdownDescription: "Ordered List of Forward Proxy Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -2037,19 +2037,19 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall .",
+								MarkdownDescription: "Ordered List of Firewall Policies active for this network firewall .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -2062,7 +2062,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"allowed_vip_port": schema.SingleNestedBlock{
-						MarkdownDescription: "Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site.",
+						MarkdownDescription: "Defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"custom_ports": schema.SingleNestedBlock{
@@ -2075,21 +2075,21 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"disable_allowed_vip_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"use_http_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"use_http_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"use_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 						},
 					},
 					"allowed_vip_port_sli": schema.SingleNestedBlock{
-						MarkdownDescription: "Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site.",
+						MarkdownDescription: "Defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"custom_ports": schema.SingleNestedBlock{
@@ -2102,25 +2102,25 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"disable_allowed_vip_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"use_http_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"use_http_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"use_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 						},
 					},
 					"az_nodes": schema.ListNestedBlock{
-						MarkdownDescription: "Ingress/Egress Gateway (two Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently.",
+						MarkdownDescription: "Only Single AZ or Three AZ(s) nodes are supported currently.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"aws_az_name": schema.StringAttribute{
-									MarkdownDescription: "AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region.",
+									MarkdownDescription: "AWS availability zone, must be consistent with the selected AWS region.",
 									Optional:            true,
 								},
 							},
@@ -2129,16 +2129,16 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet.",
 									Attributes: map[string]schema.Attribute{
 										"existing_subnet_id": schema.StringAttribute{
-											MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID.",
+											MarkdownDescription: "Information about existing subnet ID.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
+											MarkdownDescription: "Parameters for creating a new cloud subnet.",
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
+													MarkdownDescription: "IPv4 subnet prefix for this subnet .",
 													Optional:            true,
 												},
 											},
@@ -2149,16 +2149,16 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet.",
 									Attributes: map[string]schema.Attribute{
 										"existing_subnet_id": schema.StringAttribute{
-											MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID.",
+											MarkdownDescription: "Information about existing subnet ID.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
+											MarkdownDescription: "Parameters for creating a new cloud subnet.",
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
+													MarkdownDescription: "IPv4 subnet prefix for this subnet .",
 													Optional:            true,
 												},
 											},
@@ -2166,22 +2166,22 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 								},
 								"reserved_inside_subnet": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"workload_subnet": schema.SingleNestedBlock{
 									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet.",
 									Attributes: map[string]schema.Attribute{
 										"existing_subnet_id": schema.StringAttribute{
-											MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID.",
+											MarkdownDescription: "Information about existing subnet ID.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
+											MarkdownDescription: "Parameters for creating a new cloud subnet.",
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
+													MarkdownDescription: "IPv4 subnet prefix for this subnet .",
 													Optional:            true,
 												},
 											},
@@ -2192,18 +2192,18 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"dc_cluster_group_inside_vn": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -2213,18 +2213,18 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"dc_cluster_group_outside_vn": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -2234,34 +2234,34 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"forward_proxy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
-								MarkdownDescription: "Global Network Connections. Global network connections .",
+								MarkdownDescription: "Global network connections .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection.",
+											MarkdownDescription: "Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+													MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+															MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+															MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+															MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -2273,22 +2273,22 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection.",
+											MarkdownDescription: "Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+													MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+															MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+															MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+															MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -2313,39 +2313,39 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network.",
+											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_static_route": schema.SingleNestedBlock{
-											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
+											MarkdownDescription: "Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
-													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy.",
+													MarkdownDescription: "Add Labels for this Static Route, these labels can be used in network policy.",
 												},
 												"nexthop": schema.SingleNestedBlock{
 													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
-															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
+															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN.. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"interface": schema.ListNestedBlock{
-															MarkdownDescription: "Network Interface. Nexthop is network interface when type is 'Network-Interface'",
+															MarkdownDescription: "Nexthop is network interface when type is 'Network-Interface'.",
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
-																		MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -2353,15 +2353,15 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																		},
 																	},
 																	"name": schema.StringAttribute{
-																		MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
-																		MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
-																		MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -2369,7 +2369,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																		},
 																	},
 																	"uid": schema.StringAttribute{
-																		MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -2380,23 +2380,23 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
-															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
+															MarkdownDescription: "IP Address used to specify an IPv4 or IPv6 address.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
+																			MarkdownDescription: "IPv4 Address in string form with dot-decimal notation.",
 																			Optional:            true,
 																		},
 																	},
 																},
 																"ipv6": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'",
+																	MarkdownDescription: "IPv6 Address specified as hexadecimal numbers separated by ':'.",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
+																			MarkdownDescription: "IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'.",
 																			Optional:            true,
 																		},
 																	},
@@ -2411,27 +2411,27 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
+																MarkdownDescription: "IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32.",
+																		MarkdownDescription: "Prefix-length of the IPv4 subnet. Must be <= 32.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
+																		MarkdownDescription: "Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
 																		Optional:            true,
 																	},
 																},
 															},
 															"ipv6": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
+																MarkdownDescription: "IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128.",
+																		MarkdownDescription: "Prefix length of the IPv6 subnet. Must be <= 128.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
+																		MarkdownDescription: "Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'.",
 																		Optional:            true,
 																	},
 																},
@@ -2447,22 +2447,22 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"no_dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"no_forward_proxy": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"no_global_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"no_inside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"no_network_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"no_outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes.",
@@ -2473,39 +2473,39 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network.",
+											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_static_route": schema.SingleNestedBlock{
-											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
+											MarkdownDescription: "Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
-													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy.",
+													MarkdownDescription: "Add Labels for this Static Route, these labels can be used in network policy.",
 												},
 												"nexthop": schema.SingleNestedBlock{
 													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
-															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
+															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN.. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"interface": schema.ListNestedBlock{
-															MarkdownDescription: "Network Interface. Nexthop is network interface when type is 'Network-Interface'",
+															MarkdownDescription: "Nexthop is network interface when type is 'Network-Interface'.",
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
-																		MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -2513,15 +2513,15 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																		},
 																	},
 																	"name": schema.StringAttribute{
-																		MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
-																		MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
-																		MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -2529,7 +2529,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																		},
 																	},
 																	"uid": schema.StringAttribute{
-																		MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -2540,23 +2540,23 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
-															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
+															MarkdownDescription: "IP Address used to specify an IPv4 or IPv6 address.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
+																			MarkdownDescription: "IPv4 Address in string form with dot-decimal notation.",
 																			Optional:            true,
 																		},
 																	},
 																},
 																"ipv6": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'",
+																	MarkdownDescription: "IPv6 Address specified as hexadecimal numbers separated by ':'.",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
+																			MarkdownDescription: "IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'.",
 																			Optional:            true,
 																		},
 																	},
@@ -2571,27 +2571,27 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
+																MarkdownDescription: "IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32.",
+																		MarkdownDescription: "Prefix-length of the IPv4 subnet. Must be <= 32.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
+																		MarkdownDescription: "Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
 																		Optional:            true,
 																	},
 																},
 															},
 															"ipv6": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
+																MarkdownDescription: "IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128.",
+																		MarkdownDescription: "Prefix length of the IPv6 subnet. Must be <= 128.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
+																		MarkdownDescription: "Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'.",
 																		Optional:            true,
 																	},
 																},
@@ -2607,7 +2607,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode. Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+						MarkdownDescription: "Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
@@ -2615,23 +2615,23 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 									"no_jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 								},
 							},
 							"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 						},
 					},
 					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 				},
 			},
@@ -2639,13 +2639,13 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "AWS Ingress Gateway. Single interface AWS ingress site.",
 				Attributes: map[string]schema.Attribute{
 					"aws_certified_hw": schema.StringAttribute{
-						MarkdownDescription: "AWS Certified Hardware. Name for AWS certified hardware.",
+						MarkdownDescription: "Name for AWS certified hardware.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"allowed_vip_port": schema.SingleNestedBlock{
-						MarkdownDescription: "Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site.",
+						MarkdownDescription: "Defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"custom_ports": schema.SingleNestedBlock{
@@ -2658,25 +2658,25 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"disable_allowed_vip_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"use_http_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"use_http_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"use_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 						},
 					},
 					"az_nodes": schema.ListNestedBlock{
-						MarkdownDescription: "Ingress Gateway (One Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently.",
+						MarkdownDescription: "Only Single AZ or Three AZ(s) nodes are supported currently.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"aws_az_name": schema.StringAttribute{
-									MarkdownDescription: "AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region.",
+									MarkdownDescription: "AWS availability zone, must be consistent with the selected AWS region.",
 									Optional:            true,
 								},
 							},
@@ -2685,16 +2685,16 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet.",
 									Attributes: map[string]schema.Attribute{
 										"existing_subnet_id": schema.StringAttribute{
-											MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID.",
+											MarkdownDescription: "Information about existing subnet ID.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
+											MarkdownDescription: "Parameters for creating a new cloud subnet.",
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
+													MarkdownDescription: "IPv4 subnet prefix for this subnet .",
 													Optional:            true,
 												},
 											},
@@ -2705,7 +2705,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode. Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+						MarkdownDescription: "Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
@@ -2713,63 +2713,63 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 									"no_jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 								},
 							},
 							"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 						},
 					},
 				},
 			},
 			"kubernetes_upgrade_drain": schema.SingleNestedBlock{
-				MarkdownDescription: "Node by Node Upgrade. Specify how worker nodes within a site will be upgraded.",
+				MarkdownDescription: "Specify how worker nodes within a site will be upgraded.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_upgrade_drain": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"enable_upgrade_drain": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable Node by Node Upgrade. Specify batch upgrade settings for worker nodes within a site.",
+						MarkdownDescription: "Specify batch upgrade settings for worker nodes within a site.",
 						Attributes: map[string]schema.Attribute{
 							"drain_max_unavailable_node_count": schema.Int64Attribute{
 								MarkdownDescription: "Node Batch Size Count.",
 								Optional:            true,
 							},
 							"drain_node_timeout": schema.Int64Attribute{
-								MarkdownDescription: "Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value).",
+								MarkdownDescription: "Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is..",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"disable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"enable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 						},
 					},
 				},
 			},
 			"log_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{
@@ -2779,37 +2779,37 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"manual_routing": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"no_worker_nodes": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_worker_nodes, nodes_per_az, total_nodes; Default: no_worker_nodes] Enable this option",
+				MarkdownDescription: "[OneOf: no_worker_nodes, nodes_per_az, total_nodes; Default: no_worker_nodes] Can be used for messages where no values are needed.",
 			},
 			"offline_survivability_mode": schema.SingleNestedBlock{
-				MarkdownDescription: "Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen.",
+				MarkdownDescription: "Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7..",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enable_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"no_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 				},
 			},
 			"os": schema.SingleNestedBlock{
-				MarkdownDescription: "Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.",
+				MarkdownDescription: "Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.",
 				Attributes: map[string]schema.Attribute{
 					"operating_system_version": schema.StringAttribute{
-						MarkdownDescription: "Operating System Version. Specify a OS version to be used e.g. 9.2024.6.",
+						MarkdownDescription: "Specify a OS version to be used e.g. 9.2024.6.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"default_os_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 				},
 			},
@@ -2818,18 +2818,18 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"cloud_link": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -2839,57 +2839,57 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"inside": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"outside": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 				},
 			},
 			"sw": schema.SingleNestedBlock{
-				MarkdownDescription: "F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
+				MarkdownDescription: "Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
 				Attributes: map[string]schema.Attribute{
 					"volterra_software_version": schema.StringAttribute{
-						MarkdownDescription: "F5XC Software Version. Specify a F5XC Software Version to be used e.g. Crt-20210329-1002.",
+						MarkdownDescription: "Specify a F5XC Software Version to be used e.g. Crt-20210329-1002.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"default_sw_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 				},
 			},
 			"tags": schema.SingleNestedBlock{
-				MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console.",
+				MarkdownDescription: "AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console.",
 			},
 			"voltstack_cluster": schema.SingleNestedBlock{
-				MarkdownDescription: "AWS App Stack Cluster. App Stack cluster of single interface AWS nodes.",
+				MarkdownDescription: "App Stack cluster of single interface AWS nodes.",
 				Attributes: map[string]schema.Attribute{
 					"aws_certified_hw": schema.StringAttribute{
-						MarkdownDescription: "AWS Certified Hardware. Name for AWS certified hardware.",
+						MarkdownDescription: "Name for AWS certified hardware.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
+						MarkdownDescription: "List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active .",
+								MarkdownDescription: "Ordered List of Enhanced Firewall Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -2902,23 +2902,23 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active.",
+						MarkdownDescription: "Ordered List of Forward Proxy Policies active.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active .",
+								MarkdownDescription: "Ordered List of Forward Proxy Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -2935,19 +2935,19 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall .",
+								MarkdownDescription: "Ordered List of Firewall Policies active for this network firewall .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -2960,7 +2960,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"allowed_vip_port": schema.SingleNestedBlock{
-						MarkdownDescription: "Allowed VIP Ports. This defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site.",
+						MarkdownDescription: "Defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"custom_ports": schema.SingleNestedBlock{
@@ -2973,25 +2973,25 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"disable_allowed_vip_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"use_http_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"use_http_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 							"use_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 						},
 					},
 					"az_nodes": schema.ListNestedBlock{
-						MarkdownDescription: "App Stack Cluster (One Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently.",
+						MarkdownDescription: "Only Single AZ or Three AZ(s) nodes are supported currently.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"aws_az_name": schema.StringAttribute{
-									MarkdownDescription: "AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region.",
+									MarkdownDescription: "AWS availability zone, must be consistent with the selected AWS region.",
 									Optional:            true,
 								},
 							},
@@ -3000,16 +3000,16 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet.",
 									Attributes: map[string]schema.Attribute{
 										"existing_subnet_id": schema.StringAttribute{
-											MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID.",
+											MarkdownDescription: "Information about existing subnet ID.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
+											MarkdownDescription: "Parameters for creating a new cloud subnet.",
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
+													MarkdownDescription: "IPv4 subnet prefix for this subnet .",
 													Optional:            true,
 												},
 											},
@@ -3020,18 +3020,18 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -3041,37 +3041,37 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"default_storage": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"forward_proxy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
-								MarkdownDescription: "Global Network Connections. Global network connections .",
+								MarkdownDescription: "Global network connections .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection.",
+											MarkdownDescription: "Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+													MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+															MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+															MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+															MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -3083,22 +3083,22 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection.",
+											MarkdownDescription: "Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+													MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+															MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+															MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+															MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -3115,18 +3115,18 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"k8s_cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -3136,22 +3136,22 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"no_dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"no_forward_proxy": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"no_global_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"no_k8s_cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"no_network_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"no_outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes.",
@@ -3162,39 +3162,39 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network.",
+											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_static_route": schema.SingleNestedBlock{
-											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
+											MarkdownDescription: "Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
-													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
+													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy.",
+													MarkdownDescription: "Add Labels for this Static Route, these labels can be used in network policy.",
 												},
 												"nexthop": schema.SingleNestedBlock{
 													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
-															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
+															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN.. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"interface": schema.ListNestedBlock{
-															MarkdownDescription: "Network Interface. Nexthop is network interface when type is 'Network-Interface'",
+															MarkdownDescription: "Nexthop is network interface when type is 'Network-Interface'.",
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
-																		MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -3202,15 +3202,15 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																		},
 																	},
 																	"name": schema.StringAttribute{
-																		MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
-																		MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
-																		MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -3218,7 +3218,7 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																		},
 																	},
 																	"uid": schema.StringAttribute{
-																		MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -3229,23 +3229,23 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
-															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
+															MarkdownDescription: "IP Address used to specify an IPv4 or IPv6 address.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
 																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
+																			MarkdownDescription: "IPv4 Address in string form with dot-decimal notation.",
 																			Optional:            true,
 																		},
 																	},
 																},
 																"ipv6": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'",
+																	MarkdownDescription: "IPv6 Address specified as hexadecimal numbers separated by ':'.",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
+																			MarkdownDescription: "IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'.",
 																			Optional:            true,
 																		},
 																	},
@@ -3260,27 +3260,27 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
+																MarkdownDescription: "IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32.",
+																		MarkdownDescription: "Prefix-length of the IPv4 subnet. Must be <= 32.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
+																		MarkdownDescription: "Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
 																		Optional:            true,
 																	},
 																},
 															},
 															"ipv6": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
+																MarkdownDescription: "IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128.",
+																		MarkdownDescription: "Prefix length of the IPv6 subnet. Must be <= 128.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
+																		MarkdownDescription: "Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'.",
 																		Optional:            true,
 																	},
 																},
@@ -3296,13 +3296,13 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"storage_class_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in Kubernetes for this site.",
+						MarkdownDescription: "Add additional custom storage classes in Kubernetes for this site.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"storage_classes": schema.ListNestedBlock{
@@ -3310,11 +3310,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"default_storage_class": schema.BoolAttribute{
-											MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster.",
+											MarkdownDescription: "Make this storage class default storage class for the K8s cluster.",
 											Optional:            true,
 										},
 										"storage_class_name": schema.StringAttribute{
-											MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s.",
+											MarkdownDescription: "Name of the storage class as it will appear in K8s.",
 											Optional:            true,
 										},
 									},
@@ -3325,10 +3325,10 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"vpc": schema.SingleNestedBlock{
-				MarkdownDescription: "AWS VPC choice. This defines choice about AWS VPC for a view.",
+				MarkdownDescription: "Defines choice about AWS VPC for a view.",
 				Attributes: map[string]schema.Attribute{
 					"vpc_id": schema.StringAttribute{
-						MarkdownDescription: "Existing VPC ID. Information about existing VPC ID.",
+						MarkdownDescription: "Information about existing VPC ID.",
 						Optional:            true,
 					},
 				},
@@ -3337,17 +3337,17 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "AWS VPC Parameters. Parameters to create new AWS VPC.",
 						Attributes: map[string]schema.Attribute{
 							"name_tag": schema.StringAttribute{
-								MarkdownDescription: "Choose VPC Name. Specify the VPC Name.",
+								MarkdownDescription: "Specify the VPC Name.",
 								Optional:            true,
 							},
 							"primary_ipv4": schema.StringAttribute{
-								MarkdownDescription: "Primary IPv4 CIDR block. IPv4 CIDR block for this VPC. It has to be private address space. The Primary IPv4 block cannot be modified. All subnets prefixes in this VPC must be part of this CIDR block.",
+								MarkdownDescription: "IPv4 CIDR block for this VPC. It has to be private address space. The Primary IPv4 block cannot be modified. All subnets prefixes in this VPC must be part of this CIDR block.",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"autogenerate": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+								MarkdownDescription: "Can be used for messages where no values are needed.",
 							},
 						},
 					},

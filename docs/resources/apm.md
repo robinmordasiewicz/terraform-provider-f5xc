@@ -36,11 +36,11 @@ resource "f5xc_apm" "example" {
   aws_site_type_choice {
     # Configure aws_site_type_choice settings
   }
-  # Virtual F5 BIG-IP APM configuration on AWS TGW Site. Virt...
+  # Virtual F5 BIG-IP configuration for AWS TGW Site using BI...
   apm_aws_site {
     # Configure apm_aws_site settings
   }
-  # Secret. SecretType is used in an object to indicate a sen...
+  # SecretType is used in an object to indicate a sensitive/c...
   admin_password {
     # Configure admin_password settings
   }
@@ -67,8 +67,8 @@ resource "f5xc_apm" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="aws-site-type-choice"></a>[`aws_site_type_choice`](#aws-site-type-choice) - Optional Block<br>AWS Transit Gateway Site choice. Virtual F5 BIG-IP APM service to be deployed as external service on AWS Transit Gateway Site<br>See [AWS Site Type Choice](#aws-site-type-choice) below for details.
-<br><br>&#x2022; <a id="baremetal-site-type-choice"></a>[`baremetal_site_type_choice`](#baremetal-site-type-choice) - Optional Block<br>Virtual BIG-IP on App Stack Bare Metal Site. Virtual BIG-IP specification for App Stack Bare Metal Site<br>See [Baremetal Site Type Choice](#baremetal-site-type-choice) below for details.
+&#x2022; <a id="aws-site-type-choice"></a>[`aws_site_type_choice`](#aws-site-type-choice) - Optional Block<br>Virtual F5 BIG-IP APM service to be deployed as external service on AWS Transit Gateway Site<br>See [AWS Site Type Choice](#aws-site-type-choice) below for details.
+<br><br>&#x2022; <a id="baremetal-site-type-choice"></a>[`baremetal_site_type_choice`](#baremetal-site-type-choice) - Optional Block<br>Virtual BIG-IP specification for App Stack Bare Metal Site<br>See [Baremetal Site Type Choice](#baremetal-site-type-choice) below for details.
 
 <a id="https-management"></a>&#x2022; [`https_management`](#https-management) - Optional Block<br>HTTPS based management. HTTPS based configuration<br>See [HTTPS Management](#https-management) below for details.
 
@@ -86,27 +86,27 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`aws_site_type_choice`](#aws-site-type-choice) block supports the following:
 
-<a id="aws-site-type-choice-apm-aws-site"></a>&#x2022; [`apm_aws_site`](#aws-site-type-choice-apm-aws-site) - Optional Block<br>Virtual F5 BIG-IP APM configuration on AWS TGW Site. Virtual F5 BIG-IP configuration for AWS TGW Site using BIG-IP APM service<br>See [APM AWS Site](#aws-site-type-choice-apm-aws-site) below.
+<a id="aws-site-type-choice-apm-aws-site"></a>&#x2022; [`apm_aws_site`](#aws-site-type-choice-apm-aws-site) - Optional Block<br>Virtual F5 BIG-IP configuration for AWS TGW Site using BIG-IP APM service<br>See [APM AWS Site](#aws-site-type-choice-apm-aws-site) below.
 
-<a id="aws-site-type-choice-market-place-image"></a>&#x2022; [`market_place_image`](#aws-site-type-choice-market-place-image) - Optional Block<br>BIG-IP AWS Marketplace Image. Select the flavor of BIG-IP AWS Marketplace to launch the instance on AWS TGW Site<br>See [Market Place Image](#aws-site-type-choice-market-place-image) below.
+<a id="aws-site-type-choice-market-place-image"></a>&#x2022; [`market_place_image`](#aws-site-type-choice-market-place-image) - Optional Block<br>Select the flavor of BIG-IP AWS Marketplace to launch the instance on AWS TGW Site<br>See [Market Place Image](#aws-site-type-choice-market-place-image) below.
 
 #### AWS Site Type Choice APM AWS Site
 
 An [`apm_aws_site`](#aws-site-type-choice-apm-aws-site) block (within [`aws_site_type_choice`](#aws-site-type-choice)) supports the following:
 
-<a id="password-cf5632"></a>&#x2022; [`admin_password`](#password-cf5632) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Admin Password](#password-cf5632) below.
+<a id="password-cf5632"></a>&#x2022; [`admin_password`](#password-cf5632) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Admin Password](#password-cf5632) below.
 
-<a id="username-360b70"></a>&#x2022; [`admin_username`](#username-360b70) - Optional String<br>Admin Username. Admin Username for BIG-IP
+<a id="username-360b70"></a>&#x2022; [`admin_username`](#username-360b70) - Optional String<br>Admin Username for BIG-IP
 
 <a id="site-bbb128"></a>&#x2022; [`aws_tgw_site`](#site-bbb128) - Optional Block<br>BIG-IP AWS TGW Site. BIG-IP AWS TGW site specification<br>See [AWS TGW Site](#site-bbb128) below.
 
-<a id="service-8fe23c"></a>&#x2022; [`endpoint_service`](#service-8fe23c) - Optional Block<br>Endpoint Service. Endpoint Service is a type of service where the packets are destined to BIG-IP APM device and service modifies the destination with a new destination address<br>See [Endpoint Service](#service-8fe23c) below.
+<a id="service-8fe23c"></a>&#x2022; [`endpoint_service`](#service-8fe23c) - Optional Block<br>Endpoint Service is a type of service where the packets are destined to BIG-IP APM device and service modifies the destination with a new destination address<br>See [Endpoint Service](#service-8fe23c) below.
 
-<a id="aws-site-type-choice-apm-aws-site-nodes"></a>&#x2022; [`nodes`](#aws-site-type-choice-apm-aws-site-nodes) - Optional Block<br>Service Nodes. Specify how and where the service nodes are spawned<br>See [Nodes](#aws-site-type-choice-apm-aws-site-nodes) below.
+<a id="aws-site-type-choice-apm-aws-site-nodes"></a>&#x2022; [`nodes`](#aws-site-type-choice-apm-aws-site-nodes) - Optional Block<br>Specify how and where the service nodes are spawned<br>See [Nodes](#aws-site-type-choice-apm-aws-site-nodes) below.
 
-<a id="key-4e6dae"></a>&#x2022; [`ssh_key`](#key-4e6dae) - Optional String<br>Public SSH key. Public SSH key for accessing the BIG-IP nodes
+<a id="key-4e6dae"></a>&#x2022; [`ssh_key`](#key-4e6dae) - Optional String<br>Public SSH key for accessing the BIG-IP nodes
 
-<a id="aws-site-type-choice-apm-aws-site-tags"></a>&#x2022; [`tags`](#aws-site-type-choice-apm-aws-site-tags) - Optional Block<br>AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console
+<a id="aws-site-type-choice-apm-aws-site-tags"></a>&#x2022; [`tags`](#aws-site-type-choice-apm-aws-site-tags) - Optional Block<br>AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console
 
 #### AWS Site Type Choice APM AWS Site Admin Password
 
@@ -156,15 +156,15 @@ An [`apm_aws_site`](#aws-site-type-choice-apm-aws-site) block (within [`aws_site
 
 A [`market_place_image`](#aws-site-type-choice-market-place-image) block (within [`aws_site_type_choice`](#aws-site-type-choice)) supports the following:
 
-<a id="mbps-34ab41"></a>&#x2022; [`best_plus_pay_g200_mbps`](#mbps-34ab41) - Optional Block<br>Enable this option
+<a id="mbps-34ab41"></a>&#x2022; [`best_plus_pay_g200_mbps`](#mbps-34ab41) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="1gbps-f0a9c0"></a>&#x2022; [`best_plus_payg_1gbps`](#1gbps-f0a9c0) - Optional Block<br>Enable this option
+<a id="1gbps-f0a9c0"></a>&#x2022; [`best_plus_payg_1gbps`](#1gbps-f0a9c0) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Baremetal Site Type Choice
 
 A [`baremetal_site_type_choice`](#baremetal-site-type-choice) block supports the following:
 
-<a id="site-61bcd2"></a>&#x2022; [`f5_bare_metal_site`](#site-61bcd2) - Optional Block<br>Virtual BIG-IP on App Stack bare metal. Virtual BIG-IP specification for App Stack bare metal<br>See [F5 Bare Metal Site](#site-61bcd2) below.
+<a id="site-61bcd2"></a>&#x2022; [`f5_bare_metal_site`](#site-61bcd2) - Optional Block<br>Virtual BIG-IP specification for App Stack bare metal<br>See [F5 Bare Metal Site](#site-61bcd2) below.
 
 #### Baremetal Site Type Choice F5 Bare Metal Site
 
@@ -226,9 +226,9 @@ A [`baremetal_site_type_choice`](#baremetal-site-type-choice) block supports the
 
 A [`https_management`](#https-management) block supports the following:
 
-<a id="https-management-advertise-on-internet"></a>&#x2022; [`advertise_on_internet`](#https-management-advertise-on-internet) - Optional Block<br>Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Internet](#https-management-advertise-on-internet) below.
+<a id="https-management-advertise-on-internet"></a>&#x2022; [`advertise_on_internet`](#https-management-advertise-on-internet) - Optional Block<br>Defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Internet](#https-management-advertise-on-internet) below.
 
-<a id="vip-00de2c"></a>&#x2022; [`advertise_on_internet_default_vip`](#vip-00de2c) - Optional Block<br>Enable this option
+<a id="vip-00de2c"></a>&#x2022; [`advertise_on_internet_default_vip`](#vip-00de2c) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="https-management-advertise-on-sli-vip"></a>&#x2022; [`advertise_on_sli_vip`](#https-management-advertise-on-sli-vip) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [Advertise On SLI VIP](#https-management-advertise-on-sli-vip) below.
 
@@ -238,39 +238,39 @@ A [`https_management`](#https-management) block supports the following:
 
 <a id="https-management-advertise-on-slo-vip"></a>&#x2022; [`advertise_on_slo_vip`](#https-management-advertise-on-slo-vip) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [Advertise On Slo VIP](#https-management-advertise-on-slo-vip) below.
 
-<a id="https-management-default-https-port"></a>&#x2022; [`default_https_port`](#https-management-default-https-port) - Optional Block<br>Enable this option
+<a id="https-management-default-https-port"></a>&#x2022; [`default_https_port`](#https-management-default-https-port) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="https-management-domain-suffix"></a>&#x2022; [`domain_suffix`](#https-management-domain-suffix) - Optional String<br>Domain Suffix. Domain suffix will be used along with node name to form URL to access node management
+<a id="https-management-domain-suffix"></a>&#x2022; [`domain_suffix`](#https-management-domain-suffix) - Optional String<br>Domain suffix will be used along with node name to form URL to access node management
 
-<a id="https-management-https-port"></a>&#x2022; [`https_port`](#https-management-https-port) - Optional Number<br>HTTPS Port. Enter TCP port number
+<a id="https-management-https-port"></a>&#x2022; [`https_port`](#https-management-https-port) - Optional Number<br>Enter TCP port number
 
 #### HTTPS Management Advertise On Internet
 
 An [`advertise_on_internet`](#https-management-advertise-on-internet) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="public-ip-e501cc"></a>&#x2022; [`public_ip`](#public-ip-e501cc) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Public IP](#public-ip-e501cc) below.
+<a id="public-ip-e501cc"></a>&#x2022; [`public_ip`](#public-ip-e501cc) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Public IP](#public-ip-e501cc) below.
 
 #### HTTPS Management Advertise On Internet Public IP
 
 A [`public_ip`](#public-ip-e501cc) block (within [`https_management.advertise_on_internet`](#https-management-advertise-on-internet)) supports the following:
 
-<a id="name-c549a1"></a>&#x2022; [`name`](#name-c549a1) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-c549a1"></a>&#x2022; [`name`](#name-c549a1) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-8fcb5e"></a>&#x2022; [`namespace`](#namespace-8fcb5e) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-8fcb5e"></a>&#x2022; [`namespace`](#namespace-8fcb5e) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-5cb820"></a>&#x2022; [`tenant`](#tenant-5cb820) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-5cb820"></a>&#x2022; [`tenant`](#tenant-5cb820) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### HTTPS Management Advertise On SLI VIP
 
 An [`advertise_on_sli_vip`](#https-management-advertise-on-sli-vip) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="mtls-1bd8e3"></a>&#x2022; [`no_mtls`](#mtls-1bd8e3) - Optional Block<br>Enable this option
+<a id="mtls-1bd8e3"></a>&#x2022; [`no_mtls`](#mtls-1bd8e3) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="certificates-5355d7"></a>&#x2022; [`tls_certificates`](#certificates-5355d7) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-5355d7) below.
+<a id="certificates-5355d7"></a>&#x2022; [`tls_certificates`](#certificates-5355d7) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-5355d7) below.
 
-<a id="config-9f094b"></a>&#x2022; [`tls_config`](#config-9f094b) - Optional Block<br>TLS Config. This defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#config-9f094b) below.
+<a id="config-9f094b"></a>&#x2022; [`tls_config`](#config-9f094b) - Optional Block<br>Defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#config-9f094b) below.
 
-<a id="mtls-c1dce4"></a>&#x2022; [`use_mtls`](#mtls-c1dce4) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-c1dce4) below.
+<a id="mtls-c1dce4"></a>&#x2022; [`use_mtls`](#mtls-c1dce4) - Optional Block<br>Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-c1dce4) below.
 
 #### HTTPS Management Advertise On SLI VIP TLS Certificates
 
@@ -320,13 +320,13 @@ An [`advertise_on_sli_vip`](#https-management-advertise-on-sli-vip) block (withi
 
 An [`advertise_on_slo_internet_vip`](#vip-6dd6e5) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="mtls-65c4ed"></a>&#x2022; [`no_mtls`](#mtls-65c4ed) - Optional Block<br>Enable this option
+<a id="mtls-65c4ed"></a>&#x2022; [`no_mtls`](#mtls-65c4ed) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="certificates-748bff"></a>&#x2022; [`tls_certificates`](#certificates-748bff) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-748bff) below.
+<a id="certificates-748bff"></a>&#x2022; [`tls_certificates`](#certificates-748bff) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-748bff) below.
 
-<a id="config-3dcb79"></a>&#x2022; [`tls_config`](#config-3dcb79) - Optional Block<br>TLS Config. This defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#config-3dcb79) below.
+<a id="config-3dcb79"></a>&#x2022; [`tls_config`](#config-3dcb79) - Optional Block<br>Defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#config-3dcb79) below.
 
-<a id="mtls-2fcd89"></a>&#x2022; [`use_mtls`](#mtls-2fcd89) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-2fcd89) below.
+<a id="mtls-2fcd89"></a>&#x2022; [`use_mtls`](#mtls-2fcd89) - Optional Block<br>Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-2fcd89) below.
 
 #### HTTPS Management Advertise On Slo Internet VIP TLS Certificates
 
@@ -376,13 +376,13 @@ An [`advertise_on_slo_internet_vip`](#vip-6dd6e5) block (within [`https_manageme
 
 An [`advertise_on_slo_sli`](#https-management-advertise-on-slo-sli) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="mtls-e2f684"></a>&#x2022; [`no_mtls`](#mtls-e2f684) - Optional Block<br>Enable this option
+<a id="mtls-e2f684"></a>&#x2022; [`no_mtls`](#mtls-e2f684) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="certificates-b923c1"></a>&#x2022; [`tls_certificates`](#certificates-b923c1) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-b923c1) below.
+<a id="certificates-b923c1"></a>&#x2022; [`tls_certificates`](#certificates-b923c1) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-b923c1) below.
 
-<a id="config-2cd93f"></a>&#x2022; [`tls_config`](#config-2cd93f) - Optional Block<br>TLS Config. This defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#config-2cd93f) below.
+<a id="config-2cd93f"></a>&#x2022; [`tls_config`](#config-2cd93f) - Optional Block<br>Defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#config-2cd93f) below.
 
-<a id="mtls-b8036a"></a>&#x2022; [`use_mtls`](#mtls-b8036a) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-b8036a) below.
+<a id="mtls-b8036a"></a>&#x2022; [`use_mtls`](#mtls-b8036a) - Optional Block<br>Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-b8036a) below.
 
 #### HTTPS Management Advertise On Slo SLI TLS Certificates
 
@@ -432,13 +432,13 @@ An [`advertise_on_slo_sli`](#https-management-advertise-on-slo-sli) block (withi
 
 An [`advertise_on_slo_vip`](#https-management-advertise-on-slo-vip) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="mtls-476751"></a>&#x2022; [`no_mtls`](#mtls-476751) - Optional Block<br>Enable this option
+<a id="mtls-476751"></a>&#x2022; [`no_mtls`](#mtls-476751) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="certificates-49cf23"></a>&#x2022; [`tls_certificates`](#certificates-49cf23) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-49cf23) below.
+<a id="certificates-49cf23"></a>&#x2022; [`tls_certificates`](#certificates-49cf23) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-49cf23) below.
 
-<a id="config-eb7c38"></a>&#x2022; [`tls_config`](#config-eb7c38) - Optional Block<br>TLS Config. This defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#config-eb7c38) below.
+<a id="config-eb7c38"></a>&#x2022; [`tls_config`](#config-eb7c38) - Optional Block<br>Defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#config-eb7c38) below.
 
-<a id="mtls-85e7e5"></a>&#x2022; [`use_mtls`](#mtls-85e7e5) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-85e7e5) below.
+<a id="mtls-85e7e5"></a>&#x2022; [`use_mtls`](#mtls-85e7e5) - Optional Block<br>Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-85e7e5) below.
 
 #### HTTPS Management Advertise On Slo VIP TLS Certificates
 

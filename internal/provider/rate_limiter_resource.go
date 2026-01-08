@@ -212,29 +212,29 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 				Delete: true,
 			}),
 			"limits": schema.ListNestedBlock{
-				MarkdownDescription: "Rate Limit Values. A list of RateLimitValues that specifies the total number of allowed requests for each specified period.",
+				MarkdownDescription: "List of RateLimitValues that specifies the total number of allowed requests for each specified period.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"burst_multiplier": schema.Int64Attribute{
-							MarkdownDescription: "Burst Multiplier. The maximum burst of requests to accommodate, expressed as a multiple of the rate.",
+							MarkdownDescription: "The maximum burst of requests to accommodate, expressed as a multiple of the rate.",
 							Optional:            true,
 						},
 						"period_multiplier": schema.Int64Attribute{
-							MarkdownDescription: "Periods. This setting, combined with Per Period units, provides a duration.",
+							MarkdownDescription: "Setting, combined with Per Period units, provides a duration.",
 							Optional:            true,
 						},
 						"total_number": schema.Int64Attribute{
-							MarkdownDescription: "Number Of Requests. The total number of allowed requests per rate-limiting period.",
+							MarkdownDescription: "The total number of allowed requests per rate-limiting period.",
 							Optional:            true,
 						},
 						"unit": schema.StringAttribute{
-							MarkdownDescription: "[Enum: SECOND|MINUTE|HOUR] Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`. Defaults to `SECOND`.",
+							MarkdownDescription: "[Enum: SECOND|MINUTE|HOUR] Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days. Possible values are `SECOND`, `MINUTE`, `HOUR`. Defaults to `SECOND`.",
 							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
 						"action_block": schema.SingleNestedBlock{
-							MarkdownDescription: "Rate Limit Block Action. Action where a user is blocked from making further requests after exceeding rate limit threshold.",
+							MarkdownDescription: "Action where a user is blocked from making further requests after exceeding rate limit threshold.",
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"hours": schema.SingleNestedBlock{
@@ -267,23 +267,23 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"disabled": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"leaky_bucket": schema.SingleNestedBlock{
-							MarkdownDescription: "Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5.",
+							MarkdownDescription: "Leaky-Bucket is the default rate limiter algorithm for F5.",
 						},
 						"token_bucket": schema.SingleNestedBlock{
-							MarkdownDescription: "Token Bucket Rate Limiter. Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits.",
+							MarkdownDescription: "Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits.",
 						},
 					},
 				},
 			},
 			"user_identification": schema.ListNestedBlock{
-				MarkdownDescription: "User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited.",
+				MarkdownDescription: "Reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
-							MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -291,15 +291,15 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -307,7 +307,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"uid": schema.StringAttribute{
-							MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+							MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{

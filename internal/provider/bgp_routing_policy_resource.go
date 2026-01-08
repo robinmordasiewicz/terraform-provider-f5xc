@@ -219,53 +219,53 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 				Delete: true,
 			}),
 			"rules": schema.ListNestedBlock{
-				MarkdownDescription: "Rules. A BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom.",
+				MarkdownDescription: "BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"action": schema.SingleNestedBlock{
-							MarkdownDescription: "BGP Route Action. Action to be enforced if the BGP route matches the rule.",
+							MarkdownDescription: "Action to be enforced if the BGP route matches the rule.",
 							Attributes: map[string]schema.Attribute{
 								"as_path": schema.StringAttribute{
-									MarkdownDescription: "AS-path to prepend. AS-Path Prepending is generally used to influence incoming traffic.",
+									MarkdownDescription: "AS-Path Prepending is generally used to influence incoming traffic.",
 									Optional:            true,
 								},
 								"local_preference": schema.Int64Attribute{
-									MarkdownDescription: "Local preference. BGP Local Preference is generally used to influence outgoing traffic.",
+									MarkdownDescription: "BGP Local Preference is generally used to influence outgoing traffic.",
 									Optional:            true,
 								},
 								"metric": schema.Int64Attribute{
-									MarkdownDescription: "MED/Metric. The Multi-Exit Discriminator metric to indicate the preferred path to AS.",
+									MarkdownDescription: "The Multi-Exit Discriminator metric to indicate the preferred path to AS.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"aggregate": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"allow": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 								"community": schema.SingleNestedBlock{
 									MarkdownDescription: "BGP Community list. List of BGP communities.",
 									Attributes: map[string]schema.Attribute{
 										"community": schema.ListAttribute{
-											MarkdownDescription: "BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value .",
+											MarkdownDescription: "Unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value .",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 									},
 								},
 								"deny": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
+									MarkdownDescription: "Can be used for messages where no values are needed.",
 								},
 							},
 						},
 						"match": schema.SingleNestedBlock{
-							MarkdownDescription: "BGP Route Match. Predicates which have to match information in route for action to be applied.",
+							MarkdownDescription: "Predicates which have to match information in route for action to be applied.",
 							Attributes: map[string]schema.Attribute{
 								"as_path": schema.StringAttribute{
-									MarkdownDescription: "AS path to match. AS path can also be a regex, which will be matched against route information.",
+									MarkdownDescription: "AS path can also be a regex, which will be matched against route information.",
 									Optional:            true,
 								},
 							},
@@ -274,14 +274,14 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "BGP Community list. List of BGP communities.",
 									Attributes: map[string]schema.Attribute{
 										"community": schema.ListAttribute{
-											MarkdownDescription: "BGP community. An unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value .",
+											MarkdownDescription: "Unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value .",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 									},
 								},
 								"ip_prefixes": schema.SingleNestedBlock{
-									MarkdownDescription: "BGP Prefix List. List of IP prefix and prefix length range match condition.",
+									MarkdownDescription: "List of IP prefix and prefix length range match condition.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"prefixes": schema.ListNestedBlock{
@@ -295,13 +295,13 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 												},
 												Blocks: map[string]schema.Block{
 													"equal_or_longer_than": schema.SingleNestedBlock{
-														MarkdownDescription: "Enable this option",
+														MarkdownDescription: "Can be used for messages where no values are needed.",
 													},
 													"exact_match": schema.SingleNestedBlock{
-														MarkdownDescription: "Enable this option",
+														MarkdownDescription: "Can be used for messages where no values are needed.",
 													},
 													"longer_than": schema.SingleNestedBlock{
-														MarkdownDescription: "Enable this option",
+														MarkdownDescription: "Can be used for messages where no values are needed.",
 													},
 												},
 											},

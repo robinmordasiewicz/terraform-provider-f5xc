@@ -57,7 +57,7 @@ resource "f5xc_trusted_ca_list" "example" {
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#trusted-ca-url) - Optional String<br>Root CA Certificate. Trusted CA certificates for validating certificates
+<a id="trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#trusted-ca-url) - Optional String<br>Trusted CA certificates for validating certificates
 
 ### Attributes Reference
 

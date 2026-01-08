@@ -163,60 +163,60 @@ func (r *UserIdentificationResource) Schema(ctx context.Context, req resource.Sc
 				Delete: true,
 			}),
 			"rules": schema.ListNestedBlock{
-				MarkdownDescription: "User Identification Rules. An ordered list of rules that are evaluated sequentially against the input fields extracted from an API request in order to determine a user identifier. Evaluation of the rules is terminated once a user identifier has been extracted.",
+				MarkdownDescription: "Ordered list of rules that are evaluated sequentially against the input fields extracted from an API request in order to determine a user identifier. Evaluation of the rules is terminated once a user identifier has been extracted.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"cookie_name": schema.StringAttribute{
-							MarkdownDescription: "Cookie Name. Use the HTTP cookie value for the given name as user identifier.",
+							MarkdownDescription: "Use the HTTP cookie value for the given name as user..",
 							Optional:            true,
 						},
 						"http_header_name": schema.StringAttribute{
-							MarkdownDescription: "HTTP Header Name. Use the HTTP header value for the given name as user identifier.",
+							MarkdownDescription: "Use the HTTP header value for the given name as user..",
 							Optional:            true,
 						},
 						"ip_and_http_header_name": schema.StringAttribute{
-							MarkdownDescription: "HTTP Header Name. Name of HTTP header from which the value should be extracted.",
+							MarkdownDescription: "Name of HTTP header from which the value should be extracted.",
 							Optional:            true,
 						},
 						"jwt_claim_name": schema.StringAttribute{
-							MarkdownDescription: "JWT Claim Name. Use the JWT claim value as user identifier.",
+							MarkdownDescription: "Use the JWT claim value as user identifier.",
 							Optional:            true,
 						},
 						"query_param_key": schema.StringAttribute{
-							MarkdownDescription: "Query Parameter Key. Use the query parameter value for the given key as user identifier.",
+							MarkdownDescription: "Use the query parameter value for the given key as user..",
 							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
 						"client_asn": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"client_city": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"client_country": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"client_ip": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"client_region": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"ip_and_ja4_tls_fingerprint": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"ip_and_tls_fingerprint": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"ja4_tls_fingerprint": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"none": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 						"tls_fingerprint": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
+							MarkdownDescription: "Can be used for messages where no values are needed.",
 						},
 					},
 				},

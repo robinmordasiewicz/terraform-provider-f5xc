@@ -16,7 +16,7 @@ resource "f5xc_virtual_host" "example" {
   }
 
   # Resource-specific configuration
-  # Advertise Policies. Advertise Policy allows you to define...
+  # Advertise Policy allows you to define networks or sites w...
   advertise_policies {
     # Configure advertise_policies settings
   }
@@ -24,7 +24,7 @@ resource "f5xc_virtual_host" "example" {
   authentication {
     # Configure authentication settings
   }
-  # Reference to Authentication Object. Reference to Authenti...
+  # Reference to Authentication Config Object .
   auth_config {
     # Configure auth_config settings
   }

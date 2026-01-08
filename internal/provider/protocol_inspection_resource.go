@@ -157,7 +157,7 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 				},
 			},
 			"action": schema.StringAttribute{
-				MarkdownDescription: "[Enum: ALLOW|DENY|DROP] Action. Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic. Possible values are `ALLOW`, `DENY`, `DROP`. Defaults to `ALLOW`.",
+				MarkdownDescription: "[Enum: ALLOW|DENY|DROP] Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic. Possible values are `ALLOW`, `DENY`, `DROP`. Defaults to `ALLOW`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -173,25 +173,25 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 				Delete: true,
 			}),
 			"enable_disable_compliance_checks": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable/Disable Compliance Checks. Enable Disable Compliance Checks Choice.",
+				MarkdownDescription: "Enable Disable Compliance Checks Choice.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_compliance_checks": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"enable_compliance_checks": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -207,10 +207,10 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_signature": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 					"enable_signature": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Can be used for messages where no values are needed.",
 					},
 				},
 			},

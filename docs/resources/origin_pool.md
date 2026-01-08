@@ -121,31 +121,31 @@ resource "f5xc_origin_pool" "example" {
 
 ### Spec Argument Reference
 
-<a id="advanced-options"></a>&#x2022; [`advanced_options`](#advanced-options) - Optional Block  Defaults to `null`<br>Origin Pool Advanced OPTIONS. Configure Advanced OPTIONS for origin pool<br>See [Advanced Options](#advanced-options) below for details.
+<a id="advanced-options"></a>&#x2022; [`advanced_options`](#advanced-options) - Optional Block  Defaults to `null`<br>Configure Advanced OPTIONS for origin pool<br>See [Advanced Options](#advanced-options) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="automatic-port"></a>[`automatic_port`](#automatic-port) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="lb-port"></a>[`lb_port`](#lb-port) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="port"></a>[`port`](#port) - Optional Number<br>Port. Endpoint service is available on this port
+&#x2022; <a id="automatic-port"></a>[`automatic_port`](#automatic-port) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="lb-port"></a>[`lb_port`](#lb-port) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="port"></a>[`port`](#port) - Optional Number<br>Endpoint service is available on this port
 
-<a id="endpoint-selection"></a>&#x2022; [`endpoint_selection`](#endpoint-selection) - Optional String  Defaults to `DISTRIBUTED`<br>Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`<br>[Enum: DISTRIBUTED|LOCAL_ONLY|LOCAL_PREFERRED] Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered
-
--> **One of the following:**
-&#x2022; <a id="health-check-port"></a>[`health_check_port`](#health-check-port) - Optional Number<br>Health check port. Port used for performing health check
-<br><br>&#x2022; <a id="same-as-endpoint-port"></a>[`same_as_endpoint_port`](#same-as-endpoint-port) - Optional Block<br>Enable this option
-
-<a id="healthcheck"></a>&#x2022; [`healthcheck`](#healthcheck) - Optional Block<br>Health Check object. Reference to healthcheck configuration objects<br>See [Healthcheck](#healthcheck) below for details.
-
-<a id="loadbalancer-algorithm"></a>&#x2022; [`loadbalancer_algorithm`](#loadbalancer-algorithm) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`<br>[Enum: ROUND_ROBIN|LEAST_REQUEST|RING_HASH|RANDOM|LB_OVERRIDE] Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy implements consistent hashing to upstream endpoints using ring hash of endpoint names Hash of the incoming request is calculated using request hash policy. The ring/modulo hash load balancer implements consistent hashing to upstream hosts. The algorithm is based on mapping all hosts onto a circle such that the addition or removal of a host from the host set changes only affect 1/N requests. This technique is also commonly known as “ketama” hashing. A consistent hashing load balancer is only effective when protocol routing is used that specifies a value to hash on. The minimum ring size governs the replication factor for each host in the ring. For example, if the minimum ring size is 1024 and there are 16 hosts, each host will be replicated 64 times. - RANDOM: RANDOM Policy in which each available upstream endpoint is selected in random order. The random load balancer selects a random healthy host. The random load balancer generally performs better than round robin if no health checking policy is configured. Random selection avoids bias towards the host in the set that comes after a failed host. - LB_OVERRIDE: Load Balancer Override Hash policy is taken from from the load balancer which is using this origin pool
+<a id="endpoint-selection"></a>&#x2022; [`endpoint_selection`](#endpoint-selection) - Optional String  Defaults to `DISTRIBUTED`<br>Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`<br>[Enum: DISTRIBUTED|LOCAL_ONLY|LOCAL_PREFERRED] Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for
 
 -> **One of the following:**
-&#x2022; <a id="no-tls"></a>[`no_tls`](#no-tls) - Optional Block<br>Enable this option
+&#x2022; <a id="health-check-port"></a>[`health_check_port`](#health-check-port) - Optional Number<br>Port used for performing health check
+<br><br>&#x2022; <a id="same-as-endpoint-port"></a>[`same_as_endpoint_port`](#same-as-endpoint-port) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="origin-servers"></a>&#x2022; [`origin_servers`](#origin-servers) - Optional Block<br>Origin Servers. List of origin servers in this pool<br>See [Origin Servers](#origin-servers) below for details.
+<a id="healthcheck"></a>&#x2022; [`healthcheck`](#healthcheck) - Optional Block<br>Reference to healthcheck configuration objects<br>See [Healthcheck](#healthcheck) below for details.
+
+<a id="loadbalancer-algorithm"></a>&#x2022; [`loadbalancer_algorithm`](#loadbalancer-algorithm) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`<br>[Enum: ROUND_ROBIN|LEAST_REQUEST|RING_HASH|RANDOM|LB_OVERRIDE] Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in
+
+-> **One of the following:**
+&#x2022; <a id="no-tls"></a>[`no_tls`](#no-tls) - Optional Block<br>Can be used for messages where no values are needed
+
+<a id="origin-servers"></a>&#x2022; [`origin_servers`](#origin-servers) - Optional Block<br>List of origin servers in this pool<br>See [Origin Servers](#origin-servers) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
-<a id="upstream-conn-pool-reuse-type"></a>&#x2022; [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) - Optional Block  Defaults to `null`<br>Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only
+<a id="upstream-conn-pool-reuse-type"></a>&#x2022; [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) - Optional Block  Defaults to `null`<br>Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only
 
 <a id="use-tls"></a>&#x2022; [`use_tls`](#use-tls) - Optional Block<br>TLS Parameters for Origin Servers. Upstream TLS Parameters
 
@@ -161,173 +161,173 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`advanced_options`](#advanced-options) block supports the following:
 
-<a id="advanced-options-auto-http-config"></a>&#x2022; [`auto_http_config`](#advanced-options-auto-http-config) - Optional Block<br>Enable this option
+<a id="advanced-options-auto-http-config"></a>&#x2022; [`auto_http_config`](#advanced-options-auto-http-config) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="advanced-options-circuit-breaker"></a>&#x2022; [`circuit_breaker`](#advanced-options-circuit-breaker) - Optional Block<br>Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly<br>See [Circuit Breaker](#advanced-options-circuit-breaker) below.
+<a id="advanced-options-circuit-breaker"></a>&#x2022; [`circuit_breaker`](#advanced-options-circuit-breaker) - Optional Block<br>CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly<br>See [Circuit Breaker](#advanced-options-circuit-breaker) below.
 
-<a id="advanced-options-connection-timeout"></a>&#x2022; [`connection_timeout`](#advanced-options-connection-timeout) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Timeout. The timeout for new network connections to endpoints in the cluster.  The seconds
+<a id="advanced-options-connection-timeout"></a>&#x2022; [`connection_timeout`](#advanced-options-connection-timeout) - Optional Number  Defaults to `2`  Specified in milliseconds<br>The timeout for new network connections to endpoints in the cluster.  The seconds
 
-<a id="breaker-c470cf"></a>&#x2022; [`default_circuit_breaker`](#breaker-c470cf) - Optional Block<br>Enable this option
+<a id="breaker-c470cf"></a>&#x2022; [`default_circuit_breaker`](#breaker-c470cf) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="breaker-222fdc"></a>&#x2022; [`disable_circuit_breaker`](#breaker-222fdc) - Optional Block<br>Enable this option
+<a id="breaker-222fdc"></a>&#x2022; [`disable_circuit_breaker`](#breaker-222fdc) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="persistance-1139ff"></a>&#x2022; [`disable_lb_source_ip_persistance`](#persistance-1139ff) - Optional Block<br>Enable this option
+<a id="persistance-1139ff"></a>&#x2022; [`disable_lb_source_ip_persistance`](#persistance-1139ff) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="detection-c26369"></a>&#x2022; [`disable_outlier_detection`](#detection-c26369) - Optional Block<br>Enable this option
+<a id="detection-c26369"></a>&#x2022; [`disable_outlier_detection`](#detection-c26369) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="advanced-options-disable-proxy-protocol"></a>&#x2022; [`disable_proxy_protocol`](#advanced-options-disable-proxy-protocol) - Optional Block<br>Enable this option
+<a id="advanced-options-disable-proxy-protocol"></a>&#x2022; [`disable_proxy_protocol`](#advanced-options-disable-proxy-protocol) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="advanced-options-disable-subsets"></a>&#x2022; [`disable_subsets`](#advanced-options-disable-subsets) - Optional Block<br>Enable this option
+<a id="advanced-options-disable-subsets"></a>&#x2022; [`disable_subsets`](#advanced-options-disable-subsets) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="persistance-62e70d"></a>&#x2022; [`enable_lb_source_ip_persistance`](#persistance-62e70d) - Optional Block<br>Enable this option
+<a id="persistance-62e70d"></a>&#x2022; [`enable_lb_source_ip_persistance`](#persistance-62e70d) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="advanced-options-enable-subsets"></a>&#x2022; [`enable_subsets`](#advanced-options-enable-subsets) - Optional Block<br>Origin Pool Subset OPTIONS. Configure subset OPTIONS for origin pool<br>See [Enable Subsets](#advanced-options-enable-subsets) below.
+<a id="advanced-options-enable-subsets"></a>&#x2022; [`enable_subsets`](#advanced-options-enable-subsets) - Optional Block<br>Configure subset OPTIONS for origin pool<br>See [Enable Subsets](#advanced-options-enable-subsets) below.
 
-<a id="advanced-options-http1-config"></a>&#x2022; [`http1_config`](#advanced-options-http1-config) - Optional Block<br>HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for upstream connections<br>See [Http1 Config](#advanced-options-http1-config) below.
+<a id="advanced-options-http1-config"></a>&#x2022; [`http1_config`](#advanced-options-http1-config) - Optional Block<br>HTTP/1.1 Protocol OPTIONS for upstream connections<br>See [Http1 Config](#advanced-options-http1-config) below.
 
-<a id="advanced-options-http2-options"></a>&#x2022; [`http2_options`](#advanced-options-http2-options) - Optional Block<br>Http2 Protocol OPTIONS. Http2 Protocol OPTIONS for upstream connections<br>See [Http2 Options](#advanced-options-http2-options) below.
+<a id="advanced-options-http2-options"></a>&#x2022; [`http2_options`](#advanced-options-http2-options) - Optional Block<br>Http2 Protocol OPTIONS for upstream connections<br>See [Http2 Options](#advanced-options-http2-options) below.
 
-<a id="advanced-options-http-idle-timeout"></a>&#x2022; [`http_idle_timeout`](#advanced-options-http-idle-timeout) - Optional Number  Defaults to `5`  Specified in milliseconds<br>HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
+<a id="advanced-options-http-idle-timeout"></a>&#x2022; [`http_idle_timeout`](#advanced-options-http-idle-timeout) - Optional Number<br>The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed
 
-<a id="advanced-options-no-panic-threshold"></a>&#x2022; [`no_panic_threshold`](#advanced-options-no-panic-threshold) - Optional Block<br>Enable this option
+<a id="advanced-options-no-panic-threshold"></a>&#x2022; [`no_panic_threshold`](#advanced-options-no-panic-threshold) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="advanced-options-outlier-detection"></a>&#x2022; [`outlier_detection`](#advanced-options-outlier-detection) - Optional Block<br>Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host immediately. Otherwise, it checks to make sure the number of ejected hosts is below the allowed threshold (specified via max_ejection_percent setting). If the number of ejected hosts is above the threshold, the host is not ejected. 3. The endpoint is ejected for some number of milliseconds. Ejection means that the endpoint is marked unhealthy and will not be used during load balancing. The number of milliseconds is equal to the base_ejection_time value multiplied by the number of times the host has been ejected. 4. An ejected endpoint will automatically be brought back into service after the ejection time has been satisfied<br>See [Outlier Detection](#advanced-options-outlier-detection) below.
+<a id="advanced-options-outlier-detection"></a>&#x2022; [`outlier_detection`](#advanced-options-outlier-detection) - Optional Block<br>Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1<br>See [Outlier Detection](#advanced-options-outlier-detection) below.
 
-<a id="advanced-options-panic-threshold"></a>&#x2022; [`panic_threshold`](#advanced-options-panic-threshold) - Optional Number<br>Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status
+<a id="advanced-options-panic-threshold"></a>&#x2022; [`panic_threshold`](#advanced-options-panic-threshold) - Optional Number<br>Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status
 
-<a id="advanced-options-proxy-protocol-v1"></a>&#x2022; [`proxy_protocol_v1`](#advanced-options-proxy-protocol-v1) - Optional Block<br>Enable this option
+<a id="advanced-options-proxy-protocol-v1"></a>&#x2022; [`proxy_protocol_v1`](#advanced-options-proxy-protocol-v1) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="advanced-options-proxy-protocol-v2"></a>&#x2022; [`proxy_protocol_v2`](#advanced-options-proxy-protocol-v2) - Optional Block<br>Enable this option
+<a id="advanced-options-proxy-protocol-v2"></a>&#x2022; [`proxy_protocol_v2`](#advanced-options-proxy-protocol-v2) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Advanced Options Circuit Breaker
 
 A [`circuit_breaker`](#advanced-options-circuit-breaker) block (within [`advanced_options`](#advanced-options)) supports the following:
 
-<a id="limit-2f511c"></a>&#x2022; [`connection_limit`](#limit-2f511c) - Optional Number<br>Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit
+<a id="limit-2f511c"></a>&#x2022; [`connection_limit`](#limit-2f511c) - Optional Number<br>The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections
 
-<a id="requests-f8e924"></a>&#x2022; [`max_requests`](#requests-f8e924) - Optional Number<br>Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count
+<a id="requests-f8e924"></a>&#x2022; [`max_requests`](#requests-f8e924) - Optional Number<br>The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests
 
-<a id="requests-51e30f"></a>&#x2022; [`pending_requests`](#requests-51e30f) - Optional Number<br>Pending Requests. The maximum number of requests that will be queued while waiting for a ready connection pool connection. Since HTTP/2 requests are sent over a single connection, this circuit breaker only comes into play as the initial connection is created, as requests will be multiplexed immediately afterwards. For HTTP/1.1, requests are added to the list of pending requests whenever there aren’t enough upstream connections available to immediately dispatch the request, so this circuit breaker will remain in play for the lifetime of the process. Remove endpoint out of load balancing decision, if pending request reach pending_request
+<a id="requests-51e30f"></a>&#x2022; [`pending_requests`](#requests-51e30f) - Optional Number<br>The maximum number of requests that will be queued while waiting for a ready connection pool connection. Since HTTP/2 requests are sent over a single connection, this circuit breaker only comes into play as the initial connection is created, as requests will be multiplexed immediately
 
-<a id="priority-0e16c5"></a>&#x2022; [`priority`](#priority-0e16c5) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `HIGH`<br>[Enum: DEFAULT|HIGH] Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism
+<a id="priority-0e16c5"></a>&#x2022; [`priority`](#priority-0e16c5) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `HIGH`<br>[Enum: DEFAULT|HIGH] Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority
 
-<a id="retries-18e401"></a>&#x2022; [`retries`](#retries-18e401) - Optional Number<br>Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count
+<a id="retries-18e401"></a>&#x2022; [`retries`](#retries-18e401) - Optional Number<br>The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count
 
 #### Advanced Options Enable Subsets
 
 An [`enable_subsets`](#advanced-options-enable-subsets) block (within [`advanced_options`](#advanced-options)) supports the following:
 
-<a id="endpoint-0fc3f9"></a>&#x2022; [`any_endpoint`](#endpoint-0fc3f9) - Optional Block<br>Enable this option
+<a id="endpoint-0fc3f9"></a>&#x2022; [`any_endpoint`](#endpoint-0fc3f9) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="subset-276c69"></a>&#x2022; [`default_subset`](#subset-276c69) - Optional Block<br>Origin Pool Default Subset. Default Subset definition<br>See [Default Subset](#subset-276c69) below.
 
-<a id="subsets-25c75e"></a>&#x2022; [`endpoint_subsets`](#subsets-25c75e) - Optional Block<br>Origin Server Subsets Classes. List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class<br>See [Endpoint Subsets](#subsets-25c75e) below.
+<a id="subsets-25c75e"></a>&#x2022; [`endpoint_subsets`](#subsets-25c75e) - Optional Block<br>List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class<br>See [Endpoint Subsets](#subsets-25c75e) below.
 
-<a id="request-49c0b8"></a>&#x2022; [`fail_request`](#request-49c0b8) - Optional Block<br>Enable this option
+<a id="request-49c0b8"></a>&#x2022; [`fail_request`](#request-49c0b8) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Advanced Options Enable Subsets Default Subset
 
 A [`default_subset`](#subset-276c69) block (within [`advanced_options.enable_subsets`](#advanced-options-enable-subsets)) supports the following:
 
-<a id="subset-4951d9"></a>&#x2022; [`default_subset`](#subset-4951d9) - Optional Block<br>Default Subset for Origin Pool. List of key-value pairs that define default subset. Which gets used when route specifies no metadata or no subset matching the metadata exists
+<a id="subset-4951d9"></a>&#x2022; [`default_subset`](#subset-4951d9) - Optional Block<br>List of key-value pairs that define default subset. Which gets used when route specifies no metadata or no subset matching the metadata exists
 
 #### Advanced Options Enable Subsets Endpoint Subsets
 
 An [`endpoint_subsets`](#subsets-25c75e) block (within [`advanced_options.enable_subsets`](#advanced-options-enable-subsets)) supports the following:
 
-<a id="keys-3828db"></a>&#x2022; [`keys`](#keys-3828db) - Optional List<br>Keys. List of keys that define a cluster subset class
+<a id="keys-3828db"></a>&#x2022; [`keys`](#keys-3828db) - Optional List<br>List of keys that define a cluster subset class
 
 #### Advanced Options Http1 Config
 
 A [`http1_config`](#advanced-options-http1-config) block (within [`advanced_options`](#advanced-options)) supports the following:
 
-<a id="transformation-1e4851"></a>&#x2022; [`header_transformation`](#transformation-1e4851) - Optional Block<br>Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-1e4851) below.
+<a id="transformation-1e4851"></a>&#x2022; [`header_transformation`](#transformation-1e4851) - Optional Block<br>Header Transformation OPTIONS for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-1e4851) below.
 
 #### Advanced Options Http1 Config Header Transformation
 
 A [`header_transformation`](#transformation-1e4851) block (within [`advanced_options.http1_config`](#advanced-options-http1-config)) supports the following:
 
-<a id="transformation-6fa15c"></a>&#x2022; [`default_header_transformation`](#transformation-6fa15c) - Optional Block<br>Enable this option
+<a id="transformation-6fa15c"></a>&#x2022; [`default_header_transformation`](#transformation-6fa15c) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="transformation-c4c936"></a>&#x2022; [`legacy_header_transformation`](#transformation-c4c936) - Optional Block<br>Enable this option
+<a id="transformation-c4c936"></a>&#x2022; [`legacy_header_transformation`](#transformation-c4c936) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="transformation-923ab8"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-923ab8) - Optional Block<br>Enable this option
+<a id="transformation-923ab8"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-923ab8) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="transformation-1ce9d5"></a>&#x2022; [`proper_case_header_transformation`](#transformation-1ce9d5) - Optional Block<br>Enable this option
+<a id="transformation-1ce9d5"></a>&#x2022; [`proper_case_header_transformation`](#transformation-1ce9d5) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Advanced Options Http2 Options
 
 A [`http2_options`](#advanced-options-http2-options) block (within [`advanced_options`](#advanced-options)) supports the following:
 
-<a id="advanced-options-http2-options-enabled"></a>&#x2022; [`enabled`](#advanced-options-http2-options-enabled) - Optional Bool<br>HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections
+<a id="advanced-options-http2-options-enabled"></a>&#x2022; [`enabled`](#advanced-options-http2-options-enabled) - Optional Bool<br>Enable/disable HTTP2 Protocol for upstream connections
 
 #### Advanced Options Outlier Detection
 
 An [`outlier_detection`](#advanced-options-outlier-detection) block (within [`advanced_options`](#advanced-options)) supports the following:
 
-<a id="time-3534e9"></a>&#x2022; [`base_ejection_time`](#time-3534e9) - Optional Number  Defaults to `30000ms`  Specified in milliseconds<br>Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to GET ejected for longer periods if they continue to fail
+<a id="time-3534e9"></a>&#x2022; [`base_ejection_time`](#time-3534e9) - Optional Number<br>The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to GET ejected for longer periods if they continue to fail
 
-<a id="5xx-ff28ef"></a>&#x2022; [`consecutive_5xx`](#5xx-ff28ef) - Optional Number  Defaults to `5`<br>Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs
+<a id="5xx-ff28ef"></a>&#x2022; [`consecutive_5xx`](#5xx-ff28ef) - Optional Number<br>If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the
 
-<a id="failure-fbd9bf"></a>&#x2022; [`consecutive_gateway_failure`](#failure-fbd9bf) - Optional Number  Defaults to `5`<br>Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). Consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs
+<a id="failure-fbd9bf"></a>&#x2022; [`consecutive_gateway_failure`](#failure-fbd9bf) - Optional Number<br>If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.)
 
-<a id="interval-5cb76c"></a>&#x2022; [`interval`](#interval-5cb76c) - Optional Number  Defaults to `10000ms`  Specified in milliseconds<br>Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service
+<a id="interval-5cb76c"></a>&#x2022; [`interval`](#interval-5cb76c) - Optional Number  Defaults to `10000ms`<br>The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service
 
-<a id="percent-6b6ee2"></a>&#x2022; [`max_ejection_percent`](#percent-6b6ee2) - Optional Number  Defaults to `10%`<br>Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. but will eject at least one host regardless of the value
+<a id="percent-6b6ee2"></a>&#x2022; [`max_ejection_percent`](#percent-6b6ee2) - Optional Number  Defaults to `10%`<br>The maximum % of an upstream cluster that can be ejected due to outlier detection. but will eject at least one host regardless of the value
 
 #### Healthcheck
 
 A [`healthcheck`](#healthcheck) block supports the following:
 
-<a id="healthcheck-name"></a>&#x2022; [`name`](#healthcheck-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="healthcheck-name"></a>&#x2022; [`name`](#healthcheck-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="healthcheck-namespace"></a>&#x2022; [`namespace`](#healthcheck-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="healthcheck-namespace"></a>&#x2022; [`namespace`](#healthcheck-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="healthcheck-tenant"></a>&#x2022; [`tenant`](#healthcheck-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="healthcheck-tenant"></a>&#x2022; [`tenant`](#healthcheck-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers
 
 An [`origin_servers`](#origin-servers) block supports the following:
 
-<a id="origin-servers-cbip-service"></a>&#x2022; [`cbip_service`](#origin-servers-cbip-service) - Optional Block<br>Discovered Classic BIG-IP Service Name. Specify origin server with Classic BIG-IP Service (Virtual Server)<br>See [Cbip Service](#origin-servers-cbip-service) below.
+<a id="origin-servers-cbip-service"></a>&#x2022; [`cbip_service`](#origin-servers-cbip-service) - Optional Block<br>Specify origin server with Classic BIG-IP Service (Virtual Server)<br>See [Cbip Service](#origin-servers-cbip-service) below.
 
-<a id="origin-servers-consul-service"></a>&#x2022; [`consul_service`](#origin-servers-consul-service) - Optional Block<br>Consul Service Name on given Sites. Specify origin server with Hashi Corp Consul service name and site information<br>See [Consul Service](#origin-servers-consul-service) below.
+<a id="origin-servers-consul-service"></a>&#x2022; [`consul_service`](#origin-servers-consul-service) - Optional Block<br>Specify origin server with Hashi Corp Consul service name and site information<br>See [Consul Service](#origin-servers-consul-service) below.
 
-<a id="origin-servers-custom-endpoint-object"></a>&#x2022; [`custom_endpoint_object`](#origin-servers-custom-endpoint-object) - Optional Block<br>Custom Endpoint Object for Origin Server. Specify origin server with a reference to endpoint object<br>See [Custom Endpoint Object](#origin-servers-custom-endpoint-object) below.
+<a id="origin-servers-custom-endpoint-object"></a>&#x2022; [`custom_endpoint_object`](#origin-servers-custom-endpoint-object) - Optional Block<br>Specify origin server with a reference to endpoint object<br>See [Custom Endpoint Object](#origin-servers-custom-endpoint-object) below.
 
-<a id="origin-servers-k8s-service"></a>&#x2022; [`k8s_service`](#origin-servers-k8s-service) - Optional Block<br>K8S Service Name on given Sites. Specify origin server with K8S service name and site information<br>See [K8S Service](#origin-servers-k8s-service) below.
+<a id="origin-servers-k8s-service"></a>&#x2022; [`k8s_service`](#origin-servers-k8s-service) - Optional Block<br>Specify origin server with K8S service name and site information<br>See [K8S Service](#origin-servers-k8s-service) below.
 
-<a id="origin-servers-labels"></a>&#x2022; [`labels`](#origin-servers-labels) - Optional Block<br>Origin Server Labels. Add Labels for this origin server, these labels can be used to form subset
+<a id="origin-servers-labels"></a>&#x2022; [`labels`](#origin-servers-labels) - Optional Block<br>Add Labels for this origin server, these labels can be used to form subset
 
-<a id="origin-servers-private-ip"></a>&#x2022; [`private_ip`](#origin-servers-private-ip) - Optional Block<br>IP address on given Sites. Specify origin server with private or public IP address and site information<br>See [Private IP](#origin-servers-private-ip) below.
+<a id="origin-servers-private-ip"></a>&#x2022; [`private_ip`](#origin-servers-private-ip) - Optional Block<br>Specify origin server with private or public IP address and site information<br>See [Private IP](#origin-servers-private-ip) below.
 
-<a id="origin-servers-private-name"></a>&#x2022; [`private_name`](#origin-servers-private-name) - Optional Block<br>DNS Name on given Sites. Specify origin server with private or public DNS name and site information<br>See [Private Name](#origin-servers-private-name) below.
+<a id="origin-servers-private-name"></a>&#x2022; [`private_name`](#origin-servers-private-name) - Optional Block<br>Specify origin server with private or public DNS name and site information<br>See [Private Name](#origin-servers-private-name) below.
 
-<a id="origin-servers-public-ip"></a>&#x2022; [`public_ip`](#origin-servers-public-ip) - Optional Block<br>Public IP. Specify origin server with public IP address<br>See [Public IP](#origin-servers-public-ip) below.
+<a id="origin-servers-public-ip"></a>&#x2022; [`public_ip`](#origin-servers-public-ip) - Optional Block<br>Specify origin server with public IP address<br>See [Public IP](#origin-servers-public-ip) below.
 
-<a id="origin-servers-public-name"></a>&#x2022; [`public_name`](#origin-servers-public-name) - Optional Block<br>Public DNS Name. Specify origin server with public DNS name<br>See [Public Name](#origin-servers-public-name) below.
+<a id="origin-servers-public-name"></a>&#x2022; [`public_name`](#origin-servers-public-name) - Optional Block<br>Specify origin server with public DNS name<br>See [Public Name](#origin-servers-public-name) below.
 
-<a id="origin-servers-vn-private-ip"></a>&#x2022; [`vn_private_ip`](#origin-servers-vn-private-ip) - Optional Block<br>IP address Virtual Network. Specify origin server with IP on Virtual Network<br>See [Vn Private IP](#origin-servers-vn-private-ip) below.
+<a id="origin-servers-vn-private-ip"></a>&#x2022; [`vn_private_ip`](#origin-servers-vn-private-ip) - Optional Block<br>Specify origin server with IP on Virtual Network<br>See [Vn Private IP](#origin-servers-vn-private-ip) below.
 
-<a id="origin-servers-vn-private-name"></a>&#x2022; [`vn_private_name`](#origin-servers-vn-private-name) - Optional Block<br>DNS Name on Virtual Network. Specify origin server with DNS name on Virtual Network<br>See [Vn Private Name](#origin-servers-vn-private-name) below.
+<a id="origin-servers-vn-private-name"></a>&#x2022; [`vn_private_name`](#origin-servers-vn-private-name) - Optional Block<br>Specify origin server with DNS name on Virtual Network<br>See [Vn Private Name](#origin-servers-vn-private-name) below.
 
 #### Origin Servers Cbip Service
 
 A [`cbip_service`](#origin-servers-cbip-service) block (within [`origin_servers`](#origin-servers)) supports the following:
 
-<a id="name-d75410"></a>&#x2022; [`service_name`](#name-d75410) - Optional String<br>Service Name. Name of the discovered Classic BIG-IP virtual server to be used as origin
+<a id="name-d75410"></a>&#x2022; [`service_name`](#name-d75410) - Optional String<br>Name of the discovered Classic BIG-IP virtual server to be used as origin
 
 #### Origin Servers Consul Service
 
 A [`consul_service`](#origin-servers-consul-service) block (within [`origin_servers`](#origin-servers)) supports the following:
 
-<a id="network-5b2697"></a>&#x2022; [`inside_network`](#network-5b2697) - Optional Block<br>Enable this option
+<a id="network-5b2697"></a>&#x2022; [`inside_network`](#network-5b2697) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="network-844fc7"></a>&#x2022; [`outside_network`](#network-844fc7) - Optional Block<br>Enable this option
+<a id="network-844fc7"></a>&#x2022; [`outside_network`](#network-844fc7) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="name-e2ff9a"></a>&#x2022; [`service_name`](#name-e2ff9a) - Optional String<br>Service Name. Consul service name of this origin server will be listed, including cluster-ID. The format is servicename:cluster-ID
+<a id="name-e2ff9a"></a>&#x2022; [`service_name`](#name-e2ff9a) - Optional String<br>Consul service name of this origin server will be listed, including cluster-ID. The format is servicename:cluster-ID
 
-<a id="locator-0ecb39"></a>&#x2022; [`site_locator`](#locator-0ecb39) - Optional Block<br>Site or Virtual Site. This message defines a reference to a site or virtual site object<br>See [Site Locator](#locator-0ecb39) below.
+<a id="locator-0ecb39"></a>&#x2022; [`site_locator`](#locator-0ecb39) - Optional Block<br>Message defines a reference to a site or virtual site object<br>See [Site Locator](#locator-0ecb39) below.
 
 <a id="origin-servers-consul-service-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-consul-service-snat-pool) - Optional Block<br>SNAT Pool. SNAT Pool configuration<br>See [Snat Pool](#origin-servers-consul-service-snat-pool) below.
 
@@ -335,19 +335,19 @@ A [`consul_service`](#origin-servers-consul-service) block (within [`origin_serv
 
 A [`site_locator`](#locator-0ecb39) block (within [`origin_servers.consul_service`](#origin-servers-consul-service)) supports the following:
 
-<a id="site-a096eb"></a>&#x2022; [`site`](#site-a096eb) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-a096eb) below.
+<a id="site-a096eb"></a>&#x2022; [`site`](#site-a096eb) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-a096eb) below.
 
-<a id="site-faf4b5"></a>&#x2022; [`virtual_site`](#site-faf4b5) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-faf4b5) below.
+<a id="site-faf4b5"></a>&#x2022; [`virtual_site`](#site-faf4b5) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-faf4b5) below.
 
 #### Origin Servers Consul Service Site Locator Site
 
 A [`site`](#site-a096eb) block (within [`origin_servers.consul_service.site_locator`](#locator-0ecb39)) supports the following:
 
-<a id="name-8a907a"></a>&#x2022; [`name`](#name-8a907a) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-8a907a"></a>&#x2022; [`name`](#name-8a907a) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-933dcd"></a>&#x2022; [`namespace`](#namespace-933dcd) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-933dcd"></a>&#x2022; [`namespace`](#namespace-933dcd) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-c92ea9"></a>&#x2022; [`tenant`](#tenant-c92ea9) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-c92ea9"></a>&#x2022; [`tenant`](#tenant-c92ea9) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers Consul Service Site Locator Virtual Site
 
@@ -357,9 +357,9 @@ A [`site`](#site-a096eb) block (within [`origin_servers.consul_service.site_loca
 
 A [`snat_pool`](#origin-servers-consul-service-snat-pool) block (within [`origin_servers.consul_service`](#origin-servers-consul-service)) supports the following:
 
-<a id="pool-8eb799"></a>&#x2022; [`no_snat_pool`](#pool-8eb799) - Optional Block<br>Enable this option
+<a id="pool-8eb799"></a>&#x2022; [`no_snat_pool`](#pool-8eb799) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="pool-fc27df"></a>&#x2022; [`snat_pool`](#pool-fc27df) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#pool-fc27df) below.
+<a id="pool-fc27df"></a>&#x2022; [`snat_pool`](#pool-fc27df) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#pool-fc27df) below.
 
 #### Origin Servers Consul Service Snat Pool Snat Pool
 
@@ -369,53 +369,53 @@ A [`snat_pool`](#origin-servers-consul-service-snat-pool) block (within [`origin
 
 A [`custom_endpoint_object`](#origin-servers-custom-endpoint-object) block (within [`origin_servers`](#origin-servers)) supports the following:
 
-<a id="endpoint-6a2e33"></a>&#x2022; [`endpoint`](#endpoint-6a2e33) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Endpoint](#endpoint-6a2e33) below.
+<a id="endpoint-6a2e33"></a>&#x2022; [`endpoint`](#endpoint-6a2e33) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Endpoint](#endpoint-6a2e33) below.
 
 #### Origin Servers Custom Endpoint Object Endpoint
 
 An [`endpoint`](#endpoint-6a2e33) block (within [`origin_servers.custom_endpoint_object`](#origin-servers-custom-endpoint-object)) supports the following:
 
-<a id="name-33e632"></a>&#x2022; [`name`](#name-33e632) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-33e632"></a>&#x2022; [`name`](#name-33e632) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-ea699e"></a>&#x2022; [`namespace`](#namespace-ea699e) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-ea699e"></a>&#x2022; [`namespace`](#namespace-ea699e) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-45ea6c"></a>&#x2022; [`tenant`](#tenant-45ea6c) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-45ea6c"></a>&#x2022; [`tenant`](#tenant-45ea6c) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers K8S Service
 
 A [`k8s_service`](#origin-servers-k8s-service) block (within [`origin_servers`](#origin-servers)) supports the following:
 
-<a id="network-698e40"></a>&#x2022; [`inside_network`](#network-698e40) - Optional Block<br>Enable this option
+<a id="network-698e40"></a>&#x2022; [`inside_network`](#network-698e40) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="network-4852ec"></a>&#x2022; [`outside_network`](#network-4852ec) - Optional Block<br>Enable this option
+<a id="network-4852ec"></a>&#x2022; [`outside_network`](#network-4852ec) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="origin-servers-k8s-service-protocol"></a>&#x2022; [`protocol`](#origin-servers-k8s-service-protocol) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP
+<a id="origin-servers-k8s-service-protocol"></a>&#x2022; [`protocol`](#origin-servers-k8s-service-protocol) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_UDP] Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP
 
-<a id="origin-servers-k8s-service-service-name"></a>&#x2022; [`service_name`](#origin-servers-k8s-service-service-name) - Optional String<br>Service Name. K8S service name of the origin server will be listed, including the namespace and cluster-ID. For vK8s services, you need to enter a string with the format servicename.namespace:cluster-ID. If the servicename is 'frontend', namespace is 'speedtest' and cluster-ID is 'prod', then you will enter 'frontend.speedtest:prod'. Both namespace and cluster-ID are optional
+<a id="origin-servers-k8s-service-service-name"></a>&#x2022; [`service_name`](#origin-servers-k8s-service-service-name) - Optional String<br>K8S service name of the origin server will be listed, including the namespace and cluster-ID. For vK8s services, you need to enter a string with the format servicename.namespace:cluster-ID. If the servicename is 'frontend', namespace is 'speedtest' and cluster-ID is 'prod'
 
-<a id="origin-servers-k8s-service-site-locator"></a>&#x2022; [`site_locator`](#origin-servers-k8s-service-site-locator) - Optional Block<br>Site or Virtual Site. This message defines a reference to a site or virtual site object<br>See [Site Locator](#origin-servers-k8s-service-site-locator) below.
+<a id="origin-servers-k8s-service-site-locator"></a>&#x2022; [`site_locator`](#origin-servers-k8s-service-site-locator) - Optional Block<br>Message defines a reference to a site or virtual site object<br>See [Site Locator](#origin-servers-k8s-service-site-locator) below.
 
 <a id="origin-servers-k8s-service-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-k8s-service-snat-pool) - Optional Block<br>SNAT Pool. SNAT Pool configuration<br>See [Snat Pool](#origin-servers-k8s-service-snat-pool) below.
 
-<a id="networks-d41308"></a>&#x2022; [`vk8s_networks`](#networks-d41308) - Optional Block<br>Enable this option
+<a id="networks-d41308"></a>&#x2022; [`vk8s_networks`](#networks-d41308) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Origin Servers K8S Service Site Locator
 
 A [`site_locator`](#origin-servers-k8s-service-site-locator) block (within [`origin_servers.k8s_service`](#origin-servers-k8s-service)) supports the following:
 
-<a id="site-e35217"></a>&#x2022; [`site`](#site-e35217) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-e35217) below.
+<a id="site-e35217"></a>&#x2022; [`site`](#site-e35217) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-e35217) below.
 
-<a id="site-0ef9ba"></a>&#x2022; [`virtual_site`](#site-0ef9ba) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-0ef9ba) below.
+<a id="site-0ef9ba"></a>&#x2022; [`virtual_site`](#site-0ef9ba) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-0ef9ba) below.
 
 #### Origin Servers K8S Service Site Locator Site
 
 A [`site`](#site-e35217) block (within [`origin_servers.k8s_service.site_locator`](#origin-servers-k8s-service-site-locator)) supports the following:
 
-<a id="name-b0bc0e"></a>&#x2022; [`name`](#name-b0bc0e) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-b0bc0e"></a>&#x2022; [`name`](#name-b0bc0e) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-bc6979"></a>&#x2022; [`namespace`](#namespace-bc6979) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-bc6979"></a>&#x2022; [`namespace`](#namespace-bc6979) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-097ea8"></a>&#x2022; [`tenant`](#tenant-097ea8) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-097ea8"></a>&#x2022; [`tenant`](#tenant-097ea8) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers K8S Service Site Locator Virtual Site
 
@@ -425,9 +425,9 @@ A [`site`](#site-e35217) block (within [`origin_servers.k8s_service.site_locator
 
 A [`snat_pool`](#origin-servers-k8s-service-snat-pool) block (within [`origin_servers.k8s_service`](#origin-servers-k8s-service)) supports the following:
 
-<a id="pool-57d5fe"></a>&#x2022; [`no_snat_pool`](#pool-57d5fe) - Optional Block<br>Enable this option
+<a id="pool-57d5fe"></a>&#x2022; [`no_snat_pool`](#pool-57d5fe) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="pool-8c0889"></a>&#x2022; [`snat_pool`](#pool-8c0889) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#pool-8c0889) below.
+<a id="pool-8c0889"></a>&#x2022; [`snat_pool`](#pool-8c0889) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#pool-8c0889) below.
 
 #### Origin Servers K8S Service Snat Pool Snat Pool
 
@@ -437,15 +437,15 @@ A [`snat_pool`](#origin-servers-k8s-service-snat-pool) block (within [`origin_se
 
 A [`private_ip`](#origin-servers-private-ip) block (within [`origin_servers`](#origin-servers)) supports the following:
 
-<a id="network-340769"></a>&#x2022; [`inside_network`](#network-340769) - Optional Block<br>Enable this option
+<a id="network-340769"></a>&#x2022; [`inside_network`](#network-340769) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="origin-servers-private-ip-ip"></a>&#x2022; [`ip`](#origin-servers-private-ip-ip) - Optional String<br>IP. Private IPv4 address
 
-<a id="network-4b8cd1"></a>&#x2022; [`outside_network`](#network-4b8cd1) - Optional Block<br>Enable this option
+<a id="network-4b8cd1"></a>&#x2022; [`outside_network`](#network-4b8cd1) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="origin-servers-private-ip-segment"></a>&#x2022; [`segment`](#origin-servers-private-ip-segment) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Segment](#origin-servers-private-ip-segment) below.
+<a id="origin-servers-private-ip-segment"></a>&#x2022; [`segment`](#origin-servers-private-ip-segment) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Segment](#origin-servers-private-ip-segment) below.
 
-<a id="origin-servers-private-ip-site-locator"></a>&#x2022; [`site_locator`](#origin-servers-private-ip-site-locator) - Optional Block<br>Site or Virtual Site. This message defines a reference to a site or virtual site object<br>See [Site Locator](#origin-servers-private-ip-site-locator) below.
+<a id="origin-servers-private-ip-site-locator"></a>&#x2022; [`site_locator`](#origin-servers-private-ip-site-locator) - Optional Block<br>Message defines a reference to a site or virtual site object<br>See [Site Locator](#origin-servers-private-ip-site-locator) below.
 
 <a id="origin-servers-private-ip-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-private-ip-snat-pool) - Optional Block<br>SNAT Pool. SNAT Pool configuration<br>See [Snat Pool](#origin-servers-private-ip-snat-pool) below.
 
@@ -453,29 +453,29 @@ A [`private_ip`](#origin-servers-private-ip) block (within [`origin_servers`](#o
 
 A [`segment`](#origin-servers-private-ip-segment) block (within [`origin_servers.private_ip`](#origin-servers-private-ip)) supports the following:
 
-<a id="origin-servers-private-ip-segment-name"></a>&#x2022; [`name`](#origin-servers-private-ip-segment-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="origin-servers-private-ip-segment-name"></a>&#x2022; [`name`](#origin-servers-private-ip-segment-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-a2f7e0"></a>&#x2022; [`namespace`](#namespace-a2f7e0) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-a2f7e0"></a>&#x2022; [`namespace`](#namespace-a2f7e0) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-4d8d8b"></a>&#x2022; [`tenant`](#tenant-4d8d8b) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-4d8d8b"></a>&#x2022; [`tenant`](#tenant-4d8d8b) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers Private IP Site Locator
 
 A [`site_locator`](#origin-servers-private-ip-site-locator) block (within [`origin_servers.private_ip`](#origin-servers-private-ip)) supports the following:
 
-<a id="site-9000e8"></a>&#x2022; [`site`](#site-9000e8) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-9000e8) below.
+<a id="site-9000e8"></a>&#x2022; [`site`](#site-9000e8) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-9000e8) below.
 
-<a id="site-5bd329"></a>&#x2022; [`virtual_site`](#site-5bd329) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-5bd329) below.
+<a id="site-5bd329"></a>&#x2022; [`virtual_site`](#site-5bd329) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-5bd329) below.
 
 #### Origin Servers Private IP Site Locator Site
 
 A [`site`](#site-9000e8) block (within [`origin_servers.private_ip.site_locator`](#origin-servers-private-ip-site-locator)) supports the following:
 
-<a id="name-dc4f48"></a>&#x2022; [`name`](#name-dc4f48) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-dc4f48"></a>&#x2022; [`name`](#name-dc4f48) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-43a893"></a>&#x2022; [`namespace`](#namespace-43a893) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-43a893"></a>&#x2022; [`namespace`](#namespace-43a893) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-ae5087"></a>&#x2022; [`tenant`](#tenant-ae5087) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-ae5087"></a>&#x2022; [`tenant`](#tenant-ae5087) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers Private IP Site Locator Virtual Site
 
@@ -485,9 +485,9 @@ A [`site`](#site-9000e8) block (within [`origin_servers.private_ip.site_locator`
 
 A [`snat_pool`](#origin-servers-private-ip-snat-pool) block (within [`origin_servers.private_ip`](#origin-servers-private-ip)) supports the following:
 
-<a id="pool-c826de"></a>&#x2022; [`no_snat_pool`](#pool-c826de) - Optional Block<br>Enable this option
+<a id="pool-c826de"></a>&#x2022; [`no_snat_pool`](#pool-c826de) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="pool-cc6a33"></a>&#x2022; [`snat_pool`](#pool-cc6a33) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#pool-cc6a33) below.
+<a id="pool-cc6a33"></a>&#x2022; [`snat_pool`](#pool-cc6a33) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#pool-cc6a33) below.
 
 #### Origin Servers Private IP Snat Pool Snat Pool
 
@@ -499,15 +499,15 @@ A [`private_name`](#origin-servers-private-name) block (within [`origin_servers`
 
 <a id="origin-servers-private-name-dns-name"></a>&#x2022; [`dns_name`](#origin-servers-private-name-dns-name) - Optional String<br>DNS Name. DNS Name
 
-<a id="network-1921f3"></a>&#x2022; [`inside_network`](#network-1921f3) - Optional Block<br>Enable this option
+<a id="network-1921f3"></a>&#x2022; [`inside_network`](#network-1921f3) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="network-a1ed83"></a>&#x2022; [`outside_network`](#network-a1ed83) - Optional Block<br>Enable this option
+<a id="network-a1ed83"></a>&#x2022; [`outside_network`](#network-a1ed83) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="interval-4bd915"></a>&#x2022; [`refresh_interval`](#interval-4bd915) - Optional Number<br>DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per `HTTPS://datatracker.ietf.org/doc/HTML/rfc8767.`
+<a id="interval-4bd915"></a>&#x2022; [`refresh_interval`](#interval-4bd915) - Optional Number<br>Interval for DNS refresh in seconds. Max value is 7 days as per `HTTPS://datatracker.ietf.org/doc/HTML/rfc8767.`
 
-<a id="origin-servers-private-name-segment"></a>&#x2022; [`segment`](#origin-servers-private-name-segment) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Segment](#origin-servers-private-name-segment) below.
+<a id="origin-servers-private-name-segment"></a>&#x2022; [`segment`](#origin-servers-private-name-segment) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Segment](#origin-servers-private-name-segment) below.
 
-<a id="locator-0c95f1"></a>&#x2022; [`site_locator`](#locator-0c95f1) - Optional Block<br>Site or Virtual Site. This message defines a reference to a site or virtual site object<br>See [Site Locator](#locator-0c95f1) below.
+<a id="locator-0c95f1"></a>&#x2022; [`site_locator`](#locator-0c95f1) - Optional Block<br>Message defines a reference to a site or virtual site object<br>See [Site Locator](#locator-0c95f1) below.
 
 <a id="origin-servers-private-name-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-private-name-snat-pool) - Optional Block<br>SNAT Pool. SNAT Pool configuration<br>See [Snat Pool](#origin-servers-private-name-snat-pool) below.
 
@@ -515,29 +515,29 @@ A [`private_name`](#origin-servers-private-name) block (within [`origin_servers`
 
 A [`segment`](#origin-servers-private-name-segment) block (within [`origin_servers.private_name`](#origin-servers-private-name)) supports the following:
 
-<a id="name-6839c1"></a>&#x2022; [`name`](#name-6839c1) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-6839c1"></a>&#x2022; [`name`](#name-6839c1) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-217e43"></a>&#x2022; [`namespace`](#namespace-217e43) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-217e43"></a>&#x2022; [`namespace`](#namespace-217e43) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-522e3c"></a>&#x2022; [`tenant`](#tenant-522e3c) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-522e3c"></a>&#x2022; [`tenant`](#tenant-522e3c) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers Private Name Site Locator
 
 A [`site_locator`](#locator-0c95f1) block (within [`origin_servers.private_name`](#origin-servers-private-name)) supports the following:
 
-<a id="site-771c33"></a>&#x2022; [`site`](#site-771c33) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-771c33) below.
+<a id="site-771c33"></a>&#x2022; [`site`](#site-771c33) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-771c33) below.
 
-<a id="site-cf2f53"></a>&#x2022; [`virtual_site`](#site-cf2f53) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-cf2f53) below.
+<a id="site-cf2f53"></a>&#x2022; [`virtual_site`](#site-cf2f53) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-cf2f53) below.
 
 #### Origin Servers Private Name Site Locator Site
 
 A [`site`](#site-771c33) block (within [`origin_servers.private_name.site_locator`](#locator-0c95f1)) supports the following:
 
-<a id="name-5e7e2b"></a>&#x2022; [`name`](#name-5e7e2b) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-5e7e2b"></a>&#x2022; [`name`](#name-5e7e2b) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-a2ea97"></a>&#x2022; [`namespace`](#namespace-a2ea97) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-a2ea97"></a>&#x2022; [`namespace`](#namespace-a2ea97) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-33ad25"></a>&#x2022; [`tenant`](#tenant-33ad25) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-33ad25"></a>&#x2022; [`tenant`](#tenant-33ad25) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers Private Name Site Locator Virtual Site
 
@@ -547,9 +547,9 @@ A [`site`](#site-771c33) block (within [`origin_servers.private_name.site_locato
 
 A [`snat_pool`](#origin-servers-private-name-snat-pool) block (within [`origin_servers.private_name`](#origin-servers-private-name)) supports the following:
 
-<a id="pool-569cef"></a>&#x2022; [`no_snat_pool`](#pool-569cef) - Optional Block<br>Enable this option
+<a id="pool-569cef"></a>&#x2022; [`no_snat_pool`](#pool-569cef) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="pool-b6c3f7"></a>&#x2022; [`snat_pool`](#pool-b6c3f7) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#pool-b6c3f7) below.
+<a id="pool-b6c3f7"></a>&#x2022; [`snat_pool`](#pool-b6c3f7) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#pool-b6c3f7) below.
 
 #### Origin Servers Private Name Snat Pool Snat Pool
 
@@ -567,7 +567,7 @@ A [`public_name`](#origin-servers-public-name) block (within [`origin_servers`](
 
 <a id="origin-servers-public-name-dns-name"></a>&#x2022; [`dns_name`](#origin-servers-public-name-dns-name) - Optional String<br>DNS Name. DNS Name
 
-<a id="interval-b4ce5c"></a>&#x2022; [`refresh_interval`](#interval-b4ce5c) - Optional Number<br>DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per `HTTPS://datatracker.ietf.org/doc/HTML/rfc8767.`
+<a id="interval-b4ce5c"></a>&#x2022; [`refresh_interval`](#interval-b4ce5c) - Optional Number<br>Interval for DNS refresh in seconds. Max value is 7 days as per `HTTPS://datatracker.ietf.org/doc/HTML/rfc8767.`
 
 #### Origin Servers Vn Private IP
 
@@ -575,17 +575,17 @@ A [`vn_private_ip`](#origin-servers-vn-private-ip) block (within [`origin_server
 
 <a id="origin-servers-vn-private-ip-ip"></a>&#x2022; [`ip`](#origin-servers-vn-private-ip-ip) - Optional String<br>IPv4. IPv4 address
 
-<a id="network-e703ab"></a>&#x2022; [`virtual_network`](#network-e703ab) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Network](#network-e703ab) below.
+<a id="network-e703ab"></a>&#x2022; [`virtual_network`](#network-e703ab) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Network](#network-e703ab) below.
 
 #### Origin Servers Vn Private IP Virtual Network
 
 A [`virtual_network`](#network-e703ab) block (within [`origin_servers.vn_private_ip`](#origin-servers-vn-private-ip)) supports the following:
 
-<a id="name-6c5e61"></a>&#x2022; [`name`](#name-6c5e61) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-6c5e61"></a>&#x2022; [`name`](#name-6c5e61) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-fd2396"></a>&#x2022; [`namespace`](#namespace-fd2396) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-fd2396"></a>&#x2022; [`namespace`](#namespace-fd2396) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-550f0b"></a>&#x2022; [`tenant`](#tenant-550f0b) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-550f0b"></a>&#x2022; [`tenant`](#tenant-550f0b) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers Vn Private Name
 
@@ -593,17 +593,17 @@ A [`vn_private_name`](#origin-servers-vn-private-name) block (within [`origin_se
 
 <a id="origin-servers-vn-private-name-dns-name"></a>&#x2022; [`dns_name`](#origin-servers-vn-private-name-dns-name) - Optional String<br>DNS Name. DNS Name
 
-<a id="network-ff3b00"></a>&#x2022; [`private_network`](#network-ff3b00) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Private Network](#network-ff3b00) below.
+<a id="network-ff3b00"></a>&#x2022; [`private_network`](#network-ff3b00) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Private Network](#network-ff3b00) below.
 
 #### Origin Servers Vn Private Name Private Network
 
 A [`private_network`](#network-ff3b00) block (within [`origin_servers.vn_private_name`](#origin-servers-vn-private-name)) supports the following:
 
-<a id="name-6e42c8"></a>&#x2022; [`name`](#name-6e42c8) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-6e42c8"></a>&#x2022; [`name`](#name-6e42c8) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-145fbd"></a>&#x2022; [`namespace`](#namespace-145fbd) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-145fbd"></a>&#x2022; [`namespace`](#namespace-145fbd) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-e702ea"></a>&#x2022; [`tenant`](#tenant-e702ea) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-e702ea"></a>&#x2022; [`tenant`](#tenant-e702ea) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 
@@ -621,61 +621,61 @@ A [`timeouts`](#timeouts) block supports the following:
 
 An [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) block supports the following:
 
-<a id="reuse-008a14"></a>&#x2022; [`disable_conn_pool_reuse`](#reuse-008a14) - Optional Block<br>Enable this option
+<a id="reuse-008a14"></a>&#x2022; [`disable_conn_pool_reuse`](#reuse-008a14) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="reuse-ad4462"></a>&#x2022; [`enable_conn_pool_reuse`](#reuse-ad4462) - Optional Block<br>Enable this option
+<a id="reuse-ad4462"></a>&#x2022; [`enable_conn_pool_reuse`](#reuse-ad4462) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Use TLS
 
 An [`use_tls`](#use-tls) block supports the following:
 
-<a id="use-tls-default-session-key-caching"></a>&#x2022; [`default_session_key_caching`](#use-tls-default-session-key-caching) - Optional Block<br>Enable this option
+<a id="use-tls-default-session-key-caching"></a>&#x2022; [`default_session_key_caching`](#use-tls-default-session-key-caching) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="use-tls-disable-session-key-caching"></a>&#x2022; [`disable_session_key_caching`](#use-tls-disable-session-key-caching) - Optional Block<br>Enable this option
+<a id="use-tls-disable-session-key-caching"></a>&#x2022; [`disable_session_key_caching`](#use-tls-disable-session-key-caching) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="use-tls-disable-sni"></a>&#x2022; [`disable_sni`](#use-tls-disable-sni) - Optional Block<br>Enable this option
+<a id="use-tls-disable-sni"></a>&#x2022; [`disable_sni`](#use-tls-disable-sni) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="use-tls-max-session-keys"></a>&#x2022; [`max_session_keys`](#use-tls-max-session-keys) - Optional Number<br>Max Session Keys Cached. Number of session keys that are cached
+<a id="use-tls-max-session-keys"></a>&#x2022; [`max_session_keys`](#use-tls-max-session-keys) - Optional Number<br>Number of session keys that are cached
 
-<a id="use-tls-no-mtls"></a>&#x2022; [`no_mtls`](#use-tls-no-mtls) - Optional Block<br>Enable this option
+<a id="use-tls-no-mtls"></a>&#x2022; [`no_mtls`](#use-tls-no-mtls) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="use-tls-skip-server-verification"></a>&#x2022; [`skip_server_verification`](#use-tls-skip-server-verification) - Optional Block<br>Enable this option
+<a id="use-tls-skip-server-verification"></a>&#x2022; [`skip_server_verification`](#use-tls-skip-server-verification) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="use-tls-sni"></a>&#x2022; [`sni`](#use-tls-sni) - Optional String<br>SNI Value. SNI value to be used
+<a id="use-tls-sni"></a>&#x2022; [`sni`](#use-tls-sni) - Optional String<br>SNI value to be used
 
-<a id="use-tls-tls-config"></a>&#x2022; [`tls_config`](#use-tls-tls-config) - Optional Block<br>TLS Config. This defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#use-tls-tls-config) below.
+<a id="use-tls-tls-config"></a>&#x2022; [`tls_config`](#use-tls-tls-config) - Optional Block<br>Defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#use-tls-tls-config) below.
 
-<a id="use-tls-use-host-header-as-sni"></a>&#x2022; [`use_host_header_as_sni`](#use-tls-use-host-header-as-sni) - Optional Block<br>Enable this option
+<a id="use-tls-use-host-header-as-sni"></a>&#x2022; [`use_host_header_as_sni`](#use-tls-use-host-header-as-sni) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="use-tls-use-mtls"></a>&#x2022; [`use_mtls`](#use-tls-use-mtls) - Optional Block<br>mTLS Certificate. mTLS Client Certificate<br>See [Use mTLS](#use-tls-use-mtls) below.
 
-<a id="use-tls-use-mtls-obj"></a>&#x2022; [`use_mtls_obj`](#use-tls-use-mtls-obj) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Use mTLS Obj](#use-tls-use-mtls-obj) below.
+<a id="use-tls-use-mtls-obj"></a>&#x2022; [`use_mtls_obj`](#use-tls-use-mtls-obj) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Use mTLS Obj](#use-tls-use-mtls-obj) below.
 
 <a id="use-tls-use-server-verification"></a>&#x2022; [`use_server_verification`](#use-tls-use-server-verification) - Optional Block<br>TLS Validation Context for Origin Servers. Upstream TLS Validation Context<br>See [Use Server Verification](#use-tls-use-server-verification) below.
 
-<a id="use-tls-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#use-tls-volterra-trusted-ca) - Optional Block<br>Enable this option
+<a id="use-tls-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#use-tls-volterra-trusted-ca) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Use TLS TLS Config
 
 A [`tls_config`](#use-tls-tls-config) block (within [`use_tls`](#use-tls)) supports the following:
 
-<a id="use-tls-tls-config-custom-security"></a>&#x2022; [`custom_security`](#use-tls-tls-config-custom-security) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#use-tls-tls-config-custom-security) below.
+<a id="use-tls-tls-config-custom-security"></a>&#x2022; [`custom_security`](#use-tls-tls-config-custom-security) - Optional Block<br>Defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#use-tls-tls-config-custom-security) below.
 
-<a id="use-tls-tls-config-default-security"></a>&#x2022; [`default_security`](#use-tls-tls-config-default-security) - Optional Block<br>Enable this option
+<a id="use-tls-tls-config-default-security"></a>&#x2022; [`default_security`](#use-tls-tls-config-default-security) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="use-tls-tls-config-low-security"></a>&#x2022; [`low_security`](#use-tls-tls-config-low-security) - Optional Block<br>Enable this option
+<a id="use-tls-tls-config-low-security"></a>&#x2022; [`low_security`](#use-tls-tls-config-low-security) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="use-tls-tls-config-medium-security"></a>&#x2022; [`medium_security`](#use-tls-tls-config-medium-security) - Optional Block<br>Enable this option
+<a id="use-tls-tls-config-medium-security"></a>&#x2022; [`medium_security`](#use-tls-tls-config-medium-security) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Use TLS TLS Config Custom Security
 
 A [`custom_security`](#use-tls-tls-config-custom-security) block (within [`use_tls.tls_config`](#use-tls-tls-config)) supports the following:
 
-<a id="suites-2d975b"></a>&#x2022; [`cipher_suites`](#suites-2d975b) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
+<a id="suites-2d975b"></a>&#x2022; [`cipher_suites`](#suites-2d975b) - Optional List<br>The TLS listener will only support the specified cipher list
 
-<a id="version-11230d"></a>&#x2022; [`max_version`](#version-11230d) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="version-11230d"></a>&#x2022; [`max_version`](#version-11230d) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="version-a76fa4"></a>&#x2022; [`min_version`](#version-a76fa4) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="version-a76fa4"></a>&#x2022; [`min_version`](#version-a76fa4) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 #### Use TLS Use mTLS
 
@@ -687,17 +687,17 @@ An [`use_mtls`](#use-tls-use-mtls) block (within [`use_tls`](#use-tls)) supports
 
 A [`tls_certificates`](#use-tls-use-mtls-tls-certificates) block (within [`use_tls.use_mtls`](#use-tls-use-mtls)) supports the following:
 
-<a id="url-26c7eb"></a>&#x2022; [`certificate_url`](#url-26c7eb) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
+<a id="url-26c7eb"></a>&#x2022; [`certificate_url`](#url-26c7eb) - Optional String<br>TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
-<a id="algorithms-d28b5f"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-d28b5f) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-d28b5f) below.
+<a id="algorithms-d28b5f"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-d28b5f) - Optional Block<br>Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-d28b5f) below.
 
 <a id="spec-ad9c6c"></a>&#x2022; [`description_spec`](#spec-ad9c6c) - Optional String<br>Description. Description for the certificate
 
-<a id="stapling-242d9f"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-242d9f) - Optional Block<br>Enable this option
+<a id="stapling-242d9f"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-242d9f) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="key-dc1b14"></a>&#x2022; [`private_key`](#key-dc1b14) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-dc1b14) below.
+<a id="key-dc1b14"></a>&#x2022; [`private_key`](#key-dc1b14) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-dc1b14) below.
 
-<a id="defaults-413d06"></a>&#x2022; [`use_system_defaults`](#defaults-413d06) - Optional Block<br>Enable this option
+<a id="defaults-413d06"></a>&#x2022; [`use_system_defaults`](#defaults-413d06) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Use TLS Use mTLS TLS Certificates Custom Hash Algorithms
 
@@ -719,29 +719,29 @@ A [`tls_certificates`](#use-tls-use-mtls-tls-certificates) block (within [`use_t
 
 An [`use_mtls_obj`](#use-tls-use-mtls-obj) block (within [`use_tls`](#use-tls)) supports the following:
 
-<a id="use-tls-use-mtls-obj-name"></a>&#x2022; [`name`](#use-tls-use-mtls-obj-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="use-tls-use-mtls-obj-name"></a>&#x2022; [`name`](#use-tls-use-mtls-obj-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="use-tls-use-mtls-obj-namespace"></a>&#x2022; [`namespace`](#use-tls-use-mtls-obj-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="use-tls-use-mtls-obj-namespace"></a>&#x2022; [`namespace`](#use-tls-use-mtls-obj-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="use-tls-use-mtls-obj-tenant"></a>&#x2022; [`tenant`](#use-tls-use-mtls-obj-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="use-tls-use-mtls-obj-tenant"></a>&#x2022; [`tenant`](#use-tls-use-mtls-obj-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Use TLS Use Server Verification
 
 An [`use_server_verification`](#use-tls-use-server-verification) block (within [`use_tls`](#use-tls)) supports the following:
 
-<a id="trusted-ca-965dea"></a>&#x2022; [`trusted_ca`](#trusted-ca-965dea) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-965dea) below.
+<a id="trusted-ca-965dea"></a>&#x2022; [`trusted_ca`](#trusted-ca-965dea) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-965dea) below.
 
-<a id="url-21c5a6"></a>&#x2022; [`trusted_ca_url`](#url-21c5a6) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate
+<a id="url-21c5a6"></a>&#x2022; [`trusted_ca_url`](#url-21c5a6) - Optional String<br>Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate
 
 #### Use TLS Use Server Verification Trusted CA
 
 A [`trusted_ca`](#trusted-ca-965dea) block (within [`use_tls.use_server_verification`](#use-tls-use-server-verification)) supports the following:
 
-<a id="name-3590a2"></a>&#x2022; [`name`](#name-3590a2) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-3590a2"></a>&#x2022; [`name`](#name-3590a2) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-ac41ae"></a>&#x2022; [`namespace`](#namespace-ac41ae) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-ac41ae"></a>&#x2022; [`namespace`](#namespace-ac41ae) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-892ff9"></a>&#x2022; [`tenant`](#tenant-892ff9) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-892ff9"></a>&#x2022; [`tenant`](#tenant-892ff9) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 ---
 

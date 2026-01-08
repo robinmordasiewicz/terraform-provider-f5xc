@@ -16,11 +16,11 @@ resource "f5xc_segment" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: disable, enable] Enable this option
+  # [OneOf: disable, enable] Can be used for messages where n...
   disable {
     # Configure disable settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   enable {
     # Configure enable settings
   }

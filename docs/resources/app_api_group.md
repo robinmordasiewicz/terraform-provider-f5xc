@@ -36,11 +36,11 @@ resource "f5xc_app_api_group" "example" {
   bigip_virtual_server {
     # Configure bigip_virtual_server settings
   }
-  # API Group Scope CDN Loadbalancer. Set the scope of the AP...
+  # Set the scope of the API Group to a specific CDN Loadbala...
   cdn_loadbalancer {
     # Configure cdn_loadbalancer settings
   }
-  # API Group Elements. List of API group elements with metho...
+  # List of API group elements with methods and path regex fo...
   elements {
     # Configure elements settings
   }
@@ -67,11 +67,11 @@ resource "f5xc_app_api_group" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="bigip-virtual-server"></a>[`bigip_virtual_server`](#bigip-virtual-server) - Optional Block<br>API Group Scope BIG-IP Virtual Server. Set the scope of the API Group to a specific BIG-IP Virtual Server<br>See [Bigip Virtual Server](#bigip-virtual-server) below for details.
-<br><br>&#x2022; <a id="cdn-loadbalancer"></a>[`cdn_loadbalancer`](#cdn-loadbalancer) - Optional Block<br>API Group Scope CDN Loadbalancer. Set the scope of the API Group to a specific CDN Loadbalancer<br>See [CDN Loadbalancer](#cdn-loadbalancer) below for details.
-<br><br>&#x2022; <a id="http-loadbalancer"></a>[`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>API Group Scope HTTP Loadbalancer. Set the scope of the API Group to a specific HTTP Loadbalancer<br>See [HTTP Loadbalancer](#http-loadbalancer) below for details.
+&#x2022; <a id="bigip-virtual-server"></a>[`bigip_virtual_server`](#bigip-virtual-server) - Optional Block<br>Set the scope of the API Group to a specific BIG-IP Virtual Server<br>See [Bigip Virtual Server](#bigip-virtual-server) below for details.
+<br><br>&#x2022; <a id="cdn-loadbalancer"></a>[`cdn_loadbalancer`](#cdn-loadbalancer) - Optional Block<br>Set the scope of the API Group to a specific CDN Loadbalancer<br>See [CDN Loadbalancer](#cdn-loadbalancer) below for details.
+<br><br>&#x2022; <a id="http-loadbalancer"></a>[`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>Set the scope of the API Group to a specific HTTP Loadbalancer<br>See [HTTP Loadbalancer](#http-loadbalancer) below for details.
 
-<a id="elements"></a>&#x2022; [`elements`](#elements) - Optional Block<br>API Group Elements. List of API group elements with methods and path regex for matching requests<br>See [Elements](#elements) below for details.
+<a id="elements"></a>&#x2022; [`elements`](#elements) - Optional Block<br>List of API group elements with methods and path regex for matching requests<br>See [Elements](#elements) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -87,57 +87,57 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`bigip_virtual_server`](#bigip-virtual-server) block supports the following:
 
-<a id="server-575600"></a>&#x2022; [`bigip_virtual_server`](#server-575600) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Bigip Virtual Server](#server-575600) below.
+<a id="server-575600"></a>&#x2022; [`bigip_virtual_server`](#server-575600) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Bigip Virtual Server](#server-575600) below.
 
 #### Bigip Virtual Server Bigip Virtual Server
 
 A [`bigip_virtual_server`](#server-575600) block (within [`bigip_virtual_server`](#bigip-virtual-server)) supports the following:
 
-<a id="name-9fb983"></a>&#x2022; [`name`](#name-9fb983) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-9fb983"></a>&#x2022; [`name`](#name-9fb983) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-4ecc61"></a>&#x2022; [`namespace`](#namespace-4ecc61) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-4ecc61"></a>&#x2022; [`namespace`](#namespace-4ecc61) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-c4d0e6"></a>&#x2022; [`tenant`](#tenant-c4d0e6) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-c4d0e6"></a>&#x2022; [`tenant`](#tenant-c4d0e6) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### CDN Loadbalancer
 
 A [`cdn_loadbalancer`](#cdn-loadbalancer) block supports the following:
 
-<a id="cdn-loadbalancer-cdn-loadbalancer"></a>&#x2022; [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CDN Loadbalancer](#cdn-loadbalancer-cdn-loadbalancer) below.
+<a id="cdn-loadbalancer-cdn-loadbalancer"></a>&#x2022; [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CDN Loadbalancer](#cdn-loadbalancer-cdn-loadbalancer) below.
 
 #### CDN Loadbalancer CDN Loadbalancer
 
 A [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) block (within [`cdn_loadbalancer`](#cdn-loadbalancer)) supports the following:
 
-<a id="cdn-loadbalancer-cdn-loadbalancer-name"></a>&#x2022; [`name`](#cdn-loadbalancer-cdn-loadbalancer-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="cdn-loadbalancer-cdn-loadbalancer-name"></a>&#x2022; [`name`](#cdn-loadbalancer-cdn-loadbalancer-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-8ae5bf"></a>&#x2022; [`namespace`](#namespace-8ae5bf) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-8ae5bf"></a>&#x2022; [`namespace`](#namespace-8ae5bf) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-ea0b41"></a>&#x2022; [`tenant`](#tenant-ea0b41) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-ea0b41"></a>&#x2022; [`tenant`](#tenant-ea0b41) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Elements
 
 An [`elements`](#elements) block supports the following:
 
-<a id="elements-methods"></a>&#x2022; [`methods`](#elements-methods) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list
+<a id="elements-methods"></a>&#x2022; [`methods`](#elements-methods) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list
 
-<a id="elements-path-regex"></a>&#x2022; [`path_regex`](#elements-path-regex) - Optional String<br>Path Regex. Regular expression to match the input request API path against. The match is considered to succeed if the input request API path matches the specified path regex
+<a id="elements-path-regex"></a>&#x2022; [`path_regex`](#elements-path-regex) - Optional String<br>Regular expression to match the input request API path against. The match is considered to succeed if the input request API path matches the specified path regex
 
 #### HTTP Loadbalancer
 
 A [`http_loadbalancer`](#http-loadbalancer) block supports the following:
 
-<a id="http-loadbalancer-http-loadbalancer"></a>&#x2022; [`http_loadbalancer`](#http-loadbalancer-http-loadbalancer) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [HTTP Loadbalancer](#http-loadbalancer-http-loadbalancer) below.
+<a id="http-loadbalancer-http-loadbalancer"></a>&#x2022; [`http_loadbalancer`](#http-loadbalancer-http-loadbalancer) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [HTTP Loadbalancer](#http-loadbalancer-http-loadbalancer) below.
 
 #### HTTP Loadbalancer HTTP Loadbalancer
 
 A [`http_loadbalancer`](#http-loadbalancer-http-loadbalancer) block (within [`http_loadbalancer`](#http-loadbalancer)) supports the following:
 
-<a id="name-9dca0b"></a>&#x2022; [`name`](#name-9dca0b) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-9dca0b"></a>&#x2022; [`name`](#name-9dca0b) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-c94608"></a>&#x2022; [`namespace`](#namespace-c94608) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-c94608"></a>&#x2022; [`namespace`](#namespace-c94608) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-fa3b49"></a>&#x2022; [`tenant`](#tenant-fa3b49) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-fa3b49"></a>&#x2022; [`tenant`](#tenant-fa3b49) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

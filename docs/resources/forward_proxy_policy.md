@@ -75,16 +75,16 @@ resource "f5xc_forward_proxy_policy" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="allow-all"></a>[`allow_all`](#allow-all) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="allow-list"></a>[`allow_list`](#allow-list) - Optional Block<br>Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP)<br>See [Allow List](#allow-list) below for details.
-<br><br>&#x2022; <a id="deny-list"></a>[`deny_list`](#deny-list) - Optional Block<br>Forward Proxy Rule. URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP)<br>See [Deny List](#deny-list) below for details.
+&#x2022; <a id="allow-all"></a>[`allow_all`](#allow-all) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="allow-list"></a>[`allow_list`](#allow-list) - Optional Block<br>URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP)<br>See [Allow List](#allow-list) below for details.
+<br><br>&#x2022; <a id="deny-list"></a>[`deny_list`](#deny-list) - Optional Block<br>URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP)<br>See [Deny List](#deny-list) below for details.
 <br><br>&#x2022; <a id="rule-list"></a>[`rule_list`](#rule-list) - Optional Block<br>Custom Rule List. List of custom rules<br>See [Rule List](#rule-list) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="any-proxy"></a>[`any_proxy`](#any-proxy) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="drp-http-connect"></a>[`drp_http_connect`](#drp-http-connect) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="network-connector"></a>[`network_connector`](#network-connector) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Network Connector](#network-connector) below for details.
-<br><br>&#x2022; <a id="proxy-label-selector"></a>[`proxy_label_selector`](#proxy-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Proxy Label Selector](#proxy-label-selector) below for details.
+&#x2022; <a id="any-proxy"></a>[`any_proxy`](#any-proxy) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="drp-http-connect"></a>[`drp_http_connect`](#drp-http-connect) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="network-connector"></a>[`network_connector`](#network-connector) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Network Connector](#network-connector) below for details.
+<br><br>&#x2022; <a id="proxy-label-selector"></a>[`proxy_label_selector`](#proxy-label-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects<br>See [Proxy Label Selector](#proxy-label-selector) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -100,13 +100,13 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`allow_list`](#allow-list) block supports the following:
 
-<a id="allow-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#allow-list-default-action-allow) - Optional Block<br>Enable this option
+<a id="allow-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#allow-list-default-action-allow) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="allow-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#allow-list-default-action-deny) - Optional Block<br>Enable this option
+<a id="allow-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#allow-list-default-action-deny) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="allow-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#allow-list-default-action-next-policy) - Optional Block<br>Enable this option
+<a id="allow-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#allow-list-default-action-next-policy) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="allow-list-dest-list"></a>&#x2022; [`dest_list`](#allow-list-dest-list) - Optional Block<br>L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI<br>See [Dest List](#allow-list-dest-list) below.
+<a id="allow-list-dest-list"></a>&#x2022; [`dest_list`](#allow-list-dest-list) - Optional Block<br>L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI<br>See [Dest List](#allow-list-dest-list) below.
 
 <a id="allow-list-http-list"></a>&#x2022; [`http_list`](#allow-list-http-list) - Optional Block<br>HTTP URLs. URLs for HTTP connections<br>See [HTTP List](#allow-list-http-list) below.
 
@@ -118,7 +118,7 @@ A [`dest_list`](#allow-list-dest-list) block (within [`allow_list`](#allow-list)
 
 <a id="allow-list-dest-list-ipv6-prefixes"></a>&#x2022; [`ipv6_prefixes`](#allow-list-dest-list-ipv6-prefixes) - Optional List<br>IPv6 Prefixes. Destination IPv6 prefixes
 
-<a id="allow-list-dest-list-port-ranges"></a>&#x2022; [`port_ranges`](#allow-list-dest-list-port-ranges) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+<a id="allow-list-dest-list-port-ranges"></a>&#x2022; [`port_ranges`](#allow-list-dest-list-port-ranges) - Optional String<br>String containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
 
 <a id="allow-list-dest-list-prefixes"></a>&#x2022; [`prefixes`](#allow-list-dest-list-prefixes) - Optional List<br>IPv4 Prefixes. Destination IPv4 prefixes
 
@@ -126,41 +126,41 @@ A [`dest_list`](#allow-list-dest-list) block (within [`allow_list`](#allow-list)
 
 A [`http_list`](#allow-list-http-list) block (within [`allow_list`](#allow-list)) supports the following:
 
-<a id="allow-list-http-list-any-path"></a>&#x2022; [`any_path`](#allow-list-http-list-any-path) - Optional Block<br>Enable this option
+<a id="allow-list-http-list-any-path"></a>&#x2022; [`any_path`](#allow-list-http-list-any-path) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="allow-list-http-list-exact-value"></a>&#x2022; [`exact_value`](#allow-list-http-list-exact-value) - Optional String<br>Exact Values. Exact domain name
+<a id="allow-list-http-list-exact-value"></a>&#x2022; [`exact_value`](#allow-list-http-list-exact-value) - Optional String<br>Exact domain name
 
-<a id="allow-list-http-list-path-exact-value"></a>&#x2022; [`path_exact_value`](#allow-list-http-list-path-exact-value) - Optional String<br>Exact Path. Exact Path to match
+<a id="allow-list-http-list-path-exact-value"></a>&#x2022; [`path_exact_value`](#allow-list-http-list-path-exact-value) - Optional String<br>Exact Path to match
 
-<a id="allow-list-http-list-path-prefix-value"></a>&#x2022; [`path_prefix_value`](#allow-list-http-list-path-prefix-value) - Optional String<br>Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'
+<a id="allow-list-http-list-path-prefix-value"></a>&#x2022; [`path_prefix_value`](#allow-list-http-list-path-prefix-value) - Optional String<br>Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'
 
-<a id="allow-list-http-list-path-regex-value"></a>&#x2022; [`path_regex_value`](#allow-list-http-list-path-regex-value) - Optional String<br>Regex of Path. Regular Expression value for the Path to match
+<a id="allow-list-http-list-path-regex-value"></a>&#x2022; [`path_regex_value`](#allow-list-http-list-path-regex-value) - Optional String<br>Regular Expression value for the Path to match
 
-<a id="allow-list-http-list-regex-value"></a>&#x2022; [`regex_value`](#allow-list-http-list-regex-value) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
+<a id="allow-list-http-list-regex-value"></a>&#x2022; [`regex_value`](#allow-list-http-list-regex-value) - Optional String<br>Regular Expression value for the domain name
 
-<a id="allow-list-http-list-suffix-value"></a>&#x2022; [`suffix_value`](#allow-list-http-list-suffix-value) - Optional String<br>Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'
+<a id="allow-list-http-list-suffix-value"></a>&#x2022; [`suffix_value`](#allow-list-http-list-suffix-value) - Optional String<br>Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'
 
 #### Allow List TLS List
 
 A [`tls_list`](#allow-list-tls-list) block (within [`allow_list`](#allow-list)) supports the following:
 
-<a id="allow-list-tls-list-exact-value"></a>&#x2022; [`exact_value`](#allow-list-tls-list-exact-value) - Optional String<br>Exact Value. Exact domain name
+<a id="allow-list-tls-list-exact-value"></a>&#x2022; [`exact_value`](#allow-list-tls-list-exact-value) - Optional String<br>Exact domain name
 
-<a id="allow-list-tls-list-regex-value"></a>&#x2022; [`regex_value`](#allow-list-tls-list-regex-value) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
+<a id="allow-list-tls-list-regex-value"></a>&#x2022; [`regex_value`](#allow-list-tls-list-regex-value) - Optional String<br>Regular Expression value for the domain name
 
-<a id="allow-list-tls-list-suffix-value"></a>&#x2022; [`suffix_value`](#allow-list-tls-list-suffix-value) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+<a id="allow-list-tls-list-suffix-value"></a>&#x2022; [`suffix_value`](#allow-list-tls-list-suffix-value) - Optional String<br>Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
 #### Deny List
 
 A [`deny_list`](#deny-list) block supports the following:
 
-<a id="deny-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#deny-list-default-action-allow) - Optional Block<br>Enable this option
+<a id="deny-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#deny-list-default-action-allow) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="deny-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#deny-list-default-action-deny) - Optional Block<br>Enable this option
+<a id="deny-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#deny-list-default-action-deny) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="deny-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#deny-list-default-action-next-policy) - Optional Block<br>Enable this option
+<a id="deny-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#deny-list-default-action-next-policy) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="deny-list-dest-list"></a>&#x2022; [`dest_list`](#deny-list-dest-list) - Optional Block<br>L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI<br>See [Dest List](#deny-list-dest-list) below.
+<a id="deny-list-dest-list"></a>&#x2022; [`dest_list`](#deny-list-dest-list) - Optional Block<br>L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI<br>See [Dest List](#deny-list-dest-list) below.
 
 <a id="deny-list-http-list"></a>&#x2022; [`http_list`](#deny-list-http-list) - Optional Block<br>HTTP URLs. URLs for HTTP connections<br>See [HTTP List](#deny-list-http-list) below.
 
@@ -172,7 +172,7 @@ A [`dest_list`](#deny-list-dest-list) block (within [`deny_list`](#deny-list)) s
 
 <a id="deny-list-dest-list-ipv6-prefixes"></a>&#x2022; [`ipv6_prefixes`](#deny-list-dest-list-ipv6-prefixes) - Optional List<br>IPv6 Prefixes. Destination IPv6 prefixes
 
-<a id="deny-list-dest-list-port-ranges"></a>&#x2022; [`port_ranges`](#deny-list-dest-list-port-ranges) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+<a id="deny-list-dest-list-port-ranges"></a>&#x2022; [`port_ranges`](#deny-list-dest-list-port-ranges) - Optional String<br>String containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
 
 <a id="deny-list-dest-list-prefixes"></a>&#x2022; [`prefixes`](#deny-list-dest-list-prefixes) - Optional List<br>IPv4 Prefixes. Destination IPv4 prefixes
 
@@ -180,45 +180,45 @@ A [`dest_list`](#deny-list-dest-list) block (within [`deny_list`](#deny-list)) s
 
 A [`http_list`](#deny-list-http-list) block (within [`deny_list`](#deny-list)) supports the following:
 
-<a id="deny-list-http-list-any-path"></a>&#x2022; [`any_path`](#deny-list-http-list-any-path) - Optional Block<br>Enable this option
+<a id="deny-list-http-list-any-path"></a>&#x2022; [`any_path`](#deny-list-http-list-any-path) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="deny-list-http-list-exact-value"></a>&#x2022; [`exact_value`](#deny-list-http-list-exact-value) - Optional String<br>Exact Values. Exact domain name
+<a id="deny-list-http-list-exact-value"></a>&#x2022; [`exact_value`](#deny-list-http-list-exact-value) - Optional String<br>Exact domain name
 
-<a id="deny-list-http-list-path-exact-value"></a>&#x2022; [`path_exact_value`](#deny-list-http-list-path-exact-value) - Optional String<br>Exact Path. Exact Path to match
+<a id="deny-list-http-list-path-exact-value"></a>&#x2022; [`path_exact_value`](#deny-list-http-list-path-exact-value) - Optional String<br>Exact Path to match
 
-<a id="deny-list-http-list-path-prefix-value"></a>&#x2022; [`path_prefix_value`](#deny-list-http-list-path-prefix-value) - Optional String<br>Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'
+<a id="deny-list-http-list-path-prefix-value"></a>&#x2022; [`path_prefix_value`](#deny-list-http-list-path-prefix-value) - Optional String<br>Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'
 
-<a id="deny-list-http-list-path-regex-value"></a>&#x2022; [`path_regex_value`](#deny-list-http-list-path-regex-value) - Optional String<br>Regex of Path. Regular Expression value for the Path to match
+<a id="deny-list-http-list-path-regex-value"></a>&#x2022; [`path_regex_value`](#deny-list-http-list-path-regex-value) - Optional String<br>Regular Expression value for the Path to match
 
-<a id="deny-list-http-list-regex-value"></a>&#x2022; [`regex_value`](#deny-list-http-list-regex-value) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
+<a id="deny-list-http-list-regex-value"></a>&#x2022; [`regex_value`](#deny-list-http-list-regex-value) - Optional String<br>Regular Expression value for the domain name
 
-<a id="deny-list-http-list-suffix-value"></a>&#x2022; [`suffix_value`](#deny-list-http-list-suffix-value) - Optional String<br>Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'
+<a id="deny-list-http-list-suffix-value"></a>&#x2022; [`suffix_value`](#deny-list-http-list-suffix-value) - Optional String<br>Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'
 
 #### Deny List TLS List
 
 A [`tls_list`](#deny-list-tls-list) block (within [`deny_list`](#deny-list)) supports the following:
 
-<a id="deny-list-tls-list-exact-value"></a>&#x2022; [`exact_value`](#deny-list-tls-list-exact-value) - Optional String<br>Exact Value. Exact domain name
+<a id="deny-list-tls-list-exact-value"></a>&#x2022; [`exact_value`](#deny-list-tls-list-exact-value) - Optional String<br>Exact domain name
 
-<a id="deny-list-tls-list-regex-value"></a>&#x2022; [`regex_value`](#deny-list-tls-list-regex-value) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
+<a id="deny-list-tls-list-regex-value"></a>&#x2022; [`regex_value`](#deny-list-tls-list-regex-value) - Optional String<br>Regular Expression value for the domain name
 
-<a id="deny-list-tls-list-suffix-value"></a>&#x2022; [`suffix_value`](#deny-list-tls-list-suffix-value) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+<a id="deny-list-tls-list-suffix-value"></a>&#x2022; [`suffix_value`](#deny-list-tls-list-suffix-value) - Optional String<br>Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
 #### Network Connector
 
 A [`network_connector`](#network-connector) block supports the following:
 
-<a id="network-connector-name"></a>&#x2022; [`name`](#network-connector-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="network-connector-name"></a>&#x2022; [`name`](#network-connector-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="network-connector-namespace"></a>&#x2022; [`namespace`](#network-connector-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="network-connector-namespace"></a>&#x2022; [`namespace`](#network-connector-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="network-connector-tenant"></a>&#x2022; [`tenant`](#network-connector-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="network-connector-tenant"></a>&#x2022; [`tenant`](#network-connector-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Proxy Label Selector
 
 A [`proxy_label_selector`](#proxy-label-selector) block supports the following:
 
-<a id="proxy-label-selector-expressions"></a>&#x2022; [`expressions`](#proxy-label-selector-expressions) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
+<a id="proxy-label-selector-expressions"></a>&#x2022; [`expressions`](#proxy-label-selector-expressions) - Optional List<br>Expressions contains the Kubernetes style label expression for selections
 
 #### Rule List
 
@@ -230,35 +230,35 @@ A [`rule_list`](#rule-list) block supports the following:
 
 A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports the following:
 
-<a id="rule-list-rules-action"></a>&#x2022; [`action`](#rule-list-rules-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>[Enum: DENY|ALLOW|NEXT_POLICY] Rule Action. The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to the originator. If it matches a rule with a NEXT_POLICY_SET action, evaluation of the current policy set terminates and evaluation of the next policy set in the chain begins. - DENY: DENY Deny the request. - ALLOW: ALLOW Allow the request to proceed. - NEXT_POLICY_SET: NEXT_POLICY_SET Terminate evaluation of the current policy set and begin evaluating the next policy set in the chain. Note that the evaluation of any remaining policies in the current policy set is skipped. - NEXT_POLICY: NEXT_POLICY Terminate evaluation of the current policy and begin evaluating the next policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - LAST_POLICY: LAST_POLICY Terminate evaluation of the current policy and begin evaluating the last policy in the policy set. Note that the evaluation of any remaining rules in the current policy is skipped. - GOTO_POLICY: GOTO_POLICY Terminate evaluation of the current policy and begin evaluating a specific policy in the policy set. The policy is specified using the goto_policy field in the rule and must be after the current policy in the policy set
+<a id="rule-list-rules-action"></a>&#x2022; [`action`](#rule-list-rules-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>[Enum: DENY|ALLOW|NEXT_POLICY] The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to
 
-<a id="rule-list-rules-all-destinations"></a>&#x2022; [`all_destinations`](#rule-list-rules-all-destinations) - Optional Block<br>Enable this option
+<a id="rule-list-rules-all-destinations"></a>&#x2022; [`all_destinations`](#rule-list-rules-all-destinations) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="rule-list-rules-all-sources"></a>&#x2022; [`all_sources`](#rule-list-rules-all-sources) - Optional Block<br>Enable this option
+<a id="rule-list-rules-all-sources"></a>&#x2022; [`all_sources`](#rule-list-rules-all-sources) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="rule-list-rules-dst-asn-list"></a>&#x2022; [`dst_asn_list`](#rule-list-rules-dst-asn-list) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Dst Asn List](#rule-list-rules-dst-asn-list) below.
+<a id="rule-list-rules-dst-asn-list"></a>&#x2022; [`dst_asn_list`](#rule-list-rules-dst-asn-list) - Optional Block<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Dst Asn List](#rule-list-rules-dst-asn-list) below.
 
-<a id="rule-list-rules-dst-asn-set"></a>&#x2022; [`dst_asn_set`](#rule-list-rules-dst-asn-set) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dst Asn Set](#rule-list-rules-dst-asn-set) below.
+<a id="rule-list-rules-dst-asn-set"></a>&#x2022; [`dst_asn_set`](#rule-list-rules-dst-asn-set) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dst Asn Set](#rule-list-rules-dst-asn-set) below.
 
-<a id="rule-list-rules-dst-ip-prefix-set"></a>&#x2022; [`dst_ip_prefix_set`](#rule-list-rules-dst-ip-prefix-set) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dst IP Prefix Set](#rule-list-rules-dst-ip-prefix-set) below.
+<a id="rule-list-rules-dst-ip-prefix-set"></a>&#x2022; [`dst_ip_prefix_set`](#rule-list-rules-dst-ip-prefix-set) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dst IP Prefix Set](#rule-list-rules-dst-ip-prefix-set) below.
 
-<a id="rule-list-rules-dst-label-selector"></a>&#x2022; [`dst_label_selector`](#rule-list-rules-dst-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Dst Label Selector](#rule-list-rules-dst-label-selector) below.
+<a id="rule-list-rules-dst-label-selector"></a>&#x2022; [`dst_label_selector`](#rule-list-rules-dst-label-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects<br>See [Dst Label Selector](#rule-list-rules-dst-label-selector) below.
 
-<a id="rule-list-rules-dst-prefix-list"></a>&#x2022; [`dst_prefix_list`](#rule-list-rules-dst-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Dst Prefix List](#rule-list-rules-dst-prefix-list) below.
+<a id="rule-list-rules-dst-prefix-list"></a>&#x2022; [`dst_prefix_list`](#rule-list-rules-dst-prefix-list) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Dst Prefix List](#rule-list-rules-dst-prefix-list) below.
 
 <a id="rule-list-rules-http-list"></a>&#x2022; [`http_list`](#rule-list-rules-http-list) - Optional Block<br>URLListType<br>See [HTTP List](#rule-list-rules-http-list) below.
 
-<a id="rule-list-rules-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [IP Prefix Set](#rule-list-rules-ip-prefix-set) below.
+<a id="rule-list-rules-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [IP Prefix Set](#rule-list-rules-ip-prefix-set) below.
 
-<a id="rule-list-rules-label-selector"></a>&#x2022; [`label_selector`](#rule-list-rules-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#rule-list-rules-label-selector) below.
+<a id="rule-list-rules-label-selector"></a>&#x2022; [`label_selector`](#rule-list-rules-label-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects<br>See [Label Selector](#rule-list-rules-label-selector) below.
 
-<a id="rule-list-rules-metadata"></a>&#x2022; [`metadata`](#rule-list-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#rule-list-rules-metadata) below.
+<a id="rule-list-rules-metadata"></a>&#x2022; [`metadata`](#rule-list-rules-metadata) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#rule-list-rules-metadata) below.
 
-<a id="rule-list-rules-no-http-connect-port"></a>&#x2022; [`no_http_connect_port`](#rule-list-rules-no-http-connect-port) - Optional Block<br>Enable this option
+<a id="rule-list-rules-no-http-connect-port"></a>&#x2022; [`no_http_connect_port`](#rule-list-rules-no-http-connect-port) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="rule-list-rules-port-matcher"></a>&#x2022; [`port_matcher`](#rule-list-rules-port-matcher) - Optional Block<br>Port Matcher. A port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true<br>See [Port Matcher](#rule-list-rules-port-matcher) below.
+<a id="rule-list-rules-port-matcher"></a>&#x2022; [`port_matcher`](#rule-list-rules-port-matcher) - Optional Block<br>Port matcher specifies a list of port ranges as match criteria. The match is considered successful if the input port falls within any of the port ranges. The result of the match is inverted if invert_matcher is true<br>See [Port Matcher](#rule-list-rules-port-matcher) below.
 
-<a id="rule-list-rules-prefix-list"></a>&#x2022; [`prefix_list`](#rule-list-rules-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#rule-list-rules-prefix-list) below.
+<a id="rule-list-rules-prefix-list"></a>&#x2022; [`prefix_list`](#rule-list-rules-prefix-list) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#rule-list-rules-prefix-list) below.
 
 <a id="rule-list-rules-tls-list"></a>&#x2022; [`tls_list`](#rule-list-rules-tls-list) - Optional Block<br>DomainListType<br>See [TLS List](#rule-list-rules-tls-list) below.
 
@@ -268,39 +268,39 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 A [`dst_asn_list`](#rule-list-rules-dst-asn-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="rule-list-rules-dst-asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#rule-list-rules-dst-asn-list-as-numbers) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
+<a id="rule-list-rules-dst-asn-list-as-numbers"></a>&#x2022; [`as_numbers`](#rule-list-rules-dst-asn-list-as-numbers) - Optional List<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
 
 #### Rule List Rules Dst Asn Set
 
 A [`dst_asn_set`](#rule-list-rules-dst-asn-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="rule-list-rules-dst-asn-set-name"></a>&#x2022; [`name`](#rule-list-rules-dst-asn-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="rule-list-rules-dst-asn-set-name"></a>&#x2022; [`name`](#rule-list-rules-dst-asn-set-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="rule-list-rules-dst-asn-set-namespace"></a>&#x2022; [`namespace`](#rule-list-rules-dst-asn-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="rule-list-rules-dst-asn-set-namespace"></a>&#x2022; [`namespace`](#rule-list-rules-dst-asn-set-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="rule-list-rules-dst-asn-set-tenant"></a>&#x2022; [`tenant`](#rule-list-rules-dst-asn-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="rule-list-rules-dst-asn-set-tenant"></a>&#x2022; [`tenant`](#rule-list-rules-dst-asn-set-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Rule List Rules Dst IP Prefix Set
 
 A [`dst_ip_prefix_set`](#rule-list-rules-dst-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="rule-list-rules-dst-ip-prefix-set-name"></a>&#x2022; [`name`](#rule-list-rules-dst-ip-prefix-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="rule-list-rules-dst-ip-prefix-set-name"></a>&#x2022; [`name`](#rule-list-rules-dst-ip-prefix-set-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-098663"></a>&#x2022; [`namespace`](#namespace-098663) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-098663"></a>&#x2022; [`namespace`](#namespace-098663) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-047089"></a>&#x2022; [`tenant`](#tenant-047089) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-047089"></a>&#x2022; [`tenant`](#tenant-047089) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Rule List Rules Dst Label Selector
 
 A [`dst_label_selector`](#rule-list-rules-dst-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="expressions-229662"></a>&#x2022; [`expressions`](#expressions-229662) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
+<a id="expressions-229662"></a>&#x2022; [`expressions`](#expressions-229662) - Optional List<br>Expressions contains the Kubernetes style label expression for selections
 
 #### Rule List Rules Dst Prefix List
 
 A [`dst_prefix_list`](#rule-list-rules-dst-prefix-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="prefixes-d0d633"></a>&#x2022; [`prefixes`](#prefixes-d0d633) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+<a id="prefixes-d0d633"></a>&#x2022; [`prefixes`](#prefixes-d0d633) - Optional List<br>List of IPv4 prefixes that represent an endpoint
 
 #### Rule List Rules HTTP List
 
@@ -312,35 +312,35 @@ A [`http_list`](#rule-list-rules-http-list) block (within [`rule_list.rules`](#r
 
 A [`http_list`](#rule-list-rules-http-list-http-list) block (within [`rule_list.rules.http_list`](#rule-list-rules-http-list)) supports the following:
 
-<a id="path-5eabfe"></a>&#x2022; [`any_path`](#path-5eabfe) - Optional Block<br>Enable this option
+<a id="path-5eabfe"></a>&#x2022; [`any_path`](#path-5eabfe) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="value-d667cb"></a>&#x2022; [`exact_value`](#value-d667cb) - Optional String<br>Exact Values. Exact domain name
+<a id="value-d667cb"></a>&#x2022; [`exact_value`](#value-d667cb) - Optional String<br>Exact domain name
 
-<a id="value-511ae9"></a>&#x2022; [`path_exact_value`](#value-511ae9) - Optional String<br>Exact Path. Exact Path to match
+<a id="value-511ae9"></a>&#x2022; [`path_exact_value`](#value-511ae9) - Optional String<br>Exact Path to match
 
-<a id="value-cd7319"></a>&#x2022; [`path_prefix_value`](#value-cd7319) - Optional String<br>Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'
+<a id="value-cd7319"></a>&#x2022; [`path_prefix_value`](#value-cd7319) - Optional String<br>Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'
 
-<a id="value-931da3"></a>&#x2022; [`path_regex_value`](#value-931da3) - Optional String<br>Regex of Path. Regular Expression value for the Path to match
+<a id="value-931da3"></a>&#x2022; [`path_regex_value`](#value-931da3) - Optional String<br>Regular Expression value for the Path to match
 
-<a id="value-663d1f"></a>&#x2022; [`regex_value`](#value-663d1f) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
+<a id="value-663d1f"></a>&#x2022; [`regex_value`](#value-663d1f) - Optional String<br>Regular Expression value for the domain name
 
-<a id="value-acf087"></a>&#x2022; [`suffix_value`](#value-acf087) - Optional String<br>Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'
+<a id="value-acf087"></a>&#x2022; [`suffix_value`](#value-acf087) - Optional String<br>Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'
 
 #### Rule List Rules IP Prefix Set
 
 An [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="rule-list-rules-ip-prefix-set-name"></a>&#x2022; [`name`](#rule-list-rules-ip-prefix-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="rule-list-rules-ip-prefix-set-name"></a>&#x2022; [`name`](#rule-list-rules-ip-prefix-set-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="rule-list-rules-ip-prefix-set-namespace"></a>&#x2022; [`namespace`](#rule-list-rules-ip-prefix-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="rule-list-rules-ip-prefix-set-namespace"></a>&#x2022; [`namespace`](#rule-list-rules-ip-prefix-set-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="rule-list-rules-ip-prefix-set-tenant"></a>&#x2022; [`tenant`](#rule-list-rules-ip-prefix-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="rule-list-rules-ip-prefix-set-tenant"></a>&#x2022; [`tenant`](#rule-list-rules-ip-prefix-set-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Rule List Rules Label Selector
 
 A [`label_selector`](#rule-list-rules-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="expressions-8dfad5"></a>&#x2022; [`expressions`](#expressions-8dfad5) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
+<a id="expressions-8dfad5"></a>&#x2022; [`expressions`](#expressions-8dfad5) - Optional List<br>Expressions contains the Kubernetes style label expression for selections
 
 #### Rule List Rules Metadata
 
@@ -348,7 +348,7 @@ A [`metadata`](#rule-list-rules-metadata) block (within [`rule_list.rules`](#rul
 
 <a id="spec-118a99"></a>&#x2022; [`description_spec`](#spec-118a99) - Optional String<br>Description. Human readable description
 
-<a id="rule-list-rules-metadata-name"></a>&#x2022; [`name`](#rule-list-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="rule-list-rules-metadata-name"></a>&#x2022; [`name`](#rule-list-rules-metadata-name) - Optional String<br>Name of the message. The value of name has to follow DNS-1035 format
 
 #### Rule List Rules Port Matcher
 
@@ -356,13 +356,13 @@ A [`port_matcher`](#rule-list-rules-port-matcher) block (within [`rule_list.rule
 
 <a id="matcher-754775"></a>&#x2022; [`invert_matcher`](#matcher-754775) - Optional Bool<br>Invert Port Matcher. Invert the match result
 
-<a id="rule-list-rules-port-matcher-ports"></a>&#x2022; [`ports`](#rule-list-rules-port-matcher-ports) - Optional List<br>Port Ranges. A list of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range
+<a id="rule-list-rules-port-matcher-ports"></a>&#x2022; [`ports`](#rule-list-rules-port-matcher-ports) - Optional List<br>List of strings, each of which is a single port value or a tuple of start and end port values separated by '-'. The start and end values are considered to be part of the range
 
 #### Rule List Rules Prefix List
 
 A [`prefix_list`](#rule-list-rules-prefix-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="rule-list-rules-prefix-list-prefixes"></a>&#x2022; [`prefixes`](#rule-list-rules-prefix-list-prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+<a id="rule-list-rules-prefix-list-prefixes"></a>&#x2022; [`prefixes`](#rule-list-rules-prefix-list-prefixes) - Optional List<br>List of IPv4 prefixes that represent an endpoint
 
 #### Rule List Rules TLS List
 
@@ -374,17 +374,17 @@ A [`tls_list`](#rule-list-rules-tls-list) block (within [`rule_list.rules`](#rul
 
 A [`tls_list`](#rule-list-rules-tls-list-tls-list) block (within [`rule_list.rules.tls_list`](#rule-list-rules-tls-list)) supports the following:
 
-<a id="value-e81ff3"></a>&#x2022; [`exact_value`](#value-e81ff3) - Optional String<br>Exact Value. Exact domain name
+<a id="value-e81ff3"></a>&#x2022; [`exact_value`](#value-e81ff3) - Optional String<br>Exact domain name
 
-<a id="value-d11673"></a>&#x2022; [`regex_value`](#value-d11673) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
+<a id="value-d11673"></a>&#x2022; [`regex_value`](#value-d11673) - Optional String<br>Regular Expression value for the domain name
 
-<a id="value-4d4de2"></a>&#x2022; [`suffix_value`](#value-4d4de2) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+<a id="value-4d4de2"></a>&#x2022; [`suffix_value`](#value-4d4de2) - Optional String<br>Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
 #### Rule List Rules URL Category List
 
 An [`url_category_list`](#rule-list-rules-url-category-list) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="categories-b6723b"></a>&#x2022; [`url_categories`](#categories-b6723b) - Optional List  Defaults to `UNCATEGORIZED`<br>Possible values are `UNCATEGORIZED`, `REAL_ESTATE`, `COMPUTER_AND_INTERNET_SECURITY`, `FINANCIAL_SERVICES`, `BUSINESS_AND_ECONOMY`, `COMPUTER_AND_INTERNET_INFO`, `AUCTIONS`, `SHOPPING`, `CULT_AND_OCCULT`, `TRAVEL`, `ABUSED_DRUGS`, `ADULT_AND_PORNOGRAPHY`, `HOME_AND_GARDEN`, `MILITARY`, `SOCIAL_NETWORKING`, `DEAD_SITES`, `INDIVIDUAL_STOCK_ADVICE_AND_TOOLS`, `TRAINING_AND_TOOLS`, `DATING`, `SEX_EDUCATION`, `RELIGION`, `ENTERTAINMENT_AND_ARTS`, `PERSONAL_SITES_AND_BLOGS`, `LEGAL`, `LOCAL_INFORMATION`, `STREAMING_MEDIA`, `JOB_SEARCH`, `GAMBLING`, `TRANSLATION`, `REFERENCE_AND_RESEARCH`, `SHAREWARE_AND_FREEWARE`, `PEER_TO_PEER`, `MARIJUANA`, `HACKING`, `GAMES`, `PHILOSOPHY_AND_POLITICAL_ADVOCACY`, `WEAPONS`, `PAY_TO_SURF`, `HUNTING_AND_FISHING`, `SOCIETY`, `EDUCATIONAL_INSTITUTIONS`, `ONLINE_GREETING_CARDS`, `SPORTS`, `SWIMSUITS_AND_INTIMATE_APPAREL`, `QUESTIONABLE`, `KIDS`, `HATE_AND_RACISM`, `PERSONAL_STORAGE`, `VIOLENCE`, `KEYLOGGERS_AND_MONITORING`, `SEARCH_ENGINES`, `INTERNET_PORTALS`, `WEB_ADVERTISEMENTS`, `CHEATING`, `GROSS`, `WEB_BASED_EMAIL`, `MALWARE_SITES`, `PHISHING_AND_OTHER_FRAUDS`, `PROXY_AVOIDANCE_AND_ANONYMIZERS`, `SPYWARE_AND_ADWARE`, `MUSIC`, `GOVERNMENT`, `NUDITY`, `NEWS_AND_MEDIA`, `ILLEGAL`, `CONTENT_DELIVERY_NETWORKS`, `INTERNET_COMMUNICATIONS`, `BOT_NETS`, `ABORTION`, `HEALTH_AND_MEDICINE`, `CONFIRMED_SPAM_SOURCES`, `SPAM_URLS`, `UNCONFIRMED_SPAM_SOURCES`, `OPEN_HTTP_PROXIES`, `DYNAMICALLY_GENERATED_CONTENT`, `PARKED_DOMAINS`, `ALCOHOL_AND_TOBACCO`, `PRIVATE_IP_ADDRESSES`, `IMAGE_AND_VIDEO_SEARCH`, `FASHION_AND_BEAUTY`, `RECREATION_AND_HOBBIES`, `MOTOR_VEHICLES`, `WEB_HOSTING`<br>[Enum: UNCATEGORIZED|REAL_ESTATE|COMPUTER_AND_INTERNET_SECURITY|FINANCIAL_SERVICES|BUSINESS_AND_ECONOMY|COMPUTER_AND_INTERNET_INFO|AUCTIONS|SHOPPING|CULT_AND_OCCULT|TRAVEL|ABUSED_DRUGS|ADULT_AND_PORNOGRAPHY|HOME_AND_GARDEN|MILITARY|SOCIAL_NETWORKING|DEAD_SITES|INDIVIDUAL_STOCK_ADVICE_AND_TOOLS|TRAINING_AND_TOOLS|DATING|SEX_EDUCATION|RELIGION|ENTERTAINMENT_AND_ARTS|PERSONAL_SITES_AND_BLOGS|LEGAL|LOCAL_INFORMATION|STREAMING_MEDIA|JOB_SEARCH|GAMBLING|TRANSLATION|REFERENCE_AND_RESEARCH|SHAREWARE_AND_FREEWARE|PEER_TO_PEER|MARIJUANA|HACKING|GAMES|PHILOSOPHY_AND_POLITICAL_ADVOCACY|WEAPONS|PAY_TO_SURF|HUNTING_AND_FISHING|SOCIETY|EDUCATIONAL_INSTITUTIONS|ONLINE_GREETING_CARDS|SPORTS|SWIMSUITS_AND_INTIMATE_APPAREL|QUESTIONABLE|KIDS|HATE_AND_RACISM|PERSONAL_STORAGE|VIOLENCE|KEYLOGGERS_AND_MONITORING|SEARCH_ENGINES|INTERNET_PORTALS|WEB_ADVERTISEMENTS|CHEATING|GROSS|WEB_BASED_EMAIL|MALWARE_SITES|PHISHING_AND_OTHER_FRAUDS|PROXY_AVOIDANCE_AND_ANONYMIZERS|SPYWARE_AND_ADWARE|MUSIC|GOVERNMENT|NUDITY|NEWS_AND_MEDIA|ILLEGAL|CONTENT_DELIVERY_NETWORKS|INTERNET_COMMUNICATIONS|BOT_NETS|ABORTION|HEALTH_AND_MEDICINE|CONFIRMED_SPAM_SOURCES|SPAM_URLS|UNCONFIRMED_SPAM_SOURCES|OPEN_HTTP_PROXIES|DYNAMICALLY_GENERATED_CONTENT|PARKED_DOMAINS|ALCOHOL_AND_TOBACCO|PRIVATE_IP_ADDRESSES|IMAGE_AND_VIDEO_SEARCH|FASHION_AND_BEAUTY|RECREATION_AND_HOBBIES|MOTOR_VEHICLES|WEB_HOSTING] URL Categories. List of URL categories to be selected
+<a id="categories-b6723b"></a>&#x2022; [`url_categories`](#categories-b6723b) - Optional List  Defaults to `UNCATEGORIZED`<br>Possible values are `UNCATEGORIZED`, `REAL_ESTATE`, `COMPUTER_AND_INTERNET_SECURITY`, `FINANCIAL_SERVICES`, `BUSINESS_AND_ECONOMY`, `COMPUTER_AND_INTERNET_INFO`, `AUCTIONS`, `SHOPPING`, `CULT_AND_OCCULT`, `TRAVEL`, `ABUSED_DRUGS`, `ADULT_AND_PORNOGRAPHY`, `HOME_AND_GARDEN`, `MILITARY`, `SOCIAL_NETWORKING`, `DEAD_SITES`, `INDIVIDUAL_STOCK_ADVICE_AND_TOOLS`, `TRAINING_AND_TOOLS`, `DATING`, `SEX_EDUCATION`, `RELIGION`, `ENTERTAINMENT_AND_ARTS`, `PERSONAL_SITES_AND_BLOGS`, `LEGAL`, `LOCAL_INFORMATION`, `STREAMING_MEDIA`, `JOB_SEARCH`, `GAMBLING`, `TRANSLATION`, `REFERENCE_AND_RESEARCH`, `SHAREWARE_AND_FREEWARE`, `PEER_TO_PEER`, `MARIJUANA`, `HACKING`, `GAMES`, `PHILOSOPHY_AND_POLITICAL_ADVOCACY`, `WEAPONS`, `PAY_TO_SURF`, `HUNTING_AND_FISHING`, `SOCIETY`, `EDUCATIONAL_INSTITUTIONS`, `ONLINE_GREETING_CARDS`, `SPORTS`, `SWIMSUITS_AND_INTIMATE_APPAREL`, `QUESTIONABLE`, `KIDS`, `HATE_AND_RACISM`, `PERSONAL_STORAGE`, `VIOLENCE`, `KEYLOGGERS_AND_MONITORING`, `SEARCH_ENGINES`, `INTERNET_PORTALS`, `WEB_ADVERTISEMENTS`, `CHEATING`, `GROSS`, `WEB_BASED_EMAIL`, `MALWARE_SITES`, `PHISHING_AND_OTHER_FRAUDS`, `PROXY_AVOIDANCE_AND_ANONYMIZERS`, `SPYWARE_AND_ADWARE`, `MUSIC`, `GOVERNMENT`, `NUDITY`, `NEWS_AND_MEDIA`, `ILLEGAL`, `CONTENT_DELIVERY_NETWORKS`, `INTERNET_COMMUNICATIONS`, `BOT_NETS`, `ABORTION`, `HEALTH_AND_MEDICINE`, `CONFIRMED_SPAM_SOURCES`, `SPAM_URLS`, `UNCONFIRMED_SPAM_SOURCES`, `OPEN_HTTP_PROXIES`, `DYNAMICALLY_GENERATED_CONTENT`, `PARKED_DOMAINS`, `ALCOHOL_AND_TOBACCO`, `PRIVATE_IP_ADDRESSES`, `IMAGE_AND_VIDEO_SEARCH`, `FASHION_AND_BEAUTY`, `RECREATION_AND_HOBBIES`, `MOTOR_VEHICLES`, `WEB_HOSTING`<br>[Enum: UNCATEGORIZED|REAL_ESTATE|COMPUTER_AND_INTERNET_SECURITY|FINANCIAL_SERVICES|BUSINESS_AND_ECONOMY|COMPUTER_AND_INTERNET_INFO|AUCTIONS|SHOPPING|CULT_AND_OCCULT|TRAVEL|ABUSED_DRUGS|ADULT_AND_PORNOGRAPHY|HOME_AND_GARDEN|MILITARY|SOCIAL_NETWORKING|DEAD_SITES|INDIVIDUAL_STOCK_ADVICE_AND_TOOLS|TRAINING_AND_TOOLS|DATING|SEX_EDUCATION|RELIGION|ENTERTAINMENT_AND_ARTS|PERSONAL_SITES_AND_BLOGS|LEGAL|LOCAL_INFORMATION|STREAMING_MEDIA|JOB_SEARCH|GAMBLING|TRANSLATION|REFERENCE_AND_RESEARCH|SHAREWARE_AND_FREEWARE|PEER_TO_PEER|MARIJUANA|HACKING|GAMES|PHILOSOPHY_AND_POLITICAL_ADVOCACY|WEAPONS|PAY_TO_SURF|HUNTING_AND_FISHING|SOCIETY|EDUCATIONAL_INSTITUTIONS|ONLINE_GREETING_CARDS|SPORTS|SWIMSUITS_AND_INTIMATE_APPAREL|QUESTIONABLE|KIDS|HATE_AND_RACISM|PERSONAL_STORAGE|VIOLENCE|KEYLOGGERS_AND_MONITORING|SEARCH_ENGINES|INTERNET_PORTALS|WEB_ADVERTISEMENTS|CHEATING|GROSS|WEB_BASED_EMAIL|MALWARE_SITES|PHISHING_AND_OTHER_FRAUDS|PROXY_AVOIDANCE_AND_ANONYMIZERS|SPYWARE_AND_ADWARE|MUSIC|GOVERNMENT|NUDITY|NEWS_AND_MEDIA|ILLEGAL|CONTENT_DELIVERY_NETWORKS|INTERNET_COMMUNICATIONS|BOT_NETS|ABORTION|HEALTH_AND_MEDICINE|CONFIRMED_SPAM_SOURCES|SPAM_URLS|UNCONFIRMED_SPAM_SOURCES|OPEN_HTTP_PROXIES|DYNAMICALLY_GENERATED_CONTENT|PARKED_DOMAINS|ALCOHOL_AND_TOBACCO|PRIVATE_IP_ADDRESSES|IMAGE_AND_VIDEO_SEARCH|FASHION_AND_BEAUTY|RECREATION_AND_HOBBIES|MOTOR_VEHICLES|WEB_HOSTING] List of URL categories to be selected
 
 #### Timeouts
 

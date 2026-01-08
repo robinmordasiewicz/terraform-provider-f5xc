@@ -16,15 +16,15 @@ resource "f5xc_network_policy_view" "example" {
   }
 
   # Resource-specific configuration
-  # Egress Rules. Ordered list of rules applied to connection...
+  # Ordered list of rules applied to connections from policy ...
   egress_rules {
     # Configure egress_rules settings
   }
-  # Network Policy Rule Advanced Action. Network Policy Rule ...
+  # Network Policy Rule Advanced Action provides additional O...
   adv_action {
     # Configure adv_action settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   all_tcp_traffic {
     # Configure all_tcp_traffic settings
   }

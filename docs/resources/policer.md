@@ -57,13 +57,13 @@ resource "f5xc_policer" "example" {
 
 ### Spec Argument Reference
 
-<a id="burst-size"></a>&#x2022; [`burst_size`](#burst-size) - Optional Number<br>Burst Size(pps). The maximum size permitted for bursts of data. E.g. 10000 pps burst
+<a id="burst-size"></a>&#x2022; [`burst_size`](#burst-size) - Optional Number<br>The maximum size permitted for bursts of data. E.g. 10000 pps burst
 
-<a id="committed-information-rate"></a>&#x2022; [`committed_information_rate`](#committed-information-rate) - Optional Number<br>Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps
+<a id="committed-information-rate"></a>&#x2022; [`committed_information_rate`](#committed-information-rate) - Optional Number<br>The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps
 
-<a id="policer-mode"></a>&#x2022; [`policer_mode`](#policer-mode) - Optional String  Defaults to `POLICER_MODE_NOT_SHARED`<br>Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`<br>[Enum: POLICER_MODE_NOT_SHARED|POLICER_MODE_SHARED] Policer Mode. - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer
+<a id="policer-mode"></a>&#x2022; [`policer_mode`](#policer-mode) - Optional String  Defaults to `POLICER_MODE_NOT_SHARED`<br>Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`<br>[Enum: POLICER_MODE_NOT_SHARED|POLICER_MODE_SHARED] - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer
 
-<a id="policer-type"></a>&#x2022; [`policer_type`](#policer-type) - Optional String  Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`<br>[Enum: POLICER_SINGLE_RATE_TWO_COLOR] Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`
+<a id="policer-type"></a>&#x2022; [`policer_type`](#policer-type) - Optional String  Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`<br>[Enum: POLICER_SINGLE_RATE_TWO_COLOR] Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

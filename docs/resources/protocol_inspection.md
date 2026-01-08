@@ -32,15 +32,15 @@ resource "f5xc_protocol_inspection" "example" {
   }
 
   # Resource-specific configuration
-  # Enable/Disable Compliance Checks. Enable Disable Complian...
+  # Enable Disable Compliance Checks Choice.
   enable_disable_compliance_checks {
     # Configure enable_disable_compliance_checks settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   disable_compliance_checks {
     # Configure disable_compliance_checks settings
   }
-  # Object reference. This type establishes a direct referenc...
+  # Type establishes a direct reference from one object(the r...
   enable_compliance_checks {
     # Configure enable_compliance_checks settings
   }
@@ -66,9 +66,9 @@ resource "f5xc_protocol_inspection" "example" {
 
 ### Spec Argument Reference
 
-<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `ALLOW`<br>Possible values are `ALLOW`, `DENY`, `DROP`<br>[Enum: ALLOW|DENY|DROP] Action. Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic
+<a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `ALLOW`<br>Possible values are `ALLOW`, `DENY`, `DROP`<br>[Enum: ALLOW|DENY|DROP] Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic
 
-<a id="enable-disable-compliance-checks"></a>&#x2022; [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) - Optional Block<br>Enable/Disable Compliance Checks. Enable Disable Compliance Checks Choice<br>See [Enable Disable Compliance Checks](#enable-disable-compliance-checks) below for details.
+<a id="enable-disable-compliance-checks"></a>&#x2022; [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) - Optional Block<br>Enable Disable Compliance Checks Choice<br>See [Enable Disable Compliance Checks](#enable-disable-compliance-checks) below for details.
 
 <a id="enable-disable-signatures"></a>&#x2022; [`enable_disable_signatures`](#enable-disable-signatures) - Optional Block<br>Enable/Disable Signatures Choice. Enable Disable Signature Choice<br>See [Enable Disable Signatures](#enable-disable-signatures) below for details.
 
@@ -86,27 +86,27 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) block supports the following:
 
-<a id="checks-6c8eaa"></a>&#x2022; [`disable_compliance_checks`](#checks-6c8eaa) - Optional Block<br>Enable this option
+<a id="checks-6c8eaa"></a>&#x2022; [`disable_compliance_checks`](#checks-6c8eaa) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="checks-68d3e1"></a>&#x2022; [`enable_compliance_checks`](#checks-68d3e1) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Enable Compliance Checks](#checks-68d3e1) below.
+<a id="checks-68d3e1"></a>&#x2022; [`enable_compliance_checks`](#checks-68d3e1) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Enable Compliance Checks](#checks-68d3e1) below.
 
 #### Enable Disable Compliance Checks Enable Compliance Checks
 
 An [`enable_compliance_checks`](#checks-68d3e1) block (within [`enable_disable_compliance_checks`](#enable-disable-compliance-checks)) supports the following:
 
-<a id="name-8e6d21"></a>&#x2022; [`name`](#name-8e6d21) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-8e6d21"></a>&#x2022; [`name`](#name-8e6d21) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-93e0ee"></a>&#x2022; [`namespace`](#namespace-93e0ee) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-93e0ee"></a>&#x2022; [`namespace`](#namespace-93e0ee) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-67ac8b"></a>&#x2022; [`tenant`](#tenant-67ac8b) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-67ac8b"></a>&#x2022; [`tenant`](#tenant-67ac8b) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Enable Disable Signatures
 
 An [`enable_disable_signatures`](#enable-disable-signatures) block supports the following:
 
-<a id="signature-dd5a1e"></a>&#x2022; [`disable_signature`](#signature-dd5a1e) - Optional Block<br>Enable this option
+<a id="signature-dd5a1e"></a>&#x2022; [`disable_signature`](#signature-dd5a1e) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="signature-359b96"></a>&#x2022; [`enable_signature`](#signature-359b96) - Optional Block<br>Enable this option
+<a id="signature-359b96"></a>&#x2022; [`enable_signature`](#signature-359b96) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Timeouts
 

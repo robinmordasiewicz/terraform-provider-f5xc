@@ -32,11 +32,11 @@ resource "f5xc_app_type" "example" {
   }
 
   # Resource-specific configuration
-  # API Discovery Settings. Settings specifying how API Disco...
+  # Settings specifying how API Discovery will be performed.
   business_logic_markup_setting {
     # Configure business_logic_markup_setting settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   disable {
     # Configure disable settings
   }
@@ -66,7 +66,7 @@ resource "f5xc_app_type" "example" {
 
 ### Spec Argument Reference
 
-<a id="business-logic-markup-setting"></a>&#x2022; [`business_logic_markup_setting`](#business-logic-markup-setting) - Optional Block<br>API Discovery Settings. Settings specifying how API Discovery will be performed<br>See [Business Logic Markup Setting](#business-logic-markup-setting) below for details.
+<a id="business-logic-markup-setting"></a>&#x2022; [`business_logic_markup_setting`](#business-logic-markup-setting) - Optional Block<br>Settings specifying how API Discovery will be performed<br>See [Business Logic Markup Setting](#business-logic-markup-setting) below for details.
 
 <a id="features"></a>&#x2022; [`features`](#features) - Optional Block<br>Features. List of various AI/ML features enabled<br>See [Features](#features) below for details.
 
@@ -84,23 +84,23 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`business_logic_markup_setting`](#business-logic-markup-setting) block supports the following:
 
-<a id="business-logic-markup-setting-disable"></a>&#x2022; [`disable`](#business-logic-markup-setting-disable) - Optional Block<br>Enable this option
+<a id="business-logic-markup-setting-disable"></a>&#x2022; [`disable`](#business-logic-markup-setting-disable) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="settings-c32a65"></a>&#x2022; [`discovered_api_settings`](#settings-c32a65) - Optional Block<br>Discovered API Settings. Configure Discovered API Settings<br>See [Discovered API Settings](#settings-c32a65) below.
 
-<a id="business-logic-markup-setting-enable"></a>&#x2022; [`enable`](#business-logic-markup-setting-enable) - Optional Block<br>Enable this option
+<a id="business-logic-markup-setting-enable"></a>&#x2022; [`enable`](#business-logic-markup-setting-enable) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Business Logic Markup Setting Discovered API Settings
 
 A [`discovered_api_settings`](#settings-c32a65) block (within [`business_logic_markup_setting`](#business-logic-markup-setting)) supports the following:
 
-<a id="apis-85d7fa"></a>&#x2022; [`purge_duration_for_inactive_discovered_apis`](#apis-85d7fa) - Optional Number<br>Purge Duration for Inactive Discovered APIs from Traffic. Inactive discovered API will be deleted after configured duration
+<a id="apis-85d7fa"></a>&#x2022; [`purge_duration_for_inactive_discovered_apis`](#apis-85d7fa) - Optional Number<br>Inactive discovered API will be deleted after configured duration
 
 #### Features
 
 A [`features`](#features) block supports the following:
 
-<a id="features-type"></a>&#x2022; [`type`](#features-type) - Optional String  Defaults to `BUSINESS_LOGIC_MARKUP`<br>Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`<br>[Enum: BUSINESS_LOGIC_MARKUP|TIMESERIES_ANOMALY_DETECTION|PER_REQ_ANOMALY_DETECTION|USER_BEHAVIOR_ANALYSIS] AI/ML Features. Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e. The probability density function (PDF) charts generation for API endpoints Enable user behavior analysis
+<a id="features-type"></a>&#x2022; [`type`](#features-type) - Optional String  Defaults to `BUSINESS_LOGIC_MARKUP`<br>Possible values are `BUSINESS_LOGIC_MARKUP`, `TIMESERIES_ANOMALY_DETECTION`, `PER_REQ_ANOMALY_DETECTION`, `USER_BEHAVIOR_ANALYSIS`<br>[Enum: BUSINESS_LOGIC_MARKUP|TIMESERIES_ANOMALY_DETECTION|PER_REQ_ANOMALY_DETECTION|USER_BEHAVIOR_ANALYSIS] Enumeration for AI/ML features supported API Discovery enables generation of model for various API interactions between services of App type. Enable analysis of timeseries for various metric collected like requests, errors, latency etc. Enable anomaly detection per API request, i.e
 
 #### Timeouts
 

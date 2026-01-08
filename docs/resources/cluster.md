@@ -32,15 +32,15 @@ resource "f5xc_cluster" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: auto_http_config, http1_config, http2_options] En...
+  # [OneOf: auto_http_config, http1_config, http2_options] Ca...
   auto_http_config {
     # Configure auto_http_config settings
   }
-  # Circuit Breaker. CircuitBreaker provides a mechanism for ...
+  # CircuitBreaker provides a mechanism for watching failures...
   circuit_breaker {
     # Configure circuit_breaker settings
   }
-  # Default Subset. List of key-value pairs that define defau...
+  # List of key-value pairs that define default subset. This ...
   default_subset {
     # Configure default_subset settings
   }
@@ -67,48 +67,48 @@ resource "f5xc_cluster" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="auto-http-config"></a>[`auto_http_config`](#auto-http-config) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="http1-config"></a>[`http1_config`](#http1-config) - Optional Block<br>HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for upstream connections<br>See [Http1 Config](#http1-config) below for details.
-<br><br>&#x2022; <a id="http2-options"></a>[`http2_options`](#http2-options) - Optional Block<br>Http2 Protocol OPTIONS. Http2 Protocol OPTIONS for upstream connections<br>See [Http2 Options](#http2-options) below for details.
+&#x2022; <a id="auto-http-config"></a>[`auto_http_config`](#auto-http-config) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="http1-config"></a>[`http1_config`](#http1-config) - Optional Block<br>HTTP/1.1 Protocol OPTIONS for upstream connections<br>See [Http1 Config](#http1-config) below for details.
+<br><br>&#x2022; <a id="http2-options"></a>[`http2_options`](#http2-options) - Optional Block<br>Http2 Protocol OPTIONS for upstream connections<br>See [Http2 Options](#http2-options) below for details.
 
-<a id="circuit-breaker"></a>&#x2022; [`circuit_breaker`](#circuit-breaker) - Optional Block<br>Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly<br>See [Circuit Breaker](#circuit-breaker) below for details.
+<a id="circuit-breaker"></a>&#x2022; [`circuit_breaker`](#circuit-breaker) - Optional Block<br>CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly<br>See [Circuit Breaker](#circuit-breaker) below for details.
 
-<a id="connection-timeout"></a>&#x2022; [`connection_timeout`](#connection-timeout) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Timeout. The timeout for new network connections to endpoints in the cluster.  The seconds
+<a id="connection-timeout"></a>&#x2022; [`connection_timeout`](#connection-timeout) - Optional Number  Defaults to `2`  Specified in milliseconds<br>The timeout for new network connections to endpoints in the cluster.  The seconds
 
-<a id="default-subset"></a>&#x2022; [`default_subset`](#default-subset) - Optional Block<br>Default Subset. List of key-value pairs that define default subset. This subset can be referred in fallback_policy which gets used when route specifies no metadata or no subset matching the metadata exists
-
--> **One of the following:**
-&#x2022; <a id="disable-proxy-protocol"></a>[`disable_proxy_protocol`](#disable-proxy-protocol) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="proxy-protocol-v1"></a>[`proxy_protocol_v1`](#proxy-protocol-v1) - Optional Block<br>Enable this option
-
-<a id="endpoint-selection"></a>&#x2022; [`endpoint_selection`](#endpoint-selection) - Optional String  Defaults to `DISTRIBUTED`<br>Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`<br>[Enum: DISTRIBUTED|LOCAL_ONLY|LOCAL_PREFERRED] Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered
-
-<a id="endpoint-subsets"></a>&#x2022; [`endpoint_subsets`](#endpoint-subsets) - Optional Block<br>Endpoint Subsets. Cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer. Endpoint_subsets is list of subsets for this cluster. Each entry in this list has definition for a subset (which is collection of keys) During routing, the route’s metadata match configuration is used to find a specific subset. If there is a subset with the exact keys and values specified by the route, the subset is used for load balancing. Otherwise, the fallback policy is used. The cluster’s subset configuration must, therefore, contain a definition that has the same keys as a given route in order for subset load balancing to occur. RouteConfig routes: - match: - headers: [] path: path: /1.log query_params: [] routeDestination: destinations: - cluster: - kind: cluster.object uid: 00000000-0000-0000-0001-000000000005 endpointSubsets: site: india EndpointConfig metadata: labels: deployment: debug site: india name: end-1 uid: end-1 ClusterConfig gcSpec: defaultSubset: stage: production fallbackPolicy: DEFAULT_SUBSET endpointSubsets: - keys: - site - keys: - stage - app Assume the below endpoints are defined and associated with the cluster. Endpoint Labels -------- ------ ep1 stage: production, site: india ep2 stage: deployment, site: us ep3 stage: production, app: hr ep4 site: india The following table describes some routes and the result of their application to the cluster. The subset definition for cluster is assumed to be same as given above in the ClusterConfig section RouteMatch Criteria Subset Reason ------------------- ------ ------ site: india ep1, ep4 Subset of endpoints selected site: us ep2 Subset of endpoints selected app: hr ep1, ep3 Fallback: No subset selector for 'app' alone stage: production, app: hr ep3 Subset of endpoints selected other: x ep1, ep3 Fallback: No subset selector for “other” (none) ep1, ep3 Fallback: No subset requested<br>See [Endpoint Subsets](#endpoint-subsets) below for details.
-
-<a id="endpoints"></a>&#x2022; [`endpoints`](#endpoints) - Optional Block<br>Endpoints. List of references to all endpoint objects that belong to this cluster<br>See [Endpoints](#endpoints) below for details.
-
-<a id="fallback-policy"></a>&#x2022; [`fallback_policy`](#fallback-policy) - Optional String  Defaults to `NO_FALLBACK`<br>Possible values are `NO_FALLBACK`, `ANY_ENDPOINT`, `DEFAULT_SUBSET`<br>[Enum: NO_FALLBACK|ANY_ENDPOINT|DEFAULT_SUBSET] Subset Fallback Policy. Enumeration for SubsetFallbackPolicy if subset match is not found. The request fails as if the cluster had no endpoint matching the subset policy Any cluster endpoint may be selected if the cluster had no endpoint matching the subset policy Load balancing is done over endpoints matching default_subset if the cluster had no endpoint matching the subset policy
-
-<a id="health-checks"></a>&#x2022; [`health_checks`](#health-checks) - Optional Block<br>Health Checks. List of references to healthcheck object for this cluster<br>See [Health Checks](#health-checks) below for details.
-
-<a id="http-idle-timeout"></a>&#x2022; [`http_idle_timeout`](#http-idle-timeout) - Optional Number  Defaults to `5`  Specified in milliseconds<br>HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
-
-<a id="loadbalancer-algorithm"></a>&#x2022; [`loadbalancer_algorithm`](#loadbalancer-algorithm) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`<br>[Enum: ROUND_ROBIN|LEAST_REQUEST|RING_HASH|RANDOM|LB_OVERRIDE] Load Balancer Algorithm. Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in round robin order. - LEAST_REQUEST: LEAST_REQUEST Policy in which loadbalancer picks the upstream endpoint which has the fewest active requests - RING_HASH: RING_HASH Policy implements consistent hashing to upstream endpoints using ring hash of endpoint names Hash of the incoming request is calculated using request hash policy. The ring/modulo hash load balancer implements consistent hashing to upstream hosts. The algorithm is based on mapping all hosts onto a circle such that the addition or removal of a host from the host set changes only affect 1/N requests. This technique is also commonly known as “ketama” hashing. A consistent hashing load balancer is only effective when protocol routing is used that specifies a value to hash on. The minimum ring size governs the replication factor for each host in the ring. For example, if the minimum ring size is 1024 and there are 16 hosts, each host will be replicated 64 times. - RANDOM: RANDOM Policy in which each available upstream endpoint is selected in random order. The random load balancer selects a random healthy host. The random load balancer generally performs better than round robin if no health checking policy is configured. Random selection avoids bias towards the host in the set that comes after a failed host. - LB_OVERRIDE: Load Balancer Override Hash policy is taken from from the load balancer which is using this origin pool
+<a id="default-subset"></a>&#x2022; [`default_subset`](#default-subset) - Optional Block<br>List of key-value pairs that define default subset. This subset can be referred in fallback_policy which gets used when route specifies no metadata or no subset matching the metadata exists
 
 -> **One of the following:**
-&#x2022; <a id="no-panic-threshold"></a>[`no_panic_threshold`](#no-panic-threshold) - Optional Block<br>Enable this option
+&#x2022; <a id="disable-proxy-protocol"></a>[`disable_proxy_protocol`](#disable-proxy-protocol) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="proxy-protocol-v1"></a>[`proxy_protocol_v1`](#proxy-protocol-v1) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="outlier-detection"></a>&#x2022; [`outlier_detection`](#outlier-detection) - Optional Block<br>Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host immediately. Otherwise, it checks to make sure the number of ejected hosts is below the allowed threshold (specified via max_ejection_percent setting). If the number of ejected hosts is above the threshold, the host is not ejected. 3. The endpoint is ejected for some number of milliseconds. Ejection means that the endpoint is marked unhealthy and will not be used during load balancing. The number of milliseconds is equal to the base_ejection_time value multiplied by the number of times the host has been ejected. 4. An ejected endpoint will automatically be brought back into service after the ejection time has been satisfied<br>See [Outlier Detection](#outlier-detection) below for details.
+<a id="endpoint-selection"></a>&#x2022; [`endpoint_selection`](#endpoint-selection) - Optional String  Defaults to `DISTRIBUTED`<br>Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`<br>[Enum: DISTRIBUTED|LOCAL_ONLY|LOCAL_PREFERRED] Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for
 
-<a id="panic-threshold"></a>&#x2022; [`panic_threshold`](#panic-threshold) - Optional Number<br>Panic threshold. Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status
+<a id="endpoint-subsets"></a>&#x2022; [`endpoint_subsets`](#endpoint-subsets) - Optional Block<br>Configure endpoint groups based on metadata labels for traffic routing. Supports weighted distribution and session affinity across labeled endpoints<br>See [Endpoint Subsets](#endpoint-subsets) below for details.
 
-<a id="proxy-protocol-v2"></a>&#x2022; [`proxy_protocol_v2`](#proxy-protocol-v2) - Optional Block<br>Enable this option
+<a id="endpoints"></a>&#x2022; [`endpoints`](#endpoints) - Optional Block<br>List of endpoints for this cluster<br>See [Endpoints](#endpoints) below for details.
+
+<a id="fallback-policy"></a>&#x2022; [`fallback_policy`](#fallback-policy) - Optional String  Defaults to `NO_FALLBACK`<br>Possible values are `NO_FALLBACK`, `ANY_ENDPOINT`, `DEFAULT_SUBSET`<br>[Enum: NO_FALLBACK|ANY_ENDPOINT|DEFAULT_SUBSET] Enumeration for SubsetFallbackPolicy if subset match is not found. The request fails as if the cluster had no endpoint matching the subset policy Any cluster endpoint may be selected if the cluster had no endpoint matching the subset policy Load balancing is done over endpoints matching
+
+<a id="health-checks"></a>&#x2022; [`health_checks`](#health-checks) - Optional Block<br>Health check configuration for backend monitoring<br>See [Health Checks](#health-checks) below for details.
+
+<a id="http-idle-timeout"></a>&#x2022; [`http_idle_timeout`](#http-idle-timeout) - Optional Number<br>The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed
+
+<a id="loadbalancer-algorithm"></a>&#x2022; [`loadbalancer_algorithm`](#loadbalancer-algorithm) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`<br>[Enum: ROUND_ROBIN|LEAST_REQUEST|RING_HASH|RANDOM|LB_OVERRIDE] Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in
+
+-> **One of the following:**
+&#x2022; <a id="no-panic-threshold"></a>[`no_panic_threshold`](#no-panic-threshold) - Optional Block<br>Can be used for messages where no values are needed
+
+<a id="outlier-detection"></a>&#x2022; [`outlier_detection`](#outlier-detection) - Optional Block<br>Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1<br>See [Outlier Detection](#outlier-detection) below for details.
+
+<a id="panic-threshold"></a>&#x2022; [`panic_threshold`](#panic-threshold) - Optional Number<br>Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status
+
+<a id="proxy-protocol-v2"></a>&#x2022; [`proxy_protocol_v2`](#proxy-protocol-v2) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="tls-parameters"></a>&#x2022; [`tls_parameters`](#tls-parameters) - Optional Block<br>Upstream TLS Parameters. TLS configuration for upstream connections<br>See [TLS Parameters](#tls-parameters) below for details.
+<a id="tls-parameters"></a>&#x2022; [`tls_parameters`](#tls-parameters) - Optional Block<br>TLS configuration for upstream connections<br>See [TLS Parameters](#tls-parameters) below for details.
 
-<a id="upstream-conn-pool-reuse-type"></a>&#x2022; [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) - Optional Block<br>Select upstream connection pool reuse state. Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only<br>See [Upstream Conn Pool Reuse Type](#upstream-conn-pool-reuse-type) below for details.
+<a id="upstream-conn-pool-reuse-type"></a>&#x2022; [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) - Optional Block<br>Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only<br>See [Upstream Conn Pool Reuse Type](#upstream-conn-pool-reuse-type) below for details.
 
 ### Attributes Reference
 
@@ -122,87 +122,87 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`circuit_breaker`](#circuit-breaker) block supports the following:
 
-<a id="circuit-breaker-connection-limit"></a>&#x2022; [`connection_limit`](#circuit-breaker-connection-limit) - Optional Number<br>Connection Limit. The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections reach connection limit
+<a id="circuit-breaker-connection-limit"></a>&#x2022; [`connection_limit`](#circuit-breaker-connection-limit) - Optional Number<br>The maximum number of connections that loadbalancer will establish to all hosts in an upstream cluster. In practice this is only applicable to TCP and HTTP/1.1 clusters since HTTP/2 uses a single connection to each host. Remove endpoint out of load balancing decision, if number of connections
 
-<a id="circuit-breaker-max-requests"></a>&#x2022; [`max_requests`](#circuit-breaker-max-requests) - Optional Number<br>Maximum Request Count. The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests exceed this count
+<a id="circuit-breaker-max-requests"></a>&#x2022; [`max_requests`](#circuit-breaker-max-requests) - Optional Number<br>The maximum number of requests that can be outstanding to all hosts in a cluster at any given time. In practice this is applicable to HTTP/2 clusters since HTTP/1.1 clusters are governed by the maximum connections (connection_limit). Remove endpoint out of load balancing decision, if requests
 
-<a id="circuit-breaker-pending-requests"></a>&#x2022; [`pending_requests`](#circuit-breaker-pending-requests) - Optional Number<br>Pending Requests. The maximum number of requests that will be queued while waiting for a ready connection pool connection. Since HTTP/2 requests are sent over a single connection, this circuit breaker only comes into play as the initial connection is created, as requests will be multiplexed immediately afterwards. For HTTP/1.1, requests are added to the list of pending requests whenever there aren’t enough upstream connections available to immediately dispatch the request, so this circuit breaker will remain in play for the lifetime of the process. Remove endpoint out of load balancing decision, if pending request reach pending_request
+<a id="circuit-breaker-pending-requests"></a>&#x2022; [`pending_requests`](#circuit-breaker-pending-requests) - Optional Number<br>The maximum number of requests that will be queued while waiting for a ready connection pool connection. Since HTTP/2 requests are sent over a single connection, this circuit breaker only comes into play as the initial connection is created, as requests will be multiplexed immediately
 
-<a id="circuit-breaker-priority"></a>&#x2022; [`priority`](#circuit-breaker-priority) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `HIGH`<br>[Enum: DEFAULT|HIGH] Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism
+<a id="circuit-breaker-priority"></a>&#x2022; [`priority`](#circuit-breaker-priority) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `HIGH`<br>[Enum: DEFAULT|HIGH] Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority
 
-<a id="circuit-breaker-retries"></a>&#x2022; [`retries`](#circuit-breaker-retries) - Optional Number<br>Retry Count. The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count
+<a id="circuit-breaker-retries"></a>&#x2022; [`retries`](#circuit-breaker-retries) - Optional Number<br>The maximum number of retries that can be outstanding to all hosts in a cluster at any given time. Remove endpoint out of load balancing decision, if retries for request exceed this count
 
 #### Endpoint Subsets
 
 An [`endpoint_subsets`](#endpoint-subsets) block supports the following:
 
-<a id="endpoint-subsets-keys"></a>&#x2022; [`keys`](#endpoint-subsets-keys) - Optional List<br>Keys. List of keys that define a cluster subset class
+<a id="endpoint-subsets-keys"></a>&#x2022; [`keys`](#endpoint-subsets-keys) - Optional List<br>List of keys that define a cluster subset class
 
 #### Endpoints
 
 An [`endpoints`](#endpoints) block supports the following:
 
-<a id="endpoints-kind"></a>&#x2022; [`kind`](#endpoints-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="endpoints-kind"></a>&#x2022; [`kind`](#endpoints-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="endpoints-name"></a>&#x2022; [`name`](#endpoints-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="endpoints-name"></a>&#x2022; [`name`](#endpoints-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="endpoints-namespace"></a>&#x2022; [`namespace`](#endpoints-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="endpoints-namespace"></a>&#x2022; [`namespace`](#endpoints-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="endpoints-tenant"></a>&#x2022; [`tenant`](#endpoints-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="endpoints-tenant"></a>&#x2022; [`tenant`](#endpoints-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="endpoints-uid"></a>&#x2022; [`uid`](#endpoints-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="endpoints-uid"></a>&#x2022; [`uid`](#endpoints-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Health Checks
 
 A [`health_checks`](#health-checks) block supports the following:
 
-<a id="health-checks-kind"></a>&#x2022; [`kind`](#health-checks-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="health-checks-kind"></a>&#x2022; [`kind`](#health-checks-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="health-checks-name"></a>&#x2022; [`name`](#health-checks-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="health-checks-name"></a>&#x2022; [`name`](#health-checks-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="health-checks-namespace"></a>&#x2022; [`namespace`](#health-checks-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="health-checks-namespace"></a>&#x2022; [`namespace`](#health-checks-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="health-checks-tenant"></a>&#x2022; [`tenant`](#health-checks-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="health-checks-tenant"></a>&#x2022; [`tenant`](#health-checks-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="health-checks-uid"></a>&#x2022; [`uid`](#health-checks-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="health-checks-uid"></a>&#x2022; [`uid`](#health-checks-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Http1 Config
 
 A [`http1_config`](#http1-config) block supports the following:
 
-<a id="http1-config-header-transformation"></a>&#x2022; [`header_transformation`](#http1-config-header-transformation) - Optional Block<br>Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers<br>See [Header Transformation](#http1-config-header-transformation) below.
+<a id="http1-config-header-transformation"></a>&#x2022; [`header_transformation`](#http1-config-header-transformation) - Optional Block<br>Header Transformation OPTIONS for HTTP/1.1 request/response headers<br>See [Header Transformation](#http1-config-header-transformation) below.
 
 #### Http1 Config Header Transformation
 
 A [`header_transformation`](#http1-config-header-transformation) block (within [`http1_config`](#http1-config)) supports the following:
 
-<a id="transformation-489a65"></a>&#x2022; [`default_header_transformation`](#transformation-489a65) - Optional Block<br>Enable this option
+<a id="transformation-489a65"></a>&#x2022; [`default_header_transformation`](#transformation-489a65) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="transformation-7adc9e"></a>&#x2022; [`legacy_header_transformation`](#transformation-7adc9e) - Optional Block<br>Enable this option
+<a id="transformation-7adc9e"></a>&#x2022; [`legacy_header_transformation`](#transformation-7adc9e) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="transformation-61c351"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-61c351) - Optional Block<br>Enable this option
+<a id="transformation-61c351"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-61c351) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="transformation-17cea9"></a>&#x2022; [`proper_case_header_transformation`](#transformation-17cea9) - Optional Block<br>Enable this option
+<a id="transformation-17cea9"></a>&#x2022; [`proper_case_header_transformation`](#transformation-17cea9) - Optional Block<br>Can be used for messages where no values are needed
 
 #### Http2 Options
 
 A [`http2_options`](#http2-options) block supports the following:
 
-<a id="http2-options-enabled"></a>&#x2022; [`enabled`](#http2-options-enabled) - Optional Bool<br>HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections
+<a id="http2-options-enabled"></a>&#x2022; [`enabled`](#http2-options-enabled) - Optional Bool<br>Enable/disable HTTP2 Protocol for upstream connections
 
 #### Outlier Detection
 
 An [`outlier_detection`](#outlier-detection) block supports the following:
 
-<a id="outlier-detection-base-ejection-time"></a>&#x2022; [`base_ejection_time`](#outlier-detection-base-ejection-time) - Optional Number  Defaults to `30000ms`  Specified in milliseconds<br>Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to GET ejected for longer periods if they continue to fail
+<a id="outlier-detection-base-ejection-time"></a>&#x2022; [`base_ejection_time`](#outlier-detection-base-ejection-time) - Optional Number<br>The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to GET ejected for longer periods if they continue to fail
 
-<a id="outlier-detection-consecutive-5xx"></a>&#x2022; [`consecutive_5xx`](#outlier-detection-consecutive-5xx) - Optional Number  Defaults to `5`<br>Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs
+<a id="outlier-detection-consecutive-5xx"></a>&#x2022; [`consecutive_5xx`](#outlier-detection-consecutive-5xx) - Optional Number<br>If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the
 
-<a id="failure-45be04"></a>&#x2022; [`consecutive_gateway_failure`](#failure-45be04) - Optional Number  Defaults to `5`<br>Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). Consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs
+<a id="failure-45be04"></a>&#x2022; [`consecutive_gateway_failure`](#failure-45be04) - Optional Number<br>If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.)
 
-<a id="outlier-detection-interval"></a>&#x2022; [`interval`](#outlier-detection-interval) - Optional Number  Defaults to `10000ms`  Specified in milliseconds<br>Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service
+<a id="outlier-detection-interval"></a>&#x2022; [`interval`](#outlier-detection-interval) - Optional Number  Defaults to `10000ms`<br>The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service
 
-<a id="outlier-detection-max-ejection-percent"></a>&#x2022; [`max_ejection_percent`](#outlier-detection-max-ejection-percent) - Optional Number  Defaults to `10%`<br>Max Ejection Percentage. The maximum % of an upstream cluster that can be ejected due to outlier detection. but will eject at least one host regardless of the value
+<a id="outlier-detection-max-ejection-percent"></a>&#x2022; [`max_ejection_percent`](#outlier-detection-max-ejection-percent) - Optional Number  Defaults to `10%`<br>The maximum % of an upstream cluster that can be ejected due to outlier detection. but will eject at least one host regardless of the value
 
 #### Timeouts
 
@@ -220,61 +220,61 @@ A [`timeouts`](#timeouts) block supports the following:
 
 A [`tls_parameters`](#tls-parameters) block supports the following:
 
-<a id="tls-parameters-cert-params"></a>&#x2022; [`cert_params`](#tls-parameters-cert-params) - Optional Block<br>Upstream Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store<br>See [Cert Params](#tls-parameters-cert-params) below.
+<a id="tls-parameters-cert-params"></a>&#x2022; [`cert_params`](#tls-parameters-cert-params) - Optional Block<br>Certificate Parameters for authentication, TLS ciphers, and trust store<br>See [Cert Params](#tls-parameters-cert-params) below.
 
-<a id="tls-parameters-common-params"></a>&#x2022; [`common_params`](#tls-parameters-common-params) - Optional Block<br>TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store<br>See [Common Params](#tls-parameters-common-params) below.
+<a id="tls-parameters-common-params"></a>&#x2022; [`common_params`](#tls-parameters-common-params) - Optional Block<br>Information of different aspects for TLS authentication related to ciphers, certificates and trust store<br>See [Common Params](#tls-parameters-common-params) below.
 
-<a id="caching-2e557f"></a>&#x2022; [`default_session_key_caching`](#caching-2e557f) - Optional Block<br>Enable this option
+<a id="caching-2e557f"></a>&#x2022; [`default_session_key_caching`](#caching-2e557f) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="caching-d819c5"></a>&#x2022; [`disable_session_key_caching`](#caching-d819c5) - Optional Block<br>Enable this option
+<a id="caching-d819c5"></a>&#x2022; [`disable_session_key_caching`](#caching-d819c5) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="tls-parameters-disable-sni"></a>&#x2022; [`disable_sni`](#tls-parameters-disable-sni) - Optional Block<br>Enable this option
+<a id="tls-parameters-disable-sni"></a>&#x2022; [`disable_sni`](#tls-parameters-disable-sni) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="tls-parameters-max-session-keys"></a>&#x2022; [`max_session_keys`](#tls-parameters-max-session-keys) - Optional Number<br>Max Session Keys Cached. Number of session keys that are cached
+<a id="tls-parameters-max-session-keys"></a>&#x2022; [`max_session_keys`](#tls-parameters-max-session-keys) - Optional Number<br>Number of session keys that are cached
 
-<a id="tls-parameters-sni"></a>&#x2022; [`sni`](#tls-parameters-sni) - Optional String<br>SNI Value. SNI value to be used
+<a id="tls-parameters-sni"></a>&#x2022; [`sni`](#tls-parameters-sni) - Optional String<br>SNI value to be used
 
-<a id="tls-parameters-use-host-header-as-sni"></a>&#x2022; [`use_host_header_as_sni`](#tls-parameters-use-host-header-as-sni) - Optional Block<br>Enable this option
+<a id="tls-parameters-use-host-header-as-sni"></a>&#x2022; [`use_host_header_as_sni`](#tls-parameters-use-host-header-as-sni) - Optional Block<br>Can be used for messages where no values are needed
 
 #### TLS Parameters Cert Params
 
 A [`cert_params`](#tls-parameters-cert-params) block (within [`tls_parameters`](#tls-parameters)) supports the following:
 
-<a id="tls-parameters-cert-params-certificates"></a>&#x2022; [`certificates`](#tls-parameters-cert-params-certificates) - Optional Block<br>Client Certificate. Client TLS Certificate required for mTLS authentication<br>See [Certificates](#tls-parameters-cert-params-certificates) below.
+<a id="tls-parameters-cert-params-certificates"></a>&#x2022; [`certificates`](#tls-parameters-cert-params-certificates) - Optional Block<br>Client TLS Certificate required for mTLS authentication<br>See [Certificates](#tls-parameters-cert-params-certificates) below.
 
-<a id="suites-176fce"></a>&#x2022; [`cipher_suites`](#suites-176fce) - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used
+<a id="suites-176fce"></a>&#x2022; [`cipher_suites`](#suites-176fce) - Optional List<br>The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 
-<a id="version-4c65cd"></a>&#x2022; [`maximum_protocol_version`](#version-4c65cd) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="version-4c65cd"></a>&#x2022; [`maximum_protocol_version`](#version-4c65cd) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="version-e15b41"></a>&#x2022; [`minimum_protocol_version`](#version-e15b41) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="version-e15b41"></a>&#x2022; [`minimum_protocol_version`](#version-e15b41) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="params-0d9f11"></a>&#x2022; [`validation_params`](#params-0d9f11) - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#params-0d9f11) below.
+<a id="params-0d9f11"></a>&#x2022; [`validation_params`](#params-0d9f11) - Optional Block<br>Includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#params-0d9f11) below.
 
 #### TLS Parameters Cert Params Certificates
 
 A [`certificates`](#tls-parameters-cert-params-certificates) block (within [`tls_parameters.cert_params`](#tls-parameters-cert-params)) supports the following:
 
-<a id="kind-8b8a07"></a>&#x2022; [`kind`](#kind-8b8a07) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="kind-8b8a07"></a>&#x2022; [`kind`](#kind-8b8a07) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="name-d17505"></a>&#x2022; [`name`](#name-d17505) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-d17505"></a>&#x2022; [`name`](#name-d17505) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-d38fb9"></a>&#x2022; [`namespace`](#namespace-d38fb9) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-d38fb9"></a>&#x2022; [`namespace`](#namespace-d38fb9) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-34f974"></a>&#x2022; [`tenant`](#tenant-34f974) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-34f974"></a>&#x2022; [`tenant`](#tenant-34f974) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="uid-29a359"></a>&#x2022; [`uid`](#uid-29a359) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="uid-29a359"></a>&#x2022; [`uid`](#uid-29a359) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### TLS Parameters Cert Params Validation Params
 
 A [`validation_params`](#params-0d9f11) block (within [`tls_parameters.cert_params`](#tls-parameters-cert-params)) supports the following:
 
-<a id="verification-29bce9"></a>&#x2022; [`skip_hostname_verification`](#verification-29bce9) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
+<a id="verification-29bce9"></a>&#x2022; [`skip_hostname_verification`](#verification-29bce9) - Optional Bool<br>When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
 
 <a id="trusted-ca-91d5d8"></a>&#x2022; [`trusted_ca`](#trusted-ca-91d5d8) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA](#trusted-ca-91d5d8) below.
 
-<a id="url-03ea65"></a>&#x2022; [`trusted_ca_url`](#url-03ea65) - Optional String<br>Inline Root CA Certificate (legacy). Inline Root CA Certificate
+<a id="url-03ea65"></a>&#x2022; [`trusted_ca_url`](#url-03ea65) - Optional String<br>Inline Root CA Certificate
 
-<a id="names-4c662c"></a>&#x2022; [`verify_subject_alt_names`](#names-4c662c) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
+<a id="names-4c662c"></a>&#x2022; [`verify_subject_alt_names`](#names-4c662c) - Optional List<br>List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
 #### TLS Parameters Cert Params Validation Params Trusted CA
 
@@ -288,31 +288,31 @@ A [`validation_params`](#params-0d9f11) block (within [`tls_parameters.cert_para
 
 A [`common_params`](#tls-parameters-common-params) block (within [`tls_parameters`](#tls-parameters)) supports the following:
 
-<a id="suites-f69d86"></a>&#x2022; [`cipher_suites`](#suites-f69d86) - Optional List<br>Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used
+<a id="suites-f69d86"></a>&#x2022; [`cipher_suites`](#suites-f69d86) - Optional List<br>The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 
-<a id="version-e7c6f2"></a>&#x2022; [`maximum_protocol_version`](#version-e7c6f2) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="version-e7c6f2"></a>&#x2022; [`maximum_protocol_version`](#version-e7c6f2) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
-<a id="version-7d1460"></a>&#x2022; [`minimum_protocol_version`](#version-7d1460) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="version-7d1460"></a>&#x2022; [`minimum_protocol_version`](#version-7d1460) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
 
 <a id="certificates-c9caff"></a>&#x2022; [`tls_certificates`](#certificates-c9caff) - Optional Block<br>TLS Certificates. Set of TLS certificates<br>See [TLS Certificates](#certificates-c9caff) below.
 
-<a id="params-6e95a6"></a>&#x2022; [`validation_params`](#params-6e95a6) - Optional Block<br>TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#params-6e95a6) below.
+<a id="params-6e95a6"></a>&#x2022; [`validation_params`](#params-6e95a6) - Optional Block<br>Includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification<br>See [Validation Params](#params-6e95a6) below.
 
 #### TLS Parameters Common Params TLS Certificates
 
 A [`tls_certificates`](#certificates-c9caff) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
-<a id="url-323181"></a>&#x2022; [`certificate_url`](#url-323181) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
+<a id="url-323181"></a>&#x2022; [`certificate_url`](#url-323181) - Optional String<br>TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
 
-<a id="algorithms-eb62be"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-eb62be) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-eb62be) below.
+<a id="algorithms-eb62be"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-eb62be) - Optional Block<br>Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-eb62be) below.
 
 <a id="spec-5af02c"></a>&#x2022; [`description_spec`](#spec-5af02c) - Optional String<br>Description. Description for the certificate
 
-<a id="stapling-c091fa"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-c091fa) - Optional Block<br>Enable this option
+<a id="stapling-c091fa"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-c091fa) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="key-da7979"></a>&#x2022; [`private_key`](#key-da7979) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-da7979) below.
+<a id="key-da7979"></a>&#x2022; [`private_key`](#key-da7979) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-da7979) below.
 
-<a id="defaults-f58bc7"></a>&#x2022; [`use_system_defaults`](#defaults-f58bc7) - Optional Block<br>Enable this option
+<a id="defaults-f58bc7"></a>&#x2022; [`use_system_defaults`](#defaults-f58bc7) - Optional Block<br>Can be used for messages where no values are needed
 
 #### TLS Parameters Common Params TLS Certificates Custom Hash Algorithms
 
@@ -334,13 +334,13 @@ A [`tls_certificates`](#certificates-c9caff) block (within [`tls_parameters.comm
 
 A [`validation_params`](#params-6e95a6) block (within [`tls_parameters.common_params`](#tls-parameters-common-params)) supports the following:
 
-<a id="verification-30d13d"></a>&#x2022; [`skip_hostname_verification`](#verification-30d13d) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
+<a id="verification-30d13d"></a>&#x2022; [`skip_hostname_verification`](#verification-30d13d) - Optional Bool<br>When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
 
 <a id="trusted-ca-39c22f"></a>&#x2022; [`trusted_ca`](#trusted-ca-39c22f) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA](#trusted-ca-39c22f) below.
 
-<a id="url-910417"></a>&#x2022; [`trusted_ca_url`](#url-910417) - Optional String<br>Inline Root CA Certificate (legacy). Inline Root CA Certificate
+<a id="url-910417"></a>&#x2022; [`trusted_ca_url`](#url-910417) - Optional String<br>Inline Root CA Certificate
 
-<a id="names-1c97ed"></a>&#x2022; [`verify_subject_alt_names`](#names-1c97ed) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
+<a id="names-1c97ed"></a>&#x2022; [`verify_subject_alt_names`](#names-1c97ed) - Optional List<br>List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
 
 #### TLS Parameters Common Params Validation Params Trusted CA
 
@@ -354,9 +354,9 @@ A [`validation_params`](#params-6e95a6) block (within [`tls_parameters.common_pa
 
 An [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) block supports the following:
 
-<a id="reuse-008a14"></a>&#x2022; [`disable_conn_pool_reuse`](#reuse-008a14) - Optional Block<br>Enable this option
+<a id="reuse-008a14"></a>&#x2022; [`disable_conn_pool_reuse`](#reuse-008a14) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="reuse-ad4462"></a>&#x2022; [`enable_conn_pool_reuse`](#reuse-ad4462) - Optional Block<br>Enable this option
+<a id="reuse-ad4462"></a>&#x2022; [`enable_conn_pool_reuse`](#reuse-ad4462) - Optional Block<br>Can be used for messages where no values are needed
 
 ---
 

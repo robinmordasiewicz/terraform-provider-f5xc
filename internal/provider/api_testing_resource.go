@@ -359,7 +359,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"custom_header_value": schema.StringAttribute{
-				MarkdownDescription: "Custom Header. Add x-F5-API-testing-identifier header value to prevent security flags on API testing traffic.",
+				MarkdownDescription: "Add x-F5-API-testing-identifier header value to prevent security flags on API testing traffic.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -375,34 +375,34 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Delete: true,
 			}),
 			"domains": schema.ListNestedBlock{
-				MarkdownDescription: "Testing Environments. Add and configure testing domains and credentials .",
+				MarkdownDescription: "Add and configure testing domains and credentials .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"allow_destructive_methods": schema.BoolAttribute{
-							MarkdownDescription: "Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or DELETE data.",
+							MarkdownDescription: "Enable to allow API test to execute destructive methods. Be cautious as these can alter or DELETE data.",
 							Optional:            true,
 						},
 						"domain": schema.StringAttribute{
-							MarkdownDescription: "Domain. Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments.",
+							MarkdownDescription: "Add your testing environment domain. Be aware that running tests on a production domain can impact live applications, as API testing cannot distinguish between production and testing environments.",
 							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
 						"credentials": schema.ListNestedBlock{
-							MarkdownDescription: "Credentials. Add credentials for API testing to use in the selected environment.",
+							MarkdownDescription: "Add credentials for API testing to use in the selected environment.",
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"credential_name": schema.StringAttribute{
-										MarkdownDescription: "Name. Enter a unique name for the credentials used in API testing .",
+										MarkdownDescription: "Enter a unique name for the credentials used in API testing .",
 										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"admin": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 									"api_key": schema.SingleNestedBlock{
-										MarkdownDescription: "API Key.",
+										MarkdownDescription: "API Key",
 										Attributes: map[string]schema.Attribute{
 											"key": schema.StringAttribute{
 												MarkdownDescription: "Key.",
@@ -411,35 +411,35 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										Blocks: map[string]schema.Block{
 											"value": schema.SingleNestedBlock{
-												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+												MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
-														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+														MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
-																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																Optional:            true,
 															},
 															"location": schema.StringAttribute{
-																MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+																MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
-																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 														},
 													},
 													"clear_secret_info": schema.SingleNestedBlock{
-														MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+														MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
-																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 															"url": schema.StringAttribute{
-																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+																MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																Optional:            true,
 															},
 														},
@@ -458,35 +458,35 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										Blocks: map[string]schema.Block{
 											"password": schema.SingleNestedBlock{
-												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+												MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
-														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+														MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
-																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																Optional:            true,
 															},
 															"location": schema.StringAttribute{
-																MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+																MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
-																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 														},
 													},
 													"clear_secret_info": schema.SingleNestedBlock{
-														MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+														MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
-																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 															"url": schema.StringAttribute{
-																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+																MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																Optional:            true,
 															},
 														},
@@ -496,39 +496,39 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"bearer_token": schema.SingleNestedBlock{
-										MarkdownDescription: "Bearer.",
+										MarkdownDescription: "Bearer",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"token": schema.SingleNestedBlock{
-												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+												MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
-														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+														MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
-																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																Optional:            true,
 															},
 															"location": schema.StringAttribute{
-																MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+																MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
-																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 														},
 													},
 													"clear_secret_info": schema.SingleNestedBlock{
-														MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+														MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
-																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 															"url": schema.StringAttribute{
-																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+																MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																Optional:            true,
 															},
 														},
@@ -541,7 +541,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Login Endpoint.",
 										Attributes: map[string]schema.Attribute{
 											"method": schema.StringAttribute{
-												MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
+												MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
 												Optional:            true,
 											},
 											"path": schema.StringAttribute{
@@ -555,35 +555,35 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										Blocks: map[string]schema.Block{
 											"json_payload": schema.SingleNestedBlock{
-												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+												MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
-														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+														MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
-																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+																MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																Optional:            true,
 															},
 															"location": schema.StringAttribute{
-																MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+																MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
-																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 														},
 													},
 													"clear_secret_info": schema.SingleNestedBlock{
-														MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+														MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
-																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+																MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 															"url": schema.StringAttribute{
-																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+																MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																Optional:            true,
 															},
 														},
@@ -593,7 +593,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"standard": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+										MarkdownDescription: "Can be used for messages where no values are needed.",
 									},
 								},
 							},
@@ -602,13 +602,13 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"every_day": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: every_day, every_month, every_week] Enable this option",
+				MarkdownDescription: "[OneOf: every_day, every_month, every_week] Can be used for messages where no values are needed.",
 			},
 			"every_month": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 			"every_week": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Can be used for messages where no values are needed.",
 			},
 		},
 	}

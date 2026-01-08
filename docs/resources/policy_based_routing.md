@@ -40,7 +40,7 @@ resource "f5xc_policy_based_routing" "example" {
   forward_proxy_pbr_rules {
     # Configure forward_proxy_pbr_rules settings
   }
-  # Enable this option
+  # Can be used for messages where no values are needed.
   all_destinations {
     # Configure all_destinations settings
   }
@@ -70,7 +70,7 @@ resource "f5xc_policy_based_routing" "example" {
 &#x2022; <a id="forward-proxy-pbr"></a>[`forward_proxy_pbr`](#forward-proxy-pbr) - Optional Block<br>L3/L4 routing rule. Network(L3/L4) routing policy rule<br>See [Forward Proxy Pbr](#forward-proxy-pbr) below for details.
 <br><br>&#x2022; <a id="network-pbr"></a>[`network_pbr`](#network-pbr) - Optional Block<br>Network (L2/L3) routing Policy. Network(L3/L4) routing policy rule<br>See [Network Pbr](#network-pbr) below for details.
 
-<a id="forwarding-class-list"></a>&#x2022; [`forwarding_class_list`](#forwarding-class-list) - Optional Block<br>Default Forwarding Classes. Ordered list of forwarding Class to be used if source application match and no rule match<br>See [Forwarding Class List](#forwarding-class-list) below for details.
+<a id="forwarding-class-list"></a>&#x2022; [`forwarding_class_list`](#forwarding-class-list) - Optional Block<br>Ordered list of forwarding Class to be used if source application match and no rule match<br>See [Forwarding Class List](#forwarding-class-list) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -92,21 +92,21 @@ A [`forward_proxy_pbr`](#forward-proxy-pbr) block supports the following:
 
 A [`forward_proxy_pbr_rules`](#rules-67a5cc) block (within [`forward_proxy_pbr`](#forward-proxy-pbr)) supports the following:
 
-<a id="destinations-1e0cd9"></a>&#x2022; [`all_destinations`](#destinations-1e0cd9) - Optional Block<br>Enable this option
+<a id="destinations-1e0cd9"></a>&#x2022; [`all_destinations`](#destinations-1e0cd9) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="sources-4f8004"></a>&#x2022; [`all_sources`](#sources-4f8004) - Optional Block<br>Enable this option
+<a id="sources-4f8004"></a>&#x2022; [`all_sources`](#sources-4f8004) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="list-a3b35a"></a>&#x2022; [`forwarding_class_list`](#list-a3b35a) - Optional Block<br>Forwarding Class. Ordered list of forwarding Class to be used if no rule match<br>See [Forwarding Class List](#list-a3b35a) below.
+<a id="list-a3b35a"></a>&#x2022; [`forwarding_class_list`](#list-a3b35a) - Optional Block<br>Ordered list of forwarding Class to be used if no rule match<br>See [Forwarding Class List](#list-a3b35a) below.
 
 <a id="list-892bc2"></a>&#x2022; [`http_list`](#list-892bc2) - Optional Block<br>URLListType<br>See [HTTP List](#list-892bc2) below.
 
-<a id="set-b84ad7"></a>&#x2022; [`ip_prefix_set`](#set-b84ad7) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [IP Prefix Set](#set-b84ad7) below.
+<a id="set-b84ad7"></a>&#x2022; [`ip_prefix_set`](#set-b84ad7) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [IP Prefix Set](#set-b84ad7) below.
 
-<a id="selector-c5a5b4"></a>&#x2022; [`label_selector`](#selector-c5a5b4) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#selector-c5a5b4) below.
+<a id="selector-c5a5b4"></a>&#x2022; [`label_selector`](#selector-c5a5b4) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects<br>See [Label Selector](#selector-c5a5b4) below.
 
-<a id="metadata-4bce2b"></a>&#x2022; [`metadata`](#metadata-4bce2b) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#metadata-4bce2b) below.
+<a id="metadata-4bce2b"></a>&#x2022; [`metadata`](#metadata-4bce2b) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#metadata-4bce2b) below.
 
-<a id="list-b2cc8b"></a>&#x2022; [`prefix_list`](#list-b2cc8b) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#list-b2cc8b) below.
+<a id="list-b2cc8b"></a>&#x2022; [`prefix_list`](#list-b2cc8b) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#list-b2cc8b) below.
 
 <a id="list-cd1082"></a>&#x2022; [`tls_list`](#list-cd1082) - Optional Block<br>DomainListType<br>See [TLS List](#list-cd1082) below.
 
@@ -150,53 +150,53 @@ A [`forward_proxy_pbr_rules`](#rules-67a5cc) block (within [`forward_proxy_pbr`]
 
 A [`forwarding_class_list`](#forwarding-class-list) block supports the following:
 
-<a id="forwarding-class-list-name"></a>&#x2022; [`name`](#forwarding-class-list-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="forwarding-class-list-name"></a>&#x2022; [`name`](#forwarding-class-list-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="forwarding-class-list-namespace"></a>&#x2022; [`namespace`](#forwarding-class-list-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="forwarding-class-list-namespace"></a>&#x2022; [`namespace`](#forwarding-class-list-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="forwarding-class-list-tenant"></a>&#x2022; [`tenant`](#forwarding-class-list-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="forwarding-class-list-tenant"></a>&#x2022; [`tenant`](#forwarding-class-list-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Network Pbr
 
 A [`network_pbr`](#network-pbr) block supports the following:
 
-<a id="network-pbr-any"></a>&#x2022; [`any`](#network-pbr-any) - Optional Block<br>Enable this option
+<a id="network-pbr-any"></a>&#x2022; [`any`](#network-pbr-any) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="network-pbr-label-selector"></a>&#x2022; [`label_selector`](#network-pbr-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#network-pbr-label-selector) below.
+<a id="network-pbr-label-selector"></a>&#x2022; [`label_selector`](#network-pbr-label-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects<br>See [Label Selector](#network-pbr-label-selector) below.
 
 <a id="network-pbr-network-pbr-rules"></a>&#x2022; [`network_pbr_rules`](#network-pbr-network-pbr-rules) - Optional Block<br>L3/L4 Destination Routing Rules. Network(L3/L4) routing policy rule<br>See [Network Pbr Rules](#network-pbr-network-pbr-rules) below.
 
-<a id="network-pbr-prefix-list"></a>&#x2022; [`prefix_list`](#network-pbr-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#network-pbr-prefix-list) below.
+<a id="network-pbr-prefix-list"></a>&#x2022; [`prefix_list`](#network-pbr-prefix-list) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#network-pbr-prefix-list) below.
 
 #### Network Pbr Label Selector
 
 A [`label_selector`](#network-pbr-label-selector) block (within [`network_pbr`](#network-pbr)) supports the following:
 
-<a id="network-pbr-label-selector-expressions"></a>&#x2022; [`expressions`](#network-pbr-label-selector-expressions) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
+<a id="network-pbr-label-selector-expressions"></a>&#x2022; [`expressions`](#network-pbr-label-selector-expressions) - Optional List<br>Expressions contains the Kubernetes style label expression for selections
 
 #### Network Pbr Network Pbr Rules
 
 A [`network_pbr_rules`](#network-pbr-network-pbr-rules) block (within [`network_pbr`](#network-pbr)) supports the following:
 
-<a id="traffic-e56c3b"></a>&#x2022; [`all_tcp_traffic`](#traffic-e56c3b) - Optional Block<br>Enable this option
+<a id="traffic-e56c3b"></a>&#x2022; [`all_tcp_traffic`](#traffic-e56c3b) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="traffic-5b23a8"></a>&#x2022; [`all_traffic`](#traffic-5b23a8) - Optional Block<br>Enable this option
+<a id="traffic-5b23a8"></a>&#x2022; [`all_traffic`](#traffic-5b23a8) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="traffic-d923ff"></a>&#x2022; [`all_udp_traffic`](#traffic-d923ff) - Optional Block<br>Enable this option
+<a id="traffic-d923ff"></a>&#x2022; [`all_udp_traffic`](#traffic-d923ff) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="network-pbr-network-pbr-rules-any"></a>&#x2022; [`any`](#network-pbr-network-pbr-rules-any) - Optional Block<br>Enable this option
+<a id="network-pbr-network-pbr-rules-any"></a>&#x2022; [`any`](#network-pbr-network-pbr-rules-any) - Optional Block<br>Can be used for messages where no values are needed
 
 <a id="applications-913ddd"></a>&#x2022; [`applications`](#applications-913ddd) - Optional Block<br>Applications. Application protocols like HTTP, SNMP<br>See [Applications](#applications-913ddd) below.
 
-<a id="network-pbr-network-pbr-rules-dns-name"></a>&#x2022; [`dns_name`](#network-pbr-network-pbr-rules-dns-name) - Optional String<br>DNS Name to IP. Resolve hostname to GET the IP
+<a id="network-pbr-network-pbr-rules-dns-name"></a>&#x2022; [`dns_name`](#network-pbr-network-pbr-rules-dns-name) - Optional String<br>Resolve hostname to GET the IP
 
-<a id="list-b3bc91"></a>&#x2022; [`forwarding_class_list`](#list-b3bc91) - Optional Block<br>Forwarding Classes. Ordered list of forwarding Class to be used if rule match<br>See [Forwarding Class List](#list-b3bc91) below.
+<a id="list-b3bc91"></a>&#x2022; [`forwarding_class_list`](#list-b3bc91) - Optional Block<br>Ordered list of forwarding Class to be used if rule match<br>See [Forwarding Class List](#list-b3bc91) below.
 
-<a id="set-4a1382"></a>&#x2022; [`ip_prefix_set`](#set-4a1382) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [IP Prefix Set](#set-4a1382) below.
+<a id="set-4a1382"></a>&#x2022; [`ip_prefix_set`](#set-4a1382) - Optional Block<br>List of references to ip_prefix_set objects<br>See [IP Prefix Set](#set-4a1382) below.
 
-<a id="network-pbr-network-pbr-rules-metadata"></a>&#x2022; [`metadata`](#network-pbr-network-pbr-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#network-pbr-network-pbr-rules-metadata) below.
+<a id="network-pbr-network-pbr-rules-metadata"></a>&#x2022; [`metadata`](#network-pbr-network-pbr-rules-metadata) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#network-pbr-network-pbr-rules-metadata) below.
 
-<a id="list-1fa06a"></a>&#x2022; [`prefix_list`](#list-1fa06a) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#list-1fa06a) below.
+<a id="list-1fa06a"></a>&#x2022; [`prefix_list`](#list-1fa06a) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#list-1fa06a) below.
 
 <a id="range-c03943"></a>&#x2022; [`protocol_port_range`](#range-c03943) - Optional Block<br>Protocol and Port. Protocol and Port ranges<br>See [Protocol Port Range](#range-c03943) below.
 
@@ -224,13 +224,13 @@ A [`metadata`](#network-pbr-network-pbr-rules-metadata) block (within [`network_
 
 <a id="spec-92545f"></a>&#x2022; [`description_spec`](#spec-92545f) - Optional String<br>Description. Human readable description
 
-<a id="name-2c010e"></a>&#x2022; [`name`](#name-2c010e) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="name-2c010e"></a>&#x2022; [`name`](#name-2c010e) - Optional String<br>Name of the message. The value of name has to follow DNS-1035 format
 
 #### Network Pbr Network Pbr Rules Prefix List
 
 A [`prefix_list`](#list-1fa06a) block (within [`network_pbr.network_pbr_rules`](#network-pbr-network-pbr-rules)) supports the following:
 
-<a id="prefixes-97d3ee"></a>&#x2022; [`prefixes`](#prefixes-97d3ee) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+<a id="prefixes-97d3ee"></a>&#x2022; [`prefixes`](#prefixes-97d3ee) - Optional List<br>List of IPv4 prefixes that represent an endpoint
 
 #### Network Pbr Network Pbr Rules Protocol Port Range
 
@@ -240,7 +240,7 @@ A [`prefix_list`](#list-1fa06a) block (within [`network_pbr.network_pbr_rules`](
 
 A [`prefix_list`](#network-pbr-prefix-list) block (within [`network_pbr`](#network-pbr)) supports the following:
 
-<a id="network-pbr-prefix-list-prefixes"></a>&#x2022; [`prefixes`](#network-pbr-prefix-list-prefixes) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+<a id="network-pbr-prefix-list-prefixes"></a>&#x2022; [`prefixes`](#network-pbr-prefix-list-prefixes) - Optional List<br>List of IPv4 prefixes that represent an endpoint
 
 #### Timeouts
 

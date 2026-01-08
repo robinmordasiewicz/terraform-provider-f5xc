@@ -140,7 +140,7 @@ func (r *CRLResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				},
 			},
 			"server_address": schema.StringAttribute{
-				MarkdownDescription: "CRL Server address. CRL server address or hostname .",
+				MarkdownDescription: "CRL server address or hostname .",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{

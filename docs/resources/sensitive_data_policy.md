@@ -32,11 +32,11 @@ resource "f5xc_sensitive_data_policy" "example" {
   }
 
   # Resource-specific configuration
-  # Defined Custom Sensitive Data Types. Select your custom d...
+  # Select your custom data types to be monitored in the API ...
   custom_data_types {
     # Configure custom_data_types settings
   }
-  # Object reference. This type establishes a direct referenc...
+  # Type establishes a direct reference from one object(the r...
   custom_data_type_ref {
     # Configure custom_data_type_ref settings
   }
@@ -62,11 +62,11 @@ resource "f5xc_sensitive_data_policy" "example" {
 
 ### Spec Argument Reference
 
-<a id="compliances"></a>&#x2022; [`compliances`](#compliances) - Optional List<br>Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`<br>[Enum: GDPR|CCPA|PIPEDA|LGPD|DPA_UK|PDPA_SG|APPI|HIPAA|CPRA_2023|CPA_CO|SOC2|PCI_DSS|ISO_IEC_27001|ISO_IEC_27701|EPRIVACY_DIRECTIVE|GLBA|SOX] Compliance Frameworks. Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery
+<a id="compliances"></a>&#x2022; [`compliances`](#compliances) - Optional List<br>Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`<br>[Enum: GDPR|CCPA|PIPEDA|LGPD|DPA_UK|PDPA_SG|APPI|HIPAA|CPRA_2023|CPA_CO|SOC2|PCI_DSS|ISO_IEC_27001|ISO_IEC_27701|EPRIVACY_DIRECTIVE|GLBA|SOX] Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery
 
-<a id="custom-data-types"></a>&#x2022; [`custom_data_types`](#custom-data-types) - Optional Block<br>Defined Custom Sensitive Data Types. Select your custom data types to be monitored in the API discovery<br>See [Custom Data Types](#custom-data-types) below for details.
+<a id="custom-data-types"></a>&#x2022; [`custom_data_types`](#custom-data-types) - Optional Block<br>Select your custom data types to be monitored in the API discovery<br>See [Custom Data Types](#custom-data-types) below for details.
 
-<a id="disabled-predefined-data-types"></a>&#x2022; [`disabled_predefined_data_types`](#disabled-predefined-data-types) - Optional List<br>Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery
+<a id="disabled-predefined-data-types"></a>&#x2022; [`disabled_predefined_data_types`](#disabled-predefined-data-types) - Optional List<br>Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -82,17 +82,17 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`custom_data_types`](#custom-data-types) block supports the following:
 
-<a id="custom-data-types-custom-data-type-ref"></a>&#x2022; [`custom_data_type_ref`](#custom-data-types-custom-data-type-ref) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Data Type Ref](#custom-data-types-custom-data-type-ref) below.
+<a id="custom-data-types-custom-data-type-ref"></a>&#x2022; [`custom_data_type_ref`](#custom-data-types-custom-data-type-ref) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Data Type Ref](#custom-data-types-custom-data-type-ref) below.
 
 #### Custom Data Types Custom Data Type Ref
 
 A [`custom_data_type_ref`](#custom-data-types-custom-data-type-ref) block (within [`custom_data_types`](#custom-data-types)) supports the following:
 
-<a id="name-20e921"></a>&#x2022; [`name`](#name-20e921) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="name-20e921"></a>&#x2022; [`name`](#name-20e921) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-9d0119"></a>&#x2022; [`namespace`](#namespace-9d0119) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-9d0119"></a>&#x2022; [`namespace`](#namespace-9d0119) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-60fc77"></a>&#x2022; [`tenant`](#tenant-60fc77) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="tenant-60fc77"></a>&#x2022; [`tenant`](#tenant-60fc77) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

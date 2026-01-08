@@ -32,15 +32,15 @@ resource "f5xc_app_setting" "example" {
   }
 
   # Resource-specific configuration
-  # Customize AppType For This Namespace. List of settings to...
+  # List of settings to enable for each AppType, given instan...
   app_type_settings {
     # Configure app_type_settings settings
   }
-  # AppType. The AppType of App instance in current Namespace...
+  # The AppType of App instance in current Namespace. Associa...
   app_type_ref {
     # Configure app_type_ref settings
   }
-  # API Discovery. Settings specifying how API Discovery will...
+  # Settings specifying how API Discovery will be performed.
   business_logic_markup_setting {
     # Configure business_logic_markup_setting settings
   }
@@ -66,7 +66,7 @@ resource "f5xc_app_setting" "example" {
 
 ### Spec Argument Reference
 
-<a id="app-type-settings"></a>&#x2022; [`app_type_settings`](#app-type-settings) - Optional Block<br>Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace<br>See [App Type Settings](#app-type-settings) below for details.
+<a id="app-type-settings"></a>&#x2022; [`app_type_settings`](#app-type-settings) - Optional Block<br>List of settings to enable for each AppType, given instance of AppType Exist in this Namespace<br>See [App Type Settings](#app-type-settings) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -82,41 +82,41 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`app_type_settings`](#app-type-settings) block supports the following:
 
-<a id="app-type-settings-app-type-ref"></a>&#x2022; [`app_type_ref`](#app-type-settings-app-type-ref) - Optional Block<br>AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data<br>See [App Type Ref](#app-type-settings-app-type-ref) below.
+<a id="app-type-settings-app-type-ref"></a>&#x2022; [`app_type_ref`](#app-type-settings-app-type-ref) - Optional Block<br>The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data<br>See [App Type Ref](#app-type-settings-app-type-ref) below.
 
-<a id="setting-ebbad6"></a>&#x2022; [`business_logic_markup_setting`](#setting-ebbad6) - Optional Block<br>API Discovery. Settings specifying how API Discovery will be performed<br>See [Business Logic Markup Setting](#setting-ebbad6) below.
+<a id="setting-ebbad6"></a>&#x2022; [`business_logic_markup_setting`](#setting-ebbad6) - Optional Block<br>Settings specifying how API Discovery will be performed<br>See [Business Logic Markup Setting](#setting-ebbad6) below.
 
 <a id="setting-7d0042"></a>&#x2022; [`timeseries_analyses_setting`](#setting-7d0042) - Optional Block<br>DDOS Settings. Configuration for DDOS Detection<br>See [Timeseries Analyses Setting](#setting-7d0042) below.
 
-<a id="setting-2c7217"></a>&#x2022; [`user_behavior_analysis_setting`](#setting-2c7217) - Optional Block<br>User Behavior Analysis Setting. Configuration for user behavior analysis<br>See [User Behavior Analysis Setting](#setting-2c7217) below.
+<a id="setting-2c7217"></a>&#x2022; [`user_behavior_analysis_setting`](#setting-2c7217) - Optional Block<br>Configuration for user behavior analysis<br>See [User Behavior Analysis Setting](#setting-2c7217) below.
 
 #### App Type Settings App Type Ref
 
 An [`app_type_ref`](#app-type-settings-app-type-ref) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
-<a id="app-type-settings-app-type-ref-kind"></a>&#x2022; [`kind`](#app-type-settings-app-type-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="app-type-settings-app-type-ref-kind"></a>&#x2022; [`kind`](#app-type-settings-app-type-ref-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="app-type-settings-app-type-ref-name"></a>&#x2022; [`name`](#app-type-settings-app-type-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="app-type-settings-app-type-ref-name"></a>&#x2022; [`name`](#app-type-settings-app-type-ref-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-49608f"></a>&#x2022; [`namespace`](#namespace-49608f) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="namespace-49608f"></a>&#x2022; [`namespace`](#namespace-49608f) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="app-type-settings-app-type-ref-tenant"></a>&#x2022; [`tenant`](#app-type-settings-app-type-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="app-type-settings-app-type-ref-tenant"></a>&#x2022; [`tenant`](#app-type-settings-app-type-ref-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="app-type-settings-app-type-ref-uid"></a>&#x2022; [`uid`](#app-type-settings-app-type-ref-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="app-type-settings-app-type-ref-uid"></a>&#x2022; [`uid`](#app-type-settings-app-type-ref-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### App Type Settings Business Logic Markup Setting
 
 A [`business_logic_markup_setting`](#setting-ebbad6) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
-<a id="disable-d65146"></a>&#x2022; [`disable`](#disable-d65146) - Optional Block<br>Enable this option
+<a id="disable-d65146"></a>&#x2022; [`disable`](#disable-d65146) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="enable-280dfb"></a>&#x2022; [`enable`](#enable-280dfb) - Optional Block<br>Enable this option
+<a id="enable-280dfb"></a>&#x2022; [`enable`](#enable-280dfb) - Optional Block<br>Can be used for messages where no values are needed
 
 #### App Type Settings Timeseries Analyses Setting
 
 A [`timeseries_analyses_setting`](#setting-7d0042) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
-<a id="selectors-2cc4b7"></a>&#x2022; [`metric_selectors`](#selectors-2cc4b7) - Optional Block<br>Metric Selectors. Define the metric selection criteria, i.e. The metrics source and the actual metrics that should be included in the detection logic<br>See [Metric Selectors](#selectors-2cc4b7) below.
+<a id="selectors-2cc4b7"></a>&#x2022; [`metric_selectors`](#selectors-2cc4b7) - Optional Block<br>Define the metric selection criteria, i.e. The metrics source and the actual metrics that should be included in the detection logic<br>See [Metric Selectors](#selectors-2cc4b7) below.
 
 #### App Type Settings Timeseries Analyses Setting Metric Selectors
 
@@ -126,13 +126,13 @@ A [`timeseries_analyses_setting`](#setting-7d0042) block (within [`app_type_sett
 
 An [`user_behavior_analysis_setting`](#setting-2c7217) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
-<a id="detection-dd4d64"></a>&#x2022; [`disable_detection`](#detection-dd4d64) - Optional Block<br>Enable this option
+<a id="detection-dd4d64"></a>&#x2022; [`disable_detection`](#detection-dd4d64) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="learning-b549ee"></a>&#x2022; [`disable_learning`](#learning-b549ee) - Optional Block<br>Enable this option
+<a id="learning-b549ee"></a>&#x2022; [`disable_learning`](#learning-b549ee) - Optional Block<br>Can be used for messages where no values are needed
 
-<a id="detection-4127d2"></a>&#x2022; [`enable_detection`](#detection-4127d2) - Optional Block<br>Malicious User Detection Settings. Various factors about user activity are monitored and analysed to determine malicious users. These settings allow tuning those factors used by the system to detect malicious users<br>See [Enable Detection](#detection-4127d2) below.
+<a id="detection-4127d2"></a>&#x2022; [`enable_detection`](#detection-4127d2) - Optional Block<br>Various factors about user activity are monitored and analysed to determine malicious users. These settings allow tuning those factors used by the system to detect malicious users<br>See [Enable Detection](#detection-4127d2) below.
 
-<a id="learning-94d2dc"></a>&#x2022; [`enable_learning`](#learning-94d2dc) - Optional Block<br>Enable this option
+<a id="learning-94d2dc"></a>&#x2022; [`enable_learning`](#learning-94d2dc) - Optional Block<br>Can be used for messages where no values are needed
 
 #### App Type Settings User Behavior Analysis Setting Enable Detection
 

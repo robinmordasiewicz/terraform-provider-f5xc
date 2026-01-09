@@ -288,6 +288,20 @@ export const MetadataSchema = z.object({
   response_format: ResponseFormatSchema,
 }).strict();
 
+/**
+ * Auth tool schema
+ * Provides authentication status, profile management, and credential validation
+ */
+export const AuthSchema = z.object({
+  operation: z.enum(['status', 'list', 'switch', 'validate'])
+    .describe(COMMON_PARAM_DESCRIPTIONS.operation),
+  profile_name: z.string()
+    .min(1)
+    .optional()
+    .describe('Profile name to switch to (for switch operation)'),
+  response_format: ResponseFormatSchema,
+}).strict();
+
 // =============================================================================
 // TYPE EXPORTS
 // =============================================================================
@@ -298,3 +312,4 @@ export type ApiInput = z.infer<typeof ApiSchema>;
 export type SubscriptionInput = z.infer<typeof SubscriptionSchema>;
 export type AddonInput = z.infer<typeof AddonSchema>;
 export type MetadataInput = z.infer<typeof MetadataSchema>;
+export type AuthInput = z.infer<typeof AuthSchema>;

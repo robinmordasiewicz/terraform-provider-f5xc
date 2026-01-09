@@ -46,6 +46,7 @@ import { handleApi, API_TOOL_DEFINITION } from './tools/api.js';
 import { handleSubscription, SUBSCRIPTION_TOOL_DEFINITION } from './tools/subscription.js';
 import { handleAddon, ADDON_TOOL_DEFINITION } from './tools/addon.js';
 import { handleMetadata, METADATA_TOOL_DEFINITION } from './tools/metadata.js';
+import { handleAuth, AUTH_TOOL_DEFINITION, initializeAuth } from './tools/auth.js';
 
 // Consolidated schemas
 import {
@@ -55,6 +56,7 @@ import {
   SubscriptionSchema,
   AddonSchema,
   MetadataSchema,
+  AuthSchema,
   ResponseFormatSchema,
   type DiscoverInput,
   type DocsInput,
@@ -62,6 +64,7 @@ import {
   type SubscriptionInput,
   type AddonInput,
   type MetadataInput,
+  type AuthInput,
 } from './schemas/common.js';
 
 // Legacy schemas for get_summary tool
@@ -369,8 +372,11 @@ server.registerTool(
         '- `f5xc_terraform_metadata` - Resource metadata for deterministic AI config generation (operations: oneof, validation, defaults, enums, attribute, requires_replace, tier, dependencies, troubleshoot, syntax, validate, example, mistakes, summary)',
       );
       lines.push('- `f5xc_terraform_get_summary` - This summary');
+      lines.push(
+        '- `f5xc_terraform_auth` - Authentication status, profiles, and validation (operations: status, list, switch, validate)',
+      );
       lines.push('');
-      lines.push('> **Token Optimization**: 14 tools consolidated to 7 tools (~75% reduction)');
+      lines.push('> **Token Optimization**: 14 tools consolidated to 8 tools (~70% reduction)');
       lines.push('');
       lines.push('> **Note**: Use `f5xc_terraform_docs` with `operation: "get", name: "provider"` for complete provider documentation.');
 
@@ -387,13 +393,48 @@ server.registerTool(
 );
 
 // =============================================================================
+// TOOL 8: AUTH TOOL
+// =============================================================================
+
+server.registerTool(
+  AUTH_TOOL_DEFINITION.name,
+  {
+    title: 'F5XC Authentication',
+    description: AUTH_TOOL_DEFINITION.description,
+    inputSchema: AuthSchema,
+    annotations: {
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false,
+    },
+  },
+  async (params: AuthInput) => {
+    const result = await handleAuth(params);
+    return {
+      content: [{ type: 'text', text: result }],
+    };
+  },
+);
+
+// =============================================================================
 // SERVER STARTUP
 // =============================================================================
 
 async function main() {
+  // Initialize authentication system
+  const credManager = await initializeAuth();
+  const mode = credManager.isAuthenticated() ? 'authenticated' : 'documentation';
+  const tenant = credManager.getTenant();
+
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error('F5XC Terraform MCP server running on stdio (token-optimized)');
+
+  if (tenant) {
+    console.error(`F5XC Terraform MCP server running (${mode} mode, tenant: ${tenant})`);
+  } else {
+    console.error(`F5XC Terraform MCP server running (${mode} mode)`);
+  }
 }
 
 main().catch((error) => {

@@ -9,7 +9,7 @@
 
 import { DiscoverInput } from '../schemas/common.js';
 import { ResponseFormat } from '../types.js';
-import { DocsSchema, ApiSchema, SubscriptionSchema, AddonSchema } from '../schemas/common.js';
+import { DocsSchema, ApiSchema, SubscriptionSchema, AddonSchema, AuthSchema } from '../schemas/common.js';
 
 // =============================================================================
 // TOOL METADATA
@@ -18,7 +18,7 @@ import { DocsSchema, ApiSchema, SubscriptionSchema, AddonSchema } from '../schem
 interface ToolInfo {
   name: string;
   description: string;
-  category: 'docs' | 'api' | 'subscription' | 'addon' | 'summary';
+  category: 'docs' | 'api' | 'subscription' | 'addon' | 'auth' | 'summary';
   operations?: string[];
 }
 
@@ -51,6 +51,12 @@ const TOOL_REGISTRY: ToolInfo[] = [
     name: 'f5xc_terraform_get_summary',
     description: 'Get provider documentation summary',
     category: 'summary',
+  },
+  {
+    name: 'f5xc_terraform_auth',
+    description: 'Authentication status, profiles, and validation',
+    category: 'auth',
+    operations: ['status', 'list', 'switch', 'validate'],
   },
 ];
 
@@ -233,6 +239,8 @@ function getSchemaForTool(toolName: string): object {
       return schemaToJson(AddonSchema);
     case 'f5xc_terraform_get_summary':
       return { response_format: { type: 'string', enum: ['markdown', 'json'] } };
+    case 'f5xc_terraform_auth':
+      return schemaToJson(AuthSchema);
     default:
       return {};
   }

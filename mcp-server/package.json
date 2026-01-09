@@ -22,7 +22,12 @@
     "dev": "tsx watch src/index.ts",
     "clean": "rm -rf dist",
     "lint": "eslint src/**/*.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:acceptance": "vitest run tests/acceptance/",
+    "validate:auth": "tsx scripts/validate-auth-integration.ts"
   },
   "keywords": [
     "mcp",
@@ -62,8 +67,10 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
+    "@vitest/coverage-v8": "^4.0.16",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vitest": "^4.0.16"
   },
   "mcpName": "io.github.robinmordasiewicz/f5xc-terraform-mcp"
 }

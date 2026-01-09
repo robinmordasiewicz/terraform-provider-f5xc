@@ -244,6 +244,180 @@ describe('Auth Tool Acceptance Tests', () => {
   });
 
   // ===========================================================================
+  // TERRAFORM-ENV OPERATION TESTS
+  // ===========================================================================
+  describe('Terraform-Env Operation', () => {
+    describe('Documentation Mode (No Credentials)', () => {
+      beforeEach(async () => {
+        setupDocumentationModeEnv();
+        await initializeAuth();
+      });
+
+      it('should return error as JSON when not authenticated', async () => {
+        const result = await handleAuth({
+          operation: 'terraform-env',
+          response_format: ResponseFormat.JSON,
+        });
+
+        const data = JSON.parse(result);
+        expect(data.error).toBeDefined();
+        expect(data.error).toContain('No credentials configured');
+        expect(data.suggestion).toBeDefined();
+      });
+
+      it('should return error as markdown when not authenticated', async () => {
+        const result = await handleAuth({
+          operation: 'terraform-env',
+          response_format: ResponseFormat.MARKDOWN,
+        });
+
+        expect(result).toContain('# Terraform Environment Variables');
+        expect(result).toContain('**Error**: No credentials configured');
+        expect(result).toContain('documentation mode');
+      });
+    });
+
+    describe('Authenticated Mode', () => {
+      beforeEach(async () => {
+        setupAuthenticatedModeEnv();
+        await initializeAuth();
+      });
+
+      it('should return shell exports as JSON', async () => {
+        const result = await handleAuth({
+          operation: 'terraform-env',
+          output_type: 'shell',
+          response_format: ResponseFormat.JSON,
+        });
+
+        const data = JSON.parse(result);
+        expect(data.profile).toBeDefined();
+        expect(data.auth_method).toBe('token');
+        expect(data.variables).toBeDefined();
+        expect(data.variables.F5XC_API_URL).toBe('https://test.console.ves.volterra.io/api');
+        expect(data.variables.F5XC_API_TOKEN).toBe('test-token');
+        expect(data.shell_command).toContain('export F5XC_API_URL=');
+      });
+
+      it('should return shell exports as markdown', async () => {
+        const result = await handleAuth({
+          operation: 'terraform-env',
+          output_type: 'shell',
+          response_format: ResponseFormat.MARKDOWN,
+        });
+
+        expect(result).toContain('# Terraform Environment Variables');
+        expect(result).toContain('**Auth Method**: token');
+        expect(result).toContain('```bash');
+        expect(result).toContain('export F5XC_API_URL=');
+        expect(result).toContain('export F5XC_API_TOKEN=');
+        expect(result).toContain('## Usage');
+      });
+
+      it('should return dotenv format as markdown', async () => {
+        const result = await handleAuth({
+          operation: 'terraform-env',
+          output_type: 'dotenv',
+          response_format: ResponseFormat.MARKDOWN,
+        });
+
+        expect(result).toContain('# Terraform Environment Variables (.env format)');
+        expect(result).toContain('F5XC_API_URL=https://test.console.ves.volterra.io/api');
+        expect(result).toContain('F5XC_API_TOKEN=test-token');
+        expect(result).toContain('`.env` file');
+      });
+
+      it('should return JSON format as markdown', async () => {
+        const result = await handleAuth({
+          operation: 'terraform-env',
+          output_type: 'json',
+          response_format: ResponseFormat.MARKDOWN,
+        });
+
+        expect(result).toContain('# Terraform Environment Variables (JSON)');
+        expect(result).toContain('```json');
+        expect(result).toContain('"auth_method": "token"');
+        expect(result).toContain('"F5XC_API_URL"');
+      });
+
+      it('should mask secrets when requested', async () => {
+        const result = await handleAuth({
+          operation: 'terraform-env',
+          output_type: 'shell',
+          mask_secrets: true,
+          response_format: ResponseFormat.JSON,
+        });
+
+        const data = JSON.parse(result);
+        expect(data.variables.F5XC_API_TOKEN).toContain('****');
+        expect(data.variables.F5XC_API_TOKEN).not.toBe('test-token');
+      });
+
+      it('should not mask secrets by default', async () => {
+        const result = await handleAuth({
+          operation: 'terraform-env',
+          output_type: 'shell',
+          response_format: ResponseFormat.JSON,
+        });
+
+        const data = JSON.parse(result);
+        expect(data.variables.F5XC_API_TOKEN).toBe('test-token');
+        expect(data.variables.F5XC_API_TOKEN).not.toContain('****');
+      });
+    });
+
+    describe('Custom Tenant', () => {
+      beforeEach(async () => {
+        setupAuthenticatedModeEnv({
+          apiUrl: 'https://production.console.ves.volterra.io',
+          apiToken: 'production-api-token-12345',
+        });
+        await initializeAuth();
+      });
+
+      it('should generate correct URL for custom tenant', async () => {
+        const result = await handleAuth({
+          operation: 'terraform-env',
+          response_format: ResponseFormat.JSON,
+        });
+
+        const data = JSON.parse(result);
+        expect(data.variables.F5XC_API_URL).toBe('https://production.console.ves.volterra.io/api');
+        expect(data.variables.F5XC_API_TOKEN).toBe('production-api-token-12345');
+      });
+
+      it('should mask long tokens correctly', async () => {
+        const result = await handleAuth({
+          operation: 'terraform-env',
+          mask_secrets: true,
+          response_format: ResponseFormat.JSON,
+        });
+
+        const data = JSON.parse(result);
+        expect(data.variables.F5XC_API_TOKEN).toMatch(/\*\*\*\*\.\.\.[\w-]{8}$/);
+      });
+    });
+
+    describe('Output Type Defaults', () => {
+      beforeEach(async () => {
+        setupAuthenticatedModeEnv();
+        await initializeAuth();
+      });
+
+      it('should default to shell output type', async () => {
+        const result = await handleAuth({
+          operation: 'terraform-env',
+          response_format: ResponseFormat.MARKDOWN,
+        });
+
+        expect(result).toContain('```bash');
+        expect(result).toContain('#!/bin/bash');
+        expect(result).toContain('export F5XC_API_URL=');
+      });
+    });
+  });
+
+  // ===========================================================================
   // ERROR HANDLING TESTS
   // ===========================================================================
   describe('Error Handling', () => {

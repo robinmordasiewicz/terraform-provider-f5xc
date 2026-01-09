@@ -54,9 +54,9 @@ const TOOL_REGISTRY: ToolInfo[] = [
   },
   {
     name: 'f5xc_terraform_auth',
-    description: 'Authentication status, profiles, and validation',
+    description: 'Authentication status, profiles, validation, and Terraform env export',
     category: 'auth',
-    operations: ['status', 'list', 'switch', 'validate'],
+    operations: ['status', 'list', 'switch', 'validate', 'terraform-env'],
   },
 ];
 

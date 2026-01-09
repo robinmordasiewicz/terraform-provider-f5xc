@@ -3405,6 +3405,15 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 					sb.WriteString(fmt.Sprintf("%s\t\t}(),\n", indent))
 				case "int64":
 					sb.WriteString(fmt.Sprintf("%s\t\t%s: func() types.Int64 {\n", indent, nestedFieldName))
+					// For Optional nested int64 fields, preserve prior state during normal Read to avoid drift
+					// This handles fields like connection_idle_timeout where API returns 0 as default
+					if nestedAttr.Optional {
+						sb.WriteString(fmt.Sprintf("%s\t\t\tif !isImport && data.%s != nil {\n", indent, fieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t// Normal Read: preserve existing state value to avoid API default drift\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn data.%s.%s\n", indent, fieldName, nestedFieldName))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t// Import case: read from API\n", indent))
+					}
 					sb.WriteString(fmt.Sprintf("%s\t\t\tif v, ok := blockData[\"%s\"].(float64); ok {\n", indent, nestedJsonName))
 					sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn types.Int64Value(int64(v))\n", indent))
 					sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))

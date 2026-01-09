@@ -120,6 +120,13 @@ interface DiscoverResponse {
     registry_url: string;
     terraform_block: string;
   };
+  critical_auth_workflow: {
+    message: string;
+    step_1: string;
+    step_2: string;
+    step_3: string;
+    common_error: string;
+  };
   critical_syntax_warning: {
     message: string;
     common_mistake: string;
@@ -150,6 +157,13 @@ function buildJsonResponse(tools: ToolInfo[], verbose: boolean): DiscoverRespons
       deprecated_sources: ['volterraedge/volterra', 'hashicorp/volterra'],
       registry_url: 'https://registry.terraform.io/providers/robinmordasiewicz/f5xc/latest',
       terraform_block: TERRAFORM_PROVIDER_BLOCK,
+    },
+    critical_auth_workflow: {
+      message: 'MUST authenticate BEFORE running terraform plan/apply',
+      step_1: 'Call f5xc_terraform_auth(operation="terraform-env") to get credentials',
+      step_2: 'Set F5XC_API_URL and F5XC_API_TOKEN environment variables',
+      step_3: 'Then run terraform init, plan, apply',
+      common_error: 'Skipping authentication causes "Missing Authentication Configuration" error',
     },
     critical_syntax_warning: {
       message: 'This provider uses empty blocks {} for mutually exclusive options, NOT boolean values',
@@ -254,6 +268,35 @@ function buildMarkdownResponse(tools: ToolInfo[], verbose: boolean): string {
     '1. Query `f5xc_terraform_metadata(operation="syntax", resource="<name>")` to get correct syntax',
     '2. Query `f5xc_terraform_metadata(operation="example", resource="<name>")` to get complete examples',
     '3. Use `f5xc_terraform_metadata(operation="validate", resource="<name>", config="...")` to check your config',
+    '',
+    // ==========================================================================
+    // CRITICAL AUTHENTICATION WORKFLOW
+    // ==========================================================================
+    '---',
+    '',
+    '## 🔐 CRITICAL: Authentication Workflow',
+    '',
+    '**BEFORE running `terraform plan` or `terraform apply`, you MUST authenticate:**',
+    '',
+    '### Step 1: Get Authentication Credentials',
+    '```',
+    'f5xc_terraform_auth(operation="terraform-env", output_type="shell")',
+    '```',
+    '',
+    '### Step 2: Set Environment Variables',
+    'Copy and paste the export commands from Step 1:',
+    '```bash',
+    'export F5XC_API_URL="https://your-tenant.console.ves.volterra.io/api"',
+    'export F5XC_API_TOKEN="your-api-token"',
+    '```',
+    '',
+    '### Step 3: Run Terraform',
+    '```bash',
+    'terraform init',
+    'terraform plan',
+    '```',
+    '',
+    '**⚠️ Without authentication, terraform will fail with "Missing Authentication Configuration".**',
     '',
     '---',
     '',

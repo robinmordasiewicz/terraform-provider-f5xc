@@ -294,7 +294,7 @@ export const MetadataSchema = z.object({
  * and Terraform environment variable export
  */
 export const AuthSchema = z.object({
-  operation: z.enum(['status', 'list', 'switch', 'validate', 'terraform-env'])
+  operation: z.enum(['status', 'list', 'switch', 'validate', 'terraform-env', 'terraform-block'])
     .describe(COMMON_PARAM_DESCRIPTIONS.operation),
   profile_name: z.string()
     .min(1)

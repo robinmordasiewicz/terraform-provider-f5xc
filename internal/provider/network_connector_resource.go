@@ -807,8 +807,13 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 		data.EnableForwardProxy = &NetworkConnectorEnableForwardProxyModel{
 			ConnectionTimeout: func() types.Int64 {
 				if !isImport && data.EnableForwardProxy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EnableForwardProxy.ConnectionTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_timeout"].(float64); ok {
@@ -818,8 +823,13 @@ func (r *NetworkConnectorResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			MaxConnectAttempts: func() types.Int64 {
 				if !isImport && data.EnableForwardProxy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EnableForwardProxy.MaxConnectAttempts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_connect_attempts"].(float64); ok {
@@ -1008,8 +1018,13 @@ func (r *NetworkConnectorResource) Read(ctx context.Context, req resource.ReadRe
 		data.EnableForwardProxy = &NetworkConnectorEnableForwardProxyModel{
 			ConnectionTimeout: func() types.Int64 {
 				if !isImport && data.EnableForwardProxy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EnableForwardProxy.ConnectionTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_timeout"].(float64); ok {
@@ -1019,8 +1034,13 @@ func (r *NetworkConnectorResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			MaxConnectAttempts: func() types.Int64 {
 				if !isImport && data.EnableForwardProxy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EnableForwardProxy.MaxConnectAttempts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_connect_attempts"].(float64); ok {
@@ -1276,8 +1296,13 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 		data.EnableForwardProxy = &NetworkConnectorEnableForwardProxyModel{
 			ConnectionTimeout: func() types.Int64 {
 				if !isImport && data.EnableForwardProxy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EnableForwardProxy.ConnectionTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_timeout"].(float64); ok {
@@ -1287,8 +1312,13 @@ func (r *NetworkConnectorResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			MaxConnectAttempts: func() types.Int64 {
 				if !isImport && data.EnableForwardProxy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EnableForwardProxy.MaxConnectAttempts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_connect_attempts"].(float64); ok {

@@ -2493,8 +2493,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		data.APIGroupMatcher = &ServicePolicyRuleAPIGroupMatcherModel{
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.APIGroupMatcher != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.APIGroupMatcher.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -2986,8 +2991,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		data.HTTPMethod = &ServicePolicyRuleHTTPMethodModel{
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.HTTPMethod != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPMethod.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -3014,8 +3024,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		data.IPMatcher = &ServicePolicyRuleIPMatcherModel{
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.IPMatcher != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.IPMatcher.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -3072,8 +3087,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		data.IPPrefixList = &ServicePolicyRuleIPPrefixListModel{
 			InvertMatch: func() types.Bool {
 				if !isImport && data.IPPrefixList != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.IPPrefixList.InvertMatch
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_match"].(bool); ok {
@@ -3261,8 +3281,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}(),
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.Path != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.Path.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -3328,8 +3353,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		data.PortMatcher = &ServicePolicyRulePortMatcherModel{
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.PortMatcher != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.PortMatcher.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -3448,8 +3478,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		data.RequestConstraints = &ServicePolicyRuleRequestConstraintsModel{
 			MaxCookieCountExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxCookieCountExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_cookie_count_exceeds"].(float64); ok {
@@ -3471,8 +3506,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}(),
 			MaxCookieKeySizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxCookieKeySizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_cookie_key_size_exceeds"].(float64); ok {
@@ -3494,8 +3534,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}(),
 			MaxCookieValueSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxCookieValueSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_cookie_value_size_exceeds"].(float64); ok {
@@ -3517,8 +3562,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}(),
 			MaxHeaderCountExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxHeaderCountExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_header_count_exceeds"].(float64); ok {
@@ -3540,8 +3590,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}(),
 			MaxHeaderKeySizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxHeaderKeySizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_header_key_size_exceeds"].(float64); ok {
@@ -3563,8 +3618,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}(),
 			MaxHeaderValueSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxHeaderValueSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_header_value_size_exceeds"].(float64); ok {
@@ -3586,8 +3646,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}(),
 			MaxParameterCountExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxParameterCountExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_parameter_count_exceeds"].(float64); ok {
@@ -3609,8 +3674,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}(),
 			MaxParameterNameSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxParameterNameSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_parameter_name_size_exceeds"].(float64); ok {
@@ -3632,8 +3702,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}(),
 			MaxParameterValueSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxParameterValueSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_parameter_value_size_exceeds"].(float64); ok {
@@ -3655,8 +3730,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}(),
 			MaxQuerySizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxQuerySizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_query_size_exceeds"].(float64); ok {
@@ -3678,8 +3758,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}(),
 			MaxRequestLineSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxRequestLineSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_request_line_size_exceeds"].(float64); ok {
@@ -3701,8 +3786,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}(),
 			MaxRequestSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxRequestSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_request_size_exceeds"].(float64); ok {
@@ -3724,8 +3814,13 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 			}(),
 			MaxURLSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxURLSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_url_size_exceeds"].(float64); ok {
@@ -3933,8 +4028,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		data.APIGroupMatcher = &ServicePolicyRuleAPIGroupMatcherModel{
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.APIGroupMatcher != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.APIGroupMatcher.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -4426,8 +4526,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		data.HTTPMethod = &ServicePolicyRuleHTTPMethodModel{
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.HTTPMethod != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPMethod.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -4454,8 +4559,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		data.IPMatcher = &ServicePolicyRuleIPMatcherModel{
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.IPMatcher != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.IPMatcher.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -4512,8 +4622,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		data.IPPrefixList = &ServicePolicyRuleIPPrefixListModel{
 			InvertMatch: func() types.Bool {
 				if !isImport && data.IPPrefixList != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.IPPrefixList.InvertMatch
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_match"].(bool); ok {
@@ -4701,8 +4816,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.Path != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.Path.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -4768,8 +4888,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		data.PortMatcher = &ServicePolicyRulePortMatcherModel{
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.PortMatcher != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.PortMatcher.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -4888,8 +5013,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		data.RequestConstraints = &ServicePolicyRuleRequestConstraintsModel{
 			MaxCookieCountExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxCookieCountExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_cookie_count_exceeds"].(float64); ok {
@@ -4911,8 +5041,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 			MaxCookieKeySizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxCookieKeySizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_cookie_key_size_exceeds"].(float64); ok {
@@ -4934,8 +5069,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 			MaxCookieValueSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxCookieValueSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_cookie_value_size_exceeds"].(float64); ok {
@@ -4957,8 +5097,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 			MaxHeaderCountExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxHeaderCountExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_header_count_exceeds"].(float64); ok {
@@ -4980,8 +5125,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 			MaxHeaderKeySizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxHeaderKeySizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_header_key_size_exceeds"].(float64); ok {
@@ -5003,8 +5153,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 			MaxHeaderValueSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxHeaderValueSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_header_value_size_exceeds"].(float64); ok {
@@ -5026,8 +5181,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 			MaxParameterCountExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxParameterCountExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_parameter_count_exceeds"].(float64); ok {
@@ -5049,8 +5209,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 			MaxParameterNameSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxParameterNameSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_parameter_name_size_exceeds"].(float64); ok {
@@ -5072,8 +5237,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 			MaxParameterValueSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxParameterValueSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_parameter_value_size_exceeds"].(float64); ok {
@@ -5095,8 +5265,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 			MaxQuerySizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxQuerySizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_query_size_exceeds"].(float64); ok {
@@ -5118,8 +5293,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 			MaxRequestLineSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxRequestLineSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_request_line_size_exceeds"].(float64); ok {
@@ -5141,8 +5321,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 			MaxRequestSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxRequestSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_request_size_exceeds"].(float64); ok {
@@ -5164,8 +5349,13 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 			}(),
 			MaxURLSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxURLSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_url_size_exceeds"].(float64); ok {
@@ -6083,8 +6273,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		data.APIGroupMatcher = &ServicePolicyRuleAPIGroupMatcherModel{
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.APIGroupMatcher != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.APIGroupMatcher.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -6576,8 +6771,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		data.HTTPMethod = &ServicePolicyRuleHTTPMethodModel{
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.HTTPMethod != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPMethod.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -6604,8 +6804,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		data.IPMatcher = &ServicePolicyRuleIPMatcherModel{
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.IPMatcher != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.IPMatcher.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -6662,8 +6867,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		data.IPPrefixList = &ServicePolicyRuleIPPrefixListModel{
 			InvertMatch: func() types.Bool {
 				if !isImport && data.IPPrefixList != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.IPPrefixList.InvertMatch
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_match"].(bool); ok {
@@ -6851,8 +7061,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}(),
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.Path != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.Path.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -6918,8 +7133,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		data.PortMatcher = &ServicePolicyRulePortMatcherModel{
 			InvertMatcher: func() types.Bool {
 				if !isImport && data.PortMatcher != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.PortMatcher.InvertMatcher
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["invert_matcher"].(bool); ok {
@@ -7038,8 +7258,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 		data.RequestConstraints = &ServicePolicyRuleRequestConstraintsModel{
 			MaxCookieCountExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxCookieCountExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_cookie_count_exceeds"].(float64); ok {
@@ -7061,8 +7286,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}(),
 			MaxCookieKeySizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxCookieKeySizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_cookie_key_size_exceeds"].(float64); ok {
@@ -7084,8 +7314,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}(),
 			MaxCookieValueSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxCookieValueSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_cookie_value_size_exceeds"].(float64); ok {
@@ -7107,8 +7342,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}(),
 			MaxHeaderCountExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxHeaderCountExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_header_count_exceeds"].(float64); ok {
@@ -7130,8 +7370,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}(),
 			MaxHeaderKeySizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxHeaderKeySizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_header_key_size_exceeds"].(float64); ok {
@@ -7153,8 +7398,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}(),
 			MaxHeaderValueSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxHeaderValueSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_header_value_size_exceeds"].(float64); ok {
@@ -7176,8 +7426,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}(),
 			MaxParameterCountExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxParameterCountExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_parameter_count_exceeds"].(float64); ok {
@@ -7199,8 +7454,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}(),
 			MaxParameterNameSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxParameterNameSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_parameter_name_size_exceeds"].(float64); ok {
@@ -7222,8 +7482,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}(),
 			MaxParameterValueSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxParameterValueSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_parameter_value_size_exceeds"].(float64); ok {
@@ -7245,8 +7510,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}(),
 			MaxQuerySizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxQuerySizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_query_size_exceeds"].(float64); ok {
@@ -7268,8 +7538,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}(),
 			MaxRequestLineSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxRequestLineSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_request_line_size_exceeds"].(float64); ok {
@@ -7291,8 +7566,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}(),
 			MaxRequestSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxRequestSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_request_size_exceeds"].(float64); ok {
@@ -7314,8 +7594,13 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 			}(),
 			MaxURLSizeExceeds: func() types.Int64 {
 				if !isImport && data.RequestConstraints != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RequestConstraints.MaxURLSizeExceeds
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_url_size_exceeds"].(float64); ok {

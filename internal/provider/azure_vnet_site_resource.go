@@ -7326,8 +7326,13 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 		data.Coordinates = &AzureVNETSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Latitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
@@ -7337,8 +7342,13 @@ func (r *AzureVNETSiteResource) Create(ctx context.Context, req resource.CreateR
 			}(),
 			Longitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Longitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
@@ -9033,8 +9043,13 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 		data.Coordinates = &AzureVNETSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Latitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
@@ -9044,8 +9059,13 @@ func (r *AzureVNETSiteResource) Read(ctx context.Context, req resource.ReadReque
 			}(),
 			Longitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Longitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
@@ -11501,8 +11521,13 @@ func (r *AzureVNETSiteResource) Update(ctx context.Context, req resource.UpdateR
 		data.Coordinates = &AzureVNETSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Latitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
@@ -11512,8 +11537,13 @@ func (r *AzureVNETSiteResource) Update(ctx context.Context, req resource.UpdateR
 			}(),
 			Longitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Longitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {

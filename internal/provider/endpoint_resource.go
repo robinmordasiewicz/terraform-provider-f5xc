@@ -804,8 +804,13 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 			}(),
 			RefreshInterval: func() types.Int64 {
 				if !isImport && data.DNSNameAdvanced != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DNSNameAdvanced.RefreshInterval
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["refresh_interval"].(float64); ok {
@@ -1000,8 +1005,13 @@ func (r *EndpointResource) Read(ctx context.Context, req resource.ReadRequest, r
 			}(),
 			RefreshInterval: func() types.Int64 {
 				if !isImport && data.DNSNameAdvanced != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DNSNameAdvanced.RefreshInterval
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["refresh_interval"].(float64); ok {
@@ -1288,8 +1298,13 @@ func (r *EndpointResource) Update(ctx context.Context, req resource.UpdateReques
 			}(),
 			RefreshInterval: func() types.Int64 {
 				if !isImport && data.DNSNameAdvanced != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DNSNameAdvanced.RefreshInterval
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["refresh_interval"].(float64); ok {

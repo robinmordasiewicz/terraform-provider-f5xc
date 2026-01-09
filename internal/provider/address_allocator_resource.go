@@ -358,8 +358,13 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 		data.AddressAllocationScheme = &AddressAllocatorAddressAllocationSchemeModel{
 			AllocationUnit: func() types.Int64 {
 				if !isImport && data.AddressAllocationScheme != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AddressAllocationScheme.AllocationUnit
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["allocation_unit"].(float64); ok {
@@ -369,8 +374,13 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			LocalInterfaceAddressOffset: func() types.Int64 {
 				if !isImport && data.AddressAllocationScheme != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AddressAllocationScheme.LocalInterfaceAddressOffset
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["local_interface_address_offset"].(float64); ok {
@@ -509,8 +519,13 @@ func (r *AddressAllocatorResource) Read(ctx context.Context, req resource.ReadRe
 		data.AddressAllocationScheme = &AddressAllocatorAddressAllocationSchemeModel{
 			AllocationUnit: func() types.Int64 {
 				if !isImport && data.AddressAllocationScheme != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AddressAllocationScheme.AllocationUnit
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["allocation_unit"].(float64); ok {
@@ -520,8 +535,13 @@ func (r *AddressAllocatorResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			LocalInterfaceAddressOffset: func() types.Int64 {
 				if !isImport && data.AddressAllocationScheme != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AddressAllocationScheme.LocalInterfaceAddressOffset
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["local_interface_address_offset"].(float64); ok {
@@ -675,8 +695,13 @@ func (r *AddressAllocatorResource) Update(ctx context.Context, req resource.Upda
 		data.AddressAllocationScheme = &AddressAllocatorAddressAllocationSchemeModel{
 			AllocationUnit: func() types.Int64 {
 				if !isImport && data.AddressAllocationScheme != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AddressAllocationScheme.AllocationUnit
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["allocation_unit"].(float64); ok {
@@ -686,8 +711,13 @@ func (r *AddressAllocatorResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			LocalInterfaceAddressOffset: func() types.Int64 {
 				if !isImport && data.AddressAllocationScheme != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AddressAllocationScheme.LocalInterfaceAddressOffset
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["local_interface_address_offset"].(float64); ok {

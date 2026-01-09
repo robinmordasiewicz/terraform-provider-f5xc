@@ -12515,8 +12515,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}(),
 			Timeout: func() types.Int64 {
 				if !isImport && data.BotDefense != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.BotDefense.Timeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["timeout"].(float64); ok {
@@ -12530,8 +12535,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.CaptchaChallenge = &CDNLoadBalancerCaptchaChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.CaptchaChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CaptchaChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -12556,8 +12566,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.CORSPolicy = &CDNLoadBalancerCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.AllowCredentials
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -12605,8 +12620,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}(),
 			Disabled: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.Disabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -12622,8 +12642,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}(),
 			MaximumAge: func() types.Int64 {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CORSPolicy.MaximumAge
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["maximum_age"].(float64); ok {
@@ -13111,8 +13136,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.HTTP = &CDNLoadBalancerHTTPModel{
 			DNSVolterraManaged: func() types.Bool {
 				if !isImport && data.HTTP != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTP.DNSVolterraManaged
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["dns_volterra_managed"].(bool); ok {
@@ -13122,8 +13152,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.HTTP != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTP.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -13143,8 +13178,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.HTTPS = &CDNLoadBalancerHTTPSModel{
 			AddHsts: func() types.Bool {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPS.AddHsts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_hsts"].(bool); ok {
@@ -13154,8 +13194,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPS.HTTPRedirect
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_redirect"].(bool); ok {
@@ -13180,8 +13225,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.HTTPSAutoCert = &CDNLoadBalancerHTTPSAutoCertModel{
 			AddHsts: func() types.Bool {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPSAutoCert.AddHsts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_hsts"].(bool); ok {
@@ -13191,8 +13241,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPSAutoCert.HTTPRedirect
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_redirect"].(bool); ok {
@@ -13217,8 +13272,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.JsChallenge = &CDNLoadBalancerJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -13234,8 +13294,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -13264,8 +13329,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.L7DDOSActionJsChallenge = &CDNLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.L7DDOSActionJsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSActionJsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -13281,8 +13351,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.L7DDOSActionJsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSActionJsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -13451,8 +13526,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		data.OtherSettings = &CDNLoadBalancerOtherSettingsModel{
 			AddLocation: func() types.Bool {
 				if !isImport && data.OtherSettings != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.OtherSettings.AddLocation
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_location"].(bool); ok {
@@ -13647,8 +13727,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}(),
 			RequestHeadersTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestHeadersTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
@@ -13658,8 +13743,13 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 			}(),
 			RequestTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_timeout"].(float64); ok {
@@ -14435,8 +14525,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			}(),
 			Timeout: func() types.Int64 {
 				if !isImport && data.BotDefense != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.BotDefense.Timeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["timeout"].(float64); ok {
@@ -14450,8 +14545,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.CaptchaChallenge = &CDNLoadBalancerCaptchaChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.CaptchaChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CaptchaChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -14476,8 +14576,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.CORSPolicy = &CDNLoadBalancerCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.AllowCredentials
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -14525,8 +14630,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			}(),
 			Disabled: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.Disabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -14542,8 +14652,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			}(),
 			MaximumAge: func() types.Int64 {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CORSPolicy.MaximumAge
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["maximum_age"].(float64); ok {
@@ -15031,8 +15146,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.HTTP = &CDNLoadBalancerHTTPModel{
 			DNSVolterraManaged: func() types.Bool {
 				if !isImport && data.HTTP != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTP.DNSVolterraManaged
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["dns_volterra_managed"].(bool); ok {
@@ -15042,8 +15162,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.HTTP != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTP.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -15063,8 +15188,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.HTTPS = &CDNLoadBalancerHTTPSModel{
 			AddHsts: func() types.Bool {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPS.AddHsts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_hsts"].(bool); ok {
@@ -15074,8 +15204,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPS.HTTPRedirect
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_redirect"].(bool); ok {
@@ -15100,8 +15235,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.HTTPSAutoCert = &CDNLoadBalancerHTTPSAutoCertModel{
 			AddHsts: func() types.Bool {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPSAutoCert.AddHsts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_hsts"].(bool); ok {
@@ -15111,8 +15251,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPSAutoCert.HTTPRedirect
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_redirect"].(bool); ok {
@@ -15137,8 +15282,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.JsChallenge = &CDNLoadBalancerJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -15154,8 +15304,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -15184,8 +15339,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.L7DDOSActionJsChallenge = &CDNLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.L7DDOSActionJsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSActionJsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -15201,8 +15361,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.L7DDOSActionJsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSActionJsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -15371,8 +15536,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.OtherSettings = &CDNLoadBalancerOtherSettingsModel{
 			AddLocation: func() types.Bool {
 				if !isImport && data.OtherSettings != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.OtherSettings.AddLocation
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_location"].(bool); ok {
@@ -15567,8 +15737,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			}(),
 			RequestHeadersTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestHeadersTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
@@ -15578,8 +15753,13 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 			}(),
 			RequestTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_timeout"].(float64); ok {
@@ -17607,8 +17787,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}(),
 			Timeout: func() types.Int64 {
 				if !isImport && data.BotDefense != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.BotDefense.Timeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["timeout"].(float64); ok {
@@ -17622,8 +17807,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		data.CaptchaChallenge = &CDNLoadBalancerCaptchaChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.CaptchaChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CaptchaChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -17648,8 +17838,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		data.CORSPolicy = &CDNLoadBalancerCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.AllowCredentials
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -17697,8 +17892,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}(),
 			Disabled: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.Disabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -17714,8 +17914,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}(),
 			MaximumAge: func() types.Int64 {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CORSPolicy.MaximumAge
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["maximum_age"].(float64); ok {
@@ -18203,8 +18408,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		data.HTTP = &CDNLoadBalancerHTTPModel{
 			DNSVolterraManaged: func() types.Bool {
 				if !isImport && data.HTTP != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTP.DNSVolterraManaged
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["dns_volterra_managed"].(bool); ok {
@@ -18214,8 +18424,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.HTTP != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTP.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -18235,8 +18450,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		data.HTTPS = &CDNLoadBalancerHTTPSModel{
 			AddHsts: func() types.Bool {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPS.AddHsts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_hsts"].(bool); ok {
@@ -18246,8 +18466,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPS.HTTPRedirect
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_redirect"].(bool); ok {
@@ -18272,8 +18497,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		data.HTTPSAutoCert = &CDNLoadBalancerHTTPSAutoCertModel{
 			AddHsts: func() types.Bool {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPSAutoCert.AddHsts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_hsts"].(bool); ok {
@@ -18283,8 +18513,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPSAutoCert.HTTPRedirect
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_redirect"].(bool); ok {
@@ -18309,8 +18544,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		data.JsChallenge = &CDNLoadBalancerJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -18326,8 +18566,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -18356,8 +18601,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		data.L7DDOSActionJsChallenge = &CDNLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.L7DDOSActionJsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSActionJsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -18373,8 +18623,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.L7DDOSActionJsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSActionJsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -18543,8 +18798,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		data.OtherSettings = &CDNLoadBalancerOtherSettingsModel{
 			AddLocation: func() types.Bool {
 				if !isImport && data.OtherSettings != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.OtherSettings.AddLocation
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_location"].(bool); ok {
@@ -18739,8 +18999,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}(),
 			RequestHeadersTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestHeadersTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
@@ -18750,8 +19015,13 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 			}(),
 			RequestTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_timeout"].(float64); ok {

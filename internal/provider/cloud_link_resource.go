@@ -816,8 +816,13 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 			}(),
 			CustomAsn: func() types.Int64 {
 				if !isImport && data.AWS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AWS.CustomAsn
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["custom_asn"].(float64); ok {
@@ -991,8 +996,13 @@ func (r *CloudLinkResource) Read(ctx context.Context, req resource.ReadRequest, 
 			}(),
 			CustomAsn: func() types.Int64 {
 				if !isImport && data.AWS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AWS.CustomAsn
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["custom_asn"].(float64); ok {
@@ -1207,8 +1217,13 @@ func (r *CloudLinkResource) Update(ctx context.Context, req resource.UpdateReque
 			}(),
 			CustomAsn: func() types.Int64 {
 				if !isImport && data.AWS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AWS.CustomAsn
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["custom_asn"].(float64); ok {

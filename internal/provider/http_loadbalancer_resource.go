@@ -23601,8 +23601,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			Timeout: func() types.Int64 {
 				if !isImport && data.BotDefense != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.BotDefense.Timeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["timeout"].(float64); ok {
@@ -23626,8 +23631,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		data.CaptchaChallenge = &HTTPLoadBalancerCaptchaChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.CaptchaChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CaptchaChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -23760,8 +23770,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			TTL: func() types.Int64 {
 				if !isImport && data.CookieStickiness != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CookieStickiness.TTL
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["ttl"].(float64); ok {
@@ -23775,8 +23790,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		data.CORSPolicy = &HTTPLoadBalancerCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.AllowCredentials
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -23824,8 +23844,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			Disabled: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.Disabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -23841,8 +23866,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			MaximumAge: func() types.Int64 {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CORSPolicy.MaximumAge
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["maximum_age"].(float64); ok {
@@ -24104,8 +24134,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			HealthCheckPort: func() types.Int64 {
 				if !isImport && data.DefaultPool != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DefaultPool.HealthCheckPort
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["health_check_port"].(float64); ok {
@@ -24390,8 +24425,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.DefaultPool != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DefaultPool.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -24915,8 +24955,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		data.HTTP = &HTTPLoadBalancerHTTPModel{
 			DNSVolterraManaged: func() types.Bool {
 				if !isImport && data.HTTP != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTP.DNSVolterraManaged
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["dns_volterra_managed"].(bool); ok {
@@ -24926,8 +24971,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.HTTP != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTP.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -24947,8 +24997,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		data.HTTPS = &HTTPLoadBalancerHTTPSModel{
 			AddHsts: func() types.Bool {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPS.AddHsts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_hsts"].(bool); ok {
@@ -24975,8 +25030,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			ConnectionIdleTimeout: func() types.Int64 {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTPS.ConnectionIdleTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_idle_timeout"].(float64); ok {
@@ -25045,8 +25105,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPS.HTTPRedirect
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_redirect"].(bool); ok {
@@ -25080,8 +25145,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTPS.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -25129,8 +25199,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		data.HTTPSAutoCert = &HTTPLoadBalancerHTTPSAutoCertModel{
 			AddHsts: func() types.Bool {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPSAutoCert.AddHsts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_hsts"].(bool); ok {
@@ -25157,8 +25232,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			ConnectionIdleTimeout: func() types.Int64 {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTPSAutoCert.ConnectionIdleTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_idle_timeout"].(float64); ok {
@@ -25227,8 +25307,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPSAutoCert.HTTPRedirect
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_redirect"].(bool); ok {
@@ -25274,8 +25359,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTPSAutoCert.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -25336,8 +25426,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		data.JsChallenge = &HTTPLoadBalancerJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -25353,8 +25448,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -25383,8 +25483,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		data.L7DDOSActionJsChallenge = &HTTPLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.L7DDOSActionJsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSActionJsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -25400,8 +25505,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.L7DDOSActionJsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSActionJsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -25601,8 +25711,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			RpsThreshold: func() types.Int64 {
 				if !isImport && data.L7DDOSProtection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSProtection.RpsThreshold
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["rps_threshold"].(float64); ok {
@@ -25793,8 +25908,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			DisableDefaultErrorPages: func() types.Bool {
 				if !isImport && data.MoreOption != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.MoreOption.DisableDefaultErrorPages
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disable_default_error_pages"].(bool); ok {
@@ -25828,8 +25948,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			IdleTimeout: func() types.Int64 {
 				if !isImport && data.MoreOption != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.MoreOption.IdleTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["idle_timeout"].(float64); ok {
@@ -25839,8 +25964,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			MaxRequestHeaderSize: func() types.Int64 {
 				if !isImport && data.MoreOption != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.MoreOption.MaxRequestHeaderSize
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_request_header_size"].(float64); ok {
@@ -26675,8 +26805,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			RequestHeadersTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestHeadersTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
@@ -26686,8 +26821,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			RequestTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_timeout"].(float64); ok {
@@ -27900,8 +28040,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			Timeout: func() types.Int64 {
 				if !isImport && data.BotDefense != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.BotDefense.Timeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["timeout"].(float64); ok {
@@ -27925,8 +28070,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.CaptchaChallenge = &HTTPLoadBalancerCaptchaChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.CaptchaChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CaptchaChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -28059,8 +28209,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			TTL: func() types.Int64 {
 				if !isImport && data.CookieStickiness != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CookieStickiness.TTL
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["ttl"].(float64); ok {
@@ -28074,8 +28229,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.CORSPolicy = &HTTPLoadBalancerCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.AllowCredentials
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -28123,8 +28283,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			Disabled: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.Disabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -28140,8 +28305,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			MaximumAge: func() types.Int64 {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CORSPolicy.MaximumAge
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["maximum_age"].(float64); ok {
@@ -28403,8 +28573,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			HealthCheckPort: func() types.Int64 {
 				if !isImport && data.DefaultPool != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DefaultPool.HealthCheckPort
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["health_check_port"].(float64); ok {
@@ -28689,8 +28864,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.DefaultPool != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DefaultPool.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -29214,8 +29394,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.HTTP = &HTTPLoadBalancerHTTPModel{
 			DNSVolterraManaged: func() types.Bool {
 				if !isImport && data.HTTP != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTP.DNSVolterraManaged
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["dns_volterra_managed"].(bool); ok {
@@ -29225,8 +29410,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.HTTP != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTP.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -29246,8 +29436,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.HTTPS = &HTTPLoadBalancerHTTPSModel{
 			AddHsts: func() types.Bool {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPS.AddHsts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_hsts"].(bool); ok {
@@ -29274,8 +29469,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			ConnectionIdleTimeout: func() types.Int64 {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTPS.ConnectionIdleTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_idle_timeout"].(float64); ok {
@@ -29344,8 +29544,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPS.HTTPRedirect
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_redirect"].(bool); ok {
@@ -29379,8 +29584,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTPS.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -29428,8 +29638,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.HTTPSAutoCert = &HTTPLoadBalancerHTTPSAutoCertModel{
 			AddHsts: func() types.Bool {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPSAutoCert.AddHsts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_hsts"].(bool); ok {
@@ -29456,8 +29671,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			ConnectionIdleTimeout: func() types.Int64 {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTPSAutoCert.ConnectionIdleTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_idle_timeout"].(float64); ok {
@@ -29526,8 +29746,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPSAutoCert.HTTPRedirect
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_redirect"].(bool); ok {
@@ -29573,8 +29798,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTPSAutoCert.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -29635,8 +29865,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.JsChallenge = &HTTPLoadBalancerJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -29652,8 +29887,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -29682,8 +29922,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.L7DDOSActionJsChallenge = &HTTPLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.L7DDOSActionJsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSActionJsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -29699,8 +29944,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.L7DDOSActionJsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSActionJsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -29900,8 +30150,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			RpsThreshold: func() types.Int64 {
 				if !isImport && data.L7DDOSProtection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSProtection.RpsThreshold
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["rps_threshold"].(float64); ok {
@@ -30092,8 +30347,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			DisableDefaultErrorPages: func() types.Bool {
 				if !isImport && data.MoreOption != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.MoreOption.DisableDefaultErrorPages
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disable_default_error_pages"].(bool); ok {
@@ -30127,8 +30387,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			IdleTimeout: func() types.Int64 {
 				if !isImport && data.MoreOption != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.MoreOption.IdleTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["idle_timeout"].(float64); ok {
@@ -30138,8 +30403,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			MaxRequestHeaderSize: func() types.Int64 {
 				if !isImport && data.MoreOption != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.MoreOption.MaxRequestHeaderSize
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_request_header_size"].(float64); ok {
@@ -30974,8 +31244,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			RequestHeadersTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestHeadersTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
@@ -30985,8 +31260,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			RequestTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_timeout"].(float64); ok {
@@ -35019,8 +35299,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			Timeout: func() types.Int64 {
 				if !isImport && data.BotDefense != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.BotDefense.Timeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["timeout"].(float64); ok {
@@ -35044,8 +35329,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		data.CaptchaChallenge = &HTTPLoadBalancerCaptchaChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.CaptchaChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CaptchaChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -35178,8 +35468,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			TTL: func() types.Int64 {
 				if !isImport && data.CookieStickiness != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CookieStickiness.TTL
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["ttl"].(float64); ok {
@@ -35193,8 +35488,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		data.CORSPolicy = &HTTPLoadBalancerCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.AllowCredentials
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -35242,8 +35542,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			Disabled: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.Disabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -35259,8 +35564,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			MaximumAge: func() types.Int64 {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CORSPolicy.MaximumAge
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["maximum_age"].(float64); ok {
@@ -35522,8 +35832,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			HealthCheckPort: func() types.Int64 {
 				if !isImport && data.DefaultPool != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DefaultPool.HealthCheckPort
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["health_check_port"].(float64); ok {
@@ -35808,8 +36123,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.DefaultPool != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DefaultPool.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -36333,8 +36653,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		data.HTTP = &HTTPLoadBalancerHTTPModel{
 			DNSVolterraManaged: func() types.Bool {
 				if !isImport && data.HTTP != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTP.DNSVolterraManaged
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["dns_volterra_managed"].(bool); ok {
@@ -36344,8 +36669,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.HTTP != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTP.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -36365,8 +36695,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		data.HTTPS = &HTTPLoadBalancerHTTPSModel{
 			AddHsts: func() types.Bool {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPS.AddHsts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_hsts"].(bool); ok {
@@ -36393,8 +36728,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			ConnectionIdleTimeout: func() types.Int64 {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTPS.ConnectionIdleTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_idle_timeout"].(float64); ok {
@@ -36463,8 +36803,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPS.HTTPRedirect
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_redirect"].(bool); ok {
@@ -36498,8 +36843,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.HTTPS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTPS.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -36547,8 +36897,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		data.HTTPSAutoCert = &HTTPLoadBalancerHTTPSAutoCertModel{
 			AddHsts: func() types.Bool {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPSAutoCert.AddHsts
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["add_hsts"].(bool); ok {
@@ -36575,8 +36930,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			ConnectionIdleTimeout: func() types.Int64 {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTPSAutoCert.ConnectionIdleTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_idle_timeout"].(float64); ok {
@@ -36645,8 +37005,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			HTTPRedirect: func() types.Bool {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPSAutoCert.HTTPRedirect
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_redirect"].(bool); ok {
@@ -36692,8 +37057,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			Port: func() types.Int64 {
 				if !isImport && data.HTTPSAutoCert != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.HTTPSAutoCert.Port
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
@@ -36754,8 +37124,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		data.JsChallenge = &HTTPLoadBalancerJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -36771,8 +37146,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -36801,8 +37181,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		data.L7DDOSActionJsChallenge = &HTTPLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.L7DDOSActionJsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSActionJsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -36818,8 +37203,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.L7DDOSActionJsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSActionJsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -37019,8 +37409,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			RpsThreshold: func() types.Int64 {
 				if !isImport && data.L7DDOSProtection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.L7DDOSProtection.RpsThreshold
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["rps_threshold"].(float64); ok {
@@ -37211,8 +37606,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			DisableDefaultErrorPages: func() types.Bool {
 				if !isImport && data.MoreOption != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.MoreOption.DisableDefaultErrorPages
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disable_default_error_pages"].(bool); ok {
@@ -37246,8 +37646,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			IdleTimeout: func() types.Int64 {
 				if !isImport && data.MoreOption != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.MoreOption.IdleTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["idle_timeout"].(float64); ok {
@@ -37257,8 +37662,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			MaxRequestHeaderSize: func() types.Int64 {
 				if !isImport && data.MoreOption != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.MoreOption.MaxRequestHeaderSize
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_request_header_size"].(float64); ok {
@@ -38093,8 +38503,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			RequestHeadersTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestHeadersTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
@@ -38104,8 +38519,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			RequestTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_timeout"].(float64); ok {

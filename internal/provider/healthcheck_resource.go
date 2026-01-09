@@ -534,8 +534,13 @@ func (r *HealthcheckResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 			UseHttp2: func() types.Bool {
 				if !isImport && data.HTTPHealthCheck != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPHealthCheck.UseHttp2
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["use_http2"].(bool); ok {
@@ -756,8 +761,13 @@ func (r *HealthcheckResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 			UseHttp2: func() types.Bool {
 				if !isImport && data.HTTPHealthCheck != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPHealthCheck.UseHttp2
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["use_http2"].(bool); ok {
@@ -1060,8 +1070,13 @@ func (r *HealthcheckResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 			UseHttp2: func() types.Bool {
 				if !isImport && data.HTTPHealthCheck != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.HTTPHealthCheck.UseHttp2
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["use_http2"].(bool); ok {

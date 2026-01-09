@@ -1451,8 +1451,13 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		data.CircuitBreaker = &ClusterCircuitBreakerModel{
 			ConnectionLimit: func() types.Int64 {
 				if !isImport && data.CircuitBreaker != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CircuitBreaker.ConnectionLimit
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_limit"].(float64); ok {
@@ -1462,8 +1467,13 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 			}(),
 			MaxRequests: func() types.Int64 {
 				if !isImport && data.CircuitBreaker != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CircuitBreaker.MaxRequests
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_requests"].(float64); ok {
@@ -1473,8 +1483,13 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 			}(),
 			PendingRequests: func() types.Int64 {
 				if !isImport && data.CircuitBreaker != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CircuitBreaker.PendingRequests
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["pending_requests"].(float64); ok {
@@ -1490,8 +1505,13 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 			}(),
 			Retries: func() types.Int64 {
 				if !isImport && data.CircuitBreaker != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CircuitBreaker.Retries
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["retries"].(float64); ok {
@@ -1659,8 +1679,13 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		data.Http2Options = &ClusterHttp2OptionsModel{
 			Enabled: func() types.Bool {
 				if !isImport && data.Http2Options != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.Http2Options.Enabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["enabled"].(bool); ok {
@@ -1679,8 +1704,13 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		data.OutlierDetection = &ClusterOutlierDetectionModel{
 			BaseEjectionTime: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.BaseEjectionTime
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["base_ejection_time"].(float64); ok {
@@ -1690,8 +1720,13 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 			}(),
 			Consecutive5xx: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.Consecutive5xx
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["consecutive_5xx"].(float64); ok {
@@ -1701,8 +1736,13 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 			}(),
 			ConsecutiveGatewayFailure: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.ConsecutiveGatewayFailure
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["consecutive_gateway_failure"].(float64); ok {
@@ -1712,8 +1752,13 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 			}(),
 			Interval: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.Interval
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["interval"].(float64); ok {
@@ -1723,8 +1768,13 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 			}(),
 			MaxEjectionPercent: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.MaxEjectionPercent
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_ejection_percent"].(float64); ok {
@@ -1858,8 +1908,13 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 			}(),
 			MaxSessionKeys: func() types.Int64 {
 				if !isImport && data.TLSParameters != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.TLSParameters.MaxSessionKeys
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_session_keys"].(float64); ok {
@@ -2030,8 +2085,13 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 		data.CircuitBreaker = &ClusterCircuitBreakerModel{
 			ConnectionLimit: func() types.Int64 {
 				if !isImport && data.CircuitBreaker != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CircuitBreaker.ConnectionLimit
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_limit"].(float64); ok {
@@ -2041,8 +2101,13 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 			}(),
 			MaxRequests: func() types.Int64 {
 				if !isImport && data.CircuitBreaker != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CircuitBreaker.MaxRequests
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_requests"].(float64); ok {
@@ -2052,8 +2117,13 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 			}(),
 			PendingRequests: func() types.Int64 {
 				if !isImport && data.CircuitBreaker != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CircuitBreaker.PendingRequests
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["pending_requests"].(float64); ok {
@@ -2069,8 +2139,13 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 			}(),
 			Retries: func() types.Int64 {
 				if !isImport && data.CircuitBreaker != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CircuitBreaker.Retries
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["retries"].(float64); ok {
@@ -2238,8 +2313,13 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 		data.Http2Options = &ClusterHttp2OptionsModel{
 			Enabled: func() types.Bool {
 				if !isImport && data.Http2Options != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.Http2Options.Enabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["enabled"].(bool); ok {
@@ -2258,8 +2338,13 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 		data.OutlierDetection = &ClusterOutlierDetectionModel{
 			BaseEjectionTime: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.BaseEjectionTime
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["base_ejection_time"].(float64); ok {
@@ -2269,8 +2354,13 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 			}(),
 			Consecutive5xx: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.Consecutive5xx
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["consecutive_5xx"].(float64); ok {
@@ -2280,8 +2370,13 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 			}(),
 			ConsecutiveGatewayFailure: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.ConsecutiveGatewayFailure
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["consecutive_gateway_failure"].(float64); ok {
@@ -2291,8 +2386,13 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 			}(),
 			Interval: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.Interval
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["interval"].(float64); ok {
@@ -2302,8 +2402,13 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 			}(),
 			MaxEjectionPercent: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.MaxEjectionPercent
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_ejection_percent"].(float64); ok {
@@ -2437,8 +2542,13 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 			}(),
 			MaxSessionKeys: func() types.Int64 {
 				if !isImport && data.TLSParameters != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.TLSParameters.MaxSessionKeys
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_session_keys"].(float64); ok {
@@ -2852,8 +2962,13 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 		data.CircuitBreaker = &ClusterCircuitBreakerModel{
 			ConnectionLimit: func() types.Int64 {
 				if !isImport && data.CircuitBreaker != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CircuitBreaker.ConnectionLimit
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_limit"].(float64); ok {
@@ -2863,8 +2978,13 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 			}(),
 			MaxRequests: func() types.Int64 {
 				if !isImport && data.CircuitBreaker != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CircuitBreaker.MaxRequests
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_requests"].(float64); ok {
@@ -2874,8 +2994,13 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 			}(),
 			PendingRequests: func() types.Int64 {
 				if !isImport && data.CircuitBreaker != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CircuitBreaker.PendingRequests
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["pending_requests"].(float64); ok {
@@ -2891,8 +3016,13 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 			}(),
 			Retries: func() types.Int64 {
 				if !isImport && data.CircuitBreaker != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CircuitBreaker.Retries
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["retries"].(float64); ok {
@@ -3060,8 +3190,13 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 		data.Http2Options = &ClusterHttp2OptionsModel{
 			Enabled: func() types.Bool {
 				if !isImport && data.Http2Options != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.Http2Options.Enabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["enabled"].(bool); ok {
@@ -3080,8 +3215,13 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 		data.OutlierDetection = &ClusterOutlierDetectionModel{
 			BaseEjectionTime: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.BaseEjectionTime
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["base_ejection_time"].(float64); ok {
@@ -3091,8 +3231,13 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 			}(),
 			Consecutive5xx: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.Consecutive5xx
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["consecutive_5xx"].(float64); ok {
@@ -3102,8 +3247,13 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 			}(),
 			ConsecutiveGatewayFailure: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.ConsecutiveGatewayFailure
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["consecutive_gateway_failure"].(float64); ok {
@@ -3113,8 +3263,13 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 			}(),
 			Interval: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.Interval
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["interval"].(float64); ok {
@@ -3124,8 +3279,13 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 			}(),
 			MaxEjectionPercent: func() types.Int64 {
 				if !isImport && data.OutlierDetection != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.OutlierDetection.MaxEjectionPercent
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_ejection_percent"].(float64); ok {
@@ -3259,8 +3419,13 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 			}(),
 			MaxSessionKeys: func() types.Int64 {
 				if !isImport && data.TLSParameters != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.TLSParameters.MaxSessionKeys
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_session_keys"].(float64); ok {

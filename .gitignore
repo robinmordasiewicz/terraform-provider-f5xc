@@ -70,3 +70,6 @@ terraform.tfvars
 
 # MCP Registry authentication tokens (created by mcp-publisher CLI)
 .mcpregistry_*
+
+# MkDocs build output
+site/

@@ -721,12 +721,22 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 				return nil
 			}(),
 			CookieExpiry: func() types.Int64 {
+				if !isImport && data.CookieParams != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CookieParams.CookieExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			CookieRefreshInterval: func() types.Int64 {
+				if !isImport && data.CookieParams != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CookieParams.CookieRefreshInterval
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_refresh_interval"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -745,6 +755,11 @@ func (r *AuthenticationResource) Create(ctx context.Context, req resource.Create
 				return nil
 			}(),
 			SessionExpiry: func() types.Int64 {
+				if !isImport && data.CookieParams != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CookieParams.SessionExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["session_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -935,12 +950,22 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 				return nil
 			}(),
 			CookieExpiry: func() types.Int64 {
+				if !isImport && data.CookieParams != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CookieParams.CookieExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			CookieRefreshInterval: func() types.Int64 {
+				if !isImport && data.CookieParams != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CookieParams.CookieRefreshInterval
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_refresh_interval"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -959,6 +984,11 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 				return nil
 			}(),
 			SessionExpiry: func() types.Int64 {
+				if !isImport && data.CookieParams != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CookieParams.SessionExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["session_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1187,12 +1217,22 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 				return nil
 			}(),
 			CookieExpiry: func() types.Int64 {
+				if !isImport && data.CookieParams != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CookieParams.CookieExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			CookieRefreshInterval: func() types.Int64 {
+				if !isImport && data.CookieParams != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CookieParams.CookieRefreshInterval
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_refresh_interval"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1211,6 +1251,11 @@ func (r *AuthenticationResource) Update(ctx context.Context, req resource.Update
 				return nil
 			}(),
 			SessionExpiry: func() types.Int64 {
+				if !isImport && data.CookieParams != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CookieParams.SessionExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["session_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

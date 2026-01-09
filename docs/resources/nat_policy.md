@@ -90,9 +90,9 @@ A [`rules`](#rules) block supports the following:
 
 <a id="rules-criteria"></a>&#x2022; [`criteria`](#rules-criteria) - Optional Block<br>Match criteria of the packet to apply the NAT Rule<br>See [Criteria](#rules-criteria) below.
 
-<a id="rules-disable"></a>&#x2022; [`disable`](#rules-disable) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-disable"></a>&#x2022; [`disable`](#rules-disable) - Optional Block<br>Enable this option
 
-<a id="rules-enable"></a>&#x2022; [`enable`](#rules-enable) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-enable"></a>&#x2022; [`enable`](#rules-enable) - Optional Block<br>Enable this option
 
 <a id="rules-name"></a>&#x2022; [`name`](#rules-name) - Optional String<br>Name. Name of the Rule
 
@@ -168,13 +168,13 @@ A [`refs`](#rules-cloud-connect-refs) block (within [`rules.cloud_connect`](#rul
 
 A [`criteria`](#rules-criteria) block (within [`rules`](#rules)) supports the following:
 
-<a id="rules-criteria-any"></a>&#x2022; [`any`](#rules-criteria-any) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-criteria-any"></a>&#x2022; [`any`](#rules-criteria-any) - Optional Block<br>Enable this option
 
 <a id="rules-criteria-destination-cidr"></a>&#x2022; [`destination_cidr`](#rules-criteria-destination-cidr) - Optional List<br>Destination IP. Destination IP of the packet to match
 
 <a id="rules-criteria-destination-port"></a>&#x2022; [`destination_port`](#rules-criteria-destination-port) - Optional Block<br>Port match of the request can be a range or a specific port<br>See [Destination Port](#rules-criteria-destination-port) below.
 
-<a id="rules-criteria-icmp"></a>&#x2022; [`icmp`](#rules-criteria-icmp) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-criteria-icmp"></a>&#x2022; [`icmp`](#rules-criteria-icmp) - Optional Block<br>Enable this option
 
 <a id="rules-criteria-protocol"></a>&#x2022; [`protocol`](#rules-criteria-protocol) - Optional String  Defaults to `ALL`<br>Possible values are `ALL`, `ICMP`, `TCP`, `UDP`<br>[Enum: ALL|ICMP|TCP|UDP] Protocols. Protocols like TCP, UDP
 
@@ -194,7 +194,7 @@ A [`criteria`](#rules-criteria) block (within [`rules`](#rules)) supports the fo
 
 A [`destination_port`](#rules-criteria-destination-port) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
-<a id="match-408035"></a>&#x2022; [`no_port_match`](#match-408035) - Optional Block<br>Can be used for messages where no values are needed
+<a id="match-408035"></a>&#x2022; [`no_port_match`](#match-408035) - Optional Block<br>Enable this option
 
 <a id="rules-criteria-destination-port-port"></a>&#x2022; [`port`](#rules-criteria-destination-port-port) - Optional Number<br>Exact Port to match
 
@@ -224,7 +224,7 @@ A [`refs`](#rules-criteria-segment-refs) block (within [`rules.criteria.segment`
 
 A [`source_port`](#rules-criteria-source-port) block (within [`rules.criteria`](#rules-criteria)) supports the following:
 
-<a id="match-b33190"></a>&#x2022; [`no_port_match`](#match-b33190) - Optional Block<br>Can be used for messages where no values are needed
+<a id="match-b33190"></a>&#x2022; [`no_port_match`](#match-b33190) - Optional Block<br>Enable this option
 
 <a id="rules-criteria-source-port-port"></a>&#x2022; [`port`](#rules-criteria-source-port-port) - Optional Number<br>Exact Port to match
 
@@ -242,7 +242,7 @@ A [`tcp`](#rules-criteria-tcp) block (within [`rules.criteria`](#rules-criteria)
 
 A [`destination_port`](#rules-criteria-tcp-destination-port) block (within [`rules.criteria.tcp`](#rules-criteria-tcp)) supports the following:
 
-<a id="match-d7a933"></a>&#x2022; [`no_port_match`](#match-d7a933) - Optional Block<br>Can be used for messages where no values are needed
+<a id="match-d7a933"></a>&#x2022; [`no_port_match`](#match-d7a933) - Optional Block<br>Enable this option
 
 <a id="port-8bd6fd"></a>&#x2022; [`port`](#port-8bd6fd) - Optional Number<br>Exact Port to match
 
@@ -252,7 +252,7 @@ A [`destination_port`](#rules-criteria-tcp-destination-port) block (within [`rul
 
 A [`source_port`](#rules-criteria-tcp-source-port) block (within [`rules.criteria.tcp`](#rules-criteria-tcp)) supports the following:
 
-<a id="match-dbf0f6"></a>&#x2022; [`no_port_match`](#match-dbf0f6) - Optional Block<br>Can be used for messages where no values are needed
+<a id="match-dbf0f6"></a>&#x2022; [`no_port_match`](#match-dbf0f6) - Optional Block<br>Enable this option
 
 <a id="rules-criteria-tcp-source-port-port"></a>&#x2022; [`port`](#rules-criteria-tcp-source-port-port) - Optional Number<br>Exact Port to match
 
@@ -270,7 +270,7 @@ An [`udp`](#rules-criteria-udp) block (within [`rules.criteria`](#rules-criteria
 
 A [`destination_port`](#rules-criteria-udp-destination-port) block (within [`rules.criteria.udp`](#rules-criteria-udp)) supports the following:
 
-<a id="match-214578"></a>&#x2022; [`no_port_match`](#match-214578) - Optional Block<br>Can be used for messages where no values are needed
+<a id="match-214578"></a>&#x2022; [`no_port_match`](#match-214578) - Optional Block<br>Enable this option
 
 <a id="port-955148"></a>&#x2022; [`port`](#port-955148) - Optional Number<br>Exact Port to match
 
@@ -280,7 +280,7 @@ A [`destination_port`](#rules-criteria-udp-destination-port) block (within [`rul
 
 A [`source_port`](#rules-criteria-udp-source-port) block (within [`rules.criteria.udp`](#rules-criteria-udp)) supports the following:
 
-<a id="match-2dbf46"></a>&#x2022; [`no_port_match`](#match-2dbf46) - Optional Block<br>Can be used for messages where no values are needed
+<a id="match-2dbf46"></a>&#x2022; [`no_port_match`](#match-2dbf46) - Optional Block<br>Enable this option
 
 <a id="rules-criteria-udp-source-port-port"></a>&#x2022; [`port`](#rules-criteria-udp-source-port-port) - Optional Number<br>Exact Port to match
 

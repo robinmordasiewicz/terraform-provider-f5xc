@@ -17,7 +17,7 @@ type Route struct {
 // CreateRoute creates a new Route
 func (c *Client) CreateRoute(ctx context.Context, resource *Route) (*Route, error) {
 	var result Route
-	path := fmt.Sprintf("/api/operate/namespaces/%s/sites/{site}/ver/routes", resource.Metadata.Namespace)
+	path := fmt.Sprintf("/api/config/namespaces/%s/routes", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -25,7 +25,7 @@ func (c *Client) CreateRoute(ctx context.Context, resource *Route) (*Route, erro
 // GetRoute retrieves a Route
 func (c *Client) GetRoute(ctx context.Context, namespace, name string) (*Route, error) {
 	var result Route
-	path := fmt.Sprintf("/api/operate/namespaces/%s/sites/{site}/ver/routes/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/namespaces/%s/routes/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -33,13 +33,13 @@ func (c *Client) GetRoute(ctx context.Context, namespace, name string) (*Route, 
 // UpdateRoute updates a Route
 func (c *Client) UpdateRoute(ctx context.Context, resource *Route) (*Route, error) {
 	var result Route
-	path := fmt.Sprintf("/api/operate/namespaces/%s/sites/{site}/ver/routes/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/config/namespaces/%s/routes/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteRoute deletes a Route
 func (c *Client) DeleteRoute(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/operate/namespaces/%s/sites/{site}/ver/routes/%s", namespace, name)
+	path := fmt.Sprintf("/api/config/namespaces/%s/routes/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

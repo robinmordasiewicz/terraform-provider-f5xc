@@ -188,13 +188,13 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"block_temporarily": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"captcha_challenge": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"javascript_challenge": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -203,13 +203,13 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"high": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"low": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"medium": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},

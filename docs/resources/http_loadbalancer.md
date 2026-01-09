@@ -198,20 +198,20 @@ resource "f5xc_http_loadbalancer" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="active-service-policies"></a>[`active_service_policies`](#active-service-policies) - Optional Block<br>Service Policy List. List of service policies<br>See [Active Service Policies](#active-service-policies) below for details.
-<br><br>&#x2022; <a id="no-service-policies"></a>[`no_service_policies`](#no-service-policies) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="no-service-policies"></a>[`no_service_policies`](#no-service-policies) - Optional Block<br>Enable this option
 
 <a id="add-location"></a>&#x2022; [`add_location`](#add-location) - Optional Bool<br>Add Location. X-example: true Appends header x-F5 Distributed Cloud-location = `<RE-site-name>` in responses. This configuration is ignored on CE sites
 
 -> **One of the following:**
 &#x2022; <a id="advertise-custom"></a>[`advertise_custom`](#advertise-custom) - Optional Block<br>Defines a way to advertise a VIP on specific sites<br>See [Advertise Custom](#advertise-custom) below for details.
 <br><br>&#x2022; <a id="advertise-on-public"></a>[`advertise_on_public`](#advertise-on-public) - Optional Block<br>Defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Public](#advertise-on-public) below for details.
-<br><br>&#x2022; <a id="advertise-on-public-default-vip"></a>[`advertise_on_public_default_vip`](#advertise-on-public-default-vip) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="advertise-on-public-default-vip"></a>[`advertise_on_public_default_vip`](#advertise-on-public-default-vip) - Optional Block<br>Enable this option
 
 <a id="api-protection-rules"></a>&#x2022; [`api_protection_rules`](#api-protection-rules) - Optional Block<br>API Protection Rules. API Protection Rules<br>See [API Protection Rules](#api-protection-rules) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="api-rate-limit"></a>[`api_rate_limit`](#api-rate-limit) - Optional Block<br>APIRateLimit
-<br><br>&#x2022; <a id="disable-rate-limit"></a>[`disable_rate_limit`](#disable-rate-limit) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="disable-rate-limit"></a>[`disable_rate_limit`](#disable-rate-limit) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="api-specification"></a>[`api_specification`](#api-specification) - Optional Block<br>Settings for API specification (API definition, OpenAPI validation, etc.)
@@ -235,17 +235,17 @@ resource "f5xc_http_loadbalancer" "example" {
 &#x2022; <a id="captcha-challenge"></a>[`captcha_challenge`](#captcha-challenge) - Optional Block<br>Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect
 <br><br>&#x2022; <a id="enable-challenge"></a>[`enable_challenge`](#enable-challenge) - Optional Block<br>Configure auto mitigation i.e risk based challenges for malicious users
 <br><br>&#x2022; <a id="js-challenge"></a>[`js_challenge`](#js-challenge) - Optional Block<br>Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do
-<br><br>&#x2022; <a id="no-challenge"></a>[`no_challenge`](#no-challenge) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="no-challenge"></a>[`no_challenge`](#no-challenge) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="client-side-defense"></a>[`client_side_defense`](#client-side-defense) - Optional Block<br>Defines various configuration OPTIONS for Client-Side Defense Policy
 
 -> **One of the following:**
 &#x2022; <a id="cookie-stickiness"></a>[`cookie_stickiness`](#cookie-stickiness) - Optional Block<br>Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets
-<br><br>&#x2022; <a id="least-active"></a>[`least_active`](#least-active) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="random"></a>[`random`](#random) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="least-active"></a>[`least_active`](#least-active) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="random"></a>[`random`](#random) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="ring-hash"></a>[`ring_hash`](#ring-hash) - Optional Block<br>Hash Policy List. List of hash policy rules
-<br><br>&#x2022; <a id="round-robin"></a>[`round_robin`](#round-robin) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="round-robin"></a>[`round_robin`](#round-robin) - Optional Block<br>Enable this option
 
 <a id="cors-policy"></a>&#x2022; [`cors_policy`](#cors-policy) - Optional Block<br>Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel MAC OS X 10.5
 
@@ -263,39 +263,39 @@ resource "f5xc_http_loadbalancer" "example" {
 <a id="default-route-pools"></a>&#x2022; [`default_route_pools`](#default-route-pools) - Optional Block<br>Origin Pools used when no route is specified (default route)
 
 -> **One of the following:**
-&#x2022; <a id="default-sensitive-data-policy"></a>[`default_sensitive_data_policy`](#default-sensitive-data-policy) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="default-sensitive-data-policy"></a>[`default_sensitive_data_policy`](#default-sensitive-data-policy) - Optional Block<br>Enable this option
 
-<a id="disable-api-definition"></a>&#x2022; [`disable_api_definition`](#disable-api-definition) - Optional Block<br>Can be used for messages where no values are needed
-
--> **One of the following:**
-&#x2022; <a id="disable-api-discovery"></a>[`disable_api_discovery`](#disable-api-discovery) - Optional Block<br>Can be used for messages where no values are needed
-
-<a id="disable-api-testing"></a>&#x2022; [`disable_api_testing`](#disable-api-testing) - Optional Block<br>Can be used for messages where no values are needed
-
-<a id="disable-bot-defense"></a>&#x2022; [`disable_bot_defense`](#disable-bot-defense) - Optional Block<br>Can be used for messages where no values are needed
-
-<a id="disable-caching"></a>&#x2022; [`disable_caching`](#disable-caching) - Optional Block<br>Can be used for messages where no values are needed
-
-<a id="disable-client-side-defense"></a>&#x2022; [`disable_client_side_defense`](#disable-client-side-defense) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disable-api-definition"></a>&#x2022; [`disable_api_definition`](#disable-api-definition) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-ip-reputation"></a>[`disable_ip_reputation`](#disable-ip-reputation) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-api-discovery"></a>[`disable_api_discovery`](#disable-api-discovery) - Optional Block<br>Enable this option
+
+<a id="disable-api-testing"></a>&#x2022; [`disable_api_testing`](#disable-api-testing) - Optional Block<br>Enable this option
+
+<a id="disable-bot-defense"></a>&#x2022; [`disable_bot_defense`](#disable-bot-defense) - Optional Block<br>Enable this option
+
+<a id="disable-caching"></a>&#x2022; [`disable_caching`](#disable-caching) - Optional Block<br>Enable this option
+
+<a id="disable-client-side-defense"></a>&#x2022; [`disable_client_side_defense`](#disable-client-side-defense) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-malicious-user-detection"></a>[`disable_malicious_user_detection`](#disable-malicious-user-detection) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-ip-reputation"></a>[`disable_ip_reputation`](#disable-ip-reputation) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-malware-protection"></a>[`disable_malware_protection`](#disable-malware-protection) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-malicious-user-detection"></a>[`disable_malicious_user_detection`](#disable-malicious-user-detection) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-threat-mesh"></a>[`disable_threat_mesh`](#disable-threat-mesh) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-malware-protection"></a>[`disable_malware_protection`](#disable-malware-protection) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-trust-client-ip-headers"></a>[`disable_trust_client_ip_headers`](#disable-trust-client-ip-headers) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-threat-mesh"></a>[`disable_threat_mesh`](#disable-threat-mesh) - Optional Block<br>Enable this option
 
-<a id="disable-waf"></a>&#x2022; [`disable_waf`](#disable-waf) - Optional Block<br>Can be used for messages where no values are needed
+-> **One of the following:**
+&#x2022; <a id="disable-trust-client-ip-headers"></a>[`disable_trust_client_ip_headers`](#disable-trust-client-ip-headers) - Optional Block<br>Enable this option
 
-<a id="do-not-advertise"></a>&#x2022; [`do_not_advertise`](#do-not-advertise) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disable-waf"></a>&#x2022; [`disable_waf`](#disable-waf) - Optional Block<br>Enable this option
+
+<a id="do-not-advertise"></a>&#x2022; [`do_not_advertise`](#do-not-advertise) - Optional Block<br>Enable this option
 
 <a id="domains"></a>&#x2022; [`domains`](#domains) - Optional List<br>List of Domains (host/authority header) that will be matched to load balancer. Supported Domains and search order: 1. Exact Domain names: `www.example.com.` 2
 
@@ -303,9 +303,9 @@ resource "f5xc_http_loadbalancer" "example" {
 
 <a id="enable-ip-reputation"></a>&#x2022; [`enable_ip_reputation`](#enable-ip-reputation) - Optional Block<br>IP Threat Category List. List of IP threat categories
 
-<a id="enable-malicious-user-detection"></a>&#x2022; [`enable_malicious_user_detection`](#enable-malicious-user-detection) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enable-malicious-user-detection"></a>&#x2022; [`enable_malicious_user_detection`](#enable-malicious-user-detection) - Optional Block<br>Enable this option
 
-<a id="enable-threat-mesh"></a>&#x2022; [`enable_threat_mesh`](#enable-threat-mesh) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enable-threat-mesh"></a>&#x2022; [`enable_threat_mesh`](#enable-threat-mesh) - Optional Block<br>Enable this option
 
 <a id="enable-trust-client-ip-headers"></a>&#x2022; [`enable_trust_client_ip_headers`](#enable-trust-client-ip-headers) - Optional Block<br>Trust Client IP Headers List. List of Client IP Headers
 
@@ -320,8 +320,8 @@ resource "f5xc_http_loadbalancer" "example" {
 <a id="jwt-validation"></a>&#x2022; [`jwt_validation`](#jwt-validation) - Optional Block<br>JWT Validation stops JWT replay attacks and JWT tampering by cryptographically verifying incoming JWTs before they are passed to your API origin. JWT Validation will also stop requests with expired tokens or tokens that are not yet valid
 
 -> **One of the following:**
-&#x2022; <a id="l7-ddos-action-block"></a>[`l7_ddos_action_block`](#l7-ddos-action-block) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="l7-ddos-action-default"></a>[`l7_ddos_action_default`](#l7-ddos-action-default) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="l7-ddos-action-block"></a>[`l7_ddos_action_block`](#l7-ddos-action-block) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="l7-ddos-action-default"></a>[`l7_ddos_action_default`](#l7-ddos-action-default) - Optional Block<br>Enable this option
 
 <a id="l7-ddos-action-js-challenge"></a>&#x2022; [`l7_ddos_action_js_challenge`](#l7-ddos-action-js-challenge) - Optional Block<br>Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do
 
@@ -332,7 +332,7 @@ resource "f5xc_http_loadbalancer" "example" {
 <a id="more-option"></a>&#x2022; [`more_option`](#more-option) - Optional Block<br>Defines various OPTIONS to define a route
 
 -> **One of the following:**
-&#x2022; <a id="multi-lb-app"></a>[`multi_lb_app`](#multi-lb-app) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="multi-lb-app"></a>[`multi_lb_app`](#multi-lb-app) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="single-lb-app"></a>[`single_lb_app`](#single-lb-app) - Optional Block<br>Specific settings for Machine learning analysis on this HTTP LB, independently from other LBs
 
 <a id="origin-server-subset-rule-list"></a>&#x2022; [`origin_server_subset_rule_list`](#origin-server-subset-rule-list) - Optional Block<br>Origin Server Subset Rule List Type. List of Origin Pools
@@ -349,21 +349,21 @@ resource "f5xc_http_loadbalancer" "example" {
 
 <a id="sensitive-data-policy"></a>&#x2022; [`sensitive_data_policy`](#sensitive-data-policy) - Optional Block<br>Sensitive Data Discovery. Settings for data type policy
 
-<a id="service-policies-from-namespace"></a>&#x2022; [`service_policies_from_namespace`](#service-policies-from-namespace) - Optional Block<br>Can be used for messages where no values are needed
+<a id="service-policies-from-namespace"></a>&#x2022; [`service_policies_from_namespace`](#service-policies-from-namespace) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="slow-ddos-mitigation"></a>[`slow_ddos_mitigation`](#slow-ddos-mitigation) - Optional Block<br>'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users
 
-<a id="source-ip-stickiness"></a>&#x2022; [`source_ip_stickiness`](#source-ip-stickiness) - Optional Block<br>Can be used for messages where no values are needed
+<a id="source-ip-stickiness"></a>&#x2022; [`source_ip_stickiness`](#source-ip-stickiness) - Optional Block<br>Enable this option
 
-<a id="system-default-timeouts"></a>&#x2022; [`system_default_timeouts`](#system-default-timeouts) - Optional Block<br>Can be used for messages where no values are needed
+<a id="system-default-timeouts"></a>&#x2022; [`system_default_timeouts`](#system-default-timeouts) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
 <a id="trusted-clients"></a>&#x2022; [`trusted_clients`](#trusted-clients) - Optional Block<br>Define rules to skip processing of one or more features such as WAF, Bot Defense etc
 
 -> **One of the following:**
-&#x2022; <a id="user-id-client-ip"></a>[`user_id_client_ip`](#user-id-client-ip) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="user-id-client-ip"></a>[`user_id_client_ip`](#user-id-client-ip) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="user-identification"></a>[`user_identification`](#user-identification) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 
 <a id="waf-exclusion"></a>&#x2022; [`waf_exclusion`](#waf-exclusion) - Optional Block<br>WAF Exclusion
@@ -410,7 +410,7 @@ An [`advertise_where`](#advertise-custom-advertise-where) block (within [`advert
 
 <a id="advertise-custom-advertise-where-site"></a>&#x2022; [`site`](#advertise-custom-advertise-where-site) - Optional Block<br>Defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised<br>See [Site](#advertise-custom-advertise-where-site) below.
 
-<a id="port-b19c4f"></a>&#x2022; [`use_default_port`](#port-b19c4f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-b19c4f"></a>&#x2022; [`use_default_port`](#port-b19c4f) - Optional Block<br>Enable this option
 
 <a id="network-a20be3"></a>&#x2022; [`virtual_network`](#network-a20be3) - Optional Block<br>Parameters to advertise on a given virtual network<br>See [Virtual Network](#network-a20be3) below.
 
@@ -454,9 +454,9 @@ A [`site`](#site-7ecf1d) block (within [`advertise_custom.advertise_where.site`]
 
 A [`virtual_network`](#network-a20be3) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
-<a id="vip-26d874"></a>&#x2022; [`default_v6_vip`](#vip-26d874) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vip-26d874"></a>&#x2022; [`default_v6_vip`](#vip-26d874) - Optional Block<br>Enable this option
 
-<a id="vip-c51931"></a>&#x2022; [`default_vip`](#vip-c51931) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vip-c51931"></a>&#x2022; [`default_vip`](#vip-c51931) - Optional Block<br>Enable this option
 
 <a id="vip-bb67d7"></a>&#x2022; [`specific_v6_vip`](#vip-bb67d7) - Optional String<br>Use given IPv6 address as VIP on virtual Network
 
@@ -540,7 +540,7 @@ An [`api_endpoint_rules`](#api-protection-rules-api-endpoint-rules) block (withi
 
 <a id="action-389797"></a>&#x2022; [`action`](#action-389797) - Optional Block<br>The action to take if the input request matches the rule<br>See [Action](#action-389797) below.
 
-<a id="domain-c69c3a"></a>&#x2022; [`any_domain`](#domain-c69c3a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domain-c69c3a"></a>&#x2022; [`any_domain`](#domain-c69c3a) - Optional Block<br>Enable this option
 
 <a id="method-361974"></a>&#x2022; [`api_endpoint_method`](#method-361974) - Optional Block<br>HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true<br>See [API Endpoint Method](#method-361974) below.
 
@@ -558,9 +558,9 @@ An [`api_endpoint_rules`](#api-protection-rules-api-endpoint-rules) block (withi
 
 An [`action`](#action-389797) block (within [`api_protection_rules.api_endpoint_rules`](#api-protection-rules-api-endpoint-rules)) supports the following:
 
-<a id="allow-9ca9d1"></a>&#x2022; [`allow`](#allow-9ca9d1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="allow-9ca9d1"></a>&#x2022; [`allow`](#allow-9ca9d1) - Optional Block<br>Enable this option
 
-<a id="deny-ec80de"></a>&#x2022; [`deny`](#deny-ec80de) - Optional Block<br>Can be used for messages where no values are needed
+<a id="deny-ec80de"></a>&#x2022; [`deny`](#deny-ec80de) - Optional Block<br>Enable this option
 
 #### API Protection Rules API Endpoint Rules API Endpoint Method
 
@@ -656,7 +656,7 @@ An [`api_groups_rules`](#api-protection-rules-api-groups-rules) block (within [`
 
 <a id="action-fa62d7"></a>&#x2022; [`action`](#action-fa62d7) - Optional Block<br>The action to take if the input request matches the rule<br>See [Action](#action-fa62d7) below.
 
-<a id="domain-b1276e"></a>&#x2022; [`any_domain`](#domain-b1276e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domain-b1276e"></a>&#x2022; [`any_domain`](#domain-b1276e) - Optional Block<br>Enable this option
 
 <a id="group-a8b675"></a>&#x2022; [`api_group`](#group-a8b675) - Optional String<br>API groups derived from API Definition swaggers. For example oas-all-operations including all paths and methods from the swaggers, oas-base-URLs covering all requests under base-paths from the swaggers. Custom groups can be created if user tags paths or operations with 'x-F5 Distributed
 
@@ -674,9 +674,9 @@ An [`api_groups_rules`](#api-protection-rules-api-groups-rules) block (within [`
 
 An [`action`](#action-fa62d7) block (within [`api_protection_rules.api_groups_rules`](#api-protection-rules-api-groups-rules)) supports the following:
 
-<a id="allow-eba8d3"></a>&#x2022; [`allow`](#allow-eba8d3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="allow-eba8d3"></a>&#x2022; [`allow`](#allow-eba8d3) - Optional Block<br>Enable this option
 
-<a id="deny-99c219"></a>&#x2022; [`deny`](#deny-99c219) - Optional Block<br>Can be used for messages where no values are needed
+<a id="deny-99c219"></a>&#x2022; [`deny`](#deny-99c219) - Optional Block<br>Enable this option
 
 #### API Protection Rules API Groups Rules Client Matcher
 
@@ -774,7 +774,7 @@ An [`api_rate_limit`](#api-rate-limit) block supports the following:
 
 <a id="api-rate-limit-ip-allowed-list"></a>&#x2022; [`ip_allowed_list`](#api-rate-limit-ip-allowed-list) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [IP Allowed List](#api-rate-limit-ip-allowed-list) below.
 
-<a id="api-rate-limit-no-ip-allowed-list"></a>&#x2022; [`no_ip_allowed_list`](#api-rate-limit-no-ip-allowed-list) - Optional Block<br>Can be used for messages where no values are needed
+<a id="api-rate-limit-no-ip-allowed-list"></a>&#x2022; [`no_ip_allowed_list`](#api-rate-limit-no-ip-allowed-list) - Optional Block<br>Enable this option
 
 <a id="api-rate-limit-server-url-rules"></a>&#x2022; [`server_url_rules`](#api-rate-limit-server-url-rules) - Optional Block<br>Set of rules for entire domain or base path that contain multiple endpoints. Order is matter as it uses first match policy. For matching also specific endpoints you can use the API endpoint rules set bellow<br>See [Server URL Rules](#api-rate-limit-server-url-rules) below.
 
@@ -782,7 +782,7 @@ An [`api_rate_limit`](#api-rate-limit) block supports the following:
 
 An [`api_endpoint_rules`](#api-rate-limit-api-endpoint-rules) block (within [`api_rate_limit`](#api-rate-limit)) supports the following:
 
-<a id="domain-cf087c"></a>&#x2022; [`any_domain`](#domain-cf087c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domain-cf087c"></a>&#x2022; [`any_domain`](#domain-cf087c) - Optional Block<br>Enable this option
 
 <a id="method-1e49b0"></a>&#x2022; [`api_endpoint_method`](#method-1e49b0) - Optional Block<br>HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true<br>See [API Endpoint Method](#method-1e49b0) below.
 
@@ -1004,7 +1004,7 @@ An [`ip_allowed_list`](#api-rate-limit-ip-allowed-list) block (within [`api_rate
 
 A [`server_url_rules`](#api-rate-limit-server-url-rules) block (within [`api_rate_limit`](#api-rate-limit)) supports the following:
 
-<a id="domain-0747c9"></a>&#x2022; [`any_domain`](#domain-0747c9) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domain-0747c9"></a>&#x2022; [`any_domain`](#domain-0747c9) - Optional Block<br>Enable this option
 
 <a id="group-15c11a"></a>&#x2022; [`api_group`](#group-15c11a) - Optional String<br>API groups derived from API Definition swaggers. For example oas-all-operations including all paths and methods from the swaggers, oas-base-URLs covering all requests under base-paths from the swaggers. Custom groups can be created if user tags paths or operations with 'x-F5 Distributed
 
@@ -1118,7 +1118,7 @@ An [`api_specification`](#api-specification) block supports the following:
 
 <a id="list-23b577"></a>&#x2022; [`validation_custom_list`](#list-23b577) - Optional Block<br>Define API groups, base paths, or API endpoints and their OpenAPI validation modes. Any other API-endpoint not listed will act according to 'Fall Through Mode'<br>See [Validation Custom List](#list-23b577) below.
 
-<a id="api-specification-validation-disabled"></a>&#x2022; [`validation_disabled`](#api-specification-validation-disabled) - Optional Block<br>Can be used for messages where no values are needed
+<a id="api-specification-validation-disabled"></a>&#x2022; [`validation_disabled`](#api-specification-validation-disabled) - Optional Block<br>Enable this option
 
 #### API Specification API Definition
 
@@ -1164,13 +1164,13 @@ A [`validation_all_spec_endpoints`](#endpoints-4158a4) block (within [`api_speci
 
 A [`settings`](#settings-a83a93) block (within [`api_specification.validation_all_spec_endpoints`](#endpoints-4158a4)) supports the following:
 
-<a id="validation-462f95"></a>&#x2022; [`oversized_body_fail_validation`](#validation-462f95) - Optional Block<br>Can be used for messages where no values are needed
+<a id="validation-462f95"></a>&#x2022; [`oversized_body_fail_validation`](#validation-462f95) - Optional Block<br>Enable this option
 
-<a id="validation-7ffaab"></a>&#x2022; [`oversized_body_skip_validation`](#validation-7ffaab) - Optional Block<br>Can be used for messages where no values are needed
+<a id="validation-7ffaab"></a>&#x2022; [`oversized_body_skip_validation`](#validation-7ffaab) - Optional Block<br>Enable this option
 
 <a id="custom-8254df"></a>&#x2022; [`property_validation_settings_custom`](#custom-8254df) - Optional Block<br>Validation Property Settings. Custom property validation settings<br>See [Property Validation Settings Custom](#custom-8254df) below.
 
-<a id="default-f746bd"></a>&#x2022; [`property_validation_settings_default`](#default-f746bd) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-f746bd"></a>&#x2022; [`property_validation_settings_default`](#default-f746bd) - Optional Block<br>Enable this option
 
 #### API Specification Validation All Spec Endpoints Settings Property Validation Settings Custom
 
@@ -1250,13 +1250,13 @@ A [`validation_custom_list`](#list-23b577) block (within [`api_specification`](#
 
 A [`settings`](#settings-940e64) block (within [`api_specification.validation_custom_list`](#list-23b577)) supports the following:
 
-<a id="validation-cfaf7f"></a>&#x2022; [`oversized_body_fail_validation`](#validation-cfaf7f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="validation-cfaf7f"></a>&#x2022; [`oversized_body_fail_validation`](#validation-cfaf7f) - Optional Block<br>Enable this option
 
-<a id="validation-0639fa"></a>&#x2022; [`oversized_body_skip_validation`](#validation-0639fa) - Optional Block<br>Can be used for messages where no values are needed
+<a id="validation-0639fa"></a>&#x2022; [`oversized_body_skip_validation`](#validation-0639fa) - Optional Block<br>Enable this option
 
 <a id="custom-8e6ea6"></a>&#x2022; [`property_validation_settings_custom`](#custom-8e6ea6) - Optional Block<br>Validation Property Settings. Custom property validation settings<br>See [Property Validation Settings Custom](#custom-8e6ea6) below.
 
-<a id="default-baec50"></a>&#x2022; [`property_validation_settings_default`](#default-baec50) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-baec50"></a>&#x2022; [`property_validation_settings_default`](#default-baec50) - Optional Block<br>Enable this option
 
 #### API Specification Validation Custom List Settings Property Validation Settings Custom
 
@@ -1274,11 +1274,11 @@ An [`api_testing`](#api-testing) block supports the following:
 
 <a id="api-testing-domains"></a>&#x2022; [`domains`](#api-testing-domains) - Optional Block<br>Add and configure testing domains and credentials<br>See [Domains](#api-testing-domains) below.
 
-<a id="api-testing-every-day"></a>&#x2022; [`every_day`](#api-testing-every-day) - Optional Block<br>Can be used for messages where no values are needed
+<a id="api-testing-every-day"></a>&#x2022; [`every_day`](#api-testing-every-day) - Optional Block<br>Enable this option
 
-<a id="api-testing-every-month"></a>&#x2022; [`every_month`](#api-testing-every-month) - Optional Block<br>Can be used for messages where no values are needed
+<a id="api-testing-every-month"></a>&#x2022; [`every_month`](#api-testing-every-month) - Optional Block<br>Enable this option
 
-<a id="api-testing-every-week"></a>&#x2022; [`every_week`](#api-testing-every-week) - Optional Block<br>Can be used for messages where no values are needed
+<a id="api-testing-every-week"></a>&#x2022; [`every_week`](#api-testing-every-week) - Optional Block<br>Enable this option
 
 #### API Testing Domains
 
@@ -1294,7 +1294,7 @@ A [`domains`](#api-testing-domains) block (within [`api_testing`](#api-testing))
 
 A [`credentials`](#api-testing-domains-credentials) block (within [`api_testing.domains`](#api-testing-domains)) supports the following:
 
-<a id="api-testing-domains-credentials-admin"></a>&#x2022; [`admin`](#api-testing-domains-credentials-admin) - Optional Block<br>Can be used for messages where no values are needed
+<a id="api-testing-domains-credentials-admin"></a>&#x2022; [`admin`](#api-testing-domains-credentials-admin) - Optional Block<br>Enable this option
 
 <a id="api-testing-domains-credentials-api-key"></a>&#x2022; [`api_key`](#api-testing-domains-credentials-api-key) - Optional Block<br>API Key<br>See [API Key](#api-testing-domains-credentials-api-key) below.
 
@@ -1306,7 +1306,7 @@ A [`credentials`](#api-testing-domains-credentials) block (within [`api_testing.
 
 <a id="endpoint-08dc4d"></a>&#x2022; [`login_endpoint`](#endpoint-08dc4d) - Optional Block<br>Login Endpoint<br>See [Login Endpoint](#endpoint-08dc4d) below.
 
-<a id="standard-8b74a1"></a>&#x2022; [`standard`](#standard-8b74a1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="standard-8b74a1"></a>&#x2022; [`standard`](#standard-8b74a1) - Optional Block<br>Enable this option
 
 #### API Testing Domains Credentials API Key
 
@@ -1420,7 +1420,7 @@ A [`blocked_clients`](#blocked-clients) block supports the following:
 
 <a id="blocked-clients-as-number"></a>&#x2022; [`as_number`](#blocked-clients-as-number) - Optional Number<br>RFC 6793 defined 4-byte AS number
 
-<a id="blocked-clients-bot-skip-processing"></a>&#x2022; [`bot_skip_processing`](#blocked-clients-bot-skip-processing) - Optional Block<br>Can be used for messages where no values are needed
+<a id="blocked-clients-bot-skip-processing"></a>&#x2022; [`bot_skip_processing`](#blocked-clients-bot-skip-processing) - Optional Block<br>Enable this option
 
 <a id="blocked-clients-expiration-timestamp"></a>&#x2022; [`expiration_timestamp`](#blocked-clients-expiration-timestamp) - Optional String<br>Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore
 
@@ -1432,11 +1432,11 @@ A [`blocked_clients`](#blocked-clients) block supports the following:
 
 <a id="blocked-clients-metadata"></a>&#x2022; [`metadata`](#blocked-clients-metadata) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#blocked-clients-metadata) below.
 
-<a id="blocked-clients-skip-processing"></a>&#x2022; [`skip_processing`](#blocked-clients-skip-processing) - Optional Block<br>Can be used for messages where no values are needed
+<a id="blocked-clients-skip-processing"></a>&#x2022; [`skip_processing`](#blocked-clients-skip-processing) - Optional Block<br>Enable this option
 
 <a id="blocked-clients-user-identifier"></a>&#x2022; [`user_identifier`](#blocked-clients-user-identifier) - Optional String<br>Identify user based on user identifier. User identifier value needs to be copied from security event
 
-<a id="blocked-clients-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#blocked-clients-waf-skip-processing) - Optional Block<br>Can be used for messages where no values are needed
+<a id="blocked-clients-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#blocked-clients-waf-skip-processing) - Optional Block<br>Enable this option
 
 #### Blocked Clients HTTP Header
 
@@ -1470,9 +1470,9 @@ A [`metadata`](#blocked-clients-metadata) block (within [`blocked_clients`](#blo
 
 A [`bot_defense`](#bot-defense) block supports the following:
 
-<a id="bot-defense-disable-cors-support"></a>&#x2022; [`disable_cors_support`](#bot-defense-disable-cors-support) - Optional Block<br>Can be used for messages where no values are needed
+<a id="bot-defense-disable-cors-support"></a>&#x2022; [`disable_cors_support`](#bot-defense-disable-cors-support) - Optional Block<br>Enable this option
 
-<a id="bot-defense-enable-cors-support"></a>&#x2022; [`enable_cors_support`](#bot-defense-enable-cors-support) - Optional Block<br>Can be used for messages where no values are needed
+<a id="bot-defense-enable-cors-support"></a>&#x2022; [`enable_cors_support`](#bot-defense-enable-cors-support) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy"></a>&#x2022; [`policy`](#bot-defense-policy) - Optional Block<br>Defines various configuration OPTIONS for Bot Defense policy<br>See [Policy](#bot-defense-policy) below.
 
@@ -1484,9 +1484,9 @@ A [`bot_defense`](#bot-defense) block supports the following:
 
 A [`policy`](#bot-defense-policy) block (within [`bot_defense`](#bot-defense)) supports the following:
 
-<a id="bot-defense-policy-disable-js-insert"></a>&#x2022; [`disable_js_insert`](#bot-defense-policy-disable-js-insert) - Optional Block<br>Can be used for messages where no values are needed
+<a id="bot-defense-policy-disable-js-insert"></a>&#x2022; [`disable_js_insert`](#bot-defense-policy-disable-js-insert) - Optional Block<br>Enable this option
 
-<a id="bot-defense-policy-disable-mobile-sdk"></a>&#x2022; [`disable_mobile_sdk`](#bot-defense-policy-disable-mobile-sdk) - Optional Block<br>Can be used for messages where no values are needed
+<a id="bot-defense-policy-disable-mobile-sdk"></a>&#x2022; [`disable_mobile_sdk`](#bot-defense-policy-disable-mobile-sdk) - Optional Block<br>Enable this option
 
 <a id="bot-defense-policy-javascript-mode"></a>&#x2022; [`javascript_mode`](#bot-defense-policy-javascript-mode) - Optional String  Defaults to `ASYNC_JS_NO_CACHING`<br>Possible values are `ASYNC_JS_NO_CACHING`, `ASYNC_JS_CACHING`, `SYNC_JS_NO_CACHING`, `SYNC_JS_CACHING`<br>[Enum: ASYNC_JS_NO_CACHING|ASYNC_JS_CACHING|SYNC_JS_NO_CACHING|SYNC_JS_CACHING] Web Client JavaScript Mode. Bot Defense JavaScript for telemetry collection is requested asynchronously, and it is non-cacheable Bot Defense JavaScript for telemetry collection is requested asynchronously, and it is cacheable Bot Defense JavaScript for telemetry collection is requested
 
@@ -1556,7 +1556,7 @@ A [`js_insertion_rules`](#bot-defense-policy-js-insertion-rules) block (within [
 
 A [`rules`](#rules-15d983) block (within [`bot_defense.policy.js_insertion_rules`](#bot-defense-policy-js-insertion-rules)) supports the following:
 
-<a id="domain-f27f00"></a>&#x2022; [`any_domain`](#domain-f27f00) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domain-f27f00"></a>&#x2022; [`any_domain`](#domain-f27f00) - Optional Block<br>Enable this option
 
 <a id="domain-834b0f"></a>&#x2022; [`domain`](#domain-834b0f) - Optional Block<br>Domains. Domains names<br>See [Domain](#domain-834b0f) below.
 
@@ -1600,9 +1600,9 @@ A [`mobile_sdk_config`](#bot-defense-policy-mobile-sdk-config) block (within [`b
 
 A [`protected_app_endpoints`](#endpoints-01a2f3) block (within [`bot_defense.policy`](#bot-defense-policy)) supports the following:
 
-<a id="bots-cfdb6f"></a>&#x2022; [`allow_good_bots`](#bots-cfdb6f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="bots-cfdb6f"></a>&#x2022; [`allow_good_bots`](#bots-cfdb6f) - Optional Block<br>Enable this option
 
-<a id="domain-f4f253"></a>&#x2022; [`any_domain`](#domain-f4f253) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domain-f4f253"></a>&#x2022; [`any_domain`](#domain-f4f253) - Optional Block<br>Enable this option
 
 <a id="domain-18bf1a"></a>&#x2022; [`domain`](#domain-18bf1a) - Optional Block<br>Domains. Domains names<br>See [Domain](#domain-18bf1a) below.
 
@@ -1614,11 +1614,11 @@ A [`protected_app_endpoints`](#endpoints-01a2f3) block (within [`bot_defense.pol
 
 <a id="metadata-c93137"></a>&#x2022; [`metadata`](#metadata-c93137) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#metadata-c93137) below.
 
-<a id="bots-5c9c05"></a>&#x2022; [`mitigate_good_bots`](#bots-5c9c05) - Optional Block<br>Can be used for messages where no values are needed
+<a id="bots-5c9c05"></a>&#x2022; [`mitigate_good_bots`](#bots-5c9c05) - Optional Block<br>Enable this option
 
 <a id="mitigation-cc96eb"></a>&#x2022; [`mitigation`](#mitigation-cc96eb) - Optional Block<br>Modify Bot Defense behavior for a matching request<br>See [Mitigation](#mitigation-cc96eb) below.
 
-<a id="mobile-2839a0"></a>&#x2022; [`mobile`](#mobile-2839a0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mobile-2839a0"></a>&#x2022; [`mobile`](#mobile-2839a0) - Optional Block<br>Enable this option
 
 <a id="path-d5ee15"></a>&#x2022; [`path`](#path-d5ee15) - Optional Block<br>Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-d5ee15) below.
 
@@ -1626,9 +1626,9 @@ A [`protected_app_endpoints`](#endpoints-01a2f3) block (within [`bot_defense.pol
 
 <a id="params-8f5791"></a>&#x2022; [`query_params`](#params-8f5791) - Optional Block<br>List of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query<br>See [Query Params](#params-8f5791) below.
 
-<a id="label-a84f6e"></a>&#x2022; [`undefined_flow_label`](#label-a84f6e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="label-a84f6e"></a>&#x2022; [`undefined_flow_label`](#label-a84f6e) - Optional Block<br>Enable this option
 
-<a id="web-a33d3d"></a>&#x2022; [`web`](#web-a33d3d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="web-a33d3d"></a>&#x2022; [`web`](#web-a33d3d) - Optional Block<br>Enable this option
 
 <a id="mobile-0ffdfb"></a>&#x2022; [`web_mobile`](#mobile-0ffdfb) - Optional Block<br>Web and Mobile traffic type. Web and Mobile traffic type<br>See [Web Mobile](#mobile-0ffdfb) below.
 
@@ -1694,9 +1694,9 @@ A [`domain`](#domain-18bf1a) block (within [`bot_defense.policy.protected_app_en
 
 A [`headers`](#headers-986193) block (within [`bot_defense.policy.protected_app_endpoints`](#endpoints-01a2f3)) supports the following:
 
-<a id="present-2e9857"></a>&#x2022; [`check_not_present`](#present-2e9857) - Optional Block<br>Can be used for messages where no values are needed
+<a id="present-2e9857"></a>&#x2022; [`check_not_present`](#present-2e9857) - Optional Block<br>Enable this option
 
-<a id="present-3a1075"></a>&#x2022; [`check_present`](#present-3a1075) - Optional Block<br>Can be used for messages where no values are needed
+<a id="present-3a1075"></a>&#x2022; [`check_present`](#present-3a1075) - Optional Block<br>Enable this option
 
 <a id="matcher-66fb69"></a>&#x2022; [`invert_matcher`](#matcher-66fb69) - Optional Bool<br>Invert Header Matcher. Invert the match result
 
@@ -1768,9 +1768,9 @@ A [`path`](#path-d5ee15) block (within [`bot_defense.policy.protected_app_endpoi
 
 A [`bot_defense_advanced`](#bot-defense-advanced) block supports the following:
 
-<a id="bot-defense-advanced-disable-js-insert"></a>&#x2022; [`disable_js_insert`](#bot-defense-advanced-disable-js-insert) - Optional Block<br>Can be used for messages where no values are needed
+<a id="bot-defense-advanced-disable-js-insert"></a>&#x2022; [`disable_js_insert`](#bot-defense-advanced-disable-js-insert) - Optional Block<br>Enable this option
 
-<a id="bot-defense-advanced-disable-mobile-sdk"></a>&#x2022; [`disable_mobile_sdk`](#bot-defense-advanced-disable-mobile-sdk) - Optional Block<br>Can be used for messages where no values are needed
+<a id="bot-defense-advanced-disable-mobile-sdk"></a>&#x2022; [`disable_mobile_sdk`](#bot-defense-advanced-disable-mobile-sdk) - Optional Block<br>Enable this option
 
 <a id="pages-27f3ea"></a>&#x2022; [`js_insert_all_pages`](#pages-27f3ea) - Optional Block<br>Insert Bot Defense JavaScript in all pages<br>See [Js Insert All Pages](#pages-27f3ea) below.
 
@@ -1838,7 +1838,7 @@ A [`js_insertion_rules`](#bot-defense-advanced-js-insertion-rules) block (within
 
 A [`rules`](#rules-24e5a0) block (within [`bot_defense_advanced.js_insertion_rules`](#bot-defense-advanced-js-insertion-rules)) supports the following:
 
-<a id="domain-bd13eb"></a>&#x2022; [`any_domain`](#domain-bd13eb) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domain-bd13eb"></a>&#x2022; [`any_domain`](#domain-bd13eb) - Optional Block<br>Enable this option
 
 <a id="domain-ff2f2e"></a>&#x2022; [`domain`](#domain-ff2f2e) - Optional Block<br>Domains. Domains names<br>See [Domain](#domain-ff2f2e) below.
 
@@ -1920,7 +1920,7 @@ A [`custom_cache_rule`](#caching-policy-custom-cache-rule) block (within [`cachi
 
 A [`default_cache_action`](#caching-policy-default-cache-action) block (within [`caching_policy`](#caching-policy)) supports the following:
 
-<a id="disabled-39759c"></a>&#x2022; [`cache_disabled`](#disabled-39759c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-39759c"></a>&#x2022; [`cache_disabled`](#disabled-39759c) - Optional Block<br>Enable this option
 
 <a id="default-2899d2"></a>&#x2022; [`cache_ttl_default`](#default-2899d2) - Optional String<br>Use Cache TTL Provided by Origin, and set a contigency TTL value in case one is not provided
 
@@ -1944,9 +1944,9 @@ A [`client_side_defense`](#client-side-defense) block supports the following:
 
 A [`policy`](#client-side-defense-policy) block (within [`client_side_defense`](#client-side-defense)) supports the following:
 
-<a id="insert-683e69"></a>&#x2022; [`disable_js_insert`](#insert-683e69) - Optional Block<br>Can be used for messages where no values are needed
+<a id="insert-683e69"></a>&#x2022; [`disable_js_insert`](#insert-683e69) - Optional Block<br>Enable this option
 
-<a id="pages-38bd1c"></a>&#x2022; [`js_insert_all_pages`](#pages-38bd1c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="pages-38bd1c"></a>&#x2022; [`js_insert_all_pages`](#pages-38bd1c) - Optional Block<br>Enable this option
 
 <a id="except-7bfe85"></a>&#x2022; [`js_insert_all_pages_except`](#except-7bfe85) - Optional Block<br>Insert Client-Side Defense JavaScript in all pages with the exceptions<br>See [Js Insert All Pages Except](#except-7bfe85) below.
 
@@ -2016,25 +2016,25 @@ A [`js_insertion_rules`](#rules-ad3671) block (within [`client_side_defense.poli
 
 A [`cookie_stickiness`](#cookie-stickiness) block supports the following:
 
-<a id="cookie-stickiness-add-httponly"></a>&#x2022; [`add_httponly`](#cookie-stickiness-add-httponly) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cookie-stickiness-add-httponly"></a>&#x2022; [`add_httponly`](#cookie-stickiness-add-httponly) - Optional Block<br>Enable this option
 
-<a id="cookie-stickiness-add-secure"></a>&#x2022; [`add_secure`](#cookie-stickiness-add-secure) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cookie-stickiness-add-secure"></a>&#x2022; [`add_secure`](#cookie-stickiness-add-secure) - Optional Block<br>Enable this option
 
-<a id="cookie-stickiness-ignore-httponly"></a>&#x2022; [`ignore_httponly`](#cookie-stickiness-ignore-httponly) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cookie-stickiness-ignore-httponly"></a>&#x2022; [`ignore_httponly`](#cookie-stickiness-ignore-httponly) - Optional Block<br>Enable this option
 
-<a id="cookie-stickiness-ignore-samesite"></a>&#x2022; [`ignore_samesite`](#cookie-stickiness-ignore-samesite) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cookie-stickiness-ignore-samesite"></a>&#x2022; [`ignore_samesite`](#cookie-stickiness-ignore-samesite) - Optional Block<br>Enable this option
 
-<a id="cookie-stickiness-ignore-secure"></a>&#x2022; [`ignore_secure`](#cookie-stickiness-ignore-secure) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cookie-stickiness-ignore-secure"></a>&#x2022; [`ignore_secure`](#cookie-stickiness-ignore-secure) - Optional Block<br>Enable this option
 
 <a id="cookie-stickiness-name"></a>&#x2022; [`name`](#cookie-stickiness-name) - Optional String<br>The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced
 
 <a id="cookie-stickiness-path"></a>&#x2022; [`path`](#cookie-stickiness-path) - Optional String<br>The name of the path for the cookie. If no path is specified here, no path will be set for the cookie
 
-<a id="cookie-stickiness-samesite-lax"></a>&#x2022; [`samesite_lax`](#cookie-stickiness-samesite-lax) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cookie-stickiness-samesite-lax"></a>&#x2022; [`samesite_lax`](#cookie-stickiness-samesite-lax) - Optional Block<br>Enable this option
 
-<a id="cookie-stickiness-samesite-none"></a>&#x2022; [`samesite_none`](#cookie-stickiness-samesite-none) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cookie-stickiness-samesite-none"></a>&#x2022; [`samesite_none`](#cookie-stickiness-samesite-none) - Optional Block<br>Enable this option
 
-<a id="cookie-stickiness-samesite-strict"></a>&#x2022; [`samesite_strict`](#cookie-stickiness-samesite-strict) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cookie-stickiness-samesite-strict"></a>&#x2022; [`samesite_strict`](#cookie-stickiness-samesite-strict) - Optional Block<br>Enable this option
 
 <a id="cookie-stickiness-ttl"></a>&#x2022; [`ttl`](#cookie-stickiness-ttl) - Optional Number<br>If specified, a cookie with the TTL will be generated if the cookie is not present. If the TTL is present and zero, the generated cookie will be a session cookie. TTL value is in milliseconds
 
@@ -2062,11 +2062,11 @@ A [`cors_policy`](#cors-policy) block supports the following:
 
 A [`csrf_policy`](#csrf-policy) block supports the following:
 
-<a id="csrf-policy-all-load-balancer-domains"></a>&#x2022; [`all_load_balancer_domains`](#csrf-policy-all-load-balancer-domains) - Optional Block<br>Can be used for messages where no values are needed
+<a id="csrf-policy-all-load-balancer-domains"></a>&#x2022; [`all_load_balancer_domains`](#csrf-policy-all-load-balancer-domains) - Optional Block<br>Enable this option
 
 <a id="csrf-policy-custom-domain-list"></a>&#x2022; [`custom_domain_list`](#csrf-policy-custom-domain-list) - Optional Block<br>List of domain names used for Host header matching<br>See [Custom Domain List](#csrf-policy-custom-domain-list) below.
 
-<a id="csrf-policy-disabled"></a>&#x2022; [`disabled`](#csrf-policy-disabled) - Optional Block<br>Can be used for messages where no values are needed
+<a id="csrf-policy-disabled"></a>&#x2022; [`disabled`](#csrf-policy-disabled) - Optional Block<br>Enable this option
 
 #### CSRF Policy Custom Domain List
 
@@ -2078,9 +2078,9 @@ A [`custom_domain_list`](#csrf-policy-custom-domain-list) block (within [`csrf_p
 
 A [`data_guard_rules`](#data-guard-rules) block supports the following:
 
-<a id="data-guard-rules-any-domain"></a>&#x2022; [`any_domain`](#data-guard-rules-any-domain) - Optional Block<br>Can be used for messages where no values are needed
+<a id="data-guard-rules-any-domain"></a>&#x2022; [`any_domain`](#data-guard-rules-any-domain) - Optional Block<br>Enable this option
 
-<a id="data-guard-rules-apply-data-guard"></a>&#x2022; [`apply_data_guard`](#data-guard-rules-apply-data-guard) - Optional Block<br>Can be used for messages where no values are needed
+<a id="data-guard-rules-apply-data-guard"></a>&#x2022; [`apply_data_guard`](#data-guard-rules-apply-data-guard) - Optional Block<br>Enable this option
 
 <a id="data-guard-rules-exact-value"></a>&#x2022; [`exact_value`](#data-guard-rules-exact-value) - Optional String<br>Exact domain name
 
@@ -2088,7 +2088,7 @@ A [`data_guard_rules`](#data-guard-rules) block supports the following:
 
 <a id="data-guard-rules-path"></a>&#x2022; [`path`](#data-guard-rules-path) - Optional Block<br>Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#data-guard-rules-path) below.
 
-<a id="data-guard-rules-skip-data-guard"></a>&#x2022; [`skip_data_guard`](#data-guard-rules-skip-data-guard) - Optional Block<br>Can be used for messages where no values are needed
+<a id="data-guard-rules-skip-data-guard"></a>&#x2022; [`skip_data_guard`](#data-guard-rules-skip-data-guard) - Optional Block<br>Enable this option
 
 <a id="data-guard-rules-suffix-value"></a>&#x2022; [`suffix_value`](#data-guard-rules-suffix-value) - Optional String<br>Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
@@ -2114,7 +2114,7 @@ A [`path`](#data-guard-rules-path) block (within [`data_guard_rules`](#data-guar
 
 A [`ddos_mitigation_rules`](#ddos-mitigation-rules) block supports the following:
 
-<a id="ddos-mitigation-rules-block"></a>&#x2022; [`block`](#ddos-mitigation-rules-block) - Optional Block<br>Can be used for messages where no values are needed
+<a id="ddos-mitigation-rules-block"></a>&#x2022; [`block`](#ddos-mitigation-rules-block) - Optional Block<br>Enable this option
 
 <a id="source-02aa55"></a>&#x2022; [`ddos_client_source`](#source-02aa55) - Optional Block<br>DDOS Client Source Choice. DDOS Mitigation sources to be blocked<br>See [DDOS Client Source](#source-02aa55) below.
 
@@ -2170,7 +2170,7 @@ A [`default_pool`](#default-pool) block supports the following:
 
 <a id="default-pool-advanced-options"></a>&#x2022; [`advanced_options`](#default-pool-advanced-options) - Optional Block<br>Configure Advanced OPTIONS for origin pool<br>See [Advanced Options](#default-pool-advanced-options) below.
 
-<a id="default-pool-automatic-port"></a>&#x2022; [`automatic_port`](#default-pool-automatic-port) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-pool-automatic-port"></a>&#x2022; [`automatic_port`](#default-pool-automatic-port) - Optional Block<br>Enable this option
 
 <a id="default-pool-endpoint-selection"></a>&#x2022; [`endpoint_selection`](#default-pool-endpoint-selection) - Optional String  Defaults to `DISTRIBUTED`<br>Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`<br>[Enum: DISTRIBUTED|LOCAL_ONLY|LOCAL_PREFERRED] Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for
 
@@ -2178,17 +2178,17 @@ A [`default_pool`](#default-pool) block supports the following:
 
 <a id="default-pool-healthcheck"></a>&#x2022; [`healthcheck`](#default-pool-healthcheck) - Optional Block<br>Reference to healthcheck configuration objects<br>See [Healthcheck](#default-pool-healthcheck) below.
 
-<a id="default-pool-lb-port"></a>&#x2022; [`lb_port`](#default-pool-lb-port) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-pool-lb-port"></a>&#x2022; [`lb_port`](#default-pool-lb-port) - Optional Block<br>Enable this option
 
 <a id="default-pool-loadbalancer-algorithm"></a>&#x2022; [`loadbalancer_algorithm`](#default-pool-loadbalancer-algorithm) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`<br>[Enum: ROUND_ROBIN|LEAST_REQUEST|RING_HASH|RANDOM|LB_OVERRIDE] Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in
 
-<a id="default-pool-no-tls"></a>&#x2022; [`no_tls`](#default-pool-no-tls) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-pool-no-tls"></a>&#x2022; [`no_tls`](#default-pool-no-tls) - Optional Block<br>Enable this option
 
 <a id="default-pool-origin-servers"></a>&#x2022; [`origin_servers`](#default-pool-origin-servers) - Optional Block<br>List of origin servers in this pool<br>See [Origin Servers](#default-pool-origin-servers) below.
 
 <a id="default-pool-port"></a>&#x2022; [`port`](#default-pool-port) - Optional Number<br>Endpoint service is available on this port
 
-<a id="default-pool-same-as-endpoint-port"></a>&#x2022; [`same_as_endpoint_port`](#default-pool-same-as-endpoint-port) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-pool-same-as-endpoint-port"></a>&#x2022; [`same_as_endpoint_port`](#default-pool-same-as-endpoint-port) - Optional Block<br>Enable this option
 
 <a id="type-2756f7"></a>&#x2022; [`upstream_conn_pool_reuse_type`](#type-2756f7) - Optional Block<br>Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only<br>See [Upstream Conn Pool Reuse Type](#type-2756f7) below.
 
@@ -2200,25 +2200,25 @@ A [`default_pool`](#default-pool) block supports the following:
 
 An [`advanced_options`](#default-pool-advanced-options) block (within [`default_pool`](#default-pool)) supports the following:
 
-<a id="config-48f56b"></a>&#x2022; [`auto_http_config`](#config-48f56b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="config-48f56b"></a>&#x2022; [`auto_http_config`](#config-48f56b) - Optional Block<br>Enable this option
 
 <a id="breaker-8f5df4"></a>&#x2022; [`circuit_breaker`](#breaker-8f5df4) - Optional Block<br>CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly<br>See [Circuit Breaker](#breaker-8f5df4) below.
 
 <a id="timeout-8cd873"></a>&#x2022; [`connection_timeout`](#timeout-8cd873) - Optional Number  Defaults to `2`  Specified in milliseconds<br>The timeout for new network connections to endpoints in the cluster.  The seconds
 
-<a id="breaker-db5d25"></a>&#x2022; [`default_circuit_breaker`](#breaker-db5d25) - Optional Block<br>Can be used for messages where no values are needed
+<a id="breaker-db5d25"></a>&#x2022; [`default_circuit_breaker`](#breaker-db5d25) - Optional Block<br>Enable this option
 
-<a id="breaker-03c951"></a>&#x2022; [`disable_circuit_breaker`](#breaker-03c951) - Optional Block<br>Can be used for messages where no values are needed
+<a id="breaker-03c951"></a>&#x2022; [`disable_circuit_breaker`](#breaker-03c951) - Optional Block<br>Enable this option
 
-<a id="persistance-83b4c4"></a>&#x2022; [`disable_lb_source_ip_persistance`](#persistance-83b4c4) - Optional Block<br>Can be used for messages where no values are needed
+<a id="persistance-83b4c4"></a>&#x2022; [`disable_lb_source_ip_persistance`](#persistance-83b4c4) - Optional Block<br>Enable this option
 
-<a id="detection-46546c"></a>&#x2022; [`disable_outlier_detection`](#detection-46546c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="detection-46546c"></a>&#x2022; [`disable_outlier_detection`](#detection-46546c) - Optional Block<br>Enable this option
 
-<a id="protocol-d614b9"></a>&#x2022; [`disable_proxy_protocol`](#protocol-d614b9) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protocol-d614b9"></a>&#x2022; [`disable_proxy_protocol`](#protocol-d614b9) - Optional Block<br>Enable this option
 
-<a id="subsets-b0bd38"></a>&#x2022; [`disable_subsets`](#subsets-b0bd38) - Optional Block<br>Can be used for messages where no values are needed
+<a id="subsets-b0bd38"></a>&#x2022; [`disable_subsets`](#subsets-b0bd38) - Optional Block<br>Enable this option
 
-<a id="persistance-d799ee"></a>&#x2022; [`enable_lb_source_ip_persistance`](#persistance-d799ee) - Optional Block<br>Can be used for messages where no values are needed
+<a id="persistance-d799ee"></a>&#x2022; [`enable_lb_source_ip_persistance`](#persistance-d799ee) - Optional Block<br>Enable this option
 
 <a id="subsets-5a741c"></a>&#x2022; [`enable_subsets`](#subsets-5a741c) - Optional Block<br>Configure subset OPTIONS for origin pool<br>See [Enable Subsets](#subsets-5a741c) below.
 
@@ -2228,15 +2228,15 @@ An [`advanced_options`](#default-pool-advanced-options) block (within [`default_
 
 <a id="timeout-3807d9"></a>&#x2022; [`http_idle_timeout`](#timeout-3807d9) - Optional Number<br>The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed
 
-<a id="threshold-4ef07a"></a>&#x2022; [`no_panic_threshold`](#threshold-4ef07a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="threshold-4ef07a"></a>&#x2022; [`no_panic_threshold`](#threshold-4ef07a) - Optional Block<br>Enable this option
 
 <a id="detection-c89e70"></a>&#x2022; [`outlier_detection`](#detection-c89e70) - Optional Block<br>Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1<br>See [Outlier Detection](#detection-c89e70) below.
 
 <a id="threshold-61a03f"></a>&#x2022; [`panic_threshold`](#threshold-61a03f) - Optional Number<br>Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status
 
-<a id="protocol-v1-de8613"></a>&#x2022; [`proxy_protocol_v1`](#protocol-v1-de8613) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protocol-v1-de8613"></a>&#x2022; [`proxy_protocol_v1`](#protocol-v1-de8613) - Optional Block<br>Enable this option
 
-<a id="protocol-v2-5b9d69"></a>&#x2022; [`proxy_protocol_v2`](#protocol-v2-5b9d69) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protocol-v2-5b9d69"></a>&#x2022; [`proxy_protocol_v2`](#protocol-v2-5b9d69) - Optional Block<br>Enable this option
 
 #### Default Pool Advanced Options Circuit Breaker
 
@@ -2256,13 +2256,13 @@ A [`circuit_breaker`](#breaker-8f5df4) block (within [`default_pool.advanced_opt
 
 An [`enable_subsets`](#subsets-5a741c) block (within [`default_pool.advanced_options`](#default-pool-advanced-options)) supports the following:
 
-<a id="endpoint-6dd4c1"></a>&#x2022; [`any_endpoint`](#endpoint-6dd4c1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="endpoint-6dd4c1"></a>&#x2022; [`any_endpoint`](#endpoint-6dd4c1) - Optional Block<br>Enable this option
 
 <a id="subset-1bf539"></a>&#x2022; [`default_subset`](#subset-1bf539) - Optional Block<br>Origin Pool Default Subset. Default Subset definition<br>See [Default Subset](#subset-1bf539) below.
 
 <a id="subsets-5171e5"></a>&#x2022; [`endpoint_subsets`](#subsets-5171e5) - Optional Block<br>List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class<br>See [Endpoint Subsets](#subsets-5171e5) below.
 
-<a id="request-26d37d"></a>&#x2022; [`fail_request`](#request-26d37d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="request-26d37d"></a>&#x2022; [`fail_request`](#request-26d37d) - Optional Block<br>Enable this option
 
 #### Default Pool Advanced Options Enable Subsets Default Subset
 
@@ -2348,9 +2348,9 @@ A [`cbip_service`](#service-060a80) block (within [`default_pool.origin_servers`
 
 A [`consul_service`](#service-799005) block (within [`default_pool.origin_servers`](#default-pool-origin-servers)) supports the following:
 
-<a id="network-654a28"></a>&#x2022; [`inside_network`](#network-654a28) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-654a28"></a>&#x2022; [`inside_network`](#network-654a28) - Optional Block<br>Enable this option
 
-<a id="network-b1e5db"></a>&#x2022; [`outside_network`](#network-b1e5db) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-b1e5db"></a>&#x2022; [`outside_network`](#network-b1e5db) - Optional Block<br>Enable this option
 
 <a id="name-5d42b9"></a>&#x2022; [`service_name`](#name-5d42b9) - Optional String<br>Consul service name of this origin server will be listed, including cluster-ID. The format is servicename:cluster-ID
 
@@ -2392,9 +2392,9 @@ A [`custom_endpoint_object`](#object-12dd7f) block (within [`default_pool.origin
 
 A [`k8s_service`](#default-pool-origin-servers-k8s-service) block (within [`default_pool.origin_servers`](#default-pool-origin-servers)) supports the following:
 
-<a id="network-dfbf17"></a>&#x2022; [`inside_network`](#network-dfbf17) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-dfbf17"></a>&#x2022; [`inside_network`](#network-dfbf17) - Optional Block<br>Enable this option
 
-<a id="network-d1b956"></a>&#x2022; [`outside_network`](#network-d1b956) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-d1b956"></a>&#x2022; [`outside_network`](#network-d1b956) - Optional Block<br>Enable this option
 
 <a id="protocol-ffcd27"></a>&#x2022; [`protocol`](#protocol-ffcd27) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_UDP] Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP
 
@@ -2404,7 +2404,7 @@ A [`k8s_service`](#default-pool-origin-servers-k8s-service) block (within [`defa
 
 <a id="pool-0640ac"></a>&#x2022; [`snat_pool`](#pool-0640ac) - Optional Block<br>SNAT Pool. SNAT Pool configuration<br>See [Snat Pool](#pool-0640ac) below.
 
-<a id="networks-03f764"></a>&#x2022; [`vk8s_networks`](#networks-03f764) - Optional Block<br>Can be used for messages where no values are needed
+<a id="networks-03f764"></a>&#x2022; [`vk8s_networks`](#networks-03f764) - Optional Block<br>Enable this option
 
 #### Default Pool Origin Servers K8S Service Site Locator
 
@@ -2430,11 +2430,11 @@ A [`k8s_service`](#default-pool-origin-servers-k8s-service) block (within [`defa
 
 A [`private_ip`](#default-pool-origin-servers-private-ip) block (within [`default_pool.origin_servers`](#default-pool-origin-servers)) supports the following:
 
-<a id="network-704c7d"></a>&#x2022; [`inside_network`](#network-704c7d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-704c7d"></a>&#x2022; [`inside_network`](#network-704c7d) - Optional Block<br>Enable this option
 
 <a id="ip-ip-4a696b"></a>&#x2022; [`ip`](#ip-ip-4a696b) - Optional String<br>IP. Private IPv4 address
 
-<a id="network-f44165"></a>&#x2022; [`outside_network`](#network-f44165) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-f44165"></a>&#x2022; [`outside_network`](#network-f44165) - Optional Block<br>Enable this option
 
 <a id="segment-735aa1"></a>&#x2022; [`segment`](#segment-735aa1) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Segment](#segment-735aa1) below.
 
@@ -2478,9 +2478,9 @@ A [`private_name`](#name-966ae3) block (within [`default_pool.origin_servers`](#
 
 <a id="name-8a8021"></a>&#x2022; [`dns_name`](#name-8a8021) - Optional String<br>DNS Name. DNS Name
 
-<a id="network-e9e813"></a>&#x2022; [`inside_network`](#network-e9e813) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-e9e813"></a>&#x2022; [`inside_network`](#network-e9e813) - Optional Block<br>Enable this option
 
-<a id="network-873dcb"></a>&#x2022; [`outside_network`](#network-873dcb) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-873dcb"></a>&#x2022; [`outside_network`](#network-873dcb) - Optional Block<br>Enable this option
 
 <a id="interval-615002"></a>&#x2022; [`refresh_interval`](#interval-615002) - Optional Number<br>Interval for DNS refresh in seconds. Max value is 7 days as per `HTTPS://datatracker.ietf.org/doc/HTML/rfc8767.`
 
@@ -2562,31 +2562,31 @@ A [`vn_private_name`](#name-4a1747) block (within [`default_pool.origin_servers`
 
 An [`upstream_conn_pool_reuse_type`](#type-2756f7) block (within [`default_pool`](#default-pool)) supports the following:
 
-<a id="reuse-6660fb"></a>&#x2022; [`disable_conn_pool_reuse`](#reuse-6660fb) - Optional Block<br>Can be used for messages where no values are needed
+<a id="reuse-6660fb"></a>&#x2022; [`disable_conn_pool_reuse`](#reuse-6660fb) - Optional Block<br>Enable this option
 
-<a id="reuse-52dccb"></a>&#x2022; [`enable_conn_pool_reuse`](#reuse-52dccb) - Optional Block<br>Can be used for messages where no values are needed
+<a id="reuse-52dccb"></a>&#x2022; [`enable_conn_pool_reuse`](#reuse-52dccb) - Optional Block<br>Enable this option
 
 #### Default Pool Use TLS
 
 An [`use_tls`](#default-pool-use-tls) block (within [`default_pool`](#default-pool)) supports the following:
 
-<a id="caching-6d4585"></a>&#x2022; [`default_session_key_caching`](#caching-6d4585) - Optional Block<br>Can be used for messages where no values are needed
+<a id="caching-6d4585"></a>&#x2022; [`default_session_key_caching`](#caching-6d4585) - Optional Block<br>Enable this option
 
-<a id="caching-e75c13"></a>&#x2022; [`disable_session_key_caching`](#caching-e75c13) - Optional Block<br>Can be used for messages where no values are needed
+<a id="caching-e75c13"></a>&#x2022; [`disable_session_key_caching`](#caching-e75c13) - Optional Block<br>Enable this option
 
-<a id="default-pool-use-tls-disable-sni"></a>&#x2022; [`disable_sni`](#default-pool-use-tls-disable-sni) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-pool-use-tls-disable-sni"></a>&#x2022; [`disable_sni`](#default-pool-use-tls-disable-sni) - Optional Block<br>Enable this option
 
 <a id="default-pool-use-tls-max-session-keys"></a>&#x2022; [`max_session_keys`](#default-pool-use-tls-max-session-keys) - Optional Number<br>Number of session keys that are cached
 
-<a id="default-pool-use-tls-no-mtls"></a>&#x2022; [`no_mtls`](#default-pool-use-tls-no-mtls) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-pool-use-tls-no-mtls"></a>&#x2022; [`no_mtls`](#default-pool-use-tls-no-mtls) - Optional Block<br>Enable this option
 
-<a id="verification-a40775"></a>&#x2022; [`skip_server_verification`](#verification-a40775) - Optional Block<br>Can be used for messages where no values are needed
+<a id="verification-a40775"></a>&#x2022; [`skip_server_verification`](#verification-a40775) - Optional Block<br>Enable this option
 
 <a id="default-pool-use-tls-sni"></a>&#x2022; [`sni`](#default-pool-use-tls-sni) - Optional String<br>SNI value to be used
 
 <a id="default-pool-use-tls-tls-config"></a>&#x2022; [`tls_config`](#default-pool-use-tls-tls-config) - Optional Block<br>Defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#default-pool-use-tls-tls-config) below.
 
-<a id="sni-a63eaf"></a>&#x2022; [`use_host_header_as_sni`](#sni-a63eaf) - Optional Block<br>Can be used for messages where no values are needed
+<a id="sni-a63eaf"></a>&#x2022; [`use_host_header_as_sni`](#sni-a63eaf) - Optional Block<br>Enable this option
 
 <a id="default-pool-use-tls-use-mtls"></a>&#x2022; [`use_mtls`](#default-pool-use-tls-use-mtls) - Optional Block<br>mTLS Certificate. mTLS Client Certificate<br>See [Use mTLS](#default-pool-use-tls-use-mtls) below.
 
@@ -2594,7 +2594,7 @@ An [`use_tls`](#default-pool-use-tls) block (within [`default_pool`](#default-po
 
 <a id="verification-388853"></a>&#x2022; [`use_server_verification`](#verification-388853) - Optional Block<br>TLS Validation Context for Origin Servers. Upstream TLS Validation Context<br>See [Use Server Verification](#verification-388853) below.
 
-<a id="trusted-ca-e7a557"></a>&#x2022; [`volterra_trusted_ca`](#trusted-ca-e7a557) - Optional Block<br>Can be used for messages where no values are needed
+<a id="trusted-ca-e7a557"></a>&#x2022; [`volterra_trusted_ca`](#trusted-ca-e7a557) - Optional Block<br>Enable this option
 
 #### Default Pool Use TLS TLS Config
 
@@ -2602,11 +2602,11 @@ A [`tls_config`](#default-pool-use-tls-tls-config) block (within [`default_pool.
 
 <a id="security-e7acc0"></a>&#x2022; [`custom_security`](#security-e7acc0) - Optional Block<br>Defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-e7acc0) below.
 
-<a id="security-b532bd"></a>&#x2022; [`default_security`](#security-b532bd) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-b532bd"></a>&#x2022; [`default_security`](#security-b532bd) - Optional Block<br>Enable this option
 
-<a id="security-33124a"></a>&#x2022; [`low_security`](#security-33124a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-33124a"></a>&#x2022; [`low_security`](#security-33124a) - Optional Block<br>Enable this option
 
-<a id="security-ea8e0f"></a>&#x2022; [`medium_security`](#security-ea8e0f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-ea8e0f"></a>&#x2022; [`medium_security`](#security-ea8e0f) - Optional Block<br>Enable this option
 
 #### Default Pool Use TLS TLS Config Custom Security
 
@@ -2754,13 +2754,13 @@ An [`enable_api_discovery`](#enable-api-discovery) block supports the following:
 
 <a id="discovery-54db29"></a>&#x2022; [`custom_api_auth_discovery`](#discovery-54db29) - Optional Block<br>API Discovery Advanced Settings. API Discovery Advanced settings<br>See [Custom API Auth Discovery](#discovery-54db29) below.
 
-<a id="discovery-29517f"></a>&#x2022; [`default_api_auth_discovery`](#discovery-29517f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="discovery-29517f"></a>&#x2022; [`default_api_auth_discovery`](#discovery-29517f) - Optional Block<br>Enable this option
 
-<a id="traffic-90c445"></a>&#x2022; [`disable_learn_from_redirect_traffic`](#traffic-90c445) - Optional Block<br>Can be used for messages where no values are needed
+<a id="traffic-90c445"></a>&#x2022; [`disable_learn_from_redirect_traffic`](#traffic-90c445) - Optional Block<br>Enable this option
 
 <a id="settings-c31c55"></a>&#x2022; [`discovered_api_settings`](#settings-c31c55) - Optional Block<br>Discovered API Settings. Configure Discovered API Settings<br>See [Discovered API Settings](#settings-c31c55) below.
 
-<a id="traffic-074877"></a>&#x2022; [`enable_learn_from_redirect_traffic`](#traffic-074877) - Optional Block<br>Can be used for messages where no values are needed
+<a id="traffic-074877"></a>&#x2022; [`enable_learn_from_redirect_traffic`](#traffic-074877) - Optional Block<br>Enable this option
 
 #### Enable API Discovery API Crawler
 
@@ -2768,7 +2768,7 @@ An [`api_crawler`](#enable-api-discovery-api-crawler) block (within [`enable_api
 
 <a id="config-1070d6"></a>&#x2022; [`api_crawler_config`](#config-1070d6) - Optional Block<br>Crawler Configure<br>See [API Crawler Config](#config-1070d6) below.
 
-<a id="crawler-167f20"></a>&#x2022; [`disable_api_crawler`](#crawler-167f20) - Optional Block<br>Can be used for messages where no values are needed
+<a id="crawler-167f20"></a>&#x2022; [`disable_api_crawler`](#crawler-167f20) - Optional Block<br>Enable this option
 
 #### Enable API Discovery API Crawler API Crawler Config
 
@@ -2832,11 +2832,11 @@ An [`enable_challenge`](#enable-challenge) block supports the following:
 
 <a id="parameters-13a9c7"></a>&#x2022; [`captcha_challenge_parameters`](#parameters-13a9c7) - Optional Block<br>Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect<br>See [Captcha Challenge Parameters](#parameters-13a9c7) below.
 
-<a id="parameters-247f74"></a>&#x2022; [`default_captcha_challenge_parameters`](#parameters-247f74) - Optional Block<br>Can be used for messages where no values are needed
+<a id="parameters-247f74"></a>&#x2022; [`default_captcha_challenge_parameters`](#parameters-247f74) - Optional Block<br>Enable this option
 
-<a id="parameters-e2729d"></a>&#x2022; [`default_js_challenge_parameters`](#parameters-e2729d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="parameters-e2729d"></a>&#x2022; [`default_js_challenge_parameters`](#parameters-e2729d) - Optional Block<br>Enable this option
 
-<a id="settings-f4fda5"></a>&#x2022; [`default_mitigation_settings`](#settings-f4fda5) - Optional Block<br>Can be used for messages where no values are needed
+<a id="settings-f4fda5"></a>&#x2022; [`default_mitigation_settings`](#settings-f4fda5) - Optional Block<br>Enable this option
 
 <a id="parameters-6f7506"></a>&#x2022; [`js_challenge_parameters`](#parameters-6f7506) - Optional Block<br>Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do<br>See [Js Challenge Parameters](#parameters-6f7506) below.
 
@@ -2886,7 +2886,7 @@ An [`enable_trust_client_ip_headers`](#enable-trust-client-ip-headers) block sup
 
 A [`graphql_rules`](#graphql-rules) block supports the following:
 
-<a id="graphql-rules-any-domain"></a>&#x2022; [`any_domain`](#graphql-rules-any-domain) - Optional Block<br>Can be used for messages where no values are needed
+<a id="graphql-rules-any-domain"></a>&#x2022; [`any_domain`](#graphql-rules-any-domain) - Optional Block<br>Enable this option
 
 <a id="graphql-rules-exact-path"></a>&#x2022; [`exact_path`](#graphql-rules-exact-path) - Optional String  Defaults to `/GraphQL`<br>Specifies the exact path to GraphQL endpoint
 
@@ -2896,9 +2896,9 @@ A [`graphql_rules`](#graphql-rules) block supports the following:
 
 <a id="graphql-rules-metadata"></a>&#x2022; [`metadata`](#graphql-rules-metadata) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#graphql-rules-metadata) below.
 
-<a id="graphql-rules-method-get"></a>&#x2022; [`method_get`](#graphql-rules-method-get) - Optional Block<br>Can be used for messages where no values are needed
+<a id="graphql-rules-method-get"></a>&#x2022; [`method_get`](#graphql-rules-method-get) - Optional Block<br>Enable this option
 
-<a id="graphql-rules-method-post"></a>&#x2022; [`method_post`](#graphql-rules-method-post) - Optional Block<br>Can be used for messages where no values are needed
+<a id="graphql-rules-method-post"></a>&#x2022; [`method_post`](#graphql-rules-method-post) - Optional Block<br>Enable this option
 
 <a id="graphql-rules-suffix-value"></a>&#x2022; [`suffix_value`](#graphql-rules-suffix-value) - Optional String<br>Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
@@ -2906,9 +2906,9 @@ A [`graphql_rules`](#graphql-rules) block supports the following:
 
 A [`graphql_settings`](#graphql-rules-graphql-settings) block (within [`graphql_rules`](#graphql-rules)) supports the following:
 
-<a id="introspection-492a5f"></a>&#x2022; [`disable_introspection`](#introspection-492a5f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="introspection-492a5f"></a>&#x2022; [`disable_introspection`](#introspection-492a5f) - Optional Block<br>Enable this option
 
-<a id="introspection-762fd0"></a>&#x2022; [`enable_introspection`](#introspection-762fd0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="introspection-762fd0"></a>&#x2022; [`enable_introspection`](#introspection-762fd0) - Optional Block<br>Enable this option
 
 <a id="queries-f5cdb7"></a>&#x2022; [`max_batched_queries`](#queries-f5cdb7) - Optional Number<br>Specify maximum number of queries in a single batched request
 
@@ -2946,21 +2946,21 @@ A [`https`](#https) block supports the following:
 
 <a id="https-connection-idle-timeout"></a>&#x2022; [`connection_idle_timeout`](#https-connection-idle-timeout) - Optional Number<br>The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed
 
-<a id="https-default-header"></a>&#x2022; [`default_header`](#https-default-header) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-default-header"></a>&#x2022; [`default_header`](#https-default-header) - Optional Block<br>Enable this option
 
-<a id="https-default-loadbalancer"></a>&#x2022; [`default_loadbalancer`](#https-default-loadbalancer) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-default-loadbalancer"></a>&#x2022; [`default_loadbalancer`](#https-default-loadbalancer) - Optional Block<br>Enable this option
 
-<a id="https-disable-path-normalize"></a>&#x2022; [`disable_path_normalize`](#https-disable-path-normalize) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-disable-path-normalize"></a>&#x2022; [`disable_path_normalize`](#https-disable-path-normalize) - Optional Block<br>Enable this option
 
-<a id="https-enable-path-normalize"></a>&#x2022; [`enable_path_normalize`](#https-enable-path-normalize) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-enable-path-normalize"></a>&#x2022; [`enable_path_normalize`](#https-enable-path-normalize) - Optional Block<br>Enable this option
 
 <a id="https-http-protocol-options"></a>&#x2022; [`http_protocol_options`](#https-http-protocol-options) - Optional Block<br>HTTP protocol configuration OPTIONS for downstream connections<br>See [HTTP Protocol Options](#https-http-protocol-options) below.
 
 <a id="https-http-redirect"></a>&#x2022; [`http_redirect`](#https-http-redirect) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
 
-<a id="https-non-default-loadbalancer"></a>&#x2022; [`non_default_loadbalancer`](#https-non-default-loadbalancer) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-non-default-loadbalancer"></a>&#x2022; [`non_default_loadbalancer`](#https-non-default-loadbalancer) - Optional Block<br>Enable this option
 
-<a id="https-pass-through"></a>&#x2022; [`pass_through`](#https-pass-through) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-pass-through"></a>&#x2022; [`pass_through`](#https-pass-through) - Optional Block<br>Enable this option
 
 <a id="https-port"></a>&#x2022; [`port`](#https-port) - Optional Number<br>HTTPS port to Listen
 
@@ -2976,9 +2976,9 @@ A [`https`](#https) block supports the following:
 
 A [`coalescing_options`](#https-coalescing-options) block (within [`https`](#https)) supports the following:
 
-<a id="coalescing-f90c69"></a>&#x2022; [`default_coalescing`](#coalescing-f90c69) - Optional Block<br>Can be used for messages where no values are needed
+<a id="coalescing-f90c69"></a>&#x2022; [`default_coalescing`](#coalescing-f90c69) - Optional Block<br>Enable this option
 
-<a id="coalescing-c5278e"></a>&#x2022; [`strict_coalescing`](#coalescing-c5278e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="coalescing-c5278e"></a>&#x2022; [`strict_coalescing`](#coalescing-c5278e) - Optional Block<br>Enable this option
 
 #### HTTPS HTTP Protocol Options
 
@@ -2986,9 +2986,9 @@ A [`http_protocol_options`](#https-http-protocol-options) block (within [`https`
 
 <a id="only-46f3ca"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-46f3ca) - Optional Block<br>HTTP/1.1 Protocol OPTIONS for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-46f3ca) below.
 
-<a id="v1-v2-6f8b9b"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-6f8b9b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="v1-v2-6f8b9b"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-6f8b9b) - Optional Block<br>Enable this option
 
-<a id="only-5cefb3"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-5cefb3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="only-5cefb3"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-5cefb3) - Optional Block<br>Enable this option
 
 #### HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
 
@@ -3004,7 +3004,7 @@ A [`tls_cert_params`](#https-tls-cert-params) block (within [`https`](#https)) s
 
 <a id="https-tls-cert-params-certificates"></a>&#x2022; [`certificates`](#https-tls-cert-params-certificates) - Optional Block<br>Select one or more certificates with any domain names<br>See [Certificates](#https-tls-cert-params-certificates) below.
 
-<a id="https-tls-cert-params-no-mtls"></a>&#x2022; [`no_mtls`](#https-tls-cert-params-no-mtls) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-tls-cert-params-no-mtls"></a>&#x2022; [`no_mtls`](#https-tls-cert-params-no-mtls) - Optional Block<br>Enable this option
 
 <a id="https-tls-cert-params-tls-config"></a>&#x2022; [`tls_config`](#https-tls-cert-params-tls-config) - Optional Block<br>Defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#https-tls-cert-params-tls-config) below.
 
@@ -3026,11 +3026,11 @@ A [`tls_config`](#https-tls-cert-params-tls-config) block (within [`https.tls_ce
 
 <a id="security-6452ce"></a>&#x2022; [`custom_security`](#security-6452ce) - Optional Block<br>Defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-6452ce) below.
 
-<a id="security-b6db5a"></a>&#x2022; [`default_security`](#security-b6db5a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-b6db5a"></a>&#x2022; [`default_security`](#security-b6db5a) - Optional Block<br>Enable this option
 
-<a id="security-cbe12e"></a>&#x2022; [`low_security`](#security-cbe12e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-cbe12e"></a>&#x2022; [`low_security`](#security-cbe12e) - Optional Block<br>Enable this option
 
-<a id="security-e410e3"></a>&#x2022; [`medium_security`](#security-e410e3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-e410e3"></a>&#x2022; [`medium_security`](#security-e410e3) - Optional Block<br>Enable this option
 
 #### HTTPS TLS Cert Params TLS Config Custom Security
 
@@ -3044,13 +3044,13 @@ An [`use_mtls`](#https-tls-cert-params-use-mtls) block (within [`https.tls_cert_
 
 <a id="https-tls-cert-params-use-mtls-crl"></a>&#x2022; [`crl`](#https-tls-cert-params-use-mtls-crl) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#https-tls-cert-params-use-mtls-crl) below.
 
-<a id="https-tls-cert-params-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-tls-cert-params-use-mtls-no-crl) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-tls-cert-params-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-tls-cert-params-use-mtls-no-crl) - Optional Block<br>Enable this option
 
 <a id="trusted-ca-2ba851"></a>&#x2022; [`trusted_ca`](#trusted-ca-2ba851) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-2ba851) below.
 
 <a id="url-2b1433"></a>&#x2022; [`trusted_ca_url`](#url-2b1433) - Optional String<br>Upload a Root CA Certificate specifically for this Load Balancer
 
-<a id="disabled-bc6638"></a>&#x2022; [`xfcc_disabled`](#disabled-bc6638) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-bc6638"></a>&#x2022; [`xfcc_disabled`](#disabled-bc6638) - Optional Block<br>Enable this option
 
 <a id="options-8f161e"></a>&#x2022; [`xfcc_options`](#options-8f161e) - Optional Block<br>X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-8f161e) below.
 
@@ -3076,7 +3076,7 @@ A [`crl`](#https-tls-cert-params-use-mtls-crl) block (within [`https.tls_cert_pa
 
 A [`tls_parameters`](#https-tls-parameters) block (within [`https`](#https)) supports the following:
 
-<a id="https-tls-parameters-no-mtls"></a>&#x2022; [`no_mtls`](#https-tls-parameters-no-mtls) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-tls-parameters-no-mtls"></a>&#x2022; [`no_mtls`](#https-tls-parameters-no-mtls) - Optional Block<br>Enable this option
 
 <a id="https-tls-parameters-tls-certificates"></a>&#x2022; [`tls_certificates`](#https-tls-parameters-tls-certificates) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#https-tls-parameters-tls-certificates) below.
 
@@ -3094,11 +3094,11 @@ A [`tls_certificates`](#https-tls-parameters-tls-certificates) block (within [`h
 
 <a id="spec-77c99c"></a>&#x2022; [`description_spec`](#spec-77c99c) - Optional String<br>Description. Description for the certificate
 
-<a id="stapling-fd931a"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-fd931a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="stapling-fd931a"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-fd931a) - Optional Block<br>Enable this option
 
 <a id="key-372460"></a>&#x2022; [`private_key`](#key-372460) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-372460) below.
 
-<a id="defaults-2777d9"></a>&#x2022; [`use_system_defaults`](#defaults-2777d9) - Optional Block<br>Can be used for messages where no values are needed
+<a id="defaults-2777d9"></a>&#x2022; [`use_system_defaults`](#defaults-2777d9) - Optional Block<br>Enable this option
 
 #### HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms
 
@@ -3126,11 +3126,11 @@ A [`tls_config`](#https-tls-parameters-tls-config) block (within [`https.tls_par
 
 <a id="security-775274"></a>&#x2022; [`custom_security`](#security-775274) - Optional Block<br>Defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-775274) below.
 
-<a id="security-fd7aef"></a>&#x2022; [`default_security`](#security-fd7aef) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-fd7aef"></a>&#x2022; [`default_security`](#security-fd7aef) - Optional Block<br>Enable this option
 
-<a id="security-c7d5df"></a>&#x2022; [`low_security`](#security-c7d5df) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-c7d5df"></a>&#x2022; [`low_security`](#security-c7d5df) - Optional Block<br>Enable this option
 
-<a id="security-3f26ed"></a>&#x2022; [`medium_security`](#security-3f26ed) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-3f26ed"></a>&#x2022; [`medium_security`](#security-3f26ed) - Optional Block<br>Enable this option
 
 #### HTTPS TLS Parameters TLS Config Custom Security
 
@@ -3150,13 +3150,13 @@ An [`use_mtls`](#https-tls-parameters-use-mtls) block (within [`https.tls_parame
 
 <a id="https-tls-parameters-use-mtls-crl"></a>&#x2022; [`crl`](#https-tls-parameters-use-mtls-crl) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#https-tls-parameters-use-mtls-crl) below.
 
-<a id="https-tls-parameters-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-tls-parameters-use-mtls-no-crl) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-tls-parameters-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-tls-parameters-use-mtls-no-crl) - Optional Block<br>Enable this option
 
 <a id="trusted-ca-264d37"></a>&#x2022; [`trusted_ca`](#trusted-ca-264d37) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-264d37) below.
 
 <a id="url-bc2530"></a>&#x2022; [`trusted_ca_url`](#url-bc2530) - Optional String<br>Upload a Root CA Certificate specifically for this Load Balancer
 
-<a id="disabled-5c360d"></a>&#x2022; [`xfcc_disabled`](#disabled-5c360d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-5c360d"></a>&#x2022; [`xfcc_disabled`](#disabled-5c360d) - Optional Block<br>Enable this option
 
 <a id="options-4d1e53"></a>&#x2022; [`xfcc_options`](#options-4d1e53) - Optional Block<br>X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-4d1e53) below.
 
@@ -3198,23 +3198,23 @@ A [`https_auto_cert`](#https-auto-cert) block supports the following:
 
 <a id="https-auto-cert-connection-idle-timeout"></a>&#x2022; [`connection_idle_timeout`](#https-auto-cert-connection-idle-timeout) - Optional Number<br>The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed
 
-<a id="https-auto-cert-default-header"></a>&#x2022; [`default_header`](#https-auto-cert-default-header) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-auto-cert-default-header"></a>&#x2022; [`default_header`](#https-auto-cert-default-header) - Optional Block<br>Enable this option
 
-<a id="https-auto-cert-default-loadbalancer"></a>&#x2022; [`default_loadbalancer`](#https-auto-cert-default-loadbalancer) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-auto-cert-default-loadbalancer"></a>&#x2022; [`default_loadbalancer`](#https-auto-cert-default-loadbalancer) - Optional Block<br>Enable this option
 
-<a id="https-auto-cert-disable-path-normalize"></a>&#x2022; [`disable_path_normalize`](#https-auto-cert-disable-path-normalize) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-auto-cert-disable-path-normalize"></a>&#x2022; [`disable_path_normalize`](#https-auto-cert-disable-path-normalize) - Optional Block<br>Enable this option
 
-<a id="https-auto-cert-enable-path-normalize"></a>&#x2022; [`enable_path_normalize`](#https-auto-cert-enable-path-normalize) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-auto-cert-enable-path-normalize"></a>&#x2022; [`enable_path_normalize`](#https-auto-cert-enable-path-normalize) - Optional Block<br>Enable this option
 
 <a id="https-auto-cert-http-protocol-options"></a>&#x2022; [`http_protocol_options`](#https-auto-cert-http-protocol-options) - Optional Block<br>HTTP protocol configuration OPTIONS for downstream connections<br>See [HTTP Protocol Options](#https-auto-cert-http-protocol-options) below.
 
 <a id="https-auto-cert-http-redirect"></a>&#x2022; [`http_redirect`](#https-auto-cert-http-redirect) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
 
-<a id="https-auto-cert-no-mtls"></a>&#x2022; [`no_mtls`](#https-auto-cert-no-mtls) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-auto-cert-no-mtls"></a>&#x2022; [`no_mtls`](#https-auto-cert-no-mtls) - Optional Block<br>Enable this option
 
-<a id="loadbalancer-eb605c"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-eb605c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="loadbalancer-eb605c"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-eb605c) - Optional Block<br>Enable this option
 
-<a id="https-auto-cert-pass-through"></a>&#x2022; [`pass_through`](#https-auto-cert-pass-through) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-auto-cert-pass-through"></a>&#x2022; [`pass_through`](#https-auto-cert-pass-through) - Optional Block<br>Enable this option
 
 <a id="https-auto-cert-port"></a>&#x2022; [`port`](#https-auto-cert-port) - Optional Number<br>HTTPS port to Listen
 
@@ -3230,9 +3230,9 @@ A [`https_auto_cert`](#https-auto-cert) block supports the following:
 
 A [`coalescing_options`](#https-auto-cert-coalescing-options) block (within [`https_auto_cert`](#https-auto-cert)) supports the following:
 
-<a id="coalescing-3c2270"></a>&#x2022; [`default_coalescing`](#coalescing-3c2270) - Optional Block<br>Can be used for messages where no values are needed
+<a id="coalescing-3c2270"></a>&#x2022; [`default_coalescing`](#coalescing-3c2270) - Optional Block<br>Enable this option
 
-<a id="coalescing-010f02"></a>&#x2022; [`strict_coalescing`](#coalescing-010f02) - Optional Block<br>Can be used for messages where no values are needed
+<a id="coalescing-010f02"></a>&#x2022; [`strict_coalescing`](#coalescing-010f02) - Optional Block<br>Enable this option
 
 #### HTTPS Auto Cert HTTP Protocol Options
 
@@ -3240,9 +3240,9 @@ A [`http_protocol_options`](#https-auto-cert-http-protocol-options) block (withi
 
 <a id="only-d515de"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-d515de) - Optional Block<br>HTTP/1.1 Protocol OPTIONS for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-d515de) below.
 
-<a id="v1-v2-9e0811"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-9e0811) - Optional Block<br>Can be used for messages where no values are needed
+<a id="v1-v2-9e0811"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-9e0811) - Optional Block<br>Enable this option
 
-<a id="only-65e5e2"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-65e5e2) - Optional Block<br>Can be used for messages where no values are needed
+<a id="only-65e5e2"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-65e5e2) - Optional Block<br>Enable this option
 
 #### HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
 
@@ -3258,11 +3258,11 @@ A [`tls_config`](#https-auto-cert-tls-config) block (within [`https_auto_cert`](
 
 <a id="security-7a53da"></a>&#x2022; [`custom_security`](#security-7a53da) - Optional Block<br>Defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-7a53da) below.
 
-<a id="security-121c52"></a>&#x2022; [`default_security`](#security-121c52) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-121c52"></a>&#x2022; [`default_security`](#security-121c52) - Optional Block<br>Enable this option
 
-<a id="https-auto-cert-tls-config-low-security"></a>&#x2022; [`low_security`](#https-auto-cert-tls-config-low-security) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-auto-cert-tls-config-low-security"></a>&#x2022; [`low_security`](#https-auto-cert-tls-config-low-security) - Optional Block<br>Enable this option
 
-<a id="security-5e1ea1"></a>&#x2022; [`medium_security`](#security-5e1ea1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="security-5e1ea1"></a>&#x2022; [`medium_security`](#security-5e1ea1) - Optional Block<br>Enable this option
 
 #### HTTPS Auto Cert TLS Config Custom Security
 
@@ -3282,13 +3282,13 @@ An [`use_mtls`](#https-auto-cert-use-mtls) block (within [`https_auto_cert`](#ht
 
 <a id="https-auto-cert-use-mtls-crl"></a>&#x2022; [`crl`](#https-auto-cert-use-mtls-crl) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#https-auto-cert-use-mtls-crl) below.
 
-<a id="https-auto-cert-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-auto-cert-use-mtls-no-crl) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-auto-cert-use-mtls-no-crl"></a>&#x2022; [`no_crl`](#https-auto-cert-use-mtls-no-crl) - Optional Block<br>Enable this option
 
 <a id="https-auto-cert-use-mtls-trusted-ca"></a>&#x2022; [`trusted_ca`](#https-auto-cert-use-mtls-trusted-ca) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#https-auto-cert-use-mtls-trusted-ca) below.
 
 <a id="https-auto-cert-use-mtls-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#https-auto-cert-use-mtls-trusted-ca-url) - Optional String<br>Upload a Root CA Certificate specifically for this Load Balancer
 
-<a id="https-auto-cert-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-auto-cert-use-mtls-xfcc-disabled) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-auto-cert-use-mtls-xfcc-disabled"></a>&#x2022; [`xfcc_disabled`](#https-auto-cert-use-mtls-xfcc-disabled) - Optional Block<br>Enable this option
 
 <a id="https-auto-cert-use-mtls-xfcc-options"></a>&#x2022; [`xfcc_options`](#https-auto-cert-use-mtls-xfcc-options) - Optional Block<br>X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#https-auto-cert-use-mtls-xfcc-options) below.
 
@@ -3348,9 +3348,9 @@ A [`jwt_validation`](#jwt-validation) block supports the following:
 
 An [`action`](#jwt-validation-action) block (within [`jwt_validation`](#jwt-validation)) supports the following:
 
-<a id="jwt-validation-action-block"></a>&#x2022; [`block`](#jwt-validation-action-block) - Optional Block<br>Can be used for messages where no values are needed
+<a id="jwt-validation-action-block"></a>&#x2022; [`block`](#jwt-validation-action-block) - Optional Block<br>Enable this option
 
-<a id="jwt-validation-action-report"></a>&#x2022; [`report`](#jwt-validation-action-report) - Optional Block<br>Can be used for messages where no values are needed
+<a id="jwt-validation-action-report"></a>&#x2022; [`report`](#jwt-validation-action-report) - Optional Block<br>Enable this option
 
 #### JWT Validation Jwks Config
 
@@ -3370,15 +3370,15 @@ A [`reserved_claims`](#jwt-validation-reserved-claims) block (within [`jwt_valid
 
 <a id="jwt-validation-reserved-claims-audience"></a>&#x2022; [`audience`](#jwt-validation-reserved-claims-audience) - Optional Block<br>Audiences<br>See [Audience](#jwt-validation-reserved-claims-audience) below.
 
-<a id="disable-dcfb50"></a>&#x2022; [`audience_disable`](#disable-dcfb50) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disable-dcfb50"></a>&#x2022; [`audience_disable`](#disable-dcfb50) - Optional Block<br>Enable this option
 
 <a id="jwt-validation-reserved-claims-issuer"></a>&#x2022; [`issuer`](#jwt-validation-reserved-claims-issuer) - Optional String<br>Exact Match
 
-<a id="disable-c89c1c"></a>&#x2022; [`issuer_disable`](#disable-c89c1c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disable-c89c1c"></a>&#x2022; [`issuer_disable`](#disable-c89c1c) - Optional Block<br>Enable this option
 
-<a id="disable-5d3cb1"></a>&#x2022; [`validate_period_disable`](#disable-5d3cb1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disable-5d3cb1"></a>&#x2022; [`validate_period_disable`](#disable-5d3cb1) - Optional Block<br>Enable this option
 
-<a id="enable-66243b"></a>&#x2022; [`validate_period_enable`](#enable-66243b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enable-66243b"></a>&#x2022; [`validate_period_enable`](#enable-66243b) - Optional Block<br>Enable this option
 
 #### JWT Validation Reserved Claims Audience
 
@@ -3390,7 +3390,7 @@ An [`audience`](#jwt-validation-reserved-claims-audience) block (within [`jwt_va
 
 A [`target`](#jwt-validation-target) block (within [`jwt_validation`](#jwt-validation)) supports the following:
 
-<a id="jwt-validation-target-all-endpoint"></a>&#x2022; [`all_endpoint`](#jwt-validation-target-all-endpoint) - Optional Block<br>Can be used for messages where no values are needed
+<a id="jwt-validation-target-all-endpoint"></a>&#x2022; [`all_endpoint`](#jwt-validation-target-all-endpoint) - Optional Block<br>Enable this option
 
 <a id="jwt-validation-target-api-groups"></a>&#x2022; [`api_groups`](#jwt-validation-target-api-groups) - Optional Block<br>API Groups<br>See [API Groups](#jwt-validation-target-api-groups) below.
 
@@ -3412,7 +3412,7 @@ A [`base_paths`](#jwt-validation-target-base-paths) block (within [`jwt_validati
 
 A [`token_location`](#jwt-validation-token-location) block (within [`jwt_validation`](#jwt-validation)) supports the following:
 
-<a id="token-e5c0e3"></a>&#x2022; [`bearer_token`](#token-e5c0e3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="token-e5c0e3"></a>&#x2022; [`bearer_token`](#token-e5c0e3) - Optional Block<br>Enable this option
 
 #### L7 DDOS Action Js Challenge
 
@@ -3432,15 +3432,15 @@ A [`l7_ddos_protection`](#l7-ddos-protection) block supports the following:
 
 <a id="challenge-1070c2"></a>&#x2022; [`clientside_action_js_challenge`](#challenge-1070c2) - Optional Block<br>Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do<br>See [Clientside Action Js Challenge](#challenge-1070c2) below.
 
-<a id="none-88961b"></a>&#x2022; [`clientside_action_none`](#none-88961b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-88961b"></a>&#x2022; [`clientside_action_none`](#none-88961b) - Optional Block<br>Enable this option
 
 <a id="l7-ddos-protection-ddos-policy-custom"></a>&#x2022; [`ddos_policy_custom`](#l7-ddos-protection-ddos-policy-custom) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [DDOS Policy Custom](#l7-ddos-protection-ddos-policy-custom) below.
 
-<a id="l7-ddos-protection-ddos-policy-none"></a>&#x2022; [`ddos_policy_none`](#l7-ddos-protection-ddos-policy-none) - Optional Block<br>Can be used for messages where no values are needed
+<a id="l7-ddos-protection-ddos-policy-none"></a>&#x2022; [`ddos_policy_none`](#l7-ddos-protection-ddos-policy-none) - Optional Block<br>Enable this option
 
-<a id="threshold-332758"></a>&#x2022; [`default_rps_threshold`](#threshold-332758) - Optional Block<br>Can be used for messages where no values are needed
+<a id="threshold-332758"></a>&#x2022; [`default_rps_threshold`](#threshold-332758) - Optional Block<br>Enable this option
 
-<a id="l7-ddos-protection-mitigation-block"></a>&#x2022; [`mitigation_block`](#l7-ddos-protection-mitigation-block) - Optional Block<br>Can be used for messages where no values are needed
+<a id="l7-ddos-protection-mitigation-block"></a>&#x2022; [`mitigation_block`](#l7-ddos-protection-mitigation-block) - Optional Block<br>Enable this option
 
 <a id="challenge-62fb67"></a>&#x2022; [`mitigation_captcha_challenge`](#challenge-62fb67) - Optional Block<br>Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect<br>See [Mitigation Captcha Challenge](#challenge-62fb67) below.
 
@@ -3518,15 +3518,15 @@ A [`malware_protection_rules`](#rules-b2bf3e) block (within [`malware_protection
 
 An [`action`](#action-f0dc04) block (within [`malware_protection_settings.malware_protection_rules`](#rules-b2bf3e)) supports the following:
 
-<a id="block-97253f"></a>&#x2022; [`block`](#block-97253f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="block-97253f"></a>&#x2022; [`block`](#block-97253f) - Optional Block<br>Enable this option
 
-<a id="report-055d2b"></a>&#x2022; [`report`](#report-055d2b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="report-055d2b"></a>&#x2022; [`report`](#report-055d2b) - Optional Block<br>Enable this option
 
 #### Malware Protection Settings Malware Protection Rules Domain
 
 A [`domain`](#domain-7b5aea) block (within [`malware_protection_settings.malware_protection_rules`](#rules-b2bf3e)) supports the following:
 
-<a id="domain-5794b8"></a>&#x2022; [`any_domain`](#domain-5794b8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domain-5794b8"></a>&#x2022; [`any_domain`](#domain-5794b8) - Optional Block<br>Enable this option
 
 <a id="domain-168628"></a>&#x2022; [`domain`](#domain-168628) - Optional Block<br>Domains. Domains names<br>See [Domain](#domain-168628) below.
 
@@ -3564,9 +3564,9 @@ A [`more_option`](#more-option) block supports the following:
 
 <a id="more-option-disable-default-error-pages"></a>&#x2022; [`disable_default_error_pages`](#more-option-disable-default-error-pages) - Optional Bool<br>Disable the use of default F5XC error pages
 
-<a id="more-option-disable-path-normalize"></a>&#x2022; [`disable_path_normalize`](#more-option-disable-path-normalize) - Optional Block<br>Can be used for messages where no values are needed
+<a id="more-option-disable-path-normalize"></a>&#x2022; [`disable_path_normalize`](#more-option-disable-path-normalize) - Optional Block<br>Enable this option
 
-<a id="more-option-enable-path-normalize"></a>&#x2022; [`enable_path_normalize`](#more-option-enable-path-normalize) - Optional Block<br>Can be used for messages where no values are needed
+<a id="more-option-enable-path-normalize"></a>&#x2022; [`enable_path_normalize`](#more-option-enable-path-normalize) - Optional Block<br>Enable this option
 
 <a id="more-option-idle-timeout"></a>&#x2022; [`idle_timeout`](#more-option-idle-timeout) - Optional Number<br>The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset
 
@@ -3664,31 +3664,31 @@ A [`response_cookies_to_add`](#more-option-response-cookies-to-add) block (withi
 
 <a id="expiry-5d54ee"></a>&#x2022; [`add_expiry`](#expiry-5d54ee) - Optional String<br>Add expiry attribute
 
-<a id="httponly-8439bf"></a>&#x2022; [`add_httponly`](#httponly-8439bf) - Optional Block<br>Can be used for messages where no values are needed
+<a id="httponly-8439bf"></a>&#x2022; [`add_httponly`](#httponly-8439bf) - Optional Block<br>Enable this option
 
-<a id="partitioned-781e49"></a>&#x2022; [`add_partitioned`](#partitioned-781e49) - Optional Block<br>Can be used for messages where no values are needed
+<a id="partitioned-781e49"></a>&#x2022; [`add_partitioned`](#partitioned-781e49) - Optional Block<br>Enable this option
 
 <a id="path-e18695"></a>&#x2022; [`add_path`](#path-e18695) - Optional String<br>Add path attribute
 
-<a id="secure-e3baa0"></a>&#x2022; [`add_secure`](#secure-e3baa0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="secure-e3baa0"></a>&#x2022; [`add_secure`](#secure-e3baa0) - Optional Block<br>Enable this option
 
-<a id="domain-6328c3"></a>&#x2022; [`ignore_domain`](#domain-6328c3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domain-6328c3"></a>&#x2022; [`ignore_domain`](#domain-6328c3) - Optional Block<br>Enable this option
 
-<a id="expiry-49396f"></a>&#x2022; [`ignore_expiry`](#expiry-49396f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="expiry-49396f"></a>&#x2022; [`ignore_expiry`](#expiry-49396f) - Optional Block<br>Enable this option
 
-<a id="httponly-6fac42"></a>&#x2022; [`ignore_httponly`](#httponly-6fac42) - Optional Block<br>Can be used for messages where no values are needed
+<a id="httponly-6fac42"></a>&#x2022; [`ignore_httponly`](#httponly-6fac42) - Optional Block<br>Enable this option
 
-<a id="age-d6a859"></a>&#x2022; [`ignore_max_age`](#age-d6a859) - Optional Block<br>Can be used for messages where no values are needed
+<a id="age-d6a859"></a>&#x2022; [`ignore_max_age`](#age-d6a859) - Optional Block<br>Enable this option
 
-<a id="partitioned-f4bce0"></a>&#x2022; [`ignore_partitioned`](#partitioned-f4bce0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="partitioned-f4bce0"></a>&#x2022; [`ignore_partitioned`](#partitioned-f4bce0) - Optional Block<br>Enable this option
 
-<a id="path-f6b7e0"></a>&#x2022; [`ignore_path`](#path-f6b7e0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="path-f6b7e0"></a>&#x2022; [`ignore_path`](#path-f6b7e0) - Optional Block<br>Enable this option
 
-<a id="samesite-aceec3"></a>&#x2022; [`ignore_samesite`](#samesite-aceec3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="samesite-aceec3"></a>&#x2022; [`ignore_samesite`](#samesite-aceec3) - Optional Block<br>Enable this option
 
-<a id="secure-fe1099"></a>&#x2022; [`ignore_secure`](#secure-fe1099) - Optional Block<br>Can be used for messages where no values are needed
+<a id="secure-fe1099"></a>&#x2022; [`ignore_secure`](#secure-fe1099) - Optional Block<br>Enable this option
 
-<a id="value-bbe342"></a>&#x2022; [`ignore_value`](#value-bbe342) - Optional Block<br>Can be used for messages where no values are needed
+<a id="value-bbe342"></a>&#x2022; [`ignore_value`](#value-bbe342) - Optional Block<br>Enable this option
 
 <a id="value-cb17ee"></a>&#x2022; [`max_age_value`](#value-cb17ee) - Optional Number<br>Add max age attribute
 
@@ -3696,11 +3696,11 @@ A [`response_cookies_to_add`](#more-option-response-cookies-to-add) block (withi
 
 <a id="overwrite-16498a"></a>&#x2022; [`overwrite`](#overwrite-16498a) - Optional Bool  Defaults to `do`<br>Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
 
-<a id="lax-9d99f8"></a>&#x2022; [`samesite_lax`](#lax-9d99f8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="lax-9d99f8"></a>&#x2022; [`samesite_lax`](#lax-9d99f8) - Optional Block<br>Enable this option
 
-<a id="none-4de9cb"></a>&#x2022; [`samesite_none`](#none-4de9cb) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-4de9cb"></a>&#x2022; [`samesite_none`](#none-4de9cb) - Optional Block<br>Enable this option
 
-<a id="strict-d87273"></a>&#x2022; [`samesite_strict`](#strict-d87273) - Optional Block<br>Can be used for messages where no values are needed
+<a id="strict-d87273"></a>&#x2022; [`samesite_strict`](#strict-d87273) - Optional Block<br>Enable this option
 
 <a id="value-3191e4"></a>&#x2022; [`secret_value`](#value-3191e4) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-3191e4) below.
 
@@ -3788,25 +3788,25 @@ An [`origin_server_subset_rule_list`](#origin-server-subset-rule-list) block sup
 
 A [`policy_based_challenge`](#policy-based-challenge) block supports the following:
 
-<a id="challenge-a53c7e"></a>&#x2022; [`always_enable_captcha_challenge`](#challenge-a53c7e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="challenge-a53c7e"></a>&#x2022; [`always_enable_captcha_challenge`](#challenge-a53c7e) - Optional Block<br>Enable this option
 
-<a id="challenge-3ba035"></a>&#x2022; [`always_enable_js_challenge`](#challenge-3ba035) - Optional Block<br>Can be used for messages where no values are needed
+<a id="challenge-3ba035"></a>&#x2022; [`always_enable_js_challenge`](#challenge-3ba035) - Optional Block<br>Enable this option
 
 <a id="parameters-699e87"></a>&#x2022; [`captcha_challenge_parameters`](#parameters-699e87) - Optional Block<br>Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect<br>See [Captcha Challenge Parameters](#parameters-699e87) below.
 
-<a id="parameters-1afe14"></a>&#x2022; [`default_captcha_challenge_parameters`](#parameters-1afe14) - Optional Block<br>Can be used for messages where no values are needed
+<a id="parameters-1afe14"></a>&#x2022; [`default_captcha_challenge_parameters`](#parameters-1afe14) - Optional Block<br>Enable this option
 
-<a id="parameters-d11492"></a>&#x2022; [`default_js_challenge_parameters`](#parameters-d11492) - Optional Block<br>Can be used for messages where no values are needed
+<a id="parameters-d11492"></a>&#x2022; [`default_js_challenge_parameters`](#parameters-d11492) - Optional Block<br>Enable this option
 
-<a id="settings-3c8e74"></a>&#x2022; [`default_mitigation_settings`](#settings-3c8e74) - Optional Block<br>Can be used for messages where no values are needed
+<a id="settings-3c8e74"></a>&#x2022; [`default_mitigation_settings`](#settings-3c8e74) - Optional Block<br>Enable this option
 
-<a id="parameters-f17f1a"></a>&#x2022; [`default_temporary_blocking_parameters`](#parameters-f17f1a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="parameters-f17f1a"></a>&#x2022; [`default_temporary_blocking_parameters`](#parameters-f17f1a) - Optional Block<br>Enable this option
 
 <a id="parameters-65055e"></a>&#x2022; [`js_challenge_parameters`](#parameters-65055e) - Optional Block<br>Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do<br>See [Js Challenge Parameters](#parameters-65055e) below.
 
 <a id="mitigation-d19aea"></a>&#x2022; [`malicious_user_mitigation`](#mitigation-d19aea) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Malicious User Mitigation](#mitigation-d19aea) below.
 
-<a id="policy-based-challenge-no-challenge"></a>&#x2022; [`no_challenge`](#policy-based-challenge-no-challenge) - Optional Block<br>Can be used for messages where no values are needed
+<a id="policy-based-challenge-no-challenge"></a>&#x2022; [`no_challenge`](#policy-based-challenge-no-challenge) - Optional Block<br>Enable this option
 
 <a id="policy-based-challenge-rule-list"></a>&#x2022; [`rule_list`](#policy-based-challenge-rule-list) - Optional Block<br>List of challenge rules to be used in policy based challenge<br>See [Rule List](#policy-based-challenge-rule-list) below.
 
@@ -3866,11 +3866,11 @@ A [`metadata`](#metadata-72ce94) block (within [`policy_based_challenge.rule_lis
 
 A [`spec`](#spec-fbd0f9) block (within [`policy_based_challenge.rule_list.rules`](#policy-based-challenge-rule-list-rules)) supports the following:
 
-<a id="asn-cae05d"></a>&#x2022; [`any_asn`](#asn-cae05d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="asn-cae05d"></a>&#x2022; [`any_asn`](#asn-cae05d) - Optional Block<br>Enable this option
 
-<a id="client-df7cdb"></a>&#x2022; [`any_client`](#client-df7cdb) - Optional Block<br>Can be used for messages where no values are needed
+<a id="client-df7cdb"></a>&#x2022; [`any_client`](#client-df7cdb) - Optional Block<br>Enable this option
 
-<a id="any-ip-6a2554"></a>&#x2022; [`any_ip`](#any-ip-6a2554) - Optional Block<br>Can be used for messages where no values are needed
+<a id="any-ip-6a2554"></a>&#x2022; [`any_ip`](#any-ip-6a2554) - Optional Block<br>Enable this option
 
 <a id="matchers-86dff2"></a>&#x2022; [`arg_matchers`](#matchers-86dff2) - Optional Block<br>List of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name<br>See [Arg Matchers](#matchers-86dff2) below.
 
@@ -3884,13 +3884,13 @@ A [`spec`](#spec-fbd0f9) block (within [`policy_based_challenge.rule_list.rules`
 
 <a id="matchers-cb349b"></a>&#x2022; [`cookie_matchers`](#matchers-cb349b) - Optional Block<br>List of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name<br>See [Cookie Matchers](#matchers-cb349b) below.
 
-<a id="challenge-fbd9a1"></a>&#x2022; [`disable_challenge`](#challenge-fbd9a1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="challenge-fbd9a1"></a>&#x2022; [`disable_challenge`](#challenge-fbd9a1) - Optional Block<br>Enable this option
 
 <a id="matcher-888f5a"></a>&#x2022; [`domain_matcher`](#matcher-888f5a) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Domain Matcher](#matcher-888f5a) below.
 
-<a id="challenge-e0353b"></a>&#x2022; [`enable_captcha_challenge`](#challenge-e0353b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="challenge-e0353b"></a>&#x2022; [`enable_captcha_challenge`](#challenge-e0353b) - Optional Block<br>Enable this option
 
-<a id="challenge-3644c3"></a>&#x2022; [`enable_javascript_challenge`](#challenge-3644c3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="challenge-3644c3"></a>&#x2022; [`enable_javascript_challenge`](#challenge-3644c3) - Optional Block<br>Enable this option
 
 <a id="timestamp-6d26e1"></a>&#x2022; [`expiration_timestamp`](#timestamp-6d26e1) - Optional String<br>Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore
 
@@ -3998,31 +3998,31 @@ A [`temporary_user_blocking`](#blocking-9fdca7) block (within [`policy_based_cha
 
 A [`protected_cookies`](#protected-cookies) block supports the following:
 
-<a id="protected-cookies-add-httponly"></a>&#x2022; [`add_httponly`](#protected-cookies-add-httponly) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protected-cookies-add-httponly"></a>&#x2022; [`add_httponly`](#protected-cookies-add-httponly) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-add-secure"></a>&#x2022; [`add_secure`](#protected-cookies-add-secure) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protected-cookies-add-secure"></a>&#x2022; [`add_secure`](#protected-cookies-add-secure) - Optional Block<br>Enable this option
 
-<a id="protection-51c741"></a>&#x2022; [`disable_tampering_protection`](#protection-51c741) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protection-51c741"></a>&#x2022; [`disable_tampering_protection`](#protection-51c741) - Optional Block<br>Enable this option
 
-<a id="protection-d59c9f"></a>&#x2022; [`enable_tampering_protection`](#protection-d59c9f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protection-d59c9f"></a>&#x2022; [`enable_tampering_protection`](#protection-d59c9f) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-ignore-httponly"></a>&#x2022; [`ignore_httponly`](#protected-cookies-ignore-httponly) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protected-cookies-ignore-httponly"></a>&#x2022; [`ignore_httponly`](#protected-cookies-ignore-httponly) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-ignore-max-age"></a>&#x2022; [`ignore_max_age`](#protected-cookies-ignore-max-age) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protected-cookies-ignore-max-age"></a>&#x2022; [`ignore_max_age`](#protected-cookies-ignore-max-age) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-ignore-samesite"></a>&#x2022; [`ignore_samesite`](#protected-cookies-ignore-samesite) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protected-cookies-ignore-samesite"></a>&#x2022; [`ignore_samesite`](#protected-cookies-ignore-samesite) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-ignore-secure"></a>&#x2022; [`ignore_secure`](#protected-cookies-ignore-secure) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protected-cookies-ignore-secure"></a>&#x2022; [`ignore_secure`](#protected-cookies-ignore-secure) - Optional Block<br>Enable this option
 
 <a id="protected-cookies-max-age-value"></a>&#x2022; [`max_age_value`](#protected-cookies-max-age-value) - Optional Number<br>Add max age attribute
 
 <a id="protected-cookies-name"></a>&#x2022; [`name`](#protected-cookies-name) - Optional String<br>Cookie Name. Name of the Cookie
 
-<a id="protected-cookies-samesite-lax"></a>&#x2022; [`samesite_lax`](#protected-cookies-samesite-lax) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protected-cookies-samesite-lax"></a>&#x2022; [`samesite_lax`](#protected-cookies-samesite-lax) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-samesite-none"></a>&#x2022; [`samesite_none`](#protected-cookies-samesite-none) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protected-cookies-samesite-none"></a>&#x2022; [`samesite_none`](#protected-cookies-samesite-none) - Optional Block<br>Enable this option
 
-<a id="protected-cookies-samesite-strict"></a>&#x2022; [`samesite_strict`](#protected-cookies-samesite-strict) - Optional Block<br>Can be used for messages where no values are needed
+<a id="protected-cookies-samesite-strict"></a>&#x2022; [`samesite_strict`](#protected-cookies-samesite-strict) - Optional Block<br>Enable this option
 
 #### Rate Limit
 
@@ -4032,9 +4032,9 @@ A [`rate_limit`](#rate-limit) block supports the following:
 
 <a id="rate-limit-ip-allowed-list"></a>&#x2022; [`ip_allowed_list`](#rate-limit-ip-allowed-list) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [IP Allowed List](#rate-limit-ip-allowed-list) below.
 
-<a id="rate-limit-no-ip-allowed-list"></a>&#x2022; [`no_ip_allowed_list`](#rate-limit-no-ip-allowed-list) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rate-limit-no-ip-allowed-list"></a>&#x2022; [`no_ip_allowed_list`](#rate-limit-no-ip-allowed-list) - Optional Block<br>Enable this option
 
-<a id="rate-limit-no-policies"></a>&#x2022; [`no_policies`](#rate-limit-no-policies) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rate-limit-no-policies"></a>&#x2022; [`no_policies`](#rate-limit-no-policies) - Optional Block<br>Enable this option
 
 <a id="rate-limit-policies"></a>&#x2022; [`policies`](#rate-limit-policies) - Optional Block<br>List of rate limiter policies to be applied<br>See [Policies](#rate-limit-policies) below.
 
@@ -4080,7 +4080,7 @@ A [`rate_limiter`](#rate-limit-rate-limiter) block (within [`rate_limit`](#rate-
 
 <a id="multiplier-1bc2e7"></a>&#x2022; [`burst_multiplier`](#multiplier-1bc2e7) - Optional Number<br>The maximum burst of requests to accommodate, expressed as a multiple of the rate
 
-<a id="rate-limit-rate-limiter-disabled"></a>&#x2022; [`disabled`](#rate-limit-rate-limiter-disabled) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rate-limit-rate-limiter-disabled"></a>&#x2022; [`disabled`](#rate-limit-rate-limiter-disabled) - Optional Block<br>Enable this option
 
 <a id="rate-limit-rate-limiter-leaky-bucket"></a>&#x2022; [`leaky_bucket`](#rate-limit-rate-limiter-leaky-bucket) - Optional Block<br>Leaky-Bucket is the default rate limiter algorithm for F5
 
@@ -4142,25 +4142,25 @@ A [`hash_policy`](#ring-hash-hash-policy) block (within [`ring_hash`](#ring-hash
 
 A [`cookie`](#ring-hash-hash-policy-cookie) block (within [`ring_hash.hash_policy`](#ring-hash-hash-policy)) supports the following:
 
-<a id="httponly-54c45b"></a>&#x2022; [`add_httponly`](#httponly-54c45b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="httponly-54c45b"></a>&#x2022; [`add_httponly`](#httponly-54c45b) - Optional Block<br>Enable this option
 
-<a id="ring-hash-hash-policy-cookie-add-secure"></a>&#x2022; [`add_secure`](#ring-hash-hash-policy-cookie-add-secure) - Optional Block<br>Can be used for messages where no values are needed
+<a id="ring-hash-hash-policy-cookie-add-secure"></a>&#x2022; [`add_secure`](#ring-hash-hash-policy-cookie-add-secure) - Optional Block<br>Enable this option
 
-<a id="httponly-7f2aea"></a>&#x2022; [`ignore_httponly`](#httponly-7f2aea) - Optional Block<br>Can be used for messages where no values are needed
+<a id="httponly-7f2aea"></a>&#x2022; [`ignore_httponly`](#httponly-7f2aea) - Optional Block<br>Enable this option
 
-<a id="samesite-106140"></a>&#x2022; [`ignore_samesite`](#samesite-106140) - Optional Block<br>Can be used for messages where no values are needed
+<a id="samesite-106140"></a>&#x2022; [`ignore_samesite`](#samesite-106140) - Optional Block<br>Enable this option
 
-<a id="secure-febf51"></a>&#x2022; [`ignore_secure`](#secure-febf51) - Optional Block<br>Can be used for messages where no values are needed
+<a id="secure-febf51"></a>&#x2022; [`ignore_secure`](#secure-febf51) - Optional Block<br>Enable this option
 
 <a id="ring-hash-hash-policy-cookie-name"></a>&#x2022; [`name`](#ring-hash-hash-policy-cookie-name) - Optional String<br>The name of the cookie that will be used to obtain the hash key. If the cookie is not present and TTL below is not set, no hash will be produced
 
 <a id="ring-hash-hash-policy-cookie-path"></a>&#x2022; [`path`](#ring-hash-hash-policy-cookie-path) - Optional String<br>The name of the path for the cookie. If no path is specified here, no path will be set for the cookie
 
-<a id="lax-749b7e"></a>&#x2022; [`samesite_lax`](#lax-749b7e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="lax-749b7e"></a>&#x2022; [`samesite_lax`](#lax-749b7e) - Optional Block<br>Enable this option
 
-<a id="none-5bbed3"></a>&#x2022; [`samesite_none`](#none-5bbed3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-5bbed3"></a>&#x2022; [`samesite_none`](#none-5bbed3) - Optional Block<br>Enable this option
 
-<a id="strict-3e550d"></a>&#x2022; [`samesite_strict`](#strict-3e550d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="strict-3e550d"></a>&#x2022; [`samesite_strict`](#strict-3e550d) - Optional Block<br>Enable this option
 
 <a id="ring-hash-hash-policy-cookie-ttl"></a>&#x2022; [`ttl`](#ring-hash-hash-policy-cookie-ttl) - Optional Number<br>If specified, a cookie with the TTL will be generated if the cookie is not present. If the TTL is present and zero, the generated cookie will be a session cookie. TTL value is in milliseconds
 
@@ -4224,7 +4224,7 @@ A [`headers`](#routes-direct-response-route-headers) block (within [`routes.dire
 
 An [`incoming_port`](#port-9bcff1) block (within [`routes.direct_response_route`](#routes-direct-response-route)) supports the following:
 
-<a id="match-ba3425"></a>&#x2022; [`no_port_match`](#match-ba3425) - Optional Block<br>Can be used for messages where no values are needed
+<a id="match-ba3425"></a>&#x2022; [`no_port_match`](#match-ba3425) - Optional Block<br>Enable this option
 
 <a id="port-9debaf"></a>&#x2022; [`port`](#port-9debaf) - Optional Number<br>Exact Port to match
 
@@ -4280,7 +4280,7 @@ A [`headers`](#routes-redirect-route-headers) block (within [`routes.redirect_ro
 
 An [`incoming_port`](#routes-redirect-route-incoming-port) block (within [`routes.redirect_route`](#routes-redirect-route)) supports the following:
 
-<a id="match-56f681"></a>&#x2022; [`no_port_match`](#match-56f681) - Optional Block<br>Can be used for messages where no values are needed
+<a id="match-56f681"></a>&#x2022; [`no_port_match`](#match-56f681) - Optional Block<br>Enable this option
 
 <a id="port-02a88d"></a>&#x2022; [`port`](#port-02a88d) - Optional Number<br>Exact Port to match
 
@@ -4308,13 +4308,13 @@ A [`route_redirect`](#routes-redirect-route-route-redirect) block (within [`rout
 
 <a id="redirect-f23979"></a>&#x2022; [`proto_redirect`](#redirect-f23979) - Optional String<br>Swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done
 
-<a id="params-0941dc"></a>&#x2022; [`remove_all_params`](#params-0941dc) - Optional Block<br>Can be used for messages where no values are needed
+<a id="params-0941dc"></a>&#x2022; [`remove_all_params`](#params-0941dc) - Optional Block<br>Enable this option
 
 <a id="params-94a828"></a>&#x2022; [`replace_params`](#params-94a828) - Optional String
 
 <a id="code-d55c43"></a>&#x2022; [`response_code`](#code-d55c43) - Optional Number<br>The HTTP status code to use in the redirect response
 
-<a id="params-f96588"></a>&#x2022; [`retain_all_params`](#params-f96588) - Optional Block<br>Can be used for messages where no values are needed
+<a id="params-f96588"></a>&#x2022; [`retain_all_params`](#params-f96588) - Optional Block<br>Enable this option
 
 #### Routes Simple Route
 
@@ -4322,9 +4322,9 @@ A [`simple_route`](#routes-simple-route) block (within [`routes`](#routes)) supp
 
 <a id="routes-simple-route-advanced-options"></a>&#x2022; [`advanced_options`](#routes-simple-route-advanced-options) - Optional Block<br>Configure advanced OPTIONS for route like path rewrite, hash policy, etc<br>See [Advanced Options](#routes-simple-route-advanced-options) below.
 
-<a id="routes-simple-route-auto-host-rewrite"></a>&#x2022; [`auto_host_rewrite`](#routes-simple-route-auto-host-rewrite) - Optional Block<br>Can be used for messages where no values are needed
+<a id="routes-simple-route-auto-host-rewrite"></a>&#x2022; [`auto_host_rewrite`](#routes-simple-route-auto-host-rewrite) - Optional Block<br>Enable this option
 
-<a id="rewrite-706535"></a>&#x2022; [`disable_host_rewrite`](#rewrite-706535) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rewrite-706535"></a>&#x2022; [`disable_host_rewrite`](#rewrite-706535) - Optional Block<br>Enable this option
 
 <a id="routes-simple-route-headers"></a>&#x2022; [`headers`](#routes-simple-route-headers) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#routes-simple-route-headers) below.
 
@@ -4350,43 +4350,43 @@ An [`advanced_options`](#routes-simple-route-advanced-options) block (within [`r
 
 <a id="policy-23a3f6"></a>&#x2022; [`buffer_policy`](#policy-23a3f6) - Optional Block<br>Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config<br>See [Buffer Policy](#policy-23a3f6) below.
 
-<a id="buffering-44c193"></a>&#x2022; [`common_buffering`](#buffering-44c193) - Optional Block<br>Can be used for messages where no values are needed
+<a id="buffering-44c193"></a>&#x2022; [`common_buffering`](#buffering-44c193) - Optional Block<br>Enable this option
 
-<a id="policy-b912b0"></a>&#x2022; [`common_hash_policy`](#policy-b912b0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="policy-b912b0"></a>&#x2022; [`common_hash_policy`](#policy-b912b0) - Optional Block<br>Enable this option
 
 <a id="policy-ba853e"></a>&#x2022; [`cors_policy`](#policy-ba853e) - Optional Block<br>Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel MAC OS X 10.5<br>See [CORS Policy](#policy-ba853e) below.
 
 <a id="policy-7816d7"></a>&#x2022; [`csrf_policy`](#policy-7816d7) - Optional Block<br>To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.the policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to<br>See [CSRF Policy](#policy-7816d7) below.
 
-<a id="policy-70b68a"></a>&#x2022; [`default_retry_policy`](#policy-70b68a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="policy-70b68a"></a>&#x2022; [`default_retry_policy`](#policy-70b68a) - Optional Block<br>Enable this option
 
 <a id="add-11129b"></a>&#x2022; [`disable_location_add`](#add-11129b) - Optional Bool<br>Disables append of x-F5 Distributed Cloud-location = `<RE-site-name>` at route level, if it is configured at virtual-host level. This configuration is ignored on CE sites
 
-<a id="mirroring-e37294"></a>&#x2022; [`disable_mirroring`](#mirroring-e37294) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mirroring-e37294"></a>&#x2022; [`disable_mirroring`](#mirroring-e37294) - Optional Block<br>Enable this option
 
-<a id="rewrite-8c52ee"></a>&#x2022; [`disable_prefix_rewrite`](#rewrite-8c52ee) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rewrite-8c52ee"></a>&#x2022; [`disable_prefix_rewrite`](#rewrite-8c52ee) - Optional Block<br>Enable this option
 
-<a id="spdy-c4a11a"></a>&#x2022; [`disable_spdy`](#spdy-c4a11a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="spdy-c4a11a"></a>&#x2022; [`disable_spdy`](#spdy-c4a11a) - Optional Block<br>Enable this option
 
-<a id="waf-afaac0"></a>&#x2022; [`disable_waf`](#waf-afaac0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="waf-afaac0"></a>&#x2022; [`disable_waf`](#waf-afaac0) - Optional Block<br>Enable this option
 
-<a id="config-b3faa9"></a>&#x2022; [`disable_web_socket_config`](#config-b3faa9) - Optional Block<br>Can be used for messages where no values are needed
+<a id="config-b3faa9"></a>&#x2022; [`disable_web_socket_config`](#config-b3faa9) - Optional Block<br>Enable this option
 
-<a id="cluster-f8e26f"></a>&#x2022; [`do_not_retract_cluster`](#cluster-f8e26f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cluster-f8e26f"></a>&#x2022; [`do_not_retract_cluster`](#cluster-f8e26f) - Optional Block<br>Enable this option
 
-<a id="spdy-676c6f"></a>&#x2022; [`enable_spdy`](#spdy-676c6f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="spdy-676c6f"></a>&#x2022; [`enable_spdy`](#spdy-676c6f) - Optional Block<br>Enable this option
 
 <a id="subsets-b6a9d9"></a>&#x2022; [`endpoint_subsets`](#subsets-b6a9d9) - Optional Block<br>Upstream origin pool may be configured to divide its origin servers into subsets based on metadata attached to the origin servers. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer For origin servers which are discovered in K8S or Consul
 
-<a id="injection-46208e"></a>&#x2022; [`inherited_bot_defense_javascript_injection`](#injection-46208e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="injection-46208e"></a>&#x2022; [`inherited_bot_defense_javascript_injection`](#injection-46208e) - Optional Block<br>Enable this option
 
-<a id="waf-0043f0"></a>&#x2022; [`inherited_waf`](#waf-0043f0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="waf-0043f0"></a>&#x2022; [`inherited_waf`](#waf-0043f0) - Optional Block<br>Enable this option
 
-<a id="exclusion-0ba7d9"></a>&#x2022; [`inherited_waf_exclusion`](#exclusion-0ba7d9) - Optional Block<br>Can be used for messages where no values are needed
+<a id="exclusion-0ba7d9"></a>&#x2022; [`inherited_waf_exclusion`](#exclusion-0ba7d9) - Optional Block<br>Enable this option
 
 <a id="policy-f5e84d"></a>&#x2022; [`mirror_policy`](#policy-f5e84d) - Optional Block<br>MirrorPolicy is used for shadowing traffic from one origin pool to another. The approach used is 'fire and forget', meaning it will not wait for the shadow origin pool to respond before returning the response from the primary origin pool. All normal statistics are collected for the shadow origin<br>See [Mirror Policy](#policy-f5e84d) below.
 
-<a id="policy-ad7b2b"></a>&#x2022; [`no_retry_policy`](#policy-ad7b2b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="policy-ad7b2b"></a>&#x2022; [`no_retry_policy`](#policy-ad7b2b) - Optional Block<br>Enable this option
 
 <a id="rewrite-ffbe86"></a>&#x2022; [`prefix_rewrite`](#rewrite-ffbe86) - Optional String<br>prefix_rewrite indicates that during forwarding, the matched prefix (or path) should be swapped with its value. When using regex path matching, the entire path (not including the query string) will be swapped with this value
 
@@ -4410,7 +4410,7 @@ An [`advanced_options`](#routes-simple-route-advanced-options) block (within [`r
 
 <a id="remove-5c99fb"></a>&#x2022; [`response_headers_to_remove`](#remove-5c99fb) - Optional List<br>List of keys of Headers to be removed from the HTTP response being sent towards downstream
 
-<a id="cluster-3cb556"></a>&#x2022; [`retract_cluster`](#cluster-3cb556) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cluster-3cb556"></a>&#x2022; [`retract_cluster`](#cluster-3cb556) - Optional Block<br>Enable this option
 
 <a id="policy-e40fa6"></a>&#x2022; [`retry_policy`](#policy-e40fa6) - Optional Block<br>Retry policy configuration for route destination<br>See [Retry Policy](#policy-e40fa6) below.
 
@@ -4476,11 +4476,11 @@ A [`cors_policy`](#policy-ba853e) block (within [`routes.simple_route.advanced_o
 
 A [`csrf_policy`](#policy-7816d7) block (within [`routes.simple_route.advanced_options`](#routes-simple-route-advanced-options)) supports the following:
 
-<a id="domains-b58044"></a>&#x2022; [`all_load_balancer_domains`](#domains-b58044) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domains-b58044"></a>&#x2022; [`all_load_balancer_domains`](#domains-b58044) - Optional Block<br>Enable this option
 
 <a id="list-c11aec"></a>&#x2022; [`custom_domain_list`](#list-c11aec) - Optional Block<br>List of domain names used for Host header matching<br>See [Custom Domain List](#list-c11aec) below.
 
-<a id="disabled-ac6077"></a>&#x2022; [`disabled`](#disabled-ac6077) - Optional Block<br>Can be used for messages where no values are needed
+<a id="disabled-ac6077"></a>&#x2022; [`disabled`](#disabled-ac6077) - Optional Block<br>Enable this option
 
 #### Routes Simple Route Advanced Options CSRF Policy Custom Domain List
 
@@ -4630,7 +4630,7 @@ A [`headers`](#routes-simple-route-headers) block (within [`routes.simple_route`
 
 An [`incoming_port`](#routes-simple-route-incoming-port) block (within [`routes.simple_route`](#routes-simple-route)) supports the following:
 
-<a id="match-80b1e5"></a>&#x2022; [`no_port_match`](#match-80b1e5) - Optional Block<br>Can be used for messages where no values are needed
+<a id="match-80b1e5"></a>&#x2022; [`no_port_match`](#match-80b1e5) - Optional Block<br>Enable this option
 
 <a id="routes-simple-route-incoming-port-port"></a>&#x2022; [`port`](#routes-simple-route-incoming-port-port) - Optional Number<br>Exact Port to match
 
@@ -4684,11 +4684,11 @@ A [`path`](#routes-simple-route-path) block (within [`routes.simple_route`](#rou
 
 A [`query_params`](#routes-simple-route-query-params) block (within [`routes.simple_route`](#routes-simple-route)) supports the following:
 
-<a id="params-aa1f17"></a>&#x2022; [`remove_all_params`](#params-aa1f17) - Optional Block<br>Can be used for messages where no values are needed
+<a id="params-aa1f17"></a>&#x2022; [`remove_all_params`](#params-aa1f17) - Optional Block<br>Enable this option
 
 <a id="params-c3e5f1"></a>&#x2022; [`replace_params`](#params-c3e5f1) - Optional String
 
-<a id="params-bd2237"></a>&#x2022; [`retain_all_params`](#params-bd2237) - Optional Block<br>Can be used for messages where no values are needed
+<a id="params-bd2237"></a>&#x2022; [`retain_all_params`](#params-bd2237) - Optional Block<br>Enable this option
 
 #### Sensitive Data Disclosure Rules
 
@@ -4728,13 +4728,13 @@ A [`sensitive_data_policy_ref`](#ref-55b260) block (within [`sensitive_data_poli
 
 A [`single_lb_app`](#single-lb-app) block supports the following:
 
-<a id="single-lb-app-disable-discovery"></a>&#x2022; [`disable_discovery`](#single-lb-app-disable-discovery) - Optional Block<br>Can be used for messages where no values are needed
+<a id="single-lb-app-disable-discovery"></a>&#x2022; [`disable_discovery`](#single-lb-app-disable-discovery) - Optional Block<br>Enable this option
 
-<a id="detection-d482d0"></a>&#x2022; [`disable_malicious_user_detection`](#detection-d482d0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="detection-d482d0"></a>&#x2022; [`disable_malicious_user_detection`](#detection-d482d0) - Optional Block<br>Enable this option
 
 <a id="single-lb-app-enable-discovery"></a>&#x2022; [`enable_discovery`](#single-lb-app-enable-discovery) - Optional Block<br>Specifies the settings used for API discovery<br>See [Enable Discovery](#single-lb-app-enable-discovery) below.
 
-<a id="detection-280554"></a>&#x2022; [`enable_malicious_user_detection`](#detection-280554) - Optional Block<br>Can be used for messages where no values are needed
+<a id="detection-280554"></a>&#x2022; [`enable_malicious_user_detection`](#detection-280554) - Optional Block<br>Enable this option
 
 #### Single LB App Enable Discovery
 
@@ -4746,13 +4746,13 @@ An [`enable_discovery`](#single-lb-app-enable-discovery) block (within [`single_
 
 <a id="discovery-3993cd"></a>&#x2022; [`custom_api_auth_discovery`](#discovery-3993cd) - Optional Block<br>API Discovery Advanced Settings. API Discovery Advanced settings<br>See [Custom API Auth Discovery](#discovery-3993cd) below.
 
-<a id="discovery-e02c6d"></a>&#x2022; [`default_api_auth_discovery`](#discovery-e02c6d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="discovery-e02c6d"></a>&#x2022; [`default_api_auth_discovery`](#discovery-e02c6d) - Optional Block<br>Enable this option
 
-<a id="traffic-7e1631"></a>&#x2022; [`disable_learn_from_redirect_traffic`](#traffic-7e1631) - Optional Block<br>Can be used for messages where no values are needed
+<a id="traffic-7e1631"></a>&#x2022; [`disable_learn_from_redirect_traffic`](#traffic-7e1631) - Optional Block<br>Enable this option
 
 <a id="settings-e36cc7"></a>&#x2022; [`discovered_api_settings`](#settings-e36cc7) - Optional Block<br>Discovered API Settings. Configure Discovered API Settings<br>See [Discovered API Settings](#settings-e36cc7) below.
 
-<a id="traffic-ebfb24"></a>&#x2022; [`enable_learn_from_redirect_traffic`](#traffic-ebfb24) - Optional Block<br>Can be used for messages where no values are needed
+<a id="traffic-ebfb24"></a>&#x2022; [`enable_learn_from_redirect_traffic`](#traffic-ebfb24) - Optional Block<br>Enable this option
 
 #### Single LB App Enable Discovery API Crawler
 
@@ -4760,7 +4760,7 @@ An [`api_crawler`](#crawler-cb748a) block (within [`single_lb_app.enable_discove
 
 <a id="config-3110d5"></a>&#x2022; [`api_crawler_config`](#config-3110d5) - Optional Block<br>Crawler Configure<br>See [API Crawler Config](#config-3110d5) below.
 
-<a id="crawler-f73dfe"></a>&#x2022; [`disable_api_crawler`](#crawler-f73dfe) - Optional Block<br>Can be used for messages where no values are needed
+<a id="crawler-f73dfe"></a>&#x2022; [`disable_api_crawler`](#crawler-f73dfe) - Optional Block<br>Enable this option
 
 #### Single LB App Enable Discovery API Crawler API Crawler Config
 
@@ -4818,7 +4818,7 @@ An [`api_crawler`](#crawler-cb748a) block (within [`single_lb_app.enable_discove
 
 A [`slow_ddos_mitigation`](#slow-ddos-mitigation) block supports the following:
 
-<a id="timeout-81071e"></a>&#x2022; [`disable_request_timeout`](#timeout-81071e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="timeout-81071e"></a>&#x2022; [`disable_request_timeout`](#timeout-81071e) - Optional Block<br>Enable this option
 
 <a id="timeout-da89d3"></a>&#x2022; [`request_headers_timeout`](#timeout-da89d3) - Optional Number  Defaults to `10000`<br>The amount of time the client has to send only the headers on the request stream before the stream is cancelled. The milliseconds. This setting provides protection against Slowloris attacks
 
@@ -4844,7 +4844,7 @@ A [`trusted_clients`](#trusted-clients) block supports the following:
 
 <a id="trusted-clients-as-number"></a>&#x2022; [`as_number`](#trusted-clients-as-number) - Optional Number<br>RFC 6793 defined 4-byte AS number
 
-<a id="trusted-clients-bot-skip-processing"></a>&#x2022; [`bot_skip_processing`](#trusted-clients-bot-skip-processing) - Optional Block<br>Can be used for messages where no values are needed
+<a id="trusted-clients-bot-skip-processing"></a>&#x2022; [`bot_skip_processing`](#trusted-clients-bot-skip-processing) - Optional Block<br>Enable this option
 
 <a id="trusted-clients-expiration-timestamp"></a>&#x2022; [`expiration_timestamp`](#trusted-clients-expiration-timestamp) - Optional String<br>Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore
 
@@ -4856,11 +4856,11 @@ A [`trusted_clients`](#trusted-clients) block supports the following:
 
 <a id="trusted-clients-metadata"></a>&#x2022; [`metadata`](#trusted-clients-metadata) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#trusted-clients-metadata) below.
 
-<a id="trusted-clients-skip-processing"></a>&#x2022; [`skip_processing`](#trusted-clients-skip-processing) - Optional Block<br>Can be used for messages where no values are needed
+<a id="trusted-clients-skip-processing"></a>&#x2022; [`skip_processing`](#trusted-clients-skip-processing) - Optional Block<br>Enable this option
 
 <a id="trusted-clients-user-identifier"></a>&#x2022; [`user_identifier`](#trusted-clients-user-identifier) - Optional String<br>Identify user based on user identifier. User identifier value needs to be copied from security event
 
-<a id="trusted-clients-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#trusted-clients-waf-skip-processing) - Optional Block<br>Can be used for messages where no values are needed
+<a id="trusted-clients-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#trusted-clients-waf-skip-processing) - Optional Block<br>Enable this option
 
 #### Trusted Clients HTTP Header
 
@@ -4918,9 +4918,9 @@ A [`waf_exclusion_inline_rules`](#rules-6d8efc) block (within [`waf_exclusion`](
 
 A [`rules`](#rules-28cf34) block (within [`waf_exclusion.waf_exclusion_inline_rules`](#rules-6d8efc)) supports the following:
 
-<a id="domain-3f85e2"></a>&#x2022; [`any_domain`](#domain-3f85e2) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domain-3f85e2"></a>&#x2022; [`any_domain`](#domain-3f85e2) - Optional Block<br>Enable this option
 
-<a id="path-f75bfe"></a>&#x2022; [`any_path`](#path-f75bfe) - Optional Block<br>Can be used for messages where no values are needed
+<a id="path-f75bfe"></a>&#x2022; [`any_path`](#path-f75bfe) - Optional Block<br>Enable this option
 
 <a id="control-0cb52d"></a>&#x2022; [`app_firewall_detection_control`](#control-0cb52d) - Optional Block<br>Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#control-0cb52d) below.
 
@@ -4938,7 +4938,7 @@ A [`rules`](#rules-28cf34) block (within [`waf_exclusion.waf_exclusion_inline_ru
 
 <a id="value-6f2f58"></a>&#x2022; [`suffix_value`](#value-6f2f58) - Optional String<br>Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
 
-<a id="processing-8c8391"></a>&#x2022; [`waf_skip_processing`](#processing-8c8391) - Optional Block<br>Can be used for messages where no values are needed
+<a id="processing-8c8391"></a>&#x2022; [`waf_skip_processing`](#processing-8c8391) - Optional Block<br>Enable this option
 
 #### WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control
 

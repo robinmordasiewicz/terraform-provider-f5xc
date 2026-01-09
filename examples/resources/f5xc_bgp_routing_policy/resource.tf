@@ -24,7 +24,7 @@ resource "f5xc_bgp_routing_policy" "example" {
   action {
     # Configure action settings
   }
-  # Can be used for messages where no values are needed.
+  # Enable this option
   aggregate {
     # Configure aggregate settings
   }

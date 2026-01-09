@@ -5167,7 +5167,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							Blocks: map[string]schema.Block{
 								"any_domain": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"api_endpoint_method": schema.SingleNestedBlock{
 									MarkdownDescription: "HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true.",
@@ -5188,10 +5188,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"any_client": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"any_ip": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"asn_list": schema.SingleNestedBlock{
 											MarkdownDescription: "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
@@ -5389,7 +5389,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											},
 										},
 										"use_http_lb_user_id": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -5433,10 +5433,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -5476,10 +5476,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -5519,10 +5519,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -5562,10 +5562,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -5614,10 +5614,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 									Blocks: map[string]schema.Block{
 										"any_domain": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"any_url": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"api_endpoint": schema.SingleNestedBlock{
 											MarkdownDescription: "API Endpoint. This defines API endpoint.",
@@ -5648,10 +5648,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"any_client": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"any_ip": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"asn_list": schema.SingleNestedBlock{
 													MarkdownDescription: "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
@@ -5833,10 +5833,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														},
 														Blocks: map[string]schema.Block{
 															"check_not_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"check_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"item": schema.SingleNestedBlock{
 																MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -5876,10 +5876,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														},
 														Blocks: map[string]schema.Block{
 															"check_not_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"check_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"item": schema.SingleNestedBlock{
 																MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -5919,10 +5919,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														},
 														Blocks: map[string]schema.Block{
 															"check_not_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"check_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"item": schema.SingleNestedBlock{
 																MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -5962,10 +5962,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														},
 														Blocks: map[string]schema.Block{
 															"check_not_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"check_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"item": schema.SingleNestedBlock{
 																MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -6037,7 +6037,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 					"no_ip_allowed_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"server_url_rules": schema.ListNestedBlock{
 						MarkdownDescription: "Set of rules for entire domain or base path that contain multiple endpoints. Order is matter as it uses first match policy. For matching also specific endpoints you can use the API endpoint rules set bellow.",
@@ -6058,17 +6058,17 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							Blocks: map[string]schema.Block{
 								"any_domain": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"client_matcher": schema.SingleNestedBlock{
 									MarkdownDescription: "Client Matcher. Client conditions for matching a rule.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"any_client": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"any_ip": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"asn_list": schema.SingleNestedBlock{
 											MarkdownDescription: "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
@@ -6266,7 +6266,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											},
 										},
 										"use_http_lb_user_id": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -6310,10 +6310,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -6353,10 +6353,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -6396,10 +6396,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -6439,10 +6439,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -6508,7 +6508,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"fall_through_mode_allow": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"fall_through_mode_custom": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Fall Through Mode. Define the fall through settings.",
@@ -6529,13 +6529,13 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													},
 													Blocks: map[string]schema.Block{
 														"action_block": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"action_report": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"action_skip": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"api_endpoint": schema.SingleNestedBlock{
 															MarkdownDescription: "API Endpoint. This defines API endpoint.",
@@ -6576,10 +6576,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"oversized_body_fail_validation": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"oversized_body_skip_validation": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"property_validation_settings_custom": schema.SingleNestedBlock{
 										MarkdownDescription: "Validation Property Settings. Custom property validation settings.",
@@ -6590,17 +6590,17 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"allow_additional_parameters": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"disallow_additional_parameters": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 												},
 											},
 										},
 									},
 									"property_validation_settings_default": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -6619,18 +6619,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 										Blocks: map[string]schema.Block{
 											"enforcement_block": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"enforcement_report": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 										},
 									},
 									"skip_response_validation": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"skip_validation": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"validation_mode_active": schema.SingleNestedBlock{
 										MarkdownDescription: "Open API Validation Mode Active. Validation mode properties of request.",
@@ -6643,10 +6643,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 										Blocks: map[string]schema.Block{
 											"enforcement_block": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"enforcement_report": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 										},
 									},
@@ -6663,7 +6663,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"fall_through_mode_allow": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"fall_through_mode_custom": schema.SingleNestedBlock{
 										MarkdownDescription: "Custom Fall Through Mode. Define the fall through settings.",
@@ -6684,13 +6684,13 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													},
 													Blocks: map[string]schema.Block{
 														"action_block": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"action_report": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"action_skip": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"api_endpoint": schema.SingleNestedBlock{
 															MarkdownDescription: "API Endpoint. This defines API endpoint.",
@@ -6745,7 +6745,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 									Blocks: map[string]schema.Block{
 										"any_domain": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"api_endpoint": schema.SingleNestedBlock{
 											MarkdownDescription: "API Endpoint. This defines API endpoint.",
@@ -6789,18 +6789,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													},
 													Blocks: map[string]schema.Block{
 														"enforcement_block": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"enforcement_report": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 													},
 												},
 												"skip_response_validation": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"skip_validation": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"validation_mode_active": schema.SingleNestedBlock{
 													MarkdownDescription: "Open API Validation Mode Active. Validation mode properties of request.",
@@ -6813,10 +6813,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													},
 													Blocks: map[string]schema.Block{
 														"enforcement_block": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"enforcement_report": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 													},
 												},
@@ -6830,10 +6830,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"oversized_body_fail_validation": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"oversized_body_skip_validation": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"property_validation_settings_custom": schema.SingleNestedBlock{
 										MarkdownDescription: "Validation Property Settings. Custom property validation settings.",
@@ -6844,24 +6844,24 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"allow_additional_parameters": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"disallow_additional_parameters": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 												},
 											},
 										},
 									},
 									"property_validation_settings_default": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
 						},
 					},
 					"validation_disabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -6918,7 +6918,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					Blocks: map[string]schema.Block{
 						"bot_skip_processing": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"http_header": schema.SingleNestedBlock{
 							MarkdownDescription: "HTTP Header. Request header name and value pairs.",
@@ -6967,10 +6967,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 						},
 						"skip_processing": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"waf_skip_processing": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 					},
 				},
@@ -6989,10 +6989,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 				Blocks: map[string]schema.Block{
 					"disable_cors_support": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_cors_support": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"policy": schema.SingleNestedBlock{
 						MarkdownDescription: "Defines various configuration OPTIONS for Bot Defense policy.",
@@ -7008,10 +7008,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 						Blocks: map[string]schema.Block{
 							"disable_js_insert": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"disable_mobile_sdk": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"js_insert_all_pages": schema.SingleNestedBlock{
 								MarkdownDescription: "Insert Bot Defense JavaScript in all pages.",
@@ -7037,7 +7037,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"any_domain": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"domain": schema.SingleNestedBlock{
 													MarkdownDescription: "Domains. Domains names.",
@@ -7101,7 +7101,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"any_domain": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"domain": schema.SingleNestedBlock{
 													MarkdownDescription: "Domains. Domains names.",
@@ -7164,7 +7164,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											},
 											Blocks: map[string]schema.Block{
 												"any_domain": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"domain": schema.SingleNestedBlock{
 													MarkdownDescription: "Domains. Domains names.",
@@ -7237,10 +7237,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													},
 													Blocks: map[string]schema.Block{
 														"check_not_present": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"check_present": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"item": schema.SingleNestedBlock{
 															MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -7285,10 +7285,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 									Blocks: map[string]schema.Block{
 										"allow_good_bots": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"any_domain": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"domain": schema.SingleNestedBlock{
 											MarkdownDescription: "Domains. Domains names.",
@@ -7316,10 +7316,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"create": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"password_reset": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 													},
 												},
@@ -7332,7 +7332,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"disable_transaction_result": schema.SingleNestedBlock{
-																	MarkdownDescription: "Can be used for messages where no values are needed.",
+																	MarkdownDescription: "Enable this option",
 																},
 																"transaction_result": schema.SingleNestedBlock{
 																	MarkdownDescription: "Bot Defense Transaction Result Type. Bot Defense Transaction ResultType.",
@@ -7383,16 +7383,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															},
 														},
 														"login_mfa": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"login_partner": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"logout": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"token_refresh": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 													},
 												},
@@ -7401,10 +7401,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"apply": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"money_transfer": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 													},
 												},
@@ -7413,7 +7413,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"checkin": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 													},
 												},
@@ -7422,13 +7422,13 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"create": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"update": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"view": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 													},
 												},
@@ -7437,16 +7437,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"flight_search": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"product_search": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"reservation_search": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"room_search": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 													},
 												},
@@ -7455,40 +7455,40 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"gift_card_make_purchase_with_gift_card": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"gift_card_validation": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"shop_add_to_cart": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"shop_checkout": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"shop_choose_seat": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"shop_enter_drawing_submission": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"shop_make_payment": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"shop_order": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"shop_price_inquiry": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"shop_promo_code_validation": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"shop_purchase_gift_card": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"shop_update_quantity": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 													},
 												},
@@ -7509,10 +7509,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -7551,7 +7551,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											},
 										},
 										"mitigate_good_bots": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"mitigation": schema.SingleNestedBlock{
 											MarkdownDescription: "Modify Bot Defense behavior for a matching request.",
@@ -7588,7 +7588,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 															},
 														},
 														"no_headers": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 													},
 												},
@@ -7604,7 +7604,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											},
 										},
 										"mobile": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"path": schema.SingleNestedBlock{
 											MarkdownDescription: "Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
@@ -7638,10 +7638,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -7667,10 +7667,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											},
 										},
 										"undefined_flow_label": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"web": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"web_mobile": schema.SingleNestedBlock{
 											MarkdownDescription: "Web and Mobile traffic type. Web and Mobile traffic type.",
@@ -7710,10 +7710,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable_js_insert": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"js_insert_all_pages": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"js_insert_all_pages_except": schema.SingleNestedBlock{
 								MarkdownDescription: "Insert Client-Side Defense JavaScript in all pages with the exceptions.",
@@ -7725,7 +7725,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"any_domain": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"domain": schema.SingleNestedBlock{
 													MarkdownDescription: "Domains. Domains names.",
@@ -7789,7 +7789,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"any_domain": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"domain": schema.SingleNestedBlock{
 													MarkdownDescription: "Domains. Domains names.",
@@ -7847,7 +7847,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"any_domain": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"domain": schema.SingleNestedBlock{
 													MarkdownDescription: "Domains. Domains names.",
@@ -7949,7 +7949,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"all_load_balancer_domains": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"custom_domain_list": schema.SingleNestedBlock{
 						MarkdownDescription: "List of domain names used for Host header matching.",
@@ -7962,7 +7962,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 					"disabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -8010,10 +8010,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					Blocks: map[string]schema.Block{
 						"any_domain": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"apply_data_guard": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"metadata": schema.SingleNestedBlock{
 							MarkdownDescription: "MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create..",
@@ -8046,7 +8046,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 						},
 						"skip_data_guard": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 					},
 				},
@@ -8062,7 +8062,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					Blocks: map[string]schema.Block{
 						"block": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"ddos_client_source": schema.SingleNestedBlock{
 							MarkdownDescription: "DDoS Client Source Choice. DDoS Mitigation sources to be blocked.",
@@ -8160,36 +8160,36 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 				Blocks: map[string]schema.Block{
 					"cache_disabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
 			"default_sensitive_data_policy": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: default_sensitive_data_policy, sensitive_data_policy; Default: default_sensitive_data_policy] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: default_sensitive_data_policy, sensitive_data_policy; Default: default_sensitive_data_policy] Enable this option",
 			},
 			"disable_api_definition": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"disable_api_discovery": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_api_discovery, enable_api_discovery; Default: disable_api_discovery] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable_api_discovery, enable_api_discovery; Default: disable_api_discovery] Enable this option",
 			},
 			"disable_client_side_defense": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"disable_ip_reputation": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_ip_reputation, enable_ip_reputation; Default: disable_ip_reputation] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable_ip_reputation, enable_ip_reputation; Default: disable_ip_reputation] Enable this option",
 			},
 			"disable_malicious_user_detection": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_malicious_user_detection, enable_malicious_user_detection; Default: disable_malicious_user_detection] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable_malicious_user_detection, enable_malicious_user_detection; Default: disable_malicious_user_detection] Enable this option",
 			},
 			"disable_rate_limit": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"disable_threat_mesh": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_threat_mesh, enable_threat_mesh; Default: disable_threat_mesh] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable_threat_mesh, enable_threat_mesh; Default: disable_threat_mesh] Enable this option",
 			},
 			"disable_waf": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"enable_api_discovery": schema.SingleNestedBlock{
 				MarkdownDescription: "Specifies the settings used for API discovery.",
@@ -8266,7 +8266,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								},
 							},
 							"disable_api_crawler": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -8280,7 +8280,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"all_repos": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"code_base_integration": schema.SingleNestedBlock{
 											MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -8346,10 +8346,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 					"default_api_auth_discovery": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable_learn_from_redirect_traffic": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"discovered_api_settings": schema.SingleNestedBlock{
 						MarkdownDescription: "Discovered API Settings. Configure Discovered API Settings.",
@@ -8361,7 +8361,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 					"enable_learn_from_redirect_traffic": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -8383,13 +8383,13 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 					"default_captcha_challenge_parameters": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_js_challenge_parameters": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_mitigation_settings": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"js_challenge_parameters": schema.SingleNestedBlock{
 						MarkdownDescription: "Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do..",
@@ -8442,10 +8442,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"enable_malicious_user_detection": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"enable_threat_mesh": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"graphql_rules": schema.ListNestedBlock{
 				MarkdownDescription: "GraphQL is a query language and server-side runtime for APIs which provides a complete and understandable description of the data in API. GraphQL gives clients the power to ask for exactly what they need, makes it easier to evolve APIs over time, and enables powerful developer tools. Policy..",
@@ -8466,7 +8466,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					Blocks: map[string]schema.Block{
 						"any_domain": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"graphql_settings": schema.SingleNestedBlock{
 							MarkdownDescription: "GraphQL Settings. GraphQL configuration.",
@@ -8486,10 +8486,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 							Blocks: map[string]schema.Block{
 								"disable_introspection": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"enable_introspection": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
@@ -8507,10 +8507,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 						},
 						"method_get": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"method_post": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 					},
 				},
@@ -8577,7 +8577,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"no_mtls": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"tls_config": schema.SingleNestedBlock{
 										MarkdownDescription: "Defines various OPTIONS to configure TLS configuration parameters.",
@@ -8602,13 +8602,13 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 											},
 											"default_security": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"low_security": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"medium_security": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 										},
 									},
@@ -8647,7 +8647,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 											},
 											"no_crl": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"trusted_ca": schema.SingleNestedBlock{
 												MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -8671,7 +8671,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 											},
 											"xfcc_disabled": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"xfcc_options": schema.SingleNestedBlock{
 												MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
@@ -8692,7 +8692,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"no_mtls": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"tls_certificates": schema.ListNestedBlock{
 										MarkdownDescription: "Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
@@ -8719,7 +8719,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													},
 												},
 												"disable_ocsp_stapling": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"private_key": schema.SingleNestedBlock{
 													MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -8758,7 +8758,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													},
 												},
 												"use_system_defaults": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -8786,13 +8786,13 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 											},
 											"default_security": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"low_security": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"medium_security": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 										},
 									},
@@ -8831,7 +8831,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 											},
 											"no_crl": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"trusted_ca": schema.SingleNestedBlock{
 												MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -8855,7 +8855,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 												},
 											},
 											"xfcc_disabled": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"xfcc_options": schema.SingleNestedBlock{
 												MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
@@ -8893,10 +8893,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"tls_11_plus": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"tls_12_plus": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -8928,10 +8928,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"block": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"report": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -8974,16 +8974,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								},
 							},
 							"audience_disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"issuer_disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"validate_period_disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"validate_period_enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -8992,7 +8992,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"all_endpoint": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"api_groups": schema.SingleNestedBlock{
 								MarkdownDescription: "API Groups.",
@@ -9021,17 +9021,17 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"bearer_token": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 				},
 			},
 			"l7_ddos_action_block": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: l7_ddos_action_block, l7_ddos_action_default, l7_ddos_action_js_challenge; Default: l7_ddos_action_default] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: l7_ddos_action_block, l7_ddos_action_default, l7_ddos_action_js_challenge; Default: l7_ddos_action_default] Enable this option",
 			},
 			"l7_ddos_action_default": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"l7_ddos_action_js_challenge": schema.SingleNestedBlock{
 				MarkdownDescription: "Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do..",
@@ -9051,10 +9051,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"no_challenge": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_service_policies": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"origin_pool": schema.SingleNestedBlock{
 				MarkdownDescription: "CDN Origin Pool. Origin Pool for the CDN distribution.",
@@ -9079,7 +9079,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 					"no_tls": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"origin_servers": schema.ListNestedBlock{
 						MarkdownDescription: "List Of Origin Servers. List of original servers .",
@@ -9143,19 +9143,19 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 						Blocks: map[string]schema.Block{
 							"default_session_key_caching": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"disable_session_key_caching": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"disable_sni": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"skip_server_verification": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"tls_config": schema.SingleNestedBlock{
 								MarkdownDescription: "Defines various OPTIONS to configure TLS configuration parameters.",
@@ -9180,18 +9180,18 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"default_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"low_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"medium_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
 							"use_host_header_as_sni": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "MTLS Certificate. MTLS Client Certificate.",
@@ -9222,7 +9222,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													},
 												},
 												"disable_ocsp_stapling": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"private_key": schema.SingleNestedBlock{
 													MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -9261,7 +9261,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													},
 												},
 												"use_system_defaults": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -9322,7 +9322,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								},
 							},
 							"volterra_trusted_ca": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -9501,10 +9501,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"always_enable_captcha_challenge": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"always_enable_js_challenge": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"captcha_challenge_parameters": schema.SingleNestedBlock{
 						MarkdownDescription: "Enables loadbalancer to perform captcha challenge Captcha challenge will be based on Google Recaptcha. With this feature enabled, only clients that pass the captcha challenge will be allowed to complete the HTTP request. When loadbalancer is configured to do Captcha Challenge, it will redirect..",
@@ -9520,16 +9520,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 					"default_captcha_challenge_parameters": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_js_challenge_parameters": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_mitigation_settings": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_temporary_blocking_parameters": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"js_challenge_parameters": schema.SingleNestedBlock{
 						MarkdownDescription: "Enables loadbalancer to perform client browser compatibility test by redirecting to a page with Javascript. With this feature enabled, only clients that are capable of executing Javascript(mostly browsers) will be allowed to complete the HTTP request. When loadbalancer is configured to do..",
@@ -9570,7 +9570,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 					"no_challenge": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"rule_list": schema.SingleNestedBlock{
 						MarkdownDescription: "List of challenge rules to be used in policy based challenge.",
@@ -9604,13 +9604,13 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											},
 											Blocks: map[string]schema.Block{
 												"any_asn": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"any_client": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"any_ip": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"arg_matchers": schema.ListNestedBlock{
 													MarkdownDescription: "List of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name.",
@@ -9627,10 +9627,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														},
 														Blocks: map[string]schema.Block{
 															"check_not_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"check_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"item": schema.SingleNestedBlock{
 																MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -9755,10 +9755,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														},
 														Blocks: map[string]schema.Block{
 															"check_not_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"check_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"item": schema.SingleNestedBlock{
 																MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -9784,7 +9784,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													},
 												},
 												"disable_challenge": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"domain_matcher": schema.SingleNestedBlock{
 													MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -9802,10 +9802,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													},
 												},
 												"enable_captcha_challenge": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"enable_javascript_challenge": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"headers": schema.ListNestedBlock{
 													MarkdownDescription: "List of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type.",
@@ -9822,10 +9822,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														},
 														Blocks: map[string]schema.Block{
 															"check_not_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"check_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"item": schema.SingleNestedBlock{
 																MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -9977,10 +9977,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														},
 														Blocks: map[string]schema.Block{
 															"check_not_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"check_present": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"item": schema.SingleNestedBlock{
 																MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -10058,37 +10058,37 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					Blocks: map[string]schema.Block{
 						"add_httponly": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"add_secure": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"disable_tampering_protection": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"enable_tampering_protection": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"ignore_httponly": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"ignore_max_age": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"ignore_samesite": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"ignore_secure": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"samesite_lax": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"samesite_none": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"samesite_strict": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 					},
 				},
@@ -10137,10 +10137,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						},
 					},
 					"no_ip_allowed_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"policies": schema.SingleNestedBlock{
 						MarkdownDescription: "List of rate limiter policies to be applied.",
@@ -10226,7 +10226,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								},
 							},
 							"disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"leaky_bucket": schema.SingleNestedBlock{
 								MarkdownDescription: "Leaky-Bucket is the default rate limiter algorithm for F5.",
@@ -10266,7 +10266,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"service_policies_from_namespace": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"slow_ddos_mitigation": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: slow_ddos_mitigation, system_default_timeouts; Default: system_default_timeouts] 'Slow and low' attacks tie up server resources, leaving none available for servicing requests from actual users.",
@@ -10282,12 +10282,12 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 				Blocks: map[string]schema.Block{
 					"disable_request_timeout": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
 			"system_default_timeouts": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"trusted_clients": schema.ListNestedBlock{
 				MarkdownDescription: "Define rules to skip processing of one or more features such as WAF, Bot Defense etc.",
@@ -10321,7 +10321,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 					},
 					Blocks: map[string]schema.Block{
 						"bot_skip_processing": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"http_header": schema.SingleNestedBlock{
 							MarkdownDescription: "HTTP Header. Request header name and value pairs.",
@@ -10370,16 +10370,16 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							},
 						},
 						"skip_processing": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"waf_skip_processing": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 					},
 				},
 			},
 			"user_id_client_ip": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: user_id_client_ip, user_identification] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: user_id_client_ip, user_identification] Enable this option",
 			},
 			"user_identification": schema.SingleNestedBlock{
 				MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -10442,10 +10442,10 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 									Blocks: map[string]schema.Block{
 										"any_domain": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"any_path": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"app_firewall_detection_control": schema.SingleNestedBlock{
 											MarkdownDescription: "Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria.",
@@ -10535,7 +10535,7 @@ func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											},
 										},
 										"waf_skip_processing": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -12514,6 +12514,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				return types.StringNull()
 			}(),
 			Timeout: func() types.Int64 {
+				if !isImport && data.BotDefense != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.BotDefense.Timeout
+				}
+				// Import case: read from API
 				if v, ok := blockData["timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -12524,6 +12529,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	if blockData, ok := apiResource.Spec["captcha_challenge"].(map[string]interface{}); ok && (isImport || data.CaptchaChallenge != nil) {
 		data.CaptchaChallenge = &CDNLoadBalancerCaptchaChallengeModel{
 			CookieExpiry: func() types.Int64 {
+				if !isImport && data.CaptchaChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CaptchaChallenge.CookieExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -12611,6 +12621,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				return types.StringNull()
 			}(),
 			MaximumAge: func() types.Int64 {
+				if !isImport && data.CORSPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CORSPolicy.MaximumAge
+				}
+				// Import case: read from API
 				if v, ok := blockData["maximum_age"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -13106,6 +13121,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				return types.BoolNull()
 			}(),
 			Port: func() types.Int64 {
+				if !isImport && data.HTTP != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTP.Port
+				}
+				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -13196,6 +13216,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	if blockData, ok := apiResource.Spec["js_challenge"].(map[string]interface{}); ok && (isImport || data.JsChallenge != nil) {
 		data.JsChallenge = &CDNLoadBalancerJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
+				if !isImport && data.JsChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.JsChallenge.CookieExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -13208,6 +13233,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				return types.StringNull()
 			}(),
 			JsScriptDelay: func() types.Int64 {
+				if !isImport && data.JsChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.JsChallenge.JsScriptDelay
+				}
+				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -13233,6 +13263,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DDOSActionJsChallenge != nil) {
 		data.L7DDOSActionJsChallenge = &CDNLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
+				if !isImport && data.L7DDOSActionJsChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.L7DDOSActionJsChallenge.CookieExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -13245,6 +13280,11 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				return types.StringNull()
 			}(),
 			JsScriptDelay: func() types.Int64 {
+				if !isImport && data.L7DDOSActionJsChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.L7DDOSActionJsChallenge.JsScriptDelay
+				}
+				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -13606,12 +13646,22 @@ func (r *CDNLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				return nil
 			}(),
 			RequestHeadersTimeout: func() types.Int64 {
+				if !isImport && data.SlowDDOSMitigation != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.SlowDDOSMitigation.RequestHeadersTimeout
+				}
+				// Import case: read from API
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			RequestTimeout: func() types.Int64 {
+				if !isImport && data.SlowDDOSMitigation != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.SlowDDOSMitigation.RequestTimeout
+				}
+				// Import case: read from API
 				if v, ok := blockData["request_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -14384,6 +14434,11 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				return types.StringNull()
 			}(),
 			Timeout: func() types.Int64 {
+				if !isImport && data.BotDefense != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.BotDefense.Timeout
+				}
+				// Import case: read from API
 				if v, ok := blockData["timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -14394,6 +14449,11 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	if blockData, ok := apiResource.Spec["captcha_challenge"].(map[string]interface{}); ok && (isImport || data.CaptchaChallenge != nil) {
 		data.CaptchaChallenge = &CDNLoadBalancerCaptchaChallengeModel{
 			CookieExpiry: func() types.Int64 {
+				if !isImport && data.CaptchaChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CaptchaChallenge.CookieExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -14481,6 +14541,11 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				return types.StringNull()
 			}(),
 			MaximumAge: func() types.Int64 {
+				if !isImport && data.CORSPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CORSPolicy.MaximumAge
+				}
+				// Import case: read from API
 				if v, ok := blockData["maximum_age"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -14976,6 +15041,11 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				return types.BoolNull()
 			}(),
 			Port: func() types.Int64 {
+				if !isImport && data.HTTP != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTP.Port
+				}
+				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -15066,6 +15136,11 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	if blockData, ok := apiResource.Spec["js_challenge"].(map[string]interface{}); ok && (isImport || data.JsChallenge != nil) {
 		data.JsChallenge = &CDNLoadBalancerJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
+				if !isImport && data.JsChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.JsChallenge.CookieExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -15078,6 +15153,11 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				return types.StringNull()
 			}(),
 			JsScriptDelay: func() types.Int64 {
+				if !isImport && data.JsChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.JsChallenge.JsScriptDelay
+				}
+				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -15103,6 +15183,11 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DDOSActionJsChallenge != nil) {
 		data.L7DDOSActionJsChallenge = &CDNLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
+				if !isImport && data.L7DDOSActionJsChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.L7DDOSActionJsChallenge.CookieExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -15115,6 +15200,11 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				return types.StringNull()
 			}(),
 			JsScriptDelay: func() types.Int64 {
+				if !isImport && data.L7DDOSActionJsChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.L7DDOSActionJsChallenge.JsScriptDelay
+				}
+				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -15476,12 +15566,22 @@ func (r *CDNLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				return nil
 			}(),
 			RequestHeadersTimeout: func() types.Int64 {
+				if !isImport && data.SlowDDOSMitigation != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.SlowDDOSMitigation.RequestHeadersTimeout
+				}
+				// Import case: read from API
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			RequestTimeout: func() types.Int64 {
+				if !isImport && data.SlowDDOSMitigation != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.SlowDDOSMitigation.RequestTimeout
+				}
+				// Import case: read from API
 				if v, ok := blockData["request_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -17506,6 +17606,11 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				return types.StringNull()
 			}(),
 			Timeout: func() types.Int64 {
+				if !isImport && data.BotDefense != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.BotDefense.Timeout
+				}
+				// Import case: read from API
 				if v, ok := blockData["timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -17516,6 +17621,11 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	if blockData, ok := apiResource.Spec["captcha_challenge"].(map[string]interface{}); ok && (isImport || data.CaptchaChallenge != nil) {
 		data.CaptchaChallenge = &CDNLoadBalancerCaptchaChallengeModel{
 			CookieExpiry: func() types.Int64 {
+				if !isImport && data.CaptchaChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CaptchaChallenge.CookieExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -17603,6 +17713,11 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				return types.StringNull()
 			}(),
 			MaximumAge: func() types.Int64 {
+				if !isImport && data.CORSPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CORSPolicy.MaximumAge
+				}
+				// Import case: read from API
 				if v, ok := blockData["maximum_age"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -18098,6 +18213,11 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				return types.BoolNull()
 			}(),
 			Port: func() types.Int64 {
+				if !isImport && data.HTTP != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTP.Port
+				}
+				// Import case: read from API
 				if v, ok := blockData["port"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -18188,6 +18308,11 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	if blockData, ok := apiResource.Spec["js_challenge"].(map[string]interface{}); ok && (isImport || data.JsChallenge != nil) {
 		data.JsChallenge = &CDNLoadBalancerJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
+				if !isImport && data.JsChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.JsChallenge.CookieExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -18200,6 +18325,11 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				return types.StringNull()
 			}(),
 			JsScriptDelay: func() types.Int64 {
+				if !isImport && data.JsChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.JsChallenge.JsScriptDelay
+				}
+				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -18225,6 +18355,11 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	if blockData, ok := apiResource.Spec["l7_ddos_action_js_challenge"].(map[string]interface{}); ok && (isImport || data.L7DDOSActionJsChallenge != nil) {
 		data.L7DDOSActionJsChallenge = &CDNLoadBalancerL7DDOSActionJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
+				if !isImport && data.L7DDOSActionJsChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.L7DDOSActionJsChallenge.CookieExpiry
+				}
+				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -18237,6 +18372,11 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				return types.StringNull()
 			}(),
 			JsScriptDelay: func() types.Int64 {
+				if !isImport && data.L7DDOSActionJsChallenge != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.L7DDOSActionJsChallenge.JsScriptDelay
+				}
+				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -18598,12 +18738,22 @@ func (r *CDNLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				return nil
 			}(),
 			RequestHeadersTimeout: func() types.Int64 {
+				if !isImport && data.SlowDDOSMitigation != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.SlowDDOSMitigation.RequestHeadersTimeout
+				}
+				// Import case: read from API
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			RequestTimeout: func() types.Int64 {
+				if !isImport && data.SlowDDOSMitigation != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.SlowDDOSMitigation.RequestTimeout
+				}
+				// Import case: read from API
 				if v, ok := blockData["request_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

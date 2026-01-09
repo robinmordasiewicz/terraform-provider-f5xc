@@ -2,12 +2,12 @@
 page_title: "f5xc_network_policy Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages network policy rule with configured parameters in specified namespace. in F5 Distributed Cloud.
+  Manages a Network Policy resource in F5 Distributed Cloud for network policy view specification. configuration.
 ---
 
 # f5xc_network_policy (Data Source)
 
-Manages network policy rule with configured parameters in specified namespace. in F5 Distributed Cloud.
+Manages a Network Policy resource in F5 Distributed Cloud for network policy view specification. configuration.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

@@ -441,6 +441,11 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 	if blockData, ok := apiResource.Spec["brute_force_detection_settings"].(map[string]interface{}); ok && (isImport || data.BruteForceDetectionSettings != nil) {
 		data.BruteForceDetectionSettings = &TenantConfigurationBruteForceDetectionSettingsModel{
 			MaxLoginFailures: func() types.Int64 {
+				if !isImport && data.BruteForceDetectionSettings != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.BruteForceDetectionSettings.MaxLoginFailures
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_login_failures"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -451,30 +456,55 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 	if blockData, ok := apiResource.Spec["password_policy"].(map[string]interface{}); ok && (isImport || data.PasswordPolicy != nil) {
 		data.PasswordPolicy = &TenantConfigurationPasswordPolicyModel{
 			Digits: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.Digits
+				}
+				// Import case: read from API
 				if v, ok := blockData["digits"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			ExpirePassword: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.ExpirePassword
+				}
+				// Import case: read from API
 				if v, ok := blockData["expire_password"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			LowercaseCharacters: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.LowercaseCharacters
+				}
+				// Import case: read from API
 				if v, ok := blockData["lowercase_characters"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			MinimumLength: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.MinimumLength
+				}
+				// Import case: read from API
 				if v, ok := blockData["minimum_length"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			NotRecentlyUsed: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.NotRecentlyUsed
+				}
+				// Import case: read from API
 				if v, ok := blockData["not_recently_used"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -492,12 +522,22 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 				return types.BoolNull()
 			}(),
 			SpecialCharacters: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.SpecialCharacters
+				}
+				// Import case: read from API
 				if v, ok := blockData["special_characters"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			UppercaseCharacters: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.UppercaseCharacters
+				}
+				// Import case: read from API
 				if v, ok := blockData["uppercase_characters"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -617,6 +657,11 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 	if blockData, ok := apiResource.Spec["brute_force_detection_settings"].(map[string]interface{}); ok && (isImport || data.BruteForceDetectionSettings != nil) {
 		data.BruteForceDetectionSettings = &TenantConfigurationBruteForceDetectionSettingsModel{
 			MaxLoginFailures: func() types.Int64 {
+				if !isImport && data.BruteForceDetectionSettings != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.BruteForceDetectionSettings.MaxLoginFailures
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_login_failures"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -627,30 +672,55 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 	if blockData, ok := apiResource.Spec["password_policy"].(map[string]interface{}); ok && (isImport || data.PasswordPolicy != nil) {
 		data.PasswordPolicy = &TenantConfigurationPasswordPolicyModel{
 			Digits: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.Digits
+				}
+				// Import case: read from API
 				if v, ok := blockData["digits"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			ExpirePassword: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.ExpirePassword
+				}
+				// Import case: read from API
 				if v, ok := blockData["expire_password"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			LowercaseCharacters: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.LowercaseCharacters
+				}
+				// Import case: read from API
 				if v, ok := blockData["lowercase_characters"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			MinimumLength: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.MinimumLength
+				}
+				// Import case: read from API
 				if v, ok := blockData["minimum_length"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			NotRecentlyUsed: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.NotRecentlyUsed
+				}
+				// Import case: read from API
 				if v, ok := blockData["not_recently_used"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -668,12 +738,22 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 				return types.BoolNull()
 			}(),
 			SpecialCharacters: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.SpecialCharacters
+				}
+				// Import case: read from API
 				if v, ok := blockData["special_characters"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			UppercaseCharacters: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.UppercaseCharacters
+				}
+				// Import case: read from API
 				if v, ok := blockData["uppercase_characters"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -820,6 +900,11 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 	if blockData, ok := apiResource.Spec["brute_force_detection_settings"].(map[string]interface{}); ok && (isImport || data.BruteForceDetectionSettings != nil) {
 		data.BruteForceDetectionSettings = &TenantConfigurationBruteForceDetectionSettingsModel{
 			MaxLoginFailures: func() types.Int64 {
+				if !isImport && data.BruteForceDetectionSettings != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.BruteForceDetectionSettings.MaxLoginFailures
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_login_failures"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -830,30 +915,55 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 	if blockData, ok := apiResource.Spec["password_policy"].(map[string]interface{}); ok && (isImport || data.PasswordPolicy != nil) {
 		data.PasswordPolicy = &TenantConfigurationPasswordPolicyModel{
 			Digits: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.Digits
+				}
+				// Import case: read from API
 				if v, ok := blockData["digits"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			ExpirePassword: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.ExpirePassword
+				}
+				// Import case: read from API
 				if v, ok := blockData["expire_password"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			LowercaseCharacters: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.LowercaseCharacters
+				}
+				// Import case: read from API
 				if v, ok := blockData["lowercase_characters"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			MinimumLength: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.MinimumLength
+				}
+				// Import case: read from API
 				if v, ok := blockData["minimum_length"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			NotRecentlyUsed: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.NotRecentlyUsed
+				}
+				// Import case: read from API
 				if v, ok := blockData["not_recently_used"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -871,12 +981,22 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 				return types.BoolNull()
 			}(),
 			SpecialCharacters: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.SpecialCharacters
+				}
+				// Import case: read from API
 				if v, ok := blockData["special_characters"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			UppercaseCharacters: func() types.Int64 {
+				if !isImport && data.PasswordPolicy != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.PasswordPolicy.UppercaseCharacters
+				}
+				// Import case: read from API
 				if v, ok := blockData["uppercase_characters"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

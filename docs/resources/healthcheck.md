@@ -80,7 +80,7 @@ resource "f5xc_healthcheck" "example" {
 -> **One of the following:**
 &#x2022; <a id="http-health-check"></a>[`http_health_check`](#http-health-check) - Optional Block<br>Healthy if 'GET' method on URL 'HTTP(s)://`<host>`/`<path>`' with optional '`<header>`' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request<br>See [HTTP Health Check](#http-health-check) below for details.
 <br><br>&#x2022; <a id="tcp-health-check"></a>[`tcp_health_check`](#tcp-health-check) - Optional Block<br>Healthy if TCP connection is successful and response payload matches `<expected_response>`<br>See [TCP Health Check](#tcp-health-check) below for details.
-<br><br>&#x2022; <a id="udp-icmp-health-check"></a>[`udp_icmp_health_check`](#udp-icmp-health-check) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="udp-icmp-health-check"></a>[`udp_icmp_health_check`](#udp-icmp-health-check) - Optional Block<br>Enable this option
 
 <a id="interval"></a>&#x2022; [`interval`](#interval) - Optional Number<br>Time interval in seconds between two healthcheck requests
 
@@ -116,7 +116,7 @@ A [`http_health_check`](#http-health-check) block supports the following:
 
 <a id="http-health-check-use-http2"></a>&#x2022; [`use_http2`](#http-health-check-use-http2) - Optional Bool  Defaults to `false`<br>If set, health checks will be made using HTTP/2
 
-<a id="name-c19d47"></a>&#x2022; [`use_origin_server_name`](#name-c19d47) - Optional Block<br>Can be used for messages where no values are needed
+<a id="name-c19d47"></a>&#x2022; [`use_origin_server_name`](#name-c19d47) - Optional Block<br>Enable this option
 
 #### TCP Health Check
 

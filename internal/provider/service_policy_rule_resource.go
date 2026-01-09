@@ -800,13 +800,13 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				Delete: true,
 			}),
 			"any_asn": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: any_asn, asn_list, asn_matcher] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: any_asn, asn_list, asn_matcher] Enable this option",
 			},
 			"any_client": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: any_client, client_name, client_name_matcher, client_selector, ip_threat_category_list] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: any_client, client_name, client_name_matcher, client_selector, ip_threat_category_list] Enable this option",
 			},
 			"any_ip": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: any_ip, ip_matcher, ip_prefix_list] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: any_ip, ip_matcher, ip_prefix_list] Enable this option",
 			},
 			"api_group_matcher": schema.SingleNestedBlock{
 				MarkdownDescription: "Matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true.",
@@ -837,10 +837,10 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 					},
 					Blocks: map[string]schema.Block{
 						"check_not_present": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"check_present": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"item": schema.SingleNestedBlock{
 							MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -945,10 +945,10 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"bot_skip_processing": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -992,10 +992,10 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 					},
 					Blocks: map[string]schema.Block{
 						"check_not_present": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"check_present": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"item": schema.SingleNestedBlock{
 							MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -1050,10 +1050,10 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 					},
 					Blocks: map[string]schema.Block{
 						"check_not_present": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"check_present": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"item": schema.SingleNestedBlock{
 							MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -1191,10 +1191,10 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 					},
 					Blocks: map[string]schema.Block{
 						"check_not_present": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"check_present": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"item": schema.SingleNestedBlock{
 							MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -1234,10 +1234,10 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"skip_processing": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1304,10 +1304,10 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 					},
 					Blocks: map[string]schema.Block{
 						"check_not_present": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"check_present": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"item": schema.SingleNestedBlock{
 							MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -1390,43 +1390,43 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				},
 				Blocks: map[string]schema.Block{
 					"max_cookie_count_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"max_cookie_key_size_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"max_cookie_value_size_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"max_header_count_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"max_header_key_size_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"max_header_value_size_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"max_parameter_count_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"max_parameter_name_size_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"max_parameter_value_size_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"max_query_size_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"max_request_line_size_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"max_request_size_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"max_url_size_none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1435,7 +1435,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"dst_any": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"dst_segments": schema.SingleNestedBlock{
 						MarkdownDescription: "Segment List. List of references to Segments.",
@@ -1467,10 +1467,10 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"intra_segment": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"src_any": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"src_segments": schema.SingleNestedBlock{
 						MarkdownDescription: "Segment List. List of references to Segments.",
@@ -1602,10 +1602,10 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"none": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"waf_skip_processing": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -3447,6 +3447,11 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 	if blockData, ok := apiResource.Spec["request_constraints"].(map[string]interface{}); ok && (isImport || data.RequestConstraints != nil) {
 		data.RequestConstraints = &ServicePolicyRuleRequestConstraintsModel{
 			MaxCookieCountExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxCookieCountExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_cookie_count_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3465,6 +3470,11 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				return nil
 			}(),
 			MaxCookieKeySizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxCookieKeySizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_cookie_key_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3483,6 +3493,11 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				return nil
 			}(),
 			MaxCookieValueSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxCookieValueSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_cookie_value_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3501,6 +3516,11 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				return nil
 			}(),
 			MaxHeaderCountExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxHeaderCountExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_header_count_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3519,6 +3539,11 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				return nil
 			}(),
 			MaxHeaderKeySizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxHeaderKeySizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_header_key_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3537,6 +3562,11 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				return nil
 			}(),
 			MaxHeaderValueSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxHeaderValueSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_header_value_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3555,6 +3585,11 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				return nil
 			}(),
 			MaxParameterCountExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxParameterCountExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_parameter_count_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3573,6 +3608,11 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				return nil
 			}(),
 			MaxParameterNameSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxParameterNameSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_parameter_name_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3591,6 +3631,11 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				return nil
 			}(),
 			MaxParameterValueSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxParameterValueSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_parameter_value_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3609,6 +3654,11 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				return nil
 			}(),
 			MaxQuerySizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxQuerySizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_query_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3627,6 +3677,11 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				return nil
 			}(),
 			MaxRequestLineSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxRequestLineSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_request_line_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3645,6 +3700,11 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				return nil
 			}(),
 			MaxRequestSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxRequestSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_request_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3663,6 +3723,11 @@ func (r *ServicePolicyRuleResource) Create(ctx context.Context, req resource.Cre
 				return nil
 			}(),
 			MaxURLSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxURLSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_url_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4822,6 +4887,11 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	if blockData, ok := apiResource.Spec["request_constraints"].(map[string]interface{}); ok && (isImport || data.RequestConstraints != nil) {
 		data.RequestConstraints = &ServicePolicyRuleRequestConstraintsModel{
 			MaxCookieCountExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxCookieCountExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_cookie_count_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4840,6 +4910,11 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				return nil
 			}(),
 			MaxCookieKeySizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxCookieKeySizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_cookie_key_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4858,6 +4933,11 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				return nil
 			}(),
 			MaxCookieValueSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxCookieValueSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_cookie_value_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4876,6 +4956,11 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				return nil
 			}(),
 			MaxHeaderCountExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxHeaderCountExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_header_count_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4894,6 +4979,11 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				return nil
 			}(),
 			MaxHeaderKeySizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxHeaderKeySizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_header_key_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4912,6 +5002,11 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				return nil
 			}(),
 			MaxHeaderValueSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxHeaderValueSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_header_value_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4930,6 +5025,11 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				return nil
 			}(),
 			MaxParameterCountExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxParameterCountExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_parameter_count_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4948,6 +5048,11 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				return nil
 			}(),
 			MaxParameterNameSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxParameterNameSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_parameter_name_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4966,6 +5071,11 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				return nil
 			}(),
 			MaxParameterValueSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxParameterValueSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_parameter_value_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4984,6 +5094,11 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				return nil
 			}(),
 			MaxQuerySizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxQuerySizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_query_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -5002,6 +5117,11 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				return nil
 			}(),
 			MaxRequestLineSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxRequestLineSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_request_line_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -5020,6 +5140,11 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				return nil
 			}(),
 			MaxRequestSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxRequestSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_request_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -5038,6 +5163,11 @@ func (r *ServicePolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 				return nil
 			}(),
 			MaxURLSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxURLSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_url_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -6907,6 +7037,11 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	if blockData, ok := apiResource.Spec["request_constraints"].(map[string]interface{}); ok && (isImport || data.RequestConstraints != nil) {
 		data.RequestConstraints = &ServicePolicyRuleRequestConstraintsModel{
 			MaxCookieCountExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxCookieCountExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_cookie_count_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -6925,6 +7060,11 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				return nil
 			}(),
 			MaxCookieKeySizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxCookieKeySizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_cookie_key_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -6943,6 +7083,11 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				return nil
 			}(),
 			MaxCookieValueSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxCookieValueSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_cookie_value_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -6961,6 +7106,11 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				return nil
 			}(),
 			MaxHeaderCountExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxHeaderCountExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_header_count_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -6979,6 +7129,11 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				return nil
 			}(),
 			MaxHeaderKeySizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxHeaderKeySizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_header_key_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -6997,6 +7152,11 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				return nil
 			}(),
 			MaxHeaderValueSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxHeaderValueSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_header_value_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -7015,6 +7175,11 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				return nil
 			}(),
 			MaxParameterCountExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxParameterCountExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_parameter_count_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -7033,6 +7198,11 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				return nil
 			}(),
 			MaxParameterNameSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxParameterNameSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_parameter_name_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -7051,6 +7221,11 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				return nil
 			}(),
 			MaxParameterValueSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxParameterValueSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_parameter_value_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -7069,6 +7244,11 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				return nil
 			}(),
 			MaxQuerySizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxQuerySizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_query_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -7087,6 +7267,11 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				return nil
 			}(),
 			MaxRequestLineSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxRequestLineSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_request_line_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -7105,6 +7290,11 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				return nil
 			}(),
 			MaxRequestSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxRequestSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_request_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -7123,6 +7313,11 @@ func (r *ServicePolicyRuleResource) Update(ctx context.Context, req resource.Upd
 				return nil
 			}(),
 			MaxURLSizeExceeds: func() types.Int64 {
+				if !isImport && data.RequestConstraints != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.RequestConstraints.MaxURLSizeExceeds
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_url_size_exceeds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

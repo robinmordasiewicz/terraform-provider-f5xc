@@ -133,7 +133,7 @@ func (r *DNSDomainResource) Schema(ctx context.Context, req resource.SchemaReque
 				Delete: true,
 			}),
 			"volterra_managed": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 		},
 	}

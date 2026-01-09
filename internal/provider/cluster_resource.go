@@ -558,7 +558,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Delete: true,
 			}),
 			"auto_http_config": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: auto_http_config, http1_config, http2_options] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: auto_http_config, http1_config, http2_options] Enable this option",
 			},
 			"circuit_breaker": schema.SingleNestedBlock{
 				MarkdownDescription: "CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly.",
@@ -589,7 +589,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				MarkdownDescription: "List of key-value pairs that define default subset. This subset can be referred in fallback_policy which gets used when route specifies no metadata or no subset matching the metadata exists.",
 			},
 			"disable_proxy_protocol": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_proxy_protocol, proxy_protocol_v1, proxy_protocol_v2; Default: disable_proxy_protocol] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable_proxy_protocol, proxy_protocol_v1, proxy_protocol_v2; Default: disable_proxy_protocol] Enable this option",
 			},
 			"endpoint_subsets": schema.ListNestedBlock{
 				MarkdownDescription: "Configure endpoint groups based on metadata labels for traffic routing. Supports weighted distribution and session affinity across labeled endpoints.",
@@ -690,16 +690,16 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"default_header_transformation": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"legacy_header_transformation": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"preserve_case_header_transformation": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"proper_case_header_transformation": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -715,7 +715,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"no_panic_threshold": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_panic_threshold, panic_threshold; Default: no_panic_threshold] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: no_panic_threshold, panic_threshold; Default: no_panic_threshold] Enable this option",
 			},
 			"outlier_detection": schema.SingleNestedBlock{
 				MarkdownDescription: "Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1.",
@@ -743,10 +743,10 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"proxy_protocol_v1": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"proxy_protocol_v2": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"tls_parameters": schema.SingleNestedBlock{
 				MarkdownDescription: "TLS configuration for upstream connections.",
@@ -928,7 +928,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -967,7 +967,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -1040,16 +1040,16 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						},
 					},
 					"default_session_key_caching": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable_session_key_caching": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable_sni": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"use_host_header_as_sni": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1058,10 +1058,10 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_conn_pool_reuse": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_conn_pool_reuse": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1450,18 +1450,33 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 	if blockData, ok := apiResource.Spec["circuit_breaker"].(map[string]interface{}); ok && (isImport || data.CircuitBreaker != nil) {
 		data.CircuitBreaker = &ClusterCircuitBreakerModel{
 			ConnectionLimit: func() types.Int64 {
+				if !isImport && data.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CircuitBreaker.ConnectionLimit
+				}
+				// Import case: read from API
 				if v, ok := blockData["connection_limit"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			MaxRequests: func() types.Int64 {
+				if !isImport && data.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CircuitBreaker.MaxRequests
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_requests"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			PendingRequests: func() types.Int64 {
+				if !isImport && data.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CircuitBreaker.PendingRequests
+				}
+				// Import case: read from API
 				if v, ok := blockData["pending_requests"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1474,6 +1489,11 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 				return types.StringNull()
 			}(),
 			Retries: func() types.Int64 {
+				if !isImport && data.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CircuitBreaker.Retries
+				}
+				// Import case: read from API
 				if v, ok := blockData["retries"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1658,30 +1678,55 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 	if blockData, ok := apiResource.Spec["outlier_detection"].(map[string]interface{}); ok && (isImport || data.OutlierDetection != nil) {
 		data.OutlierDetection = &ClusterOutlierDetectionModel{
 			BaseEjectionTime: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.BaseEjectionTime
+				}
+				// Import case: read from API
 				if v, ok := blockData["base_ejection_time"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			Consecutive5xx: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.Consecutive5xx
+				}
+				// Import case: read from API
 				if v, ok := blockData["consecutive_5xx"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			ConsecutiveGatewayFailure: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.ConsecutiveGatewayFailure
+				}
+				// Import case: read from API
 				if v, ok := blockData["consecutive_gateway_failure"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			Interval: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.Interval
+				}
+				// Import case: read from API
 				if v, ok := blockData["interval"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			MaxEjectionPercent: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.MaxEjectionPercent
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_ejection_percent"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1812,6 +1857,11 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 				return nil
 			}(),
 			MaxSessionKeys: func() types.Int64 {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.TLSParameters.MaxSessionKeys
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_session_keys"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1979,18 +2029,33 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 	if blockData, ok := apiResource.Spec["circuit_breaker"].(map[string]interface{}); ok && (isImport || data.CircuitBreaker != nil) {
 		data.CircuitBreaker = &ClusterCircuitBreakerModel{
 			ConnectionLimit: func() types.Int64 {
+				if !isImport && data.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CircuitBreaker.ConnectionLimit
+				}
+				// Import case: read from API
 				if v, ok := blockData["connection_limit"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			MaxRequests: func() types.Int64 {
+				if !isImport && data.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CircuitBreaker.MaxRequests
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_requests"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			PendingRequests: func() types.Int64 {
+				if !isImport && data.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CircuitBreaker.PendingRequests
+				}
+				// Import case: read from API
 				if v, ok := blockData["pending_requests"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2003,6 +2068,11 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 				return types.StringNull()
 			}(),
 			Retries: func() types.Int64 {
+				if !isImport && data.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CircuitBreaker.Retries
+				}
+				// Import case: read from API
 				if v, ok := blockData["retries"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2187,30 +2257,55 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 	if blockData, ok := apiResource.Spec["outlier_detection"].(map[string]interface{}); ok && (isImport || data.OutlierDetection != nil) {
 		data.OutlierDetection = &ClusterOutlierDetectionModel{
 			BaseEjectionTime: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.BaseEjectionTime
+				}
+				// Import case: read from API
 				if v, ok := blockData["base_ejection_time"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			Consecutive5xx: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.Consecutive5xx
+				}
+				// Import case: read from API
 				if v, ok := blockData["consecutive_5xx"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			ConsecutiveGatewayFailure: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.ConsecutiveGatewayFailure
+				}
+				// Import case: read from API
 				if v, ok := blockData["consecutive_gateway_failure"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			Interval: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.Interval
+				}
+				// Import case: read from API
 				if v, ok := blockData["interval"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			MaxEjectionPercent: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.MaxEjectionPercent
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_ejection_percent"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2341,6 +2436,11 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 				return nil
 			}(),
 			MaxSessionKeys: func() types.Int64 {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.TLSParameters.MaxSessionKeys
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_session_keys"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2751,18 +2851,33 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 	if blockData, ok := apiResource.Spec["circuit_breaker"].(map[string]interface{}); ok && (isImport || data.CircuitBreaker != nil) {
 		data.CircuitBreaker = &ClusterCircuitBreakerModel{
 			ConnectionLimit: func() types.Int64 {
+				if !isImport && data.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CircuitBreaker.ConnectionLimit
+				}
+				// Import case: read from API
 				if v, ok := blockData["connection_limit"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			MaxRequests: func() types.Int64 {
+				if !isImport && data.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CircuitBreaker.MaxRequests
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_requests"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			PendingRequests: func() types.Int64 {
+				if !isImport && data.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CircuitBreaker.PendingRequests
+				}
+				// Import case: read from API
 				if v, ok := blockData["pending_requests"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2775,6 +2890,11 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 				return types.StringNull()
 			}(),
 			Retries: func() types.Int64 {
+				if !isImport && data.CircuitBreaker != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CircuitBreaker.Retries
+				}
+				// Import case: read from API
 				if v, ok := blockData["retries"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2959,30 +3079,55 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 	if blockData, ok := apiResource.Spec["outlier_detection"].(map[string]interface{}); ok && (isImport || data.OutlierDetection != nil) {
 		data.OutlierDetection = &ClusterOutlierDetectionModel{
 			BaseEjectionTime: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.BaseEjectionTime
+				}
+				// Import case: read from API
 				if v, ok := blockData["base_ejection_time"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			Consecutive5xx: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.Consecutive5xx
+				}
+				// Import case: read from API
 				if v, ok := blockData["consecutive_5xx"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			ConsecutiveGatewayFailure: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.ConsecutiveGatewayFailure
+				}
+				// Import case: read from API
 				if v, ok := blockData["consecutive_gateway_failure"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			Interval: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.Interval
+				}
+				// Import case: read from API
 				if v, ok := blockData["interval"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			MaxEjectionPercent: func() types.Int64 {
+				if !isImport && data.OutlierDetection != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.OutlierDetection.MaxEjectionPercent
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_ejection_percent"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3113,6 +3258,11 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 				return nil
 			}(),
 			MaxSessionKeys: func() types.Int64 {
+				if !isImport && data.TLSParameters != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.TLSParameters.MaxSessionKeys
+				}
+				// Import case: read from API
 				if v, ok := blockData["max_session_keys"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

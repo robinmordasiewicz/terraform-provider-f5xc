@@ -32,7 +32,7 @@ resource "f5xc_service_policy_rule" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: any_asn, asn_list, asn_matcher] Can be used for m...
+  # [OneOf: any_asn, asn_list, asn_matcher] Enable this option
   any_asn {
     # Configure any_asn settings
   }
@@ -40,7 +40,7 @@ resource "f5xc_service_policy_rule" "example" {
   any_client {
     # Configure any_client settings
   }
-  # [OneOf: any_ip, ip_matcher, ip_prefix_list] Can be used f...
+  # [OneOf: any_ip, ip_matcher, ip_prefix_list] Enable this o...
   any_ip {
     # Configure any_ip settings
   }
@@ -69,19 +69,19 @@ resource "f5xc_service_policy_rule" "example" {
 <a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>[Enum: DENY|ALLOW|NEXT_POLICY] The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to
 
 -> **One of the following:**
-&#x2022; <a id="any-asn"></a>[`any_asn`](#any-asn) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="any-asn"></a>[`any_asn`](#any-asn) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="asn-list"></a>[`asn_list`](#asn-list) - Optional Block<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#asn-list) below for details.
 <br><br>&#x2022; <a id="asn-matcher"></a>[`asn_matcher`](#asn-matcher) - Optional Block<br>Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#asn-matcher) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="any-client"></a>[`any_client`](#any-client) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="any-client"></a>[`any_client`](#any-client) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="client-name"></a>[`client_name`](#client-name) - Optional String<br>The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name
 <br><br>&#x2022; <a id="client-name-matcher"></a>[`client_name_matcher`](#client-name-matcher) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Client Name Matcher](#client-name-matcher) below for details.
 <br><br>&#x2022; <a id="client-selector"></a>[`client_selector`](#client-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects<br>See [Client Selector](#client-selector) below for details.
 <br><br>&#x2022; <a id="ip-threat-category-list"></a>[`ip_threat_category_list`](#ip-threat-category-list) - Optional Block<br>IP Threat Category List Type. List of IP threat categories<br>See [IP Threat Category List](#ip-threat-category-list) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="any-ip"></a>[`any_ip`](#any-ip) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="any-ip"></a>[`any_ip`](#any-ip) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="ip-matcher"></a>[`ip_matcher`](#ip-matcher) - Optional Block<br>Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#ip-matcher) below for details.
 <br><br>&#x2022; <a id="ip-prefix-list"></a>[`ip_prefix_list`](#ip-prefix-list) - Optional Block<br>List of IP Prefix strings to match against<br>See [IP Prefix List](#ip-prefix-list) below for details.
 
@@ -147,9 +147,9 @@ An [`api_group_matcher`](#api-group-matcher) block supports the following:
 
 An [`arg_matchers`](#arg-matchers) block supports the following:
 
-<a id="arg-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#arg-matchers-check-not-present) - Optional Block<br>Can be used for messages where no values are needed
+<a id="arg-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#arg-matchers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="arg-matchers-check-present"></a>&#x2022; [`check_present`](#arg-matchers-check-present) - Optional Block<br>Can be used for messages where no values are needed
+<a id="arg-matchers-check-present"></a>&#x2022; [`check_present`](#arg-matchers-check-present) - Optional Block<br>Enable this option
 
 <a id="arg-matchers-invert-matcher"></a>&#x2022; [`invert_matcher`](#arg-matchers-invert-matcher) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
 
@@ -207,9 +207,9 @@ A [`body_matcher`](#body-matcher) block supports the following:
 
 A [`bot_action`](#bot-action) block supports the following:
 
-<a id="bot-action-bot-skip-processing"></a>&#x2022; [`bot_skip_processing`](#bot-action-bot-skip-processing) - Optional Block<br>Can be used for messages where no values are needed
+<a id="bot-action-bot-skip-processing"></a>&#x2022; [`bot_skip_processing`](#bot-action-bot-skip-processing) - Optional Block<br>Enable this option
 
-<a id="bot-action-none"></a>&#x2022; [`none`](#bot-action-none) - Optional Block<br>Can be used for messages where no values are needed
+<a id="bot-action-none"></a>&#x2022; [`none`](#bot-action-none) - Optional Block<br>Enable this option
 
 #### Client Name Matcher
 
@@ -229,9 +229,9 @@ A [`client_selector`](#client-selector) block supports the following:
 
 A [`cookie_matchers`](#cookie-matchers) block supports the following:
 
-<a id="cookie-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#cookie-matchers-check-not-present) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cookie-matchers-check-not-present"></a>&#x2022; [`check_not_present`](#cookie-matchers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="cookie-matchers-check-present"></a>&#x2022; [`check_present`](#cookie-matchers-check-present) - Optional Block<br>Can be used for messages where no values are needed
+<a id="cookie-matchers-check-present"></a>&#x2022; [`check_present`](#cookie-matchers-check-present) - Optional Block<br>Enable this option
 
 <a id="cookie-matchers-invert-matcher"></a>&#x2022; [`invert_matcher`](#cookie-matchers-invert-matcher) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
 
@@ -261,9 +261,9 @@ A [`domain_matcher`](#domain-matcher) block supports the following:
 
 A [`headers`](#headers) block supports the following:
 
-<a id="headers-check-not-present"></a>&#x2022; [`check_not_present`](#headers-check-not-present) - Optional Block<br>Can be used for messages where no values are needed
+<a id="headers-check-not-present"></a>&#x2022; [`check_not_present`](#headers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="headers-check-present"></a>&#x2022; [`check_present`](#headers-check-present) - Optional Block<br>Can be used for messages where no values are needed
+<a id="headers-check-present"></a>&#x2022; [`check_present`](#headers-check-present) - Optional Block<br>Enable this option
 
 <a id="headers-invert-matcher"></a>&#x2022; [`invert_matcher`](#headers-invert-matcher) - Optional Bool<br>Invert Header Matcher. Invert the match result
 
@@ -335,9 +335,9 @@ A [`ja4_tls_fingerprint`](#ja4-tls-fingerprint) block supports the following:
 
 A [`jwt_claims`](#jwt-claims) block supports the following:
 
-<a id="jwt-claims-check-not-present"></a>&#x2022; [`check_not_present`](#jwt-claims-check-not-present) - Optional Block<br>Can be used for messages where no values are needed
+<a id="jwt-claims-check-not-present"></a>&#x2022; [`check_not_present`](#jwt-claims-check-not-present) - Optional Block<br>Enable this option
 
-<a id="jwt-claims-check-present"></a>&#x2022; [`check_present`](#jwt-claims-check-present) - Optional Block<br>Can be used for messages where no values are needed
+<a id="jwt-claims-check-present"></a>&#x2022; [`check_present`](#jwt-claims-check-present) - Optional Block<br>Enable this option
 
 <a id="jwt-claims-invert-matcher"></a>&#x2022; [`invert_matcher`](#jwt-claims-invert-matcher) - Optional Bool<br>Invert Matcher. Invert the match result
 
@@ -365,9 +365,9 @@ A [`label_matcher`](#label-matcher) block supports the following:
 
 A [`mum_action`](#mum-action) block supports the following:
 
-<a id="mum-action-default"></a>&#x2022; [`default`](#mum-action-default) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mum-action-default"></a>&#x2022; [`default`](#mum-action-default) - Optional Block<br>Enable this option
 
-<a id="mum-action-skip-processing"></a>&#x2022; [`skip_processing`](#mum-action-skip-processing) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mum-action-skip-processing"></a>&#x2022; [`skip_processing`](#mum-action-skip-processing) - Optional Block<br>Enable this option
 
 #### Path
 
@@ -397,9 +397,9 @@ A [`port_matcher`](#port-matcher) block supports the following:
 
 A [`query_params`](#query-params) block supports the following:
 
-<a id="query-params-check-not-present"></a>&#x2022; [`check_not_present`](#query-params-check-not-present) - Optional Block<br>Can be used for messages where no values are needed
+<a id="query-params-check-not-present"></a>&#x2022; [`check_not_present`](#query-params-check-not-present) - Optional Block<br>Enable this option
 
-<a id="query-params-check-present"></a>&#x2022; [`check_present`](#query-params-check-present) - Optional Block<br>Can be used for messages where no values are needed
+<a id="query-params-check-present"></a>&#x2022; [`check_present`](#query-params-check-present) - Optional Block<br>Enable this option
 
 <a id="query-params-invert-matcher"></a>&#x2022; [`invert_matcher`](#query-params-invert-matcher) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
 
@@ -423,67 +423,67 @@ A [`request_constraints`](#request-constraints) block supports the following:
 
 <a id="exceeds-0e8746"></a>&#x2022; [`max_cookie_count_exceeds`](#exceeds-0e8746) - Optional Number<br>Match on the Count for all Cookies that exceed this value
 
-<a id="none-291d57"></a>&#x2022; [`max_cookie_count_none`](#none-291d57) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-291d57"></a>&#x2022; [`max_cookie_count_none`](#none-291d57) - Optional Block<br>Enable this option
 
 <a id="exceeds-7352a4"></a>&#x2022; [`max_cookie_key_size_exceeds`](#exceeds-7352a4) - Optional Number
 
-<a id="none-0c2b38"></a>&#x2022; [`max_cookie_key_size_none`](#none-0c2b38) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-0c2b38"></a>&#x2022; [`max_cookie_key_size_none`](#none-0c2b38) - Optional Block<br>Enable this option
 
 <a id="exceeds-ec487d"></a>&#x2022; [`max_cookie_value_size_exceeds`](#exceeds-ec487d) - Optional Number
 
-<a id="none-cfea13"></a>&#x2022; [`max_cookie_value_size_none`](#none-cfea13) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-cfea13"></a>&#x2022; [`max_cookie_value_size_none`](#none-cfea13) - Optional Block<br>Enable this option
 
 <a id="exceeds-d461a1"></a>&#x2022; [`max_header_count_exceeds`](#exceeds-d461a1) - Optional Number<br>Match on the Count for all Headers that exceed this value
 
-<a id="none-d12b83"></a>&#x2022; [`max_header_count_none`](#none-d12b83) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-d12b83"></a>&#x2022; [`max_header_count_none`](#none-d12b83) - Optional Block<br>Enable this option
 
 <a id="exceeds-87df1c"></a>&#x2022; [`max_header_key_size_exceeds`](#exceeds-87df1c) - Optional Number
 
-<a id="none-6ea93c"></a>&#x2022; [`max_header_key_size_none`](#none-6ea93c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-6ea93c"></a>&#x2022; [`max_header_key_size_none`](#none-6ea93c) - Optional Block<br>Enable this option
 
 <a id="exceeds-883323"></a>&#x2022; [`max_header_value_size_exceeds`](#exceeds-883323) - Optional Number
 
-<a id="none-d2e74f"></a>&#x2022; [`max_header_value_size_none`](#none-d2e74f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-d2e74f"></a>&#x2022; [`max_header_value_size_none`](#none-d2e74f) - Optional Block<br>Enable this option
 
 <a id="exceeds-480590"></a>&#x2022; [`max_parameter_count_exceeds`](#exceeds-480590) - Optional Number
 
-<a id="none-cea22c"></a>&#x2022; [`max_parameter_count_none`](#none-cea22c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-cea22c"></a>&#x2022; [`max_parameter_count_none`](#none-cea22c) - Optional Block<br>Enable this option
 
 <a id="exceeds-c96298"></a>&#x2022; [`max_parameter_name_size_exceeds`](#exceeds-c96298) - Optional Number
 
-<a id="none-b2e47d"></a>&#x2022; [`max_parameter_name_size_none`](#none-b2e47d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-b2e47d"></a>&#x2022; [`max_parameter_name_size_none`](#none-b2e47d) - Optional Block<br>Enable this option
 
 <a id="exceeds-c345d4"></a>&#x2022; [`max_parameter_value_size_exceeds`](#exceeds-c345d4) - Optional Number
 
-<a id="none-bd1b4b"></a>&#x2022; [`max_parameter_value_size_none`](#none-bd1b4b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-bd1b4b"></a>&#x2022; [`max_parameter_value_size_none`](#none-bd1b4b) - Optional Block<br>Enable this option
 
 <a id="exceeds-a9b09b"></a>&#x2022; [`max_query_size_exceeds`](#exceeds-a9b09b) - Optional Number<br>Match on the URL Query Size that exceed this value
 
-<a id="request-constraints-max-query-size-none"></a>&#x2022; [`max_query_size_none`](#request-constraints-max-query-size-none) - Optional Block<br>Can be used for messages where no values are needed
+<a id="request-constraints-max-query-size-none"></a>&#x2022; [`max_query_size_none`](#request-constraints-max-query-size-none) - Optional Block<br>Enable this option
 
 <a id="exceeds-80bd97"></a>&#x2022; [`max_request_line_size_exceeds`](#exceeds-80bd97) - Optional Number
 
-<a id="none-76b27d"></a>&#x2022; [`max_request_line_size_none`](#none-76b27d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-76b27d"></a>&#x2022; [`max_request_line_size_none`](#none-76b27d) - Optional Block<br>Enable this option
 
 <a id="exceeds-2156ce"></a>&#x2022; [`max_request_size_exceeds`](#exceeds-2156ce) - Optional Number<br>Match on the Request Size that exceed this value
 
-<a id="none-250223"></a>&#x2022; [`max_request_size_none`](#none-250223) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-250223"></a>&#x2022; [`max_request_size_none`](#none-250223) - Optional Block<br>Enable this option
 
 <a id="exceeds-4ce081"></a>&#x2022; [`max_url_size_exceeds`](#exceeds-4ce081) - Optional Number<br>Match on the URL Size that exceed this value
 
-<a id="request-constraints-max-url-size-none"></a>&#x2022; [`max_url_size_none`](#request-constraints-max-url-size-none) - Optional Block<br>Can be used for messages where no values are needed
+<a id="request-constraints-max-url-size-none"></a>&#x2022; [`max_url_size_none`](#request-constraints-max-url-size-none) - Optional Block<br>Enable this option
 
 #### Segment Policy
 
 A [`segment_policy`](#segment-policy) block supports the following:
 
-<a id="segment-policy-dst-any"></a>&#x2022; [`dst_any`](#segment-policy-dst-any) - Optional Block<br>Can be used for messages where no values are needed
+<a id="segment-policy-dst-any"></a>&#x2022; [`dst_any`](#segment-policy-dst-any) - Optional Block<br>Enable this option
 
 <a id="segment-policy-dst-segments"></a>&#x2022; [`dst_segments`](#segment-policy-dst-segments) - Optional Block<br>Segment List. List of references to Segments<br>See [Dst Segments](#segment-policy-dst-segments) below.
 
-<a id="segment-policy-intra-segment"></a>&#x2022; [`intra_segment`](#segment-policy-intra-segment) - Optional Block<br>Can be used for messages where no values are needed
+<a id="segment-policy-intra-segment"></a>&#x2022; [`intra_segment`](#segment-policy-intra-segment) - Optional Block<br>Enable this option
 
-<a id="segment-policy-src-any"></a>&#x2022; [`src_any`](#segment-policy-src-any) - Optional Block<br>Can be used for messages where no values are needed
+<a id="segment-policy-src-any"></a>&#x2022; [`src_any`](#segment-policy-src-any) - Optional Block<br>Enable this option
 
 <a id="segment-policy-src-segments"></a>&#x2022; [`src_segments`](#segment-policy-src-segments) - Optional Block<br>Segment List. List of references to Segments<br>See [Src Segments](#segment-policy-src-segments) below.
 
@@ -547,9 +547,9 @@ A [`waf_action`](#waf-action) block supports the following:
 
 <a id="control-b9f62f"></a>&#x2022; [`app_firewall_detection_control`](#control-b9f62f) - Optional Block<br>Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#control-b9f62f) below.
 
-<a id="waf-action-none"></a>&#x2022; [`none`](#waf-action-none) - Optional Block<br>Can be used for messages where no values are needed
+<a id="waf-action-none"></a>&#x2022; [`none`](#waf-action-none) - Optional Block<br>Enable this option
 
-<a id="waf-action-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#waf-action-waf-skip-processing) - Optional Block<br>Can be used for messages where no values are needed
+<a id="waf-action-waf-skip-processing"></a>&#x2022; [`waf_skip_processing`](#waf-action-waf-skip-processing) - Optional Block<br>Enable this option
 
 #### WAF Action App Firewall Detection Control
 

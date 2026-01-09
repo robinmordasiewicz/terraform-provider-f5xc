@@ -102,7 +102,7 @@ resource "f5xc_aws_vpc_site" "example" {
 <a id="aws-region"></a>&#x2022; [`aws_region`](#aws-region) - Optional String<br>AWS Region. Name for AWS Region
 
 -> **One of the following:**
-&#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable node local services on this site<br>See [Blocked Services](#blocked-services) below for details.
 
 <a id="coordinates"></a>&#x2022; [`coordinates`](#coordinates) - Optional Block<br>Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
@@ -111,31 +111,31 @@ resource "f5xc_aws_vpc_site" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="custom-security-group"></a>[`custom_security_group`](#custom-security-group) - Optional Block<br>Enter pre created security groups for slo(Site Local Outside) and SLI(Site Local Inside) interface. Supported only for sites deployed on existing VPC<br>See [Custom Security Group](#custom-security-group) below for details.
-<br><br>&#x2022; <a id="f5xc-security-group"></a>[`f5xc_security_group`](#f5xc-security-group) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="f5xc-security-group"></a>[`f5xc_security_group`](#f5xc-security-group) - Optional Block<br>Enable this option
 
-<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="direct-connect-disabled"></a>[`direct_connect_disabled`](#direct-connect-disabled) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="direct-connect-disabled"></a>[`direct_connect_disabled`](#direct-connect-disabled) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="direct-connect-enabled"></a>[`direct_connect_enabled`](#direct-connect-enabled) - Optional Block<br>Direct Connect Configuration. Direct Connect Configuration<br>See [Direct Connect Enabled](#direct-connect-enabled) below for details.
 <br><br>&#x2022; <a id="private-connectivity"></a>[`private_connectivity`](#private-connectivity) - Optional Block<br>Private Connect Configuration. Private Connect Configuration
 
 -> **One of the following:**
-&#x2022; <a id="disable-internet-vip"></a>[`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-internet-vip"></a>[`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="disk-size"></a>&#x2022; [`disk_size`](#disk-size) - Optional Number<br>Disk size to be used for this instance in GiB. 80 is 80 GiB
 
 -> **One of the following:**
-&#x2022; <a id="egress-gateway-default"></a>[`egress_gateway_default`](#egress-gateway-default) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="egress-gateway-default"></a>[`egress_gateway_default`](#egress-gateway-default) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="egress-nat-gw"></a>[`egress_nat_gw`](#egress-nat-gw) - Optional Block<br>With this option, egress site traffic will be routed through an Network Address Translation(NAT) Gateway<br>See [Egress NAT Gw](#egress-nat-gw) below for details.
 
 <a id="egress-virtual-private-gateway"></a>&#x2022; [`egress_virtual_private_gateway`](#egress-virtual-private-gateway) - Optional Block<br>With this option, egress site traffic will be routed through an Virtual Private Gateway<br>See [Egress Virtual Private Gateway](#egress-virtual-private-gateway) below for details.
 
-<a id="enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#enable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#enable-internet-vip) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="f5-orchestrated-routing"></a>[`f5_orchestrated_routing`](#f5-orchestrated-routing) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="manual-routing"></a>[`manual_routing`](#manual-routing) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="f5-orchestrated-routing"></a>[`f5_orchestrated_routing`](#f5-orchestrated-routing) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="manual-routing"></a>[`manual_routing`](#manual-routing) - Optional Block<br>Enable this option
 
 -> **One of the following:**
 &#x2022; <a id="ingress-egress-gw"></a>[`ingress_egress_gw`](#ingress-egress-gw) - Optional Block<br>AWS Ingress/Egress Gateway. Two interface AWS ingress/egress site<br>See [Ingress Egress Gw](#ingress-egress-gw) below for details.
@@ -148,10 +148,10 @@ resource "f5xc_aws_vpc_site" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
-<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="no-worker-nodes"></a>[`no_worker_nodes`](#no-worker-nodes) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="no-worker-nodes"></a>[`no_worker_nodes`](#no-worker-nodes) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="nodes-per-az"></a>[`nodes_per_az`](#nodes-per-az) - Optional Number<br>Desired Worker Nodes Per AZ. Max limit is up to 21
 
 <a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7
@@ -224,13 +224,13 @@ A [`blocked_services`](#blocked-services) block supports the following:
 
 A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_services`](#blocked-services)) supports the following:
 
-<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Enable this option
 
 <a id="type-808ec9"></a>&#x2022; [`network_type`](#type-808ec9) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
 
-<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Enable this option
 
-<a id="interface-e57e21"></a>&#x2022; [`web_user_interface`](#interface-e57e21) - Optional Block<br>Can be used for messages where no values are needed
+<a id="interface-e57e21"></a>&#x2022; [`web_user_interface`](#interface-e57e21) - Optional Block<br>Enable this option
 
 #### Coordinates
 
@@ -260,13 +260,13 @@ A [`custom_security_group`](#custom-security-group) block supports the following
 
 A [`direct_connect_enabled`](#direct-connect-enabled) block supports the following:
 
-<a id="direct-connect-enabled-auto-asn"></a>&#x2022; [`auto_asn`](#direct-connect-enabled-auto-asn) - Optional Block<br>Can be used for messages where no values are needed
+<a id="direct-connect-enabled-auto-asn"></a>&#x2022; [`auto_asn`](#direct-connect-enabled-auto-asn) - Optional Block<br>Enable this option
 
 <a id="direct-connect-enabled-custom-asn"></a>&#x2022; [`custom_asn`](#direct-connect-enabled-custom-asn) - Optional Number<br>Custom Autonomous System Number
 
 <a id="direct-connect-enabled-hosted-vifs"></a>&#x2022; [`hosted_vifs`](#direct-connect-enabled-hosted-vifs) - Optional Block<br>AWS Direct Connect Hosted VIF Configuration<br>See [Hosted Vifs](#direct-connect-enabled-hosted-vifs) below.
 
-<a id="direct-connect-enabled-standard-vifs"></a>&#x2022; [`standard_vifs`](#direct-connect-enabled-standard-vifs) - Optional Block<br>Can be used for messages where no values are needed
+<a id="direct-connect-enabled-standard-vifs"></a>&#x2022; [`standard_vifs`](#direct-connect-enabled-standard-vifs) - Optional Block<br>Enable this option
 
 #### Direct Connect Enabled Hosted Vifs
 
@@ -274,7 +274,7 @@ A [`hosted_vifs`](#direct-connect-enabled-hosted-vifs) block (within [`direct_co
 
 <a id="connect-b8275e"></a>&#x2022; [`site_registration_over_direct_connect`](#connect-b8275e) - Optional Block<br>CloudLink ADN Network Config<br>See [Site Registration Over Direct Connect](#connect-b8275e) below.
 
-<a id="internet-6028e0"></a>&#x2022; [`site_registration_over_internet`](#internet-6028e0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="internet-6028e0"></a>&#x2022; [`site_registration_over_internet`](#internet-6028e0) - Optional Block<br>Enable this option
 
 <a id="list-d6c323"></a>&#x2022; [`vif_list`](#list-d6c323) - Optional Block<br>List of Hosted VIF Config. List of Hosted VIF Config<br>See [Vif List](#list-d6c323) below.
 
@@ -288,7 +288,7 @@ A [`vif_list`](#list-d6c323) block (within [`direct_connect_enabled.hosted_vifs`
 
 <a id="region-3f105f"></a>&#x2022; [`other_region`](#region-3f105f) - Optional String<br>Other Region
 
-<a id="region-3435ff"></a>&#x2022; [`same_as_site_region`](#region-3435ff) - Optional Block<br>Can be used for messages where no values are needed
+<a id="region-3435ff"></a>&#x2022; [`same_as_site_region`](#region-3435ff) - Optional Block<br>Enable this option
 
 <a id="vif-id-4f330c"></a>&#x2022; [`vif_id`](#vif-id-4f330c) - Optional String<br>AWS Direct Connect VIF ID that needs to be connected to the site
 
@@ -326,31 +326,31 @@ An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
 
 <a id="outside-vn-3594d6"></a>&#x2022; [`dc_cluster_group_outside_vn`](#outside-vn-3594d6) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Outside Vn](#outside-vn-3594d6) below.
 
-<a id="all-8889af"></a>&#x2022; [`forward_proxy_allow_all`](#all-8889af) - Optional Block<br>Can be used for messages where no values are needed
+<a id="all-8889af"></a>&#x2022; [`forward_proxy_allow_all`](#all-8889af) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-global-network-list"></a>&#x2022; [`global_network_list`](#ingress-egress-gw-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#ingress-egress-gw-global-network-list) below.
 
 <a id="ingress-egress-gw-inside-static-routes"></a>&#x2022; [`inside_static_routes`](#ingress-egress-gw-inside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Inside Static Routes](#ingress-egress-gw-inside-static-routes) below.
 
-<a id="ingress-egress-gw-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#ingress-egress-gw-no-dc-cluster-group) - Optional Block<br>Can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#ingress-egress-gw-no-dc-cluster-group) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#ingress-egress-gw-no-forward-proxy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#ingress-egress-gw-no-forward-proxy) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-no-global-network"></a>&#x2022; [`no_global_network`](#ingress-egress-gw-no-global-network) - Optional Block<br>Can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-global-network"></a>&#x2022; [`no_global_network`](#ingress-egress-gw-no-global-network) - Optional Block<br>Enable this option
 
-<a id="routes-b69a18"></a>&#x2022; [`no_inside_static_routes`](#routes-b69a18) - Optional Block<br>Can be used for messages where no values are needed
+<a id="routes-b69a18"></a>&#x2022; [`no_inside_static_routes`](#routes-b69a18) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-no-network-policy"></a>&#x2022; [`no_network_policy`](#ingress-egress-gw-no-network-policy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="ingress-egress-gw-no-network-policy"></a>&#x2022; [`no_network_policy`](#ingress-egress-gw-no-network-policy) - Optional Block<br>Enable this option
 
-<a id="routes-630976"></a>&#x2022; [`no_outside_static_routes`](#routes-630976) - Optional Block<br>Can be used for messages where no values are needed
+<a id="routes-630976"></a>&#x2022; [`no_outside_static_routes`](#routes-630976) - Optional Block<br>Enable this option
 
 <a id="ingress-egress-gw-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#ingress-egress-gw-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#ingress-egress-gw-outside-static-routes) below.
 
 <a id="mode-4d23c2"></a>&#x2022; [`performance_enhancement_mode`](#mode-4d23c2) - Optional Block<br>Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#mode-4d23c2) below.
 
-<a id="public-ip-5f6604"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-5f6604) - Optional Block<br>Can be used for messages where no values are needed
+<a id="public-ip-5f6604"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-5f6604) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#ingress-egress-gw-sm-connection-pvt-ip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="ingress-egress-gw-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#ingress-egress-gw-sm-connection-pvt-ip) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Active Enhanced Firewall Policies
 
@@ -388,13 +388,13 @@ An [`allowed_vip_port`](#ingress-egress-gw-allowed-vip-port) block (within [`ing
 
 <a id="ports-1f6ac6"></a>&#x2022; [`custom_ports`](#ports-1f6ac6) - Optional Block<br>Custom Ports. List of Custom port<br>See [Custom Ports](#ports-1f6ac6) below.
 
-<a id="port-62fd1d"></a>&#x2022; [`disable_allowed_vip_port`](#port-62fd1d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-62fd1d"></a>&#x2022; [`disable_allowed_vip_port`](#port-62fd1d) - Optional Block<br>Enable this option
 
-<a id="port-bab911"></a>&#x2022; [`use_http_https_port`](#port-bab911) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-bab911"></a>&#x2022; [`use_http_https_port`](#port-bab911) - Optional Block<br>Enable this option
 
-<a id="port-f10619"></a>&#x2022; [`use_http_port`](#port-f10619) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-f10619"></a>&#x2022; [`use_http_port`](#port-f10619) - Optional Block<br>Enable this option
 
-<a id="port-0cbb5d"></a>&#x2022; [`use_https_port`](#port-0cbb5d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-0cbb5d"></a>&#x2022; [`use_https_port`](#port-0cbb5d) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Allowed VIP Port Custom Ports
 
@@ -406,13 +406,13 @@ An [`allowed_vip_port_sli`](#ingress-egress-gw-allowed-vip-port-sli) block (with
 
 <a id="ports-93c5d6"></a>&#x2022; [`custom_ports`](#ports-93c5d6) - Optional Block<br>Custom Ports. List of Custom port<br>See [Custom Ports](#ports-93c5d6) below.
 
-<a id="port-084b63"></a>&#x2022; [`disable_allowed_vip_port`](#port-084b63) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-084b63"></a>&#x2022; [`disable_allowed_vip_port`](#port-084b63) - Optional Block<br>Enable this option
 
-<a id="port-f98848"></a>&#x2022; [`use_http_https_port`](#port-f98848) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-f98848"></a>&#x2022; [`use_http_https_port`](#port-f98848) - Optional Block<br>Enable this option
 
-<a id="port-f1e8a8"></a>&#x2022; [`use_http_port`](#port-f1e8a8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-f1e8a8"></a>&#x2022; [`use_http_port`](#port-f1e8a8) - Optional Block<br>Enable this option
 
-<a id="port-39b9bd"></a>&#x2022; [`use_https_port`](#port-39b9bd) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-39b9bd"></a>&#x2022; [`use_https_port`](#port-39b9bd) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Allowed VIP Port SLI Custom Ports
 
@@ -428,7 +428,7 @@ An [`az_nodes`](#ingress-egress-gw-az-nodes) block (within [`ingress_egress_gw`]
 
 <a id="subnet-631d3b"></a>&#x2022; [`outside_subnet`](#subnet-631d3b) - Optional Block<br>AWS Subnet. Parameters for AWS subnet<br>See [Outside Subnet](#subnet-631d3b) below.
 
-<a id="subnet-679648"></a>&#x2022; [`reserved_inside_subnet`](#subnet-679648) - Optional Block<br>Can be used for messages where no values are needed
+<a id="subnet-679648"></a>&#x2022; [`reserved_inside_subnet`](#subnet-679648) - Optional Block<br>Enable this option
 
 <a id="subnet-333bb8"></a>&#x2022; [`workload_subnet`](#subnet-333bb8) - Optional Block<br>AWS Subnet. Parameters for AWS subnet<br>See [Workload Subnet](#subnet-333bb8) below.
 
@@ -600,7 +600,7 @@ A [`performance_enhancement_mode`](#mode-4d23c2) block (within [`ingress_egress_
 
 <a id="enhanced-410f18"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-410f18) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-410f18) below.
 
-<a id="enhanced-90e2b5"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-90e2b5) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enhanced-90e2b5"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-90e2b5) - Optional Block<br>Enable this option
 
 #### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
@@ -624,13 +624,13 @@ An [`allowed_vip_port`](#ingress-gw-allowed-vip-port) block (within [`ingress_gw
 
 <a id="ports-644346"></a>&#x2022; [`custom_ports`](#ports-644346) - Optional Block<br>Custom Ports. List of Custom port<br>See [Custom Ports](#ports-644346) below.
 
-<a id="port-51dc9d"></a>&#x2022; [`disable_allowed_vip_port`](#port-51dc9d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-51dc9d"></a>&#x2022; [`disable_allowed_vip_port`](#port-51dc9d) - Optional Block<br>Enable this option
 
-<a id="port-9427a8"></a>&#x2022; [`use_http_https_port`](#port-9427a8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-9427a8"></a>&#x2022; [`use_http_https_port`](#port-9427a8) - Optional Block<br>Enable this option
 
-<a id="port-44bb52"></a>&#x2022; [`use_http_port`](#port-44bb52) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-44bb52"></a>&#x2022; [`use_http_port`](#port-44bb52) - Optional Block<br>Enable this option
 
-<a id="port-011ca8"></a>&#x2022; [`use_https_port`](#port-011ca8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-011ca8"></a>&#x2022; [`use_https_port`](#port-011ca8) - Optional Block<br>Enable this option
 
 #### Ingress Gw Allowed VIP Port Custom Ports
 
@@ -664,7 +664,7 @@ A [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) blo
 
 <a id="enhanced-5a06c8"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-5a06c8) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-5a06c8) below.
 
-<a id="enhanced-6fdd43"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-6fdd43) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enhanced-6fdd43"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-6fdd43) - Optional Block<br>Enable this option
 
 #### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
@@ -674,7 +674,7 @@ A [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) blo
 
 A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the following:
 
-<a id="drain-0d0936"></a>&#x2022; [`disable_upgrade_drain`](#drain-0d0936) - Optional Block<br>Can be used for messages where no values are needed
+<a id="drain-0d0936"></a>&#x2022; [`disable_upgrade_drain`](#drain-0d0936) - Optional Block<br>Enable this option
 
 <a id="drain-7e30d4"></a>&#x2022; [`enable_upgrade_drain`](#drain-7e30d4) - Optional Block<br>Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#drain-7e30d4) below.
 
@@ -682,13 +682,13 @@ A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the fol
 
 An [`enable_upgrade_drain`](#drain-7e30d4) block (within [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain)) supports the following:
 
-<a id="mode-668699"></a>&#x2022; [`disable_vega_upgrade_mode`](#mode-668699) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mode-668699"></a>&#x2022; [`disable_vega_upgrade_mode`](#mode-668699) - Optional Block<br>Enable this option
 
 <a id="count-3aa796"></a>&#x2022; [`drain_max_unavailable_node_count`](#count-3aa796) - Optional Number<br>Node Batch Size Count
 
 <a id="timeout-ac4ee9"></a>&#x2022; [`drain_node_timeout`](#timeout-ac4ee9) - Optional Number<br>Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is
 
-<a id="mode-9c557b"></a>&#x2022; [`enable_vega_upgrade_mode`](#mode-9c557b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mode-9c557b"></a>&#x2022; [`enable_vega_upgrade_mode`](#mode-9c557b) - Optional Block<br>Enable this option
 
 #### Log Receiver
 
@@ -704,15 +704,15 @@ A [`log_receiver`](#log-receiver) block supports the following:
 
 An [`offline_survivability_mode`](#offline-survivability-mode) block supports the following:
 
-<a id="mode-565021"></a>&#x2022; [`enable_offline_survivability_mode`](#mode-565021) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mode-565021"></a>&#x2022; [`enable_offline_survivability_mode`](#mode-565021) - Optional Block<br>Enable this option
 
-<a id="mode-02f0c8"></a>&#x2022; [`no_offline_survivability_mode`](#mode-02f0c8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mode-02f0c8"></a>&#x2022; [`no_offline_survivability_mode`](#mode-02f0c8) - Optional Block<br>Enable this option
 
 #### OS
 
 An [`os`](#os) block supports the following:
 
-<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Can be used for messages where no values are needed
+<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Enable this option
 
 <a id="os-operating-system-version"></a>&#x2022; [`operating_system_version`](#os-operating-system-version) - Optional String<br>Specify a OS version to be used e.g. 9.2024.6
 
@@ -722,9 +722,9 @@ A [`private_connectivity`](#private-connectivity) block supports the following:
 
 <a id="private-connectivity-cloud-link"></a>&#x2022; [`cloud_link`](#private-connectivity-cloud-link) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cloud Link](#private-connectivity-cloud-link) below.
 
-<a id="private-connectivity-inside"></a>&#x2022; [`inside`](#private-connectivity-inside) - Optional Block<br>Can be used for messages where no values are needed
+<a id="private-connectivity-inside"></a>&#x2022; [`inside`](#private-connectivity-inside) - Optional Block<br>Enable this option
 
-<a id="private-connectivity-outside"></a>&#x2022; [`outside`](#private-connectivity-outside) - Optional Block<br>Can be used for messages where no values are needed
+<a id="private-connectivity-outside"></a>&#x2022; [`outside`](#private-connectivity-outside) - Optional Block<br>Enable this option
 
 #### Private Connectivity Cloud Link
 
@@ -740,7 +740,7 @@ A [`cloud_link`](#private-connectivity-cloud-link) block (within [`private_conne
 
 A [`sw`](#sw) block supports the following:
 
-<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Can be used for messages where no values are needed
+<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Enable this option
 
 <a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>Specify a F5XC Software Version to be used e.g. Crt-20210329-1002
 
@@ -774,31 +774,31 @@ A [`voltstack_cluster`](#voltstack-cluster) block supports the following:
 
 <a id="voltstack-cluster-dc-cluster-group"></a>&#x2022; [`dc_cluster_group`](#voltstack-cluster-dc-cluster-group) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#voltstack-cluster-dc-cluster-group) below.
 
-<a id="voltstack-cluster-default-storage"></a>&#x2022; [`default_storage`](#voltstack-cluster-default-storage) - Optional Block<br>Can be used for messages where no values are needed
+<a id="voltstack-cluster-default-storage"></a>&#x2022; [`default_storage`](#voltstack-cluster-default-storage) - Optional Block<br>Enable this option
 
-<a id="all-48d905"></a>&#x2022; [`forward_proxy_allow_all`](#all-48d905) - Optional Block<br>Can be used for messages where no values are needed
+<a id="all-48d905"></a>&#x2022; [`forward_proxy_allow_all`](#all-48d905) - Optional Block<br>Enable this option
 
 <a id="voltstack-cluster-global-network-list"></a>&#x2022; [`global_network_list`](#voltstack-cluster-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#voltstack-cluster-global-network-list) below.
 
 <a id="voltstack-cluster-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-k8s-cluster) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster](#voltstack-cluster-k8s-cluster) below.
 
-<a id="voltstack-cluster-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-no-dc-cluster-group) - Optional Block<br>Can be used for messages where no values are needed
+<a id="voltstack-cluster-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-no-dc-cluster-group) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#voltstack-cluster-no-forward-proxy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="voltstack-cluster-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#voltstack-cluster-no-forward-proxy) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-global-network"></a>&#x2022; [`no_global_network`](#voltstack-cluster-no-global-network) - Optional Block<br>Can be used for messages where no values are needed
+<a id="voltstack-cluster-no-global-network"></a>&#x2022; [`no_global_network`](#voltstack-cluster-no-global-network) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#voltstack-cluster-no-k8s-cluster) - Optional Block<br>Can be used for messages where no values are needed
+<a id="voltstack-cluster-no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#voltstack-cluster-no-k8s-cluster) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-network-policy"></a>&#x2022; [`no_network_policy`](#voltstack-cluster-no-network-policy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="voltstack-cluster-no-network-policy"></a>&#x2022; [`no_network_policy`](#voltstack-cluster-no-network-policy) - Optional Block<br>Enable this option
 
-<a id="routes-3cc7bc"></a>&#x2022; [`no_outside_static_routes`](#routes-3cc7bc) - Optional Block<br>Can be used for messages where no values are needed
+<a id="routes-3cc7bc"></a>&#x2022; [`no_outside_static_routes`](#routes-3cc7bc) - Optional Block<br>Enable this option
 
 <a id="voltstack-cluster-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#voltstack-cluster-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#voltstack-cluster-outside-static-routes) below.
 
-<a id="public-ip-8ed01a"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-8ed01a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="public-ip-8ed01a"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-8ed01a) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#voltstack-cluster-sm-connection-pvt-ip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="voltstack-cluster-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#voltstack-cluster-sm-connection-pvt-ip) - Optional Block<br>Enable this option
 
 <a id="voltstack-cluster-storage-class-list"></a>&#x2022; [`storage_class_list`](#voltstack-cluster-storage-class-list) - Optional Block<br>Add additional custom storage classes in Kubernetes for this site<br>See [Storage Class List](#voltstack-cluster-storage-class-list) below.
 
@@ -844,13 +844,13 @@ An [`allowed_vip_port`](#voltstack-cluster-allowed-vip-port) block (within [`vol
 
 <a id="ports-22d935"></a>&#x2022; [`custom_ports`](#ports-22d935) - Optional Block<br>Custom Ports. List of Custom port<br>See [Custom Ports](#ports-22d935) below.
 
-<a id="port-b20bcf"></a>&#x2022; [`disable_allowed_vip_port`](#port-b20bcf) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-b20bcf"></a>&#x2022; [`disable_allowed_vip_port`](#port-b20bcf) - Optional Block<br>Enable this option
 
-<a id="port-f73b33"></a>&#x2022; [`use_http_https_port`](#port-f73b33) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-f73b33"></a>&#x2022; [`use_http_https_port`](#port-f73b33) - Optional Block<br>Enable this option
 
-<a id="port-6ad494"></a>&#x2022; [`use_http_port`](#port-6ad494) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-6ad494"></a>&#x2022; [`use_http_port`](#port-6ad494) - Optional Block<br>Enable this option
 
-<a id="port-4002d5"></a>&#x2022; [`use_https_port`](#port-4002d5) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-4002d5"></a>&#x2022; [`use_https_port`](#port-4002d5) - Optional Block<br>Enable this option
 
 #### Voltstack Cluster Allowed VIP Port Custom Ports
 
@@ -996,7 +996,7 @@ A [`vpc`](#vpc) block supports the following:
 
 A [`new_vpc`](#vpc-new-vpc) block (within [`vpc`](#vpc)) supports the following:
 
-<a id="vpc-new-vpc-autogenerate"></a>&#x2022; [`autogenerate`](#vpc-new-vpc-autogenerate) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vpc-new-vpc-autogenerate"></a>&#x2022; [`autogenerate`](#vpc-new-vpc-autogenerate) - Optional Block<br>Enable this option
 
 <a id="vpc-new-vpc-name-tag"></a>&#x2022; [`name_tag`](#vpc-new-vpc-name-tag) - Optional String<br>Specify the VPC Name
 

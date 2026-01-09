@@ -20,7 +20,7 @@ resource "f5xc_app_type" "example" {
   business_logic_markup_setting {
     # Configure business_logic_markup_setting settings
   }
-  # Can be used for messages where no values are needed.
+  # Enable this option
   disable {
     # Configure disable settings
   }

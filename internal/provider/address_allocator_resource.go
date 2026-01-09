@@ -357,12 +357,22 @@ func (r *AddressAllocatorResource) Create(ctx context.Context, req resource.Crea
 	if blockData, ok := apiResource.Spec["address_allocation_scheme"].(map[string]interface{}); ok && (isImport || data.AddressAllocationScheme != nil) {
 		data.AddressAllocationScheme = &AddressAllocatorAddressAllocationSchemeModel{
 			AllocationUnit: func() types.Int64 {
+				if !isImport && data.AddressAllocationScheme != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AddressAllocationScheme.AllocationUnit
+				}
+				// Import case: read from API
 				if v, ok := blockData["allocation_unit"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			LocalInterfaceAddressOffset: func() types.Int64 {
+				if !isImport && data.AddressAllocationScheme != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AddressAllocationScheme.LocalInterfaceAddressOffset
+				}
+				// Import case: read from API
 				if v, ok := blockData["local_interface_address_offset"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -498,12 +508,22 @@ func (r *AddressAllocatorResource) Read(ctx context.Context, req resource.ReadRe
 	if blockData, ok := apiResource.Spec["address_allocation_scheme"].(map[string]interface{}); ok && (isImport || data.AddressAllocationScheme != nil) {
 		data.AddressAllocationScheme = &AddressAllocatorAddressAllocationSchemeModel{
 			AllocationUnit: func() types.Int64 {
+				if !isImport && data.AddressAllocationScheme != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AddressAllocationScheme.AllocationUnit
+				}
+				// Import case: read from API
 				if v, ok := blockData["allocation_unit"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			LocalInterfaceAddressOffset: func() types.Int64 {
+				if !isImport && data.AddressAllocationScheme != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AddressAllocationScheme.LocalInterfaceAddressOffset
+				}
+				// Import case: read from API
 				if v, ok := blockData["local_interface_address_offset"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -654,12 +674,22 @@ func (r *AddressAllocatorResource) Update(ctx context.Context, req resource.Upda
 	if blockData, ok := apiResource.Spec["address_allocation_scheme"].(map[string]interface{}); ok && (isImport || data.AddressAllocationScheme != nil) {
 		data.AddressAllocationScheme = &AddressAllocatorAddressAllocationSchemeModel{
 			AllocationUnit: func() types.Int64 {
+				if !isImport && data.AddressAllocationScheme != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AddressAllocationScheme.AllocationUnit
+				}
+				// Import case: read from API
 				if v, ok := blockData["allocation_unit"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			LocalInterfaceAddressOffset: func() types.Int64 {
+				if !isImport && data.AddressAllocationScheme != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AddressAllocationScheme.LocalInterfaceAddressOffset
+				}
+				// Import case: read from API
 				if v, ok := blockData["local_interface_address_offset"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

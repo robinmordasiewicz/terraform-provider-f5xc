@@ -454,10 +454,10 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 							Attributes: map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"all_destinations": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"all_sources": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"forwarding_class_list": schema.ListNestedBlock{
 									MarkdownDescription: "Ordered list of forwarding Class to be used if no rule match.",
@@ -517,7 +517,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 												},
 												Blocks: map[string]schema.Block{
 													"any_path": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 												},
 											},
@@ -636,7 +636,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"any": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"label_selector": schema.SingleNestedBlock{
 						MarkdownDescription: "Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects.",
@@ -659,16 +659,16 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 							},
 							Blocks: map[string]schema.Block{
 								"all_tcp_traffic": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"all_traffic": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"all_udp_traffic": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"any": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"applications": schema.SingleNestedBlock{
 									MarkdownDescription: "Applications. Application protocols like HTTP, SNMP.",

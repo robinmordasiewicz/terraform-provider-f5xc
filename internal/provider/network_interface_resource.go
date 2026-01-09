@@ -608,19 +608,19 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"is_primary": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"monitor": schema.SingleNestedBlock{
 						MarkdownDescription: "Link Quality Monitoring configuration for a network interface.",
 					},
 					"monitor_disabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"not_primary": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -642,7 +642,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -672,20 +672,20 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"dhcp_client": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"dhcp_server": schema.SingleNestedBlock{
 						MarkdownDescription: "DHCPServerParametersType.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"automatic_from_end": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"automatic_from_start": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"dhcp_networks": schema.ListNestedBlock{
 								MarkdownDescription: "List of networks from which DHCP Server can allocate IPv4 Addresses .",
@@ -710,10 +710,10 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 									},
 									Blocks: map[string]schema.Block{
 										"first_address": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"last_address": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"pools": schema.ListNestedBlock{
 											MarkdownDescription: "List of non overlapping IP address ranges.",
@@ -731,7 +731,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 											},
 										},
 										"same_as_dgw": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -755,7 +755,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"host": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"router": schema.SingleNestedBlock{
 								MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -790,10 +790,10 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 												},
 												Blocks: map[string]schema.Block{
 													"first_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"last_address": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 												},
 											},
@@ -804,10 +804,10 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"automatic_from_end": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"automatic_from_start": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"dhcp_networks": schema.ListNestedBlock{
 												MarkdownDescription: "List of networks from which DHCP server can allocate IP addresses .",
@@ -860,25 +860,25 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 					"is_primary": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"monitor": schema.SingleNestedBlock{
 						MarkdownDescription: "Link Quality Monitoring configuration for a network interface.",
 					},
 					"monitor_disabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_ipv6_address": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"not_primary": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"site_local_inside_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"site_local_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"static_ip": schema.SingleNestedBlock{
 						MarkdownDescription: "Static IP Parameters. Configure Static IP parameters.",
@@ -937,10 +937,10 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						},
 					},
 					"storage_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"untagged": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -962,7 +962,7 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 						},
 						Blocks: map[string]schema.Block{
 							"untagged": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1008,10 +1008,10 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"site_local_inside_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"site_local_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"static_ip": schema.SingleNestedBlock{
 						MarkdownDescription: "Static IP Parameters. Configure Static IP parameters.",
@@ -1464,6 +1464,11 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 				return nil
 			}(),
 			MTU: func() types.Int64 {
+				if !isImport && data.DedicatedInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DedicatedInterface.MTU
+				}
+				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1488,6 +1493,11 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 				return nil
 			}(),
 			Priority: func() types.Int64 {
+				if !isImport && data.DedicatedInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DedicatedInterface.Priority
+				}
+				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1516,6 +1526,11 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 				return types.StringNull()
 			}(),
 			MTU: func() types.Int64 {
+				if !isImport && data.DedicatedManagementInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DedicatedManagementInterface.MTU
+				}
+				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1620,6 +1635,11 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 				return nil
 			}(),
 			MTU: func() types.Int64 {
+				if !isImport && data.EthernetInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.EthernetInterface.MTU
+				}
+				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1656,6 +1676,11 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 				return nil
 			}(),
 			Priority: func() types.Int64 {
+				if !isImport && data.EthernetInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.EthernetInterface.Priority
+				}
+				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1732,6 +1757,11 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 				return nil
 			}(),
 			VLANID: func() types.Int64 {
+				if !isImport && data.EthernetInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.EthernetInterface.VLANID
+				}
+				// Import case: read from API
 				if v, ok := blockData["vlan_id"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1747,6 +1777,11 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 	if blockData, ok := apiResource.Spec["tunnel_interface"].(map[string]interface{}); ok && (isImport || data.TunnelInterface != nil) {
 		data.TunnelInterface = &NetworkInterfaceTunnelInterfaceModel{
 			MTU: func() types.Int64 {
+				if !isImport && data.TunnelInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.TunnelInterface.MTU
+				}
+				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1759,6 +1794,11 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 				return types.StringNull()
 			}(),
 			Priority: func() types.Int64 {
+				if !isImport && data.TunnelInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.TunnelInterface.Priority
+				}
+				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1987,6 +2027,11 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 				return nil
 			}(),
 			MTU: func() types.Int64 {
+				if !isImport && data.DedicatedInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DedicatedInterface.MTU
+				}
+				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2011,6 +2056,11 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 				return nil
 			}(),
 			Priority: func() types.Int64 {
+				if !isImport && data.DedicatedInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DedicatedInterface.Priority
+				}
+				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2039,6 +2089,11 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 				return types.StringNull()
 			}(),
 			MTU: func() types.Int64 {
+				if !isImport && data.DedicatedManagementInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DedicatedManagementInterface.MTU
+				}
+				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2143,6 +2198,11 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 				return nil
 			}(),
 			MTU: func() types.Int64 {
+				if !isImport && data.EthernetInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.EthernetInterface.MTU
+				}
+				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2179,6 +2239,11 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 				return nil
 			}(),
 			Priority: func() types.Int64 {
+				if !isImport && data.EthernetInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.EthernetInterface.Priority
+				}
+				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2255,6 +2320,11 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 				return nil
 			}(),
 			VLANID: func() types.Int64 {
+				if !isImport && data.EthernetInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.EthernetInterface.VLANID
+				}
+				// Import case: read from API
 				if v, ok := blockData["vlan_id"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2270,6 +2340,11 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 	if blockData, ok := apiResource.Spec["tunnel_interface"].(map[string]interface{}); ok && (isImport || data.TunnelInterface != nil) {
 		data.TunnelInterface = &NetworkInterfaceTunnelInterfaceModel{
 			MTU: func() types.Int64 {
+				if !isImport && data.TunnelInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.TunnelInterface.MTU
+				}
+				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2282,6 +2357,11 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 				return types.StringNull()
 			}(),
 			Priority: func() types.Int64 {
+				if !isImport && data.TunnelInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.TunnelInterface.Priority
+				}
+				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2677,6 +2757,11 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 				return nil
 			}(),
 			MTU: func() types.Int64 {
+				if !isImport && data.DedicatedInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DedicatedInterface.MTU
+				}
+				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2701,6 +2786,11 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 				return nil
 			}(),
 			Priority: func() types.Int64 {
+				if !isImport && data.DedicatedInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DedicatedInterface.Priority
+				}
+				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2729,6 +2819,11 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 				return types.StringNull()
 			}(),
 			MTU: func() types.Int64 {
+				if !isImport && data.DedicatedManagementInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DedicatedManagementInterface.MTU
+				}
+				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2833,6 +2928,11 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 				return nil
 			}(),
 			MTU: func() types.Int64 {
+				if !isImport && data.EthernetInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.EthernetInterface.MTU
+				}
+				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2869,6 +2969,11 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 				return nil
 			}(),
 			Priority: func() types.Int64 {
+				if !isImport && data.EthernetInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.EthernetInterface.Priority
+				}
+				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2945,6 +3050,11 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 				return nil
 			}(),
 			VLANID: func() types.Int64 {
+				if !isImport && data.EthernetInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.EthernetInterface.VLANID
+				}
+				// Import case: read from API
 				if v, ok := blockData["vlan_id"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2960,6 +3070,11 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 	if blockData, ok := apiResource.Spec["tunnel_interface"].(map[string]interface{}); ok && (isImport || data.TunnelInterface != nil) {
 		data.TunnelInterface = &NetworkInterfaceTunnelInterfaceModel{
 			MTU: func() types.Int64 {
+				if !isImport && data.TunnelInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.TunnelInterface.MTU
+				}
+				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -2972,6 +3087,11 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 				return types.StringNull()
 			}(),
 			Priority: func() types.Int64 {
+				if !isImport && data.TunnelInterface != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.TunnelInterface.Priority
+				}
+				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

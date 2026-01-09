@@ -380,10 +380,10 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 				},
 				Blocks: map[string]schema.Block{
 					"external_id_is_optional": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"external_id_is_tenant_id": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"session_tags": schema.SingleNestedBlock{
 						MarkdownDescription: "Session tags are key-value pair attributes that you pass when you assume an IAM role.",
@@ -844,6 +844,11 @@ func (r *CloudCredentialsResource) Create(ctx context.Context, req resource.Crea
 				return types.StringNull()
 			}(),
 			DurationSeconds: func() types.Int64 {
+				if !isImport && data.AWSAssumeRole != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWSAssumeRole.DurationSeconds
+				}
+				// Import case: read from API
 				if v, ok := blockData["duration_seconds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1105,6 +1110,11 @@ func (r *CloudCredentialsResource) Read(ctx context.Context, req resource.ReadRe
 				return types.StringNull()
 			}(),
 			DurationSeconds: func() types.Int64 {
+				if !isImport && data.AWSAssumeRole != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWSAssumeRole.DurationSeconds
+				}
+				// Import case: read from API
 				if v, ok := blockData["duration_seconds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1432,6 +1442,11 @@ func (r *CloudCredentialsResource) Update(ctx context.Context, req resource.Upda
 				return types.StringNull()
 			}(),
 			DurationSeconds: func() types.Int64 {
+				if !isImport && data.AWSAssumeRole != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWSAssumeRole.DurationSeconds
+				}
+				// Import case: read from API
 				if v, ok := blockData["duration_seconds"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

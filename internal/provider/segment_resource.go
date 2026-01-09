@@ -120,10 +120,10 @@ func (r *SegmentResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Delete: true,
 			}),
 			"disable": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable, enable] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable, enable] Enable this option",
 			},
 			"enable": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 		},
 	}

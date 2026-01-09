@@ -1346,10 +1346,10 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Delete: true,
 			}),
 			"disable_https_management": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_https_management, https_management; Default: disable_https_management] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable_https_management, https_management; Default: disable_https_management] Enable this option",
 			},
 			"disable_ssh_access": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_ssh_access, enabled_ssh_access; Default: disable_ssh_access] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable_ssh_access, enabled_ssh_access; Default: disable_ssh_access] Enable this option",
 			},
 			"enabled_ssh_access": schema.SingleNestedBlock{
 				MarkdownDescription: "SSH based management. SSH based configuration.",
@@ -1361,13 +1361,13 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"advertise_on_sli": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"advertise_on_slo": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"advertise_on_slo_sli": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"node_ssh_ports": schema.ListNestedBlock{
 						MarkdownDescription: "Enter TCP port and node name per node .",
@@ -1472,13 +1472,13 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"advertise_on_slo_ip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"advertise_on_slo_ip_external": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"automatic_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"custom_tcp_ports": schema.SingleNestedBlock{
 								MarkdownDescription: "Port Range List. List of port ranges.",
@@ -1501,22 +1501,22 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"default_tcp_ports": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"disable_advertise_on_slo_ip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"http_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_tcp_ports": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_udp_ports": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1525,10 +1525,10 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"awafpay_g200_mbps": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"awafpay_g3_gbps": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1551,7 +1551,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 							Blocks: map[string]schema.Block{
 								"automatic_prefix": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"mgmt_subnet": schema.SingleNestedBlock{
 									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet.",
@@ -1574,7 +1574,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 								},
 								"reserved_mgmt_subnet": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
@@ -1625,14 +1625,14 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"advertise_on_internet_default_vip": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"advertise_on_sli_vip": schema.SingleNestedBlock{
 						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"tls_certificates": schema.ListNestedBlock{
 								MarkdownDescription: "Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
@@ -1659,7 +1659,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -1698,7 +1698,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -1726,13 +1726,13 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"default_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"low_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"medium_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -1771,7 +1771,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"no_crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -1795,7 +1795,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
 										MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
@@ -1816,7 +1816,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"tls_certificates": schema.ListNestedBlock{
 								MarkdownDescription: "Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
@@ -1843,7 +1843,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -1882,7 +1882,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -1910,13 +1910,13 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"default_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"low_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"medium_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -1955,7 +1955,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"no_crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -1979,7 +1979,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
 										MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
@@ -2000,7 +2000,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"tls_certificates": schema.ListNestedBlock{
 								MarkdownDescription: "Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
@@ -2027,7 +2027,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -2066,7 +2066,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -2094,13 +2094,13 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"default_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"low_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"medium_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -2139,7 +2139,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"no_crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -2163,7 +2163,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
 										MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
@@ -2184,7 +2184,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"tls_certificates": schema.ListNestedBlock{
 								MarkdownDescription: "Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
@@ -2211,7 +2211,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -2250,7 +2250,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -2278,13 +2278,13 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"default_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"low_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"medium_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -2323,7 +2323,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"no_crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -2347,7 +2347,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
 										MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
@@ -2364,7 +2364,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"default_https_port": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -2501,13 +2501,13 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"disable_panaroma": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"pan_ami_bundle1": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"pan_ami_bundle2": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"panorama_server": schema.SingleNestedBlock{
 						MarkdownDescription: "Panorama Server Type. Panorama Server Type.",
@@ -2603,7 +2603,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"reserved_mgmt_subnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -3278,6 +3278,11 @@ func (r *NfvServiceResource) Create(ctx context.Context, req resource.CreateRequ
 				return types.StringNull()
 			}(),
 			HTTPSPort: func() types.Int64 {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPSManagement.HTTPSPort
+				}
+				// Import case: read from API
 				if v, ok := blockData["https_port"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3847,6 +3852,11 @@ func (r *NfvServiceResource) Read(ctx context.Context, req resource.ReadRequest,
 				return types.StringNull()
 			}(),
 			HTTPSPort: func() types.Int64 {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPSManagement.HTTPSPort
+				}
+				// Import case: read from API
 				if v, ok := blockData["https_port"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4599,6 +4609,11 @@ func (r *NfvServiceResource) Update(ctx context.Context, req resource.UpdateRequ
 				return types.StringNull()
 			}(),
 			HTTPSPort: func() types.Int64 {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPSManagement.HTTPSPort
+				}
+				// Import case: read from API
 				if v, ok := blockData["https_port"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

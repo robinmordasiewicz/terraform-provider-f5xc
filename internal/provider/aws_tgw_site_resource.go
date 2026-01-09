@@ -1384,7 +1384,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 								},
 								"reserved_inside_subnet": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"workload_subnet": schema.SingleNestedBlock{
 									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet.",
@@ -1423,10 +1423,10 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"disable_internet_vip": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_internet_vip": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"existing_tgw": schema.SingleNestedBlock{
 						MarkdownDescription: "Existing TGW Type. Information needed for existing TGW.",
@@ -1446,14 +1446,14 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"f5xc_security_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"new_tgw": schema.SingleNestedBlock{
 						MarkdownDescription: "TGWParamsType.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"system_generated": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"user_assigned": schema.SingleNestedBlock{
 								MarkdownDescription: "Information needed when ASNs are assigned by the user.",
@@ -1484,15 +1484,15 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"autogenerate": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"no_worker_nodes": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"reserved_tgw_cidr": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"tgw_cidr": schema.SingleNestedBlock{
 						MarkdownDescription: "Parameters for creating a new cloud subnet.",
@@ -1506,7 +1506,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"block_all_services": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option",
 			},
 			"blocked_services": schema.SingleNestedBlock{
 				MarkdownDescription: "Disable node local services on this site.",
@@ -1523,13 +1523,13 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 							Blocks: map[string]schema.Block{
 								"dns": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"ssh": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"web_user_interface": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
@@ -1563,10 +1563,10 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"default_blocked_services": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"direct_connect_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Enable this option",
 			},
 			"direct_connect_enabled": schema.SingleNestedBlock{
 				MarkdownDescription: "Direct Connect Configuration. Direct Connect Configuration.",
@@ -1578,7 +1578,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"auto_asn": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"hosted_vifs": schema.SingleNestedBlock{
 						MarkdownDescription: "AWS Direct Connect Hosted VIF Configuration.",
@@ -1594,7 +1594,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"site_registration_over_internet": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"vif_list": schema.ListNestedBlock{
 								MarkdownDescription: "List of Hosted VIF Config. List of Hosted VIF Config.",
@@ -1611,7 +1611,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 									Blocks: map[string]schema.Block{
 										"same_as_site_region": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -1619,7 +1619,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"standard_vifs": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1628,7 +1628,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_upgrade_drain": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_upgrade_drain": schema.SingleNestedBlock{
 						MarkdownDescription: "Specify batch upgrade settings for worker nodes within a site.",
@@ -1644,10 +1644,10 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 						Blocks: map[string]schema.Block{
 							"disable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1675,17 +1675,17 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"offline_survivability_mode": schema.SingleNestedBlock{
 				MarkdownDescription: "Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7..",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enable_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1699,7 +1699,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"default_os_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1712,15 +1712,15 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"jumbo": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_jumbo": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1750,10 +1750,10 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"inside": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"outside": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1767,7 +1767,7 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"default_sw_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1895,19 +1895,19 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"east_west_service_policy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"forward_proxy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_east_west_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_forward_proxy": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_network_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -1929,16 +1929,16 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"disable_allowed_vip_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_http_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_http_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1956,16 +1956,16 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"disable_allowed_vip_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_http_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_http_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_https_port": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -2222,16 +2222,16 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"no_dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_global_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_inside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes.",
@@ -2376,10 +2376,10 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -3148,6 +3148,11 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				return nil
 			}(),
 			DiskSize: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWSParameters.DiskSize
+				}
+				// Import case: read from API
 				if v, ok := blockData["disk_size"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3261,6 +3266,11 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				return nil
 			}(),
 			NodesPerAz: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWSParameters.NodesPerAz
+				}
+				// Import case: read from API
 				if v, ok := blockData["nodes_per_az"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3303,6 +3313,11 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				return nil
 			}(),
 			TotalNodes: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWSParameters.TotalNodes
+				}
+				// Import case: read from API
 				if v, ok := blockData["total_nodes"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3365,12 +3380,22 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
 		data.Coordinates = &AWSTGWSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
+				if !isImport && data.Coordinates != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Coordinates.Latitude
+				}
+				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			Longitude: func() types.Int64 {
+				if !isImport && data.Coordinates != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Coordinates.Longitude
+				}
+				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3419,6 +3444,11 @@ func (r *AWSTGWSiteResource) Create(ctx context.Context, req resource.CreateRequ
 				return nil
 			}(),
 			CustomAsn: func() types.Int64 {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DirectConnectEnabled.CustomAsn
+				}
+				// Import case: read from API
 				if v, ok := blockData["custom_asn"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3833,6 +3863,11 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				return nil
 			}(),
 			DiskSize: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWSParameters.DiskSize
+				}
+				// Import case: read from API
 				if v, ok := blockData["disk_size"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3946,6 +3981,11 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				return nil
 			}(),
 			NodesPerAz: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWSParameters.NodesPerAz
+				}
+				// Import case: read from API
 				if v, ok := blockData["nodes_per_az"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3988,6 +4028,11 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				return nil
 			}(),
 			TotalNodes: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWSParameters.TotalNodes
+				}
+				// Import case: read from API
 				if v, ok := blockData["total_nodes"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4050,12 +4095,22 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
 		data.Coordinates = &AWSTGWSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
+				if !isImport && data.Coordinates != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Coordinates.Latitude
+				}
+				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			Longitude: func() types.Int64 {
+				if !isImport && data.Coordinates != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Coordinates.Longitude
+				}
+				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4104,6 +4159,11 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 				return nil
 			}(),
 			CustomAsn: func() types.Int64 {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DirectConnectEnabled.CustomAsn
+				}
+				// Import case: read from API
 				if v, ok := blockData["custom_asn"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -4935,6 +4995,11 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 				return nil
 			}(),
 			DiskSize: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWSParameters.DiskSize
+				}
+				// Import case: read from API
 				if v, ok := blockData["disk_size"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -5048,6 +5113,11 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 				return nil
 			}(),
 			NodesPerAz: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWSParameters.NodesPerAz
+				}
+				// Import case: read from API
 				if v, ok := blockData["nodes_per_az"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -5090,6 +5160,11 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 				return nil
 			}(),
 			TotalNodes: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWSParameters.TotalNodes
+				}
+				// Import case: read from API
 				if v, ok := blockData["total_nodes"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -5152,12 +5227,22 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
 		data.Coordinates = &AWSTGWSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
+				if !isImport && data.Coordinates != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Coordinates.Latitude
+				}
+				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			Longitude: func() types.Int64 {
+				if !isImport && data.Coordinates != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Coordinates.Longitude
+				}
+				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -5206,6 +5291,11 @@ func (r *AWSTGWSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 				return nil
 			}(),
 			CustomAsn: func() types.Int64 {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DirectConnectEnabled.CustomAsn
+				}
+				// Import case: read from API
 				if v, ok := blockData["custom_asn"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

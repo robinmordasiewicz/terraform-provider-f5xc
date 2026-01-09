@@ -120,7 +120,7 @@ A [`service_selector`](#service-info-service-selector) block (within [`service_i
 
 A [`snat_pool`](#snat-pool) block supports the following:
 
-<a id="snat-pool-no-snat-pool"></a>&#x2022; [`no_snat_pool`](#snat-pool-no-snat-pool) - Optional Block<br>Can be used for messages where no values are needed
+<a id="snat-pool-no-snat-pool"></a>&#x2022; [`no_snat_pool`](#snat-pool-no-snat-pool) - Optional Block<br>Enable this option
 
 <a id="snat-pool-snat-pool"></a>&#x2022; [`snat_pool`](#snat-pool-snat-pool) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#snat-pool-snat-pool) below.
 
@@ -156,9 +156,9 @@ A [`where`](#where) block supports the following:
 
 A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Enable this option
 
-<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="where-site-network-type"></a>&#x2022; [`network_type`](#where-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
 
@@ -202,9 +202,9 @@ A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#w
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Enable this option
 
-<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="where-virtual-site-network-type"></a>&#x2022; [`network_type`](#where-virtual-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
 

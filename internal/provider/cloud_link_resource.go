@@ -460,7 +460,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											},
 										},
 										"system_generated_name": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"tags": schema.SingleNestedBlock{
 											MarkdownDescription: "AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags.",
@@ -473,7 +473,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disabled, enabled] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disabled, enabled] Enable this option",
 			},
 			"enabled": schema.SingleNestedBlock{
 				MarkdownDescription: "CloudLink ADN Network Config.",
@@ -524,7 +524,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											},
 										},
 										"same_as_credential": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -815,6 +815,11 @@ func (r *CloudLinkResource) Create(ctx context.Context, req resource.CreateReque
 				return nil
 			}(),
 			CustomAsn: func() types.Int64 {
+				if !isImport && data.AWS != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWS.CustomAsn
+				}
+				// Import case: read from API
 				if v, ok := blockData["custom_asn"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -985,6 +990,11 @@ func (r *CloudLinkResource) Read(ctx context.Context, req resource.ReadRequest, 
 				return nil
 			}(),
 			CustomAsn: func() types.Int64 {
+				if !isImport && data.AWS != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWS.CustomAsn
+				}
+				// Import case: read from API
 				if v, ok := blockData["custom_asn"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1196,6 +1206,11 @@ func (r *CloudLinkResource) Update(ctx context.Context, req resource.UpdateReque
 				return nil
 			}(),
 			CustomAsn: func() types.Int64 {
+				if !isImport && data.AWS != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.AWS.CustomAsn
+				}
+				// Import case: read from API
 				if v, ok := blockData["custom_asn"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

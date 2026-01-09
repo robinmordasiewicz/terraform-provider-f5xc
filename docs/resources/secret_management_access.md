@@ -144,17 +144,17 @@ A [`tls_config`](#access-info-tls-config) block (within [`access_info`](#access-
 
 <a id="access-info-tls-config-common-params"></a>&#x2022; [`common_params`](#access-info-tls-config-common-params) - Optional Block<br>Information of different aspects for TLS authentication related to ciphers, certificates and trust store<br>See [Common Params](#access-info-tls-config-common-params) below.
 
-<a id="caching-0f2bd1"></a>&#x2022; [`default_session_key_caching`](#caching-0f2bd1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="caching-0f2bd1"></a>&#x2022; [`default_session_key_caching`](#caching-0f2bd1) - Optional Block<br>Enable this option
 
-<a id="caching-c17b8f"></a>&#x2022; [`disable_session_key_caching`](#caching-c17b8f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="caching-c17b8f"></a>&#x2022; [`disable_session_key_caching`](#caching-c17b8f) - Optional Block<br>Enable this option
 
-<a id="access-info-tls-config-disable-sni"></a>&#x2022; [`disable_sni`](#access-info-tls-config-disable-sni) - Optional Block<br>Can be used for messages where no values are needed
+<a id="access-info-tls-config-disable-sni"></a>&#x2022; [`disable_sni`](#access-info-tls-config-disable-sni) - Optional Block<br>Enable this option
 
 <a id="access-info-tls-config-max-session-keys"></a>&#x2022; [`max_session_keys`](#access-info-tls-config-max-session-keys) - Optional Number<br>Number of session keys that are cached
 
 <a id="access-info-tls-config-sni"></a>&#x2022; [`sni`](#access-info-tls-config-sni) - Optional String<br>SNI value to be used
 
-<a id="sni-493d0a"></a>&#x2022; [`use_host_header_as_sni`](#sni-493d0a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="sni-493d0a"></a>&#x2022; [`use_host_header_as_sni`](#sni-493d0a) - Optional Block<br>Enable this option
 
 #### Access Info TLS Config Cert Params
 
@@ -308,9 +308,9 @@ A [`where`](#where) block supports the following:
 
 A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Enable this option
 
-<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="where-site-network-type"></a>&#x2022; [`network_type`](#where-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
 
@@ -354,9 +354,9 @@ A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#w
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Enable this option
 
-<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="where-virtual-site-network-type"></a>&#x2022; [`network_type`](#where-virtual-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
 

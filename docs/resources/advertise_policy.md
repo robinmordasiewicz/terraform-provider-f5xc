@@ -40,7 +40,7 @@ resource "f5xc_advertise_policy" "example" {
   tls_parameters {
     # Configure tls_parameters settings
   }
-  # Can be used for messages where no values are needed.
+  # Enable this option
   client_certificate_optional {
     # Configure client_certificate_optional settings
   }
@@ -122,13 +122,13 @@ A [`timeouts`](#timeouts) block supports the following:
 
 A [`tls_parameters`](#tls-parameters) block supports the following:
 
-<a id="optional-56d793"></a>&#x2022; [`client_certificate_optional`](#optional-56d793) - Optional Block<br>Can be used for messages where no values are needed
+<a id="optional-56d793"></a>&#x2022; [`client_certificate_optional`](#optional-56d793) - Optional Block<br>Enable this option
 
-<a id="required-544cf5"></a>&#x2022; [`client_certificate_required`](#required-544cf5) - Optional Block<br>Can be used for messages where no values are needed
+<a id="required-544cf5"></a>&#x2022; [`client_certificate_required`](#required-544cf5) - Optional Block<br>Enable this option
 
 <a id="tls-parameters-common-params"></a>&#x2022; [`common_params`](#tls-parameters-common-params) - Optional Block<br>Information of different aspects for TLS authentication related to ciphers, certificates and trust store<br>See [Common Params](#tls-parameters-common-params) below.
 
-<a id="tls-parameters-no-client-certificate"></a>&#x2022; [`no_client_certificate`](#tls-parameters-no-client-certificate) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tls-parameters-no-client-certificate"></a>&#x2022; [`no_client_certificate`](#tls-parameters-no-client-certificate) - Optional Block<br>Enable this option
 
 <a id="tls-parameters-xfcc-header-elements"></a>&#x2022; [`xfcc_header_elements`](#tls-parameters-xfcc-header-elements) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] X-Forwarded-Client-Cert header elements to be set in an mTLS enabled connections. If none are defined, the header will not be added
 
@@ -156,11 +156,11 @@ A [`tls_certificates`](#certificates-c9caff) block (within [`tls_parameters.comm
 
 <a id="spec-5af02c"></a>&#x2022; [`description_spec`](#spec-5af02c) - Optional String<br>Description. Description for the certificate
 
-<a id="stapling-c091fa"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-c091fa) - Optional Block<br>Can be used for messages where no values are needed
+<a id="stapling-c091fa"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-c091fa) - Optional Block<br>Enable this option
 
 <a id="key-da7979"></a>&#x2022; [`private_key`](#key-da7979) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-da7979) below.
 
-<a id="defaults-f58bc7"></a>&#x2022; [`use_system_defaults`](#defaults-f58bc7) - Optional Block<br>Can be used for messages where no values are needed
+<a id="defaults-f58bc7"></a>&#x2022; [`use_system_defaults`](#defaults-f58bc7) - Optional Block<br>Enable this option
 
 #### TLS Parameters Common Params TLS Certificates Custom Hash Algorithms
 
@@ -212,9 +212,9 @@ A [`where`](#where) block supports the following:
 
 A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Enable this option
 
-<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="where-site-network-type"></a>&#x2022; [`network_type`](#where-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
 
@@ -258,9 +258,9 @@ A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#w
 
 A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
 
-<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Enable this option
 
-<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="where-virtual-site-network-type"></a>&#x2022; [`network_type`](#where-virtual-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
 

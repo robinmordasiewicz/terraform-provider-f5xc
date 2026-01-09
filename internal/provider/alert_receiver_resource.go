@@ -868,10 +868,10 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 							},
 							"no_authorization": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_tls": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_tls": schema.SingleNestedBlock{
 								MarkdownDescription: "Configures the token request's TLS settings.",
@@ -891,7 +891,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 								Blocks: map[string]schema.Block{
 									"disable_sni": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"use_server_verification": schema.SingleNestedBlock{
 										MarkdownDescription: "TLS Validation Context for Servers. Upstream TLS Validation Context.",
@@ -945,7 +945,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 									},
 									"volterra_trusted_ca": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},

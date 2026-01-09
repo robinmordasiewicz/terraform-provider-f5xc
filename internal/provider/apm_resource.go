@@ -1378,13 +1378,13 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								},
 								Blocks: map[string]schema.Block{
 									"advertise_on_slo_ip": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"advertise_on_slo_ip_external": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"automatic_vip": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"custom_tcp_ports": schema.SingleNestedBlock{
 										MarkdownDescription: "Port Range List. List of port ranges.",
@@ -1407,22 +1407,22 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 									},
 									"default_tcp_ports": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"disable_advertise_on_slo_ip": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"http_port": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"https_port": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"no_tcp_ports": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"no_udp_ports": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -1445,7 +1445,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									},
 									Blocks: map[string]schema.Block{
 										"automatic_prefix": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"mgmt_subnet": schema.SingleNestedBlock{
 											MarkdownDescription: "AWS Subnet. Parameters for AWS subnet.",
@@ -1468,7 +1468,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											},
 										},
 										"reserved_mgmt_subnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -1483,10 +1483,10 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"best_plus_pay_g200_mbps": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"best_plus_payg_1gbps": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1767,14 +1767,14 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						},
 					},
 					"advertise_on_internet_default_vip": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"advertise_on_sli_vip": schema.SingleNestedBlock{
 						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"tls_certificates": schema.ListNestedBlock{
 								MarkdownDescription: "Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
@@ -1801,7 +1801,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -1840,7 +1840,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -1868,13 +1868,13 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 									},
 									"default_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"low_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"medium_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -1913,7 +1913,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 									},
 									"no_crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -1937,7 +1937,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
 										MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
@@ -1958,7 +1958,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"tls_certificates": schema.ListNestedBlock{
 								MarkdownDescription: "Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
@@ -1985,7 +1985,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -2024,7 +2024,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -2052,13 +2052,13 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 									},
 									"default_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"low_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"medium_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -2097,7 +2097,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 									},
 									"no_crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -2121,7 +2121,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
 										MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
@@ -2142,7 +2142,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"tls_certificates": schema.ListNestedBlock{
 								MarkdownDescription: "Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
@@ -2169,7 +2169,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -2208,7 +2208,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -2236,13 +2236,13 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 									},
 									"default_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"low_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"medium_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -2281,7 +2281,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 									},
 									"no_crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -2305,7 +2305,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
 										MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
@@ -2326,7 +2326,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"tls_certificates": schema.ListNestedBlock{
 								MarkdownDescription: "Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
@@ -2353,7 +2353,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											},
 										},
 										"disable_ocsp_stapling": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
 											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -2392,7 +2392,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											},
 										},
 										"use_system_defaults": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -2420,13 +2420,13 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 									},
 									"default_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"low_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"medium_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 								},
 							},
@@ -2465,7 +2465,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 									},
 									"no_crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
 										MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -2489,7 +2489,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										},
 									},
 									"xfcc_disabled": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
 										MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
@@ -2506,7 +2506,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 						},
 					},
 					"default_https_port": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -2840,6 +2840,11 @@ func (r *APMResource) Create(ctx context.Context, req resource.CreateRequest, re
 				return types.StringNull()
 			}(),
 			HTTPSPort: func() types.Int64 {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPSManagement.HTTPSPort
+				}
+				// Import case: read from API
 				if v, ok := blockData["https_port"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3044,6 +3049,11 @@ func (r *APMResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 				return types.StringNull()
 			}(),
 			HTTPSPort: func() types.Int64 {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPSManagement.HTTPSPort
+				}
+				// Import case: read from API
 				if v, ok := blockData["https_port"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -3304,6 +3314,11 @@ func (r *APMResource) Update(ctx context.Context, req resource.UpdateRequest, re
 				return types.StringNull()
 			}(),
 			HTTPSPort: func() types.Int64 {
+				if !isImport && data.HTTPSManagement != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.HTTPSManagement.HTTPSPort
+				}
+				// Import case: read from API
 				if v, ok := blockData["https_port"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

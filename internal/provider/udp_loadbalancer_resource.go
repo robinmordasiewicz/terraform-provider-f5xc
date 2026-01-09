@@ -551,7 +551,7 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 								},
 								"use_default_port": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"virtual_network": schema.SingleNestedBlock{
 									MarkdownDescription: "Parameters to advertise on a given virtual network.",
@@ -567,10 +567,10 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									},
 									Blocks: map[string]schema.Block{
 										"default_v6_vip": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"default_vip": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"virtual_network": schema.SingleNestedBlock{
 											MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -744,19 +744,19 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"advertise_on_public_default_vip": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"do_not_advertise": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"hash_policy_choice_random": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: hash_policy_choice_random, hash_policy_choice_round_robin, hash_policy_choice_source_ip_stickiness] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: hash_policy_choice_random, hash_policy_choice_round_robin, hash_policy_choice_source_ip_stickiness] Enable this option",
 			},
 			"hash_policy_choice_round_robin": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"hash_policy_choice_source_ip_stickiness": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"origin_pools_weights": schema.ListNestedBlock{
 				MarkdownDescription: "Origin pools with weights and priorities used for this load balancer.",
@@ -821,7 +821,7 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				},
 			},
 			"udp": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 		},
 	}

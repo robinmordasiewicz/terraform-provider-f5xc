@@ -1607,7 +1607,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"do_not_advertise": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: do_not_advertise, site_virtual_sites] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: do_not_advertise, site_virtual_sites] Enable this option",
 			},
 			"dynamic_proxy": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: dynamic_proxy, http_proxy] DynamicProxyType.",
@@ -1620,10 +1620,10 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 				Blocks: map[string]schema.Block{
 					"disable_dns_masquerade": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_dns_masquerade": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"http_proxy": schema.SingleNestedBlock{
 						MarkdownDescription: "Dynamic HTTP Proxy Type. Parameters for dynamic HTTP proxy.",
@@ -1705,10 +1705,10 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										MarkdownDescription: "Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx..",
 									},
 									"disable_path_normalize": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"enable_path_normalize": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"request_cookies_to_add": schema.ListNestedBlock{
 										MarkdownDescription: "Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied.",
@@ -1859,49 +1859,49 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											},
 											Blocks: map[string]schema.Block{
 												"add_httponly": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"add_partitioned": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"add_secure": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_domain": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_expiry": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_httponly": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_max_age": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_partitioned": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_path": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_samesite": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_secure": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_value": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"samesite_lax": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"samesite_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"samesite_strict": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"secret_value": schema.SingleNestedBlock{
 													MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -2083,10 +2083,10 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 										MarkdownDescription: "Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx..",
 									},
 									"disable_path_normalize": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"enable_path_normalize": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"request_cookies_to_add": schema.ListNestedBlock{
 										MarkdownDescription: "Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied.",
@@ -2237,49 +2237,49 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											},
 											Blocks: map[string]schema.Block{
 												"add_httponly": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"add_partitioned": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"add_secure": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_domain": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_expiry": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_httponly": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_max_age": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_partitioned": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_path": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_samesite": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_secure": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"ignore_value": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"samesite_lax": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"samesite_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"samesite_strict": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"secret_value": schema.SingleNestedBlock{
 													MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -2384,7 +2384,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"no_mtls": schema.SingleNestedBlock{
-										MarkdownDescription: "Can be used for messages where no values are needed.",
+										MarkdownDescription: "Enable this option",
 									},
 									"tls_certificates": schema.ListNestedBlock{
 										MarkdownDescription: "Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
@@ -2411,7 +2411,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													},
 												},
 												"disable_ocsp_stapling": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"private_key": schema.SingleNestedBlock{
 													MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -2450,7 +2450,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													},
 												},
 												"use_system_defaults": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -2478,13 +2478,13 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												},
 											},
 											"default_security": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"low_security": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"medium_security": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 										},
 									},
@@ -2523,7 +2523,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												},
 											},
 											"no_crl": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"trusted_ca": schema.SingleNestedBlock{
 												MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -2547,7 +2547,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												},
 											},
 											"xfcc_disabled": schema.SingleNestedBlock{
-												MarkdownDescription: "Can be used for messages where no values are needed.",
+												MarkdownDescription: "Enable this option",
 											},
 											"xfcc_options": schema.SingleNestedBlock{
 												MarkdownDescription: "X-Forwarded-Client-Cert header elements to be added to requests.",
@@ -2581,7 +2581,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enable_http": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"more_option": schema.SingleNestedBlock{
 						MarkdownDescription: "Defines various OPTIONS to define a route.",
@@ -2659,10 +2659,10 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								MarkdownDescription: "Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx..",
 							},
 							"disable_path_normalize": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_path_normalize": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"request_cookies_to_add": schema.ListNestedBlock{
 								MarkdownDescription: "Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied.",
@@ -2813,49 +2813,49 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 									Blocks: map[string]schema.Block{
 										"add_httponly": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"add_partitioned": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"add_secure": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"ignore_domain": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"ignore_expiry": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"ignore_httponly": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"ignore_max_age": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"ignore_partitioned": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"ignore_path": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"ignore_samesite": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"ignore_secure": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"ignore_value": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"samesite_lax": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"samesite_none": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"samesite_strict": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"secret_value": schema.SingleNestedBlock{
 											MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -2958,16 +2958,16 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"no_forward_proxy_policy": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_interception": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_interception, tls_intercept; Default: no_interception] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: no_interception, tls_intercept; Default: no_interception] Enable this option",
 			},
 			"site_local_inside_network": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: site_local_inside_network, site_local_network] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: site_local_inside_network, site_local_network] Enable this option",
 			},
 			"site_local_network": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"site_virtual_sites": schema.SingleNestedBlock{
 				MarkdownDescription: "Defines a way to advertise a VIP on specific sites.",
@@ -3020,7 +3020,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									},
 								},
 								"use_default_port": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"virtual_site": schema.SingleNestedBlock{
 									MarkdownDescription: "Defines a reference to a customer site virtual site along with network type where a load balancer could be advertised.",
@@ -3092,7 +3092,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								},
 							},
 							"disable_ocsp_stapling": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"private_key": schema.SingleNestedBlock{
 								MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -3131,12 +3131,12 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 								},
 							},
 							"use_system_defaults": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"enable_for_all_domains": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"policy": schema.SingleNestedBlock{
 						MarkdownDescription: "Policy to enable or disable TLS interception.",
@@ -3148,7 +3148,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"disable_interception": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"domain_match": schema.SingleNestedBlock{
 											MarkdownDescription: "Domains. Domains names.",
@@ -3168,7 +3168,7 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 											},
 										},
 										"enable_interception": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -3176,10 +3176,10 @@ func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						},
 					},
 					"volterra_certificate": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"volterra_trusted_ca": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},

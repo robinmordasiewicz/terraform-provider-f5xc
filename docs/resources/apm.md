@@ -156,9 +156,9 @@ An [`apm_aws_site`](#aws-site-type-choice-apm-aws-site) block (within [`aws_site
 
 A [`market_place_image`](#aws-site-type-choice-market-place-image) block (within [`aws_site_type_choice`](#aws-site-type-choice)) supports the following:
 
-<a id="mbps-34ab41"></a>&#x2022; [`best_plus_pay_g200_mbps`](#mbps-34ab41) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mbps-34ab41"></a>&#x2022; [`best_plus_pay_g200_mbps`](#mbps-34ab41) - Optional Block<br>Enable this option
 
-<a id="1gbps-f0a9c0"></a>&#x2022; [`best_plus_payg_1gbps`](#1gbps-f0a9c0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="1gbps-f0a9c0"></a>&#x2022; [`best_plus_payg_1gbps`](#1gbps-f0a9c0) - Optional Block<br>Enable this option
 
 #### Baremetal Site Type Choice
 
@@ -228,7 +228,7 @@ A [`https_management`](#https-management) block supports the following:
 
 <a id="https-management-advertise-on-internet"></a>&#x2022; [`advertise_on_internet`](#https-management-advertise-on-internet) - Optional Block<br>Defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Internet](#https-management-advertise-on-internet) below.
 
-<a id="vip-00de2c"></a>&#x2022; [`advertise_on_internet_default_vip`](#vip-00de2c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vip-00de2c"></a>&#x2022; [`advertise_on_internet_default_vip`](#vip-00de2c) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-sli-vip"></a>&#x2022; [`advertise_on_sli_vip`](#https-management-advertise-on-sli-vip) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [Advertise On SLI VIP](#https-management-advertise-on-sli-vip) below.
 
@@ -238,7 +238,7 @@ A [`https_management`](#https-management) block supports the following:
 
 <a id="https-management-advertise-on-slo-vip"></a>&#x2022; [`advertise_on_slo_vip`](#https-management-advertise-on-slo-vip) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [Advertise On Slo VIP](#https-management-advertise-on-slo-vip) below.
 
-<a id="https-management-default-https-port"></a>&#x2022; [`default_https_port`](#https-management-default-https-port) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-management-default-https-port"></a>&#x2022; [`default_https_port`](#https-management-default-https-port) - Optional Block<br>Enable this option
 
 <a id="https-management-domain-suffix"></a>&#x2022; [`domain_suffix`](#https-management-domain-suffix) - Optional String<br>Domain suffix will be used along with node name to form URL to access node management
 
@@ -264,7 +264,7 @@ A [`public_ip`](#public-ip-e501cc) block (within [`https_management.advertise_on
 
 An [`advertise_on_sli_vip`](#https-management-advertise-on-sli-vip) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="mtls-1bd8e3"></a>&#x2022; [`no_mtls`](#mtls-1bd8e3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mtls-1bd8e3"></a>&#x2022; [`no_mtls`](#mtls-1bd8e3) - Optional Block<br>Enable this option
 
 <a id="certificates-5355d7"></a>&#x2022; [`tls_certificates`](#certificates-5355d7) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-5355d7) below.
 
@@ -320,7 +320,7 @@ An [`advertise_on_sli_vip`](#https-management-advertise-on-sli-vip) block (withi
 
 An [`advertise_on_slo_internet_vip`](#vip-6dd6e5) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="mtls-65c4ed"></a>&#x2022; [`no_mtls`](#mtls-65c4ed) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mtls-65c4ed"></a>&#x2022; [`no_mtls`](#mtls-65c4ed) - Optional Block<br>Enable this option
 
 <a id="certificates-748bff"></a>&#x2022; [`tls_certificates`](#certificates-748bff) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-748bff) below.
 
@@ -376,7 +376,7 @@ An [`advertise_on_slo_internet_vip`](#vip-6dd6e5) block (within [`https_manageme
 
 An [`advertise_on_slo_sli`](#https-management-advertise-on-slo-sli) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="mtls-e2f684"></a>&#x2022; [`no_mtls`](#mtls-e2f684) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mtls-e2f684"></a>&#x2022; [`no_mtls`](#mtls-e2f684) - Optional Block<br>Enable this option
 
 <a id="certificates-b923c1"></a>&#x2022; [`tls_certificates`](#certificates-b923c1) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-b923c1) below.
 
@@ -432,7 +432,7 @@ An [`advertise_on_slo_sli`](#https-management-advertise-on-slo-sli) block (withi
 
 An [`advertise_on_slo_vip`](#https-management-advertise-on-slo-vip) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="mtls-476751"></a>&#x2022; [`no_mtls`](#mtls-476751) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mtls-476751"></a>&#x2022; [`no_mtls`](#mtls-476751) - Optional Block<br>Enable this option
 
 <a id="certificates-49cf23"></a>&#x2022; [`tls_certificates`](#certificates-49cf23) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-49cf23) below.
 

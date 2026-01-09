@@ -384,7 +384,7 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"no_snat_pool": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"snat_pool": schema.SingleNestedBlock{
 						MarkdownDescription: "List of IPv4 prefixes that represent an endpoint.",
@@ -412,10 +412,10 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"disable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Reference. A site direct reference .",
@@ -513,10 +513,10 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 						Blocks: map[string]schema.Block{
 							"disable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Virtual_site direct reference .",
@@ -803,6 +803,11 @@ func (r *EndpointResource) Create(ctx context.Context, req resource.CreateReques
 				return types.StringNull()
 			}(),
 			RefreshInterval: func() types.Int64 {
+				if !isImport && data.DNSNameAdvanced != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DNSNameAdvanced.RefreshInterval
+				}
+				// Import case: read from API
 				if v, ok := blockData["refresh_interval"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -994,6 +999,11 @@ func (r *EndpointResource) Read(ctx context.Context, req resource.ReadRequest, r
 				return types.StringNull()
 			}(),
 			RefreshInterval: func() types.Int64 {
+				if !isImport && data.DNSNameAdvanced != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DNSNameAdvanced.RefreshInterval
+				}
+				// Import case: read from API
 				if v, ok := blockData["refresh_interval"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -1277,6 +1287,11 @@ func (r *EndpointResource) Update(ctx context.Context, req resource.UpdateReques
 				return types.StringNull()
 			}(),
 			RefreshInterval: func() types.Int64 {
+				if !isImport && data.DNSNameAdvanced != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.DNSNameAdvanced.RefreshInterval
+				}
+				// Import case: read from API
 				if v, ok := blockData["refresh_interval"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

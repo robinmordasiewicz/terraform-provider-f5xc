@@ -36,7 +36,7 @@ resource "f5xc_app_type" "example" {
   business_logic_markup_setting {
     # Configure business_logic_markup_setting settings
   }
-  # Can be used for messages where no values are needed.
+  # Enable this option
   disable {
     # Configure disable settings
   }
@@ -84,11 +84,11 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`business_logic_markup_setting`](#business-logic-markup-setting) block supports the following:
 
-<a id="business-logic-markup-setting-disable"></a>&#x2022; [`disable`](#business-logic-markup-setting-disable) - Optional Block<br>Can be used for messages where no values are needed
+<a id="business-logic-markup-setting-disable"></a>&#x2022; [`disable`](#business-logic-markup-setting-disable) - Optional Block<br>Enable this option
 
 <a id="settings-c32a65"></a>&#x2022; [`discovered_api_settings`](#settings-c32a65) - Optional Block<br>Discovered API Settings. Configure Discovered API Settings<br>See [Discovered API Settings](#settings-c32a65) below.
 
-<a id="business-logic-markup-setting-enable"></a>&#x2022; [`enable`](#business-logic-markup-setting-enable) - Optional Block<br>Can be used for messages where no values are needed
+<a id="business-logic-markup-setting-enable"></a>&#x2022; [`enable`](#business-logic-markup-setting-enable) - Optional Block<br>Enable this option
 
 #### Business Logic Markup Setting Discovered API Settings
 

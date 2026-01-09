@@ -69,14 +69,14 @@ resource "f5xc_service_policy" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="allow-all-requests"></a>[`allow_all_requests`](#allow-all-requests) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="allow-all-requests"></a>[`allow_all_requests`](#allow-all-requests) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="allow-list"></a>[`allow_list`](#allow-list) - Optional Block<br>List of sources. A request belongs to this list if it satisfies any of the match criteria<br>See [Allow List](#allow-list) below for details.
-<br><br>&#x2022; <a id="deny-all-requests"></a>[`deny_all_requests`](#deny-all-requests) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="deny-all-requests"></a>[`deny_all_requests`](#deny-all-requests) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="deny-list"></a>[`deny_list`](#deny-list) - Optional Block<br>List of sources. A request belongs to this list if it satisfies any of the match criteria<br>See [Deny List](#deny-list) below for details.
 <br><br>&#x2022; <a id="rule-list"></a>[`rule_list`](#rule-list) - Optional Block<br>List of rules. The order of evaluation of the rules depends on the rule combining algorithm<br>See [Rule List](#rule-list) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="any-server"></a>[`any_server`](#any-server) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="any-server"></a>[`any_server`](#any-server) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="server-name"></a>[`server_name`](#server-name) - Optional String<br>The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is
 <br><br>&#x2022; <a id="server-name-matcher"></a>[`server_name_matcher`](#server-name-matcher) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions
 <br><br>&#x2022; <a id="server-selector"></a>[`server_selector`](#server-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects
@@ -101,11 +101,11 @@ An [`allow_list`](#allow-list) block supports the following:
 
 <a id="allow-list-country-list"></a>&#x2022; [`country_list`](#allow-list-country-list) - Optional List  Defaults to `COUNTRY_NONE`<br>Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`<br>[Enum: COUNTRY_NONE|COUNTRY_AD|COUNTRY_AE|COUNTRY_AF|COUNTRY_AG|COUNTRY_AI|COUNTRY_AL|COUNTRY_AM|COUNTRY_AN|COUNTRY_AO|COUNTRY_AQ|COUNTRY_AR|COUNTRY_AS|COUNTRY_AT|COUNTRY_AU|COUNTRY_AW|COUNTRY_AX|COUNTRY_AZ|COUNTRY_BA|COUNTRY_BB|COUNTRY_BD|COUNTRY_BE|COUNTRY_BF|COUNTRY_BG|COUNTRY_BH|COUNTRY_BI|COUNTRY_BJ|COUNTRY_BL|COUNTRY_BM|COUNTRY_BN|COUNTRY_BO|COUNTRY_BQ|COUNTRY_BR|COUNTRY_BS|COUNTRY_BT|COUNTRY_BV|COUNTRY_BW|COUNTRY_BY|COUNTRY_BZ|COUNTRY_CA|COUNTRY_CC|COUNTRY_CD|COUNTRY_CF|COUNTRY_CG|COUNTRY_CH|COUNTRY_CI|COUNTRY_CK|COUNTRY_CL|COUNTRY_CM|COUNTRY_CN|COUNTRY_CO|COUNTRY_CR|COUNTRY_CS|COUNTRY_CU|COUNTRY_CV|COUNTRY_CW|COUNTRY_CX|COUNTRY_CY|COUNTRY_CZ|COUNTRY_DE|COUNTRY_DJ|COUNTRY_DK|COUNTRY_DM|COUNTRY_DO|COUNTRY_DZ|COUNTRY_EC|COUNTRY_EE|COUNTRY_EG|COUNTRY_EH|COUNTRY_ER|COUNTRY_ES|COUNTRY_ET|COUNTRY_FI|COUNTRY_FJ|COUNTRY_FK|COUNTRY_FM|COUNTRY_FO|COUNTRY_FR|COUNTRY_GA|COUNTRY_GB|COUNTRY_GD|COUNTRY_GE|COUNTRY_GF|COUNTRY_GG|COUNTRY_GH|COUNTRY_GI|COUNTRY_GL|COUNTRY_GM|COUNTRY_GN|COUNTRY_GP|COUNTRY_GQ|COUNTRY_GR|COUNTRY_GS|COUNTRY_GT|COUNTRY_GU|COUNTRY_GW|COUNTRY_GY|COUNTRY_HK|COUNTRY_HM|COUNTRY_HN|COUNTRY_HR|COUNTRY_HT|COUNTRY_HU|COUNTRY_ID|COUNTRY_IE|COUNTRY_IL|COUNTRY_IM|COUNTRY_IN|COUNTRY_IO|COUNTRY_IQ|COUNTRY_IR|COUNTRY_IS|COUNTRY_IT|COUNTRY_JE|COUNTRY_JM|COUNTRY_JO|COUNTRY_JP|COUNTRY_KE|COUNTRY_KG|COUNTRY_KH|COUNTRY_KI|COUNTRY_KM|COUNTRY_KN|COUNTRY_KP|COUNTRY_KR|COUNTRY_KW|COUNTRY_KY|COUNTRY_KZ|COUNTRY_LA|COUNTRY_LB|COUNTRY_LC|COUNTRY_LI|COUNTRY_LK|COUNTRY_LR|COUNTRY_LS|COUNTRY_LT|COUNTRY_LU|COUNTRY_LV|COUNTRY_LY|COUNTRY_MA|COUNTRY_MC|COUNTRY_MD|COUNTRY_ME|COUNTRY_MF|COUNTRY_MG|COUNTRY_MH|COUNTRY_MK|COUNTRY_ML|COUNTRY_MM|COUNTRY_MN|COUNTRY_MO|COUNTRY_MP|COUNTRY_MQ|COUNTRY_MR|COUNTRY_MS|COUNTRY_MT|COUNTRY_MU|COUNTRY_MV|COUNTRY_MW|COUNTRY_MX|COUNTRY_MY|COUNTRY_MZ|COUNTRY_NA|COUNTRY_NC|COUNTRY_NE|COUNTRY_NF|COUNTRY_NG|COUNTRY_NI|COUNTRY_NL|COUNTRY_NO|COUNTRY_NP|COUNTRY_NR|COUNTRY_NU|COUNTRY_NZ|COUNTRY_OM|COUNTRY_PA|COUNTRY_PE|COUNTRY_PF|COUNTRY_PG|COUNTRY_PH|COUNTRY_PK|COUNTRY_PL|COUNTRY_PM|COUNTRY_PN|COUNTRY_PR|COUNTRY_PS|COUNTRY_PT|COUNTRY_PW|COUNTRY_PY|COUNTRY_QA|COUNTRY_RE|COUNTRY_RO|COUNTRY_RS|COUNTRY_RU|COUNTRY_RW|COUNTRY_SA|COUNTRY_SB|COUNTRY_SC|COUNTRY_SD|COUNTRY_SE|COUNTRY_SG|COUNTRY_SH|COUNTRY_SI|COUNTRY_SJ|COUNTRY_SK|COUNTRY_SL|COUNTRY_SM|COUNTRY_SN|COUNTRY_SO|COUNTRY_SR|COUNTRY_SS|COUNTRY_ST|COUNTRY_SV|COUNTRY_SX|COUNTRY_SY|COUNTRY_SZ|COUNTRY_TC|COUNTRY_TD|COUNTRY_TF|COUNTRY_TG|COUNTRY_TH|COUNTRY_TJ|COUNTRY_TK|COUNTRY_TL|COUNTRY_TM|COUNTRY_TN|COUNTRY_TO|COUNTRY_TR|COUNTRY_TT|COUNTRY_TV|COUNTRY_TW|COUNTRY_TZ|COUNTRY_UA|COUNTRY_UG|COUNTRY_UM|COUNTRY_US|COUNTRY_UY|COUNTRY_UZ|COUNTRY_VA|COUNTRY_VC|COUNTRY_VE|COUNTRY_VG|COUNTRY_VI|COUNTRY_VN|COUNTRY_VU|COUNTRY_WF|COUNTRY_WS|COUNTRY_XK|COUNTRY_XT|COUNTRY_YE|COUNTRY_YT|COUNTRY_ZA|COUNTRY_ZM|COUNTRY_ZW] Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB
 
-<a id="allow-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#allow-list-default-action-allow) - Optional Block<br>Can be used for messages where no values are needed
+<a id="allow-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#allow-list-default-action-allow) - Optional Block<br>Enable this option
 
-<a id="allow-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#allow-list-default-action-deny) - Optional Block<br>Can be used for messages where no values are needed
+<a id="allow-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#allow-list-default-action-deny) - Optional Block<br>Enable this option
 
-<a id="allow-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#allow-list-default-action-next-policy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="allow-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#allow-list-default-action-next-policy) - Optional Block<br>Enable this option
 
 <a id="allow-list-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#allow-list-ip-prefix-set) - Optional Block<br>Addresses that are covered by the prefixes in the given ip_prefix_set<br>See [IP Prefix Set](#allow-list-ip-prefix-set) below.
 
@@ -157,11 +157,11 @@ A [`deny_list`](#deny-list) block supports the following:
 
 <a id="deny-list-country-list"></a>&#x2022; [`country_list`](#deny-list-country-list) - Optional List  Defaults to `COUNTRY_NONE`<br>Possible values are `COUNTRY_NONE`, `COUNTRY_AD`, `COUNTRY_AE`, `COUNTRY_AF`, `COUNTRY_AG`, `COUNTRY_AI`, `COUNTRY_AL`, `COUNTRY_AM`, `COUNTRY_AN`, `COUNTRY_AO`, `COUNTRY_AQ`, `COUNTRY_AR`, `COUNTRY_AS`, `COUNTRY_AT`, `COUNTRY_AU`, `COUNTRY_AW`, `COUNTRY_AX`, `COUNTRY_AZ`, `COUNTRY_BA`, `COUNTRY_BB`, `COUNTRY_BD`, `COUNTRY_BE`, `COUNTRY_BF`, `COUNTRY_BG`, `COUNTRY_BH`, `COUNTRY_BI`, `COUNTRY_BJ`, `COUNTRY_BL`, `COUNTRY_BM`, `COUNTRY_BN`, `COUNTRY_BO`, `COUNTRY_BQ`, `COUNTRY_BR`, `COUNTRY_BS`, `COUNTRY_BT`, `COUNTRY_BV`, `COUNTRY_BW`, `COUNTRY_BY`, `COUNTRY_BZ`, `COUNTRY_CA`, `COUNTRY_CC`, `COUNTRY_CD`, `COUNTRY_CF`, `COUNTRY_CG`, `COUNTRY_CH`, `COUNTRY_CI`, `COUNTRY_CK`, `COUNTRY_CL`, `COUNTRY_CM`, `COUNTRY_CN`, `COUNTRY_CO`, `COUNTRY_CR`, `COUNTRY_CS`, `COUNTRY_CU`, `COUNTRY_CV`, `COUNTRY_CW`, `COUNTRY_CX`, `COUNTRY_CY`, `COUNTRY_CZ`, `COUNTRY_DE`, `COUNTRY_DJ`, `COUNTRY_DK`, `COUNTRY_DM`, `COUNTRY_DO`, `COUNTRY_DZ`, `COUNTRY_EC`, `COUNTRY_EE`, `COUNTRY_EG`, `COUNTRY_EH`, `COUNTRY_ER`, `COUNTRY_ES`, `COUNTRY_ET`, `COUNTRY_FI`, `COUNTRY_FJ`, `COUNTRY_FK`, `COUNTRY_FM`, `COUNTRY_FO`, `COUNTRY_FR`, `COUNTRY_GA`, `COUNTRY_GB`, `COUNTRY_GD`, `COUNTRY_GE`, `COUNTRY_GF`, `COUNTRY_GG`, `COUNTRY_GH`, `COUNTRY_GI`, `COUNTRY_GL`, `COUNTRY_GM`, `COUNTRY_GN`, `COUNTRY_GP`, `COUNTRY_GQ`, `COUNTRY_GR`, `COUNTRY_GS`, `COUNTRY_GT`, `COUNTRY_GU`, `COUNTRY_GW`, `COUNTRY_GY`, `COUNTRY_HK`, `COUNTRY_HM`, `COUNTRY_HN`, `COUNTRY_HR`, `COUNTRY_HT`, `COUNTRY_HU`, `COUNTRY_ID`, `COUNTRY_IE`, `COUNTRY_IL`, `COUNTRY_IM`, `COUNTRY_IN`, `COUNTRY_IO`, `COUNTRY_IQ`, `COUNTRY_IR`, `COUNTRY_IS`, `COUNTRY_IT`, `COUNTRY_JE`, `COUNTRY_JM`, `COUNTRY_JO`, `COUNTRY_JP`, `COUNTRY_KE`, `COUNTRY_KG`, `COUNTRY_KH`, `COUNTRY_KI`, `COUNTRY_KM`, `COUNTRY_KN`, `COUNTRY_KP`, `COUNTRY_KR`, `COUNTRY_KW`, `COUNTRY_KY`, `COUNTRY_KZ`, `COUNTRY_LA`, `COUNTRY_LB`, `COUNTRY_LC`, `COUNTRY_LI`, `COUNTRY_LK`, `COUNTRY_LR`, `COUNTRY_LS`, `COUNTRY_LT`, `COUNTRY_LU`, `COUNTRY_LV`, `COUNTRY_LY`, `COUNTRY_MA`, `COUNTRY_MC`, `COUNTRY_MD`, `COUNTRY_ME`, `COUNTRY_MF`, `COUNTRY_MG`, `COUNTRY_MH`, `COUNTRY_MK`, `COUNTRY_ML`, `COUNTRY_MM`, `COUNTRY_MN`, `COUNTRY_MO`, `COUNTRY_MP`, `COUNTRY_MQ`, `COUNTRY_MR`, `COUNTRY_MS`, `COUNTRY_MT`, `COUNTRY_MU`, `COUNTRY_MV`, `COUNTRY_MW`, `COUNTRY_MX`, `COUNTRY_MY`, `COUNTRY_MZ`, `COUNTRY_NA`, `COUNTRY_NC`, `COUNTRY_NE`, `COUNTRY_NF`, `COUNTRY_NG`, `COUNTRY_NI`, `COUNTRY_NL`, `COUNTRY_NO`, `COUNTRY_NP`, `COUNTRY_NR`, `COUNTRY_NU`, `COUNTRY_NZ`, `COUNTRY_OM`, `COUNTRY_PA`, `COUNTRY_PE`, `COUNTRY_PF`, `COUNTRY_PG`, `COUNTRY_PH`, `COUNTRY_PK`, `COUNTRY_PL`, `COUNTRY_PM`, `COUNTRY_PN`, `COUNTRY_PR`, `COUNTRY_PS`, `COUNTRY_PT`, `COUNTRY_PW`, `COUNTRY_PY`, `COUNTRY_QA`, `COUNTRY_RE`, `COUNTRY_RO`, `COUNTRY_RS`, `COUNTRY_RU`, `COUNTRY_RW`, `COUNTRY_SA`, `COUNTRY_SB`, `COUNTRY_SC`, `COUNTRY_SD`, `COUNTRY_SE`, `COUNTRY_SG`, `COUNTRY_SH`, `COUNTRY_SI`, `COUNTRY_SJ`, `COUNTRY_SK`, `COUNTRY_SL`, `COUNTRY_SM`, `COUNTRY_SN`, `COUNTRY_SO`, `COUNTRY_SR`, `COUNTRY_SS`, `COUNTRY_ST`, `COUNTRY_SV`, `COUNTRY_SX`, `COUNTRY_SY`, `COUNTRY_SZ`, `COUNTRY_TC`, `COUNTRY_TD`, `COUNTRY_TF`, `COUNTRY_TG`, `COUNTRY_TH`, `COUNTRY_TJ`, `COUNTRY_TK`, `COUNTRY_TL`, `COUNTRY_TM`, `COUNTRY_TN`, `COUNTRY_TO`, `COUNTRY_TR`, `COUNTRY_TT`, `COUNTRY_TV`, `COUNTRY_TW`, `COUNTRY_TZ`, `COUNTRY_UA`, `COUNTRY_UG`, `COUNTRY_UM`, `COUNTRY_US`, `COUNTRY_UY`, `COUNTRY_UZ`, `COUNTRY_VA`, `COUNTRY_VC`, `COUNTRY_VE`, `COUNTRY_VG`, `COUNTRY_VI`, `COUNTRY_VN`, `COUNTRY_VU`, `COUNTRY_WF`, `COUNTRY_WS`, `COUNTRY_XK`, `COUNTRY_XT`, `COUNTRY_YE`, `COUNTRY_YT`, `COUNTRY_ZA`, `COUNTRY_ZM`, `COUNTRY_ZW`<br>[Enum: COUNTRY_NONE|COUNTRY_AD|COUNTRY_AE|COUNTRY_AF|COUNTRY_AG|COUNTRY_AI|COUNTRY_AL|COUNTRY_AM|COUNTRY_AN|COUNTRY_AO|COUNTRY_AQ|COUNTRY_AR|COUNTRY_AS|COUNTRY_AT|COUNTRY_AU|COUNTRY_AW|COUNTRY_AX|COUNTRY_AZ|COUNTRY_BA|COUNTRY_BB|COUNTRY_BD|COUNTRY_BE|COUNTRY_BF|COUNTRY_BG|COUNTRY_BH|COUNTRY_BI|COUNTRY_BJ|COUNTRY_BL|COUNTRY_BM|COUNTRY_BN|COUNTRY_BO|COUNTRY_BQ|COUNTRY_BR|COUNTRY_BS|COUNTRY_BT|COUNTRY_BV|COUNTRY_BW|COUNTRY_BY|COUNTRY_BZ|COUNTRY_CA|COUNTRY_CC|COUNTRY_CD|COUNTRY_CF|COUNTRY_CG|COUNTRY_CH|COUNTRY_CI|COUNTRY_CK|COUNTRY_CL|COUNTRY_CM|COUNTRY_CN|COUNTRY_CO|COUNTRY_CR|COUNTRY_CS|COUNTRY_CU|COUNTRY_CV|COUNTRY_CW|COUNTRY_CX|COUNTRY_CY|COUNTRY_CZ|COUNTRY_DE|COUNTRY_DJ|COUNTRY_DK|COUNTRY_DM|COUNTRY_DO|COUNTRY_DZ|COUNTRY_EC|COUNTRY_EE|COUNTRY_EG|COUNTRY_EH|COUNTRY_ER|COUNTRY_ES|COUNTRY_ET|COUNTRY_FI|COUNTRY_FJ|COUNTRY_FK|COUNTRY_FM|COUNTRY_FO|COUNTRY_FR|COUNTRY_GA|COUNTRY_GB|COUNTRY_GD|COUNTRY_GE|COUNTRY_GF|COUNTRY_GG|COUNTRY_GH|COUNTRY_GI|COUNTRY_GL|COUNTRY_GM|COUNTRY_GN|COUNTRY_GP|COUNTRY_GQ|COUNTRY_GR|COUNTRY_GS|COUNTRY_GT|COUNTRY_GU|COUNTRY_GW|COUNTRY_GY|COUNTRY_HK|COUNTRY_HM|COUNTRY_HN|COUNTRY_HR|COUNTRY_HT|COUNTRY_HU|COUNTRY_ID|COUNTRY_IE|COUNTRY_IL|COUNTRY_IM|COUNTRY_IN|COUNTRY_IO|COUNTRY_IQ|COUNTRY_IR|COUNTRY_IS|COUNTRY_IT|COUNTRY_JE|COUNTRY_JM|COUNTRY_JO|COUNTRY_JP|COUNTRY_KE|COUNTRY_KG|COUNTRY_KH|COUNTRY_KI|COUNTRY_KM|COUNTRY_KN|COUNTRY_KP|COUNTRY_KR|COUNTRY_KW|COUNTRY_KY|COUNTRY_KZ|COUNTRY_LA|COUNTRY_LB|COUNTRY_LC|COUNTRY_LI|COUNTRY_LK|COUNTRY_LR|COUNTRY_LS|COUNTRY_LT|COUNTRY_LU|COUNTRY_LV|COUNTRY_LY|COUNTRY_MA|COUNTRY_MC|COUNTRY_MD|COUNTRY_ME|COUNTRY_MF|COUNTRY_MG|COUNTRY_MH|COUNTRY_MK|COUNTRY_ML|COUNTRY_MM|COUNTRY_MN|COUNTRY_MO|COUNTRY_MP|COUNTRY_MQ|COUNTRY_MR|COUNTRY_MS|COUNTRY_MT|COUNTRY_MU|COUNTRY_MV|COUNTRY_MW|COUNTRY_MX|COUNTRY_MY|COUNTRY_MZ|COUNTRY_NA|COUNTRY_NC|COUNTRY_NE|COUNTRY_NF|COUNTRY_NG|COUNTRY_NI|COUNTRY_NL|COUNTRY_NO|COUNTRY_NP|COUNTRY_NR|COUNTRY_NU|COUNTRY_NZ|COUNTRY_OM|COUNTRY_PA|COUNTRY_PE|COUNTRY_PF|COUNTRY_PG|COUNTRY_PH|COUNTRY_PK|COUNTRY_PL|COUNTRY_PM|COUNTRY_PN|COUNTRY_PR|COUNTRY_PS|COUNTRY_PT|COUNTRY_PW|COUNTRY_PY|COUNTRY_QA|COUNTRY_RE|COUNTRY_RO|COUNTRY_RS|COUNTRY_RU|COUNTRY_RW|COUNTRY_SA|COUNTRY_SB|COUNTRY_SC|COUNTRY_SD|COUNTRY_SE|COUNTRY_SG|COUNTRY_SH|COUNTRY_SI|COUNTRY_SJ|COUNTRY_SK|COUNTRY_SL|COUNTRY_SM|COUNTRY_SN|COUNTRY_SO|COUNTRY_SR|COUNTRY_SS|COUNTRY_ST|COUNTRY_SV|COUNTRY_SX|COUNTRY_SY|COUNTRY_SZ|COUNTRY_TC|COUNTRY_TD|COUNTRY_TF|COUNTRY_TG|COUNTRY_TH|COUNTRY_TJ|COUNTRY_TK|COUNTRY_TL|COUNTRY_TM|COUNTRY_TN|COUNTRY_TO|COUNTRY_TR|COUNTRY_TT|COUNTRY_TV|COUNTRY_TW|COUNTRY_TZ|COUNTRY_UA|COUNTRY_UG|COUNTRY_UM|COUNTRY_US|COUNTRY_UY|COUNTRY_UZ|COUNTRY_VA|COUNTRY_VC|COUNTRY_VE|COUNTRY_VG|COUNTRY_VI|COUNTRY_VN|COUNTRY_VU|COUNTRY_WF|COUNTRY_WS|COUNTRY_XK|COUNTRY_XT|COUNTRY_YE|COUNTRY_YT|COUNTRY_ZA|COUNTRY_ZM|COUNTRY_ZW] Addresses that belong to one of the countries in the given list The country is obtained by performing a lookup for the source IPv4 Address in a GeoIP DB
 
-<a id="deny-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#deny-list-default-action-allow) - Optional Block<br>Can be used for messages where no values are needed
+<a id="deny-list-default-action-allow"></a>&#x2022; [`default_action_allow`](#deny-list-default-action-allow) - Optional Block<br>Enable this option
 
-<a id="deny-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#deny-list-default-action-deny) - Optional Block<br>Can be used for messages where no values are needed
+<a id="deny-list-default-action-deny"></a>&#x2022; [`default_action_deny`](#deny-list-default-action-deny) - Optional Block<br>Enable this option
 
-<a id="deny-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#deny-list-default-action-next-policy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="deny-list-default-action-next-policy"></a>&#x2022; [`default_action_next_policy`](#deny-list-default-action-next-policy) - Optional Block<br>Enable this option
 
 <a id="deny-list-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#deny-list-ip-prefix-set) - Optional Block<br>Addresses that are covered by the prefixes in the given ip_prefix_set<br>See [IP Prefix Set](#deny-list-ip-prefix-set) below.
 
@@ -231,11 +231,11 @@ A [`spec`](#rule-list-rules-spec) block (within [`rule_list.rules`](#rule-list-r
 
 <a id="rule-list-rules-spec-action"></a>&#x2022; [`action`](#rule-list-rules-spec-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`, `NEXT_POLICY`<br>[Enum: DENY|ALLOW|NEXT_POLICY] The rule action determines the disposition of the input request API. If a policy matches a rule with an ALLOW action, the processing of the request proceeds forward. If it matches a rule with a DENY action, the processing of the request is terminated and an appropriate message/code returned to
 
-<a id="rule-list-rules-spec-any-asn"></a>&#x2022; [`any_asn`](#rule-list-rules-spec-any-asn) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rule-list-rules-spec-any-asn"></a>&#x2022; [`any_asn`](#rule-list-rules-spec-any-asn) - Optional Block<br>Enable this option
 
-<a id="rule-list-rules-spec-any-client"></a>&#x2022; [`any_client`](#rule-list-rules-spec-any-client) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rule-list-rules-spec-any-client"></a>&#x2022; [`any_client`](#rule-list-rules-spec-any-client) - Optional Block<br>Enable this option
 
-<a id="rule-list-rules-spec-any-ip"></a>&#x2022; [`any_ip`](#rule-list-rules-spec-any-ip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rule-list-rules-spec-any-ip"></a>&#x2022; [`any_ip`](#rule-list-rules-spec-any-ip) - Optional Block<br>Enable this option
 
 <a id="rule-list-rules-spec-api-group-matcher"></a>&#x2022; [`api_group_matcher`](#rule-list-rules-spec-api-group-matcher) - Optional Block<br>Matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true<br>See [API Group Matcher](#rule-list-rules-spec-api-group-matcher) below.
 
@@ -307,9 +307,9 @@ An [`api_group_matcher`](#rule-list-rules-spec-api-group-matcher) block (within 
 
 An [`arg_matchers`](#rule-list-rules-spec-arg-matchers) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="present-2c642d"></a>&#x2022; [`check_not_present`](#present-2c642d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="present-2c642d"></a>&#x2022; [`check_not_present`](#present-2c642d) - Optional Block<br>Enable this option
 
-<a id="present-643cdb"></a>&#x2022; [`check_present`](#present-643cdb) - Optional Block<br>Can be used for messages where no values are needed
+<a id="present-643cdb"></a>&#x2022; [`check_present`](#present-643cdb) - Optional Block<br>Enable this option
 
 <a id="matcher-0461ac"></a>&#x2022; [`invert_matcher`](#matcher-0461ac) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
 
@@ -357,9 +357,9 @@ A [`body_matcher`](#rule-list-rules-spec-body-matcher) block (within [`rule_list
 
 A [`bot_action`](#rule-list-rules-spec-bot-action) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="processing-583231"></a>&#x2022; [`bot_skip_processing`](#processing-583231) - Optional Block<br>Can be used for messages where no values are needed
+<a id="processing-583231"></a>&#x2022; [`bot_skip_processing`](#processing-583231) - Optional Block<br>Enable this option
 
-<a id="rule-list-rules-spec-bot-action-none"></a>&#x2022; [`none`](#rule-list-rules-spec-bot-action-none) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rule-list-rules-spec-bot-action-none"></a>&#x2022; [`none`](#rule-list-rules-spec-bot-action-none) - Optional Block<br>Enable this option
 
 #### Rule List Rules Spec Client Name Matcher
 
@@ -381,9 +381,9 @@ A [`client_selector`](#rule-list-rules-spec-client-selector) block (within [`rul
 
 A [`cookie_matchers`](#rule-list-rules-spec-cookie-matchers) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="present-485b0a"></a>&#x2022; [`check_not_present`](#present-485b0a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="present-485b0a"></a>&#x2022; [`check_not_present`](#present-485b0a) - Optional Block<br>Enable this option
 
-<a id="present-459192"></a>&#x2022; [`check_present`](#present-459192) - Optional Block<br>Can be used for messages where no values are needed
+<a id="present-459192"></a>&#x2022; [`check_present`](#present-459192) - Optional Block<br>Enable this option
 
 <a id="matcher-c32a99"></a>&#x2022; [`invert_matcher`](#matcher-c32a99) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
 
@@ -415,9 +415,9 @@ A [`domain_matcher`](#rule-list-rules-spec-domain-matcher) block (within [`rule_
 
 A [`headers`](#rule-list-rules-spec-headers) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="present-652e97"></a>&#x2022; [`check_not_present`](#present-652e97) - Optional Block<br>Can be used for messages where no values are needed
+<a id="present-652e97"></a>&#x2022; [`check_not_present`](#present-652e97) - Optional Block<br>Enable this option
 
-<a id="present-fe2629"></a>&#x2022; [`check_present`](#present-fe2629) - Optional Block<br>Can be used for messages where no values are needed
+<a id="present-fe2629"></a>&#x2022; [`check_present`](#present-fe2629) - Optional Block<br>Enable this option
 
 <a id="matcher-0d0548"></a>&#x2022; [`invert_matcher`](#matcher-0d0548) - Optional Bool<br>Invert Header Matcher. Invert the match result
 
@@ -477,9 +477,9 @@ A [`ja4_tls_fingerprint`](#fingerprint-dfb868) block (within [`rule_list.rules.s
 
 A [`jwt_claims`](#rule-list-rules-spec-jwt-claims) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="present-2d6113"></a>&#x2022; [`check_not_present`](#present-2d6113) - Optional Block<br>Can be used for messages where no values are needed
+<a id="present-2d6113"></a>&#x2022; [`check_not_present`](#present-2d6113) - Optional Block<br>Enable this option
 
-<a id="present-4eb640"></a>&#x2022; [`check_present`](#present-4eb640) - Optional Block<br>Can be used for messages where no values are needed
+<a id="present-4eb640"></a>&#x2022; [`check_present`](#present-4eb640) - Optional Block<br>Enable this option
 
 <a id="matcher-03ed8d"></a>&#x2022; [`invert_matcher`](#matcher-03ed8d) - Optional Bool<br>Invert Matcher. Invert the match result
 
@@ -507,9 +507,9 @@ A [`label_matcher`](#rule-list-rules-spec-label-matcher) block (within [`rule_li
 
 A [`mum_action`](#rule-list-rules-spec-mum-action) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="rule-list-rules-spec-mum-action-default"></a>&#x2022; [`default`](#rule-list-rules-spec-mum-action-default) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rule-list-rules-spec-mum-action-default"></a>&#x2022; [`default`](#rule-list-rules-spec-mum-action-default) - Optional Block<br>Enable this option
 
-<a id="processing-d7aff9"></a>&#x2022; [`skip_processing`](#processing-d7aff9) - Optional Block<br>Can be used for messages where no values are needed
+<a id="processing-d7aff9"></a>&#x2022; [`skip_processing`](#processing-d7aff9) - Optional Block<br>Enable this option
 
 #### Rule List Rules Spec Path
 
@@ -539,9 +539,9 @@ A [`port_matcher`](#rule-list-rules-spec-port-matcher) block (within [`rule_list
 
 A [`query_params`](#rule-list-rules-spec-query-params) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="present-d92889"></a>&#x2022; [`check_not_present`](#present-d92889) - Optional Block<br>Can be used for messages where no values are needed
+<a id="present-d92889"></a>&#x2022; [`check_not_present`](#present-d92889) - Optional Block<br>Enable this option
 
-<a id="present-bd865e"></a>&#x2022; [`check_present`](#present-bd865e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="present-bd865e"></a>&#x2022; [`check_present`](#present-bd865e) - Optional Block<br>Enable this option
 
 <a id="matcher-ea3b3a"></a>&#x2022; [`invert_matcher`](#matcher-ea3b3a) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
 
@@ -565,67 +565,67 @@ A [`request_constraints`](#constraints-a447da) block (within [`rule_list.rules.s
 
 <a id="exceeds-88210d"></a>&#x2022; [`max_cookie_count_exceeds`](#exceeds-88210d) - Optional Number<br>Match on the Count for all Cookies that exceed this value
 
-<a id="none-3e70e3"></a>&#x2022; [`max_cookie_count_none`](#none-3e70e3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-3e70e3"></a>&#x2022; [`max_cookie_count_none`](#none-3e70e3) - Optional Block<br>Enable this option
 
 <a id="exceeds-a151df"></a>&#x2022; [`max_cookie_key_size_exceeds`](#exceeds-a151df) - Optional Number
 
-<a id="none-9984be"></a>&#x2022; [`max_cookie_key_size_none`](#none-9984be) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-9984be"></a>&#x2022; [`max_cookie_key_size_none`](#none-9984be) - Optional Block<br>Enable this option
 
 <a id="exceeds-8f6fd2"></a>&#x2022; [`max_cookie_value_size_exceeds`](#exceeds-8f6fd2) - Optional Number
 
-<a id="none-7f78ad"></a>&#x2022; [`max_cookie_value_size_none`](#none-7f78ad) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-7f78ad"></a>&#x2022; [`max_cookie_value_size_none`](#none-7f78ad) - Optional Block<br>Enable this option
 
 <a id="exceeds-5dc80b"></a>&#x2022; [`max_header_count_exceeds`](#exceeds-5dc80b) - Optional Number<br>Match on the Count for all Headers that exceed this value
 
-<a id="none-162eb4"></a>&#x2022; [`max_header_count_none`](#none-162eb4) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-162eb4"></a>&#x2022; [`max_header_count_none`](#none-162eb4) - Optional Block<br>Enable this option
 
 <a id="exceeds-e960c1"></a>&#x2022; [`max_header_key_size_exceeds`](#exceeds-e960c1) - Optional Number
 
-<a id="none-b86486"></a>&#x2022; [`max_header_key_size_none`](#none-b86486) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-b86486"></a>&#x2022; [`max_header_key_size_none`](#none-b86486) - Optional Block<br>Enable this option
 
 <a id="exceeds-2f6bfd"></a>&#x2022; [`max_header_value_size_exceeds`](#exceeds-2f6bfd) - Optional Number
 
-<a id="none-e5927d"></a>&#x2022; [`max_header_value_size_none`](#none-e5927d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-e5927d"></a>&#x2022; [`max_header_value_size_none`](#none-e5927d) - Optional Block<br>Enable this option
 
 <a id="exceeds-c0dcef"></a>&#x2022; [`max_parameter_count_exceeds`](#exceeds-c0dcef) - Optional Number
 
-<a id="none-6a4f57"></a>&#x2022; [`max_parameter_count_none`](#none-6a4f57) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-6a4f57"></a>&#x2022; [`max_parameter_count_none`](#none-6a4f57) - Optional Block<br>Enable this option
 
 <a id="exceeds-878a8c"></a>&#x2022; [`max_parameter_name_size_exceeds`](#exceeds-878a8c) - Optional Number
 
-<a id="none-ed3f5c"></a>&#x2022; [`max_parameter_name_size_none`](#none-ed3f5c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-ed3f5c"></a>&#x2022; [`max_parameter_name_size_none`](#none-ed3f5c) - Optional Block<br>Enable this option
 
 <a id="exceeds-2753a2"></a>&#x2022; [`max_parameter_value_size_exceeds`](#exceeds-2753a2) - Optional Number
 
-<a id="none-aa518b"></a>&#x2022; [`max_parameter_value_size_none`](#none-aa518b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-aa518b"></a>&#x2022; [`max_parameter_value_size_none`](#none-aa518b) - Optional Block<br>Enable this option
 
 <a id="exceeds-09d792"></a>&#x2022; [`max_query_size_exceeds`](#exceeds-09d792) - Optional Number<br>Match on the URL Query Size that exceed this value
 
-<a id="none-420f9c"></a>&#x2022; [`max_query_size_none`](#none-420f9c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-420f9c"></a>&#x2022; [`max_query_size_none`](#none-420f9c) - Optional Block<br>Enable this option
 
 <a id="exceeds-e9386b"></a>&#x2022; [`max_request_line_size_exceeds`](#exceeds-e9386b) - Optional Number
 
-<a id="none-c1b4c5"></a>&#x2022; [`max_request_line_size_none`](#none-c1b4c5) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-c1b4c5"></a>&#x2022; [`max_request_line_size_none`](#none-c1b4c5) - Optional Block<br>Enable this option
 
 <a id="exceeds-c9584b"></a>&#x2022; [`max_request_size_exceeds`](#exceeds-c9584b) - Optional Number<br>Match on the Request Size that exceed this value
 
-<a id="none-a7d587"></a>&#x2022; [`max_request_size_none`](#none-a7d587) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-a7d587"></a>&#x2022; [`max_request_size_none`](#none-a7d587) - Optional Block<br>Enable this option
 
 <a id="exceeds-36b3ef"></a>&#x2022; [`max_url_size_exceeds`](#exceeds-36b3ef) - Optional Number<br>Match on the URL Size that exceed this value
 
-<a id="none-ce96c1"></a>&#x2022; [`max_url_size_none`](#none-ce96c1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="none-ce96c1"></a>&#x2022; [`max_url_size_none`](#none-ce96c1) - Optional Block<br>Enable this option
 
 #### Rule List Rules Spec Segment Policy
 
 A [`segment_policy`](#rule-list-rules-spec-segment-policy) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="any-9c58b4"></a>&#x2022; [`dst_any`](#any-9c58b4) - Optional Block<br>Can be used for messages where no values are needed
+<a id="any-9c58b4"></a>&#x2022; [`dst_any`](#any-9c58b4) - Optional Block<br>Enable this option
 
 <a id="segments-478f34"></a>&#x2022; [`dst_segments`](#segments-478f34) - Optional Block<br>X-displayName: 'Segment List' List of references to Segments<br>See [Dst Segments](#segments-478f34) below.
 
-<a id="segment-431a3a"></a>&#x2022; [`intra_segment`](#segment-431a3a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="segment-431a3a"></a>&#x2022; [`intra_segment`](#segment-431a3a) - Optional Block<br>Enable this option
 
-<a id="any-f3d551"></a>&#x2022; [`src_any`](#any-f3d551) - Optional Block<br>Can be used for messages where no values are needed
+<a id="any-f3d551"></a>&#x2022; [`src_any`](#any-f3d551) - Optional Block<br>Enable this option
 
 <a id="segments-191ada"></a>&#x2022; [`src_segments`](#segments-191ada) - Optional Block<br>X-displayName: 'Segment List' List of references to Segments<br>See [Src Segments](#segments-191ada) below.
 
@@ -669,9 +669,9 @@ A [`waf_action`](#rule-list-rules-spec-waf-action) block (within [`rule_list.rul
 
 <a id="control-4fbf89"></a>&#x2022; [`app_firewall_detection_control`](#control-4fbf89) - Optional Block<br>Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria<br>See [App Firewall Detection Control](#control-4fbf89) below.
 
-<a id="rule-list-rules-spec-waf-action-none"></a>&#x2022; [`none`](#rule-list-rules-spec-waf-action-none) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rule-list-rules-spec-waf-action-none"></a>&#x2022; [`none`](#rule-list-rules-spec-waf-action-none) - Optional Block<br>Enable this option
 
-<a id="processing-e97520"></a>&#x2022; [`waf_skip_processing`](#processing-e97520) - Optional Block<br>Can be used for messages where no values are needed
+<a id="processing-e97520"></a>&#x2022; [`waf_skip_processing`](#processing-e97520) - Optional Block<br>Enable this option
 
 #### Rule List Rules Spec WAF Action App Firewall Detection Control
 

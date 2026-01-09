@@ -2983,7 +2983,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				Delete: true,
 			}),
 			"allow_all_usb": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: allow_all_usb, deny_all_usb, usb_policy] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: allow_all_usb, deny_all_usb, usb_policy] Enable this option",
 			},
 			"blocked_services": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: blocked_services, default_blocked_services; Default: default_blocked_services] Disable node local services on this site.",
@@ -3000,13 +3000,13 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							},
 							Blocks: map[string]schema.Block{
 								"dns": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"ssh": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"web_user_interface": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 							},
 						},
@@ -3041,7 +3041,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							},
 							Blocks: map[string]schema.Block{
 								"active_backup": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"lacp": schema.SingleNestedBlock{
 									MarkdownDescription: "LACP parameters. LACP parameters for the bond device.",
@@ -3204,16 +3204,16 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"default_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_interface_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_sli_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"forward_proxy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections.",
@@ -3298,10 +3298,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									},
 									Blocks: map[string]schema.Block{
 										"dc_cluster_group_connectivity_interface_disabled": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"dc_cluster_group_connectivity_interface_enabled": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"dedicated_interface": schema.SingleNestedBlock{
 											MarkdownDescription: "Dedicated Interface. Dedicated Interface Configuration.",
@@ -3325,19 +3325,19 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"cluster": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"is_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"monitor": schema.SingleNestedBlock{
 													MarkdownDescription: "Link Quality Monitoring configuration for a network interface.",
 												},
 												"monitor_disabled": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"not_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -3359,7 +3359,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"cluster": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -3389,20 +3389,20 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"cluster": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"dhcp_client": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"dhcp_server": schema.SingleNestedBlock{
 													MarkdownDescription: "DHCPServerParametersType.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"automatic_from_end": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"automatic_from_start": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"dhcp_networks": schema.ListNestedBlock{
 															MarkdownDescription: "List of networks from which DHCP Server can allocate IPv4 Addresses .",
@@ -3427,10 +3427,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																},
 																Blocks: map[string]schema.Block{
 																	"first_address": schema.SingleNestedBlock{
-																		MarkdownDescription: "Can be used for messages where no values are needed.",
+																		MarkdownDescription: "Enable this option",
 																	},
 																	"last_address": schema.SingleNestedBlock{
-																		MarkdownDescription: "Can be used for messages where no values are needed.",
+																		MarkdownDescription: "Enable this option",
 																	},
 																	"pools": schema.ListNestedBlock{
 																		MarkdownDescription: "List of non overlapping IP address ranges.",
@@ -3448,7 +3448,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"same_as_dgw": schema.SingleNestedBlock{
-																		MarkdownDescription: "Can be used for messages where no values are needed.",
+																		MarkdownDescription: "Enable this option",
 																	},
 																},
 															},
@@ -3472,7 +3472,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"host": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"router": schema.SingleNestedBlock{
 															MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -3507,10 +3507,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			},
 																			Blocks: map[string]schema.Block{
 																				"first_address": schema.SingleNestedBlock{
-																					MarkdownDescription: "Can be used for messages where no values are needed.",
+																					MarkdownDescription: "Enable this option",
 																				},
 																				"last_address": schema.SingleNestedBlock{
-																					MarkdownDescription: "Can be used for messages where no values are needed.",
+																					MarkdownDescription: "Enable this option",
 																				},
 																			},
 																		},
@@ -3521,10 +3521,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"automatic_from_end": schema.SingleNestedBlock{
-																			MarkdownDescription: "Can be used for messages where no values are needed.",
+																			MarkdownDescription: "Enable this option",
 																		},
 																		"automatic_from_start": schema.SingleNestedBlock{
-																			MarkdownDescription: "Can be used for messages where no values are needed.",
+																			MarkdownDescription: "Enable this option",
 																		},
 																		"dhcp_networks": schema.ListNestedBlock{
 																			MarkdownDescription: "List of networks from which DHCP server can allocate IP addresses .",
@@ -3577,25 +3577,25 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"is_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"monitor": schema.SingleNestedBlock{
 													MarkdownDescription: "Link Quality Monitoring configuration for a network interface.",
 												},
 												"monitor_disabled": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"no_ipv6_address": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"not_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"site_local_inside_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"site_local_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"static_ip": schema.SingleNestedBlock{
 													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters.",
@@ -3654,10 +3654,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"storage_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"untagged": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -3682,10 +3682,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"site_local_inside_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"site_local_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"static_ip": schema.SingleNestedBlock{
 													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters.",
@@ -3744,23 +3744,23 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"no_forward_proxy": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_global_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_network_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"sli_config": schema.SingleNestedBlock{
 						MarkdownDescription: "Site local inside network configuration.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_v6_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"static_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static Routes List. List of static routes.",
@@ -3787,7 +3787,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "On multinode site, this type holds the information about per node interfaces.",
@@ -3877,7 +3877,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "On multinode site, this type holds the information about per node interfaces.",
@@ -3973,13 +3973,13 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								MarkdownDescription: "Add Labels for this network, these labels can be used in firewall policy.",
 							},
 							"no_dc_cluster_group": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_static_v6_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"static_routes": schema.SingleNestedBlock{
 								MarkdownDescription: "Static Routes List. List of static routes.",
@@ -4006,7 +4006,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "On multinode site, this type holds the information about per node interfaces.",
@@ -4096,7 +4096,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
 													MarkdownDescription: "On multinode site, this type holds the information about per node interfaces.",
@@ -4164,10 +4164,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -4176,16 +4176,16 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"default_storage_class": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_storage_device": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_storage_interfaces": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Routes List. List of static routes.",
@@ -4212,7 +4212,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									},
 									Blocks: map[string]schema.Block{
 										"default_gateway": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"node_interface": schema.SingleNestedBlock{
 											MarkdownDescription: "On multinode site, this type holds the information about per node interfaces.",
@@ -4446,7 +4446,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											MarkdownDescription: "Advanced Parameters. Map of parameter name and string value.",
 										},
 										"custom_storage": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"hpe_storage": schema.SingleNestedBlock{
 											MarkdownDescription: "HPE Storage. Device configuration for HPE Storage.",
@@ -4772,7 +4772,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																		Blocks: map[string]schema.Block{
 																			"no_qos": schema.SingleNestedBlock{
-																				MarkdownDescription: "Can be used for messages where no values are needed.",
+																				MarkdownDescription: "Enable this option",
 																			},
 																		},
 																	},
@@ -4833,7 +4833,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															},
 															Blocks: map[string]schema.Block{
 																"no_qos": schema.SingleNestedBlock{
-																	MarkdownDescription: "Can be used for messages where no values are needed.",
+																	MarkdownDescription: "Enable this option",
 																},
 															},
 														},
@@ -4940,7 +4940,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															MarkdownDescription: "List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection.",
 														},
 														"no_chap": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"password": schema.SingleNestedBlock{
 															MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -5045,7 +5045,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																		Blocks: map[string]schema.Block{
 																			"no_qos": schema.SingleNestedBlock{
-																				MarkdownDescription: "Can be used for messages where no values are needed.",
+																				MarkdownDescription: "Enable this option",
 																			},
 																		},
 																	},
@@ -5193,7 +5193,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															},
 															Blocks: map[string]schema.Block{
 																"no_qos": schema.SingleNestedBlock{
-																	MarkdownDescription: "Can be used for messages where no values are needed.",
+																	MarkdownDescription: "Enable this option",
 																},
 															},
 														},
@@ -5441,20 +5441,20 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"cluster": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"dhcp_client": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"dhcp_server": schema.SingleNestedBlock{
 													MarkdownDescription: "DHCPServerParametersType.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"automatic_from_end": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"automatic_from_start": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"dhcp_networks": schema.ListNestedBlock{
 															MarkdownDescription: "List of networks from which DHCP Server can allocate IPv4 Addresses .",
@@ -5479,10 +5479,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																},
 																Blocks: map[string]schema.Block{
 																	"first_address": schema.SingleNestedBlock{
-																		MarkdownDescription: "Can be used for messages where no values are needed.",
+																		MarkdownDescription: "Enable this option",
 																	},
 																	"last_address": schema.SingleNestedBlock{
-																		MarkdownDescription: "Can be used for messages where no values are needed.",
+																		MarkdownDescription: "Enable this option",
 																	},
 																	"pools": schema.ListNestedBlock{
 																		MarkdownDescription: "List of non overlapping IP address ranges.",
@@ -5500,7 +5500,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"same_as_dgw": schema.SingleNestedBlock{
-																		MarkdownDescription: "Can be used for messages where no values are needed.",
+																		MarkdownDescription: "Enable this option",
 																	},
 																},
 															},
@@ -5524,7 +5524,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"host": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"router": schema.SingleNestedBlock{
 															MarkdownDescription: "IPV6AutoConfigRouterType.",
@@ -5559,10 +5559,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			},
 																			Blocks: map[string]schema.Block{
 																				"first_address": schema.SingleNestedBlock{
-																					MarkdownDescription: "Can be used for messages where no values are needed.",
+																					MarkdownDescription: "Enable this option",
 																				},
 																				"last_address": schema.SingleNestedBlock{
-																					MarkdownDescription: "Can be used for messages where no values are needed.",
+																					MarkdownDescription: "Enable this option",
 																				},
 																			},
 																		},
@@ -5573,10 +5573,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"automatic_from_end": schema.SingleNestedBlock{
-																			MarkdownDescription: "Can be used for messages where no values are needed.",
+																			MarkdownDescription: "Enable this option",
 																		},
 																		"automatic_from_start": schema.SingleNestedBlock{
-																			MarkdownDescription: "Can be used for messages where no values are needed.",
+																			MarkdownDescription: "Enable this option",
 																		},
 																		"dhcp_networks": schema.ListNestedBlock{
 																			MarkdownDescription: "List of networks from which DHCP server can allocate IP addresses .",
@@ -5629,25 +5629,25 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"is_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"monitor": schema.SingleNestedBlock{
 													MarkdownDescription: "Link Quality Monitoring configuration for a network interface.",
 												},
 												"monitor_disabled": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"no_ipv6_address": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"not_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"site_local_inside_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"site_local_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"static_ip": schema.SingleNestedBlock{
 													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters.",
@@ -5706,10 +5706,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"storage_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"untagged": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -5721,28 +5721,28 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"default_blocked_services": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"default_network_config": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"default_sriov_interface": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: default_sriov_interface, sriov_interfaces; Default: default_sriov_interface] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: default_sriov_interface, sriov_interfaces; Default: default_sriov_interface] Enable this option",
 			},
 			"default_storage_config": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"deny_all_usb": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"disable_gpu": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_gpu, enable_gpu, enable_vgpu; Default: disable_gpu] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable_gpu, enable_gpu, enable_vgpu; Default: disable_gpu] Enable this option",
 			},
 			"disable_vm": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_vm, enable_vm; Default: disable_vm] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable_vm, enable_vm; Default: disable_vm] Enable this option",
 			},
 			"enable_gpu": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"enable_vgpu": schema.SingleNestedBlock{
 				MarkdownDescription: "Licensing configuration for NVIDIA vGPU.",
@@ -5790,7 +5790,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_upgrade_drain": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_upgrade_drain": schema.SingleNestedBlock{
 						MarkdownDescription: "Specify batch upgrade settings for worker nodes within a site.",
@@ -5806,10 +5806,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"disable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -5839,7 +5839,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									},
 									Blocks: map[string]schema.Block{
 										"bfd_disabled": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"bfd_enabled": schema.SingleNestedBlock{
 											MarkdownDescription: "BFD. BFD parameters.",
@@ -5859,7 +5859,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 										},
 										"disable": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"external": schema.SingleNestedBlock{
 											MarkdownDescription: "External BGP Peer. External BGP Peer parameters.",
@@ -5903,37 +5903,37 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"default_gateway_v6": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"disable": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"disable_v6": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"external_connector": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"family_inet": schema.SingleNestedBlock{
 													MarkdownDescription: "BGP Family Inet. Parameters for inet family.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"disable": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 														"enable": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 													},
 												},
 												"from_site": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"from_site_v6": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"interface": schema.SingleNestedBlock{
 													MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
@@ -5986,7 +5986,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"no_authentication": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -6004,10 +6004,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 										},
 										"passive_mode_disabled": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"passive_mode_enabled": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"routing_policies": schema.SingleNestedBlock{
 											MarkdownDescription: "List of rules which can be applied on all or particular nodes.",
@@ -6019,10 +6019,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"all_nodes": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"inbound": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 															"node_name": schema.SingleNestedBlock{
 																MarkdownDescription: "List of nodes on which BGP routing policy has to be applied.",
@@ -6074,7 +6074,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																},
 															},
 															"outbound": schema.SingleNestedBlock{
-																MarkdownDescription: "Can be used for messages where no values are needed.",
+																MarkdownDescription: "Enable this option",
 															},
 														},
 													},
@@ -6087,10 +6087,10 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"inside_vn": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"outside_vn": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -6116,7 +6116,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"master_node_configuration": schema.ListNestedBlock{
 				MarkdownDescription: "Configuration of master nodes .",
@@ -6134,23 +6134,23 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"no_bond_devices": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_k8s_cluster": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_local_control_plane": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"offline_survivability_mode": schema.SingleNestedBlock{
 				MarkdownDescription: "Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7..",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"enable_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"no_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -6164,7 +6164,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"default_os_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -6203,7 +6203,7 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"default_sw_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -6904,12 +6904,22 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
 		data.Coordinates = &VoltstackSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
+				if !isImport && data.Coordinates != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Coordinates.Latitude
+				}
+				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			Longitude: func() types.Int64 {
+				if !isImport && data.Coordinates != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Coordinates.Longitude
+				}
+				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -7151,6 +7161,11 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 				return nil
 			}(),
 			TunnelDeadTimeout: func() types.Int64 {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CustomNetworkConfig.TunnelDeadTimeout
+				}
+				// Import case: read from API
 				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -7224,6 +7239,11 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 				return types.StringNull()
 			}(),
 			ServerPort: func() types.Int64 {
+				if !isImport && data.EnableVgpu != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.EnableVgpu.ServerPort
+				}
+				// Import case: read from API
 				if v, ok := blockData["server_port"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -7677,12 +7697,22 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
 		data.Coordinates = &VoltstackSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
+				if !isImport && data.Coordinates != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Coordinates.Latitude
+				}
+				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			Longitude: func() types.Int64 {
+				if !isImport && data.Coordinates != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Coordinates.Longitude
+				}
+				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -7924,6 +7954,11 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 				return nil
 			}(),
 			TunnelDeadTimeout: func() types.Int64 {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CustomNetworkConfig.TunnelDeadTimeout
+				}
+				// Import case: read from API
 				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -7997,6 +8032,11 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 				return types.StringNull()
 			}(),
 			ServerPort: func() types.Int64 {
+				if !isImport && data.EnableVgpu != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.EnableVgpu.ServerPort
+				}
+				// Import case: read from API
 				if v, ok := blockData["server_port"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -8861,12 +8901,22 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
 		data.Coordinates = &VoltstackSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
+				if !isImport && data.Coordinates != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Coordinates.Latitude
+				}
+				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
 				return types.Int64Null()
 			}(),
 			Longitude: func() types.Int64 {
+				if !isImport && data.Coordinates != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.Coordinates.Longitude
+				}
+				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -9108,6 +9158,11 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 				return nil
 			}(),
 			TunnelDeadTimeout: func() types.Int64 {
+				if !isImport && data.CustomNetworkConfig != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.CustomNetworkConfig.TunnelDeadTimeout
+				}
+				// Import case: read from API
 				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}
@@ -9181,6 +9236,11 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 				return types.StringNull()
 			}(),
 			ServerPort: func() types.Int64 {
+				if !isImport && data.EnableVgpu != nil {
+					// Normal Read: preserve existing state value to avoid API default drift
+					return data.EnableVgpu.ServerPort
+				}
+				// Import case: read from API
 				if v, ok := blockData["server_port"].(float64); ok {
 					return types.Int64Value(int64(v))
 				}

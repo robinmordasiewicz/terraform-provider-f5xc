@@ -2,12 +2,12 @@
 page_title: "f5xc_site Resource - terraform-provider-f5xc"
 subcategory: "Uncategorized"
 description: |-
-  Manages a Site resource in F5 Distributed Cloud for gcp vpc site specification. configuration.
+  Manages a Site resource in F5 Distributed Cloud for aws vpc site specification. configuration.
 ---
 
 # f5xc_site (Resource)
 
-Manages a Site resource in F5 Distributed Cloud for gcp vpc site specification. configuration.
+Manages a Site resource in F5 Distributed Cloud for aws vpc site specification. configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -15,7 +15,7 @@ Manages a Site resource in F5 Distributed Cloud for gcp vpc site specification. 
 
 ```terraform
 # Site Resource Example
-# Manages a Site resource in F5 Distributed Cloud for gcp vpc site specification. configuration.
+# Manages a Site resource in F5 Distributed Cloud for aws vpc site specification. configuration.
 
 # Basic Site configuration
 resource "f5xc_site" "example" {
@@ -70,28 +70,50 @@ resource "f5xc_site" "example" {
 
 <a id="admin-password"></a>&#x2022; [`admin_password`](#admin-password) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Admin Password](#admin-password) below for details.
 
+<a id="aws-cred"></a>&#x2022; [`aws_cred`](#aws-cred) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [AWS Cred](#aws-cred) below for details.
+
+<a id="aws-region"></a>&#x2022; [`aws_region`](#aws-region) - Optional String<br>AWS Region. Name for AWS Region
+
 -> **One of the following:**
 &#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable node local services on this site<br>See [Blocked Services](#blocked-services) below for details.
-
-<a id="cloud-credentials"></a>&#x2022; [`cloud_credentials`](#cloud-credentials) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cloud Credentials](#cloud-credentials) below for details.
 
 <a id="coordinates"></a>&#x2022; [`coordinates`](#coordinates) - Optional Block<br>Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
 
 <a id="custom-dns"></a>&#x2022; [`custom_dns`](#custom-dns) - Optional Block<br>Custom DNS is the configured for specify CE site<br>See [Custom DNS](#custom-dns) below for details.
 
+-> **One of the following:**
+&#x2022; <a id="custom-security-group"></a>[`custom_security_group`](#custom-security-group) - Optional Block<br>Enter pre created security groups for slo(Site Local Outside) and SLI(Site Local Inside) interface. Supported only for sites deployed on existing VPC<br>See [Custom Security Group](#custom-security-group) below for details.
+<br><br>&#x2022; <a id="f5xc-security-group"></a>[`f5xc_security_group`](#f5xc-security-group) - Optional Block<br>Enable this option
+
 <a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Enable this option
+
+-> **One of the following:**
+&#x2022; <a id="direct-connect-disabled"></a>[`direct_connect_disabled`](#direct-connect-disabled) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="direct-connect-enabled"></a>[`direct_connect_enabled`](#direct-connect-enabled) - Optional Block<br>Direct Connect Configuration. Direct Connect Configuration<br>See [Direct Connect Enabled](#direct-connect-enabled) below for details.
+<br><br>&#x2022; <a id="private-connectivity"></a>[`private_connectivity`](#private-connectivity) - Optional Block<br>Private Connect Configuration. Private Connect Configuration
+
+-> **One of the following:**
+&#x2022; <a id="disable-internet-vip"></a>[`disable_internet_vip`](#disable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="disk-size"></a>&#x2022; [`disk_size`](#disk-size) - Optional Number<br>Disk size to be used for this instance in GiB. 80 is 80 GiB
 
-<a id="gcp-labels"></a>&#x2022; [`gcp_labels`](#gcp-labels) - Optional Block<br>GCP Label is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in GCP console
+-> **One of the following:**
+&#x2022; <a id="egress-gateway-default"></a>[`egress_gateway_default`](#egress-gateway-default) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="egress-nat-gw"></a>[`egress_nat_gw`](#egress-nat-gw) - Optional Block<br>With this option, egress site traffic will be routed through an Network Address Translation(NAT) Gateway<br>See [Egress NAT Gw](#egress-nat-gw) below for details.
 
-<a id="gcp-region"></a>&#x2022; [`gcp_region`](#gcp-region) - Optional String<br>GCP Region. Name for GCP Region
+<a id="egress-virtual-private-gateway"></a>&#x2022; [`egress_virtual_private_gateway`](#egress-virtual-private-gateway) - Optional Block<br>With this option, egress site traffic will be routed through an Virtual Private Gateway<br>See [Egress Virtual Private Gateway](#egress-virtual-private-gateway) below for details.
+
+<a id="enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#enable-internet-vip) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="ingress-egress-gw"></a>[`ingress_egress_gw`](#ingress-egress-gw) - Optional Block<br>GCP Ingress/Egress Gateway. Two interface GCP ingress/egress site<br>See [Ingress Egress Gw](#ingress-egress-gw) below for details.
-<br><br>&#x2022; <a id="ingress-gw"></a>[`ingress_gw`](#ingress-gw) - Optional Block<br>GCP Ingress Gateway. Single interface GCP ingress site
-<br><br>&#x2022; <a id="voltstack-cluster"></a>[`voltstack_cluster`](#voltstack-cluster) - Optional Block<br>App Stack cluster of single interface GCP site
+&#x2022; <a id="f5-orchestrated-routing"></a>[`f5_orchestrated_routing`](#f5-orchestrated-routing) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="manual-routing"></a>[`manual_routing`](#manual-routing) - Optional Block<br>Enable this option
+
+-> **One of the following:**
+&#x2022; <a id="ingress-egress-gw"></a>[`ingress_egress_gw`](#ingress-egress-gw) - Optional Block<br>AWS Ingress/Egress Gateway. Two interface AWS ingress/egress site<br>See [Ingress Egress Gw](#ingress-egress-gw) below for details.
+<br><br>&#x2022; <a id="ingress-gw"></a>[`ingress_gw`](#ingress-gw) - Optional Block<br>AWS Ingress Gateway. Single interface AWS ingress site
+<br><br>&#x2022; <a id="voltstack-cluster"></a>[`voltstack_cluster`](#voltstack-cluster) - Optional Block<br>App Stack cluster of single interface AWS nodes
 
 <a id="instance-type"></a>&#x2022; [`instance_type`](#instance-type) - Optional String<br>Select Instance size based on performance needed
 
@@ -101,19 +123,25 @@ resource "f5xc_site" "example" {
 &#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 <br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Enable this option
 
+-> **One of the following:**
+&#x2022; <a id="no-worker-nodes"></a>[`no_worker_nodes`](#no-worker-nodes) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="nodes-per-az"></a>[`nodes_per_az`](#nodes-per-az) - Optional Number<br>Desired Worker Nodes Per AZ. Max limit is up to 21
+
 <a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7
 
 <a id="os"></a>&#x2022; [`os`](#os) - Optional Block<br>Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions
-
--> **One of the following:**
-&#x2022; <a id="private-connect-disabled"></a>[`private_connect_disabled`](#private-connect-disabled) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="private-connectivity"></a>[`private_connectivity`](#private-connectivity) - Optional Block<br>Private Connect Configuration. Private Connect Configuration
 
 <a id="ssh-key"></a>&#x2022; [`ssh_key`](#ssh-key) - Optional String<br>Public SSH key for accessing the site
 
 <a id="sw"></a>&#x2022; [`sw`](#sw) - Optional Block<br>Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions
 
+<a id="tags"></a>&#x2022; [`tags`](#tags) - Optional Block<br>AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console
+
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
+
+<a id="total-nodes"></a>&#x2022; [`total_nodes`](#total-nodes) - Optional Number<br>Total number of worker nodes to be deployed across all AZ's used in the Site
+
+<a id="vpc"></a>&#x2022; [`vpc`](#vpc) - Optional Block<br>Defines choice about AWS VPC for a view
 
 ### Attributes Reference
 
@@ -149,6 +177,16 @@ A [`clear_secret_info`](#admin-password-clear-secret-info) block (within [`admin
 
 <a id="admin-password-clear-secret-info-url"></a>&#x2022; [`url`](#admin-password-clear-secret-info-url) - Optional String<br>URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
+#### AWS Cred
+
+An [`aws_cred`](#aws-cred) block supports the following:
+
+<a id="aws-cred-name"></a>&#x2022; [`name`](#aws-cred-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="aws-cred-namespace"></a>&#x2022; [`namespace`](#aws-cred-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="aws-cred-tenant"></a>&#x2022; [`tenant`](#aws-cred-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
 #### Blocked Services
 
 A [`blocked_services`](#blocked-services) block supports the following:
@@ -167,16 +205,6 @@ A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_s
 
 <a id="interface-e57e21"></a>&#x2022; [`web_user_interface`](#interface-e57e21) - Optional Block<br>Enable this option
 
-#### Cloud Credentials
-
-A [`cloud_credentials`](#cloud-credentials) block supports the following:
-
-<a id="cloud-credentials-name"></a>&#x2022; [`name`](#cloud-credentials-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
-
-<a id="cloud-credentials-namespace"></a>&#x2022; [`namespace`](#cloud-credentials-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
-
-<a id="cloud-credentials-tenant"></a>&#x2022; [`tenant`](#cloud-credentials-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
-
 #### Coordinates
 
 A [`coordinates`](#coordinates) block supports the following:
@@ -193,6 +221,62 @@ A [`custom_dns`](#custom-dns) block supports the following:
 
 <a id="custom-dns-outside-nameserver"></a>&#x2022; [`outside_nameserver`](#custom-dns-outside-nameserver) - Optional String<br>Optional DNS server IP to be used for name resolution in outside network
 
+#### Custom Security Group
+
+A [`custom_security_group`](#custom-security-group) block supports the following:
+
+<a id="group-id-8e8adb"></a>&#x2022; [`inside_security_group_id`](#group-id-8e8adb) - Optional String<br>Security Group ID to be attached to SLI(Site Local Inside) Interface
+
+<a id="group-id-c3131b"></a>&#x2022; [`outside_security_group_id`](#group-id-c3131b) - Optional String<br>Security Group ID to be attached to SLO(Site Local Outside) Interface
+
+#### Direct Connect Enabled
+
+A [`direct_connect_enabled`](#direct-connect-enabled) block supports the following:
+
+<a id="direct-connect-enabled-auto-asn"></a>&#x2022; [`auto_asn`](#direct-connect-enabled-auto-asn) - Optional Block<br>Enable this option
+
+<a id="direct-connect-enabled-custom-asn"></a>&#x2022; [`custom_asn`](#direct-connect-enabled-custom-asn) - Optional Number<br>Custom Autonomous System Number
+
+<a id="direct-connect-enabled-hosted-vifs"></a>&#x2022; [`hosted_vifs`](#direct-connect-enabled-hosted-vifs) - Optional Block<br>AWS Direct Connect Hosted VIF Configuration<br>See [Hosted Vifs](#direct-connect-enabled-hosted-vifs) below.
+
+<a id="direct-connect-enabled-standard-vifs"></a>&#x2022; [`standard_vifs`](#direct-connect-enabled-standard-vifs) - Optional Block<br>Enable this option
+
+#### Direct Connect Enabled Hosted Vifs
+
+A [`hosted_vifs`](#direct-connect-enabled-hosted-vifs) block (within [`direct_connect_enabled`](#direct-connect-enabled)) supports the following:
+
+<a id="connect-b8275e"></a>&#x2022; [`site_registration_over_direct_connect`](#connect-b8275e) - Optional Block<br>CloudLink ADN Network Config<br>See [Site Registration Over Direct Connect](#connect-b8275e) below.
+
+<a id="internet-6028e0"></a>&#x2022; [`site_registration_over_internet`](#internet-6028e0) - Optional Block<br>Enable this option
+
+<a id="list-d6c323"></a>&#x2022; [`vif_list`](#list-d6c323) - Optional Block<br>List of Hosted VIF Config. List of Hosted VIF Config<br>See [Vif List](#list-d6c323) below.
+
+#### Direct Connect Enabled Hosted Vifs Site Registration Over Direct Connect
+
+<a id="deep-3f196d"></a>Deeply nested **Connect** block collapsed for readability.
+
+#### Direct Connect Enabled Hosted Vifs Vif List
+
+A [`vif_list`](#list-d6c323) block (within [`direct_connect_enabled.hosted_vifs`](#direct-connect-enabled-hosted-vifs)) supports the following:
+
+<a id="region-3f105f"></a>&#x2022; [`other_region`](#region-3f105f) - Optional String<br>Other Region
+
+<a id="region-3435ff"></a>&#x2022; [`same_as_site_region`](#region-3435ff) - Optional Block<br>Enable this option
+
+<a id="vif-id-4f330c"></a>&#x2022; [`vif_id`](#vif-id-4f330c) - Optional String<br>AWS Direct Connect VIF ID that needs to be connected to the site
+
+#### Egress NAT Gw
+
+An [`egress_nat_gw`](#egress-nat-gw) block supports the following:
+
+<a id="egress-nat-gw-nat-gw-id"></a>&#x2022; [`nat_gw_id`](#egress-nat-gw-nat-gw-id) - Optional String<br>Existing NAT Gateway ID
+
+#### Egress Virtual Private Gateway
+
+An [`egress_virtual_private_gateway`](#egress-virtual-private-gateway) block supports the following:
+
+<a id="egress-virtual-private-gateway-vgw-id"></a>&#x2022; [`vgw_id`](#egress-virtual-private-gateway-vgw-id) - Optional String<br>Existing Virtual Private Gateway ID
+
 #### Ingress Egress Gw
 
 An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
@@ -203,23 +287,23 @@ An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
 
 <a id="policies-a2ee20"></a>&#x2022; [`active_network_policies`](#policies-a2ee20) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#policies-a2ee20) below.
 
+<a id="ingress-egress-gw-allowed-vip-port"></a>&#x2022; [`allowed_vip_port`](#ingress-egress-gw-allowed-vip-port) - Optional Block<br>Defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site<br>See [Allowed VIP Port](#ingress-egress-gw-allowed-vip-port) below.
+
+<a id="ingress-egress-gw-allowed-vip-port-sli"></a>&#x2022; [`allowed_vip_port_sli`](#ingress-egress-gw-allowed-vip-port-sli) - Optional Block<br>Defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site<br>See [Allowed VIP Port SLI](#ingress-egress-gw-allowed-vip-port-sli) below.
+
+<a id="ingress-egress-gw-aws-certified-hw"></a>&#x2022; [`aws_certified_hw`](#ingress-egress-gw-aws-certified-hw) - Optional String<br>Name for AWS certified hardware
+
+<a id="ingress-egress-gw-az-nodes"></a>&#x2022; [`az_nodes`](#ingress-egress-gw-az-nodes) - Optional Block<br>Only Single AZ or Three AZ(s) nodes are supported currently<br>See [Az Nodes](#ingress-egress-gw-az-nodes) below.
+
 <a id="inside-vn-3ce96a"></a>&#x2022; [`dc_cluster_group_inside_vn`](#inside-vn-3ce96a) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Inside Vn](#inside-vn-3ce96a) below.
 
 <a id="outside-vn-3594d6"></a>&#x2022; [`dc_cluster_group_outside_vn`](#outside-vn-3594d6) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Outside Vn](#outside-vn-3594d6) below.
 
 <a id="all-8889af"></a>&#x2022; [`forward_proxy_allow_all`](#all-8889af) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-gcp-certified-hw"></a>&#x2022; [`gcp_certified_hw`](#ingress-egress-gw-gcp-certified-hw) - Optional String<br>Name for GCP certified hardware
-
-<a id="ingress-egress-gw-gcp-zone-names"></a>&#x2022; [`gcp_zone_names`](#ingress-egress-gw-gcp-zone-names) - Optional List<br>X-required List of zones when instances will be created, needs to match with region selected
-
 <a id="ingress-egress-gw-global-network-list"></a>&#x2022; [`global_network_list`](#ingress-egress-gw-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#ingress-egress-gw-global-network-list) below.
 
-<a id="ingress-egress-gw-inside-network"></a>&#x2022; [`inside_network`](#ingress-egress-gw-inside-network) - Optional Block<br>Defines choice about GCP VPC network for a view<br>See [Inside Network](#ingress-egress-gw-inside-network) below.
-
 <a id="ingress-egress-gw-inside-static-routes"></a>&#x2022; [`inside_static_routes`](#ingress-egress-gw-inside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Inside Static Routes](#ingress-egress-gw-inside-static-routes) below.
-
-<a id="ingress-egress-gw-inside-subnet"></a>&#x2022; [`inside_subnet`](#ingress-egress-gw-inside-subnet) - Optional Block<br>Defines choice about GCP VPC network for a view<br>See [Inside Subnet](#ingress-egress-gw-inside-subnet) below.
 
 <a id="ingress-egress-gw-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#ingress-egress-gw-no-dc-cluster-group) - Optional Block<br>Enable this option
 
@@ -233,13 +317,7 @@ An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
 
 <a id="routes-630976"></a>&#x2022; [`no_outside_static_routes`](#routes-630976) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-node-number"></a>&#x2022; [`node_number`](#ingress-egress-gw-node-number) - Optional Number<br>Number of main nodes to create, either 1 or 3
-
-<a id="ingress-egress-gw-outside-network"></a>&#x2022; [`outside_network`](#ingress-egress-gw-outside-network) - Optional Block<br>Defines choice about GCP VPC network for a view<br>See [Outside Network](#ingress-egress-gw-outside-network) below.
-
 <a id="ingress-egress-gw-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#ingress-egress-gw-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#ingress-egress-gw-outside-static-routes) below.
-
-<a id="ingress-egress-gw-outside-subnet"></a>&#x2022; [`outside_subnet`](#ingress-egress-gw-outside-subnet) - Optional Block<br>Defines choice about GCP VPC network for a view<br>See [Outside Subnet](#ingress-egress-gw-outside-subnet) below.
 
 <a id="mode-4d23c2"></a>&#x2022; [`performance_enhancement_mode`](#mode-4d23c2) - Optional Block<br>Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#mode-4d23c2) below.
 
@@ -277,6 +355,92 @@ An [`active_network_policies`](#policies-a2ee20) block (within [`ingress_egress_
 
 <a id="deep-18bd39"></a>Deeply nested **Policies** block collapsed for readability.
 
+#### Ingress Egress Gw Allowed VIP Port
+
+An [`allowed_vip_port`](#ingress-egress-gw-allowed-vip-port) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
+
+<a id="ports-1f6ac6"></a>&#x2022; [`custom_ports`](#ports-1f6ac6) - Optional Block<br>Custom Ports. List of Custom port<br>See [Custom Ports](#ports-1f6ac6) below.
+
+<a id="port-62fd1d"></a>&#x2022; [`disable_allowed_vip_port`](#port-62fd1d) - Optional Block<br>Enable this option
+
+<a id="port-bab911"></a>&#x2022; [`use_http_https_port`](#port-bab911) - Optional Block<br>Enable this option
+
+<a id="port-f10619"></a>&#x2022; [`use_http_port`](#port-f10619) - Optional Block<br>Enable this option
+
+<a id="port-0cbb5d"></a>&#x2022; [`use_https_port`](#port-0cbb5d) - Optional Block<br>Enable this option
+
+#### Ingress Egress Gw Allowed VIP Port Custom Ports
+
+<a id="deep-7a42bb"></a>Deeply nested **Ports** block collapsed for readability.
+
+#### Ingress Egress Gw Allowed VIP Port SLI
+
+An [`allowed_vip_port_sli`](#ingress-egress-gw-allowed-vip-port-sli) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
+
+<a id="ports-93c5d6"></a>&#x2022; [`custom_ports`](#ports-93c5d6) - Optional Block<br>Custom Ports. List of Custom port<br>See [Custom Ports](#ports-93c5d6) below.
+
+<a id="port-084b63"></a>&#x2022; [`disable_allowed_vip_port`](#port-084b63) - Optional Block<br>Enable this option
+
+<a id="port-f98848"></a>&#x2022; [`use_http_https_port`](#port-f98848) - Optional Block<br>Enable this option
+
+<a id="port-f1e8a8"></a>&#x2022; [`use_http_port`](#port-f1e8a8) - Optional Block<br>Enable this option
+
+<a id="port-39b9bd"></a>&#x2022; [`use_https_port`](#port-39b9bd) - Optional Block<br>Enable this option
+
+#### Ingress Egress Gw Allowed VIP Port SLI Custom Ports
+
+<a id="deep-097e05"></a>Deeply nested **Ports** block collapsed for readability.
+
+#### Ingress Egress Gw Az Nodes
+
+An [`az_nodes`](#ingress-egress-gw-az-nodes) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
+
+<a id="ingress-egress-gw-az-nodes-aws-az-name"></a>&#x2022; [`aws_az_name`](#ingress-egress-gw-az-nodes-aws-az-name) - Optional String<br>AWS availability zone, must be consistent with the selected AWS region
+
+<a id="subnet-c4f554"></a>&#x2022; [`inside_subnet`](#subnet-c4f554) - Optional Block<br>AWS Subnet. Parameters for AWS subnet<br>See [Inside Subnet](#subnet-c4f554) below.
+
+<a id="subnet-631d3b"></a>&#x2022; [`outside_subnet`](#subnet-631d3b) - Optional Block<br>AWS Subnet. Parameters for AWS subnet<br>See [Outside Subnet](#subnet-631d3b) below.
+
+<a id="subnet-679648"></a>&#x2022; [`reserved_inside_subnet`](#subnet-679648) - Optional Block<br>Enable this option
+
+<a id="subnet-333bb8"></a>&#x2022; [`workload_subnet`](#subnet-333bb8) - Optional Block<br>AWS Subnet. Parameters for AWS subnet<br>See [Workload Subnet](#subnet-333bb8) below.
+
+#### Ingress Egress Gw Az Nodes Inside Subnet
+
+An [`inside_subnet`](#subnet-c4f554) block (within [`ingress_egress_gw.az_nodes`](#ingress-egress-gw-az-nodes)) supports the following:
+
+<a id="subnet-id-aebf65"></a>&#x2022; [`existing_subnet_id`](#subnet-id-aebf65) - Optional String<br>Information about existing subnet ID
+
+<a id="param-cef0bb"></a>&#x2022; [`subnet_param`](#param-cef0bb) - Optional Block<br>Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-cef0bb) below.
+
+#### Ingress Egress Gw Az Nodes Inside Subnet Subnet Param
+
+<a id="deep-7b2aa4"></a>Deeply nested **Param** block collapsed for readability.
+
+#### Ingress Egress Gw Az Nodes Outside Subnet
+
+An [`outside_subnet`](#subnet-631d3b) block (within [`ingress_egress_gw.az_nodes`](#ingress-egress-gw-az-nodes)) supports the following:
+
+<a id="subnet-id-d34b28"></a>&#x2022; [`existing_subnet_id`](#subnet-id-d34b28) - Optional String<br>Information about existing subnet ID
+
+<a id="param-c11d6b"></a>&#x2022; [`subnet_param`](#param-c11d6b) - Optional Block<br>Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-c11d6b) below.
+
+#### Ingress Egress Gw Az Nodes Outside Subnet Subnet Param
+
+<a id="deep-4b83fd"></a>Deeply nested **Param** block collapsed for readability.
+
+#### Ingress Egress Gw Az Nodes Workload Subnet
+
+A [`workload_subnet`](#subnet-333bb8) block (within [`ingress_egress_gw.az_nodes`](#ingress-egress-gw-az-nodes)) supports the following:
+
+<a id="subnet-id-bfd2a7"></a>&#x2022; [`existing_subnet_id`](#subnet-id-bfd2a7) - Optional String<br>Information about existing subnet ID
+
+<a id="param-040933"></a>&#x2022; [`subnet_param`](#param-040933) - Optional Block<br>Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-040933) below.
+
+#### Ingress Egress Gw Az Nodes Workload Subnet Subnet Param
+
+<a id="deep-bdf65c"></a>Deeply nested **Param** block collapsed for readability.
+
 #### Ingress Egress Gw Dc Cluster Group Inside Vn
 
 <a id="deep-23860c"></a>Deeply nested **Vn** block collapsed for readability.
@@ -310,28 +474,6 @@ A [`global_network_list`](#ingress-egress-gw-global-network-list) block (within 
 #### Ingress Egress Gw Global Network List Global Network Connections Slo To Global DR Global Vn
 
 <a id="deep-184e24"></a>Deeply nested **Vn** block collapsed for readability.
-
-#### Ingress Egress Gw Inside Network
-
-An [`inside_network`](#ingress-egress-gw-inside-network) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
-
-<a id="network-9ee4a6"></a>&#x2022; [`existing_network`](#network-9ee4a6) - Optional Block<br>GCP existing VPC network Type. Name of existing VPC network<br>See [Existing Network](#network-9ee4a6) below.
-
-<a id="network-6793f9"></a>&#x2022; [`new_network`](#network-6793f9) - Optional Block<br>Parameters to create a new GCP VPC Network<br>See [New Network](#network-6793f9) below.
-
-<a id="autogenerate-1169b7"></a>&#x2022; [`new_network_autogenerate`](#autogenerate-1169b7) - Optional Block<br>Create a new GCP VPC Network with autogenerated name
-
-#### Ingress Egress Gw Inside Network Existing Network
-
-An [`existing_network`](#network-9ee4a6) block (within [`ingress_egress_gw.inside_network`](#ingress-egress-gw-inside-network)) supports the following:
-
-<a id="name-27b371"></a>&#x2022; [`name`](#name-27b371) - Optional String<br>Name for your GCP VPC Network
-
-#### Ingress Egress Gw Inside Network New Network
-
-A [`new_network`](#network-6793f9) block (within [`ingress_egress_gw.inside_network`](#ingress-egress-gw-inside-network)) supports the following:
-
-<a id="name-10e7e2"></a>&#x2022; [`name`](#name-10e7e2) - Optional String<br>Name for your GCP VPC Network
 
 #### Ingress Egress Gw Inside Static Routes
 
@@ -379,50 +521,6 @@ An [`inside_static_routes`](#ingress-egress-gw-inside-static-routes) block (with
 
 <a id="deep-5dec85"></a>Deeply nested **IPv6** block collapsed for readability.
 
-#### Ingress Egress Gw Inside Subnet
-
-An [`inside_subnet`](#ingress-egress-gw-inside-subnet) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
-
-<a id="subnet-d874b8"></a>&#x2022; [`existing_subnet`](#subnet-d874b8) - Optional Block<br>GCP existing subnet Type. Name of existing GCP subnet<br>See [Existing Subnet](#subnet-d874b8) below.
-
-<a id="subnet-b1adf6"></a>&#x2022; [`new_subnet`](#subnet-b1adf6) - Optional Block<br>GCP subnet parameters Type. Parameters for GCP subnet<br>See [New Subnet](#subnet-b1adf6) below.
-
-#### Ingress Egress Gw Inside Subnet Existing Subnet
-
-An [`existing_subnet`](#subnet-d874b8) block (within [`ingress_egress_gw.inside_subnet`](#ingress-egress-gw-inside-subnet)) supports the following:
-
-<a id="name-2f0d2c"></a>&#x2022; [`subnet_name`](#name-2f0d2c) - Optional String<br>Name of your subnet in VPC network
-
-#### Ingress Egress Gw Inside Subnet New Subnet
-
-A [`new_subnet`](#subnet-b1adf6) block (within [`ingress_egress_gw.inside_subnet`](#ingress-egress-gw-inside-subnet)) supports the following:
-
-<a id="ipv4-135b73"></a>&#x2022; [`primary_ipv4`](#ipv4-135b73) - Optional String<br>IPv4 prefix for this Subnet. It has to be private address space
-
-<a id="name-7a1f7c"></a>&#x2022; [`subnet_name`](#name-7a1f7c) - Optional String<br>Name of new VPC Subnet, will be autogenerated if empty
-
-#### Ingress Egress Gw Outside Network
-
-An [`outside_network`](#ingress-egress-gw-outside-network) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
-
-<a id="network-7bcebe"></a>&#x2022; [`existing_network`](#network-7bcebe) - Optional Block<br>GCP existing VPC network Type. Name of existing VPC network<br>See [Existing Network](#network-7bcebe) below.
-
-<a id="network-958024"></a>&#x2022; [`new_network`](#network-958024) - Optional Block<br>Parameters to create a new GCP VPC Network<br>See [New Network](#network-958024) below.
-
-<a id="autogenerate-74de44"></a>&#x2022; [`new_network_autogenerate`](#autogenerate-74de44) - Optional Block<br>Create a new GCP VPC Network with autogenerated name
-
-#### Ingress Egress Gw Outside Network Existing Network
-
-An [`existing_network`](#network-7bcebe) block (within [`ingress_egress_gw.outside_network`](#ingress-egress-gw-outside-network)) supports the following:
-
-<a id="name-b3e497"></a>&#x2022; [`name`](#name-b3e497) - Optional String<br>Name for your GCP VPC Network
-
-#### Ingress Egress Gw Outside Network New Network
-
-A [`new_network`](#network-958024) block (within [`ingress_egress_gw.outside_network`](#ingress-egress-gw-outside-network)) supports the following:
-
-<a id="name-732274"></a>&#x2022; [`name`](#name-732274) - Optional String<br>Name for your GCP VPC Network
-
 #### Ingress Egress Gw Outside Static Routes
 
 An [`outside_static_routes`](#ingress-egress-gw-outside-static-routes) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
@@ -469,28 +567,6 @@ An [`outside_static_routes`](#ingress-egress-gw-outside-static-routes) block (wi
 
 <a id="deep-21fa47"></a>Deeply nested **IPv6** block collapsed for readability.
 
-#### Ingress Egress Gw Outside Subnet
-
-An [`outside_subnet`](#ingress-egress-gw-outside-subnet) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
-
-<a id="subnet-34a158"></a>&#x2022; [`existing_subnet`](#subnet-34a158) - Optional Block<br>GCP existing subnet Type. Name of existing GCP subnet<br>See [Existing Subnet](#subnet-34a158) below.
-
-<a id="subnet-8ff867"></a>&#x2022; [`new_subnet`](#subnet-8ff867) - Optional Block<br>GCP subnet parameters Type. Parameters for GCP subnet<br>See [New Subnet](#subnet-8ff867) below.
-
-#### Ingress Egress Gw Outside Subnet Existing Subnet
-
-An [`existing_subnet`](#subnet-34a158) block (within [`ingress_egress_gw.outside_subnet`](#ingress-egress-gw-outside-subnet)) supports the following:
-
-<a id="name-091b0d"></a>&#x2022; [`subnet_name`](#name-091b0d) - Optional String<br>Name of your subnet in VPC network
-
-#### Ingress Egress Gw Outside Subnet New Subnet
-
-A [`new_subnet`](#subnet-8ff867) block (within [`ingress_egress_gw.outside_subnet`](#ingress-egress-gw-outside-subnet)) supports the following:
-
-<a id="ipv4-91f9e5"></a>&#x2022; [`primary_ipv4`](#ipv4-91f9e5) - Optional String<br>IPv4 prefix for this Subnet. It has to be private address space
-
-<a id="name-aba138"></a>&#x2022; [`subnet_name`](#name-aba138) - Optional String<br>Name of new VPC Subnet, will be autogenerated if empty
-
 #### Ingress Egress Gw Performance Enhancement Mode
 
 A [`performance_enhancement_mode`](#mode-4d23c2) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
@@ -507,61 +583,53 @@ A [`performance_enhancement_mode`](#mode-4d23c2) block (within [`ingress_egress_
 
 An [`ingress_gw`](#ingress-gw) block supports the following:
 
-<a id="ingress-gw-gcp-certified-hw"></a>&#x2022; [`gcp_certified_hw`](#ingress-gw-gcp-certified-hw) - Optional String<br>Name for GCP certified hardware
+<a id="ingress-gw-allowed-vip-port"></a>&#x2022; [`allowed_vip_port`](#ingress-gw-allowed-vip-port) - Optional Block<br>Defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site<br>See [Allowed VIP Port](#ingress-gw-allowed-vip-port) below.
 
-<a id="ingress-gw-gcp-zone-names"></a>&#x2022; [`gcp_zone_names`](#ingress-gw-gcp-zone-names) - Optional List<br>X-required List of zones when instances will be created, needs to match with region selected
+<a id="ingress-gw-aws-certified-hw"></a>&#x2022; [`aws_certified_hw`](#ingress-gw-aws-certified-hw) - Optional String<br>Name for AWS certified hardware
 
-<a id="ingress-gw-local-network"></a>&#x2022; [`local_network`](#ingress-gw-local-network) - Optional Block<br>Defines choice about GCP VPC network for a view<br>See [Local Network](#ingress-gw-local-network) below.
-
-<a id="ingress-gw-local-subnet"></a>&#x2022; [`local_subnet`](#ingress-gw-local-subnet) - Optional Block<br>Defines choice about GCP VPC network for a view<br>See [Local Subnet](#ingress-gw-local-subnet) below.
-
-<a id="ingress-gw-node-number"></a>&#x2022; [`node_number`](#ingress-gw-node-number) - Optional Number<br>Number of main nodes to create, either 1 or 3
+<a id="ingress-gw-az-nodes"></a>&#x2022; [`az_nodes`](#ingress-gw-az-nodes) - Optional Block<br>Only Single AZ or Three AZ(s) nodes are supported currently<br>See [Az Nodes](#ingress-gw-az-nodes) below.
 
 <a id="ingress-gw-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) - Optional Block<br>Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-gw-performance-enhancement-mode) below.
 
-#### Ingress Gw Local Network
+#### Ingress Gw Allowed VIP Port
 
-A [`local_network`](#ingress-gw-local-network) block (within [`ingress_gw`](#ingress-gw)) supports the following:
+An [`allowed_vip_port`](#ingress-gw-allowed-vip-port) block (within [`ingress_gw`](#ingress-gw)) supports the following:
 
-<a id="network-16c1d3"></a>&#x2022; [`existing_network`](#network-16c1d3) - Optional Block<br>GCP existing VPC network Type. Name of existing VPC network<br>See [Existing Network](#network-16c1d3) below.
+<a id="ports-644346"></a>&#x2022; [`custom_ports`](#ports-644346) - Optional Block<br>Custom Ports. List of Custom port<br>See [Custom Ports](#ports-644346) below.
 
-<a id="ingress-gw-local-network-new-network"></a>&#x2022; [`new_network`](#ingress-gw-local-network-new-network) - Optional Block<br>Parameters to create a new GCP VPC Network<br>See [New Network](#ingress-gw-local-network-new-network) below.
+<a id="port-51dc9d"></a>&#x2022; [`disable_allowed_vip_port`](#port-51dc9d) - Optional Block<br>Enable this option
 
-<a id="autogenerate-3c23a7"></a>&#x2022; [`new_network_autogenerate`](#autogenerate-3c23a7) - Optional Block<br>Create a new GCP VPC Network with autogenerated name
+<a id="port-9427a8"></a>&#x2022; [`use_http_https_port`](#port-9427a8) - Optional Block<br>Enable this option
 
-#### Ingress Gw Local Network Existing Network
+<a id="port-44bb52"></a>&#x2022; [`use_http_port`](#port-44bb52) - Optional Block<br>Enable this option
 
-An [`existing_network`](#network-16c1d3) block (within [`ingress_gw.local_network`](#ingress-gw-local-network)) supports the following:
+<a id="port-011ca8"></a>&#x2022; [`use_https_port`](#port-011ca8) - Optional Block<br>Enable this option
 
-<a id="name-03ee92"></a>&#x2022; [`name`](#name-03ee92) - Optional String<br>Name for your GCP VPC Network
+#### Ingress Gw Allowed VIP Port Custom Ports
 
-#### Ingress Gw Local Network New Network
+A [`custom_ports`](#ports-644346) block (within [`ingress_gw.allowed_vip_port`](#ingress-gw-allowed-vip-port)) supports the following:
 
-A [`new_network`](#ingress-gw-local-network-new-network) block (within [`ingress_gw.local_network`](#ingress-gw-local-network)) supports the following:
+<a id="ranges-c15a5d"></a>&#x2022; [`port_ranges`](#ranges-c15a5d) - Optional String<br>Port Ranges. Port Ranges
 
-<a id="name-a157ec"></a>&#x2022; [`name`](#name-a157ec) - Optional String<br>Name for your GCP VPC Network
+#### Ingress Gw Az Nodes
 
-#### Ingress Gw Local Subnet
+An [`az_nodes`](#ingress-gw-az-nodes) block (within [`ingress_gw`](#ingress-gw)) supports the following:
 
-A [`local_subnet`](#ingress-gw-local-subnet) block (within [`ingress_gw`](#ingress-gw)) supports the following:
+<a id="ingress-gw-az-nodes-aws-az-name"></a>&#x2022; [`aws_az_name`](#ingress-gw-az-nodes-aws-az-name) - Optional String<br>AWS availability zone, must be consistent with the selected AWS region
 
-<a id="ingress-gw-local-subnet-existing-subnet"></a>&#x2022; [`existing_subnet`](#ingress-gw-local-subnet-existing-subnet) - Optional Block<br>GCP existing subnet Type. Name of existing GCP subnet<br>See [Existing Subnet](#ingress-gw-local-subnet-existing-subnet) below.
+<a id="ingress-gw-az-nodes-local-subnet"></a>&#x2022; [`local_subnet`](#ingress-gw-az-nodes-local-subnet) - Optional Block<br>AWS Subnet. Parameters for AWS subnet<br>See [Local Subnet](#ingress-gw-az-nodes-local-subnet) below.
 
-<a id="ingress-gw-local-subnet-new-subnet"></a>&#x2022; [`new_subnet`](#ingress-gw-local-subnet-new-subnet) - Optional Block<br>GCP subnet parameters Type. Parameters for GCP subnet<br>See [New Subnet](#ingress-gw-local-subnet-new-subnet) below.
+#### Ingress Gw Az Nodes Local Subnet
 
-#### Ingress Gw Local Subnet Existing Subnet
+A [`local_subnet`](#ingress-gw-az-nodes-local-subnet) block (within [`ingress_gw.az_nodes`](#ingress-gw-az-nodes)) supports the following:
 
-An [`existing_subnet`](#ingress-gw-local-subnet-existing-subnet) block (within [`ingress_gw.local_subnet`](#ingress-gw-local-subnet)) supports the following:
+<a id="subnet-id-1778f9"></a>&#x2022; [`existing_subnet_id`](#subnet-id-1778f9) - Optional String<br>Information about existing subnet ID
 
-<a id="name-a79c96"></a>&#x2022; [`subnet_name`](#name-a79c96) - Optional String<br>Name of your subnet in VPC network
+<a id="param-f9e489"></a>&#x2022; [`subnet_param`](#param-f9e489) - Optional Block<br>Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-f9e489) below.
 
-#### Ingress Gw Local Subnet New Subnet
+#### Ingress Gw Az Nodes Local Subnet Subnet Param
 
-A [`new_subnet`](#ingress-gw-local-subnet-new-subnet) block (within [`ingress_gw.local_subnet`](#ingress-gw-local-subnet)) supports the following:
-
-<a id="ipv4-a6bd10"></a>&#x2022; [`primary_ipv4`](#ipv4-a6bd10) - Optional String<br>IPv4 prefix for this Subnet. It has to be private address space
-
-<a id="name-e9b491"></a>&#x2022; [`subnet_name`](#name-e9b491) - Optional String<br>Name of new VPC Subnet, will be autogenerated if empty
+<a id="deep-2c0fa5"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Ingress Gw Performance Enhancement Mode
 
@@ -671,15 +739,17 @@ A [`voltstack_cluster`](#voltstack-cluster) block supports the following:
 
 <a id="policies-704e06"></a>&#x2022; [`active_network_policies`](#policies-704e06) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#policies-704e06) below.
 
+<a id="voltstack-cluster-allowed-vip-port"></a>&#x2022; [`allowed_vip_port`](#voltstack-cluster-allowed-vip-port) - Optional Block<br>Defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site<br>See [Allowed VIP Port](#voltstack-cluster-allowed-vip-port) below.
+
+<a id="voltstack-cluster-aws-certified-hw"></a>&#x2022; [`aws_certified_hw`](#voltstack-cluster-aws-certified-hw) - Optional String<br>Name for AWS certified hardware
+
+<a id="voltstack-cluster-az-nodes"></a>&#x2022; [`az_nodes`](#voltstack-cluster-az-nodes) - Optional Block<br>Only Single AZ or Three AZ(s) nodes are supported currently<br>See [Az Nodes](#voltstack-cluster-az-nodes) below.
+
 <a id="voltstack-cluster-dc-cluster-group"></a>&#x2022; [`dc_cluster_group`](#voltstack-cluster-dc-cluster-group) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#voltstack-cluster-dc-cluster-group) below.
 
 <a id="voltstack-cluster-default-storage"></a>&#x2022; [`default_storage`](#voltstack-cluster-default-storage) - Optional Block<br>Enable this option
 
 <a id="all-48d905"></a>&#x2022; [`forward_proxy_allow_all`](#all-48d905) - Optional Block<br>Enable this option
-
-<a id="voltstack-cluster-gcp-certified-hw"></a>&#x2022; [`gcp_certified_hw`](#voltstack-cluster-gcp-certified-hw) - Optional String<br>Name for GCP certified hardware
-
-<a id="voltstack-cluster-gcp-zone-names"></a>&#x2022; [`gcp_zone_names`](#voltstack-cluster-gcp-zone-names) - Optional List<br>X-required List of zones when instances will be created, needs to match with region selected
 
 <a id="voltstack-cluster-global-network-list"></a>&#x2022; [`global_network_list`](#voltstack-cluster-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#voltstack-cluster-global-network-list) below.
 
@@ -697,13 +767,7 @@ A [`voltstack_cluster`](#voltstack-cluster) block supports the following:
 
 <a id="routes-3cc7bc"></a>&#x2022; [`no_outside_static_routes`](#routes-3cc7bc) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-node-number"></a>&#x2022; [`node_number`](#voltstack-cluster-node-number) - Optional Number<br>Number of main nodes to create, either 1 or 3
-
 <a id="voltstack-cluster-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#voltstack-cluster-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#voltstack-cluster-outside-static-routes) below.
-
-<a id="voltstack-cluster-site-local-network"></a>&#x2022; [`site_local_network`](#voltstack-cluster-site-local-network) - Optional Block<br>Defines choice about GCP VPC network for a view<br>See [Site Local Network](#voltstack-cluster-site-local-network) below.
-
-<a id="voltstack-cluster-site-local-subnet"></a>&#x2022; [`site_local_subnet`](#voltstack-cluster-site-local-subnet) - Optional Block<br>Defines choice about GCP VPC network for a view<br>See [Site Local Subnet](#voltstack-cluster-site-local-subnet) below.
 
 <a id="public-ip-8ed01a"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-8ed01a) - Optional Block<br>Enable this option
 
@@ -746,6 +810,46 @@ A [`network_policies`](#policies-0d13f8) block (within [`voltstack_cluster.activ
 <a id="namespace-a545c4"></a>&#x2022; [`namespace`](#namespace-a545c4) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
 <a id="tenant-fa44e1"></a>&#x2022; [`tenant`](#tenant-fa44e1) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Voltstack Cluster Allowed VIP Port
+
+An [`allowed_vip_port`](#voltstack-cluster-allowed-vip-port) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+
+<a id="ports-22d935"></a>&#x2022; [`custom_ports`](#ports-22d935) - Optional Block<br>Custom Ports. List of Custom port<br>See [Custom Ports](#ports-22d935) below.
+
+<a id="port-b20bcf"></a>&#x2022; [`disable_allowed_vip_port`](#port-b20bcf) - Optional Block<br>Enable this option
+
+<a id="port-f73b33"></a>&#x2022; [`use_http_https_port`](#port-f73b33) - Optional Block<br>Enable this option
+
+<a id="port-6ad494"></a>&#x2022; [`use_http_port`](#port-6ad494) - Optional Block<br>Enable this option
+
+<a id="port-4002d5"></a>&#x2022; [`use_https_port`](#port-4002d5) - Optional Block<br>Enable this option
+
+#### Voltstack Cluster Allowed VIP Port Custom Ports
+
+A [`custom_ports`](#ports-22d935) block (within [`voltstack_cluster.allowed_vip_port`](#voltstack-cluster-allowed-vip-port)) supports the following:
+
+<a id="ranges-16640f"></a>&#x2022; [`port_ranges`](#ranges-16640f) - Optional String<br>Port Ranges. Port Ranges
+
+#### Voltstack Cluster Az Nodes
+
+An [`az_nodes`](#voltstack-cluster-az-nodes) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+
+<a id="voltstack-cluster-az-nodes-aws-az-name"></a>&#x2022; [`aws_az_name`](#voltstack-cluster-az-nodes-aws-az-name) - Optional String<br>AWS availability zone, must be consistent with the selected AWS region
+
+<a id="voltstack-cluster-az-nodes-local-subnet"></a>&#x2022; [`local_subnet`](#voltstack-cluster-az-nodes-local-subnet) - Optional Block<br>AWS Subnet. Parameters for AWS subnet<br>See [Local Subnet](#voltstack-cluster-az-nodes-local-subnet) below.
+
+#### Voltstack Cluster Az Nodes Local Subnet
+
+A [`local_subnet`](#voltstack-cluster-az-nodes-local-subnet) block (within [`voltstack_cluster.az_nodes`](#voltstack-cluster-az-nodes)) supports the following:
+
+<a id="subnet-id-5c6a64"></a>&#x2022; [`existing_subnet_id`](#subnet-id-5c6a64) - Optional String<br>Information about existing subnet ID
+
+<a id="param-9b306d"></a>&#x2022; [`subnet_param`](#param-9b306d) - Optional Block<br>Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-9b306d) below.
+
+#### Voltstack Cluster Az Nodes Local Subnet Subnet Param
+
+<a id="deep-5303b7"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Voltstack Cluster Dc Cluster Group
 
@@ -839,50 +943,6 @@ An [`outside_static_routes`](#voltstack-cluster-outside-static-routes) block (wi
 
 <a id="deep-85f420"></a>Deeply nested **IPv6** block collapsed for readability.
 
-#### Voltstack Cluster Site Local Network
-
-A [`site_local_network`](#voltstack-cluster-site-local-network) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
-
-<a id="network-231a12"></a>&#x2022; [`existing_network`](#network-231a12) - Optional Block<br>GCP existing VPC network Type. Name of existing VPC network<br>See [Existing Network](#network-231a12) below.
-
-<a id="network-c03c21"></a>&#x2022; [`new_network`](#network-c03c21) - Optional Block<br>Parameters to create a new GCP VPC Network<br>See [New Network](#network-c03c21) below.
-
-<a id="autogenerate-cd8fd8"></a>&#x2022; [`new_network_autogenerate`](#autogenerate-cd8fd8) - Optional Block<br>Create a new GCP VPC Network with autogenerated name
-
-#### Voltstack Cluster Site Local Network Existing Network
-
-An [`existing_network`](#network-231a12) block (within [`voltstack_cluster.site_local_network`](#voltstack-cluster-site-local-network)) supports the following:
-
-<a id="name-27b5d6"></a>&#x2022; [`name`](#name-27b5d6) - Optional String<br>Name for your GCP VPC Network
-
-#### Voltstack Cluster Site Local Network New Network
-
-A [`new_network`](#network-c03c21) block (within [`voltstack_cluster.site_local_network`](#voltstack-cluster-site-local-network)) supports the following:
-
-<a id="name-52047a"></a>&#x2022; [`name`](#name-52047a) - Optional String<br>Name for your GCP VPC Network
-
-#### Voltstack Cluster Site Local Subnet
-
-A [`site_local_subnet`](#voltstack-cluster-site-local-subnet) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
-
-<a id="subnet-73ee4c"></a>&#x2022; [`existing_subnet`](#subnet-73ee4c) - Optional Block<br>GCP existing subnet Type. Name of existing GCP subnet<br>See [Existing Subnet](#subnet-73ee4c) below.
-
-<a id="subnet-52ff72"></a>&#x2022; [`new_subnet`](#subnet-52ff72) - Optional Block<br>GCP subnet parameters Type. Parameters for GCP subnet<br>See [New Subnet](#subnet-52ff72) below.
-
-#### Voltstack Cluster Site Local Subnet Existing Subnet
-
-An [`existing_subnet`](#subnet-73ee4c) block (within [`voltstack_cluster.site_local_subnet`](#voltstack-cluster-site-local-subnet)) supports the following:
-
-<a id="name-c7b494"></a>&#x2022; [`subnet_name`](#name-c7b494) - Optional String<br>Name of your subnet in VPC network
-
-#### Voltstack Cluster Site Local Subnet New Subnet
-
-A [`new_subnet`](#subnet-52ff72) block (within [`voltstack_cluster.site_local_subnet`](#voltstack-cluster-site-local-subnet)) supports the following:
-
-<a id="ipv4-ac69f3"></a>&#x2022; [`primary_ipv4`](#ipv4-ac69f3) - Optional String<br>IPv4 prefix for this Subnet. It has to be private address space
-
-<a id="name-8b6d0c"></a>&#x2022; [`subnet_name`](#name-8b6d0c) - Optional String<br>Name of new VPC Subnet, will be autogenerated if empty
-
 #### Voltstack Cluster Storage Class List
 
 A [`storage_class_list`](#voltstack-cluster-storage-class-list) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
@@ -896,6 +956,24 @@ A [`storage_classes`](#classes-3dd6e4) block (within [`voltstack_cluster.storage
 <a id="class-f2125d"></a>&#x2022; [`default_storage_class`](#class-f2125d) - Optional Bool<br>Make this storage class default storage class for the K8S cluster
 
 <a id="name-ca3ca7"></a>&#x2022; [`storage_class_name`](#name-ca3ca7) - Optional String<br>Name of the storage class as it will appear in K8S
+
+#### VPC
+
+A [`vpc`](#vpc) block supports the following:
+
+<a id="vpc-new-vpc"></a>&#x2022; [`new_vpc`](#vpc-new-vpc) - Optional Block<br>AWS VPC Parameters. Parameters to create new AWS VPC<br>See [New VPC](#vpc-new-vpc) below.
+
+<a id="vpc-vpc-id"></a>&#x2022; [`vpc_id`](#vpc-vpc-id) - Optional String<br>Information about existing VPC ID
+
+#### VPC New VPC
+
+A [`new_vpc`](#vpc-new-vpc) block (within [`vpc`](#vpc)) supports the following:
+
+<a id="vpc-new-vpc-autogenerate"></a>&#x2022; [`autogenerate`](#vpc-new-vpc-autogenerate) - Optional Block<br>Enable this option
+
+<a id="vpc-new-vpc-name-tag"></a>&#x2022; [`name_tag`](#vpc-new-vpc-name-tag) - Optional String<br>Specify the VPC Name
+
+<a id="vpc-new-vpc-primary-ipv4"></a>&#x2022; [`primary_ipv4`](#vpc-new-vpc-primary-ipv4) - Optional String<br>IPv4 CIDR block for this VPC. It has to be private address space. The Primary IPv4 block cannot be modified. All subnets prefixes in this VPC must be part of this CIDR block
 
 ---
 

@@ -3787,8 +3787,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		data.BufferPolicy = &VirtualHostBufferPolicyModel{
 			Disabled: func() types.Bool {
 				if !isImport && data.BufferPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.BufferPolicy.Disabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -3798,8 +3803,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 			MaxRequestBytes: func() types.Int64 {
 				if !isImport && data.BufferPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.BufferPolicy.MaxRequestBytes
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_request_bytes"].(float64); ok {
@@ -3813,8 +3823,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		data.CaptchaChallenge = &VirtualHostCaptchaChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.CaptchaChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CaptchaChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -3839,8 +3854,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		data.CompressionParams = &VirtualHostCompressionParamsModel{
 			ContentLength: func() types.Int64 {
 				if !isImport && data.CompressionParams != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CompressionParams.ContentLength
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["content_length"].(float64); ok {
@@ -3863,8 +3883,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 			DisableOnEtagHeader: func() types.Bool {
 				if !isImport && data.CompressionParams != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CompressionParams.DisableOnEtagHeader
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disable_on_etag_header"].(bool); ok {
@@ -3874,8 +3899,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 			RemoveAcceptEncodingHeader: func() types.Bool {
 				if !isImport && data.CompressionParams != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CompressionParams.RemoveAcceptEncodingHeader
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["remove_accept_encoding_header"].(bool); ok {
@@ -3889,8 +3919,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		data.CORSPolicy = &VirtualHostCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.AllowCredentials
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -3938,8 +3973,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 			Disabled: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.Disabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -3955,8 +3995,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 			MaximumAge: func() types.Int64 {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CORSPolicy.MaximumAge
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["maximum_age"].(float64); ok {
@@ -4010,8 +4055,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		data.DynamicReverseProxy = &VirtualHostDynamicReverseProxyModel{
 			ConnectionTimeout: func() types.Int64 {
 				if !isImport && data.DynamicReverseProxy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DynamicReverseProxy.ConnectionTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_timeout"].(float64); ok {
@@ -4070,8 +4120,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 			ResolveEndpointDynamically: func() types.Bool {
 				if !isImport && data.DynamicReverseProxy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.DynamicReverseProxy.ResolveEndpointDynamically
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["resolve_endpoint_dynamically"].(bool); ok {
@@ -4095,8 +4150,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		data.JsChallenge = &VirtualHostJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -4112,8 +4172,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -4581,8 +4646,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 			NumRetries: func() types.Int64 {
 				if !isImport && data.RetryPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RetryPolicy.NumRetries
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["num_retries"].(float64); ok {
@@ -4592,8 +4662,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 			PerTryTimeout: func() types.Int64 {
 				if !isImport && data.RetryPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RetryPolicy.PerTryTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["per_try_timeout"].(float64); ok {
@@ -4749,8 +4824,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 			RequestHeadersTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestHeadersTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
@@ -4760,8 +4840,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 			RequestTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_timeout"].(float64); ok {
@@ -5401,8 +5486,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 		data.BufferPolicy = &VirtualHostBufferPolicyModel{
 			Disabled: func() types.Bool {
 				if !isImport && data.BufferPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.BufferPolicy.Disabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -5412,8 +5502,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 			MaxRequestBytes: func() types.Int64 {
 				if !isImport && data.BufferPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.BufferPolicy.MaxRequestBytes
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_request_bytes"].(float64); ok {
@@ -5427,8 +5522,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 		data.CaptchaChallenge = &VirtualHostCaptchaChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.CaptchaChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CaptchaChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -5453,8 +5553,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 		data.CompressionParams = &VirtualHostCompressionParamsModel{
 			ContentLength: func() types.Int64 {
 				if !isImport && data.CompressionParams != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CompressionParams.ContentLength
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["content_length"].(float64); ok {
@@ -5477,8 +5582,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 			DisableOnEtagHeader: func() types.Bool {
 				if !isImport && data.CompressionParams != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CompressionParams.DisableOnEtagHeader
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disable_on_etag_header"].(bool); ok {
@@ -5488,8 +5598,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 			RemoveAcceptEncodingHeader: func() types.Bool {
 				if !isImport && data.CompressionParams != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CompressionParams.RemoveAcceptEncodingHeader
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["remove_accept_encoding_header"].(bool); ok {
@@ -5503,8 +5618,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 		data.CORSPolicy = &VirtualHostCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.AllowCredentials
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -5552,8 +5672,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 			Disabled: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.Disabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -5569,8 +5694,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 			MaximumAge: func() types.Int64 {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CORSPolicy.MaximumAge
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["maximum_age"].(float64); ok {
@@ -5624,8 +5754,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 		data.DynamicReverseProxy = &VirtualHostDynamicReverseProxyModel{
 			ConnectionTimeout: func() types.Int64 {
 				if !isImport && data.DynamicReverseProxy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DynamicReverseProxy.ConnectionTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_timeout"].(float64); ok {
@@ -5684,8 +5819,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 			ResolveEndpointDynamically: func() types.Bool {
 				if !isImport && data.DynamicReverseProxy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.DynamicReverseProxy.ResolveEndpointDynamically
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["resolve_endpoint_dynamically"].(bool); ok {
@@ -5709,8 +5849,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 		data.JsChallenge = &VirtualHostJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -5726,8 +5871,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -6195,8 +6345,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 			NumRetries: func() types.Int64 {
 				if !isImport && data.RetryPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RetryPolicy.NumRetries
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["num_retries"].(float64); ok {
@@ -6206,8 +6361,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 			PerTryTimeout: func() types.Int64 {
 				if !isImport && data.RetryPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RetryPolicy.PerTryTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["per_try_timeout"].(float64); ok {
@@ -6363,8 +6523,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 			RequestHeadersTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestHeadersTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
@@ -6374,8 +6539,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 			RequestTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_timeout"].(float64); ok {
@@ -7923,8 +8093,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		data.BufferPolicy = &VirtualHostBufferPolicyModel{
 			Disabled: func() types.Bool {
 				if !isImport && data.BufferPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.BufferPolicy.Disabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -7934,8 +8109,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 			MaxRequestBytes: func() types.Int64 {
 				if !isImport && data.BufferPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.BufferPolicy.MaxRequestBytes
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_request_bytes"].(float64); ok {
@@ -7949,8 +8129,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		data.CaptchaChallenge = &VirtualHostCaptchaChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.CaptchaChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CaptchaChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -7975,8 +8160,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		data.CompressionParams = &VirtualHostCompressionParamsModel{
 			ContentLength: func() types.Int64 {
 				if !isImport && data.CompressionParams != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CompressionParams.ContentLength
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["content_length"].(float64); ok {
@@ -7999,8 +8189,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 			DisableOnEtagHeader: func() types.Bool {
 				if !isImport && data.CompressionParams != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CompressionParams.DisableOnEtagHeader
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disable_on_etag_header"].(bool); ok {
@@ -8010,8 +8205,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 			RemoveAcceptEncodingHeader: func() types.Bool {
 				if !isImport && data.CompressionParams != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CompressionParams.RemoveAcceptEncodingHeader
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["remove_accept_encoding_header"].(bool); ok {
@@ -8025,8 +8225,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		data.CORSPolicy = &VirtualHostCORSPolicyModel{
 			AllowCredentials: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.AllowCredentials
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["allow_credentials"].(bool); ok {
@@ -8074,8 +8279,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 			Disabled: func() types.Bool {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.CORSPolicy.Disabled
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["disabled"].(bool); ok {
@@ -8091,8 +8301,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 			MaximumAge: func() types.Int64 {
 				if !isImport && data.CORSPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CORSPolicy.MaximumAge
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["maximum_age"].(float64); ok {
@@ -8146,8 +8361,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		data.DynamicReverseProxy = &VirtualHostDynamicReverseProxyModel{
 			ConnectionTimeout: func() types.Int64 {
 				if !isImport && data.DynamicReverseProxy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DynamicReverseProxy.ConnectionTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_timeout"].(float64); ok {
@@ -8206,8 +8426,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 			ResolveEndpointDynamically: func() types.Bool {
 				if !isImport && data.DynamicReverseProxy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.DynamicReverseProxy.ResolveEndpointDynamically
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["resolve_endpoint_dynamically"].(bool); ok {
@@ -8231,8 +8456,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		data.JsChallenge = &VirtualHostJsChallengeModel{
 			CookieExpiry: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.CookieExpiry
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["cookie_expiry"].(float64); ok {
@@ -8248,8 +8478,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 			JsScriptDelay: func() types.Int64 {
 				if !isImport && data.JsChallenge != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.JsChallenge.JsScriptDelay
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["js_script_delay"].(float64); ok {
@@ -8717,8 +8952,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 			NumRetries: func() types.Int64 {
 				if !isImport && data.RetryPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RetryPolicy.NumRetries
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["num_retries"].(float64); ok {
@@ -8728,8 +8968,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 			PerTryTimeout: func() types.Int64 {
 				if !isImport && data.RetryPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.RetryPolicy.PerTryTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["per_try_timeout"].(float64); ok {
@@ -8885,8 +9130,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 			RequestHeadersTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestHeadersTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_headers_timeout"].(float64); ok {
@@ -8896,8 +9146,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 			RequestTimeout: func() types.Int64 {
 				if !isImport && data.SlowDDOSMitigation != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.SlowDDOSMitigation.RequestTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["request_timeout"].(float64); ok {

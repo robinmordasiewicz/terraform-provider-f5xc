@@ -3782,8 +3782,13 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 		data.Coordinates = &GCPVPCSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Latitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
@@ -3793,8 +3798,13 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			}(),
 			Longitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Longitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
@@ -4074,8 +4084,13 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			}(),
 			NodeNumber: func() types.Int64 {
 				if !isImport && data.IngressEgressGw != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.IngressEgressGw.NodeNumber
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["node_number"].(float64); ok {
@@ -4198,8 +4213,13 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			}(),
 			NodeNumber: func() types.Int64 {
 				if !isImport && data.IngressGw != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.IngressGw.NodeNumber
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["node_number"].(float64); ok {
@@ -4534,8 +4554,13 @@ func (r *GCPVPCSiteResource) Create(ctx context.Context, req resource.CreateRequ
 			}(),
 			NodeNumber: func() types.Int64 {
 				if !isImport && data.VoltstackCluster != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.VoltstackCluster.NodeNumber
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["node_number"].(float64); ok {
@@ -4814,8 +4839,13 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Coordinates = &GCPVPCSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Latitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
@@ -4825,8 +4855,13 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 			}(),
 			Longitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Longitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
@@ -5106,8 +5141,13 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 			}(),
 			NodeNumber: func() types.Int64 {
 				if !isImport && data.IngressEgressGw != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.IngressEgressGw.NodeNumber
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["node_number"].(float64); ok {
@@ -5230,8 +5270,13 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 			}(),
 			NodeNumber: func() types.Int64 {
 				if !isImport && data.IngressGw != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.IngressGw.NodeNumber
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["node_number"].(float64); ok {
@@ -5566,8 +5611,13 @@ func (r *GCPVPCSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 			}(),
 			NodeNumber: func() types.Int64 {
 				if !isImport && data.VoltstackCluster != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.VoltstackCluster.NodeNumber
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["node_number"].(float64); ok {
@@ -6316,8 +6366,13 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 		data.Coordinates = &GCPVPCSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Latitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
@@ -6327,8 +6382,13 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 			}(),
 			Longitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Longitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
@@ -6608,8 +6668,13 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 			}(),
 			NodeNumber: func() types.Int64 {
 				if !isImport && data.IngressEgressGw != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.IngressEgressGw.NodeNumber
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["node_number"].(float64); ok {
@@ -6732,8 +6797,13 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 			}(),
 			NodeNumber: func() types.Int64 {
 				if !isImport && data.IngressGw != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.IngressGw.NodeNumber
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["node_number"].(float64); ok {
@@ -7068,8 +7138,13 @@ func (r *GCPVPCSiteResource) Update(ctx context.Context, req resource.UpdateRequ
 			}(),
 			NodeNumber: func() types.Int64 {
 				if !isImport && data.VoltstackCluster != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.VoltstackCluster.NodeNumber
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["node_number"].(float64); ok {

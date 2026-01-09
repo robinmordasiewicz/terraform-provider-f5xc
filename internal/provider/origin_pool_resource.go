@@ -2626,8 +2626,13 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 			}(),
 			ConnectionTimeout: func() types.Int64 {
 				if !isImport && data.AdvancedOptions != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AdvancedOptions.ConnectionTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_timeout"].(float64); ok {
@@ -2761,8 +2766,13 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 			}(),
 			HTTPIdleTimeout: func() types.Int64 {
 				if !isImport && data.AdvancedOptions != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AdvancedOptions.HTTPIdleTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_idle_timeout"].(float64); ok {
@@ -2826,8 +2836,13 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 			}(),
 			PanicThreshold: func() types.Int64 {
 				if !isImport && data.AdvancedOptions != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AdvancedOptions.PanicThreshold
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["panic_threshold"].(float64); ok {
@@ -3189,8 +3204,13 @@ func (r *OriginPoolResource) Create(ctx context.Context, req resource.CreateRequ
 			}(),
 			MaxSessionKeys: func() types.Int64 {
 				if !isImport && data.UseTLS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.UseTLS.MaxSessionKeys
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_session_keys"].(float64); ok {
@@ -3501,8 +3521,13 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 			}(),
 			ConnectionTimeout: func() types.Int64 {
 				if !isImport && data.AdvancedOptions != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AdvancedOptions.ConnectionTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_timeout"].(float64); ok {
@@ -3636,8 +3661,13 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 			}(),
 			HTTPIdleTimeout: func() types.Int64 {
 				if !isImport && data.AdvancedOptions != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AdvancedOptions.HTTPIdleTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_idle_timeout"].(float64); ok {
@@ -3701,8 +3731,13 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 			}(),
 			PanicThreshold: func() types.Int64 {
 				if !isImport && data.AdvancedOptions != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AdvancedOptions.PanicThreshold
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["panic_threshold"].(float64); ok {
@@ -4064,8 +4099,13 @@ func (r *OriginPoolResource) Read(ctx context.Context, req resource.ReadRequest,
 			}(),
 			MaxSessionKeys: func() types.Int64 {
 				if !isImport && data.UseTLS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.UseTLS.MaxSessionKeys
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_session_keys"].(float64); ok {
@@ -4835,8 +4875,13 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 			}(),
 			ConnectionTimeout: func() types.Int64 {
 				if !isImport && data.AdvancedOptions != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AdvancedOptions.ConnectionTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["connection_timeout"].(float64); ok {
@@ -4970,8 +5015,13 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 			}(),
 			HTTPIdleTimeout: func() types.Int64 {
 				if !isImport && data.AdvancedOptions != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AdvancedOptions.HTTPIdleTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["http_idle_timeout"].(float64); ok {
@@ -5035,8 +5085,13 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 			}(),
 			PanicThreshold: func() types.Int64 {
 				if !isImport && data.AdvancedOptions != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.AdvancedOptions.PanicThreshold
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["panic_threshold"].(float64); ok {
@@ -5398,8 +5453,13 @@ func (r *OriginPoolResource) Update(ctx context.Context, req resource.UpdateRequ
 			}(),
 			MaxSessionKeys: func() types.Int64 {
 				if !isImport && data.UseTLS != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.UseTLS.MaxSessionKeys
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_session_keys"].(float64); ok {

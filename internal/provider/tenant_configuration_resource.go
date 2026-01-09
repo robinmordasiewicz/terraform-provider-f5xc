@@ -442,8 +442,13 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 		data.BruteForceDetectionSettings = &TenantConfigurationBruteForceDetectionSettingsModel{
 			MaxLoginFailures: func() types.Int64 {
 				if !isImport && data.BruteForceDetectionSettings != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.BruteForceDetectionSettings.MaxLoginFailures
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_login_failures"].(float64); ok {
@@ -457,8 +462,13 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 		data.PasswordPolicy = &TenantConfigurationPasswordPolicyModel{
 			Digits: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.Digits
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["digits"].(float64); ok {
@@ -468,8 +478,13 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 			}(),
 			ExpirePassword: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.ExpirePassword
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["expire_password"].(float64); ok {
@@ -479,8 +494,13 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 			}(),
 			LowercaseCharacters: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.LowercaseCharacters
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["lowercase_characters"].(float64); ok {
@@ -490,8 +510,13 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 			}(),
 			MinimumLength: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.MinimumLength
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["minimum_length"].(float64); ok {
@@ -501,8 +526,13 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 			}(),
 			NotRecentlyUsed: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.NotRecentlyUsed
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["not_recently_used"].(float64); ok {
@@ -512,8 +542,13 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 			}(),
 			NotUsername: func() types.Bool {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.PasswordPolicy.NotUsername
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["not_username"].(bool); ok {
@@ -523,8 +558,13 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 			}(),
 			SpecialCharacters: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.SpecialCharacters
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["special_characters"].(float64); ok {
@@ -534,8 +574,13 @@ func (r *TenantConfigurationResource) Create(ctx context.Context, req resource.C
 			}(),
 			UppercaseCharacters: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.UppercaseCharacters
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["uppercase_characters"].(float64); ok {
@@ -658,8 +703,13 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 		data.BruteForceDetectionSettings = &TenantConfigurationBruteForceDetectionSettingsModel{
 			MaxLoginFailures: func() types.Int64 {
 				if !isImport && data.BruteForceDetectionSettings != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.BruteForceDetectionSettings.MaxLoginFailures
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_login_failures"].(float64); ok {
@@ -673,8 +723,13 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 		data.PasswordPolicy = &TenantConfigurationPasswordPolicyModel{
 			Digits: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.Digits
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["digits"].(float64); ok {
@@ -684,8 +739,13 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 			}(),
 			ExpirePassword: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.ExpirePassword
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["expire_password"].(float64); ok {
@@ -695,8 +755,13 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 			}(),
 			LowercaseCharacters: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.LowercaseCharacters
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["lowercase_characters"].(float64); ok {
@@ -706,8 +771,13 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 			}(),
 			MinimumLength: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.MinimumLength
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["minimum_length"].(float64); ok {
@@ -717,8 +787,13 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 			}(),
 			NotRecentlyUsed: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.NotRecentlyUsed
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["not_recently_used"].(float64); ok {
@@ -728,8 +803,13 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 			}(),
 			NotUsername: func() types.Bool {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.PasswordPolicy.NotUsername
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["not_username"].(bool); ok {
@@ -739,8 +819,13 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 			}(),
 			SpecialCharacters: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.SpecialCharacters
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["special_characters"].(float64); ok {
@@ -750,8 +835,13 @@ func (r *TenantConfigurationResource) Read(ctx context.Context, req resource.Rea
 			}(),
 			UppercaseCharacters: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.UppercaseCharacters
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["uppercase_characters"].(float64); ok {
@@ -901,8 +991,13 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 		data.BruteForceDetectionSettings = &TenantConfigurationBruteForceDetectionSettingsModel{
 			MaxLoginFailures: func() types.Int64 {
 				if !isImport && data.BruteForceDetectionSettings != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.BruteForceDetectionSettings.MaxLoginFailures
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["max_login_failures"].(float64); ok {
@@ -916,8 +1011,13 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 		data.PasswordPolicy = &TenantConfigurationPasswordPolicyModel{
 			Digits: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.Digits
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["digits"].(float64); ok {
@@ -927,8 +1027,13 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 			}(),
 			ExpirePassword: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.ExpirePassword
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["expire_password"].(float64); ok {
@@ -938,8 +1043,13 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 			}(),
 			LowercaseCharacters: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.LowercaseCharacters
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["lowercase_characters"].(float64); ok {
@@ -949,8 +1059,13 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 			}(),
 			MinimumLength: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.MinimumLength
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["minimum_length"].(float64); ok {
@@ -960,8 +1075,13 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 			}(),
 			NotRecentlyUsed: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.NotRecentlyUsed
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["not_recently_used"].(float64); ok {
@@ -971,8 +1091,13 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 			}(),
 			NotUsername: func() types.Bool {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults from overwriting user intent
 					return data.PasswordPolicy.NotUsername
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.BoolNull()
 				}
 				// Import case: read from API
 				if v, ok := blockData["not_username"].(bool); ok {
@@ -982,8 +1107,13 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 			}(),
 			SpecialCharacters: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.SpecialCharacters
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["special_characters"].(float64); ok {
@@ -993,8 +1123,13 @@ func (r *TenantConfigurationResource) Update(ctx context.Context, req resource.U
 			}(),
 			UppercaseCharacters: func() types.Int64 {
 				if !isImport && data.PasswordPolicy != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.PasswordPolicy.UppercaseCharacters
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["uppercase_characters"].(float64); ok {

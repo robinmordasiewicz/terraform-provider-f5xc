@@ -1465,8 +1465,13 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			MTU: func() types.Int64 {
 				if !isImport && data.DedicatedInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DedicatedInterface.MTU
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
@@ -1494,8 +1499,13 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			Priority: func() types.Int64 {
 				if !isImport && data.DedicatedInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DedicatedInterface.Priority
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
@@ -1527,8 +1537,13 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			MTU: func() types.Int64 {
 				if !isImport && data.DedicatedManagementInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DedicatedManagementInterface.MTU
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
@@ -1636,8 +1651,13 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			MTU: func() types.Int64 {
 				if !isImport && data.EthernetInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EthernetInterface.MTU
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
@@ -1677,8 +1697,13 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			Priority: func() types.Int64 {
 				if !isImport && data.EthernetInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EthernetInterface.Priority
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
@@ -1758,8 +1783,13 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			VLANID: func() types.Int64 {
 				if !isImport && data.EthernetInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EthernetInterface.VLANID
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["vlan_id"].(float64); ok {
@@ -1778,8 +1808,13 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 		data.TunnelInterface = &NetworkInterfaceTunnelInterfaceModel{
 			MTU: func() types.Int64 {
 				if !isImport && data.TunnelInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.TunnelInterface.MTU
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
@@ -1795,8 +1830,13 @@ func (r *NetworkInterfaceResource) Create(ctx context.Context, req resource.Crea
 			}(),
 			Priority: func() types.Int64 {
 				if !isImport && data.TunnelInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.TunnelInterface.Priority
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
@@ -2028,8 +2068,13 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			MTU: func() types.Int64 {
 				if !isImport && data.DedicatedInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DedicatedInterface.MTU
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
@@ -2057,8 +2102,13 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			Priority: func() types.Int64 {
 				if !isImport && data.DedicatedInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DedicatedInterface.Priority
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
@@ -2090,8 +2140,13 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			MTU: func() types.Int64 {
 				if !isImport && data.DedicatedManagementInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DedicatedManagementInterface.MTU
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
@@ -2199,8 +2254,13 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			MTU: func() types.Int64 {
 				if !isImport && data.EthernetInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EthernetInterface.MTU
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
@@ -2240,8 +2300,13 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			Priority: func() types.Int64 {
 				if !isImport && data.EthernetInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EthernetInterface.Priority
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
@@ -2321,8 +2386,13 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			VLANID: func() types.Int64 {
 				if !isImport && data.EthernetInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EthernetInterface.VLANID
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["vlan_id"].(float64); ok {
@@ -2341,8 +2411,13 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 		data.TunnelInterface = &NetworkInterfaceTunnelInterfaceModel{
 			MTU: func() types.Int64 {
 				if !isImport && data.TunnelInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.TunnelInterface.MTU
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
@@ -2358,8 +2433,13 @@ func (r *NetworkInterfaceResource) Read(ctx context.Context, req resource.ReadRe
 			}(),
 			Priority: func() types.Int64 {
 				if !isImport && data.TunnelInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.TunnelInterface.Priority
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
@@ -2758,8 +2838,13 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			MTU: func() types.Int64 {
 				if !isImport && data.DedicatedInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DedicatedInterface.MTU
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
@@ -2787,8 +2872,13 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			Priority: func() types.Int64 {
 				if !isImport && data.DedicatedInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DedicatedInterface.Priority
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
@@ -2820,8 +2910,13 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			MTU: func() types.Int64 {
 				if !isImport && data.DedicatedManagementInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.DedicatedManagementInterface.MTU
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
@@ -2929,8 +3024,13 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			MTU: func() types.Int64 {
 				if !isImport && data.EthernetInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EthernetInterface.MTU
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
@@ -2970,8 +3070,13 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			Priority: func() types.Int64 {
 				if !isImport && data.EthernetInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EthernetInterface.Priority
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {
@@ -3051,8 +3156,13 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			VLANID: func() types.Int64 {
 				if !isImport && data.EthernetInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EthernetInterface.VLANID
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["vlan_id"].(float64); ok {
@@ -3071,8 +3181,13 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 		data.TunnelInterface = &NetworkInterfaceTunnelInterfaceModel{
 			MTU: func() types.Int64 {
 				if !isImport && data.TunnelInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.TunnelInterface.MTU
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["mtu"].(float64); ok {
@@ -3088,8 +3203,13 @@ func (r *NetworkInterfaceResource) Update(ctx context.Context, req resource.Upda
 			}(),
 			Priority: func() types.Int64 {
 				if !isImport && data.TunnelInterface != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.TunnelInterface.Priority
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["priority"].(float64); ok {

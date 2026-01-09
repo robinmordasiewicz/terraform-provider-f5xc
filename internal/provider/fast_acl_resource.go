@@ -50,32 +50,80 @@ type FastACLResource struct {
 type FastACLEmptyModel struct {
 }
 
-// FastACLActionModel represents action block
-type FastACLActionModel struct {
-	SimpleAction          types.String                             `tfsdk:"simple_action"`
-	PolicerAction         *FastACLActionPolicerActionModel         `tfsdk:"policer_action"`
-	ProtocolPolicerAction *FastACLActionProtocolPolicerActionModel `tfsdk:"protocol_policer_action"`
+// FastACLProtocolPolicerModel represents protocol_policer block
+type FastACLProtocolPolicerModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// FastACLActionModelAttrTypes defines the attribute types for FastACLActionModel
-var FastACLActionModelAttrTypes = map[string]attr.Type{
+// FastACLProtocolPolicerModelAttrTypes defines the attribute types for FastACLProtocolPolicerModel
+var FastACLProtocolPolicerModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// FastACLREACLModel represents re_acl block
+type FastACLREACLModel struct {
+	AllPublicVips     *FastACLEmptyModel                  `tfsdk:"all_public_vips"`
+	DefaultTenantVIP  *FastACLEmptyModel                  `tfsdk:"default_tenant_vip"`
+	FastACLRules      []FastACLREACLFastACLRulesModel     `tfsdk:"fast_acl_rules"`
+	SelectedTenantVIP *FastACLREACLSelectedTenantVIPModel `tfsdk:"selected_tenant_vip"`
+}
+
+// FastACLREACLModelAttrTypes defines the attribute types for FastACLREACLModel
+var FastACLREACLModelAttrTypes = map[string]attr.Type{
+	"all_public_vips":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_tenant_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fast_acl_rules":      types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLREACLFastACLRulesModelAttrTypes}},
+	"selected_tenant_vip": types.ObjectType{AttrTypes: FastACLREACLSelectedTenantVIPModelAttrTypes},
+}
+
+// FastACLREACLFastACLRulesModel represents fast_acl_rules block
+type FastACLREACLFastACLRulesModel struct {
+	Action      *FastACLREACLFastACLRulesActionModel      `tfsdk:"action"`
+	IPPrefixSet *FastACLREACLFastACLRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	Metadata    *FastACLREACLFastACLRulesMetadataModel    `tfsdk:"metadata"`
+	Port        []FastACLREACLFastACLRulesPortModel       `tfsdk:"port"`
+	Prefix      *FastACLREACLFastACLRulesPrefixModel      `tfsdk:"prefix"`
+}
+
+// FastACLREACLFastACLRulesModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesModel
+var FastACLREACLFastACLRulesModelAttrTypes = map[string]attr.Type{
+	"action":        types.ObjectType{AttrTypes: FastACLREACLFastACLRulesActionModelAttrTypes},
+	"ip_prefix_set": types.ObjectType{AttrTypes: FastACLREACLFastACLRulesIPPrefixSetModelAttrTypes},
+	"metadata":      types.ObjectType{AttrTypes: FastACLREACLFastACLRulesMetadataModelAttrTypes},
+	"port":          types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLREACLFastACLRulesPortModelAttrTypes}},
+	"prefix":        types.ObjectType{AttrTypes: FastACLREACLFastACLRulesPrefixModelAttrTypes},
+}
+
+// FastACLREACLFastACLRulesActionModel represents action block
+type FastACLREACLFastACLRulesActionModel struct {
+	SimpleAction          types.String                                              `tfsdk:"simple_action"`
+	PolicerAction         *FastACLREACLFastACLRulesActionPolicerActionModel         `tfsdk:"policer_action"`
+	ProtocolPolicerAction *FastACLREACLFastACLRulesActionProtocolPolicerActionModel `tfsdk:"protocol_policer_action"`
+}
+
+// FastACLREACLFastACLRulesActionModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesActionModel
+var FastACLREACLFastACLRulesActionModelAttrTypes = map[string]attr.Type{
 	"simple_action":           types.StringType,
-	"policer_action":          types.ObjectType{AttrTypes: FastACLActionPolicerActionModelAttrTypes},
-	"protocol_policer_action": types.ObjectType{AttrTypes: FastACLActionProtocolPolicerActionModelAttrTypes},
+	"policer_action":          types.ObjectType{AttrTypes: FastACLREACLFastACLRulesActionPolicerActionModelAttrTypes},
+	"protocol_policer_action": types.ObjectType{AttrTypes: FastACLREACLFastACLRulesActionProtocolPolicerActionModelAttrTypes},
 }
 
-// FastACLActionPolicerActionModel represents policer_action block
-type FastACLActionPolicerActionModel struct {
-	Ref []FastACLActionPolicerActionRefModel `tfsdk:"ref"`
+// FastACLREACLFastACLRulesActionPolicerActionModel represents policer_action block
+type FastACLREACLFastACLRulesActionPolicerActionModel struct {
+	Ref []FastACLREACLFastACLRulesActionPolicerActionRefModel `tfsdk:"ref"`
 }
 
-// FastACLActionPolicerActionModelAttrTypes defines the attribute types for FastACLActionPolicerActionModel
-var FastACLActionPolicerActionModelAttrTypes = map[string]attr.Type{
-	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLActionPolicerActionRefModelAttrTypes}},
+// FastACLREACLFastACLRulesActionPolicerActionModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesActionPolicerActionModel
+var FastACLREACLFastACLRulesActionPolicerActionModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLREACLFastACLRulesActionPolicerActionRefModelAttrTypes}},
 }
 
-// FastACLActionPolicerActionRefModel represents ref block
-type FastACLActionPolicerActionRefModel struct {
+// FastACLREACLFastACLRulesActionPolicerActionRefModel represents ref block
+type FastACLREACLFastACLRulesActionPolicerActionRefModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -83,8 +131,8 @@ type FastACLActionPolicerActionRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// FastACLActionPolicerActionRefModelAttrTypes defines the attribute types for FastACLActionPolicerActionRefModel
-var FastACLActionPolicerActionRefModelAttrTypes = map[string]attr.Type{
+// FastACLREACLFastACLRulesActionPolicerActionRefModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesActionPolicerActionRefModel
+var FastACLREACLFastACLRulesActionPolicerActionRefModelAttrTypes = map[string]attr.Type{
 	"kind":      types.StringType,
 	"name":      types.StringType,
 	"namespace": types.StringType,
@@ -92,18 +140,18 @@ var FastACLActionPolicerActionRefModelAttrTypes = map[string]attr.Type{
 	"uid":       types.StringType,
 }
 
-// FastACLActionProtocolPolicerActionModel represents protocol_policer_action block
-type FastACLActionProtocolPolicerActionModel struct {
-	Ref []FastACLActionProtocolPolicerActionRefModel `tfsdk:"ref"`
+// FastACLREACLFastACLRulesActionProtocolPolicerActionModel represents protocol_policer_action block
+type FastACLREACLFastACLRulesActionProtocolPolicerActionModel struct {
+	Ref []FastACLREACLFastACLRulesActionProtocolPolicerActionRefModel `tfsdk:"ref"`
 }
 
-// FastACLActionProtocolPolicerActionModelAttrTypes defines the attribute types for FastACLActionProtocolPolicerActionModel
-var FastACLActionProtocolPolicerActionModelAttrTypes = map[string]attr.Type{
-	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLActionProtocolPolicerActionRefModelAttrTypes}},
+// FastACLREACLFastACLRulesActionProtocolPolicerActionModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesActionProtocolPolicerActionModel
+var FastACLREACLFastACLRulesActionProtocolPolicerActionModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLREACLFastACLRulesActionProtocolPolicerActionRefModelAttrTypes}},
 }
 
-// FastACLActionProtocolPolicerActionRefModel represents ref block
-type FastACLActionProtocolPolicerActionRefModel struct {
+// FastACLREACLFastACLRulesActionProtocolPolicerActionRefModel represents ref block
+type FastACLREACLFastACLRulesActionProtocolPolicerActionRefModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -111,8 +159,8 @@ type FastACLActionProtocolPolicerActionRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// FastACLActionProtocolPolicerActionRefModelAttrTypes defines the attribute types for FastACLActionProtocolPolicerActionRefModel
-var FastACLActionProtocolPolicerActionRefModelAttrTypes = map[string]attr.Type{
+// FastACLREACLFastACLRulesActionProtocolPolicerActionRefModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesActionProtocolPolicerActionRefModel
+var FastACLREACLFastACLRulesActionProtocolPolicerActionRefModelAttrTypes = map[string]attr.Type{
 	"kind":      types.StringType,
 	"name":      types.StringType,
 	"namespace": types.StringType,
@@ -120,18 +168,18 @@ var FastACLActionProtocolPolicerActionRefModelAttrTypes = map[string]attr.Type{
 	"uid":       types.StringType,
 }
 
-// FastACLIPPrefixSetModel represents ip_prefix_set block
-type FastACLIPPrefixSetModel struct {
-	Ref []FastACLIPPrefixSetRefModel `tfsdk:"ref"`
+// FastACLREACLFastACLRulesIPPrefixSetModel represents ip_prefix_set block
+type FastACLREACLFastACLRulesIPPrefixSetModel struct {
+	Ref []FastACLREACLFastACLRulesIPPrefixSetRefModel `tfsdk:"ref"`
 }
 
-// FastACLIPPrefixSetModelAttrTypes defines the attribute types for FastACLIPPrefixSetModel
-var FastACLIPPrefixSetModelAttrTypes = map[string]attr.Type{
-	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLIPPrefixSetRefModelAttrTypes}},
+// FastACLREACLFastACLRulesIPPrefixSetModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesIPPrefixSetModel
+var FastACLREACLFastACLRulesIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLREACLFastACLRulesIPPrefixSetRefModelAttrTypes}},
 }
 
-// FastACLIPPrefixSetRefModel represents ref block
-type FastACLIPPrefixSetRefModel struct {
+// FastACLREACLFastACLRulesIPPrefixSetRefModel represents ref block
+type FastACLREACLFastACLRulesIPPrefixSetRefModel struct {
 	Kind      types.String `tfsdk:"kind"`
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
@@ -139,8 +187,8 @@ type FastACLIPPrefixSetRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
-// FastACLIPPrefixSetRefModelAttrTypes defines the attribute types for FastACLIPPrefixSetRefModel
-var FastACLIPPrefixSetRefModelAttrTypes = map[string]attr.Type{
+// FastACLREACLFastACLRulesIPPrefixSetRefModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesIPPrefixSetRefModel
+var FastACLREACLFastACLRulesIPPrefixSetRefModelAttrTypes = map[string]attr.Type{
 	"kind":      types.StringType,
 	"name":      types.StringType,
 	"namespace": types.StringType,
@@ -148,43 +196,252 @@ var FastACLIPPrefixSetRefModelAttrTypes = map[string]attr.Type{
 	"uid":       types.StringType,
 }
 
-// FastACLPortModel represents port block
-type FastACLPortModel struct {
+// FastACLREACLFastACLRulesMetadataModel represents metadata block
+type FastACLREACLFastACLRulesMetadataModel struct {
+	DescriptionSpec types.String `tfsdk:"description_spec"`
+	Name            types.String `tfsdk:"name"`
+}
+
+// FastACLREACLFastACLRulesMetadataModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesMetadataModel
+var FastACLREACLFastACLRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
+// FastACLREACLFastACLRulesPortModel represents port block
+type FastACLREACLFastACLRulesPortModel struct {
 	UserDefined types.Int64        `tfsdk:"user_defined"`
 	All         *FastACLEmptyModel `tfsdk:"all"`
 	DNS         *FastACLEmptyModel `tfsdk:"dns"`
 }
 
-// FastACLPortModelAttrTypes defines the attribute types for FastACLPortModel
-var FastACLPortModelAttrTypes = map[string]attr.Type{
+// FastACLREACLFastACLRulesPortModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesPortModel
+var FastACLREACLFastACLRulesPortModelAttrTypes = map[string]attr.Type{
 	"user_defined": types.Int64Type,
 	"all":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dns":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
-// FastACLPrefixModel represents prefix block
-type FastACLPrefixModel struct {
+// FastACLREACLFastACLRulesPrefixModel represents prefix block
+type FastACLREACLFastACLRulesPrefixModel struct {
 	Prefix types.List `tfsdk:"prefix"`
 }
 
-// FastACLPrefixModelAttrTypes defines the attribute types for FastACLPrefixModel
-var FastACLPrefixModelAttrTypes = map[string]attr.Type{
+// FastACLREACLFastACLRulesPrefixModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesPrefixModel
+var FastACLREACLFastACLRulesPrefixModelAttrTypes = map[string]attr.Type{
+	"prefix": types.ListType{ElemType: types.StringType},
+}
+
+// FastACLREACLSelectedTenantVIPModel represents selected_tenant_vip block
+type FastACLREACLSelectedTenantVIPModel struct {
+	DefaultTenantVIP types.Bool                                       `tfsdk:"default_tenant_vip"`
+	PublicIPRefs     []FastACLREACLSelectedTenantVIPPublicIPRefsModel `tfsdk:"public_ip_refs"`
+}
+
+// FastACLREACLSelectedTenantVIPModelAttrTypes defines the attribute types for FastACLREACLSelectedTenantVIPModel
+var FastACLREACLSelectedTenantVIPModelAttrTypes = map[string]attr.Type{
+	"default_tenant_vip": types.BoolType,
+	"public_ip_refs":     types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLREACLSelectedTenantVIPPublicIPRefsModelAttrTypes}},
+}
+
+// FastACLREACLSelectedTenantVIPPublicIPRefsModel represents public_ip_refs block
+type FastACLREACLSelectedTenantVIPPublicIPRefsModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// FastACLREACLSelectedTenantVIPPublicIPRefsModelAttrTypes defines the attribute types for FastACLREACLSelectedTenantVIPPublicIPRefsModel
+var FastACLREACLSelectedTenantVIPPublicIPRefsModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// FastACLSiteACLModel represents site_acl block
+type FastACLSiteACLModel struct {
+	AllServices       *FastACLEmptyModel                `tfsdk:"all_services"`
+	FastACLRules      []FastACLSiteACLFastACLRulesModel `tfsdk:"fast_acl_rules"`
+	InsideNetwork     *FastACLEmptyModel                `tfsdk:"inside_network"`
+	InterfaceServices *FastACLEmptyModel                `tfsdk:"interface_services"`
+	OutsideNetwork    *FastACLEmptyModel                `tfsdk:"outside_network"`
+	VIPServices       *FastACLEmptyModel                `tfsdk:"vip_services"`
+}
+
+// FastACLSiteACLModelAttrTypes defines the attribute types for FastACLSiteACLModel
+var FastACLSiteACLModelAttrTypes = map[string]attr.Type{
+	"all_services":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fast_acl_rules":     types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesModelAttrTypes}},
+	"inside_network":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_services": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_network":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vip_services":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// FastACLSiteACLFastACLRulesModel represents fast_acl_rules block
+type FastACLSiteACLFastACLRulesModel struct {
+	Action      *FastACLSiteACLFastACLRulesActionModel      `tfsdk:"action"`
+	IPPrefixSet *FastACLSiteACLFastACLRulesIPPrefixSetModel `tfsdk:"ip_prefix_set"`
+	Metadata    *FastACLSiteACLFastACLRulesMetadataModel    `tfsdk:"metadata"`
+	Port        []FastACLSiteACLFastACLRulesPortModel       `tfsdk:"port"`
+	Prefix      *FastACLSiteACLFastACLRulesPrefixModel      `tfsdk:"prefix"`
+}
+
+// FastACLSiteACLFastACLRulesModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesModel
+var FastACLSiteACLFastACLRulesModelAttrTypes = map[string]attr.Type{
+	"action":        types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesActionModelAttrTypes},
+	"ip_prefix_set": types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesIPPrefixSetModelAttrTypes},
+	"metadata":      types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesMetadataModelAttrTypes},
+	"port":          types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesPortModelAttrTypes}},
+	"prefix":        types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesPrefixModelAttrTypes},
+}
+
+// FastACLSiteACLFastACLRulesActionModel represents action block
+type FastACLSiteACLFastACLRulesActionModel struct {
+	SimpleAction          types.String                                                `tfsdk:"simple_action"`
+	PolicerAction         *FastACLSiteACLFastACLRulesActionPolicerActionModel         `tfsdk:"policer_action"`
+	ProtocolPolicerAction *FastACLSiteACLFastACLRulesActionProtocolPolicerActionModel `tfsdk:"protocol_policer_action"`
+}
+
+// FastACLSiteACLFastACLRulesActionModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesActionModel
+var FastACLSiteACLFastACLRulesActionModelAttrTypes = map[string]attr.Type{
+	"simple_action":           types.StringType,
+	"policer_action":          types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesActionPolicerActionModelAttrTypes},
+	"protocol_policer_action": types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesActionProtocolPolicerActionModelAttrTypes},
+}
+
+// FastACLSiteACLFastACLRulesActionPolicerActionModel represents policer_action block
+type FastACLSiteACLFastACLRulesActionPolicerActionModel struct {
+	Ref []FastACLSiteACLFastACLRulesActionPolicerActionRefModel `tfsdk:"ref"`
+}
+
+// FastACLSiteACLFastACLRulesActionPolicerActionModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesActionPolicerActionModel
+var FastACLSiteACLFastACLRulesActionPolicerActionModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesActionPolicerActionRefModelAttrTypes}},
+}
+
+// FastACLSiteACLFastACLRulesActionPolicerActionRefModel represents ref block
+type FastACLSiteACLFastACLRulesActionPolicerActionRefModel struct {
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
+}
+
+// FastACLSiteACLFastACLRulesActionPolicerActionRefModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesActionPolicerActionRefModel
+var FastACLSiteACLFastACLRulesActionPolicerActionRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
+// FastACLSiteACLFastACLRulesActionProtocolPolicerActionModel represents protocol_policer_action block
+type FastACLSiteACLFastACLRulesActionProtocolPolicerActionModel struct {
+	Ref []FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModel `tfsdk:"ref"`
+}
+
+// FastACLSiteACLFastACLRulesActionProtocolPolicerActionModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesActionProtocolPolicerActionModel
+var FastACLSiteACLFastACLRulesActionProtocolPolicerActionModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModelAttrTypes}},
+}
+
+// FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModel represents ref block
+type FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModel struct {
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
+}
+
+// FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModel
+var FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
+// FastACLSiteACLFastACLRulesIPPrefixSetModel represents ip_prefix_set block
+type FastACLSiteACLFastACLRulesIPPrefixSetModel struct {
+	Ref []FastACLSiteACLFastACLRulesIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// FastACLSiteACLFastACLRulesIPPrefixSetModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesIPPrefixSetModel
+var FastACLSiteACLFastACLRulesIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesIPPrefixSetRefModelAttrTypes}},
+}
+
+// FastACLSiteACLFastACLRulesIPPrefixSetRefModel represents ref block
+type FastACLSiteACLFastACLRulesIPPrefixSetRefModel struct {
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
+}
+
+// FastACLSiteACLFastACLRulesIPPrefixSetRefModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesIPPrefixSetRefModel
+var FastACLSiteACLFastACLRulesIPPrefixSetRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
+// FastACLSiteACLFastACLRulesMetadataModel represents metadata block
+type FastACLSiteACLFastACLRulesMetadataModel struct {
+	DescriptionSpec types.String `tfsdk:"description_spec"`
+	Name            types.String `tfsdk:"name"`
+}
+
+// FastACLSiteACLFastACLRulesMetadataModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesMetadataModel
+var FastACLSiteACLFastACLRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
+// FastACLSiteACLFastACLRulesPortModel represents port block
+type FastACLSiteACLFastACLRulesPortModel struct {
+	UserDefined types.Int64        `tfsdk:"user_defined"`
+	All         *FastACLEmptyModel `tfsdk:"all"`
+	DNS         *FastACLEmptyModel `tfsdk:"dns"`
+}
+
+// FastACLSiteACLFastACLRulesPortModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesPortModel
+var FastACLSiteACLFastACLRulesPortModelAttrTypes = map[string]attr.Type{
+	"user_defined": types.Int64Type,
+	"all":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// FastACLSiteACLFastACLRulesPrefixModel represents prefix block
+type FastACLSiteACLFastACLRulesPrefixModel struct {
+	Prefix types.List `tfsdk:"prefix"`
+}
+
+// FastACLSiteACLFastACLRulesPrefixModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesPrefixModel
+var FastACLSiteACLFastACLRulesPrefixModelAttrTypes = map[string]attr.Type{
 	"prefix": types.ListType{ElemType: types.StringType},
 }
 
 type FastACLResourceModel struct {
-	Name        types.String             `tfsdk:"name"`
-	Namespace   types.String             `tfsdk:"namespace"`
-	Annotations types.Map                `tfsdk:"annotations"`
-	Description types.String             `tfsdk:"description"`
-	Disable     types.Bool               `tfsdk:"disable"`
-	Labels      types.Map                `tfsdk:"labels"`
-	ID          types.String             `tfsdk:"id"`
-	Timeouts    timeouts.Value           `tfsdk:"timeouts"`
-	Action      *FastACLActionModel      `tfsdk:"action"`
-	IPPrefixSet *FastACLIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	Port        types.List               `tfsdk:"port"`
-	Prefix      *FastACLPrefixModel      `tfsdk:"prefix"`
+	Name            types.String                 `tfsdk:"name"`
+	Namespace       types.String                 `tfsdk:"namespace"`
+	Annotations     types.Map                    `tfsdk:"annotations"`
+	Description     types.String                 `tfsdk:"description"`
+	Disable         types.Bool                   `tfsdk:"disable"`
+	Labels          types.Map                    `tfsdk:"labels"`
+	ID              types.String                 `tfsdk:"id"`
+	Timeouts        timeouts.Value               `tfsdk:"timeouts"`
+	ProtocolPolicer *FastACLProtocolPolicerModel `tfsdk:"protocol_policer"`
+	REACL           *FastACLREACLModel           `tfsdk:"re_acl"`
+	SiteACL         *FastACLSiteACLModel         `tfsdk:"site_acl"`
 }
 
 func (r *FastACLResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -194,7 +451,7 @@ func (r *FastACLResource) Metadata(ctx context.Context, req resource.MetadataReq
 func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             fast_aclSchemaVersion,
-		MarkdownDescription: "Manages new Fast ACL rule, has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages object, object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Fast ACL. Must be unique within the namespace.",
@@ -249,145 +506,262 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Update: true,
 				Delete: true,
 			}),
-			"action": schema.SingleNestedBlock{
-				MarkdownDescription: "FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic.",
+			"protocol_policer": schema.SingleNestedBlock{
+				MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
-					"simple_action": schema.StringAttribute{
-						MarkdownDescription: "[Enum: DENY|ALLOW] FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
+					"name": schema.StringAttribute{
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
-				},
-				Blocks: map[string]schema.Block{
-					"policer_action": schema.SingleNestedBlock{
-						MarkdownDescription: "Policer Reference. Reference to policer object.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A policer direct reference.",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-										"kind": schema.StringAttribute{
-											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
-											Optional:            true,
-											Computed:            true,
-											PlanModifiers: []planmodifier.String{
-												stringplanmodifier.UseStateForUnknown(),
-											},
-										},
-										"name": schema.StringAttribute{
-											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-											Optional:            true,
-										},
-										"namespace": schema.StringAttribute{
-											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-											Optional:            true,
-										},
-										"tenant": schema.StringAttribute{
-											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-											Optional:            true,
-											Computed:            true,
-											PlanModifiers: []planmodifier.String{
-												stringplanmodifier.UseStateForUnknown(),
-											},
-										},
-										"uid": schema.StringAttribute{
-											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
-											Optional:            true,
-											Computed:            true,
-											PlanModifiers: []planmodifier.String{
-												stringplanmodifier.UseStateForUnknown(),
-											},
-										},
-									},
-								},
-							},
-						},
+					"namespace": schema.StringAttribute{
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						Optional:            true,
 					},
-					"protocol_policer_action": schema.SingleNestedBlock{
-						MarkdownDescription: "Protocol Policer Reference. Reference to policer object.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Protocol policer Reference. Reference to protocol policer object.",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-										"kind": schema.StringAttribute{
-											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
-											Optional:            true,
-											Computed:            true,
-											PlanModifiers: []planmodifier.String{
-												stringplanmodifier.UseStateForUnknown(),
-											},
-										},
-										"name": schema.StringAttribute{
-											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-											Optional:            true,
-										},
-										"namespace": schema.StringAttribute{
-											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-											Optional:            true,
-										},
-										"tenant": schema.StringAttribute{
-											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-											Optional:            true,
-											Computed:            true,
-											PlanModifiers: []planmodifier.String{
-												stringplanmodifier.UseStateForUnknown(),
-											},
-										},
-										"uid": schema.StringAttribute{
-											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
-											Optional:            true,
-											Computed:            true,
-											PlanModifiers: []planmodifier.String{
-												stringplanmodifier.UseStateForUnknown(),
-											},
-										},
-									},
-								},
-							},
+					"tenant": schema.StringAttribute{
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						Optional:            true,
+						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
 						},
 					},
 				},
 			},
-			"ip_prefix_set": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: ip_prefix_set, prefix] List of references to ip_prefix_set objects.",
+			"re_acl": schema.SingleNestedBlock{
+				MarkdownDescription: "[OneOf: re_acl, site_acl] Fast ACL for RE. Fast ACL definition for RE.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
-					"ref": schema.ListNestedBlock{
-						MarkdownDescription: "List of references to ip_prefix_set objects.",
+					"all_public_vips": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"default_tenant_vip": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"fast_acl_rules": schema.ListNestedBlock{
+						MarkdownDescription: "Rules. Fast ACL rules to match.",
 						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-								"kind": schema.StringAttribute{
-									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
-									Optional:            true,
-									Computed:            true,
-									PlanModifiers: []planmodifier.String{
-										stringplanmodifier.UseStateForUnknown(),
+							Attributes: map[string]schema.Attribute{},
+							Blocks: map[string]schema.Block{
+								"action": schema.SingleNestedBlock{
+									MarkdownDescription: "FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic.",
+									Attributes: map[string]schema.Attribute{
+										"simple_action": schema.StringAttribute{
+											MarkdownDescription: "[Enum: DENY|ALLOW] FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
+											Optional:            true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"policer_action": schema.SingleNestedBlock{
+											MarkdownDescription: "Policer Reference. Reference to policer object.",
+											Attributes:          map[string]schema.Attribute{},
+											Blocks: map[string]schema.Block{
+												"ref": schema.ListNestedBlock{
+													MarkdownDescription: "Reference. A policer direct reference.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
+																Optional:            true,
+																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+																Optional:            true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+																Optional:            true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+																Optional:            true,
+																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+																Optional:            true,
+																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
+															},
+														},
+													},
+												},
+											},
+										},
+										"protocol_policer_action": schema.SingleNestedBlock{
+											MarkdownDescription: "Protocol Policer Reference. Reference to policer object.",
+											Attributes:          map[string]schema.Attribute{},
+											Blocks: map[string]schema.Block{
+												"ref": schema.ListNestedBlock{
+													MarkdownDescription: "Protocol policer Reference. Reference to protocol policer object.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
+																Optional:            true,
+																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+																Optional:            true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+																Optional:            true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+																Optional:            true,
+																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+																Optional:            true,
+																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
+															},
+														},
+													},
+												},
+											},
+										},
 									},
 								},
-								"name": schema.StringAttribute{
-									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-									Optional:            true,
-								},
-								"namespace": schema.StringAttribute{
-									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-									Optional:            true,
-								},
-								"tenant": schema.StringAttribute{
-									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-									Optional:            true,
-									Computed:            true,
-									PlanModifiers: []planmodifier.String{
-										stringplanmodifier.UseStateForUnknown(),
+								"ip_prefix_set": schema.SingleNestedBlock{
+									MarkdownDescription: "List of references to ip_prefix_set objects.",
+									Attributes:          map[string]schema.Attribute{},
+									Blocks: map[string]schema.Block{
+										"ref": schema.ListNestedBlock{
+											MarkdownDescription: "List of references to ip_prefix_set objects.",
+											NestedObject: schema.NestedBlockObject{
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
+														Optional:            true,
+														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+														Optional:            true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+														Optional:            true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+														Optional:            true,
+														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+														Optional:            true,
+														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
+													},
+												},
+											},
+										},
 									},
 								},
-								"uid": schema.StringAttribute{
-									MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
-									Optional:            true,
-									Computed:            true,
-									PlanModifiers: []planmodifier.String{
-										stringplanmodifier.UseStateForUnknown(),
+								"metadata": schema.SingleNestedBlock{
+									MarkdownDescription: "MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create..",
+									Attributes: map[string]schema.Attribute{
+										"description_spec": schema.StringAttribute{
+											MarkdownDescription: "Description. Human readable description.",
+											Optional:            true,
+										},
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Name of the message. The value of name has to follow DNS-1035 format.",
+											Optional:            true,
+										},
+									},
+								},
+								"port": schema.ListNestedBlock{
+									MarkdownDescription: "Source Ports. L4 port numbers to match.",
+									NestedObject: schema.NestedBlockObject{
+										Attributes: map[string]schema.Attribute{
+											"user_defined": schema.Int64Attribute{
+												MarkdownDescription: "Matches the user defined port.",
+												Optional:            true,
+											},
+										},
+										Blocks: map[string]schema.Block{
+											"all": schema.SingleNestedBlock{
+												MarkdownDescription: "Enable this option",
+											},
+											"dns": schema.SingleNestedBlock{
+												MarkdownDescription: "Enable this option",
+											},
+										},
+									},
+								},
+								"prefix": schema.SingleNestedBlock{
+									MarkdownDescription: "List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes.",
+									Attributes: map[string]schema.Attribute{
+										"prefix": schema.ListAttribute{
+											MarkdownDescription: "IP Address prefix in string format. String must contain both prefix and prefix-length.",
+											Optional:            true,
+											ElementType:         types.StringType,
+										},
+									},
+								},
+							},
+						},
+					},
+					"selected_tenant_vip": schema.SingleNestedBlock{
+						MarkdownDescription: "Specific Tenant VIP. Select various tenant public VIP(s)",
+						Attributes: map[string]schema.Attribute{
+							"default_tenant_vip": schema.BoolAttribute{
+								MarkdownDescription: "Include tenant VIP in list of specific VIP(s).",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"public_ip_refs": schema.ListNestedBlock{
+								MarkdownDescription: "Select additional public VIP(s) .",
+								NestedObject: schema.NestedBlockObject{
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											Optional:            true,
+										},
+										"namespace": schema.StringAttribute{
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											Optional:            true,
+										},
+										"tenant": schema.StringAttribute{
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											Optional:            true,
+											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
+										},
 									},
 								},
 							},
@@ -395,32 +769,220 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 					},
 				},
 			},
-			"port": schema.ListNestedBlock{
-				MarkdownDescription: "Source Ports. L4 port numbers to match .",
-				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{
-						"user_defined": schema.Int64Attribute{
-							MarkdownDescription: "Matches the user defined port.",
-							Optional:            true,
+			"site_acl": schema.SingleNestedBlock{
+				MarkdownDescription: "Fast ACL for Site. Fast ACL definition for Site.",
+				Attributes:          map[string]schema.Attribute{},
+				Blocks: map[string]schema.Block{
+					"all_services": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"fast_acl_rules": schema.ListNestedBlock{
+						MarkdownDescription: "Rules. Fast ACL rules to match.",
+						NestedObject: schema.NestedBlockObject{
+							Attributes: map[string]schema.Attribute{},
+							Blocks: map[string]schema.Block{
+								"action": schema.SingleNestedBlock{
+									MarkdownDescription: "FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic.",
+									Attributes: map[string]schema.Attribute{
+										"simple_action": schema.StringAttribute{
+											MarkdownDescription: "[Enum: DENY|ALLOW] FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
+											Optional:            true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"policer_action": schema.SingleNestedBlock{
+											MarkdownDescription: "Policer Reference. Reference to policer object.",
+											Attributes:          map[string]schema.Attribute{},
+											Blocks: map[string]schema.Block{
+												"ref": schema.ListNestedBlock{
+													MarkdownDescription: "Reference. A policer direct reference.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
+																Optional:            true,
+																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+																Optional:            true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+																Optional:            true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+																Optional:            true,
+																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+																Optional:            true,
+																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
+															},
+														},
+													},
+												},
+											},
+										},
+										"protocol_policer_action": schema.SingleNestedBlock{
+											MarkdownDescription: "Protocol Policer Reference. Reference to policer object.",
+											Attributes:          map[string]schema.Attribute{},
+											Blocks: map[string]schema.Block{
+												"ref": schema.ListNestedBlock{
+													MarkdownDescription: "Protocol policer Reference. Reference to protocol policer object.",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{
+															"kind": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
+																Optional:            true,
+																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
+															},
+															"name": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+																Optional:            true,
+															},
+															"namespace": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+																Optional:            true,
+															},
+															"tenant": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+																Optional:            true,
+																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
+															},
+															"uid": schema.StringAttribute{
+																MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+																Optional:            true,
+																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
+															},
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								"ip_prefix_set": schema.SingleNestedBlock{
+									MarkdownDescription: "List of references to ip_prefix_set objects.",
+									Attributes:          map[string]schema.Attribute{},
+									Blocks: map[string]schema.Block{
+										"ref": schema.ListNestedBlock{
+											MarkdownDescription: "List of references to ip_prefix_set objects.",
+											NestedObject: schema.NestedBlockObject{
+												Attributes: map[string]schema.Attribute{
+													"kind": schema.StringAttribute{
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
+														Optional:            true,
+														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
+													},
+													"name": schema.StringAttribute{
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+														Optional:            true,
+													},
+													"namespace": schema.StringAttribute{
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+														Optional:            true,
+													},
+													"tenant": schema.StringAttribute{
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+														Optional:            true,
+														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
+													},
+													"uid": schema.StringAttribute{
+														MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+														Optional:            true,
+														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
+													},
+												},
+											},
+										},
+									},
+								},
+								"metadata": schema.SingleNestedBlock{
+									MarkdownDescription: "MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create..",
+									Attributes: map[string]schema.Attribute{
+										"description_spec": schema.StringAttribute{
+											MarkdownDescription: "Description. Human readable description.",
+											Optional:            true,
+										},
+										"name": schema.StringAttribute{
+											MarkdownDescription: "Name of the message. The value of name has to follow DNS-1035 format.",
+											Optional:            true,
+										},
+									},
+								},
+								"port": schema.ListNestedBlock{
+									MarkdownDescription: "Source Ports. L4 port numbers to match.",
+									NestedObject: schema.NestedBlockObject{
+										Attributes: map[string]schema.Attribute{
+											"user_defined": schema.Int64Attribute{
+												MarkdownDescription: "Matches the user defined port.",
+												Optional:            true,
+											},
+										},
+										Blocks: map[string]schema.Block{
+											"all": schema.SingleNestedBlock{
+												MarkdownDescription: "Enable this option",
+											},
+											"dns": schema.SingleNestedBlock{
+												MarkdownDescription: "Enable this option",
+											},
+										},
+									},
+								},
+								"prefix": schema.SingleNestedBlock{
+									MarkdownDescription: "List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes.",
+									Attributes: map[string]schema.Attribute{
+										"prefix": schema.ListAttribute{
+											MarkdownDescription: "IP Address prefix in string format. String must contain both prefix and prefix-length.",
+											Optional:            true,
+											ElementType:         types.StringType,
+										},
+									},
+								},
+							},
 						},
 					},
-					Blocks: map[string]schema.Block{
-						"all": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
-						},
-						"dns": schema.SingleNestedBlock{
-							MarkdownDescription: "Enable this option",
-						},
+					"inside_network": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
 					},
-				},
-			},
-			"prefix": schema.SingleNestedBlock{
-				MarkdownDescription: "List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes.",
-				Attributes: map[string]schema.Attribute{
-					"prefix": schema.ListAttribute{
-						MarkdownDescription: "IP Address prefix in string format. String must contain both prefix and prefix-length.",
-						Optional:            true,
-						ElementType:         types.StringType,
+					"interface_services": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"outside_network": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"vip_services": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -572,80 +1134,120 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if data.Action != nil {
-		actionMap := make(map[string]interface{})
-		if data.Action.PolicerAction != nil {
-			policer_actionNestedMap := make(map[string]interface{})
-			actionMap["policer_action"] = policer_actionNestedMap
+	if data.ProtocolPolicer != nil {
+		protocol_policerMap := make(map[string]interface{})
+		if !data.ProtocolPolicer.Name.IsNull() && !data.ProtocolPolicer.Name.IsUnknown() {
+			protocol_policerMap["name"] = data.ProtocolPolicer.Name.ValueString()
 		}
-		if data.Action.ProtocolPolicerAction != nil {
-			protocol_policer_actionNestedMap := make(map[string]interface{})
-			actionMap["protocol_policer_action"] = protocol_policer_actionNestedMap
+		if !data.ProtocolPolicer.Namespace.IsNull() && !data.ProtocolPolicer.Namespace.IsUnknown() {
+			protocol_policerMap["namespace"] = data.ProtocolPolicer.Namespace.ValueString()
 		}
-		if !data.Action.SimpleAction.IsNull() && !data.Action.SimpleAction.IsUnknown() {
-			actionMap["simple_action"] = data.Action.SimpleAction.ValueString()
+		if !data.ProtocolPolicer.Tenant.IsNull() && !data.ProtocolPolicer.Tenant.IsUnknown() {
+			protocol_policerMap["tenant"] = data.ProtocolPolicer.Tenant.ValueString()
 		}
-		createReq.Spec["action"] = actionMap
+		createReq.Spec["protocol_policer"] = protocol_policerMap
 	}
-	if data.IPPrefixSet != nil {
-		ip_prefix_setMap := make(map[string]interface{})
-		if len(data.IPPrefixSet.Ref) > 0 {
-			var refList []map[string]interface{}
-			for _, listItem := range data.IPPrefixSet.Ref {
+	if data.REACL != nil {
+		re_aclMap := make(map[string]interface{})
+		if data.REACL.AllPublicVips != nil {
+			re_aclMap["all_public_vips"] = map[string]interface{}{}
+		}
+		if data.REACL.DefaultTenantVIP != nil {
+			re_aclMap["default_tenant_vip"] = map[string]interface{}{}
+		}
+		if len(data.REACL.FastACLRules) > 0 {
+			var fast_acl_rulesList []map[string]interface{}
+			for _, listItem := range data.REACL.FastACLRules {
 				listItemMap := make(map[string]interface{})
-				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
-					listItemMap["kind"] = listItem.Kind.ValueString()
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if !listItem.Action.SimpleAction.IsNull() && !listItem.Action.SimpleAction.IsUnknown() {
+						actionDeepMap["simple_action"] = listItem.Action.SimpleAction.ValueString()
+					}
+					listItemMap["action"] = actionDeepMap
 				}
-				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
-					listItemMap["name"] = listItem.Name.ValueString()
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
 				}
-				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
-					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
 				}
-				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
-					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				if listItem.Prefix != nil {
+					prefixDeepMap := make(map[string]interface{})
+					listItemMap["prefix"] = prefixDeepMap
 				}
-				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
-					listItemMap["uid"] = listItem.Uid.ValueString()
-				}
-				refList = append(refList, listItemMap)
+				fast_acl_rulesList = append(fast_acl_rulesList, listItemMap)
 			}
-			ip_prefix_setMap["ref"] = refList
+			re_aclMap["fast_acl_rules"] = fast_acl_rulesList
 		}
-		createReq.Spec["ip_prefix_set"] = ip_prefix_setMap
+		if data.REACL.SelectedTenantVIP != nil {
+			selected_tenant_vipNestedMap := make(map[string]interface{})
+			if !data.REACL.SelectedTenantVIP.DefaultTenantVIP.IsNull() && !data.REACL.SelectedTenantVIP.DefaultTenantVIP.IsUnknown() {
+				selected_tenant_vipNestedMap["default_tenant_vip"] = data.REACL.SelectedTenantVIP.DefaultTenantVIP.ValueBool()
+			}
+			re_aclMap["selected_tenant_vip"] = selected_tenant_vipNestedMap
+		}
+		createReq.Spec["re_acl"] = re_aclMap
 	}
-	if !data.Port.IsNull() && !data.Port.IsUnknown() {
-		var portItems []FastACLPortModel
-		diags := data.Port.ElementsAs(ctx, &portItems, false)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() && len(portItems) > 0 {
-			var portList []map[string]interface{}
-			for _, item := range portItems {
-				itemMap := make(map[string]interface{})
-				if item.All != nil {
-					itemMap["all"] = map[string]interface{}{}
-				}
-				if item.DNS != nil {
-					itemMap["dns"] = map[string]interface{}{}
-				}
-				if !item.UserDefined.IsNull() && !item.UserDefined.IsUnknown() {
-					itemMap["user_defined"] = item.UserDefined.ValueInt64()
-				}
-				portList = append(portList, itemMap)
-			}
-			createReq.Spec["port"] = portList
+	if data.SiteACL != nil {
+		site_aclMap := make(map[string]interface{})
+		if data.SiteACL.AllServices != nil {
+			site_aclMap["all_services"] = map[string]interface{}{}
 		}
-	}
-	if data.Prefix != nil {
-		prefixMap := make(map[string]interface{})
-		if !data.Prefix.Prefix.IsNull() && !data.Prefix.Prefix.IsUnknown() {
-			var prefixItems []string
-			diags := data.Prefix.Prefix.ElementsAs(ctx, &prefixItems, false)
-			if !diags.HasError() {
-				prefixMap["prefix"] = prefixItems
+		if len(data.SiteACL.FastACLRules) > 0 {
+			var fast_acl_rulesList []map[string]interface{}
+			for _, listItem := range data.SiteACL.FastACLRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if !listItem.Action.SimpleAction.IsNull() && !listItem.Action.SimpleAction.IsUnknown() {
+						actionDeepMap["simple_action"] = listItem.Action.SimpleAction.ValueString()
+					}
+					listItemMap["action"] = actionDeepMap
+				}
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.Prefix != nil {
+					prefixDeepMap := make(map[string]interface{})
+					listItemMap["prefix"] = prefixDeepMap
+				}
+				fast_acl_rulesList = append(fast_acl_rulesList, listItemMap)
 			}
+			site_aclMap["fast_acl_rules"] = fast_acl_rulesList
 		}
-		createReq.Spec["prefix"] = prefixMap
+		if data.SiteACL.InsideNetwork != nil {
+			site_aclMap["inside_network"] = map[string]interface{}{}
+		}
+		if data.SiteACL.InterfaceServices != nil {
+			site_aclMap["interface_services"] = map[string]interface{}{}
+		}
+		if data.SiteACL.OutsideNetwork != nil {
+			site_aclMap["outside_network"] = map[string]interface{}{}
+		}
+		if data.SiteACL.VIPServices != nil {
+			site_aclMap["vip_services"] = map[string]interface{}{}
+		}
+		createReq.Spec["site_acl"] = site_aclMap
 	}
 
 	apiResource, err := r.client.CreateFastACL(ctx, createReq)
@@ -660,75 +1262,103 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
-	if blockData, ok := apiResource.Spec["action"].(map[string]interface{}); ok && (isImport || data.Action != nil) {
-		data.Action = &FastACLActionModel{
-			PolicerAction: func() *FastACLActionPolicerActionModel {
-				if !isImport && data.Action != nil && data.Action.PolicerAction != nil {
-					// Normal Read: preserve existing state value
-					return data.Action.PolicerAction
+	if blockData, ok := apiResource.Spec["protocol_policer"].(map[string]interface{}); ok && (isImport || data.ProtocolPolicer != nil) {
+		data.ProtocolPolicer = &FastACLProtocolPolicerModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
 				}
-				// Import case: read from API
-				if _, ok := blockData["policer_action"].(map[string]interface{}); ok {
-					return &FastACLActionPolicerActionModel{}
-				}
-				return nil
+				return types.StringNull()
 			}(),
-			ProtocolPolicerAction: func() *FastACLActionProtocolPolicerActionModel {
-				if !isImport && data.Action != nil && data.Action.ProtocolPolicerAction != nil {
-					// Normal Read: preserve existing state value
-					return data.Action.ProtocolPolicerAction
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
 				}
-				// Import case: read from API
-				if _, ok := blockData["protocol_policer_action"].(map[string]interface{}); ok {
-					return &FastACLActionProtocolPolicerActionModel{}
-				}
-				return nil
+				return types.StringNull()
 			}(),
-			SimpleAction: func() types.String {
-				if v, ok := blockData["simple_action"].(string); ok && v != "" {
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["ip_prefix_set"].(map[string]interface{}); ok && (isImport || data.IPPrefixSet != nil) {
-		data.IPPrefixSet = &FastACLIPPrefixSetModel{
-			Ref: func() []FastACLIPPrefixSetRefModel {
-				if listData, ok := blockData["ref"].([]interface{}); ok && len(listData) > 0 {
-					var result []FastACLIPPrefixSetRefModel
+	if blockData, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && (isImport || data.REACL != nil) {
+		data.REACL = &FastACLREACLModel{
+			AllPublicVips: func() *FastACLEmptyModel {
+				if !isImport && data.REACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.REACL.AllPublicVips
+				}
+				// Import case: read from API
+				if _, ok := blockData["all_public_vips"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultTenantVIP: func() *FastACLEmptyModel {
+				if !isImport && data.REACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.REACL.DefaultTenantVIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_tenant_vip"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			FastACLRules: func() []FastACLREACLFastACLRulesModel {
+				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []FastACLREACLFastACLRulesModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, FastACLIPPrefixSetRefModel{
-								Kind: func() types.String {
-									if v, ok := itemMap["kind"].(string); ok && v != "" {
-										return types.StringValue(v)
+							result = append(result, FastACLREACLFastACLRulesModel{
+								Action: func() *FastACLREACLFastACLRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &FastACLREACLFastACLRulesActionModel{
+											SimpleAction: func() types.String {
+												if v, ok := deepMap["simple_action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
 									}
-									return types.StringNull()
+									return nil
 								}(),
-								Name: func() types.String {
-									if v, ok := itemMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
+								IPPrefixSet: func() *FastACLREACLFastACLRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &FastACLREACLFastACLRulesIPPrefixSetModel{}
 									}
-									return types.StringNull()
+									return nil
 								}(),
-								Namespace: func() types.String {
-									if v, ok := itemMap["namespace"].(string); ok && v != "" {
-										return types.StringValue(v)
+								Metadata: func() *FastACLREACLFastACLRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &FastACLREACLFastACLRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
 									}
-									return types.StringNull()
+									return nil
 								}(),
-								Tenant: func() types.String {
-									if v, ok := itemMap["tenant"].(string); ok && v != "" {
-										return types.StringValue(v)
+								Prefix: func() *FastACLREACLFastACLRulesPrefixModel {
+									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
+										return &FastACLREACLFastACLRulesPrefixModel{}
 									}
-									return types.StringNull()
-								}(),
-								Uid: func() types.String {
-									if v, ok := itemMap["uid"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
+									return nil
 								}(),
 							})
 						}
@@ -737,62 +1367,144 @@ func (r *FastACLResource) Create(ctx context.Context, req resource.CreateRequest
 				}
 				return nil
 			}(),
+			SelectedTenantVIP: func() *FastACLREACLSelectedTenantVIPModel {
+				if !isImport && data.REACL != nil && data.REACL.SelectedTenantVIP != nil {
+					// Normal Read: preserve existing state value
+					return data.REACL.SelectedTenantVIP
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["selected_tenant_vip"].(map[string]interface{}); ok {
+					return &FastACLREACLSelectedTenantVIPModel{
+						DefaultTenantVIP: func() types.Bool {
+							if v, ok := nestedBlockData["default_tenant_vip"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 		}
 	}
-	if listData, ok := apiResource.Spec["port"].([]interface{}); ok && len(listData) > 0 {
-		var portList []FastACLPortModel
-		var existingPortItems []FastACLPortModel
-		if !data.Port.IsNull() && !data.Port.IsUnknown() {
-			data.Port.ElementsAs(ctx, &existingPortItems, false)
-		}
-		for listIdx, item := range listData {
-			_ = listIdx // May be unused if no empty marker blocks in list item
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				portList = append(portList, FastACLPortModel{
-					All: func() *FastACLEmptyModel {
-						if !isImport && len(existingPortItems) > listIdx && existingPortItems[listIdx].All != nil {
-							return &FastACLEmptyModel{}
-						}
-						return nil
-					}(),
-					DNS: func() *FastACLEmptyModel {
-						if !isImport && len(existingPortItems) > listIdx && existingPortItems[listIdx].DNS != nil {
-							return &FastACLEmptyModel{}
-						}
-						return nil
-					}(),
-					UserDefined: func() types.Int64 {
-						if v, ok := itemMap["user_defined"].(float64); ok && v != 0 {
-							return types.Int64Value(int64(v))
-						}
-						return types.Int64Null()
-					}(),
-				})
-			}
-		}
-		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FastACLPortModelAttrTypes}, portList)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Port = listVal
-		}
-	} else {
-		// No data from API - set to null list
-		data.Port = types.ListNull(types.ObjectType{AttrTypes: FastACLPortModelAttrTypes})
-	}
-	if blockData, ok := apiResource.Spec["prefix"].(map[string]interface{}); ok && (isImport || data.Prefix != nil) {
-		data.Prefix = &FastACLPrefixModel{
-			Prefix: func() types.List {
-				if v, ok := blockData["prefix"].([]interface{}); ok && len(v) > 0 {
-					var items []string
-					for _, item := range v {
-						if s, ok := item.(string); ok {
-							items = append(items, s)
+	if blockData, ok := apiResource.Spec["site_acl"].(map[string]interface{}); ok && (isImport || data.SiteACL != nil) {
+		data.SiteACL = &FastACLSiteACLModel{
+			AllServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.AllServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["all_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			FastACLRules: func() []FastACLSiteACLFastACLRulesModel {
+				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []FastACLSiteACLFastACLRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FastACLSiteACLFastACLRulesModel{
+								Action: func() *FastACLSiteACLFastACLRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesActionModel{
+											SimpleAction: func() types.String {
+												if v, ok := deepMap["simple_action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *FastACLSiteACLFastACLRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesIPPrefixSetModel{}
+									}
+									return nil
+								}(),
+								Metadata: func() *FastACLSiteACLFastACLRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Prefix: func() *FastACLSiteACLFastACLRulesPrefixModel {
+									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesPrefixModel{}
+									}
+									return nil
+								}(),
+							})
 						}
 					}
-					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
-					return listVal
+					return result
 				}
-				return types.ListNull(types.StringType)
+				return nil
+			}(),
+			InsideNetwork: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.InsideNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["inside_network"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			InterfaceServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.InterfaceServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["interface_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideNetwork: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.OutsideNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_network"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			VIPServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.VIPServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["vip_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}
@@ -895,75 +1607,103 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 		"psd_is_nil": psd == nil,
 		"managed":    psd.Metadata.Custom["managed"],
 	})
-	if blockData, ok := apiResource.Spec["action"].(map[string]interface{}); ok && (isImport || data.Action != nil) {
-		data.Action = &FastACLActionModel{
-			PolicerAction: func() *FastACLActionPolicerActionModel {
-				if !isImport && data.Action != nil && data.Action.PolicerAction != nil {
-					// Normal Read: preserve existing state value
-					return data.Action.PolicerAction
+	if blockData, ok := apiResource.Spec["protocol_policer"].(map[string]interface{}); ok && (isImport || data.ProtocolPolicer != nil) {
+		data.ProtocolPolicer = &FastACLProtocolPolicerModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
 				}
-				// Import case: read from API
-				if _, ok := blockData["policer_action"].(map[string]interface{}); ok {
-					return &FastACLActionPolicerActionModel{}
-				}
-				return nil
+				return types.StringNull()
 			}(),
-			ProtocolPolicerAction: func() *FastACLActionProtocolPolicerActionModel {
-				if !isImport && data.Action != nil && data.Action.ProtocolPolicerAction != nil {
-					// Normal Read: preserve existing state value
-					return data.Action.ProtocolPolicerAction
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
 				}
-				// Import case: read from API
-				if _, ok := blockData["protocol_policer_action"].(map[string]interface{}); ok {
-					return &FastACLActionProtocolPolicerActionModel{}
-				}
-				return nil
+				return types.StringNull()
 			}(),
-			SimpleAction: func() types.String {
-				if v, ok := blockData["simple_action"].(string); ok && v != "" {
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["ip_prefix_set"].(map[string]interface{}); ok && (isImport || data.IPPrefixSet != nil) {
-		data.IPPrefixSet = &FastACLIPPrefixSetModel{
-			Ref: func() []FastACLIPPrefixSetRefModel {
-				if listData, ok := blockData["ref"].([]interface{}); ok && len(listData) > 0 {
-					var result []FastACLIPPrefixSetRefModel
+	if blockData, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && (isImport || data.REACL != nil) {
+		data.REACL = &FastACLREACLModel{
+			AllPublicVips: func() *FastACLEmptyModel {
+				if !isImport && data.REACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.REACL.AllPublicVips
+				}
+				// Import case: read from API
+				if _, ok := blockData["all_public_vips"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultTenantVIP: func() *FastACLEmptyModel {
+				if !isImport && data.REACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.REACL.DefaultTenantVIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_tenant_vip"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			FastACLRules: func() []FastACLREACLFastACLRulesModel {
+				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []FastACLREACLFastACLRulesModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, FastACLIPPrefixSetRefModel{
-								Kind: func() types.String {
-									if v, ok := itemMap["kind"].(string); ok && v != "" {
-										return types.StringValue(v)
+							result = append(result, FastACLREACLFastACLRulesModel{
+								Action: func() *FastACLREACLFastACLRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &FastACLREACLFastACLRulesActionModel{
+											SimpleAction: func() types.String {
+												if v, ok := deepMap["simple_action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
 									}
-									return types.StringNull()
+									return nil
 								}(),
-								Name: func() types.String {
-									if v, ok := itemMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
+								IPPrefixSet: func() *FastACLREACLFastACLRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &FastACLREACLFastACLRulesIPPrefixSetModel{}
 									}
-									return types.StringNull()
+									return nil
 								}(),
-								Namespace: func() types.String {
-									if v, ok := itemMap["namespace"].(string); ok && v != "" {
-										return types.StringValue(v)
+								Metadata: func() *FastACLREACLFastACLRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &FastACLREACLFastACLRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
 									}
-									return types.StringNull()
+									return nil
 								}(),
-								Tenant: func() types.String {
-									if v, ok := itemMap["tenant"].(string); ok && v != "" {
-										return types.StringValue(v)
+								Prefix: func() *FastACLREACLFastACLRulesPrefixModel {
+									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
+										return &FastACLREACLFastACLRulesPrefixModel{}
 									}
-									return types.StringNull()
-								}(),
-								Uid: func() types.String {
-									if v, ok := itemMap["uid"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
+									return nil
 								}(),
 							})
 						}
@@ -972,62 +1712,144 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 				}
 				return nil
 			}(),
+			SelectedTenantVIP: func() *FastACLREACLSelectedTenantVIPModel {
+				if !isImport && data.REACL != nil && data.REACL.SelectedTenantVIP != nil {
+					// Normal Read: preserve existing state value
+					return data.REACL.SelectedTenantVIP
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["selected_tenant_vip"].(map[string]interface{}); ok {
+					return &FastACLREACLSelectedTenantVIPModel{
+						DefaultTenantVIP: func() types.Bool {
+							if v, ok := nestedBlockData["default_tenant_vip"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 		}
 	}
-	if listData, ok := apiResource.Spec["port"].([]interface{}); ok && len(listData) > 0 {
-		var portList []FastACLPortModel
-		var existingPortItems []FastACLPortModel
-		if !data.Port.IsNull() && !data.Port.IsUnknown() {
-			data.Port.ElementsAs(ctx, &existingPortItems, false)
-		}
-		for listIdx, item := range listData {
-			_ = listIdx // May be unused if no empty marker blocks in list item
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				portList = append(portList, FastACLPortModel{
-					All: func() *FastACLEmptyModel {
-						if !isImport && len(existingPortItems) > listIdx && existingPortItems[listIdx].All != nil {
-							return &FastACLEmptyModel{}
-						}
-						return nil
-					}(),
-					DNS: func() *FastACLEmptyModel {
-						if !isImport && len(existingPortItems) > listIdx && existingPortItems[listIdx].DNS != nil {
-							return &FastACLEmptyModel{}
-						}
-						return nil
-					}(),
-					UserDefined: func() types.Int64 {
-						if v, ok := itemMap["user_defined"].(float64); ok && v != 0 {
-							return types.Int64Value(int64(v))
-						}
-						return types.Int64Null()
-					}(),
-				})
-			}
-		}
-		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FastACLPortModelAttrTypes}, portList)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Port = listVal
-		}
-	} else {
-		// No data from API - set to null list
-		data.Port = types.ListNull(types.ObjectType{AttrTypes: FastACLPortModelAttrTypes})
-	}
-	if blockData, ok := apiResource.Spec["prefix"].(map[string]interface{}); ok && (isImport || data.Prefix != nil) {
-		data.Prefix = &FastACLPrefixModel{
-			Prefix: func() types.List {
-				if v, ok := blockData["prefix"].([]interface{}); ok && len(v) > 0 {
-					var items []string
-					for _, item := range v {
-						if s, ok := item.(string); ok {
-							items = append(items, s)
+	if blockData, ok := apiResource.Spec["site_acl"].(map[string]interface{}); ok && (isImport || data.SiteACL != nil) {
+		data.SiteACL = &FastACLSiteACLModel{
+			AllServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.AllServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["all_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			FastACLRules: func() []FastACLSiteACLFastACLRulesModel {
+				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []FastACLSiteACLFastACLRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FastACLSiteACLFastACLRulesModel{
+								Action: func() *FastACLSiteACLFastACLRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesActionModel{
+											SimpleAction: func() types.String {
+												if v, ok := deepMap["simple_action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *FastACLSiteACLFastACLRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesIPPrefixSetModel{}
+									}
+									return nil
+								}(),
+								Metadata: func() *FastACLSiteACLFastACLRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Prefix: func() *FastACLSiteACLFastACLRulesPrefixModel {
+									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesPrefixModel{}
+									}
+									return nil
+								}(),
+							})
 						}
 					}
-					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
-					return listVal
+					return result
 				}
-				return types.ListNull(types.StringType)
+				return nil
+			}(),
+			InsideNetwork: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.InsideNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["inside_network"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			InterfaceServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.InterfaceServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["interface_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideNetwork: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.OutsideNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_network"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			VIPServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.VIPServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["vip_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}
@@ -1091,80 +1913,120 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if data.Action != nil {
-		actionMap := make(map[string]interface{})
-		if data.Action.PolicerAction != nil {
-			policer_actionNestedMap := make(map[string]interface{})
-			actionMap["policer_action"] = policer_actionNestedMap
+	if data.ProtocolPolicer != nil {
+		protocol_policerMap := make(map[string]interface{})
+		if !data.ProtocolPolicer.Name.IsNull() && !data.ProtocolPolicer.Name.IsUnknown() {
+			protocol_policerMap["name"] = data.ProtocolPolicer.Name.ValueString()
 		}
-		if data.Action.ProtocolPolicerAction != nil {
-			protocol_policer_actionNestedMap := make(map[string]interface{})
-			actionMap["protocol_policer_action"] = protocol_policer_actionNestedMap
+		if !data.ProtocolPolicer.Namespace.IsNull() && !data.ProtocolPolicer.Namespace.IsUnknown() {
+			protocol_policerMap["namespace"] = data.ProtocolPolicer.Namespace.ValueString()
 		}
-		if !data.Action.SimpleAction.IsNull() && !data.Action.SimpleAction.IsUnknown() {
-			actionMap["simple_action"] = data.Action.SimpleAction.ValueString()
+		if !data.ProtocolPolicer.Tenant.IsNull() && !data.ProtocolPolicer.Tenant.IsUnknown() {
+			protocol_policerMap["tenant"] = data.ProtocolPolicer.Tenant.ValueString()
 		}
-		apiResource.Spec["action"] = actionMap
+		apiResource.Spec["protocol_policer"] = protocol_policerMap
 	}
-	if data.IPPrefixSet != nil {
-		ip_prefix_setMap := make(map[string]interface{})
-		if len(data.IPPrefixSet.Ref) > 0 {
-			var refList []map[string]interface{}
-			for _, listItem := range data.IPPrefixSet.Ref {
+	if data.REACL != nil {
+		re_aclMap := make(map[string]interface{})
+		if data.REACL.AllPublicVips != nil {
+			re_aclMap["all_public_vips"] = map[string]interface{}{}
+		}
+		if data.REACL.DefaultTenantVIP != nil {
+			re_aclMap["default_tenant_vip"] = map[string]interface{}{}
+		}
+		if len(data.REACL.FastACLRules) > 0 {
+			var fast_acl_rulesList []map[string]interface{}
+			for _, listItem := range data.REACL.FastACLRules {
 				listItemMap := make(map[string]interface{})
-				if !listItem.Kind.IsNull() && !listItem.Kind.IsUnknown() {
-					listItemMap["kind"] = listItem.Kind.ValueString()
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if !listItem.Action.SimpleAction.IsNull() && !listItem.Action.SimpleAction.IsUnknown() {
+						actionDeepMap["simple_action"] = listItem.Action.SimpleAction.ValueString()
+					}
+					listItemMap["action"] = actionDeepMap
 				}
-				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
-					listItemMap["name"] = listItem.Name.ValueString()
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
 				}
-				if !listItem.Namespace.IsNull() && !listItem.Namespace.IsUnknown() {
-					listItemMap["namespace"] = listItem.Namespace.ValueString()
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
 				}
-				if !listItem.Tenant.IsNull() && !listItem.Tenant.IsUnknown() {
-					listItemMap["tenant"] = listItem.Tenant.ValueString()
+				if listItem.Prefix != nil {
+					prefixDeepMap := make(map[string]interface{})
+					listItemMap["prefix"] = prefixDeepMap
 				}
-				if !listItem.Uid.IsNull() && !listItem.Uid.IsUnknown() {
-					listItemMap["uid"] = listItem.Uid.ValueString()
-				}
-				refList = append(refList, listItemMap)
+				fast_acl_rulesList = append(fast_acl_rulesList, listItemMap)
 			}
-			ip_prefix_setMap["ref"] = refList
+			re_aclMap["fast_acl_rules"] = fast_acl_rulesList
 		}
-		apiResource.Spec["ip_prefix_set"] = ip_prefix_setMap
+		if data.REACL.SelectedTenantVIP != nil {
+			selected_tenant_vipNestedMap := make(map[string]interface{})
+			if !data.REACL.SelectedTenantVIP.DefaultTenantVIP.IsNull() && !data.REACL.SelectedTenantVIP.DefaultTenantVIP.IsUnknown() {
+				selected_tenant_vipNestedMap["default_tenant_vip"] = data.REACL.SelectedTenantVIP.DefaultTenantVIP.ValueBool()
+			}
+			re_aclMap["selected_tenant_vip"] = selected_tenant_vipNestedMap
+		}
+		apiResource.Spec["re_acl"] = re_aclMap
 	}
-	if !data.Port.IsNull() && !data.Port.IsUnknown() {
-		var portItems []FastACLPortModel
-		diags := data.Port.ElementsAs(ctx, &portItems, false)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() && len(portItems) > 0 {
-			var portList []map[string]interface{}
-			for _, item := range portItems {
-				itemMap := make(map[string]interface{})
-				if item.All != nil {
-					itemMap["all"] = map[string]interface{}{}
-				}
-				if item.DNS != nil {
-					itemMap["dns"] = map[string]interface{}{}
-				}
-				if !item.UserDefined.IsNull() && !item.UserDefined.IsUnknown() {
-					itemMap["user_defined"] = item.UserDefined.ValueInt64()
-				}
-				portList = append(portList, itemMap)
-			}
-			apiResource.Spec["port"] = portList
+	if data.SiteACL != nil {
+		site_aclMap := make(map[string]interface{})
+		if data.SiteACL.AllServices != nil {
+			site_aclMap["all_services"] = map[string]interface{}{}
 		}
-	}
-	if data.Prefix != nil {
-		prefixMap := make(map[string]interface{})
-		if !data.Prefix.Prefix.IsNull() && !data.Prefix.Prefix.IsUnknown() {
-			var prefixItems []string
-			diags := data.Prefix.Prefix.ElementsAs(ctx, &prefixItems, false)
-			if !diags.HasError() {
-				prefixMap["prefix"] = prefixItems
+		if len(data.SiteACL.FastACLRules) > 0 {
+			var fast_acl_rulesList []map[string]interface{}
+			for _, listItem := range data.SiteACL.FastACLRules {
+				listItemMap := make(map[string]interface{})
+				if listItem.Action != nil {
+					actionDeepMap := make(map[string]interface{})
+					if !listItem.Action.SimpleAction.IsNull() && !listItem.Action.SimpleAction.IsUnknown() {
+						actionDeepMap["simple_action"] = listItem.Action.SimpleAction.ValueString()
+					}
+					listItemMap["action"] = actionDeepMap
+				}
+				if listItem.IPPrefixSet != nil {
+					ip_prefix_setDeepMap := make(map[string]interface{})
+					listItemMap["ip_prefix_set"] = ip_prefix_setDeepMap
+				}
+				if listItem.Metadata != nil {
+					metadataDeepMap := make(map[string]interface{})
+					if !listItem.Metadata.DescriptionSpec.IsNull() && !listItem.Metadata.DescriptionSpec.IsUnknown() {
+						metadataDeepMap["description"] = listItem.Metadata.DescriptionSpec.ValueString()
+					}
+					if !listItem.Metadata.Name.IsNull() && !listItem.Metadata.Name.IsUnknown() {
+						metadataDeepMap["name"] = listItem.Metadata.Name.ValueString()
+					}
+					listItemMap["metadata"] = metadataDeepMap
+				}
+				if listItem.Prefix != nil {
+					prefixDeepMap := make(map[string]interface{})
+					listItemMap["prefix"] = prefixDeepMap
+				}
+				fast_acl_rulesList = append(fast_acl_rulesList, listItemMap)
 			}
+			site_aclMap["fast_acl_rules"] = fast_acl_rulesList
 		}
-		apiResource.Spec["prefix"] = prefixMap
+		if data.SiteACL.InsideNetwork != nil {
+			site_aclMap["inside_network"] = map[string]interface{}{}
+		}
+		if data.SiteACL.InterfaceServices != nil {
+			site_aclMap["interface_services"] = map[string]interface{}{}
+		}
+		if data.SiteACL.OutsideNetwork != nil {
+			site_aclMap["outside_network"] = map[string]interface{}{}
+		}
+		if data.SiteACL.VIPServices != nil {
+			site_aclMap["vip_services"] = map[string]interface{}{}
+		}
+		apiResource.Spec["site_acl"] = site_aclMap
 	}
 
 	_, err := r.client.UpdateFastACL(ctx, apiResource)
@@ -1190,75 +2052,103 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 	apiResource = fetched // Use GET response which includes all computed fields
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
-	if blockData, ok := apiResource.Spec["action"].(map[string]interface{}); ok && (isImport || data.Action != nil) {
-		data.Action = &FastACLActionModel{
-			PolicerAction: func() *FastACLActionPolicerActionModel {
-				if !isImport && data.Action != nil && data.Action.PolicerAction != nil {
-					// Normal Read: preserve existing state value
-					return data.Action.PolicerAction
+	if blockData, ok := apiResource.Spec["protocol_policer"].(map[string]interface{}); ok && (isImport || data.ProtocolPolicer != nil) {
+		data.ProtocolPolicer = &FastACLProtocolPolicerModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
 				}
-				// Import case: read from API
-				if _, ok := blockData["policer_action"].(map[string]interface{}); ok {
-					return &FastACLActionPolicerActionModel{}
-				}
-				return nil
+				return types.StringNull()
 			}(),
-			ProtocolPolicerAction: func() *FastACLActionProtocolPolicerActionModel {
-				if !isImport && data.Action != nil && data.Action.ProtocolPolicerAction != nil {
-					// Normal Read: preserve existing state value
-					return data.Action.ProtocolPolicerAction
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
 				}
-				// Import case: read from API
-				if _, ok := blockData["protocol_policer_action"].(map[string]interface{}); ok {
-					return &FastACLActionProtocolPolicerActionModel{}
-				}
-				return nil
+				return types.StringNull()
 			}(),
-			SimpleAction: func() types.String {
-				if v, ok := blockData["simple_action"].(string); ok && v != "" {
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["ip_prefix_set"].(map[string]interface{}); ok && (isImport || data.IPPrefixSet != nil) {
-		data.IPPrefixSet = &FastACLIPPrefixSetModel{
-			Ref: func() []FastACLIPPrefixSetRefModel {
-				if listData, ok := blockData["ref"].([]interface{}); ok && len(listData) > 0 {
-					var result []FastACLIPPrefixSetRefModel
+	if blockData, ok := apiResource.Spec["re_acl"].(map[string]interface{}); ok && (isImport || data.REACL != nil) {
+		data.REACL = &FastACLREACLModel{
+			AllPublicVips: func() *FastACLEmptyModel {
+				if !isImport && data.REACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.REACL.AllPublicVips
+				}
+				// Import case: read from API
+				if _, ok := blockData["all_public_vips"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			DefaultTenantVIP: func() *FastACLEmptyModel {
+				if !isImport && data.REACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.REACL.DefaultTenantVIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["default_tenant_vip"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			FastACLRules: func() []FastACLREACLFastACLRulesModel {
+				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []FastACLREACLFastACLRulesModel
 					for _, item := range listData {
 						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, FastACLIPPrefixSetRefModel{
-								Kind: func() types.String {
-									if v, ok := itemMap["kind"].(string); ok && v != "" {
-										return types.StringValue(v)
+							result = append(result, FastACLREACLFastACLRulesModel{
+								Action: func() *FastACLREACLFastACLRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &FastACLREACLFastACLRulesActionModel{
+											SimpleAction: func() types.String {
+												if v, ok := deepMap["simple_action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
 									}
-									return types.StringNull()
+									return nil
 								}(),
-								Name: func() types.String {
-									if v, ok := itemMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
+								IPPrefixSet: func() *FastACLREACLFastACLRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &FastACLREACLFastACLRulesIPPrefixSetModel{}
 									}
-									return types.StringNull()
+									return nil
 								}(),
-								Namespace: func() types.String {
-									if v, ok := itemMap["namespace"].(string); ok && v != "" {
-										return types.StringValue(v)
+								Metadata: func() *FastACLREACLFastACLRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &FastACLREACLFastACLRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
 									}
-									return types.StringNull()
+									return nil
 								}(),
-								Tenant: func() types.String {
-									if v, ok := itemMap["tenant"].(string); ok && v != "" {
-										return types.StringValue(v)
+								Prefix: func() *FastACLREACLFastACLRulesPrefixModel {
+									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
+										return &FastACLREACLFastACLRulesPrefixModel{}
 									}
-									return types.StringNull()
-								}(),
-								Uid: func() types.String {
-									if v, ok := itemMap["uid"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
+									return nil
 								}(),
 							})
 						}
@@ -1267,62 +2157,144 @@ func (r *FastACLResource) Update(ctx context.Context, req resource.UpdateRequest
 				}
 				return nil
 			}(),
+			SelectedTenantVIP: func() *FastACLREACLSelectedTenantVIPModel {
+				if !isImport && data.REACL != nil && data.REACL.SelectedTenantVIP != nil {
+					// Normal Read: preserve existing state value
+					return data.REACL.SelectedTenantVIP
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["selected_tenant_vip"].(map[string]interface{}); ok {
+					return &FastACLREACLSelectedTenantVIPModel{
+						DefaultTenantVIP: func() types.Bool {
+							if v, ok := nestedBlockData["default_tenant_vip"].(bool); ok {
+								return types.BoolValue(v)
+							}
+							return types.BoolNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
 		}
 	}
-	if listData, ok := apiResource.Spec["port"].([]interface{}); ok && len(listData) > 0 {
-		var portList []FastACLPortModel
-		var existingPortItems []FastACLPortModel
-		if !data.Port.IsNull() && !data.Port.IsUnknown() {
-			data.Port.ElementsAs(ctx, &existingPortItems, false)
-		}
-		for listIdx, item := range listData {
-			_ = listIdx // May be unused if no empty marker blocks in list item
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				portList = append(portList, FastACLPortModel{
-					All: func() *FastACLEmptyModel {
-						if !isImport && len(existingPortItems) > listIdx && existingPortItems[listIdx].All != nil {
-							return &FastACLEmptyModel{}
-						}
-						return nil
-					}(),
-					DNS: func() *FastACLEmptyModel {
-						if !isImport && len(existingPortItems) > listIdx && existingPortItems[listIdx].DNS != nil {
-							return &FastACLEmptyModel{}
-						}
-						return nil
-					}(),
-					UserDefined: func() types.Int64 {
-						if v, ok := itemMap["user_defined"].(float64); ok && v != 0 {
-							return types.Int64Value(int64(v))
-						}
-						return types.Int64Null()
-					}(),
-				})
-			}
-		}
-		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FastACLPortModelAttrTypes}, portList)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Port = listVal
-		}
-	} else {
-		// No data from API - set to null list
-		data.Port = types.ListNull(types.ObjectType{AttrTypes: FastACLPortModelAttrTypes})
-	}
-	if blockData, ok := apiResource.Spec["prefix"].(map[string]interface{}); ok && (isImport || data.Prefix != nil) {
-		data.Prefix = &FastACLPrefixModel{
-			Prefix: func() types.List {
-				if v, ok := blockData["prefix"].([]interface{}); ok && len(v) > 0 {
-					var items []string
-					for _, item := range v {
-						if s, ok := item.(string); ok {
-							items = append(items, s)
+	if blockData, ok := apiResource.Spec["site_acl"].(map[string]interface{}); ok && (isImport || data.SiteACL != nil) {
+		data.SiteACL = &FastACLSiteACLModel{
+			AllServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.AllServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["all_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			FastACLRules: func() []FastACLSiteACLFastACLRulesModel {
+				if listData, ok := blockData["fast_acl_rules"].([]interface{}); ok && len(listData) > 0 {
+					var result []FastACLSiteACLFastACLRulesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, FastACLSiteACLFastACLRulesModel{
+								Action: func() *FastACLSiteACLFastACLRulesActionModel {
+									if deepMap, ok := itemMap["action"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesActionModel{
+											SimpleAction: func() types.String {
+												if v, ok := deepMap["simple_action"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								IPPrefixSet: func() *FastACLSiteACLFastACLRulesIPPrefixSetModel {
+									if _, ok := itemMap["ip_prefix_set"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesIPPrefixSetModel{}
+									}
+									return nil
+								}(),
+								Metadata: func() *FastACLSiteACLFastACLRulesMetadataModel {
+									if deepMap, ok := itemMap["metadata"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesMetadataModel{
+											DescriptionSpec: func() types.String {
+												if v, ok := deepMap["description"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+											Name: func() types.String {
+												if v, ok := deepMap["name"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								Prefix: func() *FastACLSiteACLFastACLRulesPrefixModel {
+									if _, ok := itemMap["prefix"].(map[string]interface{}); ok {
+										return &FastACLSiteACLFastACLRulesPrefixModel{}
+									}
+									return nil
+								}(),
+							})
 						}
 					}
-					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
-					return listVal
+					return result
 				}
-				return types.ListNull(types.StringType)
+				return nil
+			}(),
+			InsideNetwork: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.InsideNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["inside_network"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			InterfaceServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.InterfaceServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["interface_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			OutsideNetwork: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.OutsideNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_network"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
+			}(),
+			VIPServices: func() *FastACLEmptyModel {
+				if !isImport && data.SiteACL != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SiteACL.VIPServices
+				}
+				// Import case: read from API
+				if _, ok := blockData["vip_services"].(map[string]interface{}); ok {
+					return &FastACLEmptyModel{}
+				}
+				return nil
 			}(),
 		}
 	}

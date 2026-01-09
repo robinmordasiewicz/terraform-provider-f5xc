@@ -6905,8 +6905,13 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 		data.Coordinates = &VoltstackSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Latitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
@@ -6916,8 +6921,13 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 			}(),
 			Longitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Longitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
@@ -7162,8 +7172,13 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 			}(),
 			TunnelDeadTimeout: func() types.Int64 {
 				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CustomNetworkConfig.TunnelDeadTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
@@ -7240,8 +7255,13 @@ func (r *VoltstackSiteResource) Create(ctx context.Context, req resource.CreateR
 			}(),
 			ServerPort: func() types.Int64 {
 				if !isImport && data.EnableVgpu != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EnableVgpu.ServerPort
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["server_port"].(float64); ok {
@@ -7698,8 +7718,13 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 		data.Coordinates = &VoltstackSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Latitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
@@ -7709,8 +7734,13 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 			}(),
 			Longitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Longitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
@@ -7955,8 +7985,13 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 			}(),
 			TunnelDeadTimeout: func() types.Int64 {
 				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CustomNetworkConfig.TunnelDeadTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
@@ -8033,8 +8068,13 @@ func (r *VoltstackSiteResource) Read(ctx context.Context, req resource.ReadReque
 			}(),
 			ServerPort: func() types.Int64 {
 				if !isImport && data.EnableVgpu != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EnableVgpu.ServerPort
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["server_port"].(float64); ok {
@@ -8902,8 +8942,13 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 		data.Coordinates = &VoltstackSiteCoordinatesModel{
 			Latitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Latitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["latitude"].(float64); ok {
@@ -8913,8 +8958,13 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 			}(),
 			Longitude: func() types.Int64 {
 				if !isImport && data.Coordinates != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.Coordinates.Longitude
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["longitude"].(float64); ok {
@@ -9159,8 +9209,13 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 			}(),
 			TunnelDeadTimeout: func() types.Int64 {
 				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.CustomNetworkConfig.TunnelDeadTimeout
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
@@ -9237,8 +9292,13 @@ func (r *VoltstackSiteResource) Update(ctx context.Context, req resource.UpdateR
 			}(),
 			ServerPort: func() types.Int64 {
 				if !isImport && data.EnableVgpu != nil {
-					// Normal Read: preserve existing state value to avoid API default drift
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
 					return data.EnableVgpu.ServerPort
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
 				}
 				// Import case: read from API
 				if v, ok := blockData["server_port"].(float64); ok {

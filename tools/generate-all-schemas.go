@@ -3409,11 +3409,17 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 					// This handles fields like connection_idle_timeout where API returns 0 as default
 					if nestedAttr.Optional {
 						sb.WriteString(fmt.Sprintf("%s\t\t\tif !isImport && data.%s != nil {\n", indent, fieldName))
-						sb.WriteString(fmt.Sprintf("%s\t\t\t\t// Normal Read: preserve existing state value to avoid API default drift\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t// Preserve existing state (null or user-set value)\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t// This prevents API defaults (like 0) from overwriting user intent\n", indent))
 						sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn data.%s.%s\n", indent, fieldName, nestedFieldName))
 						sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
-						sb.WriteString(fmt.Sprintf("%s\t\t\t// Import case: read from API\n", indent))
+						// Fallback: block not in user config but not importing - return null, not API default
+						sb.WriteString(fmt.Sprintf("%s\t\t\tif !isImport {\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t// Block not in user config - return null, not API default\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn types.Int64Null()\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
 					}
+					sb.WriteString(fmt.Sprintf("%s\t\t\t// Import case: read from API\n", indent))
 					sb.WriteString(fmt.Sprintf("%s\t\t\tif v, ok := blockData[\"%s\"].(float64); ok {\n", indent, nestedJsonName))
 					sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn types.Int64Value(int64(v))\n", indent))
 					sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
@@ -3425,11 +3431,17 @@ func renderSpecUnmarshalCode(attrs []TerraformAttribute, indent string, resource
 					// This handles both Computed+Optional and Optional-only fields where API returns defaults
 					if nestedAttr.Optional {
 						sb.WriteString(fmt.Sprintf("%s\t\t\tif !isImport && data.%s != nil {\n", indent, fieldName))
-						sb.WriteString(fmt.Sprintf("%s\t\t\t\t// Normal Read: preserve existing state value to avoid API default drift\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t// Preserve existing state (null or user-set value)\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t// This prevents API defaults from overwriting user intent\n", indent))
 						sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn data.%s.%s\n", indent, fieldName, nestedFieldName))
 						sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
-						sb.WriteString(fmt.Sprintf("%s\t\t\t// Import case: read from API\n", indent))
+						// Fallback: block not in user config but not importing - return null, not API default
+						sb.WriteString(fmt.Sprintf("%s\t\t\tif !isImport {\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\t// Block not in user config - return null, not API default\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn types.BoolNull()\n", indent))
+						sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))
 					}
+					sb.WriteString(fmt.Sprintf("%s\t\t\t// Import case: read from API\n", indent))
 					sb.WriteString(fmt.Sprintf("%s\t\t\tif v, ok := blockData[\"%s\"].(bool); ok {\n", indent, nestedJsonName))
 					sb.WriteString(fmt.Sprintf("%s\t\t\t\treturn types.BoolValue(v)\n", indent))
 					sb.WriteString(fmt.Sprintf("%s\t\t\t}\n", indent))

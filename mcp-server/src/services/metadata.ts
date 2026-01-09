@@ -709,7 +709,7 @@ export function generateTerraformSyntaxGuide(
   }
 
   // Generate syntax guide
-  let syntaxGuide = generateSyntaxGuideMarkdown(resourceName, resource, blocks, attributes, oneOfGroups);
+  const syntaxGuide = generateSyntaxGuideMarkdown(resourceName, resource, blocks, attributes, oneOfGroups);
 
   return {
     resource: resourceName,

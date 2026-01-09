@@ -4,7 +4,7 @@
  */
 
 import { readFileSync, existsSync, readdirSync } from 'fs';
-import { join, dirname, basename } from 'path';
+import { join, dirname, basename as _basename } from 'path';
 import { fileURLToPath } from 'url';
 import type { ApiSpec, OpenAPISpec, SearchResult, SchemaDefinition } from '../types.js';
 

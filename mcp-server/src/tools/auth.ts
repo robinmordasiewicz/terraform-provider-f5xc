@@ -523,8 +523,8 @@ function buildEnvironmentVariables(
     // For certificate auth, we need the file paths from the profile
     // The CredentialManager loads the certificate data, but we need paths for env vars
     // Check if credentials came from profile to get file paths
-    const profileManager = getProfileManager();
-    const activeProfileName = cm.getActiveProfile ? cm.getActiveProfile() : null;
+    const _profileManager = getProfileManager();
+    const _activeProfileName = cm.getActiveProfile ? cm.getActiveProfile() : null;
 
     // For now, indicate that cert-based auth requires file paths
     // The profile stores the paths, not the data, so we can retrieve them

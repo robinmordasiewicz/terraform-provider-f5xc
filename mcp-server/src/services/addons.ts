@@ -3,7 +3,7 @@
  * Provides information about F5 Distributed Cloud addon services and activation workflows
  */
 
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync as _readFileSync, existsSync as _existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -15,8 +15,8 @@ const PACKAGE_ROOT = join(__dirname, '..', '..'); // mcp-server/
 const PROJECT_ROOT = join(PACKAGE_ROOT, '..'); // terraform-provider-f5xc/
 
 // Paths for subscription metadata (contains addon service info)
-const BUNDLED_SUBSCRIPTION_METADATA = join(PACKAGE_ROOT, 'dist', 'subscription-tiers.json');
-const PROJECT_SUBSCRIPTION_METADATA = join(PROJECT_ROOT, 'tools', 'subscription-tiers.json');
+const _BUNDLED_SUBSCRIPTION_METADATA = join(PACKAGE_ROOT, 'dist', 'subscription-tiers.json');
+const _PROJECT_SUBSCRIPTION_METADATA = join(PROJECT_ROOT, 'tools', 'subscription-tiers.json');
 
 // Known addon services with their activation types and descriptions
 // These names are the actual API names from F5XC (validated via API testing)

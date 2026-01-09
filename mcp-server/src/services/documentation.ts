@@ -4,7 +4,7 @@
  */
 
 import { readFileSync, existsSync, readdirSync } from 'fs';
-import { join, dirname, basename, extname } from 'path';
+import { join, dirname, basename, extname as _extname } from 'path';
 import { fileURLToPath } from 'url';
 import type { ResourceDoc, SearchResult, SubscriptionMetadata, SubscriptionTier } from '../types.js';
 
@@ -149,7 +149,7 @@ function matchesAdvancedFeature(propertyName: string, featureName: string): bool
  * @param propertyName - The property name (e.g., "enable_malicious_user_detection")
  * @returns true if the property requires Advanced subscription
  */
-function isAdvancedFeatureProperty(resourceName: string, propertyName: string): boolean {
+function _isAdvancedFeatureProperty(resourceName: string, propertyName: string): boolean {
   const resourceMeta = findResourceMetadata(resourceName);
   if (!resourceMeta || !resourceMeta.advancedFeatures || resourceMeta.advancedFeatures.length === 0) {
     return false;

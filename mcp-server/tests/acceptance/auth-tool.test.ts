@@ -311,7 +311,7 @@ describe('Auth Tool Acceptance Tests', () => {
         expect(result).toContain('```bash');
         expect(result).toContain('export F5XC_API_URL=');
         expect(result).toContain('export F5XC_API_TOKEN=');
-        expect(result).toContain('## Usage');
+        expect(result).toContain('## ⚠️ EXECUTE BEFORE TERRAFORM');
       });
 
       it('should return dotenv format as markdown', async () => {

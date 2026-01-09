@@ -19,7 +19,7 @@ import {
   getValidationPattern,
   getAllValidationPatterns,
   listResourcesWithMetadata,
-  getMetadataSummary,
+  getMetadataSummary as _getMetadataSummary,
   isMetadataAvailable,
   getResourceTier,
   getResourcesByTier,
@@ -33,8 +33,8 @@ import {
   getEnhancedMetadataSummary,
   getAttributeSyntaxGuidance,
   generateTerraformSyntaxGuide,
-  validateConfigurationSyntax,
-  getOneOfGroupsQuickReference,
+  validateConfigurationSyntax as _validateConfigurationSyntax,
+  getOneOfGroupsQuickReference as _getOneOfGroupsQuickReference,
 } from '../services/metadata.js';
 
 // =============================================================================
@@ -1569,7 +1569,7 @@ ${wafExample}`;
   return getHttpLoadbalancerExample('basic');
 }
 
-function getOriginPoolExample(pattern: string): { markdown: string; terraform: string; description: string } {
+function getOriginPoolExample(_pattern: string): { markdown: string; terraform: string; description: string } {
   const example = `# Optional: Create a healthcheck resource first
 # (healthcheck is a REFERENCE BLOCK - only name/namespace/tenant are valid)
 resource "f5xc_healthcheck" "example" {
@@ -1685,7 +1685,7 @@ resource "f5xc_origin_pool" "example" {
   };
 }
 
-function getAppFirewallExample(pattern: string): { markdown: string; terraform: string; description: string } {
+function getAppFirewallExample(_pattern: string): { markdown: string; terraform: string; description: string } {
   const example = `resource "f5xc_app_firewall" "example" {
   name      = "my-waf-policy"
   namespace = "default"
@@ -2003,7 +2003,7 @@ function parseHCLForFields(hcl: string): { fields: ParsedField[]; blocks: Parsed
 
   // Track block nesting
   const blockStack: { name: string; line: number }[] = [];
-  let braceCount = 0;
+  let _braceCount = 0;
 
   for (let lineNum = 0; lineNum < lines.length; lineNum++) {
     const line = lines[lineNum];
@@ -2090,7 +2090,7 @@ function parseHCLForFields(hcl: string): { fields: ParsedField[]; blocks: Parsed
     }
 
     // Track brace closing
-    braceCount += openBraces - closeBraces;
+    _braceCount += openBraces - closeBraces;
     if (closeBraces > 0 && blockStack.length > 0) {
       for (let i = 0; i < closeBraces; i++) {
         if (blockStack.length > 0) {

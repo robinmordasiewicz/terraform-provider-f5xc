@@ -290,15 +290,24 @@ export const MetadataSchema = z.object({
 
 /**
  * Auth tool schema
- * Provides authentication status, profile management, and credential validation
+ * Provides authentication status, profile management, credential validation,
+ * and Terraform environment variable export
  */
 export const AuthSchema = z.object({
-  operation: z.enum(['status', 'list', 'switch', 'validate'])
+  operation: z.enum(['status', 'list', 'switch', 'validate', 'terraform-env'])
     .describe(COMMON_PARAM_DESCRIPTIONS.operation),
   profile_name: z.string()
     .min(1)
     .optional()
     .describe('Profile name to switch to (for switch operation)'),
+  output_type: z.enum(['shell', 'dotenv', 'json'])
+    .optional()
+    .default('shell')
+    .describe('Output format for terraform-env: shell exports, .env format, or JSON'),
+  mask_secrets: z.boolean()
+    .optional()
+    .default(false)
+    .describe('Mask sensitive values like tokens and passwords'),
   response_format: ResponseFormatSchema,
 }).strict();
 

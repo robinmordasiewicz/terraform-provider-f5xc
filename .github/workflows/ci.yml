@@ -97,6 +97,11 @@ jobs:
             "internal/provider/addon_service_activation_status_data_source.go"
             "examples/data-sources/addon_service/data-source.tf"
             "examples/data-sources/addon_service_activation_status/data-source.tf"
+            # MkDocs documentation site index files (navigation, not provider docs)
+            "docs/resources/index.md"
+            "docs/data-sources/index.md"
+            "docs/functions/index.md"
+            "docs/guides/index.md"
           )
 
           # Patterns allowed when generator tools are modified

@@ -735,6 +735,25 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: Close stale server.json PRs
+        if: steps.check-changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}
+        run: |
+          echo "Checking for stale server.json PRs..."
+          # Find all open PRs with the mcp label that update server.json
+          STALE_PRS=$(gh pr list --state open --label "mcp" --json number,title --jq '.[] | select(.title | startswith("chore(mcp): update server.json")) | .number')
+
+          if [ -n "$STALE_PRS" ]; then
+            echo "Found stale PRs: $STALE_PRS"
+            for PR in $STALE_PRS; do
+              echo "Closing stale PR #$PR (superseded by v${{ steps.version.outputs.version }})"
+              gh pr close "$PR" --comment "Closing stale PR - superseded by v${{ steps.version.outputs.version }}" || true
+            done
+          else
+            echo "No stale server.json PRs found"
+          fi
+
       - name: Create Pull Request for server.json update
         if: steps.check-changes.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v7

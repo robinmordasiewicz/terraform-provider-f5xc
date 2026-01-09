@@ -1,0 +1,154 @@
+site_name: F5 Distributed Cloud Terraform Provider
+site_url: https://robinmordasiewicz.github.io/terraform-provider-f5xc/
+repo_url: https://github.com/robinmordasiewicz/terraform-provider-f5xc
+repo_name: robinmordasiewicz/terraform-provider-f5xc
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - header.autohide
+    - content.tabs.link
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+    - content.tooltips
+    - toc.follow
+    - toc.integrate
+
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+        remove_comments: true
+      cache_safe: true
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+      permalink_title: Anchor link to this section
+      toc_depth: 3
+  - tables
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      auto_title: true
+      linenums: true
+      linenums_style: pymdownx-inline
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/sidebar-fix.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/robinmordasiewicz/terraform-provider-f5xc
+      name: GitHub Repository
+  generator: false
+  version:
+    provider: mike
+    default: latest
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Authentication: getting-started/authentication.md
+    - Quick Start: getting-started/quick-start.md
+  - Guides:
+    - Overview: guides/index.md
+    - HTTP Load Balancer: guides/http-loadbalancer.md
+  - Resources:
+    - Overview: resources/index.md
+  - Data Sources:
+    - Overview: data-sources/index.md
+  - Functions:
+    - Overview: functions/index.md
+  - Provider Configuration:
+    - Environment Variables: configuration/environment-variables.md
+    - Credential Files: configuration/credential-files.md
+  - Contributing:
+    - Development Guide: contributing/development.md
+    - Testing: contributing/testing.md
+    - Documentation: contributing/documentation.md
+  - Terraform Registry ↗: https://registry.terraform.io/providers/robinmordasiewicz/f5xc/latest

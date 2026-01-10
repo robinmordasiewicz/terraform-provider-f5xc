@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 # Comprehensive test runner for F5 XC Terraform Provider
 #
 # This script runs acceptance tests with intelligent handling of:

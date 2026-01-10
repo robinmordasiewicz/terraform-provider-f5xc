@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 // calculate-terraform-version.go
 //
 // This tool dynamically calculates the minimum required Terraform version

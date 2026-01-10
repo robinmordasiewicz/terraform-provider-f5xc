@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 #
 # Batch Resource Generator for F5XC Terraform Provider
 # Generates all 268 resources from OpenAPI specifications

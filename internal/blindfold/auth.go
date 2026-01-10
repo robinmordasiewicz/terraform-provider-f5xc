@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 // Package blindfold provides F5XC Secret Management encryption utilities.
 package blindfold
 

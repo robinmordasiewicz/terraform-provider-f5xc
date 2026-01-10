@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 /**
  * Sync MCP server version with provider release version
  *

@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 # Pre-commit hook to lint generated files when generators change
 # This catches linting errors early without violating the constitution
 #

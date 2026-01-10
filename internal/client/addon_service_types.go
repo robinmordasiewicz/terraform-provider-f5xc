@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 // Addon Service client types for F5 XC
 // This file provides read-only access to addon services (system-managed resources)
 

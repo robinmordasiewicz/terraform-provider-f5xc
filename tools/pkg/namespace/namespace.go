@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 // Package namespace provides consistent namespace classification for F5XC resources.
 // This package centralizes the logic for determining which namespace type a resource
 // should use, following F5XC best practices.

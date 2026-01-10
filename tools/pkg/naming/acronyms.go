@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 // Package naming provides consistent case conversion and acronym handling
 // for code generation tools in the F5XC Terraform provider.
 package naming

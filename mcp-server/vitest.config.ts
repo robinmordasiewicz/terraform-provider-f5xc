@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({

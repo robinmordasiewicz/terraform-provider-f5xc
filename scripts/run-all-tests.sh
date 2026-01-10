@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 # Sequential test runner with rate limit protection
 #
 # Required environment variables:

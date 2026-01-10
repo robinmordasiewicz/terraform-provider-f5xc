@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 # Setup Self-Hosted GitHub Actions Runner
 #
 # This script sets up a self-hosted GitHub Actions runner for running

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 /**
  * API Specifications Service
  * Loads and manages F5 Distributed Cloud OpenAPI specifications

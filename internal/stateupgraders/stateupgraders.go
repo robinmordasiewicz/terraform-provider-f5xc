@@ -1,5 +1,4 @@
-// Copyright (c) F5XC Community
-// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
 
 // Package stateupgraders provides state upgrade functionality for F5 XC Terraform resources.
 // StateUpgraders handle schema evolution when resource schemas change between provider versions.

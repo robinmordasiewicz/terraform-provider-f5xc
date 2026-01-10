@@ -4311,12 +4311,32 @@ func generateCombinedClientTypes(results []GenerationResult) {
 	// This is handled by individual client type files
 }
 
+// coreResources are resources that must always be registered in the provider,
+// even if they're not present in the current OpenAPI specifications.
+// These resources have working implementations that were generated previously
+// but may not be included in the enriched API specs.
+var coreResources = []string{
+	"namespace",
+}
+
 func generateProviderRegistration(results []GenerationResult) {
 	// Collect successful resources
 	var resources []string
 	var dataSources []string
+
+	// First, add core resources that must always be registered
+	// These have working implementations but may not be in current OpenAPI specs
+	added := make(map[string]bool)
+	for _, core := range coreResources {
+		titleCase := toTitleCase(core)
+		resources = append(resources, fmt.Sprintf("\t\tNew%sResource,", titleCase))
+		dataSources = append(dataSources, fmt.Sprintf("\t\tNew%sDataSource,", titleCase))
+		added[core] = true
+	}
+
+	// Then add resources from spec generation results (avoiding duplicates)
 	for _, r := range results {
-		if r.Success {
+		if r.Success && !added[r.ResourceName] {
 			titleCase := toTitleCase(r.ResourceName)
 			resources = append(resources, fmt.Sprintf("\t\tNew%sResource,", titleCase))
 			dataSources = append(dataSources, fmt.Sprintf("\t\tNew%sDataSource,", titleCase))

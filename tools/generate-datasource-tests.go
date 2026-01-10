@@ -1,5 +1,4 @@
-// Copyright (c) F5XC Community
-// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
 
 //go:build ignore
 // +build ignore
@@ -713,8 +712,7 @@ func toStructName(name string) string {
 
 func main() {
 	// Template for the test file
-	const testTemplate = `// Copyright (c) F5XC Community
-// SPDX-License-Identifier: MPL-2.0
+	const testTemplate = `// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
 
 package provider_test
 

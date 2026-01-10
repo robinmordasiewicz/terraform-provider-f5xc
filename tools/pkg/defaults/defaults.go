@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 // Package defaults provides API-discovered default value lookup for F5XC resources.
 // These defaults are discovered by comparing API request/response payloads to find
 // values that the API applies automatically when not specified in the request.

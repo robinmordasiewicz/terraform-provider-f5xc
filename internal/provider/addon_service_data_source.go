@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 // Addon Service Data Source for F5 XC
 // Provides read-only access to addon service information
 

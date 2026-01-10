@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 /**
  * Type definitions for F5 Distributed Cloud MCP Server
  */

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 // Addon Service Activation Status Data Source for F5 XC
 // Provides information about whether an addon service can be activated
 

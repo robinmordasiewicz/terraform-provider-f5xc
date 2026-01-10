@@ -1,5 +1,4 @@
-// Copyright (c) F5XC Community
-// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
 
 // provider_helpers.go - Manually maintained helper functions for the provider.
 // This file is NOT auto-generated and contains utility functions used by

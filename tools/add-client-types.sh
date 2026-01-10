@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 #
 # Add Client Types for Generated Resources
 #

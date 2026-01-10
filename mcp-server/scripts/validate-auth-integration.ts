@@ -1,4 +1,6 @@
 #!/usr/bin/env npx tsx
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 /**
  * Auth Integration Validation Script
  *

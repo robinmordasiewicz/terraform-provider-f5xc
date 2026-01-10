@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 # Build MCPB bundle for F5XC Terraform MCP Server
 #
 # This script creates a self-contained .mcpb bundle that can be installed

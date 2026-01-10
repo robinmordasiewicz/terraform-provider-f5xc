@@ -1,5 +1,4 @@
-// Copyright (c) F5XC Community
-// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
 
 // Package errors provides structured error types for F5 XC Terraform provider
 // following Terraform Plugin Framework best practices.

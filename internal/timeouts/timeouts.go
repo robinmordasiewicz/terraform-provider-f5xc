@@ -1,5 +1,4 @@
-// Copyright (c) F5XC Community
-// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
 
 // Package timeouts provides timeout configuration for F5 XC Terraform resources
 // following Terraform Plugin Framework best practices.

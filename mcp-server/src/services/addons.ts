@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 /**
  * Addon Service Module
  * Provides information about F5 Distributed Cloud addon services and activation workflows

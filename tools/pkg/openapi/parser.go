@@ -1,3 +1,5 @@
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
+
 // Package openapi provides types and utilities for parsing OpenAPI specifications
 // for the F5XC Terraform provider code generation tools.
 package openapi

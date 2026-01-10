@@ -1,5 +1,4 @@
-// Copyright (c) F5XC Community
-// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) 2026 Robin Mordasiewicz. MIT License.
 
 // Package acctest provides acceptance test utilities for F5 XC Terraform provider.
 // Following HashiCorp's acceptance testing best practices.

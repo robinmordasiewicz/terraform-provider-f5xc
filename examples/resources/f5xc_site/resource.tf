@@ -1,5 +1,5 @@
 # Site Resource Example
-# Manages a Site resource in F5 Distributed Cloud for gcp vpc site specification. configuration.
+# Manages a Site resource in F5 Distributed Cloud for azure vnet site specification. configuration.
 
 # Basic Site configuration
 resource "f5xc_site" "example" {

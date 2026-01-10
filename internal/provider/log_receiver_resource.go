@@ -50,131 +50,1348 @@ type LogReceiverResource struct {
 type LogReceiverEmptyModel struct {
 }
 
-// LogReceiverSyslogModel represents syslog block
-type LogReceiverSyslogModel struct {
-	SyslogRfc5424 types.Int64                      `tfsdk:"syslog_rfc5424"`
-	TCPServer     *LogReceiverSyslogTCPServerModel `tfsdk:"tcp_server"`
-	TLSServer     *LogReceiverSyslogTLSServerModel `tfsdk:"tls_server"`
-	UDPServer     *LogReceiverSyslogUDPServerModel `tfsdk:"udp_server"`
+// LogReceiverAWSCloudWatchReceiverModel represents aws_cloud_watch_receiver block
+type LogReceiverAWSCloudWatchReceiverModel struct {
+	AWSRegion   types.String                                      `tfsdk:"aws_region"`
+	GroupName   types.String                                      `tfsdk:"group_name"`
+	StreamName  types.String                                      `tfsdk:"stream_name"`
+	AWSCred     *LogReceiverAWSCloudWatchReceiverAWSCredModel     `tfsdk:"aws_cred"`
+	Batch       *LogReceiverAWSCloudWatchReceiverBatchModel       `tfsdk:"batch"`
+	Compression *LogReceiverAWSCloudWatchReceiverCompressionModel `tfsdk:"compression"`
 }
 
-// LogReceiverSyslogModelAttrTypes defines the attribute types for LogReceiverSyslogModel
-var LogReceiverSyslogModelAttrTypes = map[string]attr.Type{
-	"syslog_rfc5424": types.Int64Type,
-	"tcp_server":     types.ObjectType{AttrTypes: LogReceiverSyslogTCPServerModelAttrTypes},
-	"tls_server":     types.ObjectType{AttrTypes: LogReceiverSyslogTLSServerModelAttrTypes},
-	"udp_server":     types.ObjectType{AttrTypes: LogReceiverSyslogUDPServerModelAttrTypes},
+// LogReceiverAWSCloudWatchReceiverModelAttrTypes defines the attribute types for LogReceiverAWSCloudWatchReceiverModel
+var LogReceiverAWSCloudWatchReceiverModelAttrTypes = map[string]attr.Type{
+	"aws_region":  types.StringType,
+	"group_name":  types.StringType,
+	"stream_name": types.StringType,
+	"aws_cred":    types.ObjectType{AttrTypes: LogReceiverAWSCloudWatchReceiverAWSCredModelAttrTypes},
+	"batch":       types.ObjectType{AttrTypes: LogReceiverAWSCloudWatchReceiverBatchModelAttrTypes},
+	"compression": types.ObjectType{AttrTypes: LogReceiverAWSCloudWatchReceiverCompressionModelAttrTypes},
 }
 
-// LogReceiverSyslogTCPServerModel represents tcp_server block
-type LogReceiverSyslogTCPServerModel struct {
-	Port       types.Int64  `tfsdk:"port"`
-	ServerName types.String `tfsdk:"server_name"`
+// LogReceiverAWSCloudWatchReceiverAWSCredModel represents aws_cred block
+type LogReceiverAWSCloudWatchReceiverAWSCredModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
 }
 
-// LogReceiverSyslogTCPServerModelAttrTypes defines the attribute types for LogReceiverSyslogTCPServerModel
-var LogReceiverSyslogTCPServerModelAttrTypes = map[string]attr.Type{
-	"port":        types.Int64Type,
-	"server_name": types.StringType,
+// LogReceiverAWSCloudWatchReceiverAWSCredModelAttrTypes defines the attribute types for LogReceiverAWSCloudWatchReceiverAWSCredModel
+var LogReceiverAWSCloudWatchReceiverAWSCredModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
-// LogReceiverSyslogTLSServerModel represents tls_server block
-type LogReceiverSyslogTLSServerModel struct {
-	Port                 types.Int64                                `tfsdk:"port"`
-	ServerName           types.String                               `tfsdk:"server_name"`
-	TrustedCAURL         types.String                               `tfsdk:"trusted_ca_url"`
-	DefaultHTTPSPort     *LogReceiverEmptyModel                     `tfsdk:"default_https_port"`
-	DefaultSyslogTLSPort *LogReceiverEmptyModel                     `tfsdk:"default_syslog_tls_port"`
-	MtlsDisabled         *LogReceiverEmptyModel                     `tfsdk:"mtls_disabled"`
-	MtlsEnable           *LogReceiverSyslogTLSServerMtlsEnableModel `tfsdk:"mtls_enable"`
-	VolterraCA           *LogReceiverEmptyModel                     `tfsdk:"volterra_ca"`
+// LogReceiverAWSCloudWatchReceiverBatchModel represents batch block
+type LogReceiverAWSCloudWatchReceiverBatchModel struct {
+	MaxBytes              types.Int64            `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64            `tfsdk:"max_events"`
+	TimeoutSeconds        types.String           `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *LogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *LogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *LogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
-// LogReceiverSyslogTLSServerModelAttrTypes defines the attribute types for LogReceiverSyslogTLSServerModel
-var LogReceiverSyslogTLSServerModelAttrTypes = map[string]attr.Type{
-	"port":                    types.Int64Type,
-	"server_name":             types.StringType,
-	"trusted_ca_url":          types.StringType,
-	"default_https_port":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"default_syslog_tls_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"mtls_disabled":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"mtls_enable":             types.ObjectType{AttrTypes: LogReceiverSyslogTLSServerMtlsEnableModelAttrTypes},
-	"volterra_ca":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+// LogReceiverAWSCloudWatchReceiverBatchModelAttrTypes defines the attribute types for LogReceiverAWSCloudWatchReceiverBatchModel
+var LogReceiverAWSCloudWatchReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
-// LogReceiverSyslogTLSServerMtlsEnableModel represents mtls_enable block
-type LogReceiverSyslogTLSServerMtlsEnableModel struct {
-	Certificate types.String                                     `tfsdk:"certificate"`
-	KeyURL      *LogReceiverSyslogTLSServerMtlsEnableKeyURLModel `tfsdk:"key_url"`
+// LogReceiverAWSCloudWatchReceiverCompressionModel represents compression block
+type LogReceiverAWSCloudWatchReceiverCompressionModel struct {
+	CompressionDefault *LogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip    *LogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *LogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
-// LogReceiverSyslogTLSServerMtlsEnableModelAttrTypes defines the attribute types for LogReceiverSyslogTLSServerMtlsEnableModel
-var LogReceiverSyslogTLSServerMtlsEnableModelAttrTypes = map[string]attr.Type{
-	"certificate": types.StringType,
-	"key_url":     types.ObjectType{AttrTypes: LogReceiverSyslogTLSServerMtlsEnableKeyURLModelAttrTypes},
+// LogReceiverAWSCloudWatchReceiverCompressionModelAttrTypes defines the attribute types for LogReceiverAWSCloudWatchReceiverCompressionModel
+var LogReceiverAWSCloudWatchReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
-// LogReceiverSyslogTLSServerMtlsEnableKeyURLModel represents key_url block
-type LogReceiverSyslogTLSServerMtlsEnableKeyURLModel struct {
-	BlindfoldSecretInfo *LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+// LogReceiverAzureEventHubsReceiverModel represents azure_event_hubs_receiver block
+type LogReceiverAzureEventHubsReceiverModel struct {
+	Instance         types.String                                            `tfsdk:"instance"`
+	Namespace        types.String                                            `tfsdk:"namespace"`
+	ConnectionString *LogReceiverAzureEventHubsReceiverConnectionStringModel `tfsdk:"connection_string"`
 }
 
-// LogReceiverSyslogTLSServerMtlsEnableKeyURLModelAttrTypes defines the attribute types for LogReceiverSyslogTLSServerMtlsEnableKeyURLModel
-var LogReceiverSyslogTLSServerMtlsEnableKeyURLModelAttrTypes = map[string]attr.Type{
-	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes},
-	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModelAttrTypes},
+// LogReceiverAzureEventHubsReceiverModelAttrTypes defines the attribute types for LogReceiverAzureEventHubsReceiverModel
+var LogReceiverAzureEventHubsReceiverModelAttrTypes = map[string]attr.Type{
+	"instance":          types.StringType,
+	"namespace":         types.StringType,
+	"connection_string": types.ObjectType{AttrTypes: LogReceiverAzureEventHubsReceiverConnectionStringModelAttrTypes},
 }
 
-// LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
-type LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
+// LogReceiverAzureEventHubsReceiverConnectionStringModel represents connection_string block
+type LogReceiverAzureEventHubsReceiverConnectionStringModel struct {
+	BlindfoldSecretInfo *LogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *LogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverAzureEventHubsReceiverConnectionStringModelAttrTypes defines the attribute types for LogReceiverAzureEventHubsReceiverConnectionStringModel
+var LogReceiverAzureEventHubsReceiverConnectionStringModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModelAttrTypes},
+}
+
+// LogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModel represents blindfold_secret_info block
+type LogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
 	Location           types.String `tfsdk:"location"`
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
-// LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModel
-var LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+// LogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModel
+var LogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
 	"decryption_provider": types.StringType,
 	"location":            types.StringType,
 	"store_provider":      types.StringType,
 }
 
-// LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
-type LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModel struct {
+// LogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel represents clear_secret_info block
+type LogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
-// LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModel
-var LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+// LogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel
+var LogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModelAttrTypes = map[string]attr.Type{
 	"provider_ref": types.StringType,
 	"url":          types.StringType,
 }
 
-// LogReceiverSyslogUDPServerModel represents udp_server block
-type LogReceiverSyslogUDPServerModel struct {
-	Port       types.Int64  `tfsdk:"port"`
-	ServerName types.String `tfsdk:"server_name"`
+// LogReceiverAzureReceiverModel represents azure_receiver block
+type LogReceiverAzureReceiverModel struct {
+	ContainerName    types.String                                   `tfsdk:"container_name"`
+	Batch            *LogReceiverAzureReceiverBatchModel            `tfsdk:"batch"`
+	Compression      *LogReceiverAzureReceiverCompressionModel      `tfsdk:"compression"`
+	ConnectionString *LogReceiverAzureReceiverConnectionStringModel `tfsdk:"connection_string"`
+	FilenameOptions  *LogReceiverAzureReceiverFilenameOptionsModel  `tfsdk:"filename_options"`
 }
 
-// LogReceiverSyslogUDPServerModelAttrTypes defines the attribute types for LogReceiverSyslogUDPServerModel
-var LogReceiverSyslogUDPServerModelAttrTypes = map[string]attr.Type{
-	"port":        types.Int64Type,
-	"server_name": types.StringType,
+// LogReceiverAzureReceiverModelAttrTypes defines the attribute types for LogReceiverAzureReceiverModel
+var LogReceiverAzureReceiverModelAttrTypes = map[string]attr.Type{
+	"container_name":    types.StringType,
+	"batch":             types.ObjectType{AttrTypes: LogReceiverAzureReceiverBatchModelAttrTypes},
+	"compression":       types.ObjectType{AttrTypes: LogReceiverAzureReceiverCompressionModelAttrTypes},
+	"connection_string": types.ObjectType{AttrTypes: LogReceiverAzureReceiverConnectionStringModelAttrTypes},
+	"filename_options":  types.ObjectType{AttrTypes: LogReceiverAzureReceiverFilenameOptionsModelAttrTypes},
+}
+
+// LogReceiverAzureReceiverBatchModel represents batch block
+type LogReceiverAzureReceiverBatchModel struct {
+	MaxBytes              types.Int64            `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64            `tfsdk:"max_events"`
+	TimeoutSeconds        types.String           `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *LogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *LogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *LogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// LogReceiverAzureReceiverBatchModelAttrTypes defines the attribute types for LogReceiverAzureReceiverBatchModel
+var LogReceiverAzureReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverAzureReceiverCompressionModel represents compression block
+type LogReceiverAzureReceiverCompressionModel struct {
+	CompressionDefault *LogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip    *LogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *LogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// LogReceiverAzureReceiverCompressionModelAttrTypes defines the attribute types for LogReceiverAzureReceiverCompressionModel
+var LogReceiverAzureReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverAzureReceiverConnectionStringModel represents connection_string block
+type LogReceiverAzureReceiverConnectionStringModel struct {
+	BlindfoldSecretInfo *LogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *LogReceiverAzureReceiverConnectionStringClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverAzureReceiverConnectionStringModelAttrTypes defines the attribute types for LogReceiverAzureReceiverConnectionStringModel
+var LogReceiverAzureReceiverConnectionStringModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverAzureReceiverConnectionStringClearSecretInfoModelAttrTypes},
+}
+
+// LogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel represents blindfold_secret_info block
+type LogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// LogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel
+var LogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// LogReceiverAzureReceiverConnectionStringClearSecretInfoModel represents clear_secret_info block
+type LogReceiverAzureReceiverConnectionStringClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// LogReceiverAzureReceiverConnectionStringClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverAzureReceiverConnectionStringClearSecretInfoModel
+var LogReceiverAzureReceiverConnectionStringClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
+// LogReceiverAzureReceiverFilenameOptionsModel represents filename_options block
+type LogReceiverAzureReceiverFilenameOptionsModel struct {
+	CustomFolder  types.String           `tfsdk:"custom_folder"`
+	LogTypeFolder *LogReceiverEmptyModel `tfsdk:"log_type_folder"`
+	NoFolder      *LogReceiverEmptyModel `tfsdk:"no_folder"`
+}
+
+// LogReceiverAzureReceiverFilenameOptionsModelAttrTypes defines the attribute types for LogReceiverAzureReceiverFilenameOptionsModel
+var LogReceiverAzureReceiverFilenameOptionsModelAttrTypes = map[string]attr.Type{
+	"custom_folder":   types.StringType,
+	"log_type_folder": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_folder":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverDatadogReceiverModel represents datadog_receiver block
+type LogReceiverDatadogReceiverModel struct {
+	Endpoint      types.String                                  `tfsdk:"endpoint"`
+	Site          types.String                                  `tfsdk:"site"`
+	Batch         *LogReceiverDatadogReceiverBatchModel         `tfsdk:"batch"`
+	Compression   *LogReceiverDatadogReceiverCompressionModel   `tfsdk:"compression"`
+	DatadogAPIKey *LogReceiverDatadogReceiverDatadogAPIKeyModel `tfsdk:"datadog_api_key"`
+	NoTLS         *LogReceiverEmptyModel                        `tfsdk:"no_tls"`
+	UseTLS        *LogReceiverDatadogReceiverUseTLSModel        `tfsdk:"use_tls"`
+}
+
+// LogReceiverDatadogReceiverModelAttrTypes defines the attribute types for LogReceiverDatadogReceiverModel
+var LogReceiverDatadogReceiverModelAttrTypes = map[string]attr.Type{
+	"endpoint":        types.StringType,
+	"site":            types.StringType,
+	"batch":           types.ObjectType{AttrTypes: LogReceiverDatadogReceiverBatchModelAttrTypes},
+	"compression":     types.ObjectType{AttrTypes: LogReceiverDatadogReceiverCompressionModelAttrTypes},
+	"datadog_api_key": types.ObjectType{AttrTypes: LogReceiverDatadogReceiverDatadogAPIKeyModelAttrTypes},
+	"no_tls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_tls":         types.ObjectType{AttrTypes: LogReceiverDatadogReceiverUseTLSModelAttrTypes},
+}
+
+// LogReceiverDatadogReceiverBatchModel represents batch block
+type LogReceiverDatadogReceiverBatchModel struct {
+	MaxBytes              types.Int64            `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64            `tfsdk:"max_events"`
+	TimeoutSeconds        types.String           `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *LogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *LogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *LogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// LogReceiverDatadogReceiverBatchModelAttrTypes defines the attribute types for LogReceiverDatadogReceiverBatchModel
+var LogReceiverDatadogReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverDatadogReceiverCompressionModel represents compression block
+type LogReceiverDatadogReceiverCompressionModel struct {
+	CompressionDefault *LogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip    *LogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *LogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// LogReceiverDatadogReceiverCompressionModelAttrTypes defines the attribute types for LogReceiverDatadogReceiverCompressionModel
+var LogReceiverDatadogReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverDatadogReceiverDatadogAPIKeyModel represents datadog_api_key block
+type LogReceiverDatadogReceiverDatadogAPIKeyModel struct {
+	BlindfoldSecretInfo *LogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *LogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverDatadogReceiverDatadogAPIKeyModelAttrTypes defines the attribute types for LogReceiverDatadogReceiverDatadogAPIKeyModel
+var LogReceiverDatadogReceiverDatadogAPIKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModelAttrTypes},
+}
+
+// LogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type LogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// LogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel
+var LogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// LogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel represents clear_secret_info block
+type LogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// LogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel
+var LogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
+// LogReceiverDatadogReceiverUseTLSModel represents use_tls block
+type LogReceiverDatadogReceiverUseTLSModel struct {
+	TrustedCAURL             types.String                                     `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *LogReceiverEmptyModel                           `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname    *LogReceiverEmptyModel                           `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate  *LogReceiverEmptyModel                           `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname     *LogReceiverEmptyModel                           `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled             *LogReceiverEmptyModel                           `tfsdk:"mtls_disabled"`
+	MtlsEnable               *LogReceiverDatadogReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCA                     *LogReceiverEmptyModel                           `tfsdk:"no_ca"`
+}
+
+// LogReceiverDatadogReceiverUseTLSModelAttrTypes defines the attribute types for LogReceiverDatadogReceiverUseTLSModel
+var LogReceiverDatadogReceiverUseTLSModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_url":             types.StringType,
+	"disable_verify_certificate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_verify_hostname":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_certificate":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_hostname":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_disabled":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_enable":                types.ObjectType{AttrTypes: LogReceiverDatadogReceiverUseTLSMtlsEnableModelAttrTypes},
+	"no_ca":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverDatadogReceiverUseTLSMtlsEnableModel represents mtls_enable block
+type LogReceiverDatadogReceiverUseTLSMtlsEnableModel struct {
+	Certificate types.String                                           `tfsdk:"certificate"`
+	KeyURL      *LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+}
+
+// LogReceiverDatadogReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for LogReceiverDatadogReceiverUseTLSMtlsEnableModel
+var LogReceiverDatadogReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
+	"certificate": types.StringType,
+	"key_url":     types.ObjectType{AttrTypes: LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModelAttrTypes},
+}
+
+// LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
+type LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel struct {
+	BlindfoldSecretInfo *LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModelAttrTypes defines the attribute types for LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel
+var LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes},
+}
+
+// LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel
+var LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
+type LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel
+var LogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
+// LogReceiverGCPBucketReceiverModel represents gcp_bucket_receiver block
+type LogReceiverGCPBucketReceiverModel struct {
+	Bucket          types.String                                      `tfsdk:"bucket"`
+	Batch           *LogReceiverGCPBucketReceiverBatchModel           `tfsdk:"batch"`
+	Compression     *LogReceiverGCPBucketReceiverCompressionModel     `tfsdk:"compression"`
+	FilenameOptions *LogReceiverGCPBucketReceiverFilenameOptionsModel `tfsdk:"filename_options"`
+	GCPCred         *LogReceiverGCPBucketReceiverGCPCredModel         `tfsdk:"gcp_cred"`
+}
+
+// LogReceiverGCPBucketReceiverModelAttrTypes defines the attribute types for LogReceiverGCPBucketReceiverModel
+var LogReceiverGCPBucketReceiverModelAttrTypes = map[string]attr.Type{
+	"bucket":           types.StringType,
+	"batch":            types.ObjectType{AttrTypes: LogReceiverGCPBucketReceiverBatchModelAttrTypes},
+	"compression":      types.ObjectType{AttrTypes: LogReceiverGCPBucketReceiverCompressionModelAttrTypes},
+	"filename_options": types.ObjectType{AttrTypes: LogReceiverGCPBucketReceiverFilenameOptionsModelAttrTypes},
+	"gcp_cred":         types.ObjectType{AttrTypes: LogReceiverGCPBucketReceiverGCPCredModelAttrTypes},
+}
+
+// LogReceiverGCPBucketReceiverBatchModel represents batch block
+type LogReceiverGCPBucketReceiverBatchModel struct {
+	MaxBytes              types.Int64            `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64            `tfsdk:"max_events"`
+	TimeoutSeconds        types.String           `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *LogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *LogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *LogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// LogReceiverGCPBucketReceiverBatchModelAttrTypes defines the attribute types for LogReceiverGCPBucketReceiverBatchModel
+var LogReceiverGCPBucketReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverGCPBucketReceiverCompressionModel represents compression block
+type LogReceiverGCPBucketReceiverCompressionModel struct {
+	CompressionDefault *LogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip    *LogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *LogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// LogReceiverGCPBucketReceiverCompressionModelAttrTypes defines the attribute types for LogReceiverGCPBucketReceiverCompressionModel
+var LogReceiverGCPBucketReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverGCPBucketReceiverFilenameOptionsModel represents filename_options block
+type LogReceiverGCPBucketReceiverFilenameOptionsModel struct {
+	CustomFolder  types.String           `tfsdk:"custom_folder"`
+	LogTypeFolder *LogReceiverEmptyModel `tfsdk:"log_type_folder"`
+	NoFolder      *LogReceiverEmptyModel `tfsdk:"no_folder"`
+}
+
+// LogReceiverGCPBucketReceiverFilenameOptionsModelAttrTypes defines the attribute types for LogReceiverGCPBucketReceiverFilenameOptionsModel
+var LogReceiverGCPBucketReceiverFilenameOptionsModelAttrTypes = map[string]attr.Type{
+	"custom_folder":   types.StringType,
+	"log_type_folder": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_folder":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverGCPBucketReceiverGCPCredModel represents gcp_cred block
+type LogReceiverGCPBucketReceiverGCPCredModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// LogReceiverGCPBucketReceiverGCPCredModelAttrTypes defines the attribute types for LogReceiverGCPBucketReceiverGCPCredModel
+var LogReceiverGCPBucketReceiverGCPCredModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// LogReceiverHTTPReceiverModel represents http_receiver block
+type LogReceiverHTTPReceiverModel struct {
+	URI         types.String                             `tfsdk:"uri"`
+	AuthBasic   *LogReceiverHTTPReceiverAuthBasicModel   `tfsdk:"auth_basic"`
+	AuthNone    *LogReceiverEmptyModel                   `tfsdk:"auth_none"`
+	AuthToken   *LogReceiverHTTPReceiverAuthTokenModel   `tfsdk:"auth_token"`
+	Batch       *LogReceiverHTTPReceiverBatchModel       `tfsdk:"batch"`
+	Compression *LogReceiverHTTPReceiverCompressionModel `tfsdk:"compression"`
+	NoTLS       *LogReceiverEmptyModel                   `tfsdk:"no_tls"`
+	UseTLS      *LogReceiverHTTPReceiverUseTLSModel      `tfsdk:"use_tls"`
+}
+
+// LogReceiverHTTPReceiverModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverModel
+var LogReceiverHTTPReceiverModelAttrTypes = map[string]attr.Type{
+	"uri":         types.StringType,
+	"auth_basic":  types.ObjectType{AttrTypes: LogReceiverHTTPReceiverAuthBasicModelAttrTypes},
+	"auth_none":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"auth_token":  types.ObjectType{AttrTypes: LogReceiverHTTPReceiverAuthTokenModelAttrTypes},
+	"batch":       types.ObjectType{AttrTypes: LogReceiverHTTPReceiverBatchModelAttrTypes},
+	"compression": types.ObjectType{AttrTypes: LogReceiverHTTPReceiverCompressionModelAttrTypes},
+	"no_tls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_tls":     types.ObjectType{AttrTypes: LogReceiverHTTPReceiverUseTLSModelAttrTypes},
+}
+
+// LogReceiverHTTPReceiverAuthBasicModel represents auth_basic block
+type LogReceiverHTTPReceiverAuthBasicModel struct {
+	UserName types.String                                   `tfsdk:"user_name"`
+	Password *LogReceiverHTTPReceiverAuthBasicPasswordModel `tfsdk:"password"`
+}
+
+// LogReceiverHTTPReceiverAuthBasicModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverAuthBasicModel
+var LogReceiverHTTPReceiverAuthBasicModelAttrTypes = map[string]attr.Type{
+	"user_name": types.StringType,
+	"password":  types.ObjectType{AttrTypes: LogReceiverHTTPReceiverAuthBasicPasswordModelAttrTypes},
+}
+
+// LogReceiverHTTPReceiverAuthBasicPasswordModel represents password block
+type LogReceiverHTTPReceiverAuthBasicPasswordModel struct {
+	BlindfoldSecretInfo *LogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *LogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverHTTPReceiverAuthBasicPasswordModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverAuthBasicPasswordModel
+var LogReceiverHTTPReceiverAuthBasicPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModelAttrTypes},
+}
+
+// LogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type LogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// LogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel
+var LogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// LogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel represents clear_secret_info block
+type LogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// LogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel
+var LogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
+// LogReceiverHTTPReceiverAuthTokenModel represents auth_token block
+type LogReceiverHTTPReceiverAuthTokenModel struct {
+	Token *LogReceiverHTTPReceiverAuthTokenTokenModel `tfsdk:"token"`
+}
+
+// LogReceiverHTTPReceiverAuthTokenModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverAuthTokenModel
+var LogReceiverHTTPReceiverAuthTokenModelAttrTypes = map[string]attr.Type{
+	"token": types.ObjectType{AttrTypes: LogReceiverHTTPReceiverAuthTokenTokenModelAttrTypes},
+}
+
+// LogReceiverHTTPReceiverAuthTokenTokenModel represents token block
+type LogReceiverHTTPReceiverAuthTokenTokenModel struct {
+	BlindfoldSecretInfo *LogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *LogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverHTTPReceiverAuthTokenTokenModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverAuthTokenTokenModel
+var LogReceiverHTTPReceiverAuthTokenTokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModelAttrTypes},
+}
+
+// LogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
+type LogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// LogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel
+var LogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// LogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel represents clear_secret_info block
+type LogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// LogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel
+var LogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
+// LogReceiverHTTPReceiverBatchModel represents batch block
+type LogReceiverHTTPReceiverBatchModel struct {
+	MaxBytes              types.Int64            `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64            `tfsdk:"max_events"`
+	TimeoutSeconds        types.String           `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *LogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *LogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *LogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// LogReceiverHTTPReceiverBatchModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverBatchModel
+var LogReceiverHTTPReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverHTTPReceiverCompressionModel represents compression block
+type LogReceiverHTTPReceiverCompressionModel struct {
+	CompressionDefault *LogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip    *LogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *LogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// LogReceiverHTTPReceiverCompressionModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverCompressionModel
+var LogReceiverHTTPReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverHTTPReceiverUseTLSModel represents use_tls block
+type LogReceiverHTTPReceiverUseTLSModel struct {
+	TrustedCAURL             types.String                                  `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *LogReceiverEmptyModel                        `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname    *LogReceiverEmptyModel                        `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate  *LogReceiverEmptyModel                        `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname     *LogReceiverEmptyModel                        `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled             *LogReceiverEmptyModel                        `tfsdk:"mtls_disabled"`
+	MtlsEnable               *LogReceiverHTTPReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCA                     *LogReceiverEmptyModel                        `tfsdk:"no_ca"`
+}
+
+// LogReceiverHTTPReceiverUseTLSModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverUseTLSModel
+var LogReceiverHTTPReceiverUseTLSModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_url":             types.StringType,
+	"disable_verify_certificate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_verify_hostname":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_certificate":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_hostname":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_disabled":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_enable":                types.ObjectType{AttrTypes: LogReceiverHTTPReceiverUseTLSMtlsEnableModelAttrTypes},
+	"no_ca":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverHTTPReceiverUseTLSMtlsEnableModel represents mtls_enable block
+type LogReceiverHTTPReceiverUseTLSMtlsEnableModel struct {
+	Certificate types.String                                        `tfsdk:"certificate"`
+	KeyURL      *LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+}
+
+// LogReceiverHTTPReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverUseTLSMtlsEnableModel
+var LogReceiverHTTPReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
+	"certificate": types.StringType,
+	"key_url":     types.ObjectType{AttrTypes: LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModelAttrTypes},
+}
+
+// LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
+type LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel struct {
+	BlindfoldSecretInfo *LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel
+var LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes},
+}
+
+// LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel
+var LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
+type LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel
+var LogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
+// LogReceiverKafkaReceiverModel represents kafka_receiver block
+type LogReceiverKafkaReceiverModel struct {
+	BootstrapServers types.List                                `tfsdk:"bootstrap_servers"`
+	KafkaTopic       types.String                              `tfsdk:"kafka_topic"`
+	Batch            *LogReceiverKafkaReceiverBatchModel       `tfsdk:"batch"`
+	Compression      *LogReceiverKafkaReceiverCompressionModel `tfsdk:"compression"`
+	NoTLS            *LogReceiverEmptyModel                    `tfsdk:"no_tls"`
+	UseTLS           *LogReceiverKafkaReceiverUseTLSModel      `tfsdk:"use_tls"`
+}
+
+// LogReceiverKafkaReceiverModelAttrTypes defines the attribute types for LogReceiverKafkaReceiverModel
+var LogReceiverKafkaReceiverModelAttrTypes = map[string]attr.Type{
+	"bootstrap_servers": types.ListType{ElemType: types.StringType},
+	"kafka_topic":       types.StringType,
+	"batch":             types.ObjectType{AttrTypes: LogReceiverKafkaReceiverBatchModelAttrTypes},
+	"compression":       types.ObjectType{AttrTypes: LogReceiverKafkaReceiverCompressionModelAttrTypes},
+	"no_tls":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_tls":           types.ObjectType{AttrTypes: LogReceiverKafkaReceiverUseTLSModelAttrTypes},
+}
+
+// LogReceiverKafkaReceiverBatchModel represents batch block
+type LogReceiverKafkaReceiverBatchModel struct {
+	MaxBytes              types.Int64            `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64            `tfsdk:"max_events"`
+	TimeoutSeconds        types.String           `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *LogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *LogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *LogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// LogReceiverKafkaReceiverBatchModelAttrTypes defines the attribute types for LogReceiverKafkaReceiverBatchModel
+var LogReceiverKafkaReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverKafkaReceiverCompressionModel represents compression block
+type LogReceiverKafkaReceiverCompressionModel struct {
+	CompressionDefault *LogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip    *LogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *LogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// LogReceiverKafkaReceiverCompressionModelAttrTypes defines the attribute types for LogReceiverKafkaReceiverCompressionModel
+var LogReceiverKafkaReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverKafkaReceiverUseTLSModel represents use_tls block
+type LogReceiverKafkaReceiverUseTLSModel struct {
+	TrustedCAURL             types.String                                   `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *LogReceiverEmptyModel                         `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname    *LogReceiverEmptyModel                         `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate  *LogReceiverEmptyModel                         `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname     *LogReceiverEmptyModel                         `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled             *LogReceiverEmptyModel                         `tfsdk:"mtls_disabled"`
+	MtlsEnable               *LogReceiverKafkaReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCA                     *LogReceiverEmptyModel                         `tfsdk:"no_ca"`
+}
+
+// LogReceiverKafkaReceiverUseTLSModelAttrTypes defines the attribute types for LogReceiverKafkaReceiverUseTLSModel
+var LogReceiverKafkaReceiverUseTLSModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_url":             types.StringType,
+	"disable_verify_certificate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_verify_hostname":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_certificate":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_hostname":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_disabled":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_enable":                types.ObjectType{AttrTypes: LogReceiverKafkaReceiverUseTLSMtlsEnableModelAttrTypes},
+	"no_ca":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverKafkaReceiverUseTLSMtlsEnableModel represents mtls_enable block
+type LogReceiverKafkaReceiverUseTLSMtlsEnableModel struct {
+	Certificate types.String                                         `tfsdk:"certificate"`
+	KeyURL      *LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+}
+
+// LogReceiverKafkaReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for LogReceiverKafkaReceiverUseTLSMtlsEnableModel
+var LogReceiverKafkaReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
+	"certificate": types.StringType,
+	"key_url":     types.ObjectType{AttrTypes: LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModelAttrTypes},
+}
+
+// LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
+type LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel struct {
+	BlindfoldSecretInfo *LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModelAttrTypes defines the attribute types for LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel
+var LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes},
+}
+
+// LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel
+var LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
+type LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel
+var LogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
+// LogReceiverNewRelicReceiverModel represents new_relic_receiver block
+type LogReceiverNewRelicReceiverModel struct {
+	APIKey *LogReceiverNewRelicReceiverAPIKeyModel `tfsdk:"api_key"`
+	Eu     *LogReceiverEmptyModel                  `tfsdk:"eu"`
+	Us     *LogReceiverEmptyModel                  `tfsdk:"us"`
+}
+
+// LogReceiverNewRelicReceiverModelAttrTypes defines the attribute types for LogReceiverNewRelicReceiverModel
+var LogReceiverNewRelicReceiverModelAttrTypes = map[string]attr.Type{
+	"api_key": types.ObjectType{AttrTypes: LogReceiverNewRelicReceiverAPIKeyModelAttrTypes},
+	"eu":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"us":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverNewRelicReceiverAPIKeyModel represents api_key block
+type LogReceiverNewRelicReceiverAPIKeyModel struct {
+	BlindfoldSecretInfo *LogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *LogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverNewRelicReceiverAPIKeyModelAttrTypes defines the attribute types for LogReceiverNewRelicReceiverAPIKeyModel
+var LogReceiverNewRelicReceiverAPIKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverNewRelicReceiverAPIKeyClearSecretInfoModelAttrTypes},
+}
+
+// LogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type LogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// LogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel
+var LogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// LogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel represents clear_secret_info block
+type LogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// LogReceiverNewRelicReceiverAPIKeyClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel
+var LogReceiverNewRelicReceiverAPIKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
+// LogReceiverNsListModel represents ns_list block
+type LogReceiverNsListModel struct {
+	Namespaces types.List `tfsdk:"namespaces"`
+}
+
+// LogReceiverNsListModelAttrTypes defines the attribute types for LogReceiverNsListModel
+var LogReceiverNsListModelAttrTypes = map[string]attr.Type{
+	"namespaces": types.ListType{ElemType: types.StringType},
+}
+
+// LogReceiverQradarReceiverModel represents qradar_receiver block
+type LogReceiverQradarReceiverModel struct {
+	URI         types.String                               `tfsdk:"uri"`
+	Batch       *LogReceiverQradarReceiverBatchModel       `tfsdk:"batch"`
+	Compression *LogReceiverQradarReceiverCompressionModel `tfsdk:"compression"`
+	NoTLS       *LogReceiverEmptyModel                     `tfsdk:"no_tls"`
+	UseTLS      *LogReceiverQradarReceiverUseTLSModel      `tfsdk:"use_tls"`
+}
+
+// LogReceiverQradarReceiverModelAttrTypes defines the attribute types for LogReceiverQradarReceiverModel
+var LogReceiverQradarReceiverModelAttrTypes = map[string]attr.Type{
+	"uri":         types.StringType,
+	"batch":       types.ObjectType{AttrTypes: LogReceiverQradarReceiverBatchModelAttrTypes},
+	"compression": types.ObjectType{AttrTypes: LogReceiverQradarReceiverCompressionModelAttrTypes},
+	"no_tls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_tls":     types.ObjectType{AttrTypes: LogReceiverQradarReceiverUseTLSModelAttrTypes},
+}
+
+// LogReceiverQradarReceiverBatchModel represents batch block
+type LogReceiverQradarReceiverBatchModel struct {
+	MaxBytes              types.Int64            `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64            `tfsdk:"max_events"`
+	TimeoutSeconds        types.String           `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *LogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *LogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *LogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// LogReceiverQradarReceiverBatchModelAttrTypes defines the attribute types for LogReceiverQradarReceiverBatchModel
+var LogReceiverQradarReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverQradarReceiverCompressionModel represents compression block
+type LogReceiverQradarReceiverCompressionModel struct {
+	CompressionDefault *LogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip    *LogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *LogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// LogReceiverQradarReceiverCompressionModelAttrTypes defines the attribute types for LogReceiverQradarReceiverCompressionModel
+var LogReceiverQradarReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverQradarReceiverUseTLSModel represents use_tls block
+type LogReceiverQradarReceiverUseTLSModel struct {
+	TrustedCAURL             types.String                                    `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *LogReceiverEmptyModel                          `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname    *LogReceiverEmptyModel                          `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate  *LogReceiverEmptyModel                          `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname     *LogReceiverEmptyModel                          `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled             *LogReceiverEmptyModel                          `tfsdk:"mtls_disabled"`
+	MtlsEnable               *LogReceiverQradarReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCA                     *LogReceiverEmptyModel                          `tfsdk:"no_ca"`
+}
+
+// LogReceiverQradarReceiverUseTLSModelAttrTypes defines the attribute types for LogReceiverQradarReceiverUseTLSModel
+var LogReceiverQradarReceiverUseTLSModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_url":             types.StringType,
+	"disable_verify_certificate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_verify_hostname":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_certificate":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_hostname":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_disabled":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_enable":                types.ObjectType{AttrTypes: LogReceiverQradarReceiverUseTLSMtlsEnableModelAttrTypes},
+	"no_ca":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverQradarReceiverUseTLSMtlsEnableModel represents mtls_enable block
+type LogReceiverQradarReceiverUseTLSMtlsEnableModel struct {
+	Certificate types.String                                          `tfsdk:"certificate"`
+	KeyURL      *LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+}
+
+// LogReceiverQradarReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for LogReceiverQradarReceiverUseTLSMtlsEnableModel
+var LogReceiverQradarReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
+	"certificate": types.StringType,
+	"key_url":     types.ObjectType{AttrTypes: LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModelAttrTypes},
+}
+
+// LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
+type LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel struct {
+	BlindfoldSecretInfo *LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModelAttrTypes defines the attribute types for LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel
+var LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes},
+}
+
+// LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel
+var LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
+type LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel
+var LogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
+// LogReceiverS3ReceiverModel represents s3_receiver block
+type LogReceiverS3ReceiverModel struct {
+	AWSRegion       types.String                               `tfsdk:"aws_region"`
+	Bucket          types.String                               `tfsdk:"bucket"`
+	AWSCred         *LogReceiverS3ReceiverAWSCredModel         `tfsdk:"aws_cred"`
+	Batch           *LogReceiverS3ReceiverBatchModel           `tfsdk:"batch"`
+	Compression     *LogReceiverS3ReceiverCompressionModel     `tfsdk:"compression"`
+	FilenameOptions *LogReceiverS3ReceiverFilenameOptionsModel `tfsdk:"filename_options"`
+}
+
+// LogReceiverS3ReceiverModelAttrTypes defines the attribute types for LogReceiverS3ReceiverModel
+var LogReceiverS3ReceiverModelAttrTypes = map[string]attr.Type{
+	"aws_region":       types.StringType,
+	"bucket":           types.StringType,
+	"aws_cred":         types.ObjectType{AttrTypes: LogReceiverS3ReceiverAWSCredModelAttrTypes},
+	"batch":            types.ObjectType{AttrTypes: LogReceiverS3ReceiverBatchModelAttrTypes},
+	"compression":      types.ObjectType{AttrTypes: LogReceiverS3ReceiverCompressionModelAttrTypes},
+	"filename_options": types.ObjectType{AttrTypes: LogReceiverS3ReceiverFilenameOptionsModelAttrTypes},
+}
+
+// LogReceiverS3ReceiverAWSCredModel represents aws_cred block
+type LogReceiverS3ReceiverAWSCredModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// LogReceiverS3ReceiverAWSCredModelAttrTypes defines the attribute types for LogReceiverS3ReceiverAWSCredModel
+var LogReceiverS3ReceiverAWSCredModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// LogReceiverS3ReceiverBatchModel represents batch block
+type LogReceiverS3ReceiverBatchModel struct {
+	MaxBytes              types.Int64            `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64            `tfsdk:"max_events"`
+	TimeoutSeconds        types.String           `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *LogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *LogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *LogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// LogReceiverS3ReceiverBatchModelAttrTypes defines the attribute types for LogReceiverS3ReceiverBatchModel
+var LogReceiverS3ReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverS3ReceiverCompressionModel represents compression block
+type LogReceiverS3ReceiverCompressionModel struct {
+	CompressionDefault *LogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip    *LogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *LogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// LogReceiverS3ReceiverCompressionModelAttrTypes defines the attribute types for LogReceiverS3ReceiverCompressionModel
+var LogReceiverS3ReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverS3ReceiverFilenameOptionsModel represents filename_options block
+type LogReceiverS3ReceiverFilenameOptionsModel struct {
+	CustomFolder  types.String           `tfsdk:"custom_folder"`
+	LogTypeFolder *LogReceiverEmptyModel `tfsdk:"log_type_folder"`
+	NoFolder      *LogReceiverEmptyModel `tfsdk:"no_folder"`
+}
+
+// LogReceiverS3ReceiverFilenameOptionsModelAttrTypes defines the attribute types for LogReceiverS3ReceiverFilenameOptionsModel
+var LogReceiverS3ReceiverFilenameOptionsModelAttrTypes = map[string]attr.Type{
+	"custom_folder":   types.StringType,
+	"log_type_folder": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_folder":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverSplunkReceiverModel represents splunk_receiver block
+type LogReceiverSplunkReceiverModel struct {
+	Endpoint       types.String                                  `tfsdk:"endpoint"`
+	Batch          *LogReceiverSplunkReceiverBatchModel          `tfsdk:"batch"`
+	Compression    *LogReceiverSplunkReceiverCompressionModel    `tfsdk:"compression"`
+	NoTLS          *LogReceiverEmptyModel                        `tfsdk:"no_tls"`
+	SplunkHecToken *LogReceiverSplunkReceiverSplunkHecTokenModel `tfsdk:"splunk_hec_token"`
+	UseTLS         *LogReceiverSplunkReceiverUseTLSModel         `tfsdk:"use_tls"`
+}
+
+// LogReceiverSplunkReceiverModelAttrTypes defines the attribute types for LogReceiverSplunkReceiverModel
+var LogReceiverSplunkReceiverModelAttrTypes = map[string]attr.Type{
+	"endpoint":         types.StringType,
+	"batch":            types.ObjectType{AttrTypes: LogReceiverSplunkReceiverBatchModelAttrTypes},
+	"compression":      types.ObjectType{AttrTypes: LogReceiverSplunkReceiverCompressionModelAttrTypes},
+	"no_tls":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"splunk_hec_token": types.ObjectType{AttrTypes: LogReceiverSplunkReceiverSplunkHecTokenModelAttrTypes},
+	"use_tls":          types.ObjectType{AttrTypes: LogReceiverSplunkReceiverUseTLSModelAttrTypes},
+}
+
+// LogReceiverSplunkReceiverBatchModel represents batch block
+type LogReceiverSplunkReceiverBatchModel struct {
+	MaxBytes              types.Int64            `tfsdk:"max_bytes"`
+	MaxEvents             types.Int64            `tfsdk:"max_events"`
+	TimeoutSeconds        types.String           `tfsdk:"timeout_seconds"`
+	MaxBytesDisabled      *LogReceiverEmptyModel `tfsdk:"max_bytes_disabled"`
+	MaxEventsDisabled     *LogReceiverEmptyModel `tfsdk:"max_events_disabled"`
+	TimeoutSecondsDefault *LogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
+}
+
+// LogReceiverSplunkReceiverBatchModelAttrTypes defines the attribute types for LogReceiverSplunkReceiverBatchModel
+var LogReceiverSplunkReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverSplunkReceiverCompressionModel represents compression block
+type LogReceiverSplunkReceiverCompressionModel struct {
+	CompressionDefault *LogReceiverEmptyModel `tfsdk:"compression_default"`
+	CompressionGzip    *LogReceiverEmptyModel `tfsdk:"compression_gzip"`
+	CompressionNone    *LogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// LogReceiverSplunkReceiverCompressionModelAttrTypes defines the attribute types for LogReceiverSplunkReceiverCompressionModel
+var LogReceiverSplunkReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverSplunkReceiverSplunkHecTokenModel represents splunk_hec_token block
+type LogReceiverSplunkReceiverSplunkHecTokenModel struct {
+	BlindfoldSecretInfo *LogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *LogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverSplunkReceiverSplunkHecTokenModelAttrTypes defines the attribute types for LogReceiverSplunkReceiverSplunkHecTokenModel
+var LogReceiverSplunkReceiverSplunkHecTokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModelAttrTypes},
+}
+
+// LogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
+type LogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// LogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel
+var LogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// LogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel represents clear_secret_info block
+type LogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// LogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel
+var LogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
+// LogReceiverSplunkReceiverUseTLSModel represents use_tls block
+type LogReceiverSplunkReceiverUseTLSModel struct {
+	TrustedCAURL             types.String                                    `tfsdk:"trusted_ca_url"`
+	DisableVerifyCertificate *LogReceiverEmptyModel                          `tfsdk:"disable_verify_certificate"`
+	DisableVerifyHostname    *LogReceiverEmptyModel                          `tfsdk:"disable_verify_hostname"`
+	EnableVerifyCertificate  *LogReceiverEmptyModel                          `tfsdk:"enable_verify_certificate"`
+	EnableVerifyHostname     *LogReceiverEmptyModel                          `tfsdk:"enable_verify_hostname"`
+	MtlsDisabled             *LogReceiverEmptyModel                          `tfsdk:"mtls_disabled"`
+	MtlsEnable               *LogReceiverSplunkReceiverUseTLSMtlsEnableModel `tfsdk:"mtls_enable"`
+	NoCA                     *LogReceiverEmptyModel                          `tfsdk:"no_ca"`
+}
+
+// LogReceiverSplunkReceiverUseTLSModelAttrTypes defines the attribute types for LogReceiverSplunkReceiverUseTLSModel
+var LogReceiverSplunkReceiverUseTLSModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_url":             types.StringType,
+	"disable_verify_certificate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_verify_hostname":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_certificate":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_hostname":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_disabled":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_enable":                types.ObjectType{AttrTypes: LogReceiverSplunkReceiverUseTLSMtlsEnableModelAttrTypes},
+	"no_ca":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// LogReceiverSplunkReceiverUseTLSMtlsEnableModel represents mtls_enable block
+type LogReceiverSplunkReceiverUseTLSMtlsEnableModel struct {
+	Certificate types.String                                          `tfsdk:"certificate"`
+	KeyURL      *LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
+}
+
+// LogReceiverSplunkReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for LogReceiverSplunkReceiverUseTLSMtlsEnableModel
+var LogReceiverSplunkReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
+	"certificate": types.StringType,
+	"key_url":     types.ObjectType{AttrTypes: LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModelAttrTypes},
+}
+
+// LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
+type LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel struct {
+	BlindfoldSecretInfo *LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModelAttrTypes defines the attribute types for LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel
+var LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes},
+}
+
+// LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel
+var LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
+type LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel
+var LogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
+// LogReceiverSumoLogicReceiverModel represents sumo_logic_receiver block
+type LogReceiverSumoLogicReceiverModel struct {
+	URL *LogReceiverSumoLogicReceiverURLModel `tfsdk:"url"`
+}
+
+// LogReceiverSumoLogicReceiverModelAttrTypes defines the attribute types for LogReceiverSumoLogicReceiverModel
+var LogReceiverSumoLogicReceiverModelAttrTypes = map[string]attr.Type{
+	"url": types.ObjectType{AttrTypes: LogReceiverSumoLogicReceiverURLModelAttrTypes},
+}
+
+// LogReceiverSumoLogicReceiverURLModel represents url block
+type LogReceiverSumoLogicReceiverURLModel struct {
+	BlindfoldSecretInfo *LogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *LogReceiverSumoLogicReceiverURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverSumoLogicReceiverURLModelAttrTypes defines the attribute types for LogReceiverSumoLogicReceiverURLModel
+var LogReceiverSumoLogicReceiverURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverSumoLogicReceiverURLClearSecretInfoModelAttrTypes},
+}
+
+// LogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel represents blindfold_secret_info block
+type LogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// LogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel
+var LogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// LogReceiverSumoLogicReceiverURLClearSecretInfoModel represents clear_secret_info block
+type LogReceiverSumoLogicReceiverURLClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// LogReceiverSumoLogicReceiverURLClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverSumoLogicReceiverURLClearSecretInfoModel
+var LogReceiverSumoLogicReceiverURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 type LogReceiverResourceModel struct {
-	Name        types.String            `tfsdk:"name"`
-	Namespace   types.String            `tfsdk:"namespace"`
-	Annotations types.Map               `tfsdk:"annotations"`
-	Description types.String            `tfsdk:"description"`
-	Disable     types.Bool              `tfsdk:"disable"`
-	Labels      types.Map               `tfsdk:"labels"`
-	ID          types.String            `tfsdk:"id"`
-	Timeouts    timeouts.Value          `tfsdk:"timeouts"`
-	SiteLocal   *LogReceiverEmptyModel  `tfsdk:"site_local"`
-	Syslog      *LogReceiverSyslogModel `tfsdk:"syslog"`
+	Name                   types.String                            `tfsdk:"name"`
+	Namespace              types.String                            `tfsdk:"namespace"`
+	Annotations            types.Map                               `tfsdk:"annotations"`
+	Description            types.String                            `tfsdk:"description"`
+	Disable                types.Bool                              `tfsdk:"disable"`
+	Labels                 types.Map                               `tfsdk:"labels"`
+	ID                     types.String                            `tfsdk:"id"`
+	Timeouts               timeouts.Value                          `tfsdk:"timeouts"`
+	AuditLogs              *LogReceiverEmptyModel                  `tfsdk:"audit_logs"`
+	AWSCloudWatchReceiver  *LogReceiverAWSCloudWatchReceiverModel  `tfsdk:"aws_cloud_watch_receiver"`
+	AzureEventHubsReceiver *LogReceiverAzureEventHubsReceiverModel `tfsdk:"azure_event_hubs_receiver"`
+	AzureReceiver          *LogReceiverAzureReceiverModel          `tfsdk:"azure_receiver"`
+	DatadogReceiver        *LogReceiverDatadogReceiverModel        `tfsdk:"datadog_receiver"`
+	DNSLogs                *LogReceiverEmptyModel                  `tfsdk:"dns_logs"`
+	GCPBucketReceiver      *LogReceiverGCPBucketReceiverModel      `tfsdk:"gcp_bucket_receiver"`
+	HTTPReceiver           *LogReceiverHTTPReceiverModel           `tfsdk:"http_receiver"`
+	KafkaReceiver          *LogReceiverKafkaReceiverModel          `tfsdk:"kafka_receiver"`
+	NewRelicReceiver       *LogReceiverNewRelicReceiverModel       `tfsdk:"new_relic_receiver"`
+	NsAll                  *LogReceiverEmptyModel                  `tfsdk:"ns_all"`
+	NsCurrent              *LogReceiverEmptyModel                  `tfsdk:"ns_current"`
+	NsList                 *LogReceiverNsListModel                 `tfsdk:"ns_list"`
+	QradarReceiver         *LogReceiverQradarReceiverModel         `tfsdk:"qradar_receiver"`
+	RequestLogs            *LogReceiverEmptyModel                  `tfsdk:"request_logs"`
+	S3Receiver             *LogReceiverS3ReceiverModel             `tfsdk:"s3_receiver"`
+	SecurityEvents         *LogReceiverEmptyModel                  `tfsdk:"security_events"`
+	SplunkReceiver         *LogReceiverSplunkReceiverModel         `tfsdk:"splunk_receiver"`
+	SumoLogicReceiver      *LogReceiverSumoLogicReceiverModel      `tfsdk:"sumo_logic_receiver"`
 }
 
 func (r *LogReceiverResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -184,7 +1401,7 @@ func (r *LogReceiverResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             log_receiverSchemaVersion,
-		MarkdownDescription: "Manages new Log Receiver object. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new Global Log Receiver object. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Log Receiver. Must be unique within the namespace.",
@@ -239,59 +1456,371 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 				Update: true,
 				Delete: true,
 			}),
-			"site_local": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+			"audit_logs": schema.SingleNestedBlock{
+				MarkdownDescription: "[OneOf: audit_logs, dns_logs, request_logs, security_events] Enable this option",
 			},
-			"syslog": schema.SingleNestedBlock{
-				MarkdownDescription: "Syslog Server Configuration. Configuration for syslog server.",
+			"aws_cloud_watch_receiver": schema.SingleNestedBlock{
+				MarkdownDescription: "[OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiver, azure_receiver, datadog_receiver, gcp_bucket_receiver, http_receiver, kafka_receiver, new_relic_receiver, qradar_receiver, s3_receiver, splunk_receiver, sumo_logic_receiver] AWS Cloudwatch Logs Configuration for Global Log Receiver.",
 				Attributes: map[string]schema.Attribute{
-					"syslog_rfc5424": schema.Int64Attribute{
-						MarkdownDescription: "Select RFC5424 syslog format and maximum message length.",
+					"aws_region": schema.StringAttribute{
+						MarkdownDescription: "AWS Region. AWS Region Name .",
+						Optional:            true,
+					},
+					"group_name": schema.StringAttribute{
+						MarkdownDescription: "The group name of the target Cloudwatch Logs stream .",
+						Optional:            true,
+					},
+					"stream_name": schema.StringAttribute{
+						MarkdownDescription: "The stream name of the target Cloudwatch Logs stream. Note that there can only be one writer to a log stream at a time .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
-					"tcp_server": schema.SingleNestedBlock{
-						MarkdownDescription: "TCP Server name and Port Number. Name and port number for a TCP server.",
+					"aws_cred": schema.SingleNestedBlock{
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
-							"port": schema.Int64Attribute{
-								MarkdownDescription: "Port number used for communication .",
+							"name": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
-							"server_name": schema.StringAttribute{
-								MarkdownDescription: "Server name is fully qualified domain name or IP address of the server .",
+							"namespace": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
+							},
+							"tenant": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								Optional:            true,
+								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
-					"tls_server": schema.SingleNestedBlock{
-						MarkdownDescription: "TLS config for client of discovery service.",
+					"batch": schema.SingleNestedBlock{
+						MarkdownDescription: "Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
 						Attributes: map[string]schema.Attribute{
-							"port": schema.Int64Attribute{
-								MarkdownDescription: "Custom port number used for communication.",
+							"max_bytes": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
 							},
-							"server_name": schema.StringAttribute{
-								MarkdownDescription: "ServerName is passed to the server for SNI and is used in the client to check server certificates against.",
+							"max_events": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
 							},
+							"timeout_seconds": schema.StringAttribute{
+								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"max_bytes_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"max_events_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"timeout_seconds_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"compression": schema.SingleNestedBlock{
+						MarkdownDescription: "Compression Type. Compression Type.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"compression_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_gzip": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_none": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+				},
+			},
+			"azure_event_hubs_receiver": schema.SingleNestedBlock{
+				MarkdownDescription: "Azure Event Hubs Configuration for Global Log Receiver.",
+				Attributes: map[string]schema.Attribute{
+					"instance": schema.StringAttribute{
+						MarkdownDescription: "Event Hubs Instance name into which logs should be stored .",
+						Optional:            true,
+					},
+					"namespace": schema.StringAttribute{
+						MarkdownDescription: "Event Hubs Namespace is namespace with instance into which logs should be stored .",
+						Optional:            true,
+					},
+				},
+				Blocks: map[string]schema.Block{
+					"connection_string": schema.SingleNestedBlock{
+						MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"blindfold_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+								Attributes: map[string]schema.Attribute{
+									"decryption_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+										Optional:            true,
+									},
+									"location": schema.StringAttribute{
+										MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+										Optional:            true,
+									},
+									"store_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+								},
+							},
+							"clear_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+								Attributes: map[string]schema.Attribute{
+									"provider_ref": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+									"url": schema.StringAttribute{
+										MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+										Optional:            true,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			"azure_receiver": schema.SingleNestedBlock{
+				MarkdownDescription: "Azure Blob Configuration for Global Log Receiver.",
+				Attributes: map[string]schema.Attribute{
+					"container_name": schema.StringAttribute{
+						MarkdownDescription: "Container Name is the name of the container into which logs should be stored .",
+						Optional:            true,
+					},
+				},
+				Blocks: map[string]schema.Block{
+					"batch": schema.SingleNestedBlock{
+						MarkdownDescription: "Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
+						Attributes: map[string]schema.Attribute{
+							"max_bytes": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
+								Optional:            true,
+							},
+							"max_events": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
+								Optional:            true,
+							},
+							"timeout_seconds": schema.StringAttribute{
+								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"max_bytes_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"max_events_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"timeout_seconds_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"compression": schema.SingleNestedBlock{
+						MarkdownDescription: "Compression Type. Compression Type.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"compression_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_gzip": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_none": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"connection_string": schema.SingleNestedBlock{
+						MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"blindfold_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+								Attributes: map[string]schema.Attribute{
+									"decryption_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+										Optional:            true,
+									},
+									"location": schema.StringAttribute{
+										MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+										Optional:            true,
+									},
+									"store_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+								},
+							},
+							"clear_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+								Attributes: map[string]schema.Attribute{
+									"provider_ref": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+									"url": schema.StringAttribute{
+										MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+										Optional:            true,
+									},
+								},
+							},
+						},
+					},
+					"filename_options": schema.SingleNestedBlock{
+						MarkdownDescription: "Filename OPTIONS allow customization of filename and folder paths used by a destination endpoint bucket or file.",
+						Attributes: map[string]schema.Attribute{
+							"custom_folder": schema.StringAttribute{
+								MarkdownDescription: "Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"log_type_folder": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"no_folder": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+				},
+			},
+			"datadog_receiver": schema.SingleNestedBlock{
+				MarkdownDescription: "Datadog Configuration. Configuration for Datadog endpoint.",
+				Attributes: map[string]schema.Attribute{
+					"endpoint": schema.StringAttribute{
+						MarkdownDescription: "Datadog Endpoint,.",
+						Optional:            true,
+					},
+					"site": schema.StringAttribute{
+						MarkdownDescription: "Datadog Site,.",
+						Optional:            true,
+					},
+				},
+				Blocks: map[string]schema.Block{
+					"batch": schema.SingleNestedBlock{
+						MarkdownDescription: "Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
+						Attributes: map[string]schema.Attribute{
+							"max_bytes": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
+								Optional:            true,
+							},
+							"max_events": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
+								Optional:            true,
+							},
+							"timeout_seconds": schema.StringAttribute{
+								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"max_bytes_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"max_events_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"timeout_seconds_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"compression": schema.SingleNestedBlock{
+						MarkdownDescription: "Compression Type. Compression Type.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"compression_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_gzip": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_none": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"datadog_api_key": schema.SingleNestedBlock{
+						MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"blindfold_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+								Attributes: map[string]schema.Attribute{
+									"decryption_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+										Optional:            true,
+									},
+									"location": schema.StringAttribute{
+										MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+										Optional:            true,
+									},
+									"store_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+								},
+							},
+							"clear_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+								Attributes: map[string]schema.Attribute{
+									"provider_ref": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+									"url": schema.StringAttribute{
+										MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+										Optional:            true,
+									},
+								},
+							},
+						},
+					},
+					"no_tls": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"use_tls": schema.SingleNestedBlock{
+						MarkdownDescription: "TLS Parameters for client connection to the endpoint.",
+						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
-							"default_https_port": schema.SingleNestedBlock{
+							"disable_verify_certificate": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
 							},
-							"default_syslog_tls_port": schema.SingleNestedBlock{
+							"disable_verify_hostname": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"enable_verify_certificate": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"enable_verify_hostname": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
 							},
 							"mtls_disabled": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
 							},
 							"mtls_enable": schema.SingleNestedBlock{
-								MarkdownDescription: "MTLS Client Config. TLS config for client.",
+								MarkdownDescription: "MTLS Client config allows configuration of mTLS client OPTIONS.",
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
 										MarkdownDescription: "Client certificate is PEM-encoded certificate or certificate-chain.",
@@ -337,21 +1866,976 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 									},
 								},
 							},
-							"volterra_ca": schema.SingleNestedBlock{
+							"no_ca": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
-					"udp_server": schema.SingleNestedBlock{
-						MarkdownDescription: "UDP Server Name and Port Number. Name and port number for a UDP server.",
+				},
+			},
+			"dns_logs": schema.SingleNestedBlock{
+				MarkdownDescription: "Enable this option",
+			},
+			"gcp_bucket_receiver": schema.SingleNestedBlock{
+				MarkdownDescription: "GCP Bucket Configuration for Global Log Receiver.",
+				Attributes: map[string]schema.Attribute{
+					"bucket": schema.StringAttribute{
+						MarkdownDescription: "GCP Bucket Name. GCP Bucket Name .",
+						Optional:            true,
+					},
+				},
+				Blocks: map[string]schema.Block{
+					"batch": schema.SingleNestedBlock{
+						MarkdownDescription: "Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
 						Attributes: map[string]schema.Attribute{
-							"port": schema.Int64Attribute{
-								MarkdownDescription: "Port number used for communication .",
+							"max_bytes": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
 							},
-							"server_name": schema.StringAttribute{
-								MarkdownDescription: "Server name is fully qualified domain name or IP address of the server .",
+							"max_events": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
+							},
+							"timeout_seconds": schema.StringAttribute{
+								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"max_bytes_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"max_events_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"timeout_seconds_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"compression": schema.SingleNestedBlock{
+						MarkdownDescription: "Compression Type. Compression Type.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"compression_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_gzip": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_none": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"filename_options": schema.SingleNestedBlock{
+						MarkdownDescription: "Filename OPTIONS allow customization of filename and folder paths used by a destination endpoint bucket or file.",
+						Attributes: map[string]schema.Attribute{
+							"custom_folder": schema.StringAttribute{
+								MarkdownDescription: "Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"log_type_folder": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"no_folder": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"gcp_cred": schema.SingleNestedBlock{
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						Attributes: map[string]schema.Attribute{
+							"name": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								Optional:            true,
+							},
+							"namespace": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								Optional:            true,
+							},
+							"tenant": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								Optional:            true,
+								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
+							},
+						},
+					},
+				},
+			},
+			"http_receiver": schema.SingleNestedBlock{
+				MarkdownDescription: "HTTP Configuration. Configuration for HTTP endpoint.",
+				Attributes: map[string]schema.Attribute{
+					"uri": schema.StringAttribute{
+						MarkdownDescription: "HTTP URI is the URI of the HTTP endpoint to send logs to, .",
+						Optional:            true,
+					},
+				},
+				Blocks: map[string]schema.Block{
+					"auth_basic": schema.SingleNestedBlock{
+						MarkdownDescription: "Authentication parameters to access HTPP Log Receiver Endpoint.",
+						Attributes: map[string]schema.Attribute{
+							"user_name": schema.StringAttribute{
+								MarkdownDescription: "User Name. HTTP Basic Auth User Name.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"password": schema.SingleNestedBlock{
+								MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
+								Attributes:          map[string]schema.Attribute{},
+								Blocks: map[string]schema.Block{
+									"blindfold_secret_info": schema.SingleNestedBlock{
+										MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+										Attributes: map[string]schema.Attribute{
+											"decryption_provider": schema.StringAttribute{
+												MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+												Optional:            true,
+											},
+											"location": schema.StringAttribute{
+												MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+												Optional:            true,
+											},
+											"store_provider": schema.StringAttribute{
+												MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+												Optional:            true,
+											},
+										},
+									},
+									"clear_secret_info": schema.SingleNestedBlock{
+										MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+										Attributes: map[string]schema.Attribute{
+											"provider_ref": schema.StringAttribute{
+												MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+												Optional:            true,
+											},
+											"url": schema.StringAttribute{
+												MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+												Optional:            true,
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					"auth_none": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"auth_token": schema.SingleNestedBlock{
+						MarkdownDescription: "Access Token. Authentication Token for access.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"token": schema.SingleNestedBlock{
+								MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
+								Attributes:          map[string]schema.Attribute{},
+								Blocks: map[string]schema.Block{
+									"blindfold_secret_info": schema.SingleNestedBlock{
+										MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+										Attributes: map[string]schema.Attribute{
+											"decryption_provider": schema.StringAttribute{
+												MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+												Optional:            true,
+											},
+											"location": schema.StringAttribute{
+												MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+												Optional:            true,
+											},
+											"store_provider": schema.StringAttribute{
+												MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+												Optional:            true,
+											},
+										},
+									},
+									"clear_secret_info": schema.SingleNestedBlock{
+										MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+										Attributes: map[string]schema.Attribute{
+											"provider_ref": schema.StringAttribute{
+												MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+												Optional:            true,
+											},
+											"url": schema.StringAttribute{
+												MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+												Optional:            true,
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					"batch": schema.SingleNestedBlock{
+						MarkdownDescription: "Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
+						Attributes: map[string]schema.Attribute{
+							"max_bytes": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
+								Optional:            true,
+							},
+							"max_events": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
+								Optional:            true,
+							},
+							"timeout_seconds": schema.StringAttribute{
+								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"max_bytes_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"max_events_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"timeout_seconds_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"compression": schema.SingleNestedBlock{
+						MarkdownDescription: "Compression Type. Compression Type.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"compression_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_gzip": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_none": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"no_tls": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"use_tls": schema.SingleNestedBlock{
+						MarkdownDescription: "TLS Parameters for client connection to the endpoint.",
+						Attributes: map[string]schema.Attribute{
+							"trusted_ca_url": schema.StringAttribute{
+								MarkdownDescription: "The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"disable_verify_certificate": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"disable_verify_hostname": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"enable_verify_certificate": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"enable_verify_hostname": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"mtls_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"mtls_enable": schema.SingleNestedBlock{
+								MarkdownDescription: "MTLS Client config allows configuration of mTLS client OPTIONS.",
+								Attributes: map[string]schema.Attribute{
+									"certificate": schema.StringAttribute{
+										MarkdownDescription: "Client certificate is PEM-encoded certificate or certificate-chain.",
+										Optional:            true,
+									},
+								},
+								Blocks: map[string]schema.Block{
+									"key_url": schema.SingleNestedBlock{
+										MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
+										Attributes:          map[string]schema.Attribute{},
+										Blocks: map[string]schema.Block{
+											"blindfold_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+												Attributes: map[string]schema.Attribute{
+													"decryption_provider": schema.StringAttribute{
+														MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+														Optional:            true,
+													},
+													"location": schema.StringAttribute{
+														MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+														Optional:            true,
+													},
+													"store_provider": schema.StringAttribute{
+														MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+														Optional:            true,
+													},
+												},
+											},
+											"clear_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+												Attributes: map[string]schema.Attribute{
+													"provider_ref": schema.StringAttribute{
+														MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+														Optional:            true,
+													},
+													"url": schema.StringAttribute{
+														MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+														Optional:            true,
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							"no_ca": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+				},
+			},
+			"kafka_receiver": schema.SingleNestedBlock{
+				MarkdownDescription: "Kafka Configuration for Global Log Receiver.",
+				Attributes: map[string]schema.Attribute{
+					"bootstrap_servers": schema.ListAttribute{
+						MarkdownDescription: "List of host:port pairs of the Kafka brokers .",
+						Optional:            true,
+						ElementType:         types.StringType,
+					},
+					"kafka_topic": schema.StringAttribute{
+						MarkdownDescription: "The Kafka topic name to write events to .",
+						Optional:            true,
+					},
+				},
+				Blocks: map[string]schema.Block{
+					"batch": schema.SingleNestedBlock{
+						MarkdownDescription: "Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
+						Attributes: map[string]schema.Attribute{
+							"max_bytes": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
+								Optional:            true,
+							},
+							"max_events": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
+								Optional:            true,
+							},
+							"timeout_seconds": schema.StringAttribute{
+								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"max_bytes_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"max_events_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"timeout_seconds_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"compression": schema.SingleNestedBlock{
+						MarkdownDescription: "Compression Type. Compression Type.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"compression_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_gzip": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_none": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"no_tls": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"use_tls": schema.SingleNestedBlock{
+						MarkdownDescription: "TLS Parameters for client connection to the endpoint.",
+						Attributes: map[string]schema.Attribute{
+							"trusted_ca_url": schema.StringAttribute{
+								MarkdownDescription: "The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"disable_verify_certificate": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"disable_verify_hostname": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"enable_verify_certificate": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"enable_verify_hostname": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"mtls_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"mtls_enable": schema.SingleNestedBlock{
+								MarkdownDescription: "MTLS Client config allows configuration of mTLS client OPTIONS.",
+								Attributes: map[string]schema.Attribute{
+									"certificate": schema.StringAttribute{
+										MarkdownDescription: "Client certificate is PEM-encoded certificate or certificate-chain.",
+										Optional:            true,
+									},
+								},
+								Blocks: map[string]schema.Block{
+									"key_url": schema.SingleNestedBlock{
+										MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
+										Attributes:          map[string]schema.Attribute{},
+										Blocks: map[string]schema.Block{
+											"blindfold_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+												Attributes: map[string]schema.Attribute{
+													"decryption_provider": schema.StringAttribute{
+														MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+														Optional:            true,
+													},
+													"location": schema.StringAttribute{
+														MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+														Optional:            true,
+													},
+													"store_provider": schema.StringAttribute{
+														MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+														Optional:            true,
+													},
+												},
+											},
+											"clear_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+												Attributes: map[string]schema.Attribute{
+													"provider_ref": schema.StringAttribute{
+														MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+														Optional:            true,
+													},
+													"url": schema.StringAttribute{
+														MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+														Optional:            true,
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							"no_ca": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+				},
+			},
+			"new_relic_receiver": schema.SingleNestedBlock{
+				MarkdownDescription: "NewRelic Configuration. Configuration for NewRelic endpoint.",
+				Attributes:          map[string]schema.Attribute{},
+				Blocks: map[string]schema.Block{
+					"api_key": schema.SingleNestedBlock{
+						MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"blindfold_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+								Attributes: map[string]schema.Attribute{
+									"decryption_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+										Optional:            true,
+									},
+									"location": schema.StringAttribute{
+										MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+										Optional:            true,
+									},
+									"store_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+								},
+							},
+							"clear_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+								Attributes: map[string]schema.Attribute{
+									"provider_ref": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+									"url": schema.StringAttribute{
+										MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+										Optional:            true,
+									},
+								},
+							},
+						},
+					},
+					"eu": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"us": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+				},
+			},
+			"ns_all": schema.SingleNestedBlock{
+				MarkdownDescription: "[OneOf: ns_all, ns_current, ns_list] Enable this option",
+			},
+			"ns_current": schema.SingleNestedBlock{
+				MarkdownDescription: "Enable this option",
+			},
+			"ns_list": schema.SingleNestedBlock{
+				MarkdownDescription: "Namespace List. Namespace List.",
+				Attributes: map[string]schema.Attribute{
+					"namespaces": schema.ListAttribute{
+						MarkdownDescription: "List of namespaces to stream logs for .",
+						Optional:            true,
+						ElementType:         types.StringType,
+					},
+				},
+			},
+			"qradar_receiver": schema.SingleNestedBlock{
+				MarkdownDescription: "IBM QRadar Configuration. Configuration for IBM QRadar endpoint.",
+				Attributes: map[string]schema.Attribute{
+					"uri": schema.StringAttribute{
+						MarkdownDescription: "Log Source Collector URL is the URL of the IBM QRadar Log Source Collector to send logs to, .",
+						Optional:            true,
+					},
+				},
+				Blocks: map[string]schema.Block{
+					"batch": schema.SingleNestedBlock{
+						MarkdownDescription: "Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
+						Attributes: map[string]schema.Attribute{
+							"max_bytes": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
+								Optional:            true,
+							},
+							"max_events": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
+								Optional:            true,
+							},
+							"timeout_seconds": schema.StringAttribute{
+								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"max_bytes_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"max_events_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"timeout_seconds_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"compression": schema.SingleNestedBlock{
+						MarkdownDescription: "Compression Type. Compression Type.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"compression_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_gzip": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_none": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"no_tls": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"use_tls": schema.SingleNestedBlock{
+						MarkdownDescription: "TLS Parameters for client connection to the endpoint.",
+						Attributes: map[string]schema.Attribute{
+							"trusted_ca_url": schema.StringAttribute{
+								MarkdownDescription: "The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"disable_verify_certificate": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"disable_verify_hostname": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"enable_verify_certificate": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"enable_verify_hostname": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"mtls_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"mtls_enable": schema.SingleNestedBlock{
+								MarkdownDescription: "MTLS Client config allows configuration of mTLS client OPTIONS.",
+								Attributes: map[string]schema.Attribute{
+									"certificate": schema.StringAttribute{
+										MarkdownDescription: "Client certificate is PEM-encoded certificate or certificate-chain.",
+										Optional:            true,
+									},
+								},
+								Blocks: map[string]schema.Block{
+									"key_url": schema.SingleNestedBlock{
+										MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
+										Attributes:          map[string]schema.Attribute{},
+										Blocks: map[string]schema.Block{
+											"blindfold_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+												Attributes: map[string]schema.Attribute{
+													"decryption_provider": schema.StringAttribute{
+														MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+														Optional:            true,
+													},
+													"location": schema.StringAttribute{
+														MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+														Optional:            true,
+													},
+													"store_provider": schema.StringAttribute{
+														MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+														Optional:            true,
+													},
+												},
+											},
+											"clear_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+												Attributes: map[string]schema.Attribute{
+													"provider_ref": schema.StringAttribute{
+														MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+														Optional:            true,
+													},
+													"url": schema.StringAttribute{
+														MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+														Optional:            true,
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							"no_ca": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+				},
+			},
+			"request_logs": schema.SingleNestedBlock{
+				MarkdownDescription: "Enable this option",
+			},
+			"s3_receiver": schema.SingleNestedBlock{
+				MarkdownDescription: "S3 Configuration for Global Log Receiver.",
+				Attributes: map[string]schema.Attribute{
+					"aws_region": schema.StringAttribute{
+						MarkdownDescription: "AWS Region. AWS Region Name .",
+						Optional:            true,
+					},
+					"bucket": schema.StringAttribute{
+						MarkdownDescription: "S3 Bucket Name. S3 Bucket Name .",
+						Optional:            true,
+					},
+				},
+				Blocks: map[string]schema.Block{
+					"aws_cred": schema.SingleNestedBlock{
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						Attributes: map[string]schema.Attribute{
+							"name": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								Optional:            true,
+							},
+							"namespace": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								Optional:            true,
+							},
+							"tenant": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								Optional:            true,
+								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
+							},
+						},
+					},
+					"batch": schema.SingleNestedBlock{
+						MarkdownDescription: "Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
+						Attributes: map[string]schema.Attribute{
+							"max_bytes": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
+								Optional:            true,
+							},
+							"max_events": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
+								Optional:            true,
+							},
+							"timeout_seconds": schema.StringAttribute{
+								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"max_bytes_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"max_events_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"timeout_seconds_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"compression": schema.SingleNestedBlock{
+						MarkdownDescription: "Compression Type. Compression Type.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"compression_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_gzip": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_none": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"filename_options": schema.SingleNestedBlock{
+						MarkdownDescription: "Filename OPTIONS allow customization of filename and folder paths used by a destination endpoint bucket or file.",
+						Attributes: map[string]schema.Attribute{
+							"custom_folder": schema.StringAttribute{
+								MarkdownDescription: "Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"log_type_folder": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"no_folder": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+				},
+			},
+			"security_events": schema.SingleNestedBlock{
+				MarkdownDescription: "Enable this option",
+			},
+			"splunk_receiver": schema.SingleNestedBlock{
+				MarkdownDescription: "Configuration for Splunk HEC Logs endpoint.",
+				Attributes: map[string]schema.Attribute{
+					"endpoint": schema.StringAttribute{
+						MarkdownDescription: "Splunk HEC Logs Endpoint. Splunk HEC Logs Endpoint, (Note: must not contain `/services/collector`) .",
+						Optional:            true,
+					},
+				},
+				Blocks: map[string]schema.Block{
+					"batch": schema.SingleNestedBlock{
+						MarkdownDescription: "Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
+						Attributes: map[string]schema.Attribute{
+							"max_bytes": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
+								Optional:            true,
+							},
+							"max_events": schema.Int64Attribute{
+								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
+								Optional:            true,
+							},
+							"timeout_seconds": schema.StringAttribute{
+								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"max_bytes_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"max_events_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"timeout_seconds_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"compression": schema.SingleNestedBlock{
+						MarkdownDescription: "Compression Type. Compression Type.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"compression_default": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_gzip": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"compression_none": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"no_tls": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"splunk_hec_token": schema.SingleNestedBlock{
+						MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"blindfold_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+								Attributes: map[string]schema.Attribute{
+									"decryption_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+										Optional:            true,
+									},
+									"location": schema.StringAttribute{
+										MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+										Optional:            true,
+									},
+									"store_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+								},
+							},
+							"clear_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+								Attributes: map[string]schema.Attribute{
+									"provider_ref": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+									"url": schema.StringAttribute{
+										MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+										Optional:            true,
+									},
+								},
+							},
+						},
+					},
+					"use_tls": schema.SingleNestedBlock{
+						MarkdownDescription: "TLS Parameters for client connection to the endpoint.",
+						Attributes: map[string]schema.Attribute{
+							"trusted_ca_url": schema.StringAttribute{
+								MarkdownDescription: "The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"disable_verify_certificate": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"disable_verify_hostname": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"enable_verify_certificate": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"enable_verify_hostname": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"mtls_disabled": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"mtls_enable": schema.SingleNestedBlock{
+								MarkdownDescription: "MTLS Client config allows configuration of mTLS client OPTIONS.",
+								Attributes: map[string]schema.Attribute{
+									"certificate": schema.StringAttribute{
+										MarkdownDescription: "Client certificate is PEM-encoded certificate or certificate-chain.",
+										Optional:            true,
+									},
+								},
+								Blocks: map[string]schema.Block{
+									"key_url": schema.SingleNestedBlock{
+										MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
+										Attributes:          map[string]schema.Attribute{},
+										Blocks: map[string]schema.Block{
+											"blindfold_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+												Attributes: map[string]schema.Attribute{
+													"decryption_provider": schema.StringAttribute{
+														MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+														Optional:            true,
+													},
+													"location": schema.StringAttribute{
+														MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+														Optional:            true,
+													},
+													"store_provider": schema.StringAttribute{
+														MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+														Optional:            true,
+													},
+												},
+											},
+											"clear_secret_info": schema.SingleNestedBlock{
+												MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+												Attributes: map[string]schema.Attribute{
+													"provider_ref": schema.StringAttribute{
+														MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+														Optional:            true,
+													},
+													"url": schema.StringAttribute{
+														MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+														Optional:            true,
+													},
+												},
+											},
+										},
+									},
+								},
+							},
+							"no_ca": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+				},
+			},
+			"sumo_logic_receiver": schema.SingleNestedBlock{
+				MarkdownDescription: "SumoLogic Configuration. Configuration for SumoLogic endpoint.",
+				Attributes:          map[string]schema.Attribute{},
+				Blocks: map[string]schema.Block{
+					"url": schema.SingleNestedBlock{
+						MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"blindfold_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+								Attributes: map[string]schema.Attribute{
+									"decryption_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+										Optional:            true,
+									},
+									"location": schema.StringAttribute{
+										MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+										Optional:            true,
+									},
+									"store_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+								},
+							},
+							"clear_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+								Attributes: map[string]schema.Attribute{
+									"provider_ref": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+									"url": schema.StringAttribute{
+										MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+										Optional:            true,
+									},
+								},
 							},
 						},
 					},
@@ -505,49 +2989,447 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if data.SiteLocal != nil {
-		site_localMap := make(map[string]interface{})
-		createReq.Spec["site_local"] = site_localMap
+	if data.AuditLogs != nil {
+		audit_logsMap := make(map[string]interface{})
+		createReq.Spec["audit_logs"] = audit_logsMap
 	}
-	if data.Syslog != nil {
-		syslogMap := make(map[string]interface{})
-		if !data.Syslog.SyslogRfc5424.IsNull() && !data.Syslog.SyslogRfc5424.IsUnknown() {
-			syslogMap["syslog_rfc5424"] = data.Syslog.SyslogRfc5424.ValueInt64()
+	if data.AWSCloudWatchReceiver != nil {
+		aws_cloud_watch_receiverMap := make(map[string]interface{})
+		if data.AWSCloudWatchReceiver.AWSCred != nil {
+			aws_credNestedMap := make(map[string]interface{})
+			if !data.AWSCloudWatchReceiver.AWSCred.Name.IsNull() && !data.AWSCloudWatchReceiver.AWSCred.Name.IsUnknown() {
+				aws_credNestedMap["name"] = data.AWSCloudWatchReceiver.AWSCred.Name.ValueString()
+			}
+			if !data.AWSCloudWatchReceiver.AWSCred.Namespace.IsNull() && !data.AWSCloudWatchReceiver.AWSCred.Namespace.IsUnknown() {
+				aws_credNestedMap["namespace"] = data.AWSCloudWatchReceiver.AWSCred.Namespace.ValueString()
+			}
+			if !data.AWSCloudWatchReceiver.AWSCred.Tenant.IsNull() && !data.AWSCloudWatchReceiver.AWSCred.Tenant.IsUnknown() {
+				aws_credNestedMap["tenant"] = data.AWSCloudWatchReceiver.AWSCred.Tenant.ValueString()
+			}
+			aws_cloud_watch_receiverMap["aws_cred"] = aws_credNestedMap
 		}
-		if data.Syslog.TCPServer != nil {
-			tcp_serverNestedMap := make(map[string]interface{})
-			if !data.Syslog.TCPServer.Port.IsNull() && !data.Syslog.TCPServer.Port.IsUnknown() {
-				tcp_serverNestedMap["port"] = data.Syslog.TCPServer.Port.ValueInt64()
-			}
-			if !data.Syslog.TCPServer.ServerName.IsNull() && !data.Syslog.TCPServer.ServerName.IsUnknown() {
-				tcp_serverNestedMap["server_name"] = data.Syslog.TCPServer.ServerName.ValueString()
-			}
-			syslogMap["tcp_server"] = tcp_serverNestedMap
+		if !data.AWSCloudWatchReceiver.AWSRegion.IsNull() && !data.AWSCloudWatchReceiver.AWSRegion.IsUnknown() {
+			aws_cloud_watch_receiverMap["aws_region"] = data.AWSCloudWatchReceiver.AWSRegion.ValueString()
 		}
-		if data.Syslog.TLSServer != nil {
-			tls_serverNestedMap := make(map[string]interface{})
-			if !data.Syslog.TLSServer.Port.IsNull() && !data.Syslog.TLSServer.Port.IsUnknown() {
-				tls_serverNestedMap["port"] = data.Syslog.TLSServer.Port.ValueInt64()
+		if data.AWSCloudWatchReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.AWSCloudWatchReceiver.Batch.MaxBytes.IsNull() && !data.AWSCloudWatchReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.AWSCloudWatchReceiver.Batch.MaxBytes.ValueInt64()
 			}
-			if !data.Syslog.TLSServer.ServerName.IsNull() && !data.Syslog.TLSServer.ServerName.IsUnknown() {
-				tls_serverNestedMap["server_name"] = data.Syslog.TLSServer.ServerName.ValueString()
+			if !data.AWSCloudWatchReceiver.Batch.MaxEvents.IsNull() && !data.AWSCloudWatchReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.AWSCloudWatchReceiver.Batch.MaxEvents.ValueInt64()
 			}
-			if !data.Syslog.TLSServer.TrustedCAURL.IsNull() && !data.Syslog.TLSServer.TrustedCAURL.IsUnknown() {
-				tls_serverNestedMap["trusted_ca_url"] = data.Syslog.TLSServer.TrustedCAURL.ValueString()
+			if !data.AWSCloudWatchReceiver.Batch.TimeoutSeconds.IsNull() && !data.AWSCloudWatchReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.AWSCloudWatchReceiver.Batch.TimeoutSeconds.ValueString()
 			}
-			syslogMap["tls_server"] = tls_serverNestedMap
+			aws_cloud_watch_receiverMap["batch"] = batchNestedMap
 		}
-		if data.Syslog.UDPServer != nil {
-			udp_serverNestedMap := make(map[string]interface{})
-			if !data.Syslog.UDPServer.Port.IsNull() && !data.Syslog.UDPServer.Port.IsUnknown() {
-				udp_serverNestedMap["port"] = data.Syslog.UDPServer.Port.ValueInt64()
-			}
-			if !data.Syslog.UDPServer.ServerName.IsNull() && !data.Syslog.UDPServer.ServerName.IsUnknown() {
-				udp_serverNestedMap["server_name"] = data.Syslog.UDPServer.ServerName.ValueString()
-			}
-			syslogMap["udp_server"] = udp_serverNestedMap
+		if data.AWSCloudWatchReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			aws_cloud_watch_receiverMap["compression"] = compressionNestedMap
 		}
-		createReq.Spec["syslog"] = syslogMap
+		if !data.AWSCloudWatchReceiver.GroupName.IsNull() && !data.AWSCloudWatchReceiver.GroupName.IsUnknown() {
+			aws_cloud_watch_receiverMap["group_name"] = data.AWSCloudWatchReceiver.GroupName.ValueString()
+		}
+		if !data.AWSCloudWatchReceiver.StreamName.IsNull() && !data.AWSCloudWatchReceiver.StreamName.IsUnknown() {
+			aws_cloud_watch_receiverMap["stream_name"] = data.AWSCloudWatchReceiver.StreamName.ValueString()
+		}
+		createReq.Spec["aws_cloud_watch_receiver"] = aws_cloud_watch_receiverMap
+	}
+	if data.AzureEventHubsReceiver != nil {
+		azure_event_hubs_receiverMap := make(map[string]interface{})
+		if data.AzureEventHubsReceiver.ConnectionString != nil {
+			connection_stringNestedMap := make(map[string]interface{})
+			azure_event_hubs_receiverMap["connection_string"] = connection_stringNestedMap
+		}
+		if !data.AzureEventHubsReceiver.Instance.IsNull() && !data.AzureEventHubsReceiver.Instance.IsUnknown() {
+			azure_event_hubs_receiverMap["instance"] = data.AzureEventHubsReceiver.Instance.ValueString()
+		}
+		if !data.AzureEventHubsReceiver.Namespace.IsNull() && !data.AzureEventHubsReceiver.Namespace.IsUnknown() {
+			azure_event_hubs_receiverMap["namespace"] = data.AzureEventHubsReceiver.Namespace.ValueString()
+		}
+		createReq.Spec["azure_event_hubs_receiver"] = azure_event_hubs_receiverMap
+	}
+	if data.AzureReceiver != nil {
+		azure_receiverMap := make(map[string]interface{})
+		if data.AzureReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.AzureReceiver.Batch.MaxBytes.IsNull() && !data.AzureReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.AzureReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.AzureReceiver.Batch.MaxEvents.IsNull() && !data.AzureReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.AzureReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.AzureReceiver.Batch.TimeoutSeconds.IsNull() && !data.AzureReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.AzureReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			azure_receiverMap["batch"] = batchNestedMap
+		}
+		if data.AzureReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			azure_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.AzureReceiver.ConnectionString != nil {
+			connection_stringNestedMap := make(map[string]interface{})
+			azure_receiverMap["connection_string"] = connection_stringNestedMap
+		}
+		if !data.AzureReceiver.ContainerName.IsNull() && !data.AzureReceiver.ContainerName.IsUnknown() {
+			azure_receiverMap["container_name"] = data.AzureReceiver.ContainerName.ValueString()
+		}
+		if data.AzureReceiver.FilenameOptions != nil {
+			filename_optionsNestedMap := make(map[string]interface{})
+			if !data.AzureReceiver.FilenameOptions.CustomFolder.IsNull() && !data.AzureReceiver.FilenameOptions.CustomFolder.IsUnknown() {
+				filename_optionsNestedMap["custom_folder"] = data.AzureReceiver.FilenameOptions.CustomFolder.ValueString()
+			}
+			azure_receiverMap["filename_options"] = filename_optionsNestedMap
+		}
+		createReq.Spec["azure_receiver"] = azure_receiverMap
+	}
+	if data.DatadogReceiver != nil {
+		datadog_receiverMap := make(map[string]interface{})
+		if data.DatadogReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.DatadogReceiver.Batch.MaxBytes.IsNull() && !data.DatadogReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.DatadogReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.DatadogReceiver.Batch.MaxEvents.IsNull() && !data.DatadogReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.DatadogReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.DatadogReceiver.Batch.TimeoutSeconds.IsNull() && !data.DatadogReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.DatadogReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			datadog_receiverMap["batch"] = batchNestedMap
+		}
+		if data.DatadogReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			datadog_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.DatadogReceiver.DatadogAPIKey != nil {
+			datadog_api_keyNestedMap := make(map[string]interface{})
+			datadog_receiverMap["datadog_api_key"] = datadog_api_keyNestedMap
+		}
+		if !data.DatadogReceiver.Endpoint.IsNull() && !data.DatadogReceiver.Endpoint.IsUnknown() {
+			datadog_receiverMap["endpoint"] = data.DatadogReceiver.Endpoint.ValueString()
+		}
+		if data.DatadogReceiver.NoTLS != nil {
+			datadog_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.DatadogReceiver.Site.IsNull() && !data.DatadogReceiver.Site.IsUnknown() {
+			datadog_receiverMap["site"] = data.DatadogReceiver.Site.ValueString()
+		}
+		if data.DatadogReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.DatadogReceiver.UseTLS.TrustedCAURL.IsNull() && !data.DatadogReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.DatadogReceiver.UseTLS.TrustedCAURL.ValueString()
+			}
+			datadog_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		createReq.Spec["datadog_receiver"] = datadog_receiverMap
+	}
+	if data.DNSLogs != nil {
+		dns_logsMap := make(map[string]interface{})
+		createReq.Spec["dns_logs"] = dns_logsMap
+	}
+	if data.GCPBucketReceiver != nil {
+		gcp_bucket_receiverMap := make(map[string]interface{})
+		if data.GCPBucketReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.GCPBucketReceiver.Batch.MaxBytes.IsNull() && !data.GCPBucketReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.GCPBucketReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.GCPBucketReceiver.Batch.MaxEvents.IsNull() && !data.GCPBucketReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.GCPBucketReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.GCPBucketReceiver.Batch.TimeoutSeconds.IsNull() && !data.GCPBucketReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.GCPBucketReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			gcp_bucket_receiverMap["batch"] = batchNestedMap
+		}
+		if !data.GCPBucketReceiver.Bucket.IsNull() && !data.GCPBucketReceiver.Bucket.IsUnknown() {
+			gcp_bucket_receiverMap["bucket"] = data.GCPBucketReceiver.Bucket.ValueString()
+		}
+		if data.GCPBucketReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			gcp_bucket_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.GCPBucketReceiver.FilenameOptions != nil {
+			filename_optionsNestedMap := make(map[string]interface{})
+			if !data.GCPBucketReceiver.FilenameOptions.CustomFolder.IsNull() && !data.GCPBucketReceiver.FilenameOptions.CustomFolder.IsUnknown() {
+				filename_optionsNestedMap["custom_folder"] = data.GCPBucketReceiver.FilenameOptions.CustomFolder.ValueString()
+			}
+			gcp_bucket_receiverMap["filename_options"] = filename_optionsNestedMap
+		}
+		if data.GCPBucketReceiver.GCPCred != nil {
+			gcp_credNestedMap := make(map[string]interface{})
+			if !data.GCPBucketReceiver.GCPCred.Name.IsNull() && !data.GCPBucketReceiver.GCPCred.Name.IsUnknown() {
+				gcp_credNestedMap["name"] = data.GCPBucketReceiver.GCPCred.Name.ValueString()
+			}
+			if !data.GCPBucketReceiver.GCPCred.Namespace.IsNull() && !data.GCPBucketReceiver.GCPCred.Namespace.IsUnknown() {
+				gcp_credNestedMap["namespace"] = data.GCPBucketReceiver.GCPCred.Namespace.ValueString()
+			}
+			if !data.GCPBucketReceiver.GCPCred.Tenant.IsNull() && !data.GCPBucketReceiver.GCPCred.Tenant.IsUnknown() {
+				gcp_credNestedMap["tenant"] = data.GCPBucketReceiver.GCPCred.Tenant.ValueString()
+			}
+			gcp_bucket_receiverMap["gcp_cred"] = gcp_credNestedMap
+		}
+		createReq.Spec["gcp_bucket_receiver"] = gcp_bucket_receiverMap
+	}
+	if data.HTTPReceiver != nil {
+		http_receiverMap := make(map[string]interface{})
+		if data.HTTPReceiver.AuthBasic != nil {
+			auth_basicNestedMap := make(map[string]interface{})
+			if !data.HTTPReceiver.AuthBasic.UserName.IsNull() && !data.HTTPReceiver.AuthBasic.UserName.IsUnknown() {
+				auth_basicNestedMap["user_name"] = data.HTTPReceiver.AuthBasic.UserName.ValueString()
+			}
+			http_receiverMap["auth_basic"] = auth_basicNestedMap
+		}
+		if data.HTTPReceiver.AuthNone != nil {
+			http_receiverMap["auth_none"] = map[string]interface{}{}
+		}
+		if data.HTTPReceiver.AuthToken != nil {
+			auth_tokenNestedMap := make(map[string]interface{})
+			http_receiverMap["auth_token"] = auth_tokenNestedMap
+		}
+		if data.HTTPReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.HTTPReceiver.Batch.MaxBytes.IsNull() && !data.HTTPReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.HTTPReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.HTTPReceiver.Batch.MaxEvents.IsNull() && !data.HTTPReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.HTTPReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.HTTPReceiver.Batch.TimeoutSeconds.IsNull() && !data.HTTPReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.HTTPReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			http_receiverMap["batch"] = batchNestedMap
+		}
+		if data.HTTPReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			http_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.HTTPReceiver.NoTLS != nil {
+			http_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.HTTPReceiver.URI.IsNull() && !data.HTTPReceiver.URI.IsUnknown() {
+			http_receiverMap["uri"] = data.HTTPReceiver.URI.ValueString()
+		}
+		if data.HTTPReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.HTTPReceiver.UseTLS.TrustedCAURL.IsNull() && !data.HTTPReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.HTTPReceiver.UseTLS.TrustedCAURL.ValueString()
+			}
+			http_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		createReq.Spec["http_receiver"] = http_receiverMap
+	}
+	if data.KafkaReceiver != nil {
+		kafka_receiverMap := make(map[string]interface{})
+		if data.KafkaReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.KafkaReceiver.Batch.MaxBytes.IsNull() && !data.KafkaReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.KafkaReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.KafkaReceiver.Batch.MaxEvents.IsNull() && !data.KafkaReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.KafkaReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.KafkaReceiver.Batch.TimeoutSeconds.IsNull() && !data.KafkaReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.KafkaReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			kafka_receiverMap["batch"] = batchNestedMap
+		}
+		if !data.KafkaReceiver.BootstrapServers.IsNull() && !data.KafkaReceiver.BootstrapServers.IsUnknown() {
+			var bootstrap_serversItems []string
+			diags := data.KafkaReceiver.BootstrapServers.ElementsAs(ctx, &bootstrap_serversItems, false)
+			if !diags.HasError() {
+				kafka_receiverMap["bootstrap_servers"] = bootstrap_serversItems
+			}
+		}
+		if data.KafkaReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			kafka_receiverMap["compression"] = compressionNestedMap
+		}
+		if !data.KafkaReceiver.KafkaTopic.IsNull() && !data.KafkaReceiver.KafkaTopic.IsUnknown() {
+			kafka_receiverMap["kafka_topic"] = data.KafkaReceiver.KafkaTopic.ValueString()
+		}
+		if data.KafkaReceiver.NoTLS != nil {
+			kafka_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if data.KafkaReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.KafkaReceiver.UseTLS.TrustedCAURL.IsNull() && !data.KafkaReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.KafkaReceiver.UseTLS.TrustedCAURL.ValueString()
+			}
+			kafka_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		createReq.Spec["kafka_receiver"] = kafka_receiverMap
+	}
+	if data.NewRelicReceiver != nil {
+		new_relic_receiverMap := make(map[string]interface{})
+		if data.NewRelicReceiver.APIKey != nil {
+			api_keyNestedMap := make(map[string]interface{})
+			new_relic_receiverMap["api_key"] = api_keyNestedMap
+		}
+		if data.NewRelicReceiver.Eu != nil {
+			new_relic_receiverMap["eu"] = map[string]interface{}{}
+		}
+		if data.NewRelicReceiver.Us != nil {
+			new_relic_receiverMap["us"] = map[string]interface{}{}
+		}
+		createReq.Spec["new_relic_receiver"] = new_relic_receiverMap
+	}
+	if data.NsAll != nil {
+		ns_allMap := make(map[string]interface{})
+		createReq.Spec["ns_all"] = ns_allMap
+	}
+	if data.NsCurrent != nil {
+		ns_currentMap := make(map[string]interface{})
+		createReq.Spec["ns_current"] = ns_currentMap
+	}
+	if data.NsList != nil {
+		ns_listMap := make(map[string]interface{})
+		if !data.NsList.Namespaces.IsNull() && !data.NsList.Namespaces.IsUnknown() {
+			var namespacesItems []string
+			diags := data.NsList.Namespaces.ElementsAs(ctx, &namespacesItems, false)
+			if !diags.HasError() {
+				ns_listMap["namespaces"] = namespacesItems
+			}
+		}
+		createReq.Spec["ns_list"] = ns_listMap
+	}
+	if data.QradarReceiver != nil {
+		qradar_receiverMap := make(map[string]interface{})
+		if data.QradarReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.QradarReceiver.Batch.MaxBytes.IsNull() && !data.QradarReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.QradarReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.QradarReceiver.Batch.MaxEvents.IsNull() && !data.QradarReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.QradarReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.QradarReceiver.Batch.TimeoutSeconds.IsNull() && !data.QradarReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.QradarReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			qradar_receiverMap["batch"] = batchNestedMap
+		}
+		if data.QradarReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			qradar_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.QradarReceiver.NoTLS != nil {
+			qradar_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.QradarReceiver.URI.IsNull() && !data.QradarReceiver.URI.IsUnknown() {
+			qradar_receiverMap["uri"] = data.QradarReceiver.URI.ValueString()
+		}
+		if data.QradarReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.QradarReceiver.UseTLS.TrustedCAURL.IsNull() && !data.QradarReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.QradarReceiver.UseTLS.TrustedCAURL.ValueString()
+			}
+			qradar_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		createReq.Spec["qradar_receiver"] = qradar_receiverMap
+	}
+	if data.RequestLogs != nil {
+		request_logsMap := make(map[string]interface{})
+		createReq.Spec["request_logs"] = request_logsMap
+	}
+	if data.S3Receiver != nil {
+		s3_receiverMap := make(map[string]interface{})
+		if data.S3Receiver.AWSCred != nil {
+			aws_credNestedMap := make(map[string]interface{})
+			if !data.S3Receiver.AWSCred.Name.IsNull() && !data.S3Receiver.AWSCred.Name.IsUnknown() {
+				aws_credNestedMap["name"] = data.S3Receiver.AWSCred.Name.ValueString()
+			}
+			if !data.S3Receiver.AWSCred.Namespace.IsNull() && !data.S3Receiver.AWSCred.Namespace.IsUnknown() {
+				aws_credNestedMap["namespace"] = data.S3Receiver.AWSCred.Namespace.ValueString()
+			}
+			if !data.S3Receiver.AWSCred.Tenant.IsNull() && !data.S3Receiver.AWSCred.Tenant.IsUnknown() {
+				aws_credNestedMap["tenant"] = data.S3Receiver.AWSCred.Tenant.ValueString()
+			}
+			s3_receiverMap["aws_cred"] = aws_credNestedMap
+		}
+		if !data.S3Receiver.AWSRegion.IsNull() && !data.S3Receiver.AWSRegion.IsUnknown() {
+			s3_receiverMap["aws_region"] = data.S3Receiver.AWSRegion.ValueString()
+		}
+		if data.S3Receiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.S3Receiver.Batch.MaxBytes.IsNull() && !data.S3Receiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.S3Receiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.S3Receiver.Batch.MaxEvents.IsNull() && !data.S3Receiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.S3Receiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.S3Receiver.Batch.TimeoutSeconds.IsNull() && !data.S3Receiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.S3Receiver.Batch.TimeoutSeconds.ValueString()
+			}
+			s3_receiverMap["batch"] = batchNestedMap
+		}
+		if !data.S3Receiver.Bucket.IsNull() && !data.S3Receiver.Bucket.IsUnknown() {
+			s3_receiverMap["bucket"] = data.S3Receiver.Bucket.ValueString()
+		}
+		if data.S3Receiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			s3_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.S3Receiver.FilenameOptions != nil {
+			filename_optionsNestedMap := make(map[string]interface{})
+			if !data.S3Receiver.FilenameOptions.CustomFolder.IsNull() && !data.S3Receiver.FilenameOptions.CustomFolder.IsUnknown() {
+				filename_optionsNestedMap["custom_folder"] = data.S3Receiver.FilenameOptions.CustomFolder.ValueString()
+			}
+			s3_receiverMap["filename_options"] = filename_optionsNestedMap
+		}
+		createReq.Spec["s3_receiver"] = s3_receiverMap
+	}
+	if data.SecurityEvents != nil {
+		security_eventsMap := make(map[string]interface{})
+		createReq.Spec["security_events"] = security_eventsMap
+	}
+	if data.SplunkReceiver != nil {
+		splunk_receiverMap := make(map[string]interface{})
+		if data.SplunkReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.SplunkReceiver.Batch.MaxBytes.IsNull() && !data.SplunkReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.SplunkReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.SplunkReceiver.Batch.MaxEvents.IsNull() && !data.SplunkReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.SplunkReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.SplunkReceiver.Batch.TimeoutSeconds.IsNull() && !data.SplunkReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.SplunkReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			splunk_receiverMap["batch"] = batchNestedMap
+		}
+		if data.SplunkReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			splunk_receiverMap["compression"] = compressionNestedMap
+		}
+		if !data.SplunkReceiver.Endpoint.IsNull() && !data.SplunkReceiver.Endpoint.IsUnknown() {
+			splunk_receiverMap["endpoint"] = data.SplunkReceiver.Endpoint.ValueString()
+		}
+		if data.SplunkReceiver.NoTLS != nil {
+			splunk_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if data.SplunkReceiver.SplunkHecToken != nil {
+			splunk_hec_tokenNestedMap := make(map[string]interface{})
+			splunk_receiverMap["splunk_hec_token"] = splunk_hec_tokenNestedMap
+		}
+		if data.SplunkReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.SplunkReceiver.UseTLS.TrustedCAURL.IsNull() && !data.SplunkReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.SplunkReceiver.UseTLS.TrustedCAURL.ValueString()
+			}
+			splunk_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		createReq.Spec["splunk_receiver"] = splunk_receiverMap
+	}
+	if data.SumoLogicReceiver != nil {
+		sumo_logic_receiverMap := make(map[string]interface{})
+		if data.SumoLogicReceiver.URL != nil {
+			urlNestedMap := make(map[string]interface{})
+			sumo_logic_receiverMap["url"] = urlNestedMap
+		}
+		createReq.Spec["sumo_logic_receiver"] = sumo_logic_receiverMap
 	}
 
 	apiResource, err := r.client.CreateLogReceiver(ctx, createReq)
@@ -562,45 +3444,35 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
-	if _, ok := apiResource.Spec["site_local"].(map[string]interface{}); ok && isImport && data.SiteLocal == nil {
+	if _, ok := apiResource.Spec["audit_logs"].(map[string]interface{}); ok && isImport && data.AuditLogs == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SiteLocal = &LogReceiverEmptyModel{}
+		data.AuditLogs = &LogReceiverEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["syslog"].(map[string]interface{}); ok && (isImport || data.Syslog != nil) {
-		data.Syslog = &LogReceiverSyslogModel{
-			SyslogRfc5424: func() types.Int64 {
-				if !isImport && data.Syslog != nil {
-					// Preserve existing state (null or user-set value)
-					// This prevents API defaults (like 0) from overwriting user intent
-					return data.Syslog.SyslogRfc5424
-				}
-				if !isImport {
-					// Block not in user config - return null, not API default
-					return types.Int64Null()
-				}
-				// Import case: read from API
-				if v, ok := blockData["syslog_rfc5424"].(float64); ok {
-					return types.Int64Value(int64(v))
-				}
-				return types.Int64Null()
-			}(),
-			TCPServer: func() *LogReceiverSyslogTCPServerModel {
-				if !isImport && data.Syslog != nil && data.Syslog.TCPServer != nil {
+	if blockData, ok := apiResource.Spec["aws_cloud_watch_receiver"].(map[string]interface{}); ok && (isImport || data.AWSCloudWatchReceiver != nil) {
+		data.AWSCloudWatchReceiver = &LogReceiverAWSCloudWatchReceiverModel{
+			AWSCred: func() *LogReceiverAWSCloudWatchReceiverAWSCredModel {
+				if !isImport && data.AWSCloudWatchReceiver != nil && data.AWSCloudWatchReceiver.AWSCred != nil {
 					// Normal Read: preserve existing state value
-					return data.Syslog.TCPServer
+					return data.AWSCloudWatchReceiver.AWSCred
 				}
 				// Import case: read from API
-				if nestedBlockData, ok := blockData["tcp_server"].(map[string]interface{}); ok {
-					return &LogReceiverSyslogTCPServerModel{
-						Port: func() types.Int64 {
-							if v, ok := nestedBlockData["port"].(float64); ok {
-								return types.Int64Value(int64(v))
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &LogReceiverAWSCloudWatchReceiverAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
 							}
-							return types.Int64Null()
+							return types.StringNull()
 						}(),
-						ServerName: func() types.String {
-							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
 							return types.StringNull()
@@ -609,28 +3481,34 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 				}
 				return nil
 			}(),
-			TLSServer: func() *LogReceiverSyslogTLSServerModel {
-				if !isImport && data.Syslog != nil && data.Syslog.TLSServer != nil {
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Batch: func() *LogReceiverAWSCloudWatchReceiverBatchModel {
+				if !isImport && data.AWSCloudWatchReceiver != nil && data.AWSCloudWatchReceiver.Batch != nil {
 					// Normal Read: preserve existing state value
-					return data.Syslog.TLSServer
+					return data.AWSCloudWatchReceiver.Batch
 				}
 				// Import case: read from API
-				if nestedBlockData, ok := blockData["tls_server"].(map[string]interface{}); ok {
-					return &LogReceiverSyslogTLSServerModel{
-						Port: func() types.Int64 {
-							if v, ok := nestedBlockData["port"].(float64); ok {
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverAWSCloudWatchReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
 								return types.Int64Value(int64(v))
 							}
 							return types.Int64Null()
 						}(),
-						ServerName: func() types.String {
-							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
-								return types.StringValue(v)
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
 							}
-							return types.StringNull()
+							return types.Int64Null()
 						}(),
-						TrustedCAURL: func() types.String {
-							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
 							return types.StringNull()
@@ -639,22 +3517,128 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 				}
 				return nil
 			}(),
-			UDPServer: func() *LogReceiverSyslogUDPServerModel {
-				if !isImport && data.Syslog != nil && data.Syslog.UDPServer != nil {
+			Compression: func() *LogReceiverAWSCloudWatchReceiverCompressionModel {
+				if !isImport && data.AWSCloudWatchReceiver != nil && data.AWSCloudWatchReceiver.Compression != nil {
 					// Normal Read: preserve existing state value
-					return data.Syslog.UDPServer
+					return data.AWSCloudWatchReceiver.Compression
 				}
 				// Import case: read from API
-				if nestedBlockData, ok := blockData["udp_server"].(map[string]interface{}); ok {
-					return &LogReceiverSyslogUDPServerModel{
-						Port: func() types.Int64 {
-							if v, ok := nestedBlockData["port"].(float64); ok {
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverAWSCloudWatchReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			GroupName: func() types.String {
+				if v, ok := blockData["group_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			StreamName: func() types.String {
+				if v, ok := blockData["stream_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_event_hubs_receiver"].(map[string]interface{}); ok && (isImport || data.AzureEventHubsReceiver != nil) {
+		data.AzureEventHubsReceiver = &LogReceiverAzureEventHubsReceiverModel{
+			ConnectionString: func() *LogReceiverAzureEventHubsReceiverConnectionStringModel {
+				if !isImport && data.AzureEventHubsReceiver != nil && data.AzureEventHubsReceiver.ConnectionString != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureEventHubsReceiver.ConnectionString
+				}
+				// Import case: read from API
+				if _, ok := blockData["connection_string"].(map[string]interface{}); ok {
+					return &LogReceiverAzureEventHubsReceiverConnectionStringModel{}
+				}
+				return nil
+			}(),
+			Instance: func() types.String {
+				if v, ok := blockData["instance"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_receiver"].(map[string]interface{}); ok && (isImport || data.AzureReceiver != nil) {
+		data.AzureReceiver = &LogReceiverAzureReceiverModel{
+			Batch: func() *LogReceiverAzureReceiverBatchModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverAzureReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
 								return types.Int64Value(int64(v))
 							}
 							return types.Int64Null()
 						}(),
-						ServerName: func() types.String {
-							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverAzureReceiverCompressionModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverAzureReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			ConnectionString: func() *LogReceiverAzureReceiverConnectionStringModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.ConnectionString != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.ConnectionString
+				}
+				// Import case: read from API
+				if _, ok := blockData["connection_string"].(map[string]interface{}); ok {
+					return &LogReceiverAzureReceiverConnectionStringModel{}
+				}
+				return nil
+			}(),
+			ContainerName: func() types.String {
+				if v, ok := blockData["container_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			FilenameOptions: func() *LogReceiverAzureReceiverFilenameOptionsModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.FilenameOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.FilenameOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["filename_options"].(map[string]interface{}); ok {
+					return &LogReceiverAzureReceiverFilenameOptionsModel{
+						CustomFolder: func() types.String {
+							if v, ok := nestedBlockData["custom_folder"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
 							return types.StringNull()
@@ -665,6 +3649,749 @@ func (r *LogReceiverResource) Create(ctx context.Context, req resource.CreateReq
 			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["datadog_receiver"].(map[string]interface{}); ok && (isImport || data.DatadogReceiver != nil) {
+		data.DatadogReceiver = &LogReceiverDatadogReceiverModel{
+			Batch: func() *LogReceiverDatadogReceiverBatchModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverDatadogReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverDatadogReceiverCompressionModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverDatadogReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			DatadogAPIKey: func() *LogReceiverDatadogReceiverDatadogAPIKeyModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.DatadogAPIKey != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.DatadogAPIKey
+				}
+				// Import case: read from API
+				if _, ok := blockData["datadog_api_key"].(map[string]interface{}); ok {
+					return &LogReceiverDatadogReceiverDatadogAPIKeyModel{}
+				}
+				return nil
+			}(),
+			Endpoint: func() types.String {
+				if v, ok := blockData["endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.DatadogReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DatadogReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			Site: func() types.String {
+				if v, ok := blockData["site"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseTLS: func() *LogReceiverDatadogReceiverUseTLSModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverDatadogReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["dns_logs"].(map[string]interface{}); ok && isImport && data.DNSLogs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DNSLogs = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["gcp_bucket_receiver"].(map[string]interface{}); ok && (isImport || data.GCPBucketReceiver != nil) {
+		data.GCPBucketReceiver = &LogReceiverGCPBucketReceiverModel{
+			Batch: func() *LogReceiverGCPBucketReceiverBatchModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverGCPBucketReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Bucket: func() types.String {
+				if v, ok := blockData["bucket"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Compression: func() *LogReceiverGCPBucketReceiverCompressionModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverGCPBucketReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			FilenameOptions: func() *LogReceiverGCPBucketReceiverFilenameOptionsModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.FilenameOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.FilenameOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["filename_options"].(map[string]interface{}); ok {
+					return &LogReceiverGCPBucketReceiverFilenameOptionsModel{
+						CustomFolder: func() types.String {
+							if v, ok := nestedBlockData["custom_folder"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			GCPCred: func() *LogReceiverGCPBucketReceiverGCPCredModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.GCPCred != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.GCPCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["gcp_cred"].(map[string]interface{}); ok {
+					return &LogReceiverGCPBucketReceiverGCPCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["http_receiver"].(map[string]interface{}); ok && (isImport || data.HTTPReceiver != nil) {
+		data.HTTPReceiver = &LogReceiverHTTPReceiverModel{
+			AuthBasic: func() *LogReceiverHTTPReceiverAuthBasicModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.AuthBasic != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.AuthBasic
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["auth_basic"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverAuthBasicModel{
+						UserName: func() types.String {
+							if v, ok := nestedBlockData["user_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AuthNone: func() *LogReceiverEmptyModel {
+				if !isImport && data.HTTPReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPReceiver.AuthNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["auth_none"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			AuthToken: func() *LogReceiverHTTPReceiverAuthTokenModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.AuthToken != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.AuthToken
+				}
+				// Import case: read from API
+				if _, ok := blockData["auth_token"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverAuthTokenModel{}
+				}
+				return nil
+			}(),
+			Batch: func() *LogReceiverHTTPReceiverBatchModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverHTTPReceiverCompressionModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.HTTPReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			URI: func() types.String {
+				if v, ok := blockData["uri"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseTLS: func() *LogReceiverHTTPReceiverUseTLSModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["kafka_receiver"].(map[string]interface{}); ok && (isImport || data.KafkaReceiver != nil) {
+		data.KafkaReceiver = &LogReceiverKafkaReceiverModel{
+			Batch: func() *LogReceiverKafkaReceiverBatchModel {
+				if !isImport && data.KafkaReceiver != nil && data.KafkaReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.KafkaReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverKafkaReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			BootstrapServers: func() types.List {
+				if v, ok := blockData["bootstrap_servers"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			Compression: func() *LogReceiverKafkaReceiverCompressionModel {
+				if !isImport && data.KafkaReceiver != nil && data.KafkaReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.KafkaReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverKafkaReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			KafkaTopic: func() types.String {
+				if v, ok := blockData["kafka_topic"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.KafkaReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.KafkaReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			UseTLS: func() *LogReceiverKafkaReceiverUseTLSModel {
+				if !isImport && data.KafkaReceiver != nil && data.KafkaReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.KafkaReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverKafkaReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["new_relic_receiver"].(map[string]interface{}); ok && isImport && data.NewRelicReceiver == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NewRelicReceiver = &LogReceiverNewRelicReceiverModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["ns_all"].(map[string]interface{}); ok && isImport && data.NsAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NsAll = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["ns_current"].(map[string]interface{}); ok && isImport && data.NsCurrent == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NsCurrent = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["ns_list"].(map[string]interface{}); ok && (isImport || data.NsList != nil) {
+		data.NsList = &LogReceiverNsListModel{
+			Namespaces: func() types.List {
+				if v, ok := blockData["namespaces"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["qradar_receiver"].(map[string]interface{}); ok && (isImport || data.QradarReceiver != nil) {
+		data.QradarReceiver = &LogReceiverQradarReceiverModel{
+			Batch: func() *LogReceiverQradarReceiverBatchModel {
+				if !isImport && data.QradarReceiver != nil && data.QradarReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.QradarReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverQradarReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverQradarReceiverCompressionModel {
+				if !isImport && data.QradarReceiver != nil && data.QradarReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.QradarReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverQradarReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.QradarReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.QradarReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			URI: func() types.String {
+				if v, ok := blockData["uri"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseTLS: func() *LogReceiverQradarReceiverUseTLSModel {
+				if !isImport && data.QradarReceiver != nil && data.QradarReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.QradarReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverQradarReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["request_logs"].(map[string]interface{}); ok && isImport && data.RequestLogs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RequestLogs = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["s3_receiver"].(map[string]interface{}); ok && (isImport || data.S3Receiver != nil) {
+		data.S3Receiver = &LogReceiverS3ReceiverModel{
+			AWSCred: func() *LogReceiverS3ReceiverAWSCredModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.AWSCred != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.AWSCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &LogReceiverS3ReceiverAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Batch: func() *LogReceiverS3ReceiverBatchModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverS3ReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Bucket: func() types.String {
+				if v, ok := blockData["bucket"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Compression: func() *LogReceiverS3ReceiverCompressionModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverS3ReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			FilenameOptions: func() *LogReceiverS3ReceiverFilenameOptionsModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.FilenameOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.FilenameOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["filename_options"].(map[string]interface{}); ok {
+					return &LogReceiverS3ReceiverFilenameOptionsModel{
+						CustomFolder: func() types.String {
+							if v, ok := nestedBlockData["custom_folder"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["security_events"].(map[string]interface{}); ok && isImport && data.SecurityEvents == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SecurityEvents = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["splunk_receiver"].(map[string]interface{}); ok && (isImport || data.SplunkReceiver != nil) {
+		data.SplunkReceiver = &LogReceiverSplunkReceiverModel{
+			Batch: func() *LogReceiverSplunkReceiverBatchModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverSplunkReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverSplunkReceiverCompressionModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverSplunkReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			Endpoint: func() types.String {
+				if v, ok := blockData["endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.SplunkReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SplunkReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			SplunkHecToken: func() *LogReceiverSplunkReceiverSplunkHecTokenModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.SplunkHecToken != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.SplunkHecToken
+				}
+				// Import case: read from API
+				if _, ok := blockData["splunk_hec_token"].(map[string]interface{}); ok {
+					return &LogReceiverSplunkReceiverSplunkHecTokenModel{}
+				}
+				return nil
+			}(),
+			UseTLS: func() *LogReceiverSplunkReceiverUseTLSModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverSplunkReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["sumo_logic_receiver"].(map[string]interface{}); ok && isImport && data.SumoLogicReceiver == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SumoLogicReceiver = &LogReceiverSumoLogicReceiverModel{}
+	}
+	// Normal Read: preserve existing state value
 
 	psd := privatestate.NewPrivateStateData()
 	psd.SetCustom("managed", "true")
@@ -764,45 +4491,35 @@ func (r *LogReceiverResource) Read(ctx context.Context, req resource.ReadRequest
 		"psd_is_nil": psd == nil,
 		"managed":    psd.Metadata.Custom["managed"],
 	})
-	if _, ok := apiResource.Spec["site_local"].(map[string]interface{}); ok && isImport && data.SiteLocal == nil {
+	if _, ok := apiResource.Spec["audit_logs"].(map[string]interface{}); ok && isImport && data.AuditLogs == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SiteLocal = &LogReceiverEmptyModel{}
+		data.AuditLogs = &LogReceiverEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["syslog"].(map[string]interface{}); ok && (isImport || data.Syslog != nil) {
-		data.Syslog = &LogReceiverSyslogModel{
-			SyslogRfc5424: func() types.Int64 {
-				if !isImport && data.Syslog != nil {
-					// Preserve existing state (null or user-set value)
-					// This prevents API defaults (like 0) from overwriting user intent
-					return data.Syslog.SyslogRfc5424
-				}
-				if !isImport {
-					// Block not in user config - return null, not API default
-					return types.Int64Null()
-				}
-				// Import case: read from API
-				if v, ok := blockData["syslog_rfc5424"].(float64); ok {
-					return types.Int64Value(int64(v))
-				}
-				return types.Int64Null()
-			}(),
-			TCPServer: func() *LogReceiverSyslogTCPServerModel {
-				if !isImport && data.Syslog != nil && data.Syslog.TCPServer != nil {
+	if blockData, ok := apiResource.Spec["aws_cloud_watch_receiver"].(map[string]interface{}); ok && (isImport || data.AWSCloudWatchReceiver != nil) {
+		data.AWSCloudWatchReceiver = &LogReceiverAWSCloudWatchReceiverModel{
+			AWSCred: func() *LogReceiverAWSCloudWatchReceiverAWSCredModel {
+				if !isImport && data.AWSCloudWatchReceiver != nil && data.AWSCloudWatchReceiver.AWSCred != nil {
 					// Normal Read: preserve existing state value
-					return data.Syslog.TCPServer
+					return data.AWSCloudWatchReceiver.AWSCred
 				}
 				// Import case: read from API
-				if nestedBlockData, ok := blockData["tcp_server"].(map[string]interface{}); ok {
-					return &LogReceiverSyslogTCPServerModel{
-						Port: func() types.Int64 {
-							if v, ok := nestedBlockData["port"].(float64); ok {
-								return types.Int64Value(int64(v))
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &LogReceiverAWSCloudWatchReceiverAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
 							}
-							return types.Int64Null()
+							return types.StringNull()
 						}(),
-						ServerName: func() types.String {
-							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
 							return types.StringNull()
@@ -811,28 +4528,34 @@ func (r *LogReceiverResource) Read(ctx context.Context, req resource.ReadRequest
 				}
 				return nil
 			}(),
-			TLSServer: func() *LogReceiverSyslogTLSServerModel {
-				if !isImport && data.Syslog != nil && data.Syslog.TLSServer != nil {
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Batch: func() *LogReceiverAWSCloudWatchReceiverBatchModel {
+				if !isImport && data.AWSCloudWatchReceiver != nil && data.AWSCloudWatchReceiver.Batch != nil {
 					// Normal Read: preserve existing state value
-					return data.Syslog.TLSServer
+					return data.AWSCloudWatchReceiver.Batch
 				}
 				// Import case: read from API
-				if nestedBlockData, ok := blockData["tls_server"].(map[string]interface{}); ok {
-					return &LogReceiverSyslogTLSServerModel{
-						Port: func() types.Int64 {
-							if v, ok := nestedBlockData["port"].(float64); ok {
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverAWSCloudWatchReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
 								return types.Int64Value(int64(v))
 							}
 							return types.Int64Null()
 						}(),
-						ServerName: func() types.String {
-							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
-								return types.StringValue(v)
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
 							}
-							return types.StringNull()
+							return types.Int64Null()
 						}(),
-						TrustedCAURL: func() types.String {
-							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
 							return types.StringNull()
@@ -841,22 +4564,128 @@ func (r *LogReceiverResource) Read(ctx context.Context, req resource.ReadRequest
 				}
 				return nil
 			}(),
-			UDPServer: func() *LogReceiverSyslogUDPServerModel {
-				if !isImport && data.Syslog != nil && data.Syslog.UDPServer != nil {
+			Compression: func() *LogReceiverAWSCloudWatchReceiverCompressionModel {
+				if !isImport && data.AWSCloudWatchReceiver != nil && data.AWSCloudWatchReceiver.Compression != nil {
 					// Normal Read: preserve existing state value
-					return data.Syslog.UDPServer
+					return data.AWSCloudWatchReceiver.Compression
 				}
 				// Import case: read from API
-				if nestedBlockData, ok := blockData["udp_server"].(map[string]interface{}); ok {
-					return &LogReceiverSyslogUDPServerModel{
-						Port: func() types.Int64 {
-							if v, ok := nestedBlockData["port"].(float64); ok {
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverAWSCloudWatchReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			GroupName: func() types.String {
+				if v, ok := blockData["group_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			StreamName: func() types.String {
+				if v, ok := blockData["stream_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_event_hubs_receiver"].(map[string]interface{}); ok && (isImport || data.AzureEventHubsReceiver != nil) {
+		data.AzureEventHubsReceiver = &LogReceiverAzureEventHubsReceiverModel{
+			ConnectionString: func() *LogReceiverAzureEventHubsReceiverConnectionStringModel {
+				if !isImport && data.AzureEventHubsReceiver != nil && data.AzureEventHubsReceiver.ConnectionString != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureEventHubsReceiver.ConnectionString
+				}
+				// Import case: read from API
+				if _, ok := blockData["connection_string"].(map[string]interface{}); ok {
+					return &LogReceiverAzureEventHubsReceiverConnectionStringModel{}
+				}
+				return nil
+			}(),
+			Instance: func() types.String {
+				if v, ok := blockData["instance"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_receiver"].(map[string]interface{}); ok && (isImport || data.AzureReceiver != nil) {
+		data.AzureReceiver = &LogReceiverAzureReceiverModel{
+			Batch: func() *LogReceiverAzureReceiverBatchModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverAzureReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
 								return types.Int64Value(int64(v))
 							}
 							return types.Int64Null()
 						}(),
-						ServerName: func() types.String {
-							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverAzureReceiverCompressionModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverAzureReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			ConnectionString: func() *LogReceiverAzureReceiverConnectionStringModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.ConnectionString != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.ConnectionString
+				}
+				// Import case: read from API
+				if _, ok := blockData["connection_string"].(map[string]interface{}); ok {
+					return &LogReceiverAzureReceiverConnectionStringModel{}
+				}
+				return nil
+			}(),
+			ContainerName: func() types.String {
+				if v, ok := blockData["container_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			FilenameOptions: func() *LogReceiverAzureReceiverFilenameOptionsModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.FilenameOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.FilenameOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["filename_options"].(map[string]interface{}); ok {
+					return &LogReceiverAzureReceiverFilenameOptionsModel{
+						CustomFolder: func() types.String {
+							if v, ok := nestedBlockData["custom_folder"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
 							return types.StringNull()
@@ -867,6 +4696,749 @@ func (r *LogReceiverResource) Read(ctx context.Context, req resource.ReadRequest
 			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["datadog_receiver"].(map[string]interface{}); ok && (isImport || data.DatadogReceiver != nil) {
+		data.DatadogReceiver = &LogReceiverDatadogReceiverModel{
+			Batch: func() *LogReceiverDatadogReceiverBatchModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverDatadogReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverDatadogReceiverCompressionModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverDatadogReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			DatadogAPIKey: func() *LogReceiverDatadogReceiverDatadogAPIKeyModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.DatadogAPIKey != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.DatadogAPIKey
+				}
+				// Import case: read from API
+				if _, ok := blockData["datadog_api_key"].(map[string]interface{}); ok {
+					return &LogReceiverDatadogReceiverDatadogAPIKeyModel{}
+				}
+				return nil
+			}(),
+			Endpoint: func() types.String {
+				if v, ok := blockData["endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.DatadogReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DatadogReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			Site: func() types.String {
+				if v, ok := blockData["site"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseTLS: func() *LogReceiverDatadogReceiverUseTLSModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverDatadogReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["dns_logs"].(map[string]interface{}); ok && isImport && data.DNSLogs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DNSLogs = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["gcp_bucket_receiver"].(map[string]interface{}); ok && (isImport || data.GCPBucketReceiver != nil) {
+		data.GCPBucketReceiver = &LogReceiverGCPBucketReceiverModel{
+			Batch: func() *LogReceiverGCPBucketReceiverBatchModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverGCPBucketReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Bucket: func() types.String {
+				if v, ok := blockData["bucket"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Compression: func() *LogReceiverGCPBucketReceiverCompressionModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverGCPBucketReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			FilenameOptions: func() *LogReceiverGCPBucketReceiverFilenameOptionsModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.FilenameOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.FilenameOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["filename_options"].(map[string]interface{}); ok {
+					return &LogReceiverGCPBucketReceiverFilenameOptionsModel{
+						CustomFolder: func() types.String {
+							if v, ok := nestedBlockData["custom_folder"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			GCPCred: func() *LogReceiverGCPBucketReceiverGCPCredModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.GCPCred != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.GCPCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["gcp_cred"].(map[string]interface{}); ok {
+					return &LogReceiverGCPBucketReceiverGCPCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["http_receiver"].(map[string]interface{}); ok && (isImport || data.HTTPReceiver != nil) {
+		data.HTTPReceiver = &LogReceiverHTTPReceiverModel{
+			AuthBasic: func() *LogReceiverHTTPReceiverAuthBasicModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.AuthBasic != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.AuthBasic
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["auth_basic"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverAuthBasicModel{
+						UserName: func() types.String {
+							if v, ok := nestedBlockData["user_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AuthNone: func() *LogReceiverEmptyModel {
+				if !isImport && data.HTTPReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPReceiver.AuthNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["auth_none"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			AuthToken: func() *LogReceiverHTTPReceiverAuthTokenModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.AuthToken != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.AuthToken
+				}
+				// Import case: read from API
+				if _, ok := blockData["auth_token"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverAuthTokenModel{}
+				}
+				return nil
+			}(),
+			Batch: func() *LogReceiverHTTPReceiverBatchModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverHTTPReceiverCompressionModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.HTTPReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			URI: func() types.String {
+				if v, ok := blockData["uri"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseTLS: func() *LogReceiverHTTPReceiverUseTLSModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["kafka_receiver"].(map[string]interface{}); ok && (isImport || data.KafkaReceiver != nil) {
+		data.KafkaReceiver = &LogReceiverKafkaReceiverModel{
+			Batch: func() *LogReceiverKafkaReceiverBatchModel {
+				if !isImport && data.KafkaReceiver != nil && data.KafkaReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.KafkaReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverKafkaReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			BootstrapServers: func() types.List {
+				if v, ok := blockData["bootstrap_servers"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			Compression: func() *LogReceiverKafkaReceiverCompressionModel {
+				if !isImport && data.KafkaReceiver != nil && data.KafkaReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.KafkaReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverKafkaReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			KafkaTopic: func() types.String {
+				if v, ok := blockData["kafka_topic"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.KafkaReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.KafkaReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			UseTLS: func() *LogReceiverKafkaReceiverUseTLSModel {
+				if !isImport && data.KafkaReceiver != nil && data.KafkaReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.KafkaReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverKafkaReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["new_relic_receiver"].(map[string]interface{}); ok && isImport && data.NewRelicReceiver == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NewRelicReceiver = &LogReceiverNewRelicReceiverModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["ns_all"].(map[string]interface{}); ok && isImport && data.NsAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NsAll = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["ns_current"].(map[string]interface{}); ok && isImport && data.NsCurrent == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NsCurrent = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["ns_list"].(map[string]interface{}); ok && (isImport || data.NsList != nil) {
+		data.NsList = &LogReceiverNsListModel{
+			Namespaces: func() types.List {
+				if v, ok := blockData["namespaces"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["qradar_receiver"].(map[string]interface{}); ok && (isImport || data.QradarReceiver != nil) {
+		data.QradarReceiver = &LogReceiverQradarReceiverModel{
+			Batch: func() *LogReceiverQradarReceiverBatchModel {
+				if !isImport && data.QradarReceiver != nil && data.QradarReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.QradarReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverQradarReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverQradarReceiverCompressionModel {
+				if !isImport && data.QradarReceiver != nil && data.QradarReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.QradarReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverQradarReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.QradarReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.QradarReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			URI: func() types.String {
+				if v, ok := blockData["uri"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseTLS: func() *LogReceiverQradarReceiverUseTLSModel {
+				if !isImport && data.QradarReceiver != nil && data.QradarReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.QradarReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverQradarReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["request_logs"].(map[string]interface{}); ok && isImport && data.RequestLogs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RequestLogs = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["s3_receiver"].(map[string]interface{}); ok && (isImport || data.S3Receiver != nil) {
+		data.S3Receiver = &LogReceiverS3ReceiverModel{
+			AWSCred: func() *LogReceiverS3ReceiverAWSCredModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.AWSCred != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.AWSCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &LogReceiverS3ReceiverAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Batch: func() *LogReceiverS3ReceiverBatchModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverS3ReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Bucket: func() types.String {
+				if v, ok := blockData["bucket"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Compression: func() *LogReceiverS3ReceiverCompressionModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverS3ReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			FilenameOptions: func() *LogReceiverS3ReceiverFilenameOptionsModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.FilenameOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.FilenameOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["filename_options"].(map[string]interface{}); ok {
+					return &LogReceiverS3ReceiverFilenameOptionsModel{
+						CustomFolder: func() types.String {
+							if v, ok := nestedBlockData["custom_folder"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["security_events"].(map[string]interface{}); ok && isImport && data.SecurityEvents == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SecurityEvents = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["splunk_receiver"].(map[string]interface{}); ok && (isImport || data.SplunkReceiver != nil) {
+		data.SplunkReceiver = &LogReceiverSplunkReceiverModel{
+			Batch: func() *LogReceiverSplunkReceiverBatchModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverSplunkReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverSplunkReceiverCompressionModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverSplunkReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			Endpoint: func() types.String {
+				if v, ok := blockData["endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.SplunkReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SplunkReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			SplunkHecToken: func() *LogReceiverSplunkReceiverSplunkHecTokenModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.SplunkHecToken != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.SplunkHecToken
+				}
+				// Import case: read from API
+				if _, ok := blockData["splunk_hec_token"].(map[string]interface{}); ok {
+					return &LogReceiverSplunkReceiverSplunkHecTokenModel{}
+				}
+				return nil
+			}(),
+			UseTLS: func() *LogReceiverSplunkReceiverUseTLSModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverSplunkReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["sumo_logic_receiver"].(map[string]interface{}); ok && isImport && data.SumoLogicReceiver == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SumoLogicReceiver = &LogReceiverSumoLogicReceiverModel{}
+	}
+	// Normal Read: preserve existing state value
 
 	// Preserve or set the managed marker for future Read operations
 	newPsd := privatestate.NewPrivateStateData()
@@ -927,49 +5499,447 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if data.SiteLocal != nil {
-		site_localMap := make(map[string]interface{})
-		apiResource.Spec["site_local"] = site_localMap
+	if data.AuditLogs != nil {
+		audit_logsMap := make(map[string]interface{})
+		apiResource.Spec["audit_logs"] = audit_logsMap
 	}
-	if data.Syslog != nil {
-		syslogMap := make(map[string]interface{})
-		if !data.Syslog.SyslogRfc5424.IsNull() && !data.Syslog.SyslogRfc5424.IsUnknown() {
-			syslogMap["syslog_rfc5424"] = data.Syslog.SyslogRfc5424.ValueInt64()
+	if data.AWSCloudWatchReceiver != nil {
+		aws_cloud_watch_receiverMap := make(map[string]interface{})
+		if data.AWSCloudWatchReceiver.AWSCred != nil {
+			aws_credNestedMap := make(map[string]interface{})
+			if !data.AWSCloudWatchReceiver.AWSCred.Name.IsNull() && !data.AWSCloudWatchReceiver.AWSCred.Name.IsUnknown() {
+				aws_credNestedMap["name"] = data.AWSCloudWatchReceiver.AWSCred.Name.ValueString()
+			}
+			if !data.AWSCloudWatchReceiver.AWSCred.Namespace.IsNull() && !data.AWSCloudWatchReceiver.AWSCred.Namespace.IsUnknown() {
+				aws_credNestedMap["namespace"] = data.AWSCloudWatchReceiver.AWSCred.Namespace.ValueString()
+			}
+			if !data.AWSCloudWatchReceiver.AWSCred.Tenant.IsNull() && !data.AWSCloudWatchReceiver.AWSCred.Tenant.IsUnknown() {
+				aws_credNestedMap["tenant"] = data.AWSCloudWatchReceiver.AWSCred.Tenant.ValueString()
+			}
+			aws_cloud_watch_receiverMap["aws_cred"] = aws_credNestedMap
 		}
-		if data.Syslog.TCPServer != nil {
-			tcp_serverNestedMap := make(map[string]interface{})
-			if !data.Syslog.TCPServer.Port.IsNull() && !data.Syslog.TCPServer.Port.IsUnknown() {
-				tcp_serverNestedMap["port"] = data.Syslog.TCPServer.Port.ValueInt64()
-			}
-			if !data.Syslog.TCPServer.ServerName.IsNull() && !data.Syslog.TCPServer.ServerName.IsUnknown() {
-				tcp_serverNestedMap["server_name"] = data.Syslog.TCPServer.ServerName.ValueString()
-			}
-			syslogMap["tcp_server"] = tcp_serverNestedMap
+		if !data.AWSCloudWatchReceiver.AWSRegion.IsNull() && !data.AWSCloudWatchReceiver.AWSRegion.IsUnknown() {
+			aws_cloud_watch_receiverMap["aws_region"] = data.AWSCloudWatchReceiver.AWSRegion.ValueString()
 		}
-		if data.Syslog.TLSServer != nil {
-			tls_serverNestedMap := make(map[string]interface{})
-			if !data.Syslog.TLSServer.Port.IsNull() && !data.Syslog.TLSServer.Port.IsUnknown() {
-				tls_serverNestedMap["port"] = data.Syslog.TLSServer.Port.ValueInt64()
+		if data.AWSCloudWatchReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.AWSCloudWatchReceiver.Batch.MaxBytes.IsNull() && !data.AWSCloudWatchReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.AWSCloudWatchReceiver.Batch.MaxBytes.ValueInt64()
 			}
-			if !data.Syslog.TLSServer.ServerName.IsNull() && !data.Syslog.TLSServer.ServerName.IsUnknown() {
-				tls_serverNestedMap["server_name"] = data.Syslog.TLSServer.ServerName.ValueString()
+			if !data.AWSCloudWatchReceiver.Batch.MaxEvents.IsNull() && !data.AWSCloudWatchReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.AWSCloudWatchReceiver.Batch.MaxEvents.ValueInt64()
 			}
-			if !data.Syslog.TLSServer.TrustedCAURL.IsNull() && !data.Syslog.TLSServer.TrustedCAURL.IsUnknown() {
-				tls_serverNestedMap["trusted_ca_url"] = data.Syslog.TLSServer.TrustedCAURL.ValueString()
+			if !data.AWSCloudWatchReceiver.Batch.TimeoutSeconds.IsNull() && !data.AWSCloudWatchReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.AWSCloudWatchReceiver.Batch.TimeoutSeconds.ValueString()
 			}
-			syslogMap["tls_server"] = tls_serverNestedMap
+			aws_cloud_watch_receiverMap["batch"] = batchNestedMap
 		}
-		if data.Syslog.UDPServer != nil {
-			udp_serverNestedMap := make(map[string]interface{})
-			if !data.Syslog.UDPServer.Port.IsNull() && !data.Syslog.UDPServer.Port.IsUnknown() {
-				udp_serverNestedMap["port"] = data.Syslog.UDPServer.Port.ValueInt64()
-			}
-			if !data.Syslog.UDPServer.ServerName.IsNull() && !data.Syslog.UDPServer.ServerName.IsUnknown() {
-				udp_serverNestedMap["server_name"] = data.Syslog.UDPServer.ServerName.ValueString()
-			}
-			syslogMap["udp_server"] = udp_serverNestedMap
+		if data.AWSCloudWatchReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			aws_cloud_watch_receiverMap["compression"] = compressionNestedMap
 		}
-		apiResource.Spec["syslog"] = syslogMap
+		if !data.AWSCloudWatchReceiver.GroupName.IsNull() && !data.AWSCloudWatchReceiver.GroupName.IsUnknown() {
+			aws_cloud_watch_receiverMap["group_name"] = data.AWSCloudWatchReceiver.GroupName.ValueString()
+		}
+		if !data.AWSCloudWatchReceiver.StreamName.IsNull() && !data.AWSCloudWatchReceiver.StreamName.IsUnknown() {
+			aws_cloud_watch_receiverMap["stream_name"] = data.AWSCloudWatchReceiver.StreamName.ValueString()
+		}
+		apiResource.Spec["aws_cloud_watch_receiver"] = aws_cloud_watch_receiverMap
+	}
+	if data.AzureEventHubsReceiver != nil {
+		azure_event_hubs_receiverMap := make(map[string]interface{})
+		if data.AzureEventHubsReceiver.ConnectionString != nil {
+			connection_stringNestedMap := make(map[string]interface{})
+			azure_event_hubs_receiverMap["connection_string"] = connection_stringNestedMap
+		}
+		if !data.AzureEventHubsReceiver.Instance.IsNull() && !data.AzureEventHubsReceiver.Instance.IsUnknown() {
+			azure_event_hubs_receiverMap["instance"] = data.AzureEventHubsReceiver.Instance.ValueString()
+		}
+		if !data.AzureEventHubsReceiver.Namespace.IsNull() && !data.AzureEventHubsReceiver.Namespace.IsUnknown() {
+			azure_event_hubs_receiverMap["namespace"] = data.AzureEventHubsReceiver.Namespace.ValueString()
+		}
+		apiResource.Spec["azure_event_hubs_receiver"] = azure_event_hubs_receiverMap
+	}
+	if data.AzureReceiver != nil {
+		azure_receiverMap := make(map[string]interface{})
+		if data.AzureReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.AzureReceiver.Batch.MaxBytes.IsNull() && !data.AzureReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.AzureReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.AzureReceiver.Batch.MaxEvents.IsNull() && !data.AzureReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.AzureReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.AzureReceiver.Batch.TimeoutSeconds.IsNull() && !data.AzureReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.AzureReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			azure_receiverMap["batch"] = batchNestedMap
+		}
+		if data.AzureReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			azure_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.AzureReceiver.ConnectionString != nil {
+			connection_stringNestedMap := make(map[string]interface{})
+			azure_receiverMap["connection_string"] = connection_stringNestedMap
+		}
+		if !data.AzureReceiver.ContainerName.IsNull() && !data.AzureReceiver.ContainerName.IsUnknown() {
+			azure_receiverMap["container_name"] = data.AzureReceiver.ContainerName.ValueString()
+		}
+		if data.AzureReceiver.FilenameOptions != nil {
+			filename_optionsNestedMap := make(map[string]interface{})
+			if !data.AzureReceiver.FilenameOptions.CustomFolder.IsNull() && !data.AzureReceiver.FilenameOptions.CustomFolder.IsUnknown() {
+				filename_optionsNestedMap["custom_folder"] = data.AzureReceiver.FilenameOptions.CustomFolder.ValueString()
+			}
+			azure_receiverMap["filename_options"] = filename_optionsNestedMap
+		}
+		apiResource.Spec["azure_receiver"] = azure_receiverMap
+	}
+	if data.DatadogReceiver != nil {
+		datadog_receiverMap := make(map[string]interface{})
+		if data.DatadogReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.DatadogReceiver.Batch.MaxBytes.IsNull() && !data.DatadogReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.DatadogReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.DatadogReceiver.Batch.MaxEvents.IsNull() && !data.DatadogReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.DatadogReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.DatadogReceiver.Batch.TimeoutSeconds.IsNull() && !data.DatadogReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.DatadogReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			datadog_receiverMap["batch"] = batchNestedMap
+		}
+		if data.DatadogReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			datadog_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.DatadogReceiver.DatadogAPIKey != nil {
+			datadog_api_keyNestedMap := make(map[string]interface{})
+			datadog_receiverMap["datadog_api_key"] = datadog_api_keyNestedMap
+		}
+		if !data.DatadogReceiver.Endpoint.IsNull() && !data.DatadogReceiver.Endpoint.IsUnknown() {
+			datadog_receiverMap["endpoint"] = data.DatadogReceiver.Endpoint.ValueString()
+		}
+		if data.DatadogReceiver.NoTLS != nil {
+			datadog_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.DatadogReceiver.Site.IsNull() && !data.DatadogReceiver.Site.IsUnknown() {
+			datadog_receiverMap["site"] = data.DatadogReceiver.Site.ValueString()
+		}
+		if data.DatadogReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.DatadogReceiver.UseTLS.TrustedCAURL.IsNull() && !data.DatadogReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.DatadogReceiver.UseTLS.TrustedCAURL.ValueString()
+			}
+			datadog_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["datadog_receiver"] = datadog_receiverMap
+	}
+	if data.DNSLogs != nil {
+		dns_logsMap := make(map[string]interface{})
+		apiResource.Spec["dns_logs"] = dns_logsMap
+	}
+	if data.GCPBucketReceiver != nil {
+		gcp_bucket_receiverMap := make(map[string]interface{})
+		if data.GCPBucketReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.GCPBucketReceiver.Batch.MaxBytes.IsNull() && !data.GCPBucketReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.GCPBucketReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.GCPBucketReceiver.Batch.MaxEvents.IsNull() && !data.GCPBucketReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.GCPBucketReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.GCPBucketReceiver.Batch.TimeoutSeconds.IsNull() && !data.GCPBucketReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.GCPBucketReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			gcp_bucket_receiverMap["batch"] = batchNestedMap
+		}
+		if !data.GCPBucketReceiver.Bucket.IsNull() && !data.GCPBucketReceiver.Bucket.IsUnknown() {
+			gcp_bucket_receiverMap["bucket"] = data.GCPBucketReceiver.Bucket.ValueString()
+		}
+		if data.GCPBucketReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			gcp_bucket_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.GCPBucketReceiver.FilenameOptions != nil {
+			filename_optionsNestedMap := make(map[string]interface{})
+			if !data.GCPBucketReceiver.FilenameOptions.CustomFolder.IsNull() && !data.GCPBucketReceiver.FilenameOptions.CustomFolder.IsUnknown() {
+				filename_optionsNestedMap["custom_folder"] = data.GCPBucketReceiver.FilenameOptions.CustomFolder.ValueString()
+			}
+			gcp_bucket_receiverMap["filename_options"] = filename_optionsNestedMap
+		}
+		if data.GCPBucketReceiver.GCPCred != nil {
+			gcp_credNestedMap := make(map[string]interface{})
+			if !data.GCPBucketReceiver.GCPCred.Name.IsNull() && !data.GCPBucketReceiver.GCPCred.Name.IsUnknown() {
+				gcp_credNestedMap["name"] = data.GCPBucketReceiver.GCPCred.Name.ValueString()
+			}
+			if !data.GCPBucketReceiver.GCPCred.Namespace.IsNull() && !data.GCPBucketReceiver.GCPCred.Namespace.IsUnknown() {
+				gcp_credNestedMap["namespace"] = data.GCPBucketReceiver.GCPCred.Namespace.ValueString()
+			}
+			if !data.GCPBucketReceiver.GCPCred.Tenant.IsNull() && !data.GCPBucketReceiver.GCPCred.Tenant.IsUnknown() {
+				gcp_credNestedMap["tenant"] = data.GCPBucketReceiver.GCPCred.Tenant.ValueString()
+			}
+			gcp_bucket_receiverMap["gcp_cred"] = gcp_credNestedMap
+		}
+		apiResource.Spec["gcp_bucket_receiver"] = gcp_bucket_receiverMap
+	}
+	if data.HTTPReceiver != nil {
+		http_receiverMap := make(map[string]interface{})
+		if data.HTTPReceiver.AuthBasic != nil {
+			auth_basicNestedMap := make(map[string]interface{})
+			if !data.HTTPReceiver.AuthBasic.UserName.IsNull() && !data.HTTPReceiver.AuthBasic.UserName.IsUnknown() {
+				auth_basicNestedMap["user_name"] = data.HTTPReceiver.AuthBasic.UserName.ValueString()
+			}
+			http_receiverMap["auth_basic"] = auth_basicNestedMap
+		}
+		if data.HTTPReceiver.AuthNone != nil {
+			http_receiverMap["auth_none"] = map[string]interface{}{}
+		}
+		if data.HTTPReceiver.AuthToken != nil {
+			auth_tokenNestedMap := make(map[string]interface{})
+			http_receiverMap["auth_token"] = auth_tokenNestedMap
+		}
+		if data.HTTPReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.HTTPReceiver.Batch.MaxBytes.IsNull() && !data.HTTPReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.HTTPReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.HTTPReceiver.Batch.MaxEvents.IsNull() && !data.HTTPReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.HTTPReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.HTTPReceiver.Batch.TimeoutSeconds.IsNull() && !data.HTTPReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.HTTPReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			http_receiverMap["batch"] = batchNestedMap
+		}
+		if data.HTTPReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			http_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.HTTPReceiver.NoTLS != nil {
+			http_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.HTTPReceiver.URI.IsNull() && !data.HTTPReceiver.URI.IsUnknown() {
+			http_receiverMap["uri"] = data.HTTPReceiver.URI.ValueString()
+		}
+		if data.HTTPReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.HTTPReceiver.UseTLS.TrustedCAURL.IsNull() && !data.HTTPReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.HTTPReceiver.UseTLS.TrustedCAURL.ValueString()
+			}
+			http_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["http_receiver"] = http_receiverMap
+	}
+	if data.KafkaReceiver != nil {
+		kafka_receiverMap := make(map[string]interface{})
+		if data.KafkaReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.KafkaReceiver.Batch.MaxBytes.IsNull() && !data.KafkaReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.KafkaReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.KafkaReceiver.Batch.MaxEvents.IsNull() && !data.KafkaReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.KafkaReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.KafkaReceiver.Batch.TimeoutSeconds.IsNull() && !data.KafkaReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.KafkaReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			kafka_receiverMap["batch"] = batchNestedMap
+		}
+		if !data.KafkaReceiver.BootstrapServers.IsNull() && !data.KafkaReceiver.BootstrapServers.IsUnknown() {
+			var bootstrap_serversItems []string
+			diags := data.KafkaReceiver.BootstrapServers.ElementsAs(ctx, &bootstrap_serversItems, false)
+			if !diags.HasError() {
+				kafka_receiverMap["bootstrap_servers"] = bootstrap_serversItems
+			}
+		}
+		if data.KafkaReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			kafka_receiverMap["compression"] = compressionNestedMap
+		}
+		if !data.KafkaReceiver.KafkaTopic.IsNull() && !data.KafkaReceiver.KafkaTopic.IsUnknown() {
+			kafka_receiverMap["kafka_topic"] = data.KafkaReceiver.KafkaTopic.ValueString()
+		}
+		if data.KafkaReceiver.NoTLS != nil {
+			kafka_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if data.KafkaReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.KafkaReceiver.UseTLS.TrustedCAURL.IsNull() && !data.KafkaReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.KafkaReceiver.UseTLS.TrustedCAURL.ValueString()
+			}
+			kafka_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["kafka_receiver"] = kafka_receiverMap
+	}
+	if data.NewRelicReceiver != nil {
+		new_relic_receiverMap := make(map[string]interface{})
+		if data.NewRelicReceiver.APIKey != nil {
+			api_keyNestedMap := make(map[string]interface{})
+			new_relic_receiverMap["api_key"] = api_keyNestedMap
+		}
+		if data.NewRelicReceiver.Eu != nil {
+			new_relic_receiverMap["eu"] = map[string]interface{}{}
+		}
+		if data.NewRelicReceiver.Us != nil {
+			new_relic_receiverMap["us"] = map[string]interface{}{}
+		}
+		apiResource.Spec["new_relic_receiver"] = new_relic_receiverMap
+	}
+	if data.NsAll != nil {
+		ns_allMap := make(map[string]interface{})
+		apiResource.Spec["ns_all"] = ns_allMap
+	}
+	if data.NsCurrent != nil {
+		ns_currentMap := make(map[string]interface{})
+		apiResource.Spec["ns_current"] = ns_currentMap
+	}
+	if data.NsList != nil {
+		ns_listMap := make(map[string]interface{})
+		if !data.NsList.Namespaces.IsNull() && !data.NsList.Namespaces.IsUnknown() {
+			var namespacesItems []string
+			diags := data.NsList.Namespaces.ElementsAs(ctx, &namespacesItems, false)
+			if !diags.HasError() {
+				ns_listMap["namespaces"] = namespacesItems
+			}
+		}
+		apiResource.Spec["ns_list"] = ns_listMap
+	}
+	if data.QradarReceiver != nil {
+		qradar_receiverMap := make(map[string]interface{})
+		if data.QradarReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.QradarReceiver.Batch.MaxBytes.IsNull() && !data.QradarReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.QradarReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.QradarReceiver.Batch.MaxEvents.IsNull() && !data.QradarReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.QradarReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.QradarReceiver.Batch.TimeoutSeconds.IsNull() && !data.QradarReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.QradarReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			qradar_receiverMap["batch"] = batchNestedMap
+		}
+		if data.QradarReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			qradar_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.QradarReceiver.NoTLS != nil {
+			qradar_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if !data.QradarReceiver.URI.IsNull() && !data.QradarReceiver.URI.IsUnknown() {
+			qradar_receiverMap["uri"] = data.QradarReceiver.URI.ValueString()
+		}
+		if data.QradarReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.QradarReceiver.UseTLS.TrustedCAURL.IsNull() && !data.QradarReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.QradarReceiver.UseTLS.TrustedCAURL.ValueString()
+			}
+			qradar_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["qradar_receiver"] = qradar_receiverMap
+	}
+	if data.RequestLogs != nil {
+		request_logsMap := make(map[string]interface{})
+		apiResource.Spec["request_logs"] = request_logsMap
+	}
+	if data.S3Receiver != nil {
+		s3_receiverMap := make(map[string]interface{})
+		if data.S3Receiver.AWSCred != nil {
+			aws_credNestedMap := make(map[string]interface{})
+			if !data.S3Receiver.AWSCred.Name.IsNull() && !data.S3Receiver.AWSCred.Name.IsUnknown() {
+				aws_credNestedMap["name"] = data.S3Receiver.AWSCred.Name.ValueString()
+			}
+			if !data.S3Receiver.AWSCred.Namespace.IsNull() && !data.S3Receiver.AWSCred.Namespace.IsUnknown() {
+				aws_credNestedMap["namespace"] = data.S3Receiver.AWSCred.Namespace.ValueString()
+			}
+			if !data.S3Receiver.AWSCred.Tenant.IsNull() && !data.S3Receiver.AWSCred.Tenant.IsUnknown() {
+				aws_credNestedMap["tenant"] = data.S3Receiver.AWSCred.Tenant.ValueString()
+			}
+			s3_receiverMap["aws_cred"] = aws_credNestedMap
+		}
+		if !data.S3Receiver.AWSRegion.IsNull() && !data.S3Receiver.AWSRegion.IsUnknown() {
+			s3_receiverMap["aws_region"] = data.S3Receiver.AWSRegion.ValueString()
+		}
+		if data.S3Receiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.S3Receiver.Batch.MaxBytes.IsNull() && !data.S3Receiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.S3Receiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.S3Receiver.Batch.MaxEvents.IsNull() && !data.S3Receiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.S3Receiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.S3Receiver.Batch.TimeoutSeconds.IsNull() && !data.S3Receiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.S3Receiver.Batch.TimeoutSeconds.ValueString()
+			}
+			s3_receiverMap["batch"] = batchNestedMap
+		}
+		if !data.S3Receiver.Bucket.IsNull() && !data.S3Receiver.Bucket.IsUnknown() {
+			s3_receiverMap["bucket"] = data.S3Receiver.Bucket.ValueString()
+		}
+		if data.S3Receiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			s3_receiverMap["compression"] = compressionNestedMap
+		}
+		if data.S3Receiver.FilenameOptions != nil {
+			filename_optionsNestedMap := make(map[string]interface{})
+			if !data.S3Receiver.FilenameOptions.CustomFolder.IsNull() && !data.S3Receiver.FilenameOptions.CustomFolder.IsUnknown() {
+				filename_optionsNestedMap["custom_folder"] = data.S3Receiver.FilenameOptions.CustomFolder.ValueString()
+			}
+			s3_receiverMap["filename_options"] = filename_optionsNestedMap
+		}
+		apiResource.Spec["s3_receiver"] = s3_receiverMap
+	}
+	if data.SecurityEvents != nil {
+		security_eventsMap := make(map[string]interface{})
+		apiResource.Spec["security_events"] = security_eventsMap
+	}
+	if data.SplunkReceiver != nil {
+		splunk_receiverMap := make(map[string]interface{})
+		if data.SplunkReceiver.Batch != nil {
+			batchNestedMap := make(map[string]interface{})
+			if !data.SplunkReceiver.Batch.MaxBytes.IsNull() && !data.SplunkReceiver.Batch.MaxBytes.IsUnknown() {
+				batchNestedMap["max_bytes"] = data.SplunkReceiver.Batch.MaxBytes.ValueInt64()
+			}
+			if !data.SplunkReceiver.Batch.MaxEvents.IsNull() && !data.SplunkReceiver.Batch.MaxEvents.IsUnknown() {
+				batchNestedMap["max_events"] = data.SplunkReceiver.Batch.MaxEvents.ValueInt64()
+			}
+			if !data.SplunkReceiver.Batch.TimeoutSeconds.IsNull() && !data.SplunkReceiver.Batch.TimeoutSeconds.IsUnknown() {
+				batchNestedMap["timeout_seconds"] = data.SplunkReceiver.Batch.TimeoutSeconds.ValueString()
+			}
+			splunk_receiverMap["batch"] = batchNestedMap
+		}
+		if data.SplunkReceiver.Compression != nil {
+			compressionNestedMap := make(map[string]interface{})
+			splunk_receiverMap["compression"] = compressionNestedMap
+		}
+		if !data.SplunkReceiver.Endpoint.IsNull() && !data.SplunkReceiver.Endpoint.IsUnknown() {
+			splunk_receiverMap["endpoint"] = data.SplunkReceiver.Endpoint.ValueString()
+		}
+		if data.SplunkReceiver.NoTLS != nil {
+			splunk_receiverMap["no_tls"] = map[string]interface{}{}
+		}
+		if data.SplunkReceiver.SplunkHecToken != nil {
+			splunk_hec_tokenNestedMap := make(map[string]interface{})
+			splunk_receiverMap["splunk_hec_token"] = splunk_hec_tokenNestedMap
+		}
+		if data.SplunkReceiver.UseTLS != nil {
+			use_tlsNestedMap := make(map[string]interface{})
+			if !data.SplunkReceiver.UseTLS.TrustedCAURL.IsNull() && !data.SplunkReceiver.UseTLS.TrustedCAURL.IsUnknown() {
+				use_tlsNestedMap["trusted_ca_url"] = data.SplunkReceiver.UseTLS.TrustedCAURL.ValueString()
+			}
+			splunk_receiverMap["use_tls"] = use_tlsNestedMap
+		}
+		apiResource.Spec["splunk_receiver"] = splunk_receiverMap
+	}
+	if data.SumoLogicReceiver != nil {
+		sumo_logic_receiverMap := make(map[string]interface{})
+		if data.SumoLogicReceiver.URL != nil {
+			urlNestedMap := make(map[string]interface{})
+			sumo_logic_receiverMap["url"] = urlNestedMap
+		}
+		apiResource.Spec["sumo_logic_receiver"] = sumo_logic_receiverMap
 	}
 
 	_, err := r.client.UpdateLogReceiver(ctx, apiResource)
@@ -995,45 +5965,35 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 	apiResource = fetched // Use GET response which includes all computed fields
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
-	if _, ok := apiResource.Spec["site_local"].(map[string]interface{}); ok && isImport && data.SiteLocal == nil {
+	if _, ok := apiResource.Spec["audit_logs"].(map[string]interface{}); ok && isImport && data.AuditLogs == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.SiteLocal = &LogReceiverEmptyModel{}
+		data.AuditLogs = &LogReceiverEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["syslog"].(map[string]interface{}); ok && (isImport || data.Syslog != nil) {
-		data.Syslog = &LogReceiverSyslogModel{
-			SyslogRfc5424: func() types.Int64 {
-				if !isImport && data.Syslog != nil {
-					// Preserve existing state (null or user-set value)
-					// This prevents API defaults (like 0) from overwriting user intent
-					return data.Syslog.SyslogRfc5424
-				}
-				if !isImport {
-					// Block not in user config - return null, not API default
-					return types.Int64Null()
-				}
-				// Import case: read from API
-				if v, ok := blockData["syslog_rfc5424"].(float64); ok {
-					return types.Int64Value(int64(v))
-				}
-				return types.Int64Null()
-			}(),
-			TCPServer: func() *LogReceiverSyslogTCPServerModel {
-				if !isImport && data.Syslog != nil && data.Syslog.TCPServer != nil {
+	if blockData, ok := apiResource.Spec["aws_cloud_watch_receiver"].(map[string]interface{}); ok && (isImport || data.AWSCloudWatchReceiver != nil) {
+		data.AWSCloudWatchReceiver = &LogReceiverAWSCloudWatchReceiverModel{
+			AWSCred: func() *LogReceiverAWSCloudWatchReceiverAWSCredModel {
+				if !isImport && data.AWSCloudWatchReceiver != nil && data.AWSCloudWatchReceiver.AWSCred != nil {
 					// Normal Read: preserve existing state value
-					return data.Syslog.TCPServer
+					return data.AWSCloudWatchReceiver.AWSCred
 				}
 				// Import case: read from API
-				if nestedBlockData, ok := blockData["tcp_server"].(map[string]interface{}); ok {
-					return &LogReceiverSyslogTCPServerModel{
-						Port: func() types.Int64 {
-							if v, ok := nestedBlockData["port"].(float64); ok {
-								return types.Int64Value(int64(v))
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &LogReceiverAWSCloudWatchReceiverAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
 							}
-							return types.Int64Null()
+							return types.StringNull()
 						}(),
-						ServerName: func() types.String {
-							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
 							return types.StringNull()
@@ -1042,28 +6002,34 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 				}
 				return nil
 			}(),
-			TLSServer: func() *LogReceiverSyslogTLSServerModel {
-				if !isImport && data.Syslog != nil && data.Syslog.TLSServer != nil {
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Batch: func() *LogReceiverAWSCloudWatchReceiverBatchModel {
+				if !isImport && data.AWSCloudWatchReceiver != nil && data.AWSCloudWatchReceiver.Batch != nil {
 					// Normal Read: preserve existing state value
-					return data.Syslog.TLSServer
+					return data.AWSCloudWatchReceiver.Batch
 				}
 				// Import case: read from API
-				if nestedBlockData, ok := blockData["tls_server"].(map[string]interface{}); ok {
-					return &LogReceiverSyslogTLSServerModel{
-						Port: func() types.Int64 {
-							if v, ok := nestedBlockData["port"].(float64); ok {
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverAWSCloudWatchReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
 								return types.Int64Value(int64(v))
 							}
 							return types.Int64Null()
 						}(),
-						ServerName: func() types.String {
-							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
-								return types.StringValue(v)
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
 							}
-							return types.StringNull()
+							return types.Int64Null()
 						}(),
-						TrustedCAURL: func() types.String {
-							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
 							return types.StringNull()
@@ -1072,22 +6038,128 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 				}
 				return nil
 			}(),
-			UDPServer: func() *LogReceiverSyslogUDPServerModel {
-				if !isImport && data.Syslog != nil && data.Syslog.UDPServer != nil {
+			Compression: func() *LogReceiverAWSCloudWatchReceiverCompressionModel {
+				if !isImport && data.AWSCloudWatchReceiver != nil && data.AWSCloudWatchReceiver.Compression != nil {
 					// Normal Read: preserve existing state value
-					return data.Syslog.UDPServer
+					return data.AWSCloudWatchReceiver.Compression
 				}
 				// Import case: read from API
-				if nestedBlockData, ok := blockData["udp_server"].(map[string]interface{}); ok {
-					return &LogReceiverSyslogUDPServerModel{
-						Port: func() types.Int64 {
-							if v, ok := nestedBlockData["port"].(float64); ok {
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverAWSCloudWatchReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			GroupName: func() types.String {
+				if v, ok := blockData["group_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			StreamName: func() types.String {
+				if v, ok := blockData["stream_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_event_hubs_receiver"].(map[string]interface{}); ok && (isImport || data.AzureEventHubsReceiver != nil) {
+		data.AzureEventHubsReceiver = &LogReceiverAzureEventHubsReceiverModel{
+			ConnectionString: func() *LogReceiverAzureEventHubsReceiverConnectionStringModel {
+				if !isImport && data.AzureEventHubsReceiver != nil && data.AzureEventHubsReceiver.ConnectionString != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureEventHubsReceiver.ConnectionString
+				}
+				// Import case: read from API
+				if _, ok := blockData["connection_string"].(map[string]interface{}); ok {
+					return &LogReceiverAzureEventHubsReceiverConnectionStringModel{}
+				}
+				return nil
+			}(),
+			Instance: func() types.String {
+				if v, ok := blockData["instance"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["azure_receiver"].(map[string]interface{}); ok && (isImport || data.AzureReceiver != nil) {
+		data.AzureReceiver = &LogReceiverAzureReceiverModel{
+			Batch: func() *LogReceiverAzureReceiverBatchModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverAzureReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
 								return types.Int64Value(int64(v))
 							}
 							return types.Int64Null()
 						}(),
-						ServerName: func() types.String {
-							if v, ok := nestedBlockData["server_name"].(string); ok && v != "" {
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverAzureReceiverCompressionModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverAzureReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			ConnectionString: func() *LogReceiverAzureReceiverConnectionStringModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.ConnectionString != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.ConnectionString
+				}
+				// Import case: read from API
+				if _, ok := blockData["connection_string"].(map[string]interface{}); ok {
+					return &LogReceiverAzureReceiverConnectionStringModel{}
+				}
+				return nil
+			}(),
+			ContainerName: func() types.String {
+				if v, ok := blockData["container_name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			FilenameOptions: func() *LogReceiverAzureReceiverFilenameOptionsModel {
+				if !isImport && data.AzureReceiver != nil && data.AzureReceiver.FilenameOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.AzureReceiver.FilenameOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["filename_options"].(map[string]interface{}); ok {
+					return &LogReceiverAzureReceiverFilenameOptionsModel{
+						CustomFolder: func() types.String {
+							if v, ok := nestedBlockData["custom_folder"].(string); ok && v != "" {
 								return types.StringValue(v)
 							}
 							return types.StringNull()
@@ -1098,6 +6170,749 @@ func (r *LogReceiverResource) Update(ctx context.Context, req resource.UpdateReq
 			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["datadog_receiver"].(map[string]interface{}); ok && (isImport || data.DatadogReceiver != nil) {
+		data.DatadogReceiver = &LogReceiverDatadogReceiverModel{
+			Batch: func() *LogReceiverDatadogReceiverBatchModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverDatadogReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverDatadogReceiverCompressionModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverDatadogReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			DatadogAPIKey: func() *LogReceiverDatadogReceiverDatadogAPIKeyModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.DatadogAPIKey != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.DatadogAPIKey
+				}
+				// Import case: read from API
+				if _, ok := blockData["datadog_api_key"].(map[string]interface{}); ok {
+					return &LogReceiverDatadogReceiverDatadogAPIKeyModel{}
+				}
+				return nil
+			}(),
+			Endpoint: func() types.String {
+				if v, ok := blockData["endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.DatadogReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DatadogReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			Site: func() types.String {
+				if v, ok := blockData["site"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseTLS: func() *LogReceiverDatadogReceiverUseTLSModel {
+				if !isImport && data.DatadogReceiver != nil && data.DatadogReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.DatadogReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverDatadogReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["dns_logs"].(map[string]interface{}); ok && isImport && data.DNSLogs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DNSLogs = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["gcp_bucket_receiver"].(map[string]interface{}); ok && (isImport || data.GCPBucketReceiver != nil) {
+		data.GCPBucketReceiver = &LogReceiverGCPBucketReceiverModel{
+			Batch: func() *LogReceiverGCPBucketReceiverBatchModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverGCPBucketReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Bucket: func() types.String {
+				if v, ok := blockData["bucket"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Compression: func() *LogReceiverGCPBucketReceiverCompressionModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverGCPBucketReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			FilenameOptions: func() *LogReceiverGCPBucketReceiverFilenameOptionsModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.FilenameOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.FilenameOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["filename_options"].(map[string]interface{}); ok {
+					return &LogReceiverGCPBucketReceiverFilenameOptionsModel{
+						CustomFolder: func() types.String {
+							if v, ok := nestedBlockData["custom_folder"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			GCPCred: func() *LogReceiverGCPBucketReceiverGCPCredModel {
+				if !isImport && data.GCPBucketReceiver != nil && data.GCPBucketReceiver.GCPCred != nil {
+					// Normal Read: preserve existing state value
+					return data.GCPBucketReceiver.GCPCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["gcp_cred"].(map[string]interface{}); ok {
+					return &LogReceiverGCPBucketReceiverGCPCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["http_receiver"].(map[string]interface{}); ok && (isImport || data.HTTPReceiver != nil) {
+		data.HTTPReceiver = &LogReceiverHTTPReceiverModel{
+			AuthBasic: func() *LogReceiverHTTPReceiverAuthBasicModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.AuthBasic != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.AuthBasic
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["auth_basic"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverAuthBasicModel{
+						UserName: func() types.String {
+							if v, ok := nestedBlockData["user_name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AuthNone: func() *LogReceiverEmptyModel {
+				if !isImport && data.HTTPReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPReceiver.AuthNone
+				}
+				// Import case: read from API
+				if _, ok := blockData["auth_none"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			AuthToken: func() *LogReceiverHTTPReceiverAuthTokenModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.AuthToken != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.AuthToken
+				}
+				// Import case: read from API
+				if _, ok := blockData["auth_token"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverAuthTokenModel{}
+				}
+				return nil
+			}(),
+			Batch: func() *LogReceiverHTTPReceiverBatchModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverHTTPReceiverCompressionModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.HTTPReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.HTTPReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			URI: func() types.String {
+				if v, ok := blockData["uri"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseTLS: func() *LogReceiverHTTPReceiverUseTLSModel {
+				if !isImport && data.HTTPReceiver != nil && data.HTTPReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.HTTPReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverHTTPReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["kafka_receiver"].(map[string]interface{}); ok && (isImport || data.KafkaReceiver != nil) {
+		data.KafkaReceiver = &LogReceiverKafkaReceiverModel{
+			Batch: func() *LogReceiverKafkaReceiverBatchModel {
+				if !isImport && data.KafkaReceiver != nil && data.KafkaReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.KafkaReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverKafkaReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			BootstrapServers: func() types.List {
+				if v, ok := blockData["bootstrap_servers"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			Compression: func() *LogReceiverKafkaReceiverCompressionModel {
+				if !isImport && data.KafkaReceiver != nil && data.KafkaReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.KafkaReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverKafkaReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			KafkaTopic: func() types.String {
+				if v, ok := blockData["kafka_topic"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.KafkaReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.KafkaReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			UseTLS: func() *LogReceiverKafkaReceiverUseTLSModel {
+				if !isImport && data.KafkaReceiver != nil && data.KafkaReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.KafkaReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverKafkaReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["new_relic_receiver"].(map[string]interface{}); ok && isImport && data.NewRelicReceiver == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NewRelicReceiver = &LogReceiverNewRelicReceiverModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["ns_all"].(map[string]interface{}); ok && isImport && data.NsAll == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NsAll = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["ns_current"].(map[string]interface{}); ok && isImport && data.NsCurrent == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.NsCurrent = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["ns_list"].(map[string]interface{}); ok && (isImport || data.NsList != nil) {
+		data.NsList = &LogReceiverNsListModel{
+			Namespaces: func() types.List {
+				if v, ok := blockData["namespaces"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["qradar_receiver"].(map[string]interface{}); ok && (isImport || data.QradarReceiver != nil) {
+		data.QradarReceiver = &LogReceiverQradarReceiverModel{
+			Batch: func() *LogReceiverQradarReceiverBatchModel {
+				if !isImport && data.QradarReceiver != nil && data.QradarReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.QradarReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverQradarReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverQradarReceiverCompressionModel {
+				if !isImport && data.QradarReceiver != nil && data.QradarReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.QradarReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverQradarReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.QradarReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.QradarReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			URI: func() types.String {
+				if v, ok := blockData["uri"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			UseTLS: func() *LogReceiverQradarReceiverUseTLSModel {
+				if !isImport && data.QradarReceiver != nil && data.QradarReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.QradarReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverQradarReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["request_logs"].(map[string]interface{}); ok && isImport && data.RequestLogs == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.RequestLogs = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["s3_receiver"].(map[string]interface{}); ok && (isImport || data.S3Receiver != nil) {
+		data.S3Receiver = &LogReceiverS3ReceiverModel{
+			AWSCred: func() *LogReceiverS3ReceiverAWSCredModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.AWSCred != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.AWSCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &LogReceiverS3ReceiverAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Batch: func() *LogReceiverS3ReceiverBatchModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverS3ReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Bucket: func() types.String {
+				if v, ok := blockData["bucket"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Compression: func() *LogReceiverS3ReceiverCompressionModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverS3ReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			FilenameOptions: func() *LogReceiverS3ReceiverFilenameOptionsModel {
+				if !isImport && data.S3Receiver != nil && data.S3Receiver.FilenameOptions != nil {
+					// Normal Read: preserve existing state value
+					return data.S3Receiver.FilenameOptions
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["filename_options"].(map[string]interface{}); ok {
+					return &LogReceiverS3ReceiverFilenameOptionsModel{
+						CustomFolder: func() types.String {
+							if v, ok := nestedBlockData["custom_folder"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["security_events"].(map[string]interface{}); ok && isImport && data.SecurityEvents == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SecurityEvents = &LogReceiverEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["splunk_receiver"].(map[string]interface{}); ok && (isImport || data.SplunkReceiver != nil) {
+		data.SplunkReceiver = &LogReceiverSplunkReceiverModel{
+			Batch: func() *LogReceiverSplunkReceiverBatchModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.Batch != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.Batch
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["batch"].(map[string]interface{}); ok {
+					return &LogReceiverSplunkReceiverBatchModel{
+						MaxBytes: func() types.Int64 {
+							if v, ok := nestedBlockData["max_bytes"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						MaxEvents: func() types.Int64 {
+							if v, ok := nestedBlockData["max_events"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TimeoutSeconds: func() types.String {
+							if v, ok := nestedBlockData["timeout_seconds"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			Compression: func() *LogReceiverSplunkReceiverCompressionModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.Compression != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.Compression
+				}
+				// Import case: read from API
+				if _, ok := blockData["compression"].(map[string]interface{}); ok {
+					return &LogReceiverSplunkReceiverCompressionModel{}
+				}
+				return nil
+			}(),
+			Endpoint: func() types.String {
+				if v, ok := blockData["endpoint"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NoTLS: func() *LogReceiverEmptyModel {
+				if !isImport && data.SplunkReceiver != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.SplunkReceiver.NoTLS
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_tls"].(map[string]interface{}); ok {
+					return &LogReceiverEmptyModel{}
+				}
+				return nil
+			}(),
+			SplunkHecToken: func() *LogReceiverSplunkReceiverSplunkHecTokenModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.SplunkHecToken != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.SplunkHecToken
+				}
+				// Import case: read from API
+				if _, ok := blockData["splunk_hec_token"].(map[string]interface{}); ok {
+					return &LogReceiverSplunkReceiverSplunkHecTokenModel{}
+				}
+				return nil
+			}(),
+			UseTLS: func() *LogReceiverSplunkReceiverUseTLSModel {
+				if !isImport && data.SplunkReceiver != nil && data.SplunkReceiver.UseTLS != nil {
+					// Normal Read: preserve existing state value
+					return data.SplunkReceiver.UseTLS
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["use_tls"].(map[string]interface{}); ok {
+					return &LogReceiverSplunkReceiverUseTLSModel{
+						TrustedCAURL: func() types.String {
+							if v, ok := nestedBlockData["trusted_ca_url"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["sumo_logic_receiver"].(map[string]interface{}); ok && isImport && data.SumoLogicReceiver == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.SumoLogicReceiver = &LogReceiverSumoLogicReceiverModel{}
+	}
+	// Normal Read: preserve existing state value
 
 	psd := privatestate.NewPrivateStateData()
 	// Use UID from fetched resource

@@ -1,5 +1,5 @@
 # Certificate Resource Example
-# Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.
+# Manages a Certificate resource in F5 Distributed Cloud for certificate. configuration.
 
 # Basic Certificate configuration
 resource "f5xc_certificate" "example" {

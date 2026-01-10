@@ -2,12 +2,12 @@
 page_title: "f5xc_site Resource - terraform-provider-f5xc"
 subcategory: "Uncategorized"
 description: |-
-  Manages a Site resource in F5 Distributed Cloud for azure vnet site specification. configuration.
+  Manages a Site resource in F5 Distributed Cloud for secure mesh site specification. configuration.
 ---
 
 # f5xc_site (Resource)
 
-Manages a Site resource in F5 Distributed Cloud for azure vnet site specification. configuration.
+Manages a Site resource in F5 Distributed Cloud for secure mesh site specification. configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -15,7 +15,7 @@ Manages a Site resource in F5 Distributed Cloud for azure vnet site specificatio
 
 ```terraform
 # Site Resource Example
-# Manages a Site resource in F5 Distributed Cloud for azure vnet site specification. configuration.
+# Manages a Site resource in F5 Distributed Cloud for secure mesh site specification. configuration.
 
 # Basic Site configuration
 resource "f5xc_site" "example" {
@@ -32,17 +32,17 @@ resource "f5xc_site" "example" {
   }
 
   # Resource-specific configuration
-  # SecretType is used in an object to indicate a sensitive/c...
-  admin_password {
-    # Configure admin_password settings
+  # [OneOf: active_enhanced_firewall_policies, no_network_pol...
+  active_enhanced_firewall_policies {
+    # Configure active_enhanced_firewall_policies settings
   }
-  # BlindfoldSecretInfoType specifies information about the S...
-  blindfold_secret_info {
-    # Configure blindfold_secret_info settings
+  # Ordered List of Enhanced Firewall Policies active .
+  enhanced_firewall_policies {
+    # Configure enhanced_firewall_policies settings
   }
-  # ClearSecretInfoType specifies information about the Secre...
-  clear_secret_info {
-    # Configure clear_secret_info settings
+  # [OneOf: active_forward_proxy_policies, no_forward_proxy; ...
+  active_forward_proxy_policies {
+    # Configure active_forward_proxy_policies settings
   }
 }
 ```
@@ -66,65 +66,89 @@ resource "f5xc_site" "example" {
 
 ### Spec Argument Reference
 
-<a id="address"></a>&#x2022; [`address`](#address) - Optional String<br>Site's geographical address that can be used to determine its latitude and longitude
-
-<a id="admin-password"></a>&#x2022; [`admin_password`](#admin-password) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Admin Password](#admin-password) below for details.
+-> **One of the following:**
+&#x2022; <a id="active-enhanced-firewall-policies"></a>[`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) - Optional Block<br>List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="alternate-region"></a>[`alternate_region`](#alternate-region) - Optional String<br>Name of the Azure region which does not support availability zones
-<br><br>&#x2022; <a id="azure-region"></a>[`azure_region`](#azure-region) - Optional String<br>Name of the Azure region which supports availability zones
+&#x2022; <a id="active-forward-proxy-policies"></a>[`active_forward_proxy_policies`](#active-forward-proxy-policies) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#active-forward-proxy-policies) below for details.
 
-<a id="azure-cred"></a>&#x2022; [`azure_cred`](#azure-cred) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Azure Cred](#azure-cred) below for details.
+<a id="admin-user-credentials"></a>&#x2022; [`admin_user_credentials`](#admin-user-credentials) - Optional Block<br>Setup user credentials to manage access to nodes belonging to the site. When configured, 'admin' user will be setup and customers can access these nodes via either the node local WebUI or via SSH to access shell/CLI Ensure 'Node Local Services' are enabled to allow for required access<br>See [Admin User Credentials](#admin-user-credentials) below for details.
+
+-> **One of the following:**
+&#x2022; <a id="aws"></a>[`aws`](#aws) - Optional Block<br>AWS Provider Type. AWS Provider Type<br>See [AWS](#aws) below for details.
+<br><br>&#x2022; <a id="azure"></a>[`azure`](#azure) - Optional Block<br>Azure Provider Type. Azure Provider Type<br>See [Azure](#azure) below for details.
+<br><br>&#x2022; <a id="baremetal"></a>[`baremetal`](#baremetal) - Optional Block<br>Baremetal Provider Type. Baremetal Provider Type
+<br><br>&#x2022; <a id="equinix"></a>[`equinix`](#equinix) - Optional Block<br>Equinix Provider Type. Equinix Provider Type
+<br><br>&#x2022; <a id="gcp"></a>[`gcp`](#gcp) - Optional Block<br>GCP Provider Type. GCP Provider Type
+<br><br>&#x2022; <a id="kvm"></a>[`kvm`](#kvm) - Optional Block<br>KVM Provider Type. KVM Provider Type
+<br><br>&#x2022; <a id="nutanix"></a>[`nutanix`](#nutanix) - Optional Block<br>Nutanix Provider Type. Nutanix Provider Type
+<br><br>&#x2022; <a id="oci"></a>[`oci`](#oci) - Optional Block<br>OCI Provider Type. OCI Provider Type
+<br><br>&#x2022; <a id="openstack"></a>[`openstack`](#openstack) - Optional Block<br>Openstack Provider Type. Openstack Provider Type
+<br><br>&#x2022; <a id="vmware"></a>[`vmware`](#vmware) - Optional Block<br>VMware Provider Type. VMware Provider Type
 
 -> **One of the following:**
 &#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable node local services on this site<br>See [Blocked Services](#blocked-services) below for details.
-
-<a id="coordinates"></a>&#x2022; [`coordinates`](#coordinates) - Optional Block<br>Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
-
-<a id="custom-dns"></a>&#x2022; [`custom_dns`](#custom-dns) - Optional Block<br>Custom DNS is the configured for specify CE site<br>See [Custom DNS](#custom-dns) below for details.
-
-<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Enable this option
-
-<a id="disk-size"></a>&#x2022; [`disk_size`](#disk-size) - Optional Number<br>Disk size to be used for this instance in GiB. 80 is 80 GiB
+<br><br>&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable node local services on this site
 
 -> **One of the following:**
-&#x2022; <a id="ingress-egress-gw"></a>[`ingress_egress_gw`](#ingress-egress-gw) - Optional Block<br>Two interface Azure ingress/egress site<br>See [Ingress Egress Gw](#ingress-egress-gw) below for details.
-<br><br>&#x2022; <a id="ingress-egress-gw-ar"></a>[`ingress_egress_gw_ar`](#ingress-egress-gw-ar) - Optional Block<br>Two interface Azure ingress/egress site on Alternate Region with no support for zones
-<br><br>&#x2022; <a id="ingress-gw"></a>[`ingress_gw`](#ingress-gw) - Optional Block<br>Single interface Azure ingress site on on Recommended Region
-<br><br>&#x2022; <a id="ingress-gw-ar"></a>[`ingress_gw_ar`](#ingress-gw-ar) - Optional Block<br>Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site
-<br><br>&#x2022; <a id="voltstack-cluster"></a>[`voltstack_cluster`](#voltstack-cluster) - Optional Block<br>App Stack Cluster of single interface Azure nodes
-<br><br>&#x2022; <a id="voltstack-cluster-ar"></a>[`voltstack_cluster_ar`](#voltstack-cluster-ar) - Optional Block<br>App Stack Cluster of single interface Azure nodes
+&#x2022; <a id="custom-proxy"></a>[`custom_proxy`](#custom-proxy) - Optional Block<br>Custom Enterprise Proxy. Custom Enterprise Proxy
+<br><br>&#x2022; <a id="f5-proxy"></a>[`f5_proxy`](#f5-proxy) - Optional Block<br>Enable this option
 
-<a id="kubernetes-upgrade-drain"></a>&#x2022; [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) - Optional Block<br>Specify how worker nodes within a site will be upgraded
+-> **One of the following:**
+&#x2022; <a id="custom-proxy-bypass"></a>[`custom_proxy_bypass`](#custom-proxy-bypass) - Optional Block<br>Proxy Bypass. List of domains to bypass the proxy
+
+-> **One of the following:**
+&#x2022; <a id="dc-cluster-group-sli"></a>[`dc_cluster_group_sli`](#dc-cluster-group-sli) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
+
+-> **One of the following:**
+&#x2022; <a id="dc-cluster-group-slo"></a>[`dc_cluster_group_slo`](#dc-cluster-group-slo) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
+<br><br>&#x2022; <a id="no-s2s-connectivity-slo"></a>[`no_s2s_connectivity_slo`](#no-s2s-connectivity-slo) - Optional Block<br>Enable this option
+
+-> **One of the following:**
+&#x2022; <a id="disable-ha"></a>[`disable_ha`](#disable-ha) - Optional Block<br>Enable this option
+
+-> **One of the following:**
+&#x2022; <a id="disable-url-categorization"></a>[`disable_url_categorization`](#disable-url-categorization) - Optional Block<br>Enable this option
+
+<a id="dns-ntp-config"></a>&#x2022; [`dns_ntp_config`](#dns-ntp-config) - Optional Block<br>Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site
+
+<a id="enable-ha"></a>&#x2022; [`enable_ha`](#enable-ha) - Optional Block<br>Enable this option
+
+<a id="enable-url-categorization"></a>&#x2022; [`enable_url_categorization`](#enable-url-categorization) - Optional Block<br>Enable this option
+
+<a id="load-balancing"></a>&#x2022; [`load_balancing`](#load-balancing) - Optional Block<br>Section contains settings on the site that relate to Load Balancing functionality
+
+<a id="local-vrf"></a>&#x2022; [`local_vrf`](#local-vrf) - Optional Block<br>There can be two local VRFs on each site. The Site Local Outside (SLO) local VRF is used to connect WAN side workloads to this site and to connect the site to F5 Distributed Cloud for management. All sites are required to have an SLO local VRF
 
 -> **One of the following:**
 &#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 <br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Enable this option
 
-<a id="machine-type"></a>&#x2022; [`machine_type`](#machine-type) - Optional String<br>Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway > advanced OPTIONS
+<a id="no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#no-forward-proxy) - Optional Block<br>Enable this option
 
--> **One of the following:**
-&#x2022; <a id="no-worker-nodes"></a>[`no_worker_nodes`](#no-worker-nodes) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="nodes-per-az"></a>[`nodes_per_az`](#nodes-per-az) - Optional Number<br>Desired Worker Nodes Per AZ. Max limit is up to 21
+<a id="no-network-policy"></a>&#x2022; [`no_network_policy`](#no-network-policy) - Optional Block<br>Enable this option
+
+<a id="no-proxy-bypass"></a>&#x2022; [`no_proxy_bypass`](#no-proxy-bypass) - Optional Block<br>Enable this option
+
+<a id="no-s2s-connectivity-sli"></a>&#x2022; [`no_s2s_connectivity_sli`](#no-s2s-connectivity-sli) - Optional Block<br>Enable this option
 
 <a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7
 
-<a id="os"></a>&#x2022; [`os`](#os) - Optional Block<br>Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions
+<a id="performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Optimize the site for L3 or L7 traffic processing. L7 optimized is the default
 
-<a id="resource-group"></a>&#x2022; [`resource_group`](#resource-group) - Optional String<br>Azure resource group for resources that will be created
+<a id="re-select"></a>&#x2022; [`re_select`](#re-select) - Optional Block<br>Selection criteria to connect the site with F5 Distributed Cloud Regional Edge(s)
 
-<a id="ssh-key"></a>&#x2022; [`ssh_key`](#ssh-key) - Optional String<br>Public SSH key for accessing the site
+<a id="site-mesh-group-on-slo"></a>&#x2022; [`site_mesh_group_on_slo`](#site-mesh-group-on-slo) - Optional Block<br>Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used
 
-<a id="sw"></a>&#x2022; [`sw`](#sw) - Optional Block<br>Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions
-
-<a id="tags"></a>&#x2022; [`tags`](#tags) - Optional Block<br>Azure Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in Azure console
+<a id="software-settings"></a>&#x2022; [`software_settings`](#software-settings) - Optional Block<br>Select OS and Software version for the site. All nodes in the site will run the same OS and Software version. These settings cannot be changed after the site is created
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
-<a id="total-nodes"></a>&#x2022; [`total_nodes`](#total-nodes) - Optional Number<br>Total number of worker nodes to be deployed across all AZ's used in the Site
+<a id="tunnel-dead-timeout"></a>&#x2022; [`tunnel_dead_timeout`](#tunnel-dead-timeout) - Optional Number<br>Time interval, in millisec, within which any IPsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used
 
-<a id="vnet"></a>&#x2022; [`vnet`](#vnet) - Optional Block<br>Defines choice about Azure VNET for a view
+<a id="tunnel-type"></a>&#x2022; [`tunnel_type`](#tunnel-type) - Optional String  Defaults to `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`<br>Possible values are `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`, `SITE_TO_SITE_TUNNEL_IPSEC`, `SITE_TO_SITE_TUNNEL_SSL`<br>[Enum: SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL|SITE_TO_SITE_TUNNEL_IPSEC|SITE_TO_SITE_TUNNEL_SSL] Tunnel encapsulation to be used between sites Tunnel can operate in both IPsec and SSL, with IPsec being prefered over SSL. Tunnel is of type IPsec Tunnel is of type SSL
+
+<a id="upgrade-settings"></a>&#x2022; [`upgrade_settings`](#upgrade-settings) - Optional Block<br>Upgrade Settings. Specify how a site will be upgraded
 
 ### Attributes Reference
 
@@ -134,41 +158,475 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-#### Admin Password
+#### Active Enhanced Firewall Policies
 
-An [`admin_password`](#admin-password) block supports the following:
+An [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) block supports the following:
 
-<a id="admin-password-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#admin-password-blindfold-secret-info) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#admin-password-blindfold-secret-info) below.
+<a id="policies-0d92c3"></a>&#x2022; [`enhanced_firewall_policies`](#policies-0d92c3) - Optional Block<br>Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#policies-0d92c3) below.
 
-<a id="admin-password-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#admin-password-clear-secret-info) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#admin-password-clear-secret-info) below.
+#### Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-#### Admin Password Blindfold Secret Info
+An [`enhanced_firewall_policies`](#policies-0d92c3) block (within [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies)) supports the following:
 
-A [`blindfold_secret_info`](#admin-password-blindfold-secret-info) block (within [`admin_password`](#admin-password)) supports the following:
+<a id="name-09fc53"></a>&#x2022; [`name`](#name-09fc53) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="provider-e88368"></a>&#x2022; [`decryption_provider`](#provider-e88368) - Optional String<br>Name of the Secret Management Access object that contains information about the backend Secret Management service
+<a id="namespace-102d99"></a>&#x2022; [`namespace`](#namespace-102d99) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="location-60af3e"></a>&#x2022; [`location`](#location-60af3e) - Optional String<br>Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
+<a id="tenant-0eef96"></a>&#x2022; [`tenant`](#tenant-0eef96) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="provider-5c48c5"></a>&#x2022; [`store_provider`](#provider-5c48c5) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+#### Active Forward Proxy Policies
 
-#### Admin Password Clear Secret Info
+An [`active_forward_proxy_policies`](#active-forward-proxy-policies) block supports the following:
 
-A [`clear_secret_info`](#admin-password-clear-secret-info) block (within [`admin_password`](#admin-password)) supports the following:
+<a id="policies-42e2f7"></a>&#x2022; [`forward_proxy_policies`](#policies-42e2f7) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#policies-42e2f7) below.
 
-<a id="ref-e52931"></a>&#x2022; [`provider_ref`](#ref-e52931) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+#### Active Forward Proxy Policies Forward Proxy Policies
 
-<a id="admin-password-clear-secret-info-url"></a>&#x2022; [`url`](#admin-password-clear-secret-info-url) - Optional String<br>URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
+A [`forward_proxy_policies`](#policies-42e2f7) block (within [`active_forward_proxy_policies`](#active-forward-proxy-policies)) supports the following:
 
-#### Azure Cred
+<a id="name-c2d06e"></a>&#x2022; [`name`](#name-c2d06e) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-An [`azure_cred`](#azure-cred) block supports the following:
+<a id="namespace-63e125"></a>&#x2022; [`namespace`](#namespace-63e125) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="azure-cred-name"></a>&#x2022; [`name`](#azure-cred-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="tenant-e68ab4"></a>&#x2022; [`tenant`](#tenant-e68ab4) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="azure-cred-namespace"></a>&#x2022; [`namespace`](#azure-cred-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+#### Admin User Credentials
 
-<a id="azure-cred-tenant"></a>&#x2022; [`tenant`](#azure-cred-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+An [`admin_user_credentials`](#admin-user-credentials) block supports the following:
+
+<a id="admin-user-credentials-admin-password"></a>&#x2022; [`admin_password`](#admin-user-credentials-admin-password) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Admin Password](#admin-user-credentials-admin-password) below.
+
+<a id="admin-user-credentials-ssh-key"></a>&#x2022; [`ssh_key`](#admin-user-credentials-ssh-key) - Optional String<br>Provided Public SSH key can be used for accessing nodes of the site. When provided, customers can SSH to the nodes of this Customer Edge site using admin as the user
+
+#### Admin User Credentials Admin Password
+
+An [`admin_password`](#admin-user-credentials-admin-password) block (within [`admin_user_credentials`](#admin-user-credentials)) supports the following:
+
+<a id="info-710bcb"></a>&#x2022; [`blindfold_secret_info`](#info-710bcb) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-710bcb) below.
+
+<a id="info-32b90f"></a>&#x2022; [`clear_secret_info`](#info-32b90f) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-32b90f) below.
+
+#### Admin User Credentials Admin Password Blindfold Secret Info
+
+<a id="deep-6962e1"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Admin User Credentials Admin Password Clear Secret Info
+
+<a id="deep-463d43"></a>Deeply nested **Info** block collapsed for readability.
+
+#### AWS
+
+An [`aws`](#aws) block supports the following:
+
+<a id="aws-not-managed"></a>&#x2022; [`not_managed`](#aws-not-managed) - Optional Block<br>Section will show nodes associated with this site<br>See [Not Managed](#aws-not-managed) below.
+
+#### AWS Not Managed
+
+A [`not_managed`](#aws-not-managed) block (within [`aws`](#aws)) supports the following:
+
+<a id="aws-not-managed-node-list"></a>&#x2022; [`node_list`](#aws-not-managed-node-list) - Optional Block<br>Section will show nodes associated with this site<br>See [Node List](#aws-not-managed-node-list) below.
+
+#### AWS Not Managed Node List
+
+A [`node_list`](#aws-not-managed-node-list) block (within [`aws.not_managed`](#aws-not-managed)) supports the following:
+
+<a id="aws-not-managed-node-list-hostname"></a>&#x2022; [`hostname`](#aws-not-managed-node-list-hostname) - Optional String<br>Hostname. Hostname for this Node
+
+<a id="list-6c6298"></a>&#x2022; [`interface_list`](#list-6c6298) - Optional Block<br>Manage interfaces belonging to this node<br>See [Interface List](#list-6c6298) below.
+
+<a id="aws-not-managed-node-list-public-ip"></a>&#x2022; [`public_ip`](#aws-not-managed-node-list-public-ip) - Optional String<br>Public IP. Public IP for this Node
+
+<a id="aws-not-managed-node-list-type"></a>&#x2022; [`type`](#aws-not-managed-node-list-type) - Optional String<br>Type for this Node, can be Control or Worker
+
+#### AWS Not Managed Node List Interface List
+
+An [`interface_list`](#list-6c6298) block (within [`aws.not_managed.node_list`](#aws-not-managed-node-list)) supports the following:
+
+<a id="interface-f1858f"></a>&#x2022; [`bond_interface`](#interface-f1858f) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#interface-f1858f) below.
+
+<a id="spec-f3edfe"></a>&#x2022; [`description_spec`](#spec-f3edfe) - Optional String<br>Interface Description. Description for this Interface
+
+<a id="client-35134d"></a>&#x2022; [`dhcp_client`](#client-35134d) - Optional Block<br>Enable this option
+
+<a id="interface-f28fa7"></a>&#x2022; [`ethernet_interface`](#interface-f28fa7) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-f28fa7) below.
+
+<a id="config-cd50c5"></a>&#x2022; [`ipv6_auto_config`](#config-cd50c5) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#config-cd50c5) below.
+
+<a id="labels-188d84"></a>&#x2022; [`labels`](#labels-188d84) - Optional Block<br>Add Labels for this Interface, these labels can be used in firewall policy
+
+<a id="monitor-169def"></a>&#x2022; [`monitor`](#monitor-169def) - Optional Block<br>Link Quality Monitoring configuration for a network interface
+
+<a id="disabled-428eab"></a>&#x2022; [`monitor_disabled`](#disabled-428eab) - Optional Block<br>Enable this option
+
+<a id="mtu-9ea6fa"></a>&#x2022; [`mtu`](#mtu-9ea6fa) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
+
+<a id="name-7539f0"></a>&#x2022; [`name`](#name-7539f0) - Optional String<br>Interface Name. Name of this Interface
+
+<a id="option-4d9fd7"></a>&#x2022; [`network_option`](#option-4d9fd7) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-4d9fd7) below.
+
+<a id="address-95964e"></a>&#x2022; [`no_ipv4_address`](#address-95964e) - Optional Block<br>Enable this option
+
+<a id="address-b6fb0a"></a>&#x2022; [`no_ipv6_address`](#address-b6fb0a) - Optional Block<br>Enable this option
+
+<a id="priority-a786bf"></a>&#x2022; [`priority`](#priority-a786bf) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
+
+<a id="disabled-1942d4"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-1942d4) - Optional Block<br>Enable this option
+
+<a id="enabled-850dad"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-850dad) - Optional Block<br>Enable this option
+
+<a id="static-ip-f224ff"></a>&#x2022; [`static_ip`](#static-ip-f224ff) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-f224ff) below.
+
+<a id="address-fddb84"></a>&#x2022; [`static_ipv6_address`](#address-fddb84) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#address-fddb84) below.
+
+<a id="interface-70af4e"></a>&#x2022; [`vlan_interface`](#interface-70af4e) - Optional Block<br>VLAN Interface<br>See [VLAN Interface](#interface-70af4e) below.
+
+#### AWS Not Managed Node List Interface List Bond Interface
+
+<a id="deep-4224d9"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List Bond Interface Lacp
+
+<a id="deep-5560e6"></a>Deeply nested **Lacp** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List Ethernet Interface
+
+<a id="deep-fc0694"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List IPv6 Auto Config
+
+<a id="deep-72b9a7"></a>Deeply nested **Config** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List IPv6 Auto Config Router
+
+<a id="deep-2b8f0a"></a>Deeply nested **Router** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
+
+<a id="deep-ef4d0c"></a>Deeply nested **Config** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
+
+<a id="deep-3084ba"></a>Deeply nested **List** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
+
+<a id="deep-92f368"></a>Deeply nested **DNS** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful
+
+<a id="deep-1075b3"></a>Deeply nested **Stateful** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
+
+<a id="deep-19736c"></a>Deeply nested **Networks** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
+
+<a id="deep-3590d4"></a>Deeply nested **Pools** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
+
+<a id="deep-b470b4"></a>Deeply nested **Map** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List Network Option
+
+<a id="deep-ccc2da"></a>Deeply nested **Option** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List Static IP
+
+<a id="deep-28441a"></a>Deeply nested **IP** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List Static IPv6 Address
+
+<a id="deep-8f821d"></a>Deeply nested **Address** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
+
+<a id="deep-2e1682"></a>Deeply nested **IP** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List Static IPv6 Address Node Static IP
+
+<a id="deep-bbb483"></a>Deeply nested **IP** block collapsed for readability.
+
+#### AWS Not Managed Node List Interface List VLAN Interface
+
+<a id="deep-3f2db4"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Azure
+
+An [`azure`](#azure) block supports the following:
+
+<a id="azure-not-managed"></a>&#x2022; [`not_managed`](#azure-not-managed) - Optional Block<br>Section will show nodes associated with this site<br>See [Not Managed](#azure-not-managed) below.
+
+#### Azure Not Managed
+
+A [`not_managed`](#azure-not-managed) block (within [`azure`](#azure)) supports the following:
+
+<a id="azure-not-managed-node-list"></a>&#x2022; [`node_list`](#azure-not-managed-node-list) - Optional Block<br>Section will show nodes associated with this site<br>See [Node List](#azure-not-managed-node-list) below.
+
+#### Azure Not Managed Node List
+
+A [`node_list`](#azure-not-managed-node-list) block (within [`azure.not_managed`](#azure-not-managed)) supports the following:
+
+<a id="azure-not-managed-node-list-hostname"></a>&#x2022; [`hostname`](#azure-not-managed-node-list-hostname) - Optional String<br>Hostname. Hostname for this Node
+
+<a id="list-f42e50"></a>&#x2022; [`interface_list`](#list-f42e50) - Optional Block<br>Manage interfaces belonging to this node<br>See [Interface List](#list-f42e50) below.
+
+<a id="azure-not-managed-node-list-public-ip"></a>&#x2022; [`public_ip`](#azure-not-managed-node-list-public-ip) - Optional String<br>Public IP. Public IP for this Node
+
+<a id="azure-not-managed-node-list-type"></a>&#x2022; [`type`](#azure-not-managed-node-list-type) - Optional String<br>Type for this Node, can be Control or Worker
+
+#### Azure Not Managed Node List Interface List
+
+An [`interface_list`](#list-f42e50) block (within [`azure.not_managed.node_list`](#azure-not-managed-node-list)) supports the following:
+
+<a id="interface-dd8ceb"></a>&#x2022; [`bond_interface`](#interface-dd8ceb) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#interface-dd8ceb) below.
+
+<a id="spec-4b4de9"></a>&#x2022; [`description_spec`](#spec-4b4de9) - Optional String<br>Interface Description. Description for this Interface
+
+<a id="client-b5ac25"></a>&#x2022; [`dhcp_client`](#client-b5ac25) - Optional Block<br>Enable this option
+
+<a id="interface-20c4ad"></a>&#x2022; [`ethernet_interface`](#interface-20c4ad) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-20c4ad) below.
+
+<a id="config-cc5378"></a>&#x2022; [`ipv6_auto_config`](#config-cc5378) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#config-cc5378) below.
+
+<a id="labels-e2a4c4"></a>&#x2022; [`labels`](#labels-e2a4c4) - Optional Block<br>Add Labels for this Interface, these labels can be used in firewall policy
+
+<a id="monitor-a565a2"></a>&#x2022; [`monitor`](#monitor-a565a2) - Optional Block<br>Link Quality Monitoring configuration for a network interface
+
+<a id="disabled-7aa1a9"></a>&#x2022; [`monitor_disabled`](#disabled-7aa1a9) - Optional Block<br>Enable this option
+
+<a id="mtu-bfeae5"></a>&#x2022; [`mtu`](#mtu-bfeae5) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
+
+<a id="name-34ce39"></a>&#x2022; [`name`](#name-34ce39) - Optional String<br>Interface Name. Name of this Interface
+
+<a id="option-e15a34"></a>&#x2022; [`network_option`](#option-e15a34) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-e15a34) below.
+
+<a id="address-087ea1"></a>&#x2022; [`no_ipv4_address`](#address-087ea1) - Optional Block<br>Enable this option
+
+<a id="address-c7425d"></a>&#x2022; [`no_ipv6_address`](#address-c7425d) - Optional Block<br>Enable this option
+
+<a id="priority-0e03ad"></a>&#x2022; [`priority`](#priority-0e03ad) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
+
+<a id="disabled-34b2d0"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-34b2d0) - Optional Block<br>Enable this option
+
+<a id="enabled-453c17"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-453c17) - Optional Block<br>Enable this option
+
+<a id="static-ip-4b0611"></a>&#x2022; [`static_ip`](#static-ip-4b0611) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-4b0611) below.
+
+<a id="address-e1203e"></a>&#x2022; [`static_ipv6_address`](#address-e1203e) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#address-e1203e) below.
+
+<a id="interface-aa2f00"></a>&#x2022; [`vlan_interface`](#interface-aa2f00) - Optional Block<br>VLAN Interface<br>See [VLAN Interface](#interface-aa2f00) below.
+
+#### Azure Not Managed Node List Interface List Bond Interface
+
+<a id="deep-4cb273"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List Bond Interface Lacp
+
+<a id="deep-5db881"></a>Deeply nested **Lacp** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List Ethernet Interface
+
+<a id="deep-293b55"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List IPv6 Auto Config
+
+<a id="deep-435f70"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List IPv6 Auto Config Router
+
+<a id="deep-04f29f"></a>Deeply nested **Router** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
+
+<a id="deep-5dc847"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
+
+<a id="deep-8352e0"></a>Deeply nested **List** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
+
+<a id="deep-453621"></a>Deeply nested **DNS** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful
+
+<a id="deep-cd224b"></a>Deeply nested **Stateful** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
+
+<a id="deep-31b166"></a>Deeply nested **Networks** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
+
+<a id="deep-91a116"></a>Deeply nested **Pools** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
+
+<a id="deep-6e23fb"></a>Deeply nested **Map** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List Network Option
+
+<a id="deep-2a92f3"></a>Deeply nested **Option** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List Static IP
+
+<a id="deep-9df1d2"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List Static IPv6 Address
+
+<a id="deep-7bc38a"></a>Deeply nested **Address** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
+
+<a id="deep-32a2f7"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List Static IPv6 Address Node Static IP
+
+<a id="deep-a3e092"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Azure Not Managed Node List Interface List VLAN Interface
+
+<a id="deep-63221f"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Baremetal
+
+A [`baremetal`](#baremetal) block supports the following:
+
+<a id="baremetal-not-managed"></a>&#x2022; [`not_managed`](#baremetal-not-managed) - Optional Block<br>Section will show nodes associated with this site<br>See [Not Managed](#baremetal-not-managed) below.
+
+#### Baremetal Not Managed
+
+A [`not_managed`](#baremetal-not-managed) block (within [`baremetal`](#baremetal)) supports the following:
+
+<a id="baremetal-not-managed-node-list"></a>&#x2022; [`node_list`](#baremetal-not-managed-node-list) - Optional Block<br>Section will show nodes associated with this site<br>See [Node List](#baremetal-not-managed-node-list) below.
+
+#### Baremetal Not Managed Node List
+
+A [`node_list`](#baremetal-not-managed-node-list) block (within [`baremetal.not_managed`](#baremetal-not-managed)) supports the following:
+
+<a id="hostname-ff20c8"></a>&#x2022; [`hostname`](#hostname-ff20c8) - Optional String<br>Hostname. Hostname for this Node
+
+<a id="list-30e058"></a>&#x2022; [`interface_list`](#list-30e058) - Optional Block<br>Manage interfaces belonging to this node<br>See [Interface List](#list-30e058) below.
+
+<a id="public-ip-acb6d6"></a>&#x2022; [`public_ip`](#public-ip-acb6d6) - Optional String<br>Public IP. Public IP for this Node
+
+<a id="baremetal-not-managed-node-list-type"></a>&#x2022; [`type`](#baremetal-not-managed-node-list-type) - Optional String<br>Type for this Node, can be Control or Worker
+
+#### Baremetal Not Managed Node List Interface List
+
+An [`interface_list`](#list-30e058) block (within [`baremetal.not_managed.node_list`](#baremetal-not-managed-node-list)) supports the following:
+
+<a id="interface-b7e132"></a>&#x2022; [`bond_interface`](#interface-b7e132) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#interface-b7e132) below.
+
+<a id="spec-b7ed1b"></a>&#x2022; [`description_spec`](#spec-b7ed1b) - Optional String<br>Interface Description. Description for this Interface
+
+<a id="client-829bf8"></a>&#x2022; [`dhcp_client`](#client-829bf8) - Optional Block<br>Enable this option
+
+<a id="interface-3933d2"></a>&#x2022; [`ethernet_interface`](#interface-3933d2) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-3933d2) below.
+
+<a id="config-88a239"></a>&#x2022; [`ipv6_auto_config`](#config-88a239) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#config-88a239) below.
+
+<a id="labels-816fbc"></a>&#x2022; [`labels`](#labels-816fbc) - Optional Block<br>Add Labels for this Interface, these labels can be used in firewall policy
+
+<a id="monitor-1cb67f"></a>&#x2022; [`monitor`](#monitor-1cb67f) - Optional Block<br>Link Quality Monitoring configuration for a network interface
+
+<a id="disabled-1756b3"></a>&#x2022; [`monitor_disabled`](#disabled-1756b3) - Optional Block<br>Enable this option
+
+<a id="mtu-2d7f6c"></a>&#x2022; [`mtu`](#mtu-2d7f6c) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
+
+<a id="name-8c8a3d"></a>&#x2022; [`name`](#name-8c8a3d) - Optional String<br>Interface Name. Name of this Interface
+
+<a id="option-ad2bbb"></a>&#x2022; [`network_option`](#option-ad2bbb) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-ad2bbb) below.
+
+<a id="address-ac89d0"></a>&#x2022; [`no_ipv4_address`](#address-ac89d0) - Optional Block<br>Enable this option
+
+<a id="address-b8923c"></a>&#x2022; [`no_ipv6_address`](#address-b8923c) - Optional Block<br>Enable this option
+
+<a id="priority-d77987"></a>&#x2022; [`priority`](#priority-d77987) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
+
+<a id="disabled-309cd0"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-309cd0) - Optional Block<br>Enable this option
+
+<a id="enabled-832872"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-832872) - Optional Block<br>Enable this option
+
+<a id="static-ip-9bad70"></a>&#x2022; [`static_ip`](#static-ip-9bad70) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-9bad70) below.
+
+<a id="address-411954"></a>&#x2022; [`static_ipv6_address`](#address-411954) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#address-411954) below.
+
+<a id="interface-da3951"></a>&#x2022; [`vlan_interface`](#interface-da3951) - Optional Block<br>VLAN Interface<br>See [VLAN Interface](#interface-da3951) below.
+
+#### Baremetal Not Managed Node List Interface List Bond Interface
+
+<a id="deep-5827e6"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List Bond Interface Lacp
+
+<a id="deep-a0f77e"></a>Deeply nested **Lacp** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List Ethernet Interface
+
+<a id="deep-8e9a1f"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List IPv6 Auto Config
+
+<a id="deep-0dfce3"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router
+
+<a id="deep-781eec"></a>Deeply nested **Router** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
+
+<a id="deep-0df42e"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
+
+<a id="deep-0dc91f"></a>Deeply nested **List** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
+
+<a id="deep-88b0ae"></a>Deeply nested **DNS** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful
+
+<a id="deep-93e220"></a>Deeply nested **Stateful** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
+
+<a id="deep-fee53d"></a>Deeply nested **Networks** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
+
+<a id="deep-8b3c2b"></a>Deeply nested **Pools** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
+
+<a id="deep-7e8e06"></a>Deeply nested **Map** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List Network Option
+
+<a id="deep-485083"></a>Deeply nested **Option** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List Static IP
+
+<a id="deep-51a8ed"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List Static IPv6 Address
+
+<a id="deep-4c97e1"></a>Deeply nested **Address** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
+
+<a id="deep-aca84b"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List Static IPv6 Address Node Static IP
+
+<a id="deep-a0f5cd"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Baremetal Not Managed Node List Interface List VLAN Interface
+
+<a id="deep-910d0a"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Blocked Services
 
@@ -188,903 +646,653 @@ A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_s
 
 <a id="interface-e57e21"></a>&#x2022; [`web_user_interface`](#interface-e57e21) - Optional Block<br>Enable this option
 
-#### Coordinates
+#### Custom Proxy
 
-A [`coordinates`](#coordinates) block supports the following:
+A [`custom_proxy`](#custom-proxy) block supports the following:
 
-<a id="coordinates-latitude"></a>&#x2022; [`latitude`](#coordinates-latitude) - Optional Number<br>Latitude. Latitude of the site location
+<a id="custom-proxy-disable-re-tunnel"></a>&#x2022; [`disable_re_tunnel`](#custom-proxy-disable-re-tunnel) - Optional Block<br>Enable this option
 
-<a id="coordinates-longitude"></a>&#x2022; [`longitude`](#coordinates-longitude) - Optional Number<br>Longitude. Longitude of site location
+<a id="custom-proxy-enable-re-tunnel"></a>&#x2022; [`enable_re_tunnel`](#custom-proxy-enable-re-tunnel) - Optional Block<br>Enable this option
 
-#### Custom DNS
+<a id="custom-proxy-password"></a>&#x2022; [`password`](#custom-proxy-password) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#custom-proxy-password) below.
 
-A [`custom_dns`](#custom-dns) block supports the following:
+<a id="custom-proxy-proxy-ip-address"></a>&#x2022; [`proxy_ip_address`](#custom-proxy-proxy-ip-address) - Optional String<br>Specify the IPv4 Address of the internal Enterprise Proxy
 
-<a id="custom-dns-inside-nameserver"></a>&#x2022; [`inside_nameserver`](#custom-dns-inside-nameserver) - Optional String<br>Optional DNS server IP to be used for name resolution in inside network
+<a id="custom-proxy-proxy-port"></a>&#x2022; [`proxy_port`](#custom-proxy-proxy-port) - Optional Number<br>Specify the Port of the internal Enterprise Proxy
 
-<a id="custom-dns-outside-nameserver"></a>&#x2022; [`outside_nameserver`](#custom-dns-outside-nameserver) - Optional String<br>Optional DNS server IP to be used for name resolution in outside network
+<a id="custom-proxy-username"></a>&#x2022; [`username`](#custom-proxy-username) - Optional String<br>If the internal Enterprise Proxy is using basic authentication, specify the username. This is an optional field
 
-#### Ingress Egress Gw
+#### Custom Proxy Password
 
-An [`ingress_egress_gw`](#ingress-egress-gw) block supports the following:
+A [`password`](#custom-proxy-password) block (within [`custom_proxy`](#custom-proxy)) supports the following:
 
-<a id="networking-28fc87"></a>&#x2022; [`accelerated_networking`](#networking-28fc87) - Optional Block<br>Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#networking-28fc87) below.
+<a id="info-a3e566"></a>&#x2022; [`blindfold_secret_info`](#info-a3e566) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-a3e566) below.
 
-<a id="policies-4e1d03"></a>&#x2022; [`active_enhanced_firewall_policies`](#policies-4e1d03) - Optional Block<br>List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#policies-4e1d03) below.
+<a id="custom-proxy-password-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#custom-proxy-password-clear-secret-info) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#custom-proxy-password-clear-secret-info) below.
 
-<a id="policies-265acf"></a>&#x2022; [`active_forward_proxy_policies`](#policies-265acf) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#policies-265acf) below.
+#### Custom Proxy Password Blindfold Secret Info
 
-<a id="policies-a2ee20"></a>&#x2022; [`active_network_policies`](#policies-a2ee20) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#policies-a2ee20) below.
+A [`blindfold_secret_info`](#info-a3e566) block (within [`custom_proxy.password`](#custom-proxy-password)) supports the following:
 
-<a id="ingress-egress-gw-az-nodes"></a>&#x2022; [`az_nodes`](#ingress-egress-gw-az-nodes) - Optional Block<br>Only Single AZ or Three AZ(s) nodes are supported currently<br>See [Az Nodes](#ingress-egress-gw-az-nodes) below.
+<a id="provider-4c379d"></a>&#x2022; [`decryption_provider`](#provider-4c379d) - Optional String<br>Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="ingress-egress-gw-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#ingress-egress-gw-azure-certified-hw) - Optional String<br>Name for Azure certified hardware
+<a id="location-04599e"></a>&#x2022; [`location`](#location-04599e) - Optional String<br>Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="inside-vn-3ce96a"></a>&#x2022; [`dc_cluster_group_inside_vn`](#inside-vn-3ce96a) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Inside Vn](#inside-vn-3ce96a) below.
+<a id="provider-d70f6e"></a>&#x2022; [`store_provider`](#provider-d70f6e) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="outside-vn-3594d6"></a>&#x2022; [`dc_cluster_group_outside_vn`](#outside-vn-3594d6) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Outside Vn](#outside-vn-3594d6) below.
+#### Custom Proxy Password Clear Secret Info
 
-<a id="all-8889af"></a>&#x2022; [`forward_proxy_allow_all`](#all-8889af) - Optional Block<br>Enable this option
+A [`clear_secret_info`](#custom-proxy-password-clear-secret-info) block (within [`custom_proxy.password`](#custom-proxy-password)) supports the following:
 
-<a id="ingress-egress-gw-global-network-list"></a>&#x2022; [`global_network_list`](#ingress-egress-gw-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#ingress-egress-gw-global-network-list) below.
+<a id="ref-35707d"></a>&#x2022; [`provider_ref`](#ref-35707d) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="ingress-egress-gw-hub"></a>&#x2022; [`hub`](#ingress-egress-gw-hub) - Optional Block<br>Hub VNET type. Hub VNET type<br>See [Hub](#ingress-egress-gw-hub) below.
+<a id="url-0071f9"></a>&#x2022; [`url`](#url-0071f9) - Optional String<br>URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
-<a id="ingress-egress-gw-inside-static-routes"></a>&#x2022; [`inside_static_routes`](#ingress-egress-gw-inside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Inside Static Routes](#ingress-egress-gw-inside-static-routes) below.
+#### Custom Proxy Bypass
 
-<a id="ingress-egress-gw-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#ingress-egress-gw-no-dc-cluster-group) - Optional Block<br>Enable this option
+A [`custom_proxy_bypass`](#custom-proxy-bypass) block supports the following:
 
-<a id="ingress-egress-gw-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#ingress-egress-gw-no-forward-proxy) - Optional Block<br>Enable this option
+<a id="custom-proxy-bypass-proxy-bypass"></a>&#x2022; [`proxy_bypass`](#custom-proxy-bypass-proxy-bypass) - Optional List<br>Proxy Bypass. List of domains to bypass the proxy
 
-<a id="ingress-egress-gw-no-global-network"></a>&#x2022; [`no_global_network`](#ingress-egress-gw-no-global-network) - Optional Block<br>Enable this option
+#### Dc Cluster Group SLI
 
-<a id="routes-b69a18"></a>&#x2022; [`no_inside_static_routes`](#routes-b69a18) - Optional Block<br>Enable this option
+A [`dc_cluster_group_sli`](#dc-cluster-group-sli) block supports the following:
 
-<a id="ingress-egress-gw-no-network-policy"></a>&#x2022; [`no_network_policy`](#ingress-egress-gw-no-network-policy) - Optional Block<br>Enable this option
+<a id="dc-cluster-group-sli-name"></a>&#x2022; [`name`](#dc-cluster-group-sli-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="routes-630976"></a>&#x2022; [`no_outside_static_routes`](#routes-630976) - Optional Block<br>Enable this option
+<a id="dc-cluster-group-sli-namespace"></a>&#x2022; [`namespace`](#dc-cluster-group-sli-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="ingress-egress-gw-not-hub"></a>&#x2022; [`not_hub`](#ingress-egress-gw-not-hub) - Optional Block<br>Enable this option
+<a id="dc-cluster-group-sli-tenant"></a>&#x2022; [`tenant`](#dc-cluster-group-sli-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="ingress-egress-gw-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#ingress-egress-gw-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#ingress-egress-gw-outside-static-routes) below.
+#### Dc Cluster Group Slo
 
-<a id="mode-4d23c2"></a>&#x2022; [`performance_enhancement_mode`](#mode-4d23c2) - Optional Block<br>Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#mode-4d23c2) below.
+A [`dc_cluster_group_slo`](#dc-cluster-group-slo) block supports the following:
 
-<a id="public-ip-5f6604"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-5f6604) - Optional Block<br>Enable this option
+<a id="dc-cluster-group-slo-name"></a>&#x2022; [`name`](#dc-cluster-group-slo-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="ingress-egress-gw-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#ingress-egress-gw-sm-connection-pvt-ip) - Optional Block<br>Enable this option
+<a id="dc-cluster-group-slo-namespace"></a>&#x2022; [`namespace`](#dc-cluster-group-slo-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-#### Ingress Egress Gw Accelerated Networking
+<a id="dc-cluster-group-slo-tenant"></a>&#x2022; [`tenant`](#dc-cluster-group-slo-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-An [`accelerated_networking`](#networking-28fc87) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
+#### DNS NTP Config
 
-<a id="disable-85a36d"></a>&#x2022; [`disable`](#disable-85a36d) - Optional Block<br>Enable this option
+A [`dns_ntp_config`](#dns-ntp-config) block supports the following:
 
-<a id="enable-219171"></a>&#x2022; [`enable`](#enable-219171) - Optional Block<br>Enable this option
+<a id="dns-ntp-config-custom-dns"></a>&#x2022; [`custom_dns`](#dns-ntp-config-custom-dns) - Optional Block<br>DNS Servers. DNS Servers<br>See [Custom DNS](#dns-ntp-config-custom-dns) below.
 
-#### Ingress Egress Gw Active Enhanced Firewall Policies
+<a id="dns-ntp-config-custom-ntp"></a>&#x2022; [`custom_ntp`](#dns-ntp-config-custom-ntp) - Optional Block<br>NTP Servers. NTP Servers<br>See [Custom NTP](#dns-ntp-config-custom-ntp) below.
 
-An [`active_enhanced_firewall_policies`](#policies-4e1d03) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
+<a id="dns-ntp-config-f5-dns-default"></a>&#x2022; [`f5_dns_default`](#dns-ntp-config-f5-dns-default) - Optional Block<br>Enable this option
 
-<a id="policies-b74f29"></a>&#x2022; [`enhanced_firewall_policies`](#policies-b74f29) - Optional Block<br>Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#policies-b74f29) below.
+<a id="dns-ntp-config-f5-ntp-default"></a>&#x2022; [`f5_ntp_default`](#dns-ntp-config-f5-ntp-default) - Optional Block<br>Enable this option
 
-#### Ingress Egress Gw Active Enhanced Firewall Policies Enhanced Firewall Policies
+#### DNS NTP Config Custom DNS
 
-<a id="deep-3cb2d1"></a>Deeply nested **Policies** block collapsed for readability.
+A [`custom_dns`](#dns-ntp-config-custom-dns) block (within [`dns_ntp_config`](#dns-ntp-config)) supports the following:
 
-#### Ingress Egress Gw Active Forward Proxy Policies
+<a id="dns-ntp-config-custom-dns-dns-servers"></a>&#x2022; [`dns_servers`](#dns-ntp-config-custom-dns-dns-servers) - Optional List<br>DNS Servers. DNS Servers
 
-An [`active_forward_proxy_policies`](#policies-265acf) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
+#### DNS NTP Config Custom NTP
 
-<a id="policies-ae49bd"></a>&#x2022; [`forward_proxy_policies`](#policies-ae49bd) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#policies-ae49bd) below.
+A [`custom_ntp`](#dns-ntp-config-custom-ntp) block (within [`dns_ntp_config`](#dns-ntp-config)) supports the following:
 
-#### Ingress Egress Gw Active Forward Proxy Policies Forward Proxy Policies
+<a id="dns-ntp-config-custom-ntp-ntp-servers"></a>&#x2022; [`ntp_servers`](#dns-ntp-config-custom-ntp-ntp-servers) - Optional List<br>NTP Servers. NTP Servers
 
-<a id="deep-54c023"></a>Deeply nested **Policies** block collapsed for readability.
+#### Equinix
 
-#### Ingress Egress Gw Active Network Policies
+An [`equinix`](#equinix) block supports the following:
 
-An [`active_network_policies`](#policies-a2ee20) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
+<a id="equinix-not-managed"></a>&#x2022; [`not_managed`](#equinix-not-managed) - Optional Block<br>Section will show nodes associated with this site<br>See [Not Managed](#equinix-not-managed) below.
 
-<a id="policies-e07db8"></a>&#x2022; [`network_policies`](#policies-e07db8) - Optional Block<br>Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#policies-e07db8) below.
+#### Equinix Not Managed
 
-#### Ingress Egress Gw Active Network Policies Network Policies
+A [`not_managed`](#equinix-not-managed) block (within [`equinix`](#equinix)) supports the following:
 
-<a id="deep-18bd39"></a>Deeply nested **Policies** block collapsed for readability.
+<a id="equinix-not-managed-node-list"></a>&#x2022; [`node_list`](#equinix-not-managed-node-list) - Optional Block<br>Section will show nodes associated with this site<br>See [Node List](#equinix-not-managed-node-list) below.
 
-#### Ingress Egress Gw Az Nodes
+#### Equinix Not Managed Node List
 
-An [`az_nodes`](#ingress-egress-gw-az-nodes) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
+A [`node_list`](#equinix-not-managed-node-list) block (within [`equinix.not_managed`](#equinix-not-managed)) supports the following:
 
-<a id="ingress-egress-gw-az-nodes-azure-az"></a>&#x2022; [`azure_az`](#ingress-egress-gw-az-nodes-azure-az) - Optional String<br>Zone depicting a grouping of datacenters within an Azure region. Expecting numeric input
+<a id="equinix-not-managed-node-list-hostname"></a>&#x2022; [`hostname`](#equinix-not-managed-node-list-hostname) - Optional String<br>Hostname. Hostname for this Node
 
-<a id="subnet-c4f554"></a>&#x2022; [`inside_subnet`](#subnet-c4f554) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Inside Subnet](#subnet-c4f554) below.
+<a id="list-3a9b82"></a>&#x2022; [`interface_list`](#list-3a9b82) - Optional Block<br>Manage interfaces belonging to this node<br>See [Interface List](#list-3a9b82) below.
 
-<a id="subnet-631d3b"></a>&#x2022; [`outside_subnet`](#subnet-631d3b) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Outside Subnet](#subnet-631d3b) below.
+<a id="equinix-not-managed-node-list-public-ip"></a>&#x2022; [`public_ip`](#equinix-not-managed-node-list-public-ip) - Optional String<br>Public IP. Public IP for this Node
 
-#### Ingress Egress Gw Az Nodes Inside Subnet
+<a id="equinix-not-managed-node-list-type"></a>&#x2022; [`type`](#equinix-not-managed-node-list-type) - Optional String<br>Type for this Node, can be Control or Worker
 
-An [`inside_subnet`](#subnet-c4f554) block (within [`ingress_egress_gw.az_nodes`](#ingress-egress-gw-az-nodes)) supports the following:
+#### Equinix Not Managed Node List Interface List
 
-<a id="subnet-c9a09c"></a>&#x2022; [`subnet`](#subnet-c9a09c) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#subnet-c9a09c) below.
+An [`interface_list`](#list-3a9b82) block (within [`equinix.not_managed.node_list`](#equinix-not-managed-node-list)) supports the following:
 
-<a id="param-cef0bb"></a>&#x2022; [`subnet_param`](#param-cef0bb) - Optional Block<br>Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-cef0bb) below.
+<a id="interface-a1aaf8"></a>&#x2022; [`bond_interface`](#interface-a1aaf8) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#interface-a1aaf8) below.
 
-#### Ingress Egress Gw Az Nodes Inside Subnet Subnet
+<a id="spec-d32b48"></a>&#x2022; [`description_spec`](#spec-d32b48) - Optional String<br>Interface Description. Description for this Interface
 
-<a id="deep-b03698"></a>Deeply nested **Subnet** block collapsed for readability.
+<a id="client-c83f23"></a>&#x2022; [`dhcp_client`](#client-c83f23) - Optional Block<br>Enable this option
 
-#### Ingress Egress Gw Az Nodes Inside Subnet Subnet Param
+<a id="interface-a2d3e0"></a>&#x2022; [`ethernet_interface`](#interface-a2d3e0) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-a2d3e0) below.
 
-<a id="deep-7b2aa4"></a>Deeply nested **Param** block collapsed for readability.
+<a id="config-96da89"></a>&#x2022; [`ipv6_auto_config`](#config-96da89) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#config-96da89) below.
 
-#### Ingress Egress Gw Az Nodes Outside Subnet
+<a id="labels-718666"></a>&#x2022; [`labels`](#labels-718666) - Optional Block<br>Add Labels for this Interface, these labels can be used in firewall policy
 
-An [`outside_subnet`](#subnet-631d3b) block (within [`ingress_egress_gw.az_nodes`](#ingress-egress-gw-az-nodes)) supports the following:
+<a id="monitor-15c36b"></a>&#x2022; [`monitor`](#monitor-15c36b) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="subnet-251935"></a>&#x2022; [`subnet`](#subnet-251935) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#subnet-251935) below.
+<a id="disabled-5d3350"></a>&#x2022; [`monitor_disabled`](#disabled-5d3350) - Optional Block<br>Enable this option
 
-<a id="param-c11d6b"></a>&#x2022; [`subnet_param`](#param-c11d6b) - Optional Block<br>Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-c11d6b) below.
+<a id="mtu-80c067"></a>&#x2022; [`mtu`](#mtu-80c067) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-#### Ingress Egress Gw Az Nodes Outside Subnet Subnet
+<a id="name-5f1c00"></a>&#x2022; [`name`](#name-5f1c00) - Optional String<br>Interface Name. Name of this Interface
 
-<a id="deep-ab232b"></a>Deeply nested **Subnet** block collapsed for readability.
+<a id="option-1659e3"></a>&#x2022; [`network_option`](#option-1659e3) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-1659e3) below.
 
-#### Ingress Egress Gw Az Nodes Outside Subnet Subnet Param
+<a id="address-e9c2b1"></a>&#x2022; [`no_ipv4_address`](#address-e9c2b1) - Optional Block<br>Enable this option
 
-<a id="deep-4b83fd"></a>Deeply nested **Param** block collapsed for readability.
+<a id="address-278ecf"></a>&#x2022; [`no_ipv6_address`](#address-278ecf) - Optional Block<br>Enable this option
 
-#### Ingress Egress Gw Dc Cluster Group Inside Vn
+<a id="priority-8326e4"></a>&#x2022; [`priority`](#priority-8326e4) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-<a id="deep-23860c"></a>Deeply nested **Vn** block collapsed for readability.
+<a id="disabled-381ac6"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-381ac6) - Optional Block<br>Enable this option
 
-#### Ingress Egress Gw Dc Cluster Group Outside Vn
+<a id="enabled-ea35c6"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-ea35c6) - Optional Block<br>Enable this option
 
-<a id="deep-53ac3b"></a>Deeply nested **Vn** block collapsed for readability.
+<a id="static-ip-bfc08c"></a>&#x2022; [`static_ip`](#static-ip-bfc08c) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-bfc08c) below.
 
-#### Ingress Egress Gw Global Network List
+<a id="address-d74f42"></a>&#x2022; [`static_ipv6_address`](#address-d74f42) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#address-d74f42) below.
 
-A [`global_network_list`](#ingress-egress-gw-global-network-list) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
+<a id="interface-66fdd5"></a>&#x2022; [`vlan_interface`](#interface-66fdd5) - Optional Block<br>VLAN Interface<br>See [VLAN Interface](#interface-66fdd5) below.
 
-<a id="connections-bde45c"></a>&#x2022; [`global_network_connections`](#connections-bde45c) - Optional Block<br>Global network connections<br>See [Global Network Connections](#connections-bde45c) below.
+#### Equinix Not Managed Node List Interface List Bond Interface
 
-#### Ingress Egress Gw Global Network List Global Network Connections
+<a id="deep-b565ca"></a>Deeply nested **Interface** block collapsed for readability.
 
-<a id="deep-88f40a"></a>Deeply nested **Connections** block collapsed for readability.
+#### Equinix Not Managed Node List Interface List Bond Interface Lacp
 
-#### Ingress Egress Gw Global Network List Global Network Connections SLI To Global DR
+<a id="deep-08a8f4"></a>Deeply nested **Lacp** block collapsed for readability.
 
-<a id="deep-c2be4c"></a>Deeply nested **DR** block collapsed for readability.
+#### Equinix Not Managed Node List Interface List Ethernet Interface
 
-#### Ingress Egress Gw Global Network List Global Network Connections SLI To Global DR Global Vn
+<a id="deep-e260db"></a>Deeply nested **Interface** block collapsed for readability.
 
-<a id="deep-60d106"></a>Deeply nested **Vn** block collapsed for readability.
+#### Equinix Not Managed Node List Interface List IPv6 Auto Config
 
-#### Ingress Egress Gw Global Network List Global Network Connections Slo To Global DR
+<a id="deep-f79b98"></a>Deeply nested **Config** block collapsed for readability.
 
-<a id="deep-c00d54"></a>Deeply nested **DR** block collapsed for readability.
+#### Equinix Not Managed Node List Interface List IPv6 Auto Config Router
 
-#### Ingress Egress Gw Global Network List Global Network Connections Slo To Global DR Global Vn
+<a id="deep-7e62f2"></a>Deeply nested **Router** block collapsed for readability.
 
-<a id="deep-184e24"></a>Deeply nested **Vn** block collapsed for readability.
+#### Equinix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-#### Ingress Egress Gw Hub
+<a id="deep-19d109"></a>Deeply nested **Config** block collapsed for readability.
 
-A [`hub`](#ingress-egress-gw-hub) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
+#### Equinix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-<a id="disabled-748cf7"></a>&#x2022; [`express_route_disabled`](#disabled-748cf7) - Optional Block<br>Enable this option
+<a id="deep-7c11b9"></a>Deeply nested **List** block collapsed for readability.
 
-<a id="enabled-af8996"></a>&#x2022; [`express_route_enabled`](#enabled-af8996) - Optional Block<br>Express Route Configuration. Express Route Configuration<br>See [Express Route Enabled](#enabled-af8996) below.
+#### Equinix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-<a id="ingress-egress-gw-hub-spoke-vnets"></a>&#x2022; [`spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets) - Optional Block<br>Spoke VNET Peering (Legacy). Spoke VNET Peering<br>See [Spoke Vnets](#ingress-egress-gw-hub-spoke-vnets) below.
+<a id="deep-d0977a"></a>Deeply nested **DNS** block collapsed for readability.
 
-#### Ingress Egress Gw Hub Express Route Enabled
+#### Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-An [`express_route_enabled`](#enabled-af8996) block (within [`ingress_egress_gw.hub`](#ingress-egress-gw-hub)) supports the following:
+<a id="deep-c5835c"></a>Deeply nested **Stateful** block collapsed for readability.
 
-<a id="server-a50f73"></a>&#x2022; [`advertise_to_route_server`](#server-a50f73) - Optional Block<br>Enable this option
+#### Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-<a id="asn-9040f1"></a>&#x2022; [`auto_asn`](#asn-9040f1) - Optional Block<br>Enable this option
+<a id="deep-de0480"></a>Deeply nested **Networks** block collapsed for readability.
 
-<a id="connections-cb7206"></a>&#x2022; [`connections`](#connections-cb7206) - Optional Block<br>Add the ExpressRoute Circuit Connections to this site<br>See [Connections](#connections-cb7206) below.
+#### Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-<a id="asn-75fbeb"></a>&#x2022; [`custom_asn`](#asn-75fbeb) - Optional Number<br>Set custom ASN for F5XC Site
+<a id="deep-955ad2"></a>Deeply nested **Pools** block collapsed for readability.
 
-<a id="server-cbee20"></a>&#x2022; [`do_not_advertise_to_route_server`](#server-cbee20) - Optional Block<br>Enable this option
+#### Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-<a id="subnet-500a14"></a>&#x2022; [`gateway_subnet`](#subnet-500a14) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Gateway Subnet](#subnet-500a14) below.
+<a id="deep-27f6d9"></a>Deeply nested **Map** block collapsed for readability.
 
-<a id="subnet-b569ad"></a>&#x2022; [`route_server_subnet`](#subnet-b569ad) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Route Server Subnet](#subnet-b569ad) below.
+#### Equinix Not Managed Node List Interface List Network Option
 
-<a id="route-bcfd74"></a>&#x2022; [`site_registration_over_express_route`](#route-bcfd74) - Optional Block<br>CloudLink ADN Network Config<br>See [Site Registration Over Express Route](#route-bcfd74) below.
+<a id="deep-da1af1"></a>Deeply nested **Option** block collapsed for readability.
 
-<a id="internet-84b00b"></a>&#x2022; [`site_registration_over_internet`](#internet-84b00b) - Optional Block<br>Enable this option
+#### Equinix Not Managed Node List Interface List Static IP
 
-<a id="ergw1az-f27019"></a>&#x2022; [`sku_ergw1az`](#ergw1az-f27019) - Optional Block<br>Enable this option
+<a id="deep-b26b58"></a>Deeply nested **IP** block collapsed for readability.
 
-<a id="ergw2az-799446"></a>&#x2022; [`sku_ergw2az`](#ergw2az-799446) - Optional Block<br>Enable this option
+#### Equinix Not Managed Node List Interface List Static IPv6 Address
 
-<a id="perf-f8e610"></a>&#x2022; [`sku_high_perf`](#perf-f8e610) - Optional Block<br>Enable this option
+<a id="deep-a07f1e"></a>Deeply nested **Address** block collapsed for readability.
 
-<a id="standard-c8e6ac"></a>&#x2022; [`sku_standard`](#standard-c8e6ac) - Optional Block<br>Enable this option
+#### Equinix Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-#### Ingress Egress Gw Hub Express Route Enabled Connections
+<a id="deep-f0d7ec"></a>Deeply nested **IP** block collapsed for readability.
 
-<a id="deep-5aa2b8"></a>Deeply nested **Connections** block collapsed for readability.
+#### Equinix Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-#### Ingress Egress Gw Hub Express Route Enabled Connections Metadata
+<a id="deep-79432c"></a>Deeply nested **IP** block collapsed for readability.
 
-<a id="deep-4a8577"></a>Deeply nested **Metadata** block collapsed for readability.
+#### Equinix Not Managed Node List Interface List VLAN Interface
 
-#### Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription
+<a id="deep-94cba8"></a>Deeply nested **Interface** block collapsed for readability.
 
-<a id="deep-57f4c5"></a>Deeply nested **Subscription** block collapsed for readability.
+#### GCP
 
-#### Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription Authorized Key
+A [`gcp`](#gcp) block supports the following:
 
-<a id="deep-739be2"></a>Deeply nested **Key** block collapsed for readability.
+<a id="gcp-not-managed"></a>&#x2022; [`not_managed`](#gcp-not-managed) - Optional Block<br>Section will show nodes associated with this site<br>See [Not Managed](#gcp-not-managed) below.
 
-#### Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription Authorized Key Blindfold Secret Info
+#### GCP Not Managed
 
-<a id="deep-a418eb"></a>Deeply nested **Info** block collapsed for readability.
+A [`not_managed`](#gcp-not-managed) block (within [`gcp`](#gcp)) supports the following:
 
-#### Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription Authorized Key Clear Secret Info
+<a id="gcp-not-managed-node-list"></a>&#x2022; [`node_list`](#gcp-not-managed-node-list) - Optional Block<br>Section will show nodes associated with this site<br>See [Node List](#gcp-not-managed-node-list) below.
 
-<a id="deep-a1a294"></a>Deeply nested **Info** block collapsed for readability.
+#### GCP Not Managed Node List
 
-#### Ingress Egress Gw Hub Express Route Enabled Gateway Subnet
+A [`node_list`](#gcp-not-managed-node-list) block (within [`gcp.not_managed`](#gcp-not-managed)) supports the following:
 
-<a id="deep-e54791"></a>Deeply nested **Subnet** block collapsed for readability.
+<a id="gcp-not-managed-node-list-hostname"></a>&#x2022; [`hostname`](#gcp-not-managed-node-list-hostname) - Optional String<br>Hostname. Hostname for this Node
 
-#### Ingress Egress Gw Hub Express Route Enabled Gateway Subnet Subnet
+<a id="list-2f49ff"></a>&#x2022; [`interface_list`](#list-2f49ff) - Optional Block<br>Manage interfaces belonging to this node<br>See [Interface List](#list-2f49ff) below.
 
-<a id="deep-ad7509"></a>Deeply nested **Subnet** block collapsed for readability.
+<a id="gcp-not-managed-node-list-public-ip"></a>&#x2022; [`public_ip`](#gcp-not-managed-node-list-public-ip) - Optional String<br>Public IP. Public IP for this Node
 
-#### Ingress Egress Gw Hub Express Route Enabled Gateway Subnet Subnet Param
+<a id="gcp-not-managed-node-list-type"></a>&#x2022; [`type`](#gcp-not-managed-node-list-type) - Optional String<br>Type for this Node, can be Control or Worker
 
-<a id="deep-c9d7f7"></a>Deeply nested **Param** block collapsed for readability.
+#### GCP Not Managed Node List Interface List
 
-#### Ingress Egress Gw Hub Express Route Enabled Route Server Subnet
+An [`interface_list`](#list-2f49ff) block (within [`gcp.not_managed.node_list`](#gcp-not-managed-node-list)) supports the following:
 
-<a id="deep-839302"></a>Deeply nested **Subnet** block collapsed for readability.
+<a id="interface-54ab03"></a>&#x2022; [`bond_interface`](#interface-54ab03) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#interface-54ab03) below.
 
-#### Ingress Egress Gw Hub Express Route Enabled Route Server Subnet Subnet
+<a id="spec-801a55"></a>&#x2022; [`description_spec`](#spec-801a55) - Optional String<br>Interface Description. Description for this Interface
 
-<a id="deep-b8be72"></a>Deeply nested **Subnet** block collapsed for readability.
+<a id="client-649578"></a>&#x2022; [`dhcp_client`](#client-649578) - Optional Block<br>Enable this option
 
-#### Ingress Egress Gw Hub Express Route Enabled Route Server Subnet Subnet Param
+<a id="interface-fa1d2a"></a>&#x2022; [`ethernet_interface`](#interface-fa1d2a) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-fa1d2a) below.
 
-<a id="deep-4b1835"></a>Deeply nested **Param** block collapsed for readability.
+<a id="config-881893"></a>&#x2022; [`ipv6_auto_config`](#config-881893) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#config-881893) below.
 
-#### Ingress Egress Gw Hub Express Route Enabled Site Registration Over Express Route
+<a id="labels-43ee17"></a>&#x2022; [`labels`](#labels-43ee17) - Optional Block<br>Add Labels for this Interface, these labels can be used in firewall policy
 
-<a id="deep-277a06"></a>Deeply nested **Route** block collapsed for readability.
+<a id="monitor-986ba9"></a>&#x2022; [`monitor`](#monitor-986ba9) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-#### Ingress Egress Gw Hub Spoke Vnets
+<a id="disabled-33388b"></a>&#x2022; [`monitor_disabled`](#disabled-33388b) - Optional Block<br>Enable this option
 
-A [`spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets) block (within [`ingress_egress_gw.hub`](#ingress-egress-gw-hub)) supports the following:
+<a id="mtu-46e579"></a>&#x2022; [`mtu`](#mtu-46e579) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-<a id="ingress-egress-gw-hub-spoke-vnets-auto"></a>&#x2022; [`auto`](#ingress-egress-gw-hub-spoke-vnets-auto) - Optional Block<br>Enable this option
+<a id="name-fc5cd2"></a>&#x2022; [`name`](#name-fc5cd2) - Optional String<br>Interface Name. Name of this Interface
 
-<a id="labels-9c843f"></a>&#x2022; [`labels`](#labels-9c843f) - Optional Block<br>Add Labels for each of the VNets peered with transit VNET, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace
+<a id="option-ca04ce"></a>&#x2022; [`network_option`](#option-ca04ce) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-ca04ce) below.
 
-<a id="manual-6de395"></a>&#x2022; [`manual`](#manual-6de395) - Optional Block<br>Enable this option
+<a id="address-c52373"></a>&#x2022; [`no_ipv4_address`](#address-c52373) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-hub-spoke-vnets-vnet"></a>&#x2022; [`vnet`](#ingress-egress-gw-hub-spoke-vnets-vnet) - Optional Block<br>Resource group and name of existing Azure VNET<br>See [VNET](#ingress-egress-gw-hub-spoke-vnets-vnet) below.
+<a id="address-40bebe"></a>&#x2022; [`no_ipv6_address`](#address-40bebe) - Optional Block<br>Enable this option
 
-#### Ingress Egress Gw Hub Spoke Vnets VNET
+<a id="priority-b17ea9"></a>&#x2022; [`priority`](#priority-b17ea9) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-A [`vnet`](#ingress-egress-gw-hub-spoke-vnets-vnet) block (within [`ingress_egress_gw.hub.spoke_vnets`](#ingress-egress-gw-hub-spoke-vnets)) supports the following:
+<a id="disabled-45fbad"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-45fbad) - Optional Block<br>Enable this option
 
-<a id="routing-73e1cd"></a>&#x2022; [`f5_orchestrated_routing`](#routing-73e1cd) - Optional Block<br>Enable this option
+<a id="enabled-b641ce"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-b641ce) - Optional Block<br>Enable this option
 
-<a id="routing-bc490d"></a>&#x2022; [`manual_routing`](#routing-bc490d) - Optional Block<br>Enable this option
+<a id="static-ip-b40b52"></a>&#x2022; [`static_ip`](#static-ip-b40b52) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-b40b52) below.
 
-<a id="group-e35b03"></a>&#x2022; [`resource_group`](#group-e35b03) - Optional String<br>Resource group of existing VNET
+<a id="address-6a68da"></a>&#x2022; [`static_ipv6_address`](#address-6a68da) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#address-6a68da) below.
 
-<a id="name-7ba5bf"></a>&#x2022; [`vnet_name`](#name-7ba5bf) - Optional String<br>Existing VNET Name. Name of existing VNET
+<a id="interface-bd3d44"></a>&#x2022; [`vlan_interface`](#interface-bd3d44) - Optional Block<br>VLAN Interface<br>See [VLAN Interface](#interface-bd3d44) below.
 
-#### Ingress Egress Gw Inside Static Routes
+#### GCP Not Managed Node List Interface List Bond Interface
 
-An [`inside_static_routes`](#ingress-egress-gw-inside-static-routes) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
+<a id="deep-afd6e8"></a>Deeply nested **Interface** block collapsed for readability.
 
-<a id="list-ed095e"></a>&#x2022; [`static_route_list`](#list-ed095e) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#list-ed095e) below.
+#### GCP Not Managed Node List Interface List Bond Interface Lacp
 
-#### Ingress Egress Gw Inside Static Routes Static Route List
+<a id="deep-6c8fc7"></a>Deeply nested **Lacp** block collapsed for readability.
 
-<a id="deep-922a6f"></a>Deeply nested **List** block collapsed for readability.
+#### GCP Not Managed Node List Interface List Ethernet Interface
 
-#### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route
+<a id="deep-6a0162"></a>Deeply nested **Interface** block collapsed for readability.
 
-<a id="deep-3b67c8"></a>Deeply nested **Route** block collapsed for readability.
+#### GCP Not Managed Node List Interface List IPv6 Auto Config
 
-#### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop
+<a id="deep-f3d749"></a>Deeply nested **Config** block collapsed for readability.
 
-<a id="deep-373011"></a>Deeply nested **Nexthop** block collapsed for readability.
+#### GCP Not Managed Node List Interface List IPv6 Auto Config Router
 
-#### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Interface
+<a id="deep-21edde"></a>Deeply nested **Router** block collapsed for readability.
 
-<a id="deep-a58927"></a>Deeply nested **Interface** block collapsed for readability.
+#### GCP Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-#### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
+<a id="deep-484c91"></a>Deeply nested **Config** block collapsed for readability.
 
-<a id="deep-6b64ce"></a>Deeply nested **Address** block collapsed for readability.
+#### GCP Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-#### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
+<a id="deep-85dbbe"></a>Deeply nested **List** block collapsed for readability.
 
-<a id="deep-3b45f1"></a>Deeply nested **IPv4** block collapsed for readability.
+#### GCP Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-#### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
+<a id="deep-7cb154"></a>Deeply nested **DNS** block collapsed for readability.
 
-<a id="deep-976e31"></a>Deeply nested **IPv6** block collapsed for readability.
+#### GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-#### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets
+<a id="deep-001e66"></a>Deeply nested **Stateful** block collapsed for readability.
 
-<a id="deep-7e5beb"></a>Deeply nested **Subnets** block collapsed for readability.
+#### GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-#### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets IPv4
+<a id="deep-f92dfa"></a>Deeply nested **Networks** block collapsed for readability.
 
-<a id="deep-4bd73c"></a>Deeply nested **IPv4** block collapsed for readability.
+#### GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-#### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets IPv6
+<a id="deep-5e3307"></a>Deeply nested **Pools** block collapsed for readability.
 
-<a id="deep-5dec85"></a>Deeply nested **IPv6** block collapsed for readability.
+#### GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-#### Ingress Egress Gw Outside Static Routes
+<a id="deep-bd61fc"></a>Deeply nested **Map** block collapsed for readability.
 
-An [`outside_static_routes`](#ingress-egress-gw-outside-static-routes) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
+#### GCP Not Managed Node List Interface List Network Option
 
-<a id="list-445efb"></a>&#x2022; [`static_route_list`](#list-445efb) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#list-445efb) below.
+<a id="deep-8d0ef6"></a>Deeply nested **Option** block collapsed for readability.
 
-#### Ingress Egress Gw Outside Static Routes Static Route List
+#### GCP Not Managed Node List Interface List Static IP
 
-<a id="deep-fdf27e"></a>Deeply nested **List** block collapsed for readability.
+<a id="deep-3a7f7a"></a>Deeply nested **IP** block collapsed for readability.
 
-#### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route
+#### GCP Not Managed Node List Interface List Static IPv6 Address
 
-<a id="deep-025383"></a>Deeply nested **Route** block collapsed for readability.
+<a id="deep-b9548b"></a>Deeply nested **Address** block collapsed for readability.
 
-#### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop
+#### GCP Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-<a id="deep-390b03"></a>Deeply nested **Nexthop** block collapsed for readability.
+<a id="deep-164e2f"></a>Deeply nested **IP** block collapsed for readability.
 
-#### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Interface
+#### GCP Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-<a id="deep-214d2f"></a>Deeply nested **Interface** block collapsed for readability.
+<a id="deep-39ec3e"></a>Deeply nested **IP** block collapsed for readability.
 
-#### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
+#### GCP Not Managed Node List Interface List VLAN Interface
 
-<a id="deep-f33e18"></a>Deeply nested **Address** block collapsed for readability.
+<a id="deep-aef10c"></a>Deeply nested **Interface** block collapsed for readability.
 
-#### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
+#### Kvm
 
-<a id="deep-f90bc5"></a>Deeply nested **IPv4** block collapsed for readability.
+A [`kvm`](#kvm) block supports the following:
 
-#### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
+<a id="kvm-not-managed"></a>&#x2022; [`not_managed`](#kvm-not-managed) - Optional Block<br>Section will show nodes associated with this site<br>See [Not Managed](#kvm-not-managed) below.
 
-<a id="deep-23b94d"></a>Deeply nested **IPv6** block collapsed for readability.
+#### Kvm Not Managed
 
-#### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets
+A [`not_managed`](#kvm-not-managed) block (within [`kvm`](#kvm)) supports the following:
 
-<a id="deep-5d8217"></a>Deeply nested **Subnets** block collapsed for readability.
+<a id="kvm-not-managed-node-list"></a>&#x2022; [`node_list`](#kvm-not-managed-node-list) - Optional Block<br>Section will show nodes associated with this site<br>See [Node List](#kvm-not-managed-node-list) below.
 
-#### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets IPv4
+#### Kvm Not Managed Node List
 
-<a id="deep-f9fb39"></a>Deeply nested **IPv4** block collapsed for readability.
+A [`node_list`](#kvm-not-managed-node-list) block (within [`kvm.not_managed`](#kvm-not-managed)) supports the following:
 
-#### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets IPv6
+<a id="kvm-not-managed-node-list-hostname"></a>&#x2022; [`hostname`](#kvm-not-managed-node-list-hostname) - Optional String<br>Hostname. Hostname for this Node
 
-<a id="deep-21fa47"></a>Deeply nested **IPv6** block collapsed for readability.
+<a id="list-92338f"></a>&#x2022; [`interface_list`](#list-92338f) - Optional Block<br>Manage interfaces belonging to this node<br>See [Interface List](#list-92338f) below.
 
-#### Ingress Egress Gw Performance Enhancement Mode
+<a id="kvm-not-managed-node-list-public-ip"></a>&#x2022; [`public_ip`](#kvm-not-managed-node-list-public-ip) - Optional String<br>Public IP. Public IP for this Node
 
-A [`performance_enhancement_mode`](#mode-4d23c2) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
+<a id="kvm-not-managed-node-list-type"></a>&#x2022; [`type`](#kvm-not-managed-node-list-type) - Optional String<br>Type for this Node, can be Control or Worker
 
-<a id="enhanced-410f18"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-410f18) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-410f18) below.
+#### Kvm Not Managed Node List Interface List
 
-<a id="enhanced-90e2b5"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-90e2b5) - Optional Block<br>Enable this option
+An [`interface_list`](#list-92338f) block (within [`kvm.not_managed.node_list`](#kvm-not-managed-node-list)) supports the following:
 
-#### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
+<a id="interface-e24728"></a>&#x2022; [`bond_interface`](#interface-e24728) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#interface-e24728) below.
 
-<a id="deep-4a39a0"></a>Deeply nested **Enhanced** block collapsed for readability.
+<a id="spec-c3f95c"></a>&#x2022; [`description_spec`](#spec-c3f95c) - Optional String<br>Interface Description. Description for this Interface
 
-#### Ingress Egress Gw Ar
+<a id="client-59a349"></a>&#x2022; [`dhcp_client`](#client-59a349) - Optional Block<br>Enable this option
 
-An [`ingress_egress_gw_ar`](#ingress-egress-gw-ar) block supports the following:
+<a id="interface-0aad1d"></a>&#x2022; [`ethernet_interface`](#interface-0aad1d) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-0aad1d) below.
 
-<a id="networking-017a12"></a>&#x2022; [`accelerated_networking`](#networking-017a12) - Optional Block<br>Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#networking-017a12) below.
+<a id="config-ab0775"></a>&#x2022; [`ipv6_auto_config`](#config-ab0775) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#config-ab0775) below.
 
-<a id="policies-191004"></a>&#x2022; [`active_enhanced_firewall_policies`](#policies-191004) - Optional Block<br>List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#policies-191004) below.
+<a id="labels-36ae51"></a>&#x2022; [`labels`](#labels-36ae51) - Optional Block<br>Add Labels for this Interface, these labels can be used in firewall policy
 
-<a id="policies-1dcf3f"></a>&#x2022; [`active_forward_proxy_policies`](#policies-1dcf3f) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#policies-1dcf3f) below.
+<a id="monitor-1bfade"></a>&#x2022; [`monitor`](#monitor-1bfade) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="policies-f5e0fc"></a>&#x2022; [`active_network_policies`](#policies-f5e0fc) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#policies-f5e0fc) below.
+<a id="disabled-2ad250"></a>&#x2022; [`monitor_disabled`](#disabled-2ad250) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#ingress-egress-gw-ar-azure-certified-hw) - Optional String<br>Name for Azure certified hardware
+<a id="mtu-d603a1"></a>&#x2022; [`mtu`](#mtu-d603a1) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-<a id="inside-vn-d5b061"></a>&#x2022; [`dc_cluster_group_inside_vn`](#inside-vn-d5b061) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Inside Vn](#inside-vn-d5b061) below.
+<a id="name-4d7867"></a>&#x2022; [`name`](#name-4d7867) - Optional String<br>Interface Name. Name of this Interface
 
-<a id="outside-vn-b1ca44"></a>&#x2022; [`dc_cluster_group_outside_vn`](#outside-vn-b1ca44) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Outside Vn](#outside-vn-b1ca44) below.
+<a id="option-437c33"></a>&#x2022; [`network_option`](#option-437c33) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-437c33) below.
 
-<a id="all-34864e"></a>&#x2022; [`forward_proxy_allow_all`](#all-34864e) - Optional Block<br>Enable this option
+<a id="address-4c9457"></a>&#x2022; [`no_ipv4_address`](#address-4c9457) - Optional Block<br>Enable this option
 
-<a id="list-37dd04"></a>&#x2022; [`global_network_list`](#list-37dd04) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#list-37dd04) below.
+<a id="address-e9ec91"></a>&#x2022; [`no_ipv6_address`](#address-e9ec91) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-hub"></a>&#x2022; [`hub`](#ingress-egress-gw-ar-hub) - Optional Block<br>Hub VNET type. Hub VNET type<br>See [Hub](#ingress-egress-gw-ar-hub) below.
+<a id="priority-931ade"></a>&#x2022; [`priority`](#priority-931ade) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-<a id="routes-87089c"></a>&#x2022; [`inside_static_routes`](#routes-87089c) - Optional Block<br>Static Route List Type. List of static routes<br>See [Inside Static Routes](#routes-87089c) below.
+<a id="disabled-320aad"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-320aad) - Optional Block<br>Enable this option
 
-<a id="group-1c537f"></a>&#x2022; [`no_dc_cluster_group`](#group-1c537f) - Optional Block<br>Enable this option
+<a id="enabled-390b0a"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-390b0a) - Optional Block<br>Enable this option
 
-<a id="ingress-egress-gw-ar-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#ingress-egress-gw-ar-no-forward-proxy) - Optional Block<br>Enable this option
+<a id="static-ip-f20c45"></a>&#x2022; [`static_ip`](#static-ip-f20c45) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-f20c45) below.
 
-<a id="ingress-egress-gw-ar-no-global-network"></a>&#x2022; [`no_global_network`](#ingress-egress-gw-ar-no-global-network) - Optional Block<br>Enable this option
+<a id="address-41524b"></a>&#x2022; [`static_ipv6_address`](#address-41524b) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#address-41524b) below.
 
-<a id="routes-047d72"></a>&#x2022; [`no_inside_static_routes`](#routes-047d72) - Optional Block<br>Enable this option
+<a id="interface-5ffabb"></a>&#x2022; [`vlan_interface`](#interface-5ffabb) - Optional Block<br>VLAN Interface<br>See [VLAN Interface](#interface-5ffabb) below.
 
-<a id="ingress-egress-gw-ar-no-network-policy"></a>&#x2022; [`no_network_policy`](#ingress-egress-gw-ar-no-network-policy) - Optional Block<br>Enable this option
+#### Kvm Not Managed Node List Interface List Bond Interface
 
-<a id="routes-438490"></a>&#x2022; [`no_outside_static_routes`](#routes-438490) - Optional Block<br>Enable this option
+<a id="deep-fc631b"></a>Deeply nested **Interface** block collapsed for readability.
 
-<a id="ingress-egress-gw-ar-node"></a>&#x2022; [`node`](#ingress-egress-gw-ar-node) - Optional Block<br>Parameters for creating two interface Node in one AZ<br>See [Node](#ingress-egress-gw-ar-node) below.
+#### Kvm Not Managed Node List Interface List Bond Interface Lacp
 
-<a id="ingress-egress-gw-ar-not-hub"></a>&#x2022; [`not_hub`](#ingress-egress-gw-ar-not-hub) - Optional Block<br>Enable this option
+<a id="deep-1326df"></a>Deeply nested **Lacp** block collapsed for readability.
 
-<a id="routes-2c1b12"></a>&#x2022; [`outside_static_routes`](#routes-2c1b12) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#routes-2c1b12) below.
+#### Kvm Not Managed Node List Interface List Ethernet Interface
 
-<a id="mode-81547a"></a>&#x2022; [`performance_enhancement_mode`](#mode-81547a) - Optional Block<br>Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#mode-81547a) below.
+<a id="deep-6ad367"></a>Deeply nested **Interface** block collapsed for readability.
 
-<a id="public-ip-7f583c"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-7f583c) - Optional Block<br>Enable this option
+#### Kvm Not Managed Node List Interface List IPv6 Auto Config
 
-<a id="pvt-ip-7570f5"></a>&#x2022; [`sm_connection_pvt_ip`](#pvt-ip-7570f5) - Optional Block<br>Enable this option
+<a id="deep-c39ea2"></a>Deeply nested **Config** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Accelerated Networking
+#### Kvm Not Managed Node List Interface List IPv6 Auto Config Router
 
-An [`accelerated_networking`](#networking-017a12) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
+<a id="deep-ef2730"></a>Deeply nested **Router** block collapsed for readability.
 
-<a id="disable-bdf308"></a>&#x2022; [`disable`](#disable-bdf308) - Optional Block<br>Enable this option
+#### Kvm Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-<a id="enable-8123c2"></a>&#x2022; [`enable`](#enable-8123c2) - Optional Block<br>Enable this option
+<a id="deep-1c527f"></a>Deeply nested **Config** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Active Enhanced Firewall Policies
+#### Kvm Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-<a id="deep-99ea01"></a>Deeply nested **Policies** block collapsed for readability.
+<a id="deep-83e89b"></a>Deeply nested **List** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Active Enhanced Firewall Policies Enhanced Firewall Policies
+#### Kvm Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-<a id="deep-6382e5"></a>Deeply nested **Policies** block collapsed for readability.
+<a id="deep-ca2600"></a>Deeply nested **DNS** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Active Forward Proxy Policies
+#### Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-<a id="deep-629c89"></a>Deeply nested **Policies** block collapsed for readability.
+<a id="deep-0e9ec4"></a>Deeply nested **Stateful** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Active Forward Proxy Policies Forward Proxy Policies
+#### Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-<a id="deep-5a296c"></a>Deeply nested **Policies** block collapsed for readability.
+<a id="deep-8029ba"></a>Deeply nested **Networks** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Active Network Policies
+#### Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-An [`active_network_policies`](#policies-f5e0fc) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
+<a id="deep-faf0d9"></a>Deeply nested **Pools** block collapsed for readability.
 
-<a id="policies-17c802"></a>&#x2022; [`network_policies`](#policies-17c802) - Optional Block<br>Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#policies-17c802) below.
+#### Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-#### Ingress Egress Gw Ar Active Network Policies Network Policies
+<a id="deep-4a6bec"></a>Deeply nested **Map** block collapsed for readability.
 
-<a id="deep-e63033"></a>Deeply nested **Policies** block collapsed for readability.
+#### Kvm Not Managed Node List Interface List Network Option
 
-#### Ingress Egress Gw Ar Dc Cluster Group Inside Vn
+<a id="deep-62e6b3"></a>Deeply nested **Option** block collapsed for readability.
 
-<a id="deep-7e63ae"></a>Deeply nested **Vn** block collapsed for readability.
+#### Kvm Not Managed Node List Interface List Static IP
 
-#### Ingress Egress Gw Ar Dc Cluster Group Outside Vn
+<a id="deep-a6cf32"></a>Deeply nested **IP** block collapsed for readability.
 
-<a id="deep-9155be"></a>Deeply nested **Vn** block collapsed for readability.
+#### Kvm Not Managed Node List Interface List Static IPv6 Address
 
-#### Ingress Egress Gw Ar Global Network List
+<a id="deep-91a5c5"></a>Deeply nested **Address** block collapsed for readability.
 
-A [`global_network_list`](#list-37dd04) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
+#### Kvm Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-<a id="connections-2d2600"></a>&#x2022; [`global_network_connections`](#connections-2d2600) - Optional Block<br>Global network connections<br>See [Global Network Connections](#connections-2d2600) below.
+<a id="deep-b4aa6e"></a>Deeply nested **IP** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Global Network List Global Network Connections
+#### Kvm Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-<a id="deep-49fbad"></a>Deeply nested **Connections** block collapsed for readability.
+<a id="deep-abe515"></a>Deeply nested **IP** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Global Network List Global Network Connections SLI To Global DR
+#### Kvm Not Managed Node List Interface List VLAN Interface
 
-<a id="deep-a26164"></a>Deeply nested **DR** block collapsed for readability.
+<a id="deep-964e06"></a>Deeply nested **Interface** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Global Network List Global Network Connections SLI To Global DR Global Vn
+#### Load Balancing
 
-<a id="deep-d461d0"></a>Deeply nested **Vn** block collapsed for readability.
+A [`load_balancing`](#load-balancing) block supports the following:
 
-#### Ingress Egress Gw Ar Global Network List Global Network Connections Slo To Global DR
+<a id="load-balancing-vip-vrrp-mode"></a>&#x2022; [`vip_vrrp_mode`](#load-balancing-vip-vrrp-mode) - Optional String  Defaults to `VIP_VRRP_INVALID`<br>Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`<br>[Enum: VIP_VRRP_INVALID|VIP_VRRP_ENABLE|VIP_VRRP_DISABLE] VRRP advertisement mode for VIP Invalid VRRP mode
 
-<a id="deep-169664"></a>Deeply nested **DR** block collapsed for readability.
+#### Local Vrf
 
-#### Ingress Egress Gw Ar Global Network List Global Network Connections Slo To Global DR Global Vn
+A [`local_vrf`](#local-vrf) block supports the following:
 
-<a id="deep-8c1065"></a>Deeply nested **Vn** block collapsed for readability.
+<a id="local-vrf-default-config"></a>&#x2022; [`default_config`](#local-vrf-default-config) - Optional Block<br>Enable this option
 
-#### Ingress Egress Gw Ar Hub
+<a id="local-vrf-default-sli-config"></a>&#x2022; [`default_sli_config`](#local-vrf-default-sli-config) - Optional Block<br>Enable this option
 
-A [`hub`](#ingress-egress-gw-ar-hub) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
+<a id="local-vrf-sli-config"></a>&#x2022; [`sli_config`](#local-vrf-sli-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [SLI Config](#local-vrf-sli-config) below.
 
-<a id="disabled-102e7f"></a>&#x2022; [`express_route_disabled`](#disabled-102e7f) - Optional Block<br>Enable this option
+<a id="local-vrf-slo-config"></a>&#x2022; [`slo_config`](#local-vrf-slo-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [Slo Config](#local-vrf-slo-config) below.
 
-<a id="enabled-cf06b8"></a>&#x2022; [`express_route_enabled`](#enabled-cf06b8) - Optional Block<br>Express Route Configuration. Express Route Configuration<br>See [Express Route Enabled](#enabled-cf06b8) below.
+#### Local Vrf SLI Config
 
-<a id="ingress-egress-gw-ar-hub-spoke-vnets"></a>&#x2022; [`spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets) - Optional Block<br>Spoke VNET Peering (Legacy). Spoke VNET Peering<br>See [Spoke Vnets](#ingress-egress-gw-ar-hub-spoke-vnets) below.
+A [`sli_config`](#local-vrf-sli-config) block (within [`local_vrf`](#local-vrf)) supports the following:
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled
+<a id="local-vrf-sli-config-labels"></a>&#x2022; [`labels`](#local-vrf-sli-config-labels) - Optional Block<br>Add Labels for this network, these labels can be used in firewall policy
 
-<a id="deep-66e513"></a>Deeply nested **Enabled** block collapsed for readability.
+<a id="local-vrf-sli-config-nameserver"></a>&#x2022; [`nameserver`](#local-vrf-sli-config-nameserver) - Optional String<br>Optional DNS V4 server IP to be used for name resolution
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled Connections
+<a id="local-vrf-sli-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#local-vrf-sli-config-no-static-routes) - Optional Block<br>Enable this option
 
-<a id="deep-19c95b"></a>Deeply nested **Connections** block collapsed for readability.
+<a id="routes-53016e"></a>&#x2022; [`no_v6_static_routes`](#routes-53016e) - Optional Block<br>Enable this option
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled Connections Metadata
+<a id="local-vrf-sli-config-static-routes"></a>&#x2022; [`static_routes`](#local-vrf-sli-config-static-routes) - Optional Block<br>Static Routes List<br>See [Static Routes](#local-vrf-sli-config-static-routes) below.
 
-<a id="deep-bd1fbe"></a>Deeply nested **Metadata** block collapsed for readability.
+<a id="local-vrf-sli-config-static-v6-routes"></a>&#x2022; [`static_v6_routes`](#local-vrf-sli-config-static-v6-routes) - Optional Block<br>Static IPv6 Routes List. List of IPv6 static routes<br>See [Static V6 Routes](#local-vrf-sli-config-static-v6-routes) below.
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription
+<a id="local-vrf-sli-config-vip"></a>&#x2022; [`vip`](#local-vrf-sli-config-vip) - Optional String<br>Optional common virtual V4 IP across all nodes to be used as automatic VIP
 
-<a id="deep-3b2ce8"></a>Deeply nested **Subscription** block collapsed for readability.
+#### Local Vrf SLI Config Static Routes
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription Authorized Key
+A [`static_routes`](#local-vrf-sli-config-static-routes) block (within [`local_vrf.sli_config`](#local-vrf-sli-config)) supports the following:
 
-<a id="deep-eac236"></a>Deeply nested **Key** block collapsed for readability.
+<a id="routes-159447"></a>&#x2022; [`static_routes`](#routes-159447) - Optional Block<br>Static Routes<br>See [Static Routes](#routes-159447) below.
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription Authorized Key Blindfold Secret Info
+#### Local Vrf SLI Config Static Routes Static Routes
 
-<a id="deep-af12fa"></a>Deeply nested **Info** block collapsed for readability.
+<a id="deep-0b00a5"></a>Deeply nested **Routes** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription Authorized Key Clear Secret Info
+#### Local Vrf SLI Config Static Routes Static Routes Node Interface
 
-<a id="deep-d3a5d0"></a>Deeply nested **Info** block collapsed for readability.
+<a id="deep-c36771"></a>Deeply nested **Interface** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet
+#### Local Vrf SLI Config Static Routes Static Routes Node Interface List
 
-<a id="deep-7b4661"></a>Deeply nested **Subnet** block collapsed for readability.
+<a id="deep-9295ad"></a>Deeply nested **List** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet Subnet
+#### Local Vrf SLI Config Static Routes Static Routes Node Interface List Interface
 
-<a id="deep-520d02"></a>Deeply nested **Subnet** block collapsed for readability.
+<a id="deep-3a649b"></a>Deeply nested **Interface** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet Subnet Param
+#### Local Vrf SLI Config Static V6 Routes
 
-<a id="deep-07265b"></a>Deeply nested **Param** block collapsed for readability.
+A [`static_v6_routes`](#local-vrf-sli-config-static-v6-routes) block (within [`local_vrf.sli_config`](#local-vrf-sli-config)) supports the following:
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet
+<a id="routes-b75018"></a>&#x2022; [`static_routes`](#routes-b75018) - Optional Block<br>List of IPv6 static routes<br>See [Static Routes](#routes-b75018) below.
 
-<a id="deep-05872f"></a>Deeply nested **Subnet** block collapsed for readability.
+#### Local Vrf SLI Config Static V6 Routes Static Routes
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet Subnet
+<a id="deep-26bfb4"></a>Deeply nested **Routes** block collapsed for readability.
 
-<a id="deep-080d0f"></a>Deeply nested **Subnet** block collapsed for readability.
+#### Local Vrf SLI Config Static V6 Routes Static Routes Node Interface
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet Subnet Param
+<a id="deep-989f5e"></a>Deeply nested **Interface** block collapsed for readability.
 
-<a id="deep-ba3a3b"></a>Deeply nested **Param** block collapsed for readability.
+#### Local Vrf SLI Config Static V6 Routes Static Routes Node Interface List
 
-#### Ingress Egress Gw Ar Hub Express Route Enabled Site Registration Over Express Route
+<a id="deep-94960c"></a>Deeply nested **List** block collapsed for readability.
 
-<a id="deep-646d3d"></a>Deeply nested **Route** block collapsed for readability.
+#### Local Vrf SLI Config Static V6 Routes Static Routes Node Interface List Interface
 
-#### Ingress Egress Gw Ar Hub Spoke Vnets
+<a id="deep-6ebb7a"></a>Deeply nested **Interface** block collapsed for readability.
 
-A [`spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets) block (within [`ingress_egress_gw_ar.hub`](#ingress-egress-gw-ar-hub)) supports the following:
+#### Local Vrf Slo Config
 
-<a id="auto-6f9deb"></a>&#x2022; [`auto`](#auto-6f9deb) - Optional Block<br>Enable this option
+A [`slo_config`](#local-vrf-slo-config) block (within [`local_vrf`](#local-vrf)) supports the following:
 
-<a id="labels-06e528"></a>&#x2022; [`labels`](#labels-06e528) - Optional Block<br>Add Labels for each of the VNets peered with transit VNET, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace
+<a id="local-vrf-slo-config-labels"></a>&#x2022; [`labels`](#local-vrf-slo-config-labels) - Optional Block<br>Add Labels for this network, these labels can be used in firewall policy
 
-<a id="manual-f95716"></a>&#x2022; [`manual`](#manual-f95716) - Optional Block<br>Enable this option
+<a id="local-vrf-slo-config-nameserver"></a>&#x2022; [`nameserver`](#local-vrf-slo-config-nameserver) - Optional String<br>Optional DNS V4 server IP to be used for name resolution
 
-<a id="vnet-f6d2c3"></a>&#x2022; [`vnet`](#vnet-f6d2c3) - Optional Block<br>Resource group and name of existing Azure VNET<br>See [VNET](#vnet-f6d2c3) below.
+<a id="local-vrf-slo-config-no-static-routes"></a>&#x2022; [`no_static_routes`](#local-vrf-slo-config-no-static-routes) - Optional Block<br>Enable this option
 
-#### Ingress Egress Gw Ar Hub Spoke Vnets VNET
+<a id="routes-a47310"></a>&#x2022; [`no_v6_static_routes`](#routes-a47310) - Optional Block<br>Enable this option
 
-<a id="deep-401418"></a>Deeply nested **VNET** block collapsed for readability.
+<a id="local-vrf-slo-config-static-routes"></a>&#x2022; [`static_routes`](#local-vrf-slo-config-static-routes) - Optional Block<br>Static Routes List<br>See [Static Routes](#local-vrf-slo-config-static-routes) below.
 
-#### Ingress Egress Gw Ar Inside Static Routes
+<a id="local-vrf-slo-config-static-v6-routes"></a>&#x2022; [`static_v6_routes`](#local-vrf-slo-config-static-v6-routes) - Optional Block<br>Static IPv6 Routes List. List of IPv6 static routes<br>See [Static V6 Routes](#local-vrf-slo-config-static-v6-routes) below.
 
-An [`inside_static_routes`](#routes-87089c) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
+<a id="local-vrf-slo-config-vip"></a>&#x2022; [`vip`](#local-vrf-slo-config-vip) - Optional String<br>Optional common virtual V4 IP across all nodes to be used as automatic VIP
 
-<a id="list-de3cbc"></a>&#x2022; [`static_route_list`](#list-de3cbc) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#list-de3cbc) below.
+#### Local Vrf Slo Config Static Routes
 
-#### Ingress Egress Gw Ar Inside Static Routes Static Route List
+A [`static_routes`](#local-vrf-slo-config-static-routes) block (within [`local_vrf.slo_config`](#local-vrf-slo-config)) supports the following:
 
-<a id="deep-a451e2"></a>Deeply nested **List** block collapsed for readability.
+<a id="routes-07ae6c"></a>&#x2022; [`static_routes`](#routes-07ae6c) - Optional Block<br>Static Routes<br>See [Static Routes](#routes-07ae6c) below.
 
-#### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route
+#### Local Vrf Slo Config Static Routes Static Routes
 
-<a id="deep-30a730"></a>Deeply nested **Route** block collapsed for readability.
+<a id="deep-c4ba70"></a>Deeply nested **Routes** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop
+#### Local Vrf Slo Config Static Routes Static Routes Node Interface
 
-<a id="deep-ab56e2"></a>Deeply nested **Nexthop** block collapsed for readability.
+<a id="deep-9a77b8"></a>Deeply nested **Interface** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Interface
+#### Local Vrf Slo Config Static Routes Static Routes Node Interface List
 
-<a id="deep-4846fe"></a>Deeply nested **Interface** block collapsed for readability.
+<a id="deep-778bc9"></a>Deeply nested **List** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
+#### Local Vrf Slo Config Static Routes Static Routes Node Interface List Interface
 
-<a id="deep-b3f69a"></a>Deeply nested **Address** block collapsed for readability.
+<a id="deep-8ea40a"></a>Deeply nested **Interface** block collapsed for readability.
 
-#### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
+#### Local Vrf Slo Config Static V6 Routes
 
-<a id="deep-c5d876"></a>Deeply nested **IPv4** block collapsed for readability.
+A [`static_v6_routes`](#local-vrf-slo-config-static-v6-routes) block (within [`local_vrf.slo_config`](#local-vrf-slo-config)) supports the following:
 
-#### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
+<a id="routes-5b5639"></a>&#x2022; [`static_routes`](#routes-5b5639) - Optional Block<br>List of IPv6 static routes<br>See [Static Routes](#routes-5b5639) below.
 
-<a id="deep-e0eb85"></a>Deeply nested **IPv6** block collapsed for readability.
+#### Local Vrf Slo Config Static V6 Routes Static Routes
 
-#### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Subnets
+<a id="deep-69c74f"></a>Deeply nested **Routes** block collapsed for readability.
 
-<a id="deep-556713"></a>Deeply nested **Subnets** block collapsed for readability.
+#### Local Vrf Slo Config Static V6 Routes Static Routes Node Interface
 
-#### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Subnets IPv4
+<a id="deep-c59810"></a>Deeply nested **Interface** block collapsed for readability.
 
-<a id="deep-1d5ab6"></a>Deeply nested **IPv4** block collapsed for readability.
+#### Local Vrf Slo Config Static V6 Routes Static Routes Node Interface List
 
-#### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Subnets IPv6
+<a id="deep-753f28"></a>Deeply nested **List** block collapsed for readability.
 
-<a id="deep-2d5b97"></a>Deeply nested **IPv6** block collapsed for readability.
+#### Local Vrf Slo Config Static V6 Routes Static Routes Node Interface List Interface
 
-#### Ingress Egress Gw Ar Node
-
-A [`node`](#ingress-egress-gw-ar-node) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
-
-<a id="ingress-egress-gw-ar-node-fault-domain"></a>&#x2022; [`fault_domain`](#ingress-egress-gw-ar-node-fault-domain) - Optional Number<br>Namuber of fault domains to be used while creating the availability set
-
-<a id="ingress-egress-gw-ar-node-inside-subnet"></a>&#x2022; [`inside_subnet`](#ingress-egress-gw-ar-node-inside-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Inside Subnet](#ingress-egress-gw-ar-node-inside-subnet) below.
-
-<a id="ingress-egress-gw-ar-node-node-number"></a>&#x2022; [`node_number`](#ingress-egress-gw-ar-node-node-number) - Optional Number<br>Number of main nodes to create, either 1 or 3
-
-<a id="subnet-a70a4a"></a>&#x2022; [`outside_subnet`](#subnet-a70a4a) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Outside Subnet](#subnet-a70a4a) below.
-
-<a id="ingress-egress-gw-ar-node-update-domain"></a>&#x2022; [`update_domain`](#ingress-egress-gw-ar-node-update-domain) - Optional Number<br>Namuber of update domains to be used while creating the availability set
-
-#### Ingress Egress Gw Ar Node Inside Subnet
-
-An [`inside_subnet`](#ingress-egress-gw-ar-node-inside-subnet) block (within [`ingress_egress_gw_ar.node`](#ingress-egress-gw-ar-node)) supports the following:
-
-<a id="subnet-fde5af"></a>&#x2022; [`subnet`](#subnet-fde5af) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#subnet-fde5af) below.
-
-<a id="param-791f8c"></a>&#x2022; [`subnet_param`](#param-791f8c) - Optional Block<br>Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-791f8c) below.
-
-#### Ingress Egress Gw Ar Node Inside Subnet Subnet
-
-<a id="deep-b79408"></a>Deeply nested **Subnet** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Node Inside Subnet Subnet Param
-
-<a id="deep-e5f785"></a>Deeply nested **Param** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Node Outside Subnet
-
-An [`outside_subnet`](#subnet-a70a4a) block (within [`ingress_egress_gw_ar.node`](#ingress-egress-gw-ar-node)) supports the following:
-
-<a id="subnet-8747e2"></a>&#x2022; [`subnet`](#subnet-8747e2) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#subnet-8747e2) below.
-
-<a id="param-e03dee"></a>&#x2022; [`subnet_param`](#param-e03dee) - Optional Block<br>Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-e03dee) below.
-
-#### Ingress Egress Gw Ar Node Outside Subnet Subnet
-
-<a id="deep-2ece90"></a>Deeply nested **Subnet** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Node Outside Subnet Subnet Param
-
-<a id="deep-182910"></a>Deeply nested **Param** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Outside Static Routes
-
-An [`outside_static_routes`](#routes-2c1b12) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
-
-<a id="list-70cc33"></a>&#x2022; [`static_route_list`](#list-70cc33) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#list-70cc33) below.
-
-#### Ingress Egress Gw Ar Outside Static Routes Static Route List
-
-<a id="deep-73d901"></a>Deeply nested **List** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route
-
-<a id="deep-b4e4bd"></a>Deeply nested **Route** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop
-
-<a id="deep-120b78"></a>Deeply nested **Nexthop** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Interface
-
-<a id="deep-c4d29c"></a>Deeply nested **Interface** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
-
-<a id="deep-ad9b56"></a>Deeply nested **Address** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
-
-<a id="deep-9a451e"></a>Deeply nested **IPv4** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
-
-<a id="deep-e4b363"></a>Deeply nested **IPv6** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Subnets
-
-<a id="deep-06c441"></a>Deeply nested **Subnets** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv4
-
-<a id="deep-f3e7f6"></a>Deeply nested **IPv4** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv6
-
-<a id="deep-68de1f"></a>Deeply nested **IPv6** block collapsed for readability.
-
-#### Ingress Egress Gw Ar Performance Enhancement Mode
-
-A [`performance_enhancement_mode`](#mode-81547a) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
-
-<a id="enhanced-514f84"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-514f84) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-514f84) below.
-
-<a id="enhanced-890d99"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-890d99) - Optional Block<br>Enable this option
-
-#### Ingress Egress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced
-
-<a id="deep-fcdd56"></a>Deeply nested **Enhanced** block collapsed for readability.
-
-#### Ingress Gw
-
-An [`ingress_gw`](#ingress-gw) block supports the following:
-
-<a id="ingress-gw-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#ingress-gw-accelerated-networking) - Optional Block<br>Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#ingress-gw-accelerated-networking) below.
-
-<a id="ingress-gw-az-nodes"></a>&#x2022; [`az_nodes`](#ingress-gw-az-nodes) - Optional Block<br>Only Single AZ or Three AZ(s) nodes are supported currently<br>See [Az Nodes](#ingress-gw-az-nodes) below.
-
-<a id="ingress-gw-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#ingress-gw-azure-certified-hw) - Optional String<br>Name for Azure certified hardware
-
-<a id="ingress-gw-performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) - Optional Block<br>Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#ingress-gw-performance-enhancement-mode) below.
-
-#### Ingress Gw Accelerated Networking
-
-An [`accelerated_networking`](#ingress-gw-accelerated-networking) block (within [`ingress_gw`](#ingress-gw)) supports the following:
-
-<a id="disable-c71392"></a>&#x2022; [`disable`](#disable-c71392) - Optional Block<br>Enable this option
-
-<a id="enable-c21da1"></a>&#x2022; [`enable`](#enable-c21da1) - Optional Block<br>Enable this option
-
-#### Ingress Gw Az Nodes
-
-An [`az_nodes`](#ingress-gw-az-nodes) block (within [`ingress_gw`](#ingress-gw)) supports the following:
-
-<a id="ingress-gw-az-nodes-azure-az"></a>&#x2022; [`azure_az`](#ingress-gw-az-nodes-azure-az) - Optional String<br>Zone depicting a grouping of datacenters within an Azure region. Expecting numeric input
-
-<a id="ingress-gw-az-nodes-local-subnet"></a>&#x2022; [`local_subnet`](#ingress-gw-az-nodes-local-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Local Subnet](#ingress-gw-az-nodes-local-subnet) below.
-
-#### Ingress Gw Az Nodes Local Subnet
-
-A [`local_subnet`](#ingress-gw-az-nodes-local-subnet) block (within [`ingress_gw.az_nodes`](#ingress-gw-az-nodes)) supports the following:
-
-<a id="ingress-gw-az-nodes-local-subnet-subnet"></a>&#x2022; [`subnet`](#ingress-gw-az-nodes-local-subnet-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#ingress-gw-az-nodes-local-subnet-subnet) below.
-
-<a id="param-f9e489"></a>&#x2022; [`subnet_param`](#param-f9e489) - Optional Block<br>Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-f9e489) below.
-
-#### Ingress Gw Az Nodes Local Subnet Subnet
-
-A [`subnet`](#ingress-gw-az-nodes-local-subnet-subnet) block (within [`ingress_gw.az_nodes.local_subnet`](#ingress-gw-az-nodes-local-subnet)) supports the following:
-
-<a id="name-678efc"></a>&#x2022; [`subnet_name`](#name-678efc) - Optional String<br>Subnet Name. Name of existing subnet
-
-<a id="grp-4f47e6"></a>&#x2022; [`subnet_resource_grp`](#grp-4f47e6) - Optional String<br>Specify name of Resource Group
-
-<a id="group-58e33f"></a>&#x2022; [`vnet_resource_group`](#group-58e33f) - Optional Block<br>Enable this option
-
-#### Ingress Gw Az Nodes Local Subnet Subnet Param
-
-<a id="deep-2c0fa5"></a>Deeply nested **Param** block collapsed for readability.
-
-#### Ingress Gw Performance Enhancement Mode
-
-A [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) block (within [`ingress_gw`](#ingress-gw)) supports the following:
-
-<a id="enhanced-5a06c8"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-5a06c8) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-5a06c8) below.
-
-<a id="enhanced-6fdd43"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-6fdd43) - Optional Block<br>Enable this option
-
-#### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
-
-<a id="deep-690f7e"></a>Deeply nested **Enhanced** block collapsed for readability.
-
-#### Ingress Gw Ar
-
-An [`ingress_gw_ar`](#ingress-gw-ar) block supports the following:
-
-<a id="ingress-gw-ar-accelerated-networking"></a>&#x2022; [`accelerated_networking`](#ingress-gw-ar-accelerated-networking) - Optional Block<br>Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#ingress-gw-ar-accelerated-networking) below.
-
-<a id="ingress-gw-ar-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#ingress-gw-ar-azure-certified-hw) - Optional String<br>Name for Azure certified hardware
-
-<a id="ingress-gw-ar-node"></a>&#x2022; [`node`](#ingress-gw-ar-node) - Optional Block<br>Parameters for creating Single interface Node for Alternate Region<br>See [Node](#ingress-gw-ar-node) below.
-
-<a id="mode-2270b9"></a>&#x2022; [`performance_enhancement_mode`](#mode-2270b9) - Optional Block<br>Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#mode-2270b9) below.
-
-#### Ingress Gw Ar Accelerated Networking
-
-An [`accelerated_networking`](#ingress-gw-ar-accelerated-networking) block (within [`ingress_gw_ar`](#ingress-gw-ar)) supports the following:
-
-<a id="disable-1de497"></a>&#x2022; [`disable`](#disable-1de497) - Optional Block<br>Enable this option
-
-<a id="enable-4d73a4"></a>&#x2022; [`enable`](#enable-4d73a4) - Optional Block<br>Enable this option
-
-#### Ingress Gw Ar Node
-
-A [`node`](#ingress-gw-ar-node) block (within [`ingress_gw_ar`](#ingress-gw-ar)) supports the following:
-
-<a id="ingress-gw-ar-node-fault-domain"></a>&#x2022; [`fault_domain`](#ingress-gw-ar-node-fault-domain) - Optional Number<br>Namuber of fault domains to be used while creating the availability set
-
-<a id="ingress-gw-ar-node-local-subnet"></a>&#x2022; [`local_subnet`](#ingress-gw-ar-node-local-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Local Subnet](#ingress-gw-ar-node-local-subnet) below.
-
-<a id="ingress-gw-ar-node-node-number"></a>&#x2022; [`node_number`](#ingress-gw-ar-node-node-number) - Optional Number<br>Number of main nodes to create, either 1 or 3
-
-<a id="ingress-gw-ar-node-update-domain"></a>&#x2022; [`update_domain`](#ingress-gw-ar-node-update-domain) - Optional Number<br>Namuber of update domains to be used while creating the availability set
-
-#### Ingress Gw Ar Node Local Subnet
-
-A [`local_subnet`](#ingress-gw-ar-node-local-subnet) block (within [`ingress_gw_ar.node`](#ingress-gw-ar-node)) supports the following:
-
-<a id="ingress-gw-ar-node-local-subnet-subnet"></a>&#x2022; [`subnet`](#ingress-gw-ar-node-local-subnet-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#ingress-gw-ar-node-local-subnet-subnet) below.
-
-<a id="param-f4eea4"></a>&#x2022; [`subnet_param`](#param-f4eea4) - Optional Block<br>Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-f4eea4) below.
-
-#### Ingress Gw Ar Node Local Subnet Subnet
-
-A [`subnet`](#ingress-gw-ar-node-local-subnet-subnet) block (within [`ingress_gw_ar.node.local_subnet`](#ingress-gw-ar-node-local-subnet)) supports the following:
-
-<a id="name-0e77fe"></a>&#x2022; [`subnet_name`](#name-0e77fe) - Optional String<br>Subnet Name. Name of existing subnet
-
-<a id="grp-828930"></a>&#x2022; [`subnet_resource_grp`](#grp-828930) - Optional String<br>Specify name of Resource Group
-
-<a id="group-a864d6"></a>&#x2022; [`vnet_resource_group`](#group-a864d6) - Optional Block<br>Enable this option
-
-#### Ingress Gw Ar Node Local Subnet Subnet Param
-
-<a id="deep-da8cef"></a>Deeply nested **Param** block collapsed for readability.
-
-#### Ingress Gw Ar Performance Enhancement Mode
-
-A [`performance_enhancement_mode`](#mode-2270b9) block (within [`ingress_gw_ar`](#ingress-gw-ar)) supports the following:
-
-<a id="enhanced-2005f7"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-2005f7) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-2005f7) below.
-
-<a id="enhanced-3a1161"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-3a1161) - Optional Block<br>Enable this option
-
-#### Ingress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced
-
-<a id="deep-c7f2da"></a>Deeply nested **Enhanced** block collapsed for readability.
-
-#### Kubernetes Upgrade Drain
-
-A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the following:
-
-<a id="drain-0d0936"></a>&#x2022; [`disable_upgrade_drain`](#drain-0d0936) - Optional Block<br>Enable this option
-
-<a id="drain-7e30d4"></a>&#x2022; [`enable_upgrade_drain`](#drain-7e30d4) - Optional Block<br>Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#drain-7e30d4) below.
-
-#### Kubernetes Upgrade Drain Enable Upgrade Drain
-
-An [`enable_upgrade_drain`](#drain-7e30d4) block (within [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain)) supports the following:
-
-<a id="mode-668699"></a>&#x2022; [`disable_vega_upgrade_mode`](#mode-668699) - Optional Block<br>Enable this option
-
-<a id="count-3aa796"></a>&#x2022; [`drain_max_unavailable_node_count`](#count-3aa796) - Optional Number<br>Node Batch Size Count
-
-<a id="timeout-ac4ee9"></a>&#x2022; [`drain_node_timeout`](#timeout-ac4ee9) - Optional Number<br>Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is
-
-<a id="mode-9c557b"></a>&#x2022; [`enable_vega_upgrade_mode`](#mode-9c557b) - Optional Block<br>Enable this option
+<a id="deep-86b9dc"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Log Receiver
 
@@ -1096,6 +1304,282 @@ A [`log_receiver`](#log-receiver) block supports the following:
 
 <a id="log-receiver-tenant"></a>&#x2022; [`tenant`](#log-receiver-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
+#### Nutanix
+
+A [`nutanix`](#nutanix) block supports the following:
+
+<a id="nutanix-not-managed"></a>&#x2022; [`not_managed`](#nutanix-not-managed) - Optional Block<br>Section will show nodes associated with this site<br>See [Not Managed](#nutanix-not-managed) below.
+
+#### Nutanix Not Managed
+
+A [`not_managed`](#nutanix-not-managed) block (within [`nutanix`](#nutanix)) supports the following:
+
+<a id="nutanix-not-managed-node-list"></a>&#x2022; [`node_list`](#nutanix-not-managed-node-list) - Optional Block<br>Section will show nodes associated with this site<br>See [Node List](#nutanix-not-managed-node-list) below.
+
+#### Nutanix Not Managed Node List
+
+A [`node_list`](#nutanix-not-managed-node-list) block (within [`nutanix.not_managed`](#nutanix-not-managed)) supports the following:
+
+<a id="nutanix-not-managed-node-list-hostname"></a>&#x2022; [`hostname`](#nutanix-not-managed-node-list-hostname) - Optional String<br>Hostname. Hostname for this Node
+
+<a id="list-b40ceb"></a>&#x2022; [`interface_list`](#list-b40ceb) - Optional Block<br>Manage interfaces belonging to this node<br>See [Interface List](#list-b40ceb) below.
+
+<a id="nutanix-not-managed-node-list-public-ip"></a>&#x2022; [`public_ip`](#nutanix-not-managed-node-list-public-ip) - Optional String<br>Public IP. Public IP for this Node
+
+<a id="nutanix-not-managed-node-list-type"></a>&#x2022; [`type`](#nutanix-not-managed-node-list-type) - Optional String<br>Type for this Node, can be Control or Worker
+
+#### Nutanix Not Managed Node List Interface List
+
+An [`interface_list`](#list-b40ceb) block (within [`nutanix.not_managed.node_list`](#nutanix-not-managed-node-list)) supports the following:
+
+<a id="interface-2d0b01"></a>&#x2022; [`bond_interface`](#interface-2d0b01) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#interface-2d0b01) below.
+
+<a id="spec-baa727"></a>&#x2022; [`description_spec`](#spec-baa727) - Optional String<br>Interface Description. Description for this Interface
+
+<a id="client-112522"></a>&#x2022; [`dhcp_client`](#client-112522) - Optional Block<br>Enable this option
+
+<a id="interface-d78243"></a>&#x2022; [`ethernet_interface`](#interface-d78243) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-d78243) below.
+
+<a id="config-08cb50"></a>&#x2022; [`ipv6_auto_config`](#config-08cb50) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#config-08cb50) below.
+
+<a id="labels-c91cb8"></a>&#x2022; [`labels`](#labels-c91cb8) - Optional Block<br>Add Labels for this Interface, these labels can be used in firewall policy
+
+<a id="monitor-824921"></a>&#x2022; [`monitor`](#monitor-824921) - Optional Block<br>Link Quality Monitoring configuration for a network interface
+
+<a id="disabled-1b5f4c"></a>&#x2022; [`monitor_disabled`](#disabled-1b5f4c) - Optional Block<br>Enable this option
+
+<a id="mtu-9286d4"></a>&#x2022; [`mtu`](#mtu-9286d4) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
+
+<a id="name-f9abff"></a>&#x2022; [`name`](#name-f9abff) - Optional String<br>Interface Name. Name of this Interface
+
+<a id="option-40de75"></a>&#x2022; [`network_option`](#option-40de75) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-40de75) below.
+
+<a id="address-768ec8"></a>&#x2022; [`no_ipv4_address`](#address-768ec8) - Optional Block<br>Enable this option
+
+<a id="address-9dd875"></a>&#x2022; [`no_ipv6_address`](#address-9dd875) - Optional Block<br>Enable this option
+
+<a id="priority-e54ce8"></a>&#x2022; [`priority`](#priority-e54ce8) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
+
+<a id="disabled-a3014f"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-a3014f) - Optional Block<br>Enable this option
+
+<a id="enabled-47989b"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-47989b) - Optional Block<br>Enable this option
+
+<a id="static-ip-09302a"></a>&#x2022; [`static_ip`](#static-ip-09302a) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-09302a) below.
+
+<a id="address-2a34d1"></a>&#x2022; [`static_ipv6_address`](#address-2a34d1) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#address-2a34d1) below.
+
+<a id="interface-e23d44"></a>&#x2022; [`vlan_interface`](#interface-e23d44) - Optional Block<br>VLAN Interface<br>See [VLAN Interface](#interface-e23d44) below.
+
+#### Nutanix Not Managed Node List Interface List Bond Interface
+
+<a id="deep-a0d86e"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List Bond Interface Lacp
+
+<a id="deep-452ac2"></a>Deeply nested **Lacp** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List Ethernet Interface
+
+<a id="deep-c19cdf"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List IPv6 Auto Config
+
+<a id="deep-ae55a4"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router
+
+<a id="deep-1e40a4"></a>Deeply nested **Router** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
+
+<a id="deep-1a1f28"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
+
+<a id="deep-51b635"></a>Deeply nested **List** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
+
+<a id="deep-d92def"></a>Deeply nested **DNS** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful
+
+<a id="deep-be66c9"></a>Deeply nested **Stateful** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
+
+<a id="deep-5a9d54"></a>Deeply nested **Networks** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
+
+<a id="deep-7af73e"></a>Deeply nested **Pools** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
+
+<a id="deep-138aec"></a>Deeply nested **Map** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List Network Option
+
+<a id="deep-bd2504"></a>Deeply nested **Option** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List Static IP
+
+<a id="deep-0fbd56"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List Static IPv6 Address
+
+<a id="deep-822c9a"></a>Deeply nested **Address** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
+
+<a id="deep-7b95c4"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List Static IPv6 Address Node Static IP
+
+<a id="deep-ab1035"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Nutanix Not Managed Node List Interface List VLAN Interface
+
+<a id="deep-30c686"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Oci
+
+An [`oci`](#oci) block supports the following:
+
+<a id="oci-not-managed"></a>&#x2022; [`not_managed`](#oci-not-managed) - Optional Block<br>Section will show nodes associated with this site<br>See [Not Managed](#oci-not-managed) below.
+
+#### Oci Not Managed
+
+A [`not_managed`](#oci-not-managed) block (within [`oci`](#oci)) supports the following:
+
+<a id="oci-not-managed-node-list"></a>&#x2022; [`node_list`](#oci-not-managed-node-list) - Optional Block<br>Section will show nodes associated with this site<br>See [Node List](#oci-not-managed-node-list) below.
+
+#### Oci Not Managed Node List
+
+A [`node_list`](#oci-not-managed-node-list) block (within [`oci.not_managed`](#oci-not-managed)) supports the following:
+
+<a id="oci-not-managed-node-list-hostname"></a>&#x2022; [`hostname`](#oci-not-managed-node-list-hostname) - Optional String<br>Hostname. Hostname for this Node
+
+<a id="list-af4877"></a>&#x2022; [`interface_list`](#list-af4877) - Optional Block<br>Manage interfaces belonging to this node<br>See [Interface List](#list-af4877) below.
+
+<a id="oci-not-managed-node-list-public-ip"></a>&#x2022; [`public_ip`](#oci-not-managed-node-list-public-ip) - Optional String<br>Public IP. Public IP for this Node
+
+<a id="oci-not-managed-node-list-type"></a>&#x2022; [`type`](#oci-not-managed-node-list-type) - Optional String<br>Type for this Node, can be Control or Worker
+
+#### Oci Not Managed Node List Interface List
+
+An [`interface_list`](#list-af4877) block (within [`oci.not_managed.node_list`](#oci-not-managed-node-list)) supports the following:
+
+<a id="interface-8f5f59"></a>&#x2022; [`bond_interface`](#interface-8f5f59) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#interface-8f5f59) below.
+
+<a id="spec-6e395f"></a>&#x2022; [`description_spec`](#spec-6e395f) - Optional String<br>Interface Description. Description for this Interface
+
+<a id="client-29509c"></a>&#x2022; [`dhcp_client`](#client-29509c) - Optional Block<br>Enable this option
+
+<a id="interface-e66013"></a>&#x2022; [`ethernet_interface`](#interface-e66013) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-e66013) below.
+
+<a id="config-5531bb"></a>&#x2022; [`ipv6_auto_config`](#config-5531bb) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#config-5531bb) below.
+
+<a id="labels-66a173"></a>&#x2022; [`labels`](#labels-66a173) - Optional Block<br>Add Labels for this Interface, these labels can be used in firewall policy
+
+<a id="monitor-2b293c"></a>&#x2022; [`monitor`](#monitor-2b293c) - Optional Block<br>Link Quality Monitoring configuration for a network interface
+
+<a id="disabled-773f90"></a>&#x2022; [`monitor_disabled`](#disabled-773f90) - Optional Block<br>Enable this option
+
+<a id="mtu-314a9f"></a>&#x2022; [`mtu`](#mtu-314a9f) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
+
+<a id="name-600128"></a>&#x2022; [`name`](#name-600128) - Optional String<br>Interface Name. Name of this Interface
+
+<a id="option-747ef7"></a>&#x2022; [`network_option`](#option-747ef7) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-747ef7) below.
+
+<a id="address-23b964"></a>&#x2022; [`no_ipv4_address`](#address-23b964) - Optional Block<br>Enable this option
+
+<a id="address-009f48"></a>&#x2022; [`no_ipv6_address`](#address-009f48) - Optional Block<br>Enable this option
+
+<a id="priority-aeec59"></a>&#x2022; [`priority`](#priority-aeec59) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
+
+<a id="disabled-91e657"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-91e657) - Optional Block<br>Enable this option
+
+<a id="enabled-9b24dc"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-9b24dc) - Optional Block<br>Enable this option
+
+<a id="static-ip-bd24d4"></a>&#x2022; [`static_ip`](#static-ip-bd24d4) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-bd24d4) below.
+
+<a id="address-eabfe8"></a>&#x2022; [`static_ipv6_address`](#address-eabfe8) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#address-eabfe8) below.
+
+<a id="interface-cb2c85"></a>&#x2022; [`vlan_interface`](#interface-cb2c85) - Optional Block<br>VLAN Interface<br>See [VLAN Interface](#interface-cb2c85) below.
+
+#### Oci Not Managed Node List Interface List Bond Interface
+
+<a id="deep-446af8"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List Bond Interface Lacp
+
+<a id="deep-4ae1cd"></a>Deeply nested **Lacp** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List Ethernet Interface
+
+<a id="deep-dc3621"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List IPv6 Auto Config
+
+<a id="deep-a7e52b"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List IPv6 Auto Config Router
+
+<a id="deep-e27180"></a>Deeply nested **Router** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
+
+<a id="deep-4067cc"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
+
+<a id="deep-fa8fac"></a>Deeply nested **List** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
+
+<a id="deep-d366cc"></a>Deeply nested **DNS** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful
+
+<a id="deep-41029f"></a>Deeply nested **Stateful** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
+
+<a id="deep-6d3c92"></a>Deeply nested **Networks** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
+
+<a id="deep-a574c6"></a>Deeply nested **Pools** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
+
+<a id="deep-108398"></a>Deeply nested **Map** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List Network Option
+
+<a id="deep-4dc97a"></a>Deeply nested **Option** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List Static IP
+
+<a id="deep-d328a9"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List Static IPv6 Address
+
+<a id="deep-b8c38e"></a>Deeply nested **Address** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
+
+<a id="deep-6986c2"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List Static IPv6 Address Node Static IP
+
+<a id="deep-02be06"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Oci Not Managed Node List Interface List VLAN Interface
+
+<a id="deep-395474"></a>Deeply nested **Interface** block collapsed for readability.
+
 #### Offline Survivability Mode
 
 An [`offline_survivability_mode`](#offline-survivability-mode) block supports the following:
@@ -1104,21 +1588,213 @@ An [`offline_survivability_mode`](#offline-survivability-mode) block supports th
 
 <a id="mode-02f0c8"></a>&#x2022; [`no_offline_survivability_mode`](#mode-02f0c8) - Optional Block<br>Enable this option
 
-#### OS
+#### Openstack
 
-An [`os`](#os) block supports the following:
+An [`openstack`](#openstack) block supports the following:
 
-<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Enable this option
+<a id="openstack-not-managed"></a>&#x2022; [`not_managed`](#openstack-not-managed) - Optional Block<br>Section will show nodes associated with this site<br>See [Not Managed](#openstack-not-managed) below.
 
-<a id="os-operating-system-version"></a>&#x2022; [`operating_system_version`](#os-operating-system-version) - Optional String<br>Specify a OS version to be used e.g. 9.2024.6
+#### Openstack Not Managed
 
-#### Sw
+A [`not_managed`](#openstack-not-managed) block (within [`openstack`](#openstack)) supports the following:
 
-A [`sw`](#sw) block supports the following:
+<a id="openstack-not-managed-node-list"></a>&#x2022; [`node_list`](#openstack-not-managed-node-list) - Optional Block<br>Section will show nodes associated with this site<br>See [Node List](#openstack-not-managed-node-list) below.
 
-<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Enable this option
+#### Openstack Not Managed Node List
 
-<a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>Specify a F5XC Software Version to be used e.g. Crt-20210329-1002
+A [`node_list`](#openstack-not-managed-node-list) block (within [`openstack.not_managed`](#openstack-not-managed)) supports the following:
+
+<a id="hostname-6b3cf2"></a>&#x2022; [`hostname`](#hostname-6b3cf2) - Optional String<br>Hostname. Hostname for this Node
+
+<a id="list-08a137"></a>&#x2022; [`interface_list`](#list-08a137) - Optional Block<br>Manage interfaces belonging to this node<br>See [Interface List](#list-08a137) below.
+
+<a id="public-ip-1602e3"></a>&#x2022; [`public_ip`](#public-ip-1602e3) - Optional String<br>Public IP. Public IP for this Node
+
+<a id="openstack-not-managed-node-list-type"></a>&#x2022; [`type`](#openstack-not-managed-node-list-type) - Optional String<br>Type for this Node, can be Control or Worker
+
+#### Openstack Not Managed Node List Interface List
+
+An [`interface_list`](#list-08a137) block (within [`openstack.not_managed.node_list`](#openstack-not-managed-node-list)) supports the following:
+
+<a id="interface-795887"></a>&#x2022; [`bond_interface`](#interface-795887) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#interface-795887) below.
+
+<a id="spec-6e2a64"></a>&#x2022; [`description_spec`](#spec-6e2a64) - Optional String<br>Interface Description. Description for this Interface
+
+<a id="client-3f6d38"></a>&#x2022; [`dhcp_client`](#client-3f6d38) - Optional Block<br>Enable this option
+
+<a id="interface-b6bf86"></a>&#x2022; [`ethernet_interface`](#interface-b6bf86) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-b6bf86) below.
+
+<a id="config-3546e4"></a>&#x2022; [`ipv6_auto_config`](#config-3546e4) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#config-3546e4) below.
+
+<a id="labels-f228d0"></a>&#x2022; [`labels`](#labels-f228d0) - Optional Block<br>Add Labels for this Interface, these labels can be used in firewall policy
+
+<a id="monitor-430458"></a>&#x2022; [`monitor`](#monitor-430458) - Optional Block<br>Link Quality Monitoring configuration for a network interface
+
+<a id="disabled-7cde43"></a>&#x2022; [`monitor_disabled`](#disabled-7cde43) - Optional Block<br>Enable this option
+
+<a id="mtu-12e85c"></a>&#x2022; [`mtu`](#mtu-12e85c) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
+
+<a id="name-a4611b"></a>&#x2022; [`name`](#name-a4611b) - Optional String<br>Interface Name. Name of this Interface
+
+<a id="option-c423fd"></a>&#x2022; [`network_option`](#option-c423fd) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-c423fd) below.
+
+<a id="address-96a5c5"></a>&#x2022; [`no_ipv4_address`](#address-96a5c5) - Optional Block<br>Enable this option
+
+<a id="address-9ee17d"></a>&#x2022; [`no_ipv6_address`](#address-9ee17d) - Optional Block<br>Enable this option
+
+<a id="priority-34866f"></a>&#x2022; [`priority`](#priority-34866f) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
+
+<a id="disabled-006035"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-006035) - Optional Block<br>Enable this option
+
+<a id="enabled-f181b0"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-f181b0) - Optional Block<br>Enable this option
+
+<a id="static-ip-458635"></a>&#x2022; [`static_ip`](#static-ip-458635) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-458635) below.
+
+<a id="address-170d5f"></a>&#x2022; [`static_ipv6_address`](#address-170d5f) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#address-170d5f) below.
+
+<a id="interface-1fd835"></a>&#x2022; [`vlan_interface`](#interface-1fd835) - Optional Block<br>VLAN Interface<br>See [VLAN Interface](#interface-1fd835) below.
+
+#### Openstack Not Managed Node List Interface List Bond Interface
+
+<a id="deep-63720a"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List Bond Interface Lacp
+
+<a id="deep-40e69b"></a>Deeply nested **Lacp** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List Ethernet Interface
+
+<a id="deep-ce3b3d"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List IPv6 Auto Config
+
+<a id="deep-961f80"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List IPv6 Auto Config Router
+
+<a id="deep-ed028d"></a>Deeply nested **Router** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
+
+<a id="deep-28e629"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
+
+<a id="deep-914680"></a>Deeply nested **List** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
+
+<a id="deep-f991e0"></a>Deeply nested **DNS** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful
+
+<a id="deep-3b5b14"></a>Deeply nested **Stateful** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
+
+<a id="deep-c5338f"></a>Deeply nested **Networks** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
+
+<a id="deep-2f69f3"></a>Deeply nested **Pools** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
+
+<a id="deep-4f6a88"></a>Deeply nested **Map** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List Network Option
+
+<a id="deep-f60961"></a>Deeply nested **Option** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List Static IP
+
+<a id="deep-d09a62"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List Static IPv6 Address
+
+<a id="deep-dd6bdf"></a>Deeply nested **Address** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
+
+<a id="deep-38b9de"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List Static IPv6 Address Node Static IP
+
+<a id="deep-8da7bf"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Openstack Not Managed Node List Interface List VLAN Interface
+
+<a id="deep-68a558"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Performance Enhancement Mode
+
+A [`performance_enhancement_mode`](#performance-enhancement-mode) block supports the following:
+
+<a id="enhanced-31b8ac"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-31b8ac) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-31b8ac) below.
+
+<a id="enhanced-38f174"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-38f174) - Optional Block<br>Enable this option
+
+#### Performance Enhancement Mode Perf Mode L3 Enhanced
+
+A [`perf_mode_l3_enhanced`](#enhanced-31b8ac) block (within [`performance_enhancement_mode`](#performance-enhancement-mode)) supports the following:
+
+<a id="jumbo-7ba5b8"></a>&#x2022; [`jumbo`](#jumbo-7ba5b8) - Optional Block<br>Enable this option
+
+<a id="jumbo-95338e"></a>&#x2022; [`no_jumbo`](#jumbo-95338e) - Optional Block<br>Enable this option
+
+#### RE Select
+
+A [`re_select`](#re-select) block supports the following:
+
+<a id="re-select-geo-proximity"></a>&#x2022; [`geo_proximity`](#re-select-geo-proximity) - Optional Block<br>Enable this option
+
+<a id="re-select-specific-re"></a>&#x2022; [`specific_re`](#re-select-specific-re) - Optional Block<br>Select specific REs. This is useful when a site needs to deterministically connect to a set of REs. A site will always be connected to 2 REs<br>See [Specific RE](#re-select-specific-re) below.
+
+#### RE Select Specific RE
+
+A [`specific_re`](#re-select-specific-re) block (within [`re_select`](#re-select)) supports the following:
+
+<a id="re-select-specific-re-primary-re"></a>&#x2022; [`primary_re`](#re-select-specific-re-primary-re) - Optional String<br>Primary RE Geography. Select primary RE for this site
+
+#### Site Mesh Group On Slo
+
+A [`site_mesh_group_on_slo`](#site-mesh-group-on-slo) block supports the following:
+
+<a id="group-0918cc"></a>&#x2022; [`no_site_mesh_group`](#group-0918cc) - Optional Block<br>Enable this option
+
+<a id="site-mesh-group-on-slo-site-mesh-group"></a>&#x2022; [`site_mesh_group`](#site-mesh-group-on-slo-site-mesh-group) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site Mesh Group](#site-mesh-group-on-slo-site-mesh-group) below.
+
+<a id="public-ip-ebd29c"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-ebd29c) - Optional Block<br>Enable this option
+
+<a id="pvt-ip-9317b2"></a>&#x2022; [`sm_connection_pvt_ip`](#pvt-ip-9317b2) - Optional Block<br>Enable this option
+
+#### Site Mesh Group On Slo Site Mesh Group
+
+<a id="deep-e180b6"></a>Deeply nested **Group** block collapsed for readability.
+
+#### Software Settings
+
+A [`software_settings`](#software-settings) block supports the following:
+
+<a id="software-settings-os"></a>&#x2022; [`os`](#software-settings-os) - Optional Block<br>Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions<br>See [OS](#software-settings-os) below.
+
+<a id="software-settings-sw"></a>&#x2022; [`sw`](#software-settings-sw) - Optional Block<br>Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions<br>See [Sw](#software-settings-sw) below.
+
+#### Software Settings OS
+
+An [`os`](#software-settings-os) block (within [`software_settings`](#software-settings)) supports the following:
+
+<a id="software-settings-os-default-os-version"></a>&#x2022; [`default_os_version`](#software-settings-os-default-os-version) - Optional Block<br>Enable this option
+
+<a id="version-dbab0c"></a>&#x2022; [`operating_system_version`](#version-dbab0c) - Optional String<br>Specify a OS version to be used e.g. 9.2024.6
+
+#### Software Settings Sw
+
+A [`sw`](#software-settings-sw) block (within [`software_settings`](#software-settings)) supports the following:
+
+<a id="software-settings-sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#software-settings-sw-default-sw-version) - Optional Block<br>Enable this option
+
+<a id="version-0a788c"></a>&#x2022; [`volterra_software_version`](#version-0a788c) - Optional String<br>Specify a F5XC Software Version to be used e.g. Crt-20210329-1002
 
 #### Timeouts
 
@@ -1132,481 +1808,161 @@ A [`timeouts`](#timeouts) block supports the following:
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
 
-#### VNET
+#### Upgrade Settings
 
-A [`vnet`](#vnet) block supports the following:
+An [`upgrade_settings`](#upgrade-settings) block supports the following:
 
-<a id="vnet-existing-vnet"></a>&#x2022; [`existing_vnet`](#vnet-existing-vnet) - Optional Block<br>Resource group and name of existing Azure VNET<br>See [Existing VNET](#vnet-existing-vnet) below.
+<a id="drain-bb0463"></a>&#x2022; [`kubernetes_upgrade_drain`](#drain-bb0463) - Optional Block<br>Specify how worker nodes within a site will be upgraded<br>See [Kubernetes Upgrade Drain](#drain-bb0463) below.
 
-<a id="vnet-new-vnet"></a>&#x2022; [`new_vnet`](#vnet-new-vnet) - Optional Block<br>Azure VNET Parameters. Parameters to create a new Azure VNET<br>See [New VNET](#vnet-new-vnet) below.
+#### Upgrade Settings Kubernetes Upgrade Drain
 
-#### VNET Existing VNET
+A [`kubernetes_upgrade_drain`](#drain-bb0463) block (within [`upgrade_settings`](#upgrade-settings)) supports the following:
 
-An [`existing_vnet`](#vnet-existing-vnet) block (within [`vnet`](#vnet)) supports the following:
+<a id="drain-897b77"></a>&#x2022; [`disable_upgrade_drain`](#drain-897b77) - Optional Block<br>Enable this option
 
-<a id="routing-d95408"></a>&#x2022; [`f5_orchestrated_routing`](#routing-d95408) - Optional Block<br>Enable this option
+<a id="drain-817909"></a>&#x2022; [`enable_upgrade_drain`](#drain-817909) - Optional Block<br>Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#drain-817909) below.
 
-<a id="vnet-existing-vnet-manual-routing"></a>&#x2022; [`manual_routing`](#vnet-existing-vnet-manual-routing) - Optional Block<br>Enable this option
+#### Upgrade Settings Kubernetes Upgrade Drain Enable Upgrade Drain
 
-<a id="vnet-existing-vnet-resource-group"></a>&#x2022; [`resource_group`](#vnet-existing-vnet-resource-group) - Optional String<br>Resource group of existing VNET
+<a id="deep-c91971"></a>Deeply nested **Drain** block collapsed for readability.
 
-<a id="vnet-existing-vnet-vnet-name"></a>&#x2022; [`vnet_name`](#vnet-existing-vnet-vnet-name) - Optional String<br>Existing VNET Name. Name of existing VNET
+#### Vmware
 
-#### VNET New VNET
+A [`vmware`](#vmware) block supports the following:
 
-A [`new_vnet`](#vnet-new-vnet) block (within [`vnet`](#vnet)) supports the following:
+<a id="vmware-not-managed"></a>&#x2022; [`not_managed`](#vmware-not-managed) - Optional Block<br>Section will show nodes associated with this site<br>See [Not Managed](#vmware-not-managed) below.
 
-<a id="vnet-new-vnet-autogenerate"></a>&#x2022; [`autogenerate`](#vnet-new-vnet-autogenerate) - Optional Block<br>Enable this option
+#### Vmware Not Managed
 
-<a id="vnet-new-vnet-name"></a>&#x2022; [`name`](#vnet-new-vnet-name) - Optional String<br>Specify the VNET Name
+A [`not_managed`](#vmware-not-managed) block (within [`vmware`](#vmware)) supports the following:
 
-<a id="vnet-new-vnet-primary-ipv4"></a>&#x2022; [`primary_ipv4`](#vnet-new-vnet-primary-ipv4) - Optional String<br>IPv4 CIDR block for this VNET. It has to be private address space
+<a id="vmware-not-managed-node-list"></a>&#x2022; [`node_list`](#vmware-not-managed-node-list) - Optional Block<br>Section will show nodes associated with this site<br>See [Node List](#vmware-not-managed-node-list) below.
 
-#### Voltstack Cluster
+#### Vmware Not Managed Node List
 
-A [`voltstack_cluster`](#voltstack-cluster) block supports the following:
+A [`node_list`](#vmware-not-managed-node-list) block (within [`vmware.not_managed`](#vmware-not-managed)) supports the following:
 
-<a id="networking-7aaa63"></a>&#x2022; [`accelerated_networking`](#networking-7aaa63) - Optional Block<br>Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#networking-7aaa63) below.
+<a id="vmware-not-managed-node-list-hostname"></a>&#x2022; [`hostname`](#vmware-not-managed-node-list-hostname) - Optional String<br>Hostname. Hostname for this Node
 
-<a id="policies-a80edf"></a>&#x2022; [`active_enhanced_firewall_policies`](#policies-a80edf) - Optional Block<br>List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#policies-a80edf) below.
+<a id="list-7c5ba9"></a>&#x2022; [`interface_list`](#list-7c5ba9) - Optional Block<br>Manage interfaces belonging to this node<br>See [Interface List](#list-7c5ba9) below.
 
-<a id="policies-91541d"></a>&#x2022; [`active_forward_proxy_policies`](#policies-91541d) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#policies-91541d) below.
+<a id="vmware-not-managed-node-list-public-ip"></a>&#x2022; [`public_ip`](#vmware-not-managed-node-list-public-ip) - Optional String<br>Public IP. Public IP for this Node
 
-<a id="policies-704e06"></a>&#x2022; [`active_network_policies`](#policies-704e06) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#policies-704e06) below.
+<a id="vmware-not-managed-node-list-type"></a>&#x2022; [`type`](#vmware-not-managed-node-list-type) - Optional String<br>Type for this Node, can be Control or Worker
 
-<a id="voltstack-cluster-az-nodes"></a>&#x2022; [`az_nodes`](#voltstack-cluster-az-nodes) - Optional Block<br>Only Single AZ or Three AZ(s) nodes are supported currently<br>See [Az Nodes](#voltstack-cluster-az-nodes) below.
+#### Vmware Not Managed Node List Interface List
 
-<a id="voltstack-cluster-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#voltstack-cluster-azure-certified-hw) - Optional String<br>Name for Azure certified hardware
+An [`interface_list`](#list-7c5ba9) block (within [`vmware.not_managed.node_list`](#vmware-not-managed-node-list)) supports the following:
 
-<a id="voltstack-cluster-dc-cluster-group"></a>&#x2022; [`dc_cluster_group`](#voltstack-cluster-dc-cluster-group) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#voltstack-cluster-dc-cluster-group) below.
+<a id="interface-067b8c"></a>&#x2022; [`bond_interface`](#interface-067b8c) - Optional Block<br>Bond Device. Bond devices configuration for fleet<br>See [Bond Interface](#interface-067b8c) below.
 
-<a id="voltstack-cluster-default-storage"></a>&#x2022; [`default_storage`](#voltstack-cluster-default-storage) - Optional Block<br>Enable this option
+<a id="spec-2a2415"></a>&#x2022; [`description_spec`](#spec-2a2415) - Optional String<br>Interface Description. Description for this Interface
 
-<a id="all-48d905"></a>&#x2022; [`forward_proxy_allow_all`](#all-48d905) - Optional Block<br>Enable this option
+<a id="client-c6d6b2"></a>&#x2022; [`dhcp_client`](#client-c6d6b2) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-global-network-list"></a>&#x2022; [`global_network_list`](#voltstack-cluster-global-network-list) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#voltstack-cluster-global-network-list) below.
+<a id="interface-d5d7ec"></a>&#x2022; [`ethernet_interface`](#interface-d5d7ec) - Optional Block<br>Ethernet Interface<br>See [Ethernet Interface](#interface-d5d7ec) below.
 
-<a id="voltstack-cluster-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-k8s-cluster) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster](#voltstack-cluster-k8s-cluster) below.
+<a id="config-f79747"></a>&#x2022; [`ipv6_auto_config`](#config-f79747) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#config-f79747) below.
 
-<a id="voltstack-cluster-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#voltstack-cluster-no-dc-cluster-group) - Optional Block<br>Enable this option
+<a id="labels-2ed8c9"></a>&#x2022; [`labels`](#labels-2ed8c9) - Optional Block<br>Add Labels for this Interface, these labels can be used in firewall policy
 
-<a id="voltstack-cluster-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#voltstack-cluster-no-forward-proxy) - Optional Block<br>Enable this option
+<a id="monitor-ad3d04"></a>&#x2022; [`monitor`](#monitor-ad3d04) - Optional Block<br>Link Quality Monitoring configuration for a network interface
 
-<a id="voltstack-cluster-no-global-network"></a>&#x2022; [`no_global_network`](#voltstack-cluster-no-global-network) - Optional Block<br>Enable this option
+<a id="disabled-3f7207"></a>&#x2022; [`monitor_disabled`](#disabled-3f7207) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#voltstack-cluster-no-k8s-cluster) - Optional Block<br>Enable this option
+<a id="mtu-2aef73"></a>&#x2022; [`mtu`](#mtu-2aef73) - Optional Number<br>Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
 
-<a id="voltstack-cluster-no-network-policy"></a>&#x2022; [`no_network_policy`](#voltstack-cluster-no-network-policy) - Optional Block<br>Enable this option
+<a id="name-4830d8"></a>&#x2022; [`name`](#name-4830d8) - Optional String<br>Interface Name. Name of this Interface
 
-<a id="routes-3cc7bc"></a>&#x2022; [`no_outside_static_routes`](#routes-3cc7bc) - Optional Block<br>Enable this option
+<a id="option-e71ea9"></a>&#x2022; [`network_option`](#option-e71ea9) - Optional Block<br>Select virtual network (VRF) for this interface. There are 2 kinds of VRFs, local VRFs which are local to the site and global VRFs which extend into multiple sites. A site can have 2 Local VRFs, Site Local Outside (SLO), which is required for every site and Site Local Inside (SLI) which is optional<br>See [Network Option](#option-e71ea9) below.
 
-<a id="voltstack-cluster-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#voltstack-cluster-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#voltstack-cluster-outside-static-routes) below.
+<a id="address-208212"></a>&#x2022; [`no_ipv4_address`](#address-208212) - Optional Block<br>Enable this option
 
-<a id="public-ip-8ed01a"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-8ed01a) - Optional Block<br>Enable this option
+<a id="address-b8f24d"></a>&#x2022; [`no_ipv6_address`](#address-b8f24d) - Optional Block<br>Enable this option
 
-<a id="voltstack-cluster-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#voltstack-cluster-sm-connection-pvt-ip) - Optional Block<br>Enable this option
+<a id="priority-378726"></a>&#x2022; [`priority`](#priority-378726) - Optional Number<br>For a node, if multiple interfaces are configured in a VRF, interfaces with highest priority will be used as active and interfaces with lower priority will be used as backup. If multiple interfaces have the same priority, ECMP will be used. Greater the value, higher the priority
 
-<a id="voltstack-cluster-storage-class-list"></a>&#x2022; [`storage_class_list`](#voltstack-cluster-storage-class-list) - Optional Block<br>Add additional custom storage classes in Kubernetes for this site<br>See [Storage Class List](#voltstack-cluster-storage-class-list) below.
+<a id="disabled-dfbb95"></a>&#x2022; [`site_to_site_connectivity_interface_disabled`](#disabled-dfbb95) - Optional Block<br>Enable this option
 
-#### Voltstack Cluster Accelerated Networking
+<a id="enabled-223030"></a>&#x2022; [`site_to_site_connectivity_interface_enabled`](#enabled-223030) - Optional Block<br>Enable this option
 
-An [`accelerated_networking`](#networking-7aaa63) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+<a id="static-ip-7bbfdd"></a>&#x2022; [`static_ip`](#static-ip-7bbfdd) - Optional Block<br>Configure Static IP parameters for a node<br>See [Static IP](#static-ip-7bbfdd) below.
 
-<a id="disable-982912"></a>&#x2022; [`disable`](#disable-982912) - Optional Block<br>Enable this option
+<a id="address-535454"></a>&#x2022; [`static_ipv6_address`](#address-535454) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#address-535454) below.
 
-<a id="enable-e878e8"></a>&#x2022; [`enable`](#enable-e878e8) - Optional Block<br>Enable this option
+<a id="interface-699e69"></a>&#x2022; [`vlan_interface`](#interface-699e69) - Optional Block<br>VLAN Interface<br>See [VLAN Interface](#interface-699e69) below.
 
-#### Voltstack Cluster Active Enhanced Firewall Policies
+#### Vmware Not Managed Node List Interface List Bond Interface
 
-An [`active_enhanced_firewall_policies`](#policies-a80edf) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+<a id="deep-633873"></a>Deeply nested **Interface** block collapsed for readability.
 
-<a id="policies-49239d"></a>&#x2022; [`enhanced_firewall_policies`](#policies-49239d) - Optional Block<br>Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#policies-49239d) below.
+#### Vmware Not Managed Node List Interface List Bond Interface Lacp
 
-#### Voltstack Cluster Active Enhanced Firewall Policies Enhanced Firewall Policies
+<a id="deep-7afe62"></a>Deeply nested **Lacp** block collapsed for readability.
 
-<a id="deep-bf6f5b"></a>Deeply nested **Policies** block collapsed for readability.
+#### Vmware Not Managed Node List Interface List Ethernet Interface
 
-#### Voltstack Cluster Active Forward Proxy Policies
+<a id="deep-7dcc90"></a>Deeply nested **Interface** block collapsed for readability.
 
-An [`active_forward_proxy_policies`](#policies-91541d) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+#### Vmware Not Managed Node List Interface List IPv6 Auto Config
 
-<a id="policies-e4aa24"></a>&#x2022; [`forward_proxy_policies`](#policies-e4aa24) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#policies-e4aa24) below.
+<a id="deep-c33317"></a>Deeply nested **Config** block collapsed for readability.
 
-#### Voltstack Cluster Active Forward Proxy Policies Forward Proxy Policies
+#### Vmware Not Managed Node List Interface List IPv6 Auto Config Router
 
-<a id="deep-73e925"></a>Deeply nested **Policies** block collapsed for readability.
+<a id="deep-ac39e9"></a>Deeply nested **Router** block collapsed for readability.
 
-#### Voltstack Cluster Active Network Policies
+#### Vmware Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-An [`active_network_policies`](#policies-704e06) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+<a id="deep-06eab4"></a>Deeply nested **Config** block collapsed for readability.
 
-<a id="policies-0d13f8"></a>&#x2022; [`network_policies`](#policies-0d13f8) - Optional Block<br>Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#policies-0d13f8) below.
+#### Vmware Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-#### Voltstack Cluster Active Network Policies Network Policies
+<a id="deep-16e9fa"></a>Deeply nested **List** block collapsed for readability.
 
-A [`network_policies`](#policies-0d13f8) block (within [`voltstack_cluster.active_network_policies`](#policies-704e06)) supports the following:
+#### Vmware Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-<a id="name-77e23a"></a>&#x2022; [`name`](#name-77e23a) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="deep-45525f"></a>Deeply nested **DNS** block collapsed for readability.
 
-<a id="namespace-a545c4"></a>&#x2022; [`namespace`](#namespace-a545c4) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+#### Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-<a id="tenant-fa44e1"></a>&#x2022; [`tenant`](#tenant-fa44e1) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="deep-c19fa0"></a>Deeply nested **Stateful** block collapsed for readability.
 
-#### Voltstack Cluster Az Nodes
+#### Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-An [`az_nodes`](#voltstack-cluster-az-nodes) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+<a id="deep-229092"></a>Deeply nested **Networks** block collapsed for readability.
 
-<a id="voltstack-cluster-az-nodes-azure-az"></a>&#x2022; [`azure_az`](#voltstack-cluster-az-nodes-azure-az) - Optional String<br>Zone depicting a grouping of datacenters within an Azure region. Expecting numeric input
+#### Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-<a id="voltstack-cluster-az-nodes-local-subnet"></a>&#x2022; [`local_subnet`](#voltstack-cluster-az-nodes-local-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Local Subnet](#voltstack-cluster-az-nodes-local-subnet) below.
+<a id="deep-ed0fd6"></a>Deeply nested **Pools** block collapsed for readability.
 
-#### Voltstack Cluster Az Nodes Local Subnet
+#### Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-A [`local_subnet`](#voltstack-cluster-az-nodes-local-subnet) block (within [`voltstack_cluster.az_nodes`](#voltstack-cluster-az-nodes)) supports the following:
+<a id="deep-949cb5"></a>Deeply nested **Map** block collapsed for readability.
 
-<a id="subnet-4f7eec"></a>&#x2022; [`subnet`](#subnet-4f7eec) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#subnet-4f7eec) below.
+#### Vmware Not Managed Node List Interface List Network Option
 
-<a id="param-9b306d"></a>&#x2022; [`subnet_param`](#param-9b306d) - Optional Block<br>Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-9b306d) below.
+<a id="deep-995b74"></a>Deeply nested **Option** block collapsed for readability.
 
-#### Voltstack Cluster Az Nodes Local Subnet Subnet
+#### Vmware Not Managed Node List Interface List Static IP
 
-A [`subnet`](#subnet-4f7eec) block (within [`voltstack_cluster.az_nodes.local_subnet`](#voltstack-cluster-az-nodes-local-subnet)) supports the following:
+<a id="deep-acfda1"></a>Deeply nested **IP** block collapsed for readability.
 
-<a id="name-a60647"></a>&#x2022; [`subnet_name`](#name-a60647) - Optional String<br>Subnet Name. Name of existing subnet
+#### Vmware Not Managed Node List Interface List Static IPv6 Address
 
-<a id="grp-1aa3ef"></a>&#x2022; [`subnet_resource_grp`](#grp-1aa3ef) - Optional String<br>Specify name of Resource Group
+<a id="deep-ddcd86"></a>Deeply nested **Address** block collapsed for readability.
 
-<a id="group-ab3d37"></a>&#x2022; [`vnet_resource_group`](#group-ab3d37) - Optional Block<br>Enable this option
+#### Vmware Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-#### Voltstack Cluster Az Nodes Local Subnet Subnet Param
+<a id="deep-a76954"></a>Deeply nested **IP** block collapsed for readability.
 
-<a id="deep-5303b7"></a>Deeply nested **Param** block collapsed for readability.
+#### Vmware Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-#### Voltstack Cluster Dc Cluster Group
+<a id="deep-e0fa74"></a>Deeply nested **IP** block collapsed for readability.
 
-A [`dc_cluster_group`](#voltstack-cluster-dc-cluster-group) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
+#### Vmware Not Managed Node List Interface List VLAN Interface
 
-<a id="voltstack-cluster-dc-cluster-group-name"></a>&#x2022; [`name`](#voltstack-cluster-dc-cluster-group-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
-
-<a id="namespace-e43a60"></a>&#x2022; [`namespace`](#namespace-e43a60) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
-
-<a id="tenant-597aab"></a>&#x2022; [`tenant`](#tenant-597aab) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
-
-#### Voltstack Cluster Global Network List
-
-A [`global_network_list`](#voltstack-cluster-global-network-list) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
-
-<a id="connections-8e8842"></a>&#x2022; [`global_network_connections`](#connections-8e8842) - Optional Block<br>Global network connections<br>See [Global Network Connections](#connections-8e8842) below.
-
-#### Voltstack Cluster Global Network List Global Network Connections
-
-<a id="deep-974094"></a>Deeply nested **Connections** block collapsed for readability.
-
-#### Voltstack Cluster Global Network List Global Network Connections SLI To Global DR
-
-<a id="deep-8abeaa"></a>Deeply nested **DR** block collapsed for readability.
-
-#### Voltstack Cluster Global Network List Global Network Connections SLI To Global DR Global Vn
-
-<a id="deep-44dfa7"></a>Deeply nested **Vn** block collapsed for readability.
-
-#### Voltstack Cluster Global Network List Global Network Connections Slo To Global DR
-
-<a id="deep-a8283c"></a>Deeply nested **DR** block collapsed for readability.
-
-#### Voltstack Cluster Global Network List Global Network Connections Slo To Global DR Global Vn
-
-<a id="deep-3168f1"></a>Deeply nested **Vn** block collapsed for readability.
-
-#### Voltstack Cluster K8S Cluster
-
-A [`k8s_cluster`](#voltstack-cluster-k8s-cluster) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
-
-<a id="voltstack-cluster-k8s-cluster-name"></a>&#x2022; [`name`](#voltstack-cluster-k8s-cluster-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
-
-<a id="voltstack-cluster-k8s-cluster-namespace"></a>&#x2022; [`namespace`](#voltstack-cluster-k8s-cluster-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
-
-<a id="voltstack-cluster-k8s-cluster-tenant"></a>&#x2022; [`tenant`](#voltstack-cluster-k8s-cluster-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
-
-#### Voltstack Cluster Outside Static Routes
-
-An [`outside_static_routes`](#voltstack-cluster-outside-static-routes) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
-
-<a id="list-72d88b"></a>&#x2022; [`static_route_list`](#list-72d88b) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#list-72d88b) below.
-
-#### Voltstack Cluster Outside Static Routes Static Route List
-
-<a id="deep-8327ca"></a>Deeply nested **List** block collapsed for readability.
-
-#### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route
-
-<a id="deep-a60273"></a>Deeply nested **Route** block collapsed for readability.
-
-#### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop
-
-<a id="deep-9cbea6"></a>Deeply nested **Nexthop** block collapsed for readability.
-
-#### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Interface
-
-<a id="deep-81201b"></a>Deeply nested **Interface** block collapsed for readability.
-
-#### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
-
-<a id="deep-fe330c"></a>Deeply nested **Address** block collapsed for readability.
-
-#### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
-
-<a id="deep-f7834a"></a>Deeply nested **IPv4** block collapsed for readability.
-
-#### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
-
-<a id="deep-0d1284"></a>Deeply nested **IPv6** block collapsed for readability.
-
-#### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets
-
-<a id="deep-626be0"></a>Deeply nested **Subnets** block collapsed for readability.
-
-#### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets IPv4
-
-<a id="deep-a073ef"></a>Deeply nested **IPv4** block collapsed for readability.
-
-#### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets IPv6
-
-<a id="deep-85f420"></a>Deeply nested **IPv6** block collapsed for readability.
-
-#### Voltstack Cluster Storage Class List
-
-A [`storage_class_list`](#voltstack-cluster-storage-class-list) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
-
-<a id="classes-3dd6e4"></a>&#x2022; [`storage_classes`](#classes-3dd6e4) - Optional Block<br>List of Storage Classes. List of custom storage classes<br>See [Storage Classes](#classes-3dd6e4) below.
-
-#### Voltstack Cluster Storage Class List Storage Classes
-
-A [`storage_classes`](#classes-3dd6e4) block (within [`voltstack_cluster.storage_class_list`](#voltstack-cluster-storage-class-list)) supports the following:
-
-<a id="class-f2125d"></a>&#x2022; [`default_storage_class`](#class-f2125d) - Optional Bool<br>Make this storage class default storage class for the K8S cluster
-
-<a id="name-ca3ca7"></a>&#x2022; [`storage_class_name`](#name-ca3ca7) - Optional String<br>Name of the storage class as it will appear in K8S
-
-#### Voltstack Cluster Ar
-
-A [`voltstack_cluster_ar`](#voltstack-cluster-ar) block supports the following:
-
-<a id="networking-5bbd2a"></a>&#x2022; [`accelerated_networking`](#networking-5bbd2a) - Optional Block<br>Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen<br>See [Accelerated Networking](#networking-5bbd2a) below.
-
-<a id="policies-af1ab1"></a>&#x2022; [`active_enhanced_firewall_policies`](#policies-af1ab1) - Optional Block<br>List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#policies-af1ab1) below.
-
-<a id="policies-37b472"></a>&#x2022; [`active_forward_proxy_policies`](#policies-37b472) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#policies-37b472) below.
-
-<a id="policies-32b156"></a>&#x2022; [`active_network_policies`](#policies-32b156) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#policies-32b156) below.
-
-<a id="voltstack-cluster-ar-azure-certified-hw"></a>&#x2022; [`azure_certified_hw`](#voltstack-cluster-ar-azure-certified-hw) - Optional String<br>Name for Azure certified hardware
-
-<a id="voltstack-cluster-ar-dc-cluster-group"></a>&#x2022; [`dc_cluster_group`](#voltstack-cluster-ar-dc-cluster-group) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#voltstack-cluster-ar-dc-cluster-group) below.
-
-<a id="voltstack-cluster-ar-default-storage"></a>&#x2022; [`default_storage`](#voltstack-cluster-ar-default-storage) - Optional Block<br>Enable this option
-
-<a id="all-da6e14"></a>&#x2022; [`forward_proxy_allow_all`](#all-da6e14) - Optional Block<br>Enable this option
-
-<a id="list-7b202d"></a>&#x2022; [`global_network_list`](#list-7b202d) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#list-7b202d) below.
-
-<a id="voltstack-cluster-ar-k8s-cluster"></a>&#x2022; [`k8s_cluster`](#voltstack-cluster-ar-k8s-cluster) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [K8S Cluster](#voltstack-cluster-ar-k8s-cluster) below.
-
-<a id="group-5758ca"></a>&#x2022; [`no_dc_cluster_group`](#group-5758ca) - Optional Block<br>Enable this option
-
-<a id="voltstack-cluster-ar-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#voltstack-cluster-ar-no-forward-proxy) - Optional Block<br>Enable this option
-
-<a id="voltstack-cluster-ar-no-global-network"></a>&#x2022; [`no_global_network`](#voltstack-cluster-ar-no-global-network) - Optional Block<br>Enable this option
-
-<a id="voltstack-cluster-ar-no-k8s-cluster"></a>&#x2022; [`no_k8s_cluster`](#voltstack-cluster-ar-no-k8s-cluster) - Optional Block<br>Enable this option
-
-<a id="voltstack-cluster-ar-no-network-policy"></a>&#x2022; [`no_network_policy`](#voltstack-cluster-ar-no-network-policy) - Optional Block<br>Enable this option
-
-<a id="routes-9655fd"></a>&#x2022; [`no_outside_static_routes`](#routes-9655fd) - Optional Block<br>Enable this option
-
-<a id="voltstack-cluster-ar-node"></a>&#x2022; [`node`](#voltstack-cluster-ar-node) - Optional Block<br>Parameters for creating Single interface Node for Alternate Region<br>See [Node](#voltstack-cluster-ar-node) below.
-
-<a id="routes-ac3db8"></a>&#x2022; [`outside_static_routes`](#routes-ac3db8) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#routes-ac3db8) below.
-
-<a id="public-ip-0b46f3"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-0b46f3) - Optional Block<br>Enable this option
-
-<a id="pvt-ip-d90873"></a>&#x2022; [`sm_connection_pvt_ip`](#pvt-ip-d90873) - Optional Block<br>Enable this option
-
-<a id="voltstack-cluster-ar-storage-class-list"></a>&#x2022; [`storage_class_list`](#voltstack-cluster-ar-storage-class-list) - Optional Block<br>Add additional custom storage classes in Kubernetes for this site<br>See [Storage Class List](#voltstack-cluster-ar-storage-class-list) below.
-
-#### Voltstack Cluster Ar Accelerated Networking
-
-An [`accelerated_networking`](#networking-5bbd2a) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
-
-<a id="disable-be6107"></a>&#x2022; [`disable`](#disable-be6107) - Optional Block<br>Enable this option
-
-<a id="enable-68a434"></a>&#x2022; [`enable`](#enable-68a434) - Optional Block<br>Enable this option
-
-#### Voltstack Cluster Ar Active Enhanced Firewall Policies
-
-An [`active_enhanced_firewall_policies`](#policies-af1ab1) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
-
-<a id="policies-95f5fa"></a>&#x2022; [`enhanced_firewall_policies`](#policies-95f5fa) - Optional Block<br>Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#policies-95f5fa) below.
-
-#### Voltstack Cluster Ar Active Enhanced Firewall Policies Enhanced Firewall Policies
-
-<a id="deep-93d92f"></a>Deeply nested **Policies** block collapsed for readability.
-
-#### Voltstack Cluster Ar Active Forward Proxy Policies
-
-An [`active_forward_proxy_policies`](#policies-37b472) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
-
-<a id="policies-9a6e22"></a>&#x2022; [`forward_proxy_policies`](#policies-9a6e22) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#policies-9a6e22) below.
-
-#### Voltstack Cluster Ar Active Forward Proxy Policies Forward Proxy Policies
-
-<a id="deep-9cf721"></a>Deeply nested **Policies** block collapsed for readability.
-
-#### Voltstack Cluster Ar Active Network Policies
-
-An [`active_network_policies`](#policies-32b156) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
-
-<a id="policies-8548e6"></a>&#x2022; [`network_policies`](#policies-8548e6) - Optional Block<br>Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#policies-8548e6) below.
-
-#### Voltstack Cluster Ar Active Network Policies Network Policies
-
-<a id="deep-38a720"></a>Deeply nested **Policies** block collapsed for readability.
-
-#### Voltstack Cluster Ar Dc Cluster Group
-
-A [`dc_cluster_group`](#voltstack-cluster-ar-dc-cluster-group) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
-
-<a id="name-0fe452"></a>&#x2022; [`name`](#name-0fe452) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
-
-<a id="namespace-153248"></a>&#x2022; [`namespace`](#namespace-153248) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
-
-<a id="tenant-80a2c5"></a>&#x2022; [`tenant`](#tenant-80a2c5) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
-
-#### Voltstack Cluster Ar Global Network List
-
-A [`global_network_list`](#list-7b202d) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
-
-<a id="connections-cbb7ff"></a>&#x2022; [`global_network_connections`](#connections-cbb7ff) - Optional Block<br>Global network connections<br>See [Global Network Connections](#connections-cbb7ff) below.
-
-#### Voltstack Cluster Ar Global Network List Global Network Connections
-
-<a id="deep-1198a7"></a>Deeply nested **Connections** block collapsed for readability.
-
-#### Voltstack Cluster Ar Global Network List Global Network Connections SLI To Global DR
-
-<a id="deep-a69e8f"></a>Deeply nested **DR** block collapsed for readability.
-
-#### Voltstack Cluster Ar Global Network List Global Network Connections SLI To Global DR Global Vn
-
-<a id="deep-951e13"></a>Deeply nested **Vn** block collapsed for readability.
-
-#### Voltstack Cluster Ar Global Network List Global Network Connections Slo To Global DR
-
-<a id="deep-cb868c"></a>Deeply nested **DR** block collapsed for readability.
-
-#### Voltstack Cluster Ar Global Network List Global Network Connections Slo To Global DR Global Vn
-
-<a id="deep-bde99c"></a>Deeply nested **Vn** block collapsed for readability.
-
-#### Voltstack Cluster Ar K8S Cluster
-
-A [`k8s_cluster`](#voltstack-cluster-ar-k8s-cluster) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
-
-<a id="voltstack-cluster-ar-k8s-cluster-name"></a>&#x2022; [`name`](#voltstack-cluster-ar-k8s-cluster-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
-
-<a id="namespace-bfaf47"></a>&#x2022; [`namespace`](#namespace-bfaf47) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
-
-<a id="voltstack-cluster-ar-k8s-cluster-tenant"></a>&#x2022; [`tenant`](#voltstack-cluster-ar-k8s-cluster-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
-
-#### Voltstack Cluster Ar Node
-
-A [`node`](#voltstack-cluster-ar-node) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
-
-<a id="voltstack-cluster-ar-node-fault-domain"></a>&#x2022; [`fault_domain`](#voltstack-cluster-ar-node-fault-domain) - Optional Number<br>Namuber of fault domains to be used while creating the availability set
-
-<a id="voltstack-cluster-ar-node-local-subnet"></a>&#x2022; [`local_subnet`](#voltstack-cluster-ar-node-local-subnet) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Local Subnet](#voltstack-cluster-ar-node-local-subnet) below.
-
-<a id="voltstack-cluster-ar-node-node-number"></a>&#x2022; [`node_number`](#voltstack-cluster-ar-node-node-number) - Optional Number<br>Number of main nodes to create, either 1 or 3
-
-<a id="voltstack-cluster-ar-node-update-domain"></a>&#x2022; [`update_domain`](#voltstack-cluster-ar-node-update-domain) - Optional Number<br>Namuber of update domains to be used while creating the availability set
-
-#### Voltstack Cluster Ar Node Local Subnet
-
-A [`local_subnet`](#voltstack-cluster-ar-node-local-subnet) block (within [`voltstack_cluster_ar.node`](#voltstack-cluster-ar-node)) supports the following:
-
-<a id="subnet-cc9194"></a>&#x2022; [`subnet`](#subnet-cc9194) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Subnet](#subnet-cc9194) below.
-
-<a id="param-6c574d"></a>&#x2022; [`subnet_param`](#param-6c574d) - Optional Block<br>Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-6c574d) below.
-
-#### Voltstack Cluster Ar Node Local Subnet Subnet
-
-A [`subnet`](#subnet-cc9194) block (within [`voltstack_cluster_ar.node.local_subnet`](#voltstack-cluster-ar-node-local-subnet)) supports the following:
-
-<a id="name-7b2469"></a>&#x2022; [`subnet_name`](#name-7b2469) - Optional String<br>Subnet Name. Name of existing subnet
-
-<a id="grp-a8564e"></a>&#x2022; [`subnet_resource_grp`](#grp-a8564e) - Optional String<br>Specify name of Resource Group
-
-<a id="group-7c774f"></a>&#x2022; [`vnet_resource_group`](#group-7c774f) - Optional Block<br>Enable this option
-
-#### Voltstack Cluster Ar Node Local Subnet Subnet Param
-
-<a id="deep-db8b2c"></a>Deeply nested **Param** block collapsed for readability.
-
-#### Voltstack Cluster Ar Outside Static Routes
-
-An [`outside_static_routes`](#routes-ac3db8) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
-
-<a id="list-e1e081"></a>&#x2022; [`static_route_list`](#list-e1e081) - Optional Block<br>List of Static Routes. List of Static routes<br>See [Static Route List](#list-e1e081) below.
-
-#### Voltstack Cluster Ar Outside Static Routes Static Route List
-
-<a id="deep-859dd7"></a>Deeply nested **List** block collapsed for readability.
-
-#### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route
-
-<a id="deep-611948"></a>Deeply nested **Route** block collapsed for readability.
-
-#### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop
-
-<a id="deep-d38345"></a>Deeply nested **Nexthop** block collapsed for readability.
-
-#### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Interface
-
-<a id="deep-f5a887"></a>Deeply nested **Interface** block collapsed for readability.
-
-#### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
-
-<a id="deep-ae52ed"></a>Deeply nested **Address** block collapsed for readability.
-
-#### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
-
-<a id="deep-77e9bc"></a>Deeply nested **IPv4** block collapsed for readability.
-
-#### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
-
-<a id="deep-ddfd10"></a>Deeply nested **IPv6** block collapsed for readability.
-
-#### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Subnets
-
-<a id="deep-ad5565"></a>Deeply nested **Subnets** block collapsed for readability.
-
-#### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv4
-
-<a id="deep-651e2b"></a>Deeply nested **IPv4** block collapsed for readability.
-
-#### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv6
-
-<a id="deep-7e1352"></a>Deeply nested **IPv6** block collapsed for readability.
-
-#### Voltstack Cluster Ar Storage Class List
-
-A [`storage_class_list`](#voltstack-cluster-ar-storage-class-list) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
-
-<a id="classes-a6c13f"></a>&#x2022; [`storage_classes`](#classes-a6c13f) - Optional Block<br>List of Storage Classes. List of custom storage classes<br>See [Storage Classes](#classes-a6c13f) below.
-
-#### Voltstack Cluster Ar Storage Class List Storage Classes
-
-<a id="deep-865f74"></a>Deeply nested **Classes** block collapsed for readability.
+<a id="deep-a2b927"></a>Deeply nested **Interface** block collapsed for readability.
 
 ---
 

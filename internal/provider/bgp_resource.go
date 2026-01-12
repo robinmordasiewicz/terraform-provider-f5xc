@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
-	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -41,114 +40,16 @@ type BGPResource struct {
 	client *client.Client
 }
 
-// BGPEmptyModel represents empty nested blocks
-type BGPEmptyModel struct {
-}
-
-// BGPRulesModel represents rules block
-type BGPRulesModel struct {
-	Action *BGPRulesActionModel `tfsdk:"action"`
-	Match  *BGPRulesMatchModel  `tfsdk:"match"`
-}
-
-// BGPRulesModelAttrTypes defines the attribute types for BGPRulesModel
-var BGPRulesModelAttrTypes = map[string]attr.Type{
-	"action": types.ObjectType{AttrTypes: BGPRulesActionModelAttrTypes},
-	"match":  types.ObjectType{AttrTypes: BGPRulesMatchModelAttrTypes},
-}
-
-// BGPRulesActionModel represents action block
-type BGPRulesActionModel struct {
-	AsPath          types.String                  `tfsdk:"as_path"`
-	LocalPreference types.Int64                   `tfsdk:"local_preference"`
-	Metric          types.Int64                   `tfsdk:"metric"`
-	Aggregate       *BGPEmptyModel                `tfsdk:"aggregate"`
-	Allow           *BGPEmptyModel                `tfsdk:"allow"`
-	Community       *BGPRulesActionCommunityModel `tfsdk:"community"`
-	Deny            *BGPEmptyModel                `tfsdk:"deny"`
-}
-
-// BGPRulesActionModelAttrTypes defines the attribute types for BGPRulesActionModel
-var BGPRulesActionModelAttrTypes = map[string]attr.Type{
-	"as_path":          types.StringType,
-	"local_preference": types.Int64Type,
-	"metric":           types.Int64Type,
-	"aggregate":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"allow":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"community":        types.ObjectType{AttrTypes: BGPRulesActionCommunityModelAttrTypes},
-	"deny":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// BGPRulesActionCommunityModel represents community block
-type BGPRulesActionCommunityModel struct {
-	Community types.List `tfsdk:"community"`
-}
-
-// BGPRulesActionCommunityModelAttrTypes defines the attribute types for BGPRulesActionCommunityModel
-var BGPRulesActionCommunityModelAttrTypes = map[string]attr.Type{
-	"community": types.ListType{ElemType: types.StringType},
-}
-
-// BGPRulesMatchModel represents match block
-type BGPRulesMatchModel struct {
-	AsPath     types.String                  `tfsdk:"as_path"`
-	Community  *BGPRulesMatchCommunityModel  `tfsdk:"community"`
-	IPPrefixes *BGPRulesMatchIPPrefixesModel `tfsdk:"ip_prefixes"`
-}
-
-// BGPRulesMatchModelAttrTypes defines the attribute types for BGPRulesMatchModel
-var BGPRulesMatchModelAttrTypes = map[string]attr.Type{
-	"as_path":     types.StringType,
-	"community":   types.ObjectType{AttrTypes: BGPRulesMatchCommunityModelAttrTypes},
-	"ip_prefixes": types.ObjectType{AttrTypes: BGPRulesMatchIPPrefixesModelAttrTypes},
-}
-
-// BGPRulesMatchCommunityModel represents community block
-type BGPRulesMatchCommunityModel struct {
-	Community types.List `tfsdk:"community"`
-}
-
-// BGPRulesMatchCommunityModelAttrTypes defines the attribute types for BGPRulesMatchCommunityModel
-var BGPRulesMatchCommunityModelAttrTypes = map[string]attr.Type{
-	"community": types.ListType{ElemType: types.StringType},
-}
-
-// BGPRulesMatchIPPrefixesModel represents ip_prefixes block
-type BGPRulesMatchIPPrefixesModel struct {
-	Prefixes []BGPRulesMatchIPPrefixesPrefixesModel `tfsdk:"prefixes"`
-}
-
-// BGPRulesMatchIPPrefixesModelAttrTypes defines the attribute types for BGPRulesMatchIPPrefixesModel
-var BGPRulesMatchIPPrefixesModelAttrTypes = map[string]attr.Type{
-	"prefixes": types.ListType{ElemType: types.ObjectType{AttrTypes: BGPRulesMatchIPPrefixesPrefixesModelAttrTypes}},
-}
-
-// BGPRulesMatchIPPrefixesPrefixesModel represents prefixes block
-type BGPRulesMatchIPPrefixesPrefixesModel struct {
-	IPPrefixes        types.String   `tfsdk:"ip_prefixes"`
-	EqualOrLongerThan *BGPEmptyModel `tfsdk:"equal_or_longer_than"`
-	ExactMatch        *BGPEmptyModel `tfsdk:"exact_match"`
-	LongerThan        *BGPEmptyModel `tfsdk:"longer_than"`
-}
-
-// BGPRulesMatchIPPrefixesPrefixesModelAttrTypes defines the attribute types for BGPRulesMatchIPPrefixesPrefixesModel
-var BGPRulesMatchIPPrefixesPrefixesModelAttrTypes = map[string]attr.Type{
-	"ip_prefixes":          types.StringType,
-	"equal_or_longer_than": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"exact_match":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"longer_than":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
 type BGPResourceModel struct {
 	Name        types.String   `tfsdk:"name"`
 	Namespace   types.String   `tfsdk:"namespace"`
 	Annotations types.Map      `tfsdk:"annotations"`
+	AsNumbers   types.List     `tfsdk:"as_numbers"`
 	Description types.String   `tfsdk:"description"`
 	Disable     types.Bool     `tfsdk:"disable"`
 	Labels      types.Map      `tfsdk:"labels"`
 	ID          types.String   `tfsdk:"id"`
 	Timeouts    timeouts.Value `tfsdk:"timeouts"`
-	Rules       types.List     `tfsdk:"rules"`
 }
 
 func (r *BGPResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -157,7 +58,7 @@ func (r *BGPResource) Metadata(ctx context.Context, req resource.MetadataRequest
 
 func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a BGP resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers. configuration.",
+		MarkdownDescription: "Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the BGP. Must be unique within the namespace.",
@@ -183,6 +84,11 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				MarkdownDescription: "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
 				Optional:            true,
 				ElementType:         types.StringType,
+			},
+			"as_numbers": schema.ListAttribute{
+				MarkdownDescription: "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy.",
+				Optional:            true,
+				ElementType:         types.Int64Type,
 			},
 			"description": schema.StringAttribute{
 				MarkdownDescription: "Human readable description for the object.",
@@ -212,101 +118,6 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				Update: true,
 				Delete: true,
 			}),
-			"rules": schema.ListNestedBlock{
-				MarkdownDescription: "BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom.",
-				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{},
-					Blocks: map[string]schema.Block{
-						"action": schema.SingleNestedBlock{
-							MarkdownDescription: "Action to be enforced if the BGP route matches the rule.",
-							Attributes: map[string]schema.Attribute{
-								"as_path": schema.StringAttribute{
-									MarkdownDescription: "AS-Path Prepending is generally used to influence incoming traffic.",
-									Optional:            true,
-								},
-								"local_preference": schema.Int64Attribute{
-									MarkdownDescription: "BGP Local Preference is generally used to influence outgoing traffic.",
-									Optional:            true,
-								},
-								"metric": schema.Int64Attribute{
-									MarkdownDescription: "The Multi-Exit Discriminator metric to indicate the preferred path to AS.",
-									Optional:            true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"aggregate": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
-								},
-								"allow": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
-								},
-								"community": schema.SingleNestedBlock{
-									MarkdownDescription: "BGP Community list. List of BGP communities.",
-									Attributes: map[string]schema.Attribute{
-										"community": schema.ListAttribute{
-											MarkdownDescription: "Unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value .",
-											Optional:            true,
-											ElementType:         types.StringType,
-										},
-									},
-								},
-								"deny": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
-								},
-							},
-						},
-						"match": schema.SingleNestedBlock{
-							MarkdownDescription: "Predicates which have to match information in route for action to be applied.",
-							Attributes: map[string]schema.Attribute{
-								"as_path": schema.StringAttribute{
-									MarkdownDescription: "AS path can also be a regex, which will be matched against route information.",
-									Optional:            true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"community": schema.SingleNestedBlock{
-									MarkdownDescription: "BGP Community list. List of BGP communities.",
-									Attributes: map[string]schema.Attribute{
-										"community": schema.ListAttribute{
-											MarkdownDescription: "Unordered set of RFC 1997 defined 4-byte community, first 16 bits being ASN and lower 16 bits being value .",
-											Optional:            true,
-											ElementType:         types.StringType,
-										},
-									},
-								},
-								"ip_prefixes": schema.SingleNestedBlock{
-									MarkdownDescription: "List of IP prefix and prefix length range match condition.",
-									Attributes:          map[string]schema.Attribute{},
-									Blocks: map[string]schema.Block{
-										"prefixes": schema.ListNestedBlock{
-											MarkdownDescription: "Prefix list. List of IP prefix .",
-											NestedObject: schema.NestedBlockObject{
-												Attributes: map[string]schema.Attribute{
-													"ip_prefixes": schema.StringAttribute{
-														MarkdownDescription: "IP Prefix. IP prefix to match on BGP route.",
-														Optional:            true,
-													},
-												},
-												Blocks: map[string]schema.Block{
-													"equal_or_longer_than": schema.SingleNestedBlock{
-														MarkdownDescription: "Enable this option",
-													},
-													"exact_match": schema.SingleNestedBlock{
-														MarkdownDescription: "Enable this option",
-													},
-													"longer_than": schema.SingleNestedBlock{
-														MarkdownDescription: "Enable this option",
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-			},
 		},
 	}
 }
@@ -413,72 +224,11 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if !data.Rules.IsNull() && !data.Rules.IsUnknown() {
-		var rulesItems []BGPRulesModel
-		diags := data.Rules.ElementsAs(ctx, &rulesItems, false)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() && len(rulesItems) > 0 {
-			var rulesList []map[string]interface{}
-			for _, item := range rulesItems {
-				itemMap := make(map[string]interface{})
-				if item.Action != nil {
-					actionNestedMap := make(map[string]interface{})
-					if item.Action.Aggregate != nil {
-						actionNestedMap["aggregate"] = map[string]interface{}{}
-					}
-					if item.Action.Allow != nil {
-						actionNestedMap["allow"] = map[string]interface{}{}
-					}
-					if !item.Action.AsPath.IsNull() && !item.Action.AsPath.IsUnknown() {
-						actionNestedMap["as_path"] = item.Action.AsPath.ValueString()
-					}
-					if item.Action.Community != nil {
-						communityDeepMap := make(map[string]interface{})
-						if !item.Action.Community.Community.IsNull() && !item.Action.Community.Community.IsUnknown() {
-							var CommunityItems []string
-							diags := item.Action.Community.Community.ElementsAs(ctx, &CommunityItems, false)
-							if !diags.HasError() {
-								communityDeepMap["community"] = CommunityItems
-							}
-						}
-						actionNestedMap["community"] = communityDeepMap
-					}
-					if item.Action.Deny != nil {
-						actionNestedMap["deny"] = map[string]interface{}{}
-					}
-					if !item.Action.LocalPreference.IsNull() && !item.Action.LocalPreference.IsUnknown() {
-						actionNestedMap["local_preference"] = item.Action.LocalPreference.ValueInt64()
-					}
-					if !item.Action.Metric.IsNull() && !item.Action.Metric.IsUnknown() {
-						actionNestedMap["metric"] = item.Action.Metric.ValueInt64()
-					}
-					itemMap["action"] = actionNestedMap
-				}
-				if item.Match != nil {
-					matchNestedMap := make(map[string]interface{})
-					if !item.Match.AsPath.IsNull() && !item.Match.AsPath.IsUnknown() {
-						matchNestedMap["as_path"] = item.Match.AsPath.ValueString()
-					}
-					if item.Match.Community != nil {
-						communityDeepMap := make(map[string]interface{})
-						if !item.Match.Community.Community.IsNull() && !item.Match.Community.Community.IsUnknown() {
-							var CommunityItems []string
-							diags := item.Match.Community.Community.ElementsAs(ctx, &CommunityItems, false)
-							if !diags.HasError() {
-								communityDeepMap["community"] = CommunityItems
-							}
-						}
-						matchNestedMap["community"] = communityDeepMap
-					}
-					if item.Match.IPPrefixes != nil {
-						ip_prefixesDeepMap := make(map[string]interface{})
-						matchNestedMap["ip_prefixes"] = ip_prefixesDeepMap
-					}
-					itemMap["match"] = matchNestedMap
-				}
-				rulesList = append(rulesList, itemMap)
-			}
-			createReq.Spec["rules"] = rulesList
+	if !data.AsNumbers.IsNull() && !data.AsNumbers.IsUnknown() {
+		var as_numbersList []int64
+		resp.Diagnostics.Append(data.AsNumbers.ElementsAs(ctx, &as_numbersList, false)...)
+		if !resp.Diagnostics.HasError() {
+			createReq.Spec["as_numbers"] = as_numbersList
 		}
 	}
 
@@ -494,83 +244,20 @@ func (r *BGPResource) Create(ctx context.Context, req resource.CreateRequest, re
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
-	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
-		var rulesList []BGPRulesModel
-		var existingRulesItems []BGPRulesModel
-		if !data.Rules.IsNull() && !data.Rules.IsUnknown() {
-			data.Rules.ElementsAs(ctx, &existingRulesItems, false)
-		}
-		for listIdx, item := range listData {
-			_ = listIdx // May be unused if no empty marker blocks in list item
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				rulesList = append(rulesList, BGPRulesModel{
-					Action: func() *BGPRulesActionModel {
-						if nestedMap, ok := itemMap["action"].(map[string]interface{}); ok {
-							return &BGPRulesActionModel{
-								Aggregate: func() *BGPEmptyModel {
-									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Action != nil && existingRulesItems[listIdx].Action.Aggregate != nil {
-										return &BGPEmptyModel{}
-									}
-									return nil
-								}(),
-								Allow: func() *BGPEmptyModel {
-									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Action != nil && existingRulesItems[listIdx].Action.Allow != nil {
-										return &BGPEmptyModel{}
-									}
-									return nil
-								}(),
-								AsPath: func() types.String {
-									if v, ok := nestedMap["as_path"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								Deny: func() *BGPEmptyModel {
-									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Action != nil && existingRulesItems[listIdx].Action.Deny != nil {
-										return &BGPEmptyModel{}
-									}
-									return nil
-								}(),
-								LocalPreference: func() types.Int64 {
-									if v, ok := nestedMap["local_preference"].(float64); ok && v != 0 {
-										return types.Int64Value(int64(v))
-									}
-									return types.Int64Null()
-								}(),
-								Metric: func() types.Int64 {
-									if v, ok := nestedMap["metric"].(float64); ok && v != 0 {
-										return types.Int64Value(int64(v))
-									}
-									return types.Int64Null()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					Match: func() *BGPRulesMatchModel {
-						if nestedMap, ok := itemMap["match"].(map[string]interface{}); ok {
-							return &BGPRulesMatchModel{
-								AsPath: func() types.String {
-									if v, ok := nestedMap["as_path"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-				})
+	if v, ok := apiResource.Spec["as_numbers"].([]interface{}); ok && len(v) > 0 {
+		var as_numbersList []int64
+		for _, item := range v {
+			if n, ok := item.(float64); ok {
+				as_numbersList = append(as_numbersList, int64(n))
 			}
 		}
-		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: BGPRulesModelAttrTypes}, rulesList)
+		listVal, diags := types.ListValueFrom(ctx, types.Int64Type, as_numbersList)
 		resp.Diagnostics.Append(diags...)
 		if !resp.Diagnostics.HasError() {
-			data.Rules = listVal
+			data.AsNumbers = listVal
 		}
 	} else {
-		// No data from API - set to null list
-		data.Rules = types.ListNull(types.ObjectType{AttrTypes: BGPRulesModelAttrTypes})
+		data.AsNumbers = types.ListNull(types.Int64Type)
 	}
 
 	tflog.Trace(ctx, "created BGP resource")
@@ -648,83 +335,20 @@ func (r *BGPResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 	// Unmarshal spec fields from API response to Terraform state
 	isImport := false // Always false - no state upgrade tracking
 	_ = isImport      // May be unused if resource has no blocks needing import detection
-	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
-		var rulesList []BGPRulesModel
-		var existingRulesItems []BGPRulesModel
-		if !data.Rules.IsNull() && !data.Rules.IsUnknown() {
-			data.Rules.ElementsAs(ctx, &existingRulesItems, false)
-		}
-		for listIdx, item := range listData {
-			_ = listIdx // May be unused if no empty marker blocks in list item
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				rulesList = append(rulesList, BGPRulesModel{
-					Action: func() *BGPRulesActionModel {
-						if nestedMap, ok := itemMap["action"].(map[string]interface{}); ok {
-							return &BGPRulesActionModel{
-								Aggregate: func() *BGPEmptyModel {
-									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Action != nil && existingRulesItems[listIdx].Action.Aggregate != nil {
-										return &BGPEmptyModel{}
-									}
-									return nil
-								}(),
-								Allow: func() *BGPEmptyModel {
-									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Action != nil && existingRulesItems[listIdx].Action.Allow != nil {
-										return &BGPEmptyModel{}
-									}
-									return nil
-								}(),
-								AsPath: func() types.String {
-									if v, ok := nestedMap["as_path"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								Deny: func() *BGPEmptyModel {
-									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Action != nil && existingRulesItems[listIdx].Action.Deny != nil {
-										return &BGPEmptyModel{}
-									}
-									return nil
-								}(),
-								LocalPreference: func() types.Int64 {
-									if v, ok := nestedMap["local_preference"].(float64); ok && v != 0 {
-										return types.Int64Value(int64(v))
-									}
-									return types.Int64Null()
-								}(),
-								Metric: func() types.Int64 {
-									if v, ok := nestedMap["metric"].(float64); ok && v != 0 {
-										return types.Int64Value(int64(v))
-									}
-									return types.Int64Null()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					Match: func() *BGPRulesMatchModel {
-						if nestedMap, ok := itemMap["match"].(map[string]interface{}); ok {
-							return &BGPRulesMatchModel{
-								AsPath: func() types.String {
-									if v, ok := nestedMap["as_path"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-				})
+	if v, ok := apiResource.Spec["as_numbers"].([]interface{}); ok && len(v) > 0 {
+		var as_numbersList []int64
+		for _, item := range v {
+			if n, ok := item.(float64); ok {
+				as_numbersList = append(as_numbersList, int64(n))
 			}
 		}
-		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: BGPRulesModelAttrTypes}, rulesList)
+		listVal, diags := types.ListValueFrom(ctx, types.Int64Type, as_numbersList)
 		resp.Diagnostics.Append(diags...)
 		if !resp.Diagnostics.HasError() {
-			data.Rules = listVal
+			data.AsNumbers = listVal
 		}
 	} else {
-		// No data from API - set to null list
-		data.Rules = types.ListNull(types.ObjectType{AttrTypes: BGPRulesModelAttrTypes})
+		data.AsNumbers = types.ListNull(types.Int64Type)
 	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -777,72 +401,11 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if !data.Rules.IsNull() && !data.Rules.IsUnknown() {
-		var rulesItems []BGPRulesModel
-		diags := data.Rules.ElementsAs(ctx, &rulesItems, false)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() && len(rulesItems) > 0 {
-			var rulesList []map[string]interface{}
-			for _, item := range rulesItems {
-				itemMap := make(map[string]interface{})
-				if item.Action != nil {
-					actionNestedMap := make(map[string]interface{})
-					if item.Action.Aggregate != nil {
-						actionNestedMap["aggregate"] = map[string]interface{}{}
-					}
-					if item.Action.Allow != nil {
-						actionNestedMap["allow"] = map[string]interface{}{}
-					}
-					if !item.Action.AsPath.IsNull() && !item.Action.AsPath.IsUnknown() {
-						actionNestedMap["as_path"] = item.Action.AsPath.ValueString()
-					}
-					if item.Action.Community != nil {
-						communityDeepMap := make(map[string]interface{})
-						if !item.Action.Community.Community.IsNull() && !item.Action.Community.Community.IsUnknown() {
-							var CommunityItems []string
-							diags := item.Action.Community.Community.ElementsAs(ctx, &CommunityItems, false)
-							if !diags.HasError() {
-								communityDeepMap["community"] = CommunityItems
-							}
-						}
-						actionNestedMap["community"] = communityDeepMap
-					}
-					if item.Action.Deny != nil {
-						actionNestedMap["deny"] = map[string]interface{}{}
-					}
-					if !item.Action.LocalPreference.IsNull() && !item.Action.LocalPreference.IsUnknown() {
-						actionNestedMap["local_preference"] = item.Action.LocalPreference.ValueInt64()
-					}
-					if !item.Action.Metric.IsNull() && !item.Action.Metric.IsUnknown() {
-						actionNestedMap["metric"] = item.Action.Metric.ValueInt64()
-					}
-					itemMap["action"] = actionNestedMap
-				}
-				if item.Match != nil {
-					matchNestedMap := make(map[string]interface{})
-					if !item.Match.AsPath.IsNull() && !item.Match.AsPath.IsUnknown() {
-						matchNestedMap["as_path"] = item.Match.AsPath.ValueString()
-					}
-					if item.Match.Community != nil {
-						communityDeepMap := make(map[string]interface{})
-						if !item.Match.Community.Community.IsNull() && !item.Match.Community.Community.IsUnknown() {
-							var CommunityItems []string
-							diags := item.Match.Community.Community.ElementsAs(ctx, &CommunityItems, false)
-							if !diags.HasError() {
-								communityDeepMap["community"] = CommunityItems
-							}
-						}
-						matchNestedMap["community"] = communityDeepMap
-					}
-					if item.Match.IPPrefixes != nil {
-						ip_prefixesDeepMap := make(map[string]interface{})
-						matchNestedMap["ip_prefixes"] = ip_prefixesDeepMap
-					}
-					itemMap["match"] = matchNestedMap
-				}
-				rulesList = append(rulesList, itemMap)
-			}
-			apiResource.Spec["rules"] = rulesList
+	if !data.AsNumbers.IsNull() && !data.AsNumbers.IsUnknown() {
+		var as_numbersList []int64
+		resp.Diagnostics.Append(data.AsNumbers.ElementsAs(ctx, &as_numbersList, false)...)
+		if !resp.Diagnostics.HasError() {
+			apiResource.Spec["as_numbers"] = as_numbersList
 		}
 	}
 
@@ -869,83 +432,20 @@ func (r *BGPResource) Update(ctx context.Context, req resource.UpdateRequest, re
 	apiResource = fetched // Use GET response which includes all computed fields
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
-	if listData, ok := apiResource.Spec["rules"].([]interface{}); ok && len(listData) > 0 {
-		var rulesList []BGPRulesModel
-		var existingRulesItems []BGPRulesModel
-		if !data.Rules.IsNull() && !data.Rules.IsUnknown() {
-			data.Rules.ElementsAs(ctx, &existingRulesItems, false)
-		}
-		for listIdx, item := range listData {
-			_ = listIdx // May be unused if no empty marker blocks in list item
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				rulesList = append(rulesList, BGPRulesModel{
-					Action: func() *BGPRulesActionModel {
-						if nestedMap, ok := itemMap["action"].(map[string]interface{}); ok {
-							return &BGPRulesActionModel{
-								Aggregate: func() *BGPEmptyModel {
-									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Action != nil && existingRulesItems[listIdx].Action.Aggregate != nil {
-										return &BGPEmptyModel{}
-									}
-									return nil
-								}(),
-								Allow: func() *BGPEmptyModel {
-									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Action != nil && existingRulesItems[listIdx].Action.Allow != nil {
-										return &BGPEmptyModel{}
-									}
-									return nil
-								}(),
-								AsPath: func() types.String {
-									if v, ok := nestedMap["as_path"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								Deny: func() *BGPEmptyModel {
-									if !isImport && len(existingRulesItems) > listIdx && existingRulesItems[listIdx].Action != nil && existingRulesItems[listIdx].Action.Deny != nil {
-										return &BGPEmptyModel{}
-									}
-									return nil
-								}(),
-								LocalPreference: func() types.Int64 {
-									if v, ok := nestedMap["local_preference"].(float64); ok && v != 0 {
-										return types.Int64Value(int64(v))
-									}
-									return types.Int64Null()
-								}(),
-								Metric: func() types.Int64 {
-									if v, ok := nestedMap["metric"].(float64); ok && v != 0 {
-										return types.Int64Value(int64(v))
-									}
-									return types.Int64Null()
-								}(),
-							}
-						}
-						return nil
-					}(),
-					Match: func() *BGPRulesMatchModel {
-						if nestedMap, ok := itemMap["match"].(map[string]interface{}); ok {
-							return &BGPRulesMatchModel{
-								AsPath: func() types.String {
-									if v, ok := nestedMap["as_path"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-							}
-						}
-						return nil
-					}(),
-				})
+	if v, ok := apiResource.Spec["as_numbers"].([]interface{}); ok && len(v) > 0 {
+		var as_numbersList []int64
+		for _, item := range v {
+			if n, ok := item.(float64); ok {
+				as_numbersList = append(as_numbersList, int64(n))
 			}
 		}
-		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: BGPRulesModelAttrTypes}, rulesList)
+		listVal, diags := types.ListValueFrom(ctx, types.Int64Type, as_numbersList)
 		resp.Diagnostics.Append(diags...)
 		if !resp.Diagnostics.HasError() {
-			data.Rules = listVal
+			data.AsNumbers = listVal
 		}
 	} else {
-		// No data from API - set to null list
-		data.Rules = types.ListNull(types.ObjectType{AttrTypes: BGPRulesModelAttrTypes})
+		data.AsNumbers = types.ListNull(types.Int64Type)
 	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

@@ -227,6 +227,13 @@ repos:
         files: \.go$
         pass_filenames: false
 
+      - id: go-test-check
+        name: go test check
+        entry: go test -v -race ./internal/...
+        language: system
+        files: \.go$
+        pass_filenames: false
+
   # =============================================================================
   # Subscription Tier Metadata Update
   # =============================================================================

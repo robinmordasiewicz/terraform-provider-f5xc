@@ -354,6 +354,86 @@ jobs:
           echo "::endgroup::"
 
   # ═══════════════════════════════════════════════════════════════════════════
+  # Validate Shell Scripts (mirrors pre-commit shellcheck)
+  # ═══════════════════════════════════════════════════════════════════════════
+  validate-shell-scripts:
+    name: Validate Shell Scripts
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check if shell script validation needed
+        id: check
+        run: |
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD 2>/dev/null || echo "")
+
+          # Check if any shell scripts changed
+          if echo "$CHANGED_FILES" | grep -qE "\.sh$"; then
+            echo "needs_validation=true" >> $GITHUB_OUTPUT
+            echo "Shell scripts changed - validation needed"
+          else
+            echo "needs_validation=false" >> $GITHUB_OUTPUT
+            echo "No shell script changes - skipping validation"
+          fi
+
+      - name: Install shellcheck
+        if: steps.check.outputs.needs_validation == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+
+      - name: Run shellcheck
+        if: steps.check.outputs.needs_validation == 'true'
+        run: |
+          echo "Running shellcheck on all shell scripts..."
+          find . -name "*.sh" -type f -print0 | xargs -0 shellcheck --severity=warning
+          echo "Shell script validation completed successfully"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Validate Terraform Examples (mirrors pre-commit terraform_fmt)
+  # ═══════════════════════════════════════════════════════════════════════════
+  validate-terraform-examples:
+    name: Validate Terraform Examples
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check if Terraform validation needed
+        id: check
+        run: |
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD 2>/dev/null || echo "")
+
+          # Check if any Terraform files in examples/ changed
+          if echo "$CHANGED_FILES" | grep -qE "^examples/.*\.tf$"; then
+            echo "needs_validation=true" >> $GITHUB_OUTPUT
+            echo "Terraform example files changed - validation needed"
+          else
+            echo "needs_validation=false" >> $GITHUB_OUTPUT
+            echo "No Terraform example changes - skipping validation"
+          fi
+
+      - name: Setup Terraform
+        if: steps.check.outputs.needs_validation == 'true'
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Check Terraform formatting
+        if: steps.check.outputs.needs_validation == 'true'
+        run: |
+          echo "Checking Terraform formatting in examples/..."
+          terraform fmt -check -diff -recursive examples/
+          echo "Terraform formatting validated successfully"
+
+  # ═══════════════════════════════════════════════════════════════════════════
   # Validate MCP Server Build (for PRs affecting MCP server)
   # ═══════════════════════════════════════════════════════════════════════════
   validate-mcp-server:

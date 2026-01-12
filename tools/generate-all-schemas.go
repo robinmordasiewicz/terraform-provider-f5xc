@@ -4176,9 +4176,8 @@ func generateCombinedClientTypes(results []GenerationResult) {
 // even if they're not present in the current OpenAPI specifications.
 // These resources have working implementations that were generated previously
 // but may not be included in the enriched API specs.
-var coreResources = []string{
-	"namespace",
-}
+// Note: namespace was removed in v3.0.0 as part of backwards compatibility cleanup
+var coreResources = []string{}
 
 func generateProviderRegistration(results []GenerationResult) {
 	// Collect successful resources

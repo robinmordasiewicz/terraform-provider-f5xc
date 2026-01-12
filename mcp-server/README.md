@@ -10,14 +10,33 @@ MCP (Model Context Protocol) server providing AI assistants with access to F5 Di
 claude mcp add f5xc-terraform -- npx -y @robinmordasiewicz/f5xc-terraform-mcp
 ```
 
+You should see:
+```
+Added stdio MCP server f5xc-terraform with command: npx -y @robinmordasiewicz/f5xc-terraform-mcp to local config
+```
+
 **Verify installation:**
 ```bash
 claude mcp list
 ```
 
-You should see:
+Look for this line in the output (among your other MCP servers):
 ```
 f5xc-terraform: npx -y @robinmordasiewicz/f5xc-terraform-mcp - ✓ Connected
+```
+
+**Alternative verification** - get detailed server info:
+```bash
+claude mcp get f5xc-terraform
+```
+
+You should see:
+```
+f5xc-terraform:
+  Status: ✓ Connected
+  Type: stdio
+  Command: npx
+  Args: -y @robinmordasiewicz/f5xc-terraform-mcp
 ```
 
 ### VS Code (Cline/Continue)
@@ -180,15 +199,16 @@ round_robin = true
    node --version
    ```
 
-2. Test the server manually:
+2. Check server status:
+   ```bash
+   claude mcp get f5xc-terraform
+   ```
+
+3. Test the server manually (should output JSON-RPC messages):
    ```bash
    npx -y @robinmordasiewicz/f5xc-terraform-mcp
    ```
-
-3. Check Claude Code MCP status:
-   ```bash
-   claude mcp list
-   ```
+   Press `Ctrl+C` to exit after confirming it starts.
 
 ### Remove and Re-add Server
 
@@ -197,12 +217,18 @@ claude mcp remove f5xc-terraform
 claude mcp add f5xc-terraform -- npx -y @robinmordasiewicz/f5xc-terraform-mcp
 ```
 
-### Check Server Logs
+### Server Shows "Failed to connect"
 
-When running manually, the server outputs logs to stderr:
-```bash
-npx -y @robinmordasiewicz/f5xc-terraform-mcp 2>&1
-```
+If `claude mcp list` shows `✗ Failed to connect`:
+
+1. Clear npm cache and retry:
+   ```bash
+   npm cache clean --force
+   claude mcp remove f5xc-terraform
+   claude mcp add f5xc-terraform -- npx -y @robinmordasiewicz/f5xc-terraform-mcp
+   ```
+
+2. Restart Claude Code to reconnect all MCP servers.
 
 ## Requirements
 
@@ -215,6 +241,7 @@ npx -y @robinmordasiewicz/f5xc-terraform-mcp 2>&1
 - [Terraform Registry](https://registry.terraform.io/providers/robinmordasiewicz/f5xc/latest)
 - [GitHub Repository](https://github.com/robinmordasiewicz/terraform-provider-f5xc)
 - [npm Package](https://www.npmjs.com/package/@robinmordasiewicz/f5xc-terraform-mcp)
+- [Claude Code MCP Documentation](https://docs.anthropic.com/en/docs/claude-code/mcp)
 
 ## License
 

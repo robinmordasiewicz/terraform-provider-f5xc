@@ -1,5 +1,5 @@
 # Site Resource Example
-# Manages a Site resource in F5 Distributed Cloud for secure mesh site specification. configuration.
+# Manages a Site resource in F5 Distributed Cloud for app stack site specification. configuration.
 
 # Basic Site configuration
 resource "f5xc_site" "example" {
@@ -16,16 +16,16 @@ resource "f5xc_site" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: active_enhanced_firewall_policies, no_network_pol...
-  active_enhanced_firewall_policies {
-    # Configure active_enhanced_firewall_policies settings
+  # [OneOf: allow_all_usb, deny_all_usb, usb_policy] Enable t...
+  allow_all_usb {
+    # Configure allow_all_usb settings
   }
-  # Ordered List of Enhanced Firewall Policies active .
-  enhanced_firewall_policies {
-    # Configure enhanced_firewall_policies settings
+  # [OneOf: blocked_services, default_blocked_services; Defau...
+  blocked_services {
+    # Configure blocked_services settings
   }
-  # [OneOf: active_forward_proxy_policies, no_forward_proxy; ...
-  active_forward_proxy_policies {
-    # Configure active_forward_proxy_policies settings
+  # Disable Node Local Services. Blocking or denial configura...
+  blocked_sevice {
+    # Configure blocked_sevice settings
   }
 }

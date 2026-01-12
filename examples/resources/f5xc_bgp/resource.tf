@@ -1,5 +1,5 @@
 # BGP Resource Example
-# Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.
 
 # Basic BGP configuration
 resource "f5xc_bgp" "example" {

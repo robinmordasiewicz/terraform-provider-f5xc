@@ -42,7 +42,7 @@ func (d *SiteDataSource) Metadata(ctx context.Context, req datasource.MetadataRe
 
 func (d *SiteDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a Site resource in F5 Distributed Cloud for app stack site specification. configuration.",
+		MarkdownDescription: "Manages a Site resource in F5 Distributed Cloud for azure vnet site specification. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

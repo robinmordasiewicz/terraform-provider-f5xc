@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-12T15:16:45Z",
+  "generated_at": "2026-01-12T18:11:02Z",
   "version": "1.0.0",
   "resources": {
     "address_allocator": {
@@ -2292,7 +2292,7 @@
       }
     },
     "bgp": {
-      "description": "Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.",
+      "description": "Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
       "import_format": "namespace/name",
       "attributes": {
         "annotations": {
@@ -2301,12 +2301,11 @@
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
-        "bgp_parameters": {
-          "type": "object",
+        "as_numbers": {
+          "type": "list",
           "required": false,
           "optional": true,
-          "is_block": true,
-          "description": "BGP Parameters. BGP parameters for the local site."
+          "description": "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy."
         },
         "description": {
           "type": "string",
@@ -2346,20 +2345,6 @@
           "plan_modifier": "RequiresReplace",
           "validation": "name",
           "description": "Namespace where the BGP will be created."
-        },
-        "peers": {
-          "type": "list",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Peers. List of peers ."
-        },
-        "where": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "VirtualSiteSiteRefSelector defines a union of reference to site or reference to virtual_site It used to refer site or a group of sites indicated by virtual site."
         }
       }
     },
@@ -3573,8 +3558,8 @@
       },
       "dependencies": {
         "referenced_by": [
-          "azure_vnet_site",
           "gcp_vpc_site",
+          "azure_vnet_site",
           "aws_vpc_site"
         ]
       }
@@ -6659,9 +6644,9 @@
       },
       "dependencies": {
         "referenced_by": [
-          "origin_pool",
           "http_loadbalancer",
-          "tcp_loadbalancer"
+          "tcp_loadbalancer",
+          "origin_pool"
         ]
       }
     },
@@ -7660,19 +7645,40 @@
       }
     },
     "log_receiver": {
-      "description": "Manages new Log Receiver object. in F5 Distributed Cloud.",
+      "description": "Manages new Global Log Receiver object. in F5 Distributed Cloud.",
       "category": "Monitoring",
       "tier": "Standard",
       "import_format": "namespace/name",
       "oneof_groups": {
-        "log_receiver_choice": {
+        "filter_choice": {
           "fields": [
-            "syslog"
+            "ns_all",
+            "ns_current",
+            "ns_list"
           ]
         },
-        "where_choice": {
+        "log_type": {
           "fields": [
-            "site_local"
+            "audit_logs",
+            "dns_logs",
+            "request_logs",
+            "security_events"
+          ]
+        },
+        "receiver": {
+          "fields": [
+            "aws_cloud_watch_receiver",
+            "azure_event_hubs_receiver",
+            "azure_receiver",
+            "datadog_receiver",
+            "gcp_bucket_receiver",
+            "http_receiver",
+            "kafka_receiver",
+            "new_relic_receiver",
+            "qradar_receiver",
+            "s3_receiver",
+            "splunk_receiver",
+            "sumo_logic_receiver"
           ]
         }
       },
@@ -7682,6 +7688,46 @@
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
+        },
+        "audit_logs": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "log_type",
+          "description": "[OneOf: audit_logs, dns_logs, request_logs, security_events] Enable this option"
+        },
+        "aws_cloud_watch_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "[OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiver, azure_receiver, datadog_receiver, gcp_bucket_receiver, http_receiver, kafka_receiver, new_relic_receiver, qradar_receiver, s3_receiver, splunk_receiver, sumo_logic_receiver] AWS Cloudwatch Logs Configuration for Global Log Receiver."
+        },
+        "azure_event_hubs_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "Azure Event Hubs Configuration for Global Log Receiver."
+        },
+        "azure_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "Azure Blob Configuration for Global Log Receiver."
+        },
+        "datadog_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "Datadog Configuration. Configuration for Datadog endpoint."
         },
         "description": {
           "type": "string",
@@ -7695,12 +7741,44 @@
           "optional": true,
           "description": "A value of true will administratively disable the object."
         },
+        "dns_logs": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "log_type",
+          "description": "Enable this option"
+        },
+        "gcp_bucket_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "GCP Bucket Configuration for Global Log Receiver."
+        },
+        "http_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "HTTP Configuration. Configuration for HTTP endpoint."
+        },
         "id": {
           "type": "string",
           "required": false,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
+        },
+        "kafka_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "Kafka Configuration for Global Log Receiver."
         },
         "labels": {
           "type": "map",
@@ -7722,21 +7800,85 @@
           "validation": "name",
           "description": "Namespace where the Log Receiver will be created."
         },
-        "site_local": {
+        "new_relic_receiver": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "where_choice",
+          "oneof_group": "receiver",
+          "description": "NewRelic Configuration. Configuration for NewRelic endpoint."
+        },
+        "ns_all": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "filter_choice",
+          "description": "[OneOf: ns_all, ns_current, ns_list] Enable this option"
+        },
+        "ns_current": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "filter_choice",
           "description": "Enable this option"
         },
-        "syslog": {
+        "ns_list": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "log_receiver_choice",
-          "description": "Syslog Server Configuration. Configuration for syslog server."
+          "oneof_group": "filter_choice",
+          "description": "Namespace List. Namespace List."
+        },
+        "qradar_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "IBM QRadar Configuration. Configuration for IBM QRadar endpoint."
+        },
+        "request_logs": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "log_type",
+          "description": "Enable this option"
+        },
+        "s3_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "S3 Configuration for Global Log Receiver."
+        },
+        "security_events": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "log_type",
+          "description": "Enable this option"
+        },
+        "splunk_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "Configuration for Splunk HEC Logs endpoint."
+        },
+        "sumo_logic_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "SumoLogic Configuration. Configuration for SumoLogic endpoint."
         }
       }
     },
@@ -8224,11 +8366,35 @@
       }
     },
     "network_policy": {
-      "description": "Manages new network policy with configured parameters in specified namespace. in F5 Distributed Cloud.",
+      "description": "Manages network policy rule with configured parameters in specified namespace. in F5 Distributed Cloud.",
       "category": "Security",
       "tier": "Standard",
       "import_format": "namespace/name",
+      "oneof_groups": {
+        "remote_endpoint": {
+          "fields": [
+            "ip_prefix_set",
+            "prefix",
+            "prefix_selector"
+          ]
+        }
+      },
       "attributes": {
+        "action": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "[Enum: DENY|ALLOW] Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`."
+        },
+        "advanced_action": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Network Policy Rule Advanced Action provides additional OPTIONS along with RuleAction and PBRRuleAction."
+        },
         "annotations": {
           "type": "map",
           "required": false,
@@ -8247,19 +8413,27 @@
           "optional": true,
           "description": "A value of true will administratively disable the object."
         },
-        "endpoint": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Shape of the endpoint choices for a view."
-        },
         "id": {
           "type": "string",
           "required": false,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
+        },
+        "ip_prefix_set": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "remote_endpoint",
+          "description": "[OneOf: ip_prefix_set, prefix, prefix_selector] List of references to ip_prefix_set objects."
+        },
+        "label_matcher": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name."
         },
         "labels": {
           "type": "map",
@@ -8281,12 +8455,35 @@
           "validation": "name",
           "description": "Namespace where the Network Policy will be created."
         },
-        "rules": {
+        "ports": {
+          "type": "list",
+          "required": false,
+          "optional": true,
+          "description": "List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192."
+        },
+        "prefix": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Rule Choice. Shape of Rule Choice."
+          "oneof_group": "remote_endpoint",
+          "description": "List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes."
+        },
+        "prefix_selector": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "remote_endpoint",
+          "description": "Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects."
+        },
+        "protocol": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Protocol in IP packet to be used as match criteria Values are TCP, UDP, and icmp."
         }
       }
     },
@@ -8857,7 +9054,7 @@
       }
     },
     "policer": {
-      "description": "Manages new policer with traffic rate limits. in F5 Distributed Cloud.",
+      "description": "Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.",
       "import_format": "namespace/name",
       "attributes": {
         "annotations": {
@@ -8865,22 +9062,6 @@
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
-        },
-        "burst_size": {
-          "type": "int64",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "The maximum size permitted for bursts of data. E.g. 10000 pps burst ."
-        },
-        "committed_information_rate": {
-          "type": "int64",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps ."
         },
         "description": {
           "type": "string",
@@ -8921,21 +9102,12 @@
           "validation": "name",
           "description": "Namespace where the Policer will be created."
         },
-        "policer_mode": {
-          "type": "string",
+        "protocol_policer": {
+          "type": "list",
           "required": false,
           "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "[Enum: POLICER_MODE_NOT_SHARED|POLICER_MODE_SHARED] - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`. Defaults to `POLICER_MODE_NOT_SHARED`."
-        },
-        "policer_type": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "[Enum: POLICER_SINGLE_RATE_TWO_COLOR] Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`. Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`."
+          "is_block": true,
+          "description": "List of L4 protocol match condition and associated traffic rate limits."
         }
       }
     },
@@ -10726,46 +10898,23 @@
       }
     },
     "site": {
-      "description": "Manages a Site resource in F5 Distributed Cloud for app stack site specification. configuration.",
+      "description": "Manages a Site resource in F5 Distributed Cloud for azure vnet site specification. configuration.",
       "category": "Infrastructure",
       "tier": "Standard",
       "import_format": "namespace/name",
       "oneof_groups": {
         "blocked_services_choice": {
           "fields": [
+            "block_all_services",
             "blocked_services",
             "default_blocked_services"
           ],
           "default": "default_blocked_services"
         },
-        "bond_choice": {
+        "deployment": {
           "fields": [
-            "bond_device_list",
-            "no_bond_devices"
-          ],
-          "default": "no_bond_devices"
-        },
-        "gpu_choice": {
-          "fields": [
-            "disable_gpu",
-            "enable_gpu",
-            "enable_vgpu"
-          ],
-          "default": "disable_gpu"
-        },
-        "k8s_cluster_choice": {
-          "fields": [
-            "k8s_cluster",
-            "no_k8s_cluster"
-          ],
-          "default": "no_k8s_cluster"
-        },
-        "local_control_plane_choice": {
-          "fields": [
-            "local_control_plane",
-            "no_local_control_plane"
-          ],
-          "default": "no_local_control_plane"
+            "azure_cred"
+          ]
         },
         "logs_receiver_choice": {
           "fields": [
@@ -10773,40 +10922,29 @@
             "logs_streaming_disabled"
           ]
         },
-        "network_cfg_choice": {
+        "region_choice": {
           "fields": [
-            "custom_network_config",
-            "default_network_config"
-          ],
-          "default": "default_network_config"
-        },
-        "sriov_interface_choice": {
-          "fields": [
-            "default_sriov_interface",
-            "sriov_interfaces"
-          ],
-          "default": "default_sriov_interface"
-        },
-        "storage_cfg_choice": {
-          "fields": [
-            "custom_storage_config",
-            "default_storage_config"
-          ],
-          "default": "default_storage_config"
-        },
-        "usb_policy_choice": {
-          "fields": [
-            "allow_all_usb",
-            "deny_all_usb",
-            "usb_policy"
+            "alternate_region",
+            "azure_region"
           ]
         },
-        "vm_choice": {
+        "site_type": {
           "fields": [
-            "disable_vm",
-            "enable_vm"
+            "ingress_egress_gw",
+            "ingress_egress_gw_ar",
+            "ingress_gw",
+            "ingress_gw_ar",
+            "voltstack_cluster",
+            "voltstack_cluster_ar"
+          ]
+        },
+        "worker_nodes": {
+          "fields": [
+            "no_worker_nodes",
+            "nodes_per_az",
+            "total_nodes"
           ],
-          "default": "disable_vm"
+          "default": "no_worker_nodes"
         }
       },
       "attributes": {
@@ -10818,13 +10956,21 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Site's geographical address that can be used to determine its latitude and longitude."
         },
-        "allow_all_usb": {
+        "admin_password": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "usb_policy_choice",
-          "description": "[OneOf: allow_all_usb, deny_all_usb, usb_policy] Enable this option"
+          "description": "SecretType is used in an object to indicate a sensitive/confidential field."
+        },
+        "alternate_region": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "oneof_group": "region_choice",
+          "description": "[OneOf: alternate_region, azure_region] Name of the Azure region which does not support availability zones."
         },
         "annotations": {
           "type": "map",
@@ -10832,21 +10978,38 @@
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
+        "azure_cred": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "deployment",
+          "description": "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
+        },
+        "azure_region": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "oneof_group": "region_choice",
+          "description": "Name of the Azure region which supports availability zones."
+        },
+        "block_all_services": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "blocked_services_choice",
+          "description": "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option"
+        },
         "blocked_services": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "[OneOf: blocked_services, default_blocked_services; Default: default_blocked_services] Disable node local services on this site."
-        },
-        "bond_device_list": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "bond_choice",
-          "description": "[OneOf: bond_device_list, no_bond_devices; Default: no_bond_devices] Bond Devices List. List of bond devices for this fleet."
+          "description": "Disable node local services on this site."
         },
         "coordinates": {
           "type": "object",
@@ -10862,60 +11025,12 @@
           "is_block": true,
           "description": "Custom DNS is the configured for specify CE site."
         },
-        "custom_network_config": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "network_cfg_choice",
-          "description": "[OneOf: custom_network_config, default_network_config; Default: default_network_config] VssNetworkConfiguration."
-        },
-        "custom_storage_config": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "storage_cfg_choice",
-          "description": "[OneOf: custom_storage_config, default_storage_config; Default: default_storage_config] VssStorageConfiguration."
-        },
         "default_blocked_services": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "Enable this option"
-        },
-        "default_network_config": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "network_cfg_choice",
-          "description": "Enable this option"
-        },
-        "default_sriov_interface": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "sriov_interface_choice",
-          "description": "[OneOf: default_sriov_interface, sriov_interfaces; Default: default_sriov_interface] Enable this option"
-        },
-        "default_storage_config": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "storage_cfg_choice",
-          "description": "Enable this option"
-        },
-        "deny_all_usb": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "usb_policy_choice",
           "description": "Enable this option"
         },
         "description": {
@@ -10930,45 +11045,13 @@
           "optional": true,
           "description": "A value of true will administratively disable the object."
         },
-        "disable_gpu": {
-          "type": "object",
+        "disk_size": {
+          "type": "int64",
           "required": false,
           "optional": true,
-          "is_block": true,
-          "oneof_group": "gpu_choice",
-          "description": "[OneOf: disable_gpu, enable_gpu, enable_vgpu; Default: disable_gpu] Enable this option"
-        },
-        "disable_vm": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "vm_choice",
-          "description": "[OneOf: disable_vm, enable_vm; Default: disable_vm] Enable this option"
-        },
-        "enable_gpu": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "gpu_choice",
-          "description": "Enable this option"
-        },
-        "enable_vgpu": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "gpu_choice",
-          "description": "Licensing configuration for NVIDIA vGPU."
-        },
-        "enable_vm": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "vm_choice",
-          "description": "VM Configuration. VMs support configuration."
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Disk size to be used for this instance in GiB. 80 is 80 GiB."
         },
         "id": {
           "type": "string",
@@ -10977,13 +11060,37 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
-        "k8s_cluster": {
+        "ingress_egress_gw": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "k8s_cluster_choice",
-          "description": "[OneOf: k8s_cluster, no_k8s_cluster; Default: no_k8s_cluster] Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
+          "oneof_group": "site_type",
+          "description": "[OneOf: ingress_egress_gw, ingress_egress_gw_ar, ingress_gw, ingress_gw_ar, voltstack_cluster, voltstack_cluster_ar] Two interface Azure ingress/egress site."
+        },
+        "ingress_egress_gw_ar": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "site_type",
+          "description": "Two interface Azure ingress/egress site on Alternate Region with no support for zones."
+        },
+        "ingress_gw": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "site_type",
+          "description": "Single interface Azure ingress site on on Recommended Region."
+        },
+        "ingress_gw_ar": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "site_type",
+          "description": "Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site."
         },
         "kubernetes_upgrade_drain": {
           "type": "object",
@@ -10997,14 +11104,6 @@
           "required": false,
           "optional": true,
           "description": "Labels is a user defined key value map that can be attached to resources for organization and filtering."
-        },
-        "local_control_plane": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "local_control_plane_choice",
-          "description": "[OneOf: local_control_plane, no_local_control_plane; Default: no_local_control_plane] Enable local control plane for L3VPN, SRV6, EVPN etc."
         },
         "log_receiver": {
           "type": "object",
@@ -11022,12 +11121,13 @@
           "oneof_group": "logs_receiver_choice",
           "description": "Enable this option"
         },
-        "master_node_configuration": {
-          "type": "list",
+        "machine_type": {
+          "type": "string",
           "required": false,
           "optional": true,
-          "is_block": true,
-          "description": "Configuration of master nodes ."
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway \u003e advanced OPTIONS.."
         },
         "name": {
           "type": "string",
@@ -11043,29 +11143,22 @@
           "validation": "name",
           "description": "Namespace where the Site will be created."
         },
-        "no_bond_devices": {
+        "no_worker_nodes": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "bond_choice",
-          "description": "Enable this option"
+          "oneof_group": "worker_nodes",
+          "description": "[OneOf: no_worker_nodes, nodes_per_az, total_nodes; Default: no_worker_nodes] Enable this option"
         },
-        "no_k8s_cluster": {
-          "type": "object",
+        "nodes_per_az": {
+          "type": "int64",
           "required": false,
           "optional": true,
-          "is_block": true,
-          "oneof_group": "k8s_cluster_choice",
-          "description": "Enable this option"
-        },
-        "no_local_control_plane": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "local_control_plane_choice",
-          "description": "Enable this option"
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "oneof_group": "worker_nodes",
+          "description": "Desired Worker Nodes Per AZ. Max limit is up to 21."
         },
         "offline_survivability_mode": {
           "type": "object",
@@ -11081,13 +11174,21 @@
           "is_block": true,
           "description": "Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions."
         },
-        "sriov_interfaces": {
-          "type": "object",
+        "resource_group": {
+          "type": "string",
           "required": false,
           "optional": true,
-          "is_block": true,
-          "oneof_group": "sriov_interface_choice",
-          "description": "List of all custom SR-IOV interfaces configuration."
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Azure resource group for resources that will be created ."
+        },
+        "ssh_key": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Public SSH key for accessing the site."
         },
         "sw": {
           "type": "object",
@@ -11096,27 +11197,44 @@
           "is_block": true,
           "description": "Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions."
         },
-        "usb_policy": {
+        "tags": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "usb_policy_choice",
-          "description": "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
+          "description": "Azure Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in Azure console."
         },
-        "volterra_certified_hw": {
-          "type": "string",
+        "total_nodes": {
+          "type": "int64",
           "required": false,
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Name for generic server certified hardware to form this App Stack site."
+          "oneof_group": "worker_nodes",
+          "description": "Total number of worker nodes to be deployed across all AZ's used in the Site."
         },
-        "worker_nodes": {
-          "type": "list",
+        "vnet": {
+          "type": "object",
           "required": false,
           "optional": true,
-          "description": "Worker Nodes. Names of worker nodes."
+          "is_block": true,
+          "description": "Defines choice about Azure VNet for a view."
+        },
+        "voltstack_cluster": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "site_type",
+          "description": "App Stack Cluster of single interface Azure nodes."
+        },
+        "voltstack_cluster_ar": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "site_type",
+          "description": "App Stack Cluster of single interface Azure nodes."
         }
       },
       "dependencies": {

@@ -144,6 +144,6 @@ If you have automation relying on resource subcategories:
 
 ## Related Guides
 
-- [Authentication Guide](authentication)
-- [HTTP Load Balancer Guide](http-loadbalancer)
-- [Blindfold Encryption Guide](blindfold)
+- [Authentication Guide](authentication.md)
+- [HTTP Load Balancer Guide](http-loadbalancer.md)
+- [Blindfold Encryption Guide](blindfold.md)

@@ -2,12 +2,12 @@
 page_title: "f5xc_irule Resource - terraform-provider-f5xc"
 subcategory: "BIG-IP Integration"
 description: |-
-  Manages a Irule resource in F5 Distributed Cloud for desired state for big-ip irule service. configuration.
+  Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 ---
 
 # f5xc_irule (Resource)
 
-Manages a Irule resource in F5 Distributed Cloud for desired state for big-ip irule service. configuration.
+Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -15,7 +15,7 @@ Manages a Irule resource in F5 Distributed Cloud for desired state for big-ip ir
 
 ```terraform
 # Irule Resource Example
-# Manages a Irule resource in F5 Distributed Cloud for desired state for big-ip irule service. configuration.
+# Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
 # Basic Irule configuration
 resource "f5xc_irule" "example" {
@@ -52,11 +52,9 @@ resource "f5xc_irule" "example" {
 
 ### Spec Argument Reference
 
-<a id="code"></a>&#x2022; [`code`](#code) - Optional String<br>IRule code content, this content will be base64 encoded for preserving formating
+<a id="description-spec"></a>&#x2022; [`description_spec`](#description-spec) - Optional String<br>Specify Description for iRule
 
-<a id="irule-name"></a>&#x2022; [`irule_name`](#irule-name) - Optional String<br>IRule name. IRule name
-
-<a id="source"></a>&#x2022; [`source`](#source) - Optional String<br>IRule source. IRule generation/updation source
+<a id="irule"></a>&#x2022; [`irule`](#irule) - Optional String<br>Www.internal.example.f5.com')} DNS::drop} irule content
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

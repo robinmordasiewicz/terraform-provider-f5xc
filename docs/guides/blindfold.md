@@ -505,15 +505,15 @@ Type `yes` to confirm destruction.
 
 Now that you understand blindfold encryption, explore related resources:
 
-- [Certificate Resource](../resources/certificate) - Full certificate management
-- [Cloud Credentials Resource](../resources/cloud_credentials) - Cloud provider authentication
-- [HTTP Load Balancer Guide](./http-loadbalancer) - Use certificates in load balancers
-- [blindfold Function Reference](../functions/blindfold) - Function API details
-- [blindfold_file Function Reference](../functions/blindfold_file) - Function API details
+- [Certificate Resource](../resources/certificate.md) - Full certificate management
+- [Cloud Credentials Resource](../resources/cloud_credentials.md) - Cloud provider authentication
+- [HTTP Load Balancer Guide](./http-loadbalancer.md) - Use certificates in load balancers
+- [blindfold Function Reference](../functions/blindfold.md) - Function API details
+- [blindfold_file Function Reference](../functions/blindfold_file.md) - Function API details
 
 ## Support
 
-- **Provider Documentation:** [F5XC Provider](../index)
+- **Provider Documentation:** [F5XC Provider](../index.md)
 - **F5 Documentation:** [F5 Distributed Cloud Docs](https://docs.cloud.f5.com/)
 - **Secret Management:** [F5XC Secret Management](https://docs.cloud.f5.com/docs/how-to/secrets-management)
 - **Issues:** [GitHub Issues](https://github.com/robinmordasiewicz/terraform-provider-f5xc/issues)

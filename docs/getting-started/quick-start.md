@@ -59,6 +59,6 @@ terraform import f5xc_namespace.example my-existing-namespace
 
 ## Next Steps
 
-- Explore [guides](../guides/) for more complex scenarios
-- Browse available [resources](../resources/)
-- Check out [data sources](../data-sources/)
+- Explore [guides](../guides/index.md) for more complex scenarios
+- Browse available [resources](../resources/index.md)
+- Check out [data sources](../data-sources/index.md)

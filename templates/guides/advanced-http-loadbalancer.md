@@ -9,7 +9,7 @@ description: |-
 
 # Advanced HTTP Load Balancer Security
 
-This guide extends the [basic HTTP Load Balancer guide](http-loadbalancer) with advanced security features for production deployments requiring comprehensive protection against sophisticated threats.
+This guide extends the [basic HTTP Load Balancer guide](http-loadbalancer.md) with advanced security features for production deployments requiring comprehensive protection against sophisticated threats.
 
 By following this guide, you'll deploy an HTTP Load Balancer with **11 security controls**:
 
@@ -34,7 +34,7 @@ Before you begin, ensure you have:
 - **Namespace** - An existing namespace or permissions to create one
 - **Backend Origin** - Your application server accessible from the internet
 
--> **Tip:** Review the [Authentication Guide](authentication) for detailed credential setup instructions.
+-> **Tip:** Review the [Authentication Guide](authentication.md) for detailed credential setup instructions.
 
 ## Complete Configuration
 
@@ -558,10 +558,10 @@ rate_limit {
 
 ### Provider Resources
 
-- [f5xc_http_loadbalancer](../resources/http_loadbalancer)
-- [f5xc_app_firewall](../resources/app_firewall)
-- [f5xc_origin_pool](../resources/origin_pool)
-- [f5xc_healthcheck](../resources/healthcheck)
+- [f5xc_http_loadbalancer](../resources/http_loadbalancer.md)
+- [f5xc_app_firewall](../resources/app_firewall.md)
+- [f5xc_origin_pool](../resources/origin_pool.md)
+- [f5xc_healthcheck](../resources/healthcheck.md)
 
 ## Support
 

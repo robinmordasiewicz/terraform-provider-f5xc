@@ -453,7 +453,7 @@ See the [addon-activation example](https://github.com/robinmordasiewicz/terrafor
 
 ## Related Resources
 
-- [f5xc_addon_service Data Source](../data-sources/addon_service)
-- [f5xc_addon_service_activation_status Data Source](../data-sources/addon_service_activation_status)
-- [f5xc_addon_subscription Resource](../resources/addon_subscription)
-- [HTTP Load Balancer Resource](../resources/http_loadbalancer)
+- [f5xc_addon_service Data Source](../data-sources/addon_service.md)
+- [f5xc_addon_service_activation_status Data Source](../data-sources/addon_service_activation_status.md)
+- [f5xc_addon_subscription Resource](../resources/addon_subscription.md)
+- [HTTP Load Balancer Resource](../resources/http_loadbalancer.md)

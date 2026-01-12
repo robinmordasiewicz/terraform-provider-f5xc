@@ -262,13 +262,13 @@ Type `yes` to confirm destruction.
 
 Now that you have a basic HTTP Load Balancer deployed, consider exploring:
 
-- [Origin Pool Resource](../resources/origin_pool) - Add multiple origins for redundancy
-- [App Firewall Resource](../resources/app_firewall) - Customize WAF rules
-- [Service Policy Resource](../resources/service_policy) - Add custom access control
-- [TCP Load Balancer Resource](../resources/tcp_loadbalancer) - For non-HTTP applications
+- [Origin Pool Resource](../resources/origin_pool.md) - Add multiple origins for redundancy
+- [App Firewall Resource](../resources/app_firewall.md) - Customize WAF rules
+- [Service Policy Resource](../resources/service_policy.md) - Add custom access control
+- [TCP Load Balancer Resource](../resources/tcp_loadbalancer.md) - For non-HTTP applications
 
 ## Support
 
-- **Provider Documentation:** [F5XC Provider](../index)
+- **Provider Documentation:** [F5XC Provider](../index.md)
 - **F5 Documentation:** [F5 Distributed Cloud Docs](https://docs.cloud.f5.com/)
 - **Issues:** [GitHub Issues](https://github.com/robinmordasiewicz/terraform-provider-f5xc/issues)

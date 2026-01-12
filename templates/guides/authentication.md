@@ -377,13 +377,13 @@ F5XC_API_TOKEN="token"         # Won't work
 
 ## Next Steps
 
-- [HTTP Load Balancer Guide](http-loadbalancer) - Deploy your first load balancer
-- [Blindfold Functions Guide](blindfold) - Secure secret management
-- [Namespace Resource](../resources/namespace) - Organize your resources
+- [HTTP Load Balancer Guide](http-loadbalancer.md) - Deploy your first load balancer
+- [Blindfold Functions Guide](blindfold.md) - Secure secret management
+- [Namespace Resource](../resources/namespace.md) - Organize your resources
 
 ## Support
 
-- [Provider Documentation](../index)
+- [Provider Documentation](../index.md)
 - [F5 Distributed Cloud Docs](https://docs.cloud.f5.com/)
 - [F5 Credentials Guide](https://docs.cloud.f5.com/docs-v2/administration/how-tos/user-mgmt/Credentials)
 - [GitHub Issues](https://github.com/robinmordasiewicz/terraform-provider-f5xc/issues)

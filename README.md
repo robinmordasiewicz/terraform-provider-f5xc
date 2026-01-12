@@ -2,6 +2,17 @@
 
 Community Terraform provider for [F5 Distributed Cloud](https://www.f5.com/cloud).
 
+## ⚠️ Version 3.0.0 Clean Break Release
+
+**IMPORTANT**: This is a pre-release clean break version that requires recreating all Terraform-managed resources.
+
+- **No in-place upgrade**: You cannot upgrade from earlier versions without destroying and recreating resources
+- **API v2 based**: Uses F5 Distributed Cloud API v2 specifications (98 resources available)
+- **No backwards compatibility**: All state upgrade infrastructure has been removed
+- **Import supported**: You can still import existing F5XC resources using `terraform import`
+
+This is a pre-release project. See [CHANGELOG.md](CHANGELOG.md) for complete details on breaking changes and migration requirements.
+
 ## Installation
 
 ```terraform

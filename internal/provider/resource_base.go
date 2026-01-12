@@ -14,8 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
-	"github.com/f5xc/terraform-provider-f5xc/internal/client"
-	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
 	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 )
 
@@ -31,10 +29,6 @@ const (
 	ResourceTypeCritical
 )
 
-// SchemaVersion is the current schema version for all resources
-// Increment this when making breaking schema changes across all resources
-const SchemaVersion int64 = 1
-
 // BaseResourceConfig holds configuration for base resource behavior
 type BaseResourceConfig struct {
 	// ResourceTypeName is the Terraform resource type name (e.g., "f5xc_namespace")
@@ -45,12 +39,6 @@ type BaseResourceConfig struct {
 
 	// SupportsTimeouts indicates if the resource supports configurable timeouts
 	SupportsTimeouts bool
-
-	// SupportsPrivateState indicates if the resource uses private state for metadata
-	SupportsPrivateState bool
-
-	// SupportsStateUpgrade indicates if the resource supports state upgrades
-	SupportsStateUpgrade bool
 }
 
 // BaseResourceModel contains common fields for all F5 XC resources
@@ -120,22 +108,6 @@ func ModifyPlanForDestruction(ctx context.Context, req resource.ModifyPlanReques
 	}
 }
 
-// SaveAPIMetadataToPrivateState saves API metadata to private state for drift detection
-func SaveAPIMetadataToPrivateState(ctx context.Context, resp interface{}, metadata *client.Metadata) diag.Diagnostics {
-	psd := privatestate.NewPrivateStateData()
-
-	if metadata.UID != "" {
-		psd.SetUID(metadata.UID)
-	}
-
-	return psd.SaveToPrivateState(ctx, resp)
-}
-
-// LoadAPIMetadataFromPrivateState loads API metadata from private state
-func LoadAPIMetadataFromPrivateState(ctx context.Context, req interface{}) (*privatestate.PrivateStateData, diag.Diagnostics) {
-	return privatestate.LoadFromPrivateState(ctx, req)
-}
-
 // GetLabelsFromModel extracts labels from a types.Map to map[string]string
 func GetLabelsFromModel(ctx context.Context, labelsMap types.Map) (map[string]string, diag.Diagnostics) {
 	var diags diag.Diagnostics
@@ -176,39 +148,6 @@ func SetAnnotationsToModel(ctx context.Context, annotations map[string]string) (
 		return types.MapNull(types.StringType), nil
 	}
 	return types.MapValueFrom(ctx, types.StringType, annotations)
-}
-
-// StateUpgraderV0ToV1 provides a generic state upgrader from v0 to v1
-// This handles the common case of adding timeouts block to existing resources
-func StateUpgraderV0ToV1(ctx context.Context, req resource.UpgradeStateRequest, resp *resource.UpgradeStateResponse) {
-	// The v0 to v1 upgrade primarily adds the timeouts block
-	// Since timeouts are optional with defaults, no data migration is needed
-	// The framework will handle null timeouts values automatically
-}
-
-// CommonV0Schema returns the schema for version 0 (without timeouts)
-func CommonV0Schema() schema.Schema {
-	return schema.Schema{
-		Attributes: map[string]schema.Attribute{
-			"id": schema.StringAttribute{
-				Computed: true,
-			},
-			"name": schema.StringAttribute{
-				Required: true,
-			},
-			"namespace": schema.StringAttribute{
-				Required: true,
-			},
-			"labels": schema.MapAttribute{
-				Optional:    true,
-				ElementType: types.StringType,
-			},
-			"annotations": schema.MapAttribute{
-				Optional:    true,
-				ElementType: types.StringType,
-			},
-		},
-	}
 }
 
 // ValidateResourceConfig validates common resource configuration

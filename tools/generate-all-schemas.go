@@ -1184,13 +1184,13 @@ func extractNestedAttributes(schema SchemaDefinition, spec *OpenAPI3Spec, depth 
 		}
 		attr := convertToTerraformAttributeWithDepth(propName, propSchema, requiredSet[propName], "", spec, depth, nestedPath)
 
-		// Mark 'tenant', 'uid', and 'kind' fields as Computed in nested Object Reference blocks.
+		// Mark 'namespace', 'tenant', 'uid', and 'kind' fields as Computed in nested Object Reference blocks.
 		// The API always returns these values even when not specified in config,
 		// which causes state drift if not marked as Computed.
 		// Object Reference types have pattern: kind, name, namespace, tenant, uid
 		// Using UseStateForUnknown plan modifier prevents perpetual drift.
 		propNameLower := strings.ToLower(propName)
-		if (propNameLower == "tenant" || propNameLower == "uid" || propNameLower == "kind") && !attr.Required {
+		if (propNameLower == "namespace" || propNameLower == "tenant" || propNameLower == "uid" || propNameLower == "kind") && !attr.Required {
 			attr.Computed = true
 			attr.Optional = true
 			attr.PlanModifier = "UseStateForUnknown"

@@ -20,7 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
-	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
 	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
@@ -31,12 +30,8 @@ var (
 	_ resource.ResourceWithConfigure      = &NetworkPolicyRuleResource{}
 	_ resource.ResourceWithImportState    = &NetworkPolicyRuleResource{}
 	_ resource.ResourceWithModifyPlan     = &NetworkPolicyRuleResource{}
-	_ resource.ResourceWithUpgradeState   = &NetworkPolicyRuleResource{}
 	_ resource.ResourceWithValidateConfig = &NetworkPolicyRuleResource{}
 )
-
-// network_policy_ruleSchemaVersion is the schema version for state upgrades
-const network_policy_ruleSchemaVersion int64 = 1
 
 func NewNetworkPolicyRuleResource() resource.Resource {
 	return &NetworkPolicyRuleResource{}
@@ -143,7 +138,6 @@ func (r *NetworkPolicyRuleResource) Metadata(ctx context.Context, req resource.M
 
 func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		Version:             network_policy_ruleSchemaVersion,
 		MarkdownDescription: "Manages network policy rule with configured parameters in specified namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
@@ -359,48 +353,6 @@ func (r *NetworkPolicyRuleResource) ModifyPlan(ctx context.Context, req resource
 				"The resource name is not yet known. This may affect planning for dependent resources.",
 			)
 		}
-	}
-}
-
-// UpgradeState implements resource.ResourceWithUpgradeState
-func (r *NetworkPolicyRuleResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
-	return map[int64]resource.StateUpgrader{
-		0: {
-			PriorSchema: &schema.Schema{
-				Attributes: map[string]schema.Attribute{
-					"name":        schema.StringAttribute{Required: true},
-					"namespace":   schema.StringAttribute{Required: true},
-					"annotations": schema.MapAttribute{Optional: true, ElementType: types.StringType},
-					"labels":      schema.MapAttribute{Optional: true, ElementType: types.StringType},
-					"id":          schema.StringAttribute{Computed: true},
-				},
-			},
-			StateUpgrader: func(ctx context.Context, req resource.UpgradeStateRequest, resp *resource.UpgradeStateResponse) {
-				var priorState struct {
-					Name        types.String `tfsdk:"name"`
-					Namespace   types.String `tfsdk:"namespace"`
-					Annotations types.Map    `tfsdk:"annotations"`
-					Labels      types.Map    `tfsdk:"labels"`
-					ID          types.String `tfsdk:"id"`
-				}
-
-				resp.Diagnostics.Append(req.State.Get(ctx, &priorState)...)
-				if resp.Diagnostics.HasError() {
-					return
-				}
-
-				upgradedState := NetworkPolicyRuleResourceModel{
-					Name:        priorState.Name,
-					Namespace:   priorState.Namespace,
-					Annotations: priorState.Annotations,
-					Labels:      priorState.Labels,
-					ID:          priorState.ID,
-					Timeouts:    timeouts.Value{},
-				}
-
-				resp.Diagnostics.Append(resp.State.Set(ctx, upgradedState)...)
-			},
-		},
 	}
 }
 
@@ -683,13 +635,6 @@ func (r *NetworkPolicyRuleResource) Create(ctx context.Context, req resource.Cre
 		data.Protocol = types.StringNull()
 	}
 
-	psd := privatestate.NewPrivateStateData()
-	psd.SetCustom("managed", "true")
-	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": apiResource.Metadata.Name,
-	})
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
-
 	tflog.Trace(ctx, "created NetworkPolicyRule resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -710,9 +655,6 @@ func (r *NetworkPolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	ctx, cancel := context.WithTimeout(ctx, readTimeout)
 	defer cancel()
 
-	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
-	resp.Diagnostics.Append(psDiags...)
-
 	apiResource, err := r.client.GetNetworkPolicyRule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// Check if the resource was deleted outside Terraform
@@ -726,13 +668,6 @@ func (r *NetworkPolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read NetworkPolicyRule: %s", err))
 		return
-	}
-
-	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
-		resp.Diagnostics.AddWarning(
-			"Resource Drift Detected",
-			"The network_policy_rule may have been recreated outside of Terraform.",
-		)
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
@@ -773,14 +708,8 @@ func (r *NetworkPolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	}
 
 	// Unmarshal spec fields from API response to Terraform state
-	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
-	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
-	_ = isImport // May be unused if resource has no blocks needing import detection
-	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":   isImport,
-		"psd_is_nil": psd == nil,
-		"managed":    psd.Metadata.Custom["managed"],
-	})
+	isImport := false // Always false - no state upgrade tracking
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["advanced_action"].(map[string]interface{}); ok && (isImport || data.AdvancedAction != nil) {
 		data.AdvancedAction = &NetworkPolicyRuleAdvancedActionModel{
 			Action: func() types.String {
@@ -914,15 +843,6 @@ func (r *NetworkPolicyRuleResource) Read(ctx context.Context, req resource.ReadR
 	} else {
 		data.Protocol = types.StringNull()
 	}
-
-	// Preserve or set the managed marker for future Read operations
-	newPsd := privatestate.NewPrivateStateData()
-	newPsd.SetUID(apiResource.Metadata.UID)
-	if !isImport {
-		// Preserve the managed marker if we already had it
-		newPsd.SetCustom("managed", "true")
-	}
-	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1225,13 +1145,6 @@ func (r *NetworkPolicyRuleResource) Update(ctx context.Context, req resource.Upd
 	} else {
 		data.Protocol = types.StringNull()
 	}
-
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from fetched resource
-	uid := fetched.Metadata.UID
-	psd.SetUID(uid)
-	psd.SetCustom("managed", "true") // Preserve managed marker after Update
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }

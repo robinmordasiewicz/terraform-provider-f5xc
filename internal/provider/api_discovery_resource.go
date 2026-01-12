@@ -20,7 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
-	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
 	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
@@ -31,12 +30,8 @@ var (
 	_ resource.ResourceWithConfigure      = &APIDiscoveryResource{}
 	_ resource.ResourceWithImportState    = &APIDiscoveryResource{}
 	_ resource.ResourceWithModifyPlan     = &APIDiscoveryResource{}
-	_ resource.ResourceWithUpgradeState   = &APIDiscoveryResource{}
 	_ resource.ResourceWithValidateConfig = &APIDiscoveryResource{}
 )
-
-// api_discoverySchemaVersion is the schema version for state upgrades
-const api_discoverySchemaVersion int64 = 1
 
 func NewAPIDiscoveryResource() resource.Resource {
 	return &APIDiscoveryResource{}
@@ -80,7 +75,6 @@ func (r *APIDiscoveryResource) Metadata(ctx context.Context, req resource.Metada
 
 func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		Version:             api_discoverySchemaVersion,
 		MarkdownDescription: "Manages API discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
@@ -205,48 +199,6 @@ func (r *APIDiscoveryResource) ModifyPlan(ctx context.Context, req resource.Modi
 	}
 }
 
-// UpgradeState implements resource.ResourceWithUpgradeState
-func (r *APIDiscoveryResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
-	return map[int64]resource.StateUpgrader{
-		0: {
-			PriorSchema: &schema.Schema{
-				Attributes: map[string]schema.Attribute{
-					"name":        schema.StringAttribute{Required: true},
-					"namespace":   schema.StringAttribute{Required: true},
-					"annotations": schema.MapAttribute{Optional: true, ElementType: types.StringType},
-					"labels":      schema.MapAttribute{Optional: true, ElementType: types.StringType},
-					"id":          schema.StringAttribute{Computed: true},
-				},
-			},
-			StateUpgrader: func(ctx context.Context, req resource.UpgradeStateRequest, resp *resource.UpgradeStateResponse) {
-				var priorState struct {
-					Name        types.String `tfsdk:"name"`
-					Namespace   types.String `tfsdk:"namespace"`
-					Annotations types.Map    `tfsdk:"annotations"`
-					Labels      types.Map    `tfsdk:"labels"`
-					ID          types.String `tfsdk:"id"`
-				}
-
-				resp.Diagnostics.Append(req.State.Get(ctx, &priorState)...)
-				if resp.Diagnostics.HasError() {
-					return
-				}
-
-				upgradedState := APIDiscoveryResourceModel{
-					Name:        priorState.Name,
-					Namespace:   priorState.Namespace,
-					Annotations: priorState.Annotations,
-					Labels:      priorState.Labels,
-					ID:          priorState.ID,
-					Timeouts:    timeouts.Value{},
-				}
-
-				resp.Diagnostics.Append(resp.State.Set(ctx, upgradedState)...)
-			},
-		},
-	}
-}
-
 func (r *APIDiscoveryResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data APIDiscoveryResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
@@ -366,13 +318,6 @@ func (r *APIDiscoveryResource) Create(ctx context.Context, req resource.CreateRe
 		data.CustomAuthTypes = types.ListNull(types.ObjectType{AttrTypes: APIDiscoveryCustomAuthTypesModelAttrTypes})
 	}
 
-	psd := privatestate.NewPrivateStateData()
-	psd.SetCustom("managed", "true")
-	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": apiResource.Metadata.Name,
-	})
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
-
 	tflog.Trace(ctx, "created APIDiscovery resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -393,9 +338,6 @@ func (r *APIDiscoveryResource) Read(ctx context.Context, req resource.ReadReques
 	ctx, cancel := context.WithTimeout(ctx, readTimeout)
 	defer cancel()
 
-	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
-	resp.Diagnostics.Append(psDiags...)
-
 	apiResource, err := r.client.GetAPIDiscovery(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// Check if the resource was deleted outside Terraform
@@ -409,13 +351,6 @@ func (r *APIDiscoveryResource) Read(ctx context.Context, req resource.ReadReques
 		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read APIDiscovery: %s", err))
 		return
-	}
-
-	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
-		resp.Diagnostics.AddWarning(
-			"Resource Drift Detected",
-			"The api_discovery may have been recreated outside of Terraform.",
-		)
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
@@ -456,14 +391,8 @@ func (r *APIDiscoveryResource) Read(ctx context.Context, req resource.ReadReques
 	}
 
 	// Unmarshal spec fields from API response to Terraform state
-	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
-	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
-	_ = isImport // May be unused if resource has no blocks needing import detection
-	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":   isImport,
-		"psd_is_nil": psd == nil,
-		"managed":    psd.Metadata.Custom["managed"],
-	})
+	isImport := false // Always false - no state upgrade tracking
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["custom_auth_types"].([]interface{}); ok && len(listData) > 0 {
 		var custom_auth_typesList []APIDiscoveryCustomAuthTypesModel
 		var existingCustomAuthTypesItems []APIDiscoveryCustomAuthTypesModel
@@ -498,15 +427,6 @@ func (r *APIDiscoveryResource) Read(ctx context.Context, req resource.ReadReques
 		// No data from API - set to null list
 		data.CustomAuthTypes = types.ListNull(types.ObjectType{AttrTypes: APIDiscoveryCustomAuthTypesModelAttrTypes})
 	}
-
-	// Preserve or set the managed marker for future Read operations
-	newPsd := privatestate.NewPrivateStateData()
-	newPsd.SetUID(apiResource.Metadata.UID)
-	if !isImport {
-		// Preserve the managed marker if we already had it
-		newPsd.SetCustom("managed", "true")
-	}
-	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -635,13 +555,6 @@ func (r *APIDiscoveryResource) Update(ctx context.Context, req resource.UpdateRe
 		// No data from API - set to null list
 		data.CustomAuthTypes = types.ListNull(types.ObjectType{AttrTypes: APIDiscoveryCustomAuthTypesModelAttrTypes})
 	}
-
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from fetched resource
-	uid := fetched.Metadata.UID
-	psd.SetUID(uid)
-	psd.SetCustom("managed", "true") // Preserve managed marker after Update
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }

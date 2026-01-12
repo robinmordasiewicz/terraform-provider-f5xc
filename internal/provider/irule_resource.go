@@ -19,7 +19,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
-	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
 	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
@@ -30,12 +29,8 @@ var (
 	_ resource.ResourceWithConfigure      = &IruleResource{}
 	_ resource.ResourceWithImportState    = &IruleResource{}
 	_ resource.ResourceWithModifyPlan     = &IruleResource{}
-	_ resource.ResourceWithUpgradeState   = &IruleResource{}
 	_ resource.ResourceWithValidateConfig = &IruleResource{}
 )
-
-// iruleSchemaVersion is the schema version for state upgrades
-const iruleSchemaVersion int64 = 1
 
 func NewIruleResource() resource.Resource {
 	return &IruleResource{}
@@ -46,16 +41,17 @@ type IruleResource struct {
 }
 
 type IruleResourceModel struct {
-	Name            types.String   `tfsdk:"name"`
-	Namespace       types.String   `tfsdk:"namespace"`
-	Annotations     types.Map      `tfsdk:"annotations"`
-	Description     types.String   `tfsdk:"description"`
-	Disable         types.Bool     `tfsdk:"disable"`
-	Labels          types.Map      `tfsdk:"labels"`
-	ID              types.String   `tfsdk:"id"`
-	DescriptionSpec types.String   `tfsdk:"description_spec"`
-	Irule           types.String   `tfsdk:"irule"`
-	Timeouts        timeouts.Value `tfsdk:"timeouts"`
+	Name        types.String   `tfsdk:"name"`
+	Namespace   types.String   `tfsdk:"namespace"`
+	Annotations types.Map      `tfsdk:"annotations"`
+	Description types.String   `tfsdk:"description"`
+	Disable     types.Bool     `tfsdk:"disable"`
+	Labels      types.Map      `tfsdk:"labels"`
+	ID          types.String   `tfsdk:"id"`
+	Code        types.String   `tfsdk:"code"`
+	IruleName   types.String   `tfsdk:"irule_name"`
+	Source      types.String   `tfsdk:"source"`
+	Timeouts    timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *IruleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -64,8 +60,7 @@ func (r *IruleResource) Metadata(ctx context.Context, req resource.MetadataReque
 
 func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		Version:             iruleSchemaVersion,
-		MarkdownDescription: "Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages a Irule resource in F5 Distributed Cloud for desired state for big-ip irule service. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Irule. Must be unique within the namespace.",
@@ -112,16 +107,24 @@ func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
-			"description_spec": schema.StringAttribute{
-				MarkdownDescription: "Specify Description for iRule .",
+			"code": schema.StringAttribute{
+				MarkdownDescription: "IRule code content, this content will be base64 encoded for preserving formating.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
-			"irule": schema.StringAttribute{
-				MarkdownDescription: "Www.internal.example.f5.com')} DNS::drop} irule content .",
+			"irule_name": schema.StringAttribute{
+				MarkdownDescription: "IRule name. IRule name.",
+				Optional:            true,
+				Computed:            true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"source": schema.StringAttribute{
+				MarkdownDescription: "IRule source. IRule generation/updation source.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -190,48 +193,6 @@ func (r *IruleResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanR
 	}
 }
 
-// UpgradeState implements resource.ResourceWithUpgradeState
-func (r *IruleResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
-	return map[int64]resource.StateUpgrader{
-		0: {
-			PriorSchema: &schema.Schema{
-				Attributes: map[string]schema.Attribute{
-					"name":        schema.StringAttribute{Required: true},
-					"namespace":   schema.StringAttribute{Required: true},
-					"annotations": schema.MapAttribute{Optional: true, ElementType: types.StringType},
-					"labels":      schema.MapAttribute{Optional: true, ElementType: types.StringType},
-					"id":          schema.StringAttribute{Computed: true},
-				},
-			},
-			StateUpgrader: func(ctx context.Context, req resource.UpgradeStateRequest, resp *resource.UpgradeStateResponse) {
-				var priorState struct {
-					Name        types.String `tfsdk:"name"`
-					Namespace   types.String `tfsdk:"namespace"`
-					Annotations types.Map    `tfsdk:"annotations"`
-					Labels      types.Map    `tfsdk:"labels"`
-					ID          types.String `tfsdk:"id"`
-				}
-
-				resp.Diagnostics.Append(req.State.Get(ctx, &priorState)...)
-				if resp.Diagnostics.HasError() {
-					return
-				}
-
-				upgradedState := IruleResourceModel{
-					Name:        priorState.Name,
-					Namespace:   priorState.Namespace,
-					Annotations: priorState.Annotations,
-					Labels:      priorState.Labels,
-					ID:          priorState.ID,
-					Timeouts:    timeouts.Value{},
-				}
-
-				resp.Diagnostics.Append(resp.State.Set(ctx, upgradedState)...)
-			},
-		},
-	}
-}
-
 func (r *IruleResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data IruleResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
@@ -284,11 +245,14 @@ func (r *IruleResource) Create(ctx context.Context, req resource.CreateRequest, 
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if !data.DescriptionSpec.IsNull() && !data.DescriptionSpec.IsUnknown() {
-		createReq.Spec["description"] = data.DescriptionSpec.ValueString()
+	if !data.Code.IsNull() && !data.Code.IsUnknown() {
+		createReq.Spec["code"] = data.Code.ValueString()
 	}
-	if !data.Irule.IsNull() && !data.Irule.IsUnknown() {
-		createReq.Spec["irule"] = data.Irule.ValueString()
+	if !data.IruleName.IsNull() && !data.IruleName.IsUnknown() {
+		createReq.Spec["irule_name"] = data.IruleName.ValueString()
+	}
+	if !data.Source.IsNull() && !data.Source.IsUnknown() {
+		createReq.Spec["source"] = data.Source.ValueString()
 	}
 
 	apiResource, err := r.client.CreateIrule(ctx, createReq)
@@ -303,23 +267,21 @@ func (r *IruleResource) Create(ctx context.Context, req resource.CreateRequest, 
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
-	if v, ok := apiResource.Spec["description"].(string); ok && v != "" {
-		data.DescriptionSpec = types.StringValue(v)
+	if v, ok := apiResource.Spec["code"].(string); ok && v != "" {
+		data.Code = types.StringValue(v)
 	} else {
-		data.DescriptionSpec = types.StringNull()
+		data.Code = types.StringNull()
 	}
-	if v, ok := apiResource.Spec["irule"].(string); ok && v != "" {
-		data.Irule = types.StringValue(v)
+	if v, ok := apiResource.Spec["irule_name"].(string); ok && v != "" {
+		data.IruleName = types.StringValue(v)
 	} else {
-		data.Irule = types.StringNull()
+		data.IruleName = types.StringNull()
 	}
-
-	psd := privatestate.NewPrivateStateData()
-	psd.SetCustom("managed", "true")
-	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": apiResource.Metadata.Name,
-	})
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	if v, ok := apiResource.Spec["source"].(string); ok && v != "" {
+		data.Source = types.StringValue(v)
+	} else {
+		data.Source = types.StringNull()
+	}
 
 	tflog.Trace(ctx, "created Irule resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -341,9 +303,6 @@ func (r *IruleResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	ctx, cancel := context.WithTimeout(ctx, readTimeout)
 	defer cancel()
 
-	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
-	resp.Diagnostics.Append(psDiags...)
-
 	apiResource, err := r.client.GetIrule(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// Check if the resource was deleted outside Terraform
@@ -357,13 +316,6 @@ func (r *IruleResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Irule: %s", err))
 		return
-	}
-
-	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
-		resp.Diagnostics.AddWarning(
-			"Resource Drift Detected",
-			"The irule may have been recreated outside of Terraform.",
-		)
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
@@ -404,33 +356,23 @@ func (r *IruleResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	}
 
 	// Unmarshal spec fields from API response to Terraform state
-	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
-	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
-	_ = isImport // May be unused if resource has no blocks needing import detection
-	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":   isImport,
-		"psd_is_nil": psd == nil,
-		"managed":    psd.Metadata.Custom["managed"],
-	})
-	if v, ok := apiResource.Spec["description"].(string); ok && v != "" {
-		data.DescriptionSpec = types.StringValue(v)
+	isImport := false // Always false - no state upgrade tracking
+	_ = isImport      // May be unused if resource has no blocks needing import detection
+	if v, ok := apiResource.Spec["code"].(string); ok && v != "" {
+		data.Code = types.StringValue(v)
 	} else {
-		data.DescriptionSpec = types.StringNull()
+		data.Code = types.StringNull()
 	}
-	if v, ok := apiResource.Spec["irule"].(string); ok && v != "" {
-		data.Irule = types.StringValue(v)
+	if v, ok := apiResource.Spec["irule_name"].(string); ok && v != "" {
+		data.IruleName = types.StringValue(v)
 	} else {
-		data.Irule = types.StringNull()
+		data.IruleName = types.StringNull()
 	}
-
-	// Preserve or set the managed marker for future Read operations
-	newPsd := privatestate.NewPrivateStateData()
-	newPsd.SetUID(apiResource.Metadata.UID)
-	if !isImport {
-		// Preserve the managed marker if we already had it
-		newPsd.SetCustom("managed", "true")
+	if v, ok := apiResource.Spec["source"].(string); ok && v != "" {
+		data.Source = types.StringValue(v)
+	} else {
+		data.Source = types.StringNull()
 	}
-	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -482,11 +424,14 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if !data.DescriptionSpec.IsNull() && !data.DescriptionSpec.IsUnknown() {
-		apiResource.Spec["description"] = data.DescriptionSpec.ValueString()
+	if !data.Code.IsNull() && !data.Code.IsUnknown() {
+		apiResource.Spec["code"] = data.Code.ValueString()
 	}
-	if !data.Irule.IsNull() && !data.Irule.IsUnknown() {
-		apiResource.Spec["irule"] = data.Irule.ValueString()
+	if !data.IruleName.IsNull() && !data.IruleName.IsUnknown() {
+		apiResource.Spec["irule_name"] = data.IruleName.ValueString()
+	}
+	if !data.Source.IsNull() && !data.Source.IsUnknown() {
+		apiResource.Spec["source"] = data.Source.ValueString()
 	}
 
 	_, err := r.client.UpdateIrule(ctx, apiResource)
@@ -507,18 +452,25 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	}
 
 	// Set computed fields from API response
-	if v, ok := fetched.Spec["description"].(string); ok && v != "" {
-		data.DescriptionSpec = types.StringValue(v)
-	} else if data.DescriptionSpec.IsUnknown() {
+	if v, ok := fetched.Spec["code"].(string); ok && v != "" {
+		data.Code = types.StringValue(v)
+	} else if data.Code.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
-		data.DescriptionSpec = types.StringNull()
+		data.Code = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := fetched.Spec["irule"].(string); ok && v != "" {
-		data.Irule = types.StringValue(v)
-	} else if data.Irule.IsUnknown() {
+	if v, ok := fetched.Spec["irule_name"].(string); ok && v != "" {
+		data.IruleName = types.StringValue(v)
+	} else if data.IruleName.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
-		data.Irule = types.StringNull()
+		data.IruleName = types.StringNull()
+	}
+	// If plan had a value, preserve it
+	if v, ok := fetched.Spec["source"].(string); ok && v != "" {
+		data.Source = types.StringValue(v)
+	} else if data.Source.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Source = types.StringNull()
 	}
 	// If plan had a value, preserve it
 
@@ -526,23 +478,21 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	apiResource = fetched // Use GET response which includes all computed fields
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
-	if v, ok := apiResource.Spec["description"].(string); ok && v != "" {
-		data.DescriptionSpec = types.StringValue(v)
+	if v, ok := apiResource.Spec["code"].(string); ok && v != "" {
+		data.Code = types.StringValue(v)
 	} else {
-		data.DescriptionSpec = types.StringNull()
+		data.Code = types.StringNull()
 	}
-	if v, ok := apiResource.Spec["irule"].(string); ok && v != "" {
-		data.Irule = types.StringValue(v)
+	if v, ok := apiResource.Spec["irule_name"].(string); ok && v != "" {
+		data.IruleName = types.StringValue(v)
 	} else {
-		data.Irule = types.StringNull()
+		data.IruleName = types.StringNull()
 	}
-
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from fetched resource
-	uid := fetched.Metadata.UID
-	psd.SetUID(uid)
-	psd.SetCustom("managed", "true") // Preserve managed marker after Update
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
+	if v, ok := apiResource.Spec["source"].(string); ok && v != "" {
+		data.Source = types.StringValue(v)
+	} else {
+		data.Source = types.StringNull()
+	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }

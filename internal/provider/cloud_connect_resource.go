@@ -20,7 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
-	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
 	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
@@ -31,12 +30,8 @@ var (
 	_ resource.ResourceWithConfigure      = &CloudConnectResource{}
 	_ resource.ResourceWithImportState    = &CloudConnectResource{}
 	_ resource.ResourceWithModifyPlan     = &CloudConnectResource{}
-	_ resource.ResourceWithUpgradeState   = &CloudConnectResource{}
 	_ resource.ResourceWithValidateConfig = &CloudConnectResource{}
 )
-
-// cloud_connectSchemaVersion is the schema version for state upgrades
-const cloud_connectSchemaVersion int64 = 1
 
 func NewCloudConnectResource() resource.Resource {
 	return &CloudConnectResource{}
@@ -298,7 +293,6 @@ func (r *CloudConnectResource) Metadata(ctx context.Context, req resource.Metada
 
 func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		Version:             cloud_connectSchemaVersion,
 		MarkdownDescription: "Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
@@ -312,10 +306,11 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the Cloud Connect will be created.",
-				Required:            true,
+				MarkdownDescription: "Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted.",
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.UseStateForUnknown(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -656,48 +651,6 @@ func (r *CloudConnectResource) ModifyPlan(ctx context.Context, req resource.Modi
 	}
 }
 
-// UpgradeState implements resource.ResourceWithUpgradeState
-func (r *CloudConnectResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
-	return map[int64]resource.StateUpgrader{
-		0: {
-			PriorSchema: &schema.Schema{
-				Attributes: map[string]schema.Attribute{
-					"name":        schema.StringAttribute{Required: true},
-					"namespace":   schema.StringAttribute{Required: true},
-					"annotations": schema.MapAttribute{Optional: true, ElementType: types.StringType},
-					"labels":      schema.MapAttribute{Optional: true, ElementType: types.StringType},
-					"id":          schema.StringAttribute{Computed: true},
-				},
-			},
-			StateUpgrader: func(ctx context.Context, req resource.UpgradeStateRequest, resp *resource.UpgradeStateResponse) {
-				var priorState struct {
-					Name        types.String `tfsdk:"name"`
-					Namespace   types.String `tfsdk:"namespace"`
-					Annotations types.Map    `tfsdk:"annotations"`
-					Labels      types.Map    `tfsdk:"labels"`
-					ID          types.String `tfsdk:"id"`
-				}
-
-				resp.Diagnostics.Append(req.State.Get(ctx, &priorState)...)
-				if resp.Diagnostics.HasError() {
-					return
-				}
-
-				upgradedState := CloudConnectResourceModel{
-					Name:        priorState.Name,
-					Namespace:   priorState.Namespace,
-					Annotations: priorState.Annotations,
-					Labels:      priorState.Labels,
-					ID:          priorState.ID,
-					Timeouts:    timeouts.Value{},
-				}
-
-				resp.Diagnostics.Append(resp.State.Set(ctx, upgradedState)...)
-			},
-		},
-	}
-}
-
 func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
 	var data CloudConnectResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
@@ -864,13 +817,6 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 		}
 	}
 
-	psd := privatestate.NewPrivateStateData()
-	psd.SetCustom("managed", "true")
-	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": apiResource.Metadata.Name,
-	})
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
-
 	tflog.Trace(ctx, "created CloudConnect resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -891,9 +837,6 @@ func (r *CloudConnectResource) Read(ctx context.Context, req resource.ReadReques
 	ctx, cancel := context.WithTimeout(ctx, readTimeout)
 	defer cancel()
 
-	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
-	resp.Diagnostics.Append(psDiags...)
-
 	apiResource, err := r.client.GetCloudConnect(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// Check if the resource was deleted outside Terraform
@@ -907,13 +850,6 @@ func (r *CloudConnectResource) Read(ctx context.Context, req resource.ReadReques
 		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read CloudConnect: %s", err))
 		return
-	}
-
-	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
-		resp.Diagnostics.AddWarning(
-			"Resource Drift Detected",
-			"The cloud_connect may have been recreated outside of Terraform.",
-		)
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
@@ -954,14 +890,8 @@ func (r *CloudConnectResource) Read(ctx context.Context, req resource.ReadReques
 	}
 
 	// Unmarshal spec fields from API response to Terraform state
-	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
-	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
-	_ = isImport // May be unused if resource has no blocks needing import detection
-	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":   isImport,
-		"psd_is_nil": psd == nil,
-		"managed":    psd.Metadata.Custom["managed"],
-	})
+	isImport := false // Always false - no state upgrade tracking
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["aws_tgw_site"].(map[string]interface{}); ok && isImport && data.AWSTGWSite == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AWSTGWSite = &CloudConnectAWSTGWSiteModel{}
@@ -994,15 +924,6 @@ func (r *CloudConnectResource) Read(ctx context.Context, req resource.ReadReques
 			}(),
 		}
 	}
-
-	// Preserve or set the managed marker for future Read operations
-	newPsd := privatestate.NewPrivateStateData()
-	newPsd.SetUID(apiResource.Metadata.UID)
-	if !isImport {
-		// Preserve the managed marker if we already had it
-		newPsd.SetCustom("managed", "true")
-	}
-	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1178,13 +1099,6 @@ func (r *CloudConnectResource) Update(ctx context.Context, req resource.UpdateRe
 			}(),
 		}
 	}
-
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from fetched resource
-	uid := fetched.Metadata.UID
-	psd.SetUID(uid)
-	psd.SetCustom("managed", "true") // Preserve managed marker after Update
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }

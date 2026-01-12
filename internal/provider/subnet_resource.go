@@ -20,7 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
-	"github.com/f5xc/terraform-provider-f5xc/internal/privatestate"
 	inttimeouts "github.com/f5xc/terraform-provider-f5xc/internal/timeouts"
 	"github.com/f5xc/terraform-provider-f5xc/internal/validators"
 )
@@ -31,12 +30,8 @@ var (
 	_ resource.ResourceWithConfigure      = &SubnetResource{}
 	_ resource.ResourceWithImportState    = &SubnetResource{}
 	_ resource.ResourceWithModifyPlan     = &SubnetResource{}
-	_ resource.ResourceWithUpgradeState   = &SubnetResource{}
 	_ resource.ResourceWithValidateConfig = &SubnetResource{}
 )
-
-// subnetSchemaVersion is the schema version for state upgrades
-const subnetSchemaVersion int64 = 1
 
 func NewSubnetResource() resource.Resource {
 	return &SubnetResource{}
@@ -145,7 +140,6 @@ func (r *SubnetResource) Metadata(ctx context.Context, req resource.MetadataRequ
 
 func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		Version:             subnetSchemaVersion,
 		MarkdownDescription: "Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
@@ -345,48 +339,6 @@ func (r *SubnetResource) ModifyPlan(ctx context.Context, req resource.ModifyPlan
 				"The resource name is not yet known. This may affect planning for dependent resources.",
 			)
 		}
-	}
-}
-
-// UpgradeState implements resource.ResourceWithUpgradeState
-func (r *SubnetResource) UpgradeState(ctx context.Context) map[int64]resource.StateUpgrader {
-	return map[int64]resource.StateUpgrader{
-		0: {
-			PriorSchema: &schema.Schema{
-				Attributes: map[string]schema.Attribute{
-					"name":        schema.StringAttribute{Required: true},
-					"namespace":   schema.StringAttribute{Required: true},
-					"annotations": schema.MapAttribute{Optional: true, ElementType: types.StringType},
-					"labels":      schema.MapAttribute{Optional: true, ElementType: types.StringType},
-					"id":          schema.StringAttribute{Computed: true},
-				},
-			},
-			StateUpgrader: func(ctx context.Context, req resource.UpgradeStateRequest, resp *resource.UpgradeStateResponse) {
-				var priorState struct {
-					Name        types.String `tfsdk:"name"`
-					Namespace   types.String `tfsdk:"namespace"`
-					Annotations types.Map    `tfsdk:"annotations"`
-					Labels      types.Map    `tfsdk:"labels"`
-					ID          types.String `tfsdk:"id"`
-				}
-
-				resp.Diagnostics.Append(req.State.Get(ctx, &priorState)...)
-				if resp.Diagnostics.HasError() {
-					return
-				}
-
-				upgradedState := SubnetResourceModel{
-					Name:        priorState.Name,
-					Namespace:   priorState.Namespace,
-					Annotations: priorState.Annotations,
-					Labels:      priorState.Labels,
-					ID:          priorState.ID,
-					Timeouts:    timeouts.Value{},
-				}
-
-				resp.Diagnostics.Append(resp.State.Set(ctx, upgradedState)...)
-			},
-		},
 	}
 }
 
@@ -608,13 +560,6 @@ func (r *SubnetResource) Create(ctx context.Context, req resource.CreateRequest,
 		data.SiteSubnetParams = types.ListNull(types.ObjectType{AttrTypes: SubnetSiteSubnetParamsModelAttrTypes})
 	}
 
-	psd := privatestate.NewPrivateStateData()
-	psd.SetCustom("managed", "true")
-	tflog.Debug(ctx, "Create: saving private state with managed marker", map[string]interface{}{
-		"name": apiResource.Metadata.Name,
-	})
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
-
 	tflog.Trace(ctx, "created Subnet resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -635,9 +580,6 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 	ctx, cancel := context.WithTimeout(ctx, readTimeout)
 	defer cancel()
 
-	psd, psDiags := privatestate.LoadFromPrivateState(ctx, &req)
-	resp.Diagnostics.Append(psDiags...)
-
 	apiResource, err := r.client.GetSubnet(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// Check if the resource was deleted outside Terraform
@@ -651,13 +593,6 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Subnet: %s", err))
 		return
-	}
-
-	if psd != nil && psd.Metadata.UID != "" && apiResource.Metadata.UID != psd.Metadata.UID {
-		resp.Diagnostics.AddWarning(
-			"Resource Drift Detected",
-			"The subnet may have been recreated outside of Terraform.",
-		)
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
@@ -698,14 +633,8 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 	}
 
 	// Unmarshal spec fields from API response to Terraform state
-	// isImport is true when private state has no "managed" marker (Import case - never went through Create)
-	isImport := psd == nil || psd.Metadata.Custom == nil || psd.Metadata.Custom["managed"] != "true"
-	_ = isImport // May be unused if resource has no blocks needing import detection
-	tflog.Debug(ctx, "Read: checking isImport status", map[string]interface{}{
-		"isImport":   isImport,
-		"psd_is_nil": psd == nil,
-		"managed":    psd.Metadata.Custom["managed"],
-	})
+	isImport := false // Always false - no state upgrade tracking
+	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["connect_to_layer2"].(map[string]interface{}); ok && isImport && data.ConnectToLayer2 == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.ConnectToLayer2 = &SubnetConnectToLayer2Model{}
@@ -786,15 +715,6 @@ func (r *SubnetResource) Read(ctx context.Context, req resource.ReadRequest, res
 		// No data from API - set to null list
 		data.SiteSubnetParams = types.ListNull(types.ObjectType{AttrTypes: SubnetSiteSubnetParamsModelAttrTypes})
 	}
-
-	// Preserve or set the managed marker for future Read operations
-	newPsd := privatestate.NewPrivateStateData()
-	newPsd.SetUID(apiResource.Metadata.UID)
-	if !isImport {
-		// Preserve the managed marker if we already had it
-		newPsd.SetCustom("managed", "true")
-	}
-	resp.Diagnostics.Append(newPsd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
@@ -1022,13 +942,6 @@ func (r *SubnetResource) Update(ctx context.Context, req resource.UpdateRequest,
 		// No data from API - set to null list
 		data.SiteSubnetParams = types.ListNull(types.ObjectType{AttrTypes: SubnetSiteSubnetParamsModelAttrTypes})
 	}
-
-	psd := privatestate.NewPrivateStateData()
-	// Use UID from fetched resource
-	uid := fetched.Metadata.UID
-	psd.SetUID(uid)
-	psd.SetCustom("managed", "true") // Preserve managed marker after Update
-	resp.Diagnostics.Append(psd.SaveToPrivateState(ctx, resp)...)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }

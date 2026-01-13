@@ -1,5 +1,5 @@
 # Site Resource Example
-# Manages a Site resource in F5 Distributed Cloud for secure mesh site specification. configuration.
+# Manages a Site resource in F5 Distributed Cloud for aws tgw site specification. configuration.
 
 # Basic Site configuration
 resource "f5xc_site" "example" {
@@ -16,16 +16,16 @@ resource "f5xc_site" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: active_enhanced_firewall_policies, no_network_pol...
-  active_enhanced_firewall_policies {
-    # Configure active_enhanced_firewall_policies settings
+  # Setup AWS services VPC, transit gateway and site.
+  aws_parameters {
+    # Configure aws_parameters settings
   }
-  # Ordered List of Enhanced Firewall Policies active .
-  enhanced_firewall_policies {
-    # Configure enhanced_firewall_policies settings
+  # SecretType is used in an object to indicate a sensitive/c...
+  admin_password {
+    # Configure admin_password settings
   }
-  # [OneOf: active_forward_proxy_policies, no_forward_proxy; ...
-  active_forward_proxy_policies {
-    # Configure active_forward_proxy_policies settings
+  # BlindfoldSecretInfoType specifies information about the S...
+  blindfold_secret_info {
+    # Configure blindfold_secret_info settings
   }
 }

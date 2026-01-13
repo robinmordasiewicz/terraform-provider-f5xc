@@ -379,7 +379,6 @@ F5XC_API_TOKEN="token"         # Won't work
 
 - [HTTP Load Balancer Guide](http-loadbalancer.md) - Deploy your first load balancer
 - [Blindfold Functions Guide](blindfold.md) - Secure secret management
-- [Namespace Resource](../resources/namespace.md) - Organize your resources
 
 ## Support
 

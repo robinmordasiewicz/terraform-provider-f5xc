@@ -10,7 +10,10 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "manifest.json",
+    "icon.png",
+    "f5.svg"
   ],
   "scripts": {
     "build": "npm run build:ts && npm run build:docs",

@@ -1,19 +1,25 @@
 {
   "manifest_version": "0.3",
-  "name": "f5xc-terraform-mcp",
+  "name": "@robinmordasiewicz/f5xc-terraform-mcp",
   "display_name": "F5 Distributed Cloud Terraform Provider",
   "version": "3.11.14",
   "description": "MCP server providing AI assistants with access to F5 Distributed Cloud Terraform provider documentation, 270+ OpenAPI specifications, subscription tier information, and addon service activation workflows.",
+  "long_description": "Model Context Protocol (MCP) server for F5 Distributed Cloud (F5XC) Terraform provider. Provides AI assistants with comprehensive access to:\n\n- **Terraform Documentation**: Search, retrieve, and explore F5XC resources, data sources, functions, and guides\n- **OpenAPI Specifications**: Query 270+ F5 Distributed Cloud API specs with endpoint discovery and schema definitions\n- **Subscription Intelligence**: Check resource subscription tier requirements (STANDARD, ADVANCED, PREMIUM)\n- **Addon Service Workflows**: List, check activation status, and get activation workflows for F5XC addon services\n- **Metadata & Patterns**: Access validation patterns, oneof constraints, default values, and common configuration mistakes\n\nDesigned for infrastructure-as-code workflows, enabling intelligent Terraform configuration generation with subscription compliance and best practices built-in.",
   "author": {
     "name": "Robin Mordasiewicz",
-    "url": "https://github.com/robinmordasiewicz"
+    "email": "robin@mordasiewicz.com",
+    "url": "https://www.linkedin.com/in/robin-mordasiewicz/"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/robinmordasiewicz/terraform-provider-f5xc"
+    "url": "git+https://github.com/robinmordasiewicz/terraform-provider-f5xc.git"
   },
   "homepage": "https://registry.terraform.io/providers/robinmordasiewicz/f5xc/latest",
+  "documentation": "https://github.com/robinmordasiewicz/terraform-provider-f5xc/blob/main/mcp-server/README.md",
+  "support": "https://github.com/robinmordasiewicz/terraform-provider-f5xc/issues",
+  "icon": "icon.png",
+  "screenshots": [],
   "server": {
     "type": "node",
     "entry_point": "dist/index.js",
@@ -21,33 +27,42 @@
       "command": "node",
       "args": [
         "${__dirname}/dist/index.js"
-      ]
+      ],
+      "env": {}
     }
   },
   "tools": [
     {
       "name": "f5xc_terraform_discover",
-      "description": "Discover available F5XC Terraform tools with optional schema details for lazy loading"
+      "description": "Discover available F5XC Terraform MCP tools with optional schema details for lazy loading and efficient tool selection"
     },
     {
       "name": "f5xc_terraform_docs",
-      "description": "Search, get, or list F5XC Terraform documentation (operations: search, get, list)"
+      "description": "Search, get, or list F5XC Terraform provider documentation including resources, data sources, functions, and guides"
     },
     {
       "name": "f5xc_terraform_api",
-      "description": "Query 270+ F5XC OpenAPI specs (operations: search, get, find_endpoints, get_definition, list_definitions)"
+      "description": "Query 270+ F5XC OpenAPI specifications - search specs, get definitions, find endpoints, and explore schema structures"
     },
     {
       "name": "f5xc_terraform_subscription",
-      "description": "Check F5XC resource subscription tiers (operations: resource, property)"
+      "description": "Check F5XC resource subscription tier requirements and property-level feature availability (STANDARD/ADVANCED/PREMIUM)"
     },
     {
       "name": "f5xc_terraform_addon",
-      "description": "List, check activation, and get workflows for F5XC addon services (operations: list, check, workflow)"
+      "description": "List F5XC addon services, check activation status, and retrieve activation workflows for self-service, partial, or managed addons"
+    },
+    {
+      "name": "f5xc_terraform_metadata",
+      "description": "Query resource metadata for deterministic Terraform generation - oneof constraints, validation patterns, defaults, enums, subscription tiers, dependencies, and common mistakes"
+    },
+    {
+      "name": "f5xc_terraform_auth",
+      "description": "Check authentication status, list/switch profiles, validate credentials, and generate Terraform provider configuration blocks"
     },
     {
       "name": "f5xc_terraform_get_summary",
-      "description": "Get a summary of all available F5XC documentation and API specifications"
+      "description": "Get comprehensive summary of all available F5XC documentation, API specifications, and MCP server capabilities"
     }
   ],
   "keywords": [
@@ -56,10 +71,14 @@
     "distributed-cloud",
     "terraform",
     "infrastructure-as-code",
+    "iac",
     "load-balancer",
     "waf",
     "api-security",
     "bot-defense",
-    "openapi"
+    "openapi",
+    "mcp",
+    "ai-assistant",
+    "automation"
   ]
 }

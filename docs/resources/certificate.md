@@ -2,12 +2,12 @@
 page_title: "f5xc_certificate Resource - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
-  Manages a Certificate resource in F5 Distributed Cloud for certificate. configuration.
+  Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.
 ---
 
 # f5xc_certificate (Resource)
 
-Manages a Certificate resource in F5 Distributed Cloud for certificate. configuration.
+Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -15,7 +15,7 @@ Manages a Certificate resource in F5 Distributed Cloud for certificate. configur
 
 ```terraform
 # Certificate Resource Example
-# Manages a Certificate resource in F5 Distributed Cloud for certificate. configuration.
+# Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.
 
 # Basic Certificate configuration
 resource "f5xc_certificate" "example" {
@@ -60,19 +60,9 @@ resource "f5xc_certificate" "example" {
 
 ### Spec Argument Reference
 
-<a id="certificate-chain"></a>&#x2022; [`certificate_chain`](#certificate-chain) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Certificate Chain](#certificate-chain) below for details.
-
-<a id="certificate-url"></a>&#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate. Certificate or certificate chain in PEM format including the PEM headers
-
--> **One of the following:**
-&#x2022; <a id="custom-hash-algorithms"></a>[`custom_hash_algorithms`](#custom-hash-algorithms) - Optional Block<br>Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#custom-hash-algorithms) below for details.
-<br><br>&#x2022; <a id="disable-ocsp-stapling"></a>[`disable_ocsp_stapling`](#disable-ocsp-stapling) - Optional Block<br>Enable this option
-
-<a id="private-key"></a>&#x2022; [`private_key`](#private-key) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#private-key) below for details.
+<a id="certificate-url"></a>&#x2022; [`certificate_url`](#certificate-url) - Optional String<br>Certificate chain is the list of intermediate certificates in PEM format including the PEM headers
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
-
-<a id="use-system-defaults"></a>&#x2022; [`use_system_defaults`](#use-system-defaults) - Optional Block<br>Enable this option
 
 ### Attributes Reference
 
@@ -81,48 +71,6 @@ In addition to all arguments above, the following attributes are exported:
 <a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
-
-#### Certificate Chain
-
-A [`certificate_chain`](#certificate-chain) block supports the following:
-
-<a id="certificate-chain-name"></a>&#x2022; [`name`](#certificate-chain-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
-
-<a id="certificate-chain-namespace"></a>&#x2022; [`namespace`](#certificate-chain-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
-
-<a id="certificate-chain-tenant"></a>&#x2022; [`tenant`](#certificate-chain-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
-
-#### Custom Hash Algorithms
-
-A [`custom_hash_algorithms`](#custom-hash-algorithms) block supports the following:
-
-<a id="custom-hash-algorithms-hash-algorithms"></a>&#x2022; [`hash_algorithms`](#custom-hash-algorithms-hash-algorithms) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Ordered list of hash algorithms to be used
-
-#### Private Key
-
-A [`private_key`](#private-key) block supports the following:
-
-<a id="private-key-blindfold-secret-info"></a>&#x2022; [`blindfold_secret_info`](#private-key-blindfold-secret-info) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#private-key-blindfold-secret-info) below.
-
-<a id="private-key-clear-secret-info"></a>&#x2022; [`clear_secret_info`](#private-key-clear-secret-info) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#private-key-clear-secret-info) below.
-
-#### Private Key Blindfold Secret Info
-
-A [`blindfold_secret_info`](#private-key-blindfold-secret-info) block (within [`private_key`](#private-key)) supports the following:
-
-<a id="provider-2cb137"></a>&#x2022; [`decryption_provider`](#provider-2cb137) - Optional String<br>Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-208dea"></a>&#x2022; [`location`](#location-208dea) - Optional String<br>Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-1e06e0"></a>&#x2022; [`store_provider`](#provider-1e06e0) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-#### Private Key Clear Secret Info
-
-A [`clear_secret_info`](#private-key-clear-secret-info) block (within [`private_key`](#private-key)) supports the following:
-
-<a id="ref-e799a7"></a>&#x2022; [`provider_ref`](#ref-e799a7) - Optional String<br>Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="private-key-clear-secret-info-url"></a>&#x2022; [`url`](#private-key-clear-secret-info-url) - Optional String<br>URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### Timeouts
 

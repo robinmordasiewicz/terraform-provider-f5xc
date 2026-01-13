@@ -17,8 +17,7 @@ type CloudConnect struct {
 // CreateCloudConnect creates a new CloudConnect
 func (c *Client) CreateCloudConnect(ctx context.Context, resource *CloudConnect) (*CloudConnect, error) {
 	var result CloudConnect
-	path := "/api/data/namespaces/system/top/cloud_connects"
-	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
+	path := fmt.Sprintf("/api/config/namespaces/%s/cloud_connects", resource.Metadata.Namespace)
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -26,8 +25,7 @@ func (c *Client) CreateCloudConnect(ctx context.Context, resource *CloudConnect)
 // GetCloudConnect retrieves a CloudConnect
 func (c *Client) GetCloudConnect(ctx context.Context, namespace, name string) (*CloudConnect, error) {
 	var result CloudConnect
-	path := fmt.Sprintf("/api/data/namespaces/system/top/cloud_connects/%s", name)
-	_ = namespace // Namespace not required in API path for this resource
+	path := fmt.Sprintf("/api/config/namespaces/%s/cloud_connects/%s", namespace, name)
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -35,15 +33,13 @@ func (c *Client) GetCloudConnect(ctx context.Context, namespace, name string) (*
 // UpdateCloudConnect updates a CloudConnect
 func (c *Client) UpdateCloudConnect(ctx context.Context, resource *CloudConnect) (*CloudConnect, error) {
 	var result CloudConnect
-	path := fmt.Sprintf("/api/data/namespaces/system/top/cloud_connects/%s", resource.Metadata.Name)
-	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
+	path := fmt.Sprintf("/api/config/namespaces/%s/cloud_connects/%s", resource.Metadata.Namespace, resource.Metadata.Name)
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteCloudConnect deletes a CloudConnect
 func (c *Client) DeleteCloudConnect(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/data/namespaces/system/top/cloud_connects/%s", name)
-	_ = namespace // Namespace not required in API path for this resource
+	path := fmt.Sprintf("/api/config/namespaces/%s/cloud_connects/%s", namespace, name)
 	return c.Delete(ctx, path)
 }

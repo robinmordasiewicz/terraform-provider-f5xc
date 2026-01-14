@@ -42,7 +42,7 @@ func (d *IruleDataSource) Metadata(ctx context.Context, req datasource.MetadataR
 
 func (d *IruleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a Irule resource in F5 Distributed Cloud for desired state for big-ip irule service. configuration.",
+		MarkdownDescription: "Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

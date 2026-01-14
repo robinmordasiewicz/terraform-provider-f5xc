@@ -778,6 +778,8 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
+	// For resources without namespace in API path, namespace is computed from API response
+	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
@@ -888,9 +890,13 @@ func (r *CloudConnectResource) Read(ctx context.Context, req resource.ReadReques
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	// Unmarshal spec fields from API response to Terraform state
-	isImport := false // Always false - no state upgrade tracking
-	_ = isImport      // May be unused if resource has no blocks needing import detection
+	// Check if this Read is triggered by an import operation
+	// Import sets a private state marker so we know to populate all nested blocks from API response
+	isImport := false
+	if importMarker, diags := req.Private.GetKey(ctx, "isImport"); diags.HasError() == false && string(importMarker) == "true" {
+		isImport = true
+	}
+	_ = isImport // May be unused if resource has no blocks needing import detection
 	if _, ok := apiResource.Spec["aws_tgw_site"].(map[string]interface{}); ok && isImport && data.AWSTGWSite == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.AWSTGWSite = &CloudConnectAWSTGWSiteModel{}
@@ -1142,19 +1148,22 @@ func (r *CloudConnectResource) Delete(ctx context.Context, req resource.DeleteRe
 }
 
 func (r *CloudConnectResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: namespace/name
-	parts := strings.Split(req.ID, "/")
-	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+	// Import ID format: name (no namespace for this resource type)
+	name := req.ID
+	if name == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+			"Expected import ID to be the resource name, got empty string",
 		)
 		return
 	}
-	namespace := parts[0]
-	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
+
+	// Set private state marker to indicate this is an import operation
+	// This allows Read to populate all nested blocks from API response
+	diags := resp.Private.SetKey(ctx, "isImport", []byte("true"))
+	resp.Diagnostics.Append(diags...)
 }

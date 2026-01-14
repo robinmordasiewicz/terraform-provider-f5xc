@@ -2,12 +2,12 @@
 page_title: "f5xc_site Data Source - terraform-provider-f5xc"
 subcategory: "Uncategorized"
 description: |-
-  Manages a Site resource in F5 Distributed Cloud for aws vpc site specification. configuration.
+  Manages virtual site object in given namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_site (Data Source)
 
-Manages a Site resource in F5 Distributed Cloud for aws vpc site specification. configuration.
+Manages virtual site object in given namespace. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 

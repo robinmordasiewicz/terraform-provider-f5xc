@@ -2,12 +2,12 @@
 page_title: "f5xc_discovery Resource - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
-  Manages API discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace. configuration.
 ---
 
 # f5xc_discovery (Resource)
 
-Manages API discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace. configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -15,7 +15,7 @@ Manages API discovery creates a new object in the storage backend for metadata.n
 
 ```terraform
 # Discovery Resource Example
-# Manages API discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace. configuration.
 
 # Basic Discovery configuration
 resource "f5xc_discovery" "example" {
@@ -78,9 +78,18 @@ resource "f5xc_discovery" "example" {
 
 ### Spec Argument Reference
 
-<a id="custom-auth-types"></a>&#x2022; [`custom_auth_types`](#custom-auth-types) - Optional Block<br>Select your custom authentication types to be detected in the API discovery<br>See [Custom Auth Types](#custom-auth-types) below for details.
+-> **One of the following:**
+&#x2022; <a id="cluster-id"></a>[`cluster_id`](#cluster-id) - Optional String<br>Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object
+
+-> **One of the following:**
+&#x2022; <a id="discovery-consul"></a>[`discovery_consul`](#discovery-consul) - Optional Block<br>Discovery configuration for Hashicorp Consul<br>See [Discovery Consul](#discovery-consul) below for details.
+<br><br>&#x2022; <a id="discovery-k8s"></a>[`discovery_k8s`](#discovery-k8s) - Optional Block<br>K8S Discovery Configuration. Discovery configuration for K8S<br>See [Discovery K8S](#discovery-k8s) below for details.
+
+<a id="no-cluster-id"></a>&#x2022; [`no_cluster_id`](#no-cluster-id) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+
+<a id="where"></a>&#x2022; [`where`](#where) - Optional Block<br>NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using following rules \* Direct reference to virtual_network object \* Site local network when refering to site object \* All site local<br>See [Where](#where) below for details.
 
 ### Attributes Reference
 
@@ -90,13 +99,173 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-#### Custom Auth Types
+#### Discovery Consul
 
-A [`custom_auth_types`](#custom-auth-types) block supports the following:
+A [`discovery_consul`](#discovery-consul) block supports the following:
 
-<a id="custom-auth-types-parameter-name"></a>&#x2022; [`parameter_name`](#custom-auth-types-parameter-name) - Optional String<br>The authentication parameter name
+<a id="discovery-consul-access-info"></a>&#x2022; [`access_info`](#discovery-consul-access-info) - Optional Block<br>Hashicorp Consul API server information<br>See [Access Info](#discovery-consul-access-info) below.
 
-<a id="custom-auth-types-parameter-type"></a>&#x2022; [`parameter_type`](#custom-auth-types-parameter-type) - Optional String  Defaults to `QUERY_PARAMETER`<br>Possible values are `QUERY_PARAMETER`, `HEADER`, `COOKIE`<br>[Enum: QUERY_PARAMETER|HEADER|COOKIE] Enumeration for authentication parameter types
+<a id="discovery-consul-publish-info"></a>&#x2022; [`publish_info`](#discovery-consul-publish-info) - Optional Block<br>VIP Publish Configuration. Consul Configuration to publish VIPs<br>See [Publish Info](#discovery-consul-publish-info) below.
+
+#### Discovery Consul Access Info
+
+An [`access_info`](#discovery-consul-access-info) block (within [`discovery_consul`](#discovery-consul)) supports the following:
+
+<a id="info-c7c3de"></a>&#x2022; [`connection_info`](#info-c7c3de) - Optional Block<br>Configuration details to access discovery service REST API<br>See [Connection Info](#info-c7c3de) below.
+
+<a id="info-28e890"></a>&#x2022; [`http_basic_auth_info`](#info-28e890) - Optional Block<br>Authentication parameters to access Hashicorp Consul<br>See [HTTP Basic Auth Info](#info-28e890) below.
+
+#### Discovery Consul Access Info Connection Info
+
+A [`connection_info`](#info-c7c3de) block (within [`discovery_consul.access_info`](#discovery-consul-access-info)) supports the following:
+
+<a id="server-db3eac"></a>&#x2022; [`api_server`](#server-db3eac) - Optional String<br>API server must be a fully qualified domain string and port specified as host:port pair
+
+<a id="info-72d38f"></a>&#x2022; [`tls_info`](#info-72d38f) - Optional Block<br>TLS config for client of discovery service<br>See [TLS Info](#info-72d38f) below.
+
+#### Discovery Consul Access Info Connection Info TLS Info
+
+<a id="deep-2a9ae1"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Discovery Consul Access Info Connection Info TLS Info Key URL
+
+<a id="deep-9298be"></a>Deeply nested **URL** block collapsed for readability.
+
+#### Discovery Consul Access Info Connection Info TLS Info Key URL Blindfold Secret Info
+
+<a id="deep-14dd70"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Discovery Consul Access Info Connection Info TLS Info Key URL Clear Secret Info
+
+<a id="deep-ed594e"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Discovery Consul Access Info HTTP Basic Auth Info
+
+<a id="deep-bbf940"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Discovery Consul Access Info HTTP Basic Auth Info Passwd URL
+
+<a id="deep-ee109b"></a>Deeply nested **URL** block collapsed for readability.
+
+#### Discovery Consul Access Info HTTP Basic Auth Info Passwd URL Blindfold Secret Info
+
+<a id="deep-6be94c"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Discovery Consul Access Info HTTP Basic Auth Info Passwd URL Clear Secret Info
+
+<a id="deep-82d259"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Discovery Consul Publish Info
+
+A [`publish_info`](#discovery-consul-publish-info) block (within [`discovery_consul`](#discovery-consul)) supports the following:
+
+<a id="discovery-consul-publish-info-disable"></a>&#x2022; [`disable`](#discovery-consul-publish-info-disable) - Optional Block<br>Enable this option
+
+<a id="discovery-consul-publish-info-publish"></a>&#x2022; [`publish`](#discovery-consul-publish-info-publish) - Optional Block<br>Enable this option
+
+#### Discovery K8S
+
+A [`discovery_k8s`](#discovery-k8s) block supports the following:
+
+<a id="discovery-k8s-access-info"></a>&#x2022; [`access_info`](#discovery-k8s-access-info) - Optional Block<br>K8S API Server. K8S API server access<br>See [Access Info](#discovery-k8s-access-info) below.
+
+<a id="discovery-k8s-default-all"></a>&#x2022; [`default_all`](#discovery-k8s-default-all) - Optional Block<br>Enable this option
+
+<a id="discovery-k8s-namespace-mapping"></a>&#x2022; [`namespace_mapping`](#discovery-k8s-namespace-mapping) - Optional Block<br>Select the mapping between K8S namespaces from which services will be discovered and App Namespace to which the discovered services will be shared<br>See [Namespace Mapping](#discovery-k8s-namespace-mapping) below.
+
+<a id="discovery-k8s-publish-info"></a>&#x2022; [`publish_info`](#discovery-k8s-publish-info) - Optional Block<br>VIP Publish Configurations. K8S Configuration to publish VIPs<br>See [Publish Info](#discovery-k8s-publish-info) below.
+
+#### Discovery K8S Access Info
+
+An [`access_info`](#discovery-k8s-access-info) block (within [`discovery_k8s`](#discovery-k8s)) supports the following:
+
+<a id="info-731c25"></a>&#x2022; [`connection_info`](#info-731c25) - Optional Block<br>Configuration details to access discovery service REST API<br>See [Connection Info](#info-731c25) below.
+
+<a id="discovery-k8s-access-info-isolated"></a>&#x2022; [`isolated`](#discovery-k8s-access-info-isolated) - Optional Block<br>Enable this option
+
+<a id="url-d50898"></a>&#x2022; [`kubeconfig_url`](#url-d50898) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Kubeconfig URL](#url-d50898) below.
+
+<a id="discovery-k8s-access-info-reachable"></a>&#x2022; [`reachable`](#discovery-k8s-access-info-reachable) - Optional Block<br>Enable this option
+
+#### Discovery K8S Access Info Connection Info
+
+A [`connection_info`](#info-731c25) block (within [`discovery_k8s.access_info`](#discovery-k8s-access-info)) supports the following:
+
+<a id="server-c32428"></a>&#x2022; [`api_server`](#server-c32428) - Optional String<br>API server must be a fully qualified domain string and port specified as host:port pair
+
+<a id="info-16e7c5"></a>&#x2022; [`tls_info`](#info-16e7c5) - Optional Block<br>TLS config for client of discovery service<br>See [TLS Info](#info-16e7c5) below.
+
+#### Discovery K8S Access Info Connection Info TLS Info
+
+<a id="deep-4a5283"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Discovery K8S Access Info Connection Info TLS Info Key URL
+
+<a id="deep-a976c1"></a>Deeply nested **URL** block collapsed for readability.
+
+#### Discovery K8S Access Info Connection Info TLS Info Key URL Blindfold Secret Info
+
+<a id="deep-c49615"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Discovery K8S Access Info Connection Info TLS Info Key URL Clear Secret Info
+
+<a id="deep-b39c26"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Discovery K8S Access Info Kubeconfig URL
+
+A [`kubeconfig_url`](#url-d50898) block (within [`discovery_k8s.access_info`](#discovery-k8s-access-info)) supports the following:
+
+<a id="info-fef53c"></a>&#x2022; [`blindfold_secret_info`](#info-fef53c) - Optional Block<br>BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-fef53c) below.
+
+<a id="info-ba8969"></a>&#x2022; [`clear_secret_info`](#info-ba8969) - Optional Block<br>ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-ba8969) below.
+
+#### Discovery K8S Access Info Kubeconfig URL Blindfold Secret Info
+
+<a id="deep-faaa11"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Discovery K8S Access Info Kubeconfig URL Clear Secret Info
+
+<a id="deep-4a4f8b"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Discovery K8S Namespace Mapping
+
+A [`namespace_mapping`](#discovery-k8s-namespace-mapping) block (within [`discovery_k8s`](#discovery-k8s)) supports the following:
+
+<a id="discovery-k8s-namespace-mapping-items"></a>&#x2022; [`items`](#discovery-k8s-namespace-mapping-items) - Optional Block<br>Map K8S namespace(s) to App Namespaces. In Shared Configuration, Discovered Services can only be mapped to a single App Namespace, which is determined by the first matched regex<br>See [Items](#discovery-k8s-namespace-mapping-items) below.
+
+#### Discovery K8S Namespace Mapping Items
+
+An [`items`](#discovery-k8s-namespace-mapping-items) block (within [`discovery_k8s.namespace_mapping`](#discovery-k8s-namespace-mapping)) supports the following:
+
+<a id="namespace-b6599c"></a>&#x2022; [`namespace`](#namespace-b6599c) - Optional String<br>F5XC Application Namespaces. Select a namespace
+
+<a id="regex-0aa709"></a>&#x2022; [`namespace_regex`](#regex-0aa709) - Optional String<br>The regex here will be used to match K8S namespace(s)
+
+#### Discovery K8S Publish Info
+
+A [`publish_info`](#discovery-k8s-publish-info) block (within [`discovery_k8s`](#discovery-k8s)) supports the following:
+
+<a id="discovery-k8s-publish-info-disable"></a>&#x2022; [`disable`](#discovery-k8s-publish-info-disable) - Optional Block<br>Enable this option
+
+<a id="delegation-53a235"></a>&#x2022; [`dns_delegation`](#delegation-53a235) - Optional Block<br>K8SDelegationType<br>See [DNS Delegation](#delegation-53a235) below.
+
+<a id="discovery-k8s-publish-info-publish"></a>&#x2022; [`publish`](#discovery-k8s-publish-info-publish) - Optional Block<br>K8SPublishType<br>See [Publish](#discovery-k8s-publish-info-publish) below.
+
+<a id="fqdns-f85bbe"></a>&#x2022; [`publish_fqdns`](#fqdns-f85bbe) - Optional Block<br>Enable this option
+
+#### Discovery K8S Publish Info DNS Delegation
+
+A [`dns_delegation`](#delegation-53a235) block (within [`discovery_k8s.publish_info`](#discovery-k8s-publish-info)) supports the following:
+
+<a id="mode-f08507"></a>&#x2022; [`dns_mode`](#mode-f08507) - Optional String  Defaults to `CORE_DNS`<br>Possible values are `CORE_DNS`, `KUBE_DNS`<br>[Enum: CORE_DNS|KUBE_DNS] Two modes are possible CoreDNS: Whether external K8S cluster is running core-DNS KubeDNS: External K8S cluster is running kube-DNS
+
+<a id="subdomain-f4f8f0"></a>&#x2022; [`subdomain`](#subdomain-f4f8f0) - Optional String<br>The DNS subdomain for which F5XC will respond to DNS queries
+
+#### Discovery K8S Publish Info Publish
+
+A [`publish`](#discovery-k8s-publish-info-publish) block (within [`discovery_k8s.publish_info`](#discovery-k8s-publish-info)) supports the following:
+
+<a id="namespace-a13be9"></a>&#x2022; [`namespace`](#namespace-a13be9) - Optional String<br>The namespace where the service/endpoints need to be created if it's not included in the domain. The external K8S administrator needs to ensure that the namespace exists
 
 #### Timeouts
 
@@ -109,6 +278,88 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+#### Where
+
+A [`where`](#where) block supports the following:
+
+<a id="where-site"></a>&#x2022; [`site`](#where-site) - Optional Block<br>Specifies a direct reference to a site configuration object<br>See [Site](#where-site) below.
+
+<a id="where-virtual-network"></a>&#x2022; [`virtual_network`](#where-virtual-network) - Optional Block<br>Specifies a direct reference to a network configuration object<br>See [Virtual Network](#where-virtual-network) below.
+
+<a id="where-virtual-site"></a>&#x2022; [`virtual_site`](#where-virtual-site) - Optional Block<br>Virtual Site. A reference to virtual_site object<br>See [Virtual Site](#where-virtual-site) below.
+
+#### Where Site
+
+A [`site`](#where-site) block (within [`where`](#where)) supports the following:
+
+<a id="where-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-site-disable-internet-vip) - Optional Block<br>Enable this option
+
+<a id="where-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-site-enable-internet-vip) - Optional Block<br>Enable this option
+
+<a id="where-site-network-type"></a>&#x2022; [`network_type`](#where-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
+
+<a id="where-site-ref"></a>&#x2022; [`ref`](#where-site-ref) - Optional Block<br>Reference. A site direct reference<br>See [Ref](#where-site-ref) below.
+
+#### Where Site Ref
+
+A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports the following:
+
+<a id="where-site-ref-kind"></a>&#x2022; [`kind`](#where-site-ref-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+
+<a id="where-site-ref-name"></a>&#x2022; [`name`](#where-site-ref-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="where-site-ref-namespace"></a>&#x2022; [`namespace`](#where-site-ref-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="where-site-ref-tenant"></a>&#x2022; [`tenant`](#where-site-ref-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+<a id="where-site-ref-uid"></a>&#x2022; [`uid`](#where-site-ref-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+
+#### Where Virtual Network
+
+A [`virtual_network`](#where-virtual-network) block (within [`where`](#where)) supports the following:
+
+<a id="where-virtual-network-ref"></a>&#x2022; [`ref`](#where-virtual-network-ref) - Optional Block<br>Virtual network direct reference<br>See [Ref](#where-virtual-network-ref) below.
+
+#### Where Virtual Network Ref
+
+A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#where-virtual-network)) supports the following:
+
+<a id="where-virtual-network-ref-kind"></a>&#x2022; [`kind`](#where-virtual-network-ref-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+
+<a id="where-virtual-network-ref-name"></a>&#x2022; [`name`](#where-virtual-network-ref-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="where-virtual-network-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-network-ref-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="where-virtual-network-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-network-ref-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+<a id="where-virtual-network-ref-uid"></a>&#x2022; [`uid`](#where-virtual-network-ref-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+
+#### Where Virtual Site
+
+A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) supports the following:
+
+<a id="where-virtual-site-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#where-virtual-site-disable-internet-vip) - Optional Block<br>Enable this option
+
+<a id="where-virtual-site-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#where-virtual-site-enable-internet-vip) - Optional Block<br>Enable this option
+
+<a id="where-virtual-site-network-type"></a>&#x2022; [`network_type`](#where-virtual-site-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
+
+<a id="where-virtual-site-ref"></a>&#x2022; [`ref`](#where-virtual-site-ref) - Optional Block<br>Virtual_site direct reference<br>See [Ref](#where-virtual-site-ref) below.
+
+#### Where Virtual Site Ref
+
+A [`ref`](#where-virtual-site-ref) block (within [`where.virtual_site`](#where-virtual-site)) supports the following:
+
+<a id="where-virtual-site-ref-kind"></a>&#x2022; [`kind`](#where-virtual-site-ref-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+
+<a id="where-virtual-site-ref-name"></a>&#x2022; [`name`](#where-virtual-site-ref-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="where-virtual-site-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-site-ref-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="where-virtual-site-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-site-ref-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+<a id="where-virtual-site-ref-uid"></a>&#x2022; [`uid`](#where-virtual-site-ref-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 ---
 

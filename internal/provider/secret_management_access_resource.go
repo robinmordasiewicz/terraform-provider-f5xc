@@ -1658,9 +1658,13 @@ func (r *SecretManagementAccessResource) Read(ctx context.Context, req resource.
 		data.Annotations = types.MapNull(types.StringType)
 	}
 
-	// Unmarshal spec fields from API response to Terraform state
-	isImport := false // Always false - no state upgrade tracking
-	_ = isImport      // May be unused if resource has no blocks needing import detection
+	// Check if this Read is triggered by an import operation
+	// Import sets a private state marker so we know to populate all nested blocks from API response
+	isImport := false
+	if importMarker, diags := req.Private.GetKey(ctx, "isImport"); diags.HasError() == false && string(importMarker) == "true" {
+		isImport = true
+	}
+	_ = isImport // May be unused if resource has no blocks needing import detection
 	if blockData, ok := apiResource.Spec["access_info"].(map[string]interface{}); ok && (isImport || data.AccessInfo != nil) {
 		data.AccessInfo = &SecretManagementAccessAccessInfoModel{
 			RESTAuthInfo: func() *SecretManagementAccessAccessInfoRESTAuthInfoModel {
@@ -1999,4 +2003,9 @@ func (r *SecretManagementAccessResource) ImportState(ctx context.Context, req re
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
+
+	// Set private state marker to indicate this is an import operation
+	// This allows Read to populate all nested blocks from API response
+	diags := resp.Private.SetKey(ctx, "isImport", []byte("true"))
+	resp.Diagnostics.Append(diags...)
 }

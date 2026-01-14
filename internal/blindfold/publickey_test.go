@@ -300,3 +300,201 @@ func containsHelper(s, substr string) bool {
 	}
 	return false
 }
+
+// Tests for retry behavior
+
+func TestGetPublicKey_RetryOnRateLimit(t *testing.T) {
+	attempts := 0
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		attempts++
+		if attempts < 2 {
+			// First request: return rate limit
+			w.WriteHeader(http.StatusTooManyRequests)
+			w.Write([]byte(`{"error": "rate limited"}`))
+			return
+		}
+		// Second request: return success
+		response := APIEnvelope[PublicKey]{
+			Data: PublicKey{
+				KeyVersion:           1,
+				ModulusBase64:        "dGVzdC1tb2R1bHVz",
+				PublicExponentBase64: "AQAB",
+				Tenant:               "test-tenant",
+			},
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(response)
+	}))
+	defer server.Close()
+
+	client := &http.Client{Timeout: 5 * time.Second}
+	ctx := context.Background()
+
+	pubKey, err := GetPublicKey(ctx, client, server.URL)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if pubKey == nil {
+		t.Fatal("expected public key, got nil")
+	}
+	if attempts != 2 {
+		t.Errorf("expected 2 attempts, got %d", attempts)
+	}
+}
+
+func TestGetPublicKey_RetryOnServerError(t *testing.T) {
+	retryableErrors := []int{
+		http.StatusBadGateway,         // 502
+		http.StatusServiceUnavailable, // 503
+		http.StatusGatewayTimeout,     // 504
+	}
+
+	for _, statusCode := range retryableErrors {
+		t.Run(http.StatusText(statusCode), func(t *testing.T) {
+			attempts := 0
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				attempts++
+				if attempts < 2 {
+					w.WriteHeader(statusCode)
+					w.Write([]byte(`{"error": "server error"}`))
+					return
+				}
+				response := APIEnvelope[PublicKey]{
+					Data: PublicKey{
+						KeyVersion:           1,
+						ModulusBase64:        "dGVzdC1tb2R1bHVz",
+						PublicExponentBase64: "AQAB",
+						Tenant:               "test-tenant",
+					},
+				}
+				w.Header().Set("Content-Type", "application/json")
+				w.WriteHeader(http.StatusOK)
+				json.NewEncoder(w).Encode(response)
+			}))
+			defer server.Close()
+
+			client := &http.Client{Timeout: 5 * time.Second}
+			ctx := context.Background()
+
+			pubKey, err := GetPublicKey(ctx, client, server.URL)
+			if err != nil {
+				t.Fatalf("unexpected error: %v", err)
+			}
+			if pubKey == nil {
+				t.Fatal("expected public key, got nil")
+			}
+			if attempts != 2 {
+				t.Errorf("expected 2 attempts, got %d", attempts)
+			}
+		})
+	}
+}
+
+func TestGetPublicKey_NoRetryOnClientError(t *testing.T) {
+	nonRetryableErrors := []int{
+		http.StatusBadRequest,   // 400
+		http.StatusUnauthorized, // 401
+		http.StatusForbidden,    // 403
+		http.StatusNotFound,     // 404
+	}
+
+	for _, statusCode := range nonRetryableErrors {
+		t.Run(http.StatusText(statusCode), func(t *testing.T) {
+			attempts := 0
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				attempts++
+				w.WriteHeader(statusCode)
+				w.Write([]byte(`{"error": "client error"}`))
+			}))
+			defer server.Close()
+
+			client := &http.Client{Timeout: 5 * time.Second}
+			ctx := context.Background()
+
+			_, err := GetPublicKey(ctx, client, server.URL)
+			if err == nil {
+				t.Fatal("expected error")
+			}
+			if attempts != 1 {
+				t.Errorf("expected 1 attempt (no retry), got %d", attempts)
+			}
+		})
+	}
+}
+
+func TestGetPublicKey_MaxRetriesExceeded(t *testing.T) {
+	attempts := 0
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		attempts++
+		// Always return rate limit
+		w.WriteHeader(http.StatusTooManyRequests)
+		w.Write([]byte(`{"error": "rate limited"}`))
+	}))
+	defer server.Close()
+
+	client := &http.Client{Timeout: 5 * time.Second}
+	ctx := context.Background()
+
+	_, err := GetPublicKey(ctx, client, server.URL)
+	if err == nil {
+		t.Fatal("expected error after max retries")
+	}
+	// Should have tried defaultMaxRetries + 1 times (initial + retries)
+	expectedAttempts := defaultMaxRetries + 1
+	if attempts != expectedAttempts {
+		t.Errorf("expected %d attempts, got %d", expectedAttempts, attempts)
+	}
+}
+
+func TestIsRetryableStatus(t *testing.T) {
+	tests := []struct {
+		statusCode int
+		want       bool
+	}{
+		{http.StatusOK, false},
+		{http.StatusBadRequest, false},
+		{http.StatusUnauthorized, false},
+		{http.StatusForbidden, false},
+		{http.StatusNotFound, false},
+		{http.StatusTooManyRequests, true}, // 429
+		{http.StatusInternalServerError, false},
+		{http.StatusBadGateway, true},         // 502
+		{http.StatusServiceUnavailable, true}, // 503
+		{http.StatusGatewayTimeout, true},     // 504
+	}
+
+	for _, tt := range tests {
+		t.Run(http.StatusText(tt.statusCode), func(t *testing.T) {
+			got := isRetryableStatus(tt.statusCode)
+			if got != tt.want {
+				t.Errorf("isRetryableStatus(%d) = %v, want %v", tt.statusCode, got, tt.want)
+			}
+		})
+	}
+}
+
+func TestCalculateBackoff(t *testing.T) {
+	tests := []struct {
+		attempt int
+		wantMin time.Duration
+		wantMax time.Duration
+	}{
+		{0, 1 * time.Second, 1 * time.Second},    // 1s * 2^0 = 1s
+		{1, 2 * time.Second, 2 * time.Second},    // 1s * 2^1 = 2s
+		{2, 4 * time.Second, 4 * time.Second},    // 1s * 2^2 = 4s
+		{3, 8 * time.Second, 8 * time.Second},    // 1s * 2^3 = 8s
+		{4, 16 * time.Second, 16 * time.Second},  // 1s * 2^4 = 16s
+		{5, 30 * time.Second, 30 * time.Second},  // capped at max
+		{10, 30 * time.Second, 30 * time.Second}, // capped at max
+	}
+
+	for _, tt := range tests {
+		t.Run("attempt_"+string(rune('0'+tt.attempt)), func(t *testing.T) {
+			got := calculateBackoff(tt.attempt)
+			if got < tt.wantMin || got > tt.wantMax {
+				t.Errorf("calculateBackoff(%d) = %v, want between %v and %v", tt.attempt, got, tt.wantMin, tt.wantMax)
+			}
+		})
+	}
+}

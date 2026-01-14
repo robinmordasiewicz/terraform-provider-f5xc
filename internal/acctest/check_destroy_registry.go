@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"github.com/hashicorp/terraform-plugin-testing/terraform"
 
 	"github.com/f5xc/terraform-provider-f5xc/internal/client"
@@ -14,6 +15,10 @@ import (
 
 // ResourceVerifier is a function that verifies a resource no longer exists via API
 type ResourceVerifier func(ctx context.Context, c *client.Client, namespace, name string) error
+
+// ResourceDeleter is a function that deletes a resource via API
+// Used by CheckResourceDisappears to simulate external deletion
+type ResourceDeleter func(ctx context.Context, c *client.Client, namespace, name string) error
 
 // resourceVerifierRegistry maps Terraform resource types to their API verification functions
 // This registry covers ALL 78 testable resources (100% coverage)
@@ -519,6 +524,291 @@ var resourceVerifierRegistry = map[string]ResourceVerifier{
 	},
 }
 
+// resourceDeleterRegistry maps Terraform resource types to their API delete functions
+// Used by CheckResourceDisappears to simulate external deletion of resources
+var resourceDeleterRegistry = map[string]ResourceDeleter{
+	// ============================================================================
+	// Address & Network Resources
+	// ============================================================================
+	"f5xc_address_allocator": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAddressAllocator(ctx, ns, name)
+	},
+	"f5xc_advertise_policy": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAdvertisePolicy(ctx, ns, name)
+	},
+	"f5xc_cluster": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteCluster(ctx, ns, name)
+	},
+	"f5xc_endpoint": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteEndpoint(ctx, ns, name)
+	},
+	"f5xc_network_connector": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteNetworkConnector(ctx, ns, name)
+	},
+	"f5xc_network_firewall": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteNetworkFirewall(ctx, ns, name)
+	},
+	"f5xc_network_interface": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteNetworkInterface(ctx, ns, name)
+	},
+	"f5xc_network_policy": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteNetworkPolicy(ctx, ns, name)
+	},
+	"f5xc_network_policy_rule": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteNetworkPolicyRule(ctx, ns, name)
+	},
+	"f5xc_network_policy_view": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteNetworkPolicyView(ctx, ns, name)
+	},
+	"f5xc_segment": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteSegment(ctx, ns, name)
+	},
+	"f5xc_tunnel": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteTunnel(ctx, ns, name)
+	},
+	"f5xc_virtual_network": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteVirtualNetwork(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Alert & Monitoring Resources
+	// ============================================================================
+	"f5xc_alert_policy": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAlertPolicy(ctx, ns, name)
+	},
+	"f5xc_alert_receiver": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAlertReceiver(ctx, ns, name)
+	},
+	"f5xc_global_log_receiver": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteGlobalLogReceiver(ctx, ns, name)
+	},
+	"f5xc_log_receiver": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteLogReceiver(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// API Security Resources
+	// ============================================================================
+	"f5xc_api_crawler": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAPICrawler(ctx, ns, name)
+	},
+	"f5xc_api_definition": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAPIDefinition(ctx, ns, name)
+	},
+	"f5xc_api_discovery": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAPIDiscovery(ctx, ns, name)
+	},
+	"f5xc_api_testing": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAPITesting(ctx, ns, name)
+	},
+	"f5xc_app_api_group": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAppAPIGroup(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Application Security Resources
+	// ============================================================================
+	"f5xc_app_firewall": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAppFirewall(ctx, ns, name)
+	},
+	"f5xc_app_setting": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAppSetting(ctx, ns, name)
+	},
+	"f5xc_app_type": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAppType(ctx, ns, name)
+	},
+	"f5xc_sensitive_data_policy": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteSensitiveDataPolicy(ctx, ns, name)
+	},
+	"f5xc_waf_exclusion_policy": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteWAFExclusionPolicy(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// BGP Resources
+	// ============================================================================
+	"f5xc_bgp_asn_set": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteBGPAsnSet(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Bot Defense & Security Resources
+	// ============================================================================
+	"f5xc_malicious_user_mitigation": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteMaliciousUserMitigation(ctx, ns, name)
+	},
+	"f5xc_user_identification": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteUserIdentification(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Certificate Resources
+	// ============================================================================
+	"f5xc_certificate": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteCertificate(ctx, ns, name)
+	},
+	"f5xc_certificate_chain": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteCertificateChain(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Cloud Credentials & Infrastructure
+	// ============================================================================
+	"f5xc_cloud_credentials": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteCloudCredentials(ctx, ns, name)
+	},
+	"f5xc_dns_zone": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteDNSZone(ctx, ns, name)
+	},
+	"f5xc_dns_domain": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteDNSDomain(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Data Resources
+	// ============================================================================
+	"f5xc_data_group": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteDataGroup(ctx, ns, name)
+	},
+	"f5xc_data_type": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteDataType(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Forwarding & Rate Limiting Resources
+	// ============================================================================
+	"f5xc_filter_set": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteFilterSet(ctx, ns, name)
+	},
+	"f5xc_forwarding_class": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteForwardingClass(ctx, ns, name)
+	},
+	"f5xc_policer": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeletePolicer(ctx, ns, name)
+	},
+	"f5xc_rate_limiter_policy": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteRateLimiterPolicy(ctx, ns, name)
+	},
+	"f5xc_rate_limiter": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteRateLimiter(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Geographic Resources
+	// ============================================================================
+	"f5xc_geo_location_set": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteGeoLocationSet(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Healthcheck Resources
+	// ============================================================================
+	"f5xc_healthcheck": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteHealthcheck(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// IP & Protocol Resources
+	// ============================================================================
+	"f5xc_ip_prefix_set": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteIPPrefixSet(ctx, ns, name)
+	},
+	"f5xc_protocol_policer": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteProtocolPolicer(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Load Balancer Resources
+	// ============================================================================
+	"f5xc_http_loadbalancer": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteHTTPLoadBalancer(ctx, ns, name)
+	},
+	"f5xc_tcp_loadbalancer": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteTCPLoadBalancer(ctx, ns, name)
+	},
+	"f5xc_cdn_loadbalancer": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteCDNLoadBalancer(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Namespace & Origin Resources
+	// ============================================================================
+	"f5xc_namespace": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteNamespace(ctx, ns, name)
+	},
+	"f5xc_origin_pool": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteOriginPool(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Route Resources
+	// ============================================================================
+	"f5xc_route": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteRoute(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Service Policy Resources
+	// ============================================================================
+	"f5xc_service_policy": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteServicePolicy(ctx, ns, name)
+	},
+	"f5xc_service_policy_rule": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteServicePolicyRule(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Site Resources
+	// ============================================================================
+	"f5xc_aws_vpc_site": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAWSVPCSite(ctx, ns, name)
+	},
+	"f5xc_azure_vnet_site": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAzureVNETSite(ctx, ns, name)
+	},
+	"f5xc_gcp_vpc_site": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteGCPVPCSite(ctx, ns, name)
+	},
+	"f5xc_virtual_site": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteVirtualSite(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Virtual Host Resources
+	// ============================================================================
+	"f5xc_virtual_host": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteVirtualHost(ctx, ns, name)
+	},
+
+	// ============================================================================
+	// Platform & Configuration Resources
+	// ============================================================================
+	"f5xc_tenant_configuration": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteTenantConfiguration(ctx, ns, name)
+	},
+	"f5xc_voltshare_admin_policy": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteVoltshareAdminPolicy(ctx, ns, name)
+	},
+	"f5xc_workload_flavor": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteWorkloadFlavor(ctx, ns, name)
+	},
+	"f5xc_nfv_service": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteNfvService(ctx, ns, name)
+	},
+	"f5xc_cminstance": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteCminstance(ctx, ns, name)
+	},
+	"f5xc_policy_based_routing": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeletePolicyBasedRouting(ctx, ns, name)
+	},
+	"f5xc_apm": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteAPM(ctx, ns, name)
+	},
+	"f5xc_code_base_integration": func(ctx context.Context, c *client.Client, ns, name string) error {
+		return c.DeleteCodeBaseIntegration(ctx, ns, name)
+	},
+}
+
 // CheckResourceDestroyedWithAPIVerification verifies resources are deleted from the API
 // This enhanced version performs actual API calls to verify deletion.
 func CheckResourceDestroyedWithAPIVerification(resourceType string) func(*terraform.State) error {
@@ -609,4 +899,75 @@ func GetRegisteredResourceTypes() []string {
 // GetRegistrySize returns the number of registered resource verifiers
 func GetRegistrySize() int {
 	return len(resourceVerifierRegistry)
+}
+
+// CheckResourceDisappears returns a TestCheckFunc that deletes a resource
+// via the API to simulate external deletion (outside of Terraform).
+// This is used to test that Terraform properly detects and handles
+// resources that have been deleted externally.
+//
+// Usage:
+//
+//	{
+//	    Config: testAccResourceConfig_basic(rName),
+//	    Check: resource.ComposeTestCheckFunc(
+//	        acctest.CheckResourceExists(resourceName),
+//	        acctest.CheckResourceDisappears("f5xc_namespace", resourceName),
+//	    ),
+//	    ExpectNonEmptyPlan: true,
+//	},
+func CheckResourceDisappears(resourceType, resourceName string) resource.TestCheckFunc {
+	return func(s *terraform.State) error {
+		rs, ok := s.RootModule().Resources[resourceName]
+		if !ok {
+			return fmt.Errorf("resource not found in state: %s", resourceName)
+		}
+
+		deleter, ok := resourceDeleterRegistry[resourceType]
+		if !ok {
+			return fmt.Errorf("no deleter registered for resource type: %s", resourceType)
+		}
+
+		c, err := GetTestClient()
+		if err != nil {
+			return fmt.Errorf("failed to get test client: %w", err)
+		}
+
+		ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+		defer cancel()
+
+		name := rs.Primary.Attributes["name"]
+		namespace := rs.Primary.Attributes["namespace"]
+		if namespace == "" {
+			namespace = "system"
+		}
+
+		if err := deleter(ctx, c, namespace, name); err != nil {
+			// Ignore "not found" errors - resource may already be deleted
+			if !isNotFoundError(err) {
+				return fmt.Errorf("failed to delete %s %s/%s: %w", resourceType, namespace, name, err)
+			}
+		}
+
+		return nil
+	}
+}
+
+// RegisterResourceDeleter allows registering additional resource deleters at runtime
+func RegisterResourceDeleter(resourceType string, deleter ResourceDeleter) {
+	resourceDeleterRegistry[resourceType] = deleter
+}
+
+// GetRegisteredDeleterTypes returns a list of resource types with delete capability
+func GetRegisteredDeleterTypes() []string {
+	types := make([]string, 0, len(resourceDeleterRegistry))
+	for t := range resourceDeleterRegistry {
+		types = append(types, t)
+	}
+	return types
+}
+
+// GetDeleterRegistrySize returns the number of registered resource deleters
+func GetDeleterRegistrySize() int {
+	return len(resourceDeleterRegistry)
 }

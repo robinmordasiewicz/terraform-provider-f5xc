@@ -435,8 +435,7 @@ func TestAccTenantConfigurationResource_disappears(t *testing.T) {
 				Check: resource.ComposeAggregateTestCheckFunc(
 					acctest.CheckResourceExists(resourceName),
 					// Delete the resource outside of Terraform
-					// TODO: add generic CheckResourceDisappears helper
-					// acctest.CheckResourceExists(resourceName),
+					acctest.CheckResourceDisappears("f5xc_tenant_configuration", resourceName),
 				),
 				// Expect the plan to show the resource needs to be recreated
 				ExpectNonEmptyPlan: true,

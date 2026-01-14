@@ -317,16 +317,25 @@ func extractResourcePathsFromPaths(paths map[string]interface{}) []resourcePath 
 	var results []resourcePath
 	seen := make(map[string]bool)
 
-	// Pattern: /api/config/namespaces/{namespace}/{resource_plural}
+	// Primary pattern: /api/config/namespaces/{namespace}/{resource_plural}
 	configPathRegex := regexp.MustCompile(`^/api/config/namespaces/\{namespace\}/([a-z_]+s)$`)
 
+	// Secondary pattern: /api/web/{resource_plural} (for system-level resources like namespace)
+	webPathRegex := regexp.MustCompile(`^/api/web/([a-z_]+s)$`)
+
 	for path := range paths {
-		matches := configPathRegex.FindStringSubmatch(path)
-		if matches == nil || len(matches) < 2 {
+		var resourcePlural string
+
+		// Try config pattern first (most common)
+		if matches := configPathRegex.FindStringSubmatch(path); len(matches) >= 2 {
+			resourcePlural = matches[1]
+		} else if matches := webPathRegex.FindStringSubmatch(path); len(matches) >= 2 {
+			// Try web pattern for system-level resources (e.g., namespace)
+			resourcePlural = matches[1]
+		} else {
 			continue
 		}
 
-		resourcePlural := matches[1]
 		// Convert plural to singular (simple heuristic)
 		resourceName := strings.TrimSuffix(resourcePlural, "s")
 		if strings.HasSuffix(resourceName, "ie") {

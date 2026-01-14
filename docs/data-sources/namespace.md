@@ -1,31 +1,38 @@
 ---
-page_title: "f5xc_workload Data Source - terraform-provider-f5xc"
-subcategory: "Kubernetes"
+page_title: "f5xc_namespace Data Source - terraform-provider-f5xc"
+subcategory: "Organization"
 description: |-
-  Manages workload_flavor. in F5 Distributed Cloud.
+  Manages new namespace. Name of the object is name of the name space. in F5 Distributed Cloud.
 ---
 
-# f5xc_workload (Data Source)
+# f5xc_namespace (Data Source)
 
-Manages workload_flavor. in F5 Distributed Cloud.
+Manages new namespace. Name of the object is name of the name space. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
-# Workload Data Source Example
-# Retrieves information about an existing Workload
+# Namespace Data Source Example
+# Retrieves information about an existing Namespace
 
-# Look up an existing Workload by name
-data "f5xc_workload" "example" {
-  name      = "example-workload"
+# Look up an existing Namespace by name
+data "f5xc_namespace" "example" {
+  name      = "example-namespace"
   namespace = "system"
 }
 
 # Example: Use the data source in another resource
-# output "workload_id" {
-#   value = data.f5xc_workload.example.id
+# output "namespace_id" {
+#   value = data.f5xc_namespace.example.id
+# }
+
+# Example: Create resources in a namespace discovered via data source
+# resource "f5xc_origin_pool" "example" {
+#   name      = "example-pool"
+#   namespace = data.f5xc_namespace.example.name
+#   # ... other configuration
 # }
 ```
 
@@ -34,9 +41,9 @@ data "f5xc_workload" "example" {
 
 ### Metadata Argument Reference
 
-<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Workload
+<a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Workload exists
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Namespace exists
 
 ### Attributes Reference
 
@@ -44,7 +51,7 @@ In addition to all arguments above, the following attributes are exported:
 
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations applied to this resource
 
-<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Description of the Workload
+<a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Description of the Namespace
 
 <a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 

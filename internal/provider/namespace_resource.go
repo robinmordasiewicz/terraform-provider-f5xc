@@ -12,7 +12,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -26,45 +25,42 @@ import (
 
 // Ensure provider defined types fully satisfy framework interfaces.
 var (
-	_ resource.Resource                   = &WorkloadResource{}
-	_ resource.ResourceWithConfigure      = &WorkloadResource{}
-	_ resource.ResourceWithImportState    = &WorkloadResource{}
-	_ resource.ResourceWithModifyPlan     = &WorkloadResource{}
-	_ resource.ResourceWithValidateConfig = &WorkloadResource{}
+	_ resource.Resource                   = &NamespaceResource{}
+	_ resource.ResourceWithConfigure      = &NamespaceResource{}
+	_ resource.ResourceWithImportState    = &NamespaceResource{}
+	_ resource.ResourceWithModifyPlan     = &NamespaceResource{}
+	_ resource.ResourceWithValidateConfig = &NamespaceResource{}
 )
 
-func NewWorkloadResource() resource.Resource {
-	return &WorkloadResource{}
+func NewNamespaceResource() resource.Resource {
+	return &NamespaceResource{}
 }
 
-type WorkloadResource struct {
+type NamespaceResource struct {
 	client *client.Client
 }
 
-type WorkloadResourceModel struct {
-	Name             types.String   `tfsdk:"name"`
-	Namespace        types.String   `tfsdk:"namespace"`
-	Annotations      types.Map      `tfsdk:"annotations"`
-	Description      types.String   `tfsdk:"description"`
-	Disable          types.Bool     `tfsdk:"disable"`
-	Labels           types.Map      `tfsdk:"labels"`
-	ID               types.String   `tfsdk:"id"`
-	EphemeralStorage types.String   `tfsdk:"ephemeral_storage"`
-	Memory           types.String   `tfsdk:"memory"`
-	Vcpus            types.Int64    `tfsdk:"vcpus"`
-	Timeouts         timeouts.Value `tfsdk:"timeouts"`
+type NamespaceResourceModel struct {
+	Name        types.String   `tfsdk:"name"`
+	Namespace   types.String   `tfsdk:"namespace"`
+	Annotations types.Map      `tfsdk:"annotations"`
+	Description types.String   `tfsdk:"description"`
+	Disable     types.Bool     `tfsdk:"disable"`
+	Labels      types.Map      `tfsdk:"labels"`
+	ID          types.String   `tfsdk:"id"`
+	Timeouts    timeouts.Value `tfsdk:"timeouts"`
 }
 
-func (r *WorkloadResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
-	resp.TypeName = req.ProviderTypeName + "_workload"
+func (r *NamespaceResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
+	resp.TypeName = req.ProviderTypeName + "_namespace"
 }
 
-func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
+func (r *NamespaceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages workload_flavor. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new namespace. Name of the object is name of the name space. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
-				MarkdownDescription: "Name of the Workload. Must be unique within the namespace.",
+				MarkdownDescription: "Name of the Namespace. Must be unique within the namespace.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
@@ -74,10 +70,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the Workload will be created.",
-				Required:            true,
+				MarkdownDescription: "Namespace for the Namespace. For this resource type, namespace should be empty or omitted.",
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.UseStateForUnknown(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -108,30 +105,6 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
-			"ephemeral_storage": schema.StringAttribute{
-				MarkdownDescription: "Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor.",
-				Optional:            true,
-				Computed:            true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
-			},
-			"memory": schema.StringAttribute{
-				MarkdownDescription: "Memory in MiB (mebibyte) allocated for the workload_flavor.",
-				Optional:            true,
-				Computed:            true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
-			},
-			"vcpus": schema.Int64Attribute{
-				MarkdownDescription: "Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core.",
-				Optional:            true,
-				Computed:            true,
-				PlanModifiers: []planmodifier.Int64{
-					int64planmodifier.UseStateForUnknown(),
-				},
-			},
 		},
 		Blocks: map[string]schema.Block{
 			"timeouts": timeouts.Block(ctx, timeouts.Opts{
@@ -144,7 +117,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 	}
 }
 
-func (r *WorkloadResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
+func (r *NamespaceResource) Configure(ctx context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
 	if req.ProviderData == nil {
 		return
 	}
@@ -160,8 +133,8 @@ func (r *WorkloadResource) Configure(ctx context.Context, req resource.Configure
 }
 
 // ValidateConfig implements resource.ResourceWithValidateConfig
-func (r *WorkloadResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
-	var data WorkloadResourceModel
+func (r *NamespaceResource) ValidateConfig(ctx context.Context, req resource.ValidateConfigRequest, resp *resource.ValidateConfigResponse) {
+	var data NamespaceResourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -169,17 +142,17 @@ func (r *WorkloadResource) ValidateConfig(ctx context.Context, req resource.Vali
 }
 
 // ModifyPlan implements resource.ResourceWithModifyPlan
-func (r *WorkloadResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
+func (r *NamespaceResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
 	if req.Plan.Raw.IsNull() {
 		resp.Diagnostics.AddWarning(
 			"Resource Destruction",
-			"This will permanently delete the workload from F5 Distributed Cloud.",
+			"This will permanently delete the namespace from F5 Distributed Cloud.",
 		)
 		return
 	}
 
 	if req.State.Raw.IsNull() {
-		var plan WorkloadResourceModel
+		var plan NamespaceResourceModel
 		resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
 		if resp.Diagnostics.HasError() {
 			return
@@ -194,8 +167,8 @@ func (r *WorkloadResource) ModifyPlan(ctx context.Context, req resource.ModifyPl
 	}
 }
 
-func (r *WorkloadResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
-	var data WorkloadResourceModel
+func (r *NamespaceResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
+	var data NamespaceResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -210,12 +183,12 @@ func (r *WorkloadResource) Create(ctx context.Context, req resource.CreateReques
 	ctx, cancel := context.WithTimeout(ctx, createTimeout)
 	defer cancel()
 
-	tflog.Debug(ctx, "Creating workload", map[string]interface{}{
+	tflog.Debug(ctx, "Creating namespace", map[string]interface{}{
 		"name":      data.Name.ValueString(),
 		"namespace": data.Namespace.ValueString(),
 	})
 
-	createReq := &client.Workload{
+	createReq := &client.Namespace{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -246,50 +219,28 @@ func (r *WorkloadResource) Create(ctx context.Context, req resource.CreateReques
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if !data.EphemeralStorage.IsNull() && !data.EphemeralStorage.IsUnknown() {
-		createReq.Spec["ephemeral_storage"] = data.EphemeralStorage.ValueString()
-	}
-	if !data.Memory.IsNull() && !data.Memory.IsUnknown() {
-		createReq.Spec["memory"] = data.Memory.ValueString()
-	}
-	if !data.Vcpus.IsNull() && !data.Vcpus.IsUnknown() {
-		createReq.Spec["vcpus"] = data.Vcpus.ValueInt64()
-	}
 
-	apiResource, err := r.client.CreateWorkload(ctx, createReq)
+	apiResource, err := r.client.CreateNamespace(ctx, createReq)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Workload: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create Namespace: %s", err))
 		return
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
+	// For resources without namespace in API path, namespace is computed from API response
+	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
-	if v, ok := apiResource.Spec["ephemeral_storage"].(string); ok && v != "" {
-		data.EphemeralStorage = types.StringValue(v)
-	} else {
-		data.EphemeralStorage = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["memory"].(string); ok && v != "" {
-		data.Memory = types.StringValue(v)
-	} else {
-		data.Memory = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["vcpus"].(float64); ok {
-		data.Vcpus = types.Int64Value(int64(v))
-	} else {
-		data.Vcpus = types.Int64Null()
-	}
 
-	tflog.Trace(ctx, "created Workload resource")
+	tflog.Trace(ctx, "created Namespace resource")
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
-	var data WorkloadResourceModel
+func (r *NamespaceResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var data NamespaceResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -304,18 +255,18 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 	ctx, cancel := context.WithTimeout(ctx, readTimeout)
 	defer cancel()
 
-	apiResource, err := r.client.GetWorkload(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	apiResource, err := r.client.GetNamespace(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if err != nil {
 		// Check if the resource was deleted outside Terraform
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "Workload not found, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "Namespace not found, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			resp.State.RemoveResource(ctx)
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Workload: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Namespace: %s", err))
 		return
 	}
 
@@ -359,27 +310,12 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 	// Unmarshal spec fields from API response to Terraform state
 	isImport := false // Always false - no state upgrade tracking
 	_ = isImport      // May be unused if resource has no blocks needing import detection
-	if v, ok := apiResource.Spec["ephemeral_storage"].(string); ok && v != "" {
-		data.EphemeralStorage = types.StringValue(v)
-	} else {
-		data.EphemeralStorage = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["memory"].(string); ok && v != "" {
-		data.Memory = types.StringValue(v)
-	} else {
-		data.Memory = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["vcpus"].(float64); ok {
-		data.Vcpus = types.Int64Value(int64(v))
-	} else {
-		data.Vcpus = types.Int64Null()
-	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	var data WorkloadResourceModel
+func (r *NamespaceResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
+	var data NamespaceResourceModel
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -394,7 +330,7 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 	ctx, cancel := context.WithTimeout(ctx, updateTimeout)
 	defer cancel()
 
-	apiResource := &client.Workload{
+	apiResource := &client.Namespace{
 		Metadata: client.Metadata{
 			Name:      data.Name.ValueString(),
 			Namespace: data.Namespace.ValueString(),
@@ -425,19 +361,10 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if !data.EphemeralStorage.IsNull() && !data.EphemeralStorage.IsUnknown() {
-		apiResource.Spec["ephemeral_storage"] = data.EphemeralStorage.ValueString()
-	}
-	if !data.Memory.IsNull() && !data.Memory.IsUnknown() {
-		apiResource.Spec["memory"] = data.Memory.ValueString()
-	}
-	if !data.Vcpus.IsNull() && !data.Vcpus.IsUnknown() {
-		apiResource.Spec["vcpus"] = data.Vcpus.ValueInt64()
-	}
 
-	_, err := r.client.UpdateWorkload(ctx, apiResource)
+	_, err := r.client.UpdateNamespace(ctx, apiResource)
 	if err != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Workload: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to update Namespace: %s", err))
 		return
 	}
 
@@ -446,60 +373,22 @@ func (r *WorkloadResource) Update(ctx context.Context, req resource.UpdateReques
 
 	// Fetch the resource to get complete state including computed fields
 	// PUT responses may not include all computed nested fields (like tenant in Object Reference blocks)
-	fetched, fetchErr := r.client.GetWorkload(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	fetched, fetchErr := r.client.GetNamespace(ctx, data.Namespace.ValueString(), data.Name.ValueString())
 	if fetchErr != nil {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Workload after update: %s", fetchErr))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read Namespace after update: %s", fetchErr))
 		return
 	}
-
-	// Set computed fields from API response
-	if v, ok := fetched.Spec["ephemeral_storage"].(string); ok && v != "" {
-		data.EphemeralStorage = types.StringValue(v)
-	} else if data.EphemeralStorage.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.EphemeralStorage = types.StringNull()
-	}
-	// If plan had a value, preserve it
-	if v, ok := fetched.Spec["memory"].(string); ok && v != "" {
-		data.Memory = types.StringValue(v)
-	} else if data.Memory.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.Memory = types.StringNull()
-	}
-	// If plan had a value, preserve it
-	if v, ok := fetched.Spec["vcpus"].(float64); ok {
-		data.Vcpus = types.Int64Value(int64(v))
-	} else if data.Vcpus.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.Vcpus = types.Int64Null()
-	}
-	// If plan had a value, preserve it
 
 	// Unmarshal spec fields from fetched resource to Terraform state
 	apiResource = fetched // Use GET response which includes all computed fields
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
-	if v, ok := apiResource.Spec["ephemeral_storage"].(string); ok && v != "" {
-		data.EphemeralStorage = types.StringValue(v)
-	} else {
-		data.EphemeralStorage = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["memory"].(string); ok && v != "" {
-		data.Memory = types.StringValue(v)
-	} else {
-		data.Memory = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["vcpus"].(float64); ok {
-		data.Vcpus = types.Int64Value(int64(v))
-	} else {
-		data.Vcpus = types.Int64Null()
-	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
 }
 
-func (r *WorkloadResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
-	var data WorkloadResourceModel
+func (r *NamespaceResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var data NamespaceResourceModel
 	resp.Diagnostics.Append(req.State.Get(ctx, &data)...)
 	if resp.Diagnostics.HasError() {
 		return
@@ -513,11 +402,12 @@ func (r *WorkloadResource) Delete(ctx context.Context, req resource.DeleteReques
 
 	ctx, cancel := context.WithTimeout(ctx, deleteTimeout)
 	defer cancel()
-	err := r.client.DeleteWorkload(ctx, data.Namespace.ValueString(), data.Name.ValueString())
+	// Namespace requires cascade_delete endpoint (standard DELETE returns 501)
+	err := r.client.CascadeDeleteNamespace(ctx, data.Name.ValueString())
 	if err != nil {
 		// If the resource is already gone, consider deletion successful (idempotent delete)
 		if strings.Contains(err.Error(), "NOT_FOUND") || strings.Contains(err.Error(), "404") {
-			tflog.Warn(ctx, "Workload already deleted, removing from state", map[string]interface{}{
+			tflog.Warn(ctx, "Namespace already deleted, removing from state", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
@@ -526,31 +416,29 @@ func (r *WorkloadResource) Delete(ctx context.Context, req resource.DeleteReques
 		// If delete is not implemented (501), warn and remove from state
 		// Some F5 XC resources don't support deletion via API
 		if strings.Contains(err.Error(), "501") {
-			tflog.Warn(ctx, "Workload delete not supported by API (501), removing from state only", map[string]interface{}{
+			tflog.Warn(ctx, "Namespace delete not supported by API (501), removing from state only", map[string]interface{}{
 				"name":      data.Name.ValueString(),
 				"namespace": data.Namespace.ValueString(),
 			})
 			return
 		}
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete Workload: %s", err))
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete Namespace: %s", err))
 		return
 	}
 }
 
-func (r *WorkloadResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: namespace/name
-	parts := strings.Split(req.ID, "/")
-	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+func (r *NamespaceResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+	// Import ID format: name (no namespace for this resource type)
+	name := req.ID
+	if name == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+			"Expected import ID to be the resource name, got empty string",
 		)
 		return
 	}
-	namespace := parts[0]
-	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

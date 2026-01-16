@@ -2,8 +2,8 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Authentication",
-    "description": "Authentication management for F5 Distributed Cloud. Provides APIs for configuring authentication, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
-    "version": "2.0.21",
+    "description": "Identity and access management providing APIs for configuring identity providers, access policies, and user credentials. Supports MFA, identity provider integration, and lifecycle operations for credential management across distributed deployments.",
+    "version": "2.0.26",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -12,8 +12,8 @@
       "name": "Proprietary",
       "url": "https://www.f5.com/company/policies/eula"
     },
-    "x-f5xc-description-long": "Authentication management for F5 Distributed Cloud. Provides APIs for configuring authentication, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
-    "summary": "Configure and manage authentication settings, policies, and resources across your F5 Distributed Cloud deployment.",
+    "x-f5xc-description-long": "Identity and access management providing APIs for configuring identity providers, access policies, and user credentials. Supports MFA, identity provider integration, and lifecycle operations for credential management across distributed deployments.",
+    "summary": "Identity management with provider integration, access policies, and credential lifecycle control.",
     "x-f5xc-cli-domain": "authentication",
     "x-f5xc-best-practices": {
       "common_errors": [
@@ -211,18 +211,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "api-credential"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new api-credential",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace"
@@ -281,6 +271,16 @@
             "latency": "high",
             "resource_usage": "high"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "api-credential"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -410,18 +410,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "service-credential"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new service-credential",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace"
@@ -480,6 +470,16 @@
             "latency": "high",
             "resource_usage": "high"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "service-credential"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -622,19 +622,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "api-credential"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new api-credential",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -694,6 +683,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "api-credential"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -836,19 +836,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "service-credential"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new service-credential",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -908,6 +897,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "service-credential"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -1047,12 +1047,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all api-credentials",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace"
           ],
@@ -1104,6 +1100,10 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -1247,19 +1247,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "api-credential"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new api-credential",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -1319,6 +1308,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "api-credential"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -1469,13 +1469,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "Retrieve specific api-credential",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.name",
             "path.namespace"
@@ -1528,6 +1523,11 @@
             "resource_usage": "low"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -1669,19 +1669,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "api-credential"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new api-credential",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -1741,6 +1730,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "api-credential"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -1883,19 +1883,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "service-credential"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new service-credential",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -1955,6 +1944,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "service-credential"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -2097,19 +2097,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "api-credential"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new api-credential",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -2169,6 +2158,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "api-credential"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -2318,19 +2318,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "scim-token"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new scim-token",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -2390,6 +2379,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "scim-token"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -2532,19 +2532,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "service-credential"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new service-credential",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -2604,6 +2593,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "service-credential"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -2743,12 +2743,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all scim-tokens",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace"
           ],
@@ -2800,6 +2796,10 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -2943,19 +2943,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "scim-token"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new scim-token",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -3015,6 +3004,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "scim-token"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -3154,12 +3154,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all service-credentials",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace"
           ],
@@ -3211,6 +3207,10 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -3354,19 +3354,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "service-credential"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new service-credential",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -3426,6 +3415,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "service-credential"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -3576,13 +3576,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "Retrieve specific service-credential",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.name",
             "path.namespace"
@@ -3635,6 +3630,11 @@
             "resource_usage": "low"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -3789,18 +3789,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "modifies": [
-            "service-credential"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Replace existing service-credential",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource replacement operation",
           "required_fields": [
             "path.name",
             "path.namespace"
@@ -3858,6 +3848,16 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "modifies": [
+            "service-credential"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 800,
@@ -4104,7 +4104,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546664+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.435355+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4123,7 +4123,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546670+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.435386+00:00"
           },
           "spec": {
             "$ref": "#/components/schemas/api_credentialCustomCreateSpecType"
@@ -4211,7 +4211,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546680+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.435455+00:00"
           }
         },
         "x-f5xc-description-short": "CreateResponse is the response format for the credential's create request.",
@@ -4280,7 +4280,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546688+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.435512+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4299,7 +4299,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546692+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.435540+00:00"
           },
           "namespace_roles": {
             "type": "array",
@@ -4577,7 +4577,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546714+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.435705+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4604,7 +4604,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546718+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.435733+00:00"
           }
         },
         "x-f5xc-description-short": "GET credential object with a given name.",
@@ -4715,7 +4715,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546728+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.435804+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4734,7 +4734,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546731+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.435842+00:00"
           },
           "namespace_access": {
             "$ref": "#/components/schemas/schemaNamespaceAccessType"
@@ -4761,7 +4761,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546739+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.435891+00:00"
           },
           "user_email": {
             "type": "string",
@@ -5110,7 +5110,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546764+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436079+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5129,7 +5129,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546768+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436107+00:00"
           },
           "type": {
             "$ref": "#/components/schemas/api_credentialAPICredentialType"
@@ -5153,7 +5153,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546774+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436146+00:00"
           },
           "user_email": {
             "type": "string",
@@ -5299,7 +5299,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546785+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436226+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5318,7 +5318,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546789+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436254+00:00"
           },
           "namespace_access": {
             "$ref": "#/components/schemas/schemaNamespaceAccessType"
@@ -5345,7 +5345,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546795+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436302+00:00"
           },
           "user_email": {
             "type": "string",
@@ -5540,7 +5540,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546808+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436403+00:00"
           }
         },
         "x-f5xc-description-short": "RecreateScimTokenRequest is the request format for generating SCIM API credential.",
@@ -5607,7 +5607,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546813+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436443+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5634,7 +5634,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546817+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436470+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -5683,7 +5683,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546821+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436500+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5703,7 +5703,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546825+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436528+00:00"
           },
           "namespace_access": {
             "$ref": "#/components/schemas/schemaNamespaceAccessType"
@@ -5798,7 +5798,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546834+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436595+00:00"
           }
         },
         "x-f5xc-description-short": "Response format for the credential's replace request.",
@@ -5848,7 +5848,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546838+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436624+00:00"
           }
         },
         "x-f5xc-description-short": "ScimTokenRequest is used for fetching or revoking scim token.",
@@ -5960,7 +5960,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546847+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436679+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -6081,7 +6081,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546855+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436732+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -6217,7 +6217,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546864+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436797+00:00"
           },
           "role": {
             "type": "string",
@@ -6320,7 +6320,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546872+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436858+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -6380,7 +6380,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546879+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436906+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6401,7 +6401,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546883+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436933+00:00"
           },
           "uid": {
             "type": "string",
@@ -6425,7 +6425,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546888+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436962+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectMetaType is metadata(common attributes) of an object that all configuration objects will have.",
@@ -6475,7 +6475,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546892+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.436992+00:00"
           },
           "name": {
             "type": "string",
@@ -6496,7 +6496,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546896+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.437019+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6517,7 +6517,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546899+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.437046+00:00"
           },
           "tenant": {
             "type": "string",
@@ -6540,7 +6540,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546903+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.437073+00:00"
           },
           "uid": {
             "type": "string",
@@ -6564,7 +6564,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546908+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.437101+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -6662,7 +6662,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546916+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.437152+00:00"
           },
           "status": {
             "type": "string",
@@ -6682,7 +6682,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546920+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.437179+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -6900,7 +6900,7 @@
             "maxLength": 6,
             "minLength": 6,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546939+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.437305+00:00"
           },
           "object_index": {
             "type": "integer",
@@ -6981,7 +6981,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546948+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.437370+00:00"
           },
           "trace_info": {
             "type": "string",
@@ -7023,7 +7023,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546954+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.437408+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -7112,7 +7112,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546961+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.437457+00:00"
           },
           "name": {
             "type": "string",
@@ -7133,7 +7133,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546965+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.437484+00:00"
           },
           "namespace": {
             "type": "string",
@@ -7154,7 +7154,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546969+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.437511+00:00"
           },
           "uid": {
             "type": "string",
@@ -7175,7 +7175,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:32.546973+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:14.437539+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",

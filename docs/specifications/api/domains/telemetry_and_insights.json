@@ -2,8 +2,8 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Telemetry And Insights",
-    "description": "Telemetry And Insights management for F5 Distributed Cloud. Provides APIs for configuring telemetry and insights, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
-    "version": "2.0.21",
+    "description": "APIs for configuring collection endpoints, metrics storage, and insight generation. Supports log aggregation, performance monitoring, and alerting integration across deployments.",
+    "version": "2.0.26",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -12,8 +12,8 @@
       "name": "Proprietary",
       "url": "https://www.f5.com/company/policies/eula"
     },
-    "x-f5xc-description-long": "Telemetry And Insights management for F5 Distributed Cloud. Provides APIs for configuring telemetry and insights, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
-    "summary": "Configure and manage telemetry and insights settings, policies, and resources across your F5 Distributed Cloud deployment.",
+    "x-f5xc-description-long": "APIs for configuring collection endpoints, metrics storage, and insight generation. Supports log aggregation, performance monitoring, and alerting integration across deployments.",
+    "summary": "Collection endpoints, metrics storage, and insight generation for observability workflows.",
     "x-f5xc-cli-domain": "telemetry_and_insights",
     "x-f5xc-best-practices": {
       "common_errors": [
@@ -263,19 +263,8 @@
         "tags": [
           "Observability"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "connectivity"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new connectivity",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -335,6 +324,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "connectivity"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -480,19 +480,8 @@
         "tags": [
           "Observability"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "edge"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new edge",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -552,6 +541,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "edge"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -697,19 +697,8 @@
         "tags": [
           "Observability"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "node"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new node",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -769,6 +758,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "node"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -930,12 +930,8 @@
         "tags": [
           "Service Mesh"
         ],
-        "x-ves-required-fields": [
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all discovered-services",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace"
           ],
@@ -987,6 +983,10 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -1164,12 +1164,8 @@
         "tags": [
           "Service Mesh"
         ],
-        "x-ves-required-fields": [
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all discovered-services",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace"
           ],
@@ -1221,6 +1217,10 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -1387,13 +1387,8 @@
         "tags": [
           "Service Mesh"
         ],
-        "x-ves-required-fields": [
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "Retrieve specific discovered-service",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.name",
             "path.namespace"
@@ -1446,6 +1441,11 @@
             "resource_usage": "low"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -1605,20 +1605,8 @@
         "tags": [
           "Service Mesh"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "create-http-load-balancer"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new create-http-load-balancer",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -1679,6 +1667,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "create-http-load-balancer"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -1839,20 +1839,8 @@
         "tags": [
           "Service Mesh"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "create-tcp-load-balancer"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new create-tcp-load-balancer",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -1913,6 +1901,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "create-tcp-load-balancer"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -2073,20 +2073,8 @@
         "tags": [
           "Service Mesh"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "disable-visibility"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new disable-visibility",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -2147,6 +2135,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "disable-visibility"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -2307,20 +2307,8 @@
         "tags": [
           "Service Mesh"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "enable-visibility"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new enable-visibility",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -2381,6 +2369,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "enable-visibility"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -2531,13 +2531,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "Retrieve specific health-statu",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Health monitoring configuration",
           "required_fields": [
             "path.name",
             "path.namespace"
@@ -2590,6 +2585,11 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -2738,19 +2738,8 @@
         "tags": [
           "Service Mesh"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "suggest-value"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new suggest-value",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -2810,6 +2799,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "suggest-value"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -2946,18 +2946,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "subscribe"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new subscribe",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace"
@@ -3016,6 +3006,16 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "subscribe"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -3142,9 +3142,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all subscription-status",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [],
           "optional_fields": [],
           "field_docs": {},
@@ -3194,6 +3193,7 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -3329,18 +3329,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "unsubscribe"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new unsubscribe",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace"
@@ -3399,6 +3389,16 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "unsubscribe"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -3528,18 +3528,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "flow-collection"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new flow-collection",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace"
@@ -3598,6 +3588,16 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "flow-collection"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -3734,18 +3734,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "top-flow-anomalie"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new top-flow-anomalie",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace"
@@ -3804,6 +3794,16 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "top-flow-anomalie"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -3933,18 +3933,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "top-talker"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new top-talker",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace"
@@ -4003,6 +3993,16 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "top-talker"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -4132,18 +4132,8 @@
         "tags": [
           "Observability"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "all-ns-service"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new all-ns-service",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace"
@@ -4202,6 +4192,16 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "all-ns-service"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -4351,19 +4351,8 @@
         "tags": [
           "Observability"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "lb-cache-content"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new lb-cache-content",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -4423,6 +4412,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "lb-cache-content"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -4565,19 +4565,8 @@
         "tags": [
           "Observability"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "service"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new service",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -4637,6 +4626,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "service"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -4798,12 +4798,8 @@
         "tags": [
           "Observability"
         ],
-        "x-ves-required-fields": [
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all app-types",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace"
           ],
@@ -4855,6 +4851,10 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -4999,19 +4999,8 @@
         "tags": [
           "Observability"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "edge"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new edge",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -5071,6 +5060,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "edge"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -5216,19 +5216,8 @@
         "tags": [
           "Observability"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "node"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new node",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -5288,6 +5277,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "node"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -5433,19 +5433,8 @@
         "tags": [
           "Observability"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "instance"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new instance",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -5505,6 +5494,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "instance"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -5654,19 +5654,8 @@
         "tags": [
           "Observability"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "instance"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new instance",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -5726,6 +5715,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "instance"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -5916,14 +5916,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.kind",
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "Retrieve specific status-at-site",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.kind",
             "path.name",
@@ -5977,6 +5971,12 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.kind",
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -6165,7 +6165,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:06.237823+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.069401+00:00"
           },
           "range": {
             "type": "string",
@@ -6437,7 +6437,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:06.237844+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.069556+00:00"
           }
         },
         "x-f5xc-description-short": "Metrics used in the connectivity graph are tagged with labels listed in the enum Label.",
@@ -6940,7 +6940,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:06.237879+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.069818+00:00"
           },
           "range": {
             "type": "string",
@@ -7171,7 +7171,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:06.237895+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.069947+00:00"
           },
           "start_time": {
             "type": "string",
@@ -7399,7 +7399,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:06.237907+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.070032+00:00"
           },
           "type": {
             "$ref": "#/components/schemas/graphHealthscoreType"
@@ -7421,7 +7421,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:06.237914+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.070072+00:00"
           }
         },
         "x-f5xc-description-short": "HealthScoreTypeData contains healthscore type and the corresponding value.",
@@ -7888,7 +7888,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:06.237943+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.070286+00:00"
           },
           "previous_value": {
             "type": "string",
@@ -7927,7 +7927,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:06.237949+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.070334+00:00"
           }
         },
         "x-f5xc-description-short": "Trend value contains trend value, trend sentiment and trend calculation description and window size.",
@@ -8036,7 +8036,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:06.237956+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.070384+00:00"
           }
         },
         "x-f5xc-description-short": "Each metric value consists of a timestamp and a value. Timestamp in the Metric Value is based on the start_time, end_time and step in the request.",
@@ -8279,7 +8279,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547019+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.790717+00:00"
           },
           "namespace": {
             "type": "string",
@@ -8306,7 +8306,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547024+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.790746+00:00"
           },
           "tcp_lb_request": {
             "$ref": "#/components/schemas/discovered_serviceTCPLBRequest"
@@ -8381,7 +8381,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547032+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.790798+00:00"
           },
           "namespace": {
             "type": "string",
@@ -8408,7 +8408,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547036+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.790825+00:00"
           }
         },
         "x-f5xc-description-short": "Disable visibility on the discovered service.",
@@ -8467,7 +8467,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547043+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.790869+00:00"
           },
           "virtual_server_pool_members_health": {
             "$ref": "#/components/schemas/discovered_serviceVirtualServerPoolMemberHealth"
@@ -8519,7 +8519,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547048+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.790908+00:00"
           },
           "namespace": {
             "type": "string",
@@ -8546,7 +8546,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547052+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.790936+00:00"
           }
         },
         "x-f5xc-description-short": "Enable visibility of the discovered service in all workspaces like WAAP, App Connect, etc.",
@@ -8730,7 +8730,7 @@
             "x-original-maxLength": 1024,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547067+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791037+00:00"
           },
           "http": {
             "$ref": "#/components/schemas/discovered_serviceProxyTypeHttp"
@@ -8767,7 +8767,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547075+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791093+00:00"
           },
           "skip_server_verification": {
             "$ref": "#/components/schemas/ioschemaEmpty"
@@ -8981,7 +8981,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547092+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791215+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -9035,7 +9035,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547101+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791283+00:00"
           },
           "namespace": {
             "type": "string",
@@ -9054,7 +9054,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547105+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791310+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -9080,7 +9080,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547111+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791356+00:00"
           },
           "uid": {
             "type": "string",
@@ -9102,7 +9102,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547116+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791385+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of discovered_service is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -9222,7 +9222,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547125+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791448+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -9276,7 +9276,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547133+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791514+00:00"
           },
           "namespace": {
             "type": "string",
@@ -9295,7 +9295,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547137+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791542+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -9337,7 +9337,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547145+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791597+00:00"
           },
           "uid": {
             "type": "string",
@@ -9359,7 +9359,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547149+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791625+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of discovered services is returned in 'List'.",
@@ -9744,7 +9744,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547176+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791820+00:00"
           },
           "request_body": {
             "$ref": "#/components/schemas/protobufAny"
@@ -9809,7 +9809,7 @@
             "x-original-maxLength": 1024,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547184+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791889+00:00"
           },
           "listen_port": {
             "type": "integer",
@@ -9861,7 +9861,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547189+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.791927+00:00"
           },
           "no_sni": {
             "$ref": "#/components/schemas/ioschemaEmpty"
@@ -10219,7 +10219,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547212+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792093+00:00"
           },
           "status": {
             "type": "array",
@@ -10239,7 +10239,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547217+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792121+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -10522,7 +10522,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547232+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792216+00:00"
           },
           "name": {
             "type": "string",
@@ -10543,7 +10543,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547235+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792243+00:00"
           },
           "namespace": {
             "type": "string",
@@ -10564,7 +10564,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547239+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792271+00:00"
           },
           "tenant": {
             "type": "string",
@@ -10587,7 +10587,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547243+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792298+00:00"
           },
           "uid": {
             "type": "string",
@@ -10611,7 +10611,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547247+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792326+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -10664,7 +10664,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547253+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792365+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -10739,7 +10739,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547260+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792413+00:00"
           },
           "service_name": {
             "type": "string",
@@ -10782,7 +10782,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547266+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792450+00:00"
           },
           "type": {
             "type": "string",
@@ -10927,7 +10927,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547276+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792520+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -11027,7 +11027,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547285+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792589+00:00"
           }
         },
         "x-f5xc-description-short": "Metric data contains timestamp and the value.",
@@ -11104,7 +11104,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547291+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792629+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -11164,7 +11164,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547299+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792677+00:00"
           },
           "namespace": {
             "type": "string",
@@ -11185,7 +11185,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547302+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792704+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
@@ -11309,7 +11309,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547314+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792781+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -11429,7 +11429,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547322+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792848+00:00"
           },
           "status": {
             "type": "string",
@@ -11449,7 +11449,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547326+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.792876+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -11644,7 +11644,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547344+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.793000+00:00"
           },
           "uid": {
             "type": "string",
@@ -11667,7 +11667,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547348+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.793028+00:00"
           }
         },
         "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
@@ -11719,7 +11719,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547363+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.793134+00:00"
           },
           "name": {
             "type": "string",
@@ -11740,7 +11740,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547367+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.793161+00:00"
           },
           "namespace": {
             "type": "string",
@@ -11761,7 +11761,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547371+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.793188+00:00"
           },
           "uid": {
             "type": "string",
@@ -11782,7 +11782,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547376+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.793216+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
@@ -11942,7 +11942,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547391+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.793343+00:00"
           },
           "ref_value": {
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
@@ -12107,7 +12107,7 @@
             },
             "x-original-maxLength": 128,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547401+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.793414+00:00"
           },
           "namespace": {
             "type": "string",
@@ -12134,7 +12134,7 @@
             },
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547405+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.793442+00:00"
           },
           "tenant": {
             "type": "string",
@@ -12163,7 +12163,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.547409+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.793469+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a direct reference from one object(the referrer) to another(the referred).",
@@ -13112,7 +13112,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:19.763267+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:19.384327+00:00"
           }
         },
         "x-f5xc-description-short": "Field Data contains key/value pairs that uniquely identifies the group_by labels specified in the request.",
@@ -15530,7 +15530,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:53.259367+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:22.494442+00:00"
           },
           "service": {
             "type": "string",
@@ -15864,7 +15864,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:53.259403+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:22.494690+00:00"
           }
         },
         "x-f5xc-description-short": "List of application types for a namespace.",
@@ -15990,7 +15990,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:53.259414+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:22.494772+00:00"
           }
         },
         "x-f5xc-description-short": "CdnMetricData contains the metric type and the corresponding metric value(s).",
@@ -16219,7 +16219,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:53.259434+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:22.494948+00:00"
           },
           "range": {
             "type": "string",
@@ -16512,7 +16512,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:53.259461+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:22.495096+00:00"
           },
           "service": {
             "type": "string",
@@ -16731,7 +16731,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:53.259477+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:22.495224+00:00"
           },
           "range": {
             "type": "string",
@@ -16997,7 +16997,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:53.259495+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:22.495350+00:00"
           },
           "range": {
             "type": "string",
@@ -17272,7 +17272,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:53.259511+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:22.495466+00:00"
           },
           "start_time": {
             "type": "string",
@@ -17434,7 +17434,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:53.259523+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:22.495554+00:00"
           }
         },
         "x-f5xc-description-short": "Metrics used to render the service graph are tagged with labels listed in the enum Label.",
@@ -17593,7 +17593,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:53.259537+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:22.495671+00:00"
           },
           "range": {
             "type": "string",
@@ -17840,7 +17840,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:53.259555+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:22.495796+00:00"
           },
           "range": {
             "type": "string",

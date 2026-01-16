@@ -2,8 +2,8 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Vpm And Node Management",
-    "description": "Vpm And Node Management management for F5 Distributed Cloud. Provides APIs for configuring vpm and node management, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
-    "version": "2.0.21",
+    "description": "APIs for configuring node policies, fleet management, and lifecycle operations. Supports node registration, configuration deployment, and status monitoring across distributed infrastructure.",
+    "version": "2.0.26",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -12,8 +12,8 @@
       "name": "Proprietary",
       "url": "https://www.f5.com/company/policies/eula"
     },
-    "x-f5xc-description-long": "Vpm And Node Management management for F5 Distributed Cloud. Provides APIs for configuring vpm and node management, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
-    "summary": "Configure and manage vpm and node management settings, policies, and resources across your F5 Distributed Cloud deployment.",
+    "x-f5xc-description-long": "APIs for configuring node policies, fleet management, and lifecycle operations. Supports node registration, configuration deployment, and status monitoring across distributed infrastructure.",
+    "summary": "Lifecycle control, fleet configuration, and deployment policies for distributed node management.",
     "x-f5xc-cli-domain": "vpm_and_node_management",
     "x-f5xc-best-practices": {
       "common_errors": [
@@ -232,9 +232,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all upgrade-status",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [],
           "optional_fields": [],
           "field_docs": {},
@@ -284,6 +283,7 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,

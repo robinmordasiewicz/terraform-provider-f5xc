@@ -1,6 +1,6 @@
 {
-  "version": "2.0.21",
-  "timestamp": "2026-01-08T05:43:21.022206+00:00",
+  "version": "2.0.26",
+  "timestamp": "2026-01-16T01:26:38.908998+00:00",
   "specifications": [
     {
       "domain": "admin_console_and_ui",
@@ -253,9 +253,9 @@
     {
       "domain": "authentication",
       "title": "Authentication",
-      "description": "Authentication management for F5 Distributed Cloud. Provides APIs for configuring authentication, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
-      "x-f5xc-description-short": "Authentication management and configuration",
-      "x-f5xc-description-medium": "Configure and manage authentication settings, policies, and resources across your F5 Distributed Cloud deployment.",
+      "description": "Identity and access management providing APIs for configuring identity providers, access policies, and user credentials. Supports MFA, identity provider integration, and lifecycle operations for credential management across distributed deployments.",
+      "x-f5xc-description-short": "Identity provider and access policy configuration.",
+      "x-f5xc-description-medium": "Identity management with provider integration, access policies, and credential lifecycle control.",
       "file": "authentication.json",
       "path_count": 14,
       "schema_count": 39,
@@ -1049,9 +1049,9 @@
     {
       "domain": "data_intelligence",
       "title": "Data Intelligence",
-      "description": "Data Intelligence management for F5 Distributed Cloud. Provides APIs for configuring data intelligence, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
-      "x-f5xc-description-short": "Data Intelligence management and configuration",
-      "x-f5xc-description-medium": "Configure and manage data intelligence settings, policies, and resources across your F5 Distributed Cloud deployment.",
+      "description": "APIs for configuring classification policies and resource management. Supports data classification, insight generation, and integration with security services across deployments.",
+      "x-f5xc-description-short": "Classification, insights, and policy management.",
+      "x-f5xc-description-medium": "Classification rules, resource policies, and insight generation for data analysis workflows.",
       "file": "data_intelligence.json",
       "path_count": 15,
       "schema_count": 77,
@@ -2350,9 +2350,9 @@
     {
       "domain": "telemetry_and_insights",
       "title": "Telemetry And Insights",
-      "description": "Telemetry And Insights management for F5 Distributed Cloud. Provides APIs for configuring telemetry and insights, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
-      "x-f5xc-description-short": "Telemetry And Insights management and configuration",
-      "x-f5xc-description-medium": "Configure and manage telemetry and insights settings, policies, and resources across your F5 Distributed Cloud deployment.",
+      "description": "APIs for configuring collection endpoints, metrics storage, and insight generation. Supports log aggregation, performance monitoring, and alerting integration across deployments.",
+      "x-f5xc-description-short": "Metrics collection, analysis, and visualization.",
+      "x-f5xc-description-medium": "Collection endpoints, metrics storage, and insight generation for observability workflows.",
       "file": "telemetry_and_insights.json",
       "path_count": 27,
       "schema_count": 186,
@@ -2481,9 +2481,9 @@
     {
       "domain": "threat_campaign",
       "title": "Threat Campaign",
-      "description": "Threat Campaign management for F5 Distributed Cloud. Provides APIs for configuring threat campaign, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
-      "x-f5xc-description-short": "Threat Campaign management and configuration",
-      "x-f5xc-description-medium": "Configure and manage threat campaign settings, policies, and resources across your F5 Distributed Cloud deployment.",
+      "description": "APIs for configuring detection policies and attack tracking. Supports campaign analysis, risk assessment, and automated mitigation rule generation across security domains.",
+      "x-f5xc-description-short": "Attack detection, tracking, and mitigation rules.",
+      "x-f5xc-description-medium": "Detection policies, attack tracking, and automated mitigation rule generation for security operations.",
       "file": "threat_campaign.json",
       "path_count": 1,
       "schema_count": 177,
@@ -2819,9 +2819,9 @@
     {
       "domain": "vpm_and_node_management",
       "title": "Vpm And Node Management",
-      "description": "Vpm And Node Management management for F5 Distributed Cloud. Provides APIs for configuring vpm and node management, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
-      "x-f5xc-description-short": "Vpm And Node Management management and configuration",
-      "x-f5xc-description-medium": "Configure and manage vpm and node management settings, policies, and resources across your F5 Distributed Cloud deployment.",
+      "description": "APIs for configuring node policies, fleet management, and lifecycle operations. Supports node registration, configuration deployment, and status monitoring across distributed infrastructure.",
+      "x-f5xc-description-short": "Node lifecycle, fleet grouping, and orchestration.",
+      "x-f5xc-description-medium": "Lifecycle control, fleet configuration, and deployment policies for distributed node management.",
       "file": "vpm_and_node_management.json",
       "path_count": 1,
       "schema_count": 2,

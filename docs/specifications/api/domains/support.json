@@ -3,7 +3,7 @@
   "info": {
     "title": "Support",
     "description": "Case management workflows including submission, commentary, and closure paths. Urgency adjustments and routing for time-sensitive incidents. Tax exemption verification requests. Site-level tcpdump operations—initiation, enumeration, and termination—for low-level network troubleshooting and protocol analysis.",
-    "version": "2.0.21",
+    "version": "2.0.26",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -270,20 +270,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "resync-crl"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new resync-crl",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -344,6 +332,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "resync-crl"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -480,18 +480,8 @@
         "tags": [
           "Tenant Management"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "support-ticket"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new support-ticket",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace"
@@ -550,6 +540,16 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "support-ticket"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -686,18 +686,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "tax-exempt-request"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new tax-exempt-request",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace"
@@ -756,6 +746,16 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "tax-exempt-request"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -905,19 +905,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "customer-support"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new customer-support",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -977,6 +966,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "customer-support"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -1155,12 +1155,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all customer-supports",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace"
           ],
@@ -1212,6 +1208,10 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -1371,20 +1371,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "close"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new close",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -1445,6 +1433,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "close"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -1605,20 +1605,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "comment"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new comment",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -1679,6 +1667,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "comment"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -1839,20 +1839,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "escalate"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new escalate",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -1913,6 +1901,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "escalate"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -2073,20 +2073,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "priority"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new priority",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -2147,6 +2135,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "priority"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -2307,20 +2307,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "reopen"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new reopen",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -2381,6 +2369,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "reopen"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -2559,12 +2559,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all customer-supports",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace"
           ],
@@ -2616,6 +2612,10 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -2784,13 +2784,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "Retrieve specific customer-support",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.name",
             "path.namespace"
@@ -2843,6 +2838,11 @@
             "resource_usage": "low"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -2981,12 +2981,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all check-debug-info-collections",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.site"
           ],
@@ -3038,6 +3034,10 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -3187,12 +3187,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all diagnosis",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.site"
           ],
@@ -3244,6 +3240,10 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -3382,12 +3382,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all download-debug-info-collections",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.site"
           ],
@@ -3439,6 +3435,10 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -3588,12 +3588,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all healths",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Health monitoring configuration",
           "required_fields": [
             "path.site"
           ],
@@ -3645,6 +3641,10 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -3802,20 +3802,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "change-password"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new change-password",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -3876,6 +3864,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "change-password"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -4024,13 +4024,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all start-debug-info-collections",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.node",
             "path.site"
@@ -4083,6 +4078,11 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -4232,13 +4232,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace",
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all list-services",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace",
             "path.site"
@@ -4291,6 +4286,11 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -4462,14 +4462,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace",
-          "path.site",
-          "path.vesnamespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all status",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace",
             "path.site",
@@ -4523,6 +4517,12 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace",
+          "path.site",
+          "path.vesnamespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -4686,21 +4686,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "exec"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new exec",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -4762,6 +4749,19 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "exec"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -4935,14 +4935,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all exec-logs",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace",
             "path.node",
@@ -4996,6 +4990,12 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -5159,21 +5159,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "exec-user"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new exec-user",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -5235,6 +5222,19 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "exec-user"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -5406,21 +5406,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "host-ping"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new host-ping",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -5482,6 +5469,19 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "host-ping"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -5653,21 +5653,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "reboot"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new reboot",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -5729,6 +5716,19 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "reboot"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -5913,15 +5913,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace",
-          "path.node",
-          "path.service",
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all logs",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace",
             "path.node",
@@ -5976,6 +5969,13 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace",
+          "path.node",
+          "path.service",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -6157,22 +6157,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.node",
-          "path.service",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "soft-restart"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new soft-restart",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -6235,6 +6221,20 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.node",
+          "path.service",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "soft-restart"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -6385,13 +6385,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace",
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all dhcp-leases",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace",
             "path.site"
@@ -6444,6 +6439,11 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -6604,14 +6604,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all configs",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace",
             "path.node",
@@ -6665,6 +6659,12 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -6830,21 +6830,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "config"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new config",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -6906,6 +6893,19 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "config"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -7077,21 +7077,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "disconnect"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new disconnect",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -7153,6 +7140,19 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "disconnect"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -7314,14 +7314,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all infos",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace",
             "path.node",
@@ -7375,6 +7369,12 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -7530,20 +7530,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "ping"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new ping",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -7604,6 +7592,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "ping"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -7753,20 +7753,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "fetchdump"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new fetchdump",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -7827,6 +7815,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "fetchdump"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -7983,20 +7983,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "list-tcpdump"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new list-tcpdump",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -8057,6 +8045,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "list-tcpdump"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -8206,20 +8206,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "stop-tcpdump"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new stop-tcpdump",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -8280,6 +8268,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "stop-tcpdump"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -8436,20 +8436,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "tcpdump"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new tcpdump",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -8510,6 +8498,18 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "tcpdump"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -8646,18 +8646,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "jira-projects-issue-type"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new jira-projects-issue-type",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace"
@@ -8716,6 +8706,16 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "jira-projects-issue-type"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -8852,18 +8852,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "validate-ticket-tracking-system"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new validate-ticket-tracking-system",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace"
@@ -8922,6 +8912,16 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "validate-ticket-tracking-system"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -9071,19 +9071,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "ticket-tracking-system"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new ticket-tracking-system",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -9143,6 +9132,17 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "ticket-tracking-system"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -9303,18 +9303,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.metadata.name",
-          "path.metadata.namespace"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "modifies": [
-            "ticket-tracking-system"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Replace existing ticket-tracking-system",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource replacement operation",
           "required_fields": [
             "path.metadata.name",
             "path.metadata.namespace"
@@ -9372,6 +9362,16 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "path.metadata.name",
+          "path.metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "modifies": [
+            "ticket-tracking-system"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 800,
@@ -9550,12 +9550,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all ticket-tracking-systems",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace"
           ],
@@ -9607,6 +9603,10 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -9775,13 +9775,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "Retrieve specific ticket-tracking-system",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.name",
             "path.namespace"
@@ -9834,6 +9829,11 @@
             "resource_usage": "low"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -9986,20 +9986,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.name",
-          "path.namespace"
-        ],
-        "x-ves-danger-level": "high",
-        "x-ves-confirmation-required": true,
-        "x-ves-side-effects": {
-          "deletes": [
-            "ticket-tracking-system",
-            "contained_resources"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Delete ticket-tracking-system",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource deletion operation",
           "required_fields": [
             "path.name",
             "path.namespace"
@@ -10059,6 +10047,18 @@
             "latency": "high",
             "resource_usage": "moderate"
           }
+        },
+        "x-f5xc-required-fields": [
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "high",
+        "x-f5xc-confirmation-required": true,
+        "x-f5xc-side-effects": {
+          "deletes": [
+            "ticket-tracking-system",
+            "contained_resources"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 500,
@@ -10220,14 +10220,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all configs",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace",
             "path.node",
@@ -10281,6 +10275,12 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -10446,21 +10446,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "config"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new config",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -10522,6 +10509,19 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "config"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -10683,14 +10683,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all lists",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace",
             "path.node",
@@ -10744,6 +10738,12 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 500,
           "p95_ms": 2000,
@@ -10904,14 +10904,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all rules",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace",
             "path.node",
@@ -10966,6 +10960,12 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -11136,21 +11136,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "add"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new add",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -11213,6 +11200,19 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "add"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -11384,21 +11384,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "delete"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new delete",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -11461,6 +11448,19 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "delete"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -11622,14 +11622,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all configs",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace",
             "path.node",
@@ -11683,6 +11677,12 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -11848,21 +11848,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "config"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new config",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -11924,6 +11911,19 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "config"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -12095,21 +12095,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "metadata.name",
-          "metadata.namespace",
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "medium",
-        "x-ves-side-effects": {
-          "creates": [
-            "disconnect"
-          ]
-        },
-        "x-ves-operation-metadata": {
-          "purpose": "Create new disconnect",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource creation operation",
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
@@ -12171,6 +12158,19 @@
             "latency": "low",
             "resource_usage": "low"
           }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "disconnect"
+          ]
         },
         "x-f5xc-discovered-response-time": {
           "p50_ms": 1000,
@@ -12332,14 +12332,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all infos",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace",
             "path.node",
@@ -12393,6 +12387,12 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 200,
           "p95_ms": 800,
@@ -12553,14 +12553,8 @@
         "tags": [
           "Other"
         ],
-        "x-ves-required-fields": [
-          "path.namespace",
-          "path.node",
-          "path.site"
-        ],
-        "x-ves-danger-level": "low",
-        "x-ves-operation-metadata": {
-          "purpose": "List all lists",
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
           "required_fields": [
             "path.namespace",
             "path.node",
@@ -12614,6 +12608,12 @@
             "resource_usage": "moderate"
           }
         },
+        "x-f5xc-required-fields": [
+          "path.namespace",
+          "path.node",
+          "path.site"
+        ],
+        "x-f5xc-danger-level": "low",
         "x-f5xc-discovered-response-time": {
           "p50_ms": 500,
           "p95_ms": 2000,
@@ -12662,7 +12662,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:48.695196+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:16.148538+00:00"
           },
           "namespace": {
             "type": "string",
@@ -12682,7 +12682,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:48.695203+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:16.148569+00:00"
           },
           "site": {
             "type": "string",
@@ -12719,7 +12719,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:48.695211+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:16.148610+00:00"
           }
         },
         "x-f5xc-description-short": "Request to trigger resync of CRL in VER.",
@@ -12762,7 +12762,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:41:48.695217+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:16.148643+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -12898,7 +12898,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450105+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170058+00:00"
           },
           "namespace": {
             "type": "string",
@@ -12918,7 +12918,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450111+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170088+00:00"
           }
         },
         "x-f5xc-description-short": "Closes an open existing customer support ticket.",
@@ -13017,7 +13017,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450121+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170149+00:00"
           },
           "namespace": {
             "type": "string",
@@ -13037,7 +13037,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450125+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170177+00:00"
           }
         },
         "x-f5xc-description-short": "Adds a new comment to an existing customer support ticket.",
@@ -13305,7 +13305,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450146+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170336+00:00"
           },
           "namespace": {
             "type": "string",
@@ -13325,7 +13325,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450150+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170364+00:00"
           }
         },
         "x-f5xc-description-short": "Changes priority of an existing customer support ticket.",
@@ -13449,7 +13449,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450163+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170461+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -13590,7 +13590,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450175+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170536+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -13644,7 +13644,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450184+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170604+00:00"
           },
           "namespace": {
             "type": "string",
@@ -13663,7 +13663,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450188+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170632+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -13705,7 +13705,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450195+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170687+00:00"
           },
           "uid": {
             "type": "string",
@@ -13727,7 +13727,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450200+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170717+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of customer_support is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -13831,7 +13831,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450208+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170758+00:00"
           }
         },
         "x-f5xc-description-short": "Input message of the 'ListCTSupportTickets' RPC. Fields can be used to control scope and filtering of collection.",
@@ -13929,7 +13929,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450215+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170809+00:00"
           },
           "namespace": {
             "type": "string",
@@ -13949,7 +13949,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450218+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170846+00:00"
           },
           "priority": {
             "$ref": "#/components/schemas/customer_supportSupportTicketPriority"
@@ -14077,7 +14077,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450229+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170928+00:00"
           }
         },
         "x-f5xc-description-short": "Any error that may occurred during tax status verification request.",
@@ -14120,7 +14120,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450234+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170958+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14140,7 +14140,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450237+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.170986+00:00"
           }
         },
         "x-f5xc-description-short": "Reopens a closed existing customer support ticket.",
@@ -14477,7 +14477,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450250+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171073+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -14552,7 +14552,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450257+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171121+00:00"
           },
           "service_name": {
             "type": "string",
@@ -14595,7 +14595,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450262+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171159+00:00"
           },
           "type": {
             "type": "string",
@@ -14710,7 +14710,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450272+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171228+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -14826,7 +14826,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450281+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171290+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -14884,7 +14884,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450287+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171338+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14905,7 +14905,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450291+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171366+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
@@ -14985,7 +14985,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450297+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171407+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -15045,7 +15045,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450304+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171455+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15066,7 +15066,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450308+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171483+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
@@ -15114,7 +15114,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450312+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171513+00:00"
           },
           "name": {
             "type": "string",
@@ -15135,7 +15135,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450316+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171540+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15156,7 +15156,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450319+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171567+00:00"
           },
           "tenant": {
             "type": "string",
@@ -15179,7 +15179,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450323+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171594+00:00"
           },
           "uid": {
             "type": "string",
@@ -15203,7 +15203,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450328+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171624+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -15327,7 +15327,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450339+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171702+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -15447,7 +15447,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450347+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171761+00:00"
           },
           "status": {
             "type": "string",
@@ -15467,7 +15467,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450351+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171788+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -15662,7 +15662,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450368+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171921+00:00"
           },
           "uid": {
             "type": "string",
@@ -15685,7 +15685,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450373+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171950+00:00"
           }
         },
         "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
@@ -15737,7 +15737,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450377+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.171981+00:00"
           },
           "name": {
             "type": "string",
@@ -15758,7 +15758,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450381+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.172008+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15779,7 +15779,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450384+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.172035+00:00"
           },
           "uid": {
             "type": "string",
@@ -15800,7 +15800,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450388+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.172064+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
@@ -15879,7 +15879,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450396+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.172113+00:00"
           },
           "ongoing": {
             "type": "boolean",
@@ -16152,7 +16152,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:07.450419+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.172292+00:00"
           },
           "escalated": {
             "type": "boolean",
@@ -16656,7 +16656,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794212+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.722145+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -17041,7 +17041,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794246+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.722375+00:00"
           },
           "node": {
             "type": "string",
@@ -17290,7 +17290,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794268+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.722541+00:00"
           },
           "wifi_support": {
             "type": "boolean",
@@ -17423,7 +17423,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794279+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.722619+00:00"
           },
           "node": {
             "type": "string",
@@ -17732,7 +17732,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794299+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.722768+00:00"
           },
           "node": {
             "type": "string",
@@ -17822,7 +17822,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794307+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.722818+00:00"
           },
           "node": {
             "type": "string",
@@ -17857,7 +17857,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794312+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.722867+00:00"
           }
         },
         "x-f5xc-description-short": "Name and formal displayed name of the service.",
@@ -17900,7 +17900,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794316+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.722897+00:00"
           },
           "node": {
             "type": "string",
@@ -18023,7 +18023,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794325+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.722966+00:00"
           },
           "node": {
             "type": "string",
@@ -18058,7 +18058,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794331+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723004+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -18101,7 +18101,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794336+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723035+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -18197,7 +18197,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794349+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723116+00:00"
           },
           "store_provider": {
             "type": "string",
@@ -18260,7 +18260,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794355+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723156+00:00"
           },
           "url": {
             "type": "string",
@@ -18379,7 +18379,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794365+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723218+00:00"
           },
           "location": {
             "type": "string",
@@ -18397,7 +18397,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794369+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723246+00:00"
           },
           "provider": {
             "type": "string",
@@ -18416,7 +18416,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794373+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723274+00:00"
           },
           "secret_encoding": {
             "$ref": "#/components/schemas/schemaSecretEncodingType"
@@ -18440,7 +18440,7 @@
             "maxLength": 1,
             "minLength": 1,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794379+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723311+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Vault Secret\" VaultSecretInfoType specifies information about the Secret managed by Hashicorp Vault.",
@@ -18482,7 +18482,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794383+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723342+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Wingman Secret\" WingmanSecretInfoType specifies the handle to the wingman secret.",
@@ -18557,7 +18557,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794391+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723390+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -18616,7 +18616,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794396+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723429+00:00"
           },
           "serial": {
             "type": "string",
@@ -18670,7 +18670,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794402+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723475+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -18783,7 +18783,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794412+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723541+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -19141,7 +19141,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794443+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723716+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -19362,7 +19362,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794459+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723824+00:00"
           },
           "port": {
             "type": "string",
@@ -19459,7 +19459,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794467+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723891+00:00"
           },
           "release": {
             "type": "string",
@@ -19510,7 +19510,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794474+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.723938+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -19683,7 +19683,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794492+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.724087+00:00"
           },
           "serial": {
             "type": "string",
@@ -19737,7 +19737,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794498+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.724134+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -19811,7 +19811,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794505+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.724183+00:00"
           },
           "serial": {
             "type": "string",
@@ -20039,7 +20039,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:12.794523+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.724318+00:00"
           },
           "i_manufacturer": {
             "type": "string",
@@ -20274,7 +20274,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.012915+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.770601+00:00"
           },
           "value": {
             "type": "string",
@@ -20291,7 +20291,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.012921+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.770631+00:00"
           }
         },
         "x-f5xc-description-short": "DHCP Option information as a (key, value) pair.",
@@ -20347,7 +20347,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:13.012929+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:18.770673+00:00"
           },
           "expiry": {
             "type": "string",
@@ -20863,7 +20863,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:31.178890+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:20.434143+00:00"
           },
           "node": {
             "type": "string",
@@ -21003,7 +21003,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:31.178902+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:20.434226+00:00"
           },
           "node": {
             "type": "string",
@@ -21346,7 +21346,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:42:42.264369+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:21.460486+00:00"
           },
           "node": {
             "type": "string",
@@ -21930,7 +21930,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:04.493344+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:23.876643+00:00"
           },
           "node": {
             "type": "string",
@@ -22065,7 +22065,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:04.493356+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:23.876722+00:00"
           },
           "node": {
             "type": "string",
@@ -22260,7 +22260,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:04.493369+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:23.876811+00:00"
           },
           "node": {
             "type": "string",
@@ -22452,7 +22452,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:04.493384+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:23.876927+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -22556,7 +22556,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:06.766992+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.086161+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -22614,7 +22614,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:06.766999+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.086210+00:00"
           },
           "namespace": {
             "type": "string",
@@ -22635,7 +22635,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:06.767002+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.086237+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
@@ -22733,7 +22733,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:06.767085+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.086851+00:00"
           }
         },
         "x-f5xc-description-short": "Issue (ticket) type information that's specific to Jira - modeled after the JIRA REST API response format.",
@@ -22811,7 +22811,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:06.767092+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.086900+00:00"
           },
           "name": {
             "type": "string",
@@ -22831,7 +22831,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:06.767095+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.086927+00:00"
           }
         },
         "x-f5xc-description-short": "Contains fields and information that are specific to Jira projects - modeled after the JIRA REST API response format.",
@@ -22968,7 +22968,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:06.767107+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.087027+00:00"
           },
           "namespace": {
             "type": "string",
@@ -22988,7 +22988,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:06.767111+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.087054+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -23448,7 +23448,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:06.767141+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.087279+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -23503,7 +23503,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:06.767149+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.087345+00:00"
           },
           "namespace": {
             "type": "string",
@@ -23522,7 +23522,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:06.767152+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.087373+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -23548,7 +23548,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:06.767158+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.087418+00:00"
           },
           "uid": {
             "type": "string",
@@ -23570,7 +23570,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:06.767162+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.087446+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of ticket_tracking_system is returned in 'List'.",
@@ -23753,7 +23753,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:09.019985+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.334025+00:00"
           },
           "node": {
             "type": "string",
@@ -23915,7 +23915,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:09.019997+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.334108+00:00"
           },
           "node": {
             "type": "string",
@@ -24066,7 +24066,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:09.020008+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.334189+00:00"
           },
           "node": {
             "type": "string",
@@ -24195,7 +24195,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:09.020018+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:24.334267+00:00"
           },
           "node": {
             "type": "string",
@@ -24635,7 +24635,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:16.796998+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:25.082161+00:00"
           },
           "node": {
             "type": "string",
@@ -24929,7 +24929,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-08T05:43:16.797017+00:00"
+            "x-reconciled-at": "2026-01-16T01:26:25.082293+00:00"
           },
           "node": {
             "type": "string",

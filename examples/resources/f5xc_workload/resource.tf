@@ -1,5 +1,5 @@
 # Workload Resource Example
-# Manages workload_flavor. in F5 Distributed Cloud.
+# Manages a Workload resource in F5 Distributed Cloud for workload. configuration.
 
 # Basic Workload configuration
 resource "f5xc_workload" "example" {

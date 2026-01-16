@@ -2,12 +2,12 @@
 page_title: "f5xc_workload Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages workload_flavor. in F5 Distributed Cloud.
+  Manages a Workload resource in F5 Distributed Cloud for workload. configuration.
 ---
 
 # f5xc_workload (Resource)
 
-Manages workload_flavor. in F5 Distributed Cloud.
+Manages a Workload resource in F5 Distributed Cloud for workload. configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -15,7 +15,7 @@ Manages workload_flavor. in F5 Distributed Cloud.
 
 ```terraform
 # Workload Resource Example
-# Manages workload_flavor. in F5 Distributed Cloud.
+# Manages a Workload resource in F5 Distributed Cloud for workload. configuration.
 
 # Basic Workload configuration
 resource "f5xc_workload" "example" {
@@ -71,13 +71,13 @@ resource "f5xc_workload" "example" {
 
 ### Spec Argument Reference
 
-<a id="ephemeral-storage"></a>&#x2022; [`ephemeral_storage`](#ephemeral-storage) - Optional String<br>Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor
+-> **One of the following:**
+&#x2022; <a id="job"></a>[`job`](#job) - Optional Block<br>Jobs are used for running batch processing tasks and run to completion. Jobs are generally used for tasks like report generation, billing, parallel data processing, ETL processing, etc<br>See [Job](#job) below for details.
+<br><br>&#x2022; <a id="service"></a>[`service`](#service) - Optional Block<br>Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. Replicas of a service are fungible and do not have a stable network identity or storage. Common examples of services are web servers, application servers<br>See [Service](#service) below for details.
+<br><br>&#x2022; <a id="simple-service"></a>[`simple_service`](#simple-service) - Optional Block<br>SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP
+<br><br>&#x2022; <a id="stateful-service"></a>[`stateful_service`](#stateful-service) - Optional Block<br>StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. Stateful service are used for distributed stateful applications like cassandra, mongodb, redis, etc
 
-<a id="memory"></a>&#x2022; [`memory`](#memory) - Optional String<br>Memory in MiB (mebibyte) allocated for the workload_flavor
-
-<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
-
-<a id="vcpus"></a>&#x2022; [`vcpus`](#vcpus) - Optional Number<br>Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
 ### Attributes Reference
 
@@ -86,6 +86,2948 @@ In addition to all arguments above, the following attributes are exported:
 <a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
+
+#### Job
+
+A [`job`](#job) block supports the following:
+
+<a id="job-configuration"></a>&#x2022; [`configuration`](#job-configuration) - Optional Block<br>Configuration parameters of the workload<br>See [Configuration](#job-configuration) below.
+
+<a id="job-containers"></a>&#x2022; [`containers`](#job-containers) - Optional Block<br>Containers to use for the job<br>See [Containers](#job-containers) below.
+
+<a id="job-deploy-options"></a>&#x2022; [`deploy_options`](#job-deploy-options) - Optional Block<br>Deploy OPTIONS are used to configure the workload deployment OPTIONS<br>See [Deploy Options](#job-deploy-options) below.
+
+<a id="job-num-replicas"></a>&#x2022; [`num_replicas`](#job-num-replicas) - Optional Number<br>Number of replicas of the batch job to spawn per site
+
+<a id="job-volumes"></a>&#x2022; [`volumes`](#job-volumes) - Optional Block<br>Volumes. Volumes for the job<br>See [Volumes](#job-volumes) below.
+
+#### Job Configuration
+
+A [`configuration`](#job-configuration) block (within [`job`](#job)) supports the following:
+
+<a id="job-configuration-parameters"></a>&#x2022; [`parameters`](#job-configuration-parameters) - Optional Block<br>Parameters. Parameters for the workload<br>See [Parameters](#job-configuration-parameters) below.
+
+#### Job Configuration Parameters
+
+A [`parameters`](#job-configuration-parameters) block (within [`job.configuration`](#job-configuration)) supports the following:
+
+<a id="job-configuration-parameters-env-var"></a>&#x2022; [`env_var`](#job-configuration-parameters-env-var) - Optional Block<br>Environment Variable. Environment Variable<br>See [Env Var](#job-configuration-parameters-env-var) below.
+
+<a id="job-configuration-parameters-file"></a>&#x2022; [`file`](#job-configuration-parameters-file) - Optional Block<br>Configuration File. Configuration File for the workload<br>See [File](#job-configuration-parameters-file) below.
+
+#### Job Configuration Parameters Env Var
+
+An [`env_var`](#job-configuration-parameters-env-var) block (within [`job.configuration.parameters`](#job-configuration-parameters)) supports the following:
+
+<a id="name-8db56d"></a>&#x2022; [`name`](#name-8db56d) - Optional String<br>Name. Name of Environment Variable
+
+<a id="value-a8625d"></a>&#x2022; [`value`](#value-a8625d) - Optional String<br>Value. Value of Environment Variable
+
+#### Job Configuration Parameters File
+
+A [`file`](#job-configuration-parameters-file) block (within [`job.configuration.parameters`](#job-configuration-parameters)) supports the following:
+
+<a id="job-configuration-parameters-file-data"></a>&#x2022; [`data`](#job-configuration-parameters-file-data) - Optional String<br>Data. File data
+
+<a id="job-configuration-parameters-file-mount"></a>&#x2022; [`mount`](#job-configuration-parameters-file-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-configuration-parameters-file-mount) below.
+
+<a id="job-configuration-parameters-file-name"></a>&#x2022; [`name`](#job-configuration-parameters-file-name) - Optional String<br>Name. Name of the file
+
+<a id="name-03691e"></a>&#x2022; [`volume_name`](#name-03691e) - Optional String<br>Volume Name. Name of the Volume
+
+#### Job Configuration Parameters File Mount
+
+A [`mount`](#job-configuration-parameters-file-mount) block (within [`job.configuration.parameters.file`](#job-configuration-parameters-file)) supports the following:
+
+<a id="mode-8141d6"></a>&#x2022; [`mode`](#mode-8141d6) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="path-4baddf"></a>&#x2022; [`mount_path`](#path-4baddf) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="path-5fe649"></a>&#x2022; [`sub_path`](#path-5fe649) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
+
+#### Job Containers
+
+A [`containers`](#job-containers) block (within [`job`](#job)) supports the following:
+
+<a id="job-containers-args"></a>&#x2022; [`args`](#job-containers-args) - Optional List<br>Arguments to the entrypoint. Overrides the docker image's CMD
+
+<a id="job-containers-command"></a>&#x2022; [`command`](#job-containers-command) - Optional List<br>Command to execute. Overrides the docker image's ENTRYPOINT
+
+<a id="job-containers-custom-flavor"></a>&#x2022; [`custom_flavor`](#job-containers-custom-flavor) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#job-containers-custom-flavor) below.
+
+<a id="job-containers-default-flavor"></a>&#x2022; [`default_flavor`](#job-containers-default-flavor) - Optional Block<br>Enable this option
+
+<a id="job-containers-flavor"></a>&#x2022; [`flavor`](#job-containers-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have
+
+<a id="job-containers-image"></a>&#x2022; [`image`](#job-containers-image) - Optional Block<br>ImageType configures the image to use, how to pull the image, and the associated secrets to use if any<br>See [Image](#job-containers-image) below.
+
+<a id="job-containers-init-container"></a>&#x2022; [`init_container`](#job-containers-init-container) - Optional Bool<br>Specialized container that runs before application container and runs to completion
+
+<a id="job-containers-liveness-check"></a>&#x2022; [`liveness_check`](#job-containers-liveness-check) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Liveness Check](#job-containers-liveness-check) below.
+
+<a id="job-containers-name"></a>&#x2022; [`name`](#job-containers-name) - Optional String<br>Name. Name of the container
+
+<a id="job-containers-readiness-check"></a>&#x2022; [`readiness_check`](#job-containers-readiness-check) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Readiness Check](#job-containers-readiness-check) below.
+
+#### Job Containers Custom Flavor
+
+A [`custom_flavor`](#job-containers-custom-flavor) block (within [`job.containers`](#job-containers)) supports the following:
+
+<a id="job-containers-custom-flavor-name"></a>&#x2022; [`name`](#job-containers-custom-flavor-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="job-containers-custom-flavor-namespace"></a>&#x2022; [`namespace`](#job-containers-custom-flavor-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="job-containers-custom-flavor-tenant"></a>&#x2022; [`tenant`](#job-containers-custom-flavor-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Job Containers Image
+
+An [`image`](#job-containers-image) block (within [`job.containers`](#job-containers)) supports the following:
+
+<a id="job-containers-image-container-registry"></a>&#x2022; [`container_registry`](#job-containers-image-container-registry) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#job-containers-image-container-registry) below.
+
+<a id="job-containers-image-name"></a>&#x2022; [`name`](#job-containers-image-name) - Optional String<br>Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed
+
+<a id="job-containers-image-public"></a>&#x2022; [`public`](#job-containers-image-public) - Optional Block<br>Enable this option
+
+<a id="job-containers-image-pull-policy"></a>&#x2022; [`pull_policy`](#job-containers-image-pull-policy) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only
+
+#### Job Containers Image Container Registry
+
+A [`container_registry`](#job-containers-image-container-registry) block (within [`job.containers.image`](#job-containers-image)) supports the following:
+
+<a id="name-d8aa8e"></a>&#x2022; [`name`](#name-d8aa8e) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-0744ae"></a>&#x2022; [`namespace`](#namespace-0744ae) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-a2bf58"></a>&#x2022; [`tenant`](#tenant-a2bf58) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Job Containers Liveness Check
+
+A [`liveness_check`](#job-containers-liveness-check) block (within [`job.containers`](#job-containers)) supports the following:
+
+<a id="check-738ef8"></a>&#x2022; [`exec_health_check`](#check-738ef8) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-738ef8) below.
+
+<a id="threshold-1e3058"></a>&#x2022; [`healthy_threshold`](#threshold-1e3058) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
+
+<a id="check-052b16"></a>&#x2022; [`http_health_check`](#check-052b16) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-052b16) below.
+
+<a id="delay-3382ba"></a>&#x2022; [`initial_delay`](#delay-3382ba) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
+
+<a id="job-containers-liveness-check-interval"></a>&#x2022; [`interval`](#job-containers-liveness-check-interval) - Optional Number<br>Time interval in seconds between two health check requests
+
+<a id="check-71da8e"></a>&#x2022; [`tcp_health_check`](#check-71da8e) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-71da8e) below.
+
+<a id="job-containers-liveness-check-timeout"></a>&#x2022; [`timeout`](#job-containers-liveness-check-timeout) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+
+<a id="threshold-3d7b0c"></a>&#x2022; [`unhealthy_threshold`](#threshold-3d7b0c) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+
+#### Job Containers Liveness Check Exec Health Check
+
+An [`exec_health_check`](#check-738ef8) block (within [`job.containers.liveness_check`](#job-containers-liveness-check)) supports the following:
+
+<a id="command-e9b078"></a>&#x2022; [`command`](#command-e9b078) - Optional List<br>Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to
+
+#### Job Containers Liveness Check HTTP Health Check
+
+A [`http_health_check`](#check-052b16) block (within [`job.containers.liveness_check`](#job-containers-liveness-check)) supports the following:
+
+<a id="headers-202d31"></a>&#x2022; [`headers`](#headers-202d31) - Optional Block<br>Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
+
+<a id="header-2aa0a5"></a>&#x2022; [`host_header`](#header-2aa0a5) - Optional String<br>The value of the host header in the HTTP health check request
+
+<a id="path-c81de3"></a>&#x2022; [`path`](#path-c81de3) - Optional String<br>Path to access on the HTTP server
+
+<a id="port-3d627c"></a>&#x2022; [`port`](#port-3d627c) - Optional Block<br>Port. Port<br>See [Port](#port-3d627c) below.
+
+#### Job Containers Liveness Check HTTP Health Check Port
+
+<a id="deep-e84b03"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Job Containers Liveness Check TCP Health Check
+
+A [`tcp_health_check`](#check-71da8e) block (within [`job.containers.liveness_check`](#job-containers-liveness-check)) supports the following:
+
+<a id="port-7cc237"></a>&#x2022; [`port`](#port-7cc237) - Optional Block<br>Port. Port<br>See [Port](#port-7cc237) below.
+
+#### Job Containers Liveness Check TCP Health Check Port
+
+<a id="deep-eaa186"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Job Containers Readiness Check
+
+A [`readiness_check`](#job-containers-readiness-check) block (within [`job.containers`](#job-containers)) supports the following:
+
+<a id="check-ce28eb"></a>&#x2022; [`exec_health_check`](#check-ce28eb) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-ce28eb) below.
+
+<a id="threshold-c93f46"></a>&#x2022; [`healthy_threshold`](#threshold-c93f46) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
+
+<a id="check-c5bafc"></a>&#x2022; [`http_health_check`](#check-c5bafc) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-c5bafc) below.
+
+<a id="delay-cbd49d"></a>&#x2022; [`initial_delay`](#delay-cbd49d) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
+
+<a id="job-containers-readiness-check-interval"></a>&#x2022; [`interval`](#job-containers-readiness-check-interval) - Optional Number<br>Time interval in seconds between two health check requests
+
+<a id="check-df7310"></a>&#x2022; [`tcp_health_check`](#check-df7310) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-df7310) below.
+
+<a id="job-containers-readiness-check-timeout"></a>&#x2022; [`timeout`](#job-containers-readiness-check-timeout) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+
+<a id="threshold-9e6547"></a>&#x2022; [`unhealthy_threshold`](#threshold-9e6547) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+
+#### Job Containers Readiness Check Exec Health Check
+
+An [`exec_health_check`](#check-ce28eb) block (within [`job.containers.readiness_check`](#job-containers-readiness-check)) supports the following:
+
+<a id="command-c7bef1"></a>&#x2022; [`command`](#command-c7bef1) - Optional List<br>Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to
+
+#### Job Containers Readiness Check HTTP Health Check
+
+A [`http_health_check`](#check-c5bafc) block (within [`job.containers.readiness_check`](#job-containers-readiness-check)) supports the following:
+
+<a id="headers-16116f"></a>&#x2022; [`headers`](#headers-16116f) - Optional Block<br>Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
+
+<a id="header-389f08"></a>&#x2022; [`host_header`](#header-389f08) - Optional String<br>The value of the host header in the HTTP health check request
+
+<a id="path-c89875"></a>&#x2022; [`path`](#path-c89875) - Optional String<br>Path to access on the HTTP server
+
+<a id="port-3b8b2e"></a>&#x2022; [`port`](#port-3b8b2e) - Optional Block<br>Port. Port<br>See [Port](#port-3b8b2e) below.
+
+#### Job Containers Readiness Check HTTP Health Check Port
+
+<a id="deep-2f9b5d"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Job Containers Readiness Check TCP Health Check
+
+A [`tcp_health_check`](#check-df7310) block (within [`job.containers.readiness_check`](#job-containers-readiness-check)) supports the following:
+
+<a id="port-c9d337"></a>&#x2022; [`port`](#port-c9d337) - Optional Block<br>Port. Port<br>See [Port](#port-c9d337) below.
+
+#### Job Containers Readiness Check TCP Health Check Port
+
+<a id="deep-042872"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Job Deploy Options
+
+A [`deploy_options`](#job-deploy-options) block (within [`job`](#job)) supports the following:
+
+<a id="job-deploy-options-all-res"></a>&#x2022; [`all_res`](#job-deploy-options-all-res) - Optional Block<br>Enable this option
+
+<a id="sites-7d16a9"></a>&#x2022; [`default_virtual_sites`](#sites-7d16a9) - Optional Block<br>Enable this option
+
+<a id="job-deploy-options-deploy-ce-sites"></a>&#x2022; [`deploy_ce_sites`](#job-deploy-options-deploy-ce-sites) - Optional Block<br>Defines a way to deploy a workload on specific Customer sites<br>See [Deploy CE Sites](#job-deploy-options-deploy-ce-sites) below.
+
+<a id="sites-f9f96a"></a>&#x2022; [`deploy_ce_virtual_sites`](#sites-f9f96a) - Optional Block<br>Defines a way to deploy a workload on specific Customer virtual sites<br>See [Deploy CE Virtual Sites](#sites-f9f96a) below.
+
+<a id="job-deploy-options-deploy-re-sites"></a>&#x2022; [`deploy_re_sites`](#job-deploy-options-deploy-re-sites) - Optional Block<br>Defines a way to deploy a workload on specific Regional Edge sites<br>See [Deploy RE Sites](#job-deploy-options-deploy-re-sites) below.
+
+<a id="sites-178ece"></a>&#x2022; [`deploy_re_virtual_sites`](#sites-178ece) - Optional Block<br>Defines a way to deploy a workload on specific Regional Edge virtual sites<br>See [Deploy RE Virtual Sites](#sites-178ece) below.
+
+#### Job Deploy Options Deploy CE Sites
+
+A [`deploy_ce_sites`](#job-deploy-options-deploy-ce-sites) block (within [`job.deploy_options`](#job-deploy-options)) supports the following:
+
+<a id="job-deploy-options-deploy-ce-sites-site"></a>&#x2022; [`site`](#job-deploy-options-deploy-ce-sites-site) - Optional Block<br>Which customer sites should this workload be deployed<br>See [Site](#job-deploy-options-deploy-ce-sites-site) below.
+
+#### Job Deploy Options Deploy CE Sites Site
+
+A [`site`](#job-deploy-options-deploy-ce-sites-site) block (within [`job.deploy_options.deploy_ce_sites`](#job-deploy-options-deploy-ce-sites)) supports the following:
+
+<a id="name-e258db"></a>&#x2022; [`name`](#name-e258db) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-064f53"></a>&#x2022; [`namespace`](#namespace-064f53) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-d6cc86"></a>&#x2022; [`tenant`](#tenant-d6cc86) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Job Deploy Options Deploy CE Virtual Sites
+
+A [`deploy_ce_virtual_sites`](#sites-f9f96a) block (within [`job.deploy_options`](#job-deploy-options)) supports the following:
+
+<a id="site-0c4045"></a>&#x2022; [`virtual_site`](#site-0c4045) - Optional Block<br>Which customer virtual sites should this workload be deployed<br>See [Virtual Site](#site-0c4045) below.
+
+#### Job Deploy Options Deploy CE Virtual Sites Virtual Site
+
+<a id="deep-eef48f"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Job Deploy Options Deploy RE Sites
+
+A [`deploy_re_sites`](#job-deploy-options-deploy-re-sites) block (within [`job.deploy_options`](#job-deploy-options)) supports the following:
+
+<a id="job-deploy-options-deploy-re-sites-site"></a>&#x2022; [`site`](#job-deploy-options-deploy-re-sites-site) - Optional Block<br>Which regional edge sites should this workload be deployed<br>See [Site](#job-deploy-options-deploy-re-sites-site) below.
+
+#### Job Deploy Options Deploy RE Sites Site
+
+A [`site`](#job-deploy-options-deploy-re-sites-site) block (within [`job.deploy_options.deploy_re_sites`](#job-deploy-options-deploy-re-sites)) supports the following:
+
+<a id="name-03e074"></a>&#x2022; [`name`](#name-03e074) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-f7dfa3"></a>&#x2022; [`namespace`](#namespace-f7dfa3) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-2ce318"></a>&#x2022; [`tenant`](#tenant-2ce318) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Job Deploy Options Deploy RE Virtual Sites
+
+A [`deploy_re_virtual_sites`](#sites-178ece) block (within [`job.deploy_options`](#job-deploy-options)) supports the following:
+
+<a id="site-3ec46d"></a>&#x2022; [`virtual_site`](#site-3ec46d) - Optional Block<br>Which regional edge virtual sites should this workload be deployed<br>See [Virtual Site](#site-3ec46d) below.
+
+#### Job Deploy Options Deploy RE Virtual Sites Virtual Site
+
+<a id="deep-4625a0"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Job Volumes
+
+A [`volumes`](#job-volumes) block (within [`job`](#job)) supports the following:
+
+<a id="job-volumes-empty-dir"></a>&#x2022; [`empty_dir`](#job-volumes-empty-dir) - Optional Block<br>Volume containing a temporary directory whose lifetime is the same as a replica of a workload<br>See [Empty Dir](#job-volumes-empty-dir) below.
+
+<a id="job-volumes-host-path"></a>&#x2022; [`host_path`](#job-volumes-host-path) - Optional Block<br>Volume containing a host mapped path into the workload<br>See [Host Path](#job-volumes-host-path) below.
+
+<a id="job-volumes-name"></a>&#x2022; [`name`](#job-volumes-name) - Optional String<br>Name. Name of the volume
+
+<a id="job-volumes-persistent-volume"></a>&#x2022; [`persistent_volume`](#job-volumes-persistent-volume) - Optional Block<br>Volume containing the Persistent Storage for the workload<br>See [Persistent Volume](#job-volumes-persistent-volume) below.
+
+#### Job Volumes Empty Dir
+
+An [`empty_dir`](#job-volumes-empty-dir) block (within [`job.volumes`](#job-volumes)) supports the following:
+
+<a id="job-volumes-empty-dir-mount"></a>&#x2022; [`mount`](#job-volumes-empty-dir-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-volumes-empty-dir-mount) below.
+
+<a id="job-volumes-empty-dir-size-limit"></a>&#x2022; [`size_limit`](#job-volumes-empty-dir-size-limit) - Optional Number<br>Size Limit (in GiB)
+
+#### Job Volumes Empty Dir Mount
+
+A [`mount`](#job-volumes-empty-dir-mount) block (within [`job.volumes.empty_dir`](#job-volumes-empty-dir)) supports the following:
+
+<a id="job-volumes-empty-dir-mount-mode"></a>&#x2022; [`mode`](#job-volumes-empty-dir-mount-mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="job-volumes-empty-dir-mount-mount-path"></a>&#x2022; [`mount_path`](#job-volumes-empty-dir-mount-mount-path) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="job-volumes-empty-dir-mount-sub-path"></a>&#x2022; [`sub_path`](#job-volumes-empty-dir-mount-sub-path) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
+
+#### Job Volumes Host Path
+
+A [`host_path`](#job-volumes-host-path) block (within [`job.volumes`](#job-volumes)) supports the following:
+
+<a id="job-volumes-host-path-mount"></a>&#x2022; [`mount`](#job-volumes-host-path-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-volumes-host-path-mount) below.
+
+<a id="job-volumes-host-path-path"></a>&#x2022; [`path`](#job-volumes-host-path-path) - Optional String<br>Path of the directory on the host
+
+#### Job Volumes Host Path Mount
+
+A [`mount`](#job-volumes-host-path-mount) block (within [`job.volumes.host_path`](#job-volumes-host-path)) supports the following:
+
+<a id="job-volumes-host-path-mount-mode"></a>&#x2022; [`mode`](#job-volumes-host-path-mount-mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="job-volumes-host-path-mount-mount-path"></a>&#x2022; [`mount_path`](#job-volumes-host-path-mount-mount-path) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="job-volumes-host-path-mount-sub-path"></a>&#x2022; [`sub_path`](#job-volumes-host-path-mount-sub-path) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
+
+#### Job Volumes Persistent Volume
+
+A [`persistent_volume`](#job-volumes-persistent-volume) block (within [`job.volumes`](#job-volumes)) supports the following:
+
+<a id="job-volumes-persistent-volume-mount"></a>&#x2022; [`mount`](#job-volumes-persistent-volume-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#job-volumes-persistent-volume-mount) below.
+
+<a id="job-volumes-persistent-volume-storage"></a>&#x2022; [`storage`](#job-volumes-persistent-volume-storage) - Optional Block<br>Persistent storage configuration is used to configure Persistent Volume Claim (PVC)<br>See [Storage](#job-volumes-persistent-volume-storage) below.
+
+#### Job Volumes Persistent Volume Mount
+
+A [`mount`](#job-volumes-persistent-volume-mount) block (within [`job.volumes.persistent_volume`](#job-volumes-persistent-volume)) supports the following:
+
+<a id="mode-f3adb7"></a>&#x2022; [`mode`](#mode-f3adb7) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="path-fda002"></a>&#x2022; [`mount_path`](#path-fda002) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="path-a2ee82"></a>&#x2022; [`sub_path`](#path-a2ee82) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
+
+#### Job Volumes Persistent Volume Storage
+
+A [`storage`](#job-volumes-persistent-volume-storage) block (within [`job.volumes.persistent_volume`](#job-volumes-persistent-volume)) supports the following:
+
+<a id="mode-a09ded"></a>&#x2022; [`access_mode`](#mode-a09ded) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used
+
+<a id="name-a51d52"></a>&#x2022; [`class_name`](#name-a51d52) - Optional String<br>Use the specified class name
+
+<a id="default-3128b0"></a>&#x2022; [`default`](#default-3128b0) - Optional Block<br>Enable this option
+
+<a id="size-81eddf"></a>&#x2022; [`storage_size`](#size-81eddf) - Optional Number<br>Size in GiB of the persistent storage
+
+#### Service
+
+A [`service`](#service) block supports the following:
+
+<a id="service-advertise-options"></a>&#x2022; [`advertise_options`](#service-advertise-options) - Optional Block<br>Advertise OPTIONS are used to configure how and where to advertise the workload using load balancers<br>See [Advertise Options](#service-advertise-options) below.
+
+<a id="service-configuration"></a>&#x2022; [`configuration`](#service-configuration) - Optional Block<br>Configuration parameters of the workload<br>See [Configuration](#service-configuration) below.
+
+<a id="service-containers"></a>&#x2022; [`containers`](#service-containers) - Optional Block<br>Containers to use for service<br>See [Containers](#service-containers) below.
+
+<a id="service-deploy-options"></a>&#x2022; [`deploy_options`](#service-deploy-options) - Optional Block<br>Deploy OPTIONS are used to configure the workload deployment OPTIONS<br>See [Deploy Options](#service-deploy-options) below.
+
+<a id="service-num-replicas"></a>&#x2022; [`num_replicas`](#service-num-replicas) - Optional Number<br>Number of replicas of service to spawn per site
+
+<a id="service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#service-scale-to-zero) - Optional Block<br>Enable this option
+
+<a id="service-volumes"></a>&#x2022; [`volumes`](#service-volumes) - Optional Block<br>Volumes. Volumes for the service<br>See [Volumes](#service-volumes) below.
+
+#### Service Advertise Options
+
+An [`advertise_options`](#service-advertise-options) block (within [`service`](#service)) supports the following:
+
+<a id="custom-206cd2"></a>&#x2022; [`advertise_custom`](#custom-206cd2) - Optional Block<br>Advertise this workload via loadbalancer on specific sites<br>See [Advertise Custom](#custom-206cd2) below.
+
+<a id="cluster-9d3c24"></a>&#x2022; [`advertise_in_cluster`](#cluster-9d3c24) - Optional Block<br>Advertise the workload locally in-cluster<br>See [Advertise In Cluster](#cluster-9d3c24) below.
+
+<a id="public-fac1e6"></a>&#x2022; [`advertise_on_public`](#public-fac1e6) - Optional Block<br>Advertise this workload via loadbalancer on Internet with default VIP<br>See [Advertise On Public](#public-fac1e6) below.
+
+<a id="advertise-e33e18"></a>&#x2022; [`do_not_advertise`](#advertise-e33e18) - Optional Block<br>Enable this option
+
+#### Service Advertise Options Advertise Custom
+
+An [`advertise_custom`](#custom-206cd2) block (within [`service.advertise_options`](#service-advertise-options)) supports the following:
+
+<a id="where-07a5a8"></a>&#x2022; [`advertise_where`](#where-07a5a8) - Optional Block<br>Where should this load balancer be available<br>See [Advertise Where](#where-07a5a8) below.
+
+<a id="ports-b755b5"></a>&#x2022; [`ports`](#ports-b755b5) - Optional Block<br>Ports. Ports to advertise<br>See [Ports](#ports-b755b5) below.
+
+#### Service Advertise Options Advertise Custom Advertise Where
+
+An [`advertise_where`](#where-07a5a8) block (within [`service.advertise_options.advertise_custom`](#custom-206cd2)) supports the following:
+
+<a id="site-511518"></a>&#x2022; [`site`](#site-511518) - Optional Block<br>Defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised<br>See [Site](#site-511518) below.
+
+<a id="site-754a5a"></a>&#x2022; [`virtual_site`](#site-754a5a) - Optional Block<br>Defines a reference to a customer site virtual site along with network type where a load balancer could be advertised<br>See [Virtual Site](#site-754a5a) below.
+
+<a id="service-1a83c0"></a>&#x2022; [`vk8s_service`](#service-1a83c0) - Optional Block<br>Defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network<br>See [Vk8s Service](#service-1a83c0) below.
+
+#### Service Advertise Options Advertise Custom Advertise Where Site
+
+<a id="deep-63c006"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Advertise Where Site Site
+
+<a id="deep-55fbc2"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Advertise Where Virtual Site
+
+<a id="deep-f8931d"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Advertise Where Virtual Site Virtual Site
+
+<a id="deep-b4597b"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Advertise Where Vk8s Service
+
+<a id="deep-9d76cc"></a>Deeply nested **Service** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Advertise Where Vk8s Service Site
+
+<a id="deep-12f52b"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Advertise Where Vk8s Service Virtual Site
+
+<a id="deep-631521"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports
+
+A [`ports`](#ports-b755b5) block (within [`service.advertise_options.advertise_custom`](#custom-206cd2)) supports the following:
+
+<a id="loadbalancer-40a524"></a>&#x2022; [`http_loadbalancer`](#loadbalancer-40a524) - Optional Block<br>HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer<br>See [HTTP Loadbalancer](#loadbalancer-40a524) below.
+
+<a id="port-49f116"></a>&#x2022; [`port`](#port-49f116) - Optional Block<br>Port. Port of the workload<br>See [Port](#port-49f116) below.
+
+<a id="loadbalancer-0fd9c3"></a>&#x2022; [`tcp_loadbalancer`](#loadbalancer-0fd9c3) - Optional Block<br>TCP Load Balancer. TCP loadbalancer<br>See [TCP Loadbalancer](#loadbalancer-0fd9c3) below.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer
+
+<a id="deep-df89c1"></a>Deeply nested **Loadbalancer** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Default Route
+
+<a id="deep-a3eb40"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTP
+
+<a id="deep-84a2b1"></a>Deeply nested **HTTP** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS
+
+<a id="deep-c3aaa7"></a>Deeply nested **HTTPS** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Coalescing Options
+
+<a id="deep-964101"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options
+
+<a id="deep-18a985"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
+
+<a id="deep-2c8ac3"></a>Deeply nested **Only** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
+
+<a id="deep-686593"></a>Deeply nested **Transformation** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params
+
+<a id="deep-794912"></a>Deeply nested **Params** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates
+
+<a id="deep-8f5ce4"></a>Deeply nested **Certificates** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config
+
+<a id="deep-586d55"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security
+
+<a id="deep-2197c6"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS
+
+<a id="deep-d19b82"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL
+
+<a id="deep-94e1a0"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA
+
+<a id="deep-274fc9"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options
+
+<a id="deep-726fe8"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters
+
+<a id="deep-ff871e"></a>Deeply nested **Parameters** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates
+
+<a id="deep-bcaea7"></a>Deeply nested **Certificates** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms
+
+<a id="deep-78ee27"></a>Deeply nested **Algorithms** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key
+
+<a id="deep-6b2af0"></a>Deeply nested **Key** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info
+
+<a id="deep-c31663"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info
+
+<a id="deep-7179e0"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config
+
+<a id="deep-5a85c5"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security
+
+<a id="deep-8c729c"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS
+
+<a id="deep-0a2766"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL
+
+<a id="deep-d94c97"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA
+
+<a id="deep-ffb136"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options
+
+<a id="deep-77dd02"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert
+
+<a id="deep-8be33c"></a>Deeply nested **Cert** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options
+
+<a id="deep-316e42"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options
+
+<a id="deep-6e41fa"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
+
+<a id="deep-2c9770"></a>Deeply nested **Only** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
+
+<a id="deep-3da430"></a>Deeply nested **Transformation** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config
+
+<a id="deep-cfd083"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security
+
+<a id="deep-fd8bbe"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS
+
+<a id="deep-033783"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL
+
+<a id="deep-ecd09a"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA
+
+<a id="deep-841dde"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options
+
+<a id="deep-6c38ec"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes
+
+<a id="deep-1f4409"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes
+
+<a id="deep-14b5ee"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object
+
+<a id="deep-f308f8"></a>Deeply nested **Object** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref
+
+<a id="deep-a05f4e"></a>Deeply nested **Ref** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route
+
+<a id="deep-17efaa"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers
+
+<a id="deep-d77a6f"></a>Deeply nested **Headers** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port
+
+<a id="deep-972608"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path
+
+<a id="deep-547291"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response
+
+<a id="deep-5d8fe5"></a>Deeply nested **Response** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route
+
+<a id="deep-2db089"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers
+
+<a id="deep-26f51e"></a>Deeply nested **Headers** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port
+
+<a id="deep-664ee8"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path
+
+<a id="deep-7c04a1"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect
+
+<a id="deep-126497"></a>Deeply nested **Redirect** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route
+
+<a id="deep-2d1a5a"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path
+
+<a id="deep-9a6802"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports Port
+
+A [`port`](#port-49f116) block (within [`service.advertise_options.advertise_custom.ports`](#ports-b755b5)) supports the following:
+
+<a id="info-66bbf6"></a>&#x2022; [`info`](#info-66bbf6) - Optional Block<br>Port Information. Port information<br>See [Info](#info-66bbf6) below.
+
+<a id="name-6799ba"></a>&#x2022; [`name`](#name-6799ba) - Optional String<br>Name. Name of the Port
+
+#### Service Advertise Options Advertise Custom Ports Port Info
+
+<a id="deep-aab026"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Service Advertise Options Advertise Custom Ports TCP Loadbalancer
+
+<a id="deep-94c104"></a>Deeply nested **Loadbalancer** block collapsed for readability.
+
+#### Service Advertise Options Advertise In Cluster
+
+An [`advertise_in_cluster`](#cluster-9d3c24) block (within [`service.advertise_options`](#service-advertise-options)) supports the following:
+
+<a id="ports-47cae5"></a>&#x2022; [`multi_ports`](#ports-47cae5) - Optional Block<br>Multiple Ports. Multiple ports<br>See [Multi Ports](#ports-47cae5) below.
+
+<a id="port-fc2a3b"></a>&#x2022; [`port`](#port-fc2a3b) - Optional Block<br>Port. Single port<br>See [Port](#port-fc2a3b) below.
+
+#### Service Advertise Options Advertise In Cluster Multi Ports
+
+<a id="deep-9d2ae1"></a>Deeply nested **Ports** block collapsed for readability.
+
+#### Service Advertise Options Advertise In Cluster Multi Ports Ports
+
+<a id="deep-3744bf"></a>Deeply nested **Ports** block collapsed for readability.
+
+#### Service Advertise Options Advertise In Cluster Multi Ports Ports Info
+
+<a id="deep-8dde36"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Service Advertise Options Advertise In Cluster Port
+
+A [`port`](#port-fc2a3b) block (within [`service.advertise_options.advertise_in_cluster`](#cluster-9d3c24)) supports the following:
+
+<a id="info-73ea02"></a>&#x2022; [`info`](#info-73ea02) - Optional Block<br>Port Information. Port information<br>See [Info](#info-73ea02) below.
+
+#### Service Advertise Options Advertise In Cluster Port Info
+
+<a id="deep-936296"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public
+
+An [`advertise_on_public`](#public-fac1e6) block (within [`service.advertise_options`](#service-advertise-options)) supports the following:
+
+<a id="ports-b4a2d0"></a>&#x2022; [`multi_ports`](#ports-b4a2d0) - Optional Block<br>Advertise Multiple Ports. Advertise multiple ports<br>See [Multi Ports](#ports-b4a2d0) below.
+
+<a id="port-c54e32"></a>&#x2022; [`port`](#port-c54e32) - Optional Block<br>Advertise Port. Advertise single port<br>See [Port](#port-c54e32) below.
+
+#### Service Advertise Options Advertise On Public Multi Ports
+
+<a id="deep-780c5a"></a>Deeply nested **Ports** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports
+
+<a id="deep-d87391"></a>Deeply nested **Ports** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer
+
+<a id="deep-2b84f8"></a>Deeply nested **Loadbalancer** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Default Route
+
+<a id="deep-db98d3"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTP
+
+<a id="deep-db7f35"></a>Deeply nested **HTTP** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS
+
+<a id="deep-e24bdc"></a>Deeply nested **HTTPS** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Coalescing Options
+
+<a id="deep-202620"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options
+
+<a id="deep-7ec77e"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
+
+<a id="deep-84a652"></a>Deeply nested **Only** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
+
+<a id="deep-a51019"></a>Deeply nested **Transformation** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params
+
+<a id="deep-659a12"></a>Deeply nested **Params** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates
+
+<a id="deep-315ba5"></a>Deeply nested **Certificates** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config
+
+<a id="deep-504635"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security
+
+<a id="deep-4a5832"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS
+
+<a id="deep-ae20aa"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL
+
+<a id="deep-2d5cca"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA
+
+<a id="deep-6f57c1"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options
+
+<a id="deep-5b1fe8"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters
+
+<a id="deep-f5509b"></a>Deeply nested **Parameters** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates
+
+<a id="deep-ae0e3b"></a>Deeply nested **Certificates** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms
+
+<a id="deep-c90287"></a>Deeply nested **Algorithms** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key
+
+<a id="deep-e1d299"></a>Deeply nested **Key** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info
+
+<a id="deep-56478b"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info
+
+<a id="deep-9fa0e2"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config
+
+<a id="deep-3a10ee"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security
+
+<a id="deep-3252f9"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS
+
+<a id="deep-71d78a"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL
+
+<a id="deep-9c38dd"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA
+
+<a id="deep-76a1d2"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options
+
+<a id="deep-e042ef"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert
+
+<a id="deep-1f5bf4"></a>Deeply nested **Cert** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options
+
+<a id="deep-0c944d"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options
+
+<a id="deep-644074"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
+
+<a id="deep-fa1fde"></a>Deeply nested **Only** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
+
+<a id="deep-2f7e39"></a>Deeply nested **Transformation** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config
+
+<a id="deep-67b420"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security
+
+<a id="deep-d9d763"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS
+
+<a id="deep-4b8890"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL
+
+<a id="deep-99074b"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA
+
+<a id="deep-f9f4c3"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options
+
+<a id="deep-66d7da"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes
+
+<a id="deep-30820a"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes
+
+<a id="deep-b4c6e8"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object
+
+<a id="deep-b3f649"></a>Deeply nested **Object** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref
+
+<a id="deep-fa356c"></a>Deeply nested **Ref** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route
+
+<a id="deep-8d239e"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers
+
+<a id="deep-ca1e3f"></a>Deeply nested **Headers** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port
+
+<a id="deep-337787"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path
+
+<a id="deep-3daf64"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response
+
+<a id="deep-640d68"></a>Deeply nested **Response** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route
+
+<a id="deep-e97b13"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers
+
+<a id="deep-893273"></a>Deeply nested **Headers** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port
+
+<a id="deep-7d903b"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path
+
+<a id="deep-8eea80"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect
+
+<a id="deep-016eb6"></a>Deeply nested **Redirect** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route
+
+<a id="deep-1e7841"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path
+
+<a id="deep-1ab782"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports Port
+
+<a id="deep-f4ab08"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports Port Info
+
+<a id="deep-1ce2ae"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Multi Ports Ports TCP Loadbalancer
+
+<a id="deep-5977e4"></a>Deeply nested **Loadbalancer** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port
+
+A [`port`](#port-c54e32) block (within [`service.advertise_options.advertise_on_public`](#public-fac1e6)) supports the following:
+
+<a id="loadbalancer-96cb17"></a>&#x2022; [`http_loadbalancer`](#loadbalancer-96cb17) - Optional Block<br>HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer<br>See [HTTP Loadbalancer](#loadbalancer-96cb17) below.
+
+<a id="port-c1fca3"></a>&#x2022; [`port`](#port-c1fca3) - Optional Block<br>Port. Single port<br>See [Port](#port-c1fca3) below.
+
+<a id="loadbalancer-eb1f77"></a>&#x2022; [`tcp_loadbalancer`](#loadbalancer-eb1f77) - Optional Block<br>TCP Load Balancer. TCP loadbalancer<br>See [TCP Loadbalancer](#loadbalancer-eb1f77) below.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer
+
+<a id="deep-8f00d7"></a>Deeply nested **Loadbalancer** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Default Route
+
+<a id="deep-48638b"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTP
+
+<a id="deep-f2a50d"></a>Deeply nested **HTTP** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS
+
+<a id="deep-67821c"></a>Deeply nested **HTTPS** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Coalescing Options
+
+<a id="deep-424d68"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options
+
+<a id="deep-e9a072"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
+
+<a id="deep-0c6299"></a>Deeply nested **Only** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
+
+<a id="deep-4f3e9b"></a>Deeply nested **Transformation** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params
+
+<a id="deep-e981ba"></a>Deeply nested **Params** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Certificates
+
+<a id="deep-090632"></a>Deeply nested **Certificates** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config
+
+<a id="deep-2945ab"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security
+
+<a id="deep-f05e85"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS
+
+<a id="deep-f06f40"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL
+
+<a id="deep-79b558"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA
+
+<a id="deep-02b65c"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options
+
+<a id="deep-93c7bc"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters
+
+<a id="deep-6a5f00"></a>Deeply nested **Parameters** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates
+
+<a id="deep-d2decf"></a>Deeply nested **Certificates** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms
+
+<a id="deep-1c2d40"></a>Deeply nested **Algorithms** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key
+
+<a id="deep-20fd03"></a>Deeply nested **Key** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info
+
+<a id="deep-81b3c1"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info
+
+<a id="deep-e7afa8"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config
+
+<a id="deep-976d3d"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security
+
+<a id="deep-332564"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS
+
+<a id="deep-6f5f3a"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL
+
+<a id="deep-55496a"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA
+
+<a id="deep-20e21b"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options
+
+<a id="deep-123824"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert
+
+<a id="deep-d33ae7"></a>Deeply nested **Cert** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Coalescing Options
+
+<a id="deep-04759a"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options
+
+<a id="deep-67fd92"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
+
+<a id="deep-66c7c3"></a>Deeply nested **Only** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
+
+<a id="deep-8b6fcc"></a>Deeply nested **Transformation** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config
+
+<a id="deep-e0e48d"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security
+
+<a id="deep-de57d7"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS
+
+<a id="deep-3f768b"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL
+
+<a id="deep-e15bac"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA
+
+<a id="deep-2315b8"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options
+
+<a id="deep-f33892"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes
+
+<a id="deep-b6228c"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes
+
+<a id="deep-3856c3"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object
+
+<a id="deep-167a98"></a>Deeply nested **Object** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref
+
+<a id="deep-6c1d94"></a>Deeply nested **Ref** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route
+
+<a id="deep-1a89cd"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers
+
+<a id="deep-9754bd"></a>Deeply nested **Headers** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port
+
+<a id="deep-babbdb"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Path
+
+<a id="deep-3b276b"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response
+
+<a id="deep-317ed4"></a>Deeply nested **Response** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route
+
+<a id="deep-e4e340"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Headers
+
+<a id="deep-d5e00a"></a>Deeply nested **Headers** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port
+
+<a id="deep-916460"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Path
+
+<a id="deep-2006d5"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect
+
+<a id="deep-971b67"></a>Deeply nested **Redirect** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route
+
+<a id="deep-babfd4"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route Path
+
+<a id="deep-7d51e7"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port Port
+
+<a id="deep-0c31dd"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port Port Info
+
+<a id="deep-1d882f"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Service Advertise Options Advertise On Public Port TCP Loadbalancer
+
+<a id="deep-d0b793"></a>Deeply nested **Loadbalancer** block collapsed for readability.
+
+#### Service Configuration
+
+A [`configuration`](#service-configuration) block (within [`service`](#service)) supports the following:
+
+<a id="service-configuration-parameters"></a>&#x2022; [`parameters`](#service-configuration-parameters) - Optional Block<br>Parameters. Parameters for the workload<br>See [Parameters](#service-configuration-parameters) below.
+
+#### Service Configuration Parameters
+
+A [`parameters`](#service-configuration-parameters) block (within [`service.configuration`](#service-configuration)) supports the following:
+
+<a id="var-0376c3"></a>&#x2022; [`env_var`](#var-0376c3) - Optional Block<br>Environment Variable. Environment Variable<br>See [Env Var](#var-0376c3) below.
+
+<a id="service-configuration-parameters-file"></a>&#x2022; [`file`](#service-configuration-parameters-file) - Optional Block<br>Configuration File. Configuration File for the workload<br>See [File](#service-configuration-parameters-file) below.
+
+#### Service Configuration Parameters Env Var
+
+An [`env_var`](#var-0376c3) block (within [`service.configuration.parameters`](#service-configuration-parameters)) supports the following:
+
+<a id="name-9bd43a"></a>&#x2022; [`name`](#name-9bd43a) - Optional String<br>Name. Name of Environment Variable
+
+<a id="value-d14ca5"></a>&#x2022; [`value`](#value-d14ca5) - Optional String<br>Value. Value of Environment Variable
+
+#### Service Configuration Parameters File
+
+A [`file`](#service-configuration-parameters-file) block (within [`service.configuration.parameters`](#service-configuration-parameters)) supports the following:
+
+<a id="data-d0d370"></a>&#x2022; [`data`](#data-d0d370) - Optional String<br>Data. File data
+
+<a id="mount-b0c9b7"></a>&#x2022; [`mount`](#mount-b0c9b7) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-b0c9b7) below.
+
+<a id="name-a1546d"></a>&#x2022; [`name`](#name-a1546d) - Optional String<br>Name. Name of the file
+
+<a id="name-c99c09"></a>&#x2022; [`volume_name`](#name-c99c09) - Optional String<br>Volume Name. Name of the Volume
+
+#### Service Configuration Parameters File Mount
+
+A [`mount`](#mount-b0c9b7) block (within [`service.configuration.parameters.file`](#service-configuration-parameters-file)) supports the following:
+
+<a id="mode-ba89fd"></a>&#x2022; [`mode`](#mode-ba89fd) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="path-7998af"></a>&#x2022; [`mount_path`](#path-7998af) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="path-98e114"></a>&#x2022; [`sub_path`](#path-98e114) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
+
+#### Service Containers
+
+A [`containers`](#service-containers) block (within [`service`](#service)) supports the following:
+
+<a id="service-containers-args"></a>&#x2022; [`args`](#service-containers-args) - Optional List<br>Arguments to the entrypoint. Overrides the docker image's CMD
+
+<a id="service-containers-command"></a>&#x2022; [`command`](#service-containers-command) - Optional List<br>Command to execute. Overrides the docker image's ENTRYPOINT
+
+<a id="service-containers-custom-flavor"></a>&#x2022; [`custom_flavor`](#service-containers-custom-flavor) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#service-containers-custom-flavor) below.
+
+<a id="service-containers-default-flavor"></a>&#x2022; [`default_flavor`](#service-containers-default-flavor) - Optional Block<br>Enable this option
+
+<a id="service-containers-flavor"></a>&#x2022; [`flavor`](#service-containers-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have
+
+<a id="service-containers-image"></a>&#x2022; [`image`](#service-containers-image) - Optional Block<br>ImageType configures the image to use, how to pull the image, and the associated secrets to use if any<br>See [Image](#service-containers-image) below.
+
+<a id="service-containers-init-container"></a>&#x2022; [`init_container`](#service-containers-init-container) - Optional Bool<br>Specialized container that runs before application container and runs to completion
+
+<a id="service-containers-liveness-check"></a>&#x2022; [`liveness_check`](#service-containers-liveness-check) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Liveness Check](#service-containers-liveness-check) below.
+
+<a id="service-containers-name"></a>&#x2022; [`name`](#service-containers-name) - Optional String<br>Name. Name of the container
+
+<a id="service-containers-readiness-check"></a>&#x2022; [`readiness_check`](#service-containers-readiness-check) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Readiness Check](#service-containers-readiness-check) below.
+
+#### Service Containers Custom Flavor
+
+A [`custom_flavor`](#service-containers-custom-flavor) block (within [`service.containers`](#service-containers)) supports the following:
+
+<a id="service-containers-custom-flavor-name"></a>&#x2022; [`name`](#service-containers-custom-flavor-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-d5d342"></a>&#x2022; [`namespace`](#namespace-d5d342) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="service-containers-custom-flavor-tenant"></a>&#x2022; [`tenant`](#service-containers-custom-flavor-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Service Containers Image
+
+An [`image`](#service-containers-image) block (within [`service.containers`](#service-containers)) supports the following:
+
+<a id="registry-ad1f41"></a>&#x2022; [`container_registry`](#registry-ad1f41) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#registry-ad1f41) below.
+
+<a id="service-containers-image-name"></a>&#x2022; [`name`](#service-containers-image-name) - Optional String<br>Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed
+
+<a id="service-containers-image-public"></a>&#x2022; [`public`](#service-containers-image-public) - Optional Block<br>Enable this option
+
+<a id="service-containers-image-pull-policy"></a>&#x2022; [`pull_policy`](#service-containers-image-pull-policy) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only
+
+#### Service Containers Image Container Registry
+
+A [`container_registry`](#registry-ad1f41) block (within [`service.containers.image`](#service-containers-image)) supports the following:
+
+<a id="name-b1a7e7"></a>&#x2022; [`name`](#name-b1a7e7) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-993dc9"></a>&#x2022; [`namespace`](#namespace-993dc9) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-882aa5"></a>&#x2022; [`tenant`](#tenant-882aa5) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Service Containers Liveness Check
+
+A [`liveness_check`](#service-containers-liveness-check) block (within [`service.containers`](#service-containers)) supports the following:
+
+<a id="check-f4a0a5"></a>&#x2022; [`exec_health_check`](#check-f4a0a5) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-f4a0a5) below.
+
+<a id="threshold-e58da7"></a>&#x2022; [`healthy_threshold`](#threshold-e58da7) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
+
+<a id="check-d4d023"></a>&#x2022; [`http_health_check`](#check-d4d023) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-d4d023) below.
+
+<a id="delay-5a594c"></a>&#x2022; [`initial_delay`](#delay-5a594c) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
+
+<a id="interval-84cdc4"></a>&#x2022; [`interval`](#interval-84cdc4) - Optional Number<br>Time interval in seconds between two health check requests
+
+<a id="check-b2633e"></a>&#x2022; [`tcp_health_check`](#check-b2633e) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-b2633e) below.
+
+<a id="timeout-cea9e6"></a>&#x2022; [`timeout`](#timeout-cea9e6) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+
+<a id="threshold-b85e9e"></a>&#x2022; [`unhealthy_threshold`](#threshold-b85e9e) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+
+#### Service Containers Liveness Check Exec Health Check
+
+An [`exec_health_check`](#check-f4a0a5) block (within [`service.containers.liveness_check`](#service-containers-liveness-check)) supports the following:
+
+<a id="command-2a2705"></a>&#x2022; [`command`](#command-2a2705) - Optional List<br>Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to
+
+#### Service Containers Liveness Check HTTP Health Check
+
+A [`http_health_check`](#check-d4d023) block (within [`service.containers.liveness_check`](#service-containers-liveness-check)) supports the following:
+
+<a id="headers-10e4cf"></a>&#x2022; [`headers`](#headers-10e4cf) - Optional Block<br>Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
+
+<a id="header-d00d0a"></a>&#x2022; [`host_header`](#header-d00d0a) - Optional String<br>The value of the host header in the HTTP health check request
+
+<a id="path-ab95e6"></a>&#x2022; [`path`](#path-ab95e6) - Optional String<br>Path to access on the HTTP server
+
+<a id="port-df543d"></a>&#x2022; [`port`](#port-df543d) - Optional Block<br>Port. Port<br>See [Port](#port-df543d) below.
+
+#### Service Containers Liveness Check HTTP Health Check Port
+
+<a id="deep-ff14cb"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Service Containers Liveness Check TCP Health Check
+
+A [`tcp_health_check`](#check-b2633e) block (within [`service.containers.liveness_check`](#service-containers-liveness-check)) supports the following:
+
+<a id="port-7d7fdc"></a>&#x2022; [`port`](#port-7d7fdc) - Optional Block<br>Port. Port<br>See [Port](#port-7d7fdc) below.
+
+#### Service Containers Liveness Check TCP Health Check Port
+
+<a id="deep-6e7f23"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Service Containers Readiness Check
+
+A [`readiness_check`](#service-containers-readiness-check) block (within [`service.containers`](#service-containers)) supports the following:
+
+<a id="check-b467be"></a>&#x2022; [`exec_health_check`](#check-b467be) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-b467be) below.
+
+<a id="threshold-1015f0"></a>&#x2022; [`healthy_threshold`](#threshold-1015f0) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
+
+<a id="check-2e8715"></a>&#x2022; [`http_health_check`](#check-2e8715) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-2e8715) below.
+
+<a id="delay-6b92df"></a>&#x2022; [`initial_delay`](#delay-6b92df) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
+
+<a id="interval-ddc93b"></a>&#x2022; [`interval`](#interval-ddc93b) - Optional Number<br>Time interval in seconds between two health check requests
+
+<a id="check-6b7ea7"></a>&#x2022; [`tcp_health_check`](#check-6b7ea7) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-6b7ea7) below.
+
+<a id="timeout-3e7e3a"></a>&#x2022; [`timeout`](#timeout-3e7e3a) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+
+<a id="threshold-01c2b9"></a>&#x2022; [`unhealthy_threshold`](#threshold-01c2b9) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+
+#### Service Containers Readiness Check Exec Health Check
+
+An [`exec_health_check`](#check-b467be) block (within [`service.containers.readiness_check`](#service-containers-readiness-check)) supports the following:
+
+<a id="command-ad2ba2"></a>&#x2022; [`command`](#command-ad2ba2) - Optional List<br>Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to
+
+#### Service Containers Readiness Check HTTP Health Check
+
+A [`http_health_check`](#check-2e8715) block (within [`service.containers.readiness_check`](#service-containers-readiness-check)) supports the following:
+
+<a id="headers-eb2094"></a>&#x2022; [`headers`](#headers-eb2094) - Optional Block<br>Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
+
+<a id="header-62e026"></a>&#x2022; [`host_header`](#header-62e026) - Optional String<br>The value of the host header in the HTTP health check request
+
+<a id="path-f132ec"></a>&#x2022; [`path`](#path-f132ec) - Optional String<br>Path to access on the HTTP server
+
+<a id="port-3d625e"></a>&#x2022; [`port`](#port-3d625e) - Optional Block<br>Port. Port<br>See [Port](#port-3d625e) below.
+
+#### Service Containers Readiness Check HTTP Health Check Port
+
+<a id="deep-b02908"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Service Containers Readiness Check TCP Health Check
+
+A [`tcp_health_check`](#check-6b7ea7) block (within [`service.containers.readiness_check`](#service-containers-readiness-check)) supports the following:
+
+<a id="port-6de51f"></a>&#x2022; [`port`](#port-6de51f) - Optional Block<br>Port. Port<br>See [Port](#port-6de51f) below.
+
+#### Service Containers Readiness Check TCP Health Check Port
+
+<a id="deep-fcfc8b"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Service Deploy Options
+
+A [`deploy_options`](#service-deploy-options) block (within [`service`](#service)) supports the following:
+
+<a id="service-deploy-options-all-res"></a>&#x2022; [`all_res`](#service-deploy-options-all-res) - Optional Block<br>Enable this option
+
+<a id="sites-736a02"></a>&#x2022; [`default_virtual_sites`](#sites-736a02) - Optional Block<br>Enable this option
+
+<a id="service-deploy-options-deploy-ce-sites"></a>&#x2022; [`deploy_ce_sites`](#service-deploy-options-deploy-ce-sites) - Optional Block<br>Defines a way to deploy a workload on specific Customer sites<br>See [Deploy CE Sites](#service-deploy-options-deploy-ce-sites) below.
+
+<a id="sites-d63f27"></a>&#x2022; [`deploy_ce_virtual_sites`](#sites-d63f27) - Optional Block<br>Defines a way to deploy a workload on specific Customer virtual sites<br>See [Deploy CE Virtual Sites](#sites-d63f27) below.
+
+<a id="service-deploy-options-deploy-re-sites"></a>&#x2022; [`deploy_re_sites`](#service-deploy-options-deploy-re-sites) - Optional Block<br>Defines a way to deploy a workload on specific Regional Edge sites<br>See [Deploy RE Sites](#service-deploy-options-deploy-re-sites) below.
+
+<a id="sites-e0dada"></a>&#x2022; [`deploy_re_virtual_sites`](#sites-e0dada) - Optional Block<br>Defines a way to deploy a workload on specific Regional Edge virtual sites<br>See [Deploy RE Virtual Sites](#sites-e0dada) below.
+
+#### Service Deploy Options Deploy CE Sites
+
+A [`deploy_ce_sites`](#service-deploy-options-deploy-ce-sites) block (within [`service.deploy_options`](#service-deploy-options)) supports the following:
+
+<a id="site-8d4fa5"></a>&#x2022; [`site`](#site-8d4fa5) - Optional Block<br>Which customer sites should this workload be deployed<br>See [Site](#site-8d4fa5) below.
+
+#### Service Deploy Options Deploy CE Sites Site
+
+A [`site`](#site-8d4fa5) block (within [`service.deploy_options.deploy_ce_sites`](#service-deploy-options-deploy-ce-sites)) supports the following:
+
+<a id="name-48099d"></a>&#x2022; [`name`](#name-48099d) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-23fa32"></a>&#x2022; [`namespace`](#namespace-23fa32) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-75f6c4"></a>&#x2022; [`tenant`](#tenant-75f6c4) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Service Deploy Options Deploy CE Virtual Sites
+
+A [`deploy_ce_virtual_sites`](#sites-d63f27) block (within [`service.deploy_options`](#service-deploy-options)) supports the following:
+
+<a id="site-044146"></a>&#x2022; [`virtual_site`](#site-044146) - Optional Block<br>Which customer virtual sites should this workload be deployed<br>See [Virtual Site](#site-044146) below.
+
+#### Service Deploy Options Deploy CE Virtual Sites Virtual Site
+
+<a id="deep-ae5488"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Service Deploy Options Deploy RE Sites
+
+A [`deploy_re_sites`](#service-deploy-options-deploy-re-sites) block (within [`service.deploy_options`](#service-deploy-options)) supports the following:
+
+<a id="site-e7bf20"></a>&#x2022; [`site`](#site-e7bf20) - Optional Block<br>Which regional edge sites should this workload be deployed<br>See [Site](#site-e7bf20) below.
+
+#### Service Deploy Options Deploy RE Sites Site
+
+A [`site`](#site-e7bf20) block (within [`service.deploy_options.deploy_re_sites`](#service-deploy-options-deploy-re-sites)) supports the following:
+
+<a id="name-1ebeb9"></a>&#x2022; [`name`](#name-1ebeb9) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-b4b743"></a>&#x2022; [`namespace`](#namespace-b4b743) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-68f3c1"></a>&#x2022; [`tenant`](#tenant-68f3c1) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Service Deploy Options Deploy RE Virtual Sites
+
+A [`deploy_re_virtual_sites`](#sites-e0dada) block (within [`service.deploy_options`](#service-deploy-options)) supports the following:
+
+<a id="site-5bb43f"></a>&#x2022; [`virtual_site`](#site-5bb43f) - Optional Block<br>Which regional edge virtual sites should this workload be deployed<br>See [Virtual Site](#site-5bb43f) below.
+
+#### Service Deploy Options Deploy RE Virtual Sites Virtual Site
+
+<a id="deep-50a367"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Service Volumes
+
+A [`volumes`](#service-volumes) block (within [`service`](#service)) supports the following:
+
+<a id="service-volumes-empty-dir"></a>&#x2022; [`empty_dir`](#service-volumes-empty-dir) - Optional Block<br>Volume containing a temporary directory whose lifetime is the same as a replica of a workload<br>See [Empty Dir](#service-volumes-empty-dir) below.
+
+<a id="service-volumes-host-path"></a>&#x2022; [`host_path`](#service-volumes-host-path) - Optional Block<br>Volume containing a host mapped path into the workload<br>See [Host Path](#service-volumes-host-path) below.
+
+<a id="service-volumes-name"></a>&#x2022; [`name`](#service-volumes-name) - Optional String<br>Name. Name of the volume
+
+<a id="service-volumes-persistent-volume"></a>&#x2022; [`persistent_volume`](#service-volumes-persistent-volume) - Optional Block<br>Volume containing the Persistent Storage for the workload<br>See [Persistent Volume](#service-volumes-persistent-volume) below.
+
+#### Service Volumes Empty Dir
+
+An [`empty_dir`](#service-volumes-empty-dir) block (within [`service.volumes`](#service-volumes)) supports the following:
+
+<a id="service-volumes-empty-dir-mount"></a>&#x2022; [`mount`](#service-volumes-empty-dir-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#service-volumes-empty-dir-mount) below.
+
+<a id="service-volumes-empty-dir-size-limit"></a>&#x2022; [`size_limit`](#service-volumes-empty-dir-size-limit) - Optional Number<br>Size Limit (in GiB)
+
+#### Service Volumes Empty Dir Mount
+
+A [`mount`](#service-volumes-empty-dir-mount) block (within [`service.volumes.empty_dir`](#service-volumes-empty-dir)) supports the following:
+
+<a id="service-volumes-empty-dir-mount-mode"></a>&#x2022; [`mode`](#service-volumes-empty-dir-mount-mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="path-db6f81"></a>&#x2022; [`mount_path`](#path-db6f81) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="path-3009de"></a>&#x2022; [`sub_path`](#path-3009de) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
+
+#### Service Volumes Host Path
+
+A [`host_path`](#service-volumes-host-path) block (within [`service.volumes`](#service-volumes)) supports the following:
+
+<a id="service-volumes-host-path-mount"></a>&#x2022; [`mount`](#service-volumes-host-path-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#service-volumes-host-path-mount) below.
+
+<a id="service-volumes-host-path-path"></a>&#x2022; [`path`](#service-volumes-host-path-path) - Optional String<br>Path of the directory on the host
+
+#### Service Volumes Host Path Mount
+
+A [`mount`](#service-volumes-host-path-mount) block (within [`service.volumes.host_path`](#service-volumes-host-path)) supports the following:
+
+<a id="service-volumes-host-path-mount-mode"></a>&#x2022; [`mode`](#service-volumes-host-path-mount-mode) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="path-0b89b4"></a>&#x2022; [`mount_path`](#path-0b89b4) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="path-7cee3d"></a>&#x2022; [`sub_path`](#path-7cee3d) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
+
+#### Service Volumes Persistent Volume
+
+A [`persistent_volume`](#service-volumes-persistent-volume) block (within [`service.volumes`](#service-volumes)) supports the following:
+
+<a id="service-volumes-persistent-volume-mount"></a>&#x2022; [`mount`](#service-volumes-persistent-volume-mount) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#service-volumes-persistent-volume-mount) below.
+
+<a id="storage-aa2194"></a>&#x2022; [`storage`](#storage-aa2194) - Optional Block<br>Persistent storage configuration is used to configure Persistent Volume Claim (PVC)<br>See [Storage](#storage-aa2194) below.
+
+#### Service Volumes Persistent Volume Mount
+
+A [`mount`](#service-volumes-persistent-volume-mount) block (within [`service.volumes.persistent_volume`](#service-volumes-persistent-volume)) supports the following:
+
+<a id="mode-134e61"></a>&#x2022; [`mode`](#mode-134e61) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="path-7af794"></a>&#x2022; [`mount_path`](#path-7af794) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="path-18ad39"></a>&#x2022; [`sub_path`](#path-18ad39) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
+
+#### Service Volumes Persistent Volume Storage
+
+A [`storage`](#storage-aa2194) block (within [`service.volumes.persistent_volume`](#service-volumes-persistent-volume)) supports the following:
+
+<a id="mode-1d091d"></a>&#x2022; [`access_mode`](#mode-1d091d) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used
+
+<a id="name-4c16c5"></a>&#x2022; [`class_name`](#name-4c16c5) - Optional String<br>Use the specified class name
+
+<a id="default-36c85c"></a>&#x2022; [`default`](#default-36c85c) - Optional Block<br>Enable this option
+
+<a id="size-fea8d4"></a>&#x2022; [`storage_size`](#size-fea8d4) - Optional Number<br>Size in GiB of the persistent storage
+
+#### Simple Service
+
+A [`simple_service`](#simple-service) block supports the following:
+
+<a id="simple-service-configuration"></a>&#x2022; [`configuration`](#simple-service-configuration) - Optional Block<br>Configuration parameters of the workload<br>See [Configuration](#simple-service-configuration) below.
+
+<a id="simple-service-container"></a>&#x2022; [`container`](#simple-service-container) - Optional Block<br>ContainerType configures the container information<br>See [Container](#simple-service-container) below.
+
+<a id="simple-service-disabled"></a>&#x2022; [`disabled`](#simple-service-disabled) - Optional Block<br>Enable this option
+
+<a id="simple-service-do-not-advertise"></a>&#x2022; [`do_not_advertise`](#simple-service-do-not-advertise) - Optional Block<br>Enable this option
+
+<a id="simple-service-enabled"></a>&#x2022; [`enabled`](#simple-service-enabled) - Optional Block<br>Persistent storage volume configuration for the workload<br>See [Enabled](#simple-service-enabled) below.
+
+<a id="simple-service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#simple-service-scale-to-zero) - Optional Bool<br>Scale down replicas of the service to zero
+
+<a id="simple-service-simple-advertise"></a>&#x2022; [`simple_advertise`](#simple-service-simple-advertise) - Optional Block<br>Advertise OPTIONS For Simple Service. Advertise OPTIONS for Simple Service<br>See [Simple Advertise](#simple-service-simple-advertise) below.
+
+#### Simple Service Configuration
+
+A [`configuration`](#simple-service-configuration) block (within [`simple_service`](#simple-service)) supports the following:
+
+<a id="simple-service-configuration-parameters"></a>&#x2022; [`parameters`](#simple-service-configuration-parameters) - Optional Block<br>Parameters. Parameters for the workload<br>See [Parameters](#simple-service-configuration-parameters) below.
+
+#### Simple Service Configuration Parameters
+
+A [`parameters`](#simple-service-configuration-parameters) block (within [`simple_service.configuration`](#simple-service-configuration)) supports the following:
+
+<a id="var-e566e9"></a>&#x2022; [`env_var`](#var-e566e9) - Optional Block<br>Environment Variable. Environment Variable<br>See [Env Var](#var-e566e9) below.
+
+<a id="file-b5c200"></a>&#x2022; [`file`](#file-b5c200) - Optional Block<br>Configuration File. Configuration File for the workload<br>See [File](#file-b5c200) below.
+
+#### Simple Service Configuration Parameters Env Var
+
+An [`env_var`](#var-e566e9) block (within [`simple_service.configuration.parameters`](#simple-service-configuration-parameters)) supports the following:
+
+<a id="name-e5e695"></a>&#x2022; [`name`](#name-e5e695) - Optional String<br>Name. Name of Environment Variable
+
+<a id="value-4694ef"></a>&#x2022; [`value`](#value-4694ef) - Optional String<br>Value. Value of Environment Variable
+
+#### Simple Service Configuration Parameters File
+
+A [`file`](#file-b5c200) block (within [`simple_service.configuration.parameters`](#simple-service-configuration-parameters)) supports the following:
+
+<a id="data-5368fd"></a>&#x2022; [`data`](#data-5368fd) - Optional String<br>Data. File data
+
+<a id="mount-decdef"></a>&#x2022; [`mount`](#mount-decdef) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-decdef) below.
+
+<a id="name-251776"></a>&#x2022; [`name`](#name-251776) - Optional String<br>Name. Name of the file
+
+<a id="name-0d865e"></a>&#x2022; [`volume_name`](#name-0d865e) - Optional String<br>Volume Name. Name of the Volume
+
+#### Simple Service Configuration Parameters File Mount
+
+A [`mount`](#mount-decdef) block (within [`simple_service.configuration.parameters.file`](#file-b5c200)) supports the following:
+
+<a id="mode-c071a8"></a>&#x2022; [`mode`](#mode-c071a8) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="path-8115be"></a>&#x2022; [`mount_path`](#path-8115be) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="path-b15eb2"></a>&#x2022; [`sub_path`](#path-b15eb2) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
+
+#### Simple Service Container
+
+A [`container`](#simple-service-container) block (within [`simple_service`](#simple-service)) supports the following:
+
+<a id="simple-service-container-args"></a>&#x2022; [`args`](#simple-service-container-args) - Optional List<br>Arguments to the entrypoint. Overrides the docker image's CMD
+
+<a id="simple-service-container-command"></a>&#x2022; [`command`](#simple-service-container-command) - Optional List<br>Command to execute. Overrides the docker image's ENTRYPOINT
+
+<a id="simple-service-container-custom-flavor"></a>&#x2022; [`custom_flavor`](#simple-service-container-custom-flavor) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#simple-service-container-custom-flavor) below.
+
+<a id="simple-service-container-default-flavor"></a>&#x2022; [`default_flavor`](#simple-service-container-default-flavor) - Optional Block<br>Enable this option
+
+<a id="simple-service-container-flavor"></a>&#x2022; [`flavor`](#simple-service-container-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have
+
+<a id="simple-service-container-image"></a>&#x2022; [`image`](#simple-service-container-image) - Optional Block<br>ImageType configures the image to use, how to pull the image, and the associated secrets to use if any<br>See [Image](#simple-service-container-image) below.
+
+<a id="simple-service-container-init-container"></a>&#x2022; [`init_container`](#simple-service-container-init-container) - Optional Bool<br>Specialized container that runs before application container and runs to completion
+
+<a id="simple-service-container-liveness-check"></a>&#x2022; [`liveness_check`](#simple-service-container-liveness-check) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Liveness Check](#simple-service-container-liveness-check) below.
+
+<a id="simple-service-container-name"></a>&#x2022; [`name`](#simple-service-container-name) - Optional String<br>Name. Name of the container
+
+<a id="check-9028f0"></a>&#x2022; [`readiness_check`](#check-9028f0) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Readiness Check](#check-9028f0) below.
+
+#### Simple Service Container Custom Flavor
+
+A [`custom_flavor`](#simple-service-container-custom-flavor) block (within [`simple_service.container`](#simple-service-container)) supports the following:
+
+<a id="name-256e2d"></a>&#x2022; [`name`](#name-256e2d) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-3dbb57"></a>&#x2022; [`namespace`](#namespace-3dbb57) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-bf6176"></a>&#x2022; [`tenant`](#tenant-bf6176) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Simple Service Container Image
+
+An [`image`](#simple-service-container-image) block (within [`simple_service.container`](#simple-service-container)) supports the following:
+
+<a id="registry-f7f6d1"></a>&#x2022; [`container_registry`](#registry-f7f6d1) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#registry-f7f6d1) below.
+
+<a id="simple-service-container-image-name"></a>&#x2022; [`name`](#simple-service-container-image-name) - Optional String<br>Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed
+
+<a id="simple-service-container-image-public"></a>&#x2022; [`public`](#simple-service-container-image-public) - Optional Block<br>Enable this option
+
+<a id="policy-b2dd3c"></a>&#x2022; [`pull_policy`](#policy-b2dd3c) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only
+
+#### Simple Service Container Image Container Registry
+
+A [`container_registry`](#registry-f7f6d1) block (within [`simple_service.container.image`](#simple-service-container-image)) supports the following:
+
+<a id="name-d862eb"></a>&#x2022; [`name`](#name-d862eb) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-3251f2"></a>&#x2022; [`namespace`](#namespace-3251f2) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-86a541"></a>&#x2022; [`tenant`](#tenant-86a541) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Simple Service Container Liveness Check
+
+A [`liveness_check`](#simple-service-container-liveness-check) block (within [`simple_service.container`](#simple-service-container)) supports the following:
+
+<a id="check-16db8f"></a>&#x2022; [`exec_health_check`](#check-16db8f) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-16db8f) below.
+
+<a id="threshold-b6ea90"></a>&#x2022; [`healthy_threshold`](#threshold-b6ea90) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
+
+<a id="check-25986b"></a>&#x2022; [`http_health_check`](#check-25986b) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-25986b) below.
+
+<a id="delay-758ad8"></a>&#x2022; [`initial_delay`](#delay-758ad8) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
+
+<a id="interval-a75912"></a>&#x2022; [`interval`](#interval-a75912) - Optional Number<br>Time interval in seconds between two health check requests
+
+<a id="check-f33b9a"></a>&#x2022; [`tcp_health_check`](#check-f33b9a) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-f33b9a) below.
+
+<a id="timeout-cca4da"></a>&#x2022; [`timeout`](#timeout-cca4da) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+
+<a id="threshold-d8ab4a"></a>&#x2022; [`unhealthy_threshold`](#threshold-d8ab4a) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+
+#### Simple Service Container Liveness Check Exec Health Check
+
+<a id="deep-718ea8"></a>Deeply nested **Check** block collapsed for readability.
+
+#### Simple Service Container Liveness Check HTTP Health Check
+
+<a id="deep-dbda88"></a>Deeply nested **Check** block collapsed for readability.
+
+#### Simple Service Container Liveness Check HTTP Health Check Port
+
+<a id="deep-172371"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Simple Service Container Liveness Check TCP Health Check
+
+<a id="deep-cd2848"></a>Deeply nested **Check** block collapsed for readability.
+
+#### Simple Service Container Liveness Check TCP Health Check Port
+
+<a id="deep-40c0b7"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Simple Service Container Readiness Check
+
+A [`readiness_check`](#check-9028f0) block (within [`simple_service.container`](#simple-service-container)) supports the following:
+
+<a id="check-083116"></a>&#x2022; [`exec_health_check`](#check-083116) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-083116) below.
+
+<a id="threshold-b19598"></a>&#x2022; [`healthy_threshold`](#threshold-b19598) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
+
+<a id="check-71ae5b"></a>&#x2022; [`http_health_check`](#check-71ae5b) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-71ae5b) below.
+
+<a id="delay-f56b24"></a>&#x2022; [`initial_delay`](#delay-f56b24) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
+
+<a id="interval-0aaa38"></a>&#x2022; [`interval`](#interval-0aaa38) - Optional Number<br>Time interval in seconds between two health check requests
+
+<a id="check-074b55"></a>&#x2022; [`tcp_health_check`](#check-074b55) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-074b55) below.
+
+<a id="timeout-354826"></a>&#x2022; [`timeout`](#timeout-354826) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+
+<a id="threshold-b99edb"></a>&#x2022; [`unhealthy_threshold`](#threshold-b99edb) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+
+#### Simple Service Container Readiness Check Exec Health Check
+
+<a id="deep-43a0b9"></a>Deeply nested **Check** block collapsed for readability.
+
+#### Simple Service Container Readiness Check HTTP Health Check
+
+<a id="deep-6e41fe"></a>Deeply nested **Check** block collapsed for readability.
+
+#### Simple Service Container Readiness Check HTTP Health Check Port
+
+<a id="deep-a15304"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Simple Service Container Readiness Check TCP Health Check
+
+<a id="deep-ff1fc9"></a>Deeply nested **Check** block collapsed for readability.
+
+#### Simple Service Container Readiness Check TCP Health Check Port
+
+<a id="deep-253286"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Simple Service Enabled
+
+An [`enabled`](#simple-service-enabled) block (within [`simple_service`](#simple-service)) supports the following:
+
+<a id="simple-service-enabled-name"></a>&#x2022; [`name`](#simple-service-enabled-name) - Optional String<br>Name. Name of the volume
+
+<a id="volume-64b8ac"></a>&#x2022; [`persistent_volume`](#volume-64b8ac) - Optional Block<br>Volume containing the Persistent Storage for the workload<br>See [Persistent Volume](#volume-64b8ac) below.
+
+#### Simple Service Enabled Persistent Volume
+
+A [`persistent_volume`](#volume-64b8ac) block (within [`simple_service.enabled`](#simple-service-enabled)) supports the following:
+
+<a id="mount-80f853"></a>&#x2022; [`mount`](#mount-80f853) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-80f853) below.
+
+<a id="storage-8c6930"></a>&#x2022; [`storage`](#storage-8c6930) - Optional Block<br>Persistent storage configuration is used to configure Persistent Volume Claim (PVC)<br>See [Storage](#storage-8c6930) below.
+
+#### Simple Service Enabled Persistent Volume Mount
+
+A [`mount`](#mount-80f853) block (within [`simple_service.enabled.persistent_volume`](#volume-64b8ac)) supports the following:
+
+<a id="mode-c91e4c"></a>&#x2022; [`mode`](#mode-c91e4c) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="path-7949ef"></a>&#x2022; [`mount_path`](#path-7949ef) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="path-7a72f2"></a>&#x2022; [`sub_path`](#path-7a72f2) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
+
+#### Simple Service Enabled Persistent Volume Storage
+
+A [`storage`](#storage-8c6930) block (within [`simple_service.enabled.persistent_volume`](#volume-64b8ac)) supports the following:
+
+<a id="mode-acb744"></a>&#x2022; [`access_mode`](#mode-acb744) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used
+
+<a id="name-b14a4c"></a>&#x2022; [`class_name`](#name-b14a4c) - Optional String<br>Use the specified class name
+
+<a id="default-f48482"></a>&#x2022; [`default`](#default-f48482) - Optional Block<br>Enable this option
+
+<a id="size-17db0b"></a>&#x2022; [`storage_size`](#size-17db0b) - Optional Number<br>Size in GiB of the persistent storage
+
+#### Simple Service Simple Advertise
+
+A [`simple_advertise`](#simple-service-simple-advertise) block (within [`simple_service`](#simple-service)) supports the following:
+
+<a id="simple-service-simple-advertise-domains"></a>&#x2022; [`domains`](#simple-service-simple-advertise-domains) - Optional List<br>List of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.example.com.` 2
+
+<a id="port-b7cc36"></a>&#x2022; [`service_port`](#port-b7cc36) - Optional Number<br>Service port to advertise on Internet via HTTP loadbalancer using port 80
+
+#### Stateful Service
+
+A [`stateful_service`](#stateful-service) block supports the following:
+
+<a id="stateful-service-advertise-options"></a>&#x2022; [`advertise_options`](#stateful-service-advertise-options) - Optional Block<br>Advertise OPTIONS are used to configure how and where to advertise the workload using load balancers<br>See [Advertise Options](#stateful-service-advertise-options) below.
+
+<a id="stateful-service-configuration"></a>&#x2022; [`configuration`](#stateful-service-configuration) - Optional Block<br>Configuration parameters of the workload<br>See [Configuration](#stateful-service-configuration) below.
+
+<a id="stateful-service-containers"></a>&#x2022; [`containers`](#stateful-service-containers) - Optional Block<br>Containers to use for service<br>See [Containers](#stateful-service-containers) below.
+
+<a id="stateful-service-deploy-options"></a>&#x2022; [`deploy_options`](#stateful-service-deploy-options) - Optional Block<br>Deploy OPTIONS are used to configure the workload deployment OPTIONS<br>See [Deploy Options](#stateful-service-deploy-options) below.
+
+<a id="stateful-service-num-replicas"></a>&#x2022; [`num_replicas`](#stateful-service-num-replicas) - Optional Number<br>Number of replicas of service to spawn per site
+
+<a id="stateful-service-persistent-volumes"></a>&#x2022; [`persistent_volumes`](#stateful-service-persistent-volumes) - Optional Block<br>Persistent storage configuration for the service<br>See [Persistent Volumes](#stateful-service-persistent-volumes) below.
+
+<a id="stateful-service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#stateful-service-scale-to-zero) - Optional Block<br>Enable this option
+
+<a id="stateful-service-volumes"></a>&#x2022; [`volumes`](#stateful-service-volumes) - Optional Block<br>Ephemeral Volumes. Ephemeral volumes for the service<br>See [Volumes](#stateful-service-volumes) below.
+
+#### Stateful Service Advertise Options
+
+An [`advertise_options`](#stateful-service-advertise-options) block (within [`stateful_service`](#stateful-service)) supports the following:
+
+<a id="custom-2e9653"></a>&#x2022; [`advertise_custom`](#custom-2e9653) - Optional Block<br>Advertise this workload via loadbalancer on specific sites<br>See [Advertise Custom](#custom-2e9653) below.
+
+<a id="cluster-e091a1"></a>&#x2022; [`advertise_in_cluster`](#cluster-e091a1) - Optional Block<br>Advertise the workload locally in-cluster<br>See [Advertise In Cluster](#cluster-e091a1) below.
+
+<a id="public-86b094"></a>&#x2022; [`advertise_on_public`](#public-86b094) - Optional Block<br>Advertise this workload via loadbalancer on Internet with default VIP<br>See [Advertise On Public](#public-86b094) below.
+
+<a id="advertise-a4c726"></a>&#x2022; [`do_not_advertise`](#advertise-a4c726) - Optional Block<br>Enable this option
+
+#### Stateful Service Advertise Options Advertise Custom
+
+An [`advertise_custom`](#custom-2e9653) block (within [`stateful_service.advertise_options`](#stateful-service-advertise-options)) supports the following:
+
+<a id="where-ecb677"></a>&#x2022; [`advertise_where`](#where-ecb677) - Optional Block<br>Where should this load balancer be available<br>See [Advertise Where](#where-ecb677) below.
+
+<a id="ports-17a1c0"></a>&#x2022; [`ports`](#ports-17a1c0) - Optional Block<br>Ports. Ports to advertise<br>See [Ports](#ports-17a1c0) below.
+
+#### Stateful Service Advertise Options Advertise Custom Advertise Where
+
+<a id="deep-1b9a8d"></a>Deeply nested **Where** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Advertise Where Site
+
+<a id="deep-9ff9ec"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Advertise Where Site Site
+
+<a id="deep-329be6"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Advertise Where Virtual Site
+
+<a id="deep-15a54c"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Advertise Where Virtual Site Virtual Site
+
+<a id="deep-3af2c4"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Advertise Where Vk8s Service
+
+<a id="deep-78688d"></a>Deeply nested **Service** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Advertise Where Vk8s Service Site
+
+<a id="deep-911694"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Advertise Where Vk8s Service Virtual Site
+
+<a id="deep-ec2a75"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports
+
+A [`ports`](#ports-17a1c0) block (within [`stateful_service.advertise_options.advertise_custom`](#custom-2e9653)) supports the following:
+
+<a id="loadbalancer-6acd33"></a>&#x2022; [`http_loadbalancer`](#loadbalancer-6acd33) - Optional Block<br>HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer<br>See [HTTP Loadbalancer](#loadbalancer-6acd33) below.
+
+<a id="port-018c8a"></a>&#x2022; [`port`](#port-018c8a) - Optional Block<br>Port. Port of the workload<br>See [Port](#port-018c8a) below.
+
+<a id="loadbalancer-6147bf"></a>&#x2022; [`tcp_loadbalancer`](#loadbalancer-6147bf) - Optional Block<br>TCP Load Balancer. TCP loadbalancer<br>See [TCP Loadbalancer](#loadbalancer-6147bf) below.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer
+
+<a id="deep-deba7b"></a>Deeply nested **Loadbalancer** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Default Route
+
+<a id="deep-c23a03"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTP
+
+<a id="deep-c5f207"></a>Deeply nested **HTTP** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS
+
+<a id="deep-54c2b3"></a>Deeply nested **HTTPS** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Coalescing Options
+
+<a id="deep-b206e8"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options
+
+<a id="deep-386653"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
+
+<a id="deep-9c8446"></a>Deeply nested **Only** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
+
+<a id="deep-71e625"></a>Deeply nested **Transformation** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params
+
+<a id="deep-cf6057"></a>Deeply nested **Params** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates
+
+<a id="deep-025b6a"></a>Deeply nested **Certificates** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config
+
+<a id="deep-12bb98"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security
+
+<a id="deep-51e56c"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS
+
+<a id="deep-16fb45"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL
+
+<a id="deep-21c207"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA
+
+<a id="deep-260b64"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options
+
+<a id="deep-ae9db4"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters
+
+<a id="deep-1b3cda"></a>Deeply nested **Parameters** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates
+
+<a id="deep-286dbf"></a>Deeply nested **Certificates** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms
+
+<a id="deep-669e16"></a>Deeply nested **Algorithms** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key
+
+<a id="deep-0cd780"></a>Deeply nested **Key** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info
+
+<a id="deep-9a3590"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info
+
+<a id="deep-c93871"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config
+
+<a id="deep-b5ca7c"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security
+
+<a id="deep-ac03b7"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS
+
+<a id="deep-4662e7"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL
+
+<a id="deep-2fe5d1"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA
+
+<a id="deep-d70642"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options
+
+<a id="deep-ec5644"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert
+
+<a id="deep-1c1e39"></a>Deeply nested **Cert** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options
+
+<a id="deep-f4d48f"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options
+
+<a id="deep-b88856"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
+
+<a id="deep-06612a"></a>Deeply nested **Only** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
+
+<a id="deep-53e3b9"></a>Deeply nested **Transformation** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config
+
+<a id="deep-8738dd"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security
+
+<a id="deep-5b07d2"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS
+
+<a id="deep-dfaa70"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL
+
+<a id="deep-81e77c"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA
+
+<a id="deep-f3a926"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options
+
+<a id="deep-b48146"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes
+
+<a id="deep-8dc3bb"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes
+
+<a id="deep-434413"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object
+
+<a id="deep-5bd8c8"></a>Deeply nested **Object** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref
+
+<a id="deep-a55e57"></a>Deeply nested **Ref** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route
+
+<a id="deep-de733a"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers
+
+<a id="deep-42ca44"></a>Deeply nested **Headers** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port
+
+<a id="deep-bd8afd"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path
+
+<a id="deep-b65bc6"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response
+
+<a id="deep-1e1cf0"></a>Deeply nested **Response** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route
+
+<a id="deep-ae9934"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers
+
+<a id="deep-c73ff5"></a>Deeply nested **Headers** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port
+
+<a id="deep-2b2330"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path
+
+<a id="deep-65c019"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect
+
+<a id="deep-248f98"></a>Deeply nested **Redirect** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route
+
+<a id="deep-c9c5c6"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path
+
+<a id="deep-1e4d1b"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports Port
+
+<a id="deep-13234e"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports Port Info
+
+<a id="deep-afe3d5"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise Custom Ports TCP Loadbalancer
+
+<a id="deep-ed0465"></a>Deeply nested **Loadbalancer** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise In Cluster
+
+An [`advertise_in_cluster`](#cluster-e091a1) block (within [`stateful_service.advertise_options`](#stateful-service-advertise-options)) supports the following:
+
+<a id="ports-8e674f"></a>&#x2022; [`multi_ports`](#ports-8e674f) - Optional Block<br>Multiple Ports. Multiple ports<br>See [Multi Ports](#ports-8e674f) below.
+
+<a id="port-9af3c4"></a>&#x2022; [`port`](#port-9af3c4) - Optional Block<br>Port. Single port<br>See [Port](#port-9af3c4) below.
+
+#### Stateful Service Advertise Options Advertise In Cluster Multi Ports
+
+<a id="deep-9b9d6a"></a>Deeply nested **Ports** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise In Cluster Multi Ports Ports
+
+<a id="deep-b2c5c2"></a>Deeply nested **Ports** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise In Cluster Multi Ports Ports Info
+
+<a id="deep-5d6955"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise In Cluster Port
+
+<a id="deep-149104"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise In Cluster Port Info
+
+<a id="deep-318fb3"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public
+
+An [`advertise_on_public`](#public-86b094) block (within [`stateful_service.advertise_options`](#stateful-service-advertise-options)) supports the following:
+
+<a id="ports-63766e"></a>&#x2022; [`multi_ports`](#ports-63766e) - Optional Block<br>Advertise Multiple Ports. Advertise multiple ports<br>See [Multi Ports](#ports-63766e) below.
+
+<a id="port-1247eb"></a>&#x2022; [`port`](#port-1247eb) - Optional Block<br>Advertise Port. Advertise single port<br>See [Port](#port-1247eb) below.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports
+
+<a id="deep-fd3c5a"></a>Deeply nested **Ports** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports
+
+<a id="deep-448f55"></a>Deeply nested **Ports** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer
+
+<a id="deep-c554c9"></a>Deeply nested **Loadbalancer** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Default Route
+
+<a id="deep-30e133"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTP
+
+<a id="deep-d9564b"></a>Deeply nested **HTTP** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS
+
+<a id="deep-fd8161"></a>Deeply nested **HTTPS** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Coalescing Options
+
+<a id="deep-1ebf1e"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options
+
+<a id="deep-91710b"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
+
+<a id="deep-5f8f3e"></a>Deeply nested **Only** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
+
+<a id="deep-023b71"></a>Deeply nested **Transformation** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params
+
+<a id="deep-772343"></a>Deeply nested **Params** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates
+
+<a id="deep-853555"></a>Deeply nested **Certificates** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config
+
+<a id="deep-dcee5a"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security
+
+<a id="deep-fb52de"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS
+
+<a id="deep-c23b6d"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL
+
+<a id="deep-0f1756"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA
+
+<a id="deep-5c48ac"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options
+
+<a id="deep-802e32"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters
+
+<a id="deep-82afe1"></a>Deeply nested **Parameters** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates
+
+<a id="deep-00a8ec"></a>Deeply nested **Certificates** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms
+
+<a id="deep-5a20af"></a>Deeply nested **Algorithms** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key
+
+<a id="deep-49489e"></a>Deeply nested **Key** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info
+
+<a id="deep-b28abf"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info
+
+<a id="deep-639d38"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config
+
+<a id="deep-68cec9"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security
+
+<a id="deep-e36b2c"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS
+
+<a id="deep-a4b527"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL
+
+<a id="deep-c3e12f"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA
+
+<a id="deep-c797ab"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options
+
+<a id="deep-2df252"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert
+
+<a id="deep-43ef50"></a>Deeply nested **Cert** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options
+
+<a id="deep-040bd4"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options
+
+<a id="deep-3fe0dd"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
+
+<a id="deep-a1efa3"></a>Deeply nested **Only** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
+
+<a id="deep-f94784"></a>Deeply nested **Transformation** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config
+
+<a id="deep-165f40"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security
+
+<a id="deep-f6ef45"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS
+
+<a id="deep-3db17a"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL
+
+<a id="deep-1bc609"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA
+
+<a id="deep-cd80a3"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options
+
+<a id="deep-10a93f"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes
+
+<a id="deep-a22e01"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes
+
+<a id="deep-e2338f"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object
+
+<a id="deep-a60631"></a>Deeply nested **Object** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref
+
+<a id="deep-f20d74"></a>Deeply nested **Ref** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route
+
+<a id="deep-2e3160"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers
+
+<a id="deep-d54750"></a>Deeply nested **Headers** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port
+
+<a id="deep-3776d6"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path
+
+<a id="deep-e0dc9c"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response
+
+<a id="deep-f31bdb"></a>Deeply nested **Response** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route
+
+<a id="deep-2f195b"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers
+
+<a id="deep-4d2d9a"></a>Deeply nested **Headers** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port
+
+<a id="deep-6a788d"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path
+
+<a id="deep-478484"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect
+
+<a id="deep-b9e553"></a>Deeply nested **Redirect** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route
+
+<a id="deep-9d5c84"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path
+
+<a id="deep-722753"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports Port
+
+<a id="deep-4f3d68"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports Port Info
+
+<a id="deep-63cbf3"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Multi Ports Ports TCP Loadbalancer
+
+<a id="deep-5fa3a7"></a>Deeply nested **Loadbalancer** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port
+
+<a id="deep-8c94ab"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer
+
+<a id="deep-d7478f"></a>Deeply nested **Loadbalancer** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Default Route
+
+<a id="deep-1317ce"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTP
+
+<a id="deep-f8336f"></a>Deeply nested **HTTP** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS
+
+<a id="deep-88c203"></a>Deeply nested **HTTPS** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Coalescing Options
+
+<a id="deep-5b699c"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options
+
+<a id="deep-3fd15d"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
+
+<a id="deep-1e9fea"></a>Deeply nested **Only** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
+
+<a id="deep-96577f"></a>Deeply nested **Transformation** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params
+
+<a id="deep-cb4920"></a>Deeply nested **Params** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Certificates
+
+<a id="deep-1406ba"></a>Deeply nested **Certificates** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config
+
+<a id="deep-c9f0c1"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security
+
+<a id="deep-feb32d"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS
+
+<a id="deep-5b8a3c"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL
+
+<a id="deep-49d7a4"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA
+
+<a id="deep-8d206a"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options
+
+<a id="deep-a9b8df"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters
+
+<a id="deep-f7d00f"></a>Deeply nested **Parameters** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates
+
+<a id="deep-24598f"></a>Deeply nested **Certificates** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms
+
+<a id="deep-9279c2"></a>Deeply nested **Algorithms** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key
+
+<a id="deep-6ca79f"></a>Deeply nested **Key** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info
+
+<a id="deep-906508"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info
+
+<a id="deep-2cb08d"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config
+
+<a id="deep-822220"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security
+
+<a id="deep-4ec091"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS
+
+<a id="deep-966ded"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL
+
+<a id="deep-f1a4a8"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA
+
+<a id="deep-16c5e1"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options
+
+<a id="deep-189054"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert
+
+<a id="deep-e6c6ca"></a>Deeply nested **Cert** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Coalescing Options
+
+<a id="deep-c60043"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options
+
+<a id="deep-acc31c"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
+
+<a id="deep-1e5eee"></a>Deeply nested **Only** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
+
+<a id="deep-bada35"></a>Deeply nested **Transformation** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config
+
+<a id="deep-57e2ee"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security
+
+<a id="deep-6df39c"></a>Deeply nested **Security** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS
+
+<a id="deep-43d6c1"></a>Deeply nested **mTLS** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL
+
+<a id="deep-6bd648"></a>Deeply nested **CRL** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA
+
+<a id="deep-2e4ca6"></a>Deeply nested **CA** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options
+
+<a id="deep-6d2698"></a>Deeply nested **Options** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes
+
+<a id="deep-ee8802"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes
+
+<a id="deep-5b9b7f"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object
+
+<a id="deep-139784"></a>Deeply nested **Object** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref
+
+<a id="deep-fa0b80"></a>Deeply nested **Ref** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route
+
+<a id="deep-e4cb4d"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers
+
+<a id="deep-16b389"></a>Deeply nested **Headers** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port
+
+<a id="deep-600cbb"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Path
+
+<a id="deep-8d9f69"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response
+
+<a id="deep-3e55b0"></a>Deeply nested **Response** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route
+
+<a id="deep-b619f2"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Headers
+
+<a id="deep-869c99"></a>Deeply nested **Headers** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port
+
+<a id="deep-df832d"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Path
+
+<a id="deep-4adff7"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect
+
+<a id="deep-5f4ed2"></a>Deeply nested **Redirect** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route
+
+<a id="deep-be5f76"></a>Deeply nested **Route** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route Path
+
+<a id="deep-af937d"></a>Deeply nested **Path** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port Port
+
+<a id="deep-8e2e80"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port Port Info
+
+<a id="deep-c00eff"></a>Deeply nested **Info** block collapsed for readability.
+
+#### Stateful Service Advertise Options Advertise On Public Port TCP Loadbalancer
+
+<a id="deep-ee5fc5"></a>Deeply nested **Loadbalancer** block collapsed for readability.
+
+#### Stateful Service Configuration
+
+A [`configuration`](#stateful-service-configuration) block (within [`stateful_service`](#stateful-service)) supports the following:
+
+<a id="parameters-dc9866"></a>&#x2022; [`parameters`](#parameters-dc9866) - Optional Block<br>Parameters. Parameters for the workload<br>See [Parameters](#parameters-dc9866) below.
+
+#### Stateful Service Configuration Parameters
+
+A [`parameters`](#parameters-dc9866) block (within [`stateful_service.configuration`](#stateful-service-configuration)) supports the following:
+
+<a id="var-ccabf5"></a>&#x2022; [`env_var`](#var-ccabf5) - Optional Block<br>Environment Variable. Environment Variable<br>See [Env Var](#var-ccabf5) below.
+
+<a id="file-343e3f"></a>&#x2022; [`file`](#file-343e3f) - Optional Block<br>Configuration File. Configuration File for the workload<br>See [File](#file-343e3f) below.
+
+#### Stateful Service Configuration Parameters Env Var
+
+An [`env_var`](#var-ccabf5) block (within [`stateful_service.configuration.parameters`](#parameters-dc9866)) supports the following:
+
+<a id="name-364c07"></a>&#x2022; [`name`](#name-364c07) - Optional String<br>Name. Name of Environment Variable
+
+<a id="value-d3bca9"></a>&#x2022; [`value`](#value-d3bca9) - Optional String<br>Value. Value of Environment Variable
+
+#### Stateful Service Configuration Parameters File
+
+A [`file`](#file-343e3f) block (within [`stateful_service.configuration.parameters`](#parameters-dc9866)) supports the following:
+
+<a id="data-1a89a8"></a>&#x2022; [`data`](#data-1a89a8) - Optional String<br>Data. File data
+
+<a id="mount-9251c5"></a>&#x2022; [`mount`](#mount-9251c5) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-9251c5) below.
+
+<a id="name-0fb42b"></a>&#x2022; [`name`](#name-0fb42b) - Optional String<br>Name. Name of the file
+
+<a id="name-b84d33"></a>&#x2022; [`volume_name`](#name-b84d33) - Optional String<br>Volume Name. Name of the Volume
+
+#### Stateful Service Configuration Parameters File Mount
+
+A [`mount`](#mount-9251c5) block (within [`stateful_service.configuration.parameters.file`](#file-343e3f)) supports the following:
+
+<a id="mode-744d6b"></a>&#x2022; [`mode`](#mode-744d6b) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="path-6612e2"></a>&#x2022; [`mount_path`](#path-6612e2) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="path-1fc41c"></a>&#x2022; [`sub_path`](#path-1fc41c) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
+
+#### Stateful Service Containers
+
+A [`containers`](#stateful-service-containers) block (within [`stateful_service`](#stateful-service)) supports the following:
+
+<a id="stateful-service-containers-args"></a>&#x2022; [`args`](#stateful-service-containers-args) - Optional List<br>Arguments to the entrypoint. Overrides the docker image's CMD
+
+<a id="stateful-service-containers-command"></a>&#x2022; [`command`](#stateful-service-containers-command) - Optional List<br>Command to execute. Overrides the docker image's ENTRYPOINT
+
+<a id="flavor-0d2be0"></a>&#x2022; [`custom_flavor`](#flavor-0d2be0) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Custom Flavor](#flavor-0d2be0) below.
+
+<a id="flavor-c485c6"></a>&#x2022; [`default_flavor`](#flavor-c485c6) - Optional Block<br>Enable this option
+
+<a id="stateful-service-containers-flavor"></a>&#x2022; [`flavor`](#stateful-service-containers-flavor) - Optional String  Defaults to `CONTAINER_FLAVOR_TYPE_TINY`<br>Possible values are `CONTAINER_FLAVOR_TYPE_TINY`, `CONTAINER_FLAVOR_TYPE_MEDIUM`, `CONTAINER_FLAVOR_TYPE_LARGE`<br>[Enum: CONTAINER_FLAVOR_TYPE_TINY|CONTAINER_FLAVOR_TYPE_MEDIUM|CONTAINER_FLAVOR_TYPE_LARGE] Container Flavor type - CONTAINER_FLAVOR_TYPE_TINY: Tiny Tiny containers have limit of 0.1 vCPU and 256 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_MEDIUM: Medium Medium containers have limit of 0.25 vCPU and 512 MiB (mebibyte) memory - CONTAINER_FLAVOR_TYPE_LARGE: Large Large containers have
+
+<a id="stateful-service-containers-image"></a>&#x2022; [`image`](#stateful-service-containers-image) - Optional Block<br>ImageType configures the image to use, how to pull the image, and the associated secrets to use if any<br>See [Image](#stateful-service-containers-image) below.
+
+<a id="container-7dbf25"></a>&#x2022; [`init_container`](#container-7dbf25) - Optional Bool<br>Specialized container that runs before application container and runs to completion
+
+<a id="check-82bd07"></a>&#x2022; [`liveness_check`](#check-82bd07) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Liveness Check](#check-82bd07) below.
+
+<a id="stateful-service-containers-name"></a>&#x2022; [`name`](#stateful-service-containers-name) - Optional String<br>Name. Name of the container
+
+<a id="check-81b532"></a>&#x2022; [`readiness_check`](#check-81b532) - Optional Block<br>HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic<br>See [Readiness Check](#check-81b532) below.
+
+#### Stateful Service Containers Custom Flavor
+
+A [`custom_flavor`](#flavor-0d2be0) block (within [`stateful_service.containers`](#stateful-service-containers)) supports the following:
+
+<a id="name-37698d"></a>&#x2022; [`name`](#name-37698d) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-db9524"></a>&#x2022; [`namespace`](#namespace-db9524) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-a8296a"></a>&#x2022; [`tenant`](#tenant-a8296a) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Stateful Service Containers Image
+
+An [`image`](#stateful-service-containers-image) block (within [`stateful_service.containers`](#stateful-service-containers)) supports the following:
+
+<a id="registry-78045a"></a>&#x2022; [`container_registry`](#registry-78045a) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#registry-78045a) below.
+
+<a id="stateful-service-containers-image-name"></a>&#x2022; [`name`](#stateful-service-containers-image-name) - Optional String<br>Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed
+
+<a id="public-27eb7d"></a>&#x2022; [`public`](#public-27eb7d) - Optional Block<br>Enable this option
+
+<a id="policy-013972"></a>&#x2022; [`pull_policy`](#policy-013972) - Optional String  Defaults to `IMAGE_PULL_POLICY_DEFAULT`<br>Possible values are `IMAGE_PULL_POLICY_DEFAULT`, `IMAGE_PULL_POLICY_IF_NOT_PRESENT`, `IMAGE_PULL_POLICY_ALWAYS`, `IMAGE_PULL_POLICY_NEVER`<br>[Enum: IMAGE_PULL_POLICY_DEFAULT|IMAGE_PULL_POLICY_IF_NOT_PRESENT|IMAGE_PULL_POLICY_ALWAYS|IMAGE_PULL_POLICY_NEVER] Image pull policy type enumerates the policy choices to use for pulling the image prior to starting the workload - IMAGE_PULL_POLICY_DEFAULT: Default Default will always pull image if :latest tag is specified in image name. If :latest tag is not specified in image name, it will pull image only
+
+#### Stateful Service Containers Image Container Registry
+
+A [`container_registry`](#registry-78045a) block (within [`stateful_service.containers.image`](#stateful-service-containers-image)) supports the following:
+
+<a id="name-4d4804"></a>&#x2022; [`name`](#name-4d4804) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-f6725d"></a>&#x2022; [`namespace`](#namespace-f6725d) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-1ee737"></a>&#x2022; [`tenant`](#tenant-1ee737) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Stateful Service Containers Liveness Check
+
+A [`liveness_check`](#check-82bd07) block (within [`stateful_service.containers`](#stateful-service-containers)) supports the following:
+
+<a id="check-d745b6"></a>&#x2022; [`exec_health_check`](#check-d745b6) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-d745b6) below.
+
+<a id="threshold-87f287"></a>&#x2022; [`healthy_threshold`](#threshold-87f287) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
+
+<a id="check-3fba6e"></a>&#x2022; [`http_health_check`](#check-3fba6e) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-3fba6e) below.
+
+<a id="delay-58e58a"></a>&#x2022; [`initial_delay`](#delay-58e58a) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
+
+<a id="interval-2c75b3"></a>&#x2022; [`interval`](#interval-2c75b3) - Optional Number<br>Time interval in seconds between two health check requests
+
+<a id="check-485f86"></a>&#x2022; [`tcp_health_check`](#check-485f86) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-485f86) below.
+
+<a id="timeout-4a23bd"></a>&#x2022; [`timeout`](#timeout-4a23bd) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+
+<a id="threshold-50b947"></a>&#x2022; [`unhealthy_threshold`](#threshold-50b947) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+
+#### Stateful Service Containers Liveness Check Exec Health Check
+
+<a id="deep-5f4a6d"></a>Deeply nested **Check** block collapsed for readability.
+
+#### Stateful Service Containers Liveness Check HTTP Health Check
+
+<a id="deep-18c5ba"></a>Deeply nested **Check** block collapsed for readability.
+
+#### Stateful Service Containers Liveness Check HTTP Health Check Port
+
+<a id="deep-13e4c2"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Containers Liveness Check TCP Health Check
+
+<a id="deep-6439d2"></a>Deeply nested **Check** block collapsed for readability.
+
+#### Stateful Service Containers Liveness Check TCP Health Check Port
+
+<a id="deep-b68950"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Containers Readiness Check
+
+A [`readiness_check`](#check-81b532) block (within [`stateful_service.containers`](#stateful-service-containers)) supports the following:
+
+<a id="check-d067fc"></a>&#x2022; [`exec_health_check`](#check-d067fc) - Optional Block<br>ExecHealthCheckType describes a health check based on 'run in container' action. Exit status of 0 is treated as live/healthy and non-zero is unhealthy<br>See [Exec Health Check](#check-d067fc) below.
+
+<a id="threshold-793b66"></a>&#x2022; [`healthy_threshold`](#threshold-793b66) - Optional Number<br>Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container
+
+<a id="check-d4b642"></a>&#x2022; [`http_health_check`](#check-d4b642) - Optional Block<br>HTTPHealthCheckType describes a health check based on HTTP GET requests<br>See [HTTP Health Check](#check-d4b642) below.
+
+<a id="delay-e5c176"></a>&#x2022; [`initial_delay`](#delay-e5c176) - Optional Number<br>Number of seconds after the container has started before health checks are initiated
+
+<a id="interval-b7509d"></a>&#x2022; [`interval`](#interval-b7509d) - Optional Number<br>Time interval in seconds between two health check requests
+
+<a id="check-fde4eb"></a>&#x2022; [`tcp_health_check`](#check-fde4eb) - Optional Block<br>TCPHealthCheckType describes a health check based on opening a TCP connection<br>See [TCP Health Check](#check-fde4eb) below.
+
+<a id="timeout-db7e11"></a>&#x2022; [`timeout`](#timeout-db7e11) - Optional Number<br>Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure
+
+<a id="threshold-a50cc0"></a>&#x2022; [`unhealthy_threshold`](#threshold-a50cc0) - Optional Number<br>Number of consecutive failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a container is marked unhealthy
+
+#### Stateful Service Containers Readiness Check Exec Health Check
+
+<a id="deep-082de5"></a>Deeply nested **Check** block collapsed for readability.
+
+#### Stateful Service Containers Readiness Check HTTP Health Check
+
+<a id="deep-51404c"></a>Deeply nested **Check** block collapsed for readability.
+
+#### Stateful Service Containers Readiness Check HTTP Health Check Port
+
+<a id="deep-b0f7b4"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Containers Readiness Check TCP Health Check
+
+<a id="deep-e587e5"></a>Deeply nested **Check** block collapsed for readability.
+
+#### Stateful Service Containers Readiness Check TCP Health Check Port
+
+<a id="deep-8ad9e9"></a>Deeply nested **Port** block collapsed for readability.
+
+#### Stateful Service Deploy Options
+
+A [`deploy_options`](#stateful-service-deploy-options) block (within [`stateful_service`](#stateful-service)) supports the following:
+
+<a id="stateful-service-deploy-options-all-res"></a>&#x2022; [`all_res`](#stateful-service-deploy-options-all-res) - Optional Block<br>Enable this option
+
+<a id="sites-4ecc3f"></a>&#x2022; [`default_virtual_sites`](#sites-4ecc3f) - Optional Block<br>Enable this option
+
+<a id="sites-6c0f50"></a>&#x2022; [`deploy_ce_sites`](#sites-6c0f50) - Optional Block<br>Defines a way to deploy a workload on specific Customer sites<br>See [Deploy CE Sites](#sites-6c0f50) below.
+
+<a id="sites-f4950a"></a>&#x2022; [`deploy_ce_virtual_sites`](#sites-f4950a) - Optional Block<br>Defines a way to deploy a workload on specific Customer virtual sites<br>See [Deploy CE Virtual Sites](#sites-f4950a) below.
+
+<a id="sites-d00d51"></a>&#x2022; [`deploy_re_sites`](#sites-d00d51) - Optional Block<br>Defines a way to deploy a workload on specific Regional Edge sites<br>See [Deploy RE Sites](#sites-d00d51) below.
+
+<a id="sites-4ad049"></a>&#x2022; [`deploy_re_virtual_sites`](#sites-4ad049) - Optional Block<br>Defines a way to deploy a workload on specific Regional Edge virtual sites<br>See [Deploy RE Virtual Sites](#sites-4ad049) below.
+
+#### Stateful Service Deploy Options Deploy CE Sites
+
+A [`deploy_ce_sites`](#sites-6c0f50) block (within [`stateful_service.deploy_options`](#stateful-service-deploy-options)) supports the following:
+
+<a id="site-0e137b"></a>&#x2022; [`site`](#site-0e137b) - Optional Block<br>Which customer sites should this workload be deployed<br>See [Site](#site-0e137b) below.
+
+#### Stateful Service Deploy Options Deploy CE Sites Site
+
+<a id="deep-d27353"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Stateful Service Deploy Options Deploy CE Virtual Sites
+
+<a id="deep-030779"></a>Deeply nested **Sites** block collapsed for readability.
+
+#### Stateful Service Deploy Options Deploy CE Virtual Sites Virtual Site
+
+<a id="deep-59c8af"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Stateful Service Deploy Options Deploy RE Sites
+
+A [`deploy_re_sites`](#sites-d00d51) block (within [`stateful_service.deploy_options`](#stateful-service-deploy-options)) supports the following:
+
+<a id="site-92faf4"></a>&#x2022; [`site`](#site-92faf4) - Optional Block<br>Which regional edge sites should this workload be deployed<br>See [Site](#site-92faf4) below.
+
+#### Stateful Service Deploy Options Deploy RE Sites Site
+
+<a id="deep-d51a07"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Stateful Service Deploy Options Deploy RE Virtual Sites
+
+<a id="deep-77c59a"></a>Deeply nested **Sites** block collapsed for readability.
+
+#### Stateful Service Deploy Options Deploy RE Virtual Sites Virtual Site
+
+<a id="deep-be1ff4"></a>Deeply nested **Site** block collapsed for readability.
+
+#### Stateful Service Persistent Volumes
+
+A [`persistent_volumes`](#stateful-service-persistent-volumes) block (within [`stateful_service`](#stateful-service)) supports the following:
+
+<a id="name-5e24ab"></a>&#x2022; [`name`](#name-5e24ab) - Optional String<br>Name. Name of the volume
+
+<a id="volume-9c1fa2"></a>&#x2022; [`persistent_volume`](#volume-9c1fa2) - Optional Block<br>Volume containing the Persistent Storage for the workload<br>See [Persistent Volume](#volume-9c1fa2) below.
+
+#### Stateful Service Persistent Volumes Persistent Volume
+
+A [`persistent_volume`](#volume-9c1fa2) block (within [`stateful_service.persistent_volumes`](#stateful-service-persistent-volumes)) supports the following:
+
+<a id="mount-332197"></a>&#x2022; [`mount`](#mount-332197) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-332197) below.
+
+<a id="storage-33a80f"></a>&#x2022; [`storage`](#storage-33a80f) - Optional Block<br>Persistent storage configuration is used to configure Persistent Volume Claim (PVC)<br>See [Storage](#storage-33a80f) below.
+
+#### Stateful Service Persistent Volumes Persistent Volume Mount
+
+A [`mount`](#mount-332197) block (within [`stateful_service.persistent_volumes.persistent_volume`](#volume-9c1fa2)) supports the following:
+
+<a id="mode-90ab42"></a>&#x2022; [`mode`](#mode-90ab42) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="path-a261fb"></a>&#x2022; [`mount_path`](#path-a261fb) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="path-056461"></a>&#x2022; [`sub_path`](#path-056461) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
+
+#### Stateful Service Persistent Volumes Persistent Volume Storage
+
+A [`storage`](#storage-33a80f) block (within [`stateful_service.persistent_volumes.persistent_volume`](#volume-9c1fa2)) supports the following:
+
+<a id="mode-04d189"></a>&#x2022; [`access_mode`](#mode-04d189) - Optional String  Defaults to `ACCESS_MODE_READ_WRITE_ONCE`<br>Possible values are `ACCESS_MODE_READ_WRITE_ONCE`, `ACCESS_MODE_READ_WRITE_MANY`, `ACCESS_MODE_READ_ONLY_MANY`<br>[Enum: ACCESS_MODE_READ_WRITE_ONCE|ACCESS_MODE_READ_WRITE_MANY|ACCESS_MODE_READ_ONLY_MANY] Persistence storage access mode is used to configure access mode for persistent storage - ACCESS_MODE_READ_WRITE_ONCE: Read Write Once Read Write Once is used to mount persistent storage in read/write mode to exactly 1 host - ACCESS_MODE_READ_WRITE_MANY: Read Write Many Read Write Many is used
+
+<a id="name-6dd4e7"></a>&#x2022; [`class_name`](#name-6dd4e7) - Optional String<br>Use the specified class name
+
+<a id="default-def9af"></a>&#x2022; [`default`](#default-def9af) - Optional Block<br>Enable this option
+
+<a id="size-f9136f"></a>&#x2022; [`storage_size`](#size-f9136f) - Optional Number<br>Size in GiB of the persistent storage
+
+#### Stateful Service Volumes
+
+A [`volumes`](#stateful-service-volumes) block (within [`stateful_service`](#stateful-service)) supports the following:
+
+<a id="stateful-service-volumes-empty-dir"></a>&#x2022; [`empty_dir`](#stateful-service-volumes-empty-dir) - Optional Block<br>Volume containing a temporary directory whose lifetime is the same as a replica of a workload<br>See [Empty Dir](#stateful-service-volumes-empty-dir) below.
+
+<a id="stateful-service-volumes-host-path"></a>&#x2022; [`host_path`](#stateful-service-volumes-host-path) - Optional Block<br>Volume containing a host mapped path into the workload<br>See [Host Path](#stateful-service-volumes-host-path) below.
+
+<a id="stateful-service-volumes-name"></a>&#x2022; [`name`](#stateful-service-volumes-name) - Optional String<br>Name. Name of the volume
+
+#### Stateful Service Volumes Empty Dir
+
+An [`empty_dir`](#stateful-service-volumes-empty-dir) block (within [`stateful_service.volumes`](#stateful-service-volumes)) supports the following:
+
+<a id="mount-0d2125"></a>&#x2022; [`mount`](#mount-0d2125) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-0d2125) below.
+
+<a id="limit-15665a"></a>&#x2022; [`size_limit`](#limit-15665a) - Optional Number<br>Size Limit (in GiB)
+
+#### Stateful Service Volumes Empty Dir Mount
+
+A [`mount`](#mount-0d2125) block (within [`stateful_service.volumes.empty_dir`](#stateful-service-volumes-empty-dir)) supports the following:
+
+<a id="mode-c70f04"></a>&#x2022; [`mode`](#mode-c70f04) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="path-a872b3"></a>&#x2022; [`mount_path`](#path-a872b3) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="path-812c0d"></a>&#x2022; [`sub_path`](#path-812c0d) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
+
+#### Stateful Service Volumes Host Path
+
+A [`host_path`](#stateful-service-volumes-host-path) block (within [`stateful_service.volumes`](#stateful-service-volumes)) supports the following:
+
+<a id="mount-ebf189"></a>&#x2022; [`mount`](#mount-ebf189) - Optional Block<br>Volume mount describes how volume is mounted inside a workload<br>See [Mount](#mount-ebf189) below.
+
+<a id="stateful-service-volumes-host-path-path"></a>&#x2022; [`path`](#stateful-service-volumes-host-path-path) - Optional String<br>Path of the directory on the host
+
+#### Stateful Service Volumes Host Path Mount
+
+A [`mount`](#mount-ebf189) block (within [`stateful_service.volumes.host_path`](#stateful-service-volumes-host-path)) supports the following:
+
+<a id="mode-0cbd14"></a>&#x2022; [`mode`](#mode-0cbd14) - Optional String  Defaults to `VOLUME_MOUNT_READ_ONLY`<br>Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`<br>[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode
+
+<a id="path-4fa8ea"></a>&#x2022; [`mount_path`](#path-4fa8ea) - Optional String<br>Path within the workload container at which the volume should be mounted. Must not contain ':'
+
+<a id="path-acb5bd"></a>&#x2022; [`sub_path`](#path-acb5bd) - Optional String  Defaults to `'' (volume's root)`<br>Path within the volume from which the workload's volume should be mounted
 
 #### Timeouts
 

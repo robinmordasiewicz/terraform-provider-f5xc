@@ -1,5 +1,5 @@
 # Irule Resource Example
-# Manages a Irule resource in F5 Distributed Cloud for desired state for big-ip irule service. configuration.
+# Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
 # Basic Irule configuration
 resource "f5xc_irule" "example" {

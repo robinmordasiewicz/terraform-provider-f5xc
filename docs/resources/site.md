@@ -2,12 +2,12 @@
 page_title: "f5xc_site Resource - terraform-provider-f5xc"
 subcategory: "Uncategorized"
 description: |-
-  Manages virtual site object in given namespace. in F5 Distributed Cloud.
+  Manages a Site resource in F5 Distributed Cloud for secure mesh site specification. configuration.
 ---
 
 # f5xc_site (Resource)
 
-Manages virtual site object in given namespace. in F5 Distributed Cloud.
+Manages a Site resource in F5 Distributed Cloud for secure mesh site specification. configuration.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -15,7 +15,7 @@ Manages virtual site object in given namespace. in F5 Distributed Cloud.
 
 ```terraform
 # Site Resource Example
-# Manages virtual site object in given namespace. in F5 Distributed Cloud.
+# Manages a Site resource in F5 Distributed Cloud for secure mesh site specification. configuration.
 
 # Basic Site configuration
 resource "f5xc_site" "example" {
@@ -32,9 +32,17 @@ resource "f5xc_site" "example" {
   }
 
   # Resource-specific configuration
-  # Type can be used to establish a 'selector reference' from...
-  site_selector {
-    # Configure site_selector settings
+  # [OneOf: blocked_services, default_blocked_services; Defau...
+  blocked_services {
+    # Configure blocked_services settings
+  }
+  # Disable Node Local Services. Blocking or denial configura...
+  blocked_sevice {
+    # Configure blocked_sevice settings
+  }
+  # Enable this option
+  dns {
+    # Configure dns settings
   }
 }
 ```
@@ -58,11 +66,46 @@ resource "f5xc_site" "example" {
 
 ### Spec Argument Reference
 
-<a id="site-selector"></a>&#x2022; [`site_selector`](#site-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects<br>See [Site Selector](#site-selector) below for details.
+<a id="address"></a>&#x2022; [`address`](#address) - Optional String<br>Site's geographical address that can be used to determine its latitude and longitude
 
-<a id="site-type"></a>&#x2022; [`site_type`](#site-type) - Optional String<br>Possible values are `INVALID`, `REGIONAL_EDGE`, `CUSTOMER_EDGE`, `NGINX_ONE`<br>[Enum: INVALID|REGIONAL_EDGE|CUSTOMER_EDGE|NGINX_ONE] Site Type which can either RE or CE Invalid type of site Regional Edge site Customer Edge site
+-> **One of the following:**
+&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable node local services on this site<br>See [Blocked Services](#blocked-services) below for details.
 
-<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
+-> **One of the following:**
+&#x2022; <a id="bond-device-list"></a>[`bond_device_list`](#bond-device-list) - Optional Block<br>Bond Devices List. List of bond devices for this fleet<br>See [Bond Device List](#bond-device-list) below for details.
+
+<a id="coordinates"></a>&#x2022; [`coordinates`](#coordinates) - Optional Block<br>Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
+
+-> **One of the following:**
+&#x2022; <a id="custom-network-config"></a>[`custom_network_config`](#custom-network-config) - Optional Block<br>SmsNetworkConfiguration<br>See [Custom Network Config](#custom-network-config) below for details.
+
+<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Enable this option
+
+<a id="default-network-config"></a>&#x2022; [`default_network_config`](#default-network-config) - Optional Block<br>Enable this option
+
+<a id="kubernetes-upgrade-drain"></a>&#x2022; [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) - Optional Block<br>Specify how worker nodes within a site will be upgraded
+
+-> **One of the following:**
+&#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
+<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Enable this option
+
+<a id="master-node-configuration"></a>&#x2022; [`master_node_configuration`](#master-node-configuration) - Optional Block<br>Configuration of master nodes
+
+<a id="no-bond-devices"></a>&#x2022; [`no_bond_devices`](#no-bond-devices) - Optional Block<br>Enable this option
+
+<a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7
+
+<a id="os"></a>&#x2022; [`os`](#os) - Optional Block<br>Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions
+
+<a id="performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Optimize the site for L3 or L7 traffic processing. L7 optimized is the default
+
+<a id="sw"></a>&#x2022; [`sw`](#sw) - Optional Block<br>Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions
+
+<a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
+
+<a id="volterra-certified-hw"></a>&#x2022; [`volterra_certified_hw`](#volterra-certified-hw) - Optional String<br>Name for generic server certified hardware to form this Secure Mesh site
+
+<a id="worker-nodes"></a>&#x2022; [`worker_nodes`](#worker-nodes) - Optional List<br>Worker Nodes. Names of worker nodes
 
 ### Attributes Reference
 
@@ -72,11 +115,481 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-#### Site Selector
+#### Blocked Services
 
-A [`site_selector`](#site-selector) block supports the following:
+A [`blocked_services`](#blocked-services) block supports the following:
 
-<a id="site-selector-expressions"></a>&#x2022; [`expressions`](#site-selector-expressions) - Optional List<br>Expressions contains the Kubernetes style label expression for selections
+<a id="blocked-services-blocked-sevice"></a>&#x2022; [`blocked_sevice`](#blocked-services-blocked-sevice) - Optional Block<br>Disable Node Local Services. Blocking or denial configuration<br>See [Blocked Sevice](#blocked-services-blocked-sevice) below.
+
+#### Blocked Services Blocked Sevice
+
+A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_services`](#blocked-services)) supports the following:
+
+<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Enable this option
+
+<a id="type-808ec9"></a>&#x2022; [`network_type`](#type-808ec9) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
+
+<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Enable this option
+
+<a id="interface-e57e21"></a>&#x2022; [`web_user_interface`](#interface-e57e21) - Optional Block<br>Enable this option
+
+#### Bond Device List
+
+A [`bond_device_list`](#bond-device-list) block supports the following:
+
+<a id="bond-device-list-bond-devices"></a>&#x2022; [`bond_devices`](#bond-device-list-bond-devices) - Optional Block<br>Bond Devices. List of bond devices<br>See [Bond Devices](#bond-device-list-bond-devices) below.
+
+#### Bond Device List Bond Devices
+
+A [`bond_devices`](#bond-device-list-bond-devices) block (within [`bond_device_list`](#bond-device-list)) supports the following:
+
+<a id="backup-c22794"></a>&#x2022; [`active_backup`](#backup-c22794) - Optional Block<br>Enable this option
+
+<a id="bond-device-list-bond-devices-devices"></a>&#x2022; [`devices`](#bond-device-list-bond-devices-devices) - Optional List<br>Ethernet devices that will make up this bond
+
+<a id="bond-device-list-bond-devices-lacp"></a>&#x2022; [`lacp`](#bond-device-list-bond-devices-lacp) - Optional Block<br>LACP parameters. LACP parameters for the bond device<br>See [Lacp](#bond-device-list-bond-devices-lacp) below.
+
+<a id="interval-0b4c96"></a>&#x2022; [`link_polling_interval`](#interval-0b4c96) - Optional Number<br>Link polling interval in milliseconds
+
+<a id="delay-b1200b"></a>&#x2022; [`link_up_delay`](#delay-b1200b) - Optional Number<br>Milliseconds wait before link is declared up
+
+<a id="bond-device-list-bond-devices-name"></a>&#x2022; [`name`](#bond-device-list-bond-devices-name) - Optional String<br>Name for the Bond. Ex 'bond0'
+
+#### Bond Device List Bond Devices Lacp
+
+A [`lacp`](#bond-device-list-bond-devices-lacp) block (within [`bond_device_list.bond_devices`](#bond-device-list-bond-devices)) supports the following:
+
+<a id="bond-device-list-bond-devices-lacp-rate"></a>&#x2022; [`rate`](#bond-device-list-bond-devices-lacp-rate) - Optional Number<br>Interval in seconds to transmit LACP packets
+
+#### Coordinates
+
+A [`coordinates`](#coordinates) block supports the following:
+
+<a id="coordinates-latitude"></a>&#x2022; [`latitude`](#coordinates-latitude) - Optional Number<br>Latitude. Latitude of the site location
+
+<a id="coordinates-longitude"></a>&#x2022; [`longitude`](#coordinates-longitude) - Optional Number<br>Longitude. Longitude of site location
+
+#### Custom Network Config
+
+A [`custom_network_config`](#custom-network-config) block supports the following:
+
+<a id="policies-c4c984"></a>&#x2022; [`active_enhanced_firewall_policies`](#policies-c4c984) - Optional Block<br>List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#policies-c4c984) below.
+
+<a id="policies-fbbf75"></a>&#x2022; [`active_forward_proxy_policies`](#policies-fbbf75) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#policies-fbbf75) below.
+
+<a id="policies-e8cb6b"></a>&#x2022; [`active_network_policies`](#policies-e8cb6b) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#policies-e8cb6b) below.
+
+<a id="custom-network-config-default-config"></a>&#x2022; [`default_config`](#custom-network-config-default-config) - Optional Block<br>Enable this option
+
+<a id="config-226341"></a>&#x2022; [`default_interface_config`](#config-226341) - Optional Block<br>Enable this option
+
+<a id="config-ac20e7"></a>&#x2022; [`default_sli_config`](#config-ac20e7) - Optional Block<br>Enable this option
+
+<a id="all-1d28e8"></a>&#x2022; [`forward_proxy_allow_all`](#all-1d28e8) - Optional Block<br>Enable this option
+
+<a id="list-452116"></a>&#x2022; [`global_network_list`](#list-452116) - Optional Block<br>Global Network Connection List. List of global network connections<br>See [Global Network List](#list-452116) below.
+
+<a id="custom-network-config-interface-list"></a>&#x2022; [`interface_list`](#custom-network-config-interface-list) - Optional Block<br>Configure network interfaces for this Secure Mesh site<br>See [Interface List](#custom-network-config-interface-list) below.
+
+<a id="custom-network-config-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#custom-network-config-no-forward-proxy) - Optional Block<br>Enable this option
+
+<a id="custom-network-config-no-global-network"></a>&#x2022; [`no_global_network`](#custom-network-config-no-global-network) - Optional Block<br>Enable this option
+
+<a id="custom-network-config-no-network-policy"></a>&#x2022; [`no_network_policy`](#custom-network-config-no-network-policy) - Optional Block<br>Enable this option
+
+<a id="custom-network-config-sli-config"></a>&#x2022; [`sli_config`](#custom-network-config-sli-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [SLI Config](#custom-network-config-sli-config) below.
+
+<a id="custom-network-config-slo-config"></a>&#x2022; [`slo_config`](#custom-network-config-slo-config) - Optional Block<br>Site Local Network Configuration. Site local network configuration<br>See [Slo Config](#custom-network-config-slo-config) below.
+
+<a id="public-ip-5fd49f"></a>&#x2022; [`sm_connection_public_ip`](#public-ip-5fd49f) - Optional Block<br>Enable this option
+
+<a id="pvt-ip-892ce0"></a>&#x2022; [`sm_connection_pvt_ip`](#pvt-ip-892ce0) - Optional Block<br>Enable this option
+
+<a id="timeout-1607a1"></a>&#x2022; [`tunnel_dead_timeout`](#timeout-1607a1) - Optional Number<br>Time interval, in millisec, within which any IPsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used
+
+<a id="custom-network-config-vip-vrrp-mode"></a>&#x2022; [`vip_vrrp_mode`](#custom-network-config-vip-vrrp-mode) - Optional String  Defaults to `VIP_VRRP_INVALID`<br>Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`<br>[Enum: VIP_VRRP_INVALID|VIP_VRRP_ENABLE|VIP_VRRP_DISABLE] VRRP advertisement mode for VIP Invalid VRRP mode
+
+#### Custom Network Config Active Enhanced Firewall Policies
+
+An [`active_enhanced_firewall_policies`](#policies-c4c984) block (within [`custom_network_config`](#custom-network-config)) supports the following:
+
+<a id="policies-d28848"></a>&#x2022; [`enhanced_firewall_policies`](#policies-d28848) - Optional Block<br>Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#policies-d28848) below.
+
+#### Custom Network Config Active Enhanced Firewall Policies Enhanced Firewall Policies
+
+<a id="deep-d2a5f1"></a>Deeply nested **Policies** block collapsed for readability.
+
+#### Custom Network Config Active Forward Proxy Policies
+
+An [`active_forward_proxy_policies`](#policies-fbbf75) block (within [`custom_network_config`](#custom-network-config)) supports the following:
+
+<a id="policies-3c82d8"></a>&#x2022; [`forward_proxy_policies`](#policies-3c82d8) - Optional Block<br>Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#policies-3c82d8) below.
+
+#### Custom Network Config Active Forward Proxy Policies Forward Proxy Policies
+
+<a id="deep-2a9750"></a>Deeply nested **Policies** block collapsed for readability.
+
+#### Custom Network Config Active Network Policies
+
+An [`active_network_policies`](#policies-e8cb6b) block (within [`custom_network_config`](#custom-network-config)) supports the following:
+
+<a id="policies-461fea"></a>&#x2022; [`network_policies`](#policies-461fea) - Optional Block<br>Ordered List of Firewall Policies active for this network firewall<br>See [Network Policies](#policies-461fea) below.
+
+#### Custom Network Config Active Network Policies Network Policies
+
+<a id="deep-6de48c"></a>Deeply nested **Policies** block collapsed for readability.
+
+#### Custom Network Config Global Network List
+
+A [`global_network_list`](#list-452116) block (within [`custom_network_config`](#custom-network-config)) supports the following:
+
+<a id="connections-1d58e6"></a>&#x2022; [`global_network_connections`](#connections-1d58e6) - Optional Block<br>Global network connections<br>See [Global Network Connections](#connections-1d58e6) below.
+
+#### Custom Network Config Global Network List Global Network Connections
+
+<a id="deep-be6603"></a>Deeply nested **Connections** block collapsed for readability.
+
+#### Custom Network Config Global Network List Global Network Connections SLI To Global DR
+
+<a id="deep-9b64ff"></a>Deeply nested **DR** block collapsed for readability.
+
+#### Custom Network Config Global Network List Global Network Connections SLI To Global DR Global Vn
+
+<a id="deep-811bd6"></a>Deeply nested **Vn** block collapsed for readability.
+
+#### Custom Network Config Global Network List Global Network Connections Slo To Global DR
+
+<a id="deep-32aa3f"></a>Deeply nested **DR** block collapsed for readability.
+
+#### Custom Network Config Global Network List Global Network Connections Slo To Global DR Global Vn
+
+<a id="deep-e7b054"></a>Deeply nested **Vn** block collapsed for readability.
+
+#### Custom Network Config Interface List
+
+An [`interface_list`](#custom-network-config-interface-list) block (within [`custom_network_config`](#custom-network-config)) supports the following:
+
+<a id="interfaces-e1b75d"></a>&#x2022; [`interfaces`](#interfaces-e1b75d) - Optional Block<br>Configure network interfaces for this Secure Mesh site<br>See [Interfaces](#interfaces-e1b75d) below.
+
+#### Custom Network Config Interface List Interfaces
+
+An [`interfaces`](#interfaces-e1b75d) block (within [`custom_network_config.interface_list`](#custom-network-config-interface-list)) supports the following:
+
+<a id="disabled-8e6c58"></a>&#x2022; [`dc_cluster_group_connectivity_interface_disabled`](#disabled-8e6c58) - Optional Block<br>Enable this option
+
+<a id="enabled-976919"></a>&#x2022; [`dc_cluster_group_connectivity_interface_enabled`](#enabled-976919) - Optional Block<br>Enable this option
+
+<a id="interface-5e9f68"></a>&#x2022; [`dedicated_interface`](#interface-5e9f68) - Optional Block<br>Dedicated Interface. Dedicated Interface Configuration<br>See [Dedicated Interface](#interface-5e9f68) below.
+
+<a id="interface-a7c718"></a>&#x2022; [`dedicated_management_interface`](#interface-a7c718) - Optional Block<br>Dedicated Management Interface. Dedicated Interface Configuration<br>See [Dedicated Management Interface](#interface-a7c718) below.
+
+<a id="spec-5c5d10"></a>&#x2022; [`description_spec`](#spec-5c5d10) - Optional String<br>Interface Description. Description for this Interface
+
+<a id="interface-40e35f"></a>&#x2022; [`ethernet_interface`](#interface-40e35f) - Optional Block<br>Ethernet Interface. Ethernet Interface Configuration<br>See [Ethernet Interface](#interface-40e35f) below.
+
+<a id="labels-eb9e14"></a>&#x2022; [`labels`](#labels-eb9e14) - Optional Block<br>Add Labels for this Interface, these labels can be used in firewall policy
+
+#### Custom Network Config Interface List Interfaces Dedicated Interface
+
+<a id="deep-e9e120"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Dedicated Management Interface
+
+<a id="deep-fe54f2"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface
+
+<a id="deep-155d07"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server
+
+<a id="deep-c00b69"></a>Deeply nested **Server** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server DHCP Networks
+
+<a id="deep-bf31a8"></a>Deeply nested **Networks** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server DHCP Networks Pools
+
+<a id="deep-904e69"></a>Deeply nested **Pools** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server Interface IP Map
+
+<a id="deep-ff4e59"></a>Deeply nested **Map** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config
+
+<a id="deep-606ad3"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router
+
+<a id="deep-b3aca4"></a>Deeply nested **Router** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router DNS Config
+
+<a id="deep-305937"></a>Deeply nested **Config** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router DNS Config Configured List
+
+<a id="deep-de36d1"></a>Deeply nested **List** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router DNS Config Local DNS
+
+<a id="deep-33d01b"></a>Deeply nested **DNS** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful
+
+<a id="deep-52248e"></a>Deeply nested **Stateful** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks
+
+<a id="deep-e99cbf"></a>Deeply nested **Networks** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks Pools
+
+<a id="deep-fd529f"></a>Deeply nested **Pools** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful Interface IP Map
+
+<a id="deep-15168d"></a>Deeply nested **Map** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface Static IP
+
+<a id="deep-0f1737"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface Static IP Cluster Static IP
+
+<a id="deep-34de63"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface Static IP Node Static IP
+
+<a id="deep-99b20e"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface Static IPv6 Address
+
+<a id="deep-7525c4"></a>Deeply nested **Address** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface Static IPv6 Address Cluster Static IP
+
+<a id="deep-fbb4ee"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Custom Network Config Interface List Interfaces Ethernet Interface Static IPv6 Address Node Static IP
+
+<a id="deep-be6bf5"></a>Deeply nested **IP** block collapsed for readability.
+
+#### Custom Network Config SLI Config
+
+A [`sli_config`](#custom-network-config-sli-config) block (within [`custom_network_config`](#custom-network-config)) supports the following:
+
+<a id="group-c050c8"></a>&#x2022; [`dc_cluster_group`](#group-c050c8) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#group-c050c8) below.
+
+<a id="custom-network-config-sli-config-labels"></a>&#x2022; [`labels`](#custom-network-config-sli-config-labels) - Optional Block<br>Add Labels for this network, these labels can be used in firewall policy
+
+<a id="nameserver-b7700f"></a>&#x2022; [`nameserver`](#nameserver-b7700f) - Optional String<br>Optional DNS V4 server IP to be used for name resolution
+
+<a id="group-4a0820"></a>&#x2022; [`no_dc_cluster_group`](#group-4a0820) - Optional Block<br>Enable this option
+
+<a id="routes-ece448"></a>&#x2022; [`no_static_routes`](#routes-ece448) - Optional Block<br>Enable this option
+
+<a id="routes-ef5627"></a>&#x2022; [`no_v6_static_routes`](#routes-ef5627) - Optional Block<br>Enable this option
+
+<a id="routes-766a73"></a>&#x2022; [`static_routes`](#routes-766a73) - Optional Block<br>Static Routes List. List of static routes<br>See [Static Routes](#routes-766a73) below.
+
+<a id="routes-3c3781"></a>&#x2022; [`static_v6_routes`](#routes-3c3781) - Optional Block<br>Static IPv6 Routes List. List of IPv6 static routes<br>See [Static V6 Routes](#routes-3c3781) below.
+
+<a id="custom-network-config-sli-config-vip"></a>&#x2022; [`vip`](#custom-network-config-sli-config-vip) - Optional String<br>Optional common virtual V4 IP across all nodes to be used as automatic VIP
+
+#### Custom Network Config SLI Config Dc Cluster Group
+
+<a id="deep-d8cb49"></a>Deeply nested **Group** block collapsed for readability.
+
+#### Custom Network Config SLI Config Static Routes
+
+A [`static_routes`](#routes-766a73) block (within [`custom_network_config.sli_config`](#custom-network-config-sli-config)) supports the following:
+
+<a id="routes-75c512"></a>&#x2022; [`static_routes`](#routes-75c512) - Optional Block<br>Static Routes. List of static routes<br>See [Static Routes](#routes-75c512) below.
+
+#### Custom Network Config SLI Config Static Routes Static Routes
+
+<a id="deep-418fe7"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Custom Network Config SLI Config Static Routes Static Routes Node Interface
+
+<a id="deep-845177"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Custom Network Config SLI Config Static Routes Static Routes Node Interface List
+
+<a id="deep-346157"></a>Deeply nested **List** block collapsed for readability.
+
+#### Custom Network Config SLI Config Static Routes Static Routes Node Interface List Interface
+
+<a id="deep-460da1"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Custom Network Config SLI Config Static V6 Routes
+
+<a id="deep-a62933"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Custom Network Config SLI Config Static V6 Routes Static Routes
+
+<a id="deep-b94fe3"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Custom Network Config SLI Config Static V6 Routes Static Routes Node Interface
+
+<a id="deep-85506f"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Custom Network Config SLI Config Static V6 Routes Static Routes Node Interface List
+
+<a id="deep-0405fc"></a>Deeply nested **List** block collapsed for readability.
+
+#### Custom Network Config SLI Config Static V6 Routes Static Routes Node Interface List Interface
+
+<a id="deep-48ce07"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Custom Network Config Slo Config
+
+A [`slo_config`](#custom-network-config-slo-config) block (within [`custom_network_config`](#custom-network-config)) supports the following:
+
+<a id="group-4f2dd5"></a>&#x2022; [`dc_cluster_group`](#group-4f2dd5) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group](#group-4f2dd5) below.
+
+<a id="custom-network-config-slo-config-labels"></a>&#x2022; [`labels`](#custom-network-config-slo-config-labels) - Optional Block<br>Add Labels for this network, these labels can be used in firewall policy
+
+<a id="nameserver-21f3ed"></a>&#x2022; [`nameserver`](#nameserver-21f3ed) - Optional String<br>Optional DNS V4 server IP to be used for name resolution
+
+<a id="group-babd4e"></a>&#x2022; [`no_dc_cluster_group`](#group-babd4e) - Optional Block<br>Enable this option
+
+<a id="routes-9a2e74"></a>&#x2022; [`no_static_routes`](#routes-9a2e74) - Optional Block<br>Enable this option
+
+<a id="routes-5253c9"></a>&#x2022; [`no_v6_static_routes`](#routes-5253c9) - Optional Block<br>Enable this option
+
+<a id="routes-f61105"></a>&#x2022; [`static_routes`](#routes-f61105) - Optional Block<br>Static Routes List. List of static routes<br>See [Static Routes](#routes-f61105) below.
+
+<a id="routes-c7512d"></a>&#x2022; [`static_v6_routes`](#routes-c7512d) - Optional Block<br>Static IPv6 Routes List. List of IPv6 static routes<br>See [Static V6 Routes](#routes-c7512d) below.
+
+<a id="custom-network-config-slo-config-vip"></a>&#x2022; [`vip`](#custom-network-config-slo-config-vip) - Optional String<br>Optional common virtual V4 IP across all nodes to be used as automatic VIP
+
+#### Custom Network Config Slo Config Dc Cluster Group
+
+<a id="deep-e1ed68"></a>Deeply nested **Group** block collapsed for readability.
+
+#### Custom Network Config Slo Config Static Routes
+
+A [`static_routes`](#routes-f61105) block (within [`custom_network_config.slo_config`](#custom-network-config-slo-config)) supports the following:
+
+<a id="routes-5ecd87"></a>&#x2022; [`static_routes`](#routes-5ecd87) - Optional Block<br>Static Routes. List of static routes<br>See [Static Routes](#routes-5ecd87) below.
+
+#### Custom Network Config Slo Config Static Routes Static Routes
+
+<a id="deep-f8a4c7"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Custom Network Config Slo Config Static Routes Static Routes Node Interface
+
+<a id="deep-05f4a8"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Custom Network Config Slo Config Static Routes Static Routes Node Interface List
+
+<a id="deep-2bd0bf"></a>Deeply nested **List** block collapsed for readability.
+
+#### Custom Network Config Slo Config Static Routes Static Routes Node Interface List Interface
+
+<a id="deep-e969af"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Custom Network Config Slo Config Static V6 Routes
+
+<a id="deep-b07bb8"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Custom Network Config Slo Config Static V6 Routes Static Routes
+
+<a id="deep-0e185b"></a>Deeply nested **Routes** block collapsed for readability.
+
+#### Custom Network Config Slo Config Static V6 Routes Static Routes Node Interface
+
+<a id="deep-e2b2f3"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Custom Network Config Slo Config Static V6 Routes Static Routes Node Interface List
+
+<a id="deep-cac034"></a>Deeply nested **List** block collapsed for readability.
+
+#### Custom Network Config Slo Config Static V6 Routes Static Routes Node Interface List Interface
+
+<a id="deep-5ea460"></a>Deeply nested **Interface** block collapsed for readability.
+
+#### Kubernetes Upgrade Drain
+
+A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the following:
+
+<a id="drain-0d0936"></a>&#x2022; [`disable_upgrade_drain`](#drain-0d0936) - Optional Block<br>Enable this option
+
+<a id="drain-7e30d4"></a>&#x2022; [`enable_upgrade_drain`](#drain-7e30d4) - Optional Block<br>Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#drain-7e30d4) below.
+
+#### Kubernetes Upgrade Drain Enable Upgrade Drain
+
+An [`enable_upgrade_drain`](#drain-7e30d4) block (within [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain)) supports the following:
+
+<a id="mode-668699"></a>&#x2022; [`disable_vega_upgrade_mode`](#mode-668699) - Optional Block<br>Enable this option
+
+<a id="count-3aa796"></a>&#x2022; [`drain_max_unavailable_node_count`](#count-3aa796) - Optional Number<br>Node Batch Size Count
+
+<a id="timeout-ac4ee9"></a>&#x2022; [`drain_node_timeout`](#timeout-ac4ee9) - Optional Number<br>Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is
+
+<a id="mode-9c557b"></a>&#x2022; [`enable_vega_upgrade_mode`](#mode-9c557b) - Optional Block<br>Enable this option
+
+#### Log Receiver
+
+A [`log_receiver`](#log-receiver) block supports the following:
+
+<a id="log-receiver-name"></a>&#x2022; [`name`](#log-receiver-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="log-receiver-namespace"></a>&#x2022; [`namespace`](#log-receiver-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="log-receiver-tenant"></a>&#x2022; [`tenant`](#log-receiver-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+
+#### Master Node Configuration
+
+A [`master_node_configuration`](#master-node-configuration) block supports the following:
+
+<a id="master-node-configuration-name"></a>&#x2022; [`name`](#master-node-configuration-name) - Optional String<br>Name. Names of master node
+
+<a id="master-node-configuration-public-ip"></a>&#x2022; [`public_ip`](#master-node-configuration-public-ip) - Optional String<br>IP Address of the master node. This IP will be used when other sites connect via Site Mesh Group
+
+#### Offline Survivability Mode
+
+An [`offline_survivability_mode`](#offline-survivability-mode) block supports the following:
+
+<a id="mode-565021"></a>&#x2022; [`enable_offline_survivability_mode`](#mode-565021) - Optional Block<br>Enable this option
+
+<a id="mode-02f0c8"></a>&#x2022; [`no_offline_survivability_mode`](#mode-02f0c8) - Optional Block<br>Enable this option
+
+#### OS
+
+An [`os`](#os) block supports the following:
+
+<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Enable this option
+
+<a id="os-operating-system-version"></a>&#x2022; [`operating_system_version`](#os-operating-system-version) - Optional String<br>Specify a OS version to be used e.g. 9.2024.6
+
+#### Performance Enhancement Mode
+
+A [`performance_enhancement_mode`](#performance-enhancement-mode) block supports the following:
+
+<a id="enhanced-31b8ac"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-31b8ac) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-31b8ac) below.
+
+<a id="enhanced-38f174"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-38f174) - Optional Block<br>Enable this option
+
+#### Performance Enhancement Mode Perf Mode L3 Enhanced
+
+A [`perf_mode_l3_enhanced`](#enhanced-31b8ac) block (within [`performance_enhancement_mode`](#performance-enhancement-mode)) supports the following:
+
+<a id="jumbo-7ba5b8"></a>&#x2022; [`jumbo`](#jumbo-7ba5b8) - Optional Block<br>Enable this option
+
+<a id="jumbo-95338e"></a>&#x2022; [`no_jumbo`](#jumbo-95338e) - Optional Block<br>Enable this option
+
+#### Sw
+
+A [`sw`](#sw) block supports the following:
+
+<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Enable this option
+
+<a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>Specify a F5XC Software Version to be used e.g. Crt-20210329-1002
 
 #### Timeouts
 

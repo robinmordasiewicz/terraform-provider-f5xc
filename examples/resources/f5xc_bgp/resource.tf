@@ -1,5 +1,5 @@
 # BGP Resource Example
-# Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages a BGP resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers. configuration.
 
 # Basic BGP configuration
 resource "f5xc_bgp" "example" {

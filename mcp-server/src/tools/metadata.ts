@@ -1387,6 +1387,21 @@ function getExampleForResource(
     return getAppFirewallExample(pattern);
   }
 
+  // TCP Load Balancer example
+  if (resource === 'tcp_loadbalancer') {
+    return getTcpLoadbalancerExample(pattern);
+  }
+
+  // UDP Load Balancer example
+  if (resource === 'udp_loadbalancer') {
+    return getUdpLoadbalancerExample(pattern);
+  }
+
+  // Certificate example
+  if (resource === 'certificate') {
+    return getCertificateExample(pattern);
+  }
+
   // Generic fallback - generate from syntax guide
   const syntaxGuide = generateTerraformSyntaxGuide(resource);
   if (syntaxGuide) {
@@ -1435,6 +1450,183 @@ function getExampleForResource(
   }
 
   return null;
+}
+
+function getTcpLoadbalancerExample(pattern: string): { markdown: string; terraform: string; description: string } {
+  const baseExample = `resource "f5xc_tcp_loadbalancer" "example" {
+  name      = "my-tcp-lb"
+  namespace = "default"
+
+  # DNS configuration
+  dns_volterra_managed = true
+
+  # Origin pool reference
+  origin_pools_weights {
+    pool {
+      name      = "my-origin-pool"
+      namespace = "default"
+    }
+    weight   = 1
+    priority = 1
+  }
+
+  # Listen port
+  listen_port = 8080
+
+  # Advertise configuration - use empty block syntax
+  advertise_on_public_default_vip {}
+}`;
+
+  if (pattern === 'basic') {
+    return {
+      description: 'Basic TCP load balancer configuration with origin pool',
+      terraform: baseExample,
+      markdown: [
+        '# Complete Example: TCP Load Balancer (Basic Pattern)',
+        '',
+        'Creates a TCP load balancer in F5 Distributed Cloud.',
+        '',
+        '## Required Resources',
+        '',
+        '```hcl',
+        baseExample,
+        '```',
+        '',
+        '## Key Syntax Notes',
+        '',
+        '1. **origin_pools_weights**: References existing origin pool',
+        '2. **advertise_on_public_default_vip**: Use empty block syntax {}',
+        '3. **dns_volterra_managed**: Enable F5XC-managed DNS',
+        '4. **listen_port**: TCP port for load balancer to listen on',
+        '',
+        '## Important Notes',
+        '',
+        '- Origin pool must exist before creating TCP load balancer',
+        '- Use weight and priority for traffic distribution',
+        '- Empty block syntax for advertise configuration choices',
+      ].join('\n'),
+    };
+  }
+
+  // Fallback
+  return {
+    description: 'TCP load balancer example',
+    terraform: baseExample,
+    markdown: `# TCP Load Balancer Example\n\n\`\`\`hcl\n${baseExample}\n\`\`\``,
+  };
+}
+
+function getUdpLoadbalancerExample(pattern: string): { markdown: string; terraform: string; description: string } {
+  const baseExample = `resource "f5xc_udp_loadbalancer" "example" {
+  name      = "my-udp-lb"
+  namespace = "default"
+
+  # DNS configuration
+  dns_volterra_managed = true
+
+  # Origin pool reference
+  origin_pools_weights {
+    pool {
+      name      = "my-origin-pool"
+      namespace = "default"
+    }
+    weight   = 1
+    priority = 1
+  }
+
+  # Port range (single port or range like "53" or "5000-5010")
+  port_ranges = "53"
+
+  # Advertise configuration - use empty block syntax
+  advertise_on_public_default_vip {}
+}`;
+
+  if (pattern === 'basic') {
+    return {
+      description: 'Basic UDP load balancer configuration with origin pool',
+      terraform: baseExample,
+      markdown: [
+        '# Complete Example: UDP Load Balancer (Basic Pattern)',
+        '',
+        'Creates a UDP load balancer in F5 Distributed Cloud.',
+        '',
+        '## Required Resources',
+        '',
+        '```hcl',
+        baseExample,
+        '```',
+        '',
+        '## Key Syntax Notes',
+        '',
+        '1. **origin_pools_weights**: References existing origin pool',
+        '2. **advertise_on_public_default_vip**: Use empty block syntax {}',
+        '3. **dns_volterra_managed**: Enable F5XC-managed DNS',
+        '4. **port_ranges**: Single port ("53") or range ("5000-5010")',
+        '',
+        '## Important Notes',
+        '',
+        '- Origin pool must exist before creating UDP load balancer',
+        '- Use weight and priority for traffic distribution',
+        '- Empty block syntax for advertise configuration choices',
+        '- Port ranges support single port or range format',
+      ].join('\n'),
+    };
+  }
+
+  // Fallback
+  return {
+    description: 'UDP load balancer example',
+    terraform: baseExample,
+    markdown: `# UDP Load Balancer Example\n\n\`\`\`hcl\n${baseExample}\n\`\`\``,
+  };
+}
+
+function getCertificateExample(pattern: string): { markdown: string; terraform: string; description: string } {
+  const baseExample = `resource "f5xc_certificate" "example" {
+  name      = "my-certificate"
+  namespace = "default"
+
+  # Certificate data in PEM format (replace with actual certificate)
+  certificate_url = "string:///-----BEGIN CERTIFICATE-----\\nMIIDdzCCAl+gAwIBAgIEAgAAuTANBgkqhkiG9w0BAQUFADBaMQswCQYDVQQGEwJJRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJlclRydXN0MSIwIAYDVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTAwMDUxMjE4NDYwMFoXDTI1MDUxMjIzNTkwMFowWjELMAkGA1UEBhMCSUUxEjAQBgNVBAoTCUJhbHRpbW9yZTETMBEGA1UECxMKQ3liZXJUcnVzdDEiMCAGA1UEAxMZQmFsdGltb3JlIEN5YmVyVHJ1c3QgUm9vdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKMEuyKrmD1X6CZymrV51Cni4eiVgLGw41uOKymaZN+hXe2wCQVt2yguzmKiYv60iNoS6zjrIZ3AQSsBUnuId9Mcj8e6uYi1agnnc+gRQKfRzMpijS3ljwumUNKoUMMo6vWrJYeKmpYcqWe4PwzV9\/lSEy\/CG9VwcPCPwBLKBsua4dnKM3p31vjsufFoREJIE9LAwqSuXmD+tqYF\/LTdB1kC1FkYmGP1pWPgkAx9XbIGevOF6uvUA65ehD5f\/xXtabz5OTZydc93Uk3zyZAsuT3lySNTPx8kmCFcB5kpvcY67Oduhjprl3RjM71oGDHweI12v\/yejl0qhqdNkNwnGjkCAwEAAaNFMEMwHQYDVR0OBBYEFOWdWTCCR1jMrPoIVDaGezq1BE3wMBIGA1UdEwEB\/wQIMAYBAf8CAQMwDgYDVR0PAQH\/BAQDAgEGMA0GCSqGSIb3DQEBBQUAA4IBAQCFDF2O5G9RaEIFoN27TyclhAO992T9Ldcw46QQF+vaKSm2eT929hkTI7gQCvlYpNRhcL0EYWoSihfVCr3FvDB81ukMJY2GQE\/szKN+OMY3EU\/t3WgxjkzSswF07r51XgdIGn9w\/xZchMB5hbgF\/X++ZRGjD8ACtPhSNzkE1akxehi\/oCr0Epn3o0WC4zxe9Z2etciefC7IpJ5OCBRLbf1wbWsaY71k5h+3zvDyny67G7fyUIhzksLi4xaNmjICq44Y3ekQEe5+NauQrz4wlHrQMz2nZQ\/1\/I6eYs9HRCwBXbsdtTLSR9I4LtD+gdwyah617jzV\/OeBHRnDJELqYzmp\\n-----END CERTIFICATE-----"
+}`;
+
+  if (pattern === 'basic') {
+    return {
+      description: 'Basic certificate configuration with TLS certificate and private key',
+      terraform: baseExample,
+      markdown: [
+        '# Complete Example: Certificate (Basic Pattern)',
+        '',
+        'Creates a TLS certificate resource in F5 Distributed Cloud.',
+        '',
+        '## Required Resources',
+        '',
+        '```hcl',
+        baseExample,
+        '```',
+        '',
+        '## Key Syntax Notes',
+        '',
+        '1. **certificate_url**: PEM-encoded certificate with string:/// prefix',
+        '2. **private_key**: Nested block with blindfold_secret_info_internal',
+        '3. **location**: PEM-encoded private key with string:/// prefix',
+        '',
+        '## Important Notes',
+        '',
+        '- Replace MIICert... with your actual certificate content',
+        '- Replace MIIEprivate... with your actual private key content',
+        '- PEM format must include BEGIN/END markers',
+        '- Use \\n for line breaks in the string',
+      ].join('\n'),
+    };
+  }
+
+  // Fallback
+  return {
+    description: 'Certificate example',
+    terraform: baseExample,
+    markdown: `# Certificate Example\n\n\`\`\`hcl\n${baseExample}\n\`\`\``,
+  };
 }
 
 function getHttpLoadbalancerExample(pattern: string): { markdown: string; terraform: string; description: string } {

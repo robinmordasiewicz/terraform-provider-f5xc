@@ -93,3 +93,82 @@ export function getRealCredentials(): { apiUrl: string; apiToken: string } | nul
     apiToken: process.env.F5XC_TEST_API_TOKEN!,
   };
 }
+
+// =============================================================================
+// E2E TEST HELPERS
+// =============================================================================
+
+/**
+ * Check if E2E tests should run
+ * Requires credentials and optionally Terraform CLI
+ */
+export function shouldRunE2ETests(): boolean {
+  return hasRealCredentials();
+}
+
+/**
+ * Get test namespace prefix for E2E tests
+ * Default: 'mcp-e2e-test'
+ */
+export function getTestNamespacePrefix(): string {
+  return process.env.F5XC_TEST_NAMESPACE_PREFIX || 'mcp-e2e-test';
+}
+
+/**
+ * Check if test cleanup should be performed
+ * Default: true
+ */
+export function shouldCleanup(): boolean {
+  const cleanup = process.env.F5XC_TEST_CLEANUP;
+  if (cleanup === undefined) return true;
+  return cleanup.toLowerCase() !== 'false';
+}
+
+/**
+ * Generate a unique test resource name
+ */
+export function generateTestResourceName(prefix?: string): string {
+  const basePrefix = prefix || getTestNamespacePrefix();
+  const timestamp = Date.now();
+  const random = Math.random().toString(36).substring(2, 8);
+  return `${basePrefix}-${timestamp}-${random}`;
+}
+
+/**
+ * Setup environment for E2E testing
+ * Uses real credentials from F5XC_TEST_* variables
+ */
+export function setupE2ETestEnv(): {
+  apiUrl: string;
+  apiToken: string;
+  namespace: string;
+} | null {
+  const credentials = getRealCredentials();
+  if (!credentials) {
+    return null;
+  }
+
+  // Set up environment for Terraform
+  process.env.F5XC_API_URL = credentials.apiUrl;
+  process.env.F5XC_API_TOKEN = credentials.apiToken;
+
+  // Generate unique namespace for this test run
+  const namespace = generateTestResourceName();
+
+  return {
+    ...credentials,
+    namespace,
+  };
+}
+
+/**
+ * Skip message for E2E tests when credentials are not available
+ */
+export const E2E_SKIP_MESSAGE =
+  'E2E tests require F5XC_TEST_API_URL and F5XC_TEST_API_TOKEN environment variables';
+
+/**
+ * Skip message for Terraform tests when CLI is not available
+ */
+export const TERRAFORM_SKIP_MESSAGE =
+  'Terraform CLI is not available - skipping Terraform-based tests';

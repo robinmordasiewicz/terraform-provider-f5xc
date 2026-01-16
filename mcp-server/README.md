@@ -70,7 +70,7 @@ docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:v1.0.0
 docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:main-20250906-abc123d
 ```
 
-**Available tags:** 
+**Available tags:**
 - **Releases**: `latest`, `v1.0.0`, `v1.1.0`, etc.
 - **Continuous**: `main` (latest main branch build)
 - **Development**: `main-<date>-<sha>` (specific commit builds)

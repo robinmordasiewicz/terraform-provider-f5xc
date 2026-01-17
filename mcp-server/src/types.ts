@@ -149,3 +149,103 @@ export enum ResponseFormat {
   MARKDOWN = 'markdown',
   JSON = 'json'
 }
+
+// =============================================================================
+// Operation Metadata Types (v2.0.33 extensions)
+// =============================================================================
+
+/**
+ * Danger level classification for operations
+ */
+export type DangerLevel = 'low' | 'medium' | 'high' | 'critical';
+
+/**
+ * Collection of operation metadata for all resources
+ */
+export interface OperationsMetadataCollection {
+  generated_at: string;
+  version: string;
+  resources: Record<string, ResourceOperationInfo>;
+}
+
+/**
+ * Operation metadata for a single resource
+ */
+export interface ResourceOperationInfo {
+  resource: string;
+  base_path?: string;
+  operations: Record<string, OperationMetadata>;  // key: "create" | "read" | "update" | "delete" | "list"
+  best_practices?: BestPracticesInfo;
+  guided_workflows?: GuidedWorkflowInfo[];
+}
+
+/**
+ * Operation-level metadata from x-f5xc-* extensions
+ */
+export interface OperationMetadata {
+  method: string;  // HTTP method (POST, GET, PUT, DELETE)
+  path: string;    // API path
+  danger_level?: DangerLevel;
+  discovered_response_time?: ResponseTimeInfo;
+  required_fields?: string[];
+  confirmation_required?: boolean;
+  side_effects?: SideEffectsInfo;
+  purpose?: string;
+}
+
+/**
+ * Response time metrics from API discovery
+ */
+export interface ResponseTimeInfo {
+  p50_ms: number;
+  p95_ms: number;
+  p99_ms: number;
+  sample_count: number;
+  source: 'measured' | 'estimate';
+}
+
+/**
+ * Side effects of an operation
+ */
+export interface SideEffectsInfo {
+  creates?: string[];
+  modifies?: string[];
+  deletes?: string[];
+}
+
+/**
+ * Best practices information
+ */
+export interface BestPracticesInfo {
+  common_errors?: CommonErrorInfo[];
+}
+
+/**
+ * Common error and its resolution
+ */
+export interface CommonErrorInfo {
+  code: number;
+  message: string;
+  resolution: string;
+  prevention?: string;
+}
+
+/**
+ * Guided workflow for resource creation
+ */
+export interface GuidedWorkflowInfo {
+  name: string;
+  description: string;
+  steps: WorkflowStepInfo[];
+}
+
+/**
+ * Step in a guided workflow
+ */
+export interface WorkflowStepInfo {
+  order: number;
+  action: string;
+  description?: string;
+  fields?: string[];
+  validation?: string;
+}

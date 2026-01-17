@@ -401,6 +401,23 @@ const serverDefaultIndicator = "⚙️ **Server Default**"
 // serverDefaultMarker is the text pattern added by generate-all-schemas.go to identify server default fields
 const serverDefaultMarker = "Server applies default when omitted."
 
+// dangerLevelIndicators maps operation danger levels to visual indicators
+// Used for marking resource operations that require extra caution
+var dangerLevelIndicators = map[string]string{
+	"low":      "",     // No indicator for low risk
+	"medium":   "⚠️",   // Warning for medium risk
+	"high":     "🔶",   // Orange diamond for high risk
+	"critical": "🔴",   // Red circle for critical risk
+}
+
+// formatDangerLevelIndicator returns the visual indicator for a danger level
+func formatDangerLevelIndicator(dangerLevel string) string {
+	if indicator, ok := dangerLevelIndicators[dangerLevel]; ok {
+		return indicator
+	}
+	return ""
+}
+
 // formatServerDefaultNote transforms the server default marker in descriptions into a visual indicator.
 // The marker "Server applies default when omitted." is replaced with a styled badge.
 func formatServerDefaultNote(description string) string {

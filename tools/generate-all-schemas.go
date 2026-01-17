@@ -582,6 +582,9 @@ func generateResourceFromSchema(resourceName string, schemaName string, schema *
 
 		// Collect metadata for MCP server
 		collectResourceMetadata(resource, category, requiresTier)
+
+		// Collect operation-level metadata from spec (v2.0.33 extensions)
+		collectOperationMetadata(resourceName, apiPath, specFile)
 	}
 
 	fmt.Printf("✅ %s: %d attrs, %d blocks\n", resourceName, attrCount, blockCount)
@@ -2068,6 +2071,19 @@ func writeMetadataFiles() error {
 	}
 	fmt.Printf("📝 Wrote validation patterns to %s\n", validationPatternsPath)
 
+	// Write operations-metadata.json (v2.0.33 operation-level metadata)
+	operationsMetadataCollection.GeneratedAt = time.Now().UTC().Format(time.RFC3339)
+	operationsMetadataCollection.Version = "1.0.0"
+	operationsMetadataPath := filepath.Join(metadataDir, "operations-metadata.json")
+	operationsMetadataJSON, err := json.MarshalIndent(operationsMetadataCollection, "", "  ")
+	if err != nil {
+		return fmt.Errorf("failed to marshal operations metadata: %w", err)
+	}
+	if err := os.WriteFile(operationsMetadataPath, operationsMetadataJSON, 0644); err != nil {
+		return fmt.Errorf("failed to write operations metadata: %w", err)
+	}
+	fmt.Printf("📝 Wrote operations metadata for %d resources to %s\n", len(operationsMetadataCollection.Resources), operationsMetadataPath)
+
 	return nil
 }
 
@@ -2128,6 +2144,412 @@ func getValidationPatterns() *ValidationPatterns {
 			},
 		},
 	}
+}
+
+// =============================================================================
+// Operation Metadata Types (v2.0.33 extensions)
+// =============================================================================
+
+// OperationsMetadataCollection holds all operation-level metadata for JSON output
+type OperationsMetadataCollection struct {
+	GeneratedAt string                            `json:"generated_at"`
+	Version     string                            `json:"version"`
+	Resources   map[string]*ResourceOperationInfo `json:"resources"`
+}
+
+// ResourceOperationInfo holds operation metadata for a single resource
+type ResourceOperationInfo struct {
+	Resource      string                       `json:"resource"`
+	BasePath      string                       `json:"base_path,omitempty"`
+	Operations    map[string]*OperationMetadata `json:"operations"`
+	BestPractices *BestPracticesInfo           `json:"best_practices,omitempty"`
+	Workflows     []*GuidedWorkflowInfo        `json:"guided_workflows,omitempty"`
+}
+
+// OperationMetadata holds metadata for a single CRUD operation
+type OperationMetadata struct {
+	Method               string            `json:"method"`
+	Path                 string            `json:"path"`
+	DangerLevel          string            `json:"danger_level,omitempty"`
+	DiscoveredRespTime   *ResponseTimeInfo `json:"discovered_response_time,omitempty"`
+	RequiredFields       []string          `json:"required_fields,omitempty"`
+	ConfirmationRequired bool              `json:"confirmation_required,omitempty"`
+	SideEffects          *SideEffectsInfo  `json:"side_effects,omitempty"`
+	Purpose              string            `json:"purpose,omitempty"`
+}
+
+// ResponseTimeInfo holds response time metrics from API discovery
+type ResponseTimeInfo struct {
+	P50Ms       int    `json:"p50_ms"`
+	P95Ms       int    `json:"p95_ms"`
+	P99Ms       int    `json:"p99_ms"`
+	SampleCount int    `json:"sample_count"`
+	Source      string `json:"source"` // "measured" or "estimate"
+}
+
+// SideEffectsInfo describes what resources are affected by an operation
+type SideEffectsInfo struct {
+	Creates []string `json:"creates,omitempty"`
+	Modifies []string `json:"modifies,omitempty"`
+	Deletes []string `json:"deletes,omitempty"`
+}
+
+// BestPracticesInfo holds best practices for a resource
+type BestPracticesInfo struct {
+	CommonErrors []*CommonErrorInfo `json:"common_errors,omitempty"`
+}
+
+// CommonErrorInfo describes a common error and its resolution
+type CommonErrorInfo struct {
+	Code       int    `json:"code"`
+	Message    string `json:"message"`
+	Resolution string `json:"resolution"`
+	Prevention string `json:"prevention,omitempty"`
+}
+
+// GuidedWorkflowInfo describes a step-by-step workflow
+type GuidedWorkflowInfo struct {
+	Name        string              `json:"name"`
+	Description string              `json:"description"`
+	Steps       []*WorkflowStepInfo `json:"steps"`
+}
+
+// WorkflowStepInfo describes a single step in a workflow
+type WorkflowStepInfo struct {
+	Order       int      `json:"order"`
+	Action      string   `json:"action"`
+	Description string   `json:"description,omitempty"`
+	Fields      []string `json:"fields,omitempty"`
+	Validation  string   `json:"validation,omitempty"`
+}
+
+// Global collection for operation metadata
+var operationsMetadataCollection = &OperationsMetadataCollection{
+	Resources: make(map[string]*ResourceOperationInfo),
+}
+
+// collectOperationMetadata extracts operation-level metadata from a spec file for a resource
+func collectOperationMetadata(resourceName string, apiPath string, specFile string) {
+	data, err := os.ReadFile(specFile)
+	if err != nil {
+		return
+	}
+
+	var spec map[string]interface{}
+	if err := json.Unmarshal(data, &spec); err != nil {
+		return
+	}
+
+	paths, ok := spec["paths"].(map[string]interface{})
+	if !ok {
+		return
+	}
+
+	resourceInfo := &ResourceOperationInfo{
+		Resource:   resourceName,
+		BasePath:   apiPath,
+		Operations: make(map[string]*OperationMetadata),
+	}
+
+	// Extract operations from paths that match this resource
+	resourcePlural := resourceName + "s"
+	for pathKey, pathValue := range paths {
+		if !strings.Contains(pathKey, resourcePlural) && !strings.Contains(pathKey, resourceName) {
+			continue
+		}
+
+		if _, ok := pathValue.(map[string]interface{}); !ok {
+			continue
+		}
+
+		pathMethods := pathValue.(map[string]interface{})
+		for method, methodValue := range pathMethods {
+			if _, ok := methodValue.(map[string]interface{}); !ok {
+				continue
+			}
+
+			opType := mapMethodToOperationType(method, pathKey)
+			if opType == "" {
+				continue
+			}
+
+			opMeta := extractOperationMetadataFromRaw(methodValue.(map[string]interface{}), method, pathKey, opType, resourceName)
+			if opMeta != nil {
+				resourceInfo.Operations[opType] = opMeta
+			}
+		}
+	}
+
+	// Extract best practices and guided workflows from spec-level extensions
+	if bp := extractBestPracticesFromRaw(spec); bp != nil {
+		resourceInfo.BestPractices = bp
+	}
+	if workflows := extractGuidedWorkflowsFromRaw(spec); len(workflows) > 0 {
+		resourceInfo.Workflows = workflows
+	}
+
+	if len(resourceInfo.Operations) > 0 {
+		operationsMetadataCollection.Resources[resourceName] = resourceInfo
+	}
+}
+
+// mapMethodToOperationType maps HTTP method and path to CRUD operation type
+func mapMethodToOperationType(method string, pathKey string) string {
+	method = strings.ToUpper(method)
+
+	// Determine if this is a collection or item operation based on path pattern
+	isItemPath := strings.Contains(pathKey, "/{name}") || strings.HasSuffix(pathKey, "}") && !strings.HasSuffix(pathKey, "s}")
+
+	switch method {
+	case "POST":
+		return "create"
+	case "GET":
+		if isItemPath {
+			return "read"
+		}
+		return "list"
+	case "PUT":
+		return "update"
+	case "DELETE":
+		return "delete"
+	}
+	return ""
+}
+
+// extractOperationMetadataFromRaw extracts metadata from a raw operation map
+func extractOperationMetadataFromRaw(op map[string]interface{}, method string, path string, opType string, resourceName string) *OperationMetadata {
+	meta := &OperationMetadata{
+		Method: strings.ToUpper(method),
+		Path:   path,
+	}
+
+	// Extract x-f5xc-danger-level
+	if dl, ok := op["x-f5xc-danger-level"].(string); ok && dl != "" {
+		meta.DangerLevel = dl
+	} else {
+		// Assign default danger levels based on operation type
+		switch opType {
+		case "create":
+			meta.DangerLevel = "medium"
+		case "update":
+			meta.DangerLevel = "medium"
+		case "delete":
+			meta.DangerLevel = "high"
+		default:
+			meta.DangerLevel = "low"
+		}
+	}
+
+	// Extract x-f5xc-discovered-response-time
+	if rt, ok := op["x-f5xc-discovered-response-time"].(map[string]interface{}); ok {
+		meta.DiscoveredRespTime = &ResponseTimeInfo{
+			P50Ms:       getIntFromInterface(rt["p50_ms"]),
+			P95Ms:       getIntFromInterface(rt["p95_ms"]),
+			P99Ms:       getIntFromInterface(rt["p99_ms"]),
+			SampleCount: getIntFromInterface(rt["sample_count"]),
+			Source:      getStringFromInterface(rt["source"]),
+		}
+	} else {
+		// Assign estimated response times based on operation type
+		switch opType {
+		case "create":
+			meta.DiscoveredRespTime = &ResponseTimeInfo{P50Ms: 1000, P95Ms: 3000, P99Ms: 8000, Source: "estimate"}
+		case "update":
+			meta.DiscoveredRespTime = &ResponseTimeInfo{P50Ms: 800, P95Ms: 2500, P99Ms: 6000, Source: "estimate"}
+		case "delete":
+			meta.DiscoveredRespTime = &ResponseTimeInfo{P50Ms: 500, P95Ms: 1500, P99Ms: 4000, Source: "estimate"}
+		default:
+			meta.DiscoveredRespTime = &ResponseTimeInfo{P50Ms: 200, P95Ms: 800, P99Ms: 2000, Source: "estimate"}
+		}
+	}
+
+	// Extract x-f5xc-required-fields
+	if rf, ok := op["x-f5xc-required-fields"].([]interface{}); ok {
+		for _, f := range rf {
+			if s, ok := f.(string); ok {
+				meta.RequiredFields = append(meta.RequiredFields, s)
+			}
+		}
+	} else {
+		// Derive required fields from path parameters
+		params := extractPathParams(path)
+		for _, p := range params {
+			meta.RequiredFields = append(meta.RequiredFields, "path."+p)
+		}
+		if opType == "create" {
+			meta.RequiredFields = append(meta.RequiredFields, "metadata.name", "metadata.namespace")
+		}
+	}
+
+	// Extract x-f5xc-confirmation-required
+	if cr, ok := op["x-f5xc-confirmation-required"].(bool); ok {
+		meta.ConfirmationRequired = cr
+	} else if opType == "delete" {
+		meta.ConfirmationRequired = true
+	}
+
+	// Extract x-f5xc-side-effects
+	if se, ok := op["x-f5xc-side-effects"].(map[string]interface{}); ok {
+		meta.SideEffects = &SideEffectsInfo{}
+		if creates, ok := se["creates"].([]interface{}); ok {
+			for _, c := range creates {
+				if s, ok := c.(string); ok {
+					meta.SideEffects.Creates = append(meta.SideEffects.Creates, s)
+				}
+			}
+		}
+		if modifies, ok := se["modifies"].([]interface{}); ok {
+			for _, m := range modifies {
+				if s, ok := m.(string); ok {
+					meta.SideEffects.Modifies = append(meta.SideEffects.Modifies, s)
+				}
+			}
+		}
+		if deletes, ok := se["deletes"].([]interface{}); ok {
+			for _, d := range deletes {
+				if s, ok := d.(string); ok {
+					meta.SideEffects.Deletes = append(meta.SideEffects.Deletes, s)
+				}
+			}
+		}
+	} else {
+		// Assign default side effects based on operation type
+		switch opType {
+		case "create":
+			meta.SideEffects = &SideEffectsInfo{Creates: []string{resourceName}}
+		case "delete":
+			meta.SideEffects = &SideEffectsInfo{Deletes: []string{resourceName, "contained_resources"}}
+		}
+	}
+
+	// Extract purpose from summary or description
+	if summary, ok := op["summary"].(string); ok && summary != "" {
+		meta.Purpose = summary
+	} else if desc, ok := op["description"].(string); ok && desc != "" {
+		if len(desc) > 100 {
+			meta.Purpose = desc[:100] + "..."
+		} else {
+			meta.Purpose = desc
+		}
+	} else {
+		// Default purpose based on operation type
+		switch opType {
+		case "create":
+			meta.Purpose = "Resource creation operation"
+		case "read":
+			meta.Purpose = "Resource retrieval operation"
+		case "update":
+			meta.Purpose = "Resource modification operation"
+		case "delete":
+			meta.Purpose = "Resource deletion operation"
+		case "list":
+			meta.Purpose = "Resource retrieval operation"
+		}
+	}
+
+	return meta
+}
+
+// extractPathParams extracts parameter names from a path template
+func extractPathParams(path string) []string {
+	var params []string
+	re := regexp.MustCompile(`\{([^}]+)\}`)
+	matches := re.FindAllStringSubmatch(path, -1)
+	for _, m := range matches {
+		if len(m) > 1 {
+			params = append(params, m[1])
+		}
+	}
+	return params
+}
+
+// extractBestPracticesFromRaw extracts best practices from spec-level extensions
+func extractBestPracticesFromRaw(spec map[string]interface{}) *BestPracticesInfo {
+	bp, ok := spec["x-f5xc-best-practices"].(map[string]interface{})
+	if !ok {
+		return nil
+	}
+
+	result := &BestPracticesInfo{}
+	if errors, ok := bp["common_errors"].([]interface{}); ok {
+		for _, e := range errors {
+			if errMap, ok := e.(map[string]interface{}); ok {
+				errInfo := &CommonErrorInfo{
+					Code:       getIntFromInterface(errMap["code"]),
+					Message:    getStringFromInterface(errMap["message"]),
+					Resolution: getStringFromInterface(errMap["resolution"]),
+					Prevention: getStringFromInterface(errMap["prevention"]),
+				}
+				result.CommonErrors = append(result.CommonErrors, errInfo)
+			}
+		}
+	}
+
+	if len(result.CommonErrors) == 0 {
+		return nil
+	}
+	return result
+}
+
+// extractGuidedWorkflowsFromRaw extracts guided workflows from spec-level extensions
+func extractGuidedWorkflowsFromRaw(spec map[string]interface{}) []*GuidedWorkflowInfo {
+	workflows, ok := spec["x-f5xc-guided-workflows"].([]interface{})
+	if !ok {
+		return nil
+	}
+
+	var result []*GuidedWorkflowInfo
+	for _, w := range workflows {
+		if wMap, ok := w.(map[string]interface{}); ok {
+			workflow := &GuidedWorkflowInfo{
+				Name:        getStringFromInterface(wMap["name"]),
+				Description: getStringFromInterface(wMap["description"]),
+			}
+			if steps, ok := wMap["steps"].([]interface{}); ok {
+				for _, s := range steps {
+					if sMap, ok := s.(map[string]interface{}); ok {
+						step := &WorkflowStepInfo{
+							Order:       getIntFromInterface(sMap["order"]),
+							Action:      getStringFromInterface(sMap["action"]),
+							Description: getStringFromInterface(sMap["description"]),
+							Validation:  getStringFromInterface(sMap["validation"]),
+						}
+						if fields, ok := sMap["fields"].([]interface{}); ok {
+							for _, f := range fields {
+								if fs, ok := f.(string); ok {
+									step.Fields = append(step.Fields, fs)
+								}
+							}
+						}
+						workflow.Steps = append(workflow.Steps, step)
+					}
+				}
+			}
+			result = append(result, workflow)
+		}
+	}
+	return result
+}
+
+// getIntFromInterface safely extracts an int from an interface{}
+func getIntFromInterface(v interface{}) int {
+	switch val := v.(type) {
+	case int:
+		return val
+	case int64:
+		return int(val)
+	case float64:
+		return int(val)
+	}
+	return 0
+}
+
+// getStringFromInterface safely extracts a string from an interface{}
+func getStringFromInterface(v interface{}) string {
+	if s, ok := v.(string); ok {
+		return s
+	}
+	return ""
 }
 
 // addOneOfConstraint adds a OneOf constraint hint to the description with recommended default

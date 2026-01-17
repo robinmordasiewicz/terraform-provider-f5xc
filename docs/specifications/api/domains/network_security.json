@@ -3,7 +3,7 @@
   "info": {
     "title": "Network Security",
     "description": "Perimeter defense through firewall configurations, address translation, and ingress/egress policies. Traffic steering directs packets according to defined criteria including origin, target, and service type. Segment boundaries create workload isolation zones while HTTP intermediaries manage client requests to external destinations. Port mappings employ static and dynamic address pools for flexible translation scenarios across multi-tenant environments.",
-    "version": "2.0.27",
+    "version": "2.0.29",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -16798,7 +16798,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.682959+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.593623+00:00"
           },
           "namespace": {
             "type": "string",
@@ -16818,7 +16818,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.682989+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.593653+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -17050,7 +17050,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.683220+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.593878+00:00"
           },
           "policy": {
             "type": "string",
@@ -17219,7 +17219,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.683320+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.593973+00:00"
           },
           "start_time": {
             "type": "string",
@@ -17407,7 +17407,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.683412+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594062+00:00"
           }
         },
         "x-f5xc-description-short": "Label filter can be specified to filter metrics based on label match.",
@@ -17457,8 +17457,8 @@
             },
             "x-f5xc-example": "{\"key\": \"value\"}",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -17672,7 +17672,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.683582+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594225+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -17815,7 +17815,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.683659+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594298+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -17869,7 +17869,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.683738+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594364+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17888,7 +17888,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.683768+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594392+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -17930,7 +17930,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.683825+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594445+00:00"
           },
           "uid": {
             "type": "string",
@@ -17952,7 +17952,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.683855+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594474+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of forward_proxy_policy is returned in 'List'.",
@@ -18108,8 +18108,8 @@
             },
             "x-f5xc-description-short": "List of URL categories to be selected Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -18410,7 +18410,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684032+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594658+00:00"
           },
           "name": {
             "type": "string",
@@ -18431,7 +18431,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684060+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594686+00:00"
           },
           "namespace": {
             "type": "string",
@@ -18452,7 +18452,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684088+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594713+00:00"
           },
           "tenant": {
             "type": "string",
@@ -18475,7 +18475,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684116+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594740+00:00"
           },
           "uid": {
             "type": "string",
@@ -18499,7 +18499,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684145+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594768+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -18556,8 +18556,8 @@
             "x-f5xc-description-short": "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy.",
             "x-f5xc-description-medium": "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -18775,7 +18775,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684247+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594871+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -18850,7 +18850,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684296+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594919+00:00"
           },
           "service_name": {
             "type": "string",
@@ -18893,7 +18893,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684333+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.594955+00:00"
           },
           "type": {
             "type": "string",
@@ -19143,7 +19143,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684436+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595055+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -19263,8 +19263,8 @@
             "x-f5xc-description-short": "String containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by \"-\".",
             "x-f5xc-description-medium": "String containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by \"-\". Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -19352,8 +19352,8 @@
             },
             "x-f5xc-description-short": "Expressions contains the Kubernetes style label expression for selections. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -19403,7 +19403,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684529+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595146+00:00"
           },
           "name": {
             "type": "string",
@@ -19427,14 +19427,14 @@
             "x-f5xc-description-short": "Name of the message. The value of name has to follow DNS-1035 format.",
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684557+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595174+00:00"
           }
         },
         "x-f5xc-description-short": "MessageMetaType is metadata (common attributes) of a message that only certain messages have.",
@@ -19516,7 +19516,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684608+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595223+00:00"
           }
         },
         "x-f5xc-description-short": "Metric data contains timestamp and the value.",
@@ -19592,7 +19592,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684650+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595264+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -19643,14 +19643,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684709+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595311+00:00"
           },
           "namespace": {
             "type": "string",
@@ -19671,7 +19671,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684737+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595338+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
@@ -19751,7 +19751,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684778+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595379+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -19804,14 +19804,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684826+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595426+00:00"
           },
           "namespace": {
             "type": "string",
@@ -19832,7 +19832,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684854+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595454+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
@@ -19912,7 +19912,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684895+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595497+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -19963,14 +19963,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684943+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595545+00:00"
           },
           "namespace": {
             "type": "string",
@@ -19991,7 +19991,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.684970+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595572+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
@@ -20115,7 +20115,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685047+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595661+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -20235,7 +20235,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685107+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595720+00:00"
           },
           "status": {
             "type": "string",
@@ -20255,7 +20255,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685135+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595747+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -20450,7 +20450,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685261+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595870+00:00"
           },
           "uid": {
             "type": "string",
@@ -20473,7 +20473,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685289+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595899+00:00"
           }
         },
         "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
@@ -20549,7 +20549,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685321+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595929+00:00"
           },
           "previous_value": {
             "type": "string",
@@ -20588,7 +20588,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685368+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.595975+00:00"
           }
         },
         "x-f5xc-description-short": "Trend value contains trend value, trend sentiment and trend calculation description and window size.",
@@ -20632,7 +20632,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685399+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.596005+00:00"
           },
           "name": {
             "type": "string",
@@ -20653,7 +20653,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685427+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.596032+00:00"
           },
           "namespace": {
             "type": "string",
@@ -20674,7 +20674,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685454+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.596059+00:00"
           },
           "uid": {
             "type": "string",
@@ -20695,7 +20695,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685484+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.596087+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
@@ -20761,8 +20761,8 @@
             "x-f5xc-description-short": "List of strings, each of which is a single port value or a tuple of start and end port values separated by \"-\".",
             "x-f5xc-description-medium": "List of strings, each of which is a single port value or a tuple of start and end port values separated by \"-\". The start and end values are considered to be part of the range. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20813,14 +20813,14 @@
             "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g.",
             "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 128,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685535+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.596137+00:00"
           },
           "namespace": {
             "type": "string",
@@ -20847,7 +20847,7 @@
             },
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685563+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.596165+00:00"
           },
           "tenant": {
             "type": "string",
@@ -20876,7 +20876,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:52.685591+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.596192+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a direct reference from one object(the referrer) to another(the referred).",
@@ -21560,7 +21560,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.054453+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.951304+00:00"
           },
           "namespace": {
             "type": "string",
@@ -21580,7 +21580,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.054481+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.951332+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -21683,7 +21683,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.054578+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.951428+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -21826,7 +21826,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.054654+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.951501+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -21880,7 +21880,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.054735+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.951568+00:00"
           },
           "namespace": {
             "type": "string",
@@ -21899,7 +21899,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.054765+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.951606+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -21941,7 +21941,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.054821+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.951662+00:00"
           },
           "uid": {
             "type": "string",
@@ -21963,7 +21963,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.054852+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.951691+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of network_policy_view is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -22073,7 +22073,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.054913+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.951752+00:00"
           },
           "policy": {
             "type": "string",
@@ -22225,7 +22225,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.055001+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.951837+00:00"
           },
           "start_time": {
             "type": "string",
@@ -22411,7 +22411,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.055093+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:16.951926+00:00"
           }
         },
         "x-f5xc-description-short": "Label filter can be specified to filter metrics based on label match.",
@@ -22947,7 +22947,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.573708+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.409907+00:00"
           },
           "namespace": {
             "type": "string",
@@ -22967,7 +22967,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.573739+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.409937+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -23194,7 +23194,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.573905+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.410101+00:00"
           },
           "site": {
             "type": "string",
@@ -23313,7 +23313,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.573974+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.410168+00:00"
           },
           "start_time": {
             "type": "string",
@@ -23498,7 +23498,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.574063+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.410258+00:00"
           }
         },
         "x-f5xc-description-short": "Label filter can be specified to filter metrics based on label match.",
@@ -23664,7 +23664,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.574206+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.410400+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -23850,7 +23850,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.574307+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.410501+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -23904,7 +23904,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.574375+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.410569+00:00"
           },
           "namespace": {
             "type": "string",
@@ -23923,7 +23923,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.574404+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.410608+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -23965,7 +23965,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.574458+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.410663+00:00"
           },
           "uid": {
             "type": "string",
@@ -23986,7 +23986,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.574487+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.410691+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of fast_acl is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -24157,8 +24157,8 @@
             },
             "x-f5xc-description-short": "Select additional public VIP(s) Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -24563,8 +24563,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -24896,8 +24896,8 @@
             "minimum": 1,
             "maximum": 65535,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -24960,7 +24960,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.617625+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.452517+00:00"
           },
           "namespace": {
             "type": "string",
@@ -24980,7 +24980,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.617656+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.452547+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -25083,7 +25083,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.617793+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.452684+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -25170,8 +25170,8 @@
             "minimum": 1,
             "maximum": 65535,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -25286,7 +25286,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.617907+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.452797+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -25340,7 +25340,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.617974+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.452864+00:00"
           },
           "namespace": {
             "type": "string",
@@ -25359,7 +25359,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.618002+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.452892+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -25401,7 +25401,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.618058+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.452946+00:00"
           },
           "uid": {
             "type": "string",
@@ -25422,7 +25422,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.618087+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.452975+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of fast_acl_rule is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -25526,8 +25526,8 @@
             "minimum": 1,
             "maximum": 65535,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -25638,7 +25638,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.618672+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.453556+00:00"
           },
           "name": {
             "type": "string",
@@ -25659,7 +25659,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.618710+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.453584+00:00"
           },
           "namespace": {
             "type": "string",
@@ -25680,7 +25680,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.618738+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.453621+00:00"
           },
           "tenant": {
             "type": "string",
@@ -25703,7 +25703,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.618765+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.453648+00:00"
           },
           "uid": {
             "type": "string",
@@ -25727,7 +25727,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.618794+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.453676+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -25826,8 +25826,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -25853,8 +25853,8 @@
             },
             "x-f5xc-description-short": "List of fields and their values selected by the user Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -25911,7 +25911,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.654188+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.487852+00:00"
           },
           "namespace": {
             "type": "string",
@@ -25931,7 +25931,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.654218+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.487882+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -25973,8 +25973,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -26019,8 +26019,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
@@ -26071,8 +26071,8 @@
               "ves.io.schema.rules.message.required": "true"
             },
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -26161,8 +26161,8 @@
             "x-f5xc-description-short": "Context key(s) that idenfify one or more console pages/views where filters of the same field/values can be applied Required: YES.",
             "x-f5xc-description-medium": "Context key(s) that idenfify one or more console pages/views where filters of the same field/values can be applied Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -26185,14 +26185,14 @@
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.654343+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.488008+00:00"
           }
         },
         "x-f5xc-description-short": "Find Filter Sets API returns FilterSets that match the given context key(s).",
@@ -26331,7 +26331,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.654450+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.488114+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -26406,8 +26406,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -26433,8 +26433,8 @@
             },
             "x-f5xc-description-short": "List of fields and their values selected by the user Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -26477,8 +26477,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -26505,8 +26505,8 @@
             },
             "x-f5xc-description-short": "List of fields and their values selected by the user Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -26616,7 +26616,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.654566+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.488230+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -26670,7 +26670,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.654632+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.488301+00:00"
           },
           "namespace": {
             "type": "string",
@@ -26689,7 +26689,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.654660+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.488329+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -26731,7 +26731,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.654726+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.488383+00:00"
           },
           "uid": {
             "type": "string",
@@ -26752,7 +26752,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.654755+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.488413+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of filter_set is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -26875,8 +26875,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -26902,8 +26902,8 @@
             },
             "x-f5xc-description-short": "List of fields and their values selected by the user Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -27025,8 +27025,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -27047,8 +27047,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -27127,7 +27127,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.655391+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.489062+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -27180,14 +27180,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.655438+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.489109+00:00"
           },
           "namespace": {
             "type": "string",
@@ -27208,7 +27208,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.655465+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.489136+00:00"
           },
           "uid": {
             "type": "string",
@@ -27232,7 +27232,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.655494+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.489164+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectMetaType is metadata(common attributes) of an object that all configuration objects will have.",
@@ -27455,7 +27455,7 @@
             "maxLength": 6,
             "minLength": 6,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.656196+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.489864+00:00"
           },
           "object_index": {
             "type": "integer",
@@ -27536,7 +27536,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.656260+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.489928+00:00"
           },
           "trace_info": {
             "type": "string",
@@ -27578,7 +27578,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:54.656298+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:18.489966+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -27775,8 +27775,8 @@
             "x-f5xc-description-short": "List of rules to apply under the NAT Policy. Rule that matches first would be applied Required: YES.",
             "x-f5xc-description-medium": "List of rules to apply under the NAT Policy. Rule that matches first would be applied Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -27837,7 +27837,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.260508+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.018829+00:00"
           },
           "namespace": {
             "type": "string",
@@ -27857,7 +27857,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.260535+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.018857+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -27988,7 +27988,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.260652+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.018971+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -28069,8 +28069,8 @@
             "x-f5xc-description-short": "List of rules to apply under the NAT Policy. Rule that matches first would be applied Required: YES.",
             "x-f5xc-description-medium": "List of rules to apply under the NAT Policy. Rule that matches first would be applied Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -28185,7 +28185,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.260759+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.019065+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -28239,7 +28239,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.260826+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.019130+00:00"
           },
           "namespace": {
             "type": "string",
@@ -28258,7 +28258,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.260854+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.019158+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -28300,7 +28300,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.260909+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.019212+00:00"
           },
           "uid": {
             "type": "string",
@@ -28321,7 +28321,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.260938+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.019240+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of nat_policy is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -28553,8 +28553,8 @@
             "x-f5xc-description-short": "List of rules to apply under the NAT Policy. Rule that matches first would be applied Required: YES.",
             "x-f5xc-description-medium": "List of rules to apply under the NAT Policy. Rule that matches first would be applied Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -28619,14 +28619,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.261180+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.019476+00:00"
           },
           "network_interface": {
             "$ref": "#/components/schemas/schemaNetworkInterfaceRefType"
@@ -28743,8 +28743,8 @@
             },
             "x-f5xc-description-short": "Reference to Cloud Connect Object Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -28789,8 +28789,8 @@
             },
             "x-f5xc-description-short": "Reference to one or more cloud elastic IP objects Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -28836,8 +28836,8 @@
             },
             "x-f5xc-description-short": "Reference to Network Interface Object Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -29072,8 +29072,8 @@
             },
             "x-f5xc-description-short": "Reference to Segment Object Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -29114,8 +29114,8 @@
               "ves.io.schema.rules.message.required": "true"
             },
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -29206,8 +29206,8 @@
             },
             "x-f5xc-description-short": "Ordered List of Enhanced Firewall Policies active Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -29257,8 +29257,8 @@
             },
             "x-f5xc-description-short": "Ordered List of Fast ACL(s) active for this network firewall Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -29306,8 +29306,8 @@
             },
             "x-f5xc-description-short": "Ordered List of Forward Proxy Policies active Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -29356,8 +29356,8 @@
             },
             "x-f5xc-description-short": "Ordered List of Firewall Policies active for this network firewall Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -29519,7 +29519,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.693781+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.432478+00:00"
           },
           "namespace": {
             "type": "string",
@@ -29539,7 +29539,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.693812+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.432506+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -29642,7 +29642,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.693908+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.432613+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -29836,7 +29836,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.694047+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.432751+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -29890,7 +29890,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.694114+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.432817+00:00"
           },
           "namespace": {
             "type": "string",
@@ -29909,7 +29909,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.694143+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.432845+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -29951,7 +29951,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.694197+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.432899+00:00"
           },
           "uid": {
             "type": "string",
@@ -29973,7 +29973,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.694226+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.432928+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of network_firewall is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -30280,7 +30280,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.785181+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.519862+00:00"
           },
           "namespace": {
             "type": "string",
@@ -30300,7 +30300,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.785209+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.519889+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -30403,7 +30403,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.785352+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.520029+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -30621,7 +30621,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.785448+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.520123+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -30675,7 +30675,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.785514+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.520189+00:00"
           },
           "namespace": {
             "type": "string",
@@ -30694,7 +30694,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.785542+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.520217+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -30736,7 +30736,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.785597+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.520272+00:00"
           },
           "uid": {
             "type": "string",
@@ -30757,7 +30757,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.785626+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.520301+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of network_policy is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -30867,7 +30867,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.785697+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.520360+00:00"
           },
           "policy": {
             "type": "string",
@@ -31036,7 +31036,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.785794+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.520454+00:00"
           },
           "start_time": {
             "type": "string",
@@ -31223,7 +31223,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.785884+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.520541+00:00"
           }
         },
         "x-f5xc-description-short": "Label filter can be specified to filter metrics based on label match.",
@@ -31694,7 +31694,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.828898+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.561183+00:00"
           },
           "namespace": {
             "type": "string",
@@ -31714,7 +31714,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.828925+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.561210+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -31817,7 +31817,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.829021+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.561305+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -32056,7 +32056,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.829171+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.561454+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -32110,7 +32110,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.829238+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.561521+00:00"
           },
           "namespace": {
             "type": "string",
@@ -32129,7 +32129,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.829266+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.561549+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -32171,7 +32171,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.829321+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.561615+00:00"
           },
           "uid": {
             "type": "string",
@@ -32193,7 +32193,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.829350+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.561644+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of network_policy_rule is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -32495,7 +32495,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.861624+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.592579+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -32677,7 +32677,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.861728+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.592680+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -32731,7 +32731,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.861797+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.592749+00:00"
           },
           "namespace": {
             "type": "string",
@@ -32750,7 +32750,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.861826+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.592778+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -32792,7 +32792,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.861882+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.592832+00:00"
           },
           "uid": {
             "type": "string",
@@ -32814,7 +32814,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:56.861912+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.592862+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of network_policy_set is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -32993,7 +32993,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.084167+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.806612+00:00"
           },
           "namespace": {
             "type": "string",
@@ -33013,7 +33013,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.084195+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.806641+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -33068,8 +33068,8 @@
             },
             "x-f5xc-description-short": "Ordered list of forwarding Class to be used if no rule match. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -33245,7 +33245,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.084386+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.806831+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -33388,7 +33388,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.084461+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.806905+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -33442,7 +33442,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.084528+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.806972+00:00"
           },
           "namespace": {
             "type": "string",
@@ -33461,7 +33461,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.084556+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.807000+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -33503,7 +33503,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.084610+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.807054+00:00"
           },
           "uid": {
             "type": "string",
@@ -33525,7 +33525,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.084639+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:20.807083+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of policy_based_routing is returned in 'List'.",
@@ -33624,8 +33624,8 @@
             },
             "x-f5xc-description-short": "Ordered list of forwarding Class to be used if rule match. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -33855,8 +33855,8 @@
             "x-f5xc-description-short": "Ordered list of forwarding Class to be used if source application match and no rule match.",
             "x-f5xc-description-medium": "Ordered list of forwarding Class to be used if source application match and no rule match. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -33914,8 +33914,8 @@
             "x-f5xc-description-short": "Ordered list of forwarding Class to be used if source application match and no rule match.",
             "x-f5xc-description-medium": "Ordered list of forwarding Class to be used if source application match and no rule match. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -33973,8 +33973,8 @@
             "x-f5xc-description-short": "Ordered list of forwarding Class to be used if source application match and no rule match.",
             "x-f5xc-description-medium": "Ordered list of forwarding Class to be used if source application match and no rule match. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -34291,7 +34291,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.954187+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.631558+00:00"
           }
         },
         "x-f5xc-description-short": "Label Filter. Filters that will use segment labels to filter out timeseries.",
@@ -34338,7 +34338,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.954237+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.631617+00:00"
           }
         },
         "x-f5xc-description-short": "Node Metric Data. Metric Data for each metric type in the segments node.",
@@ -34436,7 +34436,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.954307+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.631687+00:00"
           },
           "site": {
             "type": "string",
@@ -34576,7 +34576,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.954414+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.631795+00:00"
           },
           "namespace": {
             "type": "string",
@@ -34596,7 +34596,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.954441+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.631821+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -34699,7 +34699,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.954535+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.631915+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -34841,7 +34841,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.954607+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.631986+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -34895,7 +34895,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.954675+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.632054+00:00"
           },
           "namespace": {
             "type": "string",
@@ -34914,7 +34914,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.954713+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.632082+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -34956,7 +34956,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.954768+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.632136+00:00"
           },
           "uid": {
             "type": "string",
@@ -34977,7 +34977,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.954797+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.632164+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of segment is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -35220,7 +35220,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.954917+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.632285+00:00"
           },
           "start_time": {
             "type": "string",
@@ -35510,7 +35510,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.991803+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.667277+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -35694,7 +35694,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.991888+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.667361+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -35748,7 +35748,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.991955+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.667426+00:00"
           },
           "namespace": {
             "type": "string",
@@ -35767,7 +35767,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.991983+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.667454+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -35809,7 +35809,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.992037+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.667508+00:00"
           },
           "uid": {
             "type": "string",
@@ -35831,7 +35831,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:57.992066+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.667536+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of segment_connection is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -35975,8 +35975,8 @@
               "ves.io.schema.rules.repeated.unique": "true"
             },
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -36008,8 +36008,8 @@
               "ves.io.schema.rules.repeated.unique": "true"
             },
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -36441,8 +36441,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
@@ -36591,14 +36591,14 @@
             "x-f5xc-description-short": "Case-sensitive JSON path in the HTTP request body. Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.117623+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.788706+00:00"
           }
         },
         "x-f5xc-description-short": "Argument matcher specifies the name of a single argument in the body and the criteria to match it.",
@@ -36646,8 +36646,8 @@
             },
             "x-f5xc-description-short": "List of references to bgp_asn_set objects. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -36735,7 +36735,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.117717+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.788791+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"BotAdvanced Domain Matcher Type\" Bot Advanced Domain Matcher Type.",
@@ -36912,7 +36912,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.117854+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.788927+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Bot Advanced Path Matcher Type\" Bot Advanced Path Matcher Type.",
@@ -36989,8 +36989,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -37176,14 +37176,14 @@
             "x-f5xc-description-short": "Case-sensitive cookie name. Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.118015+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.789093+00:00"
           }
         },
         "x-f5xc-description-short": "Cookie matcher specifies the name of a single cookie and the criteria to match it.",
@@ -37815,8 +37815,8 @@
             },
             "x-f5xc-description-short": "List of references to ip_prefix_set objects. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -37936,14 +37936,14 @@
             },
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.118216+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.789297+00:00"
           }
         },
         "x-f5xc-description-short": "JWT claim matcher specifies the name of a single JWT claim and the criteria for the input request to match it.",
@@ -38553,8 +38553,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -38582,8 +38582,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -38611,8 +38611,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -38639,8 +38639,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -38668,8 +38668,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -38697,8 +38697,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -38726,8 +38726,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -38755,8 +38755,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -38784,8 +38784,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -38812,8 +38812,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -38841,8 +38841,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -38869,8 +38869,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -38897,8 +38897,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -39323,8 +39323,8 @@
             },
             "x-f5xc-description-short": "List of exact values to match the input against. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -40011,7 +40011,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.119279+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.790366+00:00"
           },
           "regex_values": {
             "type": "array",
@@ -40315,14 +40315,14 @@
             "x-f5xc-description-short": "Case-insensitive HTTP header name. Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.120564+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.791689+00:00"
           }
         },
         "x-f5xc-description-short": "Header matcher specifies the name of a single HTTP header and the criteria for the input request to match it.",
@@ -40594,14 +40594,14 @@
             "x-f5xc-description-short": "Case-sensitive HTTP query parameter name. Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.120717+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.791832+00:00"
           }
         },
         "x-f5xc-description-short": "Query parameter matcher specifies the name of a single query parameter and the criteria for the input request to match it.",
@@ -40661,7 +40661,9 @@
               "update": false,
               "read": false
             },
-            "x-field-mutability": "read-only"
+            "x-field-mutability": "read-only",
+            "default": [],
+            "x-f5xc-server-default": true
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Specification\" Shape of rate_limiter in the storage backend.",
@@ -40738,24 +40740,28 @@
         },
         "x-f5xc-description-short": "Create service_policy creates a new object in the storage backend for metadata.namespace.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for schemaservice_policyCreateSpecType",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "allow_all_requests",
-            "allow_list",
-            "any_server",
-            "deny_all_requests",
-            "deny_list",
-            "rule_list",
-            "server_name",
-            "server_name_matcher",
-            "server_selector"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for schemaservice_policyCreateSpecType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  allow_all_requests: value\n  allow_list: value\n  any_server: value\n  deny_all_requests: value\n  deny_list: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_all_requests\": \"value\",\n    \"allow_list\": \"value\",\n    \"any_server\": \"value\",\n    \"deny_all_requests\": \"value\",\n    \"deny_list\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schemaservice_policies\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "schemaservice_policyGetSpecType": {
         "type": "object",
@@ -40819,25 +40825,28 @@
         },
         "x-f5xc-description-short": "GET service_policy reads a given object from storage backend for metadata.namespace.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for schemaservice_policyGetSpecType",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "allow_all_requests",
-            "allow_list",
-            "any_server",
-            "deny_all_requests",
-            "deny_list",
-            "legacy_rule_list",
-            "rule_list",
-            "server_name",
-            "server_name_matcher",
-            "server_selector"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for schemaservice_policyGetSpecType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  allow_all_requests: value\n  allow_list: value\n  any_server: value\n  deny_all_requests: value\n  deny_list: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_all_requests\": \"value\",\n    \"allow_list\": \"value\",\n    \"any_server\": \"value\",\n    \"deny_all_requests\": \"value\",\n    \"deny_list\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schemaservice_policies\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "schemaservice_policyReplaceSpecType": {
         "type": "object",
@@ -40901,25 +40910,28 @@
         },
         "x-f5xc-description-short": "Replace service_policy replaces an existing object in the storage backend for metadata.namespace.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for schemaservice_policyReplaceSpecType",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "allow_all_requests",
-            "allow_list",
-            "any_server",
-            "deny_all_requests",
-            "deny_list",
-            "legacy_rule_list",
-            "rule_list",
-            "server_name",
-            "server_name_matcher",
-            "server_selector"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for schemaservice_policyReplaceSpecType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  allow_all_requests: value\n  allow_list: value\n  any_server: value\n  deny_all_requests: value\n  deny_list: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_all_requests\": \"value\",\n    \"allow_list\": \"value\",\n    \"any_server\": \"value\",\n    \"deny_all_requests\": \"value\",\n    \"deny_list\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schemaservice_policy_replace_spec_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "schemaservice_policy_ruleGlobalSpecType": {
         "type": "object",
@@ -41179,48 +41191,28 @@
         },
         "x-f5xc-description-short": "Shape of service_policy_rule in the storage backend.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for schemaservice_policy_ruleGlobalSpecType",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "action",
-            "any_asn",
-            "any_client",
-            "any_ip",
-            "api_group_matcher",
-            "arg_matchers",
-            "asn_list",
-            "asn_matcher",
-            "body_matcher",
-            "bot_action",
-            "client_name",
-            "client_name_matcher",
-            "client_selector",
-            "cookie_matchers",
-            "domain_matcher",
-            "expiration_timestamp",
-            "headers",
-            "http_method",
-            "ip_matcher",
-            "ip_prefix_list",
-            "ip_threat_category_list",
-            "ja4_tls_fingerprint",
-            "jwt_claims",
-            "label_matcher",
-            "mum_action",
-            "path",
-            "port_matcher",
-            "query_params",
-            "request_constraints",
-            "segment_policy",
-            "tls_fingerprint_matcher",
-            "user_identity_matcher",
-            "waf_action"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for schemaservice_policy_ruleGlobalSpecType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  action: value\n  any_asn: value\n  any_client: value\n  any_ip: value\n  api_group_matcher: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"action\": \"value\",\n    \"any_asn\": \"value\",\n    \"any_client\": \"value\",\n    \"any_ip\": \"value\",\n    \"api_group_matcher\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schemaservice_policy_rule_global_spec_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "schemaservice_policy_ruleIPThreatCategoryListType": {
         "type": "object",
@@ -41253,24 +41245,36 @@
             "x-f5xc-description-short": "The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions Required: YES.",
             "x-f5xc-description-medium": "The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
           }
         },
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for schemaservice_policy_ruleIPThreatCategoryListType",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "ip_threat_categories"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for schemaservice_policy_ruleIPThreatCategoryListType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  ip_threat_categories: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"ip_threat_categories\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schemaservice_policy_rule_i_p_threat_category_list_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyCreateRequest": {
         "type": "object",
@@ -41287,17 +41291,28 @@
           }
         },
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyCreateRequest",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "metadata",
-            "spec"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyCreateRequest\nmetadata:\n  name: example\n  namespace: default\nspec:\n  spec: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"spec\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policies\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyCreateResponse": {
         "type": "object",
@@ -41314,18 +41329,28 @@
           }
         },
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyCreateResponse",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "metadata",
-            "spec",
-            "system_metadata"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyCreateResponse\nmetadata:\n  name: example\n  namespace: default\nspec:\n  spec: value\n  system_metadata: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"spec\": \"value\",\n    \"system_metadata\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policies\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyDeleteRequest": {
         "type": "object",
@@ -41365,7 +41390,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.121493+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.792616+00:00"
           },
           "namespace": {
             "type": "string",
@@ -41385,22 +41410,32 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.121519+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.792644+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyDeleteRequest",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "fail_if_referred",
-            "name",
-            "namespace"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyDeleteRequest\nmetadata:\n  name: example\n  namespace: default\nspec:\n  fail_if_referred: value\n  name: value\n  namespace: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"fail_if_referred\": \"value\",\n    \"name\": \"value\",\n    \"namespace\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policies\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyGetResponse": {
         "type": "object",
@@ -41488,31 +41523,35 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.121613+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.792738+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
           }
         },
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyGetResponse",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "create_form",
-            "deleted_referred_objects",
-            "disabled_referred_objects",
-            "metadata",
-            "referring_objects",
-            "replace_form",
-            "spec",
-            "status",
-            "system_metadata"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyGetResponse\nmetadata:\n  name: example\n  namespace: default\nspec:\n  create_form: value\n  deleted_referred_objects: value\n  disabled_referred_objects: value\n  referring_objects: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"create_form\": \"value\",\n    \"deleted_referred_objects\": \"value\",\n    \"disabled_referred_objects\": \"value\",\n    \"referring_objects\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policies\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyGetResponseFormatCode": {
         "type": "string",
@@ -41531,14 +41570,28 @@
         "x-f5xc-description-short": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT...",
         "x-f5xc-description-medium": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT: x-displayName: \"Default Format\" Default format of returned resource - GET_RSP_FORMAT_FOR_CREATE: x-displayName: \"Create request Format\" Response should be...",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyGetResponseFormatCode",
-          "required_fields": [],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyGetResponseFormatCode\nmetadata:\n  name: example\n  namespace: default",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policies\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "description": "Service policy for network-level access control and traffic rules",
+          "required_fields": [
+            "metadata.name",
+            "metadata.namespace"
+          ],
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyLegacyRuleList": {
         "type": "object",
@@ -41576,16 +41629,28 @@
         "x-f5xc-description-short": "List of references to service_policy_rule objects. The order of evaluation of the rules depends on the rule combining algorithm.",
         "x-f5xc-description-medium": "List of references to service_policy_rule objects. The order of evaluation of the rules depends on the rule combining algorithm.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyLegacyRuleList",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "rules"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyLegacyRuleList\nmetadata:\n  name: example\n  namespace: default\nspec:\n  rules: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"rules\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_legacy_rule_lists\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyListResponse": {
         "type": "object",
@@ -41629,17 +41694,28 @@
           }
         },
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyListResponse",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "errors",
-            "items"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyListResponse\nmetadata:\n  name: example\n  namespace: default\nspec:\n  errors: value\n  items: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"errors\": \"value\",\n    \"items\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_list_responses\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyListResponseItem": {
         "type": "object",
@@ -41678,7 +41754,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.121706+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.792822+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -41732,7 +41808,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.121773+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.792888+00:00"
           },
           "namespace": {
             "type": "string",
@@ -41751,7 +41827,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.121801+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.792916+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -41793,7 +41869,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.121854+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.792969+00:00"
           },
           "uid": {
             "type": "string",
@@ -41814,34 +41890,34 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.121883+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.792997+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of service_policy is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
         "x-f5xc-description-medium": "By default a summary of service_policy is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyListResponseItem",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "annotations",
-            "description",
-            "disabled",
-            "get_spec",
-            "labels",
-            "metadata",
-            "name",
-            "namespace",
-            "owner_view",
-            "status_set",
-            "system_metadata",
-            "tenant",
-            "uid"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyListResponseItem\nmetadata:\n  name: example\n  namespace: default\nspec:\n  annotations: value\n  description: value\n  disabled: value\n  get_spec: value\n  labels: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"annotations\": \"value\",\n    \"description\": \"value\",\n    \"disabled\": \"value\",\n    \"get_spec\": \"value\",\n    \"labels\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_list_response_items\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyReplaceRequest": {
         "type": "object",
@@ -41858,30 +41934,55 @@
           }
         },
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyReplaceRequest",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "metadata",
-            "spec"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyReplaceRequest\nmetadata:\n  name: example\n  namespace: default\nspec:\n  spec: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"spec\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_replace_requests\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyReplaceResponse": {
         "type": "object",
         "x-ves-proto-message": "ves.io.schema.service_policy.ReplaceResponse",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyReplaceResponse",
-          "required_fields": [],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyReplaceResponse\nmetadata:\n  name: example\n  namespace: default",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_replace_responses\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "description": "Service policy for network-level access control and traffic rules",
+          "required_fields": [
+            "metadata.name",
+            "metadata.namespace"
+          ],
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyRule": {
         "type": "object",
@@ -41900,17 +42001,28 @@
         "x-f5xc-description-short": "Rule consists of an unordered list of predicates and an action.",
         "x-f5xc-description-medium": "Rule consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from or derived from an L7 request API. A request API is considered to match the simple rule if all predicates in the rule evaluate to true for that request.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyRule",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "metadata",
-            "spec"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyRule\nmetadata:\n  name: example\n  namespace: default\nspec:\n  spec: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"spec\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_rules\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyRuleList": {
         "type": "object",
@@ -41949,16 +42061,28 @@
         },
         "x-f5xc-description-short": "List of rules. The order of evaluation of the rules depends on the rule combining algorithm.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyRuleList",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "rules"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyRuleList\nmetadata:\n  name: example\n  namespace: default\nspec:\n  rules: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"rules\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_rule_lists\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyServicePolicyHits": {
         "type": "object",
@@ -41988,17 +42112,28 @@
         },
         "x-f5xc-description-short": "ServicePolicyHits contains the timeseries data of Service policy hits.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyServicePolicyHits",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "id",
-            "metric"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyServicePolicyHits\nmetadata:\n  name: example\n  namespace: default\nspec:\n  id: value\n  metric: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"id\": \"value\",\n    \"metric\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_service_policy_hitses\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyServicePolicyHitsId": {
         "type": "object",
@@ -42041,7 +42176,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.121995+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.793110+00:00"
           },
           "policy": {
             "type": "string",
@@ -42127,22 +42262,28 @@
         "x-f5xc-description-short": "ServicePolicyHitsId uniquely identifies an entry in the response to Service policy hits request.",
         "x-f5xc-description-medium": "ServicePolicyHitsId uniquely identifies an entry in the response to Service policy hits request. Service policy hits counter is aggregated based on the labels specified in the group_by field in the request. Therefore, only the feields that corresponds to the MetricLabel in the group_by field...",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyServicePolicyHitsId",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "action",
-            "namespace",
-            "policy",
-            "policy_rule",
-            "policy_set",
-            "site",
-            "virtual_host"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyServicePolicyHitsId\nmetadata:\n  name: example\n  namespace: default\nspec:\n  action: value\n  namespace: value\n  policy: value\n  policy_rule: value\n  policy_set: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"action\": \"value\",\n    \"namespace\": \"value\",\n    \"policy\": \"value\",\n    \"policy_rule\": \"value\",\n    \"policy_set\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_service_policy_hits_ids\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyServicePolicyHitsRequest": {
         "type": "object",
@@ -42227,7 +42368,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.122098+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.793213+00:00"
           },
           "start_time": {
             "type": "string",
@@ -42280,21 +42421,28 @@
         },
         "x-f5xc-description-short": "Request to GET the Service policy hits counter.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyServicePolicyHitsRequest",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "end_time",
-            "group_by",
-            "label_filter",
-            "namespace",
-            "start_time",
-            "step"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyServicePolicyHitsRequest\nmetadata:\n  name: example\n  namespace: default\nspec:\n  end_time: value\n  group_by: value\n  label_filter: value\n  namespace: value\n  start_time: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"end_time\": \"value\",\n    \"group_by\": \"value\",\n    \"label_filter\": \"value\",\n    \"namespace\": \"value\",\n    \"start_time\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_service_policy_hits_requests\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyServicePolicyHitsResponse": {
         "type": "object",
@@ -42346,17 +42494,28 @@
         },
         "x-f5xc-description-short": "Number of Service policy rule hits for each unique combination of group_by labels in the request.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyServicePolicyHitsResponse",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "data",
-            "step"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyServicePolicyHitsResponse\nmetadata:\n  name: example\n  namespace: default\nspec:\n  data: value\n  step: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"data\": \"value\",\n    \"step\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_service_policy_hits_responses\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyServicePolicyMetricLabel": {
         "type": "string",
@@ -42376,14 +42535,28 @@
         "x-ves-proto-enum": "ves.io.schema.service_policy.ServicePolicyMetricLabel",
         "x-f5xc-description-short": "Service policy hits can be sliced and diced based on one or more labels listed below.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyServicePolicyMetricLabel",
-          "required_fields": [],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyServicePolicyMetricLabel\nmetadata:\n  name: example\n  namespace: default",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_service_policy_metric_labels\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "description": "Service policy for network-level access control and traffic rules",
+          "required_fields": [
+            "metadata.name",
+            "metadata.namespace"
+          ],
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyServicePolicyMetricLabelFilter": {
         "type": "object",
@@ -42415,23 +42588,33 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.122186+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.793302+00:00"
           }
         },
         "x-f5xc-description-short": "Label filter can be specified to filter metrics based on label match.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyServicePolicyMetricLabelFilter",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "label",
-            "op",
-            "value"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyServicePolicyMetricLabelFilter\nmetadata:\n  name: example\n  namespace: default\nspec:\n  label: value\n  op: value\n  value: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"label\": \"value\",\n    \"op\": \"value\",\n    \"value\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_service_policy_metric_label_filters\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policySimpleRule": {
         "type": "object",
@@ -42554,7 +42737,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.122360+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.793475+00:00"
           },
           "domain_matcher": {
             "$ref": "#/components/schemas/policyMatcherType"
@@ -42701,7 +42884,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:58.122575+00:00"
+            "x-reconciled-at": "2026-01-17T01:13:21.793699+00:00"
           },
           "openapi_validation_action": {
             "$ref": "#/components/schemas/policyOpenApiValidationAction"
@@ -42824,72 +43007,28 @@
         "x-f5xc-description-short": "X-displayName: \"Simple Rule\" A SimpleRule consists of an unordered list of predicates and an action.",
         "x-f5xc-description-medium": "X-displayName: \"Simple Rule\" A SimpleRule consists of an unordered list of predicates and an action. The predicates are evaluated against a set of input fields that are extracted from or derived from an L7 request API. A request API is considered to match the simple rule if all predicates in the...",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policySimpleRule",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "action",
-            "additional_api_group_matchers",
-            "api_group_matcher",
-            "arg_matchers",
-            "asn_list",
-            "asn_matcher",
-            "body_matcher",
-            "bot_action",
-            "bot_advanced_endpoint_matcher",
-            "challenge_action",
-            "client_name",
-            "client_name_matcher",
-            "client_role",
-            "client_selector",
-            "content_rewrite_action",
-            "cookie_matchers",
-            "description",
-            "domain_matcher",
-            "dst_asn_list",
-            "dst_asn_matcher",
-            "dst_ip_matcher",
-            "dst_ip_prefix_list",
-            "expiration_timestamp",
-            "goto_policy",
-            "graphql_settings",
-            "headers",
-            "http_method",
-            "ip_matcher",
-            "ip_prefix_list",
-            "ip_reputation_action",
-            "ja4_tls_fingerprint",
-            "jwt_claims",
-            "label_matcher",
-            "malware_protection_action",
-            "malware_protection_settings",
-            "metric_name_label",
-            "mobile_identifier_matcher_action",
-            "mum_action",
-            "name",
-            "openapi_validation_action",
-            "origin_server_subsets_action",
-            "path",
-            "port_matcher",
-            "query_params",
-            "rate_limiter_specs",
-            "rate_limiters",
-            "request_constraints",
-            "response_masking_config",
-            "scheme",
-            "server_selector",
-            "shape_protected_endpoint_action",
-            "threat_mesh_action",
-            "tls_fingerprint_matcher",
-            "url_matcher",
-            "user_identity_matcher",
-            "virtual_host_matcher",
-            "waf_action"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policySimpleRule\nmetadata:\n  name: example\n  namespace: default\nspec:\n  action: value\n  additional_api_group_matchers: value\n  api_group_matcher: value\n  arg_matchers: value\n  asn_list: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"action\": \"value\",\n    \"additional_api_group_matchers\": \"value\",\n    \"api_group_matcher\": \"value\",\n    \"arg_matchers\": \"value\",\n    \"asn_list\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_simple_rules\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policySourceList": {
         "type": "object",
@@ -43053,25 +43192,28 @@
         },
         "x-f5xc-description-short": "List of sources. A request belongs to this list if it satisfies any of the match criteria.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policySourceList",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "asn_list",
-            "asn_set",
-            "country_list",
-            "default_action_allow",
-            "default_action_deny",
-            "default_action_next_policy",
-            "ip_prefix_set",
-            "prefix_list",
-            "tls_fingerprint_classes",
-            "tls_fingerprint_values"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policySourceList\nmetadata:\n  name: example\n  namespace: default\nspec:\n  asn_list: value\n  asn_set: value\n  country_list: value\n  default_action_allow: value\n  default_action_deny: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"asn_list\": \"value\",\n    \"asn_set\": \"value\",\n    \"country_list\": \"value\",\n    \"default_action_allow\": \"value\",\n    \"default_action_deny\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_source_lists\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       },
       "service_policyStatusObject": {
         "type": "object",
@@ -43117,18 +43259,28 @@
         },
         "x-f5xc-description-short": "Most recently observed status of object.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for service_policyStatusObject",
+          "description": "Service policy for network-level access control and traffic rules",
           "required_fields": [
-            "conditions",
-            "metadata",
-            "object_refs"
+            "metadata.name",
+            "metadata.namespace"
           ],
-          "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for service_policyStatusObject\nmetadata:\n  name: example\n  namespace: default\nspec:\n  conditions: value\n  object_refs: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"conditions\": \"value\",\n    \"object_refs\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policy_status_objects\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "mutually_exclusive_groups": [
+            {
+              "fields": [
+                "spec.allow_all_requests",
+                "spec.deny_all_requests",
+                "spec.allow_list",
+                "spec.deny_list",
+                "spec.rule_list"
+              ],
+              "reason": "Choose exactly one rule type"
+            }
+          ],
+          "example_yaml": "apiVersion: v1\nkind: service_policy\nmetadata:\n  name: allow-internal\n  namespace: default\nspec:\n  allow_list:\n    rules:\n      - metadata:\n          name: internal-traffic\n        spec:\n          ip_prefix_list:\n            prefix:\n              - \"10.0.0.0/8\"\n              - \"192.168.0.0/16\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"allow-internal\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"allow_list\": {\n      \"rules\": [{\n        \"metadata\": {\"name\": \"internal-traffic\"},\n        \"spec\": {\n          \"ip_prefix_list\": {\"prefix\": [\"10.0.0.0/8\", \"192.168.0.0/16\"]}\n        }\n      }]\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/service_policys\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @service-policy.json\n"
         },
-        "x-f5xc-cli-domain": "virtual"
+        "x-f5xc-cli-domain": "network_security"
       }
     },
     "responses": {},

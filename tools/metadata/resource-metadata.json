@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-16T21:19:02Z",
+  "generated_at": "2026-01-17T01:07:11Z",
   "version": "1.0.0",
   "resources": {
     "address_allocator": {
@@ -2292,7 +2292,7 @@
       }
     },
     "bgp": {
-      "description": "Manages a BGP resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers. configuration.",
+      "description": "Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
       "import_format": "namespace/name",
       "attributes": {
         "annotations": {
@@ -2300,6 +2300,12 @@
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
+        },
+        "as_numbers": {
+          "type": "list",
+          "required": false,
+          "optional": true,
+          "description": "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy."
         },
         "description": {
           "type": "string",
@@ -2339,13 +2345,6 @@
           "plan_modifier": "RequiresReplace",
           "validation": "name",
           "description": "Namespace where the BGP will be created."
-        },
-        "rules": {
-          "type": "list",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom."
         }
       }
     },
@@ -3440,12 +3439,10 @@
         },
         "namespace": {
           "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
+          "required": true,
+          "plan_modifier": "RequiresReplace",
           "validation": "name",
-          "description": "Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted."
+          "description": "Namespace where the Cloud Connect will be created."
         },
         "segment": {
           "type": "object",
@@ -3561,9 +3558,9 @@
       },
       "dependencies": {
         "referenced_by": [
-          "aws_vpc_site",
           "azure_vnet_site",
-          "gcp_vpc_site"
+          "gcp_vpc_site",
+          "aws_vpc_site"
         ]
       }
     },
@@ -4519,8 +4516,23 @@
       }
     },
     "discovery": {
-      "description": "Manages API discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "description": "Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace. configuration.",
       "import_format": "namespace/name",
+      "oneof_groups": {
+        "cluster_identifier_choice": {
+          "fields": [
+            "cluster_id",
+            "no_cluster_id"
+          ],
+          "default": "no_cluster_id"
+        },
+        "discovery_choice": {
+          "fields": [
+            "discovery_consul",
+            "discovery_k8s"
+          ]
+        }
+      },
       "attributes": {
         "annotations": {
           "type": "map",
@@ -4528,12 +4540,14 @@
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
-        "custom_auth_types": {
-          "type": "list",
+        "cluster_id": {
+          "type": "string",
           "required": false,
           "optional": true,
-          "is_block": true,
-          "description": "Select your custom authentication types to be detected in the API discovery."
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "oneof_group": "cluster_identifier_choice",
+          "description": "[OneOf: cluster_id, no_cluster_id; Default: no_cluster_id] Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object."
         },
         "description": {
           "type": "string",
@@ -4546,6 +4560,22 @@
           "required": false,
           "optional": true,
           "description": "A value of true will administratively disable the object."
+        },
+        "discovery_consul": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "discovery_choice",
+          "description": "[OneOf: discovery_consul, discovery_k8s] Discovery configuration for Hashicorp Consul."
+        },
+        "discovery_k8s": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "discovery_choice",
+          "description": "K8s Discovery Configuration. Discovery configuration for K8s."
         },
         "id": {
           "type": "string",
@@ -4573,6 +4603,21 @@
           "plan_modifier": "RequiresReplace",
           "validation": "name",
           "description": "Namespace where the Discovery will be created."
+        },
+        "no_cluster_id": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "cluster_identifier_choice",
+          "description": "Enable this option"
+        },
+        "where": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using following rules * Direct reference to virtual_network object * Site local network when refering to site object * All site local.."
         }
       }
     },
@@ -5052,24 +5097,17 @@
       }
     },
     "fast_acl": {
-      "description": "Manages new Fast ACL rule, has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.",
+      "description": "Manages object, object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to. in F5 Distributed Cloud.",
       "import_format": "namespace/name",
       "oneof_groups": {
-        "source": {
+        "site_choice": {
           "fields": [
-            "ip_prefix_set",
-            "prefix"
+            "re_acl",
+            "site_acl"
           ]
         }
       },
       "attributes": {
-        "action": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic."
-        },
         "annotations": {
           "type": "map",
           "required": false,
@@ -5095,14 +5133,6 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
-        "ip_prefix_set": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "source",
-          "description": "[OneOf: ip_prefix_set, prefix] List of references to ip_prefix_set objects."
-        },
         "labels": {
           "type": "map",
           "required": false,
@@ -5123,21 +5153,28 @@
           "validation": "name",
           "description": "Namespace where the Fast ACL will be created."
         },
-        "port": {
-          "type": "list",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "validation": "port",
-          "description": "Source Ports. L4 port numbers to match ."
-        },
-        "prefix": {
+        "protocol_policer": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "source",
-          "description": "List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes."
+          "description": "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
+        },
+        "re_acl": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "site_choice",
+          "description": "[OneOf: re_acl, site_acl] Fast ACL for RE. Fast ACL definition for RE."
+        },
+        "site_acl": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "site_choice",
+          "description": "Fast ACL for Site. Fast ACL definition for Site."
         }
       }
     },
@@ -6655,9 +6692,9 @@
       },
       "dependencies": {
         "referenced_by": [
+          "origin_pool",
           "http_loadbalancer",
-          "tcp_loadbalancer",
-          "origin_pool"
+          "tcp_loadbalancer"
         ]
       }
     },
@@ -8287,35 +8324,11 @@
       }
     },
     "network_policy": {
-      "description": "Manages network policy rule with configured parameters in specified namespace. in F5 Distributed Cloud.",
+      "description": "Manages new network policy with configured parameters in specified namespace. in F5 Distributed Cloud.",
       "category": "Security",
       "tier": "Standard",
       "import_format": "namespace/name",
-      "oneof_groups": {
-        "remote_endpoint": {
-          "fields": [
-            "ip_prefix_set",
-            "prefix",
-            "prefix_selector"
-          ]
-        }
-      },
       "attributes": {
-        "action": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "[Enum: DENY|ALLOW] Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`."
-        },
-        "advanced_action": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Network Policy Rule Advanced Action provides additional OPTIONS along with RuleAction and PBRRuleAction."
-        },
         "annotations": {
           "type": "map",
           "required": false,
@@ -8334,27 +8347,19 @@
           "optional": true,
           "description": "A value of true will administratively disable the object."
         },
+        "endpoint": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Shape of the endpoint choices for a view."
+        },
         "id": {
           "type": "string",
           "required": false,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
-        },
-        "ip_prefix_set": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "remote_endpoint",
-          "description": "[OneOf: ip_prefix_set, prefix, prefix_selector] List of references to ip_prefix_set objects."
-        },
-        "label_matcher": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name."
         },
         "labels": {
           "type": "map",
@@ -8376,35 +8381,12 @@
           "validation": "name",
           "description": "Namespace where the Network Policy will be created."
         },
-        "ports": {
-          "type": "list",
-          "required": false,
-          "optional": true,
-          "description": "List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192."
-        },
-        "prefix": {
+        "rules": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "remote_endpoint",
-          "description": "List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes."
-        },
-        "prefix_selector": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "remote_endpoint",
-          "description": "Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects."
-        },
-        "protocol": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "Protocol in IP packet to be used as match criteria Values are TCP, UDP, and icmp."
+          "description": "Rule Choice. Shape of Rule Choice."
         }
       }
     },
@@ -8975,7 +8957,7 @@
       }
     },
     "policer": {
-      "description": "Manages new policer with traffic rate limits. in F5 Distributed Cloud.",
+      "description": "Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.",
       "import_format": "namespace/name",
       "attributes": {
         "annotations": {
@@ -8983,22 +8965,6 @@
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
-        },
-        "burst_size": {
-          "type": "int64",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "The maximum size permitted for bursts of data. E.g. 10000 pps burst ."
-        },
-        "committed_information_rate": {
-          "type": "int64",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps ."
         },
         "description": {
           "type": "string",
@@ -9039,21 +9005,12 @@
           "validation": "name",
           "description": "Namespace where the Policer will be created."
         },
-        "policer_mode": {
-          "type": "string",
+        "protocol_policer": {
+          "type": "list",
           "required": false,
           "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "[Enum: POLICER_MODE_NOT_SHARED|POLICER_MODE_SHARED] - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`. Defaults to `POLICER_MODE_NOT_SHARED`."
-        },
-        "policer_type": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "[Enum: POLICER_SINGLE_RATE_TWO_COLOR] Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`. Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`."
+          "is_block": true,
+          "description": "List of L4 protocol match condition and associated traffic rate limits."
         }
       }
     },

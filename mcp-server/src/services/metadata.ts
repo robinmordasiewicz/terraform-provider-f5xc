@@ -65,6 +65,8 @@ export interface AttributeMetadata {
   default?: unknown;
   oneof_group?: string;
   description: string;
+  server_default?: boolean;
+  recommended_value?: string | number | boolean;
 }
 
 export interface DependencyInfo {
@@ -108,6 +110,18 @@ export interface CommonErrorPattern {
   remediation: string;
 }
 
+// Import operation metadata types from types.ts
+import type {
+  OperationsMetadataCollection,
+  ResourceOperationInfo,
+  OperationMetadata,
+  DangerLevel,
+  SideEffectsInfo,
+  BestPracticesInfo,
+  GuidedWorkflowInfo,
+  ResponseTimeInfo,
+} from '../types.js';
+
 // =============================================================================
 // CACHING
 // =============================================================================
@@ -115,6 +129,7 @@ export interface CommonErrorPattern {
 let resourceMetadataCache: MetadataCollection | null = null;
 let validationPatternsCache: ValidationPatterns | null = null;
 let errorPatternsCache: ErrorPatterns | null = null;
+let operationsMetadataCache: OperationsMetadataCollection | null = null;
 
 // =============================================================================
 // PATH RESOLUTION
@@ -206,6 +221,31 @@ export function loadErrorPatterns(): ErrorPatterns | null {
     return errorPatternsCache;
   } catch (error) {
     console.error(`Failed to load error patterns: ${error}`);
+    return null;
+  }
+}
+
+/**
+ * Load operations metadata from JSON file (v2.0.33 extensions)
+ */
+export function loadOperationsMetadata(): OperationsMetadataCollection | null {
+  if (operationsMetadataCache) {
+    return operationsMetadataCache;
+  }
+
+  const operationsPath = join(getMetadataPath(), 'operations-metadata.json');
+
+  if (!existsSync(operationsPath)) {
+    // Operations metadata is optional (may not be generated yet)
+    return null;
+  }
+
+  try {
+    const content = readFileSync(operationsPath, 'utf-8');
+    operationsMetadataCache = JSON.parse(content) as OperationsMetadataCollection;
+    return operationsMetadataCache;
+  } catch (error) {
+    console.error(`Failed to load operations metadata: ${error}`);
     return null;
   }
 }
@@ -1052,4 +1092,189 @@ export function getCommonBlockPatterns(): {
     nestedBlockAttributes: Array.from(nestedBlockAttributes).sort(),
     listBlockAttributes: Array.from(listBlockAttributes).sort(),
   };
+}
+
+// =============================================================================
+// OPERATION METADATA FUNCTIONS (v2.0.33 extensions)
+// =============================================================================
+
+/**
+ * Get operation metadata for a specific resource
+ */
+export function getResourceOperationInfo(resourceName: string): ResourceOperationInfo | null {
+  const metadata = loadOperationsMetadata();
+  if (!metadata) return null;
+
+  const normalized = resourceName.toLowerCase().replace(/-/g, '_');
+  return metadata.resources[normalized] || metadata.resources[resourceName] || null;
+}
+
+/**
+ * Get danger level for a specific operation
+ */
+export function getOperationDangerLevel(
+  resourceName: string,
+  operation: 'create' | 'read' | 'update' | 'delete' | 'list',
+): DangerLevel | null {
+  const resourceOps = getResourceOperationInfo(resourceName);
+  return resourceOps?.operations[operation]?.danger_level || null;
+}
+
+/**
+ * Get side effects for a specific operation
+ */
+export function getOperationSideEffects(
+  resourceName: string,
+  operation: 'create' | 'read' | 'update' | 'delete' | 'list',
+): SideEffectsInfo | null {
+  const resourceOps = getResourceOperationInfo(resourceName);
+  return resourceOps?.operations[operation]?.side_effects || null;
+}
+
+/**
+ * Get response time metrics for a specific operation
+ */
+export function getOperationResponseTime(
+  resourceName: string,
+  operation: 'create' | 'read' | 'update' | 'delete' | 'list',
+): ResponseTimeInfo | null {
+  const resourceOps = getResourceOperationInfo(resourceName);
+  return resourceOps?.operations[operation]?.discovered_response_time || null;
+}
+
+/**
+ * Check if an operation requires confirmation
+ */
+export function operationRequiresConfirmation(
+  resourceName: string,
+  operation: 'create' | 'read' | 'update' | 'delete' | 'list',
+): boolean {
+  const resourceOps = getResourceOperationInfo(resourceName);
+  return resourceOps?.operations[operation]?.confirmation_required || false;
+}
+
+/**
+ * Get required fields for an operation
+ */
+export function getOperationRequiredFields(
+  resourceName: string,
+  operation: 'create' | 'read' | 'update' | 'delete' | 'list',
+): string[] {
+  const resourceOps = getResourceOperationInfo(resourceName);
+  return resourceOps?.operations[operation]?.required_fields || [];
+}
+
+/**
+ * Get best practices for a resource
+ */
+export function getResourceBestPractices(resourceName: string): BestPracticesInfo | null {
+  const resourceOps = getResourceOperationInfo(resourceName);
+  return resourceOps?.best_practices || null;
+}
+
+/**
+ * Get guided workflows for a resource
+ */
+export function getResourceGuidedWorkflows(resourceName: string): GuidedWorkflowInfo[] {
+  const resourceOps = getResourceOperationInfo(resourceName);
+  return resourceOps?.guided_workflows || [];
+}
+
+/**
+ * Get complete operation metadata
+ */
+export function getOperationMetadataDetail(
+  resourceName: string,
+  operation: 'create' | 'read' | 'update' | 'delete' | 'list',
+): OperationMetadata | null {
+  const resourceOps = getResourceOperationInfo(resourceName);
+  return resourceOps?.operations[operation] || null;
+}
+
+/**
+ * Get all high-danger operations across all resources
+ */
+export function getHighDangerOperations(): Array<{
+  resource: string;
+  operation: string;
+  dangerLevel: DangerLevel;
+  confirmationRequired: boolean;
+}> {
+  const metadata = loadOperationsMetadata();
+  if (!metadata) return [];
+
+  const results: Array<{
+    resource: string;
+    operation: string;
+    dangerLevel: DangerLevel;
+    confirmationRequired: boolean;
+  }> = [];
+
+  for (const [resourceName, resourceOps] of Object.entries(metadata.resources)) {
+    for (const [opName, opMeta] of Object.entries(resourceOps.operations)) {
+      if (opMeta.danger_level === 'high' || opMeta.danger_level === 'critical') {
+        results.push({
+          resource: resourceName,
+          operation: opName,
+          dangerLevel: opMeta.danger_level,
+          confirmationRequired: opMeta.confirmation_required || false,
+        });
+      }
+    }
+  }
+
+  return results;
+}
+
+/**
+ * Get operations metadata summary
+ */
+export function getOperationsMetadataSummary(): {
+  available: boolean;
+  totalResources: number;
+  totalOperations: number;
+  byDangerLevel: Record<string, number>;
+  confirmationRequired: number;
+} {
+  const metadata = loadOperationsMetadata();
+  if (!metadata) {
+    return {
+      available: false,
+      totalResources: 0,
+      totalOperations: 0,
+      byDangerLevel: {},
+      confirmationRequired: 0,
+    };
+  }
+
+  const summary = {
+    available: true,
+    totalResources: Object.keys(metadata.resources).length,
+    totalOperations: 0,
+    byDangerLevel: {} as Record<string, number>,
+    confirmationRequired: 0,
+  };
+
+  for (const resourceOps of Object.values(metadata.resources)) {
+    for (const opMeta of Object.values(resourceOps.operations)) {
+      summary.totalOperations++;
+      if (opMeta.danger_level) {
+        summary.byDangerLevel[opMeta.danger_level] =
+          (summary.byDangerLevel[opMeta.danger_level] || 0) + 1;
+      }
+      if (opMeta.confirmation_required) {
+        summary.confirmationRequired++;
+      }
+    }
+  }
+
+  return summary;
+}
+
+/**
+ * Check if operations metadata is available
+ */
+export function isOperationsMetadataAvailable(): boolean {
+  const metadata = loadOperationsMetadata();
+  return metadata !== null && Object.keys(metadata.resources).length > 0;
 }

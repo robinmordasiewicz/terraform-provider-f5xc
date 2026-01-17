@@ -3,7 +3,7 @@
   "info": {
     "title": "Vpm And Node Management",
     "description": "APIs for configuring node policies, fleet management, and lifecycle operations. Supports node registration, configuration deployment, and status monitoring across distributed infrastructure.",
-    "version": "2.0.27",
+    "version": "2.0.33",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"

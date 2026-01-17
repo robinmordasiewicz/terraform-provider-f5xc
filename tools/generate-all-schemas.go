@@ -88,7 +88,8 @@ type SchemaDefinition struct {
 	XF5XCUseCases         []string `json:"x-f5xc-use-cases"`
 	XF5XCRelatedDomains   []string `json:"x-f5xc-related-domains"`
 	XF5XCIsPreview        bool     `json:"x-f5xc-is-preview"`
-	XF5XCServerDefault    bool     `json:"x-f5xc-server-default"` // True if server applies default when omitted
+	XF5XCServerDefault      bool        `json:"x-f5xc-server-default"`      // True if server applies default when omitted
+	XF5XCRecommendedValue   interface{} `json:"x-f5xc-recommended-value"`   // Recommended value for required fields
 }
 
 type TerraformAttribute struct {
@@ -111,8 +112,9 @@ type TerraformAttribute struct {
 	IsSpecField        bool   // True if this is a spec field (not metadata)
 	JsonName           string // JSON field name from OpenAPI for API marshaling
 	GoType             string // Go type for client struct generation
-	UseDomainValidator bool   // True if name field should use DomainValidator (for DNS resources)
-	ServerDefault      bool   // True if server applies default when field is omitted (from x-f5xc-server-default)
+	UseDomainValidator bool        // True if name field should use DomainValidator (for DNS resources)
+	ServerDefault      bool        // True if server applies default when field is omitted (from x-f5xc-server-default)
+	RecommendedValue   interface{} // Recommended value for required fields without server defaults
 }
 
 type ResourceTemplate struct {
@@ -190,12 +192,95 @@ type AttributeMetadata struct {
 	Description       string      `json:"description"`
 	ServerDefault     bool        `json:"server_default,omitempty"`      // True if server applies default when field is omitted
 	ServerDefaultDesc string      `json:"server_default_desc,omitempty"` // Description of what server default behavior is
+	RecommendedValue  interface{} `json:"recommended_value,omitempty"`   // Suggested value for required fields
 }
 
 // DependencyInfo holds resource relationship information
 type DependencyInfo struct {
 	References   []string `json:"references,omitempty"`    // Resources this resource references
 	ReferencedBy []string `json:"referenced_by,omitempty"` // Resources that reference this
+}
+
+// =============================================================================
+// OPERATION METADATA TYPES (v2.0.33 extensions - for MCP Server consumption)
+// =============================================================================
+
+// OperationsMetadataCollection holds all operation-level metadata for JSON output
+type OperationsMetadataCollection struct {
+	GeneratedAt string                           `json:"generated_at"`
+	Version     string                           `json:"version"`
+	Resources   map[string]*ResourceOperationInfo `json:"resources"`
+}
+
+// ResourceOperationInfo contains operation metadata for a single resource
+type ResourceOperationInfo struct {
+	Resource     string                        `json:"resource"`
+	BasePath     string                        `json:"base_path,omitempty"`
+	Operations   map[string]*OperationMetadata `json:"operations"`             // key: "create", "read", "update", "delete", "list"
+	BestPractices *BestPracticesInfo           `json:"best_practices,omitempty"`
+	Workflows    []*GuidedWorkflowInfo         `json:"guided_workflows,omitempty"`
+}
+
+// OperationMetadata represents operation-level x-f5xc-* extensions
+type OperationMetadata struct {
+	Method               string            `json:"method"`                           // HTTP method (POST, GET, PUT, DELETE)
+	Path                 string            `json:"path"`                             // API path
+	DangerLevel          string            `json:"danger_level,omitempty"`           // low, medium, high, critical
+	DiscoveredRespTime   *ResponseTimeInfo `json:"discovered_response_time,omitempty"`
+	RequiredFields       []string          `json:"required_fields,omitempty"`
+	ConfirmationRequired bool              `json:"confirmation_required,omitempty"`
+	SideEffects          *SideEffectsInfo  `json:"side_effects,omitempty"`
+	Purpose              string            `json:"purpose,omitempty"`                // From x-f5xc-operation-metadata.purpose
+}
+
+// ResponseTimeInfo represents the x-f5xc-discovered-response-time extension
+type ResponseTimeInfo struct {
+	P50Ms       int    `json:"p50_ms"`
+	P95Ms       int    `json:"p95_ms"`
+	P99Ms       int    `json:"p99_ms"`
+	SampleCount int    `json:"sample_count"`
+	Source      string `json:"source"` // "measured" or "estimate"
+}
+
+// SideEffectsInfo represents the x-f5xc-side-effects extension
+type SideEffectsInfo struct {
+	Creates  []string `json:"creates,omitempty"`
+	Modifies []string `json:"modifies,omitempty"`
+	Deletes  []string `json:"deletes,omitempty"`
+}
+
+// BestPracticesInfo represents the x-f5xc-best-practices extension
+type BestPracticesInfo struct {
+	CommonErrors []CommonErrorInfo `json:"common_errors,omitempty"`
+}
+
+// CommonErrorInfo represents a common error and its resolution
+type CommonErrorInfo struct {
+	Code       int    `json:"code"`
+	Message    string `json:"message"`
+	Resolution string `json:"resolution"`
+	Prevention string `json:"prevention,omitempty"`
+}
+
+// GuidedWorkflowInfo represents the x-f5xc-guided-workflows extension
+type GuidedWorkflowInfo struct {
+	Name        string              `json:"name"`
+	Description string              `json:"description"`
+	Steps       []*WorkflowStepInfo `json:"steps"`
+}
+
+// WorkflowStepInfo represents a step in a guided workflow
+type WorkflowStepInfo struct {
+	Order       int      `json:"order"`
+	Action      string   `json:"action"`
+	Description string   `json:"description,omitempty"`
+	Fields      []string `json:"fields,omitempty"`
+	Validation  string   `json:"validation,omitempty"`
+}
+
+// Global operations metadata collection (populated during generation)
+var operationsMetadataCollection = &OperationsMetadataCollection{
+	Resources: make(map[string]*ResourceOperationInfo),
 }
 
 // Global metadata collection (populated during generation)
@@ -582,6 +667,15 @@ func generateResourceFromSchema(resourceName string, schemaName string, schema *
 
 		// Collect metadata for MCP server
 		collectResourceMetadata(resource, category, requiresTier)
+
+		// Collect operation-level metadata (v2.0.33 extensions)
+		// Parse raw spec again to access path-level extensions
+		if rawData, err := os.ReadFile(specFile); err == nil {
+			var rawSpec map[string]interface{}
+			if json.Unmarshal(rawData, &rawSpec) == nil {
+				collectOperationMetadata(spec, resourceName, resource.APIPath, rawSpec)
+			}
+		}
 	}
 
 	fmt.Printf("✅ %s: %d attrs, %d blocks\n", resourceName, attrCount, blockCount)
@@ -1048,8 +1142,9 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 		OneOfGroup:  oneOfGroup,
 		MaxDepth:      depth,
 		IsSpecField:   true, // Attributes from OpenAPI spec are spec fields
-		JsonName:      name, // Original OpenAPI property name for JSON marshaling
-		ServerDefault: schema.XF5XCServerDefault,
+		JsonName:         name, // Original OpenAPI property name for JSON marshaling
+		ServerDefault:    schema.XF5XCServerDefault,
+		RecommendedValue: schema.XF5XCRecommendedValue,
 	}
 
 	// Build description with enrichment extension priority:
@@ -1096,6 +1191,12 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 	// This indicates fields where F5XC server applies sensible defaults when omitted
 	if schema.XF5XCServerDefault {
 		attr.Description += " Server applies default when omitted."
+	}
+
+	// Add recommended value note to description (x-f5xc-recommended-value extension)
+	// This indicates suggested values for fields that benefit from guidance
+	if schema.XF5XCRecommendedValue != nil {
+		attr.Description += fmt.Sprintf(" Recommended value: `%v`.", schema.XF5XCRecommendedValue)
 	}
 
 	// Determine type and extract nested attributes
@@ -1985,15 +2086,16 @@ func extractAttributeMetadata(attrs []TerraformAttribute, output map[string]*Att
 
 	for _, attr := range attrs {
 		attrMeta := &AttributeMetadata{
-			Type:          attr.Type,
-			Required:      attr.Required,
-			Optional:      attr.Optional,
-			Computed:      attr.Computed,
-			Sensitive:     attr.Sensitive,
-			IsBlock:       attr.IsBlock,
-			PlanModifier:  attr.PlanModifier,
-			Description:   attr.Description,
-			ServerDefault: attr.ServerDefault,
+			Type:             attr.Type,
+			Required:         attr.Required,
+			Optional:         attr.Optional,
+			Computed:         attr.Computed,
+			Sensitive:        attr.Sensitive,
+			IsBlock:          attr.IsBlock,
+			PlanModifier:     attr.PlanModifier,
+			Description:      attr.Description,
+			ServerDefault:    attr.ServerDefault,
+			RecommendedValue: attr.RecommendedValue,
 		}
 
 		// Add OneOf group reference if applicable
@@ -2033,6 +2135,318 @@ func inferValidationType(attr TerraformAttribute) string {
 	return ""
 }
 
+// =============================================================================
+// OPERATION METADATA EXTRACTION (v2.0.33 extensions)
+// =============================================================================
+
+// collectOperationMetadata extracts operation-level metadata from a domain spec file for a resource
+func collectOperationMetadata(spec *OpenAPI3Spec, resourceName string, basePath string, rawSpec map[string]interface{}) {
+	if spec == nil || len(spec.Paths) == 0 {
+		return
+	}
+
+	resourcePlural := resourceName + "s"
+	// Handle special pluralization
+	if strings.HasSuffix(resourceName, "y") && !strings.HasSuffix(resourceName, "ey") {
+		resourcePlural = strings.TrimSuffix(resourceName, "y") + "ies"
+	}
+
+	// Initialize resource operation info
+	resourceOps := &ResourceOperationInfo{
+		Resource:   resourceName,
+		BasePath:   basePath,
+		Operations: make(map[string]*OperationMetadata),
+	}
+
+	// Get raw paths for extension extraction
+	var rawPaths map[string]interface{}
+	if components, ok := rawSpec["paths"].(map[string]interface{}); ok {
+		rawPaths = components
+	}
+
+	// Process each path looking for this resource's operations
+	for pathKey, pathValue := range spec.Paths {
+		// Check if this path is for our resource
+		if !strings.Contains(pathKey, "/"+resourcePlural) && !strings.Contains(pathKey, "/"+resourceName+"s") {
+			continue
+		}
+
+		pathMap, ok := pathValue.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		// Get raw path data for extension extraction
+		var rawPathData map[string]interface{}
+		if rawPaths != nil {
+			if rp, ok := rawPaths[pathKey].(map[string]interface{}); ok {
+				rawPathData = rp
+			}
+		}
+
+		// Process each HTTP method
+		for method, methodValue := range pathMap {
+			if method == "parameters" {
+				continue
+			}
+
+			// Skip if method value is not a map (sanity check)
+			if _, ok := methodValue.(map[string]interface{}); !ok {
+				continue
+			}
+
+			// Get raw method data for extension extraction
+			var rawMethodData map[string]interface{}
+			if rawPathData != nil {
+				if rm, ok := rawPathData[method].(map[string]interface{}); ok {
+					rawMethodData = rm
+				}
+			}
+
+			// Determine operation type
+			opType := mapMethodToOperationType(method, pathKey)
+			if opType == "" {
+				continue
+			}
+
+			// Extract operation metadata from extensions
+			opMeta := extractOperationMetadataFromRaw(method, pathKey, rawMethodData)
+			if opMeta != nil {
+				resourceOps.Operations[opType] = opMeta
+			}
+		}
+
+		// Extract best practices from any operation (typically on the base path)
+		if rawPathData != nil {
+			if bp := extractBestPracticesFromRaw(rawPathData); bp != nil {
+				resourceOps.BestPractices = bp
+			}
+			if workflows := extractGuidedWorkflowsFromRaw(rawPathData); len(workflows) > 0 {
+				resourceOps.Workflows = workflows
+			}
+		}
+	}
+
+	// Only store if we found operations
+	if len(resourceOps.Operations) > 0 {
+		operationsMetadataCollection.Resources[resourceName] = resourceOps
+	}
+}
+
+// mapMethodToOperationType maps HTTP method and path to CRUD operation type
+func mapMethodToOperationType(method string, path string) string {
+	hasNameInPath := strings.Contains(path, "{name}") || strings.Contains(path, "{metadata.name}")
+
+	switch strings.ToUpper(method) {
+	case "POST":
+		return "create"
+	case "GET":
+		if hasNameInPath {
+			return "read"
+		}
+		return "list"
+	case "PUT":
+		return "update"
+	case "DELETE":
+		return "delete"
+	default:
+		return ""
+	}
+}
+
+// extractOperationMetadataFromRaw extracts x-f5xc-* extensions from raw operation data
+func extractOperationMetadataFromRaw(method string, path string, rawOp map[string]interface{}) *OperationMetadata {
+	if rawOp == nil {
+		return nil
+	}
+
+	opMeta := &OperationMetadata{
+		Method: strings.ToUpper(method),
+		Path:   path,
+	}
+
+	// Extract danger level
+	if dl, ok := rawOp["x-f5xc-danger-level"].(string); ok {
+		opMeta.DangerLevel = dl
+	}
+
+	// Extract required fields
+	if rf, ok := rawOp["x-f5xc-required-fields"].([]interface{}); ok {
+		for _, f := range rf {
+			if s, ok := f.(string); ok {
+				opMeta.RequiredFields = append(opMeta.RequiredFields, s)
+			}
+		}
+	}
+
+	// Extract confirmation required
+	if cr, ok := rawOp["x-f5xc-confirmation-required"].(bool); ok {
+		opMeta.ConfirmationRequired = cr
+	}
+
+	// Extract discovered response time
+	if rt, ok := rawOp["x-f5xc-discovered-response-time"].(map[string]interface{}); ok {
+		opMeta.DiscoveredRespTime = &ResponseTimeInfo{
+			P50Ms:       getIntFromInterface(rt["p50_ms"]),
+			P95Ms:       getIntFromInterface(rt["p95_ms"]),
+			P99Ms:       getIntFromInterface(rt["p99_ms"]),
+			SampleCount: getIntFromInterface(rt["sample_count"]),
+			Source:      getStringFromInterface(rt["source"]),
+		}
+	}
+
+	// Extract side effects
+	if se, ok := rawOp["x-f5xc-side-effects"].(map[string]interface{}); ok {
+		sideEffects := &SideEffectsInfo{}
+		if creates, ok := se["creates"].([]interface{}); ok {
+			for _, c := range creates {
+				if s, ok := c.(string); ok {
+					sideEffects.Creates = append(sideEffects.Creates, s)
+				}
+			}
+		}
+		if modifies, ok := se["modifies"].([]interface{}); ok {
+			for _, m := range modifies {
+				if s, ok := m.(string); ok {
+					sideEffects.Modifies = append(sideEffects.Modifies, s)
+				}
+			}
+		}
+		if deletes, ok := se["deletes"].([]interface{}); ok {
+			for _, d := range deletes {
+				if s, ok := d.(string); ok {
+					sideEffects.Deletes = append(sideEffects.Deletes, s)
+				}
+			}
+		}
+		if sideEffects.Creates != nil || sideEffects.Modifies != nil || sideEffects.Deletes != nil {
+			opMeta.SideEffects = sideEffects
+		}
+	}
+
+	// Extract purpose from operation metadata
+	if om, ok := rawOp["x-f5xc-operation-metadata"].(map[string]interface{}); ok {
+		if purpose, ok := om["purpose"].(string); ok {
+			opMeta.Purpose = purpose
+		}
+	}
+
+	// Only return if we extracted any meaningful metadata
+	if opMeta.DangerLevel != "" || opMeta.DiscoveredRespTime != nil ||
+		len(opMeta.RequiredFields) > 0 || opMeta.ConfirmationRequired ||
+		opMeta.SideEffects != nil || opMeta.Purpose != "" {
+		return opMeta
+	}
+	return nil
+}
+
+// extractBestPracticesFromRaw extracts x-f5xc-best-practices from path data
+func extractBestPracticesFromRaw(rawPath map[string]interface{}) *BestPracticesInfo {
+	// Check each method for best practices (typically on POST)
+	for _, methodData := range rawPath {
+		methodMap, ok := methodData.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		if bp, ok := methodMap["x-f5xc-best-practices"].(map[string]interface{}); ok {
+			bestPractices := &BestPracticesInfo{}
+
+			if errors, ok := bp["common_errors"].([]interface{}); ok {
+				for _, e := range errors {
+					if errMap, ok := e.(map[string]interface{}); ok {
+						errInfo := CommonErrorInfo{
+							Code:       getIntFromInterface(errMap["code"]),
+							Message:    getStringFromInterface(errMap["message"]),
+							Resolution: getStringFromInterface(errMap["resolution"]),
+							Prevention: getStringFromInterface(errMap["prevention"]),
+						}
+						bestPractices.CommonErrors = append(bestPractices.CommonErrors, errInfo)
+					}
+				}
+			}
+
+			if len(bestPractices.CommonErrors) > 0 {
+				return bestPractices
+			}
+		}
+	}
+	return nil
+}
+
+// extractGuidedWorkflowsFromRaw extracts x-f5xc-guided-workflows from path data
+func extractGuidedWorkflowsFromRaw(rawPath map[string]interface{}) []*GuidedWorkflowInfo {
+	var workflows []*GuidedWorkflowInfo
+
+	// Check each method for guided workflows
+	for _, methodData := range rawPath {
+		methodMap, ok := methodData.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		if wf, ok := methodMap["x-f5xc-guided-workflows"].([]interface{}); ok {
+			for _, w := range wf {
+				if wfMap, ok := w.(map[string]interface{}); ok {
+					workflow := &GuidedWorkflowInfo{
+						Name:        getStringFromInterface(wfMap["name"]),
+						Description: getStringFromInterface(wfMap["description"]),
+					}
+
+					if steps, ok := wfMap["steps"].([]interface{}); ok {
+						for i, s := range steps {
+							if stepMap, ok := s.(map[string]interface{}); ok {
+								step := &WorkflowStepInfo{
+									Order:       i + 1,
+									Action:      getStringFromInterface(stepMap["action"]),
+									Description: getStringFromInterface(stepMap["description"]),
+									Validation:  getStringFromInterface(stepMap["validation"]),
+								}
+								if fields, ok := stepMap["fields"].([]interface{}); ok {
+									for _, f := range fields {
+										if s, ok := f.(string); ok {
+											step.Fields = append(step.Fields, s)
+										}
+									}
+								}
+								workflow.Steps = append(workflow.Steps, step)
+							}
+						}
+					}
+
+					if workflow.Name != "" {
+						workflows = append(workflows, workflow)
+					}
+				}
+			}
+		}
+	}
+
+	return workflows
+}
+
+// getIntFromInterface safely extracts an int from an interface{}
+func getIntFromInterface(v interface{}) int {
+	switch val := v.(type) {
+	case int:
+		return val
+	case int64:
+		return int(val)
+	case float64:
+		return int(val)
+	default:
+		return 0
+	}
+}
+
+// getStringFromInterface safely extracts a string from an interface{}
+func getStringFromInterface(v interface{}) string {
+	if s, ok := v.(string); ok {
+		return s
+	}
+	return ""
+}
+
 // writeMetadataFiles writes the collected metadata to JSON files for MCP server consumption
 func writeMetadataFiles() error {
 	// Create metadata directory
@@ -2067,6 +2481,22 @@ func writeMetadataFiles() error {
 		return fmt.Errorf("failed to write validation patterns: %w", err)
 	}
 	fmt.Printf("📝 Wrote validation patterns to %s\n", validationPatternsPath)
+
+	// Write operations-metadata.json (v2.0.33 extensions)
+	if len(operationsMetadataCollection.Resources) > 0 {
+		operationsMetadataCollection.GeneratedAt = time.Now().UTC().Format(time.RFC3339)
+		operationsMetadataCollection.Version = "1.0.0"
+
+		operationsMetadataPath := filepath.Join(metadataDir, "operations-metadata.json")
+		operationsMetadataJSON, err := json.MarshalIndent(operationsMetadataCollection, "", "  ")
+		if err != nil {
+			return fmt.Errorf("failed to marshal operations metadata: %w", err)
+		}
+		if err := os.WriteFile(operationsMetadataPath, operationsMetadataJSON, 0644); err != nil {
+			return fmt.Errorf("failed to write operations metadata: %w", err)
+		}
+		fmt.Printf("📝 Wrote operations metadata for %d resources to %s\n", len(operationsMetadataCollection.Resources), operationsMetadataPath)
+	}
 
 	return nil
 }

@@ -401,6 +401,29 @@ const serverDefaultIndicator = "⚙️ **Server Default**"
 // serverDefaultMarker is the text pattern added by generate-all-schemas.go to identify server default fields
 const serverDefaultMarker = "Server applies default when omitted."
 
+// recommendedValuePrefix is the visual indicator prefix for recommended values
+const recommendedValuePrefix = "💡 **Recommended**"
+
+// recommendedValuePattern matches the text pattern added by generate-all-schemas.go for recommended values
+var recommendedValuePattern = regexp.MustCompile(`Recommended value: \x60([^\x60]+)\x60\.`)
+
+// dangerLevelIndicators maps operation danger levels to visual indicators
+// Used for marking resource operations that require extra caution
+var dangerLevelIndicators = map[string]string{
+	"low":      "",     // No indicator for low risk
+	"medium":   "⚠️",   // Warning for medium risk
+	"high":     "🔶",   // Orange diamond for high risk
+	"critical": "🔴",   // Red circle for critical risk
+}
+
+// formatDangerLevelIndicator returns the visual indicator for a danger level
+func formatDangerLevelIndicator(dangerLevel string) string {
+	if indicator, ok := dangerLevelIndicators[dangerLevel]; ok {
+		return indicator
+	}
+	return ""
+}
+
 // formatServerDefaultNote transforms the server default marker in descriptions into a visual indicator.
 // The marker "Server applies default when omitted." is replaced with a styled badge.
 func formatServerDefaultNote(description string) string {
@@ -415,6 +438,24 @@ func formatServerDefaultNote(description string) string {
 		return serverDefaultIndicator
 	}
 	return desc + " " + serverDefaultIndicator
+}
+
+// formatRecommendedValue transforms the recommended value marker in descriptions into a visual indicator.
+// The marker "Recommended value: `X`." is replaced with a styled badge showing the value.
+func formatRecommendedValue(description string) string {
+	match := recommendedValuePattern.FindStringSubmatch(description)
+	if match == nil {
+		return description
+	}
+	// Remove the marker text and add the visual indicator with the value
+	desc := recommendedValuePattern.ReplaceAllString(description, "")
+	desc = strings.TrimSpace(desc)
+	desc = strings.TrimSuffix(desc, ".")
+	indicator := fmt.Sprintf("%s: `%s`", recommendedValuePrefix, match[1])
+	if desc == "" {
+		return indicator
+	}
+	return desc + " " + indicator
 }
 
 // appendSubscriptionIndicator adds the Advanced subscription indicator to a description
@@ -1598,6 +1639,8 @@ func transformDoc(filePath string) error {
 		if desc != "" {
 			// Format server default note into visual indicator (x-f5xc-server-default extension)
 			desc = formatServerDefaultNote(desc)
+			// Format recommended value into visual indicator (x-f5xc-recommended-value extension)
+			desc = formatRecommendedValue(desc)
 			// Annotate advanced feature properties with subscription tier indicator
 			desc = appendSubscriptionIndicator(resourceName, attr.name, desc)
 			result.WriteString("<br>" + desc)
@@ -1912,6 +1955,8 @@ func transformDoc(filePath string) error {
 					if desc != "" {
 						// Format server default note into visual indicator (x-f5xc-server-default extension)
 						desc = formatServerDefaultNote(desc)
+						// Format recommended value into visual indicator (x-f5xc-recommended-value extension)
+						desc = formatRecommendedValue(desc)
 						result.WriteString("<br>" + desc)
 					}
 

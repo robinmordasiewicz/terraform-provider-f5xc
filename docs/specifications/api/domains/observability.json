@@ -3,7 +3,7 @@
   "info": {
     "title": "Observability",
     "description": "Telemetry systems execute scheduled availability checks from distributed AWS locations worldwide. Response code validation and timing metrics feed into historical trend analysis. DNS resolution accuracy verification ensures name service reliability. Certificate lifecycle tracking generates expiration warnings before outages occur. Regional probe distribution provides geographic coverage insights. Health summaries aggregate results into actionable dashboards with configurable alerting thresholds.",
-    "version": "2.0.27",
+    "version": "2.0.33",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -14897,7 +14897,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:49.934393+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:13.806986+00:00"
           },
           "start_time": {
             "type": "string",
@@ -15097,7 +15097,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:49.934490+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:13.807084+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -15496,7 +15496,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:49.934683+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:13.807281+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Avg Aggregation Data\" Average Aggregation data.",
@@ -15730,7 +15730,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:49.934839+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:13.807441+00:00"
           },
           "order_by": {
             "$ref": "#/components/schemas/logOrderByData"
@@ -15839,7 +15839,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:49.934922+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:13.807528+00:00"
           },
           "order_by": {
             "$ref": "#/components/schemas/logOrderByData"
@@ -15955,7 +15955,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:49.935037+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:13.807645+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Field Sub Field Aggregation Bucket\" Field sub aggregation bucket containing field values and the number of logs.",
@@ -16124,7 +16124,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:49.935123+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:13.807732+00:00"
           },
           "sub_aggs": {
             "type": "object",
@@ -16232,7 +16232,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:49.935256+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:13.807869+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Max Aggregation Data\" Max Aggregation data.",
@@ -16289,7 +16289,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:49.935298+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:13.807911+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Min Aggregation Data\" Min Aggregation data.",
@@ -16520,7 +16520,7 @@
             "maxLength": 16,
             "minLength": 7,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:49.935453+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:13.808068+00:00"
           },
           "value": {
             "type": "number",
@@ -16536,7 +16536,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:49.935481+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:13.808095+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Percentile Aggregation Data\" Percentile Aggregation data.",
@@ -16646,7 +16646,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:49.935535+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:13.808149+00:00"
           },
           "previous_value": {
             "type": "string",
@@ -16680,7 +16680,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:49.935580+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:13.808195+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Trend Value\" Trend value contains trend value, trend sentiment and trend calculation description and window size.",
@@ -16748,7 +16748,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.817431+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.643678+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -16823,7 +16823,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.817483+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.643730+00:00"
           },
           "service_name": {
             "type": "string",
@@ -16866,7 +16866,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.817521+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.643769+00:00"
           },
           "type": {
             "type": "string",
@@ -17011,7 +17011,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.817594+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.643842+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -17127,7 +17127,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.817657+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.643905+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -17178,14 +17178,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.817717+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.643955+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17206,7 +17206,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.817744+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.643983+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
@@ -17286,7 +17286,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.817786+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644024+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -17339,14 +17339,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.817834+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644072+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17367,7 +17367,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.817862+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644100+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
@@ -17447,7 +17447,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.817902+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644141+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -17500,14 +17500,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.817951+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644190+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17528,7 +17528,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.817978+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644218+00:00"
           },
           "uid": {
             "type": "string",
@@ -17552,7 +17552,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818008+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644247+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectMetaType is metadata(common attributes) of an object that all configuration objects will have.",
@@ -17602,7 +17602,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818038+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644278+00:00"
           },
           "name": {
             "type": "string",
@@ -17623,7 +17623,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818066+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644316+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17644,7 +17644,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818093+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644345+00:00"
           },
           "tenant": {
             "type": "string",
@@ -17667,7 +17667,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818120+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644372+00:00"
           },
           "uid": {
             "type": "string",
@@ -17691,7 +17691,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818149+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644401+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -17771,7 +17771,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818190+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644443+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -17822,14 +17822,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818238+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644492+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17850,7 +17850,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818266+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644520+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
@@ -17974,7 +17974,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818344+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644598+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -18094,7 +18094,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818403+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644658+00:00"
           },
           "status": {
             "type": "string",
@@ -18114,7 +18114,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818430+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644686+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -18309,7 +18309,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818555+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644811+00:00"
           },
           "uid": {
             "type": "string",
@@ -18332,7 +18332,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818583+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644839+00:00"
           }
         },
         "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
@@ -18560,7 +18560,7 @@
             "maxLength": 6,
             "minLength": 6,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818718+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.644999+00:00"
           },
           "object_index": {
             "type": "integer",
@@ -18641,7 +18641,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818784+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.645082+00:00"
           },
           "trace_info": {
             "type": "string",
@@ -18683,7 +18683,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818822+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.645122+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -18772,7 +18772,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818871+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.645172+00:00"
           },
           "name": {
             "type": "string",
@@ -18793,7 +18793,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818899+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.645200+00:00"
           },
           "namespace": {
             "type": "string",
@@ -18814,7 +18814,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818926+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.645227+00:00"
           },
           "uid": {
             "type": "string",
@@ -18835,7 +18835,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.818953+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.645257+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
@@ -18884,8 +18884,8 @@
             },
             "x-f5xc-description-short": "Specific source location within AWS Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -18934,8 +18934,8 @@
             },
             "x-f5xc-description-short": "Specific source location within AWS Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -19080,8 +19080,8 @@
             },
             "x-f5xc-description-short": "Specific source location within F5 Distributed Cloud Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -19130,8 +19130,8 @@
             },
             "x-f5xc-description-short": "Specific source location within F5 Distributed Cloud Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -19239,8 +19239,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -19292,8 +19292,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -19423,15 +19423,15 @@
             },
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 2048,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.819237+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.645556+00:00"
           },
           "external_sources": {
             "type": "array",
@@ -19457,8 +19457,8 @@
             },
             "x-f5xc-description-short": "Internet facing monitor sources Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -19516,8 +19516,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -19559,8 +19559,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -19589,8 +19589,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -19637,8 +19637,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -19666,8 +19666,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -19743,7 +19743,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.819458+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.645778+00:00"
           },
           "namespace": {
             "type": "string",
@@ -19763,7 +19763,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.819485+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.645806+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -19921,7 +19921,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.819599+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.645921+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -20004,15 +20004,15 @@
             },
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 2048,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.819639+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.645963+00:00"
           },
           "external_sources": {
             "type": "array",
@@ -20038,8 +20038,8 @@
             },
             "x-f5xc-description-short": "Internet facing monitor sources Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20097,8 +20097,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20140,8 +20140,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20170,8 +20170,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20218,8 +20218,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20247,8 +20247,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20318,15 +20318,15 @@
             },
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 2048,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.819861+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.646175+00:00"
           },
           "external_sources": {
             "type": "array",
@@ -20353,8 +20353,8 @@
             },
             "x-f5xc-description-short": "Internet facing monitor sources Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20413,8 +20413,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20458,8 +20458,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20489,8 +20489,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20539,8 +20539,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20569,8 +20569,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20699,7 +20699,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.820104+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.646429+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -20753,7 +20753,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.820170+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.646496+00:00"
           },
           "namespace": {
             "type": "string",
@@ -20772,7 +20772,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.820199+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.646524+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -20814,7 +20814,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.820253+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.646579+00:00"
           },
           "uid": {
             "type": "string",
@@ -20835,7 +20835,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.820281+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.646607+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of v1_dns_monitor is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -20891,8 +20891,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -20917,8 +20917,8 @@
             "minimum": 1,
             "maximum": 65535,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -21040,15 +21040,15 @@
             },
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 2048,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:53.820382+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:17.646709+00:00"
           },
           "external_sources": {
             "type": "array",
@@ -21074,8 +21074,8 @@
             },
             "x-f5xc-description-short": "Internet facing monitor sources Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -21133,8 +21133,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -21176,8 +21176,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -21206,8 +21206,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -21254,8 +21254,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -21283,8 +21283,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -21494,8 +21494,8 @@
             },
             "x-f5xc-description-short": "Internet facing monitor sources Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -21588,8 +21588,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -21673,8 +21673,8 @@
             "x-f5xc-description-short": "HTTP response codes which will result in a healthy monitor. Use \"*\" as a wildcard character.",
             "x-f5xc-description-medium": "HTTP response codes which will result in a healthy monitor. Use \"*\" as a wildcard character. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -21698,8 +21698,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -21750,8 +21750,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -21777,8 +21777,8 @@
             "format": "uri",
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -21861,7 +21861,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.010149+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:18.851761+00:00"
           },
           "namespace": {
             "type": "string",
@@ -21881,7 +21881,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.010177+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:18.851790+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -22039,7 +22039,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.010292+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:18.851906+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -22127,8 +22127,8 @@
             },
             "x-f5xc-description-short": "Internet facing monitor sources Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -22221,8 +22221,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -22306,8 +22306,8 @@
             "x-f5xc-description-short": "HTTP response codes which will result in a healthy monitor. Use \"*\" as a wildcard character.",
             "x-f5xc-description-medium": "HTTP response codes which will result in a healthy monitor. Use \"*\" as a wildcard character. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -22331,8 +22331,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -22383,8 +22383,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -22410,8 +22410,8 @@
             "format": "uri",
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -22493,8 +22493,8 @@
             },
             "x-f5xc-description-short": "Internet facing monitor sources Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -22590,8 +22590,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -22678,8 +22678,8 @@
             "x-f5xc-description-short": "HTTP response codes which will result in a healthy monitor. Use \"*\" as a wildcard character.",
             "x-f5xc-description-medium": "HTTP response codes which will result in a healthy monitor. Use \"*\" as a wildcard character. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -22704,8 +22704,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -22758,8 +22758,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -22786,8 +22786,8 @@
             "format": "uri",
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -22858,14 +22858,14 @@
             },
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 2048,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.010852+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:18.852472+00:00"
           },
           "value": {
             "type": "string",
@@ -22889,7 +22889,7 @@
             },
             "x-original-maxLength": 8192,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.010879+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:18.852500+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -22996,7 +22996,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.010943+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:18.852564+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -23050,7 +23050,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.011009+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:18.852631+00:00"
           },
           "namespace": {
             "type": "string",
@@ -23069,7 +23069,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.011038+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:18.852659+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -23111,7 +23111,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.011092+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:18.852713+00:00"
           },
           "uid": {
             "type": "string",
@@ -23132,7 +23132,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.011120+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:18.852741+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of v1_http_monitor is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -23268,8 +23268,8 @@
             },
             "x-f5xc-description-short": "Internet facing monitor sources Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -23362,8 +23362,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -23447,8 +23447,8 @@
             "x-f5xc-description-short": "HTTP response codes which will result in a healthy monitor. Use \"*\" as a wildcard character.",
             "x-f5xc-description-medium": "HTTP response codes which will result in a healthy monitor. Use \"*\" as a wildcard character. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -23472,8 +23472,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -23524,8 +23524,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -23551,8 +23551,8 @@
             "format": "uri",
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -23979,7 +23979,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.991976+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.830078+00:00"
           },
           "query": {
             "type": "string",
@@ -24123,7 +24123,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.992057+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.830161+00:00"
           },
           "query": {
             "type": "string",
@@ -24270,7 +24270,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.992145+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.830251+00:00"
           },
           "query": {
             "type": "string",
@@ -24413,7 +24413,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.992226+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.830342+00:00"
           },
           "query": {
             "type": "string",
@@ -24566,8 +24566,8 @@
             "x-f5xc-description-short": "List of label filter expressions of the form \"label key\" QueryOp \"value\".",
             "x-f5xc-description-medium": "List of label filter expressions of the form \"label key\" QueryOp \"value\". Response will only contain data that matches all the conditions specified in the label_filter. For external connector logs, user can specify LABEL_EXTERNAL_CONNECTOR_IP & LABEL_EXTERNAL_CONNECTOR_NODE in the label_filter...",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -24615,7 +24615,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.992465+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.830585+00:00"
           },
           "site": {
             "type": "string",
@@ -24740,7 +24740,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.992876+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.830997+00:00"
           },
           "query": {
             "type": "string",
@@ -24884,7 +24884,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.992957+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.831075+00:00"
           },
           "query": {
             "type": "string",
@@ -25031,7 +25031,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.993044+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.831162+00:00"
           },
           "query": {
             "type": "string",
@@ -25192,7 +25192,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.993131+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.831249+00:00"
           },
           "query": {
             "type": "string",
@@ -25356,7 +25356,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.993226+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.831356+00:00"
           },
           "query": {
             "type": "string",
@@ -25517,7 +25517,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.993312+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.831442+00:00"
           },
           "query": {
             "type": "string",
@@ -25650,14 +25650,14 @@
             },
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.993407+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.831536+00:00"
           }
         },
         "x-f5xc-description-short": "Label Filter is used to filter th that match the logs specified label key/value and the operator.",
@@ -25848,7 +25848,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.993592+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.831721+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -25947,7 +25947,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.993916+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.832036+00:00"
           },
           "query": {
             "type": "string",
@@ -26105,7 +26105,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.994004+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.832124+00:00"
           },
           "query": {
             "type": "string",
@@ -26253,7 +26253,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.994111+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.832231+00:00"
           },
           "query": {
             "type": "string",
@@ -26397,7 +26397,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.994189+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.832318+00:00"
           },
           "query": {
             "type": "string",
@@ -26545,7 +26545,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.994275+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.832405+00:00"
           },
           "query": {
             "type": "string",
@@ -26689,7 +26689,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:55.994352+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:19.832483+00:00"
           },
           "query": {
             "type": "string",
@@ -28199,22 +28199,18 @@
         },
         "x-f5xc-description-short": "Entry in certificate report detail response.",
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for synthetic_monitorCertificateReportDetailResponseEntry",
+          "description": "TLS certificate for securing HTTPS endpoints and connections",
           "required_fields": [
-            "cert_common_name",
-            "cert_issuer",
-            "certificate_expiry_time",
-            "monitor_labels",
-            "monitor_name",
-            "region",
-            "region_provider"
+            "metadata.name",
+            "metadata.namespace",
+            "spec.certificate_url"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for synthetic_monitorCertificateReportDetailResponseEntry\nmetadata:\n  name: example\n  namespace: default\nspec:\n  cert_common_name: value\n  cert_issuer: value\n  certificate_expiry_time: value\n  monitor_labels: value\n  monitor_name: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"cert_common_name\": \"value\",\n    \"cert_issuer\": \"value\",\n    \"certificate_expiry_time\": \"value\",\n    \"monitor_labels\": \"value\",\n    \"monitor_name\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/synthetic_monitor_certificate_report_detail_response_entries\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "example_yaml": "apiVersion: v1\nkind: certificate\nmetadata:\n  name: example-cert\n  namespace: default\nspec:\n  certificate_url: \"string:///BASE64_ENCODED_CERTIFICATE\"\n  private_key:\n    blindfold_secret_info:\n      location: \"string:///BASE64_ENCODED_ENCRYPTED_KEY\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example-cert\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"certificate_url\": \"string:///BASE64_ENCODED_CERTIFICATE\",\n    \"private_key\": {\n      \"blindfold_secret_info\": {\n        \"location\": \"string:///BASE64_ENCODED_ENCRYPTED_KEY\"\n      }\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/certificates\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @certificate.json\n"
         },
-        "x-f5xc-cli-domain": "observability"
+        "x-f5xc-cli-domain": "certificates"
       },
       "synthetic_monitorDNSMonitorEventDetail": {
         "type": "object",
@@ -28618,16 +28614,18 @@
           }
         },
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for synthetic_monitorGetCertificateReportDetailResponse",
+          "description": "TLS certificate for securing HTTPS endpoints and connections",
           "required_fields": [
-            "entries"
+            "metadata.name",
+            "metadata.namespace",
+            "spec.certificate_url"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for synthetic_monitorGetCertificateReportDetailResponse\nmetadata:\n  name: example\n  namespace: default\nspec:\n  entries: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"entries\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/synthetic_monitors\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "example_yaml": "apiVersion: v1\nkind: certificate\nmetadata:\n  name: example-cert\n  namespace: default\nspec:\n  certificate_url: \"string:///BASE64_ENCODED_CERTIFICATE\"\n  private_key:\n    blindfold_secret_info:\n      location: \"string:///BASE64_ENCODED_ENCRYPTED_KEY\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example-cert\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"certificate_url\": \"string:///BASE64_ENCODED_CERTIFICATE\",\n    \"private_key\": {\n      \"blindfold_secret_info\": {\n        \"location\": \"string:///BASE64_ENCODED_ENCRYPTED_KEY\"\n      }\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/certificates\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @certificate.json\n"
         },
-        "x-f5xc-cli-domain": "observability"
+        "x-f5xc-cli-domain": "certificates"
       },
       "synthetic_monitorGetDNSMonitorHealthRequest": {
         "type": "object",
@@ -28684,7 +28682,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:59.283879+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:23.123418+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -29138,7 +29136,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:59.284084+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:23.123624+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -29480,7 +29478,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:59.284253+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:23.123794+00:00"
           },
           "start_time": {
             "type": "string",
@@ -29630,7 +29628,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:59.284326+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:23.123867+00:00"
           },
           "segments": {
             "type": "array",
@@ -30668,8 +30666,8 @@
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -30691,7 +30689,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:59.284845+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:23.124385+00:00"
           },
           "source": {
             "type": "string",
@@ -30767,8 +30765,8 @@
               "ves.io.schema.rules.message.required": "true"
             },
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -30913,7 +30911,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:59.284964+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:23.124504+00:00"
           },
           "region": {
             "type": "string",
@@ -31017,7 +31015,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:59.285016+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:23.124556+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -31178,7 +31176,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:59.285105+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:23.124646+00:00"
           },
           "region": {
             "type": "string",
@@ -31289,7 +31287,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:59.285172+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:23.124713+00:00"
           },
           "source": {
             "type": "string",
@@ -31395,7 +31393,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:59.285230+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:23.124771+00:00"
           },
           "request_body": {
             "$ref": "#/components/schemas/protobufAny"
@@ -31475,7 +31473,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:59.285281+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:23.124823+00:00"
           },
           "value": {
             "type": "string",
@@ -31492,7 +31490,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:59.285308+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:23.124850+00:00"
           }
         },
         "x-f5xc-description-short": "Tuple with a suggested value and it's description.",
@@ -31594,7 +31592,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:19:59.285370+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:23.124912+00:00"
           },
           "values": {
             "type": "array",

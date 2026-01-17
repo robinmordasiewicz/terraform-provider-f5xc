@@ -3,7 +3,7 @@
   "info": {
     "title": "Container Services",
     "description": "Namespaced isolation with configurable limits and autoscaling policies. vK8s abstracts operational overhead while providing scheduling, persistent storage, and service mesh integration. Compute profiles specify CPU, memory, and GPU allocations for reproducible environments. Telemetry tracks consumption patterns across geographically distributed infrastructure nodes.",
-    "version": "2.0.27",
+    "version": "2.0.33",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -3821,7 +3821,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.526871+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332276+00:00"
           },
           "name": {
             "type": "string",
@@ -3842,7 +3842,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.526902+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332319+00:00"
           },
           "namespace": {
             "type": "string",
@@ -3863,7 +3863,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.526932+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332349+00:00"
           },
           "tenant": {
             "type": "string",
@@ -3886,7 +3886,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.526960+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332377+00:00"
           },
           "uid": {
             "type": "string",
@@ -3910,7 +3910,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.526990+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332407+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -3963,7 +3963,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527032+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332449+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -4038,7 +4038,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527082+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332499+00:00"
           },
           "service_name": {
             "type": "string",
@@ -4081,7 +4081,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527120+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332537+00:00"
           },
           "type": {
             "type": "string",
@@ -4226,7 +4226,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527193+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332611+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -4326,7 +4326,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527264+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332683+00:00"
           }
         },
         "x-f5xc-description-short": "Metric data contains timestamp and the value.",
@@ -4402,7 +4402,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527307+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332725+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -4453,14 +4453,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527357+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332774+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4481,7 +4481,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527384+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332801+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
@@ -4561,7 +4561,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527427+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332843+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -4614,14 +4614,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527476+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332892+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4642,7 +4642,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527504+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332920+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
@@ -4722,7 +4722,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527545+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.332961+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -4773,14 +4773,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527593+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333009+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4801,7 +4801,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527621+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333036+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
@@ -4925,7 +4925,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527713+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333115+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -5045,7 +5045,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527774+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333175+00:00"
           },
           "status": {
             "type": "string",
@@ -5065,7 +5065,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527802+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333202+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -5260,7 +5260,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527929+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333342+00:00"
           },
           "uid": {
             "type": "string",
@@ -5283,7 +5283,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527958+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333372+00:00"
           }
         },
         "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
@@ -5359,7 +5359,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.527990+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333403+00:00"
           },
           "previous_value": {
             "type": "string",
@@ -5398,7 +5398,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528038+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333451+00:00"
           }
         },
         "x-f5xc-description-short": "Trend value contains trend value, trend sentiment and trend calculation description and window size.",
@@ -5489,7 +5489,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528070+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333484+00:00"
           },
           "name": {
             "type": "string",
@@ -5510,7 +5510,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528097+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333512+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5531,7 +5531,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528125+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333539+00:00"
           },
           "uid": {
             "type": "string",
@@ -5552,7 +5552,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528154+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333568+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
@@ -5601,14 +5601,14 @@
             "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g.",
             "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 128,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528185+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333599+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5635,7 +5635,7 @@
             },
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528213+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333627+00:00"
           },
           "tenant": {
             "type": "string",
@@ -5664,7 +5664,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528242+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333655+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a direct reference from one object(the referrer) to another(the referred).",
@@ -5833,7 +5833,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528374+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333786+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5853,7 +5853,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528402+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333813+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -5956,7 +5956,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528498+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.333909+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -6156,7 +6156,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528612+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.334022+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -6210,7 +6210,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528680+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.334088+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6229,7 +6229,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528721+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.334117+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -6271,7 +6271,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528776+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.334172+00:00"
           },
           "uid": {
             "type": "string",
@@ -6292,7 +6292,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528804+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.334201+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of virtual_k8s is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -6433,7 +6433,7 @@
             "maxLength": 16,
             "minLength": 7,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528868+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.334264+00:00"
           },
           "value": {
             "type": "array",
@@ -6452,7 +6452,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528899+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.334296+00:00"
           }
         },
         "x-f5xc-description-short": "PVC Metric Type Data contains key/value pair that uniquely identifies the group_by labels specified in the request.",
@@ -6527,8 +6527,8 @@
             "x-f5xc-description-short": "Select fields to be returned in the response. One or more fields in {PVC_USAGE, PVC_CAPACITY} can be specified.",
             "x-f5xc-description-medium": "Select fields to be returned in the response. One or more fields in {PVC_USAGE, PVC_CAPACITY} can be specified. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -6584,7 +6584,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.528968+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.334378+00:00"
           },
           "range": {
             "type": "string",
@@ -7814,14 +7814,14 @@
               "ves.io.schema.rules.string.min_bytes": "1"
             },
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.826221+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.623028+00:00"
           },
           "presence": {
             "type": "boolean",
@@ -7960,8 +7960,8 @@
             "x-f5xc-description-short": "Exclusive with [path prefix] Regular expression of path match (e.g. The value .* will match on all paths)",
             "x-f5xc-description-medium": "Exclusive with [path prefix] Regular expression of path match (e.g. The value .* will match on all paths).",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -8113,8 +8113,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -8392,14 +8392,14 @@
             "minLength": 0,
             "maxLength": 4,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.826643+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.623463+00:00"
           },
           "store_provider": {
             "type": "string",
@@ -8462,7 +8462,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.826683+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.623503+00:00"
           },
           "url": {
             "type": "string",
@@ -8488,8 +8488,8 @@
             "format": "uri",
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -8565,8 +8565,8 @@
             },
             "x-f5xc-description-short": "Ordered list of hash algorithms to be used. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -8678,7 +8678,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.826963+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.623773+00:00"
           },
           "name": {
             "type": "string",
@@ -8697,7 +8697,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.826991+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.623802+00:00"
           },
           "namespace": {
             "type": "string",
@@ -8716,7 +8716,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.827020+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.623830+00:00"
           }
         },
         "x-f5xc-description-short": "KubeRefType represents a reference to a Kubernetes (K8s) object.",
@@ -8846,8 +8846,8 @@
             "x-f5xc-description-short": "TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
             "x-f5xc-description-medium": "TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -8872,7 +8872,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.827833+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.624648+00:00"
           },
           "disable_ocsp_stapling": {
             "$ref": "#/components/schemas/ioschemaEmpty"
@@ -8885,19 +8885,16 @@
           }
         },
         "x-f5xc-minimum-configuration": {
-          "description": "Minimum configuration for schemaTlsCertificateType",
+          "description": "TLS certificate for securing HTTPS endpoints and connections",
           "required_fields": [
-            "certificate_url",
-            "custom_hash_algorithms",
-            "description",
-            "disable_ocsp_stapling",
-            "private_key",
-            "use_system_defaults"
+            "metadata.name",
+            "metadata.namespace",
+            "spec.certificate_url"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "# Minimal example for schemaTlsCertificateType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  certificate_url: value\n  custom_hash_algorithms: value\n  description: value\n  disable_ocsp_stapling: value\n  private_key: value",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"certificate_url\": \"value\",\n    \"custom_hash_algorithms\": \"value\",\n    \"description\": \"value\",\n    \"disable_ocsp_stapling\": \"value\",\n    \"private_key\": \"value\"\n  }\n}",
-          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_tls_certificate_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+          "example_yaml": "apiVersion: v1\nkind: certificate\nmetadata:\n  name: example-cert\n  namespace: default\nspec:\n  certificate_url: \"string:///BASE64_ENCODED_CERTIFICATE\"\n  private_key:\n    blindfold_secret_info:\n      location: \"string:///BASE64_ENCODED_ENCRYPTED_KEY\"\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example-cert\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"certificate_url\": \"string:///BASE64_ENCODED_CERTIFICATE\",\n    \"private_key\": {\n      \"blindfold_secret_info\": {\n        \"location\": \"string:///BASE64_ENCODED_ENCRYPTED_KEY\"\n      }\n    }\n  }\n}\n",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/certificates\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @certificate.json\n"
         },
         "x-f5xc-cli-domain": "certificates"
       },
@@ -8949,7 +8946,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.827970+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.624785+00:00"
           },
           "location": {
             "type": "string",
@@ -8967,7 +8964,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.827998+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.624814+00:00"
           },
           "provider": {
             "type": "string",
@@ -8986,7 +8983,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.828026+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.624842+00:00"
           },
           "secret_encoding": {
             "$ref": "#/components/schemas/schemaSecretEncodingType"
@@ -9010,7 +9007,7 @@
             "maxLength": 1,
             "minLength": 1,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.828063+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.624878+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Vault Secret\" VaultSecretInfoType specifies information about the Secret managed by Hashicorp Vault.",
@@ -9052,7 +9049,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.828207+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.625023+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Wingman Secret\" WingmanSecretInfoType specifies the handle to the wingman secret.",
@@ -9130,8 +9127,8 @@
             "x-f5xc-description-short": "Users can add one or more certificates that share the same set of domains.",
             "x-f5xc-description-medium": "Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -9213,8 +9210,8 @@
             },
             "x-f5xc-description-short": "The TLS listener will only support the specified cipher list. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -9271,8 +9268,8 @@
             },
             "x-f5xc-description-short": "Select one or more certificates with any domain names. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -9356,8 +9353,8 @@
             },
             "x-f5xc-description-short": "Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -9597,8 +9594,8 @@
             },
             "x-f5xc-description-short": "X-Forwarded-Client-Cert header elements to be added to requests Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -9828,8 +9825,8 @@
             },
             "x-f5xc-description-short": "Containers to use for service Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -9975,8 +9972,8 @@
             },
             "x-f5xc-description-short": "Where should this load balancer be available Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -10000,8 +9997,8 @@
               "ves.io.schema.rules.repeated.max_items": "16"
             },
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -10076,8 +10073,8 @@
               "ves.io.schema.rules.repeated.max_items": "16"
             },
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -10237,8 +10234,8 @@
             "x-f5xc-description-short": "List of Domains (host/authority header) that will be matched to Load Balancer.",
             "x-f5xc-description-medium": "List of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: www.example.com. 2.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -10266,8 +10263,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -10404,14 +10401,14 @@
             },
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.829092+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.625910+00:00"
           },
           "volume_name": {
             "type": "string",
@@ -10432,8 +10429,8 @@
             },
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -10658,14 +10655,14 @@
             },
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.829237+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.626055+00:00"
           },
           "readiness_check": {
             "$ref": "#/components/schemas/workloadHealthCheckType"
@@ -10786,7 +10783,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.829335+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.626154+00:00"
           },
           "namespace": {
             "type": "string",
@@ -10806,7 +10803,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.829362+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.626181+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -10855,8 +10852,8 @@
             },
             "x-f5xc-description-short": "Which customer sites should this workload be deployed Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -10907,8 +10904,8 @@
             },
             "x-f5xc-description-short": "Which customer virtual sites should this workload be deployed Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -11004,8 +11001,8 @@
             },
             "x-f5xc-description-short": "Which regional edge sites should this workload be deployed Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -11056,8 +11053,8 @@
             },
             "x-f5xc-description-short": "Which regional edge virtual sites should this workload be deployed Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -11104,8 +11101,8 @@
               "ves.io.schema.rules.message.required": "true"
             },
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -11155,7 +11152,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.829514+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.626342+00:00"
           },
           "value": {
             "type": "string",
@@ -11180,7 +11177,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.829541+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.626370+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -11233,7 +11230,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.829588+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.626418+00:00"
           }
         },
         "x-f5xc-description-short": "Ephemeral storage volume configuration for the workload.",
@@ -11289,8 +11286,8 @@
             "x-f5xc-description-short": "Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem.",
             "x-f5xc-description-medium": "Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to...",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -11303,20 +11300,23 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec"
+            "spec.interval",
+            "spec.timeout",
+            "spec.healthy_threshold",
+            "spec.unhealthy_threshold"
           ],
           "mutually_exclusive_groups": [
             {
               "fields": [
-                "spec.http",
-                "spec.tcp",
-                "spec.dns"
+                "spec.http_health_check",
+                "spec.tcp_health_check",
+                "spec.udp_icmp_health_check"
               ],
               "reason": "Choose exactly one health check type"
             }
           ],
-          "example_yaml": "apiVersion: v1\nkind: healthcheck\nmetadata:\n  name: http-health\n  namespace: default\nspec:\n  http:\n    path: /health\n    use_origin_server_hostname: true\n  interval_seconds: 10\n  timeout_seconds: 3\n  unhealthy_threshold: 3\n  healthy_threshold: 2\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"http-health\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"http\": {\"path\": \"/health\", \"use_origin_server_hostname\": true},\n    \"interval_seconds\": 10,\n    \"timeout_seconds\": 3,\n    \"unhealthy_threshold\": 3,\n    \"healthy_threshold\": 2\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: healthcheck\nmetadata:\n  name: http-health\n  namespace: default\nspec:\n  http_health_check:\n    path: /health\n    use_origin_server_hostname: true\n  interval: 15\n  timeout: 3\n  unhealthy_threshold: 1\n  healthy_threshold: 3\n  jitter_percent: 30\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"http-health\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"http_health_check\": {\"path\": \"/health\", \"use_origin_server_hostname\": true},\n    \"interval\": 15,\n    \"timeout\": 3,\n    \"unhealthy_threshold\": 1,\n    \"healthy_threshold\": 3,\n    \"jitter_percent\": 30\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/healthchecks\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @healthcheck.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -11407,7 +11407,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.829703+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.626523+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -11543,8 +11543,8 @@
             "x-f5xc-description-short": "Path to access on the HTTP server. Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -11559,20 +11559,23 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec"
+            "spec.interval",
+            "spec.timeout",
+            "spec.healthy_threshold",
+            "spec.unhealthy_threshold"
           ],
           "mutually_exclusive_groups": [
             {
               "fields": [
-                "spec.http",
-                "spec.tcp",
-                "spec.dns"
+                "spec.http_health_check",
+                "spec.tcp_health_check",
+                "spec.udp_icmp_health_check"
               ],
               "reason": "Choose exactly one health check type"
             }
           ],
-          "example_yaml": "apiVersion: v1\nkind: healthcheck\nmetadata:\n  name: http-health\n  namespace: default\nspec:\n  http:\n    path: /health\n    use_origin_server_hostname: true\n  interval_seconds: 10\n  timeout_seconds: 3\n  unhealthy_threshold: 3\n  healthy_threshold: 2\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"http-health\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"http\": {\"path\": \"/health\", \"use_origin_server_hostname\": true},\n    \"interval_seconds\": 10,\n    \"timeout_seconds\": 3,\n    \"unhealthy_threshold\": 3,\n    \"healthy_threshold\": 2\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: healthcheck\nmetadata:\n  name: http-health\n  namespace: default\nspec:\n  http_health_check:\n    path: /health\n    use_origin_server_hostname: true\n  interval: 15\n  timeout: 3\n  unhealthy_threshold: 1\n  healthy_threshold: 3\n  jitter_percent: 30\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"http-health\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"http_health_check\": {\"path\": \"/health\", \"use_origin_server_hostname\": true},\n    \"interval\": 15,\n    \"timeout\": 3,\n    \"unhealthy_threshold\": 1,\n    \"healthy_threshold\": 3,\n    \"jitter_percent\": 30\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/healthchecks\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @healthcheck.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -11625,8 +11628,8 @@
             "x-f5xc-description-short": "List of domains (host/authority header) that will be matched to loadbalancer.",
             "x-f5xc-description-medium": "List of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: `` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the...",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -11696,8 +11699,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -11752,8 +11755,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -11785,8 +11788,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -11815,8 +11818,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -11829,20 +11832,23 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec"
+            "spec.interval",
+            "spec.timeout",
+            "spec.healthy_threshold",
+            "spec.unhealthy_threshold"
           ],
           "mutually_exclusive_groups": [
             {
               "fields": [
-                "spec.http",
-                "spec.tcp",
-                "spec.dns"
+                "spec.http_health_check",
+                "spec.tcp_health_check",
+                "spec.udp_icmp_health_check"
               ],
               "reason": "Choose exactly one health check type"
             }
           ],
-          "example_yaml": "apiVersion: v1\nkind: healthcheck\nmetadata:\n  name: http-health\n  namespace: default\nspec:\n  http:\n    path: /health\n    use_origin_server_hostname: true\n  interval_seconds: 10\n  timeout_seconds: 3\n  unhealthy_threshold: 3\n  healthy_threshold: 2\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"http-health\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"http\": {\"path\": \"/health\", \"use_origin_server_hostname\": true},\n    \"interval_seconds\": 10,\n    \"timeout_seconds\": 3,\n    \"unhealthy_threshold\": 3,\n    \"healthy_threshold\": 2\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: healthcheck\nmetadata:\n  name: http-health\n  namespace: default\nspec:\n  http_health_check:\n    path: /health\n    use_origin_server_hostname: true\n  interval: 15\n  timeout: 3\n  unhealthy_threshold: 1\n  healthy_threshold: 3\n  jitter_percent: 30\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"http-health\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"http_health_check\": {\"path\": \"/health\", \"use_origin_server_hostname\": true},\n    \"interval\": 15,\n    \"timeout\": 3,\n    \"unhealthy_threshold\": 1,\n    \"healthy_threshold\": 3,\n    \"jitter_percent\": 30\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/healthchecks\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @healthcheck.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -11879,8 +11885,8 @@
             "x-f5xc-description-short": "Path of the directory on the host Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -11990,14 +11996,14 @@
             "x-f5xc-description-medium": "Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed.",
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.829987+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.626806+00:00"
           },
           "public": {
             "$ref": "#/components/schemas/ioschemaEmpty"
@@ -12053,8 +12059,8 @@
             },
             "x-f5xc-description-short": "Containers to use for the job Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -12217,7 +12223,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.830113+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.626934+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -12271,7 +12277,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.830181+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.627002+00:00"
           },
           "namespace": {
             "type": "string",
@@ -12290,7 +12296,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.830209+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.627030+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -12332,7 +12338,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.830263+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.627084+00:00"
           },
           "uid": {
             "type": "string",
@@ -12353,7 +12359,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.830291+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.627112+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of workload is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -12461,8 +12467,8 @@
               "ves.io.schema.rules.repeated.max_items": "16"
             },
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -12562,8 +12568,8 @@
             },
             "x-f5xc-description-short": "Size in GiB of the persistent storage Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -12639,14 +12645,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.830422+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.627244+00:00"
           },
           "persistent_volume": {
             "$ref": "#/components/schemas/workloadPersistentStorageVolumeType"
@@ -12696,7 +12702,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.830460+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.627282+00:00"
           },
           "num": {
             "type": "integer",
@@ -12715,8 +12721,8 @@
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -12767,8 +12773,8 @@
             "minimum": 1,
             "maximum": 65535,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -12849,14 +12855,14 @@
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.830547+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.627378+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -13068,8 +13074,8 @@
             },
             "x-f5xc-description-short": "Containers to use for service Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -13123,8 +13129,8 @@
             },
             "x-f5xc-description-short": "Persistent storage configuration for the service Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -13285,7 +13291,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.830851+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.627674+00:00"
           },
           "persistent_volume": {
             "$ref": "#/components/schemas/workloadPersistentStorageVolumeType"
@@ -13324,20 +13330,23 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec"
+            "spec.interval",
+            "spec.timeout",
+            "spec.healthy_threshold",
+            "spec.unhealthy_threshold"
           ],
           "mutually_exclusive_groups": [
             {
               "fields": [
-                "spec.http",
-                "spec.tcp",
-                "spec.dns"
+                "spec.http_health_check",
+                "spec.tcp_health_check",
+                "spec.udp_icmp_health_check"
               ],
               "reason": "Choose exactly one health check type"
             }
           ],
-          "example_yaml": "apiVersion: v1\nkind: healthcheck\nmetadata:\n  name: http-health\n  namespace: default\nspec:\n  http:\n    path: /health\n    use_origin_server_hostname: true\n  interval_seconds: 10\n  timeout_seconds: 3\n  unhealthy_threshold: 3\n  healthy_threshold: 2\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"http-health\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"http\": {\"path\": \"/health\", \"use_origin_server_hostname\": true},\n    \"interval_seconds\": 10,\n    \"timeout_seconds\": 3,\n    \"unhealthy_threshold\": 3,\n    \"healthy_threshold\": 2\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: healthcheck\nmetadata:\n  name: http-health\n  namespace: default\nspec:\n  http_health_check:\n    path: /health\n    use_origin_server_hostname: true\n  interval: 15\n  timeout: 3\n  unhealthy_threshold: 1\n  healthy_threshold: 3\n  jitter_percent: 30\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"http-health\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"http_health_check\": {\"path\": \"/health\", \"use_origin_server_hostname\": true},\n    \"interval\": 15,\n    \"timeout\": 3,\n    \"unhealthy_threshold\": 1,\n    \"healthy_threshold\": 3,\n    \"jitter_percent\": 30\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/healthchecks\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @healthcheck.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -13535,8 +13544,8 @@
             "x-f5xc-description-short": "Select fields to be returned in the response. One or more fields in {CPU_USAGE, MEMORY_USAGE, DISK_READS, DISK_WRITES} can be specified.",
             "x-f5xc-description-medium": "Select fields to be returned in the response. One or more fields in {CPU_USAGE, MEMORY_USAGE, DISK_READS, DISK_WRITES} can be specified. Required: YES.",
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -13608,7 +13617,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.830998+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.627822+00:00"
           },
           "range": {
             "type": "string",
@@ -13814,7 +13823,7 @@
             "maxLength": 16,
             "minLength": 7,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.831079+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.627902+00:00"
           },
           "value": {
             "type": "array",
@@ -13833,7 +13842,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.831110+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.627933+00:00"
           }
         },
         "x-f5xc-description-short": "Usage Type Data contains key/value pair that uniquely identifies a workload in the response and the corresponding metric data.",
@@ -13907,8 +13916,8 @@
             "x-f5xc-description-medium": "Path within the workload container at which the volume should be mounted. Must not contain ':'. Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
-              "minimum_config": false,
-              "create": false,
+              "minimum_config": true,
+              "create": true,
               "update": false,
               "read": false
             }
@@ -13980,7 +13989,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.898200+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.695069+00:00"
           },
           "name": {
             "type": "string",
@@ -14001,7 +14010,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.898227+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.695097+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14022,7 +14031,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.898254+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.695124+00:00"
           },
           "tenant": {
             "type": "string",
@@ -14045,7 +14054,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.898281+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.695152+00:00"
           },
           "uid": {
             "type": "string",
@@ -14069,7 +14078,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.898311+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.695182+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -14274,7 +14283,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.898994+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.695869+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14294,7 +14303,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.899022+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.695897+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -14397,7 +14406,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.899117+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.695993+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -14631,7 +14640,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.899220+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.696097+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -14685,7 +14694,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.899285+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.696164+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14704,7 +14713,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.899313+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.696192+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -14746,7 +14755,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.899367+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.696247+00:00"
           },
           "uid": {
             "type": "string",
@@ -14767,7 +14776,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-16T02:20:00.899396+00:00"
+            "x-reconciled-at": "2026-01-17T07:54:24.696276+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of workload_flavor is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",

@@ -88,6 +88,7 @@ type SchemaDefinition struct {
 	XF5XCUseCases         []string `json:"x-f5xc-use-cases"`
 	XF5XCRelatedDomains   []string `json:"x-f5xc-related-domains"`
 	XF5XCIsPreview        bool     `json:"x-f5xc-is-preview"`
+	XF5XCServerDefault    bool     `json:"x-f5xc-server-default"` // True if server applies default when omitted
 }
 
 type TerraformAttribute struct {
@@ -111,6 +112,7 @@ type TerraformAttribute struct {
 	JsonName           string // JSON field name from OpenAPI for API marshaling
 	GoType             string // Go type for client struct generation
 	UseDomainValidator bool   // True if name field should use DomainValidator (for DNS resources)
+	ServerDefault      bool   // True if server applies default when field is omitted (from x-f5xc-server-default)
 }
 
 type ResourceTemplate struct {
@@ -184,8 +186,10 @@ type AttributeMetadata struct {
 	Validation   string      `json:"validation,omitempty"`
 	Enum         []string    `json:"enum,omitempty"`
 	Default      interface{} `json:"default,omitempty"`
-	OneOfGroup   string      `json:"oneof_group,omitempty"`
-	Description  string      `json:"description"`
+	OneOfGroup        string      `json:"oneof_group,omitempty"`
+	Description       string      `json:"description"`
+	ServerDefault     bool        `json:"server_default,omitempty"`      // True if server applies default when field is omitted
+	ServerDefaultDesc string      `json:"server_default_desc,omitempty"` // Description of what server default behavior is
 }
 
 // DependencyInfo holds resource relationship information
@@ -1004,8 +1008,24 @@ func convertToTerraformAttribute(name string, schema SchemaDefinition, required 
 }
 
 func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, required bool, oneOfGroup string, spec *OpenAPI3Spec, depth int, fieldPath string) TerraformAttribute {
+	// Preserve extensions from original schema before resolving $ref
+	// Extensions like x-f5xc-server-default are on the property, not the referenced schema
+	serverDefault := schema.XF5XCServerDefault
+	descShort := schema.XF5XCDescriptionShort
+	descMed := schema.XF5XCDescriptionMed
+
 	if schema.Ref != "" {
 		schema = resolveRef(schema.Ref, spec)
+		// Restore preserved extensions (property-level extensions take precedence)
+		if serverDefault {
+			schema.XF5XCServerDefault = serverDefault
+		}
+		if descShort != "" && schema.XF5XCDescriptionShort == "" {
+			schema.XF5XCDescriptionShort = descShort
+		}
+		if descMed != "" && schema.XF5XCDescriptionMed == "" {
+			schema.XF5XCDescriptionMed = descMed
+		}
 	}
 
 	// Convert name to valid Terraform attribute name (lowercase with underscores)
@@ -1026,9 +1046,10 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 		Required:    required,
 		Optional:    !required,
 		OneOfGroup:  oneOfGroup,
-		MaxDepth:    depth,
-		IsSpecField: true, // Attributes from OpenAPI spec are spec fields
-		JsonName:    name, // Original OpenAPI property name for JSON marshaling
+		MaxDepth:      depth,
+		IsSpecField:   true, // Attributes from OpenAPI spec are spec fields
+		JsonName:      name, // Original OpenAPI property name for JSON marshaling
+		ServerDefault: schema.XF5XCServerDefault,
 	}
 
 	// Build description with enrichment extension priority:
@@ -1069,6 +1090,12 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 		if extractedDefault != nil {
 			attr.Description = formatDefaultDescription(cleanedDesc, extractedDefault)
 		}
+	}
+
+	// Add server default note to description (x-f5xc-server-default extension)
+	// This indicates fields where F5XC server applies sensible defaults when omitted
+	if schema.XF5XCServerDefault {
+		attr.Description += " Server applies default when omitted."
 	}
 
 	// Determine type and extract nested attributes
@@ -1958,14 +1985,15 @@ func extractAttributeMetadata(attrs []TerraformAttribute, output map[string]*Att
 
 	for _, attr := range attrs {
 		attrMeta := &AttributeMetadata{
-			Type:         attr.Type,
-			Required:     attr.Required,
-			Optional:     attr.Optional,
-			Computed:     attr.Computed,
-			Sensitive:    attr.Sensitive,
-			IsBlock:      attr.IsBlock,
-			PlanModifier: attr.PlanModifier,
-			Description:  attr.Description,
+			Type:          attr.Type,
+			Required:      attr.Required,
+			Optional:      attr.Optional,
+			Computed:      attr.Computed,
+			Sensitive:     attr.Sensitive,
+			IsBlock:       attr.IsBlock,
+			PlanModifier:  attr.PlanModifier,
+			Description:   attr.Description,
+			ServerDefault: attr.ServerDefault,
 		}
 
 		// Add OneOf group reference if applicable

@@ -395,6 +395,28 @@ func isAdvancedFeatureProperty(resourceName, propertyName string) bool {
 
 const advancedIndicator = "**(Advanced subscription required)**"
 
+// serverDefaultIndicator marks fields where F5XC server applies sensible defaults when omitted
+const serverDefaultIndicator = "⚙️ **Server Default**"
+
+// serverDefaultMarker is the text pattern added by generate-all-schemas.go to identify server default fields
+const serverDefaultMarker = "Server applies default when omitted."
+
+// formatServerDefaultNote transforms the server default marker in descriptions into a visual indicator.
+// The marker "Server applies default when omitted." is replaced with a styled badge.
+func formatServerDefaultNote(description string) string {
+	if !strings.Contains(description, serverDefaultMarker) {
+		return description
+	}
+	// Remove the marker text and add the visual indicator
+	desc := strings.Replace(description, serverDefaultMarker, "", 1)
+	desc = strings.TrimSpace(desc)
+	desc = strings.TrimSuffix(desc, ".")
+	if desc == "" {
+		return serverDefaultIndicator
+	}
+	return desc + " " + serverDefaultIndicator
+}
+
 // appendSubscriptionIndicator adds the Advanced subscription indicator to a description
 // if the property matches an advanced feature. Idempotent - won't add if already present.
 func appendSubscriptionIndicator(resourceName, propertyName, description string) string {
@@ -1574,6 +1596,8 @@ func transformDoc(filePath string) error {
 
 		// Add description on next line (if any)
 		if desc != "" {
+			// Format server default note into visual indicator (x-f5xc-server-default extension)
+			desc = formatServerDefaultNote(desc)
 			// Annotate advanced feature properties with subscription tier indicator
 			desc = appendSubscriptionIndicator(resourceName, attr.name, desc)
 			result.WriteString("<br>" + desc)
@@ -1886,6 +1910,8 @@ func transformDoc(filePath string) error {
 
 					// Add description on next line (if any)
 					if desc != "" {
+						// Format server default note into visual indicator (x-f5xc-server-default extension)
+						desc = formatServerDefaultNote(desc)
 						result.WriteString("<br>" + desc)
 					}
 

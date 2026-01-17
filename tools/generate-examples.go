@@ -27,6 +27,9 @@ import (
 // Global defaults store for API-discovered default values
 var apiDefaultsStore *defaults.Store
 
+// serverDefaultMarker is the text pattern added by generate-all-schemas.go to identify server default fields
+const serverDefaultMarker = "Server applies default when omitted."
+
 type SchemaInfo struct {
 	ResourceName string
 	TypeName     string
@@ -37,21 +40,23 @@ type SchemaInfo struct {
 }
 
 type AttributeInfo struct {
-	Name        string
-	Type        string
-	Description string
-	Required    bool
-	Optional    bool
-	OneOfGroup  string // Which OneOf group this attribute belongs to
+	Name          string
+	Type          string
+	Description   string
+	Required      bool
+	Optional      bool
+	OneOfGroup    string // Which OneOf group this attribute belongs to
+	ServerDefault bool   // True if server applies default when field is omitted (x-f5xc-server-default)
 }
 
 type BlockInfo struct {
-	Name        string
-	Description string
-	IsList      bool
-	Attributes  []AttributeInfo
-	Blocks      []BlockInfo
-	OneOfGroup  string // Which OneOf group this block belongs to
+	Name          string
+	Description   string
+	IsList        bool
+	Attributes    []AttributeInfo
+	Blocks        []BlockInfo
+	OneOfGroup    string // Which OneOf group this block belongs to
+	ServerDefault bool   // True if server applies default when field is omitted (x-f5xc-server-default)
 }
 
 // OneOfGroup represents a group of mutually exclusive options
@@ -262,12 +267,14 @@ func parseAttributes(content string) []AttributeInfo {
 	matches := attrRe.FindAllStringSubmatch(content, -1)
 
 	for _, match := range matches {
+		description := match[3]
 		attr := AttributeInfo{
-			Name:        match[1],
-			Type:        strings.ToLower(match[2]),
-			Description: match[3],
-			Required:    strings.Contains(match[0], "Required: true"),
-			Optional:    strings.Contains(match[0], "Optional: true"),
+			Name:          match[1],
+			Type:          strings.ToLower(match[2]),
+			Description:   description,
+			Required:      strings.Contains(match[0], "Required: true"),
+			Optional:      strings.Contains(match[0], "Optional: true"),
+			ServerDefault: strings.Contains(description, serverDefaultMarker),
 		}
 		// Skip computed-only attributes
 		if attr.Name != "id" {
@@ -292,10 +299,12 @@ func parseBlocks(content string) []BlockInfo {
 		}
 		seen[match[1]] = true
 
+		description := match[3]
 		block := BlockInfo{
-			Name:        match[1],
-			IsList:      match[2] == "ListNestedBlock",
-			Description: match[3],
+			Name:          match[1],
+			IsList:        match[2] == "ListNestedBlock",
+			Description:   description,
+			ServerDefault: strings.Contains(description, serverDefaultMarker),
 		}
 		blocks = append(blocks, block)
 	}
@@ -334,6 +343,27 @@ func generateExample(resourceName string, schema *SchemaInfo) string {
 	addResourceSpecificConfig(&sb, resourceName, schema)
 
 	sb.WriteString("}\n")
+
+	// Collect fields with server defaults for informational comment
+	var serverDefaultFields []string
+	for _, attr := range schema.Attributes {
+		if attr.ServerDefault {
+			serverDefaultFields = append(serverDefaultFields, attr.Name)
+		}
+	}
+	for _, block := range schema.Blocks {
+		if block.ServerDefault {
+			serverDefaultFields = append(serverDefaultFields, block.Name)
+		}
+	}
+
+	// Add server defaults comment if any exist
+	if len(serverDefaultFields) > 0 {
+		sb.WriteString("\n# The following optional fields have server-applied defaults and can be omitted:\n")
+		for _, field := range serverDefaultFields {
+			sb.WriteString(fmt.Sprintf("# - %s\n", field))
+		}
+	}
 
 	// Per HashiCorp standards: "Avoid multiple examples unless configuration is particularly complex"
 	// We generate only the basic example - advanced configurations should be in user guides, not reference docs

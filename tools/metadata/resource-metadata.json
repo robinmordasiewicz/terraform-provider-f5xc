@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-17T09:45:45Z",
+  "generated_at": "2026-01-17T10:13:20Z",
   "version": "1.0.0",
   "resources": {
     "address_allocator": {
@@ -2299,7 +2299,7 @@
       }
     },
     "bgp": {
-      "description": "Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "description": "Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.",
       "import_format": "namespace/name",
       "attributes": {
         "annotations": {
@@ -2308,11 +2308,12 @@
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
-        "as_numbers": {
-          "type": "list",
+        "bgp_parameters": {
+          "type": "object",
           "required": false,
           "optional": true,
-          "description": "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy."
+          "is_block": true,
+          "description": "BGP Parameters. BGP parameters for the local site."
         },
         "description": {
           "type": "string",
@@ -2352,6 +2353,20 @@
           "plan_modifier": "RequiresReplace",
           "validation": "name",
           "description": "Namespace where the BGP will be created."
+        },
+        "peers": {
+          "type": "list",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Peers. List of peers ."
+        },
+        "where": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "VirtualSiteSiteRefSelector defines a union of reference to site or reference to virtual_site It used to refer site or a group of sites indicated by virtual site."
         }
       }
     },
@@ -3204,10 +3219,20 @@
       }
     },
     "certificate": {
-      "description": "Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.",
+      "description": "Manages a Certificate resource in F5 Distributed Cloud for certificate. configuration.",
       "category": "Security",
       "tier": "Standard",
       "import_format": "namespace/name",
+      "oneof_groups": {
+        "ocsp_stapling_choice": {
+          "fields": [
+            "custom_hash_algorithms",
+            "disable_ocsp_stapling",
+            "use_system_defaults"
+          ],
+          "default": "use_system_defaults"
+        }
+      },
       "attributes": {
         "annotations": {
           "type": "map",
@@ -3215,13 +3240,28 @@
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
+        "certificate_chain": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
+        },
         "certificate_url": {
           "type": "string",
           "required": false,
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Certificate chain is the list of intermediate certificates in PEM format including the PEM headers."
+          "description": "Certificate. Certificate or certificate chain in PEM format including the PEM headers."
+        },
+        "custom_hash_algorithms": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "ocsp_stapling_choice",
+          "description": "[OneOf: custom_hash_algorithms, disable_ocsp_stapling, use_system_defaults; Default: use_system_defaults] Specifies the hash algorithms to be used."
         },
         "description": {
           "type": "string",
@@ -3234,6 +3274,14 @@
           "required": false,
           "optional": true,
           "description": "A value of true will administratively disable the object."
+        },
+        "disable_ocsp_stapling": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "ocsp_stapling_choice",
+          "description": "Enable this option"
         },
         "id": {
           "type": "string",
@@ -3261,6 +3309,21 @@
           "plan_modifier": "RequiresReplace",
           "validation": "name",
           "description": "Namespace where the Certificate will be created."
+        },
+        "private_key": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "SecretType is used in an object to indicate a sensitive/confidential field."
+        },
+        "use_system_defaults": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "ocsp_stapling_choice",
+          "description": "Enable this option"
         }
       },
       "dependencies": {
@@ -3332,7 +3395,7 @@
     },
     "cloud_connect": {
       "description": "Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.",
-      "import_format": "namespace/name",
+      "import_format": "name",
       "oneof_groups": {
         "cloud": {
           "fields": [
@@ -3398,10 +3461,12 @@
         },
         "namespace": {
           "type": "string",
-          "required": true,
-          "plan_modifier": "RequiresReplace",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
           "validation": "name",
-          "description": "Namespace where the Cloud Connect will be created."
+          "description": "Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted."
         },
         "segment": {
           "type": "object",
@@ -5008,17 +5073,24 @@
       }
     },
     "fast_acl": {
-      "description": "Manages object, object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to. in F5 Distributed Cloud.",
+      "description": "Manages new Fast ACL rule, has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.",
       "import_format": "namespace/name",
       "oneof_groups": {
-        "site_choice": {
+        "source": {
           "fields": [
-            "re_acl",
-            "site_acl"
+            "ip_prefix_set",
+            "prefix"
           ]
         }
       },
       "attributes": {
+        "action": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic."
+        },
         "annotations": {
           "type": "map",
           "required": false,
@@ -5044,6 +5116,14 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
+        "ip_prefix_set": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "source",
+          "description": "[OneOf: ip_prefix_set, prefix] List of references to ip_prefix_set objects."
+        },
         "labels": {
           "type": "map",
           "required": false,
@@ -5064,28 +5144,21 @@
           "validation": "name",
           "description": "Namespace where the Fast ACL will be created."
         },
-        "protocol_policer": {
-          "type": "object",
+        "port": {
+          "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
+          "validation": "port",
+          "description": "Source Ports. L4 port numbers to match ."
         },
-        "re_acl": {
+        "prefix": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "site_choice",
-          "description": "[OneOf: re_acl, site_acl] Fast ACL for RE. Fast ACL definition for RE."
-        },
-        "site_acl": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "site_choice",
-          "description": "Fast ACL for Site. Fast ACL definition for Site."
+          "oneof_group": "source",
+          "description": "List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes."
         }
       }
     },
@@ -6604,9 +6677,9 @@
       },
       "dependencies": {
         "referenced_by": [
+          "origin_pool",
           "http_loadbalancer",
-          "tcp_loadbalancer",
-          "origin_pool"
+          "tcp_loadbalancer"
         ]
       }
     },
@@ -7544,7 +7617,7 @@
       }
     },
     "irule": {
-      "description": "Manages a Irule resource in F5 Distributed Cloud for desired state for big-ip irule service. configuration.",
+      "description": "Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
       "import_format": "namespace/name",
       "attributes": {
         "annotations": {
@@ -7553,19 +7626,13 @@
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
-        "code": {
+        "description": {
           "type": "string",
           "required": false,
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "IRule code content, this content will be base64 encoded for preserving formating."
-        },
-        "description": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "description": "Human readable description for the object."
+          "description": "Specify Description for iRule ."
         },
         "disable": {
           "type": "bool",
@@ -7580,13 +7647,13 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
-        "irule_name": {
+        "irule": {
           "type": "string",
           "required": false,
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "IRule name. IRule name."
+          "description": "Www.internal.example.f5.com')} DNS::drop} irule content ."
         },
         "labels": {
           "type": "map",
@@ -7607,14 +7674,6 @@
           "plan_modifier": "RequiresReplace",
           "validation": "name",
           "description": "Namespace where the Irule will be created."
-        },
-        "source": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "IRule source. IRule generation/updation source."
         }
       }
     },
@@ -10680,10 +10739,33 @@
       }
     },
     "site": {
-      "description": "Manages virtual site object in given namespace. in F5 Distributed Cloud.",
+      "description": "Manages a Site resource in F5 Distributed Cloud for aws tgw site specification. configuration.",
       "category": "Infrastructure",
       "tier": "Standard",
       "import_format": "namespace/name",
+      "oneof_groups": {
+        "blocked_services_choice": {
+          "fields": [
+            "block_all_services",
+            "blocked_services",
+            "default_blocked_services"
+          ],
+          "default": "default_blocked_services"
+        },
+        "direct_connect_choice": {
+          "fields": [
+            "direct_connect_disabled",
+            "direct_connect_enabled",
+            "private_connectivity"
+          ]
+        },
+        "logs_receiver_choice": {
+          "fields": [
+            "log_receiver",
+            "logs_streaming_disabled"
+          ]
+        }
+      },
       "attributes": {
         "annotations": {
           "type": "map",
@@ -10691,11 +10773,72 @@
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
+        "aws_parameters": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Setup AWS services VPC, transit gateway and site."
+        },
+        "block_all_services": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "blocked_services_choice",
+          "description": "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option"
+        },
+        "blocked_services": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "blocked_services_choice",
+          "description": "Disable node local services on this site."
+        },
+        "coordinates": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Coordinates of the site which provides the site physical location."
+        },
+        "custom_dns": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Custom DNS is the configured for specify CE site."
+        },
+        "default_blocked_services": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "blocked_services_choice",
+          "description": "Enable this option"
+        },
         "description": {
           "type": "string",
           "required": false,
           "optional": true,
           "description": "Human readable description for the object."
+        },
+        "direct_connect_disabled": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "direct_connect_choice",
+          "description": "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Enable this option"
+        },
+        "direct_connect_enabled": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "direct_connect_choice",
+          "description": "Direct Connect Configuration. Direct Connect Configuration."
         },
         "disable": {
           "type": "bool",
@@ -10710,11 +10853,34 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
+        "kubernetes_upgrade_drain": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Specify how worker nodes within a site will be upgraded."
+        },
         "labels": {
           "type": "map",
           "required": false,
           "optional": true,
           "description": "Labels is a user defined key value map that can be attached to resources for organization and filtering."
+        },
+        "log_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "logs_receiver_choice",
+          "description": "[OneOf: log_receiver, logs_streaming_disabled] Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
+        },
+        "logs_streaming_disabled": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "logs_receiver_choice",
+          "description": "Enable this option"
         },
         "name": {
           "type": "string",
@@ -10730,20 +10896,69 @@
           "validation": "name",
           "description": "Namespace where the Site will be created."
         },
-        "site_selector": {
+        "offline_survivability_mode": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects."
+          "description": "Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7.."
         },
-        "site_type": {
-          "type": "string",
+        "os": {
+          "type": "object",
           "required": false,
           "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "[Enum: INVALID|REGIONAL_EDGE|CUSTOMER_EDGE|NGINX_ONE] Site Type which can either RE or CE Invalid type of site Regional Edge site Customer Edge site. Possible values are `INVALID`, `REGIONAL_EDGE`, `CUSTOMER_EDGE`, `NGINX_ONE`."
+          "is_block": true,
+          "description": "Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions."
+        },
+        "performance_enhancement_mode": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Optimize the site for L3 or L7 traffic processing. L7 optimized is the default."
+        },
+        "private_connectivity": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "direct_connect_choice",
+          "description": "Private Connect Configuration. Private Connect Configuration."
+        },
+        "sw": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions."
+        },
+        "tags": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console."
+        },
+        "tgw_security": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Security Configuration for transit gateway."
+        },
+        "vn_config": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Virtual Network Configuration. Virtual Network Configuration."
+        },
+        "vpc_attachments": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Spoke VPCs to be attached to the AWS TGW Site."
         }
       },
       "dependencies": {

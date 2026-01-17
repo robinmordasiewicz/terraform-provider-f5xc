@@ -38,3 +38,6 @@ resource "f5xc_healthcheck" "example" {
   interval            = 15
   timeout             = 5
 }
+
+# The following optional fields have server-applied defaults and can be omitted:
+# - jitter_percent

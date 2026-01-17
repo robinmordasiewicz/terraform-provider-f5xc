@@ -20,3 +20,6 @@ resource "f5xc_rate_limiter" "example" {
   unit             = "MINUTE"
   burst_multiplier = 10
 }
+
+# The following optional fields have server-applied defaults and can be omitted:
+# - user_identification

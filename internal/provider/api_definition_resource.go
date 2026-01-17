@@ -145,7 +145,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 				ElementType:         types.StringType,
 			},
 			"swagger_specs": schema.ListAttribute{
-				MarkdownDescription: "Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files.",
+				MarkdownDescription: "Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App & API Protection-> Files-> Swagger Files. 2. Select from the list of uploaded files. Defaults to `[]`. Server applies default when omitted.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},

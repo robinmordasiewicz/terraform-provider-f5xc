@@ -9,10 +9,10 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
-	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -41,86 +41,19 @@ type PolicerResource struct {
 	client *client.Client
 }
 
-// PolicerEmptyModel represents empty nested blocks
-type PolicerEmptyModel struct {
-}
-
-// PolicerProtocolPolicerModel represents protocol_policer block
-type PolicerProtocolPolicerModel struct {
-	Policer  []PolicerProtocolPolicerPolicerModel `tfsdk:"policer"`
-	Protocol *PolicerProtocolPolicerProtocolModel `tfsdk:"protocol"`
-}
-
-// PolicerProtocolPolicerModelAttrTypes defines the attribute types for PolicerProtocolPolicerModel
-var PolicerProtocolPolicerModelAttrTypes = map[string]attr.Type{
-	"policer":  types.ListType{ElemType: types.ObjectType{AttrTypes: PolicerProtocolPolicerPolicerModelAttrTypes}},
-	"protocol": types.ObjectType{AttrTypes: PolicerProtocolPolicerProtocolModelAttrTypes},
-}
-
-// PolicerProtocolPolicerPolicerModel represents policer block
-type PolicerProtocolPolicerPolicerModel struct {
-	Kind      types.String `tfsdk:"kind"`
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-	Uid       types.String `tfsdk:"uid"`
-}
-
-// PolicerProtocolPolicerPolicerModelAttrTypes defines the attribute types for PolicerProtocolPolicerPolicerModel
-var PolicerProtocolPolicerPolicerModelAttrTypes = map[string]attr.Type{
-	"kind":      types.StringType,
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-	"uid":       types.StringType,
-}
-
-// PolicerProtocolPolicerProtocolModel represents protocol block
-type PolicerProtocolPolicerProtocolModel struct {
-	DNS  *PolicerEmptyModel                       `tfsdk:"dns"`
-	ICMP *PolicerProtocolPolicerProtocolICMPModel `tfsdk:"icmp"`
-	TCP  *PolicerProtocolPolicerProtocolTCPModel  `tfsdk:"tcp"`
-	UDP  *PolicerEmptyModel                       `tfsdk:"udp"`
-}
-
-// PolicerProtocolPolicerProtocolModelAttrTypes defines the attribute types for PolicerProtocolPolicerProtocolModel
-var PolicerProtocolPolicerProtocolModelAttrTypes = map[string]attr.Type{
-	"dns":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"icmp": types.ObjectType{AttrTypes: PolicerProtocolPolicerProtocolICMPModelAttrTypes},
-	"tcp":  types.ObjectType{AttrTypes: PolicerProtocolPolicerProtocolTCPModelAttrTypes},
-	"udp":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// PolicerProtocolPolicerProtocolICMPModel represents icmp block
-type PolicerProtocolPolicerProtocolICMPModel struct {
-	Type types.List `tfsdk:"type"`
-}
-
-// PolicerProtocolPolicerProtocolICMPModelAttrTypes defines the attribute types for PolicerProtocolPolicerProtocolICMPModel
-var PolicerProtocolPolicerProtocolICMPModelAttrTypes = map[string]attr.Type{
-	"type": types.ListType{ElemType: types.StringType},
-}
-
-// PolicerProtocolPolicerProtocolTCPModel represents tcp block
-type PolicerProtocolPolicerProtocolTCPModel struct {
-	Flags types.List `tfsdk:"flags"`
-}
-
-// PolicerProtocolPolicerProtocolTCPModelAttrTypes defines the attribute types for PolicerProtocolPolicerProtocolTCPModel
-var PolicerProtocolPolicerProtocolTCPModelAttrTypes = map[string]attr.Type{
-	"flags": types.ListType{ElemType: types.StringType},
-}
-
 type PolicerResourceModel struct {
-	Name            types.String   `tfsdk:"name"`
-	Namespace       types.String   `tfsdk:"namespace"`
-	Annotations     types.Map      `tfsdk:"annotations"`
-	Description     types.String   `tfsdk:"description"`
-	Disable         types.Bool     `tfsdk:"disable"`
-	Labels          types.Map      `tfsdk:"labels"`
-	ID              types.String   `tfsdk:"id"`
-	Timeouts        timeouts.Value `tfsdk:"timeouts"`
-	ProtocolPolicer types.List     `tfsdk:"protocol_policer"`
+	Name                     types.String   `tfsdk:"name"`
+	Namespace                types.String   `tfsdk:"namespace"`
+	Annotations              types.Map      `tfsdk:"annotations"`
+	Description              types.String   `tfsdk:"description"`
+	Disable                  types.Bool     `tfsdk:"disable"`
+	Labels                   types.Map      `tfsdk:"labels"`
+	ID                       types.String   `tfsdk:"id"`
+	BurstSize                types.Int64    `tfsdk:"burst_size"`
+	CommittedInformationRate types.Int64    `tfsdk:"committed_information_rate"`
+	PolicerMode              types.String   `tfsdk:"policer_mode"`
+	PolicerType              types.String   `tfsdk:"policer_type"`
+	Timeouts                 timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *PolicerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -129,7 +62,7 @@ func (r *PolicerResource) Metadata(ctx context.Context, req resource.MetadataReq
 
 func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new policer with traffic rate limits. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Policer. Must be unique within the namespace.",
@@ -176,6 +109,38 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
+			"burst_size": schema.Int64Attribute{
+				MarkdownDescription: "The maximum size permitted for bursts of data. E.g. 10000 pps burst .",
+				Optional:            true,
+				Computed:            true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"committed_information_rate": schema.Int64Attribute{
+				MarkdownDescription: "The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps .",
+				Optional:            true,
+				Computed:            true,
+				PlanModifiers: []planmodifier.Int64{
+					int64planmodifier.UseStateForUnknown(),
+				},
+			},
+			"policer_mode": schema.StringAttribute{
+				MarkdownDescription: "[Enum: POLICER_MODE_NOT_SHARED|POLICER_MODE_SHARED] - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`. Defaults to `POLICER_MODE_NOT_SHARED`.",
+				Optional:            true,
+				Computed:            true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"policer_type": schema.StringAttribute{
+				MarkdownDescription: "[Enum: POLICER_SINGLE_RATE_TWO_COLOR] Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`. Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`.",
+				Optional:            true,
+				Computed:            true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
 		},
 		Blocks: map[string]schema.Block{
 			"timeouts": timeouts.Block(ctx, timeouts.Opts{
@@ -184,89 +149,6 @@ func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Update: true,
 				Delete: true,
 			}),
-			"protocol_policer": schema.ListNestedBlock{
-				MarkdownDescription: "List of L4 protocol match condition and associated traffic rate limits.",
-				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{},
-					Blocks: map[string]schema.Block{
-						"policer": schema.ListNestedBlock{
-							MarkdownDescription: "Reference to policer object to apply traffic rate limits .",
-							NestedObject: schema.NestedBlockObject{
-								Attributes: map[string]schema.Attribute{
-									"kind": schema.StringAttribute{
-										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
-										Optional:            true,
-										Computed:            true,
-										PlanModifiers: []planmodifier.String{
-											stringplanmodifier.UseStateForUnknown(),
-										},
-									},
-									"name": schema.StringAttribute{
-										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-										Optional:            true,
-									},
-									"namespace": schema.StringAttribute{
-										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-										Optional:            true,
-										Computed:            true,
-										PlanModifiers: []planmodifier.String{
-											stringplanmodifier.UseStateForUnknown(),
-										},
-									},
-									"tenant": schema.StringAttribute{
-										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-										Optional:            true,
-										Computed:            true,
-										PlanModifiers: []planmodifier.String{
-											stringplanmodifier.UseStateForUnknown(),
-										},
-									},
-									"uid": schema.StringAttribute{
-										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
-										Optional:            true,
-										Computed:            true,
-										PlanModifiers: []planmodifier.String{
-											stringplanmodifier.UseStateForUnknown(),
-										},
-									},
-								},
-							},
-						},
-						"protocol": schema.SingleNestedBlock{
-							MarkdownDescription: "Protocol and protocol specific flags to be matched in packet.",
-							Attributes:          map[string]schema.Attribute{},
-							Blocks: map[string]schema.Block{
-								"dns": schema.SingleNestedBlock{
-									MarkdownDescription: "Match all DNS packets inclusing UDP and TCP.",
-								},
-								"icmp": schema.SingleNestedBlock{
-									MarkdownDescription: "ICMP Packet Type. ICMP message type to match in packet.",
-									Attributes: map[string]schema.Attribute{
-										"type": schema.ListAttribute{
-											MarkdownDescription: "[Enum: ECHO_REPLY|ECHO_REQUEST|ALL_ICMP_MSG] ICMP message type to be matched in packet. Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`. Defaults to `ECHO_REPLY`.",
-											Optional:            true,
-											ElementType:         types.StringType,
-										},
-									},
-								},
-								"tcp": schema.SingleNestedBlock{
-									MarkdownDescription: "Specification of TCP flag to be matched in a TCP packet.",
-									Attributes: map[string]schema.Attribute{
-										"flags": schema.ListAttribute{
-											MarkdownDescription: "[Enum: FIN|SYN|RST|PSH|ACK|URG|ALL_TCP_FLAGS|KEEPALIVE] TCP flags. TCP flag to be matched in a TCP packet. Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`. Defaults to `FIN`.",
-											Optional:            true,
-											ElementType:         types.StringType,
-										},
-									},
-								},
-								"udp": schema.SingleNestedBlock{
-									MarkdownDescription: "UDP Packets. Match all UDP packets.",
-								},
-							},
-						},
-					},
-				},
-			},
 		},
 	}
 }
@@ -373,73 +255,17 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if !data.ProtocolPolicer.IsNull() && !data.ProtocolPolicer.IsUnknown() {
-		var protocol_policerItems []PolicerProtocolPolicerModel
-		diags := data.ProtocolPolicer.ElementsAs(ctx, &protocol_policerItems, false)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() && len(protocol_policerItems) > 0 {
-			var protocol_policerList []map[string]interface{}
-			for _, item := range protocol_policerItems {
-				itemMap := make(map[string]interface{})
-				if len(item.Policer) > 0 {
-					var policerNestedList []map[string]interface{}
-					for _, nestedItem := range item.Policer {
-						nestedItemMap := make(map[string]interface{})
-						if !nestedItem.Kind.IsNull() && !nestedItem.Kind.IsUnknown() {
-							nestedItemMap["kind"] = nestedItem.Kind.ValueString()
-						}
-						if !nestedItem.Name.IsNull() && !nestedItem.Name.IsUnknown() {
-							nestedItemMap["name"] = nestedItem.Name.ValueString()
-						}
-						if !nestedItem.Namespace.IsNull() && !nestedItem.Namespace.IsUnknown() {
-							nestedItemMap["namespace"] = nestedItem.Namespace.ValueString()
-						}
-						if !nestedItem.Tenant.IsNull() && !nestedItem.Tenant.IsUnknown() {
-							nestedItemMap["tenant"] = nestedItem.Tenant.ValueString()
-						}
-						if !nestedItem.Uid.IsNull() && !nestedItem.Uid.IsUnknown() {
-							nestedItemMap["uid"] = nestedItem.Uid.ValueString()
-						}
-						policerNestedList = append(policerNestedList, nestedItemMap)
-					}
-					itemMap["policer"] = policerNestedList
-				}
-				if item.Protocol != nil {
-					protocolNestedMap := make(map[string]interface{})
-					if item.Protocol.DNS != nil {
-						protocolNestedMap["dns"] = map[string]interface{}{}
-					}
-					if item.Protocol.ICMP != nil {
-						icmpDeepMap := make(map[string]interface{})
-						if !item.Protocol.ICMP.Type.IsNull() && !item.Protocol.ICMP.Type.IsUnknown() {
-							var TypeItems []string
-							diags := item.Protocol.ICMP.Type.ElementsAs(ctx, &TypeItems, false)
-							if !diags.HasError() {
-								icmpDeepMap["type"] = TypeItems
-							}
-						}
-						protocolNestedMap["icmp"] = icmpDeepMap
-					}
-					if item.Protocol.TCP != nil {
-						tcpDeepMap := make(map[string]interface{})
-						if !item.Protocol.TCP.Flags.IsNull() && !item.Protocol.TCP.Flags.IsUnknown() {
-							var FlagsItems []string
-							diags := item.Protocol.TCP.Flags.ElementsAs(ctx, &FlagsItems, false)
-							if !diags.HasError() {
-								tcpDeepMap["flags"] = FlagsItems
-							}
-						}
-						protocolNestedMap["tcp"] = tcpDeepMap
-					}
-					if item.Protocol.UDP != nil {
-						protocolNestedMap["udp"] = map[string]interface{}{}
-					}
-					itemMap["protocol"] = protocolNestedMap
-				}
-				protocol_policerList = append(protocol_policerList, itemMap)
-			}
-			createReq.Spec["protocol_policer"] = protocol_policerList
-		}
+	if !data.BurstSize.IsNull() && !data.BurstSize.IsUnknown() {
+		createReq.Spec["burst_size"] = data.BurstSize.ValueInt64()
+	}
+	if !data.CommittedInformationRate.IsNull() && !data.CommittedInformationRate.IsUnknown() {
+		createReq.Spec["committed_information_rate"] = data.CommittedInformationRate.ValueInt64()
+	}
+	if !data.PolicerMode.IsNull() && !data.PolicerMode.IsUnknown() {
+		createReq.Spec["policer_mode"] = data.PolicerMode.ValueString()
+	}
+	if !data.PolicerType.IsNull() && !data.PolicerType.IsUnknown() {
+		createReq.Spec["policer_type"] = data.PolicerType.ValueString()
 	}
 
 	apiResource, err := r.client.CreatePolicer(ctx, createReq)
@@ -454,89 +280,25 @@ func (r *PolicerResource) Create(ctx context.Context, req resource.CreateRequest
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
-	if listData, ok := apiResource.Spec["protocol_policer"].([]interface{}); ok && len(listData) > 0 {
-		var protocol_policerList []PolicerProtocolPolicerModel
-		var existingProtocolPolicerItems []PolicerProtocolPolicerModel
-		if !data.ProtocolPolicer.IsNull() && !data.ProtocolPolicer.IsUnknown() {
-			data.ProtocolPolicer.ElementsAs(ctx, &existingProtocolPolicerItems, false)
-		}
-		for listIdx, item := range listData {
-			_ = listIdx // May be unused if no empty marker blocks in list item
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				protocol_policerList = append(protocol_policerList, PolicerProtocolPolicerModel{
-					Policer: func() []PolicerProtocolPolicerPolicerModel {
-						if nestedListData, ok := itemMap["policer"].([]interface{}); ok && len(nestedListData) > 0 {
-							var result []PolicerProtocolPolicerPolicerModel
-							for _, nestedItem := range nestedListData {
-								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
-									result = append(result, PolicerProtocolPolicerPolicerModel{
-										Kind: func() types.String {
-											if v, ok := nestedItemMap["kind"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-										Name: func() types.String {
-											if v, ok := nestedItemMap["name"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-										Namespace: func() types.String {
-											if v, ok := nestedItemMap["namespace"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-										Tenant: func() types.String {
-											if v, ok := nestedItemMap["tenant"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-										Uid: func() types.String {
-											if v, ok := nestedItemMap["uid"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-									})
-								}
-							}
-							return result
-						}
-						return nil
-					}(),
-					Protocol: func() *PolicerProtocolPolicerProtocolModel {
-						if _, ok := itemMap["protocol"].(map[string]interface{}); ok {
-							return &PolicerProtocolPolicerProtocolModel{
-								DNS: func() *PolicerEmptyModel {
-									if !isImport && len(existingProtocolPolicerItems) > listIdx && existingProtocolPolicerItems[listIdx].Protocol != nil && existingProtocolPolicerItems[listIdx].Protocol.DNS != nil {
-										return &PolicerEmptyModel{}
-									}
-									return nil
-								}(),
-								UDP: func() *PolicerEmptyModel {
-									if !isImport && len(existingProtocolPolicerItems) > listIdx && existingProtocolPolicerItems[listIdx].Protocol != nil && existingProtocolPolicerItems[listIdx].Protocol.UDP != nil {
-										return &PolicerEmptyModel{}
-									}
-									return nil
-								}(),
-							}
-						}
-						return nil
-					}(),
-				})
-			}
-		}
-		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: PolicerProtocolPolicerModelAttrTypes}, protocol_policerList)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.ProtocolPolicer = listVal
-		}
+	if v, ok := apiResource.Spec["burst_size"].(float64); ok {
+		data.BurstSize = types.Int64Value(int64(v))
 	} else {
-		// No data from API - set to null list
-		data.ProtocolPolicer = types.ListNull(types.ObjectType{AttrTypes: PolicerProtocolPolicerModelAttrTypes})
+		data.BurstSize = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["committed_information_rate"].(float64); ok {
+		data.CommittedInformationRate = types.Int64Value(int64(v))
+	} else {
+		data.CommittedInformationRate = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["policer_mode"].(string); ok && v != "" {
+		data.PolicerMode = types.StringValue(v)
+	} else {
+		data.PolicerMode = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["policer_type"].(string); ok && v != "" {
+		data.PolicerType = types.StringValue(v)
+	} else {
+		data.PolicerType = types.StringNull()
 	}
 
 	tflog.Trace(ctx, "created Policer resource")
@@ -618,89 +380,25 @@ func (r *PolicerResource) Read(ctx context.Context, req resource.ReadRequest, re
 		isImport = true
 	}
 	_ = isImport // May be unused if resource has no blocks needing import detection
-	if listData, ok := apiResource.Spec["protocol_policer"].([]interface{}); ok && len(listData) > 0 {
-		var protocol_policerList []PolicerProtocolPolicerModel
-		var existingProtocolPolicerItems []PolicerProtocolPolicerModel
-		if !data.ProtocolPolicer.IsNull() && !data.ProtocolPolicer.IsUnknown() {
-			data.ProtocolPolicer.ElementsAs(ctx, &existingProtocolPolicerItems, false)
-		}
-		for listIdx, item := range listData {
-			_ = listIdx // May be unused if no empty marker blocks in list item
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				protocol_policerList = append(protocol_policerList, PolicerProtocolPolicerModel{
-					Policer: func() []PolicerProtocolPolicerPolicerModel {
-						if nestedListData, ok := itemMap["policer"].([]interface{}); ok && len(nestedListData) > 0 {
-							var result []PolicerProtocolPolicerPolicerModel
-							for _, nestedItem := range nestedListData {
-								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
-									result = append(result, PolicerProtocolPolicerPolicerModel{
-										Kind: func() types.String {
-											if v, ok := nestedItemMap["kind"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-										Name: func() types.String {
-											if v, ok := nestedItemMap["name"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-										Namespace: func() types.String {
-											if v, ok := nestedItemMap["namespace"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-										Tenant: func() types.String {
-											if v, ok := nestedItemMap["tenant"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-										Uid: func() types.String {
-											if v, ok := nestedItemMap["uid"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-									})
-								}
-							}
-							return result
-						}
-						return nil
-					}(),
-					Protocol: func() *PolicerProtocolPolicerProtocolModel {
-						if _, ok := itemMap["protocol"].(map[string]interface{}); ok {
-							return &PolicerProtocolPolicerProtocolModel{
-								DNS: func() *PolicerEmptyModel {
-									if !isImport && len(existingProtocolPolicerItems) > listIdx && existingProtocolPolicerItems[listIdx].Protocol != nil && existingProtocolPolicerItems[listIdx].Protocol.DNS != nil {
-										return &PolicerEmptyModel{}
-									}
-									return nil
-								}(),
-								UDP: func() *PolicerEmptyModel {
-									if !isImport && len(existingProtocolPolicerItems) > listIdx && existingProtocolPolicerItems[listIdx].Protocol != nil && existingProtocolPolicerItems[listIdx].Protocol.UDP != nil {
-										return &PolicerEmptyModel{}
-									}
-									return nil
-								}(),
-							}
-						}
-						return nil
-					}(),
-				})
-			}
-		}
-		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: PolicerProtocolPolicerModelAttrTypes}, protocol_policerList)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.ProtocolPolicer = listVal
-		}
+	if v, ok := apiResource.Spec["burst_size"].(float64); ok {
+		data.BurstSize = types.Int64Value(int64(v))
 	} else {
-		// No data from API - set to null list
-		data.ProtocolPolicer = types.ListNull(types.ObjectType{AttrTypes: PolicerProtocolPolicerModelAttrTypes})
+		data.BurstSize = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["committed_information_rate"].(float64); ok {
+		data.CommittedInformationRate = types.Int64Value(int64(v))
+	} else {
+		data.CommittedInformationRate = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["policer_mode"].(string); ok && v != "" {
+		data.PolicerMode = types.StringValue(v)
+	} else {
+		data.PolicerMode = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["policer_type"].(string); ok && v != "" {
+		data.PolicerType = types.StringValue(v)
+	} else {
+		data.PolicerType = types.StringNull()
 	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -753,73 +451,17 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if !data.ProtocolPolicer.IsNull() && !data.ProtocolPolicer.IsUnknown() {
-		var protocol_policerItems []PolicerProtocolPolicerModel
-		diags := data.ProtocolPolicer.ElementsAs(ctx, &protocol_policerItems, false)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() && len(protocol_policerItems) > 0 {
-			var protocol_policerList []map[string]interface{}
-			for _, item := range protocol_policerItems {
-				itemMap := make(map[string]interface{})
-				if len(item.Policer) > 0 {
-					var policerNestedList []map[string]interface{}
-					for _, nestedItem := range item.Policer {
-						nestedItemMap := make(map[string]interface{})
-						if !nestedItem.Kind.IsNull() && !nestedItem.Kind.IsUnknown() {
-							nestedItemMap["kind"] = nestedItem.Kind.ValueString()
-						}
-						if !nestedItem.Name.IsNull() && !nestedItem.Name.IsUnknown() {
-							nestedItemMap["name"] = nestedItem.Name.ValueString()
-						}
-						if !nestedItem.Namespace.IsNull() && !nestedItem.Namespace.IsUnknown() {
-							nestedItemMap["namespace"] = nestedItem.Namespace.ValueString()
-						}
-						if !nestedItem.Tenant.IsNull() && !nestedItem.Tenant.IsUnknown() {
-							nestedItemMap["tenant"] = nestedItem.Tenant.ValueString()
-						}
-						if !nestedItem.Uid.IsNull() && !nestedItem.Uid.IsUnknown() {
-							nestedItemMap["uid"] = nestedItem.Uid.ValueString()
-						}
-						policerNestedList = append(policerNestedList, nestedItemMap)
-					}
-					itemMap["policer"] = policerNestedList
-				}
-				if item.Protocol != nil {
-					protocolNestedMap := make(map[string]interface{})
-					if item.Protocol.DNS != nil {
-						protocolNestedMap["dns"] = map[string]interface{}{}
-					}
-					if item.Protocol.ICMP != nil {
-						icmpDeepMap := make(map[string]interface{})
-						if !item.Protocol.ICMP.Type.IsNull() && !item.Protocol.ICMP.Type.IsUnknown() {
-							var TypeItems []string
-							diags := item.Protocol.ICMP.Type.ElementsAs(ctx, &TypeItems, false)
-							if !diags.HasError() {
-								icmpDeepMap["type"] = TypeItems
-							}
-						}
-						protocolNestedMap["icmp"] = icmpDeepMap
-					}
-					if item.Protocol.TCP != nil {
-						tcpDeepMap := make(map[string]interface{})
-						if !item.Protocol.TCP.Flags.IsNull() && !item.Protocol.TCP.Flags.IsUnknown() {
-							var FlagsItems []string
-							diags := item.Protocol.TCP.Flags.ElementsAs(ctx, &FlagsItems, false)
-							if !diags.HasError() {
-								tcpDeepMap["flags"] = FlagsItems
-							}
-						}
-						protocolNestedMap["tcp"] = tcpDeepMap
-					}
-					if item.Protocol.UDP != nil {
-						protocolNestedMap["udp"] = map[string]interface{}{}
-					}
-					itemMap["protocol"] = protocolNestedMap
-				}
-				protocol_policerList = append(protocol_policerList, itemMap)
-			}
-			apiResource.Spec["protocol_policer"] = protocol_policerList
-		}
+	if !data.BurstSize.IsNull() && !data.BurstSize.IsUnknown() {
+		apiResource.Spec["burst_size"] = data.BurstSize.ValueInt64()
+	}
+	if !data.CommittedInformationRate.IsNull() && !data.CommittedInformationRate.IsUnknown() {
+		apiResource.Spec["committed_information_rate"] = data.CommittedInformationRate.ValueInt64()
+	}
+	if !data.PolicerMode.IsNull() && !data.PolicerMode.IsUnknown() {
+		apiResource.Spec["policer_mode"] = data.PolicerMode.ValueString()
+	}
+	if !data.PolicerType.IsNull() && !data.PolicerType.IsUnknown() {
+		apiResource.Spec["policer_type"] = data.PolicerType.ValueString()
 	}
 
 	_, err := r.client.UpdatePolicer(ctx, apiResource)
@@ -840,94 +482,58 @@ func (r *PolicerResource) Update(ctx context.Context, req resource.UpdateRequest
 	}
 
 	// Set computed fields from API response
+	if v, ok := fetched.Spec["burst_size"].(float64); ok {
+		data.BurstSize = types.Int64Value(int64(v))
+	} else if data.BurstSize.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.BurstSize = types.Int64Null()
+	}
+	// If plan had a value, preserve it
+	if v, ok := fetched.Spec["committed_information_rate"].(float64); ok {
+		data.CommittedInformationRate = types.Int64Value(int64(v))
+	} else if data.CommittedInformationRate.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.CommittedInformationRate = types.Int64Null()
+	}
+	// If plan had a value, preserve it
+	if v, ok := fetched.Spec["policer_mode"].(string); ok && v != "" {
+		data.PolicerMode = types.StringValue(v)
+	} else if data.PolicerMode.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PolicerMode = types.StringNull()
+	}
+	// If plan had a value, preserve it
+	if v, ok := fetched.Spec["policer_type"].(string); ok && v != "" {
+		data.PolicerType = types.StringValue(v)
+	} else if data.PolicerType.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.PolicerType = types.StringNull()
+	}
+	// If plan had a value, preserve it
 
 	// Unmarshal spec fields from fetched resource to Terraform state
 	apiResource = fetched // Use GET response which includes all computed fields
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
-	if listData, ok := apiResource.Spec["protocol_policer"].([]interface{}); ok && len(listData) > 0 {
-		var protocol_policerList []PolicerProtocolPolicerModel
-		var existingProtocolPolicerItems []PolicerProtocolPolicerModel
-		if !data.ProtocolPolicer.IsNull() && !data.ProtocolPolicer.IsUnknown() {
-			data.ProtocolPolicer.ElementsAs(ctx, &existingProtocolPolicerItems, false)
-		}
-		for listIdx, item := range listData {
-			_ = listIdx // May be unused if no empty marker blocks in list item
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				protocol_policerList = append(protocol_policerList, PolicerProtocolPolicerModel{
-					Policer: func() []PolicerProtocolPolicerPolicerModel {
-						if nestedListData, ok := itemMap["policer"].([]interface{}); ok && len(nestedListData) > 0 {
-							var result []PolicerProtocolPolicerPolicerModel
-							for _, nestedItem := range nestedListData {
-								if nestedItemMap, ok := nestedItem.(map[string]interface{}); ok {
-									result = append(result, PolicerProtocolPolicerPolicerModel{
-										Kind: func() types.String {
-											if v, ok := nestedItemMap["kind"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-										Name: func() types.String {
-											if v, ok := nestedItemMap["name"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-										Namespace: func() types.String {
-											if v, ok := nestedItemMap["namespace"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-										Tenant: func() types.String {
-											if v, ok := nestedItemMap["tenant"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-										Uid: func() types.String {
-											if v, ok := nestedItemMap["uid"].(string); ok && v != "" {
-												return types.StringValue(v)
-											}
-											return types.StringNull()
-										}(),
-									})
-								}
-							}
-							return result
-						}
-						return nil
-					}(),
-					Protocol: func() *PolicerProtocolPolicerProtocolModel {
-						if _, ok := itemMap["protocol"].(map[string]interface{}); ok {
-							return &PolicerProtocolPolicerProtocolModel{
-								DNS: func() *PolicerEmptyModel {
-									if !isImport && len(existingProtocolPolicerItems) > listIdx && existingProtocolPolicerItems[listIdx].Protocol != nil && existingProtocolPolicerItems[listIdx].Protocol.DNS != nil {
-										return &PolicerEmptyModel{}
-									}
-									return nil
-								}(),
-								UDP: func() *PolicerEmptyModel {
-									if !isImport && len(existingProtocolPolicerItems) > listIdx && existingProtocolPolicerItems[listIdx].Protocol != nil && existingProtocolPolicerItems[listIdx].Protocol.UDP != nil {
-										return &PolicerEmptyModel{}
-									}
-									return nil
-								}(),
-							}
-						}
-						return nil
-					}(),
-				})
-			}
-		}
-		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: PolicerProtocolPolicerModelAttrTypes}, protocol_policerList)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.ProtocolPolicer = listVal
-		}
+	if v, ok := apiResource.Spec["burst_size"].(float64); ok {
+		data.BurstSize = types.Int64Value(int64(v))
 	} else {
-		// No data from API - set to null list
-		data.ProtocolPolicer = types.ListNull(types.ObjectType{AttrTypes: PolicerProtocolPolicerModelAttrTypes})
+		data.BurstSize = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["committed_information_rate"].(float64); ok {
+		data.CommittedInformationRate = types.Int64Value(int64(v))
+	} else {
+		data.CommittedInformationRate = types.Int64Null()
+	}
+	if v, ok := apiResource.Spec["policer_mode"].(string); ok && v != "" {
+		data.PolicerMode = types.StringValue(v)
+	} else {
+		data.PolicerMode = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["policer_type"].(string); ok && v != "" {
+		data.PolicerType = types.StringValue(v)
+	} else {
+		data.PolicerType = types.StringNull()
 	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

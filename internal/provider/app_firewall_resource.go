@@ -357,7 +357,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"allow_all_response_codes": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: allow_all_response_codes, allowed_response_codes] Enable this option",
+				MarkdownDescription: "[OneOf: allow_all_response_codes, allowed_response_codes] Enable this option Server applies default when omitted.",
 			},
 			"allowed_response_codes": schema.SingleNestedBlock{
 				MarkdownDescription: "List of HTTP response status codes that are allowed.",
@@ -444,13 +444,13 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"default_anonymization": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Enable this option Server applies default when omitted.",
 			},
 			"default_bot_setting": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Enable this option Server applies default when omitted.",
 			},
 			"default_detection_settings": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Enable this option Server applies default when omitted.",
 			},
 			"detection_settings": schema.SingleNestedBlock{
 				MarkdownDescription: "Specifies detection settings to be used by WAF.",
@@ -556,10 +556,10 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "Enable this option",
 			},
 			"monitoring": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Enable this option Server applies default when omitted.",
 			},
 			"use_default_blocking_page": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Enable this option Server applies default when omitted.",
 			},
 		},
 	}

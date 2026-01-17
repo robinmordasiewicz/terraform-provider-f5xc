@@ -169,7 +169,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"jitter_percent": schema.Int64Attribute{
-				MarkdownDescription: "Add a random amount of time as a percent value to the interval between successive healthcheck requests.",
+				MarkdownDescription: "Add a random amount of time as a percent value to the interval between successive healthcheck requests. Server applies default when omitted.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{

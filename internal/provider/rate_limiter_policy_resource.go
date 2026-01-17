@@ -400,7 +400,7 @@ func (r *RateLimiterPolicyResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "[OneOf: any_server, server_name, server_name_matcher, server_selector] Enable this option",
 			},
 			"rules": schema.ListNestedBlock{
-				MarkdownDescription: "List of RateLimiterRules that are evaluated sequentially till a matching rule is identified.",
+				MarkdownDescription: "List of RateLimiterRules that are evaluated sequentially till a matching rule is identified. Defaults to `[]`. Server applies default when omitted.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{

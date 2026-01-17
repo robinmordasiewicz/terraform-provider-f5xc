@@ -25,3 +25,6 @@ resource "f5xc_rate_limiter_policy" "example" {
     # Configure rules settings
   }
 }
+
+# The following optional fields have server-applied defaults and can be omitted:
+# - rules

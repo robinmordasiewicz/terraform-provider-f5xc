@@ -22,3 +22,6 @@ resource "f5xc_api_definition" "example" {
   # Non-validation mode
   non_validation_mode {}
 }
+
+# The following optional fields have server-applied defaults and can be omitted:
+# - swagger_specs

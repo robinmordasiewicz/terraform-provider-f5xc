@@ -45,6 +45,264 @@ type SiteResource struct {
 type SiteEmptyModel struct {
 }
 
+// SiteAWSParametersModel represents aws_parameters block
+type SiteAWSParametersModel struct {
+	AWSRegion           types.String                               `tfsdk:"aws_region"`
+	DiskSize            types.Int64                                `tfsdk:"disk_size"`
+	InstanceType        types.String                               `tfsdk:"instance_type"`
+	NodesPerAz          types.Int64                                `tfsdk:"nodes_per_az"`
+	SSHKey              types.String                               `tfsdk:"ssh_key"`
+	TotalNodes          types.Int64                                `tfsdk:"total_nodes"`
+	VPCID               types.String                               `tfsdk:"vpc_id"`
+	AdminPassword       *SiteAWSParametersAdminPasswordModel       `tfsdk:"admin_password"`
+	AWSCred             *SiteAWSParametersAWSCredModel             `tfsdk:"aws_cred"`
+	AzNodes             []SiteAWSParametersAzNodesModel            `tfsdk:"az_nodes"`
+	CustomSecurityGroup *SiteAWSParametersCustomSecurityGroupModel `tfsdk:"custom_security_group"`
+	DisableInternetVIP  *SiteEmptyModel                            `tfsdk:"disable_internet_vip"`
+	EnableInternetVIP   *SiteEmptyModel                            `tfsdk:"enable_internet_vip"`
+	ExistingTGW         *SiteAWSParametersExistingTGWModel         `tfsdk:"existing_tgw"`
+	F5xcSecurityGroup   *SiteEmptyModel                            `tfsdk:"f5xc_security_group"`
+	NewTGW              *SiteAWSParametersNewTGWModel              `tfsdk:"new_tgw"`
+	NewVPC              *SiteAWSParametersNewVPCModel              `tfsdk:"new_vpc"`
+	NoWorkerNodes       *SiteEmptyModel                            `tfsdk:"no_worker_nodes"`
+	ReservedTGWCIDR     *SiteEmptyModel                            `tfsdk:"reserved_tgw_cidr"`
+	TGWCIDR             *SiteAWSParametersTGWCIDRModel             `tfsdk:"tgw_cidr"`
+}
+
+// SiteAWSParametersModelAttrTypes defines the attribute types for SiteAWSParametersModel
+var SiteAWSParametersModelAttrTypes = map[string]attr.Type{
+	"aws_region":            types.StringType,
+	"disk_size":             types.Int64Type,
+	"instance_type":         types.StringType,
+	"nodes_per_az":          types.Int64Type,
+	"ssh_key":               types.StringType,
+	"total_nodes":           types.Int64Type,
+	"vpc_id":                types.StringType,
+	"admin_password":        types.ObjectType{AttrTypes: SiteAWSParametersAdminPasswordModelAttrTypes},
+	"aws_cred":              types.ObjectType{AttrTypes: SiteAWSParametersAWSCredModelAttrTypes},
+	"az_nodes":              types.ListType{ElemType: types.ObjectType{AttrTypes: SiteAWSParametersAzNodesModelAttrTypes}},
+	"custom_security_group": types.ObjectType{AttrTypes: SiteAWSParametersCustomSecurityGroupModelAttrTypes},
+	"disable_internet_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_internet_vip":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"existing_tgw":          types.ObjectType{AttrTypes: SiteAWSParametersExistingTGWModelAttrTypes},
+	"f5xc_security_group":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"new_tgw":               types.ObjectType{AttrTypes: SiteAWSParametersNewTGWModelAttrTypes},
+	"new_vpc":               types.ObjectType{AttrTypes: SiteAWSParametersNewVPCModelAttrTypes},
+	"no_worker_nodes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"reserved_tgw_cidr":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tgw_cidr":              types.ObjectType{AttrTypes: SiteAWSParametersTGWCIDRModelAttrTypes},
+}
+
+// SiteAWSParametersAdminPasswordModel represents admin_password block
+type SiteAWSParametersAdminPasswordModel struct {
+	BlindfoldSecretInfo *SiteAWSParametersAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *SiteAWSParametersAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// SiteAWSParametersAdminPasswordModelAttrTypes defines the attribute types for SiteAWSParametersAdminPasswordModel
+var SiteAWSParametersAdminPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: SiteAWSParametersAdminPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: SiteAWSParametersAdminPasswordClearSecretInfoModelAttrTypes},
+}
+
+// SiteAWSParametersAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
+type SiteAWSParametersAdminPasswordBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// SiteAWSParametersAdminPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for SiteAWSParametersAdminPasswordBlindfoldSecretInfoModel
+var SiteAWSParametersAdminPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// SiteAWSParametersAdminPasswordClearSecretInfoModel represents clear_secret_info block
+type SiteAWSParametersAdminPasswordClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// SiteAWSParametersAdminPasswordClearSecretInfoModelAttrTypes defines the attribute types for SiteAWSParametersAdminPasswordClearSecretInfoModel
+var SiteAWSParametersAdminPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
+// SiteAWSParametersAWSCredModel represents aws_cred block
+type SiteAWSParametersAWSCredModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SiteAWSParametersAWSCredModelAttrTypes defines the attribute types for SiteAWSParametersAWSCredModel
+var SiteAWSParametersAWSCredModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// SiteAWSParametersAzNodesModel represents az_nodes block
+type SiteAWSParametersAzNodesModel struct {
+	AWSAzName            types.String                                 `tfsdk:"aws_az_name"`
+	InsideSubnet         *SiteAWSParametersAzNodesInsideSubnetModel   `tfsdk:"inside_subnet"`
+	OutsideSubnet        *SiteAWSParametersAzNodesOutsideSubnetModel  `tfsdk:"outside_subnet"`
+	ReservedInsideSubnet *SiteEmptyModel                              `tfsdk:"reserved_inside_subnet"`
+	WorkloadSubnet       *SiteAWSParametersAzNodesWorkloadSubnetModel `tfsdk:"workload_subnet"`
+}
+
+// SiteAWSParametersAzNodesModelAttrTypes defines the attribute types for SiteAWSParametersAzNodesModel
+var SiteAWSParametersAzNodesModelAttrTypes = map[string]attr.Type{
+	"aws_az_name":            types.StringType,
+	"inside_subnet":          types.ObjectType{AttrTypes: SiteAWSParametersAzNodesInsideSubnetModelAttrTypes},
+	"outside_subnet":         types.ObjectType{AttrTypes: SiteAWSParametersAzNodesOutsideSubnetModelAttrTypes},
+	"reserved_inside_subnet": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"workload_subnet":        types.ObjectType{AttrTypes: SiteAWSParametersAzNodesWorkloadSubnetModelAttrTypes},
+}
+
+// SiteAWSParametersAzNodesInsideSubnetModel represents inside_subnet block
+type SiteAWSParametersAzNodesInsideSubnetModel struct {
+	ExistingSubnetID types.String                                          `tfsdk:"existing_subnet_id"`
+	SubnetParam      *SiteAWSParametersAzNodesInsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// SiteAWSParametersAzNodesInsideSubnetModelAttrTypes defines the attribute types for SiteAWSParametersAzNodesInsideSubnetModel
+var SiteAWSParametersAzNodesInsideSubnetModelAttrTypes = map[string]attr.Type{
+	"existing_subnet_id": types.StringType,
+	"subnet_param":       types.ObjectType{AttrTypes: SiteAWSParametersAzNodesInsideSubnetSubnetParamModelAttrTypes},
+}
+
+// SiteAWSParametersAzNodesInsideSubnetSubnetParamModel represents subnet_param block
+type SiteAWSParametersAzNodesInsideSubnetSubnetParamModel struct {
+	Ipv4 types.String `tfsdk:"ipv4"`
+}
+
+// SiteAWSParametersAzNodesInsideSubnetSubnetParamModelAttrTypes defines the attribute types for SiteAWSParametersAzNodesInsideSubnetSubnetParamModel
+var SiteAWSParametersAzNodesInsideSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.StringType,
+}
+
+// SiteAWSParametersAzNodesOutsideSubnetModel represents outside_subnet block
+type SiteAWSParametersAzNodesOutsideSubnetModel struct {
+	ExistingSubnetID types.String                                           `tfsdk:"existing_subnet_id"`
+	SubnetParam      *SiteAWSParametersAzNodesOutsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// SiteAWSParametersAzNodesOutsideSubnetModelAttrTypes defines the attribute types for SiteAWSParametersAzNodesOutsideSubnetModel
+var SiteAWSParametersAzNodesOutsideSubnetModelAttrTypes = map[string]attr.Type{
+	"existing_subnet_id": types.StringType,
+	"subnet_param":       types.ObjectType{AttrTypes: SiteAWSParametersAzNodesOutsideSubnetSubnetParamModelAttrTypes},
+}
+
+// SiteAWSParametersAzNodesOutsideSubnetSubnetParamModel represents subnet_param block
+type SiteAWSParametersAzNodesOutsideSubnetSubnetParamModel struct {
+	Ipv4 types.String `tfsdk:"ipv4"`
+}
+
+// SiteAWSParametersAzNodesOutsideSubnetSubnetParamModelAttrTypes defines the attribute types for SiteAWSParametersAzNodesOutsideSubnetSubnetParamModel
+var SiteAWSParametersAzNodesOutsideSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.StringType,
+}
+
+// SiteAWSParametersAzNodesWorkloadSubnetModel represents workload_subnet block
+type SiteAWSParametersAzNodesWorkloadSubnetModel struct {
+	ExistingSubnetID types.String                                            `tfsdk:"existing_subnet_id"`
+	SubnetParam      *SiteAWSParametersAzNodesWorkloadSubnetSubnetParamModel `tfsdk:"subnet_param"`
+}
+
+// SiteAWSParametersAzNodesWorkloadSubnetModelAttrTypes defines the attribute types for SiteAWSParametersAzNodesWorkloadSubnetModel
+var SiteAWSParametersAzNodesWorkloadSubnetModelAttrTypes = map[string]attr.Type{
+	"existing_subnet_id": types.StringType,
+	"subnet_param":       types.ObjectType{AttrTypes: SiteAWSParametersAzNodesWorkloadSubnetSubnetParamModelAttrTypes},
+}
+
+// SiteAWSParametersAzNodesWorkloadSubnetSubnetParamModel represents subnet_param block
+type SiteAWSParametersAzNodesWorkloadSubnetSubnetParamModel struct {
+	Ipv4 types.String `tfsdk:"ipv4"`
+}
+
+// SiteAWSParametersAzNodesWorkloadSubnetSubnetParamModelAttrTypes defines the attribute types for SiteAWSParametersAzNodesWorkloadSubnetSubnetParamModel
+var SiteAWSParametersAzNodesWorkloadSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.StringType,
+}
+
+// SiteAWSParametersCustomSecurityGroupModel represents custom_security_group block
+type SiteAWSParametersCustomSecurityGroupModel struct {
+	InsideSecurityGroupID  types.String `tfsdk:"inside_security_group_id"`
+	OutsideSecurityGroupID types.String `tfsdk:"outside_security_group_id"`
+}
+
+// SiteAWSParametersCustomSecurityGroupModelAttrTypes defines the attribute types for SiteAWSParametersCustomSecurityGroupModel
+var SiteAWSParametersCustomSecurityGroupModelAttrTypes = map[string]attr.Type{
+	"inside_security_group_id":  types.StringType,
+	"outside_security_group_id": types.StringType,
+}
+
+// SiteAWSParametersExistingTGWModel represents existing_tgw block
+type SiteAWSParametersExistingTGWModel struct {
+	TGWAsn          types.Int64  `tfsdk:"tgw_asn"`
+	TGWID           types.String `tfsdk:"tgw_id"`
+	VolterraSiteAsn types.Int64  `tfsdk:"volterra_site_asn"`
+}
+
+// SiteAWSParametersExistingTGWModelAttrTypes defines the attribute types for SiteAWSParametersExistingTGWModel
+var SiteAWSParametersExistingTGWModelAttrTypes = map[string]attr.Type{
+	"tgw_asn":           types.Int64Type,
+	"tgw_id":            types.StringType,
+	"volterra_site_asn": types.Int64Type,
+}
+
+// SiteAWSParametersNewTGWModel represents new_tgw block
+type SiteAWSParametersNewTGWModel struct {
+	SystemGenerated *SiteEmptyModel                           `tfsdk:"system_generated"`
+	UserAssigned    *SiteAWSParametersNewTGWUserAssignedModel `tfsdk:"user_assigned"`
+}
+
+// SiteAWSParametersNewTGWModelAttrTypes defines the attribute types for SiteAWSParametersNewTGWModel
+var SiteAWSParametersNewTGWModelAttrTypes = map[string]attr.Type{
+	"system_generated": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"user_assigned":    types.ObjectType{AttrTypes: SiteAWSParametersNewTGWUserAssignedModelAttrTypes},
+}
+
+// SiteAWSParametersNewTGWUserAssignedModel represents user_assigned block
+type SiteAWSParametersNewTGWUserAssignedModel struct {
+	TGWAsn          types.Int64 `tfsdk:"tgw_asn"`
+	VolterraSiteAsn types.Int64 `tfsdk:"volterra_site_asn"`
+}
+
+// SiteAWSParametersNewTGWUserAssignedModelAttrTypes defines the attribute types for SiteAWSParametersNewTGWUserAssignedModel
+var SiteAWSParametersNewTGWUserAssignedModelAttrTypes = map[string]attr.Type{
+	"tgw_asn":           types.Int64Type,
+	"volterra_site_asn": types.Int64Type,
+}
+
+// SiteAWSParametersNewVPCModel represents new_vpc block
+type SiteAWSParametersNewVPCModel struct {
+	NameTag      types.String    `tfsdk:"name_tag"`
+	PrimaryIpv4  types.String    `tfsdk:"primary_ipv4"`
+	Autogenerate *SiteEmptyModel `tfsdk:"autogenerate"`
+}
+
+// SiteAWSParametersNewVPCModelAttrTypes defines the attribute types for SiteAWSParametersNewVPCModel
+var SiteAWSParametersNewVPCModelAttrTypes = map[string]attr.Type{
+	"name_tag":     types.StringType,
+	"primary_ipv4": types.StringType,
+	"autogenerate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// SiteAWSParametersTGWCIDRModel represents tgw_cidr block
+type SiteAWSParametersTGWCIDRModel struct {
+	Ipv4 types.String `tfsdk:"ipv4"`
+}
+
+// SiteAWSParametersTGWCIDRModelAttrTypes defines the attribute types for SiteAWSParametersTGWCIDRModel
+var SiteAWSParametersTGWCIDRModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.StringType,
+}
+
 // SiteBlockedServicesModel represents blocked_services block
 type SiteBlockedServicesModel struct {
 	BlockedSevice []SiteBlockedServicesBlockedSeviceModel `tfsdk:"blocked_sevice"`
@@ -71,46 +329,6 @@ var SiteBlockedServicesBlockedSeviceModelAttrTypes = map[string]attr.Type{
 	"web_user_interface": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
-// SiteBondDeviceListModel represents bond_device_list block
-type SiteBondDeviceListModel struct {
-	BondDevices []SiteBondDeviceListBondDevicesModel `tfsdk:"bond_devices"`
-}
-
-// SiteBondDeviceListModelAttrTypes defines the attribute types for SiteBondDeviceListModel
-var SiteBondDeviceListModelAttrTypes = map[string]attr.Type{
-	"bond_devices": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteBondDeviceListBondDevicesModelAttrTypes}},
-}
-
-// SiteBondDeviceListBondDevicesModel represents bond_devices block
-type SiteBondDeviceListBondDevicesModel struct {
-	Devices             types.List                              `tfsdk:"devices"`
-	LinkPollingInterval types.Int64                             `tfsdk:"link_polling_interval"`
-	LinkUpDelay         types.Int64                             `tfsdk:"link_up_delay"`
-	Name                types.String                            `tfsdk:"name"`
-	ActiveBackup        *SiteEmptyModel                         `tfsdk:"active_backup"`
-	Lacp                *SiteBondDeviceListBondDevicesLacpModel `tfsdk:"lacp"`
-}
-
-// SiteBondDeviceListBondDevicesModelAttrTypes defines the attribute types for SiteBondDeviceListBondDevicesModel
-var SiteBondDeviceListBondDevicesModelAttrTypes = map[string]attr.Type{
-	"devices":               types.ListType{ElemType: types.StringType},
-	"link_polling_interval": types.Int64Type,
-	"link_up_delay":         types.Int64Type,
-	"name":                  types.StringType,
-	"active_backup":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"lacp":                  types.ObjectType{AttrTypes: SiteBondDeviceListBondDevicesLacpModelAttrTypes},
-}
-
-// SiteBondDeviceListBondDevicesLacpModel represents lacp block
-type SiteBondDeviceListBondDevicesLacpModel struct {
-	Rate types.Int64 `tfsdk:"rate"`
-}
-
-// SiteBondDeviceListBondDevicesLacpModelAttrTypes defines the attribute types for SiteBondDeviceListBondDevicesLacpModel
-var SiteBondDeviceListBondDevicesLacpModelAttrTypes = map[string]attr.Type{
-	"rate": types.Int64Type,
-}
-
 // SiteCoordinatesModel represents coordinates block
 type SiteCoordinatesModel struct {
 	Latitude  types.Int64 `tfsdk:"latitude"`
@@ -123,912 +341,70 @@ var SiteCoordinatesModelAttrTypes = map[string]attr.Type{
 	"longitude": types.Int64Type,
 }
 
-// SiteCustomNetworkConfigModel represents custom_network_config block
-type SiteCustomNetworkConfigModel struct {
-	TunnelDeadTimeout              types.Int64                                                 `tfsdk:"tunnel_dead_timeout"`
-	VIPVrrpMode                    types.String                                                `tfsdk:"vip_vrrp_mode"`
-	ActiveEnhancedFirewallPolicies *SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
-	ActiveForwardProxyPolicies     *SiteCustomNetworkConfigActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
-	ActiveNetworkPolicies          *SiteCustomNetworkConfigActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
-	DefaultConfig                  *SiteEmptyModel                                             `tfsdk:"default_config"`
-	DefaultInterfaceConfig         *SiteEmptyModel                                             `tfsdk:"default_interface_config"`
-	DefaultSLIConfig               *SiteEmptyModel                                             `tfsdk:"default_sli_config"`
-	ForwardProxyAllowAll           *SiteEmptyModel                                             `tfsdk:"forward_proxy_allow_all"`
-	GlobalNetworkList              *SiteCustomNetworkConfigGlobalNetworkListModel              `tfsdk:"global_network_list"`
-	InterfaceList                  *SiteCustomNetworkConfigInterfaceListModel                  `tfsdk:"interface_list"`
-	NoForwardProxy                 *SiteEmptyModel                                             `tfsdk:"no_forward_proxy"`
-	NoGlobalNetwork                *SiteEmptyModel                                             `tfsdk:"no_global_network"`
-	NoNetworkPolicy                *SiteEmptyModel                                             `tfsdk:"no_network_policy"`
-	SLIConfig                      *SiteCustomNetworkConfigSLIConfigModel                      `tfsdk:"sli_config"`
-	SloConfig                      *SiteCustomNetworkConfigSloConfigModel                      `tfsdk:"slo_config"`
-	SmConnectionPublicIP           *SiteEmptyModel                                             `tfsdk:"sm_connection_public_ip"`
-	SmConnectionPvtIP              *SiteEmptyModel                                             `tfsdk:"sm_connection_pvt_ip"`
+// SiteCustomDNSModel represents custom_dns block
+type SiteCustomDNSModel struct {
+	InsideNameserver  types.String `tfsdk:"inside_nameserver"`
+	OutsideNameserver types.String `tfsdk:"outside_nameserver"`
 }
 
-// SiteCustomNetworkConfigModelAttrTypes defines the attribute types for SiteCustomNetworkConfigModel
-var SiteCustomNetworkConfigModelAttrTypes = map[string]attr.Type{
-	"tunnel_dead_timeout":               types.Int64Type,
-	"vip_vrrp_mode":                     types.StringType,
-	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModelAttrTypes},
-	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: SiteCustomNetworkConfigActiveForwardProxyPoliciesModelAttrTypes},
-	"active_network_policies":           types.ObjectType{AttrTypes: SiteCustomNetworkConfigActiveNetworkPoliciesModelAttrTypes},
-	"default_config":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"default_interface_config":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"default_sli_config":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"forward_proxy_allow_all":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"global_network_list":               types.ObjectType{AttrTypes: SiteCustomNetworkConfigGlobalNetworkListModelAttrTypes},
-	"interface_list":                    types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListModelAttrTypes},
-	"no_forward_proxy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_global_network":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_network_policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sli_config":                        types.ObjectType{AttrTypes: SiteCustomNetworkConfigSLIConfigModelAttrTypes},
-	"slo_config":                        types.ObjectType{AttrTypes: SiteCustomNetworkConfigSloConfigModelAttrTypes},
-	"sm_connection_public_ip":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sm_connection_pvt_ip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+// SiteCustomDNSModelAttrTypes defines the attribute types for SiteCustomDNSModel
+var SiteCustomDNSModelAttrTypes = map[string]attr.Type{
+	"inside_nameserver":  types.StringType,
+	"outside_nameserver": types.StringType,
 }
 
-// SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
-type SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel struct {
-	EnhancedFirewallPolicies []SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
+// SiteDirectConnectEnabledModel represents direct_connect_enabled block
+type SiteDirectConnectEnabledModel struct {
+	CustomAsn    types.Int64                              `tfsdk:"custom_asn"`
+	AutoAsn      *SiteEmptyModel                          `tfsdk:"auto_asn"`
+	HostedVifs   *SiteDirectConnectEnabledHostedVifsModel `tfsdk:"hosted_vifs"`
+	StandardVifs *SiteEmptyModel                          `tfsdk:"standard_vifs"`
 }
 
-// SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel
-var SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
-	"enhanced_firewall_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes}},
+// SiteDirectConnectEnabledModelAttrTypes defines the attribute types for SiteDirectConnectEnabledModel
+var SiteDirectConnectEnabledModelAttrTypes = map[string]attr.Type{
+	"custom_asn":    types.Int64Type,
+	"auto_asn":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"hosted_vifs":   types.ObjectType{AttrTypes: SiteDirectConnectEnabledHostedVifsModelAttrTypes},
+	"standard_vifs": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
-// SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
-type SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
+// SiteDirectConnectEnabledHostedVifsModel represents hosted_vifs block
+type SiteDirectConnectEnabledHostedVifsModel struct {
+	SiteRegistrationOverDirectConnect *SiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModel `tfsdk:"site_registration_over_direct_connect"`
+	SiteRegistrationOverInternet      *SiteEmptyModel                                                           `tfsdk:"site_registration_over_internet"`
+	VifList                           []SiteDirectConnectEnabledHostedVifsVifListModel                          `tfsdk:"vif_list"`
 }
 
-// SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel
-var SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
+// SiteDirectConnectEnabledHostedVifsModelAttrTypes defines the attribute types for SiteDirectConnectEnabledHostedVifsModel
+var SiteDirectConnectEnabledHostedVifsModelAttrTypes = map[string]attr.Type{
+	"site_registration_over_direct_connect": types.ObjectType{AttrTypes: SiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModelAttrTypes},
+	"site_registration_over_internet":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vif_list":                              types.ListType{ElemType: types.ObjectType{AttrTypes: SiteDirectConnectEnabledHostedVifsVifListModelAttrTypes}},
 }
 
-// SiteCustomNetworkConfigActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
-type SiteCustomNetworkConfigActiveForwardProxyPoliciesModel struct {
-	ForwardProxyPolicies []SiteCustomNetworkConfigActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
+// SiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModel represents site_registration_over_direct_connect block
+type SiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModel struct {
+	CloudlinkNetworkName types.String `tfsdk:"cloudlink_network_name"`
 }
 
-// SiteCustomNetworkConfigActiveForwardProxyPoliciesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigActiveForwardProxyPoliciesModel
-var SiteCustomNetworkConfigActiveForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
-	"forward_proxy_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes}},
+// SiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModelAttrTypes defines the attribute types for SiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModel
+var SiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModelAttrTypes = map[string]attr.Type{
+	"cloudlink_network_name": types.StringType,
 }
 
-// SiteCustomNetworkConfigActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
-type SiteCustomNetworkConfigActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
+// SiteDirectConnectEnabledHostedVifsVifListModel represents vif_list block
+type SiteDirectConnectEnabledHostedVifsVifListModel struct {
+	OtherRegion      types.String    `tfsdk:"other_region"`
+	VifID            types.String    `tfsdk:"vif_id"`
+	SameAsSiteRegion *SiteEmptyModel `tfsdk:"same_as_site_region"`
 }
 
-// SiteCustomNetworkConfigActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigActiveForwardProxyPoliciesForwardProxyPoliciesModel
-var SiteCustomNetworkConfigActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteCustomNetworkConfigActiveNetworkPoliciesModel represents active_network_policies block
-type SiteCustomNetworkConfigActiveNetworkPoliciesModel struct {
-	NetworkPolicies []SiteCustomNetworkConfigActiveNetworkPoliciesNetworkPoliciesModel `tfsdk:"network_policies"`
-}
-
-// SiteCustomNetworkConfigActiveNetworkPoliciesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigActiveNetworkPoliciesModel
-var SiteCustomNetworkConfigActiveNetworkPoliciesModelAttrTypes = map[string]attr.Type{
-	"network_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigActiveNetworkPoliciesNetworkPoliciesModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
-type SiteCustomNetworkConfigActiveNetworkPoliciesNetworkPoliciesModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteCustomNetworkConfigActiveNetworkPoliciesNetworkPoliciesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigActiveNetworkPoliciesNetworkPoliciesModel
-var SiteCustomNetworkConfigActiveNetworkPoliciesNetworkPoliciesModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteCustomNetworkConfigGlobalNetworkListModel represents global_network_list block
-type SiteCustomNetworkConfigGlobalNetworkListModel struct {
-	GlobalNetworkConnections []SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModel `tfsdk:"global_network_connections"`
-}
-
-// SiteCustomNetworkConfigGlobalNetworkListModelAttrTypes defines the attribute types for SiteCustomNetworkConfigGlobalNetworkListModel
-var SiteCustomNetworkConfigGlobalNetworkListModelAttrTypes = map[string]attr.Type{
-	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
-type SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModel struct {
-	SLIToGlobalDR *SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel `tfsdk:"sli_to_global_dr"`
-	SloToGlobalDR *SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel `tfsdk:"slo_to_global_dr"`
-}
-
-// SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModel
-var SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
-	"sli_to_global_dr": types.ObjectType{AttrTypes: SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes},
-	"slo_to_global_dr": types.ObjectType{AttrTypes: SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
-type SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel struct {
-	GlobalVn *SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
-}
-
-// SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes defines the attribute types for SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel
-var SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes = map[string]attr.Type{
-	"global_vn": types.ObjectType{AttrTypes: SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel represents global_vn block
-type SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes defines the attribute types for SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel
-var SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel represents slo_to_global_dr block
-type SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel struct {
-	GlobalVn *SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
-}
-
-// SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes defines the attribute types for SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel
-var SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes = map[string]attr.Type{
-	"global_vn": types.ObjectType{AttrTypes: SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel represents global_vn block
-type SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes defines the attribute types for SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel
-var SiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteCustomNetworkConfigInterfaceListModel represents interface_list block
-type SiteCustomNetworkConfigInterfaceListModel struct {
-	Interfaces []SiteCustomNetworkConfigInterfaceListInterfacesModel `tfsdk:"interfaces"`
-}
-
-// SiteCustomNetworkConfigInterfaceListModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListModel
-var SiteCustomNetworkConfigInterfaceListModelAttrTypes = map[string]attr.Type{
-	"interfaces": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesModel represents interfaces block
-type SiteCustomNetworkConfigInterfaceListInterfacesModel struct {
-	DescriptionSpec                             types.String                                                                     `tfsdk:"description_spec"`
-	DcClusterGroupConnectivityInterfaceDisabled *SiteEmptyModel                                                                  `tfsdk:"dc_cluster_group_connectivity_interface_disabled"`
-	DcClusterGroupConnectivityInterfaceEnabled  *SiteEmptyModel                                                                  `tfsdk:"dc_cluster_group_connectivity_interface_enabled"`
-	DedicatedInterface                          *SiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModel           `tfsdk:"dedicated_interface"`
-	DedicatedManagementInterface                *SiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementInterfaceModel `tfsdk:"dedicated_management_interface"`
-	EthernetInterface                           *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceModel            `tfsdk:"ethernet_interface"`
-	Labels                                      *SiteEmptyModel                                                                  `tfsdk:"labels"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesModel
-var SiteCustomNetworkConfigInterfaceListInterfacesModelAttrTypes = map[string]attr.Type{
-	"description_spec": types.StringType,
-	"dc_cluster_group_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"dc_cluster_group_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"dedicated_interface":                              types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModelAttrTypes},
-	"dedicated_management_interface":                   types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementInterfaceModelAttrTypes},
-	"ethernet_interface":                               types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceModelAttrTypes},
-	"labels":                                           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModel represents dedicated_interface block
-type SiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModel struct {
-	Device          types.String    `tfsdk:"device"`
-	MTU             types.Int64     `tfsdk:"mtu"`
-	Node            types.String    `tfsdk:"node"`
-	Priority        types.Int64     `tfsdk:"priority"`
-	Cluster         *SiteEmptyModel `tfsdk:"cluster"`
-	IsPrimary       *SiteEmptyModel `tfsdk:"is_primary"`
-	Monitor         *SiteEmptyModel `tfsdk:"monitor"`
-	MonitorDisabled *SiteEmptyModel `tfsdk:"monitor_disabled"`
-	NotPrimary      *SiteEmptyModel `tfsdk:"not_primary"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModel
-var SiteCustomNetworkConfigInterfaceListInterfacesDedicatedInterfaceModelAttrTypes = map[string]attr.Type{
-	"device":           types.StringType,
-	"mtu":              types.Int64Type,
-	"node":             types.StringType,
-	"priority":         types.Int64Type,
-	"cluster":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"is_primary":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"monitor":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"monitor_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"not_primary":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementInterfaceModel represents dedicated_management_interface block
-type SiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementInterfaceModel struct {
-	Device  types.String    `tfsdk:"device"`
-	MTU     types.Int64     `tfsdk:"mtu"`
-	Node    types.String    `tfsdk:"node"`
-	Cluster *SiteEmptyModel `tfsdk:"cluster"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementInterfaceModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementInterfaceModel
-var SiteCustomNetworkConfigInterfaceListInterfacesDedicatedManagementInterfaceModelAttrTypes = map[string]attr.Type{
-	"device":  types.StringType,
-	"mtu":     types.Int64Type,
-	"node":    types.StringType,
-	"cluster": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceModel represents ethernet_interface block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceModel struct {
-	Device                 types.String                                                                           `tfsdk:"device"`
-	MTU                    types.Int64                                                                            `tfsdk:"mtu"`
-	Node                   types.String                                                                           `tfsdk:"node"`
-	Priority               types.Int64                                                                            `tfsdk:"priority"`
-	VLANID                 types.Int64                                                                            `tfsdk:"vlan_id"`
-	Cluster                *SiteEmptyModel                                                                        `tfsdk:"cluster"`
-	DHCPClient             *SiteEmptyModel                                                                        `tfsdk:"dhcp_client"`
-	DHCPServer             *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerModel        `tfsdk:"dhcp_server"`
-	Ipv6AutoConfig         *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigModel    `tfsdk:"ipv6_auto_config"`
-	IsPrimary              *SiteEmptyModel                                                                        `tfsdk:"is_primary"`
-	Monitor                *SiteEmptyModel                                                                        `tfsdk:"monitor"`
-	MonitorDisabled        *SiteEmptyModel                                                                        `tfsdk:"monitor_disabled"`
-	NoIpv6Address          *SiteEmptyModel                                                                        `tfsdk:"no_ipv6_address"`
-	NotPrimary             *SiteEmptyModel                                                                        `tfsdk:"not_primary"`
-	SiteLocalInsideNetwork *SiteEmptyModel                                                                        `tfsdk:"site_local_inside_network"`
-	SiteLocalNetwork       *SiteEmptyModel                                                                        `tfsdk:"site_local_network"`
-	StaticIP               *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModel          `tfsdk:"static_ip"`
-	StaticIpv6Address      *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModel `tfsdk:"static_ipv6_address"`
-	StorageNetwork         *SiteEmptyModel                                                                        `tfsdk:"storage_network"`
-	Untagged               *SiteEmptyModel                                                                        `tfsdk:"untagged"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceModelAttrTypes = map[string]attr.Type{
-	"device":                    types.StringType,
-	"mtu":                       types.Int64Type,
-	"node":                      types.StringType,
-	"priority":                  types.Int64Type,
-	"vlan_id":                   types.Int64Type,
-	"cluster":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"dhcp_client":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"dhcp_server":               types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerModelAttrTypes},
-	"ipv6_auto_config":          types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigModelAttrTypes},
-	"is_primary":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"monitor":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"monitor_disabled":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_ipv6_address":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"not_primary":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_ip":                 types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModelAttrTypes},
-	"static_ipv6_address":       types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModelAttrTypes},
-	"storage_network":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"untagged":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerModel represents dhcp_server block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerModel struct {
-	AutomaticFromEnd   *SiteEmptyModel                                                                               `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *SiteEmptyModel                                                                               `tfsdk:"automatic_from_start"`
-	DHCPNetworks       []SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModel  `tfsdk:"dhcp_networks"`
-	FixedIPMap         *SiteEmptyModel                                                                               `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap     *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerInterfaceIPMapModel `tfsdk:"interface_ip_map"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerModelAttrTypes = map[string]attr.Type{
-	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModelAttrTypes}},
-	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerInterfaceIPMapModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModel represents dhcp_networks block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModel struct {
-	DgwAddress    types.String                                                                                      `tfsdk:"dgw_address"`
-	DNSAddress    types.String                                                                                      `tfsdk:"dns_address"`
-	NetworkPrefix types.String                                                                                      `tfsdk:"network_prefix"`
-	PoolSettings  types.String                                                                                      `tfsdk:"pool_settings"`
-	FirstAddress  *SiteEmptyModel                                                                                   `tfsdk:"first_address"`
-	LastAddress   *SiteEmptyModel                                                                                   `tfsdk:"last_address"`
-	Pools         []SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksPoolsModel `tfsdk:"pools"`
-	SameAsDgw     *SiteEmptyModel                                                                                   `tfsdk:"same_as_dgw"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModelAttrTypes = map[string]attr.Type{
-	"dgw_address":    types.StringType,
-	"dns_address":    types.StringType,
-	"network_prefix": types.StringType,
-	"pool_settings":  types.StringType,
-	"first_address":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"last_address":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksPoolsModelAttrTypes}},
-	"same_as_dgw":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksPoolsModel represents pools block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksPoolsModel struct {
-	EndIP   types.String `tfsdk:"end_ip"`
-	StartIP types.String `tfsdk:"start_ip"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksPoolsModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksPoolsModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
-	"end_ip":   types.StringType,
-	"start_ip": types.StringType,
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerInterfaceIPMapModel represents interface_ip_map block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerInterfaceIPMapModel struct {
-	InterfaceIPMap *SiteEmptyModel `tfsdk:"interface_ip_map"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerInterfaceIPMapModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerInterfaceIPMapModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerInterfaceIPMapModelAttrTypes = map[string]attr.Type{
-	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigModel represents ipv6_auto_config block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigModel struct {
-	Host   *SiteEmptyModel                                                                           `tfsdk:"host"`
-	Router *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModel `tfsdk:"router"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigModelAttrTypes = map[string]attr.Type{
-	"host":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"router": types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModel represents router block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModel struct {
-	NetworkPrefix types.String                                                                                       `tfsdk:"network_prefix"`
-	DNSConfig     *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModel `tfsdk:"dns_config"`
-	Stateful      *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
-	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModelAttrTypes},
-	"stateful":       types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModel represents dns_config block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModel struct {
-	ConfiguredList *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
-	LocalDNS       *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModelAttrTypes = map[string]attr.Type{
-	"configured_list": types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes},
-	"local_dns":       types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModel struct {
-	DNSList types.List `tfsdk:"dns_list"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes = map[string]attr.Type{
-	"dns_list": types.ListType{ElemType: types.StringType},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
-	ConfiguredAddress types.String    `tfsdk:"configured_address"`
-	FirstAddress      *SiteEmptyModel `tfsdk:"first_address"`
-	LastAddress       *SiteEmptyModel `tfsdk:"last_address"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes = map[string]attr.Type{
-	"configured_address": types.StringType,
-	"first_address":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"last_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulModel represents stateful block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulModel struct {
-	AutomaticFromEnd   *SiteEmptyModel                                                                                                 `tfsdk:"automatic_from_end"`
-	AutomaticFromStart *SiteEmptyModel                                                                                                 `tfsdk:"automatic_from_start"`
-	DHCPNetworks       []SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel  `tfsdk:"dhcp_networks"`
-	FixedIPMap         *SiteEmptyModel                                                                                                 `tfsdk:"fixed_ip_map"`
-	InterfaceIPMap     *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulModelAttrTypes = map[string]attr.Type{
-	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
-	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
-	NetworkPrefix types.String                                                                                                        `tfsdk:"network_prefix"`
-	PoolSettings  types.String                                                                                                        `tfsdk:"pool_settings"`
-	Pools         []SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes = map[string]attr.Type{
-	"network_prefix": types.StringType,
-	"pool_settings":  types.StringType,
-	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel struct {
-	EndIP   types.String `tfsdk:"end_ip"`
-	StartIP types.String `tfsdk:"start_ip"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
-	"end_ip":   types.StringType,
-	"start_ip": types.StringType,
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
-	InterfaceIPMap *SiteEmptyModel `tfsdk:"interface_ip_map"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes = map[string]attr.Type{
-	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModel represents static_ip block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModel struct {
-	ClusterStaticIP *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP    *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPNodeStaticIPModel    `tfsdk:"node_static_ip"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPClusterStaticIPModelAttrTypes},
-	"node_static_ip":    types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPNodeStaticIPModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPClusterStaticIPModel represents cluster_static_ip block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPClusterStaticIPModel struct {
-	InterfaceIPMap *SiteEmptyModel `tfsdk:"interface_ip_map"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPClusterStaticIPModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPClusterStaticIPModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPClusterStaticIPModelAttrTypes = map[string]attr.Type{
-	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPNodeStaticIPModel represents node_static_ip block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPNodeStaticIPModel struct {
-	DefaultGw types.String `tfsdk:"default_gw"`
-	IPAddress types.String `tfsdk:"ip_address"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPNodeStaticIPModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPNodeStaticIPModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPNodeStaticIPModelAttrTypes = map[string]attr.Type{
-	"default_gw": types.StringType,
-	"ip_address": types.StringType,
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModel represents static_ipv6_address block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModel struct {
-	ClusterStaticIP *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressClusterStaticIPModel `tfsdk:"cluster_static_ip"`
-	NodeStaticIP    *SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressClusterStaticIPModelAttrTypes},
-	"node_static_ip":    types.ObjectType{AttrTypes: SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressNodeStaticIPModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressClusterStaticIPModel struct {
-	InterfaceIPMap *SiteEmptyModel `tfsdk:"interface_ip_map"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressClusterStaticIPModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressClusterStaticIPModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressClusterStaticIPModelAttrTypes = map[string]attr.Type{
-	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
-type SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressNodeStaticIPModel struct {
-	DefaultGw types.String `tfsdk:"default_gw"`
-	IPAddress types.String `tfsdk:"ip_address"`
-}
-
-// SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressNodeStaticIPModelAttrTypes defines the attribute types for SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressNodeStaticIPModel
-var SiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressNodeStaticIPModelAttrTypes = map[string]attr.Type{
-	"default_gw": types.StringType,
-	"ip_address": types.StringType,
-}
-
-// SiteCustomNetworkConfigSLIConfigModel represents sli_config block
-type SiteCustomNetworkConfigSLIConfigModel struct {
-	Nameserver       types.String                                         `tfsdk:"nameserver"`
-	VIP              types.String                                         `tfsdk:"vip"`
-	DcClusterGroup   *SiteCustomNetworkConfigSLIConfigDcClusterGroupModel `tfsdk:"dc_cluster_group"`
-	Labels           *SiteEmptyModel                                      `tfsdk:"labels"`
-	NoDcClusterGroup *SiteEmptyModel                                      `tfsdk:"no_dc_cluster_group"`
-	NoStaticRoutes   *SiteEmptyModel                                      `tfsdk:"no_static_routes"`
-	NoV6StaticRoutes *SiteEmptyModel                                      `tfsdk:"no_v6_static_routes"`
-	StaticRoutes     *SiteCustomNetworkConfigSLIConfigStaticRoutesModel   `tfsdk:"static_routes"`
-	StaticV6Routes   *SiteCustomNetworkConfigSLIConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
-}
-
-// SiteCustomNetworkConfigSLIConfigModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSLIConfigModel
-var SiteCustomNetworkConfigSLIConfigModelAttrTypes = map[string]attr.Type{
-	"nameserver":          types.StringType,
-	"vip":                 types.StringType,
-	"dc_cluster_group":    types.ObjectType{AttrTypes: SiteCustomNetworkConfigSLIConfigDcClusterGroupModelAttrTypes},
-	"labels":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_dc_cluster_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_static_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_v6_static_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_routes":       types.ObjectType{AttrTypes: SiteCustomNetworkConfigSLIConfigStaticRoutesModelAttrTypes},
-	"static_v6_routes":    types.ObjectType{AttrTypes: SiteCustomNetworkConfigSLIConfigStaticV6RoutesModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigSLIConfigDcClusterGroupModel represents dc_cluster_group block
-type SiteCustomNetworkConfigSLIConfigDcClusterGroupModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteCustomNetworkConfigSLIConfigDcClusterGroupModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSLIConfigDcClusterGroupModel
-var SiteCustomNetworkConfigSLIConfigDcClusterGroupModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticRoutesModel represents static_routes block
-type SiteCustomNetworkConfigSLIConfigStaticRoutesModel struct {
-	StaticRoutes []SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesModel `tfsdk:"static_routes"`
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticRoutesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSLIConfigStaticRoutesModel
-var SiteCustomNetworkConfigSLIConfigStaticRoutesModelAttrTypes = map[string]attr.Type{
-	"static_routes": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesModel represents static_routes block
-type SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesModel struct {
-	Attrs          types.List                                                                  `tfsdk:"attrs"`
-	IPAddress      types.String                                                                `tfsdk:"ip_address"`
-	IPPrefixes     types.List                                                                  `tfsdk:"ip_prefixes"`
-	DefaultGateway *SiteEmptyModel                                                             `tfsdk:"default_gateway"`
-	NodeInterface  *SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesModel
-var SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesModelAttrTypes = map[string]attr.Type{
-	"attrs":           types.ListType{ElemType: types.StringType},
-	"ip_address":      types.StringType,
-	"ip_prefixes":     types.ListType{ElemType: types.StringType},
-	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
-type SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel struct {
-	List []SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel
-var SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes = map[string]attr.Type{
-	"list": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel represents list block
-type SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel struct {
-	Node      types.String                                                                              `tfsdk:"node"`
-	Interface []SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel
-var SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModelAttrTypes = map[string]attr.Type{
-	"node":      types.StringType,
-	"interface": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
-type SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind      types.String `tfsdk:"kind"`
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-	Uid       types.String `tfsdk:"uid"`
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel
-var SiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes = map[string]attr.Type{
-	"kind":      types.StringType,
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-	"uid":       types.StringType,
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticV6RoutesModel represents static_v6_routes block
-type SiteCustomNetworkConfigSLIConfigStaticV6RoutesModel struct {
-	StaticRoutes []SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesModel `tfsdk:"static_routes"`
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticV6RoutesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSLIConfigStaticV6RoutesModel
-var SiteCustomNetworkConfigSLIConfigStaticV6RoutesModelAttrTypes = map[string]attr.Type{
-	"static_routes": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesModel represents static_routes block
-type SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesModel struct {
-	Attrs          types.List                                                                    `tfsdk:"attrs"`
-	IPAddress      types.String                                                                  `tfsdk:"ip_address"`
-	IPPrefixes     types.List                                                                    `tfsdk:"ip_prefixes"`
-	DefaultGateway *SiteEmptyModel                                                               `tfsdk:"default_gateway"`
-	NodeInterface  *SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesModel
-var SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesModelAttrTypes = map[string]attr.Type{
-	"attrs":           types.ListType{ElemType: types.StringType},
-	"ip_address":      types.StringType,
-	"ip_prefixes":     types.ListType{ElemType: types.StringType},
-	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
-type SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel struct {
-	List []SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel
-var SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes = map[string]attr.Type{
-	"list": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel represents list block
-type SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel struct {
-	Node      types.String                                                                                `tfsdk:"node"`
-	Interface []SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel
-var SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModelAttrTypes = map[string]attr.Type{
-	"node":      types.StringType,
-	"interface": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
-type SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind      types.String `tfsdk:"kind"`
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-	Uid       types.String `tfsdk:"uid"`
-}
-
-// SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel
-var SiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes = map[string]attr.Type{
-	"kind":      types.StringType,
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-	"uid":       types.StringType,
-}
-
-// SiteCustomNetworkConfigSloConfigModel represents slo_config block
-type SiteCustomNetworkConfigSloConfigModel struct {
-	Nameserver       types.String                                         `tfsdk:"nameserver"`
-	VIP              types.String                                         `tfsdk:"vip"`
-	DcClusterGroup   *SiteCustomNetworkConfigSloConfigDcClusterGroupModel `tfsdk:"dc_cluster_group"`
-	Labels           *SiteEmptyModel                                      `tfsdk:"labels"`
-	NoDcClusterGroup *SiteEmptyModel                                      `tfsdk:"no_dc_cluster_group"`
-	NoStaticRoutes   *SiteEmptyModel                                      `tfsdk:"no_static_routes"`
-	NoV6StaticRoutes *SiteEmptyModel                                      `tfsdk:"no_v6_static_routes"`
-	StaticRoutes     *SiteCustomNetworkConfigSloConfigStaticRoutesModel   `tfsdk:"static_routes"`
-	StaticV6Routes   *SiteCustomNetworkConfigSloConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
-}
-
-// SiteCustomNetworkConfigSloConfigModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSloConfigModel
-var SiteCustomNetworkConfigSloConfigModelAttrTypes = map[string]attr.Type{
-	"nameserver":          types.StringType,
-	"vip":                 types.StringType,
-	"dc_cluster_group":    types.ObjectType{AttrTypes: SiteCustomNetworkConfigSloConfigDcClusterGroupModelAttrTypes},
-	"labels":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_dc_cluster_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_static_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_v6_static_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_routes":       types.ObjectType{AttrTypes: SiteCustomNetworkConfigSloConfigStaticRoutesModelAttrTypes},
-	"static_v6_routes":    types.ObjectType{AttrTypes: SiteCustomNetworkConfigSloConfigStaticV6RoutesModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigSloConfigDcClusterGroupModel represents dc_cluster_group block
-type SiteCustomNetworkConfigSloConfigDcClusterGroupModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteCustomNetworkConfigSloConfigDcClusterGroupModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSloConfigDcClusterGroupModel
-var SiteCustomNetworkConfigSloConfigDcClusterGroupModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteCustomNetworkConfigSloConfigStaticRoutesModel represents static_routes block
-type SiteCustomNetworkConfigSloConfigStaticRoutesModel struct {
-	StaticRoutes []SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesModel `tfsdk:"static_routes"`
-}
-
-// SiteCustomNetworkConfigSloConfigStaticRoutesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSloConfigStaticRoutesModel
-var SiteCustomNetworkConfigSloConfigStaticRoutesModelAttrTypes = map[string]attr.Type{
-	"static_routes": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesModel represents static_routes block
-type SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesModel struct {
-	Attrs          types.List                                                                  `tfsdk:"attrs"`
-	IPAddress      types.String                                                                `tfsdk:"ip_address"`
-	IPPrefixes     types.List                                                                  `tfsdk:"ip_prefixes"`
-	DefaultGateway *SiteEmptyModel                                                             `tfsdk:"default_gateway"`
-	NodeInterface  *SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
-}
-
-// SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesModel
-var SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesModelAttrTypes = map[string]attr.Type{
-	"attrs":           types.ListType{ElemType: types.StringType},
-	"ip_address":      types.StringType,
-	"ip_prefixes":     types.ListType{ElemType: types.StringType},
-	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
-type SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModel struct {
-	List []SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
-}
-
-// SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModel
-var SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes = map[string]attr.Type{
-	"list": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListModel represents list block
-type SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListModel struct {
-	Node      types.String                                                                              `tfsdk:"node"`
-	Interface []SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
-}
-
-// SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListModel
-var SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListModelAttrTypes = map[string]attr.Type{
-	"node":      types.StringType,
-	"interface": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
-type SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind      types.String `tfsdk:"kind"`
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-	Uid       types.String `tfsdk:"uid"`
-}
-
-// SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel
-var SiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes = map[string]attr.Type{
-	"kind":      types.StringType,
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-	"uid":       types.StringType,
-}
-
-// SiteCustomNetworkConfigSloConfigStaticV6RoutesModel represents static_v6_routes block
-type SiteCustomNetworkConfigSloConfigStaticV6RoutesModel struct {
-	StaticRoutes []SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesModel `tfsdk:"static_routes"`
-}
-
-// SiteCustomNetworkConfigSloConfigStaticV6RoutesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSloConfigStaticV6RoutesModel
-var SiteCustomNetworkConfigSloConfigStaticV6RoutesModelAttrTypes = map[string]attr.Type{
-	"static_routes": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesModel represents static_routes block
-type SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesModel struct {
-	Attrs          types.List                                                                    `tfsdk:"attrs"`
-	IPAddress      types.String                                                                  `tfsdk:"ip_address"`
-	IPPrefixes     types.List                                                                    `tfsdk:"ip_prefixes"`
-	DefaultGateway *SiteEmptyModel                                                               `tfsdk:"default_gateway"`
-	NodeInterface  *SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
-}
-
-// SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesModel
-var SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesModelAttrTypes = map[string]attr.Type{
-	"attrs":           types.ListType{ElemType: types.StringType},
-	"ip_address":      types.StringType,
-	"ip_prefixes":     types.ListType{ElemType: types.StringType},
-	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes},
-}
-
-// SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
-type SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel struct {
-	List []SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
-}
-
-// SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel
-var SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes = map[string]attr.Type{
-	"list": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel represents list block
-type SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel struct {
-	Node      types.String                                                                                `tfsdk:"node"`
-	Interface []SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
-}
-
-// SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel
-var SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModelAttrTypes = map[string]attr.Type{
-	"node":      types.StringType,
-	"interface": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes}},
-}
-
-// SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
-type SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel struct {
-	Kind      types.String `tfsdk:"kind"`
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-	Uid       types.String `tfsdk:"uid"`
-}
-
-// SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes defines the attribute types for SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel
-var SiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes = map[string]attr.Type{
-	"kind":      types.StringType,
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-	"uid":       types.StringType,
+// SiteDirectConnectEnabledHostedVifsVifListModelAttrTypes defines the attribute types for SiteDirectConnectEnabledHostedVifsVifListModel
+var SiteDirectConnectEnabledHostedVifsVifListModelAttrTypes = map[string]attr.Type{
+	"other_region":        types.StringType,
+	"vif_id":              types.StringType,
+	"same_as_site_region": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SiteKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
@@ -1071,18 +447,6 @@ var SiteLogReceiverModelAttrTypes = map[string]attr.Type{
 	"name":      types.StringType,
 	"namespace": types.StringType,
 	"tenant":    types.StringType,
-}
-
-// SiteMasterNodeConfigurationModel represents master_node_configuration block
-type SiteMasterNodeConfigurationModel struct {
-	Name     types.String `tfsdk:"name"`
-	PublicIP types.String `tfsdk:"public_ip"`
-}
-
-// SiteMasterNodeConfigurationModelAttrTypes defines the attribute types for SiteMasterNodeConfigurationModel
-var SiteMasterNodeConfigurationModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"public_ip": types.StringType,
 }
 
 // SiteOfflineSurvivabilityModeModel represents offline_survivability_mode block
@@ -1133,6 +497,34 @@ var SitePerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes = map[string]
 	"no_jumbo": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
+// SitePrivateConnectivityModel represents private_connectivity block
+type SitePrivateConnectivityModel struct {
+	CloudLink *SitePrivateConnectivityCloudLinkModel `tfsdk:"cloud_link"`
+	Inside    *SiteEmptyModel                        `tfsdk:"inside"`
+	Outside   *SiteEmptyModel                        `tfsdk:"outside"`
+}
+
+// SitePrivateConnectivityModelAttrTypes defines the attribute types for SitePrivateConnectivityModel
+var SitePrivateConnectivityModelAttrTypes = map[string]attr.Type{
+	"cloud_link": types.ObjectType{AttrTypes: SitePrivateConnectivityCloudLinkModelAttrTypes},
+	"inside":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// SitePrivateConnectivityCloudLinkModel represents cloud_link block
+type SitePrivateConnectivityCloudLinkModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SitePrivateConnectivityCloudLinkModelAttrTypes defines the attribute types for SitePrivateConnectivityCloudLinkModel
+var SitePrivateConnectivityCloudLinkModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // SiteSwModel represents sw block
 type SiteSwModel struct {
 	VolterraSoftwareVersion types.String    `tfsdk:"volterra_software_version"`
@@ -1145,6 +537,614 @@ var SiteSwModelAttrTypes = map[string]attr.Type{
 	"default_sw_version":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
+// SiteTGWSecurityModel represents tgw_security block
+type SiteTGWSecurityModel struct {
+	ActiveEastWestServicePolicies  *SiteTGWSecurityActiveEastWestServicePoliciesModel  `tfsdk:"active_east_west_service_policies"`
+	ActiveEnhancedFirewallPolicies *SiteTGWSecurityActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
+	ActiveForwardProxyPolicies     *SiteTGWSecurityActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
+	ActiveNetworkPolicies          *SiteTGWSecurityActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
+	EastWestServicePolicyAllowAll  *SiteEmptyModel                                     `tfsdk:"east_west_service_policy_allow_all"`
+	ForwardProxyAllowAll           *SiteEmptyModel                                     `tfsdk:"forward_proxy_allow_all"`
+	NoEastWestPolicy               *SiteEmptyModel                                     `tfsdk:"no_east_west_policy"`
+	NoForwardProxy                 *SiteEmptyModel                                     `tfsdk:"no_forward_proxy"`
+	NoNetworkPolicy                *SiteEmptyModel                                     `tfsdk:"no_network_policy"`
+}
+
+// SiteTGWSecurityModelAttrTypes defines the attribute types for SiteTGWSecurityModel
+var SiteTGWSecurityModelAttrTypes = map[string]attr.Type{
+	"active_east_west_service_policies":  types.ObjectType{AttrTypes: SiteTGWSecurityActiveEastWestServicePoliciesModelAttrTypes},
+	"active_enhanced_firewall_policies":  types.ObjectType{AttrTypes: SiteTGWSecurityActiveEnhancedFirewallPoliciesModelAttrTypes},
+	"active_forward_proxy_policies":      types.ObjectType{AttrTypes: SiteTGWSecurityActiveForwardProxyPoliciesModelAttrTypes},
+	"active_network_policies":            types.ObjectType{AttrTypes: SiteTGWSecurityActiveNetworkPoliciesModelAttrTypes},
+	"east_west_service_policy_allow_all": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"forward_proxy_allow_all":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_east_west_policy":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_forward_proxy":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_network_policy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// SiteTGWSecurityActiveEastWestServicePoliciesModel represents active_east_west_service_policies block
+type SiteTGWSecurityActiveEastWestServicePoliciesModel struct {
+	ServicePolicies []SiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModel `tfsdk:"service_policies"`
+}
+
+// SiteTGWSecurityActiveEastWestServicePoliciesModelAttrTypes defines the attribute types for SiteTGWSecurityActiveEastWestServicePoliciesModel
+var SiteTGWSecurityActiveEastWestServicePoliciesModelAttrTypes = map[string]attr.Type{
+	"service_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModelAttrTypes}},
+}
+
+// SiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModel represents service_policies block
+type SiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModelAttrTypes defines the attribute types for SiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModel
+var SiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// SiteTGWSecurityActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
+type SiteTGWSecurityActiveEnhancedFirewallPoliciesModel struct {
+	EnhancedFirewallPolicies []SiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
+}
+
+// SiteTGWSecurityActiveEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for SiteTGWSecurityActiveEnhancedFirewallPoliciesModel
+var SiteTGWSecurityActiveEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
+	"enhanced_firewall_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes}},
+}
+
+// SiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
+type SiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for SiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel
+var SiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// SiteTGWSecurityActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
+type SiteTGWSecurityActiveForwardProxyPoliciesModel struct {
+	ForwardProxyPolicies []SiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
+}
+
+// SiteTGWSecurityActiveForwardProxyPoliciesModelAttrTypes defines the attribute types for SiteTGWSecurityActiveForwardProxyPoliciesModel
+var SiteTGWSecurityActiveForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
+	"forward_proxy_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes}},
+}
+
+// SiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
+type SiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes defines the attribute types for SiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModel
+var SiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// SiteTGWSecurityActiveNetworkPoliciesModel represents active_network_policies block
+type SiteTGWSecurityActiveNetworkPoliciesModel struct {
+	NetworkPolicies []SiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModel `tfsdk:"network_policies"`
+}
+
+// SiteTGWSecurityActiveNetworkPoliciesModelAttrTypes defines the attribute types for SiteTGWSecurityActiveNetworkPoliciesModel
+var SiteTGWSecurityActiveNetworkPoliciesModelAttrTypes = map[string]attr.Type{
+	"network_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModelAttrTypes}},
+}
+
+// SiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
+type SiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModelAttrTypes defines the attribute types for SiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModel
+var SiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// SiteVnConfigModel represents vn_config block
+type SiteVnConfigModel struct {
+	AllowedVIPPort          *SiteVnConfigAllowedVIPPortModel          `tfsdk:"allowed_vip_port"`
+	AllowedVIPPortSLI       *SiteVnConfigAllowedVIPPortSLIModel       `tfsdk:"allowed_vip_port_sli"`
+	DcClusterGroupInsideVn  *SiteVnConfigDcClusterGroupInsideVnModel  `tfsdk:"dc_cluster_group_inside_vn"`
+	DcClusterGroupOutsideVn *SiteVnConfigDcClusterGroupOutsideVnModel `tfsdk:"dc_cluster_group_outside_vn"`
+	GlobalNetworkList       *SiteVnConfigGlobalNetworkListModel       `tfsdk:"global_network_list"`
+	InsideStaticRoutes      *SiteVnConfigInsideStaticRoutesModel      `tfsdk:"inside_static_routes"`
+	NoDcClusterGroup        *SiteEmptyModel                           `tfsdk:"no_dc_cluster_group"`
+	NoGlobalNetwork         *SiteEmptyModel                           `tfsdk:"no_global_network"`
+	NoInsideStaticRoutes    *SiteEmptyModel                           `tfsdk:"no_inside_static_routes"`
+	NoOutsideStaticRoutes   *SiteEmptyModel                           `tfsdk:"no_outside_static_routes"`
+	OutsideStaticRoutes     *SiteVnConfigOutsideStaticRoutesModel     `tfsdk:"outside_static_routes"`
+	SmConnectionPublicIP    *SiteEmptyModel                           `tfsdk:"sm_connection_public_ip"`
+	SmConnectionPvtIP       *SiteEmptyModel                           `tfsdk:"sm_connection_pvt_ip"`
+}
+
+// SiteVnConfigModelAttrTypes defines the attribute types for SiteVnConfigModel
+var SiteVnConfigModelAttrTypes = map[string]attr.Type{
+	"allowed_vip_port":            types.ObjectType{AttrTypes: SiteVnConfigAllowedVIPPortModelAttrTypes},
+	"allowed_vip_port_sli":        types.ObjectType{AttrTypes: SiteVnConfigAllowedVIPPortSLIModelAttrTypes},
+	"dc_cluster_group_inside_vn":  types.ObjectType{AttrTypes: SiteVnConfigDcClusterGroupInsideVnModelAttrTypes},
+	"dc_cluster_group_outside_vn": types.ObjectType{AttrTypes: SiteVnConfigDcClusterGroupOutsideVnModelAttrTypes},
+	"global_network_list":         types.ObjectType{AttrTypes: SiteVnConfigGlobalNetworkListModelAttrTypes},
+	"inside_static_routes":        types.ObjectType{AttrTypes: SiteVnConfigInsideStaticRoutesModelAttrTypes},
+	"no_dc_cluster_group":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_global_network":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_inside_static_routes":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_outside_static_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_static_routes":       types.ObjectType{AttrTypes: SiteVnConfigOutsideStaticRoutesModelAttrTypes},
+	"sm_connection_public_ip":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sm_connection_pvt_ip":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// SiteVnConfigAllowedVIPPortModel represents allowed_vip_port block
+type SiteVnConfigAllowedVIPPortModel struct {
+	CustomPorts           *SiteVnConfigAllowedVIPPortCustomPortsModel `tfsdk:"custom_ports"`
+	DisableAllowedVIPPort *SiteEmptyModel                             `tfsdk:"disable_allowed_vip_port"`
+	UseHTTPHTTPSPort      *SiteEmptyModel                             `tfsdk:"use_http_https_port"`
+	UseHTTPPort           *SiteEmptyModel                             `tfsdk:"use_http_port"`
+	UseHTTPSPort          *SiteEmptyModel                             `tfsdk:"use_https_port"`
+}
+
+// SiteVnConfigAllowedVIPPortModelAttrTypes defines the attribute types for SiteVnConfigAllowedVIPPortModel
+var SiteVnConfigAllowedVIPPortModelAttrTypes = map[string]attr.Type{
+	"custom_ports":             types.ObjectType{AttrTypes: SiteVnConfigAllowedVIPPortCustomPortsModelAttrTypes},
+	"disable_allowed_vip_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_http_https_port":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_http_port":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_https_port":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// SiteVnConfigAllowedVIPPortCustomPortsModel represents custom_ports block
+type SiteVnConfigAllowedVIPPortCustomPortsModel struct {
+	PortRanges types.String `tfsdk:"port_ranges"`
+}
+
+// SiteVnConfigAllowedVIPPortCustomPortsModelAttrTypes defines the attribute types for SiteVnConfigAllowedVIPPortCustomPortsModel
+var SiteVnConfigAllowedVIPPortCustomPortsModelAttrTypes = map[string]attr.Type{
+	"port_ranges": types.StringType,
+}
+
+// SiteVnConfigAllowedVIPPortSLIModel represents allowed_vip_port_sli block
+type SiteVnConfigAllowedVIPPortSLIModel struct {
+	CustomPorts           *SiteVnConfigAllowedVIPPortSLICustomPortsModel `tfsdk:"custom_ports"`
+	DisableAllowedVIPPort *SiteEmptyModel                                `tfsdk:"disable_allowed_vip_port"`
+	UseHTTPHTTPSPort      *SiteEmptyModel                                `tfsdk:"use_http_https_port"`
+	UseHTTPPort           *SiteEmptyModel                                `tfsdk:"use_http_port"`
+	UseHTTPSPort          *SiteEmptyModel                                `tfsdk:"use_https_port"`
+}
+
+// SiteVnConfigAllowedVIPPortSLIModelAttrTypes defines the attribute types for SiteVnConfigAllowedVIPPortSLIModel
+var SiteVnConfigAllowedVIPPortSLIModelAttrTypes = map[string]attr.Type{
+	"custom_ports":             types.ObjectType{AttrTypes: SiteVnConfigAllowedVIPPortSLICustomPortsModelAttrTypes},
+	"disable_allowed_vip_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_http_https_port":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_http_port":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_https_port":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// SiteVnConfigAllowedVIPPortSLICustomPortsModel represents custom_ports block
+type SiteVnConfigAllowedVIPPortSLICustomPortsModel struct {
+	PortRanges types.String `tfsdk:"port_ranges"`
+}
+
+// SiteVnConfigAllowedVIPPortSLICustomPortsModelAttrTypes defines the attribute types for SiteVnConfigAllowedVIPPortSLICustomPortsModel
+var SiteVnConfigAllowedVIPPortSLICustomPortsModelAttrTypes = map[string]attr.Type{
+	"port_ranges": types.StringType,
+}
+
+// SiteVnConfigDcClusterGroupInsideVnModel represents dc_cluster_group_inside_vn block
+type SiteVnConfigDcClusterGroupInsideVnModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SiteVnConfigDcClusterGroupInsideVnModelAttrTypes defines the attribute types for SiteVnConfigDcClusterGroupInsideVnModel
+var SiteVnConfigDcClusterGroupInsideVnModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// SiteVnConfigDcClusterGroupOutsideVnModel represents dc_cluster_group_outside_vn block
+type SiteVnConfigDcClusterGroupOutsideVnModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SiteVnConfigDcClusterGroupOutsideVnModelAttrTypes defines the attribute types for SiteVnConfigDcClusterGroupOutsideVnModel
+var SiteVnConfigDcClusterGroupOutsideVnModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// SiteVnConfigGlobalNetworkListModel represents global_network_list block
+type SiteVnConfigGlobalNetworkListModel struct {
+	GlobalNetworkConnections []SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModel `tfsdk:"global_network_connections"`
+}
+
+// SiteVnConfigGlobalNetworkListModelAttrTypes defines the attribute types for SiteVnConfigGlobalNetworkListModel
+var SiteVnConfigGlobalNetworkListModelAttrTypes = map[string]attr.Type{
+	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes}},
+}
+
+// SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
+type SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModel struct {
+	SLIToGlobalDR *SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel `tfsdk:"sli_to_global_dr"`
+	SloToGlobalDR *SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel `tfsdk:"slo_to_global_dr"`
+}
+
+// SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModel
+var SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
+	"sli_to_global_dr": types.ObjectType{AttrTypes: SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes},
+	"slo_to_global_dr": types.ObjectType{AttrTypes: SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes},
+}
+
+// SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
+type SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel struct {
+	GlobalVn *SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes defines the attribute types for SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel
+var SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes = map[string]attr.Type{
+	"global_vn": types.ObjectType{AttrTypes: SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes},
+}
+
+// SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel represents global_vn block
+type SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes defines the attribute types for SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel
+var SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel represents slo_to_global_dr block
+type SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel struct {
+	GlobalVn *SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes defines the attribute types for SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel
+var SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes = map[string]attr.Type{
+	"global_vn": types.ObjectType{AttrTypes: SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes},
+}
+
+// SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel represents global_vn block
+type SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes defines the attribute types for SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel
+var SiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// SiteVnConfigInsideStaticRoutesModel represents inside_static_routes block
+type SiteVnConfigInsideStaticRoutesModel struct {
+	StaticRouteList []SiteVnConfigInsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
+}
+
+// SiteVnConfigInsideStaticRoutesModelAttrTypes defines the attribute types for SiteVnConfigInsideStaticRoutesModel
+var SiteVnConfigInsideStaticRoutesModelAttrTypes = map[string]attr.Type{
+	"static_route_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVnConfigInsideStaticRoutesStaticRouteListModelAttrTypes}},
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListModel represents static_route_list block
+type SiteVnConfigInsideStaticRoutesStaticRouteListModel struct {
+	SimpleStaticRoute types.String                                                         `tfsdk:"simple_static_route"`
+	CustomStaticRoute *SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListModelAttrTypes defines the attribute types for SiteVnConfigInsideStaticRoutesStaticRouteListModel
+var SiteVnConfigInsideStaticRoutesStaticRouteListModelAttrTypes = map[string]attr.Type{
+	"simple_static_route": types.StringType,
+	"custom_static_route": types.ObjectType{AttrTypes: SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes},
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
+type SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
+	Attrs   types.List                                                                   `tfsdk:"attrs"`
+	Labels  *SiteEmptyModel                                                              `tfsdk:"labels"`
+	Nexthop *SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
+	Subnets []SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes defines the attribute types for SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModel
+var SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes = map[string]attr.Type{
+	"attrs":   types.ListType{ElemType: types.StringType},
+	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop": types.ObjectType{AttrTypes: SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
+type SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
+	Type           types.String                                                                              `tfsdk:"type"`
+	Interface      []SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
+	NexthopAddress *SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes defines the attribute types for SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel
+var SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
+	"type":            types.StringType,
+	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
+	"nexthop_address": types.ObjectType{AttrTypes: SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
+type SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes defines the attribute types for SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel
+var SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
+type SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
+	Ipv4 *SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes defines the attribute types for SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel
+var SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.ObjectType{AttrTypes: SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes},
+	"ipv6": types.ObjectType{AttrTypes: SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes},
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model represents ipv4 block
+type SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes defines the attribute types for SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model
+var SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model represents ipv6 block
+type SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes defines the attribute types for SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model
+var SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
+type SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
+	Ipv4 *SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model `tfsdk:"ipv6"`
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes defines the attribute types for SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel
+var SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.ObjectType{AttrTypes: SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes},
+	"ipv6": types.ObjectType{AttrTypes: SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes},
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model represents ipv4 block
+type SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model struct {
+	Plen   types.Int64  `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes defines the attribute types for SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model
+var SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes = map[string]attr.Type{
+	"plen":   types.Int64Type,
+	"prefix": types.StringType,
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model represents ipv6 block
+type SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model struct {
+	Plen   types.Int64  `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes defines the attribute types for SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model
+var SiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes = map[string]attr.Type{
+	"plen":   types.Int64Type,
+	"prefix": types.StringType,
+}
+
+// SiteVnConfigOutsideStaticRoutesModel represents outside_static_routes block
+type SiteVnConfigOutsideStaticRoutesModel struct {
+	StaticRouteList []SiteVnConfigOutsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
+}
+
+// SiteVnConfigOutsideStaticRoutesModelAttrTypes defines the attribute types for SiteVnConfigOutsideStaticRoutesModel
+var SiteVnConfigOutsideStaticRoutesModelAttrTypes = map[string]attr.Type{
+	"static_route_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVnConfigOutsideStaticRoutesStaticRouteListModelAttrTypes}},
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListModel represents static_route_list block
+type SiteVnConfigOutsideStaticRoutesStaticRouteListModel struct {
+	SimpleStaticRoute types.String                                                          `tfsdk:"simple_static_route"`
+	CustomStaticRoute *SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListModelAttrTypes defines the attribute types for SiteVnConfigOutsideStaticRoutesStaticRouteListModel
+var SiteVnConfigOutsideStaticRoutesStaticRouteListModelAttrTypes = map[string]attr.Type{
+	"simple_static_route": types.StringType,
+	"custom_static_route": types.ObjectType{AttrTypes: SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes},
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
+type SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
+	Attrs   types.List                                                                    `tfsdk:"attrs"`
+	Labels  *SiteEmptyModel                                                               `tfsdk:"labels"`
+	Nexthop *SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
+	Subnets []SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes defines the attribute types for SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModel
+var SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes = map[string]attr.Type{
+	"attrs":   types.ListType{ElemType: types.StringType},
+	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop": types.ObjectType{AttrTypes: SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
+type SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
+	Type           types.String                                                                               `tfsdk:"type"`
+	Interface      []SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
+	NexthopAddress *SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes defines the attribute types for SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel
+var SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
+	"type":            types.StringType,
+	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
+	"nexthop_address": types.ObjectType{AttrTypes: SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
+type SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
+	Kind      types.String `tfsdk:"kind"`
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+	Uid       types.String `tfsdk:"uid"`
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes defines the attribute types for SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel
+var SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
+type SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
+	Ipv4 *SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes defines the attribute types for SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel
+var SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.ObjectType{AttrTypes: SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes},
+	"ipv6": types.ObjectType{AttrTypes: SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes},
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model represents ipv4 block
+type SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes defines the attribute types for SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model
+var SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model represents ipv6 block
+type SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model struct {
+	Addr types.String `tfsdk:"addr"`
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes defines the attribute types for SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model
+var SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
+type SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
+	Ipv4 *SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model `tfsdk:"ipv4"`
+	Ipv6 *SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model `tfsdk:"ipv6"`
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes defines the attribute types for SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel
+var SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.ObjectType{AttrTypes: SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes},
+	"ipv6": types.ObjectType{AttrTypes: SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes},
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model represents ipv4 block
+type SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model struct {
+	Plen   types.Int64  `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes defines the attribute types for SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model
+var SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes = map[string]attr.Type{
+	"plen":   types.Int64Type,
+	"prefix": types.StringType,
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model represents ipv6 block
+type SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model struct {
+	Plen   types.Int64  `tfsdk:"plen"`
+	Prefix types.String `tfsdk:"prefix"`
+}
+
+// SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes defines the attribute types for SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model
+var SiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes = map[string]attr.Type{
+	"plen":   types.Int64Type,
+	"prefix": types.StringType,
+}
+
+// SiteVPCAttachmentsModel represents vpc_attachments block
+type SiteVPCAttachmentsModel struct {
+	VPCList []SiteVPCAttachmentsVPCListModel `tfsdk:"vpc_list"`
+}
+
+// SiteVPCAttachmentsModelAttrTypes defines the attribute types for SiteVPCAttachmentsModel
+var SiteVPCAttachmentsModelAttrTypes = map[string]attr.Type{
+	"vpc_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVPCAttachmentsVPCListModelAttrTypes}},
+}
+
+// SiteVPCAttachmentsVPCListModel represents vpc_list block
+type SiteVPCAttachmentsVPCListModel struct {
+	VPCID  types.String    `tfsdk:"vpc_id"`
+	Labels *SiteEmptyModel `tfsdk:"labels"`
+}
+
+// SiteVPCAttachmentsVPCListModelAttrTypes defines the attribute types for SiteVPCAttachmentsVPCListModel
+var SiteVPCAttachmentsVPCListModelAttrTypes = map[string]attr.Type{
+	"vpc_id": types.StringType,
+	"labels": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 type SiteResourceModel struct {
 	Name                       types.String                         `tfsdk:"name"`
 	Namespace                  types.String                         `tfsdk:"namespace"`
@@ -1152,26 +1152,28 @@ type SiteResourceModel struct {
 	Description                types.String                         `tfsdk:"description"`
 	Disable                    types.Bool                           `tfsdk:"disable"`
 	Labels                     types.Map                            `tfsdk:"labels"`
-	WorkerNodes                types.List                           `tfsdk:"worker_nodes"`
 	ID                         types.String                         `tfsdk:"id"`
-	Address                    types.String                         `tfsdk:"address"`
-	VolterraCertifiedHw        types.String                         `tfsdk:"volterra_certified_hw"`
 	Timeouts                   timeouts.Value                       `tfsdk:"timeouts"`
+	AWSParameters              *SiteAWSParametersModel              `tfsdk:"aws_parameters"`
+	BlockAllServices           *SiteEmptyModel                      `tfsdk:"block_all_services"`
 	BlockedServices            *SiteBlockedServicesModel            `tfsdk:"blocked_services"`
-	BondDeviceList             *SiteBondDeviceListModel             `tfsdk:"bond_device_list"`
 	Coordinates                *SiteCoordinatesModel                `tfsdk:"coordinates"`
-	CustomNetworkConfig        *SiteCustomNetworkConfigModel        `tfsdk:"custom_network_config"`
+	CustomDNS                  *SiteCustomDNSModel                  `tfsdk:"custom_dns"`
 	DefaultBlockedServices     *SiteEmptyModel                      `tfsdk:"default_blocked_services"`
-	DefaultNetworkConfig       *SiteEmptyModel                      `tfsdk:"default_network_config"`
+	DirectConnectDisabled      *SiteEmptyModel                      `tfsdk:"direct_connect_disabled"`
+	DirectConnectEnabled       *SiteDirectConnectEnabledModel       `tfsdk:"direct_connect_enabled"`
 	KubernetesUpgradeDrain     *SiteKubernetesUpgradeDrainModel     `tfsdk:"kubernetes_upgrade_drain"`
 	LogReceiver                *SiteLogReceiverModel                `tfsdk:"log_receiver"`
 	LogsStreamingDisabled      *SiteEmptyModel                      `tfsdk:"logs_streaming_disabled"`
-	MasterNodeConfiguration    types.List                           `tfsdk:"master_node_configuration"`
-	NoBondDevices              *SiteEmptyModel                      `tfsdk:"no_bond_devices"`
 	OfflineSurvivabilityMode   *SiteOfflineSurvivabilityModeModel   `tfsdk:"offline_survivability_mode"`
 	OS                         *SiteOSModel                         `tfsdk:"os"`
 	PerformanceEnhancementMode *SitePerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
+	PrivateConnectivity        *SitePrivateConnectivityModel        `tfsdk:"private_connectivity"`
 	Sw                         *SiteSwModel                         `tfsdk:"sw"`
+	Tags                       *SiteEmptyModel                      `tfsdk:"tags"`
+	TGWSecurity                *SiteTGWSecurityModel                `tfsdk:"tgw_security"`
+	VnConfig                   *SiteVnConfigModel                   `tfsdk:"vn_config"`
+	VPCAttachments             *SiteVPCAttachmentsModel             `tfsdk:"vpc_attachments"`
 }
 
 func (r *SiteResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -1180,7 +1182,7 @@ func (r *SiteResource) Metadata(ctx context.Context, req resource.MetadataReques
 
 func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a Site resource in F5 Distributed Cloud for secure mesh site specification. configuration.",
+		MarkdownDescription: "Manages a Site resource in F5 Distributed Cloud for aws tgw site specification. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Site. Must be unique within the namespace.",
@@ -1220,29 +1222,8 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
-			"worker_nodes": schema.ListAttribute{
-				MarkdownDescription: "Worker Nodes. Names of worker nodes.",
-				Optional:            true,
-				ElementType:         types.StringType,
-			},
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",
-				Computed:            true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
-			},
-			"address": schema.StringAttribute{
-				MarkdownDescription: "Site's geographical address that can be used to determine its latitude and longitude.",
-				Optional:            true,
-				Computed:            true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
-			},
-			"volterra_certified_hw": schema.StringAttribute{
-				MarkdownDescription: "Name for generic server certified hardware to form this Secure Mesh site.",
-				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
@@ -1256,8 +1237,277 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				Update: true,
 				Delete: true,
 			}),
+			"aws_parameters": schema.SingleNestedBlock{
+				MarkdownDescription: "Setup AWS services VPC, transit gateway and site.",
+				Attributes: map[string]schema.Attribute{
+					"aws_region": schema.StringAttribute{
+						MarkdownDescription: "AWS Region of your services VPC, where F5XC site will be deployed.",
+						Optional:            true,
+					},
+					"disk_size": schema.Int64Attribute{
+						MarkdownDescription: "Node disk size for all node in the F5XC site. Unit is GiB.",
+						Optional:            true,
+					},
+					"instance_type": schema.StringAttribute{
+						MarkdownDescription: "Instance size based on the performance.",
+						Optional:            true,
+					},
+					"nodes_per_az": schema.Int64Attribute{
+						MarkdownDescription: "Desired Worker Nodes Per AZ. Max limit is up to 21.",
+						Optional:            true,
+					},
+					"ssh_key": schema.StringAttribute{
+						MarkdownDescription: "Public SSH key for accessing nodes of the site.",
+						Optional:            true,
+					},
+					"total_nodes": schema.Int64Attribute{
+						MarkdownDescription: "Total number of worker nodes to be deployed across all AZ's used in the Site.",
+						Optional:            true,
+					},
+					"vpc_id": schema.StringAttribute{
+						MarkdownDescription: "Existing VPC ID.",
+						Optional:            true,
+					},
+				},
+				Blocks: map[string]schema.Block{
+					"admin_password": schema.SingleNestedBlock{
+						MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"blindfold_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+								Attributes: map[string]schema.Attribute{
+									"decryption_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+										Optional:            true,
+									},
+									"location": schema.StringAttribute{
+										MarkdownDescription: "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+										Optional:            true,
+									},
+									"store_provider": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+								},
+							},
+							"clear_secret_info": schema.SingleNestedBlock{
+								MarkdownDescription: "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+								Attributes: map[string]schema.Attribute{
+									"provider_ref": schema.StringAttribute{
+										MarkdownDescription: "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+										Optional:            true,
+									},
+									"url": schema.StringAttribute{
+										MarkdownDescription: "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+										Optional:            true,
+									},
+								},
+							},
+						},
+					},
+					"aws_cred": schema.SingleNestedBlock{
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						Attributes: map[string]schema.Attribute{
+							"name": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								Optional:            true,
+							},
+							"namespace": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								Optional:            true,
+								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
+							},
+							"tenant": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								Optional:            true,
+								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
+							},
+						},
+					},
+					"az_nodes": schema.ListNestedBlock{
+						MarkdownDescription: "Only Single AZ or Three AZ(s) nodes are supported currently.",
+						NestedObject: schema.NestedBlockObject{
+							Attributes: map[string]schema.Attribute{
+								"aws_az_name": schema.StringAttribute{
+									MarkdownDescription: "AWS availability zone, must be consistent with the selected AWS region.",
+									Optional:            true,
+								},
+							},
+							Blocks: map[string]schema.Block{
+								"inside_subnet": schema.SingleNestedBlock{
+									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet.",
+									Attributes: map[string]schema.Attribute{
+										"existing_subnet_id": schema.StringAttribute{
+											MarkdownDescription: "Information about existing subnet ID.",
+											Optional:            true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"subnet_param": schema.SingleNestedBlock{
+											MarkdownDescription: "Parameters for creating a new cloud subnet.",
+											Attributes: map[string]schema.Attribute{
+												"ipv4": schema.StringAttribute{
+													MarkdownDescription: "IPv4 subnet prefix for this subnet .",
+													Optional:            true,
+												},
+											},
+										},
+									},
+								},
+								"outside_subnet": schema.SingleNestedBlock{
+									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet.",
+									Attributes: map[string]schema.Attribute{
+										"existing_subnet_id": schema.StringAttribute{
+											MarkdownDescription: "Information about existing subnet ID.",
+											Optional:            true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"subnet_param": schema.SingleNestedBlock{
+											MarkdownDescription: "Parameters for creating a new cloud subnet.",
+											Attributes: map[string]schema.Attribute{
+												"ipv4": schema.StringAttribute{
+													MarkdownDescription: "IPv4 subnet prefix for this subnet .",
+													Optional:            true,
+												},
+											},
+										},
+									},
+								},
+								"reserved_inside_subnet": schema.SingleNestedBlock{
+									MarkdownDescription: "Enable this option",
+								},
+								"workload_subnet": schema.SingleNestedBlock{
+									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet.",
+									Attributes: map[string]schema.Attribute{
+										"existing_subnet_id": schema.StringAttribute{
+											MarkdownDescription: "Information about existing subnet ID.",
+											Optional:            true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"subnet_param": schema.SingleNestedBlock{
+											MarkdownDescription: "Parameters for creating a new cloud subnet.",
+											Attributes: map[string]schema.Attribute{
+												"ipv4": schema.StringAttribute{
+													MarkdownDescription: "IPv4 subnet prefix for this subnet .",
+													Optional:            true,
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					"custom_security_group": schema.SingleNestedBlock{
+						MarkdownDescription: "Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC.",
+						Attributes: map[string]schema.Attribute{
+							"inside_security_group_id": schema.StringAttribute{
+								MarkdownDescription: "Security Group ID to be attached to SLI(Site Local Inside) Interface.",
+								Optional:            true,
+							},
+							"outside_security_group_id": schema.StringAttribute{
+								MarkdownDescription: "Security Group ID to be attached to SLO(Site Local Outside) Interface.",
+								Optional:            true,
+							},
+						},
+					},
+					"disable_internet_vip": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"enable_internet_vip": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"existing_tgw": schema.SingleNestedBlock{
+						MarkdownDescription: "Existing TGW Type. Information needed for existing TGW.",
+						Attributes: map[string]schema.Attribute{
+							"tgw_asn": schema.Int64Attribute{
+								MarkdownDescription: "Enter TGW ASN. TGW ASN.",
+								Optional:            true,
+							},
+							"tgw_id": schema.StringAttribute{
+								MarkdownDescription: "Existing TGW ID. Existing TGW ID.",
+								Optional:            true,
+							},
+							"volterra_site_asn": schema.Int64Attribute{
+								MarkdownDescription: "Enter F5XC Site ASN. F5XC Site ASN.",
+								Optional:            true,
+							},
+						},
+					},
+					"f5xc_security_group": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"new_tgw": schema.SingleNestedBlock{
+						MarkdownDescription: "TGWParamsType.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"system_generated": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"user_assigned": schema.SingleNestedBlock{
+								MarkdownDescription: "Information needed when ASNs are assigned by the user.",
+								Attributes: map[string]schema.Attribute{
+									"tgw_asn": schema.Int64Attribute{
+										MarkdownDescription: "TGW ASN. Allowed range for 16-bit private ASNs include 64512 to 65534.",
+										Optional:            true,
+									},
+									"volterra_site_asn": schema.Int64Attribute{
+										MarkdownDescription: "Enter F5XC Site ASN. F5XC Site ASN.",
+										Optional:            true,
+									},
+								},
+							},
+						},
+					},
+					"new_vpc": schema.SingleNestedBlock{
+						MarkdownDescription: "AWS VPC Parameters. Parameters to create new AWS VPC.",
+						Attributes: map[string]schema.Attribute{
+							"name_tag": schema.StringAttribute{
+								MarkdownDescription: "Specify the VPC Name.",
+								Optional:            true,
+							},
+							"primary_ipv4": schema.StringAttribute{
+								MarkdownDescription: "IPv4 CIDR block for this VPC. It has to be private address space. The Primary IPv4 block cannot be modified. All subnets prefixes in this VPC must be part of this CIDR block.",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"autogenerate": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"no_worker_nodes": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"reserved_tgw_cidr": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"tgw_cidr": schema.SingleNestedBlock{
+						MarkdownDescription: "Parameters for creating a new cloud subnet.",
+						Attributes: map[string]schema.Attribute{
+							"ipv4": schema.StringAttribute{
+								MarkdownDescription: "IPv4 subnet prefix for this subnet .",
+								Optional:            true,
+							},
+						},
+					},
+				},
+			},
+			"block_all_services": schema.SingleNestedBlock{
+				MarkdownDescription: "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option",
+			},
 			"blocked_services": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: blocked_services, default_blocked_services; Default: default_blocked_services] Disable node local services on this site.",
+				MarkdownDescription: "Disable node local services on this site.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blocked_sevice": schema.ListNestedBlock{
@@ -1284,50 +1534,6 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					},
 				},
 			},
-			"bond_device_list": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: bond_device_list, no_bond_devices; Default: no_bond_devices] Bond Devices List. List of bond devices for this fleet.",
-				Attributes:          map[string]schema.Attribute{},
-				Blocks: map[string]schema.Block{
-					"bond_devices": schema.ListNestedBlock{
-						MarkdownDescription: "Bond Devices. List of bond devices .",
-						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-								"devices": schema.ListAttribute{
-									MarkdownDescription: "Ethernet devices that will make up this bond .",
-									Optional:            true,
-									ElementType:         types.StringType,
-								},
-								"link_polling_interval": schema.Int64Attribute{
-									MarkdownDescription: "Link polling interval in milliseconds .",
-									Optional:            true,
-								},
-								"link_up_delay": schema.Int64Attribute{
-									MarkdownDescription: "Milliseconds wait before link is declared up .",
-									Optional:            true,
-								},
-								"name": schema.StringAttribute{
-									MarkdownDescription: "Name for the Bond. Ex 'bond0' .",
-									Optional:            true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"active_backup": schema.SingleNestedBlock{
-									MarkdownDescription: "Enable this option",
-								},
-								"lacp": schema.SingleNestedBlock{
-									MarkdownDescription: "LACP parameters. LACP parameters for the bond device.",
-									Attributes: map[string]schema.Attribute{
-										"rate": schema.Int64Attribute{
-											MarkdownDescription: "Interval in seconds to transmit LACP packets.",
-											Optional:            true,
-										},
-									},
-								},
-							},
-						},
-					},
-				},
-			},
 			"coordinates": schema.SingleNestedBlock{
 				MarkdownDescription: "Coordinates of the site which provides the site physical location.",
 				Attributes: map[string]schema.Attribute{
@@ -1341,19 +1547,276 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					},
 				},
 			},
-			"custom_network_config": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: custom_network_config, default_network_config; Default: default_network_config] SmsNetworkConfiguration.",
+			"custom_dns": schema.SingleNestedBlock{
+				MarkdownDescription: "Custom DNS is the configured for specify CE site.",
 				Attributes: map[string]schema.Attribute{
-					"tunnel_dead_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Time interval, in millisec, within which any IPsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used.",
+					"inside_nameserver": schema.StringAttribute{
+						MarkdownDescription: "Optional DNS server IP to be used for name resolution in inside network.",
 						Optional:            true,
 					},
-					"vip_vrrp_mode": schema.StringAttribute{
-						MarkdownDescription: "[Enum: VIP_VRRP_INVALID|VIP_VRRP_ENABLE|VIP_VRRP_DISABLE] VRRP advertisement mode for VIP Invalid VRRP mode. Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`. Defaults to `VIP_VRRP_INVALID`.",
+					"outside_nameserver": schema.StringAttribute{
+						MarkdownDescription: "Optional DNS server IP to be used for name resolution in outside network.",
+						Optional:            true,
+					},
+				},
+			},
+			"default_blocked_services": schema.SingleNestedBlock{
+				MarkdownDescription: "Enable this option",
+			},
+			"direct_connect_disabled": schema.SingleNestedBlock{
+				MarkdownDescription: "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Enable this option",
+			},
+			"direct_connect_enabled": schema.SingleNestedBlock{
+				MarkdownDescription: "Direct Connect Configuration. Direct Connect Configuration.",
+				Attributes: map[string]schema.Attribute{
+					"custom_asn": schema.Int64Attribute{
+						MarkdownDescription: "Custom Autonomous System Number.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
+					"auto_asn": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"hosted_vifs": schema.SingleNestedBlock{
+						MarkdownDescription: "AWS Direct Connect Hosted VIF Configuration.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"site_registration_over_direct_connect": schema.SingleNestedBlock{
+								MarkdownDescription: "CloudLink ADN Network Config.",
+								Attributes: map[string]schema.Attribute{
+									"cloudlink_network_name": schema.StringAttribute{
+										MarkdownDescription: "Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support.",
+										Optional:            true,
+									},
+								},
+							},
+							"site_registration_over_internet": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"vif_list": schema.ListNestedBlock{
+								MarkdownDescription: "List of Hosted VIF Config. List of Hosted VIF Config.",
+								NestedObject: schema.NestedBlockObject{
+									Attributes: map[string]schema.Attribute{
+										"other_region": schema.StringAttribute{
+											MarkdownDescription: "Other Region.",
+											Optional:            true,
+										},
+										"vif_id": schema.StringAttribute{
+											MarkdownDescription: "AWS Direct Connect VIF ID that needs to be connected to the site .",
+											Optional:            true,
+										},
+									},
+									Blocks: map[string]schema.Block{
+										"same_as_site_region": schema.SingleNestedBlock{
+											MarkdownDescription: "Enable this option",
+										},
+									},
+								},
+							},
+						},
+					},
+					"standard_vifs": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+				},
+			},
+			"kubernetes_upgrade_drain": schema.SingleNestedBlock{
+				MarkdownDescription: "Specify how worker nodes within a site will be upgraded.",
+				Attributes:          map[string]schema.Attribute{},
+				Blocks: map[string]schema.Block{
+					"disable_upgrade_drain": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"enable_upgrade_drain": schema.SingleNestedBlock{
+						MarkdownDescription: "Specify batch upgrade settings for worker nodes within a site.",
+						Attributes: map[string]schema.Attribute{
+							"drain_max_unavailable_node_count": schema.Int64Attribute{
+								MarkdownDescription: "Node Batch Size Count.",
+								Optional:            true,
+							},
+							"drain_node_timeout": schema.Int64Attribute{
+								MarkdownDescription: "Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is..",
+								Optional:            true,
+							},
+						},
+						Blocks: map[string]schema.Block{
+							"disable_vega_upgrade_mode": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"enable_vega_upgrade_mode": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+				},
+			},
+			"log_receiver": schema.SingleNestedBlock{
+				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+				Attributes: map[string]schema.Attribute{
+					"name": schema.StringAttribute{
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+						Optional:            true,
+					},
+					"namespace": schema.StringAttribute{
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						Optional:            true,
+						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
+					},
+					"tenant": schema.StringAttribute{
+						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						Optional:            true,
+						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
+					},
+				},
+			},
+			"logs_streaming_disabled": schema.SingleNestedBlock{
+				MarkdownDescription: "Enable this option",
+			},
+			"offline_survivability_mode": schema.SingleNestedBlock{
+				MarkdownDescription: "Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7..",
+				Attributes:          map[string]schema.Attribute{},
+				Blocks: map[string]schema.Block{
+					"enable_offline_survivability_mode": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"no_offline_survivability_mode": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+				},
+			},
+			"os": schema.SingleNestedBlock{
+				MarkdownDescription: "Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.",
+				Attributes: map[string]schema.Attribute{
+					"operating_system_version": schema.StringAttribute{
+						MarkdownDescription: "Specify a OS version to be used e.g. 9.2024.6.",
+						Optional:            true,
+					},
+				},
+				Blocks: map[string]schema.Block{
+					"default_os_version": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+				},
+			},
+			"performance_enhancement_mode": schema.SingleNestedBlock{
+				MarkdownDescription: "Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+				Attributes:          map[string]schema.Attribute{},
+				Blocks: map[string]schema.Block{
+					"perf_mode_l3_enhanced": schema.SingleNestedBlock{
+						MarkdownDescription: "L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"jumbo": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"no_jumbo": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"perf_mode_l7_enhanced": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+				},
+			},
+			"private_connectivity": schema.SingleNestedBlock{
+				MarkdownDescription: "Private Connect Configuration. Private Connect Configuration.",
+				Attributes:          map[string]schema.Attribute{},
+				Blocks: map[string]schema.Block{
+					"cloud_link": schema.SingleNestedBlock{
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						Attributes: map[string]schema.Attribute{
+							"name": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								Optional:            true,
+							},
+							"namespace": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								Optional:            true,
+								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
+							},
+							"tenant": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								Optional:            true,
+								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
+							},
+						},
+					},
+					"inside": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"outside": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+				},
+			},
+			"sw": schema.SingleNestedBlock{
+				MarkdownDescription: "Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
+				Attributes: map[string]schema.Attribute{
+					"volterra_software_version": schema.StringAttribute{
+						MarkdownDescription: "Specify a F5XC Software Version to be used e.g. Crt-20210329-1002.",
+						Optional:            true,
+					},
+				},
+				Blocks: map[string]schema.Block{
+					"default_sw_version": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+				},
+			},
+			"tags": schema.SingleNestedBlock{
+				MarkdownDescription: "AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console.",
+			},
+			"tgw_security": schema.SingleNestedBlock{
+				MarkdownDescription: "Security Configuration for transit gateway.",
+				Attributes:          map[string]schema.Attribute{},
+				Blocks: map[string]schema.Block{
+					"active_east_west_service_policies": schema.SingleNestedBlock{
+						MarkdownDescription: "Active service policies for the east-west proxy.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"service_policies": schema.ListNestedBlock{
+								MarkdownDescription: "List of references to service_policy objects.",
+								NestedObject: schema.NestedBlockObject{
+									Attributes: map[string]schema.Attribute{
+										"name": schema.StringAttribute{
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+											Optional:            true,
+										},
+										"namespace": schema.StringAttribute{
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+											Optional:            true,
+											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
+										},
+										"tenant": schema.StringAttribute{
+											MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+											Optional:            true,
+											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
 						Attributes:          map[string]schema.Attribute{},
@@ -1453,17 +1916,130 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 							},
 						},
 					},
-					"default_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"default_interface_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"default_sli_config": schema.SingleNestedBlock{
+					"east_west_service_policy_allow_all": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable this option",
 					},
 					"forward_proxy_allow_all": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable this option",
+					},
+					"no_east_west_policy": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"no_forward_proxy": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"no_network_policy": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+				},
+			},
+			"vn_config": schema.SingleNestedBlock{
+				MarkdownDescription: "Virtual Network Configuration. Virtual Network Configuration.",
+				Attributes:          map[string]schema.Attribute{},
+				Blocks: map[string]schema.Block{
+					"allowed_vip_port": schema.SingleNestedBlock{
+						MarkdownDescription: "Defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"custom_ports": schema.SingleNestedBlock{
+								MarkdownDescription: "Custom Ports. List of Custom port.",
+								Attributes: map[string]schema.Attribute{
+									"port_ranges": schema.StringAttribute{
+										MarkdownDescription: "Port Ranges. Port Ranges .",
+										Optional:            true,
+									},
+								},
+							},
+							"disable_allowed_vip_port": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"use_http_https_port": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"use_http_port": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"use_https_port": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"allowed_vip_port_sli": schema.SingleNestedBlock{
+						MarkdownDescription: "Defines the TCP port(s) which will be opened on the cloud loadbalancer. Such that the client can use the cloud VIP IP and port combination to reach TCP/HTTP LB configured on the F5XC Site.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"custom_ports": schema.SingleNestedBlock{
+								MarkdownDescription: "Custom Ports. List of Custom port.",
+								Attributes: map[string]schema.Attribute{
+									"port_ranges": schema.StringAttribute{
+										MarkdownDescription: "Port Ranges. Port Ranges .",
+										Optional:            true,
+									},
+								},
+							},
+							"disable_allowed_vip_port": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"use_http_https_port": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"use_http_port": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+							"use_https_port": schema.SingleNestedBlock{
+								MarkdownDescription: "Enable this option",
+							},
+						},
+					},
+					"dc_cluster_group_inside_vn": schema.SingleNestedBlock{
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						Attributes: map[string]schema.Attribute{
+							"name": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								Optional:            true,
+							},
+							"namespace": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								Optional:            true,
+								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
+							},
+							"tenant": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								Optional:            true,
+								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
+							},
+						},
+					},
+					"dc_cluster_group_outside_vn": schema.SingleNestedBlock{
+						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						Attributes: map[string]schema.Attribute{
+							"name": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								Optional:            true,
+							},
+							"namespace": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								Optional:            true,
+								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
+							},
+							"tenant": schema.StringAttribute{
+								MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								Optional:            true,
+								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
+							},
+						},
 					},
 					"global_network_list": schema.SingleNestedBlock{
 						MarkdownDescription: "Global Network Connection List. List of global network connections.",
@@ -1541,292 +2117,104 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 							},
 						},
 					},
-					"interface_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Configure network interfaces for this Secure Mesh site.",
+					"inside_static_routes": schema.SingleNestedBlock{
+						MarkdownDescription: "Static Route List Type. List of static routes.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
-							"interfaces": schema.ListNestedBlock{
-								MarkdownDescription: "Configure network interfaces for this Secure Mesh site .",
+							"static_route_list": schema.ListNestedBlock{
+								MarkdownDescription: "List of Static Routes. List of Static routes .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
-										"description_spec": schema.StringAttribute{
-											MarkdownDescription: "Interface Description. Description for this Interface.",
+										"simple_static_route": schema.StringAttribute{
+											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
-										"dc_cluster_group_connectivity_interface_disabled": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
-										},
-										"dc_cluster_group_connectivity_interface_enabled": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
-										},
-										"dedicated_interface": schema.SingleNestedBlock{
-											MarkdownDescription: "Dedicated Interface. Dedicated Interface Configuration.",
+										"custom_static_route": schema.SingleNestedBlock{
+											MarkdownDescription: "Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
 											Attributes: map[string]schema.Attribute{
-												"device": schema.StringAttribute{
-													MarkdownDescription: "Name of the device for which interface is configured. Use wwan0 for 4G/LTE.",
+												"attrs": schema.ListAttribute{
+													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
 													Optional:            true,
-												},
-												"mtu": schema.Int64Attribute{
-													MarkdownDescription: "Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384.",
-													Optional:            true,
-												},
-												"node": schema.StringAttribute{
-													MarkdownDescription: "Configuration will apply to a device on the given node of the site.",
-													Optional:            true,
-												},
-												"priority": schema.Int64Attribute{
-													MarkdownDescription: "Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority.",
-													Optional:            true,
+													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
-												"cluster": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
+												"labels": schema.SingleNestedBlock{
+													MarkdownDescription: "Add Labels for this Static Route, these labels can be used in network policy.",
 												},
-												"is_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"monitor": schema.SingleNestedBlock{
-													MarkdownDescription: "Link Quality Monitoring configuration for a network interface.",
-												},
-												"monitor_disabled": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"not_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-											},
-										},
-										"dedicated_management_interface": schema.SingleNestedBlock{
-											MarkdownDescription: "Dedicated Management Interface. Dedicated Interface Configuration.",
-											Attributes: map[string]schema.Attribute{
-												"device": schema.StringAttribute{
-													MarkdownDescription: "Name of the device for which interface is configured .",
-													Optional:            true,
-												},
-												"mtu": schema.Int64Attribute{
-													MarkdownDescription: "Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384.",
-													Optional:            true,
-												},
-												"node": schema.StringAttribute{
-													MarkdownDescription: "Configuration will apply to a device on the given node of the site.",
-													Optional:            true,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"cluster": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-											},
-										},
-										"ethernet_interface": schema.SingleNestedBlock{
-											MarkdownDescription: "Ethernet Interface. Ethernet Interface Configuration.",
-											Attributes: map[string]schema.Attribute{
-												"device": schema.StringAttribute{
-													MarkdownDescription: "Interface configuration for the ethernet device .",
-													Optional:            true,
-												},
-												"mtu": schema.Int64Attribute{
-													MarkdownDescription: "Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384.",
-													Optional:            true,
-												},
-												"node": schema.StringAttribute{
-													MarkdownDescription: "Configuration will apply to a device on the given node.",
-													Optional:            true,
-												},
-												"priority": schema.Int64Attribute{
-													MarkdownDescription: "Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority.",
-													Optional:            true,
-												},
-												"vlan_id": schema.Int64Attribute{
-													MarkdownDescription: "Configure a VLAN tagged ethernet interface.",
-													Optional:            true,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"cluster": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"dhcp_client": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"dhcp_server": schema.SingleNestedBlock{
-													MarkdownDescription: "DHCPServerParametersType.",
-													Attributes:          map[string]schema.Attribute{},
+												"nexthop": schema.SingleNestedBlock{
+													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
+													Attributes: map[string]schema.Attribute{
+														"type": schema.StringAttribute{
+															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN.. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
+															Optional:            true,
+														},
+													},
 													Blocks: map[string]schema.Block{
-														"automatic_from_end": schema.SingleNestedBlock{
-															MarkdownDescription: "Enable this option",
-														},
-														"automatic_from_start": schema.SingleNestedBlock{
-															MarkdownDescription: "Enable this option",
-														},
-														"dhcp_networks": schema.ListNestedBlock{
-															MarkdownDescription: "List of networks from which DHCP Server can allocate IPv4 Addresses .",
+														"interface": schema.ListNestedBlock{
+															MarkdownDescription: "Nexthop is network interface when type is 'Network-Interface'.",
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
-																	"dgw_address": schema.StringAttribute{
-																		MarkdownDescription: "Enter a IPv4 address from the network prefix to be used as the default gateway.",
+																	"kind": schema.StringAttribute{
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
 																		Optional:            true,
-																	},
-																	"dns_address": schema.StringAttribute{
-																		MarkdownDescription: "Enter a IPv4 address from the network prefix to be used as the DNS server.",
-																		Optional:            true,
-																	},
-																	"network_prefix": schema.StringAttribute{
-																		MarkdownDescription: "Set the network prefix for the site. Ex: 10.1.1.0/24.",
-																		Optional:            true,
-																	},
-																	"pool_settings": schema.StringAttribute{
-																		MarkdownDescription: "[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																		Optional:            true,
-																	},
-																},
-																Blocks: map[string]schema.Block{
-																	"first_address": schema.SingleNestedBlock{
-																		MarkdownDescription: "Enable this option",
-																	},
-																	"last_address": schema.SingleNestedBlock{
-																		MarkdownDescription: "Enable this option",
-																	},
-																	"pools": schema.ListNestedBlock{
-																		MarkdownDescription: "List of non overlapping IP address ranges.",
-																		NestedObject: schema.NestedBlockObject{
-																			Attributes: map[string]schema.Attribute{
-																				"end_ip": schema.StringAttribute{
-																					MarkdownDescription: "Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200.",
-																					Optional:            true,
-																				},
-																				"start_ip": schema.StringAttribute{
-																					MarkdownDescription: "Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5.",
-																					Optional:            true,
-																				},
-																			},
+																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
 																		},
 																	},
-																	"same_as_dgw": schema.SingleNestedBlock{
-																		MarkdownDescription: "Enable this option",
+																	"name": schema.StringAttribute{
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+																		Optional:            true,
+																	},
+																	"namespace": schema.StringAttribute{
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+																		Optional:            true,
+																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
+																	},
+																	"tenant": schema.StringAttribute{
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+																		Optional:            true,
+																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
+																	},
+																	"uid": schema.StringAttribute{
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+																		Optional:            true,
+																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																},
 															},
 														},
-														"fixed_ip_map": schema.SingleNestedBlock{
-															MarkdownDescription: "Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client.",
-														},
-														"interface_ip_map": schema.SingleNestedBlock{
-															MarkdownDescription: "Interface IPv4 Assignments. Specify static IPv4 addresses per node.",
+														"nexthop_address": schema.SingleNestedBlock{
+															MarkdownDescription: "IP Address used to specify an IPv4 or IPv6 address.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
-																"interface_ip_map": schema.SingleNestedBlock{
-																	MarkdownDescription: "Specify static IPv4 addresses per site:node.",
-																},
-															},
-														},
-													},
-												},
-												"ipv6_auto_config": schema.SingleNestedBlock{
-													MarkdownDescription: "IPV6AutoConfigType.",
-													Attributes:          map[string]schema.Attribute{},
-													Blocks: map[string]schema.Block{
-														"host": schema.SingleNestedBlock{
-															MarkdownDescription: "Enable this option",
-														},
-														"router": schema.SingleNestedBlock{
-															MarkdownDescription: "IPV6AutoConfigRouterType.",
-															Attributes: map[string]schema.Attribute{
-																"network_prefix": schema.StringAttribute{
-																	MarkdownDescription: "Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862.",
-																	Optional:            true,
-																},
-															},
-															Blocks: map[string]schema.Block{
-																"dns_config": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPV6DnsConfig.",
-																	Attributes:          map[string]schema.Attribute{},
-																	Blocks: map[string]schema.Block{
-																		"configured_list": schema.SingleNestedBlock{
-																			MarkdownDescription: "IPV6DnsList.",
-																			Attributes: map[string]schema.Attribute{
-																				"dns_list": schema.ListAttribute{
-																					MarkdownDescription: "List of IPv6 Addresses acting as DNS servers .",
-																					Optional:            true,
-																					ElementType:         types.StringType,
-																				},
-																			},
-																		},
-																		"local_dns": schema.SingleNestedBlock{
-																			MarkdownDescription: "IPV6LocalDnsAddress.",
-																			Attributes: map[string]schema.Attribute{
-																				"configured_address": schema.StringAttribute{
-																					MarkdownDescription: "Configured address from the network prefix is chosen as DNS server.",
-																					Optional:            true,
-																				},
-																			},
-																			Blocks: map[string]schema.Block{
-																				"first_address": schema.SingleNestedBlock{
-																					MarkdownDescription: "Enable this option",
-																				},
-																				"last_address": schema.SingleNestedBlock{
-																					MarkdownDescription: "Enable this option",
-																				},
-																			},
+																"ipv4": schema.SingleNestedBlock{
+																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
+																	Attributes: map[string]schema.Attribute{
+																		"addr": schema.StringAttribute{
+																			MarkdownDescription: "IPv4 Address in string form with dot-decimal notation.",
+																			Optional:            true,
 																		},
 																	},
 																},
-																"stateful": schema.SingleNestedBlock{
-																	MarkdownDescription: "DHCPIPV6 Stateful Server.",
-																	Attributes:          map[string]schema.Attribute{},
-																	Blocks: map[string]schema.Block{
-																		"automatic_from_end": schema.SingleNestedBlock{
-																			MarkdownDescription: "Enable this option",
-																		},
-																		"automatic_from_start": schema.SingleNestedBlock{
-																			MarkdownDescription: "Enable this option",
-																		},
-																		"dhcp_networks": schema.ListNestedBlock{
-																			MarkdownDescription: "List of networks from which DHCP server can allocate IP addresses .",
-																			NestedObject: schema.NestedBlockObject{
-																				Attributes: map[string]schema.Attribute{
-																					"network_prefix": schema.StringAttribute{
-																						MarkdownDescription: "Network Prefix to be used for IPv6 address auto configuration.",
-																						Optional:            true,
-																					},
-																					"pool_settings": schema.StringAttribute{
-																						MarkdownDescription: "[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation. Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`. Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`.",
-																						Optional:            true,
-																					},
-																				},
-																				Blocks: map[string]schema.Block{
-																					"pools": schema.ListNestedBlock{
-																						MarkdownDescription: "List of non overlapping IP address ranges.",
-																						NestedObject: schema.NestedBlockObject{
-																							Attributes: map[string]schema.Attribute{
-																								"end_ip": schema.StringAttribute{
-																									MarkdownDescription: "Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
-																									Optional:            true,
-																								},
-																								"start_ip": schema.StringAttribute{
-																									MarkdownDescription: "Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5.",
-																									Optional:            true,
-																								},
-																							},
-																						},
-																					},
-																				},
-																			},
-																		},
-																		"fixed_ip_map": schema.SingleNestedBlock{
-																			MarkdownDescription: "Fixed MAC address to IPv6 assignments, Key: MAC address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
-																		},
-																		"interface_ip_map": schema.SingleNestedBlock{
-																			MarkdownDescription: "Map of Interface IPv6 assignments per node.",
-																			Attributes:          map[string]schema.Attribute{},
-																			Blocks: map[string]schema.Block{
-																				"interface_ip_map": schema.SingleNestedBlock{
-																					MarkdownDescription: "Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address.",
-																				},
-																			},
+																"ipv6": schema.SingleNestedBlock{
+																	MarkdownDescription: "IPv6 Address specified as hexadecimal numbers separated by ':'.",
+																	Attributes: map[string]schema.Attribute{
+																		"addr": schema.StringAttribute{
+																			MarkdownDescription: "IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'.",
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -1834,480 +2222,157 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 														},
 													},
 												},
-												"is_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"monitor": schema.SingleNestedBlock{
-													MarkdownDescription: "Link Quality Monitoring configuration for a network interface.",
-												},
-												"monitor_disabled": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"no_ipv6_address": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"not_primary": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"site_local_inside_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"site_local_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"static_ip": schema.SingleNestedBlock{
-													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters.",
-													Attributes:          map[string]schema.Attribute{},
-													Blocks: map[string]schema.Block{
-														"cluster_static_ip": schema.SingleNestedBlock{
-															MarkdownDescription: "Configure Static IP parameters for cluster.",
-															Attributes:          map[string]schema.Attribute{},
-															Blocks: map[string]schema.Block{
-																"interface_ip_map": schema.SingleNestedBlock{
-																	MarkdownDescription: "Map of Node to Static IP configuration value, Key:Node, Value:IP Address.",
+												"subnets": schema.ListNestedBlock{
+													MarkdownDescription: "Subnets. List of route prefixes .",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{},
+														Blocks: map[string]schema.Block{
+															"ipv4": schema.SingleNestedBlock{
+																MarkdownDescription: "IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
+																Attributes: map[string]schema.Attribute{
+																	"plen": schema.Int64Attribute{
+																		MarkdownDescription: "Prefix-length of the IPv4 subnet. Must be <= 32.",
+																		Optional:            true,
+																	},
+																	"prefix": schema.StringAttribute{
+																		MarkdownDescription: "Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
+																		Optional:            true,
+																	},
 																},
 															},
-														},
-														"node_static_ip": schema.SingleNestedBlock{
-															MarkdownDescription: "Configure Static IP parameters for a node.",
-															Attributes: map[string]schema.Attribute{
-																"default_gw": schema.StringAttribute{
-																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																	Optional:            true,
-																},
-																"ip_address": schema.StringAttribute{
-																	MarkdownDescription: "IP address of the interface and prefix length .",
-																	Optional:            true,
+															"ipv6": schema.SingleNestedBlock{
+																MarkdownDescription: "IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
+																Attributes: map[string]schema.Attribute{
+																	"plen": schema.Int64Attribute{
+																		MarkdownDescription: "Prefix length of the IPv6 subnet. Must be <= 128.",
+																		Optional:            true,
+																	},
+																	"prefix": schema.StringAttribute{
+																		MarkdownDescription: "Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'.",
+																		Optional:            true,
+																	},
 																},
 															},
 														},
 													},
-												},
-												"static_ipv6_address": schema.SingleNestedBlock{
-													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters.",
-													Attributes:          map[string]schema.Attribute{},
-													Blocks: map[string]schema.Block{
-														"cluster_static_ip": schema.SingleNestedBlock{
-															MarkdownDescription: "Configure Static IP parameters for cluster.",
-															Attributes:          map[string]schema.Attribute{},
-															Blocks: map[string]schema.Block{
-																"interface_ip_map": schema.SingleNestedBlock{
-																	MarkdownDescription: "Map of Node to Static IP configuration value, Key:Node, Value:IP Address.",
-																},
-															},
-														},
-														"node_static_ip": schema.SingleNestedBlock{
-															MarkdownDescription: "Configure Static IP parameters for a node.",
-															Attributes: map[string]schema.Attribute{
-																"default_gw": schema.StringAttribute{
-																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
-																	Optional:            true,
-																},
-																"ip_address": schema.StringAttribute{
-																	MarkdownDescription: "IP address of the interface and prefix length .",
-																	Optional:            true,
-																},
-															},
-														},
-													},
-												},
-												"storage_network": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"untagged": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
 												},
 											},
-										},
-										"labels": schema.SingleNestedBlock{
-											MarkdownDescription: "Add Labels for this Interface, these labels can be used in firewall policy.",
 										},
 									},
 								},
 							},
 						},
 					},
-					"no_forward_proxy": schema.SingleNestedBlock{
+					"no_dc_cluster_group": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable this option",
 					},
 					"no_global_network": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable this option",
 					},
-					"no_network_policy": schema.SingleNestedBlock{
+					"no_inside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable this option",
 					},
-					"sli_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Site Local Network Configuration. Site local network configuration.",
-						Attributes: map[string]schema.Attribute{
-							"nameserver": schema.StringAttribute{
-								MarkdownDescription: "Optional DNS V4 server IP to be used for name resolution.",
-								Optional:            true,
-							},
-							"vip": schema.StringAttribute{
-								MarkdownDescription: "Optional common virtual V4 IP across all nodes to be used as automatic VIP.",
-								Optional:            true,
-							},
-						},
-						Blocks: map[string]schema.Block{
-							"dc_cluster_group": schema.SingleNestedBlock{
-								MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
-								Attributes: map[string]schema.Attribute{
-									"name": schema.StringAttribute{
-										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-										Optional:            true,
-									},
-									"namespace": schema.StringAttribute{
-										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-										Optional:            true,
-										Computed:            true,
-										PlanModifiers: []planmodifier.String{
-											stringplanmodifier.UseStateForUnknown(),
-										},
-									},
-									"tenant": schema.StringAttribute{
-										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-										Optional:            true,
-										Computed:            true,
-										PlanModifiers: []planmodifier.String{
-											stringplanmodifier.UseStateForUnknown(),
-										},
-									},
-								},
-							},
-							"labels": schema.SingleNestedBlock{
-								MarkdownDescription: "Add Labels for this network, these labels can be used in firewall policy.",
-							},
-							"no_dc_cluster_group": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"no_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"no_v6_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Static Routes List. List of static routes.",
-								Attributes:          map[string]schema.Attribute{},
-								Blocks: map[string]schema.Block{
-									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static Routes. List of static routes .",
-										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{
-												"attrs": schema.ListAttribute{
-													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional:            true,
-													ElementType:         types.StringType,
-												},
-												"ip_address": schema.StringAttribute{
-													MarkdownDescription: "Traffic matching the IP prefixes is sent to this IP Address.",
-													Optional:            true,
-												},
-												"ip_prefixes": schema.ListAttribute{
-													MarkdownDescription: "List of route prefixes that have common next hop and attributes .",
-													Optional:            true,
-													ElementType:         types.StringType,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"node_interface": schema.SingleNestedBlock{
-													MarkdownDescription: "On multinode site, this type holds the information about per node interfaces.",
-													Attributes:          map[string]schema.Attribute{},
-													Blocks: map[string]schema.Block{
-														"list": schema.ListNestedBlock{
-															MarkdownDescription: "On a multinode site, this list holds the nodes and corresponding networking_interface.",
-															NestedObject: schema.NestedBlockObject{
-																Attributes: map[string]schema.Attribute{
-																	"node": schema.StringAttribute{
-																		MarkdownDescription: "Node. Node name on this site.",
-																		Optional:            true,
-																	},
-																},
-																Blocks: map[string]schema.Block{
-																	"interface": schema.ListNestedBlock{
-																		MarkdownDescription: "Interface. Interface reference on this node.",
-																		NestedObject: schema.NestedBlockObject{
-																			Attributes: map[string]schema.Attribute{
-																				"kind": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																				"name": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-																					Optional:            true,
-																				},
-																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																				"uid": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																			},
-																		},
-																	},
-																},
-															},
-														},
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-							"static_v6_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Static IPv6 Routes List. List of IPv6 static routes.",
-								Attributes:          map[string]schema.Attribute{},
-								Blocks: map[string]schema.Block{
-									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "List of IPv6 static routes .",
-										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{
-												"attrs": schema.ListAttribute{
-													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional:            true,
-													ElementType:         types.StringType,
-												},
-												"ip_address": schema.StringAttribute{
-													MarkdownDescription: "Traffic matching the IP prefixes is sent to this IP Address.",
-													Optional:            true,
-												},
-												"ip_prefixes": schema.ListAttribute{
-													MarkdownDescription: "List of IPv6 route prefixes that have common next hop and attributes .",
-													Optional:            true,
-													ElementType:         types.StringType,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"node_interface": schema.SingleNestedBlock{
-													MarkdownDescription: "On multinode site, this type holds the information about per node interfaces.",
-													Attributes:          map[string]schema.Attribute{},
-													Blocks: map[string]schema.Block{
-														"list": schema.ListNestedBlock{
-															MarkdownDescription: "On a multinode site, this list holds the nodes and corresponding networking_interface.",
-															NestedObject: schema.NestedBlockObject{
-																Attributes: map[string]schema.Attribute{
-																	"node": schema.StringAttribute{
-																		MarkdownDescription: "Node. Node name on this site.",
-																		Optional:            true,
-																	},
-																},
-																Blocks: map[string]schema.Block{
-																	"interface": schema.ListNestedBlock{
-																		MarkdownDescription: "Interface. Interface reference on this node.",
-																		NestedObject: schema.NestedBlockObject{
-																			Attributes: map[string]schema.Attribute{
-																				"kind": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																				"name": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-																					Optional:            true,
-																				},
-																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																				"uid": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																			},
-																		},
-																	},
-																},
-															},
-														},
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-						},
+					"no_outside_static_routes": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
 					},
-					"slo_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Site Local Network Configuration. Site local network configuration.",
-						Attributes: map[string]schema.Attribute{
-							"nameserver": schema.StringAttribute{
-								MarkdownDescription: "Optional DNS V4 server IP to be used for name resolution.",
-								Optional:            true,
-							},
-							"vip": schema.StringAttribute{
-								MarkdownDescription: "Optional common virtual V4 IP across all nodes to be used as automatic VIP.",
-								Optional:            true,
-							},
-						},
+					"outside_static_routes": schema.SingleNestedBlock{
+						MarkdownDescription: "Static Route List Type. List of static routes.",
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
-							"dc_cluster_group": schema.SingleNestedBlock{
-								MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
-								Attributes: map[string]schema.Attribute{
-									"name": schema.StringAttribute{
-										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-										Optional:            true,
-									},
-									"namespace": schema.StringAttribute{
-										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-										Optional:            true,
-										Computed:            true,
-										PlanModifiers: []planmodifier.String{
-											stringplanmodifier.UseStateForUnknown(),
+							"static_route_list": schema.ListNestedBlock{
+								MarkdownDescription: "List of Static Routes. List of Static routes .",
+								NestedObject: schema.NestedBlockObject{
+									Attributes: map[string]schema.Attribute{
+										"simple_static_route": schema.StringAttribute{
+											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
+											Optional:            true,
 										},
 									},
-									"tenant": schema.StringAttribute{
-										MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-										Optional:            true,
-										Computed:            true,
-										PlanModifiers: []planmodifier.String{
-											stringplanmodifier.UseStateForUnknown(),
-										},
-									},
-								},
-							},
-							"labels": schema.SingleNestedBlock{
-								MarkdownDescription: "Add Labels for this network, these labels can be used in firewall policy.",
-							},
-							"no_dc_cluster_group": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"no_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"no_v6_static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Static Routes List. List of static routes.",
-								Attributes:          map[string]schema.Attribute{},
-								Blocks: map[string]schema.Block{
-									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static Routes. List of static routes .",
-										NestedObject: schema.NestedBlockObject{
+									Blocks: map[string]schema.Block{
+										"custom_static_route": schema.SingleNestedBlock{
+											MarkdownDescription: "Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
-													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional:            true,
-													ElementType:         types.StringType,
-												},
-												"ip_address": schema.StringAttribute{
-													MarkdownDescription: "Traffic matching the IP prefixes is sent to this IP Address.",
-													Optional:            true,
-												},
-												"ip_prefixes": schema.ListAttribute{
-													MarkdownDescription: "List of route prefixes that have common next hop and attributes .",
+													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
 											},
 											Blocks: map[string]schema.Block{
-												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
+												"labels": schema.SingleNestedBlock{
+													MarkdownDescription: "Add Labels for this Static Route, these labels can be used in network policy.",
 												},
-												"node_interface": schema.SingleNestedBlock{
-													MarkdownDescription: "On multinode site, this type holds the information about per node interfaces.",
-													Attributes:          map[string]schema.Attribute{},
+												"nexthop": schema.SingleNestedBlock{
+													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
+													Attributes: map[string]schema.Attribute{
+														"type": schema.StringAttribute{
+															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN.. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
+															Optional:            true,
+														},
+													},
 													Blocks: map[string]schema.Block{
-														"list": schema.ListNestedBlock{
-															MarkdownDescription: "On a multinode site, this list holds the nodes and corresponding networking_interface.",
+														"interface": schema.ListNestedBlock{
+															MarkdownDescription: "Nexthop is network interface when type is 'Network-Interface'.",
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
-																	"node": schema.StringAttribute{
-																		MarkdownDescription: "Node. Node name on this site.",
+																	"kind": schema.StringAttribute{
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
+																		Optional:            true,
+																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
+																	},
+																	"name": schema.StringAttribute{
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																		Optional:            true,
 																	},
+																	"namespace": schema.StringAttribute{
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+																		Optional:            true,
+																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
+																	},
+																	"tenant": schema.StringAttribute{
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+																		Optional:            true,
+																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
+																	},
+																	"uid": schema.StringAttribute{
+																		MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+																		Optional:            true,
+																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
+																	},
 																},
-																Blocks: map[string]schema.Block{
-																	"interface": schema.ListNestedBlock{
-																		MarkdownDescription: "Interface. Interface reference on this node.",
-																		NestedObject: schema.NestedBlockObject{
-																			Attributes: map[string]schema.Attribute{
-																				"kind": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																				"name": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-																					Optional:            true,
-																				},
-																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																				"uid": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																			},
+															},
+														},
+														"nexthop_address": schema.SingleNestedBlock{
+															MarkdownDescription: "IP Address used to specify an IPv4 or IPv6 address.",
+															Attributes:          map[string]schema.Attribute{},
+															Blocks: map[string]schema.Block{
+																"ipv4": schema.SingleNestedBlock{
+																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
+																	Attributes: map[string]schema.Attribute{
+																		"addr": schema.StringAttribute{
+																			MarkdownDescription: "IPv4 Address in string form with dot-decimal notation.",
+																			Optional:            true,
+																		},
+																	},
+																},
+																"ipv6": schema.SingleNestedBlock{
+																	MarkdownDescription: "IPv6 Address specified as hexadecimal numbers separated by ':'.",
+																	Attributes: map[string]schema.Attribute{
+																		"addr": schema.StringAttribute{
+																			MarkdownDescription: "IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'.",
+																			Optional:            true,
 																		},
 																	},
 																},
@@ -2315,94 +2380,34 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 														},
 													},
 												},
-											},
-										},
-									},
-								},
-							},
-							"static_v6_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Static IPv6 Routes List. List of IPv6 static routes.",
-								Attributes:          map[string]schema.Attribute{},
-								Blocks: map[string]schema.Block{
-									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "List of IPv6 static routes .",
-										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{
-												"attrs": schema.ListAttribute{
-													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] List of attributes that control forwarding, dynamic routing and control plane (host) reachability. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional:            true,
-													ElementType:         types.StringType,
-												},
-												"ip_address": schema.StringAttribute{
-													MarkdownDescription: "Traffic matching the IP prefixes is sent to this IP Address.",
-													Optional:            true,
-												},
-												"ip_prefixes": schema.ListAttribute{
-													MarkdownDescription: "List of IPv6 route prefixes that have common next hop and attributes .",
-													Optional:            true,
-													ElementType:         types.StringType,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"default_gateway": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"node_interface": schema.SingleNestedBlock{
-													MarkdownDescription: "On multinode site, this type holds the information about per node interfaces.",
-													Attributes:          map[string]schema.Attribute{},
-													Blocks: map[string]schema.Block{
-														"list": schema.ListNestedBlock{
-															MarkdownDescription: "On a multinode site, this list holds the nodes and corresponding networking_interface.",
-															NestedObject: schema.NestedBlockObject{
+												"subnets": schema.ListNestedBlock{
+													MarkdownDescription: "Subnets. List of route prefixes .",
+													NestedObject: schema.NestedBlockObject{
+														Attributes: map[string]schema.Attribute{},
+														Blocks: map[string]schema.Block{
+															"ipv4": schema.SingleNestedBlock{
+																MarkdownDescription: "IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
 																Attributes: map[string]schema.Attribute{
-																	"node": schema.StringAttribute{
-																		MarkdownDescription: "Node. Node name on this site.",
+																	"plen": schema.Int64Attribute{
+																		MarkdownDescription: "Prefix-length of the IPv4 subnet. Must be <= 32.",
+																		Optional:            true,
+																	},
+																	"prefix": schema.StringAttribute{
+																		MarkdownDescription: "Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
 																		Optional:            true,
 																	},
 																},
-																Blocks: map[string]schema.Block{
-																	"interface": schema.ListNestedBlock{
-																		MarkdownDescription: "Interface. Interface reference on this node.",
-																		NestedObject: schema.NestedBlockObject{
-																			Attributes: map[string]schema.Attribute{
-																				"kind": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route').",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																				"name": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-																					Optional:            true,
-																				},
-																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																				"uid": schema.StringAttribute{
-																					MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
-																					Optional:            true,
-																					Computed:            true,
-																					PlanModifiers: []planmodifier.String{
-																						stringplanmodifier.UseStateForUnknown(),
-																					},
-																				},
-																			},
-																		},
+															},
+															"ipv6": schema.SingleNestedBlock{
+																MarkdownDescription: "IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
+																Attributes: map[string]schema.Attribute{
+																	"plen": schema.Int64Attribute{
+																		MarkdownDescription: "Prefix length of the IPv6 subnet. Must be <= 128.",
+																		Optional:            true,
+																	},
+																	"prefix": schema.StringAttribute{
+																		MarkdownDescription: "Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'.",
+																		Optional:            true,
 																	},
 																},
 															},
@@ -2424,146 +2429,25 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					},
 				},
 			},
-			"default_blocked_services": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
-			},
-			"default_network_config": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
-			},
-			"kubernetes_upgrade_drain": schema.SingleNestedBlock{
-				MarkdownDescription: "Specify how worker nodes within a site will be upgraded.",
+			"vpc_attachments": schema.SingleNestedBlock{
+				MarkdownDescription: "Spoke VPCs to be attached to the AWS TGW Site.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
-					"disable_upgrade_drain": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"enable_upgrade_drain": schema.SingleNestedBlock{
-						MarkdownDescription: "Specify batch upgrade settings for worker nodes within a site.",
-						Attributes: map[string]schema.Attribute{
-							"drain_max_unavailable_node_count": schema.Int64Attribute{
-								MarkdownDescription: "Node Batch Size Count.",
-								Optional:            true,
+					"vpc_list": schema.ListNestedBlock{
+						MarkdownDescription: "List of VPC attachments to transit gateway.",
+						NestedObject: schema.NestedBlockObject{
+							Attributes: map[string]schema.Attribute{
+								"vpc_id": schema.StringAttribute{
+									MarkdownDescription: "VPC ID. Information about existing VPC.",
+									Optional:            true,
+								},
 							},
-							"drain_node_timeout": schema.Int64Attribute{
-								MarkdownDescription: "Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is..",
-								Optional:            true,
-							},
-						},
-						Blocks: map[string]schema.Block{
-							"disable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"enable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+							Blocks: map[string]schema.Block{
+								"labels": schema.SingleNestedBlock{
+									MarkdownDescription: "Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall.",
+								},
 							},
 						},
-					},
-				},
-			},
-			"log_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
-				Attributes: map[string]schema.Attribute{
-					"name": schema.StringAttribute{
-						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-						Optional:            true,
-					},
-					"namespace": schema.StringAttribute{
-						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-						Optional:            true,
-						Computed:            true,
-						PlanModifiers: []planmodifier.String{
-							stringplanmodifier.UseStateForUnknown(),
-						},
-					},
-					"tenant": schema.StringAttribute{
-						MarkdownDescription: "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-						Optional:            true,
-						Computed:            true,
-						PlanModifiers: []planmodifier.String{
-							stringplanmodifier.UseStateForUnknown(),
-						},
-					},
-				},
-			},
-			"logs_streaming_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
-			},
-			"master_node_configuration": schema.ListNestedBlock{
-				MarkdownDescription: "Configuration of master nodes .",
-				NestedObject: schema.NestedBlockObject{
-					Attributes: map[string]schema.Attribute{
-						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. Names of master node .",
-							Optional:            true,
-						},
-						"public_ip": schema.StringAttribute{
-							MarkdownDescription: "IP Address of the master node. This IP will be used when other sites connect via Site Mesh Group.",
-							Optional:            true,
-						},
-					},
-				},
-			},
-			"no_bond_devices": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
-			},
-			"offline_survivability_mode": schema.SingleNestedBlock{
-				MarkdownDescription: "Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7..",
-				Attributes:          map[string]schema.Attribute{},
-				Blocks: map[string]schema.Block{
-					"enable_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"no_offline_survivability_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-				},
-			},
-			"os": schema.SingleNestedBlock{
-				MarkdownDescription: "Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions.",
-				Attributes: map[string]schema.Attribute{
-					"operating_system_version": schema.StringAttribute{
-						MarkdownDescription: "Specify a OS version to be used e.g. 9.2024.6.",
-						Optional:            true,
-					},
-				},
-				Blocks: map[string]schema.Block{
-					"default_os_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-				},
-			},
-			"performance_enhancement_mode": schema.SingleNestedBlock{
-				MarkdownDescription: "Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
-				Attributes:          map[string]schema.Attribute{},
-				Blocks: map[string]schema.Block{
-					"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-						MarkdownDescription: "L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"jumbo": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"no_jumbo": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-						},
-					},
-					"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-				},
-			},
-			"sw": schema.SingleNestedBlock{
-				MarkdownDescription: "Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
-				Attributes: map[string]schema.Attribute{
-					"volterra_software_version": schema.StringAttribute{
-						MarkdownDescription: "Specify a F5XC Software Version to be used e.g. Crt-20210329-1002.",
-						Optional:            true,
-					},
-				},
-				Blocks: map[string]schema.Block{
-					"default_sw_version": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -2673,6 +2557,146 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 	}
 
 	// Marshal spec fields from Terraform state to API struct
+	if data.AWSParameters != nil {
+		aws_parametersMap := make(map[string]interface{})
+		if data.AWSParameters.AdminPassword != nil {
+			admin_passwordNestedMap := make(map[string]interface{})
+			aws_parametersMap["admin_password"] = admin_passwordNestedMap
+		}
+		if data.AWSParameters.AWSCred != nil {
+			aws_credNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.AWSCred.Name.IsNull() && !data.AWSParameters.AWSCred.Name.IsUnknown() {
+				aws_credNestedMap["name"] = data.AWSParameters.AWSCred.Name.ValueString()
+			}
+			if !data.AWSParameters.AWSCred.Namespace.IsNull() && !data.AWSParameters.AWSCred.Namespace.IsUnknown() {
+				aws_credNestedMap["namespace"] = data.AWSParameters.AWSCred.Namespace.ValueString()
+			}
+			if !data.AWSParameters.AWSCred.Tenant.IsNull() && !data.AWSParameters.AWSCred.Tenant.IsUnknown() {
+				aws_credNestedMap["tenant"] = data.AWSParameters.AWSCred.Tenant.ValueString()
+			}
+			aws_parametersMap["aws_cred"] = aws_credNestedMap
+		}
+		if !data.AWSParameters.AWSRegion.IsNull() && !data.AWSParameters.AWSRegion.IsUnknown() {
+			aws_parametersMap["aws_region"] = data.AWSParameters.AWSRegion.ValueString()
+		}
+		if len(data.AWSParameters.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.AWSParameters.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AWSAzName.IsNull() && !listItem.AWSAzName.IsUnknown() {
+					listItemMap["aws_az_name"] = listItem.AWSAzName.ValueString()
+				}
+				if listItem.InsideSubnet != nil {
+					inside_subnetDeepMap := make(map[string]interface{})
+					if !listItem.InsideSubnet.ExistingSubnetID.IsNull() && !listItem.InsideSubnet.ExistingSubnetID.IsUnknown() {
+						inside_subnetDeepMap["existing_subnet_id"] = listItem.InsideSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["inside_subnet"] = inside_subnetDeepMap
+				}
+				if listItem.OutsideSubnet != nil {
+					outside_subnetDeepMap := make(map[string]interface{})
+					if !listItem.OutsideSubnet.ExistingSubnetID.IsNull() && !listItem.OutsideSubnet.ExistingSubnetID.IsUnknown() {
+						outside_subnetDeepMap["existing_subnet_id"] = listItem.OutsideSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["outside_subnet"] = outside_subnetDeepMap
+				}
+				if listItem.ReservedInsideSubnet != nil {
+					listItemMap["reserved_inside_subnet"] = map[string]interface{}{}
+				}
+				if listItem.WorkloadSubnet != nil {
+					workload_subnetDeepMap := make(map[string]interface{})
+					if !listItem.WorkloadSubnet.ExistingSubnetID.IsNull() && !listItem.WorkloadSubnet.ExistingSubnetID.IsUnknown() {
+						workload_subnetDeepMap["existing_subnet_id"] = listItem.WorkloadSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["workload_subnet"] = workload_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			aws_parametersMap["az_nodes"] = az_nodesList
+		}
+		if data.AWSParameters.CustomSecurityGroup != nil {
+			custom_security_groupNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.CustomSecurityGroup.InsideSecurityGroupID.IsNull() && !data.AWSParameters.CustomSecurityGroup.InsideSecurityGroupID.IsUnknown() {
+				custom_security_groupNestedMap["inside_security_group_id"] = data.AWSParameters.CustomSecurityGroup.InsideSecurityGroupID.ValueString()
+			}
+			if !data.AWSParameters.CustomSecurityGroup.OutsideSecurityGroupID.IsNull() && !data.AWSParameters.CustomSecurityGroup.OutsideSecurityGroupID.IsUnknown() {
+				custom_security_groupNestedMap["outside_security_group_id"] = data.AWSParameters.CustomSecurityGroup.OutsideSecurityGroupID.ValueString()
+			}
+			aws_parametersMap["custom_security_group"] = custom_security_groupNestedMap
+		}
+		if data.AWSParameters.DisableInternetVIP != nil {
+			aws_parametersMap["disable_internet_vip"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.DiskSize.IsNull() && !data.AWSParameters.DiskSize.IsUnknown() {
+			aws_parametersMap["disk_size"] = data.AWSParameters.DiskSize.ValueInt64()
+		}
+		if data.AWSParameters.EnableInternetVIP != nil {
+			aws_parametersMap["enable_internet_vip"] = map[string]interface{}{}
+		}
+		if data.AWSParameters.ExistingTGW != nil {
+			existing_tgwNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.ExistingTGW.TGWAsn.IsNull() && !data.AWSParameters.ExistingTGW.TGWAsn.IsUnknown() {
+				existing_tgwNestedMap["tgw_asn"] = data.AWSParameters.ExistingTGW.TGWAsn.ValueInt64()
+			}
+			if !data.AWSParameters.ExistingTGW.TGWID.IsNull() && !data.AWSParameters.ExistingTGW.TGWID.IsUnknown() {
+				existing_tgwNestedMap["tgw_id"] = data.AWSParameters.ExistingTGW.TGWID.ValueString()
+			}
+			if !data.AWSParameters.ExistingTGW.VolterraSiteAsn.IsNull() && !data.AWSParameters.ExistingTGW.VolterraSiteAsn.IsUnknown() {
+				existing_tgwNestedMap["volterra_site_asn"] = data.AWSParameters.ExistingTGW.VolterraSiteAsn.ValueInt64()
+			}
+			aws_parametersMap["existing_tgw"] = existing_tgwNestedMap
+		}
+		if data.AWSParameters.F5xcSecurityGroup != nil {
+			aws_parametersMap["f5xc_security_group"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.InstanceType.IsNull() && !data.AWSParameters.InstanceType.IsUnknown() {
+			aws_parametersMap["instance_type"] = data.AWSParameters.InstanceType.ValueString()
+		}
+		if data.AWSParameters.NewTGW != nil {
+			new_tgwNestedMap := make(map[string]interface{})
+			aws_parametersMap["new_tgw"] = new_tgwNestedMap
+		}
+		if data.AWSParameters.NewVPC != nil {
+			new_vpcNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.NewVPC.NameTag.IsNull() && !data.AWSParameters.NewVPC.NameTag.IsUnknown() {
+				new_vpcNestedMap["name_tag"] = data.AWSParameters.NewVPC.NameTag.ValueString()
+			}
+			if !data.AWSParameters.NewVPC.PrimaryIpv4.IsNull() && !data.AWSParameters.NewVPC.PrimaryIpv4.IsUnknown() {
+				new_vpcNestedMap["primary_ipv4"] = data.AWSParameters.NewVPC.PrimaryIpv4.ValueString()
+			}
+			aws_parametersMap["new_vpc"] = new_vpcNestedMap
+		}
+		if data.AWSParameters.NoWorkerNodes != nil {
+			aws_parametersMap["no_worker_nodes"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.NodesPerAz.IsNull() && !data.AWSParameters.NodesPerAz.IsUnknown() {
+			aws_parametersMap["nodes_per_az"] = data.AWSParameters.NodesPerAz.ValueInt64()
+		}
+		if data.AWSParameters.ReservedTGWCIDR != nil {
+			aws_parametersMap["reserved_tgw_cidr"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.SSHKey.IsNull() && !data.AWSParameters.SSHKey.IsUnknown() {
+			aws_parametersMap["ssh_key"] = data.AWSParameters.SSHKey.ValueString()
+		}
+		if data.AWSParameters.TGWCIDR != nil {
+			tgw_cidrNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.TGWCIDR.Ipv4.IsNull() && !data.AWSParameters.TGWCIDR.Ipv4.IsUnknown() {
+				tgw_cidrNestedMap["ipv4"] = data.AWSParameters.TGWCIDR.Ipv4.ValueString()
+			}
+			aws_parametersMap["tgw_cidr"] = tgw_cidrNestedMap
+		}
+		if !data.AWSParameters.TotalNodes.IsNull() && !data.AWSParameters.TotalNodes.IsUnknown() {
+			aws_parametersMap["total_nodes"] = data.AWSParameters.TotalNodes.ValueInt64()
+		}
+		if !data.AWSParameters.VPCID.IsNull() && !data.AWSParameters.VPCID.IsUnknown() {
+			aws_parametersMap["vpc_id"] = data.AWSParameters.VPCID.ValueString()
+		}
+		createReq.Spec["aws_parameters"] = aws_parametersMap
+	}
+	if data.BlockAllServices != nil {
+		block_all_servicesMap := make(map[string]interface{})
+		createReq.Spec["block_all_services"] = block_all_servicesMap
+	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
 		if len(data.BlockedServices.BlockedSevice) > 0 {
@@ -2697,37 +2721,6 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		}
 		createReq.Spec["blocked_services"] = blocked_servicesMap
 	}
-	if data.BondDeviceList != nil {
-		bond_device_listMap := make(map[string]interface{})
-		if len(data.BondDeviceList.BondDevices) > 0 {
-			var bond_devicesList []map[string]interface{}
-			for _, listItem := range data.BondDeviceList.BondDevices {
-				listItemMap := make(map[string]interface{})
-				if listItem.ActiveBackup != nil {
-					listItemMap["active_backup"] = map[string]interface{}{}
-				}
-				if listItem.Lacp != nil {
-					lacpDeepMap := make(map[string]interface{})
-					if !listItem.Lacp.Rate.IsNull() && !listItem.Lacp.Rate.IsUnknown() {
-						lacpDeepMap["rate"] = listItem.Lacp.Rate.ValueInt64()
-					}
-					listItemMap["lacp"] = lacpDeepMap
-				}
-				if !listItem.LinkPollingInterval.IsNull() && !listItem.LinkPollingInterval.IsUnknown() {
-					listItemMap["link_polling_interval"] = listItem.LinkPollingInterval.ValueInt64()
-				}
-				if !listItem.LinkUpDelay.IsNull() && !listItem.LinkUpDelay.IsUnknown() {
-					listItemMap["link_up_delay"] = listItem.LinkUpDelay.ValueInt64()
-				}
-				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
-					listItemMap["name"] = listItem.Name.ValueString()
-				}
-				bond_devicesList = append(bond_devicesList, listItemMap)
-			}
-			bond_device_listMap["bond_devices"] = bond_devicesList
-		}
-		createReq.Spec["bond_device_list"] = bond_device_listMap
-	}
 	if data.Coordinates != nil {
 		coordinatesMap := make(map[string]interface{})
 		if !data.Coordinates.Latitude.IsNull() && !data.Coordinates.Latitude.IsUnknown() {
@@ -2738,90 +2731,40 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		}
 		createReq.Spec["coordinates"] = coordinatesMap
 	}
-	if data.CustomNetworkConfig != nil {
-		custom_network_configMap := make(map[string]interface{})
-		if data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies != nil {
-			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
-			custom_network_configMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+	if data.CustomDNS != nil {
+		custom_dnsMap := make(map[string]interface{})
+		if !data.CustomDNS.InsideNameserver.IsNull() && !data.CustomDNS.InsideNameserver.IsUnknown() {
+			custom_dnsMap["inside_nameserver"] = data.CustomDNS.InsideNameserver.ValueString()
 		}
-		if data.CustomNetworkConfig.ActiveForwardProxyPolicies != nil {
-			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
-			custom_network_configMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		if !data.CustomDNS.OutsideNameserver.IsNull() && !data.CustomDNS.OutsideNameserver.IsUnknown() {
+			custom_dnsMap["outside_nameserver"] = data.CustomDNS.OutsideNameserver.ValueString()
 		}
-		if data.CustomNetworkConfig.ActiveNetworkPolicies != nil {
-			active_network_policiesNestedMap := make(map[string]interface{})
-			custom_network_configMap["active_network_policies"] = active_network_policiesNestedMap
-		}
-		if data.CustomNetworkConfig.DefaultConfig != nil {
-			custom_network_configMap["default_config"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.DefaultInterfaceConfig != nil {
-			custom_network_configMap["default_interface_config"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.DefaultSLIConfig != nil {
-			custom_network_configMap["default_sli_config"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.ForwardProxyAllowAll != nil {
-			custom_network_configMap["forward_proxy_allow_all"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.GlobalNetworkList != nil {
-			global_network_listNestedMap := make(map[string]interface{})
-			custom_network_configMap["global_network_list"] = global_network_listNestedMap
-		}
-		if data.CustomNetworkConfig.InterfaceList != nil {
-			interface_listNestedMap := make(map[string]interface{})
-			custom_network_configMap["interface_list"] = interface_listNestedMap
-		}
-		if data.CustomNetworkConfig.NoForwardProxy != nil {
-			custom_network_configMap["no_forward_proxy"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.NoGlobalNetwork != nil {
-			custom_network_configMap["no_global_network"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.NoNetworkPolicy != nil {
-			custom_network_configMap["no_network_policy"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.SLIConfig != nil {
-			sli_configNestedMap := make(map[string]interface{})
-			if !data.CustomNetworkConfig.SLIConfig.Nameserver.IsNull() && !data.CustomNetworkConfig.SLIConfig.Nameserver.IsUnknown() {
-				sli_configNestedMap["nameserver"] = data.CustomNetworkConfig.SLIConfig.Nameserver.ValueString()
-			}
-			if !data.CustomNetworkConfig.SLIConfig.VIP.IsNull() && !data.CustomNetworkConfig.SLIConfig.VIP.IsUnknown() {
-				sli_configNestedMap["vip"] = data.CustomNetworkConfig.SLIConfig.VIP.ValueString()
-			}
-			custom_network_configMap["sli_config"] = sli_configNestedMap
-		}
-		if data.CustomNetworkConfig.SloConfig != nil {
-			slo_configNestedMap := make(map[string]interface{})
-			if !data.CustomNetworkConfig.SloConfig.Nameserver.IsNull() && !data.CustomNetworkConfig.SloConfig.Nameserver.IsUnknown() {
-				slo_configNestedMap["nameserver"] = data.CustomNetworkConfig.SloConfig.Nameserver.ValueString()
-			}
-			if !data.CustomNetworkConfig.SloConfig.VIP.IsNull() && !data.CustomNetworkConfig.SloConfig.VIP.IsUnknown() {
-				slo_configNestedMap["vip"] = data.CustomNetworkConfig.SloConfig.VIP.ValueString()
-			}
-			custom_network_configMap["slo_config"] = slo_configNestedMap
-		}
-		if data.CustomNetworkConfig.SmConnectionPublicIP != nil {
-			custom_network_configMap["sm_connection_public_ip"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.SmConnectionPvtIP != nil {
-			custom_network_configMap["sm_connection_pvt_ip"] = map[string]interface{}{}
-		}
-		if !data.CustomNetworkConfig.TunnelDeadTimeout.IsNull() && !data.CustomNetworkConfig.TunnelDeadTimeout.IsUnknown() {
-			custom_network_configMap["tunnel_dead_timeout"] = data.CustomNetworkConfig.TunnelDeadTimeout.ValueInt64()
-		}
-		if !data.CustomNetworkConfig.VIPVrrpMode.IsNull() && !data.CustomNetworkConfig.VIPVrrpMode.IsUnknown() {
-			custom_network_configMap["vip_vrrp_mode"] = data.CustomNetworkConfig.VIPVrrpMode.ValueString()
-		}
-		createReq.Spec["custom_network_config"] = custom_network_configMap
+		createReq.Spec["custom_dns"] = custom_dnsMap
 	}
 	if data.DefaultBlockedServices != nil {
 		default_blocked_servicesMap := make(map[string]interface{})
 		createReq.Spec["default_blocked_services"] = default_blocked_servicesMap
 	}
-	if data.DefaultNetworkConfig != nil {
-		default_network_configMap := make(map[string]interface{})
-		createReq.Spec["default_network_config"] = default_network_configMap
+	if data.DirectConnectDisabled != nil {
+		direct_connect_disabledMap := make(map[string]interface{})
+		createReq.Spec["direct_connect_disabled"] = direct_connect_disabledMap
+	}
+	if data.DirectConnectEnabled != nil {
+		direct_connect_enabledMap := make(map[string]interface{})
+		if data.DirectConnectEnabled.AutoAsn != nil {
+			direct_connect_enabledMap["auto_asn"] = map[string]interface{}{}
+		}
+		if !data.DirectConnectEnabled.CustomAsn.IsNull() && !data.DirectConnectEnabled.CustomAsn.IsUnknown() {
+			direct_connect_enabledMap["custom_asn"] = data.DirectConnectEnabled.CustomAsn.ValueInt64()
+		}
+		if data.DirectConnectEnabled.HostedVifs != nil {
+			hosted_vifsNestedMap := make(map[string]interface{})
+			direct_connect_enabledMap["hosted_vifs"] = hosted_vifsNestedMap
+		}
+		if data.DirectConnectEnabled.StandardVifs != nil {
+			direct_connect_enabledMap["standard_vifs"] = map[string]interface{}{}
+		}
+		createReq.Spec["direct_connect_enabled"] = direct_connect_enabledMap
 	}
 	if data.KubernetesUpgradeDrain != nil {
 		kubernetes_upgrade_drainMap := make(map[string]interface{})
@@ -2857,29 +2800,6 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		logs_streaming_disabledMap := make(map[string]interface{})
 		createReq.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
 	}
-	if !data.MasterNodeConfiguration.IsNull() && !data.MasterNodeConfiguration.IsUnknown() {
-		var master_node_configurationItems []SiteMasterNodeConfigurationModel
-		diags := data.MasterNodeConfiguration.ElementsAs(ctx, &master_node_configurationItems, false)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() && len(master_node_configurationItems) > 0 {
-			var master_node_configurationList []map[string]interface{}
-			for _, item := range master_node_configurationItems {
-				itemMap := make(map[string]interface{})
-				if !item.Name.IsNull() && !item.Name.IsUnknown() {
-					itemMap["name"] = item.Name.ValueString()
-				}
-				if !item.PublicIP.IsNull() && !item.PublicIP.IsUnknown() {
-					itemMap["public_ip"] = item.PublicIP.ValueString()
-				}
-				master_node_configurationList = append(master_node_configurationList, itemMap)
-			}
-			createReq.Spec["master_node_configuration"] = master_node_configurationList
-		}
-	}
-	if data.NoBondDevices != nil {
-		no_bond_devicesMap := make(map[string]interface{})
-		createReq.Spec["no_bond_devices"] = no_bond_devicesMap
-	}
 	if data.OfflineSurvivabilityMode != nil {
 		offline_survivability_modeMap := make(map[string]interface{})
 		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
@@ -2911,6 +2831,29 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		}
 		createReq.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
 	}
+	if data.PrivateConnectivity != nil {
+		private_connectivityMap := make(map[string]interface{})
+		if data.PrivateConnectivity.CloudLink != nil {
+			cloud_linkNestedMap := make(map[string]interface{})
+			if !data.PrivateConnectivity.CloudLink.Name.IsNull() && !data.PrivateConnectivity.CloudLink.Name.IsUnknown() {
+				cloud_linkNestedMap["name"] = data.PrivateConnectivity.CloudLink.Name.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Namespace.IsNull() && !data.PrivateConnectivity.CloudLink.Namespace.IsUnknown() {
+				cloud_linkNestedMap["namespace"] = data.PrivateConnectivity.CloudLink.Namespace.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Tenant.IsNull() && !data.PrivateConnectivity.CloudLink.Tenant.IsUnknown() {
+				cloud_linkNestedMap["tenant"] = data.PrivateConnectivity.CloudLink.Tenant.ValueString()
+			}
+			private_connectivityMap["cloud_link"] = cloud_linkNestedMap
+		}
+		if data.PrivateConnectivity.Inside != nil {
+			private_connectivityMap["inside"] = map[string]interface{}{}
+		}
+		if data.PrivateConnectivity.Outside != nil {
+			private_connectivityMap["outside"] = map[string]interface{}{}
+		}
+		createReq.Spec["private_connectivity"] = private_connectivityMap
+	}
 	if data.Sw != nil {
 		swMap := make(map[string]interface{})
 		if data.Sw.DefaultSwVersion != nil {
@@ -2921,18 +2864,130 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		}
 		createReq.Spec["sw"] = swMap
 	}
-	if !data.WorkerNodes.IsNull() && !data.WorkerNodes.IsUnknown() {
-		var worker_nodesList []string
-		resp.Diagnostics.Append(data.WorkerNodes.ElementsAs(ctx, &worker_nodesList, false)...)
-		if !resp.Diagnostics.HasError() {
-			createReq.Spec["worker_nodes"] = worker_nodesList
+	if data.Tags != nil {
+		tagsMap := make(map[string]interface{})
+		createReq.Spec["tags"] = tagsMap
+	}
+	if data.TGWSecurity != nil {
+		tgw_securityMap := make(map[string]interface{})
+		if data.TGWSecurity.ActiveEastWestServicePolicies != nil {
+			active_east_west_service_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_east_west_service_policies"] = active_east_west_service_policiesNestedMap
 		}
+		if data.TGWSecurity.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.TGWSecurity.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.TGWSecurity.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if data.TGWSecurity.EastWestServicePolicyAllowAll != nil {
+			tgw_securityMap["east_west_service_policy_allow_all"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.ForwardProxyAllowAll != nil {
+			tgw_securityMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.NoEastWestPolicy != nil {
+			tgw_securityMap["no_east_west_policy"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.NoForwardProxy != nil {
+			tgw_securityMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.NoNetworkPolicy != nil {
+			tgw_securityMap["no_network_policy"] = map[string]interface{}{}
+		}
+		createReq.Spec["tgw_security"] = tgw_securityMap
 	}
-	if !data.Address.IsNull() && !data.Address.IsUnknown() {
-		createReq.Spec["address"] = data.Address.ValueString()
+	if data.VnConfig != nil {
+		vn_configMap := make(map[string]interface{})
+		if data.VnConfig.AllowedVIPPort != nil {
+			allowed_vip_portNestedMap := make(map[string]interface{})
+			vn_configMap["allowed_vip_port"] = allowed_vip_portNestedMap
+		}
+		if data.VnConfig.AllowedVIPPortSLI != nil {
+			allowed_vip_port_sliNestedMap := make(map[string]interface{})
+			vn_configMap["allowed_vip_port_sli"] = allowed_vip_port_sliNestedMap
+		}
+		if data.VnConfig.DcClusterGroupInsideVn != nil {
+			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
+			if !data.VnConfig.DcClusterGroupInsideVn.Name.IsNull() && !data.VnConfig.DcClusterGroupInsideVn.Name.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["name"] = data.VnConfig.DcClusterGroupInsideVn.Name.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupInsideVn.Namespace.IsNull() && !data.VnConfig.DcClusterGroupInsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["namespace"] = data.VnConfig.DcClusterGroupInsideVn.Namespace.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupInsideVn.Tenant.IsNull() && !data.VnConfig.DcClusterGroupInsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["tenant"] = data.VnConfig.DcClusterGroupInsideVn.Tenant.ValueString()
+			}
+			vn_configMap["dc_cluster_group_inside_vn"] = dc_cluster_group_inside_vnNestedMap
+		}
+		if data.VnConfig.DcClusterGroupOutsideVn != nil {
+			dc_cluster_group_outside_vnNestedMap := make(map[string]interface{})
+			if !data.VnConfig.DcClusterGroupOutsideVn.Name.IsNull() && !data.VnConfig.DcClusterGroupOutsideVn.Name.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["name"] = data.VnConfig.DcClusterGroupOutsideVn.Name.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupOutsideVn.Namespace.IsNull() && !data.VnConfig.DcClusterGroupOutsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["namespace"] = data.VnConfig.DcClusterGroupOutsideVn.Namespace.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupOutsideVn.Tenant.IsNull() && !data.VnConfig.DcClusterGroupOutsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["tenant"] = data.VnConfig.DcClusterGroupOutsideVn.Tenant.ValueString()
+			}
+			vn_configMap["dc_cluster_group_outside_vn"] = dc_cluster_group_outside_vnNestedMap
+		}
+		if data.VnConfig.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			vn_configMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.VnConfig.InsideStaticRoutes != nil {
+			inside_static_routesNestedMap := make(map[string]interface{})
+			vn_configMap["inside_static_routes"] = inside_static_routesNestedMap
+		}
+		if data.VnConfig.NoDcClusterGroup != nil {
+			vn_configMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.VnConfig.NoGlobalNetwork != nil {
+			vn_configMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.VnConfig.NoInsideStaticRoutes != nil {
+			vn_configMap["no_inside_static_routes"] = map[string]interface{}{}
+		}
+		if data.VnConfig.NoOutsideStaticRoutes != nil {
+			vn_configMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if data.VnConfig.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			vn_configMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.VnConfig.SmConnectionPublicIP != nil {
+			vn_configMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.VnConfig.SmConnectionPvtIP != nil {
+			vn_configMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		createReq.Spec["vn_config"] = vn_configMap
 	}
-	if !data.VolterraCertifiedHw.IsNull() && !data.VolterraCertifiedHw.IsUnknown() {
-		createReq.Spec["volterra_certified_hw"] = data.VolterraCertifiedHw.ValueString()
+	if data.VPCAttachments != nil {
+		vpc_attachmentsMap := make(map[string]interface{})
+		if len(data.VPCAttachments.VPCList) > 0 {
+			var vpc_listList []map[string]interface{}
+			for _, listItem := range data.VPCAttachments.VPCList {
+				listItemMap := make(map[string]interface{})
+				if listItem.Labels != nil {
+					listItemMap["labels"] = map[string]interface{}{}
+				}
+				if !listItem.VPCID.IsNull() && !listItem.VPCID.IsUnknown() {
+					listItemMap["vpc_id"] = listItem.VPCID.ValueString()
+				}
+				vpc_listList = append(vpc_listList, listItemMap)
+			}
+			vpc_attachmentsMap["vpc_list"] = vpc_listList
+		}
+		createReq.Spec["vpc_attachments"] = vpc_attachmentsMap
 	}
 
 	apiResource, err := r.client.CreateSite(ctx, createReq)
@@ -2947,6 +3002,359 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["aws_parameters"].(map[string]interface{}); ok && (isImport || data.AWSParameters != nil) {
+		data.AWSParameters = &SiteAWSParametersModel{
+			AdminPassword: func() *SiteAWSParametersAdminPasswordModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.AdminPassword != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.AdminPassword
+				}
+				// Import case: read from API
+				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
+					return &SiteAWSParametersAdminPasswordModel{}
+				}
+				return nil
+			}(),
+			AWSCred: func() *SiteAWSParametersAWSCredModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.AWSCred != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.AWSCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &SiteAWSParametersAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AzNodes: func() []SiteAWSParametersAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []SiteAWSParametersAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SiteAWSParametersAzNodesModel{
+								AWSAzName: func() types.String {
+									if v, ok := itemMap["aws_az_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								InsideSubnet: func() *SiteAWSParametersAzNodesInsideSubnetModel {
+									if deepMap, ok := itemMap["inside_subnet"].(map[string]interface{}); ok {
+										return &SiteAWSParametersAzNodesInsideSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								OutsideSubnet: func() *SiteAWSParametersAzNodesOutsideSubnetModel {
+									if deepMap, ok := itemMap["outside_subnet"].(map[string]interface{}); ok {
+										return &SiteAWSParametersAzNodesOutsideSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								ReservedInsideSubnet: func() *SiteEmptyModel {
+									if _, ok := itemMap["reserved_inside_subnet"].(map[string]interface{}); ok {
+										return &SiteEmptyModel{}
+									}
+									return nil
+								}(),
+								WorkloadSubnet: func() *SiteAWSParametersAzNodesWorkloadSubnetModel {
+									if deepMap, ok := itemMap["workload_subnet"].(map[string]interface{}); ok {
+										return &SiteAWSParametersAzNodesWorkloadSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			CustomSecurityGroup: func() *SiteAWSParametersCustomSecurityGroupModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.CustomSecurityGroup != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.CustomSecurityGroup
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["custom_security_group"].(map[string]interface{}); ok {
+					return &SiteAWSParametersCustomSecurityGroupModel{
+						InsideSecurityGroupID: func() types.String {
+							if v, ok := nestedBlockData["inside_security_group_id"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						OutsideSecurityGroupID: func() types.String {
+							if v, ok := nestedBlockData["outside_security_group_id"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DisableInternetVIP: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.DisableInternetVIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_internet_vip"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			DiskSize: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
+					return data.AWSParameters.DiskSize
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
+				}
+				// Import case: read from API
+				if v, ok := blockData["disk_size"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			EnableInternetVIP: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.EnableInternetVIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_internet_vip"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			ExistingTGW: func() *SiteAWSParametersExistingTGWModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.ExistingTGW != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.ExistingTGW
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["existing_tgw"].(map[string]interface{}); ok {
+					return &SiteAWSParametersExistingTGWModel{
+						TGWAsn: func() types.Int64 {
+							if v, ok := nestedBlockData["tgw_asn"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TGWID: func() types.String {
+							if v, ok := nestedBlockData["tgw_id"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						VolterraSiteAsn: func() types.Int64 {
+							if v, ok := nestedBlockData["volterra_site_asn"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			F5xcSecurityGroup: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.F5xcSecurityGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["f5xc_security_group"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			InstanceType: func() types.String {
+				if v, ok := blockData["instance_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NewTGW: func() *SiteAWSParametersNewTGWModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.NewTGW != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.NewTGW
+				}
+				// Import case: read from API
+				if _, ok := blockData["new_tgw"].(map[string]interface{}); ok {
+					return &SiteAWSParametersNewTGWModel{}
+				}
+				return nil
+			}(),
+			NewVPC: func() *SiteAWSParametersNewVPCModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.NewVPC != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.NewVPC
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["new_vpc"].(map[string]interface{}); ok {
+					return &SiteAWSParametersNewVPCModel{
+						NameTag: func() types.String {
+							if v, ok := nestedBlockData["name_tag"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						PrimaryIpv4: func() types.String {
+							if v, ok := nestedBlockData["primary_ipv4"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoWorkerNodes: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.NoWorkerNodes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_worker_nodes"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NodesPerAz: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
+					return data.AWSParameters.NodesPerAz
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
+				}
+				// Import case: read from API
+				if v, ok := blockData["nodes_per_az"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ReservedTGWCIDR: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.ReservedTGWCIDR
+				}
+				// Import case: read from API
+				if _, ok := blockData["reserved_tgw_cidr"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SSHKey: func() types.String {
+				if v, ok := blockData["ssh_key"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TGWCIDR: func() *SiteAWSParametersTGWCIDRModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.TGWCIDR != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.TGWCIDR
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tgw_cidr"].(map[string]interface{}); ok {
+					return &SiteAWSParametersTGWCIDRModel{
+						Ipv4: func() types.String {
+							if v, ok := nestedBlockData["ipv4"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			TotalNodes: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
+					return data.AWSParameters.TotalNodes
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
+				}
+				// Import case: read from API
+				if v, ok := blockData["total_nodes"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			VPCID: func() types.String {
+				if v, ok := blockData["vpc_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockAllServices = &SiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
 		data.BlockedServices = &SiteBlockedServicesModel{
 			BlockedSevice: func() []SiteBlockedServicesBlockedSeviceModel {
@@ -2978,60 +3386,6 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 										return &SiteEmptyModel{}
 									}
 									return nil
-								}(),
-							})
-						}
-					}
-					return result
-				}
-				return nil
-			}(),
-		}
-	}
-	if blockData, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && (isImport || data.BondDeviceList != nil) {
-		data.BondDeviceList = &SiteBondDeviceListModel{
-			BondDevices: func() []SiteBondDeviceListBondDevicesModel {
-				if listData, ok := blockData["bond_devices"].([]interface{}); ok && len(listData) > 0 {
-					var result []SiteBondDeviceListBondDevicesModel
-					for _, item := range listData {
-						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, SiteBondDeviceListBondDevicesModel{
-								ActiveBackup: func() *SiteEmptyModel {
-									if _, ok := itemMap["active_backup"].(map[string]interface{}); ok {
-										return &SiteEmptyModel{}
-									}
-									return nil
-								}(),
-								Lacp: func() *SiteBondDeviceListBondDevicesLacpModel {
-									if deepMap, ok := itemMap["lacp"].(map[string]interface{}); ok {
-										return &SiteBondDeviceListBondDevicesLacpModel{
-											Rate: func() types.Int64 {
-												if v, ok := deepMap["rate"].(float64); ok {
-													return types.Int64Value(int64(v))
-												}
-												return types.Int64Null()
-											}(),
-										}
-									}
-									return nil
-								}(),
-								LinkPollingInterval: func() types.Int64 {
-									if v, ok := itemMap["link_polling_interval"].(float64); ok {
-										return types.Int64Value(int64(v))
-									}
-									return types.Int64Null()
-								}(),
-								LinkUpDelay: func() types.Int64 {
-									if v, ok := itemMap["link_up_delay"].(float64); ok {
-										return types.Int64Value(int64(v))
-									}
-									return types.Int64Null()
-								}(),
-								Name: func() types.String {
-									if v, ok := itemMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
 								}(),
 							})
 						}
@@ -3078,237 +3432,16 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["custom_network_config"].(map[string]interface{}); ok && (isImport || data.CustomNetworkConfig != nil) {
-		data.CustomNetworkConfig = &SiteCustomNetworkConfigModel{
-			ActiveEnhancedFirewallPolicies: func() *SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies
+	if blockData, ok := apiResource.Spec["custom_dns"].(map[string]interface{}); ok && (isImport || data.CustomDNS != nil) {
+		data.CustomDNS = &SiteCustomDNSModel{
+			InsideNameserver: func() types.String {
+				if v, ok := blockData["inside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
 				}
-				// Import case: read from API
-				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel{}
-				}
-				return nil
+				return types.StringNull()
 			}(),
-			ActiveForwardProxyPolicies: func() *SiteCustomNetworkConfigActiveForwardProxyPoliciesModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveForwardProxyPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.ActiveForwardProxyPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigActiveForwardProxyPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveNetworkPolicies: func() *SiteCustomNetworkConfigActiveNetworkPoliciesModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveNetworkPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.ActiveNetworkPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigActiveNetworkPoliciesModel{}
-				}
-				return nil
-			}(),
-			DefaultConfig: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.DefaultConfig
-				}
-				// Import case: read from API
-				if _, ok := blockData["default_config"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			DefaultInterfaceConfig: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.DefaultInterfaceConfig
-				}
-				// Import case: read from API
-				if _, ok := blockData["default_interface_config"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			DefaultSLIConfig: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.DefaultSLIConfig
-				}
-				// Import case: read from API
-				if _, ok := blockData["default_sli_config"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			ForwardProxyAllowAll: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.ForwardProxyAllowAll
-				}
-				// Import case: read from API
-				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			GlobalNetworkList: func() *SiteCustomNetworkConfigGlobalNetworkListModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.GlobalNetworkList != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.GlobalNetworkList
-				}
-				// Import case: read from API
-				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigGlobalNetworkListModel{}
-				}
-				return nil
-			}(),
-			InterfaceList: func() *SiteCustomNetworkConfigInterfaceListModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.InterfaceList != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.InterfaceList
-				}
-				// Import case: read from API
-				if _, ok := blockData["interface_list"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigInterfaceListModel{}
-				}
-				return nil
-			}(),
-			NoForwardProxy: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.NoForwardProxy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoGlobalNetwork: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.NoGlobalNetwork
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoNetworkPolicy: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.NoNetworkPolicy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			SLIConfig: func() *SiteCustomNetworkConfigSLIConfigModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLIConfig != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.SLIConfig
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["sli_config"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigSLIConfigModel{
-						Nameserver: func() types.String {
-							if v, ok := nestedBlockData["nameserver"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						VIP: func() types.String {
-							if v, ok := nestedBlockData["vip"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			SloConfig: func() *SiteCustomNetworkConfigSloConfigModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SloConfig != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.SloConfig
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["slo_config"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigSloConfigModel{
-						Nameserver: func() types.String {
-							if v, ok := nestedBlockData["nameserver"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						VIP: func() types.String {
-							if v, ok := nestedBlockData["vip"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			SmConnectionPublicIP: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.SmConnectionPublicIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPvtIP: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.SmConnectionPvtIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			TunnelDeadTimeout: func() types.Int64 {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Preserve existing state (null or user-set value)
-					// This prevents API defaults (like 0) from overwriting user intent
-					return data.CustomNetworkConfig.TunnelDeadTimeout
-				}
-				if !isImport {
-					// Block not in user config - return null, not API default
-					return types.Int64Null()
-				}
-				// Import case: read from API
-				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
-					return types.Int64Value(int64(v))
-				}
-				return types.Int64Null()
-			}(),
-			VIPVrrpMode: func() types.String {
-				if v, ok := blockData["vip_vrrp_mode"].(string); ok && v != "" {
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
@@ -3320,11 +3453,66 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		data.DefaultBlockedServices = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["default_network_config"].(map[string]interface{}); ok && isImport && data.DefaultNetworkConfig == nil {
+	if _, ok := apiResource.Spec["direct_connect_disabled"].(map[string]interface{}); ok && isImport && data.DirectConnectDisabled == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DefaultNetworkConfig = &SiteEmptyModel{}
+		data.DirectConnectDisabled = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["direct_connect_enabled"].(map[string]interface{}); ok && (isImport || data.DirectConnectEnabled != nil) {
+		data.DirectConnectEnabled = &SiteDirectConnectEnabledModel{
+			AutoAsn: func() *SiteEmptyModel {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DirectConnectEnabled.AutoAsn
+				}
+				// Import case: read from API
+				if _, ok := blockData["auto_asn"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			CustomAsn: func() types.Int64 {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
+					return data.DirectConnectEnabled.CustomAsn
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
+				}
+				// Import case: read from API
+				if v, ok := blockData["custom_asn"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HostedVifs: func() *SiteDirectConnectEnabledHostedVifsModel {
+				if !isImport && data.DirectConnectEnabled != nil && data.DirectConnectEnabled.HostedVifs != nil {
+					// Normal Read: preserve existing state value
+					return data.DirectConnectEnabled.HostedVifs
+				}
+				// Import case: read from API
+				if _, ok := blockData["hosted_vifs"].(map[string]interface{}); ok {
+					return &SiteDirectConnectEnabledHostedVifsModel{}
+				}
+				return nil
+			}(),
+			StandardVifs: func() *SiteEmptyModel {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DirectConnectEnabled.StandardVifs
+				}
+				// Import case: read from API
+				if _, ok := blockData["standard_vifs"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
 	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.KubernetesUpgradeDrain = &SiteKubernetesUpgradeDrainModel{}
@@ -3355,45 +3543,6 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.LogsStreamingDisabled = &SiteEmptyModel{}
-	}
-	// Normal Read: preserve existing state value
-	if listData, ok := apiResource.Spec["master_node_configuration"].([]interface{}); ok && len(listData) > 0 {
-		var master_node_configurationList []SiteMasterNodeConfigurationModel
-		var existingMasterNodeConfigurationItems []SiteMasterNodeConfigurationModel
-		if !data.MasterNodeConfiguration.IsNull() && !data.MasterNodeConfiguration.IsUnknown() {
-			data.MasterNodeConfiguration.ElementsAs(ctx, &existingMasterNodeConfigurationItems, false)
-		}
-		for listIdx, item := range listData {
-			_ = listIdx // May be unused if no empty marker blocks in list item
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				master_node_configurationList = append(master_node_configurationList, SiteMasterNodeConfigurationModel{
-					Name: func() types.String {
-						if v, ok := itemMap["name"].(string); ok && v != "" {
-							return types.StringValue(v)
-						}
-						return types.StringNull()
-					}(),
-					PublicIP: func() types.String {
-						if v, ok := itemMap["public_ip"].(string); ok && v != "" {
-							return types.StringValue(v)
-						}
-						return types.StringNull()
-					}(),
-				})
-			}
-		}
-		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: SiteMasterNodeConfigurationModelAttrTypes}, master_node_configurationList)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.MasterNodeConfiguration = listVal
-		}
-	} else {
-		// No data from API - set to null list
-		data.MasterNodeConfiguration = types.ListNull(types.ObjectType{AttrTypes: SiteMasterNodeConfigurationModelAttrTypes})
-	}
-	if _, ok := apiResource.Spec["no_bond_devices"].(map[string]interface{}); ok && isImport && data.NoBondDevices == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.NoBondDevices = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
@@ -3428,6 +3577,11 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		data.PerformanceEnhancementMode = &SitePerformanceEnhancementModeModel{}
 	}
 	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_connectivity"].(map[string]interface{}); ok && isImport && data.PrivateConnectivity == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateConnectivity = &SitePrivateConnectivityModel{}
+	}
+	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
 		data.Sw = &SiteSwModel{
 			DefaultSwVersion: func() *SiteEmptyModel {
@@ -3450,30 +3604,49 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 			}(),
 		}
 	}
-	if v, ok := apiResource.Spec["worker_nodes"].([]interface{}); ok && len(v) > 0 {
-		var worker_nodesList []string
-		for _, item := range v {
-			if s, ok := item.(string); ok {
-				worker_nodesList = append(worker_nodesList, s)
-			}
-		}
-		listVal, diags := types.ListValueFrom(ctx, types.StringType, worker_nodesList)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.WorkerNodes = listVal
-		}
-	} else {
-		data.WorkerNodes = types.ListNull(types.StringType)
+	if _, ok := apiResource.Spec["tags"].(map[string]interface{}); ok && isImport && data.Tags == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Tags = &SiteEmptyModel{}
 	}
-	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
-		data.Address = types.StringValue(v)
-	} else {
-		data.Address = types.StringNull()
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["tgw_security"].(map[string]interface{}); ok && isImport && data.TGWSecurity == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.TGWSecurity = &SiteTGWSecurityModel{}
 	}
-	if v, ok := apiResource.Spec["volterra_certified_hw"].(string); ok && v != "" {
-		data.VolterraCertifiedHw = types.StringValue(v)
-	} else {
-		data.VolterraCertifiedHw = types.StringNull()
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vn_config"].(map[string]interface{}); ok && isImport && data.VnConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.VnConfig = &SiteVnConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["vpc_attachments"].(map[string]interface{}); ok && (isImport || data.VPCAttachments != nil) {
+		data.VPCAttachments = &SiteVPCAttachmentsModel{
+			VPCList: func() []SiteVPCAttachmentsVPCListModel {
+				if listData, ok := blockData["vpc_list"].([]interface{}); ok && len(listData) > 0 {
+					var result []SiteVPCAttachmentsVPCListModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SiteVPCAttachmentsVPCListModel{
+								Labels: func() *SiteEmptyModel {
+									if _, ok := itemMap["labels"].(map[string]interface{}); ok {
+										return &SiteEmptyModel{}
+									}
+									return nil
+								}(),
+								VPCID: func() types.String {
+									if v, ok := itemMap["vpc_id"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
 
 	tflog.Trace(ctx, "created Site resource")
@@ -3555,6 +3728,359 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 		isImport = true
 	}
 	_ = isImport // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["aws_parameters"].(map[string]interface{}); ok && (isImport || data.AWSParameters != nil) {
+		data.AWSParameters = &SiteAWSParametersModel{
+			AdminPassword: func() *SiteAWSParametersAdminPasswordModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.AdminPassword != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.AdminPassword
+				}
+				// Import case: read from API
+				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
+					return &SiteAWSParametersAdminPasswordModel{}
+				}
+				return nil
+			}(),
+			AWSCred: func() *SiteAWSParametersAWSCredModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.AWSCred != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.AWSCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &SiteAWSParametersAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AzNodes: func() []SiteAWSParametersAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []SiteAWSParametersAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SiteAWSParametersAzNodesModel{
+								AWSAzName: func() types.String {
+									if v, ok := itemMap["aws_az_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								InsideSubnet: func() *SiteAWSParametersAzNodesInsideSubnetModel {
+									if deepMap, ok := itemMap["inside_subnet"].(map[string]interface{}); ok {
+										return &SiteAWSParametersAzNodesInsideSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								OutsideSubnet: func() *SiteAWSParametersAzNodesOutsideSubnetModel {
+									if deepMap, ok := itemMap["outside_subnet"].(map[string]interface{}); ok {
+										return &SiteAWSParametersAzNodesOutsideSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								ReservedInsideSubnet: func() *SiteEmptyModel {
+									if _, ok := itemMap["reserved_inside_subnet"].(map[string]interface{}); ok {
+										return &SiteEmptyModel{}
+									}
+									return nil
+								}(),
+								WorkloadSubnet: func() *SiteAWSParametersAzNodesWorkloadSubnetModel {
+									if deepMap, ok := itemMap["workload_subnet"].(map[string]interface{}); ok {
+										return &SiteAWSParametersAzNodesWorkloadSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			CustomSecurityGroup: func() *SiteAWSParametersCustomSecurityGroupModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.CustomSecurityGroup != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.CustomSecurityGroup
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["custom_security_group"].(map[string]interface{}); ok {
+					return &SiteAWSParametersCustomSecurityGroupModel{
+						InsideSecurityGroupID: func() types.String {
+							if v, ok := nestedBlockData["inside_security_group_id"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						OutsideSecurityGroupID: func() types.String {
+							if v, ok := nestedBlockData["outside_security_group_id"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DisableInternetVIP: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.DisableInternetVIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_internet_vip"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			DiskSize: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
+					return data.AWSParameters.DiskSize
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
+				}
+				// Import case: read from API
+				if v, ok := blockData["disk_size"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			EnableInternetVIP: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.EnableInternetVIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_internet_vip"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			ExistingTGW: func() *SiteAWSParametersExistingTGWModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.ExistingTGW != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.ExistingTGW
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["existing_tgw"].(map[string]interface{}); ok {
+					return &SiteAWSParametersExistingTGWModel{
+						TGWAsn: func() types.Int64 {
+							if v, ok := nestedBlockData["tgw_asn"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TGWID: func() types.String {
+							if v, ok := nestedBlockData["tgw_id"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						VolterraSiteAsn: func() types.Int64 {
+							if v, ok := nestedBlockData["volterra_site_asn"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			F5xcSecurityGroup: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.F5xcSecurityGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["f5xc_security_group"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			InstanceType: func() types.String {
+				if v, ok := blockData["instance_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NewTGW: func() *SiteAWSParametersNewTGWModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.NewTGW != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.NewTGW
+				}
+				// Import case: read from API
+				if _, ok := blockData["new_tgw"].(map[string]interface{}); ok {
+					return &SiteAWSParametersNewTGWModel{}
+				}
+				return nil
+			}(),
+			NewVPC: func() *SiteAWSParametersNewVPCModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.NewVPC != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.NewVPC
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["new_vpc"].(map[string]interface{}); ok {
+					return &SiteAWSParametersNewVPCModel{
+						NameTag: func() types.String {
+							if v, ok := nestedBlockData["name_tag"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						PrimaryIpv4: func() types.String {
+							if v, ok := nestedBlockData["primary_ipv4"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoWorkerNodes: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.NoWorkerNodes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_worker_nodes"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NodesPerAz: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
+					return data.AWSParameters.NodesPerAz
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
+				}
+				// Import case: read from API
+				if v, ok := blockData["nodes_per_az"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ReservedTGWCIDR: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.ReservedTGWCIDR
+				}
+				// Import case: read from API
+				if _, ok := blockData["reserved_tgw_cidr"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SSHKey: func() types.String {
+				if v, ok := blockData["ssh_key"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TGWCIDR: func() *SiteAWSParametersTGWCIDRModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.TGWCIDR != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.TGWCIDR
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tgw_cidr"].(map[string]interface{}); ok {
+					return &SiteAWSParametersTGWCIDRModel{
+						Ipv4: func() types.String {
+							if v, ok := nestedBlockData["ipv4"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			TotalNodes: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
+					return data.AWSParameters.TotalNodes
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
+				}
+				// Import case: read from API
+				if v, ok := blockData["total_nodes"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			VPCID: func() types.String {
+				if v, ok := blockData["vpc_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockAllServices = &SiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
 		data.BlockedServices = &SiteBlockedServicesModel{
 			BlockedSevice: func() []SiteBlockedServicesBlockedSeviceModel {
@@ -3586,60 +4112,6 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 										return &SiteEmptyModel{}
 									}
 									return nil
-								}(),
-							})
-						}
-					}
-					return result
-				}
-				return nil
-			}(),
-		}
-	}
-	if blockData, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && (isImport || data.BondDeviceList != nil) {
-		data.BondDeviceList = &SiteBondDeviceListModel{
-			BondDevices: func() []SiteBondDeviceListBondDevicesModel {
-				if listData, ok := blockData["bond_devices"].([]interface{}); ok && len(listData) > 0 {
-					var result []SiteBondDeviceListBondDevicesModel
-					for _, item := range listData {
-						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, SiteBondDeviceListBondDevicesModel{
-								ActiveBackup: func() *SiteEmptyModel {
-									if _, ok := itemMap["active_backup"].(map[string]interface{}); ok {
-										return &SiteEmptyModel{}
-									}
-									return nil
-								}(),
-								Lacp: func() *SiteBondDeviceListBondDevicesLacpModel {
-									if deepMap, ok := itemMap["lacp"].(map[string]interface{}); ok {
-										return &SiteBondDeviceListBondDevicesLacpModel{
-											Rate: func() types.Int64 {
-												if v, ok := deepMap["rate"].(float64); ok {
-													return types.Int64Value(int64(v))
-												}
-												return types.Int64Null()
-											}(),
-										}
-									}
-									return nil
-								}(),
-								LinkPollingInterval: func() types.Int64 {
-									if v, ok := itemMap["link_polling_interval"].(float64); ok {
-										return types.Int64Value(int64(v))
-									}
-									return types.Int64Null()
-								}(),
-								LinkUpDelay: func() types.Int64 {
-									if v, ok := itemMap["link_up_delay"].(float64); ok {
-										return types.Int64Value(int64(v))
-									}
-									return types.Int64Null()
-								}(),
-								Name: func() types.String {
-									if v, ok := itemMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
 								}(),
 							})
 						}
@@ -3686,237 +4158,16 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["custom_network_config"].(map[string]interface{}); ok && (isImport || data.CustomNetworkConfig != nil) {
-		data.CustomNetworkConfig = &SiteCustomNetworkConfigModel{
-			ActiveEnhancedFirewallPolicies: func() *SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies
+	if blockData, ok := apiResource.Spec["custom_dns"].(map[string]interface{}); ok && (isImport || data.CustomDNS != nil) {
+		data.CustomDNS = &SiteCustomDNSModel{
+			InsideNameserver: func() types.String {
+				if v, ok := blockData["inside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
 				}
-				// Import case: read from API
-				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel{}
-				}
-				return nil
+				return types.StringNull()
 			}(),
-			ActiveForwardProxyPolicies: func() *SiteCustomNetworkConfigActiveForwardProxyPoliciesModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveForwardProxyPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.ActiveForwardProxyPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigActiveForwardProxyPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveNetworkPolicies: func() *SiteCustomNetworkConfigActiveNetworkPoliciesModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveNetworkPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.ActiveNetworkPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigActiveNetworkPoliciesModel{}
-				}
-				return nil
-			}(),
-			DefaultConfig: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.DefaultConfig
-				}
-				// Import case: read from API
-				if _, ok := blockData["default_config"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			DefaultInterfaceConfig: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.DefaultInterfaceConfig
-				}
-				// Import case: read from API
-				if _, ok := blockData["default_interface_config"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			DefaultSLIConfig: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.DefaultSLIConfig
-				}
-				// Import case: read from API
-				if _, ok := blockData["default_sli_config"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			ForwardProxyAllowAll: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.ForwardProxyAllowAll
-				}
-				// Import case: read from API
-				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			GlobalNetworkList: func() *SiteCustomNetworkConfigGlobalNetworkListModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.GlobalNetworkList != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.GlobalNetworkList
-				}
-				// Import case: read from API
-				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigGlobalNetworkListModel{}
-				}
-				return nil
-			}(),
-			InterfaceList: func() *SiteCustomNetworkConfigInterfaceListModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.InterfaceList != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.InterfaceList
-				}
-				// Import case: read from API
-				if _, ok := blockData["interface_list"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigInterfaceListModel{}
-				}
-				return nil
-			}(),
-			NoForwardProxy: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.NoForwardProxy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoGlobalNetwork: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.NoGlobalNetwork
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoNetworkPolicy: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.NoNetworkPolicy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			SLIConfig: func() *SiteCustomNetworkConfigSLIConfigModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLIConfig != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.SLIConfig
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["sli_config"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigSLIConfigModel{
-						Nameserver: func() types.String {
-							if v, ok := nestedBlockData["nameserver"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						VIP: func() types.String {
-							if v, ok := nestedBlockData["vip"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			SloConfig: func() *SiteCustomNetworkConfigSloConfigModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SloConfig != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.SloConfig
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["slo_config"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigSloConfigModel{
-						Nameserver: func() types.String {
-							if v, ok := nestedBlockData["nameserver"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						VIP: func() types.String {
-							if v, ok := nestedBlockData["vip"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			SmConnectionPublicIP: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.SmConnectionPublicIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPvtIP: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.SmConnectionPvtIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			TunnelDeadTimeout: func() types.Int64 {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Preserve existing state (null or user-set value)
-					// This prevents API defaults (like 0) from overwriting user intent
-					return data.CustomNetworkConfig.TunnelDeadTimeout
-				}
-				if !isImport {
-					// Block not in user config - return null, not API default
-					return types.Int64Null()
-				}
-				// Import case: read from API
-				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
-					return types.Int64Value(int64(v))
-				}
-				return types.Int64Null()
-			}(),
-			VIPVrrpMode: func() types.String {
-				if v, ok := blockData["vip_vrrp_mode"].(string); ok && v != "" {
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
@@ -3928,11 +4179,66 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 		data.DefaultBlockedServices = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["default_network_config"].(map[string]interface{}); ok && isImport && data.DefaultNetworkConfig == nil {
+	if _, ok := apiResource.Spec["direct_connect_disabled"].(map[string]interface{}); ok && isImport && data.DirectConnectDisabled == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DefaultNetworkConfig = &SiteEmptyModel{}
+		data.DirectConnectDisabled = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["direct_connect_enabled"].(map[string]interface{}); ok && (isImport || data.DirectConnectEnabled != nil) {
+		data.DirectConnectEnabled = &SiteDirectConnectEnabledModel{
+			AutoAsn: func() *SiteEmptyModel {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DirectConnectEnabled.AutoAsn
+				}
+				// Import case: read from API
+				if _, ok := blockData["auto_asn"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			CustomAsn: func() types.Int64 {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
+					return data.DirectConnectEnabled.CustomAsn
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
+				}
+				// Import case: read from API
+				if v, ok := blockData["custom_asn"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HostedVifs: func() *SiteDirectConnectEnabledHostedVifsModel {
+				if !isImport && data.DirectConnectEnabled != nil && data.DirectConnectEnabled.HostedVifs != nil {
+					// Normal Read: preserve existing state value
+					return data.DirectConnectEnabled.HostedVifs
+				}
+				// Import case: read from API
+				if _, ok := blockData["hosted_vifs"].(map[string]interface{}); ok {
+					return &SiteDirectConnectEnabledHostedVifsModel{}
+				}
+				return nil
+			}(),
+			StandardVifs: func() *SiteEmptyModel {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DirectConnectEnabled.StandardVifs
+				}
+				// Import case: read from API
+				if _, ok := blockData["standard_vifs"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
 	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.KubernetesUpgradeDrain = &SiteKubernetesUpgradeDrainModel{}
@@ -3963,45 +4269,6 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.LogsStreamingDisabled = &SiteEmptyModel{}
-	}
-	// Normal Read: preserve existing state value
-	if listData, ok := apiResource.Spec["master_node_configuration"].([]interface{}); ok && len(listData) > 0 {
-		var master_node_configurationList []SiteMasterNodeConfigurationModel
-		var existingMasterNodeConfigurationItems []SiteMasterNodeConfigurationModel
-		if !data.MasterNodeConfiguration.IsNull() && !data.MasterNodeConfiguration.IsUnknown() {
-			data.MasterNodeConfiguration.ElementsAs(ctx, &existingMasterNodeConfigurationItems, false)
-		}
-		for listIdx, item := range listData {
-			_ = listIdx // May be unused if no empty marker blocks in list item
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				master_node_configurationList = append(master_node_configurationList, SiteMasterNodeConfigurationModel{
-					Name: func() types.String {
-						if v, ok := itemMap["name"].(string); ok && v != "" {
-							return types.StringValue(v)
-						}
-						return types.StringNull()
-					}(),
-					PublicIP: func() types.String {
-						if v, ok := itemMap["public_ip"].(string); ok && v != "" {
-							return types.StringValue(v)
-						}
-						return types.StringNull()
-					}(),
-				})
-			}
-		}
-		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: SiteMasterNodeConfigurationModelAttrTypes}, master_node_configurationList)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.MasterNodeConfiguration = listVal
-		}
-	} else {
-		// No data from API - set to null list
-		data.MasterNodeConfiguration = types.ListNull(types.ObjectType{AttrTypes: SiteMasterNodeConfigurationModelAttrTypes})
-	}
-	if _, ok := apiResource.Spec["no_bond_devices"].(map[string]interface{}); ok && isImport && data.NoBondDevices == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.NoBondDevices = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
@@ -4036,6 +4303,11 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 		data.PerformanceEnhancementMode = &SitePerformanceEnhancementModeModel{}
 	}
 	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_connectivity"].(map[string]interface{}); ok && isImport && data.PrivateConnectivity == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateConnectivity = &SitePrivateConnectivityModel{}
+	}
+	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
 		data.Sw = &SiteSwModel{
 			DefaultSwVersion: func() *SiteEmptyModel {
@@ -4058,30 +4330,49 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 			}(),
 		}
 	}
-	if v, ok := apiResource.Spec["worker_nodes"].([]interface{}); ok && len(v) > 0 {
-		var worker_nodesList []string
-		for _, item := range v {
-			if s, ok := item.(string); ok {
-				worker_nodesList = append(worker_nodesList, s)
-			}
-		}
-		listVal, diags := types.ListValueFrom(ctx, types.StringType, worker_nodesList)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.WorkerNodes = listVal
-		}
-	} else {
-		data.WorkerNodes = types.ListNull(types.StringType)
+	if _, ok := apiResource.Spec["tags"].(map[string]interface{}); ok && isImport && data.Tags == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Tags = &SiteEmptyModel{}
 	}
-	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
-		data.Address = types.StringValue(v)
-	} else {
-		data.Address = types.StringNull()
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["tgw_security"].(map[string]interface{}); ok && isImport && data.TGWSecurity == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.TGWSecurity = &SiteTGWSecurityModel{}
 	}
-	if v, ok := apiResource.Spec["volterra_certified_hw"].(string); ok && v != "" {
-		data.VolterraCertifiedHw = types.StringValue(v)
-	} else {
-		data.VolterraCertifiedHw = types.StringNull()
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vn_config"].(map[string]interface{}); ok && isImport && data.VnConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.VnConfig = &SiteVnConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["vpc_attachments"].(map[string]interface{}); ok && (isImport || data.VPCAttachments != nil) {
+		data.VPCAttachments = &SiteVPCAttachmentsModel{
+			VPCList: func() []SiteVPCAttachmentsVPCListModel {
+				if listData, ok := blockData["vpc_list"].([]interface{}); ok && len(listData) > 0 {
+					var result []SiteVPCAttachmentsVPCListModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SiteVPCAttachmentsVPCListModel{
+								Labels: func() *SiteEmptyModel {
+									if _, ok := itemMap["labels"].(map[string]interface{}); ok {
+										return &SiteEmptyModel{}
+									}
+									return nil
+								}(),
+								VPCID: func() types.String {
+									if v, ok := itemMap["vpc_id"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)
@@ -4134,6 +4425,146 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 	}
 
 	// Marshal spec fields from Terraform state to API struct
+	if data.AWSParameters != nil {
+		aws_parametersMap := make(map[string]interface{})
+		if data.AWSParameters.AdminPassword != nil {
+			admin_passwordNestedMap := make(map[string]interface{})
+			aws_parametersMap["admin_password"] = admin_passwordNestedMap
+		}
+		if data.AWSParameters.AWSCred != nil {
+			aws_credNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.AWSCred.Name.IsNull() && !data.AWSParameters.AWSCred.Name.IsUnknown() {
+				aws_credNestedMap["name"] = data.AWSParameters.AWSCred.Name.ValueString()
+			}
+			if !data.AWSParameters.AWSCred.Namespace.IsNull() && !data.AWSParameters.AWSCred.Namespace.IsUnknown() {
+				aws_credNestedMap["namespace"] = data.AWSParameters.AWSCred.Namespace.ValueString()
+			}
+			if !data.AWSParameters.AWSCred.Tenant.IsNull() && !data.AWSParameters.AWSCred.Tenant.IsUnknown() {
+				aws_credNestedMap["tenant"] = data.AWSParameters.AWSCred.Tenant.ValueString()
+			}
+			aws_parametersMap["aws_cred"] = aws_credNestedMap
+		}
+		if !data.AWSParameters.AWSRegion.IsNull() && !data.AWSParameters.AWSRegion.IsUnknown() {
+			aws_parametersMap["aws_region"] = data.AWSParameters.AWSRegion.ValueString()
+		}
+		if len(data.AWSParameters.AzNodes) > 0 {
+			var az_nodesList []map[string]interface{}
+			for _, listItem := range data.AWSParameters.AzNodes {
+				listItemMap := make(map[string]interface{})
+				if !listItem.AWSAzName.IsNull() && !listItem.AWSAzName.IsUnknown() {
+					listItemMap["aws_az_name"] = listItem.AWSAzName.ValueString()
+				}
+				if listItem.InsideSubnet != nil {
+					inside_subnetDeepMap := make(map[string]interface{})
+					if !listItem.InsideSubnet.ExistingSubnetID.IsNull() && !listItem.InsideSubnet.ExistingSubnetID.IsUnknown() {
+						inside_subnetDeepMap["existing_subnet_id"] = listItem.InsideSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["inside_subnet"] = inside_subnetDeepMap
+				}
+				if listItem.OutsideSubnet != nil {
+					outside_subnetDeepMap := make(map[string]interface{})
+					if !listItem.OutsideSubnet.ExistingSubnetID.IsNull() && !listItem.OutsideSubnet.ExistingSubnetID.IsUnknown() {
+						outside_subnetDeepMap["existing_subnet_id"] = listItem.OutsideSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["outside_subnet"] = outside_subnetDeepMap
+				}
+				if listItem.ReservedInsideSubnet != nil {
+					listItemMap["reserved_inside_subnet"] = map[string]interface{}{}
+				}
+				if listItem.WorkloadSubnet != nil {
+					workload_subnetDeepMap := make(map[string]interface{})
+					if !listItem.WorkloadSubnet.ExistingSubnetID.IsNull() && !listItem.WorkloadSubnet.ExistingSubnetID.IsUnknown() {
+						workload_subnetDeepMap["existing_subnet_id"] = listItem.WorkloadSubnet.ExistingSubnetID.ValueString()
+					}
+					listItemMap["workload_subnet"] = workload_subnetDeepMap
+				}
+				az_nodesList = append(az_nodesList, listItemMap)
+			}
+			aws_parametersMap["az_nodes"] = az_nodesList
+		}
+		if data.AWSParameters.CustomSecurityGroup != nil {
+			custom_security_groupNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.CustomSecurityGroup.InsideSecurityGroupID.IsNull() && !data.AWSParameters.CustomSecurityGroup.InsideSecurityGroupID.IsUnknown() {
+				custom_security_groupNestedMap["inside_security_group_id"] = data.AWSParameters.CustomSecurityGroup.InsideSecurityGroupID.ValueString()
+			}
+			if !data.AWSParameters.CustomSecurityGroup.OutsideSecurityGroupID.IsNull() && !data.AWSParameters.CustomSecurityGroup.OutsideSecurityGroupID.IsUnknown() {
+				custom_security_groupNestedMap["outside_security_group_id"] = data.AWSParameters.CustomSecurityGroup.OutsideSecurityGroupID.ValueString()
+			}
+			aws_parametersMap["custom_security_group"] = custom_security_groupNestedMap
+		}
+		if data.AWSParameters.DisableInternetVIP != nil {
+			aws_parametersMap["disable_internet_vip"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.DiskSize.IsNull() && !data.AWSParameters.DiskSize.IsUnknown() {
+			aws_parametersMap["disk_size"] = data.AWSParameters.DiskSize.ValueInt64()
+		}
+		if data.AWSParameters.EnableInternetVIP != nil {
+			aws_parametersMap["enable_internet_vip"] = map[string]interface{}{}
+		}
+		if data.AWSParameters.ExistingTGW != nil {
+			existing_tgwNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.ExistingTGW.TGWAsn.IsNull() && !data.AWSParameters.ExistingTGW.TGWAsn.IsUnknown() {
+				existing_tgwNestedMap["tgw_asn"] = data.AWSParameters.ExistingTGW.TGWAsn.ValueInt64()
+			}
+			if !data.AWSParameters.ExistingTGW.TGWID.IsNull() && !data.AWSParameters.ExistingTGW.TGWID.IsUnknown() {
+				existing_tgwNestedMap["tgw_id"] = data.AWSParameters.ExistingTGW.TGWID.ValueString()
+			}
+			if !data.AWSParameters.ExistingTGW.VolterraSiteAsn.IsNull() && !data.AWSParameters.ExistingTGW.VolterraSiteAsn.IsUnknown() {
+				existing_tgwNestedMap["volterra_site_asn"] = data.AWSParameters.ExistingTGW.VolterraSiteAsn.ValueInt64()
+			}
+			aws_parametersMap["existing_tgw"] = existing_tgwNestedMap
+		}
+		if data.AWSParameters.F5xcSecurityGroup != nil {
+			aws_parametersMap["f5xc_security_group"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.InstanceType.IsNull() && !data.AWSParameters.InstanceType.IsUnknown() {
+			aws_parametersMap["instance_type"] = data.AWSParameters.InstanceType.ValueString()
+		}
+		if data.AWSParameters.NewTGW != nil {
+			new_tgwNestedMap := make(map[string]interface{})
+			aws_parametersMap["new_tgw"] = new_tgwNestedMap
+		}
+		if data.AWSParameters.NewVPC != nil {
+			new_vpcNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.NewVPC.NameTag.IsNull() && !data.AWSParameters.NewVPC.NameTag.IsUnknown() {
+				new_vpcNestedMap["name_tag"] = data.AWSParameters.NewVPC.NameTag.ValueString()
+			}
+			if !data.AWSParameters.NewVPC.PrimaryIpv4.IsNull() && !data.AWSParameters.NewVPC.PrimaryIpv4.IsUnknown() {
+				new_vpcNestedMap["primary_ipv4"] = data.AWSParameters.NewVPC.PrimaryIpv4.ValueString()
+			}
+			aws_parametersMap["new_vpc"] = new_vpcNestedMap
+		}
+		if data.AWSParameters.NoWorkerNodes != nil {
+			aws_parametersMap["no_worker_nodes"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.NodesPerAz.IsNull() && !data.AWSParameters.NodesPerAz.IsUnknown() {
+			aws_parametersMap["nodes_per_az"] = data.AWSParameters.NodesPerAz.ValueInt64()
+		}
+		if data.AWSParameters.ReservedTGWCIDR != nil {
+			aws_parametersMap["reserved_tgw_cidr"] = map[string]interface{}{}
+		}
+		if !data.AWSParameters.SSHKey.IsNull() && !data.AWSParameters.SSHKey.IsUnknown() {
+			aws_parametersMap["ssh_key"] = data.AWSParameters.SSHKey.ValueString()
+		}
+		if data.AWSParameters.TGWCIDR != nil {
+			tgw_cidrNestedMap := make(map[string]interface{})
+			if !data.AWSParameters.TGWCIDR.Ipv4.IsNull() && !data.AWSParameters.TGWCIDR.Ipv4.IsUnknown() {
+				tgw_cidrNestedMap["ipv4"] = data.AWSParameters.TGWCIDR.Ipv4.ValueString()
+			}
+			aws_parametersMap["tgw_cidr"] = tgw_cidrNestedMap
+		}
+		if !data.AWSParameters.TotalNodes.IsNull() && !data.AWSParameters.TotalNodes.IsUnknown() {
+			aws_parametersMap["total_nodes"] = data.AWSParameters.TotalNodes.ValueInt64()
+		}
+		if !data.AWSParameters.VPCID.IsNull() && !data.AWSParameters.VPCID.IsUnknown() {
+			aws_parametersMap["vpc_id"] = data.AWSParameters.VPCID.ValueString()
+		}
+		apiResource.Spec["aws_parameters"] = aws_parametersMap
+	}
+	if data.BlockAllServices != nil {
+		block_all_servicesMap := make(map[string]interface{})
+		apiResource.Spec["block_all_services"] = block_all_servicesMap
+	}
 	if data.BlockedServices != nil {
 		blocked_servicesMap := make(map[string]interface{})
 		if len(data.BlockedServices.BlockedSevice) > 0 {
@@ -4158,37 +4589,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		}
 		apiResource.Spec["blocked_services"] = blocked_servicesMap
 	}
-	if data.BondDeviceList != nil {
-		bond_device_listMap := make(map[string]interface{})
-		if len(data.BondDeviceList.BondDevices) > 0 {
-			var bond_devicesList []map[string]interface{}
-			for _, listItem := range data.BondDeviceList.BondDevices {
-				listItemMap := make(map[string]interface{})
-				if listItem.ActiveBackup != nil {
-					listItemMap["active_backup"] = map[string]interface{}{}
-				}
-				if listItem.Lacp != nil {
-					lacpDeepMap := make(map[string]interface{})
-					if !listItem.Lacp.Rate.IsNull() && !listItem.Lacp.Rate.IsUnknown() {
-						lacpDeepMap["rate"] = listItem.Lacp.Rate.ValueInt64()
-					}
-					listItemMap["lacp"] = lacpDeepMap
-				}
-				if !listItem.LinkPollingInterval.IsNull() && !listItem.LinkPollingInterval.IsUnknown() {
-					listItemMap["link_polling_interval"] = listItem.LinkPollingInterval.ValueInt64()
-				}
-				if !listItem.LinkUpDelay.IsNull() && !listItem.LinkUpDelay.IsUnknown() {
-					listItemMap["link_up_delay"] = listItem.LinkUpDelay.ValueInt64()
-				}
-				if !listItem.Name.IsNull() && !listItem.Name.IsUnknown() {
-					listItemMap["name"] = listItem.Name.ValueString()
-				}
-				bond_devicesList = append(bond_devicesList, listItemMap)
-			}
-			bond_device_listMap["bond_devices"] = bond_devicesList
-		}
-		apiResource.Spec["bond_device_list"] = bond_device_listMap
-	}
 	if data.Coordinates != nil {
 		coordinatesMap := make(map[string]interface{})
 		if !data.Coordinates.Latitude.IsNull() && !data.Coordinates.Latitude.IsUnknown() {
@@ -4199,90 +4599,40 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		}
 		apiResource.Spec["coordinates"] = coordinatesMap
 	}
-	if data.CustomNetworkConfig != nil {
-		custom_network_configMap := make(map[string]interface{})
-		if data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies != nil {
-			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
-			custom_network_configMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+	if data.CustomDNS != nil {
+		custom_dnsMap := make(map[string]interface{})
+		if !data.CustomDNS.InsideNameserver.IsNull() && !data.CustomDNS.InsideNameserver.IsUnknown() {
+			custom_dnsMap["inside_nameserver"] = data.CustomDNS.InsideNameserver.ValueString()
 		}
-		if data.CustomNetworkConfig.ActiveForwardProxyPolicies != nil {
-			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
-			custom_network_configMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		if !data.CustomDNS.OutsideNameserver.IsNull() && !data.CustomDNS.OutsideNameserver.IsUnknown() {
+			custom_dnsMap["outside_nameserver"] = data.CustomDNS.OutsideNameserver.ValueString()
 		}
-		if data.CustomNetworkConfig.ActiveNetworkPolicies != nil {
-			active_network_policiesNestedMap := make(map[string]interface{})
-			custom_network_configMap["active_network_policies"] = active_network_policiesNestedMap
-		}
-		if data.CustomNetworkConfig.DefaultConfig != nil {
-			custom_network_configMap["default_config"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.DefaultInterfaceConfig != nil {
-			custom_network_configMap["default_interface_config"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.DefaultSLIConfig != nil {
-			custom_network_configMap["default_sli_config"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.ForwardProxyAllowAll != nil {
-			custom_network_configMap["forward_proxy_allow_all"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.GlobalNetworkList != nil {
-			global_network_listNestedMap := make(map[string]interface{})
-			custom_network_configMap["global_network_list"] = global_network_listNestedMap
-		}
-		if data.CustomNetworkConfig.InterfaceList != nil {
-			interface_listNestedMap := make(map[string]interface{})
-			custom_network_configMap["interface_list"] = interface_listNestedMap
-		}
-		if data.CustomNetworkConfig.NoForwardProxy != nil {
-			custom_network_configMap["no_forward_proxy"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.NoGlobalNetwork != nil {
-			custom_network_configMap["no_global_network"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.NoNetworkPolicy != nil {
-			custom_network_configMap["no_network_policy"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.SLIConfig != nil {
-			sli_configNestedMap := make(map[string]interface{})
-			if !data.CustomNetworkConfig.SLIConfig.Nameserver.IsNull() && !data.CustomNetworkConfig.SLIConfig.Nameserver.IsUnknown() {
-				sli_configNestedMap["nameserver"] = data.CustomNetworkConfig.SLIConfig.Nameserver.ValueString()
-			}
-			if !data.CustomNetworkConfig.SLIConfig.VIP.IsNull() && !data.CustomNetworkConfig.SLIConfig.VIP.IsUnknown() {
-				sli_configNestedMap["vip"] = data.CustomNetworkConfig.SLIConfig.VIP.ValueString()
-			}
-			custom_network_configMap["sli_config"] = sli_configNestedMap
-		}
-		if data.CustomNetworkConfig.SloConfig != nil {
-			slo_configNestedMap := make(map[string]interface{})
-			if !data.CustomNetworkConfig.SloConfig.Nameserver.IsNull() && !data.CustomNetworkConfig.SloConfig.Nameserver.IsUnknown() {
-				slo_configNestedMap["nameserver"] = data.CustomNetworkConfig.SloConfig.Nameserver.ValueString()
-			}
-			if !data.CustomNetworkConfig.SloConfig.VIP.IsNull() && !data.CustomNetworkConfig.SloConfig.VIP.IsUnknown() {
-				slo_configNestedMap["vip"] = data.CustomNetworkConfig.SloConfig.VIP.ValueString()
-			}
-			custom_network_configMap["slo_config"] = slo_configNestedMap
-		}
-		if data.CustomNetworkConfig.SmConnectionPublicIP != nil {
-			custom_network_configMap["sm_connection_public_ip"] = map[string]interface{}{}
-		}
-		if data.CustomNetworkConfig.SmConnectionPvtIP != nil {
-			custom_network_configMap["sm_connection_pvt_ip"] = map[string]interface{}{}
-		}
-		if !data.CustomNetworkConfig.TunnelDeadTimeout.IsNull() && !data.CustomNetworkConfig.TunnelDeadTimeout.IsUnknown() {
-			custom_network_configMap["tunnel_dead_timeout"] = data.CustomNetworkConfig.TunnelDeadTimeout.ValueInt64()
-		}
-		if !data.CustomNetworkConfig.VIPVrrpMode.IsNull() && !data.CustomNetworkConfig.VIPVrrpMode.IsUnknown() {
-			custom_network_configMap["vip_vrrp_mode"] = data.CustomNetworkConfig.VIPVrrpMode.ValueString()
-		}
-		apiResource.Spec["custom_network_config"] = custom_network_configMap
+		apiResource.Spec["custom_dns"] = custom_dnsMap
 	}
 	if data.DefaultBlockedServices != nil {
 		default_blocked_servicesMap := make(map[string]interface{})
 		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
 	}
-	if data.DefaultNetworkConfig != nil {
-		default_network_configMap := make(map[string]interface{})
-		apiResource.Spec["default_network_config"] = default_network_configMap
+	if data.DirectConnectDisabled != nil {
+		direct_connect_disabledMap := make(map[string]interface{})
+		apiResource.Spec["direct_connect_disabled"] = direct_connect_disabledMap
+	}
+	if data.DirectConnectEnabled != nil {
+		direct_connect_enabledMap := make(map[string]interface{})
+		if data.DirectConnectEnabled.AutoAsn != nil {
+			direct_connect_enabledMap["auto_asn"] = map[string]interface{}{}
+		}
+		if !data.DirectConnectEnabled.CustomAsn.IsNull() && !data.DirectConnectEnabled.CustomAsn.IsUnknown() {
+			direct_connect_enabledMap["custom_asn"] = data.DirectConnectEnabled.CustomAsn.ValueInt64()
+		}
+		if data.DirectConnectEnabled.HostedVifs != nil {
+			hosted_vifsNestedMap := make(map[string]interface{})
+			direct_connect_enabledMap["hosted_vifs"] = hosted_vifsNestedMap
+		}
+		if data.DirectConnectEnabled.StandardVifs != nil {
+			direct_connect_enabledMap["standard_vifs"] = map[string]interface{}{}
+		}
+		apiResource.Spec["direct_connect_enabled"] = direct_connect_enabledMap
 	}
 	if data.KubernetesUpgradeDrain != nil {
 		kubernetes_upgrade_drainMap := make(map[string]interface{})
@@ -4318,29 +4668,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		logs_streaming_disabledMap := make(map[string]interface{})
 		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
 	}
-	if !data.MasterNodeConfiguration.IsNull() && !data.MasterNodeConfiguration.IsUnknown() {
-		var master_node_configurationItems []SiteMasterNodeConfigurationModel
-		diags := data.MasterNodeConfiguration.ElementsAs(ctx, &master_node_configurationItems, false)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() && len(master_node_configurationItems) > 0 {
-			var master_node_configurationList []map[string]interface{}
-			for _, item := range master_node_configurationItems {
-				itemMap := make(map[string]interface{})
-				if !item.Name.IsNull() && !item.Name.IsUnknown() {
-					itemMap["name"] = item.Name.ValueString()
-				}
-				if !item.PublicIP.IsNull() && !item.PublicIP.IsUnknown() {
-					itemMap["public_ip"] = item.PublicIP.ValueString()
-				}
-				master_node_configurationList = append(master_node_configurationList, itemMap)
-			}
-			apiResource.Spec["master_node_configuration"] = master_node_configurationList
-		}
-	}
-	if data.NoBondDevices != nil {
-		no_bond_devicesMap := make(map[string]interface{})
-		apiResource.Spec["no_bond_devices"] = no_bond_devicesMap
-	}
 	if data.OfflineSurvivabilityMode != nil {
 		offline_survivability_modeMap := make(map[string]interface{})
 		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
@@ -4372,6 +4699,29 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		}
 		apiResource.Spec["performance_enhancement_mode"] = performance_enhancement_modeMap
 	}
+	if data.PrivateConnectivity != nil {
+		private_connectivityMap := make(map[string]interface{})
+		if data.PrivateConnectivity.CloudLink != nil {
+			cloud_linkNestedMap := make(map[string]interface{})
+			if !data.PrivateConnectivity.CloudLink.Name.IsNull() && !data.PrivateConnectivity.CloudLink.Name.IsUnknown() {
+				cloud_linkNestedMap["name"] = data.PrivateConnectivity.CloudLink.Name.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Namespace.IsNull() && !data.PrivateConnectivity.CloudLink.Namespace.IsUnknown() {
+				cloud_linkNestedMap["namespace"] = data.PrivateConnectivity.CloudLink.Namespace.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Tenant.IsNull() && !data.PrivateConnectivity.CloudLink.Tenant.IsUnknown() {
+				cloud_linkNestedMap["tenant"] = data.PrivateConnectivity.CloudLink.Tenant.ValueString()
+			}
+			private_connectivityMap["cloud_link"] = cloud_linkNestedMap
+		}
+		if data.PrivateConnectivity.Inside != nil {
+			private_connectivityMap["inside"] = map[string]interface{}{}
+		}
+		if data.PrivateConnectivity.Outside != nil {
+			private_connectivityMap["outside"] = map[string]interface{}{}
+		}
+		apiResource.Spec["private_connectivity"] = private_connectivityMap
+	}
 	if data.Sw != nil {
 		swMap := make(map[string]interface{})
 		if data.Sw.DefaultSwVersion != nil {
@@ -4382,18 +4732,130 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		}
 		apiResource.Spec["sw"] = swMap
 	}
-	if !data.WorkerNodes.IsNull() && !data.WorkerNodes.IsUnknown() {
-		var worker_nodesList []string
-		resp.Diagnostics.Append(data.WorkerNodes.ElementsAs(ctx, &worker_nodesList, false)...)
-		if !resp.Diagnostics.HasError() {
-			apiResource.Spec["worker_nodes"] = worker_nodesList
+	if data.Tags != nil {
+		tagsMap := make(map[string]interface{})
+		apiResource.Spec["tags"] = tagsMap
+	}
+	if data.TGWSecurity != nil {
+		tgw_securityMap := make(map[string]interface{})
+		if data.TGWSecurity.ActiveEastWestServicePolicies != nil {
+			active_east_west_service_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_east_west_service_policies"] = active_east_west_service_policiesNestedMap
 		}
+		if data.TGWSecurity.ActiveEnhancedFirewallPolicies != nil {
+			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
+		}
+		if data.TGWSecurity.ActiveForwardProxyPolicies != nil {
+			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
+		}
+		if data.TGWSecurity.ActiveNetworkPolicies != nil {
+			active_network_policiesNestedMap := make(map[string]interface{})
+			tgw_securityMap["active_network_policies"] = active_network_policiesNestedMap
+		}
+		if data.TGWSecurity.EastWestServicePolicyAllowAll != nil {
+			tgw_securityMap["east_west_service_policy_allow_all"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.ForwardProxyAllowAll != nil {
+			tgw_securityMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.NoEastWestPolicy != nil {
+			tgw_securityMap["no_east_west_policy"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.NoForwardProxy != nil {
+			tgw_securityMap["no_forward_proxy"] = map[string]interface{}{}
+		}
+		if data.TGWSecurity.NoNetworkPolicy != nil {
+			tgw_securityMap["no_network_policy"] = map[string]interface{}{}
+		}
+		apiResource.Spec["tgw_security"] = tgw_securityMap
 	}
-	if !data.Address.IsNull() && !data.Address.IsUnknown() {
-		apiResource.Spec["address"] = data.Address.ValueString()
+	if data.VnConfig != nil {
+		vn_configMap := make(map[string]interface{})
+		if data.VnConfig.AllowedVIPPort != nil {
+			allowed_vip_portNestedMap := make(map[string]interface{})
+			vn_configMap["allowed_vip_port"] = allowed_vip_portNestedMap
+		}
+		if data.VnConfig.AllowedVIPPortSLI != nil {
+			allowed_vip_port_sliNestedMap := make(map[string]interface{})
+			vn_configMap["allowed_vip_port_sli"] = allowed_vip_port_sliNestedMap
+		}
+		if data.VnConfig.DcClusterGroupInsideVn != nil {
+			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
+			if !data.VnConfig.DcClusterGroupInsideVn.Name.IsNull() && !data.VnConfig.DcClusterGroupInsideVn.Name.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["name"] = data.VnConfig.DcClusterGroupInsideVn.Name.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupInsideVn.Namespace.IsNull() && !data.VnConfig.DcClusterGroupInsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["namespace"] = data.VnConfig.DcClusterGroupInsideVn.Namespace.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupInsideVn.Tenant.IsNull() && !data.VnConfig.DcClusterGroupInsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_inside_vnNestedMap["tenant"] = data.VnConfig.DcClusterGroupInsideVn.Tenant.ValueString()
+			}
+			vn_configMap["dc_cluster_group_inside_vn"] = dc_cluster_group_inside_vnNestedMap
+		}
+		if data.VnConfig.DcClusterGroupOutsideVn != nil {
+			dc_cluster_group_outside_vnNestedMap := make(map[string]interface{})
+			if !data.VnConfig.DcClusterGroupOutsideVn.Name.IsNull() && !data.VnConfig.DcClusterGroupOutsideVn.Name.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["name"] = data.VnConfig.DcClusterGroupOutsideVn.Name.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupOutsideVn.Namespace.IsNull() && !data.VnConfig.DcClusterGroupOutsideVn.Namespace.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["namespace"] = data.VnConfig.DcClusterGroupOutsideVn.Namespace.ValueString()
+			}
+			if !data.VnConfig.DcClusterGroupOutsideVn.Tenant.IsNull() && !data.VnConfig.DcClusterGroupOutsideVn.Tenant.IsUnknown() {
+				dc_cluster_group_outside_vnNestedMap["tenant"] = data.VnConfig.DcClusterGroupOutsideVn.Tenant.ValueString()
+			}
+			vn_configMap["dc_cluster_group_outside_vn"] = dc_cluster_group_outside_vnNestedMap
+		}
+		if data.VnConfig.GlobalNetworkList != nil {
+			global_network_listNestedMap := make(map[string]interface{})
+			vn_configMap["global_network_list"] = global_network_listNestedMap
+		}
+		if data.VnConfig.InsideStaticRoutes != nil {
+			inside_static_routesNestedMap := make(map[string]interface{})
+			vn_configMap["inside_static_routes"] = inside_static_routesNestedMap
+		}
+		if data.VnConfig.NoDcClusterGroup != nil {
+			vn_configMap["no_dc_cluster_group"] = map[string]interface{}{}
+		}
+		if data.VnConfig.NoGlobalNetwork != nil {
+			vn_configMap["no_global_network"] = map[string]interface{}{}
+		}
+		if data.VnConfig.NoInsideStaticRoutes != nil {
+			vn_configMap["no_inside_static_routes"] = map[string]interface{}{}
+		}
+		if data.VnConfig.NoOutsideStaticRoutes != nil {
+			vn_configMap["no_outside_static_routes"] = map[string]interface{}{}
+		}
+		if data.VnConfig.OutsideStaticRoutes != nil {
+			outside_static_routesNestedMap := make(map[string]interface{})
+			vn_configMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.VnConfig.SmConnectionPublicIP != nil {
+			vn_configMap["sm_connection_public_ip"] = map[string]interface{}{}
+		}
+		if data.VnConfig.SmConnectionPvtIP != nil {
+			vn_configMap["sm_connection_pvt_ip"] = map[string]interface{}{}
+		}
+		apiResource.Spec["vn_config"] = vn_configMap
 	}
-	if !data.VolterraCertifiedHw.IsNull() && !data.VolterraCertifiedHw.IsUnknown() {
-		apiResource.Spec["volterra_certified_hw"] = data.VolterraCertifiedHw.ValueString()
+	if data.VPCAttachments != nil {
+		vpc_attachmentsMap := make(map[string]interface{})
+		if len(data.VPCAttachments.VPCList) > 0 {
+			var vpc_listList []map[string]interface{}
+			for _, listItem := range data.VPCAttachments.VPCList {
+				listItemMap := make(map[string]interface{})
+				if listItem.Labels != nil {
+					listItemMap["labels"] = map[string]interface{}{}
+				}
+				if !listItem.VPCID.IsNull() && !listItem.VPCID.IsUnknown() {
+					listItemMap["vpc_id"] = listItem.VPCID.ValueString()
+				}
+				vpc_listList = append(vpc_listList, listItemMap)
+			}
+			vpc_attachmentsMap["vpc_list"] = vpc_listList
+		}
+		apiResource.Spec["vpc_attachments"] = vpc_attachmentsMap
 	}
 
 	_, err := r.client.UpdateSite(ctx, apiResource)
@@ -4414,25 +4876,364 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 	}
 
 	// Set computed fields from API response
-	if v, ok := fetched.Spec["address"].(string); ok && v != "" {
-		data.Address = types.StringValue(v)
-	} else if data.Address.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.Address = types.StringNull()
-	}
-	// If plan had a value, preserve it
-	if v, ok := fetched.Spec["volterra_certified_hw"].(string); ok && v != "" {
-		data.VolterraCertifiedHw = types.StringValue(v)
-	} else if data.VolterraCertifiedHw.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.VolterraCertifiedHw = types.StringNull()
-	}
-	// If plan had a value, preserve it
 
 	// Unmarshal spec fields from fetched resource to Terraform state
 	apiResource = fetched // Use GET response which includes all computed fields
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["aws_parameters"].(map[string]interface{}); ok && (isImport || data.AWSParameters != nil) {
+		data.AWSParameters = &SiteAWSParametersModel{
+			AdminPassword: func() *SiteAWSParametersAdminPasswordModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.AdminPassword != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.AdminPassword
+				}
+				// Import case: read from API
+				if _, ok := blockData["admin_password"].(map[string]interface{}); ok {
+					return &SiteAWSParametersAdminPasswordModel{}
+				}
+				return nil
+			}(),
+			AWSCred: func() *SiteAWSParametersAWSCredModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.AWSCred != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.AWSCred
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["aws_cred"].(map[string]interface{}); ok {
+					return &SiteAWSParametersAWSCredModel{
+						Name: func() types.String {
+							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Namespace: func() types.String {
+							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						Tenant: func() types.String {
+							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			AWSRegion: func() types.String {
+				if v, ok := blockData["aws_region"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			AzNodes: func() []SiteAWSParametersAzNodesModel {
+				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
+					var result []SiteAWSParametersAzNodesModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SiteAWSParametersAzNodesModel{
+								AWSAzName: func() types.String {
+									if v, ok := itemMap["aws_az_name"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+								InsideSubnet: func() *SiteAWSParametersAzNodesInsideSubnetModel {
+									if deepMap, ok := itemMap["inside_subnet"].(map[string]interface{}); ok {
+										return &SiteAWSParametersAzNodesInsideSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								OutsideSubnet: func() *SiteAWSParametersAzNodesOutsideSubnetModel {
+									if deepMap, ok := itemMap["outside_subnet"].(map[string]interface{}); ok {
+										return &SiteAWSParametersAzNodesOutsideSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+								ReservedInsideSubnet: func() *SiteEmptyModel {
+									if _, ok := itemMap["reserved_inside_subnet"].(map[string]interface{}); ok {
+										return &SiteEmptyModel{}
+									}
+									return nil
+								}(),
+								WorkloadSubnet: func() *SiteAWSParametersAzNodesWorkloadSubnetModel {
+									if deepMap, ok := itemMap["workload_subnet"].(map[string]interface{}); ok {
+										return &SiteAWSParametersAzNodesWorkloadSubnetModel{
+											ExistingSubnetID: func() types.String {
+												if v, ok := deepMap["existing_subnet_id"].(string); ok && v != "" {
+													return types.StringValue(v)
+												}
+												return types.StringNull()
+											}(),
+										}
+									}
+									return nil
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+			CustomSecurityGroup: func() *SiteAWSParametersCustomSecurityGroupModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.CustomSecurityGroup != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.CustomSecurityGroup
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["custom_security_group"].(map[string]interface{}); ok {
+					return &SiteAWSParametersCustomSecurityGroupModel{
+						InsideSecurityGroupID: func() types.String {
+							if v, ok := nestedBlockData["inside_security_group_id"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						OutsideSecurityGroupID: func() types.String {
+							if v, ok := nestedBlockData["outside_security_group_id"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			DisableInternetVIP: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.DisableInternetVIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["disable_internet_vip"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			DiskSize: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
+					return data.AWSParameters.DiskSize
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
+				}
+				// Import case: read from API
+				if v, ok := blockData["disk_size"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			EnableInternetVIP: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.EnableInternetVIP
+				}
+				// Import case: read from API
+				if _, ok := blockData["enable_internet_vip"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			ExistingTGW: func() *SiteAWSParametersExistingTGWModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.ExistingTGW != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.ExistingTGW
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["existing_tgw"].(map[string]interface{}); ok {
+					return &SiteAWSParametersExistingTGWModel{
+						TGWAsn: func() types.Int64 {
+							if v, ok := nestedBlockData["tgw_asn"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+						TGWID: func() types.String {
+							if v, ok := nestedBlockData["tgw_id"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						VolterraSiteAsn: func() types.Int64 {
+							if v, ok := nestedBlockData["volterra_site_asn"].(float64); ok {
+								return types.Int64Value(int64(v))
+							}
+							return types.Int64Null()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			F5xcSecurityGroup: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.F5xcSecurityGroup
+				}
+				// Import case: read from API
+				if _, ok := blockData["f5xc_security_group"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			InstanceType: func() types.String {
+				if v, ok := blockData["instance_type"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			NewTGW: func() *SiteAWSParametersNewTGWModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.NewTGW != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.NewTGW
+				}
+				// Import case: read from API
+				if _, ok := blockData["new_tgw"].(map[string]interface{}); ok {
+					return &SiteAWSParametersNewTGWModel{}
+				}
+				return nil
+			}(),
+			NewVPC: func() *SiteAWSParametersNewVPCModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.NewVPC != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.NewVPC
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["new_vpc"].(map[string]interface{}); ok {
+					return &SiteAWSParametersNewVPCModel{
+						NameTag: func() types.String {
+							if v, ok := nestedBlockData["name_tag"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+						PrimaryIpv4: func() types.String {
+							if v, ok := nestedBlockData["primary_ipv4"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			NoWorkerNodes: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.NoWorkerNodes
+				}
+				// Import case: read from API
+				if _, ok := blockData["no_worker_nodes"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			NodesPerAz: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
+					return data.AWSParameters.NodesPerAz
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
+				}
+				// Import case: read from API
+				if v, ok := blockData["nodes_per_az"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			ReservedTGWCIDR: func() *SiteEmptyModel {
+				if !isImport && data.AWSParameters != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.AWSParameters.ReservedTGWCIDR
+				}
+				// Import case: read from API
+				if _, ok := blockData["reserved_tgw_cidr"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			SSHKey: func() types.String {
+				if v, ok := blockData["ssh_key"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			TGWCIDR: func() *SiteAWSParametersTGWCIDRModel {
+				if !isImport && data.AWSParameters != nil && data.AWSParameters.TGWCIDR != nil {
+					// Normal Read: preserve existing state value
+					return data.AWSParameters.TGWCIDR
+				}
+				// Import case: read from API
+				if nestedBlockData, ok := blockData["tgw_cidr"].(map[string]interface{}); ok {
+					return &SiteAWSParametersTGWCIDRModel{
+						Ipv4: func() types.String {
+							if v, ok := nestedBlockData["ipv4"].(string); ok && v != "" {
+								return types.StringValue(v)
+							}
+							return types.StringNull()
+						}(),
+					}
+				}
+				return nil
+			}(),
+			TotalNodes: func() types.Int64 {
+				if !isImport && data.AWSParameters != nil {
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
+					return data.AWSParameters.TotalNodes
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
+				}
+				// Import case: read from API
+				if v, ok := blockData["total_nodes"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			VPCID: func() types.String {
+				if v, ok := blockData["vpc_id"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.BlockAllServices = &SiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["blocked_services"].(map[string]interface{}); ok && (isImport || data.BlockedServices != nil) {
 		data.BlockedServices = &SiteBlockedServicesModel{
 			BlockedSevice: func() []SiteBlockedServicesBlockedSeviceModel {
@@ -4464,60 +5265,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 										return &SiteEmptyModel{}
 									}
 									return nil
-								}(),
-							})
-						}
-					}
-					return result
-				}
-				return nil
-			}(),
-		}
-	}
-	if blockData, ok := apiResource.Spec["bond_device_list"].(map[string]interface{}); ok && (isImport || data.BondDeviceList != nil) {
-		data.BondDeviceList = &SiteBondDeviceListModel{
-			BondDevices: func() []SiteBondDeviceListBondDevicesModel {
-				if listData, ok := blockData["bond_devices"].([]interface{}); ok && len(listData) > 0 {
-					var result []SiteBondDeviceListBondDevicesModel
-					for _, item := range listData {
-						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, SiteBondDeviceListBondDevicesModel{
-								ActiveBackup: func() *SiteEmptyModel {
-									if _, ok := itemMap["active_backup"].(map[string]interface{}); ok {
-										return &SiteEmptyModel{}
-									}
-									return nil
-								}(),
-								Lacp: func() *SiteBondDeviceListBondDevicesLacpModel {
-									if deepMap, ok := itemMap["lacp"].(map[string]interface{}); ok {
-										return &SiteBondDeviceListBondDevicesLacpModel{
-											Rate: func() types.Int64 {
-												if v, ok := deepMap["rate"].(float64); ok {
-													return types.Int64Value(int64(v))
-												}
-												return types.Int64Null()
-											}(),
-										}
-									}
-									return nil
-								}(),
-								LinkPollingInterval: func() types.Int64 {
-									if v, ok := itemMap["link_polling_interval"].(float64); ok {
-										return types.Int64Value(int64(v))
-									}
-									return types.Int64Null()
-								}(),
-								LinkUpDelay: func() types.Int64 {
-									if v, ok := itemMap["link_up_delay"].(float64); ok {
-										return types.Int64Value(int64(v))
-									}
-									return types.Int64Null()
-								}(),
-								Name: func() types.String {
-									if v, ok := itemMap["name"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
 								}(),
 							})
 						}
@@ -4564,237 +5311,16 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["custom_network_config"].(map[string]interface{}); ok && (isImport || data.CustomNetworkConfig != nil) {
-		data.CustomNetworkConfig = &SiteCustomNetworkConfigModel{
-			ActiveEnhancedFirewallPolicies: func() *SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.ActiveEnhancedFirewallPolicies
+	if blockData, ok := apiResource.Spec["custom_dns"].(map[string]interface{}); ok && (isImport || data.CustomDNS != nil) {
+		data.CustomDNS = &SiteCustomDNSModel{
+			InsideNameserver: func() types.String {
+				if v, ok := blockData["inside_nameserver"].(string); ok && v != "" {
+					return types.StringValue(v)
 				}
-				// Import case: read from API
-				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModel{}
-				}
-				return nil
+				return types.StringNull()
 			}(),
-			ActiveForwardProxyPolicies: func() *SiteCustomNetworkConfigActiveForwardProxyPoliciesModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveForwardProxyPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.ActiveForwardProxyPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigActiveForwardProxyPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveNetworkPolicies: func() *SiteCustomNetworkConfigActiveNetworkPoliciesModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.ActiveNetworkPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.ActiveNetworkPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigActiveNetworkPoliciesModel{}
-				}
-				return nil
-			}(),
-			DefaultConfig: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.DefaultConfig
-				}
-				// Import case: read from API
-				if _, ok := blockData["default_config"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			DefaultInterfaceConfig: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.DefaultInterfaceConfig
-				}
-				// Import case: read from API
-				if _, ok := blockData["default_interface_config"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			DefaultSLIConfig: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.DefaultSLIConfig
-				}
-				// Import case: read from API
-				if _, ok := blockData["default_sli_config"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			ForwardProxyAllowAll: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.ForwardProxyAllowAll
-				}
-				// Import case: read from API
-				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			GlobalNetworkList: func() *SiteCustomNetworkConfigGlobalNetworkListModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.GlobalNetworkList != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.GlobalNetworkList
-				}
-				// Import case: read from API
-				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigGlobalNetworkListModel{}
-				}
-				return nil
-			}(),
-			InterfaceList: func() *SiteCustomNetworkConfigInterfaceListModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.InterfaceList != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.InterfaceList
-				}
-				// Import case: read from API
-				if _, ok := blockData["interface_list"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigInterfaceListModel{}
-				}
-				return nil
-			}(),
-			NoForwardProxy: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.NoForwardProxy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoGlobalNetwork: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.NoGlobalNetwork
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoNetworkPolicy: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.NoNetworkPolicy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			SLIConfig: func() *SiteCustomNetworkConfigSLIConfigModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SLIConfig != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.SLIConfig
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["sli_config"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigSLIConfigModel{
-						Nameserver: func() types.String {
-							if v, ok := nestedBlockData["nameserver"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						VIP: func() types.String {
-							if v, ok := nestedBlockData["vip"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			SloConfig: func() *SiteCustomNetworkConfigSloConfigModel {
-				if !isImport && data.CustomNetworkConfig != nil && data.CustomNetworkConfig.SloConfig != nil {
-					// Normal Read: preserve existing state value
-					return data.CustomNetworkConfig.SloConfig
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["slo_config"].(map[string]interface{}); ok {
-					return &SiteCustomNetworkConfigSloConfigModel{
-						Nameserver: func() types.String {
-							if v, ok := nestedBlockData["nameserver"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						VIP: func() types.String {
-							if v, ok := nestedBlockData["vip"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			SmConnectionPublicIP: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.SmConnectionPublicIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPvtIP: func() *SiteEmptyModel {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.CustomNetworkConfig.SmConnectionPvtIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			TunnelDeadTimeout: func() types.Int64 {
-				if !isImport && data.CustomNetworkConfig != nil {
-					// Preserve existing state (null or user-set value)
-					// This prevents API defaults (like 0) from overwriting user intent
-					return data.CustomNetworkConfig.TunnelDeadTimeout
-				}
-				if !isImport {
-					// Block not in user config - return null, not API default
-					return types.Int64Null()
-				}
-				// Import case: read from API
-				if v, ok := blockData["tunnel_dead_timeout"].(float64); ok {
-					return types.Int64Value(int64(v))
-				}
-				return types.Int64Null()
-			}(),
-			VIPVrrpMode: func() types.String {
-				if v, ok := blockData["vip_vrrp_mode"].(string); ok && v != "" {
+			OutsideNameserver: func() types.String {
+				if v, ok := blockData["outside_nameserver"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
@@ -4806,11 +5332,66 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		data.DefaultBlockedServices = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["default_network_config"].(map[string]interface{}); ok && isImport && data.DefaultNetworkConfig == nil {
+	if _, ok := apiResource.Spec["direct_connect_disabled"].(map[string]interface{}); ok && isImport && data.DirectConnectDisabled == nil {
 		// Import case: populate from API since state is nil and psd is empty
-		data.DefaultNetworkConfig = &SiteEmptyModel{}
+		data.DirectConnectDisabled = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["direct_connect_enabled"].(map[string]interface{}); ok && (isImport || data.DirectConnectEnabled != nil) {
+		data.DirectConnectEnabled = &SiteDirectConnectEnabledModel{
+			AutoAsn: func() *SiteEmptyModel {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DirectConnectEnabled.AutoAsn
+				}
+				// Import case: read from API
+				if _, ok := blockData["auto_asn"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+			CustomAsn: func() types.Int64 {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Preserve existing state (null or user-set value)
+					// This prevents API defaults (like 0) from overwriting user intent
+					return data.DirectConnectEnabled.CustomAsn
+				}
+				if !isImport {
+					// Block not in user config - return null, not API default
+					return types.Int64Null()
+				}
+				// Import case: read from API
+				if v, ok := blockData["custom_asn"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			HostedVifs: func() *SiteDirectConnectEnabledHostedVifsModel {
+				if !isImport && data.DirectConnectEnabled != nil && data.DirectConnectEnabled.HostedVifs != nil {
+					// Normal Read: preserve existing state value
+					return data.DirectConnectEnabled.HostedVifs
+				}
+				// Import case: read from API
+				if _, ok := blockData["hosted_vifs"].(map[string]interface{}); ok {
+					return &SiteDirectConnectEnabledHostedVifsModel{}
+				}
+				return nil
+			}(),
+			StandardVifs: func() *SiteEmptyModel {
+				if !isImport && data.DirectConnectEnabled != nil {
+					// Normal Read: preserve existing state value (even if nil)
+					// This prevents API returning empty objects from overwriting user's 'not configured' intent
+					return data.DirectConnectEnabled.StandardVifs
+				}
+				// Import case: read from API
+				if _, ok := blockData["standard_vifs"].(map[string]interface{}); ok {
+					return &SiteEmptyModel{}
+				}
+				return nil
+			}(),
+		}
+	}
 	if _, ok := apiResource.Spec["kubernetes_upgrade_drain"].(map[string]interface{}); ok && isImport && data.KubernetesUpgradeDrain == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.KubernetesUpgradeDrain = &SiteKubernetesUpgradeDrainModel{}
@@ -4841,45 +5422,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 	if _, ok := apiResource.Spec["logs_streaming_disabled"].(map[string]interface{}); ok && isImport && data.LogsStreamingDisabled == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.LogsStreamingDisabled = &SiteEmptyModel{}
-	}
-	// Normal Read: preserve existing state value
-	if listData, ok := apiResource.Spec["master_node_configuration"].([]interface{}); ok && len(listData) > 0 {
-		var master_node_configurationList []SiteMasterNodeConfigurationModel
-		var existingMasterNodeConfigurationItems []SiteMasterNodeConfigurationModel
-		if !data.MasterNodeConfiguration.IsNull() && !data.MasterNodeConfiguration.IsUnknown() {
-			data.MasterNodeConfiguration.ElementsAs(ctx, &existingMasterNodeConfigurationItems, false)
-		}
-		for listIdx, item := range listData {
-			_ = listIdx // May be unused if no empty marker blocks in list item
-			if itemMap, ok := item.(map[string]interface{}); ok {
-				master_node_configurationList = append(master_node_configurationList, SiteMasterNodeConfigurationModel{
-					Name: func() types.String {
-						if v, ok := itemMap["name"].(string); ok && v != "" {
-							return types.StringValue(v)
-						}
-						return types.StringNull()
-					}(),
-					PublicIP: func() types.String {
-						if v, ok := itemMap["public_ip"].(string); ok && v != "" {
-							return types.StringValue(v)
-						}
-						return types.StringNull()
-					}(),
-				})
-			}
-		}
-		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: SiteMasterNodeConfigurationModelAttrTypes}, master_node_configurationList)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.MasterNodeConfiguration = listVal
-		}
-	} else {
-		// No data from API - set to null list
-		data.MasterNodeConfiguration = types.ListNull(types.ObjectType{AttrTypes: SiteMasterNodeConfigurationModelAttrTypes})
-	}
-	if _, ok := apiResource.Spec["no_bond_devices"].(map[string]interface{}); ok && isImport && data.NoBondDevices == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.NoBondDevices = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
@@ -4914,6 +5456,11 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		data.PerformanceEnhancementMode = &SitePerformanceEnhancementModeModel{}
 	}
 	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_connectivity"].(map[string]interface{}); ok && isImport && data.PrivateConnectivity == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateConnectivity = &SitePrivateConnectivityModel{}
+	}
+	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
 		data.Sw = &SiteSwModel{
 			DefaultSwVersion: func() *SiteEmptyModel {
@@ -4936,30 +5483,49 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 			}(),
 		}
 	}
-	if v, ok := apiResource.Spec["worker_nodes"].([]interface{}); ok && len(v) > 0 {
-		var worker_nodesList []string
-		for _, item := range v {
-			if s, ok := item.(string); ok {
-				worker_nodesList = append(worker_nodesList, s)
-			}
-		}
-		listVal, diags := types.ListValueFrom(ctx, types.StringType, worker_nodesList)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.WorkerNodes = listVal
-		}
-	} else {
-		data.WorkerNodes = types.ListNull(types.StringType)
+	if _, ok := apiResource.Spec["tags"].(map[string]interface{}); ok && isImport && data.Tags == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.Tags = &SiteEmptyModel{}
 	}
-	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
-		data.Address = types.StringValue(v)
-	} else {
-		data.Address = types.StringNull()
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["tgw_security"].(map[string]interface{}); ok && isImport && data.TGWSecurity == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.TGWSecurity = &SiteTGWSecurityModel{}
 	}
-	if v, ok := apiResource.Spec["volterra_certified_hw"].(string); ok && v != "" {
-		data.VolterraCertifiedHw = types.StringValue(v)
-	} else {
-		data.VolterraCertifiedHw = types.StringNull()
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["vn_config"].(map[string]interface{}); ok && isImport && data.VnConfig == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.VnConfig = &SiteVnConfigModel{}
+	}
+	// Normal Read: preserve existing state value
+	if blockData, ok := apiResource.Spec["vpc_attachments"].(map[string]interface{}); ok && (isImport || data.VPCAttachments != nil) {
+		data.VPCAttachments = &SiteVPCAttachmentsModel{
+			VPCList: func() []SiteVPCAttachmentsVPCListModel {
+				if listData, ok := blockData["vpc_list"].([]interface{}); ok && len(listData) > 0 {
+					var result []SiteVPCAttachmentsVPCListModel
+					for _, item := range listData {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							result = append(result, SiteVPCAttachmentsVPCListModel{
+								Labels: func() *SiteEmptyModel {
+									if _, ok := itemMap["labels"].(map[string]interface{}); ok {
+										return &SiteEmptyModel{}
+									}
+									return nil
+								}(),
+								VPCID: func() types.String {
+									if v, ok := itemMap["vpc_id"].(string); ok && v != "" {
+										return types.StringValue(v)
+									}
+									return types.StringNull()
+								}(),
+							})
+						}
+					}
+					return result
+				}
+				return nil
+			}(),
+		}
 	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &data)...)

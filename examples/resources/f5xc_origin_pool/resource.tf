@@ -84,3 +84,9 @@ resource "f5xc_origin_pool" "example" {
   endpoint_selection     = "LOCAL_PREFERRED"
   loadbalancer_algorithm = "ROUND_ROBIN"
 }
+
+# The following optional fields have server-applied defaults and can be omitted:
+# - endpoint_selection
+# - loadbalancer_algorithm
+# - healthcheck
+# - no_tls

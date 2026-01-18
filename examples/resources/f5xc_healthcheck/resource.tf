@@ -41,3 +41,8 @@ resource "f5xc_healthcheck" "example" {
 
 # The following optional fields have server-applied defaults and can be omitted:
 # - jitter_percent
+# - expected_status_codes
+# - request_headers_to_remove
+# - use_http2
+# - headers
+# - use_origin_server_name

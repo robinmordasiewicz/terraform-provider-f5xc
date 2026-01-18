@@ -204,7 +204,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "[OneOf: http_health_check, tcp_health_check, udp_icmp_health_check] Healthy if 'GET' method on URL 'HTTP(s)://<host>/<path>' with optional '<header>' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request.",
 				Attributes: map[string]schema.Attribute{
 					"expected_status_codes": schema.ListAttribute{
-						MarkdownDescription: "Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-'.",
+						MarkdownDescription: "Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-'. Defaults to `[]`. Server applies default when omitted.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
@@ -217,21 +217,21 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 						Optional:            true,
 					},
 					"request_headers_to_remove": schema.ListAttribute{
-						MarkdownDescription: "Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers.",
+						MarkdownDescription: "Specifies a list of HTTP headers that should be removed from each request that is sent to the health checked cluster. This is a list of keys of headers. Defaults to `[]`. Server applies default when omitted.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
 					"use_http2": schema.BoolAttribute{
-						MarkdownDescription: "If set, health checks will be made using HTTP/2.",
+						MarkdownDescription: "If set, health checks will be made using HTTP/2. Defaults to `false`. Server applies default when omitted.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"headers": schema.SingleNestedBlock{
-						MarkdownDescription: "Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs.",
+						MarkdownDescription: "Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs. Defaults to `map[]`. Server applies default when omitted.",
 					},
 					"use_origin_server_name": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Enable this option Server applies default when omitted.",
 					},
 				},
 			},

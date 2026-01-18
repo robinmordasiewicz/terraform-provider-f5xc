@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-17T10:13:20Z",
+  "generated_at": "2026-01-18T07:34:46Z",
   "version": "1.0.0",
   "resources": {
     "address_allocator": {
@@ -306,11 +306,11 @@
     },
     "alert_receiver": {
       "resource": "alert_receiver",
-      "base_path": "/api/alert/namespaces/{namespace}/alert_receivers/{name}/confirm",
+      "base_path": "/api/config/namespaces/{namespace}/alert_receivers/{name}",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/alert/namespaces/{namespace}/alert_receivers/{name}/test",
+          "path": "/api/config/namespaces/{metadata.namespace}/alert_receivers",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -322,15 +322,14 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "path.name",
-            "path.namespace"
+            "path.metadata.namespace"
           ],
           "side_effects": {
             "creates": [
-              "test"
+              "alert-receiver"
             ]
           },
-          "purpose": "Test Alert Receiver."
+          "purpose": "Create Alert Receiver."
         },
         "delete": {
           "method": "DELETE",
@@ -523,11 +522,11 @@
     },
     "api_definition": {
       "resource": "api_definition",
-      "base_path": "/api/config/namespaces/{namespace}/api_definitions/{name}/move_to_inventory",
+      "base_path": "/api/config/namespaces/{namespace}/api_definitions/{name}/mark_as_non_api",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{metadata.namespace}/api_definitions",
+          "path": "/api/config/namespaces/{namespace}/api_definitions/{name}/move_to_inventory",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -539,14 +538,15 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "path.metadata.namespace"
+            "path.name",
+            "path.namespace"
           ],
           "side_effects": {
             "creates": [
-              "api-definition"
+              "move-to-inventory"
             ]
           },
-          "purpose": "Create API Definition."
+          "purpose": "Move To API Inventory."
         },
         "delete": {
           "method": "DELETE",
@@ -574,7 +574,7 @@
         },
         "list": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/api_definitions_without_shared",
+          "path": "/api/config/namespaces/{namespace}/api_definitions",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -586,7 +586,7 @@
           "required_fields": [
             "path.namespace"
           ],
-          "purpose": "List Available API Definitions."
+          "purpose": "List API Definition."
         },
         "read": {
           "method": "GET",
@@ -847,7 +847,7 @@
     },
     "apm": {
       "resource": "apm",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/apms",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/apms/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -955,7 +955,7 @@
     },
     "app_api_group": {
       "resource": "app_api_group",
-      "base_path": "/api/config/namespaces/{namespace}/app_api_groups/{name}",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/app_api_groups/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -1063,7 +1063,7 @@
     },
     "app_firewall": {
       "resource": "app_firewall",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/app_firewalls/{metadata.name}",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/app_firewalls",
       "operations": {
         "create": {
           "method": "POST",
@@ -1170,7 +1170,7 @@
     },
     "app_setting": {
       "resource": "app_setting",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/app_settings/{metadata.name}",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/app_settings",
       "operations": {
         "create": {
           "method": "POST",
@@ -1237,7 +1237,7 @@
         },
         "read": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/app_settings/{name}",
+          "path": "/api/ml/data/namespaces/{namespace}/app_settings/{name}/suspicious_users",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -1250,7 +1250,7 @@
             "path.name",
             "path.namespace"
           ],
-          "purpose": "GET App Setting."
+          "purpose": "GET Status of Suspicious users."
         },
         "update": {
           "method": "PUT",
@@ -1278,7 +1278,7 @@
     },
     "app_type": {
       "resource": "app_type",
-      "base_path": "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/overrides",
+      "base_path": "/api/config/namespaces/{namespace}/app_types",
       "operations": {
         "create": {
           "method": "POST",
@@ -1330,20 +1330,20 @@
         },
         "list": {
           "method": "GET",
-          "path": "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/api_endpoints",
+          "path": "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/api_endpoints/swagger_spec",
           "danger_level": "low",
           "discovered_response_time": {
-            "p50_ms": 200,
-            "p95_ms": 800,
-            "p99_ms": 2000,
-            "sample_count": 0,
-            "source": "estimate"
+            "p50_ms": 150,
+            "p95_ms": 301,
+            "p99_ms": 451,
+            "sample_count": 1,
+            "source": "discovery"
           },
           "required_fields": [
             "path.app_type_name",
             "path.namespace"
           ],
-          "purpose": "GET API endpoints."
+          "purpose": "GET Swagger Spec for App Type."
         },
         "read": {
           "method": "GET",
@@ -1496,11 +1496,11 @@
     },
     "aws_tgw_site": {
       "resource": "aws_tgw_site",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/aws_tgw_sites/{metadata.name}",
+      "base_path": "/api/config/namespaces/{namespace}/aws_tgw_sites",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{namespace}/aws_tgw_site/{name}/set_vpc_ip_prefixes",
+          "path": "/api/config/namespaces/{namespace}/aws_tgw_site/{name}/set_tgw_info",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -1517,10 +1517,10 @@
           ],
           "side_effects": {
             "creates": [
-              "set-vpc-ip-prefixe"
+              "set-tgw-info"
             ]
           },
-          "purpose": "Configure VPC IP prefixes."
+          "purpose": "Configure TGW Information."
         },
         "delete": {
           "method": "DELETE",
@@ -1605,11 +1605,11 @@
     },
     "aws_vpc_site": {
       "resource": "aws_vpc_site",
-      "base_path": "/api/config/namespaces/{namespace}/aws_vpc_sites",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/aws_vpc_sites",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{namespace}/aws_vpc_site/{name}/validate_config",
+          "path": "/api/config/namespaces/{metadata.namespace}/aws_vpc_sites",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -1621,15 +1621,14 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "path.name",
-            "path.namespace"
+            "path.metadata.namespace"
           ],
           "side_effects": {
             "creates": [
-              "validate-config"
+              "aws-vpc-site"
             ]
           },
-          "purpose": "Validate AWS VPC Site Config."
+          "purpose": "Create AWS VPC site."
         },
         "delete": {
           "method": "DELETE",
@@ -1714,11 +1713,11 @@
     },
     "azure_vnet_site": {
       "resource": "azure_vnet_site",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/azure_vnet_sites",
+      "base_path": "/api/config/namespaces/{namespace}/azure_vnet_sites/{name}",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{namespace}/azure_vnet_site/{name}/set_vip_info",
+          "path": "/api/config/namespaces/{namespace}/azure_vnet_site/{name}/set_cloud_site_info",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -1735,10 +1734,10 @@
           ],
           "side_effects": {
             "creates": [
-              "set-vip-info"
+              "set-cloud-site-info"
             ]
           },
-          "purpose": "Configure Azure VNet Site VIP Information."
+          "purpose": "Configure Azure VNet Site Information."
         },
         "delete": {
           "method": "DELETE",
@@ -1823,11 +1822,11 @@
     },
     "bgp": {
       "resource": "bgp",
-      "base_path": "/api/config/namespaces/{namespace}/bgpstatus/{view_name}",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/bgps",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{metadata.namespace}/bgps",
+          "path": "/api/config/namespaces/{metadata.namespace}/bgp_asn_sets",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -1843,10 +1842,10 @@
           ],
           "side_effects": {
             "creates": [
-              "bgp"
+              "bgp-asn-set"
             ]
           },
-          "purpose": "Create BGP."
+          "purpose": "Create BGP ASN Set."
         },
         "delete": {
           "method": "DELETE",
@@ -1874,7 +1873,7 @@
         },
         "list": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/bgp_routing_policys",
+          "path": "/api/operate/namespaces/{namespace}/sites/{site}/ver/bgp_peers",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -1884,9 +1883,10 @@
             "source": "estimate"
           },
           "required_fields": [
-            "path.namespace"
+            "path.namespace",
+            "path.site"
           ],
-          "purpose": "List BGP Routing Policy."
+          "purpose": "Show BGP Peer Info."
         },
         "read": {
           "method": "GET",
@@ -1907,7 +1907,7 @@
         },
         "update": {
           "method": "PUT",
-          "path": "/api/config/namespaces/{metadata.namespace}/bgp_routing_policys/{metadata.name}",
+          "path": "/api/config/namespaces/{metadata.namespace}/bgps/{metadata.name}",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 800,
@@ -1922,16 +1922,16 @@
           ],
           "side_effects": {
             "modifies": [
-              "bgp-routing-policy"
+              "bgp"
             ]
           },
-          "purpose": "Replace BGP Routing Policy."
+          "purpose": "Replace BGP."
         }
       }
     },
     "bgp_asn_set": {
       "resource": "bgp_asn_set",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/bgp_asn_sets",
+      "base_path": "/api/config/namespaces/{namespace}/bgp_asn_sets",
       "operations": {
         "create": {
           "method": "POST",
@@ -2147,7 +2147,7 @@
     },
     "bot_defense_app_infrastructure": {
       "resource": "bot_defense_app_infrastructure",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/bot_defense_app_infrastructures",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/bot_defense_app_infrastructures/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -2255,7 +2255,7 @@
     },
     "cdn_cache_rule": {
       "resource": "cdn_cache_rule",
-      "base_path": "/api/config/namespaces/{namespace}/cdn_cache_rules/{name}",
+      "base_path": "/api/config/namespaces/{namespace}/cdn_cache_rules",
       "operations": {
         "create": {
           "method": "POST",
@@ -2363,11 +2363,11 @@
     },
     "cdn_loadbalancer": {
       "resource": "cdn_loadbalancer",
-      "base_path": "/api/config/namespaces/{namespace}/cdn_loadbalancers/{name}/block_client/suggestion",
+      "base_path": "/api/config/namespaces/{namespace}/cdn_loadbalancers",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/cdn/namespaces/{namespace}/cdn_loadbalancer/metrics",
+          "path": "/api/config/namespaces/{metadata.namespace}/cdn_loadbalancers",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -2379,18 +2379,18 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "path.namespace"
+            "path.metadata.namespace"
           ],
           "side_effects": {
             "creates": [
-              "metric"
+              "cdn-loadbalancer"
             ]
           },
-          "purpose": "GET CDN Metrics."
+          "purpose": "Create CDN Loadbalancer."
         },
         "delete": {
           "method": "DELETE",
-          "path": "/api/config/namespaces/{namespace}/cdn_loadbalancers/{name}",
+          "path": "/api/config/namespaces/{namespace}/cdn_loadbalancers/{name}/dos_automitigation_rules/{dos_automitigation_rule_name}",
           "danger_level": "high",
           "discovered_response_time": {
             "p50_ms": 500,
@@ -2400,17 +2400,18 @@
             "source": "estimate"
           },
           "required_fields": [
+            "path.dos_automitigation_rule_name",
             "path.name",
             "path.namespace"
           ],
           "confirmation_required": true,
           "side_effects": {
             "deletes": [
-              "cdn-loadbalancer",
+              "dos-automitigation-rule",
               "contained_resources"
             ]
           },
-          "purpose": "DELETE CDN Loadbalancer."
+          "purpose": "DELETE DoS Auto-Mitigation Rule for CDN Load Balancer."
         },
         "list": {
           "method": "GET",
@@ -2430,20 +2431,20 @@
         },
         "read": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/cdn_loadbalancers/{name}/dos_automitigation_rules",
+          "path": "/api/config/namespaces/{namespace}/cdn_loadbalancers/{name}",
           "danger_level": "low",
           "discovered_response_time": {
-            "p50_ms": 164,
-            "p95_ms": 328,
-            "p99_ms": 493,
-            "sample_count": 1,
-            "source": "discovery"
+            "p50_ms": 200,
+            "p95_ms": 800,
+            "p99_ms": 2000,
+            "sample_count": 0,
+            "source": "estimate"
           },
           "required_fields": [
             "path.name",
             "path.namespace"
           ],
-          "purpose": "GET DoS Auto-Mitigation Rules for CDN Load Balancer."
+          "purpose": "GET CDN Loadbalancer."
         },
         "update": {
           "method": "PUT",
@@ -2475,7 +2476,7 @@
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{metadata.namespace}/certificates",
+          "path": "/api/config/namespaces/{metadata.namespace}/certificate_chains",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -2491,10 +2492,10 @@
           ],
           "side_effects": {
             "creates": [
-              "certificate"
+              "certificate-chain"
             ]
           },
-          "purpose": "Create Certificate."
+          "purpose": "Create Certificate Chain."
         },
         "delete": {
           "method": "DELETE",
@@ -2555,7 +2556,7 @@
         },
         "update": {
           "method": "PUT",
-          "path": "/api/config/namespaces/{metadata.namespace}/certificates/{metadata.name}",
+          "path": "/api/config/namespaces/{metadata.namespace}/certificate_chains/{metadata.name}",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 800,
@@ -2570,10 +2571,10 @@
           ],
           "side_effects": {
             "modifies": [
-              "certificate"
+              "certificate-chain"
             ]
           },
-          "purpose": "Replace Certificate."
+          "purpose": "Replace Certificate Chain."
         }
       }
     },
@@ -2687,11 +2688,11 @@
     },
     "cloud_connect": {
       "resource": "cloud_connect",
-      "base_path": "/api/data/namespaces/system/top/cloud_connects",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/cloud_connects/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/data/namespaces/system/cloud_connects/segment_metrics",
+          "path": "/api/config/namespaces/{metadata.namespace}/cloud_connects",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -2702,14 +2703,15 @@
           },
           "required_fields": [
             "metadata.name",
-            "metadata.namespace"
+            "metadata.namespace",
+            "path.metadata.namespace"
           ],
           "side_effects": {
             "creates": [
-              "segment-metric"
+              "cloud-connect"
             ]
           },
-          "purpose": "All Cloud Connect Segment Metrics."
+          "purpose": "Create Cloud Connect."
         },
         "delete": {
           "method": "DELETE",
@@ -2794,7 +2796,7 @@
     },
     "cloud_credentials": {
       "resource": "cloud_credentials",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/cloud_credentialss",
+      "base_path": "/api/config/namespaces/{namespace}/cloud_credentialss",
       "operations": {
         "create": {
           "method": "POST",
@@ -2902,7 +2904,7 @@
     },
     "cloud_elastic_ip": {
       "resource": "cloud_elastic_ip",
-      "base_path": "/api/config/namespaces/{namespace}/cloud_elastic_ips",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/cloud_elastic_ips/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -3010,11 +3012,11 @@
     },
     "cloud_link": {
       "resource": "cloud_link",
-      "base_path": "/api/config/namespaces/system/cloud_links/{name}/reapply_config",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/cloud_links",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{metadata.namespace}/cloud_links",
+          "path": "/api/config/namespaces/system/cloud_links/{name}/reapply_config",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -3026,14 +3028,14 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "path.metadata.namespace"
+            "path.name"
           ],
           "side_effects": {
             "creates": [
-              "cloud-link"
+              "reapply-config"
             ]
           },
-          "purpose": "Create CloudLink."
+          "purpose": "CloudLink"
         },
         "delete": {
           "method": "DELETE",
@@ -3118,7 +3120,7 @@
     },
     "cluster": {
       "resource": "cluster",
-      "base_path": "/api/config/namespaces/{namespace}/clusters",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/clusters/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -3226,7 +3228,7 @@
     },
     "cminstance": {
       "resource": "cminstance",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/cminstances",
+      "base_path": "/api/config/namespaces/{namespace}/cminstances",
       "operations": {
         "create": {
           "method": "POST",
@@ -3550,7 +3552,7 @@
     },
     "crl": {
       "resource": "crl",
-      "base_path": "/api/config/namespaces/{namespace}/crls/{name}",
+      "base_path": "/api/config/namespaces/{namespace}/crls",
       "operations": {
         "create": {
           "method": "POST",
@@ -3874,11 +3876,11 @@
     },
     "dc_cluster_group": {
       "resource": "dc_cluster_group",
-      "base_path": "/api/data/namespaces/{namespace}/dc_cluster_groups/metrics",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/dc_cluster_groups",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/data/namespaces/{namespace}/dc_cluster_groups/metrics",
+          "path": "/api/config/namespaces/{metadata.namespace}/dc_cluster_groups",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -3890,14 +3892,14 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "path.namespace"
+            "path.metadata.namespace"
           ],
           "side_effects": {
             "creates": [
-              "metric"
+              "dc-cluster-group"
             ]
           },
-          "purpose": "Metrics"
+          "purpose": "Create DC Cluster Group."
         },
         "delete": {
           "method": "DELETE",
@@ -4010,7 +4012,7 @@
         },
         "delete": {
           "method": "DELETE",
-          "path": "/api/config/namespaces/{namespace}/api_discoverys/{name}",
+          "path": "/api/config/namespaces/{namespace}/discoverys/{name}",
           "danger_level": "high",
           "discovered_response_time": {
             "p50_ms": 500,
@@ -4026,11 +4028,11 @@
           "confirmation_required": true,
           "side_effects": {
             "deletes": [
-              "api-discovery",
+              "discovery",
               "contained_resources"
             ]
           },
-          "purpose": "DELETE API Discovery."
+          "purpose": "DELETE Discovery."
         },
         "list": {
           "method": "GET",
@@ -4050,7 +4052,7 @@
         },
         "read": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/api_discoverys/{name}",
+          "path": "/api/config/namespaces/{namespace}/discoverys/{name}",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -4063,11 +4065,11 @@
             "path.name",
             "path.namespace"
           ],
-          "purpose": "GET API Discovery."
+          "purpose": "GET Discovery."
         },
         "update": {
           "method": "PUT",
-          "path": "/api/config/namespaces/{metadata.namespace}/api_discoverys/{metadata.name}",
+          "path": "/api/config/namespaces/{metadata.namespace}/discoverys/{metadata.name}",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 800,
@@ -4082,16 +4084,16 @@
           ],
           "side_effects": {
             "modifies": [
-              "api-discovery"
+              "discovery"
             ]
           },
-          "purpose": "Replace API Discovery."
+          "purpose": "Replace Discovery."
         }
       }
     },
     "dns_compliance_checks": {
       "resource": "dns_compliance_checks",
-      "base_path": "/api/config/namespaces/{namespace}/dns_compliance_checkss/{name}",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/dns_compliance_checkss",
       "operations": {
         "create": {
           "method": "POST",
@@ -4199,11 +4201,11 @@
     },
     "dns_domain": {
       "resource": "dns_domain",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/dns_domains",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/dns_domains/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/dns/namespaces/system/dns_zone/clone_from_dns_domain",
+          "path": "/api/config/namespaces/{metadata.namespace}/dns_domains",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -4214,14 +4216,15 @@
           },
           "required_fields": [
             "metadata.name",
-            "metadata.namespace"
+            "metadata.namespace",
+            "path.metadata.namespace"
           ],
           "side_effects": {
             "creates": [
-              "clone-from-dns-domain"
+              "dns-domain"
             ]
           },
-          "purpose": "Clone from DNSDomain."
+          "purpose": "Create DNS Domain."
         },
         "delete": {
           "method": "DELETE",
@@ -4306,11 +4309,11 @@
     },
     "endpoint": {
       "resource": "endpoint",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/endpoints/{metadata.name}",
+      "base_path": "/api/config/namespaces/{namespace}/endpoints/{name}",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/api_endpoint/learnt_schema",
+          "path": "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/services/{service_name}/api_endpoints",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -4323,14 +4326,15 @@
             "metadata.name",
             "metadata.namespace",
             "path.app_type_name",
-            "path.namespace"
+            "path.namespace",
+            "path.service_name"
           ],
           "side_effects": {
             "creates": [
-              "learnt-schema"
+              "api-endpoint"
             ]
           },
-          "purpose": "GET Learnt Schema per API endpoint."
+          "purpose": "GET Service API Endpoints."
         },
         "delete": {
           "method": "DELETE",
@@ -4358,19 +4362,20 @@
         },
         "list": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/endpoints",
+          "path": "/api/ml/data/namespaces/{namespace}/app_types/{app_type_name}/api_endpoints/swagger_spec",
           "danger_level": "low",
           "discovered_response_time": {
-            "p50_ms": 200,
-            "p95_ms": 800,
-            "p99_ms": 2000,
-            "sample_count": 0,
-            "source": "estimate"
+            "p50_ms": 150,
+            "p95_ms": 301,
+            "p99_ms": 451,
+            "sample_count": 1,
+            "source": "discovery"
           },
           "required_fields": [
+            "path.app_type_name",
             "path.namespace"
           ],
-          "purpose": "List Endpoint."
+          "purpose": "GET Swagger Spec for App Type."
         },
         "read": {
           "method": "GET",
@@ -4523,7 +4528,7 @@
     },
     "external_connector": {
       "resource": "external_connector",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/external_connectors",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/external_connectors/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -4635,7 +4640,7 @@
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/data/namespaces/{namespace}/fast_acl/hits",
+          "path": "/api/config/namespaces/{metadata.namespace}/fast_acls",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -4647,18 +4652,18 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "path.namespace"
+            "path.metadata.namespace"
           ],
           "side_effects": {
             "creates": [
-              "hit"
+              "fast-acl"
             ]
           },
-          "purpose": "Fast ACL Hits."
+          "purpose": "Create Fast ACL."
         },
         "delete": {
           "method": "DELETE",
-          "path": "/api/config/namespaces/{namespace}/fast_acl_rules/{name}",
+          "path": "/api/config/namespaces/{namespace}/fast_acls/{name}",
           "danger_level": "high",
           "discovered_response_time": {
             "p50_ms": 500,
@@ -4674,15 +4679,15 @@
           "confirmation_required": true,
           "side_effects": {
             "deletes": [
-              "fast-acl-rule",
+              "fast-acl",
               "contained_resources"
             ]
           },
-          "purpose": "DELETE Fast ACL Rule."
+          "purpose": "DELETE Fast ACL."
         },
         "list": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/fast_acl_rules",
+          "path": "/api/config/namespaces/{namespace}/fast_acls",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -4694,11 +4699,11 @@
           "required_fields": [
             "path.namespace"
           ],
-          "purpose": "List Fast ACL Rule."
+          "purpose": "List Fast ACL."
         },
         "read": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/fast_acl_rules/{name}",
+          "path": "/api/config/namespaces/{namespace}/fast_acls/{name}",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -4711,11 +4716,11 @@
             "path.name",
             "path.namespace"
           ],
-          "purpose": "GET Fast ACL Rule."
+          "purpose": "GET Fast ACL."
         },
         "update": {
           "method": "PUT",
-          "path": "/api/config/namespaces/{metadata.namespace}/fast_acls/{metadata.name}",
+          "path": "/api/config/namespaces/{metadata.namespace}/fast_acl_rules/{metadata.name}",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 800,
@@ -4730,16 +4735,16 @@
           ],
           "side_effects": {
             "modifies": [
-              "fast-acl"
+              "fast-acl-rule"
             ]
           },
-          "purpose": "Replace Fast ACL."
+          "purpose": "Replace Fast ACL Rule."
         }
       }
     },
     "fast_acl_rule": {
       "resource": "fast_acl_rule",
-      "base_path": "/api/config/namespaces/{namespace}/fast_acl_rules/{name}",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/fast_acl_rules/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -4847,7 +4852,7 @@
     },
     "filter_set": {
       "resource": "filter_set",
-      "base_path": "/api/config/namespaces/{namespace}/filter_sets",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/filter_sets/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -4955,7 +4960,7 @@
     },
     "fleet": {
       "resource": "fleet",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/fleets",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/fleets/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -5171,7 +5176,7 @@
     },
     "forwarding_class": {
       "resource": "forwarding_class",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/forwarding_classs",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/forwarding_classs/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -5279,11 +5284,11 @@
     },
     "gcp_vpc_site": {
       "resource": "gcp_vpc_site",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/gcp_vpc_sites/{metadata.name}",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/gcp_vpc_sites",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{namespace}/gcp_vpc_site/{name}/validate_config",
+          "path": "/api/config/namespaces/{namespace}/gcp_vpc_site/{name}/set_cloud_site_info",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -5300,10 +5305,10 @@
           ],
           "side_effects": {
             "creates": [
-              "validate-config"
+              "set-cloud-site-info"
             ]
           },
-          "purpose": "Validate GCP VPC Site Config."
+          "purpose": "Configure GCP VPC Site Information."
         },
         "delete": {
           "method": "DELETE",
@@ -5388,7 +5393,7 @@
     },
     "global_log_receiver": {
       "resource": "global_log_receiver",
-      "base_path": "/api/config/namespaces/{namespace}/global_log_receivers/{name}",
+      "base_path": "/api/log_receiver/namespaces/{namespace}/global_log_receivers/{name}/test",
       "operations": {
         "create": {
           "method": "POST",
@@ -5605,11 +5610,11 @@
     },
     "http_loadbalancer": {
       "resource": "http_loadbalancer",
-      "base_path": "/api/config/namespaces/{namespace}/http_loadbalancers/get_security_config",
+      "base_path": "/api/ml/data/namespaces/{namespace}/http_loadbalancers/{name}/api_endpoints/swagger_spec",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{namespace}/http_loadbalancers/{name}/l7ddos_rps_threshold",
+          "path": "/api/ml/data/namespaces/{namespace}/http_loadbalancers/{name}/api_endpoints",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -5626,10 +5631,10 @@
           ],
           "side_effects": {
             "creates": [
-              "l7ddos-rps-threshold"
+              "api-endpoint"
             ]
           },
-          "purpose": "Set L7 DDoS RPS Threshold."
+          "purpose": "GET API Endpoints."
         },
         "delete": {
           "method": "DELETE",
@@ -5714,7 +5719,7 @@
     },
     "ip_prefix_set": {
       "resource": "ip_prefix_set",
-      "base_path": "/api/config/namespaces/{namespace}/ip_prefix_sets",
+      "base_path": "/api/config/namespaces/{namespace}/ip_prefix_sets/{name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -5822,7 +5827,7 @@
     },
     "irule": {
       "resource": "irule",
-      "base_path": "/api/config/namespaces/{namespace}/irules",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/irules",
       "operations": {
         "create": {
           "method": "POST",
@@ -5873,19 +5878,19 @@
         },
         "list": {
           "method": "GET",
-          "path": "/api/bigipconnector/namespaces/{namespace}/bigip_irules",
+          "path": "/api/config/namespaces/{namespace}/irules",
           "danger_level": "low",
           "discovered_response_time": {
-            "p50_ms": 200,
-            "p95_ms": 800,
-            "p99_ms": 2000,
-            "sample_count": 0,
-            "source": "estimate"
+            "p50_ms": 157,
+            "p95_ms": 314,
+            "p99_ms": 471,
+            "sample_count": 1,
+            "source": "discovery"
           },
           "required_fields": [
             "path.namespace"
           ],
-          "purpose": "List BIG-IP iRule as a Service."
+          "purpose": "List Configure iRule."
         },
         "read": {
           "method": "GET",
@@ -5930,11 +5935,11 @@
     },
     "log_receiver": {
       "resource": "log_receiver",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/log_receivers",
+      "base_path": "/api/config/namespaces/{namespace}/log_receivers/{name}/test",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{metadata.namespace}/global_log_receivers",
+          "path": "/api/log_receiver/namespaces/{namespace}/global_log_receivers/{name}/test",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -5946,18 +5951,19 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "path.metadata.namespace"
+            "path.name",
+            "path.namespace"
           ],
           "side_effects": {
             "creates": [
-              "global-log-receiver"
+              "test"
             ]
           },
-          "purpose": "Create Global Log Receiver."
+          "purpose": "Test Global Log Receiver."
         },
         "delete": {
           "method": "DELETE",
-          "path": "/api/config/namespaces/{namespace}/global_log_receivers/{name}",
+          "path": "/api/config/namespaces/{namespace}/log_receivers/{name}",
           "danger_level": "high",
           "discovered_response_time": {
             "p50_ms": 500,
@@ -5973,11 +5979,11 @@
           "confirmation_required": true,
           "side_effects": {
             "deletes": [
-              "global-log-receiver",
+              "log-receiver",
               "contained_resources"
             ]
           },
-          "purpose": "DELETE Global Log Receiver."
+          "purpose": "DELETE Log Receiver."
         },
         "list": {
           "method": "GET",
@@ -5997,7 +6003,7 @@
         },
         "read": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/global_log_receivers/{name}",
+          "path": "/api/config/namespaces/{namespace}/log_receivers/{name}",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -6010,7 +6016,7 @@
             "path.name",
             "path.namespace"
           ],
-          "purpose": "GET Global Log Receiver."
+          "purpose": "GET Log Receiver."
         },
         "update": {
           "method": "PUT",
@@ -6038,7 +6044,7 @@
     },
     "malicious_user_mitigation": {
       "resource": "malicious_user_mitigation",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/malicious_user_mitigations",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/malicious_user_mitigations/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -6146,11 +6152,11 @@
     },
     "namespace": {
       "resource": "namespace",
-      "base_path": "/api/web/namespaces/system/managed_client/customer_supports/{tp_id}/comment",
+      "base_path": "/api/web/namespaces/system/tenant/settings/otp/enable",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/ml/data/namespaces/{namespace}/api_endpoints/stats",
+          "path": "/api/web/custom/namespaces/system/user_groups",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -6161,19 +6167,18 @@
           },
           "required_fields": [
             "metadata.name",
-            "metadata.namespace",
-            "path.namespace"
+            "metadata.namespace"
           ],
           "side_effects": {
             "creates": [
-              "stat"
+              "user-group"
             ]
           },
-          "purpose": "GET API Endpoints Stats for Namespace."
+          "purpose": "Create User Group."
         },
         "delete": {
           "method": "DELETE",
-          "path": "/api/web/namespaces/{namespace}/child_tenant_managers/{name}",
+          "path": "/api/web/namespaces/system/tenant/settings/tenant/image",
           "danger_level": "high",
           "discovered_response_time": {
             "p50_ms": 500,
@@ -6182,22 +6187,18 @@
             "sample_count": 0,
             "source": "estimate"
           },
-          "required_fields": [
-            "path.name",
-            "path.namespace"
-          ],
           "confirmation_required": true,
           "side_effects": {
             "deletes": [
-              "child-tenant-manager",
+              "image",
               "contained_resources"
             ]
           },
-          "purpose": "DELETE Child Tenant Manager."
+          "purpose": "DELETE tenant profile image."
         },
         "list": {
           "method": "GET",
-          "path": "/api/web/namespaces/system/tenant/idm/events/login",
+          "path": "/api/web/namespaces/system/user/sessions",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -6206,11 +6207,11 @@
             "sample_count": 0,
             "source": "estimate"
           },
-          "purpose": "GetLoginEvents."
+          "purpose": "GetUserSessions."
         },
         "read": {
           "method": "GET",
-          "path": "/api/web/namespaces/{namespace}/child_tenant_managers/{name}",
+          "path": "/api/web/namespaces/{namespace}/roles/{name}",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -6223,11 +6224,11 @@
             "path.name",
             "path.namespace"
           ],
-          "purpose": "GET Child Tenant Manager."
+          "purpose": "GET Role"
         },
         "update": {
           "method": "PUT",
-          "path": "/api/web/namespaces/system/user/settings/request_initial_access",
+          "path": "/api/web/namespaces/system/user/notifications/unset",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 800,
@@ -6238,10 +6239,10 @@
           },
           "side_effects": {
             "modifies": [
-              "request-initial-acces"
+              "unset"
             ]
           },
-          "purpose": "Request Initial Access."
+          "purpose": "Unset ntfn preference."
         }
       }
     },
@@ -6571,7 +6572,7 @@
     },
     "network_interface": {
       "resource": "network_interface",
-      "base_path": "/api/config/namespaces/{namespace}/network_interfaces/{name}",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/network_interfaces",
       "operations": {
         "create": {
           "method": "POST",
@@ -6683,7 +6684,7 @@
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{metadata.namespace}/network_policys",
+          "path": "/api/config/namespaces/{metadata.namespace}/network_policy_rules",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -6699,14 +6700,14 @@
           ],
           "side_effects": {
             "creates": [
-              "network-policy"
+              "network-policy-rule"
             ]
           },
-          "purpose": "Create Network Policy."
+          "purpose": "Create Network Policy Rule."
         },
         "delete": {
           "method": "DELETE",
-          "path": "/api/config/namespaces/{namespace}/network_policy_views/{name}",
+          "path": "/api/config/namespaces/{namespace}/network_policy_rules/{name}",
           "danger_level": "high",
           "discovered_response_time": {
             "p50_ms": 500,
@@ -6722,15 +6723,15 @@
           "confirmation_required": true,
           "side_effects": {
             "deletes": [
-              "network-policy-view",
+              "network-policy-rule",
               "contained_resources"
             ]
           },
-          "purpose": "DELETE Configure Network policy View."
+          "purpose": "DELETE Network Policy Rule."
         },
         "list": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/network_policy_sets",
+          "path": "/api/config/namespaces/{namespace}/network_policy_views",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -6742,11 +6743,11 @@
           "required_fields": [
             "path.namespace"
           ],
-          "purpose": "List Network Policy Set."
+          "purpose": "List Configure Network policy View."
         },
         "read": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/network_policy_views/{name}",
+          "path": "/api/config/namespaces/{namespace}/network_policy_rules/{name}",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -6759,11 +6760,11 @@
             "path.name",
             "path.namespace"
           ],
-          "purpose": "GET Network policy View."
+          "purpose": "GET Network Policy Rule."
         },
         "update": {
           "method": "PUT",
-          "path": "/api/config/namespaces/{metadata.namespace}/network_policys/{metadata.name}",
+          "path": "/api/config/namespaces/{metadata.namespace}/network_policy_views/{metadata.name}",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 800,
@@ -6778,10 +6779,10 @@
           ],
           "side_effects": {
             "modifies": [
-              "network-policy"
+              "network-policy-view"
             ]
           },
-          "purpose": "Replace Network Policy."
+          "purpose": "Replace Network policy View."
         }
       }
     },
@@ -6895,7 +6896,7 @@
     },
     "network_policy_view": {
       "resource": "network_policy_view",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/network_policy_views",
+      "base_path": "/api/config/namespaces/{namespace}/network_policy_views/{name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -7003,11 +7004,11 @@
     },
     "nfv_service": {
       "resource": "nfv_service",
-      "base_path": "/api/data/namespaces/{namespace}/nfv_services/metrics",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/nfv_services",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{metadata.namespace}/nfv_services",
+          "path": "/api/config/namespaces/system/nfv_service/{name}/force-delete",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -7019,14 +7020,14 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "path.metadata.namespace"
+            "path.name"
           ],
           "side_effects": {
             "creates": [
-              "nfv-service"
+              "force-delete"
             ]
           },
-          "purpose": "Create NFV Service."
+          "purpose": "Force DELETE NFV Service."
         },
         "delete": {
           "method": "DELETE",
@@ -7219,7 +7220,7 @@
     },
     "origin_pool": {
       "resource": "origin_pool",
-      "base_path": "/api/config/namespaces/{namespace}/origin_pools",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/origin_pools",
       "operations": {
         "create": {
           "method": "POST",
@@ -7327,7 +7328,7 @@
     },
     "policer": {
       "resource": "policer",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/policers",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/policers/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -7378,7 +7379,7 @@
         },
         "list": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/policers",
+          "path": "/api/config/namespaces/{namespace}/protocol_policers",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -7390,7 +7391,7 @@
           "required_fields": [
             "path.namespace"
           ],
-          "purpose": "List Policer."
+          "purpose": "List Protocol Policer."
         },
         "read": {
           "method": "GET",
@@ -7435,7 +7436,7 @@
     },
     "policy_based_routing": {
       "resource": "policy_based_routing",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/policy_based_routings/{metadata.name}",
+      "base_path": "/api/config/namespaces/{namespace}/policy_based_routings/{name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -7543,7 +7544,7 @@
     },
     "protocol_inspection": {
       "resource": "protocol_inspection",
-      "base_path": "/api/config/namespaces/{namespace}/protocol_inspections/{name}",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/protocol_inspections/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -8083,11 +8084,11 @@
     },
     "route": {
       "resource": "route",
-      "base_path": "/api/operate/namespaces/{namespace}/sites/{site}/ver/routes",
+      "base_path": "/api/config/namespaces/{namespace}/routes/{name}",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/operate/namespaces/{namespace}/sites/{site}/ver/simplified_routes",
+          "path": "/api/operate/namespaces/{namespace}/sites/{site}/ver/routes",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -8104,10 +8105,10 @@
           ],
           "side_effects": {
             "creates": [
-              "simplified-route"
+              "route"
             ]
           },
-          "purpose": "Show Simplified Routes."
+          "purpose": "Show Routes."
         },
         "delete": {
           "method": "DELETE",
@@ -8135,7 +8136,7 @@
         },
         "list": {
           "method": "GET",
-          "path": "/api/operate/namespaces/{namespace}/sites/{site}/ver/bgp_routes",
+          "path": "/api/config/namespaces/{namespace}/routes",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -8145,10 +8146,9 @@
             "source": "estimate"
           },
           "required_fields": [
-            "path.namespace",
-            "path.site"
+            "path.namespace"
           ],
-          "purpose": "Show BGP Routes."
+          "purpose": "List Route."
         },
         "read": {
           "method": "GET",
@@ -8193,7 +8193,7 @@
     },
     "secret_management_access": {
       "resource": "secret_management_access",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/secret_management_accesss",
+      "base_path": "/api/config/namespaces/{namespace}/secret_management_accesss",
       "operations": {
         "create": {
           "method": "POST",
@@ -8328,7 +8328,7 @@
         },
         "delete": {
           "method": "DELETE",
-          "path": "/api/config/namespaces/{namespace}/securemesh_site_v2s/{name}",
+          "path": "/api/config/namespaces/{namespace}/securemesh_sites/{name}",
           "danger_level": "high",
           "discovered_response_time": {
             "p50_ms": 500,
@@ -8344,7 +8344,7 @@
           "confirmation_required": true,
           "side_effects": {
             "deletes": [
-              "securemesh-site-v2",
+              "securemesh-site",
               "contained_resources"
             ]
           },
@@ -8368,7 +8368,7 @@
         },
         "read": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/securemesh_site_v2s/{name}",
+          "path": "/api/config/namespaces/{namespace}/securemesh_sites/{name}",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -8385,7 +8385,7 @@
         },
         "update": {
           "method": "PUT",
-          "path": "/api/config/namespaces/{metadata.namespace}/securemesh_sites/{metadata.name}",
+          "path": "/api/config/namespaces/{metadata.namespace}/securemesh_site_v2s/{metadata.name}",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 800,
@@ -8400,7 +8400,7 @@
           ],
           "side_effects": {
             "modifies": [
-              "securemesh-site"
+              "securemesh-site-v2"
             ]
           },
           "purpose": "Replace Secure Mesh site."
@@ -8409,7 +8409,7 @@
     },
     "segment": {
       "resource": "segment",
-      "base_path": "/api/config/namespaces/{namespace}/segments",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/segments",
       "operations": {
         "create": {
           "method": "POST",
@@ -8476,7 +8476,7 @@
         },
         "read": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/segment_connections/{name}",
+          "path": "/api/config/namespaces/{namespace}/segments/{name}",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -8489,7 +8489,7 @@
             "path.name",
             "path.namespace"
           ],
-          "purpose": "GET segment connector."
+          "purpose": "GET segment."
         },
         "update": {
           "method": "PUT",
@@ -8629,7 +8629,7 @@
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/data/namespaces/{namespace}/service_policy/latency",
+          "path": "/api/config/namespaces/{metadata.namespace}/service_policys",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -8641,14 +8641,14 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "path.namespace"
+            "path.metadata.namespace"
           ],
           "side_effects": {
             "creates": [
-              "latency"
+              "service-policy"
             ]
           },
-          "purpose": "Service Policy Latency."
+          "purpose": "Create Service Policy."
         },
         "delete": {
           "method": "DELETE",
@@ -8733,7 +8733,7 @@
     },
     "service_policy_rule": {
       "resource": "service_policy_rule",
-      "base_path": "/api/config/namespaces/{namespace}/service_policy_rules",
+      "base_path": "/api/config/namespaces/{namespace}/service_policy_rules/{name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -8841,11 +8841,11 @@
     },
     "site": {
       "resource": "site",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/sites/{metadata.name}",
+      "base_path": "/api/config/namespaces/{namespace}/sites/{name}/local-kubeconfig",
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{namespace}/azure_vnet_site/{name}/validate_config",
+          "path": "/api/config/namespaces/{namespace}/sites/{name}/upgrade_sw",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -8862,14 +8862,14 @@
           ],
           "side_effects": {
             "creates": [
-              "validate-config"
+              "upgrade-sw"
             ]
           },
-          "purpose": "Validate Azure VNet Site Config."
+          "purpose": "Upgrade SW."
         },
         "delete": {
           "method": "DELETE",
-          "path": "/api/config/namespaces/{namespace}/securemesh_sites/{name}",
+          "path": "/api/config/namespaces/{namespace}/securemesh_site_v2s/{name}",
           "danger_level": "high",
           "discovered_response_time": {
             "p50_ms": 500,
@@ -8885,7 +8885,7 @@
           "confirmation_required": true,
           "side_effects": {
             "deletes": [
-              "securemesh-site",
+              "securemesh-site-v2",
               "contained_resources"
             ]
           },
@@ -8893,23 +8893,23 @@
         },
         "list": {
           "method": "GET",
-          "path": "/api/data/namespaces/system/site/{site}/api/v1/persistentvolumeclaims",
+          "path": "/api/data/namespaces/system/site/{site}/apis/batch/v1/jobs",
           "danger_level": "low",
           "discovered_response_time": {
-            "p50_ms": 149,
-            "p95_ms": 298,
-            "p99_ms": 448,
+            "p50_ms": 147,
+            "p95_ms": 295,
+            "p99_ms": 443,
             "sample_count": 1,
             "source": "discovery"
           },
           "required_fields": [
             "path.site"
           ],
-          "purpose": "PersistentVolumeClaim List."
+          "purpose": "Job List"
         },
         "read": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/securemesh_sites/{name}",
+          "path": "/api/config/namespaces/{namespace}/securemesh_site_v2s/{name}",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -8926,7 +8926,7 @@
         },
         "update": {
           "method": "PUT",
-          "path": "/api/config/namespaces/{metadata.namespace}/sites/{metadata.name}",
+          "path": "/api/config/namespaces/{metadata.namespace}/azure_vnet_sites/{metadata.name}",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 800,
@@ -8941,10 +8941,10 @@
           ],
           "side_effects": {
             "modifies": [
-              "site"
+              "azure-vnet-site"
             ]
           },
-          "purpose": "Replace Site."
+          "purpose": "Replace Azure VNet site."
         }
       }
     },
@@ -9058,7 +9058,7 @@
     },
     "subnet": {
       "resource": "subnet",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/subnets/{metadata.name}",
+      "base_path": "/api/config/namespaces/{namespace}/subnets/{name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -9233,7 +9233,7 @@
         },
         "read": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/tcp_loadbalancers/{name}/get-dns-info",
+          "path": "/api/config/namespaces/{namespace}/tcp_loadbalancers/{name}",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -9246,7 +9246,7 @@
             "path.name",
             "path.namespace"
           ],
-          "purpose": "GET DNS Info."
+          "purpose": "GET TCP Load Balancer."
         },
         "update": {
           "method": "PUT",
@@ -9382,7 +9382,7 @@
     },
     "trusted_ca_list": {
       "resource": "trusted_ca_list",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/trusted_ca_lists/{metadata.name}",
+      "base_path": "/api/config/namespaces/{namespace}/trusted_ca_lists",
       "operations": {
         "create": {
           "method": "POST",
@@ -9490,7 +9490,7 @@
     },
     "tunnel": {
       "resource": "tunnel",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/tunnels/{metadata.name}",
+      "base_path": "/api/config/namespaces/{namespace}/tunnels/{name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -9665,7 +9665,7 @@
         },
         "read": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/udp_loadbalancers/{name}/get-dns-info",
+          "path": "/api/config/namespaces/{namespace}/udp_loadbalancers/{name}",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -9678,7 +9678,7 @@
             "path.name",
             "path.namespace"
           ],
-          "purpose": "GET DNS Info."
+          "purpose": "GET UDP Load Balancer."
         },
         "update": {
           "method": "PUT",
@@ -9814,7 +9814,7 @@
     },
     "user_identification": {
       "resource": "user_identification",
-      "base_path": "/api/config/namespaces/{namespace}/user_identifications/{name}",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/user_identifications/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",
@@ -9926,7 +9926,7 @@
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/ml/data/namespaces/{namespace}/virtual_hosts/{name}/unlink_tickets",
+          "path": "/api/ml/data/namespaces/{namespace}/virtual_hosts/{name}/create_ticket",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -9943,10 +9943,10 @@
           ],
           "side_effects": {
             "creates": [
-              "unlink-ticket"
+              "create-ticket"
             ]
           },
-          "purpose": "Unlink Tickets."
+          "purpose": "Create a ticket for a vulnerability."
         },
         "delete": {
           "method": "DELETE",
@@ -9990,7 +9990,7 @@
         },
         "read": {
           "method": "GET",
-          "path": "/api/ml/data/namespaces/{namespace}/virtual_hosts/{name}/api_endpoint/sources_openapi_schema",
+          "path": "/api/ml/data/namespaces/{namespace}/virtual_hosts/{name}/api_endpoints",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -10003,7 +10003,7 @@
             "path.name",
             "path.namespace"
           ],
-          "purpose": "GET relevant source OpenApi schema per API endpoint."
+          "purpose": "GET API Endpoints."
         },
         "update": {
           "method": "PUT",
@@ -10139,7 +10139,7 @@
     },
     "virtual_site": {
       "resource": "virtual_site",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/virtual_sites",
+      "base_path": "/api/config/namespaces/{namespace}/virtual_sites/{name}/selectees",
       "operations": {
         "create": {
           "method": "POST",
@@ -10467,7 +10467,7 @@
       "operations": {
         "create": {
           "method": "POST",
-          "path": "/api/config/namespaces/{metadata.namespace}/workload_flavors",
+          "path": "/api/config/namespaces/{metadata.namespace}/workloads",
           "danger_level": "medium",
           "discovered_response_time": {
             "p50_ms": 1000,
@@ -10483,14 +10483,14 @@
           ],
           "side_effects": {
             "creates": [
-              "workload-flavor"
+              "workload"
             ]
           },
-          "purpose": "Create Workload Flavor."
+          "purpose": "Create Workload."
         },
         "delete": {
           "method": "DELETE",
-          "path": "/api/config/namespaces/{namespace}/workload_flavors/{name}",
+          "path": "/api/config/namespaces/{namespace}/workloads/{name}",
           "danger_level": "high",
           "discovered_response_time": {
             "p50_ms": 500,
@@ -10506,31 +10506,31 @@
           "confirmation_required": true,
           "side_effects": {
             "deletes": [
-              "workload-flavor",
+              "workload",
               "contained_resources"
             ]
           },
-          "purpose": "DELETE Workload Flavor."
+          "purpose": "DELETE Workload."
         },
         "list": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/workloads",
+          "path": "/api/config/namespaces/{namespace}/workload_flavors",
           "danger_level": "low",
           "discovered_response_time": {
-            "p50_ms": 153,
-            "p95_ms": 306,
-            "p99_ms": 459,
+            "p50_ms": 155,
+            "p95_ms": 311,
+            "p99_ms": 467,
             "sample_count": 1,
             "source": "discovery"
           },
           "required_fields": [
             "path.namespace"
           ],
-          "purpose": "List Workload."
+          "purpose": "List Workload Flavor."
         },
         "read": {
           "method": "GET",
-          "path": "/api/config/namespaces/{namespace}/workload_flavors/{name}",
+          "path": "/api/config/namespaces/{namespace}/workloads/{name}",
           "danger_level": "low",
           "discovered_response_time": {
             "p50_ms": 200,
@@ -10543,7 +10543,7 @@
             "path.name",
             "path.namespace"
           ],
-          "purpose": "GET Workload Flavor."
+          "purpose": "GET Workload."
         },
         "update": {
           "method": "PUT",
@@ -10571,7 +10571,7 @@
     },
     "workload_flavor": {
       "resource": "workload_flavor",
-      "base_path": "/api/config/namespaces/{metadata.namespace}/workload_flavors",
+      "base_path": "/api/config/namespaces/{metadata.namespace}/workload_flavors/{metadata.name}",
       "operations": {
         "create": {
           "method": "POST",

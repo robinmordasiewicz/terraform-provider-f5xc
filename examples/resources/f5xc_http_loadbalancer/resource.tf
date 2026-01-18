@@ -159,3 +159,9 @@ resource "f5xc_http_loadbalancer" "example" {
     priority = 1
   }
 }
+
+# The following optional fields have server-applied defaults and can be omitted:
+# - endpoint_selection
+# - loadbalancer_algorithm
+# - healthcheck
+# - no_tls

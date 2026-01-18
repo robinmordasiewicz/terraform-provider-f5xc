@@ -1,0 +1,944 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "2.1.0",
+  "description": "Centralized validation specification for F5 XC API",
+  "generated_at": "2026-01-18T06:23:45.765630+00:00",
+  "source": "f5xc-api-enriched",
+  "required_fields": {
+    "common": {
+      "all_operations": [
+        "metadata.name",
+        "metadata.namespace"
+      ]
+    },
+    "resources": {
+      "http_loadbalancer": {
+        "create": [
+          "metadata.name",
+          "metadata.namespace",
+          "spec.domains",
+          "spec.routes",
+          "spec.origin_pools"
+        ],
+        "update": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "minimum_config": [
+          "metadata.name",
+          "metadata.namespace",
+          "spec.domains"
+        ]
+      },
+      "origin_pool": {
+        "create": [
+          "metadata.name",
+          "metadata.namespace",
+          "spec.origin_servers",
+          "spec.port"
+        ],
+        "update": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "minimum_config": [
+          "metadata.name",
+          "metadata.namespace",
+          "spec.origin_servers",
+          "spec.port"
+        ]
+      },
+      "healthcheck": {
+        "create": [
+          "metadata.name",
+          "metadata.namespace",
+          "spec.interval",
+          "spec.timeout",
+          "spec.healthy_threshold",
+          "spec.unhealthy_threshold"
+        ],
+        "update": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "minimum_config": [
+          "metadata.name",
+          "metadata.namespace",
+          "spec.interval",
+          "spec.timeout",
+          "spec.healthy_threshold",
+          "spec.unhealthy_threshold"
+        ]
+      },
+      "tcp_loadbalancer": {
+        "create": [
+          "metadata.name",
+          "metadata.namespace",
+          "spec.origin_pools"
+        ],
+        "update": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "minimum_config": [
+          "metadata.name",
+          "metadata.namespace",
+          "spec.origin_pools"
+        ]
+      },
+      "app_firewall": {
+        "create": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "update": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "minimum_config": [
+          "metadata.name",
+          "metadata.namespace"
+        ]
+      },
+      "certificate": {
+        "create": [
+          "metadata.name",
+          "metadata.namespace",
+          "spec.certificate_url"
+        ],
+        "update": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "minimum_config": [
+          "metadata.name",
+          "metadata.namespace",
+          "spec.certificate_url"
+        ]
+      },
+      "service_policy": {
+        "create": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "update": [
+          "metadata.name",
+          "metadata.namespace"
+        ],
+        "minimum_config": [
+          "metadata.name",
+          "metadata.namespace"
+        ]
+      }
+    }
+  },
+  "enum_values": {
+    "loadbalancer_algorithm": {
+      "description": "Load balancing algorithm for distributing traffic across origin servers",
+      "values": [
+        {
+          "value": "ROUND_ROBIN",
+          "description": "Each healthy endpoint selected in round robin order"
+        },
+        {
+          "value": "LEAST_REQUEST",
+          "description": "Endpoint with fewest active requests selected"
+        },
+        {
+          "value": "RING_HASH",
+          "description": "Consistent hashing using ring hash of endpoint names"
+        },
+        {
+          "value": "RANDOM",
+          "description": "Random healthy endpoint selection"
+        },
+        {
+          "value": "LB_OVERRIDE",
+          "description": "Hash policy inherited from parent load balancer"
+        }
+      ],
+      "default": "ROUND_ROBIN"
+    },
+    "endpoint_selection": {
+      "description": "Policy for selecting endpoints from local and remote sites",
+      "values": [
+        {
+          "value": "DISTRIBUTED",
+          "description": "Consider both remote and local endpoints for load balancing"
+        },
+        {
+          "value": "LOCAL_ONLY",
+          "description": "Only local endpoints used for load balancing"
+        },
+        {
+          "value": "LOCAL_PREFERRED",
+          "description": "Prefer local endpoints, fall back to remote if unavailable"
+        }
+      ],
+      "default": "DISTRIBUTED"
+    },
+    "health_check_type": {
+      "description": "Type of health check to perform",
+      "values": [
+        {
+          "value": "HTTP",
+          "description": "HTTP/HTTPS health check with configurable path and headers"
+        },
+        {
+          "value": "TCP",
+          "description": "TCP connection health check"
+        },
+        {
+          "value": "UDP",
+          "description": "UDP/ICMP health check"
+        }
+      ],
+      "default": null
+    },
+    "waf_mode": {
+      "description": "WAF operation mode",
+      "values": [
+        {
+          "value": "MONITORING",
+          "description": "Log threats without blocking (default)"
+        },
+        {
+          "value": "BLOCKING",
+          "description": "Block detected threats"
+        }
+      ],
+      "default": "MONITORING"
+    },
+    "tls_mode": {
+      "description": "TLS termination mode",
+      "values": [
+        {
+          "value": "NO_TLS",
+          "description": "No TLS, plaintext connection"
+        },
+        {
+          "value": "TLS",
+          "description": "TLS enabled with certificate"
+        },
+        {
+          "value": "MTLS",
+          "description": "Mutual TLS with client certificate verification"
+        }
+      ],
+      "default": "NO_TLS"
+    },
+    "port_choice": {
+      "description": "Origin server port configuration method",
+      "values": [
+        {
+          "value": "port",
+          "description": "Explicit port number (1-65535)"
+        },
+        {
+          "value": "automatic_port",
+          "description": "Port automatically assigned"
+        },
+        {
+          "value": "lb_port",
+          "description": "Use load balancer port"
+        }
+      ],
+      "default": null
+    },
+    "upstream_conn_pool_reuse": {
+      "description": "Upstream connection pool reuse state",
+      "values": [
+        {
+          "value": "enable_conn_pool_reuse",
+          "description": "Enable connection pool reuse"
+        },
+        {
+          "value": "disable_conn_pool_reuse",
+          "description": "Disable connection pool reuse"
+        }
+      ],
+      "default": "enable_conn_pool_reuse"
+    },
+    "health_check_port_choice": {
+      "description": "Port used for health checks",
+      "values": [
+        {
+          "value": "same_as_endpoint_port",
+          "description": "Use endpoint port for health checks"
+        },
+        {
+          "value": "health_check_port",
+          "description": "Explicit health check port"
+        }
+      ],
+      "default": "same_as_endpoint_port"
+    },
+    "origin_tls_choice": {
+      "description": "TLS encryption to origin servers",
+      "values": [
+        {
+          "value": "no_tls",
+          "description": "Disable TLS to origin"
+        },
+        {
+          "value": "use_tls",
+          "description": "Enable TLS with configuration"
+        }
+      ],
+      "default": "no_tls"
+    },
+    "circuit_breaker_choice": {
+      "description": "Circuit breaker configuration",
+      "values": [
+        {
+          "value": "default_circuit_breaker",
+          "description": "Use default circuit breaker settings"
+        },
+        {
+          "value": "disable_circuit_breaker",
+          "description": "Disable circuit breaker"
+        },
+        {
+          "value": "circuit_breaker",
+          "description": "Custom circuit breaker configuration"
+        }
+      ],
+      "default": "default_circuit_breaker"
+    },
+    "outlier_detection_choice": {
+      "description": "Outlier detection configuration",
+      "values": [
+        {
+          "value": "disable_outlier_detection",
+          "description": "Disable outlier detection"
+        },
+        {
+          "value": "outlier_detection",
+          "description": "Enable custom outlier detection"
+        }
+      ],
+      "default": "disable_outlier_detection"
+    },
+    "panic_threshold_type": {
+      "description": "Panic threshold configuration",
+      "values": [
+        {
+          "value": "no_panic_threshold",
+          "description": "No panic threshold"
+        },
+        {
+          "value": "panic_threshold",
+          "description": "Custom panic threshold (0-100%)"
+        }
+      ],
+      "default": "no_panic_threshold"
+    },
+    "subset_choice": {
+      "description": "Subset load balancing configuration",
+      "values": [
+        {
+          "value": "disable_subsets",
+          "description": "Disable subset load balancing"
+        },
+        {
+          "value": "enable_subsets",
+          "description": "Enable subset load balancing"
+        }
+      ],
+      "default": "disable_subsets"
+    },
+    "http_protocol_type": {
+      "description": "HTTP protocol configuration",
+      "values": [
+        {
+          "value": "auto_http_config",
+          "description": "Automatic protocol negotiation"
+        },
+        {
+          "value": "http1_config",
+          "description": "HTTP/1.x configuration"
+        },
+        {
+          "value": "http2_options",
+          "description": "HTTP/2 configuration"
+        }
+      ],
+      "default": "auto_http_config"
+    },
+    "proxy_protocol_choice": {
+      "description": "Proxy protocol configuration",
+      "values": [
+        {
+          "value": "disable_proxy_protocol",
+          "description": "Disable proxy protocol"
+        },
+        {
+          "value": "proxy_protocol_v1",
+          "description": "Proxy Protocol v1"
+        },
+        {
+          "value": "proxy_protocol_v2",
+          "description": "Proxy Protocol v2"
+        }
+      ],
+      "default": "disable_proxy_protocol"
+    },
+    "lb_source_ip_persistence_choice": {
+      "description": "LB source IP persistence configuration",
+      "values": [
+        {
+          "value": "disable_lb_source_ip_persistance",
+          "description": "Disable LB source IP persistence"
+        },
+        {
+          "value": "enable_lb_source_ip_persistance",
+          "description": "Enable LB source IP persistence"
+        }
+      ],
+      "default": "disable_lb_source_ip_persistance"
+    }
+  },
+  "constraints": {
+    "type_defaults": {
+      "string": {
+        "minLength": 0,
+        "maxLength": 1024
+      },
+      "integer": {
+        "minimum": 0,
+        "maximum": 2147483647
+      }
+    }
+  },
+  "patterns": [
+    {
+      "pattern": "\\bport$",
+      "constraints": {
+        "minimum": 1,
+        "maximum": 65535
+      },
+      "confidence": 0.99,
+      "description": "Valid TCP/UDP port range"
+    },
+    {
+      "pattern": "\\b(vlan)?_?id$",
+      "constraints": {
+        "minimum": 1,
+        "maximum": 4094
+      },
+      "confidence": 0.95,
+      "description": "Valid VLAN ID range (802.1Q)"
+    },
+    {
+      "pattern": "\\bemail$",
+      "constraints": {
+        "format": "email",
+        "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+      },
+      "confidence": 0.99,
+      "description": "RFC 5322 compliant email validation"
+    },
+    {
+      "pattern": "\\burl$",
+      "constraints": {
+        "format": "uri"
+      },
+      "confidence": 0.95,
+      "description": "URL must be valid URI format"
+    },
+    {
+      "pattern": "\\buuid$",
+      "constraints": {
+        "format": "uuid"
+      },
+      "confidence": 0.99,
+      "description": "UUID format validation (RFC 4122)"
+    },
+    {
+      "pattern": "\\btimestamp$",
+      "constraints": {
+        "format": "date-time"
+      },
+      "confidence": 0.95,
+      "description": "ISO 8601 date-time format"
+    },
+    {
+      "pattern": "\\b(ipv4|ipaddress|ip_addr)$",
+      "constraints": {
+        "format": "ipv4"
+      },
+      "confidence": 0.95,
+      "description": "IPv4 address format validation"
+    },
+    {
+      "pattern": "\\bname$",
+      "constraints": {
+        "minLength": 1,
+        "maxLength": 63,
+        "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+      },
+      "confidence": 0.9,
+      "description": "Kubernetes-style naming convention"
+    },
+    {
+      "pattern": "\\bnamespace$",
+      "constraints": {
+        "minLength": 1,
+        "maxLength": 63,
+        "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+      },
+      "confidence": 0.95,
+      "description": "Kubernetes namespace naming convention"
+    },
+    {
+      "pattern": "\\b(interval|timeout)$",
+      "constraints": {
+        "minimum": 1,
+        "maximum": 600
+      },
+      "confidence": 0.9,
+      "description": "Time duration in seconds (1s to 10min)"
+    },
+    {
+      "pattern": "\\b(healthy_threshold|unhealthy_threshold)$",
+      "constraints": {
+        "minimum": 1,
+        "maximum": 16
+      },
+      "confidence": 0.95,
+      "description": "Health check threshold count"
+    },
+    {
+      "pattern": "\\bjitter_percent$",
+      "constraints": {
+        "minimum": 0,
+        "maximum": 100
+      },
+      "confidence": 0.95,
+      "description": "Percentage value for jitter"
+    }
+  ],
+  "conditional_requirements": {
+    "description": "Fields required or mutually exclusive based on context",
+    "resources": {
+      "http_loadbalancer": {
+        "mutually_exclusive": [
+          {
+            "fields": [
+              "spec.dns_name",
+              "spec.advertise"
+            ],
+            "reason": "Choose either DNS-based or advertised traffic routing"
+          },
+          {
+            "fields": [
+              "spec.certificate_chain",
+              "spec.tls_config.vault_secret"
+            ],
+            "reason": "Certificate source: inline or vault"
+          }
+        ],
+        "conditional": [
+          {
+            "field": "spec.certificate",
+            "required_when": {
+              "field": "spec.https",
+              "condition": "present"
+            },
+            "reason": "Required for TLS termination"
+          }
+        ]
+      },
+      "healthcheck": {
+        "mutually_exclusive": [
+          {
+            "fields": [
+              "spec.http_health_check",
+              "spec.tcp_health_check",
+              "spec.udp_icmp_health_check"
+            ],
+            "reason": "Choose exactly one health check type"
+          }
+        ],
+        "conditional": []
+      },
+      "origin_pool": {
+        "mutually_exclusive": [
+          {
+            "fields": [
+              "spec.port",
+              "spec.automatic_port",
+              "spec.lb_port"
+            ],
+            "reason": "Choose exactly one port configuration method"
+          },
+          {
+            "fields": [
+              "spec.enable_conn_pool_reuse",
+              "spec.disable_conn_pool_reuse"
+            ],
+            "reason": "Choose exactly one connection pool reuse setting"
+          },
+          {
+            "fields": [
+              "spec.advanced_options.health_check_port",
+              "spec.advanced_options.same_as_endpoint_port"
+            ],
+            "reason": "Choose exactly one health check port method"
+          },
+          {
+            "fields": [
+              "spec.no_tls",
+              "spec.use_tls"
+            ],
+            "reason": "Choose exactly one TLS configuration"
+          },
+          {
+            "fields": [
+              "spec.advanced_options.default_circuit_breaker",
+              "spec.advanced_options.disable_circuit_breaker",
+              "spec.advanced_options.circuit_breaker"
+            ],
+            "reason": "Choose exactly one circuit breaker configuration"
+          },
+          {
+            "fields": [
+              "spec.advanced_options.disable_outlier_detection",
+              "spec.advanced_options.outlier_detection"
+            ],
+            "reason": "Choose exactly one outlier detection configuration"
+          },
+          {
+            "fields": [
+              "spec.advanced_options.no_panic_threshold",
+              "spec.advanced_options.panic_threshold"
+            ],
+            "reason": "Choose exactly one panic threshold configuration"
+          },
+          {
+            "fields": [
+              "spec.advanced_options.disable_subsets",
+              "spec.advanced_options.enable_subsets"
+            ],
+            "reason": "Choose exactly one subset load balancing configuration"
+          },
+          {
+            "fields": [
+              "spec.advanced_options.auto_http_config",
+              "spec.advanced_options.http1_config",
+              "spec.advanced_options.http2_options"
+            ],
+            "reason": "Choose exactly one HTTP protocol configuration"
+          },
+          {
+            "fields": [
+              "spec.advanced_options.disable_proxy_protocol",
+              "spec.advanced_options.proxy_protocol_v1",
+              "spec.advanced_options.proxy_protocol_v2"
+            ],
+            "reason": "Choose exactly one proxy protocol configuration"
+          },
+          {
+            "fields": [
+              "spec.advanced_options.disable_lb_source_ip_persistance",
+              "spec.advanced_options.enable_lb_source_ip_persistance"
+            ],
+            "reason": "Choose exactly one LB source IP persistence configuration"
+          }
+        ],
+        "conditional": []
+      },
+      "tcp_loadbalancer": {
+        "mutually_exclusive": [
+          {
+            "fields": [
+              "spec.listen_port",
+              "spec.port_ranges"
+            ],
+            "reason": "Specify either a single port or port ranges (port_choice)"
+          },
+          {
+            "fields": [
+              "spec.listener.tcp_port",
+              "spec.listener.udp_port"
+            ],
+            "reason": "Specify either TCP or UDP protocol"
+          }
+        ],
+        "conditional": []
+      },
+      "service_policy": {
+        "mutually_exclusive": [
+          {
+            "fields": [
+              "spec.allow_all_requests",
+              "spec.deny_all_requests",
+              "spec.allow_list",
+              "spec.deny_list",
+              "spec.rule_list"
+            ],
+            "reason": "Choose exactly one rule type"
+          }
+        ],
+        "conditional": []
+      }
+    }
+  },
+  "minimum_configurations": {
+    "description": "Minimum viable configuration for creating resources",
+    "resources": {
+      "http_loadbalancer": {
+        "description": "HTTP/HTTPS load balancer for distributing traffic across origin pools",
+        "example": {
+          "metadata": {
+            "name": "example-lb",
+            "namespace": "default"
+          },
+          "spec": {
+            "domains": [
+              "example.com"
+            ],
+            "http": [
+              {
+                "port": 80
+              }
+            ],
+            "routes": [
+              {
+                "prefix": "/",
+                "origin_pool": {
+                  "pool_name": "pool"
+                }
+              }
+            ],
+            "origin_pools": [
+              {
+                "name": "pool",
+                "origins": [
+                  {
+                    "hostname": "backend.example.com"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "origin_pool": {
+        "description": "Backend origin servers for load balancing",
+        "example": {
+          "metadata": {
+            "name": "backend-pool",
+            "namespace": "default"
+          },
+          "spec": {
+            "origin_servers": [
+              {
+                "public_name": {
+                  "dns_name": "backend1.example.com"
+                }
+              },
+              {
+                "public_name": {
+                  "dns_name": "backend2.example.com"
+                }
+              }
+            ],
+            "port": 8080
+          }
+        }
+      },
+      "healthcheck": {
+        "description": "Health check configuration for monitoring origin servers",
+        "example": {
+          "metadata": {
+            "name": "http-health",
+            "namespace": "default"
+          },
+          "spec": {
+            "http_health_check": {
+              "path": "/health",
+              "use_origin_server_hostname": true
+            },
+            "interval": 15,
+            "timeout": 3,
+            "unhealthy_threshold": 1,
+            "healthy_threshold": 3,
+            "jitter_percent": 30
+          }
+        }
+      },
+      "tcp_loadbalancer": {
+        "description": "TCP/UDP load balancer for non-HTTP protocols",
+        "example": {
+          "metadata": {
+            "name": "database-lb",
+            "namespace": "default"
+          },
+          "spec": {
+            "listener": {
+              "port": 5432,
+              "protocol": "TCP"
+            },
+            "origin_pools": [
+              {
+                "pool_name": "postgres-cluster"
+              }
+            ]
+          }
+        }
+      },
+      "app_firewall": {
+        "description": "Web Application Firewall (WAF) policy",
+        "example": {
+          "metadata": {
+            "name": "default-waf",
+            "namespace": "default"
+          },
+          "spec": {
+            "detection_settings": {
+              "signature_detection": true
+            },
+            "monitoring": {}
+          }
+        }
+      },
+      "certificate": {
+        "description": "TLS certificate for securing HTTPS endpoints",
+        "example": {
+          "metadata": {
+            "name": "example-cert",
+            "namespace": "default"
+          },
+          "spec": {
+            "certificate_url": "string:///BASE64_ENCODED_CERTIFICATE"
+          }
+        }
+      }
+    }
+  },
+  "defaults": {
+    "description": "All default values organized by resource type",
+    "resources": {
+      "api_definition": {
+        "server_applied": {
+          "swagger_specs": []
+        }
+      },
+      "app_firewall": {
+        "server_applied": {
+          "allow_all_response_codes": {},
+          "default_anonymization": {},
+          "default_bot_setting": {},
+          "default_detection_settings": {},
+          "disable_ai_enhancements": {},
+          "monitoring": {},
+          "use_default_blocking_page": {}
+        }
+      },
+      "healthcheck": {
+        "server_applied": {
+          "jitter": 0,
+          "jitter_percent": 0
+        },
+        "recommended": {
+          "timeout": 3,
+          "interval": 15,
+          "unhealthy_threshold": 1,
+          "healthy_threshold": 3,
+          "jitter_percent": 30
+        }
+      },
+      "origin_pool": {
+        "server_applied": {
+          "no_tls": {},
+          "healthcheck": [],
+          "loadbalancer_algorithm": "ROUND_ROBIN",
+          "endpoint_selection": "DISTRIBUTED"
+        },
+        "recommended": {
+          "port": 443,
+          "connection_timeout": 2000,
+          "http_idle_timeout": 300000
+        },
+        "advanced_options": {
+          "connection_timeout": 2000,
+          "http_idle_timeout": 300000,
+          "same_as_endpoint_port": {},
+          "default_circuit_breaker": {},
+          "disable_outlier_detection": {},
+          "no_panic_threshold": {},
+          "disable_subsets": {},
+          "auto_http_config": {},
+          "disable_proxy_protocol": {},
+          "disable_lb_source_ip_persistance": {}
+        },
+        "oneof_choices": {
+          "port_choice": "port",
+          "upstream_conn_pool_reuse": "enable_conn_pool_reuse",
+          "health_check_port_choice": "same_as_endpoint_port",
+          "tls_choice": "no_tls",
+          "circuit_breaker_choice": "default_circuit_breaker",
+          "outlier_detection_choice": "disable_outlier_detection",
+          "panic_threshold_type": "no_panic_threshold",
+          "subset_choice": "disable_subsets",
+          "http_protocol_type": "auto_http_config",
+          "proxy_protocol_choice": "disable_proxy_protocol",
+          "lb_source_ip_persistence_choice": "disable_lb_source_ip_persistance"
+        },
+        "ui_vs_server": {
+          "loadbalancer_algorithm": {
+            "ui_default": "LB_OVERRIDE",
+            "server_default": "ROUND_ROBIN",
+            "note": "UI pre-selects LB_OVERRIDE but server applies ROUND_ROBIN if omitted"
+          }
+        }
+      },
+      "rate_limiter": {
+        "server_applied": {
+          "rules": [],
+          "user_identification": []
+        }
+      }
+    }
+  },
+  "extensions": {
+    "description": "OpenAPI extension field names used in enriched specs",
+    "required_for": "x-f5xc-required-for",
+    "server_default": "x-f5xc-server-default",
+    "recommended_value": "x-f5xc-recommended-value",
+    "conditions": "x-f5xc-conditions",
+    "minimum_configuration": "x-f5xc-minimum-configuration",
+    "validation": "x-f5xc-validation"
+  },
+  "reconciliation": {
+    "description": "Strategy for resolving conflicts between constraint sources",
+    "priority_order": [
+      "existing",
+      "discovery",
+      "inferred"
+    ],
+    "behavior": {
+      "existing_wins": true,
+      "log_conflicts": true,
+      "merge_non_conflicting": true
+    }
+  },
+  "_stats": {
+    "resources_processed": 7,
+    "required_fields_exported": 62,
+    "enum_values_exported": 42,
+    "constraints_exported": 14,
+    "server_defaults_exported": 5,
+    "recommended_values_exported": 8,
+    "advanced_options_exported": 1,
+    "conditional_requirements_exported": 18,
+    "minimum_configs_exported": 6,
+    "oneof_defaults_exported": 11,
+    "ui_vs_server_defaults_exported": 1,
+    "warnings": []
+  },
+  "info": {
+    "version": "2.0.34"
+  }
+}

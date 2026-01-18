@@ -3,7 +3,7 @@
   "info": {
     "title": "Cdn",
     "description": "Content delivery networks with edge caching, geographic distribution, and cache management. Supports custom rules, asset purge operations, and performance analytics. Enables worldwide asset distribution, optimization, and delivery monitoring across regions and protocols.",
-    "version": "2.0.29",
+    "version": "2.0.34",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -6685,7 +6685,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.289828+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123125+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6705,7 +6705,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.289858+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123155+00:00"
           },
           "path": {
             "type": "string",
@@ -6881,7 +6881,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.289947+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123244+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6901,7 +6901,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.289978+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123272+00:00"
           },
           "user_id": {
             "type": "string",
@@ -6973,7 +6973,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290026+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123321+00:00"
           },
           "rule": {
             "$ref": "#/components/schemas/common_wafSimpleClientSrcRule"
@@ -7053,7 +7053,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290101+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123398+00:00"
           },
           "namespace": {
             "type": "string",
@@ -7073,7 +7073,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290128+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123425+00:00"
           },
           "tls_fingerprint_matcher": {
             "$ref": "#/components/schemas/policyTlsFingerprintMatcherType"
@@ -7189,7 +7189,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290214+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123512+00:00"
           },
           "namespace": {
             "type": "string",
@@ -7209,7 +7209,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290241+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123539+00:00"
           },
           "path": {
             "type": "string",
@@ -7318,7 +7318,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290320+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123616+00:00"
           },
           "namespace": {
             "type": "string",
@@ -7338,7 +7338,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290348+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123643+00:00"
           },
           "path": {
             "type": "string",
@@ -7441,7 +7441,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290416+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123723+00:00"
           },
           "namespace": {
             "type": "string",
@@ -7461,7 +7461,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290444+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123750+00:00"
           },
           "path": {
             "type": "string",
@@ -7653,7 +7653,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290541+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123848+00:00"
           },
           "namespace": {
             "type": "string",
@@ -7673,7 +7673,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290569+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123875+00:00"
           },
           "sec_event_name": {
             "type": "string",
@@ -7808,7 +7808,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290657+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.123952+00:00"
           },
           "rule": {
             "$ref": "#/components/schemas/common_wafSimpleClientSrcRule"
@@ -7865,7 +7865,7 @@
             "x-original-maxLength": 256,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290712+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124003+00:00"
           },
           "exclude_bot_names": {
             "type": "array",
@@ -7966,7 +7966,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290769+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124059+00:00"
           },
           "namespace": {
             "type": "string",
@@ -7986,7 +7986,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290797+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124087+00:00"
           },
           "req_path": {
             "type": "string",
@@ -8083,7 +8083,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290856+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124146+00:00"
           },
           "waf_exclusion_policy": {
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
@@ -8132,7 +8132,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290906+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124195+00:00"
           },
           "namespace": {
             "type": "string",
@@ -8151,7 +8151,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.290934+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124223+00:00"
           },
           "request_data": {
             "$ref": "#/components/schemas/app_securityRequestData"
@@ -8289,7 +8289,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.291031+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124320+00:00"
           }
         },
         "x-f5xc-description-short": "Metric label filter can be specified to query specific metrics based on label match.",
@@ -8400,7 +8400,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.291073+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124362+00:00"
           }
         },
         "x-f5xc-description-short": "GET a list of virtual hosts in all the namespaces matching filter provided in the request.",
@@ -8550,7 +8550,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.291137+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124425+00:00"
           },
           "query": {
             "type": "string",
@@ -8749,7 +8749,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.291235+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124524+00:00"
           },
           "start_time": {
             "type": "string",
@@ -9037,7 +9037,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.291362+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124653+00:00"
           },
           "query": {
             "type": "string",
@@ -9256,7 +9256,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.291478+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124780+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -9355,7 +9355,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.291537+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124839+00:00"
           },
           "query": {
             "type": "string",
@@ -9553,7 +9553,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.291649+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.124938+00:00"
           },
           "query": {
             "type": "string",
@@ -9772,7 +9772,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.291765+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.125055+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -9871,7 +9871,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.291823+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.125114+00:00"
           },
           "query": {
             "type": "string",
@@ -10069,7 +10069,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.291923+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.125214+00:00"
           },
           "query": {
             "type": "string",
@@ -10288,7 +10288,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.292039+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.125330+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -10364,7 +10364,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.292089+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.125379+00:00"
           },
           "id": {
             "type": "string",
@@ -10480,7 +10480,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.292153+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.125444+00:00"
           },
           "references": {
             "type": "array",
@@ -12846,7 +12846,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.293495+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.126806+00:00"
           },
           "presence": {
             "type": "boolean",
@@ -12933,7 +12933,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.293543+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.126855+00:00"
           },
           "name": {
             "type": "string",
@@ -12954,7 +12954,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.293572+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.126883+00:00"
           },
           "namespace": {
             "type": "string",
@@ -12975,7 +12975,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.293608+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.126910+00:00"
           },
           "tenant": {
             "type": "string",
@@ -12998,7 +12998,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.293636+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.126937+00:00"
           },
           "uid": {
             "type": "string",
@@ -13022,7 +13022,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.293665+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.126966+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -13062,7 +13062,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.293695+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.126997+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Avg Aggregation Data\" Average Aggregation data.",
@@ -13296,7 +13296,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.293837+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.127139+00:00"
           },
           "order_by": {
             "$ref": "#/components/schemas/logOrderByData"
@@ -13405,7 +13405,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.293918+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.127221+00:00"
           },
           "order_by": {
             "$ref": "#/components/schemas/logOrderByData"
@@ -13521,7 +13521,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.294031+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.127335+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Field Sub Field Aggregation Bucket\" Field sub aggregation bucket containing field values and the number of logs.",
@@ -13690,7 +13690,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.294116+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.127419+00:00"
           },
           "sub_aggs": {
             "type": "object",
@@ -13798,7 +13798,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.294247+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.127551+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Max Aggregation Data\" Max Aggregation data.",
@@ -13855,7 +13855,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.294288+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.127592+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Min Aggregation Data\" Min Aggregation data.",
@@ -14086,7 +14086,7 @@
             "maxLength": 16,
             "minLength": 7,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.294442+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.127756+00:00"
           },
           "value": {
             "type": "number",
@@ -14102,7 +14102,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.294469+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.127784+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Percentile Aggregation Data\" Percentile Aggregation data.",
@@ -14234,7 +14234,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.294541+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.127855+00:00"
           },
           "sec_event_type": {
             "type": "string",
@@ -14373,7 +14373,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.294637+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.127942+00:00"
           }
         },
         "x-f5xc-description-short": "Label based filtering for Security Events metrics. Security Events metrics are tagged with labels mentioned in MetricLabel.",
@@ -14453,7 +14453,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.294679+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.127983+00:00"
           }
         },
         "x-f5xc-description-short": "Value returned for a Security Events Metrics query.",
@@ -15046,7 +15046,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.294990+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.128295+00:00"
           }
         },
         "x-f5xc-description-short": "Cookie matcher specifies the name of a single cookie and the criteria to match it.",
@@ -15636,7 +15636,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.295112+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.128417+00:00"
           }
         },
         "x-f5xc-description-short": "JWT claim matcher specifies the name of a single JWT claim and the criteria for the input request to match it.",
@@ -16496,7 +16496,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.295381+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.128700+00:00"
           },
           "name": {
             "type": "string",
@@ -16527,7 +16527,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.295409+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.128727+00:00"
           }
         },
         "x-f5xc-description-short": "MessageMetaType is metadata (common attributes) of a message that only certain messages have.",
@@ -16639,7 +16639,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.295443+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.128762+00:00"
           },
           "previous_value": {
             "type": "string",
@@ -16673,7 +16673,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.295489+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.128807+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Trend Value\" Trend value contains trend value, trend sentiment and trend calculation description and window size.",
@@ -17261,7 +17261,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.295813+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.129122+00:00"
           }
         },
         "x-f5xc-description-short": "Header matcher specifies the name of a single HTTP header and the criteria for the input request to match it.",
@@ -17390,7 +17390,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.295890+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.129199+00:00"
           }
         },
         "x-f5xc-description-short": "Query parameter matcher specifies the name of a single query parameter and the criteria for the input request to match it.",
@@ -17448,7 +17448,7 @@
             },
             "x-original-maxLength": 128,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.295920+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.129229+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17475,7 +17475,7 @@
             },
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.295947+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.129256+00:00"
           },
           "tenant": {
             "type": "string",
@@ -17504,7 +17504,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:14.295975+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:20.129283+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a direct reference from one object(the referrer) to another(the referred).",
@@ -17741,7 +17741,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.189215+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.032334+00:00"
           }
         },
         "x-f5xc-example": "[EMAIL, CC]",
@@ -18351,7 +18351,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.189664+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.032786+00:00"
           },
           "query": {
             "type": "array",
@@ -18580,7 +18580,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.189777+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.032898+00:00"
           },
           "query": {
             "type": "array",
@@ -19663,7 +19663,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.190516+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.033634+00:00"
           },
           "namespace": {
             "type": "string",
@@ -19683,7 +19683,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.190544+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.033671+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -19758,7 +19758,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.190621+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.033739+00:00"
           }
         },
         "x-f5xc-description-short": "Request of GET Security Config Spec API.",
@@ -19862,7 +19862,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.190716+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.033834+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -20747,7 +20747,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.191140+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.034258+00:00"
           },
           "start_time": {
             "type": "string",
@@ -20936,7 +20936,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.191246+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.034365+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -20991,7 +20991,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.191288+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.034407+00:00"
           }
         },
         "x-f5xc-description-short": "CDN Metrics response series. Each series instance has data for a combination of group-by tag values.",
@@ -21047,7 +21047,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.191327+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.034446+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -21182,7 +21182,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.191392+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.034511+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -21236,7 +21236,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.191458+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.034577+00:00"
           },
           "namespace": {
             "type": "string",
@@ -21255,7 +21255,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.191486+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.034605+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -21297,7 +21297,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.191540+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.034668+00:00"
           },
           "uid": {
             "type": "string",
@@ -21319,7 +21319,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.191569+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.034698+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of cdn_loadbalancer is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -21931,7 +21931,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.191932+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.035050+00:00"
           },
           "namespace": {
             "type": "string",
@@ -21958,7 +21958,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.191960+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.035078+00:00"
           },
           "service_op_id": {
             "type": "integer",
@@ -22227,7 +22227,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.192097+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.035215+00:00"
           },
           "namespace": {
             "type": "string",
@@ -22254,7 +22254,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.192124+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.035242+00:00"
           },
           "time_range": {
             "$ref": "#/components/schemas/common_cdnServiceOperationsTimeRange"
@@ -22534,7 +22534,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.192278+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.035395+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -23204,7 +23204,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.192808+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.035941+00:00"
           }
         },
         "x-f5xc-description-short": "Response of DELETE DoS Auto-Mitigation Rule API.",
@@ -25705,7 +25705,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.194932+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.038085+00:00"
           },
           "uid": {
             "type": "string",
@@ -25728,7 +25728,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.194962+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.038115+00:00"
           }
         },
         "x-f5xc-description-short": "DoS Mitigation Object to auto-configure rules to block attackers.",
@@ -26012,11 +26012,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -26090,11 +26091,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -26141,11 +26143,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -26250,11 +26253,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -26302,11 +26306,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -26371,7 +26376,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.196440+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.039597+00:00"
           }
         },
         "x-f5xc-description-short": "Argument matcher specifies the name of a single argument in the body and the criteria to match it.",
@@ -26735,7 +26740,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.196832+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.039990+00:00"
           }
         },
         "x-f5xc-description-short": "Header matcher specifies the name of a single HTTP header and the criteria for the input request to match it.",
@@ -26776,7 +26781,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.196863+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.040021+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Name of the cookie field\" Specifies the name of the cookie field.",
@@ -26813,7 +26818,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.196894+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.040051+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Name of the field\" Specifies the name of the field.",
@@ -26850,7 +26855,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.196945+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.040102+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Key name of the query parameter\" Specifies the key name of the query parameter.",
@@ -27365,7 +27370,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.197551+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.040715+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -27832,7 +27837,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.197777+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.040927+00:00"
           },
           "store_provider": {
             "type": "string",
@@ -28239,7 +28244,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.198172+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.041321+00:00"
           },
           "regex_values": {
             "type": "array",
@@ -28419,7 +28424,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.198242+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.041392+00:00"
           },
           "url": {
             "type": "string",
@@ -28523,7 +28528,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.198299+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.041449+00:00"
           },
           "service_name": {
             "type": "string",
@@ -28566,7 +28571,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.198336+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.041486+00:00"
           },
           "type": {
             "type": "string",
@@ -28698,7 +28703,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.198455+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.041605+00:00"
           },
           "samesite_lax": {
             "$ref": "#/components/schemas/ioschemaEmpty"
@@ -29350,7 +29355,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.198720+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.041870+00:00"
           },
           "secret_value": {
             "$ref": "#/components/schemas/schemaSecretType"
@@ -29377,7 +29382,7 @@
             },
             "x-original-maxLength": 8096,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.198757+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.041907+00:00"
           }
         },
         "x-f5xc-description-medium": "HTTP header is a key-value pair. The name acts as key of HTTP header The value acts as the data/value of HTTP header Example HTTP header Host: user.F5 Distributed cloud.com In the above example, Host is the name or key of HTTP header In the above example, user.F5 Distributed cloud.com is the...",
@@ -29523,7 +29528,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.198791+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.041941+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -29663,7 +29668,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.198922+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042071+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -29721,7 +29726,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.198969+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042119+00:00"
           },
           "namespace": {
             "type": "string",
@@ -29742,7 +29747,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.198996+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042146+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
@@ -29822,7 +29827,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199037+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042186+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -29882,7 +29887,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199085+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042234+00:00"
           },
           "namespace": {
             "type": "string",
@@ -29903,7 +29908,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199111+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042260+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
@@ -29983,7 +29988,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199152+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042301+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -30041,7 +30046,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199199+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042348+00:00"
           },
           "namespace": {
             "type": "string",
@@ -30062,7 +30067,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199226+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042375+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
@@ -30236,7 +30241,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199327+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042475+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -30356,7 +30361,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199387+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042534+00:00"
           },
           "status": {
             "type": "string",
@@ -30376,7 +30381,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199414+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042561+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -30571,7 +30576,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199537+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042695+00:00"
           },
           "uid": {
             "type": "string",
@@ -30594,7 +30599,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199566+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042723+00:00"
           }
         },
         "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
@@ -30681,7 +30686,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199624+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042772+00:00"
           },
           "disable_ocsp_stapling": {
             "$ref": "#/components/schemas/ioschemaEmpty"
@@ -30755,7 +30760,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199760+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042909+00:00"
           },
           "location": {
             "type": "string",
@@ -30773,7 +30778,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199788+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042937+00:00"
           },
           "provider": {
             "type": "string",
@@ -30792,7 +30797,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199816+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.042965+00:00"
           },
           "secret_encoding": {
             "$ref": "#/components/schemas/schemaSecretEncodingType"
@@ -30816,7 +30821,7 @@
             "maxLength": 1,
             "minLength": 1,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199867+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.043001+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Vault Secret\" VaultSecretInfoType specifies information about the Secret managed by Hashicorp Vault.",
@@ -30861,7 +30866,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199919+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.043031+00:00"
           },
           "name": {
             "type": "string",
@@ -30882,7 +30887,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199965+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.043058+00:00"
           },
           "namespace": {
             "type": "string",
@@ -30903,7 +30908,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.199998+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.043085+00:00"
           },
           "uid": {
             "type": "string",
@@ -30924,7 +30929,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.200027+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.043114+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
@@ -30964,7 +30969,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.200059+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.043144+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Wingman Secret\" WingmanSecretInfoType specifies the handle to the wingman secret.",
@@ -32417,7 +32422,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.201093+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.044174+00:00"
           },
           "operator": {
             "$ref": "#/components/schemas/viewscdn_loadbalancerCacheOperator"
@@ -32681,7 +32686,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.201291+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.044373+00:00"
           },
           "operator": {
             "$ref": "#/components/schemas/viewscdn_loadbalancerCacheOperator"
@@ -34737,7 +34742,7 @@
             "x-original-maxLength": 256,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.203079+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.046173+00:00"
           },
           "simple_login": {
             "$ref": "#/components/schemas/common_wafSimpleLogin"
@@ -35105,7 +35110,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.203309+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.046403+00:00"
           },
           "type": {
             "type": "string",
@@ -35138,7 +35143,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.203346+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.046439+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -35359,7 +35364,7 @@
             "x-original-maxLength": 1024,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.203457+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.046549+00:00"
           },
           "service_domain": {
             "type": "string",
@@ -35920,7 +35925,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.352790+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.199619+00:00"
           },
           "operator": {
             "$ref": "#/components/schemas/cdn_cache_ruleCacheOperator"
@@ -36216,7 +36221,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.352958+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.199801+00:00"
           },
           "operator": {
             "$ref": "#/components/schemas/cdn_cache_ruleCacheOperator"
@@ -36407,7 +36412,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.353088+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.199933+00:00"
           },
           "namespace": {
             "type": "string",
@@ -36427,7 +36432,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.353116+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.199961+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -36675,7 +36680,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.353256+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.200102+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -36729,7 +36734,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.353324+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.200169+00:00"
           },
           "namespace": {
             "type": "string",
@@ -36748,7 +36753,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.353352+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.200197+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -36774,7 +36779,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.353397+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.200242+00:00"
           },
           "uid": {
             "type": "string",
@@ -36795,7 +36800,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:15.353426+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:21.200271+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of cdn_cache_rule is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -38374,7 +38379,7 @@
             },
             "x-original-maxLength": 128,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.754970+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.605312+00:00"
           },
           "value": {
             "$ref": "#/components/schemas/schemaSecretType"
@@ -38547,7 +38552,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.755076+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.605419+00:00"
           },
           "namespace": {
             "type": "string",
@@ -38566,7 +38571,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.755104+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.605446+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -39002,7 +39007,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.755321+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.605685+00:00"
           },
           "namespace": {
             "type": "string",
@@ -39022,7 +39027,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.755348+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.605717+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -39081,7 +39086,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.755376+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.605747+00:00"
           },
           "namespace": {
             "type": "string",
@@ -39101,7 +39106,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.755404+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.605774+00:00"
           }
         },
         "x-f5xc-description-short": "Request shape for GET API Endpoints For Groups.",
@@ -39259,7 +39264,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.755462+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.605834+00:00"
           },
           "namespace": {
             "type": "string",
@@ -39279,7 +39284,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.755489+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.605861+00:00"
           },
           "query_type": {
             "$ref": "#/components/schemas/http_loadbalancerApiInventorySchemaQueryType"
@@ -39519,7 +39524,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.755633+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.605996+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -39635,7 +39640,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.755691+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.606054+00:00"
           }
         },
         "x-f5xc-description-short": "Request of GET Security Config Spec API.",
@@ -40069,7 +40074,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.755879+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.606243+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -40123,7 +40128,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.755946+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.606309+00:00"
           },
           "namespace": {
             "type": "string",
@@ -40142,7 +40147,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.755974+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.606338+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -40184,7 +40189,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.756028+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.606392+00:00"
           },
           "uid": {
             "type": "string",
@@ -40206,7 +40211,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.756057+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.606422+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of http_loadbalancer is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -41836,7 +41841,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.757129+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.607495+00:00"
           },
           "namespace": {
             "type": "string",
@@ -41863,7 +41868,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.757158+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.607523+00:00"
           },
           "rps_threshold": {
             "type": "integer",
@@ -42155,7 +42160,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.757302+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.607675+00:00"
           },
           "namespace": {
             "type": "string",
@@ -42175,7 +42180,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.757329+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.607702+00:00"
           }
         },
         "x-f5xc-description-short": "Request shape for Update API Endpoints Schemas.",
@@ -42490,11 +42495,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -42534,11 +42540,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -42595,11 +42602,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -42643,11 +42651,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -42705,11 +42714,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -42732,11 +42742,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -42800,11 +42811,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -42863,11 +42875,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -42951,11 +42964,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -43020,11 +43034,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -43070,11 +43085,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -43120,11 +43136,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -43146,11 +43163,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"
@@ -43437,7 +43455,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.759929+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.610302+00:00"
           },
           "path": {
             "type": "string",
@@ -44219,7 +44237,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.761023+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.611404+00:00"
           },
           "overwrite": {
             "type": "boolean",
@@ -44261,7 +44279,7 @@
             },
             "x-original-maxLength": 8096,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.761067+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.611450+00:00"
           }
         },
         "x-f5xc-description-short": "Cookie name and value for cookie header.",
@@ -44899,7 +44917,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.762176+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.612563+00:00"
           },
           "overwrite": {
             "type": "boolean",
@@ -44950,7 +44968,7 @@
             },
             "x-original-maxLength": 8096,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.762247+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.612635+00:00"
           }
         },
         "x-f5xc-description-short": "Cookie name and its attribute values in set-cookie header.",
@@ -45501,7 +45519,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.763905+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.614301+00:00"
           },
           "status": {
             "type": "string",
@@ -45519,7 +45537,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.763936+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.614331+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -45575,7 +45593,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.763975+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.614370+00:00"
           },
           "nlb_cname": {
             "type": "string",
@@ -45621,7 +45639,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.764021+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.614416+00:00"
           },
           "target_group_status": {
             "type": "array",
@@ -45705,7 +45723,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.764080+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.614476+00:00"
           },
           "protocol": {
             "type": "string",
@@ -45736,7 +45754,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.764117+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.614512+00:00"
           },
           "status": {
             "type": "string",
@@ -45754,7 +45772,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.764147+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.614542+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -47215,7 +47233,7 @@
             "x-original-maxLength": 256,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-17T01:13:16.765664+00:00"
+            "x-reconciled-at": "2026-01-18T06:23:22.616077+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -48487,7 +48505,9 @@
             "$ref": "#/components/schemas/ioschemaEmpty"
           },
           "endpoint_selection": {
-            "$ref": "#/components/schemas/clusterEndpointSelectionPolicy"
+            "$ref": "#/components/schemas/clusterEndpointSelectionPolicy",
+            "default": "DISTRIBUTED",
+            "x-f5xc-server-default": true
           },
           "health_check_port": {
             "type": "integer",
@@ -48532,16 +48552,22 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "default": [],
+            "x-f5xc-server-default": true
           },
           "lb_port": {
             "$ref": "#/components/schemas/ioschemaEmpty"
           },
           "loadbalancer_algorithm": {
-            "$ref": "#/components/schemas/clusterLoadbalancerAlgorithm"
+            "$ref": "#/components/schemas/clusterLoadbalancerAlgorithm",
+            "default": "ROUND_ROBIN",
+            "x-f5xc-server-default": true
           },
           "no_tls": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "default": {},
+            "x-f5xc-server-default": true
           },
           "origin_servers": {
             "type": "array",
@@ -48598,7 +48624,8 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-recommended-value": 443
           },
           "same_as_endpoint_port": {
             "$ref": "#/components/schemas/ioschemaEmpty"
@@ -48618,11 +48645,12 @@
           "required_fields": [
             "metadata.name",
             "metadata.namespace",
-            "spec.origin_servers"
+            "spec.origin_servers",
+            "spec.port"
           ],
           "mutually_exclusive_groups": [],
-          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origins:\n    - origin_server:\n        hostname: backend1.example.com\n        port: 8080\n    - origin_server:\n        hostname: backend2.example.com\n        port: 8080\n  health_checks:\n    - health_check_name: http-health-check\n  connection_timeout_ms: 3600\n  idle_timeout_ms: 900000\n",
-          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origins\": [\n      {\"origin_server\": {\"hostname\": \"backend1.example.com\", \"port\": 8080}},\n      {\"origin_server\": {\"hostname\": \"backend2.example.com\", \"port\": 8080}}\n    ],\n    \"health_checks\": [{\"health_check_name\": \"http-health-check\"}],\n    \"connection_timeout_ms\": 3600,\n    \"idle_timeout_ms\": 900000\n  }\n}\n",
+          "example_yaml": "apiVersion: v1\nkind: origin_pool\nmetadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 8080\n",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"backend-pool\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"origin_servers\": [\n      {\"public_name\": {\"dns_name\": \"backend1.example.com\"}},\n      {\"public_name\": {\"dns_name\": \"backend2.example.com\"}}\n    ],\n    \"port\": 8080\n  }\n}\n",
           "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/origin_pools\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @origin-pool.json\n"
         },
         "x-f5xc-cli-domain": "virtual"

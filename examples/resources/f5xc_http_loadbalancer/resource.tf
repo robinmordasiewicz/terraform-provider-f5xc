@@ -163,5 +163,13 @@ resource "f5xc_http_loadbalancer" "example" {
 # The following optional fields have server-applied defaults and can be omitted:
 # - endpoint_selection
 # - loadbalancer_algorithm
+# - auto_http_config
+# - default_circuit_breaker
+# - disable_lb_source_ip_persistance
+# - disable_outlier_detection
+# - disable_proxy_protocol
+# - disable_subsets
+# - no_panic_threshold
 # - healthcheck
 # - no_tls
+# - same_as_endpoint_port

@@ -1039,7 +1039,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"auto_http_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Enable this option Server applies default when omitted.",
 					},
 					"circuit_breaker": schema.SingleNestedBlock{
 						MarkdownDescription: "CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly.",
@@ -1067,22 +1067,22 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"default_circuit_breaker": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Enable this option Server applies default when omitted.",
 					},
 					"disable_circuit_breaker": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable this option",
 					},
 					"disable_lb_source_ip_persistance": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Enable this option Server applies default when omitted.",
 					},
 					"disable_outlier_detection": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Enable this option Server applies default when omitted.",
 					},
 					"disable_proxy_protocol": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Enable this option Server applies default when omitted.",
 					},
 					"disable_subsets": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Enable this option Server applies default when omitted.",
 					},
 					"enable_lb_source_ip_persistance": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable this option",
@@ -1154,7 +1154,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"no_panic_threshold": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
+						MarkdownDescription: "Enable this option Server applies default when omitted.",
 					},
 					"outlier_detection": schema.SingleNestedBlock{
 						MarkdownDescription: "Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1.",
@@ -1800,7 +1800,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"same_as_endpoint_port": schema.SingleNestedBlock{
-				MarkdownDescription: "Enable this option",
+				MarkdownDescription: "Enable this option Server applies default when omitted.",
 			},
 			"upstream_conn_pool_reuse_type": schema.SingleNestedBlock{
 				MarkdownDescription: "Select upstream connection pool reuse state for every downstream connection. This configuration choice is for HTTP(S) LB only.",

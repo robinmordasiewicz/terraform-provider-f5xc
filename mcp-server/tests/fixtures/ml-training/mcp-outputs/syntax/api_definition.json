@@ -1,0 +1,30 @@
+{
+  "operation": "syntax",
+  "resource": "api_definition",
+  "totalBlocks": 6,
+  "totalAttributes": 7,
+  "totalOneOfGroups": 1,
+  "blocks": [
+    "api_inventory_exclusion_list",
+    "api_inventory_inclusion_list",
+    "mixed_schema_origin",
+    "non_api_endpoints",
+    "strict_schema_origin",
+    "swagger_specs"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {
+    "schema_updates_strategy": [
+      "mixed_schema_origin",
+      "strict_schema_origin"
+    ]
+  }
+}

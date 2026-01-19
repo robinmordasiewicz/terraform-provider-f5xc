@@ -1,0 +1,60 @@
+{
+  "operation": "syntax",
+  "resource": "app_firewall",
+  "totalBlocks": 14,
+  "totalAttributes": 7,
+  "totalOneOfGroups": 6,
+  "blocks": [
+    "ai_risk_based_blocking",
+    "allow_all_response_codes",
+    "allowed_response_codes",
+    "blocking",
+    "blocking_page",
+    "bot_protection_setting",
+    "custom_anonymization",
+    "default_anonymization",
+    "default_bot_setting",
+    "default_detection_settings",
+    "detection_settings",
+    "disable_anonymization",
+    "monitoring",
+    "use_default_blocking_page"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {
+    "detection_setting_choice": [
+      "ai_risk_based_blocking",
+      "default_detection_settings",
+      "detection_settings"
+    ],
+    "allowed_response_codes_choice": [
+      "allow_all_response_codes",
+      "allowed_response_codes"
+    ],
+    "enforcement_mode_choice": [
+      "blocking",
+      "monitoring"
+    ],
+    "blocking_page_choice": [
+      "blocking_page",
+      "use_default_blocking_page"
+    ],
+    "bot_protection_choice": [
+      "bot_protection_setting",
+      "default_bot_setting"
+    ],
+    "anonymization_setting": [
+      "custom_anonymization",
+      "default_anonymization",
+      "disable_anonymization"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "operation": "syntax",
+  "resource": "origin_pool",
+  "totalBlocks": 9,
+  "totalAttributes": 11,
+  "totalOneOfGroups": 3,
+  "blocks": [
+    "advanced_options",
+    "automatic_port",
+    "healthcheck",
+    "lb_port",
+    "no_tls",
+    "origin_servers",
+    "same_as_endpoint_port",
+    "upstream_conn_pool_reuse_type",
+    "use_tls"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "endpoint_selection",
+    "health_check_port",
+    "id",
+    "labels",
+    "loadbalancer_algorithm",
+    "name",
+    "namespace",
+    "port"
+  ],
+  "oneOfGroups": {
+    "port_choice": [
+      "automatic_port",
+      "lb_port",
+      "port"
+    ],
+    "health_check_port_choice": [
+      "health_check_port",
+      "same_as_endpoint_port"
+    ],
+    "tls_choice": [
+      "no_tls",
+      "use_tls"
+    ]
+  }
+}

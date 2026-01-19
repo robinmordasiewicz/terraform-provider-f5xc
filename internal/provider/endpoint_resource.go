@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -294,6 +295,13 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("dns_name_advanced"),
+						path.MatchRelative().AtParent().AtName("ip"),
+						path.MatchRelative().AtParent().AtName("service_info"),
+					),
+				},
 			},
 			"health_check_port": schema.Int64Attribute{
 				MarkdownDescription: "By default the health check port of an endpoint is the same as the endpoint’s port. This option provides an alternative health check port. Setting this with a non-zero value allows an endpoint to have different health check port.",
@@ -309,6 +317,13 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("dns_name"),
+						path.MatchRelative().AtParent().AtName("dns_name_advanced"),
+						path.MatchRelative().AtParent().AtName("service_info"),
+					),
 				},
 			},
 			"port": schema.Int64Attribute{
@@ -358,6 +373,11 @@ func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaReques
 					"service_name": schema.StringAttribute{
 						MarkdownDescription: "Name of the service to discover with an optional namespace and cluster identifier. The format is service_name.namespace_name:cluster_identifier for K8s and service_name:cluster_identifier for Consul Endpoint will be discovered in all discovery objects where the..",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("service_selector"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{

@@ -1,0 +1,211 @@
+{
+  "operation": "syntax",
+  "resource": "http_loadbalancer",
+  "totalBlocks": 80,
+  "totalAttributes": 8,
+  "totalOneOfGroups": 24,
+  "blocks": [
+    "active_service_policies",
+    "advertise_custom",
+    "advertise_on_public",
+    "advertise_on_public_default_vip",
+    "api_protection_rules",
+    "api_rate_limit",
+    "api_specification",
+    "api_testing",
+    "app_firewall",
+    "blocked_clients",
+    "bot_defense",
+    "bot_defense_advanced",
+    "caching_policy",
+    "captcha_challenge",
+    "client_side_defense",
+    "cookie_stickiness",
+    "cors_policy",
+    "csrf_policy",
+    "data_guard_rules",
+    "ddos_mitigation_rules",
+    "default_pool",
+    "default_pool_list",
+    "default_route_pools",
+    "default_sensitive_data_policy",
+    "disable_api_definition",
+    "disable_api_discovery",
+    "disable_api_testing",
+    "disable_bot_defense",
+    "disable_caching",
+    "disable_client_side_defense",
+    "disable_ip_reputation",
+    "disable_malicious_user_detection",
+    "disable_malware_protection",
+    "disable_rate_limit",
+    "disable_threat_mesh",
+    "disable_trust_client_ip_headers",
+    "disable_waf",
+    "do_not_advertise",
+    "domains",
+    "enable_api_discovery",
+    "enable_challenge",
+    "enable_ip_reputation",
+    "enable_malicious_user_detection",
+    "enable_threat_mesh",
+    "enable_trust_client_ip_headers",
+    "graphql_rules",
+    "http",
+    "https",
+    "https_auto_cert",
+    "js_challenge",
+    "jwt_validation",
+    "l7_ddos_action_block",
+    "l7_ddos_action_default",
+    "l7_ddos_action_js_challenge",
+    "l7_ddos_protection",
+    "least_active",
+    "malware_protection_settings",
+    "more_option",
+    "multi_lb_app",
+    "no_challenge",
+    "no_service_policies",
+    "origin_server_subset_rule_list",
+    "policy_based_challenge",
+    "protected_cookies",
+    "random",
+    "rate_limit",
+    "ring_hash",
+    "round_robin",
+    "routes",
+    "sensitive_data_disclosure_rules",
+    "sensitive_data_policy",
+    "service_policies_from_namespace",
+    "single_lb_app",
+    "slow_ddos_mitigation",
+    "source_ip_stickiness",
+    "system_default_timeouts",
+    "trusted_clients",
+    "user_id_client_ip",
+    "user_identification",
+    "waf_exclusion"
+  ],
+  "attributes": [
+    "add_location",
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {
+    "service_policy_choice": [
+      "active_service_policies",
+      "no_service_policies",
+      "service_policies_from_namespace"
+    ],
+    "advertise_choice": [
+      "advertise_custom",
+      "advertise_on_public",
+      "advertise_on_public_default_vip",
+      "do_not_advertise"
+    ],
+    "rate_limit_choice": [
+      "api_rate_limit",
+      "disable_rate_limit",
+      "rate_limit"
+    ],
+    "api_definition_choice": [
+      "api_specification",
+      "disable_api_definition"
+    ],
+    "api_testing_choice": [
+      "api_testing",
+      "disable_api_testing"
+    ],
+    "waf_choice": [
+      "app_firewall",
+      "disable_waf"
+    ],
+    "bot_defense_choice": [
+      "bot_defense",
+      "bot_defense_advanced",
+      "disable_bot_defense"
+    ],
+    "cache_options": [
+      "caching_policy",
+      "disable_caching"
+    ],
+    "challenge_type": [
+      "captcha_challenge",
+      "enable_challenge",
+      "js_challenge",
+      "no_challenge",
+      "policy_based_challenge"
+    ],
+    "client_side_defense_choice": [
+      "client_side_defense",
+      "disable_client_side_defense"
+    ],
+    "hash_policy_choice": [
+      "cookie_stickiness",
+      "least_active",
+      "random",
+      "ring_hash",
+      "round_robin",
+      "source_ip_stickiness"
+    ],
+    "origin_pool_choice": [
+      "default_pool",
+      "default_pool_list"
+    ],
+    "sensitive_data_policy_choice": [
+      "default_sensitive_data_policy",
+      "sensitive_data_policy"
+    ],
+    "api_discovery_choice": [
+      "disable_api_discovery",
+      "enable_api_discovery"
+    ],
+    "ip_reputation_choice": [
+      "disable_ip_reputation",
+      "enable_ip_reputation"
+    ],
+    "malicious_user_detection_choice": [
+      "disable_malicious_user_detection",
+      "enable_malicious_user_detection"
+    ],
+    "malware_protection": [
+      "disable_malware_protection",
+      "malware_protection_settings"
+    ],
+    "threat_mesh_choice": [
+      "disable_threat_mesh",
+      "enable_threat_mesh"
+    ],
+    "trust_client_ip_headers_choice": [
+      "disable_trust_client_ip_headers",
+      "enable_trust_client_ip_headers"
+    ],
+    "loadbalancer_type": [
+      "http",
+      "https",
+      "https_auto_cert"
+    ],
+    "l7_ddos_auto_mitigation_action": [
+      "l7_ddos_action_block",
+      "l7_ddos_action_default",
+      "l7_ddos_action_js_challenge"
+    ],
+    "ml_config_choice": [
+      "multi_lb_app",
+      "single_lb_app"
+    ],
+    "slow_ddos_mitigation_choice": [
+      "slow_ddos_mitigation",
+      "system_default_timeouts"
+    ],
+    "user_id_choice": [
+      "user_id_client_ip",
+      "user_identification"
+    ]
+  }
+}

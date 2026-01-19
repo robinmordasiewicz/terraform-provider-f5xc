@@ -769,6 +769,80 @@ resource "f5xc_healthcheck" "test" {
   });
 
   // ===========================================================================
+  // TERRAFORM FMT VALIDATION
+  // ===========================================================================
+
+  describe('Terraform Formatting Validation', { timeout: VALIDATION_TIMEOUT }, () => {
+    let terraform: TerraformRunner;
+
+    beforeEach(async () => {
+      if (skipTests) return;
+      terraform = new TerraformRunner(`fmt-validation-${Date.now()}`);
+      await terraform.setup();
+      terraform.writeProviderConfig(credentials.apiUrl);
+    });
+
+    afterAll(async () => {
+      if (skipTests || !terraform) return;
+      try {
+        const fs = await import('fs');
+        fs.rmSync(terraform.getWorkDir(), { recursive: true, force: true });
+      } catch {
+        // Ignore cleanup errors
+      }
+    });
+
+    const fmtTestResources = [
+      'namespace',
+      'origin_pool',
+      'http_loadbalancer',
+      'healthcheck',
+      'app_firewall',
+      'tcp_loadbalancer',
+      'service_policy',
+    ];
+
+    describe.each(fmtTestResources)('terraform fmt check: %s', (resourceType) => {
+      it.skipIf(skipTests)(`MCP ${resourceType} example passes terraform fmt`, async () => {
+        // Get example FROM MCP SERVER
+        const example = await mcpClient.getExample(resourceType, 'basic');
+
+        expect(example).toBeTruthy();
+        expect(example.length).toBeGreaterThan(50);
+
+        // Write MCP-generated example to Terraform
+        terraform.writeConfig('main.tf', example);
+
+        // Check formatting BEFORE init (fmt doesn't need init)
+        const fmtResult = await terraform.fmt();
+
+        // MCP examples MUST be pre-formatted
+        expect(fmtResult.success).toBe(true);
+        if (!fmtResult.success) {
+          console.error(`Formatting issues for ${resourceType}:`, fmtResult.output);
+        }
+        expect(fmtResult.errors).toHaveLength(0);
+      });
+    });
+
+    it.skipIf(skipTests)('manually written config passes terraform fmt', async () => {
+      // Test that our test configs are also properly formatted
+      const config = `resource "f5xc_namespace" "test" {
+  name        = "fmt-test"
+  description = "Test namespace for fmt validation"
+  labels = {
+    "test" = "true"
+  }
+}
+`;
+      terraform.writeConfig('main.tf', config);
+
+      const fmtResult = await terraform.fmt();
+      expect(fmtResult.success).toBe(true);
+    });
+  });
+
+  // ===========================================================================
   // MCP VALIDATION TOOL ACCURACY
   // ===========================================================================
 

@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -1198,6 +1200,13 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("default_header"),
+						path.MatchRelative().AtParent().AtName("pass_through"),
+						path.MatchRelative().AtParent().AtName("server_name"),
+					),
+				},
 			},
 			"connection_idle_timeout": schema.Int64Attribute{
 				MarkdownDescription: "The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed.",
@@ -1253,6 +1262,13 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("append_server_name"),
+						path.MatchRelative().AtParent().AtName("default_header"),
+						path.MatchRelative().AtParent().AtName("pass_through"),
+					),
 				},
 			},
 		},
@@ -1312,6 +1328,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 					"redirect_url": schema.StringAttribute{
 						MarkdownDescription: "user can provide a URL for e.g https://abc.xyz.com where user gets redirected. This URL configured here must match with the redirect URL configured with the OIDC provider.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("redirect_dynamic"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1796,6 +1817,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						"value": schema.StringAttribute{
 							MarkdownDescription: "Value of the Cookie header.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("secret_value"),
+								),
+							},
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -1853,6 +1879,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						"value": schema.StringAttribute{
 							MarkdownDescription: "Value of the HTTP header.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("secret_value"),
+								),
+							},
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -1902,18 +1933,38 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						"add_domain": schema.StringAttribute{
 							MarkdownDescription: "Add domain attribute.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("ignore_domain"),
+								),
+							},
 						},
 						"add_expiry": schema.StringAttribute{
 							MarkdownDescription: "Add expiry attribute.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("ignore_expiry"),
+								),
+							},
 						},
 						"add_path": schema.StringAttribute{
 							MarkdownDescription: "Add path attribute.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("ignore_path"),
+								),
+							},
 						},
 						"max_age_value": schema.Int64Attribute{
 							MarkdownDescription: "Add max age attribute.",
 							Optional:            true,
+							Validators: []validator.Int64{
+								int64validator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("ignore_max_age"),
+								),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name of the cookie in Cookie header.",
@@ -1926,6 +1977,12 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						"value": schema.StringAttribute{
 							MarkdownDescription: "Value of the Cookie header.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("ignore_value"),
+									path.MatchRelative().AtParent().AtName("secret_value"),
+								),
+							},
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -2028,6 +2085,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 						"value": schema.StringAttribute{
 							MarkdownDescription: "Value of the HTTP header.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("secret_value"),
+								),
+							},
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -2204,6 +2266,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 					"request_timeout": schema.Int64Attribute{
 						MarkdownDescription: ".",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("disable_request_timeout"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -2297,6 +2364,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Inline Root CA Certificate.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("trusted_ca"),
+									),
+								},
 							},
 							"verify_subject_alt_names": schema.ListAttribute{
 								MarkdownDescription: "List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate.",
@@ -2471,6 +2543,11 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("trusted_ca"),
+											),
+										},
 									},
 									"verify_subject_alt_names": schema.ListAttribute{
 										MarkdownDescription: "List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate.",

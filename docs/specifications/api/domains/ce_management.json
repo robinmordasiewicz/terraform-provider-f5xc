@@ -3,7 +3,7 @@
   "info": {
     "title": "Ce Management",
     "description": "Customer edge node lifecycle through secure enrollment tokens and downloadable deployment images. Network connectivity options span exclusive, common, and administrative pathways with DHCP address pools supporting both IPv4 and IPv6. Bulk grouping consolidates configuration across distributed locations. Compatibility verification runs before software updates, with rollout tracking for version progression across the infrastructure.",
-    "version": "2.0.39",
+    "version": "2.0.40",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -4395,13 +4395,25 @@
         "x-ves-proto-message": "ves.io.schema.maintenance_status.GetUpgradeStatusResponse",
         "properties": {
           "upgrade_in_progress": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "upgrade_in_progress_with_config_downtime",
+              "upgrade_not_in_progress"
+            ]
           },
           "upgrade_in_progress_with_config_downtime": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "upgrade_in_progress",
+              "upgrade_not_in_progress"
+            ]
           },
           "upgrade_not_in_progress": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "upgrade_in_progress",
+              "upgrade_in_progress_with_config_downtime"
+            ]
           }
         },
         "x-f5xc-description-short": "Response message for Upgrade Status Request. Response contain different states in upgrade process.",
@@ -4444,16 +4456,28 @@
         "x-ves-proto-message": "ves.io.schema.fleet.BlockedServices",
         "properties": {
           "dns": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "ssh",
+              "web_user_interface"
+            ]
           },
           "network_type": {
             "$ref": "#/components/schemas/schemaVirtualNetworkType"
           },
           "ssh": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "dns",
+              "web_user_interface"
+            ]
           },
           "web_user_interface": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "dns",
+              "ssh"
+            ]
           }
         },
         "x-f5xc-description-short": "Disable a node local service on this site.",
@@ -4611,7 +4635,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.457139+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.380003+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4631,7 +4655,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.457170+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.380033+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4675,7 +4699,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.457200+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.380063+00:00"
           },
           "network_device": {
             "$ref": "#/components/schemas/fleetNetworkingDeviceInstanceType"
@@ -4869,7 +4893,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "mgmt_ip"
+            ]
           },
           "mgmt_ip": {
             "type": "string",
@@ -4892,7 +4919,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "mgmt_dns_name"
+            ]
           }
         },
         "x-f5xc-description-short": "For FlashArrays you must set the \"mgmt_endpoint\" and \"api_token\".",
@@ -5180,7 +5210,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "mgmt_ip"
+            ]
           },
           "mgmt_ip": {
             "type": "string",
@@ -5203,7 +5236,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "mgmt_dns_name"
+            ]
           },
           "nfs_endpoint_dns_name": {
             "type": "string",
@@ -5229,7 +5265,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "nfs_endpoint_ip"
+            ]
           },
           "nfs_endpoint_ip": {
             "type": "string",
@@ -5252,7 +5291,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "nfs_endpoint_dns_name"
+            ]
           }
         },
         "x-f5xc-description-short": "For FlashBlades you must set the \"mgmt_endpoint\", \"api_token\" and nfs_endpoint.",
@@ -5373,7 +5415,10 @@
         "x-ves-proto-message": "ves.io.schema.fleet.FleetBondDeviceType",
         "properties": {
           "active_backup": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "lacp"
+            ]
           },
           "devices": {
             "type": "array",
@@ -5412,7 +5457,10 @@
             }
           },
           "lacp": {
-            "$ref": "#/components/schemas/fleetBondLacpType"
+            "$ref": "#/components/schemas/fleetBondLacpType",
+            "x-f5xc-conflicts-with": [
+              "active_backup"
+            ]
           },
           "link_polling_interval": {
             "type": "integer",
@@ -5499,7 +5547,7 @@
             },
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.457541+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.380429+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -5798,7 +5846,12 @@
             }
           },
           "custom_storage": {
-            "$ref": "#/components/schemas/fleetStorageClassCustomType"
+            "$ref": "#/components/schemas/fleetStorageClassCustomType",
+            "x-f5xc-conflicts-with": [
+              "hpe_storage",
+              "netapp_trident",
+              "pure_service_orchestrator"
+            ]
           },
           "default_storage_class": {
             "type": "boolean",
@@ -5837,16 +5890,31 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.457668+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.380559+00:00"
           },
           "hpe_storage": {
-            "$ref": "#/components/schemas/fleetStorageClassHpeStorageType"
+            "$ref": "#/components/schemas/fleetStorageClassHpeStorageType",
+            "x-f5xc-conflicts-with": [
+              "custom_storage",
+              "netapp_trident",
+              "pure_service_orchestrator"
+            ]
           },
           "netapp_trident": {
-            "$ref": "#/components/schemas/fleetStorageClassNetappTridentType"
+            "$ref": "#/components/schemas/fleetStorageClassNetappTridentType",
+            "x-f5xc-conflicts-with": [
+              "custom_storage",
+              "hpe_storage",
+              "pure_service_orchestrator"
+            ]
           },
           "pure_service_orchestrator": {
-            "$ref": "#/components/schemas/fleetStorageClassPureServiceOrchestratorType"
+            "$ref": "#/components/schemas/fleetStorageClassPureServiceOrchestratorType",
+            "x-f5xc-conflicts-with": [
+              "custom_storage",
+              "hpe_storage",
+              "netapp_trident"
+            ]
           },
           "reclaim_policy": {
             "type": "string",
@@ -6030,16 +6098,36 @@
             }
           },
           "custom_storage": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "hpe_storage",
+              "netapp_trident",
+              "pure_service_orchestrator"
+            ]
           },
           "hpe_storage": {
-            "$ref": "#/components/schemas/fleetStorageDeviceHpeStorageType"
+            "$ref": "#/components/schemas/fleetStorageDeviceHpeStorageType",
+            "x-f5xc-conflicts-with": [
+              "custom_storage",
+              "netapp_trident",
+              "pure_service_orchestrator"
+            ]
           },
           "netapp_trident": {
-            "$ref": "#/components/schemas/fleetStorageDeviceNetappTridentType"
+            "$ref": "#/components/schemas/fleetStorageDeviceNetappTridentType",
+            "x-f5xc-conflicts-with": [
+              "custom_storage",
+              "hpe_storage",
+              "pure_service_orchestrator"
+            ]
           },
           "pure_service_orchestrator": {
-            "$ref": "#/components/schemas/fleetStorageDevicePureStorageServiceOrchestratorType"
+            "$ref": "#/components/schemas/fleetStorageDevicePureStorageServiceOrchestratorType",
+            "x-f5xc-conflicts-with": [
+              "custom_storage",
+              "hpe_storage",
+              "netapp_trident"
+            ]
           },
           "storage_device": {
             "type": "string",
@@ -6222,7 +6310,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.457915+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.380793+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -6364,7 +6452,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.457990+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.380866+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -6418,7 +6506,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.458061+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.380935+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6437,7 +6525,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.458089+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.380964+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -6479,7 +6567,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.458145+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.381018+00:00"
           },
           "uid": {
             "type": "string",
@@ -6500,7 +6588,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.458174+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.381047+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of fleet is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -6706,7 +6794,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "no_qos",
+              "qos_policy"
+            ]
           },
           "encryption": {
             "type": "boolean",
@@ -6741,7 +6833,11 @@
             }
           },
           "no_qos": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "adaptive_qos_policy",
+              "qos_policy"
+            ]
           },
           "qos_policy": {
             "type": "string",
@@ -6764,7 +6860,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "adaptive_qos_policy",
+              "no_qos"
+            ]
           },
           "security_style": {
             "type": "string",
@@ -7331,7 +7431,7 @@
             },
             "x-original-maxLength": 512,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.458545+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.381424+00:00"
           },
           "destroy_on_delete": {
             "type": "boolean",
@@ -8012,7 +8112,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "data_lif_ip"
+            ]
           },
           "data_lif_ip": {
             "type": "string",
@@ -8036,7 +8139,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "data_lif_dns_name"
+            ]
           },
           "labels": {
             "type": "object",
@@ -8125,7 +8231,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "management_lif_ip"
+            ]
           },
           "management_lif_ip": {
             "type": "string",
@@ -8149,7 +8258,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "management_lif_dns_name"
+            ]
           },
           "nfs_mount_options": {
             "type": "string",
@@ -8431,7 +8543,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "data_lif_ip"
+            ]
           },
           "data_lif_ip": {
             "type": "string",
@@ -8455,7 +8570,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "data_lif_dns_name"
+            ]
           },
           "igroup_name": {
             "type": "string",
@@ -8579,7 +8697,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "management_lif_ip"
+            ]
           },
           "management_lif_ip": {
             "type": "string",
@@ -8603,10 +8724,16 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "management_lif_dns_name"
+            ]
           },
           "no_chap": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "use_chap"
+            ]
           },
           "password": {
             "$ref": "#/components/schemas/schemaSecretType"
@@ -8754,7 +8881,10 @@
             }
           },
           "use_chap": {
-            "$ref": "#/components/schemas/fleetDeviceNetappBackendOntapSanChapType"
+            "$ref": "#/components/schemas/fleetDeviceNetappBackendOntapSanChapType",
+            "x-f5xc-conflicts-with": [
+              "no_chap"
+            ]
           },
           "username": {
             "type": "string",
@@ -8830,10 +8960,16 @@
         "x-ves-proto-message": "ves.io.schema.fleet.StorageDeviceNetappTridentType",
         "properties": {
           "netapp_backend_ontap_nas": {
-            "$ref": "#/components/schemas/fleetStorageDeviceNetappBackendOntapNasType"
+            "$ref": "#/components/schemas/fleetStorageDeviceNetappBackendOntapNasType",
+            "x-f5xc-conflicts-with": [
+              "netapp_backend_ontap_san"
+            ]
           },
           "netapp_backend_ontap_san": {
-            "$ref": "#/components/schemas/fleetStorageDeviceNetappBackendOntapSanType"
+            "$ref": "#/components/schemas/fleetStorageDeviceNetappBackendOntapSanType",
+            "x-f5xc-conflicts-with": [
+              "netapp_backend_ontap_nas"
+            ]
           }
         },
         "x-f5xc-description-short": "Device configuration for NetApp Trident Storage.",
@@ -9094,7 +9230,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459319+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382182+00:00"
           },
           "name": {
             "type": "string",
@@ -9115,7 +9251,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459347+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382209+00:00"
           },
           "namespace": {
             "type": "string",
@@ -9136,7 +9272,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459374+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382236+00:00"
           },
           "tenant": {
             "type": "string",
@@ -9159,7 +9295,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459402+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382263+00:00"
           },
           "uid": {
             "type": "string",
@@ -9183,7 +9319,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459430+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382291+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -9236,7 +9372,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459470+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382338+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -9308,7 +9444,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459509+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382378+00:00"
           },
           "store_provider": {
             "type": "string",
@@ -9371,7 +9507,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459548+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382417+00:00"
           },
           "url": {
             "type": "string",
@@ -9475,7 +9611,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459606+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382474+00:00"
           },
           "service_name": {
             "type": "string",
@@ -9518,7 +9654,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459642+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382511+00:00"
           },
           "type": {
             "type": "string",
@@ -9663,7 +9799,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459714+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382582+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -9731,10 +9867,16 @@
         "x-ves-proto-message": "ves.io.schema.IpAddressType",
         "properties": {
           "ipv4": {
-            "$ref": "#/components/schemas/schemaIpv4AddressType"
+            "$ref": "#/components/schemas/schemaIpv4AddressType",
+            "x-f5xc-conflicts-with": [
+              "ipv6"
+            ]
           },
           "ipv6": {
-            "$ref": "#/components/schemas/schemaIpv6AddressType"
+            "$ref": "#/components/schemas/schemaIpv6AddressType",
+            "x-f5xc-conflicts-with": [
+              "ipv4"
+            ]
           }
         },
         "x-f5xc-description-short": "IP Address used to specify an IPv4 or IPv6 address.",
@@ -9761,10 +9903,16 @@
         "x-ves-proto-message": "ves.io.schema.IpSubnetType",
         "properties": {
           "ipv4": {
-            "$ref": "#/components/schemas/schemaIpv4SubnetType"
+            "$ref": "#/components/schemas/schemaIpv4SubnetType",
+            "x-f5xc-conflicts-with": [
+              "ipv6"
+            ]
           },
           "ipv6": {
-            "$ref": "#/components/schemas/schemaIpv6SubnetType"
+            "$ref": "#/components/schemas/schemaIpv6SubnetType",
+            "x-f5xc-conflicts-with": [
+              "ipv4"
+            ]
           }
         },
         "x-f5xc-description-short": "IP Address used to specify an IPv4 or IPv6 subnet addresses.",
@@ -10140,7 +10288,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459922+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382778+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -10198,7 +10346,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459970+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382826+00:00"
           },
           "namespace": {
             "type": "string",
@@ -10219,7 +10367,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.459997+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382853+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
@@ -10299,7 +10447,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460038+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382894+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -10359,7 +10507,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460086+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382941+00:00"
           },
           "namespace": {
             "type": "string",
@@ -10380,7 +10528,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460113+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.382968+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
@@ -10460,7 +10608,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460153+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383008+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -10518,7 +10666,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460201+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383056+00:00"
           },
           "namespace": {
             "type": "string",
@@ -10539,7 +10687,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460228+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383083+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
@@ -10616,10 +10764,16 @@
         "x-ves-proto-message": "ves.io.schema.SecretType",
         "properties": {
           "blindfold_secret_info": {
-            "$ref": "#/components/schemas/schemaBlindfoldSecretInfoType"
+            "$ref": "#/components/schemas/schemaBlindfoldSecretInfoType",
+            "x-f5xc-conflicts-with": [
+              "clear_secret_info"
+            ]
           },
           "clear_secret_info": {
-            "$ref": "#/components/schemas/schemaClearSecretInfoType"
+            "$ref": "#/components/schemas/schemaClearSecretInfoType",
+            "x-f5xc-conflicts-with": [
+              "blindfold_secret_info"
+            ]
           }
         },
         "x-f5xc-description-short": "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -10830,7 +10984,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460369+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383225+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -10950,7 +11104,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460428+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383284+00:00"
           },
           "status": {
             "type": "string",
@@ -10970,7 +11124,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460455+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383311+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -11165,7 +11319,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460580+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383444+00:00"
           },
           "uid": {
             "type": "string",
@@ -11188,7 +11342,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460608+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383472+00:00"
           }
         },
         "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
@@ -11238,7 +11392,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460638+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383503+00:00"
           },
           "location": {
             "type": "string",
@@ -11256,7 +11410,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460667+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383531+00:00"
           },
           "provider": {
             "type": "string",
@@ -11275,7 +11429,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460695+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383559+00:00"
           },
           "secret_encoding": {
             "$ref": "#/components/schemas/schemaSecretEncodingType"
@@ -11299,7 +11453,7 @@
             "maxLength": 1,
             "minLength": 1,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460732+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383595+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Vault Secret\" VaultSecretInfoType specifies information about the Secret managed by Hashicorp Vault.",
@@ -11344,7 +11498,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460762+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383626+00:00"
           },
           "name": {
             "type": "string",
@@ -11365,7 +11519,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460790+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383653+00:00"
           },
           "namespace": {
             "type": "string",
@@ -11386,7 +11540,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460817+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383680+00:00"
           },
           "uid": {
             "type": "string",
@@ -11407,7 +11561,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460845+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383708+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
@@ -11481,7 +11635,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.460876+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.383740+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Wingman Secret\" WingmanSecretInfoType specifies the handle to the wingman secret.",
@@ -11517,7 +11671,11 @@
         "x-ves-proto-message": "ves.io.schema.fleet.CreateSpecType",
         "properties": {
           "allow_all_usb": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "deny_all_usb",
+              "usb_policy"
+            ]
           },
           "blocked_services": {
             "type": "array",
@@ -11543,34 +11701,70 @@
             }
           },
           "bond_device_list": {
-            "$ref": "#/components/schemas/fleetFleetBondDevicesListType"
+            "$ref": "#/components/schemas/fleetFleetBondDevicesListType",
+            "x-f5xc-conflicts-with": [
+              "no_bond_devices"
+            ]
           },
           "dc_cluster_group": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "dc_cluster_group_inside",
+              "no_dc_cluster_group"
+            ]
           },
           "dc_cluster_group_inside": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "dc_cluster_group",
+              "no_dc_cluster_group"
+            ]
           },
           "default_config": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "device_list",
+              "interface_list"
+            ]
           },
           "default_sriov_interface": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "sriov_interfaces"
+            ]
           },
           "default_storage_class": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "storage_class_list"
+            ]
           },
           "deny_all_usb": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_all_usb",
+              "usb_policy"
+            ]
           },
           "device_list": {
-            "$ref": "#/components/schemas/fleetFleetDeviceListType"
+            "$ref": "#/components/schemas/fleetFleetDeviceListType",
+            "x-f5xc-conflicts-with": [
+              "default_config",
+              "interface_list"
+            ]
           },
           "disable_gpu": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_gpu",
+              "enable_vgpu"
+            ]
           },
           "disable_vm": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_vm"
+            ]
           },
           "enable_default_fleet_config_download": {
             "type": "boolean",
@@ -11586,13 +11780,24 @@
             }
           },
           "enable_gpu": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable_gpu",
+              "enable_vgpu"
+            ]
           },
           "enable_vgpu": {
-            "$ref": "#/components/schemas/fleetVGPUConfiguration"
+            "$ref": "#/components/schemas/fleetVGPUConfiguration",
+            "x-f5xc-conflicts-with": [
+              "disable_gpu",
+              "enable_gpu"
+            ]
           },
           "enable_vm": {
-            "$ref": "#/components/schemas/fleetVMConfiguration"
+            "$ref": "#/components/schemas/fleetVMConfiguration",
+            "x-f5xc-conflicts-with": [
+              "disable_vm"
+            ]
           },
           "fleet_label": {
             "type": "string",
@@ -11643,16 +11848,26 @@
             }
           },
           "interface_list": {
-            "$ref": "#/components/schemas/fleetFleetInterfaceListType"
+            "$ref": "#/components/schemas/fleetFleetInterfaceListType",
+            "x-f5xc-conflicts-with": [
+              "default_config",
+              "device_list"
+            ]
           },
           "kubernetes_upgrade_drain": {
             "$ref": "#/components/schemas/viewsKubernetesUpgradeDrain"
           },
           "log_receiver": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "logs_streaming_disabled"
+            ]
           },
           "logs_streaming_disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "log_receiver"
+            ]
           },
           "network_connectors": {
             "type": "array",
@@ -11701,19 +11916,35 @@
             }
           },
           "no_bond_devices": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "bond_device_list"
+            ]
           },
           "no_dc_cluster_group": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "dc_cluster_group",
+              "dc_cluster_group_inside"
+            ]
           },
           "no_storage_device": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "storage_device_list"
+            ]
           },
           "no_storage_interfaces": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "storage_interface_list"
+            ]
           },
           "no_storage_static_routes": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "storage_static_routes"
+            ]
           },
           "operating_system_version": {
             "type": "string",
@@ -11764,22 +11995,41 @@
             "$ref": "#/components/schemas/viewsPerformanceEnhancementModeType"
           },
           "sriov_interfaces": {
-            "$ref": "#/components/schemas/fleetSriovInterfacesListType"
+            "$ref": "#/components/schemas/fleetSriovInterfacesListType",
+            "x-f5xc-conflicts-with": [
+              "default_sriov_interface"
+            ]
           },
           "storage_class_list": {
-            "$ref": "#/components/schemas/fleetFleetStorageClassListType"
+            "$ref": "#/components/schemas/fleetFleetStorageClassListType",
+            "x-f5xc-conflicts-with": [
+              "default_storage_class"
+            ]
           },
           "storage_device_list": {
-            "$ref": "#/components/schemas/fleetFleetStorageDeviceListType"
+            "$ref": "#/components/schemas/fleetFleetStorageDeviceListType",
+            "x-f5xc-conflicts-with": [
+              "no_storage_device"
+            ]
           },
           "storage_interface_list": {
-            "$ref": "#/components/schemas/fleetFleetInterfaceListType"
+            "$ref": "#/components/schemas/fleetFleetInterfaceListType",
+            "x-f5xc-conflicts-with": [
+              "no_storage_interfaces"
+            ]
           },
           "storage_static_routes": {
-            "$ref": "#/components/schemas/fleetFleetStorageStaticRoutesListType"
+            "$ref": "#/components/schemas/fleetFleetStorageStaticRoutesListType",
+            "x-f5xc-conflicts-with": [
+              "no_storage_static_routes"
+            ]
           },
           "usb_policy": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "allow_all_usb",
+              "deny_all_usb"
+            ]
           },
           "volterra_software_version": {
             "type": "string",
@@ -11876,7 +12126,11 @@
         "x-ves-proto-message": "ves.io.schema.fleet.GetSpecType",
         "properties": {
           "allow_all_usb": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "deny_all_usb",
+              "usb_policy"
+            ]
           },
           "blocked_services": {
             "type": "array",
@@ -11902,34 +12156,70 @@
             }
           },
           "bond_device_list": {
-            "$ref": "#/components/schemas/fleetFleetBondDevicesListType"
+            "$ref": "#/components/schemas/fleetFleetBondDevicesListType",
+            "x-f5xc-conflicts-with": [
+              "no_bond_devices"
+            ]
           },
           "dc_cluster_group": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "dc_cluster_group_inside",
+              "no_dc_cluster_group"
+            ]
           },
           "dc_cluster_group_inside": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "dc_cluster_group",
+              "no_dc_cluster_group"
+            ]
           },
           "default_config": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "device_list",
+              "interface_list"
+            ]
           },
           "default_sriov_interface": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "sriov_interfaces"
+            ]
           },
           "default_storage_class": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "storage_class_list"
+            ]
           },
           "deny_all_usb": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_all_usb",
+              "usb_policy"
+            ]
           },
           "device_list": {
-            "$ref": "#/components/schemas/fleetFleetDeviceListType"
+            "$ref": "#/components/schemas/fleetFleetDeviceListType",
+            "x-f5xc-conflicts-with": [
+              "default_config",
+              "interface_list"
+            ]
           },
           "disable_gpu": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_gpu",
+              "enable_vgpu"
+            ]
           },
           "disable_vm": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_vm"
+            ]
           },
           "enable_default_fleet_config_download": {
             "type": "boolean",
@@ -11945,13 +12235,24 @@
             }
           },
           "enable_gpu": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable_gpu",
+              "enable_vgpu"
+            ]
           },
           "enable_vgpu": {
-            "$ref": "#/components/schemas/fleetVGPUConfiguration"
+            "$ref": "#/components/schemas/fleetVGPUConfiguration",
+            "x-f5xc-conflicts-with": [
+              "disable_gpu",
+              "enable_gpu"
+            ]
           },
           "enable_vm": {
-            "$ref": "#/components/schemas/fleetVMConfiguration"
+            "$ref": "#/components/schemas/fleetVMConfiguration",
+            "x-f5xc-conflicts-with": [
+              "disable_vm"
+            ]
           },
           "fleet_label": {
             "type": "string",
@@ -12002,16 +12303,26 @@
             }
           },
           "interface_list": {
-            "$ref": "#/components/schemas/fleetFleetInterfaceListType"
+            "$ref": "#/components/schemas/fleetFleetInterfaceListType",
+            "x-f5xc-conflicts-with": [
+              "default_config",
+              "device_list"
+            ]
           },
           "kubernetes_upgrade_drain": {
             "$ref": "#/components/schemas/viewsKubernetesUpgradeDrain"
           },
           "log_receiver": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "logs_streaming_disabled"
+            ]
           },
           "logs_streaming_disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "log_receiver"
+            ]
           },
           "network_connectors": {
             "type": "array",
@@ -12060,19 +12371,35 @@
             }
           },
           "no_bond_devices": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "bond_device_list"
+            ]
           },
           "no_dc_cluster_group": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "dc_cluster_group",
+              "dc_cluster_group_inside"
+            ]
           },
           "no_storage_device": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "storage_device_list"
+            ]
           },
           "no_storage_interfaces": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "storage_interface_list"
+            ]
           },
           "no_storage_static_routes": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "storage_static_routes"
+            ]
           },
           "operating_system_version": {
             "type": "string",
@@ -12123,22 +12450,41 @@
             "$ref": "#/components/schemas/viewsPerformanceEnhancementModeType"
           },
           "sriov_interfaces": {
-            "$ref": "#/components/schemas/fleetSriovInterfacesListType"
+            "$ref": "#/components/schemas/fleetSriovInterfacesListType",
+            "x-f5xc-conflicts-with": [
+              "default_sriov_interface"
+            ]
           },
           "storage_class_list": {
-            "$ref": "#/components/schemas/fleetFleetStorageClassListType"
+            "$ref": "#/components/schemas/fleetFleetStorageClassListType",
+            "x-f5xc-conflicts-with": [
+              "default_storage_class"
+            ]
           },
           "storage_device_list": {
-            "$ref": "#/components/schemas/fleetFleetStorageDeviceListType"
+            "$ref": "#/components/schemas/fleetFleetStorageDeviceListType",
+            "x-f5xc-conflicts-with": [
+              "no_storage_device"
+            ]
           },
           "storage_interface_list": {
-            "$ref": "#/components/schemas/fleetFleetInterfaceListType"
+            "$ref": "#/components/schemas/fleetFleetInterfaceListType",
+            "x-f5xc-conflicts-with": [
+              "no_storage_interfaces"
+            ]
           },
           "storage_static_routes": {
-            "$ref": "#/components/schemas/fleetFleetStorageStaticRoutesListType"
+            "$ref": "#/components/schemas/fleetFleetStorageStaticRoutesListType",
+            "x-f5xc-conflicts-with": [
+              "no_storage_static_routes"
+            ]
           },
           "usb_policy": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "allow_all_usb",
+              "deny_all_usb"
+            ]
           },
           "volterra_software_version": {
             "type": "string",
@@ -12235,7 +12581,11 @@
         "x-ves-proto-message": "ves.io.schema.fleet.ReplaceSpecType",
         "properties": {
           "allow_all_usb": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "deny_all_usb",
+              "usb_policy"
+            ]
           },
           "blocked_services": {
             "type": "array",
@@ -12261,34 +12611,70 @@
             }
           },
           "bond_device_list": {
-            "$ref": "#/components/schemas/fleetFleetBondDevicesListType"
+            "$ref": "#/components/schemas/fleetFleetBondDevicesListType",
+            "x-f5xc-conflicts-with": [
+              "no_bond_devices"
+            ]
           },
           "dc_cluster_group": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "dc_cluster_group_inside",
+              "no_dc_cluster_group"
+            ]
           },
           "dc_cluster_group_inside": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "dc_cluster_group",
+              "no_dc_cluster_group"
+            ]
           },
           "default_config": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "device_list",
+              "interface_list"
+            ]
           },
           "default_sriov_interface": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "sriov_interfaces"
+            ]
           },
           "default_storage_class": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "storage_class_list"
+            ]
           },
           "deny_all_usb": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_all_usb",
+              "usb_policy"
+            ]
           },
           "device_list": {
-            "$ref": "#/components/schemas/fleetFleetDeviceListType"
+            "$ref": "#/components/schemas/fleetFleetDeviceListType",
+            "x-f5xc-conflicts-with": [
+              "default_config",
+              "interface_list"
+            ]
           },
           "disable_gpu": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_gpu",
+              "enable_vgpu"
+            ]
           },
           "disable_vm": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_vm"
+            ]
           },
           "enable_default_fleet_config_download": {
             "type": "boolean",
@@ -12304,13 +12690,24 @@
             }
           },
           "enable_gpu": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable_gpu",
+              "enable_vgpu"
+            ]
           },
           "enable_vgpu": {
-            "$ref": "#/components/schemas/fleetVGPUConfiguration"
+            "$ref": "#/components/schemas/fleetVGPUConfiguration",
+            "x-f5xc-conflicts-with": [
+              "disable_gpu",
+              "enable_gpu"
+            ]
           },
           "enable_vm": {
-            "$ref": "#/components/schemas/fleetVMConfiguration"
+            "$ref": "#/components/schemas/fleetVMConfiguration",
+            "x-f5xc-conflicts-with": [
+              "disable_vm"
+            ]
           },
           "inside_virtual_network": {
             "type": "array",
@@ -12335,16 +12732,26 @@
             }
           },
           "interface_list": {
-            "$ref": "#/components/schemas/fleetFleetInterfaceListType"
+            "$ref": "#/components/schemas/fleetFleetInterfaceListType",
+            "x-f5xc-conflicts-with": [
+              "default_config",
+              "device_list"
+            ]
           },
           "kubernetes_upgrade_drain": {
             "$ref": "#/components/schemas/viewsKubernetesUpgradeDrain"
           },
           "log_receiver": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "logs_streaming_disabled"
+            ]
           },
           "logs_streaming_disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "log_receiver"
+            ]
           },
           "network_connectors": {
             "type": "array",
@@ -12393,19 +12800,35 @@
             }
           },
           "no_bond_devices": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "bond_device_list"
+            ]
           },
           "no_dc_cluster_group": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "dc_cluster_group",
+              "dc_cluster_group_inside"
+            ]
           },
           "no_storage_device": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "storage_device_list"
+            ]
           },
           "no_storage_interfaces": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "storage_interface_list"
+            ]
           },
           "no_storage_static_routes": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "storage_static_routes"
+            ]
           },
           "operating_system_version": {
             "type": "string",
@@ -12456,22 +12879,41 @@
             "$ref": "#/components/schemas/viewsPerformanceEnhancementModeType"
           },
           "sriov_interfaces": {
-            "$ref": "#/components/schemas/fleetSriovInterfacesListType"
+            "$ref": "#/components/schemas/fleetSriovInterfacesListType",
+            "x-f5xc-conflicts-with": [
+              "default_sriov_interface"
+            ]
           },
           "storage_class_list": {
-            "$ref": "#/components/schemas/fleetFleetStorageClassListType"
+            "$ref": "#/components/schemas/fleetFleetStorageClassListType",
+            "x-f5xc-conflicts-with": [
+              "default_storage_class"
+            ]
           },
           "storage_device_list": {
-            "$ref": "#/components/schemas/fleetFleetStorageDeviceListType"
+            "$ref": "#/components/schemas/fleetFleetStorageDeviceListType",
+            "x-f5xc-conflicts-with": [
+              "no_storage_device"
+            ]
           },
           "storage_interface_list": {
-            "$ref": "#/components/schemas/fleetFleetInterfaceListType"
+            "$ref": "#/components/schemas/fleetFleetInterfaceListType",
+            "x-f5xc-conflicts-with": [
+              "no_storage_interfaces"
+            ]
           },
           "storage_static_routes": {
-            "$ref": "#/components/schemas/fleetFleetStorageStaticRoutesListType"
+            "$ref": "#/components/schemas/fleetFleetStorageStaticRoutesListType",
+            "x-f5xc-conflicts-with": [
+              "no_storage_static_routes"
+            ]
           },
           "usb_policy": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "allow_all_usb",
+              "deny_all_usb"
+            ]
           },
           "volterra_software_version": {
             "type": "string",
@@ -12584,7 +13026,7 @@
             },
             "x-original-maxLength": 128,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.462009+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.384828+00:00"
           },
           "namespace": {
             "type": "string",
@@ -12611,7 +13053,7 @@
             },
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.462038+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.384856+00:00"
           },
           "tenant": {
             "type": "string",
@@ -12640,7 +13082,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.462065+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.384883+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a direct reference from one object(the referrer) to another(the referred).",
@@ -12669,10 +13111,16 @@
         "x-ves-proto-message": "ves.io.schema.views.KubernetesUpgradeDrain",
         "properties": {
           "disable_upgrade_drain": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_upgrade_drain"
+            ]
           },
           "enable_upgrade_drain": {
-            "$ref": "#/components/schemas/viewsKubernetesUpgradeDrainConfig"
+            "$ref": "#/components/schemas/viewsKubernetesUpgradeDrainConfig",
+            "x-f5xc-conflicts-with": [
+              "disable_upgrade_drain"
+            ]
           }
         },
         "x-f5xc-description-short": "Specify how worker nodes within a site will be upgraded.",
@@ -12699,7 +13147,10 @@
         "x-ves-proto-message": "ves.io.schema.views.KubernetesUpgradeDrainConfig",
         "properties": {
           "disable_vega_upgrade_mode": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_vega_upgrade_mode"
+            ]
           },
           "drain_max_unavailable_node_count": {
             "type": "integer",
@@ -12755,7 +13206,10 @@
             }
           },
           "enable_vega_upgrade_mode": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable_vega_upgrade_mode"
+            ]
           }
         },
         "x-f5xc-description-short": "Specify batch upgrade settings for worker nodes within a site.",
@@ -12784,10 +13238,16 @@
         "x-ves-proto-message": "ves.io.schema.views.L3PerformanceEnhancementType",
         "properties": {
           "jumbo": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "no_jumbo"
+            ]
           },
           "no_jumbo": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "jumbo"
+            ]
           }
         },
         "x-required": true,
@@ -12814,10 +13274,16 @@
         "x-ves-proto-message": "ves.io.schema.views.PerformanceEnhancementModeType",
         "properties": {
           "perf_mode_l3_enhanced": {
-            "$ref": "#/components/schemas/viewsL3PerformanceEnhancementType"
+            "$ref": "#/components/schemas/viewsL3PerformanceEnhancementType",
+            "x-f5xc-conflicts-with": [
+              "perf_mode_l7_enhanced"
+            ]
           },
           "perf_mode_l7_enhanced": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "perf_mode_l3_enhanced"
+            ]
           }
         },
         "x-required": true,
@@ -12997,19 +13463,49 @@
         "x-ves-proto-message": "ves.io.schema.network_interface.CreateSpecType",
         "properties": {
           "dedicated_interface": {
-            "$ref": "#/components/schemas/network_interfaceDedicatedInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceDedicatedInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_management_interface",
+              "ethernet_interface",
+              "layer2_interface",
+              "tunnel_interface"
+            ]
           },
           "dedicated_management_interface": {
-            "$ref": "#/components/schemas/network_interfaceDedicatedManagementInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceDedicatedManagementInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "ethernet_interface",
+              "layer2_interface",
+              "tunnel_interface"
+            ]
           },
           "ethernet_interface": {
-            "$ref": "#/components/schemas/network_interfaceEthernetInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceEthernetInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "dedicated_management_interface",
+              "layer2_interface",
+              "tunnel_interface"
+            ]
           },
           "layer2_interface": {
-            "$ref": "#/components/schemas/network_interfaceLayer2InterfaceType"
+            "$ref": "#/components/schemas/network_interfaceLayer2InterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "dedicated_management_interface",
+              "ethernet_interface",
+              "tunnel_interface"
+            ]
           },
           "tunnel_interface": {
-            "$ref": "#/components/schemas/network_interfaceTunnelInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceTunnelInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "dedicated_management_interface",
+              "ethernet_interface",
+              "layer2_interface"
+            ]
           }
         },
         "x-f5xc-description-short": "Network interface represents configuration of a network device. It is created by users in system namespace.",
@@ -13183,10 +13679,18 @@
         "x-ves-proto-message": "ves.io.schema.network_interface.DHCPIPV6StatefulServer",
         "properties": {
           "automatic_from_end": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "automatic_from_start",
+              "interface_ip_map"
+            ]
           },
           "automatic_from_start": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "automatic_from_end",
+              "interface_ip_map"
+            ]
           },
           "dhcp_networks": {
             "type": "array",
@@ -13248,7 +13752,11 @@
             }
           },
           "interface_ip_map": {
-            "$ref": "#/components/schemas/network_interfaceDHCPInterfaceIPV6Type"
+            "$ref": "#/components/schemas/network_interfaceDHCPInterfaceIPV6Type",
+            "x-f5xc-conflicts-with": [
+              "automatic_from_end",
+              "automatic_from_start"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -13394,7 +13902,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "first_address",
+              "last_address"
+            ]
           },
           "dns_address": {
             "type": "string",
@@ -13418,13 +13930,24 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "same_as_dgw"
+            ]
           },
           "first_address": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "dgw_address",
+              "last_address"
+            ]
           },
           "last_address": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "dgw_address",
+              "first_address"
+            ]
           },
           "network_prefix": {
             "type": "string",
@@ -13478,7 +14001,10 @@
             }
           },
           "same_as_dgw": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "dns_address"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -13599,10 +14125,18 @@
         "x-ves-proto-message": "ves.io.schema.network_interface.DHCPServerParametersType",
         "properties": {
           "automatic_from_end": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "automatic_from_start",
+              "interface_ip_map"
+            ]
           },
           "automatic_from_start": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "automatic_from_end",
+              "interface_ip_map"
+            ]
           },
           "dhcp_networks": {
             "type": "array",
@@ -13663,7 +14197,11 @@
             }
           },
           "interface_ip_map": {
-            "$ref": "#/components/schemas/network_interfaceDHCPInterfaceIPType"
+            "$ref": "#/components/schemas/network_interfaceDHCPInterfaceIPType",
+            "x-f5xc-conflicts-with": [
+              "automatic_from_end",
+              "automatic_from_start"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -13693,7 +14231,10 @@
         "x-ves-proto-message": "ves.io.schema.network_interface.DedicatedInterfaceType",
         "properties": {
           "cluster": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "node"
+            ]
           },
           "device": {
             "type": "string",
@@ -13724,13 +14265,22 @@
             }
           },
           "is_primary": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "not_primary"
+            ]
           },
           "monitor": {
-            "$ref": "#/components/schemas/network_interfaceLinkQualityMonitorConfig"
+            "$ref": "#/components/schemas/network_interfaceLinkQualityMonitorConfig",
+            "x-f5xc-conflicts-with": [
+              "monitor_disabled"
+            ]
           },
           "monitor_disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "monitor"
+            ]
           },
           "mtu": {
             "type": "integer",
@@ -13778,10 +14328,16 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "cluster"
+            ]
           },
           "not_primary": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "is_primary"
+            ]
           },
           "priority": {
             "type": "integer",
@@ -13840,7 +14396,10 @@
         "x-ves-proto-message": "ves.io.schema.network_interface.DedicatedManagementInterfaceType",
         "properties": {
           "cluster": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "node"
+            ]
           },
           "device": {
             "type": "string",
@@ -13916,7 +14475,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "cluster"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -13972,7 +14534,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.488019+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.319422+00:00"
           },
           "namespace": {
             "type": "string",
@@ -13992,7 +14554,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.488048+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.319450+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -14024,7 +14586,10 @@
         "x-ves-proto-message": "ves.io.schema.network_interface.EthernetInterfaceType",
         "properties": {
           "cluster": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "node"
+            ]
           },
           "device": {
             "type": "string",
@@ -14055,22 +14620,43 @@
             }
           },
           "dhcp_client": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "dhcp_server",
+              "static_ip"
+            ]
           },
           "dhcp_server": {
-            "$ref": "#/components/schemas/network_interfaceDHCPServerParametersType"
+            "$ref": "#/components/schemas/network_interfaceDHCPServerParametersType",
+            "x-f5xc-conflicts-with": [
+              "dhcp_client",
+              "static_ip"
+            ]
           },
           "ipv6_auto_config": {
-            "$ref": "#/components/schemas/network_interfaceIPV6AutoConfigType"
+            "$ref": "#/components/schemas/network_interfaceIPV6AutoConfigType",
+            "x-f5xc-conflicts-with": [
+              "no_ipv6_address",
+              "static_ipv6_address"
+            ]
           },
           "is_primary": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "not_primary"
+            ]
           },
           "monitor": {
-            "$ref": "#/components/schemas/network_interfaceLinkQualityMonitorConfig"
+            "$ref": "#/components/schemas/network_interfaceLinkQualityMonitorConfig",
+            "x-f5xc-conflicts-with": [
+              "monitor_disabled"
+            ]
           },
           "monitor_disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "monitor"
+            ]
           },
           "mtu": {
             "type": "integer",
@@ -14098,7 +14684,11 @@
             }
           },
           "no_ipv6_address": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "ipv6_auto_config",
+              "static_ipv6_address"
+            ]
           },
           "node": {
             "type": "string",
@@ -14121,10 +14711,16 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "cluster"
+            ]
           },
           "not_primary": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "is_primary"
+            ]
           },
           "priority": {
             "type": "integer",
@@ -14154,22 +14750,48 @@
             }
           },
           "site_local_inside_network": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "segment_network",
+              "site_local_network",
+              "storage_network"
+            ]
           },
           "site_local_network": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "segment_network",
+              "site_local_inside_network",
+              "storage_network"
+            ]
           },
           "static_ip": {
-            "$ref": "#/components/schemas/network_interfaceStaticIPParametersType"
+            "$ref": "#/components/schemas/network_interfaceStaticIPParametersType",
+            "x-f5xc-conflicts-with": [
+              "dhcp_client",
+              "dhcp_server"
+            ]
           },
           "static_ipv6_address": {
-            "$ref": "#/components/schemas/network_interfaceStaticIPParametersType"
+            "$ref": "#/components/schemas/network_interfaceStaticIPParametersType",
+            "x-f5xc-conflicts-with": [
+              "ipv6_auto_config",
+              "no_ipv6_address"
+            ]
           },
           "storage_network": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "segment_network",
+              "site_local_inside_network",
+              "site_local_network"
+            ]
           },
           "untagged": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "vlan_id"
+            ]
           },
           "vlan_id": {
             "type": "integer",
@@ -14194,7 +14816,10 @@
               "update": false,
               "read": false
             },
-            "x-field-mutability": "read-only"
+            "x-field-mutability": "read-only",
+            "x-f5xc-conflicts-with": [
+              "untagged"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -14314,7 +14939,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.488333+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.319731+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -14405,10 +15030,24 @@
             }
           },
           "dedicated_interface": {
-            "$ref": "#/components/schemas/network_interfaceDedicatedInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceDedicatedInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_management_interface",
+              "ethernet_interface",
+              "layer2_interface",
+              "legacy_interface",
+              "tunnel_interface"
+            ]
           },
           "dedicated_management_interface": {
-            "$ref": "#/components/schemas/network_interfaceDedicatedManagementInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceDedicatedManagementInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "ethernet_interface",
+              "layer2_interface",
+              "legacy_interface",
+              "tunnel_interface"
+            ]
           },
           "default_gateway": {
             "$ref": "#/components/schemas/network_interfaceNetworkInterfaceDFGW"
@@ -14441,7 +15080,14 @@
             "$ref": "#/components/schemas/network_interfaceNetworkInterfaceDHCP"
           },
           "ethernet_interface": {
-            "$ref": "#/components/schemas/network_interfaceEthernetInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceEthernetInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "dedicated_management_interface",
+              "layer2_interface",
+              "legacy_interface",
+              "tunnel_interface"
+            ]
           },
           "interface_ip_map": {
             "type": "object",
@@ -14481,16 +15127,36 @@
             }
           },
           "layer2_interface": {
-            "$ref": "#/components/schemas/network_interfaceLayer2InterfaceType"
+            "$ref": "#/components/schemas/network_interfaceLayer2InterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "dedicated_management_interface",
+              "ethernet_interface",
+              "legacy_interface",
+              "tunnel_interface"
+            ]
           },
           "legacy_interface": {
-            "$ref": "#/components/schemas/network_interfaceLegacyInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceLegacyInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "dedicated_management_interface",
+              "ethernet_interface",
+              "layer2_interface",
+              "tunnel_interface"
+            ]
           },
           "monitor": {
-            "$ref": "#/components/schemas/network_interfaceLinkQualityMonitorConfig"
+            "$ref": "#/components/schemas/network_interfaceLinkQualityMonitorConfig",
+            "x-f5xc-conflicts-with": [
+              "monitor_disabled"
+            ]
           },
           "monitor_disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "monitor"
+            ]
           },
           "mtu": {
             "type": "integer",
@@ -14570,7 +15236,14 @@
             "$ref": "#/components/schemas/network_interfaceNetworkInterfaceTunnel"
           },
           "tunnel_interface": {
-            "$ref": "#/components/schemas/network_interfaceTunnelInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceTunnelInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "dedicated_management_interface",
+              "ethernet_interface",
+              "layer2_interface",
+              "legacy_interface"
+            ]
           },
           "type": {
             "$ref": "#/components/schemas/network_interfaceNetworkInterfaceType"
@@ -14697,10 +15370,16 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "stateful"
+            ]
           },
           "stateful": {
-            "$ref": "#/components/schemas/network_interfaceDHCPIPV6StatefulServer"
+            "$ref": "#/components/schemas/network_interfaceDHCPIPV6StatefulServer",
+            "x-f5xc-conflicts-with": [
+              "network_prefix"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -14725,10 +15404,16 @@
         "x-ves-proto-message": "ves.io.schema.network_interface.IPV6AutoConfigType",
         "properties": {
           "host": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "router"
+            ]
           },
           "router": {
-            "$ref": "#/components/schemas/network_interfaceIPV6AutoConfigRouterType"
+            "$ref": "#/components/schemas/network_interfaceIPV6AutoConfigRouterType",
+            "x-f5xc-conflicts-with": [
+              "host"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -14752,10 +15437,16 @@
         "x-ves-proto-message": "ves.io.schema.network_interface.IPV6DnsConfig",
         "properties": {
           "configured_list": {
-            "$ref": "#/components/schemas/network_interfaceIPV6DnsList"
+            "$ref": "#/components/schemas/network_interfaceIPV6DnsList",
+            "x-f5xc-conflicts-with": [
+              "local_dns"
+            ]
           },
           "local_dns": {
-            "$ref": "#/components/schemas/network_interfaceIPV6LocalDnsAddress"
+            "$ref": "#/components/schemas/network_interfaceIPV6LocalDnsAddress",
+            "x-f5xc-conflicts-with": [
+              "configured_list"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -14854,13 +15545,25 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "first_address",
+              "last_address"
+            ]
           },
           "first_address": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "configured_address",
+              "last_address"
+            ]
           },
           "last_address": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "configured_address",
+              "first_address"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -14886,13 +15589,25 @@
         "x-ves-proto-message": "ves.io.schema.network_interface.Layer2InterfaceType",
         "properties": {
           "l2sriov_interface": {
-            "$ref": "#/components/schemas/network_interfaceLayer2SriovInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceLayer2SriovInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "l2vlan_interface",
+              "l2vlan_slo_interface"
+            ]
           },
           "l2vlan_interface": {
-            "$ref": "#/components/schemas/network_interfaceLayer2VlanInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceLayer2VlanInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "l2sriov_interface",
+              "l2vlan_slo_interface"
+            ]
           },
           "l2vlan_slo_interface": {
-            "$ref": "#/components/schemas/network_interfaceLayer2SloVlanInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceLayer2SloVlanInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "l2sriov_interface",
+              "l2vlan_interface"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -14996,7 +15711,10 @@
             }
           },
           "untagged": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "vlan_id"
+            ]
           },
           "vlan_id": {
             "type": "integer",
@@ -15023,7 +15741,10 @@
               "update": false,
               "read": false
             },
-            "x-field-mutability": "read-only"
+            "x-field-mutability": "read-only",
+            "x-f5xc-conflicts-with": [
+              "untagged"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -15188,10 +15909,16 @@
             "$ref": "#/components/schemas/network_interfaceNetworkInterfaceDHCP"
           },
           "monitor": {
-            "$ref": "#/components/schemas/network_interfaceLinkQualityMonitorConfig"
+            "$ref": "#/components/schemas/network_interfaceLinkQualityMonitorConfig",
+            "x-f5xc-conflicts-with": [
+              "monitor_disabled"
+            ]
           },
           "monitor_disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "monitor"
+            ]
           },
           "mtu": {
             "type": "integer",
@@ -15456,7 +16183,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.488997+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.320389+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -15510,7 +16237,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.489065+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.320457+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15529,7 +16256,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.489093+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.320485+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -15571,7 +16298,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.489151+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.320540+00:00"
           },
           "uid": {
             "type": "string",
@@ -15593,7 +16320,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.489181+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.320569+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of network_interface is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -15976,22 +16703,64 @@
         "x-ves-proto-message": "ves.io.schema.network_interface.ReplaceSpecType",
         "properties": {
           "dedicated_interface": {
-            "$ref": "#/components/schemas/network_interfaceDedicatedInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceDedicatedInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_management_interface",
+              "ethernet_interface",
+              "layer2_interface",
+              "legacy_interface",
+              "tunnel_interface"
+            ]
           },
           "dedicated_management_interface": {
-            "$ref": "#/components/schemas/network_interfaceDedicatedManagementInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceDedicatedManagementInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "ethernet_interface",
+              "layer2_interface",
+              "legacy_interface",
+              "tunnel_interface"
+            ]
           },
           "ethernet_interface": {
-            "$ref": "#/components/schemas/network_interfaceEthernetInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceEthernetInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "dedicated_management_interface",
+              "layer2_interface",
+              "legacy_interface",
+              "tunnel_interface"
+            ]
           },
           "layer2_interface": {
-            "$ref": "#/components/schemas/network_interfaceLayer2InterfaceType"
+            "$ref": "#/components/schemas/network_interfaceLayer2InterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "dedicated_management_interface",
+              "ethernet_interface",
+              "legacy_interface",
+              "tunnel_interface"
+            ]
           },
           "legacy_interface": {
-            "$ref": "#/components/schemas/network_interfaceLegacyInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceLegacyInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "dedicated_management_interface",
+              "ethernet_interface",
+              "layer2_interface",
+              "tunnel_interface"
+            ]
           },
           "tunnel_interface": {
-            "$ref": "#/components/schemas/network_interfaceTunnelInterfaceType"
+            "$ref": "#/components/schemas/network_interfaceTunnelInterfaceType",
+            "x-f5xc-conflicts-with": [
+              "dedicated_interface",
+              "dedicated_management_interface",
+              "ethernet_interface",
+              "layer2_interface",
+              "legacy_interface"
+            ]
           }
         },
         "x-f5xc-description-short": "Network interface represents configuration of a network device. Replace network interface will replace the contents of given network interface object.",
@@ -16022,10 +16791,16 @@
         "x-ves-proto-message": "ves.io.schema.network_interface.StaticIPParametersType",
         "properties": {
           "cluster_static_ip": {
-            "$ref": "#/components/schemas/network_interfaceStaticIpParametersClusterType"
+            "$ref": "#/components/schemas/network_interfaceStaticIpParametersClusterType",
+            "x-f5xc-conflicts-with": [
+              "node_static_ip"
+            ]
           },
           "node_static_ip": {
-            "$ref": "#/components/schemas/network_interfaceStaticIpParametersNodeType"
+            "$ref": "#/components/schemas/network_interfaceStaticIpParametersNodeType",
+            "x-f5xc-conflicts-with": [
+              "cluster_static_ip"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -16357,10 +17132,16 @@
             }
           },
           "site_local_inside_network": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "site_local_network"
+            ]
           },
           "site_local_network": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "site_local_inside_network"
+            ]
           },
           "static_ip": {
             "$ref": "#/components/schemas/network_interfaceStaticIPParametersType"
@@ -16530,7 +17311,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.734676+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.441448+00:00"
           },
           "namespace": {
             "type": "string",
@@ -16550,7 +17331,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.734704+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.441475+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -16653,7 +17434,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.734802+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.441570+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -16846,7 +17627,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.734909+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.441656+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -16900,7 +17681,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.734988+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.441722+00:00"
           },
           "namespace": {
             "type": "string",
@@ -16919,7 +17700,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.735019+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.441750+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -16961,7 +17742,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.735075+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.441805+00:00"
           },
           "uid": {
             "type": "string",
@@ -16982,7 +17763,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.735104+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.441833+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of usb_policy is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -17367,7 +18148,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.785057+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.487492+00:00"
           },
           "name": {
             "type": "string",
@@ -17384,7 +18165,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.785087+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.487521+00:00"
           }
         },
         "x-f5xc-description-short": "ApplicationObj shows the upgrade status of each object in a application in either site/node level upgrades.",
@@ -17426,7 +18207,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.785121+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.487554+00:00"
           },
           "reason": {
             "type": "string",
@@ -17445,7 +18226,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.785149+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.487582+00:00"
           },
           "status": {
             "$ref": "#/components/schemas/upgrade_statusChecklistStatus"
@@ -17696,7 +18477,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.785284+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.487714+00:00"
           },
           "status": {
             "$ref": "#/components/schemas/upgrade_statusStatus"
@@ -17802,7 +18583,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.785366+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.487793+00:00"
           },
           "progress": {
             "$ref": "#/components/schemas/upgrade_statusUpgradeProgressCount"
@@ -17861,7 +18642,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.785423+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.487850+00:00"
           },
           "results": {
             "type": "array",
@@ -18059,7 +18840,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.785595+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.488020+00:00"
           }
         },
         "x-f5xc-description-short": "SWStatus stores information about CE Site upgrade status.",
@@ -18162,7 +18943,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.785664+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.488088+00:00"
           },
           "objects": {
             "type": "array",
@@ -18233,7 +19014,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.785722+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.488145+00:00"
           },
           "status": {
             "$ref": "#/components/schemas/upgrade_statusStatus"

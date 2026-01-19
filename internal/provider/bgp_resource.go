@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -432,6 +434,12 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 					"ip_address": schema.StringAttribute{
 						MarkdownDescription: "Use the configured IPv4 Address as Router ID.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("from_site"),
+								path.MatchRelative().AtParent().AtName("local_address"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -482,10 +490,29 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								"address": schema.StringAttribute{
 									MarkdownDescription: "Specify IPv4 peer address.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("default_gateway"),
+											path.MatchRelative().AtParent().AtName("disable"),
+											path.MatchRelative().AtParent().AtName("external_connector"),
+											path.MatchRelative().AtParent().AtName("from_site"),
+											path.MatchRelative().AtParent().AtName("subnet_begin_offset"),
+											path.MatchRelative().AtParent().AtName("subnet_end_offset"),
+										),
+									},
 								},
 								"address_ipv6": schema.StringAttribute{
 									MarkdownDescription: "Specify peer IPv6 address.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("default_gateway_v6"),
+											path.MatchRelative().AtParent().AtName("disable_v6"),
+											path.MatchRelative().AtParent().AtName("from_site_v6"),
+											path.MatchRelative().AtParent().AtName("subnet_begin_offset_v6"),
+											path.MatchRelative().AtParent().AtName("subnet_end_offset_v6"),
+										),
+									},
 								},
 								"asn": schema.Int64Attribute{
 									MarkdownDescription: "Autonomous System Number for BGP peer .",
@@ -494,6 +521,11 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								"md5_auth_key": schema.StringAttribute{
 									MarkdownDescription: "MD5 key for protecting BGP Sessions (RFC 2385).",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("no_authentication"),
+										),
+									},
 								},
 								"port": schema.Int64Attribute{
 									MarkdownDescription: "Peer Port. Peer TCP port number.",
@@ -502,18 +534,56 @@ func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 								"subnet_begin_offset": schema.Int64Attribute{
 									MarkdownDescription: "Calculate peer address using offset from the beginning of the subnet.",
 									Optional:            true,
+									Validators: []validator.Int64{
+										int64validator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("address"),
+											path.MatchRelative().AtParent().AtName("default_gateway"),
+											path.MatchRelative().AtParent().AtName("disable"),
+											path.MatchRelative().AtParent().AtName("external_connector"),
+											path.MatchRelative().AtParent().AtName("from_site"),
+											path.MatchRelative().AtParent().AtName("subnet_end_offset"),
+										),
+									},
 								},
 								"subnet_begin_offset_v6": schema.Int64Attribute{
 									MarkdownDescription: "Calculate peer address using offset from the beginning of the subnet.",
 									Optional:            true,
+									Validators: []validator.Int64{
+										int64validator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("address_ipv6"),
+											path.MatchRelative().AtParent().AtName("default_gateway_v6"),
+											path.MatchRelative().AtParent().AtName("disable_v6"),
+											path.MatchRelative().AtParent().AtName("from_site_v6"),
+											path.MatchRelative().AtParent().AtName("subnet_end_offset_v6"),
+										),
+									},
 								},
 								"subnet_end_offset": schema.Int64Attribute{
 									MarkdownDescription: "Calculate peer address using offset from the end of the subnet.",
 									Optional:            true,
+									Validators: []validator.Int64{
+										int64validator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("address"),
+											path.MatchRelative().AtParent().AtName("default_gateway"),
+											path.MatchRelative().AtParent().AtName("disable"),
+											path.MatchRelative().AtParent().AtName("external_connector"),
+											path.MatchRelative().AtParent().AtName("from_site"),
+											path.MatchRelative().AtParent().AtName("subnet_begin_offset"),
+										),
+									},
 								},
 								"subnet_end_offset_v6": schema.Int64Attribute{
 									MarkdownDescription: "Calculate peer address using offset from the end of the subnet.",
 									Optional:            true,
+									Validators: []validator.Int64{
+										int64validator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("address_ipv6"),
+											path.MatchRelative().AtParent().AtName("default_gateway_v6"),
+											path.MatchRelative().AtParent().AtName("disable_v6"),
+											path.MatchRelative().AtParent().AtName("from_site_v6"),
+											path.MatchRelative().AtParent().AtName("subnet_begin_offset_v6"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{

@@ -1,0 +1,29 @@
+{
+  "operation": "syntax",
+  "resource": "app_api_group",
+  "totalBlocks": 4,
+  "totalAttributes": 7,
+  "totalOneOfGroups": 1,
+  "blocks": [
+    "bigip_virtual_server",
+    "cdn_loadbalancer",
+    "elements",
+    "http_loadbalancer"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {
+    "scope_choice": [
+      "bigip_virtual_server",
+      "cdn_loadbalancer",
+      "http_loadbalancer"
+    ]
+  }
+}

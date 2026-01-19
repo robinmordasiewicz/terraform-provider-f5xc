@@ -3,7 +3,7 @@
   "info": {
     "title": "Network Security",
     "description": "Perimeter defense through firewall configurations, address translation, and ingress/egress policies. Traffic steering directs packets according to defined criteria including origin, target, and service type. Segment boundaries create workload isolation zones while HTTP intermediaries manage client requests to external destinations. Port mappings employ static and dynamic address pools for flexible translation scenarios across multi-tenant environments.",
-    "version": "2.0.39",
+    "version": "2.0.40",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -16798,7 +16798,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.422730+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.438639+00:00"
           },
           "namespace": {
             "type": "string",
@@ -16818,7 +16818,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.422760+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.438669+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -16892,52 +16892,168 @@
             "$ref": "#/components/schemas/policyRuleAction"
           },
           "all_destinations": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "dst_asn_list",
+              "dst_asn_set",
+              "dst_ip_prefix_set",
+              "dst_label_selector",
+              "dst_prefix_list",
+              "http_list",
+              "tls_list",
+              "url_category_list"
+            ]
           },
           "all_sources": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_set",
+              "label_selector",
+              "prefix_list"
+            ]
           },
           "dst_asn_list": {
-            "$ref": "#/components/schemas/policyAsnMatchList"
+            "$ref": "#/components/schemas/policyAsnMatchList",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "dst_asn_set",
+              "dst_ip_prefix_set",
+              "dst_label_selector",
+              "dst_prefix_list",
+              "http_list",
+              "tls_list",
+              "url_category_list"
+            ]
           },
           "dst_asn_set": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "dst_asn_list",
+              "dst_ip_prefix_set",
+              "dst_label_selector",
+              "dst_prefix_list",
+              "http_list",
+              "tls_list",
+              "url_category_list"
+            ]
           },
           "dst_ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "dst_asn_list",
+              "dst_asn_set",
+              "dst_label_selector",
+              "dst_prefix_list",
+              "http_list",
+              "tls_list",
+              "url_category_list"
+            ]
           },
           "dst_label_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "dst_asn_list",
+              "dst_asn_set",
+              "dst_ip_prefix_set",
+              "dst_prefix_list",
+              "http_list",
+              "tls_list",
+              "url_category_list"
+            ]
           },
           "dst_prefix_list": {
-            "$ref": "#/components/schemas/viewsPrefixStringListType"
+            "$ref": "#/components/schemas/viewsPrefixStringListType",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "dst_asn_list",
+              "dst_asn_set",
+              "dst_ip_prefix_set",
+              "dst_label_selector",
+              "http_list",
+              "tls_list",
+              "url_category_list"
+            ]
           },
           "http_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyURLListType"
+            "$ref": "#/components/schemas/forward_proxy_policyURLListType",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "dst_asn_list",
+              "dst_asn_set",
+              "dst_ip_prefix_set",
+              "dst_label_selector",
+              "dst_prefix_list",
+              "tls_list",
+              "url_category_list"
+            ]
           },
           "ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "all_sources",
+              "label_selector",
+              "prefix_list"
+            ]
           },
           "label_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "all_sources",
+              "ip_prefix_set",
+              "prefix_list"
+            ]
           },
           "metadata": {
             "$ref": "#/components/schemas/schemaMessageMetaType"
           },
           "no_http_connect_port": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "port_matcher"
+            ]
           },
           "port_matcher": {
-            "$ref": "#/components/schemas/schemapolicyPortMatcherType"
+            "$ref": "#/components/schemas/schemapolicyPortMatcherType",
+            "x-f5xc-conflicts-with": [
+              "no_http_connect_port"
+            ]
           },
           "prefix_list": {
-            "$ref": "#/components/schemas/viewsPrefixStringListType"
+            "$ref": "#/components/schemas/viewsPrefixStringListType",
+            "x-f5xc-conflicts-with": [
+              "all_sources",
+              "ip_prefix_set",
+              "label_selector"
+            ]
           },
           "tls_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyDomainListType"
+            "$ref": "#/components/schemas/forward_proxy_policyDomainListType",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "dst_asn_list",
+              "dst_asn_set",
+              "dst_ip_prefix_set",
+              "dst_label_selector",
+              "dst_prefix_list",
+              "http_list",
+              "url_category_list"
+            ]
           },
           "url_category_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyURLCategoryListType"
+            "$ref": "#/components/schemas/forward_proxy_policyURLCategoryListType",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "dst_asn_list",
+              "dst_asn_set",
+              "dst_ip_prefix_set",
+              "dst_label_selector",
+              "dst_prefix_list",
+              "http_list",
+              "tls_list"
+            ]
           }
         },
         "x-f5xc-description-short": "URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP).",
@@ -17050,7 +17166,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423005+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.438896+00:00"
           },
           "policy": {
             "type": "string",
@@ -17219,7 +17335,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423104+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.438990+00:00"
           },
           "start_time": {
             "type": "string",
@@ -17407,7 +17523,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423196+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439079+00:00"
           }
         },
         "x-f5xc-description-short": "Label filter can be specified to filter metrics based on label match.",
@@ -17486,13 +17602,25 @@
         "x-ves-proto-message": "ves.io.schema.views.forward_proxy_policy.ForwardProxySimpleRuleType",
         "properties": {
           "default_action_allow": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_action_deny",
+              "default_action_next_policy"
+            ]
           },
           "default_action_deny": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_action_allow",
+              "default_action_next_policy"
+            ]
           },
           "default_action_next_policy": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_action_allow",
+              "default_action_deny"
+            ]
           },
           "dest_list": {
             "type": "array",
@@ -17672,7 +17800,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423364+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439242+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -17815,7 +17943,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423440+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439317+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -17869,7 +17997,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423509+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439395+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17888,7 +18016,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423538+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439423+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -17930,7 +18058,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423594+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439478+00:00"
           },
           "uid": {
             "type": "string",
@@ -17952,7 +18080,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423623+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439507+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of forward_proxy_policy is returned in 'List'.",
@@ -18180,7 +18308,12 @@
         "x-ves-proto-message": "ves.io.schema.views.forward_proxy_policy.URLType",
         "properties": {
           "any_path": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "path_exact_value",
+              "path_prefix_value",
+              "path_regex_value"
+            ]
           },
           "exact_value": {
             "type": "string",
@@ -18207,7 +18340,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "regex_value",
+              "suffix_value"
+            ]
           },
           "path_exact_value": {
             "type": "string",
@@ -18234,7 +18371,12 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_path",
+              "path_prefix_value",
+              "path_regex_value"
+            ]
           },
           "path_prefix_value": {
             "type": "string",
@@ -18262,7 +18404,12 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_path",
+              "path_exact_value",
+              "path_regex_value"
+            ]
           },
           "path_regex_value": {
             "type": "string",
@@ -18290,7 +18437,12 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_path",
+              "path_exact_value",
+              "path_prefix_value"
+            ]
           },
           "regex_value": {
             "type": "string",
@@ -18317,7 +18469,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "exact_value",
+              "suffix_value"
+            ]
           },
           "suffix_value": {
             "type": "string",
@@ -18345,7 +18501,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "exact_value",
+              "regex_value"
+            ]
           }
         },
         "x-f5xc-description-short": "URL strings in form \"HTTP://<domian>/<path>\".",
@@ -18410,7 +18570,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423800+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439680+00:00"
           },
           "name": {
             "type": "string",
@@ -18431,7 +18591,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423828+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439708+00:00"
           },
           "namespace": {
             "type": "string",
@@ -18452,7 +18612,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423855+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439734+00:00"
           },
           "tenant": {
             "type": "string",
@@ -18475,7 +18635,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423883+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439762+00:00"
           },
           "uid": {
             "type": "string",
@@ -18499,7 +18659,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.423923+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439790+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -18775,7 +18935,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424026+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439890+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -18850,7 +19010,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424075+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439938+00:00"
           },
           "service_name": {
             "type": "string",
@@ -18893,7 +19053,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424113+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.439975+00:00"
           },
           "type": {
             "type": "string",
@@ -18972,7 +19132,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "regex_value",
+              "suffix_value"
+            ]
           },
           "regex_value": {
             "type": "string",
@@ -18999,7 +19163,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "exact_value",
+              "suffix_value"
+            ]
           },
           "suffix_value": {
             "type": "string",
@@ -19027,7 +19195,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "exact_value",
+              "regex_value"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -19143,7 +19315,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424214+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440075+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -19403,7 +19575,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424307+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440167+00:00"
           },
           "name": {
             "type": "string",
@@ -19434,7 +19606,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424336+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440194+00:00"
           }
         },
         "x-f5xc-description-short": "MessageMetaType is metadata (common attributes) of a message that only certain messages have.",
@@ -19516,7 +19688,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424387+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440243+00:00"
           }
         },
         "x-f5xc-description-short": "Metric data contains timestamp and the value.",
@@ -19592,7 +19764,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424429+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440284+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -19650,7 +19822,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424477+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440342+00:00"
           },
           "namespace": {
             "type": "string",
@@ -19671,7 +19843,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424504+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440369+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
@@ -19751,7 +19923,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424546+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440411+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -19811,7 +19983,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424596+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440458+00:00"
           },
           "namespace": {
             "type": "string",
@@ -19832,7 +20004,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424624+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440485+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
@@ -19912,7 +20084,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424665+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440526+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -19970,7 +20142,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424713+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440573+00:00"
           },
           "namespace": {
             "type": "string",
@@ -19991,7 +20163,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424741+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440599+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
@@ -20115,7 +20287,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424819+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440677+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -20235,7 +20407,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424879+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440735+00:00"
           },
           "status": {
             "type": "string",
@@ -20255,7 +20427,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.424917+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440762+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -20450,7 +20622,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.425045+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440887+00:00"
           },
           "uid": {
             "type": "string",
@@ -20473,7 +20645,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.425074+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440915+00:00"
           }
         },
         "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
@@ -20549,7 +20721,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.425106+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440945+00:00"
           },
           "previous_value": {
             "type": "string",
@@ -20588,7 +20760,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.425153+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.440991+00:00"
           }
         },
         "x-f5xc-description-short": "Trend value contains trend value, trend sentiment and trend calculation description and window size.",
@@ -20632,7 +20804,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.425184+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.441021+00:00"
           },
           "name": {
             "type": "string",
@@ -20653,7 +20825,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.425212+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.441048+00:00"
           },
           "namespace": {
             "type": "string",
@@ -20674,7 +20846,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.425239+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.441075+00:00"
           },
           "uid": {
             "type": "string",
@@ -20695,7 +20867,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.425269+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.441103+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
@@ -20820,7 +20992,7 @@
             },
             "x-original-maxLength": 128,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.425321+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.441153+00:00"
           },
           "namespace": {
             "type": "string",
@@ -20847,7 +21019,7 @@
             },
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.425349+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.441181+00:00"
           },
           "tenant": {
             "type": "string",
@@ -20876,7 +21048,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.425377+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.441208+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a direct reference from one object(the referrer) to another(the referred).",
@@ -20990,28 +21162,68 @@
         "x-ves-proto-message": "ves.io.schema.views.forward_proxy_policy.CreateSpecType",
         "properties": {
           "allow_all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_list",
+              "deny_list",
+              "rule_list"
+            ]
           },
           "allow_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyForwardProxySimpleRuleType"
+            "$ref": "#/components/schemas/forward_proxy_policyForwardProxySimpleRuleType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "deny_list",
+              "rule_list"
+            ]
           },
           "any_proxy": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "drp_http_connect",
+              "network_connector",
+              "proxy_label_selector"
+            ]
           },
           "deny_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyForwardProxySimpleRuleType"
+            "$ref": "#/components/schemas/forward_proxy_policyForwardProxySimpleRuleType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allow_list",
+              "rule_list"
+            ]
           },
           "drp_http_connect": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "any_proxy",
+              "network_connector",
+              "proxy_label_selector"
+            ]
           },
           "network_connector": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "any_proxy",
+              "drp_http_connect",
+              "proxy_label_selector"
+            ]
           },
           "proxy_label_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "any_proxy",
+              "drp_http_connect",
+              "network_connector"
+            ]
           },
           "rule_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyForwardProxyRuleListType"
+            "$ref": "#/components/schemas/forward_proxy_policyForwardProxyRuleListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allow_list",
+              "deny_list"
+            ]
           }
         },
         "x-f5xc-description-short": "Shape of the Forward Proxy Policy specification.",
@@ -21044,28 +21256,68 @@
         "x-ves-proto-message": "ves.io.schema.views.forward_proxy_policy.GetSpecType",
         "properties": {
           "allow_all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_list",
+              "deny_list",
+              "rule_list"
+            ]
           },
           "allow_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyForwardProxySimpleRuleType"
+            "$ref": "#/components/schemas/forward_proxy_policyForwardProxySimpleRuleType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "deny_list",
+              "rule_list"
+            ]
           },
           "any_proxy": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "drp_http_connect",
+              "network_connector",
+              "proxy_label_selector"
+            ]
           },
           "deny_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyForwardProxySimpleRuleType"
+            "$ref": "#/components/schemas/forward_proxy_policyForwardProxySimpleRuleType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allow_list",
+              "rule_list"
+            ]
           },
           "drp_http_connect": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "any_proxy",
+              "network_connector",
+              "proxy_label_selector"
+            ]
           },
           "network_connector": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "any_proxy",
+              "drp_http_connect",
+              "proxy_label_selector"
+            ]
           },
           "proxy_label_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "any_proxy",
+              "drp_http_connect",
+              "network_connector"
+            ]
           },
           "rule_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyForwardProxyRuleListType"
+            "$ref": "#/components/schemas/forward_proxy_policyForwardProxyRuleListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allow_list",
+              "deny_list"
+            ]
           }
         },
         "x-f5xc-description-short": "Shape of the Forward Proxy Policy specification.",
@@ -21098,28 +21350,68 @@
         "x-ves-proto-message": "ves.io.schema.views.forward_proxy_policy.ReplaceSpecType",
         "properties": {
           "allow_all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_list",
+              "deny_list",
+              "rule_list"
+            ]
           },
           "allow_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyForwardProxySimpleRuleType"
+            "$ref": "#/components/schemas/forward_proxy_policyForwardProxySimpleRuleType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "deny_list",
+              "rule_list"
+            ]
           },
           "any_proxy": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "drp_http_connect",
+              "network_connector",
+              "proxy_label_selector"
+            ]
           },
           "deny_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyForwardProxySimpleRuleType"
+            "$ref": "#/components/schemas/forward_proxy_policyForwardProxySimpleRuleType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allow_list",
+              "rule_list"
+            ]
           },
           "drp_http_connect": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "any_proxy",
+              "network_connector",
+              "proxy_label_selector"
+            ]
           },
           "network_connector": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "any_proxy",
+              "drp_http_connect",
+              "proxy_label_selector"
+            ]
           },
           "proxy_label_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "any_proxy",
+              "drp_http_connect",
+              "network_connector"
+            ]
           },
           "rule_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyForwardProxyRuleListType"
+            "$ref": "#/components/schemas/forward_proxy_policyForwardProxyRuleListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allow_list",
+              "deny_list"
+            ]
           }
         },
         "x-f5xc-description-short": "Shape of the Forward Proxy Policy replace specification.",
@@ -21211,19 +21503,49 @@
         "x-ves-proto-message": "ves.io.schema.network_policy.EndpointChoiceType",
         "properties": {
           "any": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "inside_endpoints",
+              "label_selector",
+              "outside_endpoints",
+              "prefix_list"
+            ]
           },
           "inside_endpoints": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "label_selector",
+              "outside_endpoints",
+              "prefix_list"
+            ]
           },
           "label_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "inside_endpoints",
+              "outside_endpoints",
+              "prefix_list"
+            ]
           },
           "outside_endpoints": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "inside_endpoints",
+              "label_selector",
+              "prefix_list"
+            ]
           },
           "prefix_list": {
-            "$ref": "#/components/schemas/viewsPrefixStringListType"
+            "$ref": "#/components/schemas/viewsPrefixStringListType",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "inside_endpoints",
+              "label_selector",
+              "outside_endpoints"
+            ]
           }
         },
         "x-f5xc-description-short": "Shape of the endpoint choices for a view.",
@@ -21259,43 +21581,115 @@
             "$ref": "#/components/schemas/network_policy_ruleNetworkPolicyRuleAdvancedAction"
           },
           "all_tcp_traffic": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_traffic",
+              "all_udp_traffic",
+              "applications",
+              "protocol_port_range"
+            ]
           },
           "all_traffic": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_tcp_traffic",
+              "all_udp_traffic",
+              "applications",
+              "protocol_port_range"
+            ]
           },
           "all_udp_traffic": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_tcp_traffic",
+              "all_traffic",
+              "applications",
+              "protocol_port_range"
+            ]
           },
           "any": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "inside_endpoints",
+              "ip_prefix_set",
+              "label_selector",
+              "outside_endpoints",
+              "prefix_list"
+            ]
           },
           "applications": {
-            "$ref": "#/components/schemas/network_policyApplicationsType"
+            "$ref": "#/components/schemas/network_policyApplicationsType",
+            "x-f5xc-conflicts-with": [
+              "all_tcp_traffic",
+              "all_traffic",
+              "all_udp_traffic",
+              "protocol_port_range"
+            ]
           },
           "inside_endpoints": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "ip_prefix_set",
+              "label_selector",
+              "outside_endpoints",
+              "prefix_list"
+            ]
           },
           "ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaIpPrefixSetRefType"
+            "$ref": "#/components/schemas/schemaIpPrefixSetRefType",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "inside_endpoints",
+              "label_selector",
+              "outside_endpoints",
+              "prefix_list"
+            ]
           },
           "label_matcher": {
             "$ref": "#/components/schemas/schemaLabelMatcherType"
           },
           "label_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "inside_endpoints",
+              "ip_prefix_set",
+              "outside_endpoints",
+              "prefix_list"
+            ]
           },
           "metadata": {
             "$ref": "#/components/schemas/schemaMessageMetaType"
           },
           "outside_endpoints": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "inside_endpoints",
+              "ip_prefix_set",
+              "label_selector",
+              "prefix_list"
+            ]
           },
           "prefix_list": {
-            "$ref": "#/components/schemas/viewsPrefixStringListType"
+            "$ref": "#/components/schemas/viewsPrefixStringListType",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "inside_endpoints",
+              "ip_prefix_set",
+              "label_selector",
+              "outside_endpoints"
+            ]
           },
           "protocol_port_range": {
-            "$ref": "#/components/schemas/network_policyProtocolPortType"
+            "$ref": "#/components/schemas/network_policyProtocolPortType",
+            "x-f5xc-conflicts-with": [
+              "all_tcp_traffic",
+              "all_traffic",
+              "all_udp_traffic",
+              "applications"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -21560,7 +21954,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.790957+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.793315+00:00"
           },
           "namespace": {
             "type": "string",
@@ -21580,7 +21974,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.790986+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.793353+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -21683,7 +22077,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.791083+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.793450+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -21826,7 +22220,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.791158+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.793524+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -21880,7 +22274,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.791228+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.793591+00:00"
           },
           "namespace": {
             "type": "string",
@@ -21899,7 +22293,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.791256+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.793619+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -21941,7 +22335,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.791312+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.793673+00:00"
           },
           "uid": {
             "type": "string",
@@ -21963,7 +22357,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.791342+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.793701+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of network_policy_view is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -22073,7 +22467,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.791404+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.793761+00:00"
           },
           "policy": {
             "type": "string",
@@ -22225,7 +22619,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.791490+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.793847+00:00"
           },
           "start_time": {
             "type": "string",
@@ -22411,7 +22805,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.791581+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.793936+00:00"
           }
         },
         "x-f5xc-description-short": "Label filter can be specified to filter metrics based on label match.",
@@ -22947,7 +23341,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.327781+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.254474+00:00"
           },
           "namespace": {
             "type": "string",
@@ -22967,7 +23361,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.327812+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.254504+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -23194,7 +23588,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.327993+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.254670+00:00"
           },
           "site": {
             "type": "string",
@@ -23313,7 +23707,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.328063+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.254738+00:00"
           },
           "start_time": {
             "type": "string",
@@ -23498,7 +23892,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.328211+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.254828+00:00"
           }
         },
         "x-f5xc-description-short": "Label filter can be specified to filter metrics based on label match.",
@@ -23528,7 +23922,10 @@
             "$ref": "#/components/schemas/fast_acl_ruleFastAclRuleAction"
           },
           "ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaIpPrefixSetRefType"
+            "$ref": "#/components/schemas/schemaIpPrefixSetRefType",
+            "x-f5xc-conflicts-with": [
+              "prefix"
+            ]
           },
           "metadata": {
             "$ref": "#/components/schemas/schemaMessageMetaType"
@@ -23559,7 +23956,10 @@
             }
           },
           "prefix": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_set"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -23664,7 +24064,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.328372+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.254971+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -23850,7 +24250,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.328478+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.255074+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -23904,7 +24304,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.328548+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.255143+00:00"
           },
           "namespace": {
             "type": "string",
@@ -23923,7 +24323,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.328577+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.255170+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -23965,7 +24365,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.328632+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.255225+00:00"
           },
           "uid": {
             "type": "string",
@@ -23986,7 +24386,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.328666+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.255253+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of fast_acl is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -24024,10 +24424,18 @@
         "x-ves-proto-message": "ves.io.schema.fast_acl.ReACLType",
         "properties": {
           "all_public_vips": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_tenant_vip",
+              "selected_tenant_vip"
+            ]
           },
           "default_tenant_vip": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_public_vips",
+              "selected_tenant_vip"
+            ]
           },
           "fast_acl_rules": {
             "type": "array",
@@ -24055,7 +24463,11 @@
             }
           },
           "selected_tenant_vip": {
-            "$ref": "#/components/schemas/fast_aclSelectedTenantVIPsType"
+            "$ref": "#/components/schemas/fast_aclSelectedTenantVIPsType",
+            "x-f5xc-conflicts-with": [
+              "all_public_vips",
+              "default_tenant_vip"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -24222,7 +24634,11 @@
         "x-ves-proto-message": "ves.io.schema.fast_acl.SiteACLType",
         "properties": {
           "all_services": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interface_services",
+              "vip_services"
+            ]
           },
           "fast_acl_rules": {
             "type": "array",
@@ -24250,16 +24666,30 @@
             }
           },
           "inside_network": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "outside_network"
+            ]
           },
           "interface_services": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_services",
+              "vip_services"
+            ]
           },
           "outside_network": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "inside_network"
+            ]
           },
           "vip_services": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_services",
+              "interface_services"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -24346,13 +24776,25 @@
         "x-ves-proto-message": "ves.io.schema.fast_acl_rule.FastAclRuleAction",
         "properties": {
           "policer_action": {
-            "$ref": "#/components/schemas/schemaPolicerRefType"
+            "$ref": "#/components/schemas/schemaPolicerRefType",
+            "x-f5xc-conflicts-with": [
+              "protocol_policer_action",
+              "simple_action"
+            ]
           },
           "protocol_policer_action": {
-            "$ref": "#/components/schemas/schemaProtocolPolicerRefType"
+            "$ref": "#/components/schemas/schemaProtocolPolicerRefType",
+            "x-f5xc-conflicts-with": [
+              "policer_action",
+              "simple_action"
+            ]
           },
           "simple_action": {
-            "$ref": "#/components/schemas/fast_acl_ruleFastAclRuleSimpleAction"
+            "$ref": "#/components/schemas/fast_acl_ruleFastAclRuleSimpleAction",
+            "x-f5xc-conflicts-with": [
+              "policer_action",
+              "protocol_policer_action"
+            ]
           }
         },
         "x-f5xc-description-short": "FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic.",
@@ -24540,10 +24982,18 @@
         "x-ves-proto-message": "ves.io.schema.PortValueType",
         "properties": {
           "all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "dns",
+              "user_defined"
+            ]
           },
           "dns": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all",
+              "user_defined"
+            ]
           },
           "user_defined": {
             "type": "integer",
@@ -24567,7 +25017,11 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "all",
+              "dns"
+            ]
           }
         },
         "x-f5xc-description-short": "PortValueType specifies the port value Can be any or a specified port.",
@@ -24718,10 +25172,16 @@
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
           },
           "re_acl": {
-            "$ref": "#/components/schemas/fast_aclReACLType"
+            "$ref": "#/components/schemas/fast_aclReACLType",
+            "x-f5xc-conflicts-with": [
+              "site_acl"
+            ]
           },
           "site_acl": {
-            "$ref": "#/components/schemas/fast_aclSiteACLType"
+            "$ref": "#/components/schemas/fast_aclSiteACLType",
+            "x-f5xc-conflicts-with": [
+              "re_acl"
+            ]
           }
         },
         "x-f5xc-description-short": "Create a object, object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to.",
@@ -24752,10 +25212,16 @@
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
           },
           "re_acl": {
-            "$ref": "#/components/schemas/fast_aclReACLType"
+            "$ref": "#/components/schemas/fast_aclReACLType",
+            "x-f5xc-conflicts-with": [
+              "site_acl"
+            ]
           },
           "site_acl": {
-            "$ref": "#/components/schemas/fast_aclSiteACLType"
+            "$ref": "#/components/schemas/fast_aclSiteACLType",
+            "x-f5xc-conflicts-with": [
+              "re_acl"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -24784,10 +25250,16 @@
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
           },
           "re_acl": {
-            "$ref": "#/components/schemas/fast_aclReACLType"
+            "$ref": "#/components/schemas/fast_aclReACLType",
+            "x-f5xc-conflicts-with": [
+              "site_acl"
+            ]
           },
           "site_acl": {
-            "$ref": "#/components/schemas/fast_aclSiteACLType"
+            "$ref": "#/components/schemas/fast_aclSiteACLType",
+            "x-f5xc-conflicts-with": [
+              "re_acl"
+            ]
           }
         },
         "x-f5xc-description-short": "Replace a object, object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to.",
@@ -24873,7 +25345,10 @@
             "$ref": "#/components/schemas/fast_acl_ruleFastAclRuleAction"
           },
           "ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaIpPrefixSetRefType"
+            "$ref": "#/components/schemas/schemaIpPrefixSetRefType",
+            "x-f5xc-conflicts-with": [
+              "prefix"
+            ]
           },
           "port": {
             "type": "array",
@@ -24903,7 +25378,10 @@
             }
           },
           "prefix": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_set"
+            ]
           }
         },
         "x-f5xc-description-short": "Create a new Fast ACL rule, has specification to match source IP, source port and action to apply.",
@@ -24960,7 +25438,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.372252+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.297033+00:00"
           },
           "namespace": {
             "type": "string",
@@ -24980,7 +25458,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.372282+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.297063+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -25083,7 +25561,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.372412+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.297190+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -25147,7 +25625,10 @@
             "$ref": "#/components/schemas/fast_acl_ruleFastAclRuleAction"
           },
           "ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaIpPrefixSetRefType"
+            "$ref": "#/components/schemas/schemaIpPrefixSetRefType",
+            "x-f5xc-conflicts-with": [
+              "prefix"
+            ]
           },
           "port": {
             "type": "array",
@@ -25177,7 +25658,10 @@
             }
           },
           "prefix": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_set"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -25286,7 +25770,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.372527+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.297305+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -25340,7 +25824,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.372596+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.297383+00:00"
           },
           "namespace": {
             "type": "string",
@@ -25359,7 +25843,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.372624+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.297411+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -25401,7 +25885,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.372680+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.297466+00:00"
           },
           "uid": {
             "type": "string",
@@ -25422,7 +25906,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.372709+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.297495+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of fast_acl_rule is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -25503,7 +25987,10 @@
             "$ref": "#/components/schemas/fast_acl_ruleFastAclRuleAction"
           },
           "ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaIpPrefixSetRefType"
+            "$ref": "#/components/schemas/schemaIpPrefixSetRefType",
+            "x-f5xc-conflicts-with": [
+              "prefix"
+            ]
           },
           "port": {
             "type": "array",
@@ -25533,7 +26020,10 @@
             }
           },
           "prefix": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_set"
+            ]
           }
         },
         "x-f5xc-description-short": "Replace a given Fast ACL rule, has specification to match source IP, source port, protocol and action to apply.",
@@ -25638,7 +26128,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.373315+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.298076+00:00"
           },
           "name": {
             "type": "string",
@@ -25659,7 +26149,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.373342+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.298103+00:00"
           },
           "namespace": {
             "type": "string",
@@ -25680,7 +26170,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.373370+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.298130+00:00"
           },
           "tenant": {
             "type": "string",
@@ -25703,7 +26193,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.373397+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.298157+00:00"
           },
           "uid": {
             "type": "string",
@@ -25727,7 +26217,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.373426+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.298186+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -25911,7 +26401,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.408928+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.332752+00:00"
           },
           "namespace": {
             "type": "string",
@@ -25931,7 +26421,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.408959+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.332782+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -26001,7 +26491,11 @@
         "x-ves-proto-message": "ves.io.schema.filter_set.FilterSetField",
         "properties": {
           "date_field": {
-            "$ref": "#/components/schemas/filter_setFilterTimeRangeField"
+            "$ref": "#/components/schemas/filter_setFilterTimeRangeField",
+            "x-f5xc-conflicts-with": [
+              "filter_expression_field",
+              "string_field"
+            ]
           },
           "field_id": {
             "type": "string",
@@ -26027,10 +26521,18 @@
             "x-field-mutability": "read-only"
           },
           "filter_expression_field": {
-            "$ref": "#/components/schemas/filter_setFilterExpressionField"
+            "$ref": "#/components/schemas/filter_setFilterExpressionField",
+            "x-f5xc-conflicts-with": [
+              "date_field",
+              "string_field"
+            ]
           },
           "string_field": {
-            "$ref": "#/components/schemas/filter_setFilterStringField"
+            "$ref": "#/components/schemas/filter_setFilterStringField",
+            "x-f5xc-conflicts-with": [
+              "date_field",
+              "filter_expression_field"
+            ]
           }
         },
         "x-f5xc-description-short": "Field ID and its value selected by the user.",
@@ -26099,7 +26601,10 @@
         "x-ves-proto-message": "ves.io.schema.filter_set.FilterTimeRangeField",
         "properties": {
           "absolute": {
-            "$ref": "#/components/schemas/schemaDateRange"
+            "$ref": "#/components/schemas/schemaDateRange",
+            "x-f5xc-conflicts-with": [
+              "relative"
+            ]
           },
           "relative": {
             "type": "string",
@@ -26114,7 +26619,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "absolute"
+            ]
           }
         },
         "x-f5xc-description-short": "Either an absolute time range or a relative time interval.",
@@ -26192,7 +26700,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.409087+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.332904+00:00"
           }
         },
         "x-f5xc-description-short": "Find Filter Sets API returns FilterSets that match the given context key(s).",
@@ -26331,7 +26839,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.409196+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.333010+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -26616,7 +27124,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.409315+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.333127+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -26670,7 +27178,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.409384+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.333193+00:00"
           },
           "namespace": {
             "type": "string",
@@ -26689,7 +27197,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.409412+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.333222+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -26731,7 +27239,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.409467+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.333276+00:00"
           },
           "uid": {
             "type": "string",
@@ -26752,7 +27260,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.409497+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.333305+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of filter_set is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -27127,7 +27635,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.410151+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.334021+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -27187,7 +27695,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.410198+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.334069+00:00"
           },
           "namespace": {
             "type": "string",
@@ -27208,7 +27716,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.410225+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.334096+00:00"
           },
           "uid": {
             "type": "string",
@@ -27232,7 +27740,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.410254+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.334125+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectMetaType is metadata(common attributes) of an object that all configuration objects will have.",
@@ -27455,7 +27963,7 @@
             "maxLength": 6,
             "minLength": 6,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.410960+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.334830+00:00"
           },
           "object_index": {
             "type": "integer",
@@ -27536,7 +28044,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.411026+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.334894+00:00"
           },
           "trace_info": {
             "type": "string",
@@ -27578,7 +28086,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.411064+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.334931+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -27652,7 +28160,10 @@
         "x-ves-proto-message": "ves.io.schema.nat_policy.ActionType",
         "properties": {
           "dynamic": {
-            "$ref": "#/components/schemas/nat_policyDynamicPool"
+            "$ref": "#/components/schemas/nat_policyDynamicPool",
+            "x-f5xc-conflicts-with": [
+              "virtual_cidr"
+            ]
           },
           "virtual_cidr": {
             "type": "string",
@@ -27674,7 +28185,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "dynamic"
+            ]
           }
         },
         "x-f5xc-description-short": "Action to apply on the packet if the NAT rule is applied.",
@@ -27837,7 +28351,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.018595+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.868255+00:00"
           },
           "namespace": {
             "type": "string",
@@ -27857,7 +28371,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.018624+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.868283+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -27883,10 +28397,16 @@
         "x-ves-proto-message": "ves.io.schema.nat_policy.DynamicPool",
         "properties": {
           "elastic_ips": {
-            "$ref": "#/components/schemas/schemaCloudElasticIpRefListType"
+            "$ref": "#/components/schemas/schemaCloudElasticIpRefListType",
+            "x-f5xc-conflicts-with": [
+              "pools"
+            ]
           },
           "pools": {
-            "$ref": "#/components/schemas/viewsPrefixStringListType"
+            "$ref": "#/components/schemas/viewsPrefixStringListType",
+            "x-f5xc-conflicts-with": [
+              "elastic_ips"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -27988,7 +28508,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.018740+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.868408+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -28185,7 +28705,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.018837+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.868503+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -28239,7 +28759,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.018916+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.868570+00:00"
           },
           "namespace": {
             "type": "string",
@@ -28258,7 +28778,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.018946+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.868598+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -28300,7 +28820,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.019001+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.868652+00:00"
           },
           "uid": {
             "type": "string",
@@ -28321,7 +28841,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.019031+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.868681+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of nat_policy is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -28360,7 +28880,12 @@
         "x-ves-proto-message": "ves.io.schema.nat_policy.MatchCriteriaType",
         "properties": {
           "any": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "icmp",
+              "tcp",
+              "udp"
+            ]
           },
           "destination_cidr": {
             "type": "array",
@@ -28389,13 +28914,21 @@
             "$ref": "#/components/schemas/schemaPortMatcherType"
           },
           "icmp": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "tcp",
+              "udp"
+            ]
           },
           "protocol": {
             "$ref": "#/components/schemas/schemaProtocolEnumType"
           },
           "segment": {
-            "$ref": "#/components/schemas/schemaSegmentRefType"
+            "$ref": "#/components/schemas/schemaSegmentRefType",
+            "x-f5xc-conflicts-with": [
+              "virtual_network"
+            ]
           },
           "source_cidr": {
             "type": "array",
@@ -28424,13 +28957,26 @@
             "$ref": "#/components/schemas/schemaPortMatcherType"
           },
           "tcp": {
-            "$ref": "#/components/schemas/nat_policyPortConfiguration"
+            "$ref": "#/components/schemas/nat_policyPortConfiguration",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "icmp",
+              "udp"
+            ]
           },
           "udp": {
-            "$ref": "#/components/schemas/nat_policyPortConfiguration"
+            "$ref": "#/components/schemas/nat_policyPortConfiguration",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "icmp",
+              "tcp"
+            ]
           },
           "virtual_network": {
-            "$ref": "#/components/schemas/schemaVirtualNetworkReferenceType"
+            "$ref": "#/components/schemas/schemaVirtualNetworkReferenceType",
+            "x-f5xc-conflicts-with": [
+              "segment"
+            ]
           }
         },
         "x-f5xc-description-short": "Match criteria of the packet to apply the NAT Rule.",
@@ -28591,16 +29137,27 @@
             "$ref": "#/components/schemas/nat_policyActionType"
           },
           "cloud_connect": {
-            "$ref": "#/components/schemas/schemaCloudConnectRefType"
+            "$ref": "#/components/schemas/schemaCloudConnectRefType",
+            "x-f5xc-conflicts-with": [
+              "network_interface",
+              "segment",
+              "virtual_network"
+            ]
           },
           "criteria": {
             "$ref": "#/components/schemas/nat_policyMatchCriteriaType"
           },
           "disable": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable"
+            ]
           },
           "enable": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable"
+            ]
           },
           "name": {
             "type": "string",
@@ -28626,16 +29183,31 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.019278+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.868918+00:00"
           },
           "network_interface": {
-            "$ref": "#/components/schemas/schemaNetworkInterfaceRefType"
+            "$ref": "#/components/schemas/schemaNetworkInterfaceRefType",
+            "x-f5xc-conflicts-with": [
+              "cloud_connect",
+              "segment",
+              "virtual_network"
+            ]
           },
           "segment": {
-            "$ref": "#/components/schemas/schemaSegmentRefType"
+            "$ref": "#/components/schemas/schemaSegmentRefType",
+            "x-f5xc-conflicts-with": [
+              "cloud_connect",
+              "network_interface",
+              "virtual_network"
+            ]
           },
           "virtual_network": {
-            "$ref": "#/components/schemas/schemaVirtualNetworkReferenceType"
+            "$ref": "#/components/schemas/schemaVirtualNetworkReferenceType",
+            "x-f5xc-conflicts-with": [
+              "cloud_connect",
+              "network_interface",
+              "segment"
+            ]
           }
         },
         "x-f5xc-description-short": "Rule specifies configuration of where, when and how to apply the NAT Policy.",
@@ -28953,7 +29525,11 @@
         "x-ves-proto-message": "ves.io.schema.PortMatcherType",
         "properties": {
           "no_port_match": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "port",
+              "port_ranges"
+            ]
           },
           "port": {
             "type": "integer",
@@ -28977,7 +29553,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "no_port_match",
+              "port_ranges"
+            ]
           },
           "port_ranges": {
             "type": "string",
@@ -29004,7 +29584,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "no_port_match",
+              "port"
+            ]
           }
         },
         "x-f5xc-description-short": "Port match of the request can be a range or a specific port.",
@@ -29441,25 +30025,49 @@
         "x-ves-proto-message": "ves.io.schema.network_firewall.CreateSpecType",
         "properties": {
           "active_enhanced_firewall_policies": {
-            "$ref": "#/components/schemas/network_firewallActiveEnhancedFirewallPoliciesType"
+            "$ref": "#/components/schemas/network_firewallActiveEnhancedFirewallPoliciesType",
+            "x-f5xc-conflicts-with": [
+              "active_network_policies",
+              "disable_network_policy"
+            ]
           },
           "active_fast_acls": {
-            "$ref": "#/components/schemas/network_firewallActiveFastACLsType"
+            "$ref": "#/components/schemas/network_firewallActiveFastACLsType",
+            "x-f5xc-conflicts-with": [
+              "disable_fast_acl"
+            ]
           },
           "active_forward_proxy_policies": {
-            "$ref": "#/components/schemas/network_firewallActiveForwardProxyPoliciesType"
+            "$ref": "#/components/schemas/network_firewallActiveForwardProxyPoliciesType",
+            "x-f5xc-conflicts-with": [
+              "disable_forward_proxy_policy"
+            ]
           },
           "active_network_policies": {
-            "$ref": "#/components/schemas/network_firewallActiveNetworkPoliciesType"
+            "$ref": "#/components/schemas/network_firewallActiveNetworkPoliciesType",
+            "x-f5xc-conflicts-with": [
+              "active_enhanced_firewall_policies",
+              "disable_network_policy"
+            ]
           },
           "disable_fast_acl": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "active_fast_acls"
+            ]
           },
           "disable_forward_proxy_policy": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "active_forward_proxy_policies"
+            ]
           },
           "disable_network_policy": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "active_enhanced_firewall_policies",
+              "active_network_policies"
+            ]
           }
         },
         "x-f5xc-description-short": "Network firewall is created by users in system namespace.",
@@ -29519,7 +30127,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.448530+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.281863+00:00"
           },
           "namespace": {
             "type": "string",
@@ -29539,7 +30147,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.448559+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.281891+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -29642,7 +30250,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.448656+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.281986+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -29705,25 +30313,49 @@
         "x-ves-proto-message": "ves.io.schema.network_firewall.GetSpecType",
         "properties": {
           "active_enhanced_firewall_policies": {
-            "$ref": "#/components/schemas/network_firewallActiveEnhancedFirewallPoliciesType"
+            "$ref": "#/components/schemas/network_firewallActiveEnhancedFirewallPoliciesType",
+            "x-f5xc-conflicts-with": [
+              "active_network_policies",
+              "disable_network_policy"
+            ]
           },
           "active_fast_acls": {
-            "$ref": "#/components/schemas/network_firewallActiveFastACLsType"
+            "$ref": "#/components/schemas/network_firewallActiveFastACLsType",
+            "x-f5xc-conflicts-with": [
+              "disable_fast_acl"
+            ]
           },
           "active_forward_proxy_policies": {
-            "$ref": "#/components/schemas/network_firewallActiveForwardProxyPoliciesType"
+            "$ref": "#/components/schemas/network_firewallActiveForwardProxyPoliciesType",
+            "x-f5xc-conflicts-with": [
+              "disable_forward_proxy_policy"
+            ]
           },
           "active_network_policies": {
-            "$ref": "#/components/schemas/network_firewallActiveNetworkPoliciesType"
+            "$ref": "#/components/schemas/network_firewallActiveNetworkPoliciesType",
+            "x-f5xc-conflicts-with": [
+              "active_enhanced_firewall_policies",
+              "disable_network_policy"
+            ]
           },
           "disable_fast_acl": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "active_fast_acls"
+            ]
           },
           "disable_forward_proxy_policy": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "active_forward_proxy_policies"
+            ]
           },
           "disable_network_policy": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "active_enhanced_firewall_policies",
+              "active_network_policies"
+            ]
           }
         },
         "x-f5xc-description-short": "GET network firewall in system namespace.",
@@ -29836,7 +30468,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.448797+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.282124+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -29890,7 +30522,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.448866+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.282191+00:00"
           },
           "namespace": {
             "type": "string",
@@ -29909,7 +30541,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.448905+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.282219+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -29951,7 +30583,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.448962+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.282273+00:00"
           },
           "uid": {
             "type": "string",
@@ -29973,7 +30605,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.448992+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.282302+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of network_firewall is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -30087,25 +30719,49 @@
         "x-ves-proto-message": "ves.io.schema.network_firewall.ReplaceSpecType",
         "properties": {
           "active_enhanced_firewall_policies": {
-            "$ref": "#/components/schemas/network_firewallActiveEnhancedFirewallPoliciesType"
+            "$ref": "#/components/schemas/network_firewallActiveEnhancedFirewallPoliciesType",
+            "x-f5xc-conflicts-with": [
+              "active_network_policies",
+              "disable_network_policy"
+            ]
           },
           "active_fast_acls": {
-            "$ref": "#/components/schemas/network_firewallActiveFastACLsType"
+            "$ref": "#/components/schemas/network_firewallActiveFastACLsType",
+            "x-f5xc-conflicts-with": [
+              "disable_fast_acl"
+            ]
           },
           "active_forward_proxy_policies": {
-            "$ref": "#/components/schemas/network_firewallActiveForwardProxyPoliciesType"
+            "$ref": "#/components/schemas/network_firewallActiveForwardProxyPoliciesType",
+            "x-f5xc-conflicts-with": [
+              "disable_forward_proxy_policy"
+            ]
           },
           "active_network_policies": {
-            "$ref": "#/components/schemas/network_firewallActiveNetworkPoliciesType"
+            "$ref": "#/components/schemas/network_firewallActiveNetworkPoliciesType",
+            "x-f5xc-conflicts-with": [
+              "active_enhanced_firewall_policies",
+              "disable_network_policy"
+            ]
           },
           "disable_fast_acl": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "active_fast_acls"
+            ]
           },
           "disable_forward_proxy_policy": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "active_forward_proxy_policies"
+            ]
           },
           "disable_network_policy": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "active_enhanced_firewall_policies",
+              "active_network_policies"
+            ]
           }
         },
         "x-f5xc-description-short": "Replace network firewall will replace the contains of given object.",
@@ -30280,7 +30936,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.539860+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.368901+00:00"
           },
           "namespace": {
             "type": "string",
@@ -30300,7 +30956,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.539899+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.368928+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -30403,7 +31059,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.540045+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.369072+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -30621,7 +31277,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.540142+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.369168+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -30675,7 +31331,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.540210+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.369236+00:00"
           },
           "namespace": {
             "type": "string",
@@ -30694,7 +31350,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.540239+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.369266+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -30736,7 +31392,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.540294+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.369321+00:00"
           },
           "uid": {
             "type": "string",
@@ -30757,7 +31413,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.540324+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.369361+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of network_policy is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -30867,7 +31523,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.540385+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.369421+00:00"
           },
           "policy": {
             "type": "string",
@@ -31036,7 +31692,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.540483+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.369515+00:00"
           },
           "start_time": {
             "type": "string",
@@ -31223,7 +31879,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.540576+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.369603+00:00"
           }
         },
         "x-f5xc-description-short": "Label filter can be specified to filter metrics based on label match.",
@@ -31451,10 +32107,16 @@
             "$ref": "#/components/schemas/network_policyEndpointChoiceType"
           },
           "legacy_rules": {
-            "$ref": "#/components/schemas/network_policyLegacyNetworkPolicyRuleChoice"
+            "$ref": "#/components/schemas/network_policyLegacyNetworkPolicyRuleChoice",
+            "x-f5xc-conflicts-with": [
+              "rules"
+            ]
           },
           "rules": {
-            "$ref": "#/components/schemas/network_policyNetworkPolicyRuleChoice"
+            "$ref": "#/components/schemas/network_policyNetworkPolicyRuleChoice",
+            "x-f5xc-conflicts-with": [
+              "legacy_rules"
+            ]
           }
         },
         "x-f5xc-description-short": "Gets Network Policy parameters in specified namespace.",
@@ -31484,10 +32146,16 @@
             "$ref": "#/components/schemas/network_policyEndpointChoiceType"
           },
           "legacy_rules": {
-            "$ref": "#/components/schemas/network_policyLegacyNetworkPolicyRuleChoice"
+            "$ref": "#/components/schemas/network_policyLegacyNetworkPolicyRuleChoice",
+            "x-f5xc-conflicts-with": [
+              "rules"
+            ]
           },
           "rules": {
-            "$ref": "#/components/schemas/network_policyNetworkPolicyRuleChoice"
+            "$ref": "#/components/schemas/network_policyNetworkPolicyRuleChoice",
+            "x-f5xc-conflicts-with": [
+              "legacy_rules"
+            ]
           }
         },
         "x-f5xc-description-short": "Replaces configured Network Policy with new set of parameters in specified namespace.",
@@ -31576,7 +32244,11 @@
             "$ref": "#/components/schemas/network_policy_ruleNetworkPolicyRuleAdvancedAction"
           },
           "ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaIpPrefixSetRefType"
+            "$ref": "#/components/schemas/schemaIpPrefixSetRefType",
+            "x-f5xc-conflicts-with": [
+              "prefix",
+              "prefix_selector"
+            ]
           },
           "label_matcher": {
             "$ref": "#/components/schemas/schemaLabelMatcherType"
@@ -31608,10 +32280,18 @@
             }
           },
           "prefix": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_set",
+              "prefix_selector"
+            ]
           },
           "prefix_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_set",
+              "prefix"
+            ]
           },
           "protocol": {
             "type": "string",
@@ -31694,7 +32374,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.582838+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.410329+00:00"
           },
           "namespace": {
             "type": "string",
@@ -31714,7 +32394,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.582866+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.410368+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -31817,7 +32497,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.582975+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.410464+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -31885,7 +32565,11 @@
             "$ref": "#/components/schemas/network_policy_ruleNetworkPolicyRuleAdvancedAction"
           },
           "ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaIpPrefixSetRefType"
+            "$ref": "#/components/schemas/schemaIpPrefixSetRefType",
+            "x-f5xc-conflicts-with": [
+              "prefix",
+              "prefix_selector"
+            ]
           },
           "label_matcher": {
             "$ref": "#/components/schemas/schemaLabelMatcherType"
@@ -31917,10 +32601,18 @@
             }
           },
           "prefix": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_set",
+              "prefix_selector"
+            ]
           },
           "prefix_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_set",
+              "prefix"
+            ]
           },
           "protocol": {
             "type": "string",
@@ -32056,7 +32748,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.583129+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.410612+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -32110,7 +32802,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.583197+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.410679+00:00"
           },
           "namespace": {
             "type": "string",
@@ -32129,7 +32821,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.583225+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.410706+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -32171,7 +32863,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.583281+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.410761+00:00"
           },
           "uid": {
             "type": "string",
@@ -32193,7 +32885,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.583310+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.410790+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of network_policy_rule is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -32278,7 +32970,11 @@
             "$ref": "#/components/schemas/network_policy_ruleNetworkPolicyRuleAdvancedAction"
           },
           "ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaIpPrefixSetRefType"
+            "$ref": "#/components/schemas/schemaIpPrefixSetRefType",
+            "x-f5xc-conflicts-with": [
+              "prefix",
+              "prefix_selector"
+            ]
           },
           "label_matcher": {
             "$ref": "#/components/schemas/schemaLabelMatcherType"
@@ -32310,10 +33006,18 @@
             }
           },
           "prefix": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_set",
+              "prefix_selector"
+            ]
           },
           "prefix_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_set",
+              "prefix"
+            ]
           },
           "protocol": {
             "type": "string",
@@ -32495,7 +33199,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.615034+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.441774+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -32677,7 +33381,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.615127+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.441864+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -32731,7 +33435,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.615196+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.441932+00:00"
           },
           "namespace": {
             "type": "string",
@@ -32750,7 +33454,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.615225+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.441960+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -32792,7 +33496,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.615280+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.442015+00:00"
           },
           "uid": {
             "type": "string",
@@ -32814,7 +33518,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.615309+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.442044+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of network_policy_set is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -32993,7 +33697,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.836538+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.655029+00:00"
           },
           "namespace": {
             "type": "string",
@@ -33013,7 +33717,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.836567+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.655056+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -33040,10 +33744,19 @@
         "x-ves-proto-message": "ves.io.schema.views.policy_based_routing.ForwardProxyPBRRuleType",
         "properties": {
           "all_destinations": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "http_list",
+              "tls_list"
+            ]
           },
           "all_sources": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_set",
+              "label_selector",
+              "prefix_list"
+            ]
           },
           "forwarding_class_list": {
             "type": "array",
@@ -33075,22 +33788,45 @@
             }
           },
           "http_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyURLListType"
+            "$ref": "#/components/schemas/forward_proxy_policyURLListType",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "tls_list"
+            ]
           },
           "ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "all_sources",
+              "label_selector",
+              "prefix_list"
+            ]
           },
           "label_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "all_sources",
+              "ip_prefix_set",
+              "prefix_list"
+            ]
           },
           "metadata": {
             "$ref": "#/components/schemas/schemaMessageMetaType"
           },
           "prefix_list": {
-            "$ref": "#/components/schemas/viewsPrefixStringListType"
+            "$ref": "#/components/schemas/viewsPrefixStringListType",
+            "x-f5xc-conflicts-with": [
+              "all_sources",
+              "ip_prefix_set",
+              "label_selector"
+            ]
           },
           "tls_list": {
-            "$ref": "#/components/schemas/forward_proxy_policyDomainListType"
+            "$ref": "#/components/schemas/forward_proxy_policyDomainListType",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "http_list"
+            ]
           }
         },
         "x-f5xc-description-short": "URL(s) and domains policy for forward proxy for a connection type (TLS or HTTP).",
@@ -33245,7 +33981,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.836760+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.655248+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -33388,7 +34124,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.836837+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.655324+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -33442,7 +34178,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.836916+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.655403+00:00"
           },
           "namespace": {
             "type": "string",
@@ -33461,7 +34197,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.836946+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.655432+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -33503,7 +34239,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.837002+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.655487+00:00"
           },
           "uid": {
             "type": "string",
@@ -33525,7 +34261,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.837031+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.655516+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of policy_based_routing is returned in 'List'.",
@@ -33564,19 +34300,48 @@
         "x-ves-proto-message": "ves.io.schema.views.policy_based_routing.NetworkPBRRuleType",
         "properties": {
           "all_tcp_traffic": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_traffic",
+              "all_udp_traffic",
+              "applications",
+              "protocol_port_range"
+            ]
           },
           "all_traffic": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_tcp_traffic",
+              "all_udp_traffic",
+              "applications",
+              "protocol_port_range"
+            ]
           },
           "all_udp_traffic": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_tcp_traffic",
+              "all_traffic",
+              "applications",
+              "protocol_port_range"
+            ]
           },
           "any": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "dns_name",
+              "ip_prefix_set",
+              "prefix_list"
+            ]
           },
           "applications": {
-            "$ref": "#/components/schemas/network_policyApplicationsType"
+            "$ref": "#/components/schemas/network_policyApplicationsType",
+            "x-f5xc-conflicts-with": [
+              "all_tcp_traffic",
+              "all_traffic",
+              "all_udp_traffic",
+              "protocol_port_range"
+            ]
           },
           "dns_name": {
             "type": "string",
@@ -33599,7 +34364,12 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any",
+              "ip_prefix_set",
+              "prefix_list"
+            ]
           },
           "forwarding_class_list": {
             "type": "array",
@@ -33631,16 +34401,32 @@
             }
           },
           "ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaIpPrefixSetRefType"
+            "$ref": "#/components/schemas/schemaIpPrefixSetRefType",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "dns_name",
+              "prefix_list"
+            ]
           },
           "metadata": {
             "$ref": "#/components/schemas/schemaMessageMetaType"
           },
           "prefix_list": {
-            "$ref": "#/components/schemas/viewsPrefixStringListType"
+            "$ref": "#/components/schemas/viewsPrefixStringListType",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "dns_name",
+              "ip_prefix_set"
+            ]
           },
           "protocol_port_range": {
-            "$ref": "#/components/schemas/network_policyProtocolPortType"
+            "$ref": "#/components/schemas/network_policyProtocolPortType",
+            "x-f5xc-conflicts-with": [
+              "all_tcp_traffic",
+              "all_traffic",
+              "all_udp_traffic",
+              "applications"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -33674,10 +34460,18 @@
         "x-ves-proto-message": "ves.io.schema.views.policy_based_routing.NetworkPBRType",
         "properties": {
           "any": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "label_selector",
+              "prefix_list"
+            ]
           },
           "label_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "prefix_list"
+            ]
           },
           "network_pbr_rules": {
             "type": "array",
@@ -33705,7 +34499,11 @@
             }
           },
           "prefix_list": {
-            "$ref": "#/components/schemas/viewsPrefixStringListType"
+            "$ref": "#/components/schemas/viewsPrefixStringListType",
+            "x-f5xc-conflicts-with": [
+              "any",
+              "label_selector"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -33830,7 +34628,10 @@
         "x-ves-proto-message": "ves.io.schema.views.policy_based_routing.CreateSpecType",
         "properties": {
           "forward_proxy_pbr": {
-            "$ref": "#/components/schemas/policy_based_routingForwardProxyPBRType"
+            "$ref": "#/components/schemas/policy_based_routingForwardProxyPBRType",
+            "x-f5xc-conflicts-with": [
+              "network_pbr"
+            ]
           },
           "forwarding_class_list": {
             "type": "array",
@@ -33862,7 +34663,10 @@
             }
           },
           "network_pbr": {
-            "$ref": "#/components/schemas/policy_based_routingNetworkPBRType"
+            "$ref": "#/components/schemas/policy_based_routingNetworkPBRType",
+            "x-f5xc-conflicts-with": [
+              "forward_proxy_pbr"
+            ]
           }
         },
         "x-f5xc-description-short": "Shape of the Network Policy based routing create specification.",
@@ -33889,7 +34693,10 @@
         "x-ves-proto-message": "ves.io.schema.views.policy_based_routing.GetSpecType",
         "properties": {
           "forward_proxy_pbr": {
-            "$ref": "#/components/schemas/policy_based_routingForwardProxyPBRType"
+            "$ref": "#/components/schemas/policy_based_routingForwardProxyPBRType",
+            "x-f5xc-conflicts-with": [
+              "network_pbr"
+            ]
           },
           "forwarding_class_list": {
             "type": "array",
@@ -33921,7 +34728,10 @@
             }
           },
           "network_pbr": {
-            "$ref": "#/components/schemas/policy_based_routingNetworkPBRType"
+            "$ref": "#/components/schemas/policy_based_routingNetworkPBRType",
+            "x-f5xc-conflicts-with": [
+              "forward_proxy_pbr"
+            ]
           }
         },
         "x-f5xc-description-short": "Shape of the Network Policy based routing GET specification.",
@@ -33948,7 +34758,10 @@
         "x-ves-proto-message": "ves.io.schema.views.policy_based_routing.ReplaceSpecType",
         "properties": {
           "forward_proxy_pbr": {
-            "$ref": "#/components/schemas/policy_based_routingForwardProxyPBRType"
+            "$ref": "#/components/schemas/policy_based_routingForwardProxyPBRType",
+            "x-f5xc-conflicts-with": [
+              "network_pbr"
+            ]
           },
           "forwarding_class_list": {
             "type": "array",
@@ -33980,7 +34793,10 @@
             }
           },
           "network_pbr": {
-            "$ref": "#/components/schemas/policy_based_routingNetworkPBRType"
+            "$ref": "#/components/schemas/policy_based_routingNetworkPBRType",
+            "x-f5xc-conflicts-with": [
+              "forward_proxy_pbr"
+            ]
           }
         },
         "x-f5xc-description-short": "Shape of the Network Policy based routing replace specification.",
@@ -34054,10 +34870,16 @@
         "x-ves-proto-message": "ves.io.schema.segment.CreateSpecType",
         "properties": {
           "disable": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable"
+            ]
           },
           "enable": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -34220,10 +35042,16 @@
             }
           },
           "disable": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable"
+            ]
           },
           "enable": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -34291,7 +35119,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.689602+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.481042+00:00"
           }
         },
         "x-f5xc-description-short": "Label Filter. Filters that will use segment labels to filter out timeseries.",
@@ -34338,7 +35166,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.689653+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.481092+00:00"
           }
         },
         "x-f5xc-description-short": "Node Metric Data. Metric Data for each metric type in the segments node.",
@@ -34365,10 +35193,16 @@
         "x-ves-proto-message": "ves.io.schema.segment.ReplaceSpecType",
         "properties": {
           "disable": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable"
+            ]
           },
           "enable": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -34436,7 +35270,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.689724+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.481162+00:00"
           },
           "site": {
             "type": "string",
@@ -34576,7 +35410,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.689833+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.481269+00:00"
           },
           "namespace": {
             "type": "string",
@@ -34596,7 +35430,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.689860+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.481296+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -34699,7 +35533,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.689965+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.481400+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -34841,7 +35675,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.690038+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.481472+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -34895,7 +35729,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.690107+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.481541+00:00"
           },
           "namespace": {
             "type": "string",
@@ -34914,7 +35748,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.690135+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.481569+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -34956,7 +35790,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.690190+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.481623+00:00"
           },
           "uid": {
             "type": "string",
@@ -34977,7 +35811,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.690219+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.481652+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of segment is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -35220,7 +36054,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.690341+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.481775+00:00"
           },
           "start_time": {
             "type": "string",
@@ -35510,7 +36344,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.727513+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.517026+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -35694,7 +36528,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.727603+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.517110+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -35748,7 +36582,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.727671+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.517177+00:00"
           },
           "namespace": {
             "type": "string",
@@ -35767,7 +36601,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.727700+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.517205+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -35809,7 +36643,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.727756+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.517259+00:00"
           },
           "uid": {
             "type": "string",
@@ -35831,7 +36665,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.727786+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.517287+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of segment_connection is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -36548,10 +37382,18 @@
         "x-ves-proto-message": "ves.io.schema.policy.ArgMatcherType",
         "properties": {
           "check_not_present": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_present",
+              "item"
+            ]
           },
           "check_present": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "item"
+            ]
           },
           "invert_matcher": {
             "type": "boolean",
@@ -36567,7 +37409,11 @@
             }
           },
           "item": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "check_present"
+            ]
           },
           "name": {
             "type": "string",
@@ -36598,7 +37444,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.854459+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.639160+00:00"
           }
         },
         "x-f5xc-description-short": "Argument matcher specifies the name of a single argument in the body and the criteria to match it.",
@@ -36735,7 +37581,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.854545+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.639244+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"BotAdvanced Domain Matcher Type\" Bot Advanced Domain Matcher Type.",
@@ -36912,7 +37758,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.854686+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.639394+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Bot Advanced Path Matcher Type\" Bot Advanced Path Matcher Type.",
@@ -37135,10 +37981,18 @@
         "x-ves-proto-message": "ves.io.schema.policy.CookieMatcherType",
         "properties": {
           "check_not_present": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_present",
+              "item"
+            ]
           },
           "check_present": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "item"
+            ]
           },
           "invert_matcher": {
             "type": "boolean",
@@ -37154,7 +38008,11 @@
             }
           },
           "item": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "check_present"
+            ]
           },
           "name": {
             "type": "string",
@@ -37183,7 +38041,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.854852+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.639556+00:00"
           }
         },
         "x-f5xc-description-short": "Cookie matcher specifies the name of a single cookie and the criteria to match it.",
@@ -37896,10 +38754,18 @@
         "x-ves-proto-message": "ves.io.schema.policy.JWTClaimMatcherType",
         "properties": {
           "check_not_present": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_present",
+              "item"
+            ]
           },
           "check_present": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "item"
+            ]
           },
           "invert_matcher": {
             "type": "boolean",
@@ -37915,7 +38781,11 @@
             }
           },
           "item": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "check_present"
+            ]
           },
           "name": {
             "type": "string",
@@ -37943,7 +38813,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.855071+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.639761+00:00"
           }
         },
         "x-f5xc-description-short": "JWT claim matcher specifies the name of a single JWT claim and the criteria for the input request to match it.",
@@ -38346,10 +39216,16 @@
         "x-ves-proto-message": "ves.io.schema.policy.ModifyAction",
         "properties": {
           "default": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "skip_processing"
+            ]
           },
           "skip_processing": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default"
+            ]
           }
         },
         "x-f5xc-description-short": "Modify behavior for a matching request. The modification could be to entirely skip processing.",
@@ -38557,10 +39433,16 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "max_cookie_count_none"
+            ]
           },
           "max_cookie_count_none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "max_cookie_count_exceeds"
+            ]
           },
           "max_cookie_key_size_exceeds": {
             "type": "integer",
@@ -38586,10 +39468,16 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "max_cookie_key_size_none"
+            ]
           },
           "max_cookie_key_size_none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "max_cookie_key_size_exceeds"
+            ]
           },
           "max_cookie_value_size_exceeds": {
             "type": "integer",
@@ -38615,10 +39503,16 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "max_cookie_value_size_none"
+            ]
           },
           "max_cookie_value_size_none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "max_cookie_value_size_exceeds"
+            ]
           },
           "max_header_count_exceeds": {
             "type": "integer",
@@ -38643,10 +39537,16 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "max_header_count_none"
+            ]
           },
           "max_header_count_none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "max_header_count_exceeds"
+            ]
           },
           "max_header_key_size_exceeds": {
             "type": "integer",
@@ -38672,10 +39572,16 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "max_header_key_size_none"
+            ]
           },
           "max_header_key_size_none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "max_header_key_size_exceeds"
+            ]
           },
           "max_header_value_size_exceeds": {
             "type": "integer",
@@ -38701,10 +39607,16 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "max_header_value_size_none"
+            ]
           },
           "max_header_value_size_none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "max_header_value_size_exceeds"
+            ]
           },
           "max_parameter_count_exceeds": {
             "type": "integer",
@@ -38730,10 +39642,16 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "max_parameter_count_none"
+            ]
           },
           "max_parameter_count_none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "max_parameter_count_exceeds"
+            ]
           },
           "max_parameter_name_size_exceeds": {
             "type": "integer",
@@ -38759,10 +39677,16 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "max_parameter_name_size_none"
+            ]
           },
           "max_parameter_name_size_none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "max_parameter_name_size_exceeds"
+            ]
           },
           "max_parameter_value_size_exceeds": {
             "type": "integer",
@@ -38788,10 +39712,16 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "max_parameter_value_size_none"
+            ]
           },
           "max_parameter_value_size_none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "max_parameter_value_size_exceeds"
+            ]
           },
           "max_query_size_exceeds": {
             "type": "integer",
@@ -38816,10 +39746,16 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "max_query_size_none"
+            ]
           },
           "max_query_size_none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "max_query_size_exceeds"
+            ]
           },
           "max_request_line_size_exceeds": {
             "type": "integer",
@@ -38845,10 +39781,16 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "max_request_line_size_none"
+            ]
           },
           "max_request_line_size_none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "max_request_line_size_exceeds"
+            ]
           },
           "max_request_size_exceeds": {
             "type": "integer",
@@ -38873,10 +39815,16 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "max_request_size_none"
+            ]
           },
           "max_request_size_none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "max_request_size_exceeds"
+            ]
           },
           "max_url_size_exceeds": {
             "type": "integer",
@@ -38901,10 +39849,16 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "max_url_size_none"
+            ]
           },
           "max_url_size_none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "max_url_size_exceeds"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -39642,13 +40596,25 @@
         "x-ves-proto-message": "ves.io.schema.policy.WafAction",
         "properties": {
           "app_firewall_detection_control": {
-            "$ref": "#/components/schemas/policyAppFirewallDetectionControl"
+            "$ref": "#/components/schemas/policyAppFirewallDetectionControl",
+            "x-f5xc-conflicts-with": [
+              "none",
+              "waf_skip_processing"
+            ]
           },
           "none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "app_firewall_detection_control",
+              "waf_skip_processing"
+            ]
           },
           "waf_skip_processing": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "app_firewall_detection_control",
+              "none"
+            ]
           }
         },
         "x-f5xc-description-short": "Modify App Firewall behavior for a matching request.",
@@ -40011,7 +40977,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.856163+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.640847+00:00"
           },
           "regex_values": {
             "type": "array",
@@ -40241,10 +41207,16 @@
         "x-ves-proto-message": "ves.io.schema.policy.BotAction",
         "properties": {
           "bot_skip_processing": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "none"
+            ]
           },
           "none": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "bot_skip_processing"
+            ]
           }
         },
         "x-f5xc-description-short": "Modify Bot protection behavior for a matching request. The modification could be to entirely skip Bot processing.",
@@ -40272,10 +41244,18 @@
         "x-ves-proto-message": "ves.io.schema.policy.HeaderMatcherType",
         "properties": {
           "check_not_present": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_present",
+              "item"
+            ]
           },
           "check_present": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "item"
+            ]
           },
           "invert_matcher": {
             "type": "boolean",
@@ -40291,7 +41271,11 @@
             }
           },
           "item": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "check_present"
+            ]
           },
           "name": {
             "type": "string",
@@ -40322,7 +41306,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.857466+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.642143+00:00"
           }
         },
         "x-f5xc-description-short": "Header matcher specifies the name of a single HTTP header and the criteria for the input request to match it.",
@@ -40553,10 +41537,18 @@
         "x-ves-proto-message": "ves.io.schema.policy.QueryParameterMatcherType",
         "properties": {
           "check_not_present": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_present",
+              "item"
+            ]
           },
           "check_present": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "item"
+            ]
           },
           "invert_matcher": {
             "type": "boolean",
@@ -40572,7 +41564,11 @@
             }
           },
           "item": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "check_present"
+            ]
           },
           "key": {
             "type": "string",
@@ -40601,7 +41597,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.857613+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.642287+00:00"
           }
         },
         "x-f5xc-description-short": "Query parameter matcher specifies the name of a single query parameter and the criteria for the input request to match it.",
@@ -40691,22 +41687,57 @@
         "x-ves-proto-message": "ves.io.schema.service_policy.CreateSpecType",
         "properties": {
           "allow_all_requests": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_list",
+              "deny_all_requests",
+              "deny_list",
+              "rule_list"
+            ]
           },
           "allow_list": {
-            "$ref": "#/components/schemas/service_policySourceList"
+            "$ref": "#/components/schemas/service_policySourceList",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "deny_all_requests",
+              "deny_list",
+              "rule_list"
+            ]
           },
           "any_server": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "server_name",
+              "server_name_matcher",
+              "server_selector"
+            ]
           },
           "deny_all_requests": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "allow_list",
+              "deny_list",
+              "rule_list"
+            ]
           },
           "deny_list": {
-            "$ref": "#/components/schemas/service_policySourceList"
+            "$ref": "#/components/schemas/service_policySourceList",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "allow_list",
+              "deny_all_requests",
+              "rule_list"
+            ]
           },
           "rule_list": {
-            "$ref": "#/components/schemas/service_policyRuleList"
+            "$ref": "#/components/schemas/service_policyRuleList",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "allow_list",
+              "deny_all_requests",
+              "deny_list"
+            ]
           },
           "server_name": {
             "type": "string",
@@ -40729,13 +41760,28 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_server",
+              "server_name_matcher",
+              "server_selector"
+            ]
           },
           "server_name_matcher": {
-            "$ref": "#/components/schemas/policyMatcherTypeBasic"
+            "$ref": "#/components/schemas/policyMatcherTypeBasic",
+            "x-f5xc-conflicts-with": [
+              "any_server",
+              "server_name",
+              "server_selector"
+            ]
           },
           "server_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "any_server",
+              "server_name",
+              "server_name_matcher"
+            ]
           }
         },
         "x-f5xc-description-short": "Create service_policy creates a new object in the storage backend for metadata.namespace.",
@@ -40773,25 +41819,72 @@
         "x-ves-proto-message": "ves.io.schema.service_policy.GetSpecType",
         "properties": {
           "allow_all_requests": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_list",
+              "deny_all_requests",
+              "deny_list",
+              "legacy_rule_list",
+              "rule_list"
+            ]
           },
           "allow_list": {
-            "$ref": "#/components/schemas/service_policySourceList"
+            "$ref": "#/components/schemas/service_policySourceList",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "deny_all_requests",
+              "deny_list",
+              "legacy_rule_list",
+              "rule_list"
+            ]
           },
           "any_server": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "server_name",
+              "server_name_matcher",
+              "server_selector"
+            ]
           },
           "deny_all_requests": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "allow_list",
+              "deny_list",
+              "legacy_rule_list",
+              "rule_list"
+            ]
           },
           "deny_list": {
-            "$ref": "#/components/schemas/service_policySourceList"
+            "$ref": "#/components/schemas/service_policySourceList",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "allow_list",
+              "deny_all_requests",
+              "legacy_rule_list",
+              "rule_list"
+            ]
           },
           "legacy_rule_list": {
-            "$ref": "#/components/schemas/service_policyLegacyRuleList"
+            "$ref": "#/components/schemas/service_policyLegacyRuleList",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "allow_list",
+              "deny_all_requests",
+              "deny_list",
+              "rule_list"
+            ]
           },
           "rule_list": {
-            "$ref": "#/components/schemas/service_policyRuleList"
+            "$ref": "#/components/schemas/service_policyRuleList",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "allow_list",
+              "deny_all_requests",
+              "deny_list",
+              "legacy_rule_list"
+            ]
           },
           "server_name": {
             "type": "string",
@@ -40814,13 +41907,28 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_server",
+              "server_name_matcher",
+              "server_selector"
+            ]
           },
           "server_name_matcher": {
-            "$ref": "#/components/schemas/policyMatcherTypeBasic"
+            "$ref": "#/components/schemas/policyMatcherTypeBasic",
+            "x-f5xc-conflicts-with": [
+              "any_server",
+              "server_name",
+              "server_selector"
+            ]
           },
           "server_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "any_server",
+              "server_name",
+              "server_name_matcher"
+            ]
           }
         },
         "x-f5xc-description-short": "GET service_policy reads a given object from storage backend for metadata.namespace.",
@@ -40858,25 +41966,72 @@
         "x-ves-proto-message": "ves.io.schema.service_policy.ReplaceSpecType",
         "properties": {
           "allow_all_requests": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_list",
+              "deny_all_requests",
+              "deny_list",
+              "legacy_rule_list",
+              "rule_list"
+            ]
           },
           "allow_list": {
-            "$ref": "#/components/schemas/service_policySourceList"
+            "$ref": "#/components/schemas/service_policySourceList",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "deny_all_requests",
+              "deny_list",
+              "legacy_rule_list",
+              "rule_list"
+            ]
           },
           "any_server": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "server_name",
+              "server_name_matcher",
+              "server_selector"
+            ]
           },
           "deny_all_requests": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "allow_list",
+              "deny_list",
+              "legacy_rule_list",
+              "rule_list"
+            ]
           },
           "deny_list": {
-            "$ref": "#/components/schemas/service_policySourceList"
+            "$ref": "#/components/schemas/service_policySourceList",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "allow_list",
+              "deny_all_requests",
+              "legacy_rule_list",
+              "rule_list"
+            ]
           },
           "legacy_rule_list": {
-            "$ref": "#/components/schemas/service_policyLegacyRuleList"
+            "$ref": "#/components/schemas/service_policyLegacyRuleList",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "allow_list",
+              "deny_all_requests",
+              "deny_list",
+              "rule_list"
+            ]
           },
           "rule_list": {
-            "$ref": "#/components/schemas/service_policyRuleList"
+            "$ref": "#/components/schemas/service_policyRuleList",
+            "x-f5xc-conflicts-with": [
+              "allow_all_requests",
+              "allow_list",
+              "deny_all_requests",
+              "deny_list",
+              "legacy_rule_list"
+            ]
           },
           "server_name": {
             "type": "string",
@@ -40899,13 +42054,28 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_server",
+              "server_name_matcher",
+              "server_selector"
+            ]
           },
           "server_name_matcher": {
-            "$ref": "#/components/schemas/policyMatcherTypeBasic"
+            "$ref": "#/components/schemas/policyMatcherTypeBasic",
+            "x-f5xc-conflicts-with": [
+              "any_server",
+              "server_name",
+              "server_selector"
+            ]
           },
           "server_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "any_server",
+              "server_name",
+              "server_name_matcher"
+            ]
           }
         },
         "x-f5xc-description-short": "Replace service_policy replaces an existing object in the storage backend for metadata.namespace.",
@@ -40950,13 +42120,27 @@
             "$ref": "#/components/schemas/policyRuleAction"
           },
           "any_asn": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "asn_list",
+              "asn_matcher"
+            ]
           },
           "any_client": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "client_name",
+              "client_name_matcher",
+              "client_selector",
+              "ip_threat_category_list"
+            ]
           },
           "any_ip": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "ip_matcher",
+              "ip_prefix_list"
+            ]
           },
           "api_group_matcher": {
             "$ref": "#/components/schemas/policyStringMatcherType"
@@ -40986,10 +42170,18 @@
             }
           },
           "asn_list": {
-            "$ref": "#/components/schemas/policyAsnMatchList"
+            "$ref": "#/components/schemas/policyAsnMatchList",
+            "x-f5xc-conflicts-with": [
+              "any_asn",
+              "asn_matcher"
+            ]
           },
           "asn_matcher": {
-            "$ref": "#/components/schemas/policyAsnMatcherType"
+            "$ref": "#/components/schemas/policyAsnMatcherType",
+            "x-f5xc-conflicts-with": [
+              "any_asn",
+              "asn_list"
+            ]
           },
           "body_matcher": {
             "$ref": "#/components/schemas/policyMatcherType"
@@ -41019,13 +42211,31 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_client",
+              "client_name_matcher",
+              "client_selector",
+              "ip_threat_category_list"
+            ]
           },
           "client_name_matcher": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "any_client",
+              "client_name",
+              "client_selector",
+              "ip_threat_category_list"
+            ]
           },
           "client_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "any_client",
+              "client_name",
+              "client_name_matcher",
+              "ip_threat_category_list"
+            ]
           },
           "cookie_matchers": {
             "type": "array",
@@ -41102,16 +42312,33 @@
             "$ref": "#/components/schemas/policyHttpMethodMatcherType"
           },
           "ip_matcher": {
-            "$ref": "#/components/schemas/policyIpMatcherType"
+            "$ref": "#/components/schemas/policyIpMatcherType",
+            "x-f5xc-conflicts-with": [
+              "any_ip",
+              "ip_prefix_list"
+            ]
           },
           "ip_prefix_list": {
-            "$ref": "#/components/schemas/policyPrefixMatchList"
+            "$ref": "#/components/schemas/policyPrefixMatchList",
+            "x-f5xc-conflicts-with": [
+              "any_ip",
+              "ip_matcher"
+            ]
           },
           "ip_threat_category_list": {
-            "$ref": "#/components/schemas/schemaservice_policy_ruleIPThreatCategoryListType"
+            "$ref": "#/components/schemas/schemaservice_policy_ruleIPThreatCategoryListType",
+            "x-f5xc-conflicts-with": [
+              "any_client",
+              "client_name",
+              "client_name_matcher",
+              "client_selector"
+            ]
           },
           "ja4_tls_fingerprint": {
-            "$ref": "#/components/schemas/policyJA4TlsFingerprintMatcherType"
+            "$ref": "#/components/schemas/policyJA4TlsFingerprintMatcherType",
+            "x-f5xc-conflicts-with": [
+              "tls_fingerprint_matcher"
+            ]
           },
           "jwt_claims": {
             "type": "array",
@@ -41180,7 +42407,10 @@
             "$ref": "#/components/schemas/policySegmentPolicyType"
           },
           "tls_fingerprint_matcher": {
-            "$ref": "#/components/schemas/policyTlsFingerprintMatcherType"
+            "$ref": "#/components/schemas/policyTlsFingerprintMatcherType",
+            "x-f5xc-conflicts-with": [
+              "ja4_tls_fingerprint"
+            ]
           },
           "user_identity_matcher": {
             "$ref": "#/components/schemas/policyMatcherTypeBasic"
@@ -41390,7 +42620,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.858416+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.643074+00:00"
           },
           "namespace": {
             "type": "string",
@@ -41410,7 +42640,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.858443+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.643101+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -41523,7 +42753,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.858540+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.643195+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -41754,7 +42984,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.858627+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.643279+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -41808,7 +43038,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.858695+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.643355+00:00"
           },
           "namespace": {
             "type": "string",
@@ -41827,7 +43057,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.858724+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.643383+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -41869,7 +43099,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.858779+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.643438+00:00"
           },
           "uid": {
             "type": "string",
@@ -41890,7 +43120,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.858808+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.643466+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of service_policy is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -42176,7 +43406,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.858931+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.643578+00:00"
           },
           "policy": {
             "type": "string",
@@ -42368,7 +43598,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.859036+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.643682+00:00"
           },
           "start_time": {
             "type": "string",
@@ -42588,7 +43818,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.859126+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.643770+00:00"
           }
         },
         "x-f5xc-description-short": "Label filter can be specified to filter metrics based on label match.",
@@ -42737,7 +43967,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.859302+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.643944+00:00"
           },
           "domain_matcher": {
             "$ref": "#/components/schemas/policyMatcherType"
@@ -42884,7 +44114,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.859525+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:36.644160+00:00"
           },
           "openapi_validation_action": {
             "$ref": "#/components/schemas/policyOpenApiValidationAction"
@@ -43099,13 +44329,25 @@
             }
           },
           "default_action_allow": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_action_deny",
+              "default_action_next_policy"
+            ]
           },
           "default_action_deny": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_action_allow",
+              "default_action_next_policy"
+            ]
           },
           "default_action_next_policy": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_action_allow",
+              "default_action_deny"
+            ]
           },
           "ip_prefix_set": {
             "type": "array",

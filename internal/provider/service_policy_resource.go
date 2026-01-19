@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -1043,6 +1045,13 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("any_server"),
+						path.MatchRelative().AtParent().AtName("server_name_matcher"),
+						path.MatchRelative().AtParent().AtName("server_selector"),
+					),
+				},
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -1303,6 +1312,14 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 										"client_name": schema.StringAttribute{
 											MarkdownDescription: "The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("any_client"),
+													path.MatchRelative().AtParent().AtName("client_name_matcher"),
+													path.MatchRelative().AtParent().AtName("client_selector"),
+													path.MatchRelative().AtParent().AtName("ip_threat_category_list"),
+												),
+											},
 										},
 										"expiration_timestamp": schema.StringAttribute{
 											MarkdownDescription: "Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
@@ -1867,54 +1884,119 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 												"max_cookie_count_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Count for all Cookies that exceed this value.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("max_cookie_count_none"),
+														),
+													},
 												},
 												"max_cookie_key_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: ".",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("max_cookie_key_size_none"),
+														),
+													},
 												},
 												"max_cookie_value_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: ".",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("max_cookie_value_size_none"),
+														),
+													},
 												},
 												"max_header_count_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Count for all Headers that exceed this value.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("max_header_count_none"),
+														),
+													},
 												},
 												"max_header_key_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: ".",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("max_header_key_size_none"),
+														),
+													},
 												},
 												"max_header_value_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: ".",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("max_header_value_size_none"),
+														),
+													},
 												},
 												"max_parameter_count_exceeds": schema.Int64Attribute{
 													MarkdownDescription: ".",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("max_parameter_count_none"),
+														),
+													},
 												},
 												"max_parameter_name_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: ".",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("max_parameter_name_size_none"),
+														),
+													},
 												},
 												"max_parameter_value_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: ".",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("max_parameter_value_size_none"),
+														),
+													},
 												},
 												"max_query_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the URL Query Size that exceed this value.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("max_query_size_none"),
+														),
+													},
 												},
 												"max_request_line_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: ".",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("max_request_line_size_none"),
+														),
+													},
 												},
 												"max_request_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the Request Size that exceed this value.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("max_request_size_none"),
+														),
+													},
 												},
 												"max_url_size_exceeds": schema.Int64Attribute{
 													MarkdownDescription: "Match on the URL Size that exceed this value.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("max_url_size_none"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{

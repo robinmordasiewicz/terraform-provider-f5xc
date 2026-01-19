@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -163,22 +164,112 @@ func (r *UserIdentificationResource) Schema(ctx context.Context, req resource.Sc
 						"cookie_name": schema.StringAttribute{
 							MarkdownDescription: "Use the HTTP cookie value for the given name as user..",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("client_asn"),
+									path.MatchRelative().AtParent().AtName("client_city"),
+									path.MatchRelative().AtParent().AtName("client_country"),
+									path.MatchRelative().AtParent().AtName("client_ip"),
+									path.MatchRelative().AtParent().AtName("client_region"),
+									path.MatchRelative().AtParent().AtName("http_header_name"),
+									path.MatchRelative().AtParent().AtName("ip_and_http_header_name"),
+									path.MatchRelative().AtParent().AtName("ip_and_ja4_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("ip_and_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("ja4_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("jwt_claim_name"),
+									path.MatchRelative().AtParent().AtName("none"),
+									path.MatchRelative().AtParent().AtName("query_param_key"),
+									path.MatchRelative().AtParent().AtName("tls_fingerprint"),
+								),
+							},
 						},
 						"http_header_name": schema.StringAttribute{
 							MarkdownDescription: "Use the HTTP header value for the given name as user..",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("client_asn"),
+									path.MatchRelative().AtParent().AtName("client_city"),
+									path.MatchRelative().AtParent().AtName("client_country"),
+									path.MatchRelative().AtParent().AtName("client_ip"),
+									path.MatchRelative().AtParent().AtName("client_region"),
+									path.MatchRelative().AtParent().AtName("cookie_name"),
+									path.MatchRelative().AtParent().AtName("ip_and_http_header_name"),
+									path.MatchRelative().AtParent().AtName("ip_and_ja4_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("ip_and_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("ja4_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("jwt_claim_name"),
+									path.MatchRelative().AtParent().AtName("none"),
+									path.MatchRelative().AtParent().AtName("query_param_key"),
+									path.MatchRelative().AtParent().AtName("tls_fingerprint"),
+								),
+							},
 						},
 						"ip_and_http_header_name": schema.StringAttribute{
 							MarkdownDescription: "Name of HTTP header from which the value should be extracted.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("client_asn"),
+									path.MatchRelative().AtParent().AtName("client_city"),
+									path.MatchRelative().AtParent().AtName("client_country"),
+									path.MatchRelative().AtParent().AtName("client_ip"),
+									path.MatchRelative().AtParent().AtName("client_region"),
+									path.MatchRelative().AtParent().AtName("cookie_name"),
+									path.MatchRelative().AtParent().AtName("http_header_name"),
+									path.MatchRelative().AtParent().AtName("ip_and_ja4_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("ip_and_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("ja4_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("jwt_claim_name"),
+									path.MatchRelative().AtParent().AtName("none"),
+									path.MatchRelative().AtParent().AtName("query_param_key"),
+									path.MatchRelative().AtParent().AtName("tls_fingerprint"),
+								),
+							},
 						},
 						"jwt_claim_name": schema.StringAttribute{
 							MarkdownDescription: "Use the JWT claim value as user identifier.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("client_asn"),
+									path.MatchRelative().AtParent().AtName("client_city"),
+									path.MatchRelative().AtParent().AtName("client_country"),
+									path.MatchRelative().AtParent().AtName("client_ip"),
+									path.MatchRelative().AtParent().AtName("client_region"),
+									path.MatchRelative().AtParent().AtName("cookie_name"),
+									path.MatchRelative().AtParent().AtName("http_header_name"),
+									path.MatchRelative().AtParent().AtName("ip_and_http_header_name"),
+									path.MatchRelative().AtParent().AtName("ip_and_ja4_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("ip_and_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("ja4_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("none"),
+									path.MatchRelative().AtParent().AtName("query_param_key"),
+									path.MatchRelative().AtParent().AtName("tls_fingerprint"),
+								),
+							},
 						},
 						"query_param_key": schema.StringAttribute{
 							MarkdownDescription: "Use the query parameter value for the given key as user..",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("client_asn"),
+									path.MatchRelative().AtParent().AtName("client_city"),
+									path.MatchRelative().AtParent().AtName("client_country"),
+									path.MatchRelative().AtParent().AtName("client_ip"),
+									path.MatchRelative().AtParent().AtName("client_region"),
+									path.MatchRelative().AtParent().AtName("cookie_name"),
+									path.MatchRelative().AtParent().AtName("http_header_name"),
+									path.MatchRelative().AtParent().AtName("ip_and_http_header_name"),
+									path.MatchRelative().AtParent().AtName("ip_and_ja4_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("ip_and_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("ja4_tls_fingerprint"),
+									path.MatchRelative().AtParent().AtName("jwt_claim_name"),
+									path.MatchRelative().AtParent().AtName("none"),
+									path.MatchRelative().AtParent().AtName("tls_fingerprint"),
+								),
+							},
 						},
 					},
 					Blocks: map[string]schema.Block{

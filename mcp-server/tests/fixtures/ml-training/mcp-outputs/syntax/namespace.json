@@ -1,0 +1,18 @@
+{
+  "operation": "syntax",
+  "resource": "namespace",
+  "totalBlocks": 0,
+  "totalAttributes": 7,
+  "totalOneOfGroups": 0,
+  "blocks": [],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {}
+}

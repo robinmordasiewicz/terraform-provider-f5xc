@@ -1,0 +1,20 @@
+{
+  "operation": "syntax",
+  "resource": "api_crawler",
+  "totalBlocks": 1,
+  "totalAttributes": 7,
+  "totalOneOfGroups": 0,
+  "blocks": [
+    "domains"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {}
+}

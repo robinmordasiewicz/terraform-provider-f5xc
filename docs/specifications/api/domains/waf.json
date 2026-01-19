@@ -3,7 +3,7 @@
   "info": {
     "title": "Waf",
     "description": "Signature-based attack detection with customizable blocking responses. Attack type classification, protocol inspection, and AI-driven risk assessment. Exclusion policies override default blocking for trusted traffic. Staged signature testing validates rules before enforcement. Security event metrics track rule hits and blocked requests across namespaces.",
-    "version": "2.0.39",
+    "version": "2.0.40",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -10598,13 +10598,25 @@
         "x-ves-proto-message": "ves.io.schema.app_firewall.AnonymizationConfiguration",
         "properties": {
           "cookie": {
-            "$ref": "#/components/schemas/app_firewallAnonymizeHttpCookie"
+            "$ref": "#/components/schemas/app_firewallAnonymizeHttpCookie",
+            "x-f5xc-conflicts-with": [
+              "http_header",
+              "query_parameter"
+            ]
           },
           "http_header": {
-            "$ref": "#/components/schemas/app_firewallAnonymizeHttpHeader"
+            "$ref": "#/components/schemas/app_firewallAnonymizeHttpHeader",
+            "x-f5xc-conflicts-with": [
+              "cookie",
+              "query_parameter"
+            ]
           },
           "query_parameter": {
-            "$ref": "#/components/schemas/app_firewallAnonymizeHttpQueryParameter"
+            "$ref": "#/components/schemas/app_firewallAnonymizeHttpQueryParameter",
+            "x-f5xc-conflicts-with": [
+              "cookie",
+              "http_header"
+            ]
           }
         },
         "x-f5xc-description-short": "Configure anonymization for HTTP headers, parameters or cookies which may contain sensitive data.",
@@ -11116,58 +11128,106 @@
         "x-ves-proto-message": "ves.io.schema.app_firewall.CreateSpecType",
         "properties": {
           "ai_risk_based_blocking": {
-            "$ref": "#/components/schemas/app_firewallAiRiskBasedBlocking"
+            "$ref": "#/components/schemas/app_firewallAiRiskBasedBlocking",
+            "x-f5xc-conflicts-with": [
+              "default_detection_settings",
+              "detection_settings"
+            ]
           },
           "allow_all_response_codes": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "allowed_response_codes"
+            ]
           },
           "allowed_response_codes": {
-            "$ref": "#/components/schemas/app_firewallAllowedResponseCodes"
+            "$ref": "#/components/schemas/app_firewallAllowedResponseCodes",
+            "x-f5xc-conflicts-with": [
+              "allow_all_response_codes"
+            ]
           },
           "blocking": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "monitoring"
+            ]
           },
           "blocking_page": {
-            "$ref": "#/components/schemas/app_firewallCustomBlockingPage"
+            "$ref": "#/components/schemas/app_firewallCustomBlockingPage",
+            "x-f5xc-conflicts-with": [
+              "use_default_blocking_page"
+            ]
           },
           "bot_protection_setting": {
-            "$ref": "#/components/schemas/app_firewallBotProtectionSetting"
+            "$ref": "#/components/schemas/app_firewallBotProtectionSetting",
+            "x-f5xc-conflicts-with": [
+              "default_bot_setting"
+            ]
           },
           "custom_anonymization": {
-            "$ref": "#/components/schemas/app_firewallAnonymizationSetting"
+            "$ref": "#/components/schemas/app_firewallAnonymizationSetting",
+            "x-f5xc-conflicts-with": [
+              "default_anonymization",
+              "disable_anonymization"
+            ]
           },
           "default_anonymization": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "custom_anonymization",
+              "disable_anonymization"
+            ]
           },
           "default_bot_setting": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "bot_protection_setting"
+            ]
           },
           "default_detection_settings": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "ai_risk_based_blocking",
+              "detection_settings"
+            ]
           },
           "detection_settings": {
-            "$ref": "#/components/schemas/app_firewallDetectionSetting"
+            "$ref": "#/components/schemas/app_firewallDetectionSetting",
+            "x-f5xc-conflicts-with": [
+              "ai_risk_based_blocking",
+              "default_detection_settings"
+            ]
           },
           "disable_anonymization": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "custom_anonymization",
+              "default_anonymization"
+            ]
           },
           "monitoring": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "blocking"
+            ]
           },
           "use_default_blocking_page": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "blocking_page"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -11274,7 +11334,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.895188+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.037671+00:00"
           },
           "namespace": {
             "type": "string",
@@ -11294,7 +11354,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.895220+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.037702+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -11325,40 +11385,76 @@
         "x-ves-proto-message": "ves.io.schema.app_firewall.DetectionSetting",
         "properties": {
           "bot_protection_setting": {
-            "$ref": "#/components/schemas/app_firewallBotProtectionSetting"
+            "$ref": "#/components/schemas/app_firewallBotProtectionSetting",
+            "x-f5xc-conflicts-with": [
+              "default_bot_setting"
+            ]
           },
           "default_bot_setting": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "bot_protection_setting"
+            ]
           },
           "default_violation_settings": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "violation_settings"
+            ]
           },
           "disable_staging": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "stage_new_and_updated_signatures",
+              "stage_new_signatures"
+            ]
           },
           "disable_suppression": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_suppression"
+            ]
           },
           "disable_threat_campaigns": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_threat_campaigns"
+            ]
           },
           "enable_suppression": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable_suppression"
+            ]
           },
           "enable_threat_campaigns": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable_threat_campaigns"
+            ]
           },
           "signature_selection_setting": {
             "$ref": "#/components/schemas/app_firewallSignatureSelectionSetting"
           },
           "stage_new_and_updated_signatures": {
-            "$ref": "#/components/schemas/app_firewallSignaturesStagingSettings"
+            "$ref": "#/components/schemas/app_firewallSignaturesStagingSettings",
+            "x-f5xc-conflicts-with": [
+              "disable_staging",
+              "stage_new_signatures"
+            ]
           },
           "stage_new_signatures": {
-            "$ref": "#/components/schemas/app_firewallSignaturesStagingSettings"
+            "$ref": "#/components/schemas/app_firewallSignaturesStagingSettings",
+            "x-f5xc-conflicts-with": [
+              "disable_staging",
+              "stage_new_and_updated_signatures"
+            ]
           },
           "violation_settings": {
-            "$ref": "#/components/schemas/app_firewallViolationSettings"
+            "$ref": "#/components/schemas/app_firewallViolationSettings",
+            "x-f5xc-conflicts-with": [
+              "default_violation_settings"
+            ]
           }
         },
         "x-f5xc-description-short": "Specifies detection settings to be used by WAF.",
@@ -11462,7 +11558,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.895431+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.037909+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -11526,58 +11622,106 @@
         "x-ves-proto-message": "ves.io.schema.app_firewall.GetSpecType",
         "properties": {
           "ai_risk_based_blocking": {
-            "$ref": "#/components/schemas/app_firewallAiRiskBasedBlocking"
+            "$ref": "#/components/schemas/app_firewallAiRiskBasedBlocking",
+            "x-f5xc-conflicts-with": [
+              "default_detection_settings",
+              "detection_settings"
+            ]
           },
           "allow_all_response_codes": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "allowed_response_codes"
+            ]
           },
           "allowed_response_codes": {
-            "$ref": "#/components/schemas/app_firewallAllowedResponseCodes"
+            "$ref": "#/components/schemas/app_firewallAllowedResponseCodes",
+            "x-f5xc-conflicts-with": [
+              "allow_all_response_codes"
+            ]
           },
           "blocking": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "monitoring"
+            ]
           },
           "blocking_page": {
-            "$ref": "#/components/schemas/app_firewallCustomBlockingPage"
+            "$ref": "#/components/schemas/app_firewallCustomBlockingPage",
+            "x-f5xc-conflicts-with": [
+              "use_default_blocking_page"
+            ]
           },
           "bot_protection_setting": {
-            "$ref": "#/components/schemas/app_firewallBotProtectionSetting"
+            "$ref": "#/components/schemas/app_firewallBotProtectionSetting",
+            "x-f5xc-conflicts-with": [
+              "default_bot_setting"
+            ]
           },
           "custom_anonymization": {
-            "$ref": "#/components/schemas/app_firewallAnonymizationSetting"
+            "$ref": "#/components/schemas/app_firewallAnonymizationSetting",
+            "x-f5xc-conflicts-with": [
+              "default_anonymization",
+              "disable_anonymization"
+            ]
           },
           "default_anonymization": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "custom_anonymization",
+              "disable_anonymization"
+            ]
           },
           "default_bot_setting": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "bot_protection_setting"
+            ]
           },
           "default_detection_settings": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "ai_risk_based_blocking",
+              "detection_settings"
+            ]
           },
           "detection_settings": {
-            "$ref": "#/components/schemas/app_firewallDetectionSetting"
+            "$ref": "#/components/schemas/app_firewallDetectionSetting",
+            "x-f5xc-conflicts-with": [
+              "ai_risk_based_blocking",
+              "default_detection_settings"
+            ]
           },
           "disable_anonymization": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "custom_anonymization",
+              "default_anonymization"
+            ]
           },
           "monitoring": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "blocking"
+            ]
           },
           "use_default_blocking_page": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "blocking_page"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -11686,7 +11830,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.895640+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.038111+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -11740,7 +11884,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.895710+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.038179+00:00"
           },
           "namespace": {
             "type": "string",
@@ -11759,7 +11903,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.895738+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.038207+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -11801,7 +11945,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.895795+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.038262+00:00"
           },
           "uid": {
             "type": "string",
@@ -11822,7 +11966,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.895824+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.038292+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of app_firewall is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -12042,7 +12186,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.895945+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.038411+00:00"
           },
           "range": {
             "type": "string",
@@ -12254,58 +12398,106 @@
         "x-ves-proto-message": "ves.io.schema.app_firewall.ReplaceSpecType",
         "properties": {
           "ai_risk_based_blocking": {
-            "$ref": "#/components/schemas/app_firewallAiRiskBasedBlocking"
+            "$ref": "#/components/schemas/app_firewallAiRiskBasedBlocking",
+            "x-f5xc-conflicts-with": [
+              "default_detection_settings",
+              "detection_settings"
+            ]
           },
           "allow_all_response_codes": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "allowed_response_codes"
+            ]
           },
           "allowed_response_codes": {
-            "$ref": "#/components/schemas/app_firewallAllowedResponseCodes"
+            "$ref": "#/components/schemas/app_firewallAllowedResponseCodes",
+            "x-f5xc-conflicts-with": [
+              "allow_all_response_codes"
+            ]
           },
           "blocking": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "monitoring"
+            ]
           },
           "blocking_page": {
-            "$ref": "#/components/schemas/app_firewallCustomBlockingPage"
+            "$ref": "#/components/schemas/app_firewallCustomBlockingPage",
+            "x-f5xc-conflicts-with": [
+              "use_default_blocking_page"
+            ]
           },
           "bot_protection_setting": {
-            "$ref": "#/components/schemas/app_firewallBotProtectionSetting"
+            "$ref": "#/components/schemas/app_firewallBotProtectionSetting",
+            "x-f5xc-conflicts-with": [
+              "default_bot_setting"
+            ]
           },
           "custom_anonymization": {
-            "$ref": "#/components/schemas/app_firewallAnonymizationSetting"
+            "$ref": "#/components/schemas/app_firewallAnonymizationSetting",
+            "x-f5xc-conflicts-with": [
+              "default_anonymization",
+              "disable_anonymization"
+            ]
           },
           "default_anonymization": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "custom_anonymization",
+              "disable_anonymization"
+            ]
           },
           "default_bot_setting": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "bot_protection_setting"
+            ]
           },
           "default_detection_settings": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "ai_risk_based_blocking",
+              "detection_settings"
+            ]
           },
           "detection_settings": {
-            "$ref": "#/components/schemas/app_firewallDetectionSetting"
+            "$ref": "#/components/schemas/app_firewallDetectionSetting",
+            "x-f5xc-conflicts-with": [
+              "ai_risk_based_blocking",
+              "default_detection_settings"
+            ]
           },
           "disable_anonymization": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "custom_anonymization",
+              "default_anonymization"
+            ]
           },
           "monitoring": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "blocking"
+            ]
           },
           "use_default_blocking_page": {
             "$ref": "#/components/schemas/ioschemaEmpty",
             "default": {},
-            "x-f5xc-server-default": true
+            "x-f5xc-server-default": true,
+            "x-f5xc-conflicts-with": [
+              "blocking_page"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -12359,19 +12551,37 @@
         "x-ves-proto-message": "ves.io.schema.app_firewall.SignatureSelectionSetting",
         "properties": {
           "attack_type_settings": {
-            "$ref": "#/components/schemas/app_firewallAttackTypeSettings"
+            "$ref": "#/components/schemas/app_firewallAttackTypeSettings",
+            "x-f5xc-conflicts-with": [
+              "default_attack_type_settings"
+            ]
           },
           "default_attack_type_settings": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "attack_type_settings"
+            ]
           },
           "high_medium_accuracy_signatures": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "high_medium_low_accuracy_signatures",
+              "only_high_accuracy_signatures"
+            ]
           },
           "high_medium_low_accuracy_signatures": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "high_medium_accuracy_signatures",
+              "only_high_accuracy_signatures"
+            ]
           },
           "only_high_accuracy_signatures": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "high_medium_accuracy_signatures",
+              "high_medium_low_accuracy_signatures"
+            ]
           }
         },
         "x-f5xc-description-short": "Attack Signatures are patterns that identify attacks on a web application and its components.",
@@ -12597,7 +12807,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896293+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.038754+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -12672,7 +12882,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896342+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.038803+00:00"
           },
           "service_name": {
             "type": "string",
@@ -12715,7 +12925,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896380+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.038839+00:00"
           },
           "type": {
             "type": "string",
@@ -12938,7 +13148,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896451+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.038911+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -13038,7 +13248,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896522+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.038980+00:00"
           }
         },
         "x-f5xc-description-short": "Metric data contains timestamp and the value.",
@@ -13114,7 +13324,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896564+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039022+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -13172,7 +13382,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896612+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039069+00:00"
           },
           "namespace": {
             "type": "string",
@@ -13193,7 +13403,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896639+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039097+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
@@ -13273,7 +13483,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896681+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039137+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -13333,7 +13543,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896729+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039185+00:00"
           },
           "namespace": {
             "type": "string",
@@ -13354,7 +13564,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896756+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039212+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
@@ -13402,7 +13612,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896785+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039242+00:00"
           },
           "name": {
             "type": "string",
@@ -13423,7 +13633,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896812+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039269+00:00"
           },
           "namespace": {
             "type": "string",
@@ -13444,7 +13654,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896840+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039296+00:00"
           },
           "tenant": {
             "type": "string",
@@ -13467,7 +13677,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896866+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039323+00:00"
           },
           "uid": {
             "type": "string",
@@ -13491,7 +13701,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896904+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039361+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -13571,7 +13781,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896946+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039403+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -13629,7 +13839,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.896994+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039451+00:00"
           },
           "namespace": {
             "type": "string",
@@ -13650,7 +13860,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897021+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039478+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
@@ -13774,7 +13984,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897099+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039556+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -13894,7 +14104,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897158+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039615+00:00"
           },
           "status": {
             "type": "string",
@@ -13914,7 +14124,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897185+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039644+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -14109,7 +14319,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897310+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039769+00:00"
           },
           "uid": {
             "type": "string",
@@ -14132,7 +14342,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897338+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039797+00:00"
           }
         },
         "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
@@ -14208,7 +14418,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897368+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039827+00:00"
           },
           "previous_value": {
             "type": "string",
@@ -14247,7 +14457,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897415+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039875+00:00"
           }
         },
         "x-f5xc-description-short": "Trend value contains trend value, trend sentiment and trend calculation description and window size.",
@@ -14338,7 +14548,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897446+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039906+00:00"
           },
           "name": {
             "type": "string",
@@ -14359,7 +14569,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897473+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039933+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14380,7 +14590,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897501+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039960+00:00"
           },
           "uid": {
             "type": "string",
@@ -14401,7 +14611,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897529+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.039988+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
@@ -14470,7 +14680,7 @@
             "maxLength": 16,
             "minLength": 7,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897560+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.040020+00:00"
           },
           "value": {
             "type": "array",
@@ -14489,7 +14699,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.897591+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.040052+00:00"
           }
         },
         "x-f5xc-description-short": "Metric Type Data contains key/value pair that uniquely identifies the group_by labels specified in the request.",
@@ -14596,7 +14806,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981564+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122070+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14616,7 +14826,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981596+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122100+00:00"
           },
           "path": {
             "type": "string",
@@ -14792,7 +15002,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981688+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122190+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14812,7 +15022,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981716+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122217+00:00"
           },
           "user_id": {
             "type": "string",
@@ -14884,7 +15094,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981766+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122266+00:00"
           },
           "rule": {
             "$ref": "#/components/schemas/common_wafSimpleClientSrcRule"
@@ -14964,7 +15174,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981843+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122355+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14984,7 +15194,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981870+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122382+00:00"
           },
           "tls_fingerprint_matcher": {
             "$ref": "#/components/schemas/policyTlsFingerprintMatcherType"
@@ -15100,7 +15310,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981969+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122469+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15120,7 +15330,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981997+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122496+00:00"
           },
           "path": {
             "type": "string",
@@ -15177,10 +15387,16 @@
         "x-ves-proto-message": "ves.io.schema.app_security.GetSuggestedOasValidationRuleRsp",
         "properties": {
           "all_endpoints_oas_validation": {
-            "$ref": "#/components/schemas/common_wafOpenApiValidationAllSpecEndpointsSettings"
+            "$ref": "#/components/schemas/common_wafOpenApiValidationAllSpecEndpointsSettings",
+            "x-f5xc-conflicts-with": [
+              "custom_oas_validation"
+            ]
           },
           "custom_oas_validation": {
-            "$ref": "#/components/schemas/common_wafOpenApiValidationRule"
+            "$ref": "#/components/schemas/common_wafOpenApiValidationRule",
+            "x-f5xc-conflicts-with": [
+              "all_endpoints_oas_validation"
+            ]
           },
           "found_existing_rule": {
             "$ref": "#/components/schemas/schemaEmpty"
@@ -15229,7 +15445,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982077+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122573+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15249,7 +15465,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982104+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122600+00:00"
           },
           "path": {
             "type": "string",
@@ -15352,7 +15568,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982174+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122668+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15372,7 +15588,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982202+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122695+00:00"
           },
           "path": {
             "type": "string",
@@ -15564,7 +15780,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982301+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122791+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15584,7 +15800,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982328+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122818+00:00"
           },
           "sec_event_name": {
             "type": "string",
@@ -15719,7 +15935,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982406+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122894+00:00"
           },
           "rule": {
             "$ref": "#/components/schemas/common_wafSimpleClientSrcRule"
@@ -15776,7 +15992,7 @@
             "x-original-maxLength": 256,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982457+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122944+00:00"
           },
           "exclude_bot_names": {
             "type": "array",
@@ -15877,7 +16093,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982515+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123000+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15897,7 +16113,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982543+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123028+00:00"
           },
           "req_path": {
             "type": "string",
@@ -15994,7 +16210,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982602+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123085+00:00"
           },
           "waf_exclusion_policy": {
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
@@ -16043,7 +16259,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982653+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123135+00:00"
           },
           "namespace": {
             "type": "string",
@@ -16062,7 +16278,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982681+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123163+00:00"
           },
           "request_data": {
             "$ref": "#/components/schemas/app_securityRequestData"
@@ -16200,7 +16416,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982779+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123260+00:00"
           }
         },
         "x-f5xc-description-short": "Metric label filter can be specified to query specific metrics based on label match.",
@@ -16311,7 +16527,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982822+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123302+00:00"
           }
         },
         "x-f5xc-description-short": "GET a list of virtual hosts in all the namespaces matching filter provided in the request.",
@@ -16461,7 +16677,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982894+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123375+00:00"
           },
           "query": {
             "type": "string",
@@ -16660,7 +16876,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982995+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123474+00:00"
           },
           "start_time": {
             "type": "string",
@@ -16948,7 +17164,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983125+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123602+00:00"
           },
           "query": {
             "type": "string",
@@ -17167,7 +17383,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983243+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123719+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -17266,7 +17482,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983302+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123778+00:00"
           },
           "query": {
             "type": "string",
@@ -17464,7 +17680,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983403+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123878+00:00"
           },
           "query": {
             "type": "string",
@@ -17683,7 +17899,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983521+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123994+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -17782,7 +17998,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983580+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.124054+00:00"
           },
           "query": {
             "type": "string",
@@ -17980,7 +18196,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983683+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.124154+00:00"
           },
           "query": {
             "type": "string",
@@ -18199,7 +18415,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983800+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.124270+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -18275,7 +18491,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983850+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.124319+00:00"
           },
           "id": {
             "type": "string",
@@ -18391,7 +18607,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983924+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.124396+00:00"
           },
           "references": {
             "type": "array",
@@ -19259,7 +19475,10 @@
             "$ref": "#/components/schemas/schemaEmpty"
           },
           "ddos_client_source": {
-            "$ref": "#/components/schemas/common_securityDDoSClientSource"
+            "$ref": "#/components/schemas/common_securityDDoSClientSource",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_list"
+            ]
           },
           "expiration_timestamp": {
             "type": "string",
@@ -19287,7 +19506,10 @@
             }
           },
           "ip_prefix_list": {
-            "$ref": "#/components/schemas/policyPrefixMatchList"
+            "$ref": "#/components/schemas/policyPrefixMatchList",
+            "x-f5xc-conflicts-with": [
+              "ddos_client_source"
+            ]
           },
           "metadata": {
             "$ref": "#/components/schemas/schemaMessageMetaType"
@@ -19322,7 +19544,10 @@
             "$ref": "#/components/schemas/common_wafAPIProtectionRuleAction"
           },
           "any_domain": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "specific_domain"
+            ]
           },
           "api_endpoint_method": {
             "$ref": "#/components/schemas/policyHttpMethodMatcherType"
@@ -19387,7 +19612,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_domain"
+            ]
           }
         },
         "x-f5xc-description-short": "API Protection Rule for a specific endpoint.",
@@ -19419,10 +19647,16 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.APIProtectionRuleAction",
         "properties": {
           "allow": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "deny"
+            ]
           },
           "deny": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow"
+            ]
           }
         },
         "x-f5xc-description-short": "The action to take if the input request matches the rule.",
@@ -19524,7 +19758,10 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.ApiEndpointRule",
         "properties": {
           "any_domain": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "specific_domain"
+            ]
           },
           "api_endpoint_method": {
             "$ref": "#/components/schemas/policyHttpMethodMatcherType"
@@ -19561,10 +19798,16 @@
             "$ref": "#/components/schemas/policyClientMatcher"
           },
           "inline_rate_limiter": {
-            "$ref": "#/components/schemas/common_wafInlineRateLimiter"
+            "$ref": "#/components/schemas/common_wafInlineRateLimiter",
+            "x-f5xc-conflicts-with": [
+              "ref_rate_limiter"
+            ]
           },
           "ref_rate_limiter": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "inline_rate_limiter"
+            ]
           },
           "request_matcher": {
             "$ref": "#/components/schemas/policyRequestMatcher"
@@ -19590,7 +19833,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_domain"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -19699,16 +19945,32 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.FallThroughRule",
         "properties": {
           "action_block": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "action_report",
+              "action_skip"
+            ]
           },
           "action_report": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "action_block",
+              "action_skip"
+            ]
           },
           "action_skip": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "action_block",
+              "action_report"
+            ]
           },
           "api_endpoint": {
-            "$ref": "#/components/schemas/common_wafApiEndpointDetails"
+            "$ref": "#/components/schemas/common_wafApiEndpointDetails",
+            "x-f5xc-conflicts-with": [
+              "api_group",
+              "base_path"
+            ]
           },
           "api_group": {
             "type": "string",
@@ -19731,7 +19993,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "api_endpoint",
+              "base_path"
+            ]
           },
           "base_path": {
             "type": "string",
@@ -19756,7 +20022,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "api_endpoint",
+              "api_group"
+            ]
           },
           "metadata": {
             "$ref": "#/components/schemas/schemaMessageMetaType"
@@ -19836,7 +20106,10 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.InlineRateLimiter",
         "properties": {
           "ref_user_id": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "use_http_lb_user_id"
+            ]
           },
           "threshold": {
             "type": "integer",
@@ -19872,7 +20145,10 @@
             "$ref": "#/components/schemas/rate_limiterRateLimitPeriodUnit"
           },
           "use_http_lb_user_id": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "ref_user_id"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -19899,10 +20175,16 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.OpenApiFallThroughMode",
         "properties": {
           "fall_through_mode_allow": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "fall_through_mode_custom"
+            ]
           },
           "fall_through_mode_custom": {
-            "$ref": "#/components/schemas/common_wafCustomFallThroughMode"
+            "$ref": "#/components/schemas/common_wafCustomFallThroughMode",
+            "x-f5xc-conflicts-with": [
+              "fall_through_mode_allow"
+            ]
           }
         },
         "x-required": true,
@@ -19964,16 +20246,28 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.OpenApiValidationCommonSettings",
         "properties": {
           "oversized_body_fail_validation": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "oversized_body_skip_validation"
+            ]
           },
           "oversized_body_skip_validation": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "oversized_body_fail_validation"
+            ]
           },
           "property_validation_settings_custom": {
-            "$ref": "#/components/schemas/common_wafValidationPropertySetting"
+            "$ref": "#/components/schemas/common_wafValidationPropertySetting",
+            "x-f5xc-conflicts-with": [
+              "property_validation_settings_default"
+            ]
           },
           "property_validation_settings_default": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "property_validation_settings_custom"
+            ]
           }
         },
         "x-f5xc-description-short": "OpenAPI specification validation settings relevant for \"API Inventory\" enforcement and for \"Custom list\" enforcement.",
@@ -20003,16 +20297,28 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.OpenApiValidationMode",
         "properties": {
           "response_validation_mode_active": {
-            "$ref": "#/components/schemas/common_wafOpenApiValidationModeActiveResponse"
+            "$ref": "#/components/schemas/common_wafOpenApiValidationModeActiveResponse",
+            "x-f5xc-conflicts-with": [
+              "skip_response_validation"
+            ]
           },
           "skip_response_validation": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "response_validation_mode_active"
+            ]
           },
           "skip_validation": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "validation_mode_active"
+            ]
           },
           "validation_mode_active": {
-            "$ref": "#/components/schemas/common_wafOpenApiValidationModeActive"
+            "$ref": "#/components/schemas/common_wafOpenApiValidationModeActive",
+            "x-f5xc-conflicts-with": [
+              "skip_validation"
+            ]
           }
         },
         "x-required": true,
@@ -20042,10 +20348,16 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.OpenApiValidationModeActive",
         "properties": {
           "enforcement_block": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enforcement_report"
+            ]
           },
           "enforcement_report": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enforcement_block"
+            ]
           },
           "request_validation_properties": {
             "type": "array",
@@ -20104,10 +20416,16 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.OpenApiValidationModeActiveResponse",
         "properties": {
           "enforcement_block": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enforcement_report"
+            ]
           },
           "enforcement_report": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enforcement_block"
+            ]
           },
           "response_validation_properties": {
             "type": "array",
@@ -20167,10 +20485,17 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.OpenApiValidationRule",
         "properties": {
           "any_domain": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "specific_domain"
+            ]
           },
           "api_endpoint": {
-            "$ref": "#/components/schemas/common_wafApiEndpointDetails"
+            "$ref": "#/components/schemas/common_wafApiEndpointDetails",
+            "x-f5xc-conflicts-with": [
+              "api_group",
+              "base_path"
+            ]
           },
           "api_group": {
             "type": "string",
@@ -20193,7 +20518,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "api_endpoint",
+              "base_path"
+            ]
           },
           "base_path": {
             "type": "string",
@@ -20218,7 +20547,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "api_endpoint",
+              "api_group"
+            ]
           },
           "metadata": {
             "$ref": "#/components/schemas/schemaMessageMetaType"
@@ -20244,7 +20577,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_domain"
+            ]
           },
           "validation_mode": {
             "$ref": "#/components/schemas/common_wafOpenApiValidationMode"
@@ -20330,10 +20666,20 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "http_header",
+              "ip_prefix",
+              "ipv6_prefix",
+              "user_identifier"
+            ]
           },
           "bot_skip_processing": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "skip_processing",
+              "waf_skip_processing"
+            ]
           },
           "expiration_timestamp": {
             "type": "string",
@@ -20361,7 +20707,13 @@
             }
           },
           "http_header": {
-            "$ref": "#/components/schemas/common_wafHttpHeaderMatcherList"
+            "$ref": "#/components/schemas/common_wafHttpHeaderMatcherList",
+            "x-f5xc-conflicts-with": [
+              "as_number",
+              "ip_prefix",
+              "ipv6_prefix",
+              "user_identifier"
+            ]
           },
           "ip_prefix": {
             "type": "string",
@@ -20384,7 +20736,13 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "as_number",
+              "http_header",
+              "ipv6_prefix",
+              "user_identifier"
+            ]
           },
           "ipv6_prefix": {
             "type": "string",
@@ -20407,13 +20765,23 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "as_number",
+              "http_header",
+              "ip_prefix",
+              "user_identifier"
+            ]
           },
           "metadata": {
             "$ref": "#/components/schemas/schemaMessageMetaType"
           },
           "skip_processing": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "bot_skip_processing",
+              "waf_skip_processing"
+            ]
           },
           "user_identifier": {
             "type": "string",
@@ -20436,10 +20804,20 @@
               "update": false,
               "read": false
             },
-            "x-field-mutability": "read-only"
+            "x-field-mutability": "read-only",
+            "x-f5xc-conflicts-with": [
+              "as_number",
+              "http_header",
+              "ip_prefix",
+              "ipv6_prefix"
+            ]
           },
           "waf_skip_processing": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "bot_skip_processing",
+              "skip_processing"
+            ]
           }
         },
         "x-f5xc-description-short": "Simple client source rule specifies the sources to be blocked or trusted (skip WAF).",
@@ -20523,10 +20901,16 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.ValidationSettingForQueryParameters",
         "properties": {
           "allow_additional_parameters": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disallow_additional_parameters"
+            ]
           },
           "disallow_additional_parameters": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_additional_parameters"
+            ]
           }
         },
         "x-f5xc-description-short": "Custom settings for query parameters validation.",
@@ -20642,10 +21026,16 @@
             "$ref": "#/components/schemas/http_loadbalancerBodySectionMaskingOptions"
           },
           "mask": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "report"
+            ]
           },
           "report": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "mask"
+            ]
           }
         },
         "x-f5xc-description-short": "Settings to mask sensitive data in request/response payload.",
@@ -20711,7 +21101,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "presence",
+              "regex"
+            ]
           },
           "invert_match": {
             "type": "boolean",
@@ -20757,7 +21151,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985293+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125746+00:00"
           },
           "presence": {
             "type": "boolean",
@@ -20771,7 +21165,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "exact",
+              "regex"
+            ]
           },
           "regex": {
             "type": "string",
@@ -20796,7 +21194,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "exact",
+              "presence"
+            ]
           }
         },
         "x-f5xc-description-short": "Header match is done using the name of the header and its value.",
@@ -20844,7 +21246,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985342+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125794+00:00"
           },
           "name": {
             "type": "string",
@@ -20865,7 +21267,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985369+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125822+00:00"
           },
           "namespace": {
             "type": "string",
@@ -20886,7 +21288,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985396+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125849+00:00"
           },
           "tenant": {
             "type": "string",
@@ -20909,7 +21311,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985423+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125877+00:00"
           },
           "uid": {
             "type": "string",
@@ -20933,7 +21335,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985453+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125905+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -20973,7 +21375,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985484+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125935+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Avg Aggregation Data\" Average Aggregation data.",
@@ -21207,7 +21609,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985628+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126078+00:00"
           },
           "order_by": {
             "$ref": "#/components/schemas/logOrderByData"
@@ -21316,7 +21718,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985710+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126161+00:00"
           },
           "order_by": {
             "$ref": "#/components/schemas/logOrderByData"
@@ -21432,7 +21834,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985825+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126275+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Field Sub Field Aggregation Bucket\" Field sub aggregation bucket containing field values and the number of logs.",
@@ -21601,7 +22003,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985920+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126369+00:00"
           },
           "sub_aggs": {
             "type": "object",
@@ -21709,7 +22111,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986054+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126501+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Max Aggregation Data\" Max Aggregation data.",
@@ -21766,7 +22168,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986097+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126543+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Min Aggregation Data\" Min Aggregation data.",
@@ -21997,7 +22399,7 @@
             "maxLength": 16,
             "minLength": 7,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986253+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126699+00:00"
           },
           "value": {
             "type": "number",
@@ -22013,7 +22415,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986280+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126726+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Percentile Aggregation Data\" Percentile Aggregation data.",
@@ -22145,7 +22547,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986352+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126797+00:00"
           },
           "sec_event_type": {
             "type": "string",
@@ -22284,7 +22686,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986439+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126883+00:00"
           }
         },
         "x-f5xc-description-short": "Label based filtering for Security Events metrics. Security Events metrics are tagged with labels mentioned in MetricLabel.",
@@ -22364,7 +22766,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986481+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126924+00:00"
           }
         },
         "x-f5xc-description-short": "Value returned for a Security Events Metrics query.",
@@ -22852,28 +23254,70 @@
         "x-ves-proto-message": "ves.io.schema.policy.ClientMatcher",
         "properties": {
           "any_client": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "client_selector",
+              "ip_threat_category_list"
+            ]
           },
           "any_ip": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "asn_list",
+              "asn_matcher",
+              "ip_matcher",
+              "ip_prefix_list"
+            ]
           },
           "asn_list": {
-            "$ref": "#/components/schemas/policyAsnMatchList"
+            "$ref": "#/components/schemas/policyAsnMatchList",
+            "x-f5xc-conflicts-with": [
+              "any_ip",
+              "asn_matcher",
+              "ip_matcher",
+              "ip_prefix_list"
+            ]
           },
           "asn_matcher": {
-            "$ref": "#/components/schemas/policyAsnMatcherType"
+            "$ref": "#/components/schemas/policyAsnMatcherType",
+            "x-f5xc-conflicts-with": [
+              "any_ip",
+              "asn_list",
+              "ip_matcher",
+              "ip_prefix_list"
+            ]
           },
           "client_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "any_client",
+              "ip_threat_category_list"
+            ]
           },
           "ip_matcher": {
-            "$ref": "#/components/schemas/policyIpMatcherType"
+            "$ref": "#/components/schemas/policyIpMatcherType",
+            "x-f5xc-conflicts-with": [
+              "any_ip",
+              "asn_list",
+              "asn_matcher",
+              "ip_prefix_list"
+            ]
           },
           "ip_prefix_list": {
-            "$ref": "#/components/schemas/policyPrefixMatchList"
+            "$ref": "#/components/schemas/policyPrefixMatchList",
+            "x-f5xc-conflicts-with": [
+              "any_ip",
+              "asn_list",
+              "asn_matcher",
+              "ip_matcher"
+            ]
           },
           "ip_threat_category_list": {
-            "$ref": "#/components/schemas/schemapolicyIPThreatCategoryListType"
+            "$ref": "#/components/schemas/schemapolicyIPThreatCategoryListType",
+            "x-f5xc-conflicts-with": [
+              "any_client",
+              "client_selector"
+            ]
           },
           "tls_fingerprint_matcher": {
             "$ref": "#/components/schemas/policyTlsFingerprintMatcherType"
@@ -22909,10 +23353,18 @@
         "x-ves-proto-message": "ves.io.schema.policy.CookieMatcherType",
         "properties": {
           "check_not_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_present",
+              "item"
+            ]
           },
           "check_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "item"
+            ]
           },
           "invert_matcher": {
             "type": "boolean",
@@ -22928,7 +23380,11 @@
             }
           },
           "item": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "check_present"
+            ]
           },
           "name": {
             "type": "string",
@@ -22957,7 +23413,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986797+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.127239+00:00"
           }
         },
         "x-f5xc-description-short": "Cookie matcher specifies the name of a single cookie and the criteria to match it.",
@@ -23500,10 +23956,18 @@
         "x-ves-proto-message": "ves.io.schema.policy.JWTClaimMatcherType",
         "properties": {
           "check_not_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_present",
+              "item"
+            ]
           },
           "check_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "item"
+            ]
           },
           "invert_matcher": {
             "type": "boolean",
@@ -23519,7 +23983,11 @@
             }
           },
           "item": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "check_present"
+            ]
           },
           "name": {
             "type": "string",
@@ -23547,7 +24015,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986930+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.127370+00:00"
           }
         },
         "x-f5xc-description-short": "JWT claim matcher specifies the name of a single JWT claim and the criteria for the input request to match it.",
@@ -23916,13 +24384,24 @@
         "x-ves-proto-message": "ves.io.schema.policy.SimpleWafExclusionRule",
         "properties": {
           "any_domain": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "exact_value",
+              "suffix_value"
+            ]
           },
           "any_path": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "path_prefix",
+              "path_regex"
+            ]
           },
           "app_firewall_detection_control": {
-            "$ref": "#/components/schemas/policyAppFirewallDetectionControl"
+            "$ref": "#/components/schemas/policyAppFirewallDetectionControl",
+            "x-f5xc-conflicts-with": [
+              "waf_skip_processing"
+            ]
           },
           "exact_value": {
             "type": "string",
@@ -23949,7 +24428,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_domain",
+              "suffix_value"
+            ]
           },
           "expiration_timestamp": {
             "type": "string",
@@ -24025,7 +24508,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_path",
+              "path_regex"
+            ]
           },
           "path_regex": {
             "type": "string",
@@ -24051,7 +24538,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_path",
+              "path_prefix"
+            ]
           },
           "suffix_value": {
             "type": "string",
@@ -24079,10 +24570,17 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_domain",
+              "exact_value"
+            ]
           },
           "waf_skip_processing": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "app_firewall_detection_control"
+            ]
           }
         },
         "x-f5xc-description-short": "Simple WAF exclusion rule specifies a simple set of match conditions to be matched to skip a list of WAF detections.",
@@ -24407,7 +24905,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987203+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.127638+00:00"
           },
           "name": {
             "type": "string",
@@ -24438,7 +24936,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987231+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.127666+00:00"
           }
         },
         "x-f5xc-description-short": "MessageMetaType is metadata (common attributes) of a message that only certain messages have.",
@@ -25025,10 +25523,18 @@
         "x-ves-proto-message": "ves.io.schema.policy.HeaderMatcherType",
         "properties": {
           "check_not_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_present",
+              "item"
+            ]
           },
           "check_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "item"
+            ]
           },
           "invert_matcher": {
             "type": "boolean",
@@ -25044,7 +25550,11 @@
             }
           },
           "item": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "check_present"
+            ]
           },
           "name": {
             "type": "string",
@@ -25075,7 +25585,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987633+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.128063+00:00"
           }
         },
         "x-f5xc-description-short": "Header matcher specifies the name of a single HTTP header and the criteria for the input request to match it.",
@@ -25156,10 +25666,18 @@
         "x-ves-proto-message": "ves.io.schema.policy.QueryParameterMatcherType",
         "properties": {
           "check_not_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_present",
+              "item"
+            ]
           },
           "check_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "item"
+            ]
           },
           "invert_matcher": {
             "type": "boolean",
@@ -25175,7 +25693,11 @@
             }
           },
           "item": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "check_present"
+            ]
           },
           "key": {
             "type": "string",
@@ -25204,7 +25726,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987713+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.128140+00:00"
           }
         },
         "x-f5xc-description-short": "Query parameter matcher specifies the name of a single query parameter and the criteria for the input request to match it.",
@@ -25262,7 +25784,7 @@
             },
             "x-original-maxLength": 128,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987743+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.128170+00:00"
           },
           "namespace": {
             "type": "string",
@@ -25289,7 +25811,7 @@
             },
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987771+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.128198+00:00"
           },
           "tenant": {
             "type": "string",
@@ -25318,7 +25840,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987799+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.128226+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a direct reference from one object(the referrer) to another(the referred).",
@@ -25566,7 +26088,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.833997+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.834189+00:00"
           },
           "namespace": {
             "type": "string",
@@ -25586,7 +26108,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.834026+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.834217+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -25612,10 +26134,16 @@
         "x-ves-proto-message": "ves.io.schema.protocol_inspection.EnableDisableComplianceChecks",
         "properties": {
           "disable_compliance_checks": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_compliance_checks"
+            ]
           },
           "enable_compliance_checks": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "disable_compliance_checks"
+            ]
           }
         },
         "x-required": true,
@@ -25642,10 +26170,16 @@
         "x-ves-proto-message": "ves.io.schema.protocol_inspection.EnableDisableSignatures",
         "properties": {
           "disable_signature": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_signature"
+            ]
           },
           "enable_signature": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable_signature"
+            ]
           }
         },
         "x-required": true,
@@ -25748,7 +26282,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.834164+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.834365+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -25922,7 +26456,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.834269+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.834469+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -25976,7 +26510,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.834337+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.834536+00:00"
           },
           "namespace": {
             "type": "string",
@@ -25995,7 +26529,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.834365+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.834564+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -26037,7 +26571,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.834421+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.834619+00:00"
           },
           "uid": {
             "type": "string",
@@ -26059,7 +26593,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.834450+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.834648+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of protocol_inspection is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -26386,7 +26920,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.122560+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.054818+00:00"
           },
           "namespace": {
             "type": "string",
@@ -26406,7 +26940,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.122590+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.054848+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -26504,7 +27038,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.122651+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.054909+00:00"
           },
           "policy": {
             "type": "string",
@@ -26656,7 +27190,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.122737+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.054995+00:00"
           },
           "start_time": {
             "type": "string",
@@ -26844,7 +27378,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.122827+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.055086+00:00"
           }
         },
         "x-f5xc-description-short": "Label filter can be specified to filter metrics based on label match.",
@@ -26926,55 +27460,187 @@
             "$ref": "#/components/schemas/network_policy_ruleNetworkPolicyRuleAdvancedAction"
           },
           "all_destinations": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_sli_vips",
+              "all_slo_vips",
+              "destination_aws_vpc_ids",
+              "destination_ip_prefix_set",
+              "destination_label_selector",
+              "destination_prefix_list",
+              "inside_destinations",
+              "outside_destinations"
+            ]
           },
           "all_sli_vips": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "all_slo_vips",
+              "destination_aws_vpc_ids",
+              "destination_ip_prefix_set",
+              "destination_label_selector",
+              "destination_prefix_list",
+              "inside_destinations",
+              "outside_destinations"
+            ]
           },
           "all_slo_vips": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "all_sli_vips",
+              "destination_aws_vpc_ids",
+              "destination_ip_prefix_set",
+              "destination_label_selector",
+              "destination_prefix_list",
+              "inside_destinations",
+              "outside_destinations"
+            ]
           },
           "all_sources": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "inside_sources",
+              "outside_sources",
+              "source_aws_vpc_ids",
+              "source_ip_prefix_set",
+              "source_label_selector",
+              "source_prefix_list"
+            ]
           },
           "all_tcp_traffic": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_traffic",
+              "all_udp_traffic",
+              "applications",
+              "protocol_port_range"
+            ]
           },
           "all_traffic": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_tcp_traffic",
+              "all_udp_traffic",
+              "applications",
+              "protocol_port_range"
+            ]
           },
           "all_udp_traffic": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_tcp_traffic",
+              "all_traffic",
+              "applications",
+              "protocol_port_range"
+            ]
           },
           "allow": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "deny",
+              "insert_service"
+            ]
           },
           "applications": {
-            "$ref": "#/components/schemas/network_policyApplicationsType"
+            "$ref": "#/components/schemas/network_policyApplicationsType",
+            "x-f5xc-conflicts-with": [
+              "all_tcp_traffic",
+              "all_traffic",
+              "all_udp_traffic",
+              "protocol_port_range"
+            ]
           },
           "deny": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow",
+              "insert_service"
+            ]
           },
           "destination_aws_vpc_ids": {
-            "$ref": "#/components/schemas/schemaAwsVpcList"
+            "$ref": "#/components/schemas/schemaAwsVpcList",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "all_sli_vips",
+              "all_slo_vips",
+              "destination_ip_prefix_set",
+              "destination_label_selector",
+              "destination_prefix_list",
+              "inside_destinations",
+              "outside_destinations"
+            ]
           },
           "destination_ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaIpPrefixSetRefType"
+            "$ref": "#/components/schemas/schemaIpPrefixSetRefType",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "all_sli_vips",
+              "all_slo_vips",
+              "destination_aws_vpc_ids",
+              "destination_label_selector",
+              "destination_prefix_list",
+              "inside_destinations",
+              "outside_destinations"
+            ]
           },
           "destination_label_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "all_sli_vips",
+              "all_slo_vips",
+              "destination_aws_vpc_ids",
+              "destination_ip_prefix_set",
+              "destination_prefix_list",
+              "inside_destinations",
+              "outside_destinations"
+            ]
           },
           "destination_prefix_list": {
-            "$ref": "#/components/schemas/viewsPrefixStringListType"
+            "$ref": "#/components/schemas/viewsPrefixStringListType",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "all_sli_vips",
+              "all_slo_vips",
+              "destination_aws_vpc_ids",
+              "destination_ip_prefix_set",
+              "destination_label_selector",
+              "inside_destinations",
+              "outside_destinations"
+            ]
           },
           "insert_service": {
-            "$ref": "#/components/schemas/enhanced_firewall_policyServiceActionType"
+            "$ref": "#/components/schemas/enhanced_firewall_policyServiceActionType",
+            "x-f5xc-conflicts-with": [
+              "allow",
+              "deny"
+            ]
           },
           "inside_destinations": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "all_sli_vips",
+              "all_slo_vips",
+              "destination_aws_vpc_ids",
+              "destination_ip_prefix_set",
+              "destination_label_selector",
+              "destination_prefix_list",
+              "outside_destinations"
+            ]
           },
           "inside_sources": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_sources",
+              "outside_sources",
+              "source_aws_vpc_ids",
+              "source_ip_prefix_set",
+              "source_label_selector",
+              "source_prefix_list"
+            ]
           },
           "label_matcher": {
             "$ref": "#/components/schemas/schemaLabelMatcherType"
@@ -26983,25 +27649,81 @@
             "$ref": "#/components/schemas/schemaMessageMetaType"
           },
           "outside_destinations": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_destinations",
+              "all_sli_vips",
+              "all_slo_vips",
+              "destination_aws_vpc_ids",
+              "destination_ip_prefix_set",
+              "destination_label_selector",
+              "destination_prefix_list",
+              "inside_destinations"
+            ]
           },
           "outside_sources": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_sources",
+              "inside_sources",
+              "source_aws_vpc_ids",
+              "source_ip_prefix_set",
+              "source_label_selector",
+              "source_prefix_list"
+            ]
           },
           "protocol_port_range": {
-            "$ref": "#/components/schemas/network_policyProtocolPortType"
+            "$ref": "#/components/schemas/network_policyProtocolPortType",
+            "x-f5xc-conflicts-with": [
+              "all_tcp_traffic",
+              "all_traffic",
+              "all_udp_traffic",
+              "applications"
+            ]
           },
           "source_aws_vpc_ids": {
-            "$ref": "#/components/schemas/schemaAwsVpcList"
+            "$ref": "#/components/schemas/schemaAwsVpcList",
+            "x-f5xc-conflicts-with": [
+              "all_sources",
+              "inside_sources",
+              "outside_sources",
+              "source_ip_prefix_set",
+              "source_label_selector",
+              "source_prefix_list"
+            ]
           },
           "source_ip_prefix_set": {
-            "$ref": "#/components/schemas/schemaIpPrefixSetRefType"
+            "$ref": "#/components/schemas/schemaIpPrefixSetRefType",
+            "x-f5xc-conflicts-with": [
+              "all_sources",
+              "inside_sources",
+              "outside_sources",
+              "source_aws_vpc_ids",
+              "source_label_selector",
+              "source_prefix_list"
+            ]
           },
           "source_label_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "all_sources",
+              "inside_sources",
+              "outside_sources",
+              "source_aws_vpc_ids",
+              "source_ip_prefix_set",
+              "source_prefix_list"
+            ]
           },
           "source_prefix_list": {
-            "$ref": "#/components/schemas/viewsPrefixStringListType"
+            "$ref": "#/components/schemas/viewsPrefixStringListType",
+            "x-f5xc-conflicts-with": [
+              "all_sources",
+              "inside_sources",
+              "outside_sources",
+              "source_aws_vpc_ids",
+              "source_ip_prefix_set",
+              "source_label_selector"
+            ]
           }
         },
         "x-f5xc-description-short": "Enhanced Firewall Policy rules definition.",
@@ -27129,7 +27851,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.123211+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.055445+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -27272,7 +27994,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.123290+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.055520+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -27327,7 +28049,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.123356+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.055586+00:00"
           },
           "namespace": {
             "type": "string",
@@ -27346,7 +28068,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.123385+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.055614+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -27388,7 +28110,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.123440+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.055669+00:00"
           },
           "uid": {
             "type": "string",
@@ -27410,7 +28132,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.123469+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.055698+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of enhanced_firewall_policy is returned in 'List'.",
@@ -28049,25 +28771,81 @@
         "x-ves-proto-message": "ves.io.schema.enhanced_firewall_policy.CreateSpecType",
         "properties": {
           "allow_all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_destinations",
+              "denied_sources",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "allowed_destinations": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_sources",
+              "denied_destinations",
+              "denied_sources",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "allowed_sources": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "denied_destinations",
+              "denied_sources",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "denied_destinations": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_sources",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "denied_sources": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_destinations",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "deny_all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_destinations",
+              "denied_sources",
+              "rule_list"
+            ]
           },
           "rule_list": {
-            "$ref": "#/components/schemas/enhanced_firewall_policyEnhancedFirewallPolicyRuleListType"
+            "$ref": "#/components/schemas/enhanced_firewall_policyEnhancedFirewallPolicyRuleListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_destinations",
+              "denied_sources",
+              "deny_all"
+            ]
           }
         },
         "x-f5xc-description-short": "Shape of Enhanced Firewall Policy specification.",
@@ -28098,25 +28876,81 @@
         "x-ves-proto-message": "ves.io.schema.enhanced_firewall_policy.GetSpecType",
         "properties": {
           "allow_all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_destinations",
+              "denied_sources",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "allowed_destinations": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_sources",
+              "denied_destinations",
+              "denied_sources",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "allowed_sources": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "denied_destinations",
+              "denied_sources",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "denied_destinations": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_sources",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "denied_sources": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_destinations",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "deny_all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_destinations",
+              "denied_sources",
+              "rule_list"
+            ]
           },
           "rule_list": {
-            "$ref": "#/components/schemas/enhanced_firewall_policyEnhancedFirewallPolicyRuleListType"
+            "$ref": "#/components/schemas/enhanced_firewall_policyEnhancedFirewallPolicyRuleListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_destinations",
+              "denied_sources",
+              "deny_all"
+            ]
           }
         },
         "x-f5xc-description-short": "Shape of the Enhanced Firewall Policy specification.",
@@ -28147,25 +28981,81 @@
         "x-ves-proto-message": "ves.io.schema.enhanced_firewall_policy.ReplaceSpecType",
         "properties": {
           "allow_all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_destinations",
+              "denied_sources",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "allowed_destinations": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_sources",
+              "denied_destinations",
+              "denied_sources",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "allowed_sources": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "denied_destinations",
+              "denied_sources",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "denied_destinations": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_sources",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "denied_sources": {
-            "$ref": "#/components/schemas/schemaPrefixListType"
+            "$ref": "#/components/schemas/schemaPrefixListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_destinations",
+              "deny_all",
+              "rule_list"
+            ]
           },
           "deny_all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_destinations",
+              "denied_sources",
+              "rule_list"
+            ]
           },
           "rule_list": {
-            "$ref": "#/components/schemas/enhanced_firewall_policyEnhancedFirewallPolicyRuleListType"
+            "$ref": "#/components/schemas/enhanced_firewall_policyEnhancedFirewallPolicyRuleListType",
+            "x-f5xc-conflicts-with": [
+              "allow_all",
+              "allowed_destinations",
+              "allowed_sources",
+              "denied_destinations",
+              "denied_sources",
+              "deny_all"
+            ]
           }
         },
         "x-f5xc-description-short": "Shape of Enhanced Firewall Policy replace specification.",
@@ -28357,7 +29247,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.392796+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.067517+00:00"
           }
         },
         "x-f5xc-description-short": "Label based filtering of WAF metrics. WAF metrics are tagged with labels mentioned in MetricLabel.",
@@ -28459,7 +29349,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.392856+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.067574+00:00"
           },
           "range": {
             "type": "string",
@@ -28747,7 +29637,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.393012+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.067712+00:00"
           },
           "rule_id": {
             "type": "string",
@@ -28978,7 +29868,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.393137+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.067833+00:00"
           },
           "range": {
             "type": "string",
@@ -29267,7 +30157,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.393277+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.067969+00:00"
           },
           "service": {
             "type": "string",
@@ -29612,7 +30502,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.440767+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.111710+00:00"
           },
           "namespace": {
             "type": "string",
@@ -29632,7 +30522,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.440794+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.111737+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -29735,7 +30625,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.440899+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.111831+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -29878,7 +30768,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.440973+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.111905+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -29932,7 +30822,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.441039+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.111972+00:00"
           },
           "namespace": {
             "type": "string",
@@ -29951,7 +30841,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.441067+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.112000+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -29993,7 +30883,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.441122+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.112054+00:00"
           },
           "uid": {
             "type": "string",
@@ -30015,7 +30905,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.441150+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.112082+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of waf_exclusion_policy is returned in 'List'.",
@@ -30388,7 +31278,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.472741+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.142286+00:00"
           },
           "state": {
             "type": "string",
@@ -30469,7 +31359,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.472796+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.142347+00:00"
           },
           "start_time": {
             "type": "string",

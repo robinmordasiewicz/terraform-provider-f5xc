@@ -1,0 +1,53 @@
+{
+  "operation": "syntax",
+  "resource": "udp_loadbalancer",
+  "totalBlocks": 10,
+  "totalAttributes": 12,
+  "totalOneOfGroups": 4,
+  "blocks": [
+    "advertise_custom",
+    "advertise_on_public",
+    "advertise_on_public_default_vip",
+    "do_not_advertise",
+    "domains",
+    "hash_policy_choice_random",
+    "hash_policy_choice_round_robin",
+    "hash_policy_choice_source_ip_stickiness",
+    "origin_pools_weights",
+    "udp"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "dns_volterra_managed",
+    "enable_per_packet_load_balancing",
+    "id",
+    "idle_timeout",
+    "labels",
+    "listen_port",
+    "name",
+    "namespace",
+    "port_ranges"
+  ],
+  "oneOfGroups": {
+    "advertise_choice": [
+      "advertise_custom",
+      "advertise_on_public",
+      "advertise_on_public_default_vip",
+      "do_not_advertise"
+    ],
+    "hash_policy_choice": [
+      "hash_policy_choice_random",
+      "hash_policy_choice_round_robin",
+      "hash_policy_choice_source_ip_stickiness"
+    ],
+    "port_choice": [
+      "listen_port",
+      "port_ranges"
+    ],
+    "loadbalancer_type": [
+      "udp"
+    ]
+  }
+}

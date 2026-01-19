@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -1372,6 +1374,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									"configured_vip": schema.StringAttribute{
 										MarkdownDescription: "Enter IP address for the default VIP.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("automatic_vip"),
+											),
+										},
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1439,6 +1446,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										"tunnel_prefix": schema.StringAttribute{
 											MarkdownDescription: "Enter IP prefix for the tunnel, it has to be /30.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("automatic_prefix"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1451,6 +1463,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												"existing_subnet_id": schema.StringAttribute{
 													MarkdownDescription: "Information about existing subnet ID.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("subnet_param"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -1746,6 +1763,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 					"https_port": schema.Int64Attribute{
 						MarkdownDescription: "Enter TCP port number.",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_https_port"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1902,6 +1924,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("trusted_ca"),
+											),
+										},
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -2094,6 +2121,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("trusted_ca"),
+											),
+										},
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -2286,6 +2318,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("trusted_ca"),
+											),
+										},
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -2478,6 +2515,11 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("trusted_ca"),
+											),
+										},
 									},
 								},
 								Blocks: map[string]schema.Block{

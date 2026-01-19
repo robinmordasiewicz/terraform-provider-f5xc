@@ -1,0 +1,1708 @@
+{
+  "version": "3.20.0",
+  "generated_at": "2026-01-19T22:18:30.105Z",
+  "resources": {
+    "namespace": {
+      "resource_name": "namespace",
+      "category": "infrastructure",
+      "prompt_templates": [
+        "Create an F5XC namespace called {name}",
+        "Set up a new namespace for {project}"
+      ],
+      "expected_terraform": "# Complete Example: Namespace (Basic Pattern)\n\nCreates a namespace in F5 Distributed Cloud.\n\n```hcl\nresource \"f5xc_namespace\" \"example\" {\n  name = \"my-namespace\"\n}\n```\n\n## Key Syntax Notes\n\n- Namespace is the simplest resource - just needs a name\n- Most other resources require a namespace reference",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "namespace",
+        "totalBlocks": 0,
+        "totalAttributes": 7,
+        "totalOneOfGroups": 0,
+        "blocks": [],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {}
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "info",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "message",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "origin_pool": {
+      "resource_name": "origin_pool",
+      "category": "load_balancing",
+      "prompt_templates": [
+        "Create an origin pool for {domain} on port {port}",
+        "Set up an origin pool with TLS to {backend}"
+      ],
+      "expected_terraform": "# Complete Example: Origin Pool with Healthcheck\n\nCreates an origin pool with healthcheck reference and multiple configuration options.\n\n```hcl\n# Optional: Create a healthcheck resource first\n# (healthcheck is a REFERENCE BLOCK - only name/namespace/tenant are valid)\nresource \"f5xc_healthcheck\" \"example\" {\n  name      = \"my-healthcheck\"\n  namespace = \"default\"\n\n  # Health check type - select ONE\n  http_health_check {\n    use_origin_server_name {}\n    path = \"/health\"\n  }\n  # OR: tcp_health_check {}\n  # OR: grpc_health_check { ... }\n\n  healthy_threshold   = 2\n  unhealthy_threshold = 3\n  interval            = 15\n  timeout             = 5\n}\n\nresource \"f5xc_origin_pool\" \"example\" {\n  name      = \"my-origin-pool\"\n  namespace = \"default\"\n\n  # TLS Choice - select ONE (use empty block syntax)\n  # Option 1: No TLS (plain HTTP to origin)\n  no_tls {}\n\n  # Option 2: Use TLS (uncomment and configure)\n  # use_tls {\n  #   # Nested TLS configuration\n  #   skip_server_verification {}\n  #   # OR\n  #   # use_server_verification {}\n  # }\n\n  # Port Choice - select ONE\n  # Option 1: Automatic port (80 for HTTP, 443 for HTTPS)\n  automatic_port {}\n\n  # Option 2: Same as endpoint port\n  # same_as_endpoint_port {}\n\n  # Option 3: Explicit port number (use attribute, not block)\n  # port = 8080\n\n  # Origin servers (at least one required)\n  origin_servers {\n    # Public DNS name\n    public_name {\n      dns_name = \"api.example.com\"\n    }\n  }\n\n  # Healthcheck - REFERENCE BLOCK (only name/namespace/tenant!)\n  # This references the separate f5xc_healthcheck resource above\n  # DO NOT put configuration parameters here (interval, timeout, etc.)\n  healthcheck {\n    name      = f5xc_healthcheck.example.name\n    namespace = \"default\"\n  }\n\n  # Load balancing algorithm (attribute, not block)\n  loadbalancer_algorithm = \"ROUND_ROBIN\"\n}\n```\n\n## Reference Blocks vs Inline Blocks\n\n**IMPORTANT**: The `healthcheck` field is a **reference block**, NOT an inline configuration block.\n\n### Reference Blocks (only accept name/namespace/tenant)\n- `healthcheck {}` - References a separate `f5xc_healthcheck` resource\n- Configuration parameters (interval, timeout, path, etc.) go in the separate resource\n\n### Common Error (WRONG):\n```hcl\n# DO NOT DO THIS - healthcheck is a reference, not inline config\nhealthcheck {\n  interval_seconds = 30  # ERROR!\n  http_request {}        # ERROR!\n}\n```\n\n## OneOf Groups Explained\n\n### tls_choice\n- `no_tls {}` - Plain HTTP to origin (use empty block)\n- `use_tls { ... }` - TLS to origin (use block with nested config)\n\n### port_choice\n- `automatic_port {}` - Auto-select based on TLS (use empty block)\n- `same_as_endpoint_port {}` - Use endpoint's port (use empty block)\n- `port = 8080` - Explicit port (use attribute assignment)\n\n## Key Syntax Pattern\n\nBlock-type fields like `no_tls`, `automatic_port` use `{}` syntax.\nAttribute fields like `port` use `= value` syntax.\nReference fields like `healthcheck` only accept `name`/`namespace`/`tenant`.",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "origin_pool",
+        "totalBlocks": 9,
+        "totalAttributes": 11,
+        "totalOneOfGroups": 3,
+        "blocks": [
+          "advanced_options",
+          "automatic_port",
+          "healthcheck",
+          "lb_port",
+          "no_tls",
+          "origin_servers",
+          "same_as_endpoint_port",
+          "upstream_conn_pool_reuse_type",
+          "use_tls"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "endpoint_selection",
+          "health_check_port",
+          "id",
+          "labels",
+          "loadbalancer_algorithm",
+          "name",
+          "namespace",
+          "port"
+        ],
+        "oneOfGroups": {
+          "port_choice": [
+            "automatic_port",
+            "lb_port",
+            "port"
+          ],
+          "health_check_port_choice": [
+            "health_check_port",
+            "same_as_endpoint_port"
+          ],
+          "tls_choice": [
+            "no_tls",
+            "use_tls"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "http_loadbalancer": {
+      "resource_name": "http_loadbalancer",
+      "category": "load_balancing",
+      "prompt_templates": [
+        "Create an HTTP load balancer for {domain}",
+        "Set up an HTTP LB on public VIP for {app}",
+        "Create an HTTPS load balancer with WAF for {domain}"
+      ],
+      "expected_terraform": "# Complete Example: HTTP Load Balancer (Basic Pattern)\n\nCreates an HTTP load balancer with an origin pool pointing to httpbin.org.\n\n## Required Resources\n\n```hcl\n# 1. Create the origin pool\nresource \"f5xc_origin_pool\" \"example\" {\n  name      = \"httpbin-pool\"\n  namespace = \"default\"\n\n  # TLS choice - use empty block syntax\n  no_tls {}\n\n  # Port choice - use empty block syntax\n  automatic_port {}\n\n  origin_servers {\n    public_name {\n      dns_name = \"httpbin.org\"\n    }\n  }\n\n  loadbalancer_algorithm = \"ROUND_ROBIN\"\n}\n\n# 2. Create the HTTP load balancer\nresource \"f5xc_http_loadbalancer\" \"example\" {\n  name      = \"httpbin-lb\"\n  namespace = \"default\"\n  domains   = [\"httpbin.example.com\"]\n\n  # Load balancer type - use empty block syntax\n  https_auto_cert {\n    http_redirect = true\n    add_hsts      = false\n  }\n\n  # Advertising - use empty block syntax\n  advertise_on_public_default_vip {}\n\n  # Origin pool reference\n  default_route_pools {\n    pool {\n      name      = f5xc_origin_pool.example.name\n      namespace = \"default\"\n    }\n  }\n\n  # Security options - use empty block syntax\n  disable_waf {}\n  no_challenge {}\n  disable_rate_limit {}\n  no_service_policies {}\n  disable_bot_defense {}\n  disable_api_definition {}\n  disable_api_discovery {}\n\n  # Load balancing algorithm - use empty block syntax\n  round_robin {}\n}\n```\n\n## Key Syntax Notes\n\n1. **Empty blocks for OneOf choices**: `no_tls {}`, `advertise_on_public_default_vip {}`\n2. **Nested blocks with values**: `https_auto_cert { http_redirect = true }`\n3. **Reference syntax**: `f5xc_origin_pool.example.name`\n\n## Common Mistakes to Avoid\n\n```hcl\n# WRONG - Do not use boolean assignment for these fields!\nno_tls = true                          # ERROR: use no_tls {}\nadvertise_on_public_default_vip = true # ERROR: use advertise_on_public_default_vip {}\nround_robin = true                     # ERROR: use round_robin {}\n```",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "http_loadbalancer",
+        "totalBlocks": 80,
+        "totalAttributes": 8,
+        "totalOneOfGroups": 24,
+        "blocks": [
+          "active_service_policies",
+          "advertise_custom",
+          "advertise_on_public",
+          "advertise_on_public_default_vip",
+          "api_protection_rules",
+          "api_rate_limit",
+          "api_specification",
+          "api_testing",
+          "app_firewall",
+          "blocked_clients",
+          "bot_defense",
+          "bot_defense_advanced",
+          "caching_policy",
+          "captcha_challenge",
+          "client_side_defense",
+          "cookie_stickiness",
+          "cors_policy",
+          "csrf_policy",
+          "data_guard_rules",
+          "ddos_mitigation_rules",
+          "default_pool",
+          "default_pool_list",
+          "default_route_pools",
+          "default_sensitive_data_policy",
+          "disable_api_definition",
+          "disable_api_discovery",
+          "disable_api_testing",
+          "disable_bot_defense",
+          "disable_caching",
+          "disable_client_side_defense",
+          "disable_ip_reputation",
+          "disable_malicious_user_detection",
+          "disable_malware_protection",
+          "disable_rate_limit",
+          "disable_threat_mesh",
+          "disable_trust_client_ip_headers",
+          "disable_waf",
+          "do_not_advertise",
+          "domains",
+          "enable_api_discovery",
+          "enable_challenge",
+          "enable_ip_reputation",
+          "enable_malicious_user_detection",
+          "enable_threat_mesh",
+          "enable_trust_client_ip_headers",
+          "graphql_rules",
+          "http",
+          "https",
+          "https_auto_cert",
+          "js_challenge",
+          "jwt_validation",
+          "l7_ddos_action_block",
+          "l7_ddos_action_default",
+          "l7_ddos_action_js_challenge",
+          "l7_ddos_protection",
+          "least_active",
+          "malware_protection_settings",
+          "more_option",
+          "multi_lb_app",
+          "no_challenge",
+          "no_service_policies",
+          "origin_server_subset_rule_list",
+          "policy_based_challenge",
+          "protected_cookies",
+          "random",
+          "rate_limit",
+          "ring_hash",
+          "round_robin",
+          "routes",
+          "sensitive_data_disclosure_rules",
+          "sensitive_data_policy",
+          "service_policies_from_namespace",
+          "single_lb_app",
+          "slow_ddos_mitigation",
+          "source_ip_stickiness",
+          "system_default_timeouts",
+          "trusted_clients",
+          "user_id_client_ip",
+          "user_identification",
+          "waf_exclusion"
+        ],
+        "attributes": [
+          "add_location",
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {
+          "service_policy_choice": [
+            "active_service_policies",
+            "no_service_policies",
+            "service_policies_from_namespace"
+          ],
+          "advertise_choice": [
+            "advertise_custom",
+            "advertise_on_public",
+            "advertise_on_public_default_vip",
+            "do_not_advertise"
+          ],
+          "rate_limit_choice": [
+            "api_rate_limit",
+            "disable_rate_limit",
+            "rate_limit"
+          ],
+          "api_definition_choice": [
+            "api_specification",
+            "disable_api_definition"
+          ],
+          "api_testing_choice": [
+            "api_testing",
+            "disable_api_testing"
+          ],
+          "waf_choice": [
+            "app_firewall",
+            "disable_waf"
+          ],
+          "bot_defense_choice": [
+            "bot_defense",
+            "bot_defense_advanced",
+            "disable_bot_defense"
+          ],
+          "cache_options": [
+            "caching_policy",
+            "disable_caching"
+          ],
+          "challenge_type": [
+            "captcha_challenge",
+            "enable_challenge",
+            "js_challenge",
+            "no_challenge",
+            "policy_based_challenge"
+          ],
+          "client_side_defense_choice": [
+            "client_side_defense",
+            "disable_client_side_defense"
+          ],
+          "hash_policy_choice": [
+            "cookie_stickiness",
+            "least_active",
+            "random",
+            "ring_hash",
+            "round_robin",
+            "source_ip_stickiness"
+          ],
+          "origin_pool_choice": [
+            "default_pool",
+            "default_pool_list"
+          ],
+          "sensitive_data_policy_choice": [
+            "default_sensitive_data_policy",
+            "sensitive_data_policy"
+          ],
+          "api_discovery_choice": [
+            "disable_api_discovery",
+            "enable_api_discovery"
+          ],
+          "ip_reputation_choice": [
+            "disable_ip_reputation",
+            "enable_ip_reputation"
+          ],
+          "malicious_user_detection_choice": [
+            "disable_malicious_user_detection",
+            "enable_malicious_user_detection"
+          ],
+          "malware_protection": [
+            "disable_malware_protection",
+            "malware_protection_settings"
+          ],
+          "threat_mesh_choice": [
+            "disable_threat_mesh",
+            "enable_threat_mesh"
+          ],
+          "trust_client_ip_headers_choice": [
+            "disable_trust_client_ip_headers",
+            "enable_trust_client_ip_headers"
+          ],
+          "loadbalancer_type": [
+            "http",
+            "https",
+            "https_auto_cert"
+          ],
+          "l7_ddos_auto_mitigation_action": [
+            "l7_ddos_action_block",
+            "l7_ddos_action_default",
+            "l7_ddos_action_js_challenge"
+          ],
+          "ml_config_choice": [
+            "multi_lb_app",
+            "single_lb_app"
+          ],
+          "slow_ddos_mitigation_choice": [
+            "slow_ddos_mitigation",
+            "system_default_timeouts"
+          ],
+          "user_id_choice": [
+            "user_id_client_ip",
+            "user_identification"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "tcp_loadbalancer": {
+      "resource_name": "tcp_loadbalancer",
+      "category": "load_balancing",
+      "prompt_templates": [
+        "Create an F5XC tcp loadbalancer"
+      ],
+      "expected_terraform": "# Complete Example: TCP Load Balancer (Basic Pattern)\n\nCreates a TCP load balancer in F5 Distributed Cloud.\n\n## Required Resources\n\n```hcl\nresource \"f5xc_tcp_loadbalancer\" \"example\" {\n  name      = \"my-tcp-lb\"\n  namespace = \"default\"\n\n  # DNS configuration\n  dns_volterra_managed = true\n\n  # Origin pool reference\n  origin_pools_weights {\n    pool {\n      name      = \"my-origin-pool\"\n      namespace = \"default\"\n    }\n    weight   = 1\n    priority = 1\n  }\n\n  # Listen port\n  listen_port = 8080\n\n  # Advertise configuration - use empty block syntax\n  advertise_on_public_default_vip {}\n}\n```\n\n## Key Syntax Notes\n\n1. **origin_pools_weights**: References existing origin pool\n2. **advertise_on_public_default_vip**: Use empty block syntax {}\n3. **dns_volterra_managed**: Enable F5XC-managed DNS\n4. **listen_port**: TCP port for load balancer to listen on\n\n## Important Notes\n\n- Origin pool must exist before creating TCP load balancer\n- Use weight and priority for traffic distribution\n- Empty block syntax for advertise configuration choices",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "tcp_loadbalancer",
+        "totalBlocks": 21,
+        "totalAttributes": 11,
+        "totalOneOfGroups": 7,
+        "blocks": [
+          "active_service_policies",
+          "advertise_custom",
+          "advertise_on_public",
+          "advertise_on_public_default_vip",
+          "default_lb_with_sni",
+          "do_not_advertise",
+          "do_not_retract_cluster",
+          "domains",
+          "hash_policy_choice_least_active",
+          "hash_policy_choice_random",
+          "hash_policy_choice_round_robin",
+          "hash_policy_choice_source_ip_stickiness",
+          "no_service_policies",
+          "no_sni",
+          "origin_pools_weights",
+          "retract_cluster",
+          "service_policies_from_namespace",
+          "sni",
+          "tcp",
+          "tls_tcp",
+          "tls_tcp_auto_cert"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "dns_volterra_managed",
+          "id",
+          "idle_timeout",
+          "labels",
+          "listen_port",
+          "name",
+          "namespace",
+          "port_ranges"
+        ],
+        "oneOfGroups": {
+          "service_policy_choice": [
+            "active_service_policies",
+            "no_service_policies",
+            "service_policies_from_namespace"
+          ],
+          "advertise_choice": [
+            "advertise_custom",
+            "advertise_on_public",
+            "advertise_on_public_default_vip",
+            "do_not_advertise"
+          ],
+          "sni_default_lb_choice": [
+            "default_lb_with_sni",
+            "no_sni",
+            "sni"
+          ],
+          "cluster_retract_choice": [
+            "do_not_retract_cluster",
+            "retract_cluster"
+          ],
+          "hash_policy_choice": [
+            "hash_policy_choice_least_active",
+            "hash_policy_choice_random",
+            "hash_policy_choice_round_robin",
+            "hash_policy_choice_source_ip_stickiness"
+          ],
+          "port_choice": [
+            "listen_port",
+            "port_ranges"
+          ],
+          "loadbalancer_type": [
+            "tcp",
+            "tls_tcp",
+            "tls_tcp_auto_cert"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "udp_loadbalancer": {
+      "resource_name": "udp_loadbalancer",
+      "category": "load_balancing",
+      "prompt_templates": [
+        "Create an F5XC udp loadbalancer"
+      ],
+      "expected_terraform": "# Complete Example: UDP Load Balancer (Basic Pattern)\n\nCreates a UDP load balancer in F5 Distributed Cloud.\n\n## Required Resources\n\n```hcl\nresource \"f5xc_udp_loadbalancer\" \"example\" {\n  name      = \"my-udp-lb\"\n  namespace = \"default\"\n\n  # DNS configuration\n  dns_volterra_managed = true\n\n  # Origin pool reference\n  origin_pools_weights {\n    pool {\n      name      = \"my-origin-pool\"\n      namespace = \"default\"\n    }\n    weight   = 1\n    priority = 1\n  }\n\n  # Port range (single port or range like \"53\" or \"5000-5010\")\n  port_ranges = \"53\"\n\n  # Advertise configuration - use empty block syntax\n  advertise_on_public_default_vip {}\n}\n```\n\n## Key Syntax Notes\n\n1. **origin_pools_weights**: References existing origin pool\n2. **advertise_on_public_default_vip**: Use empty block syntax {}\n3. **dns_volterra_managed**: Enable F5XC-managed DNS\n4. **port_ranges**: Single port (\"53\") or range (\"5000-5010\")\n\n## Important Notes\n\n- Origin pool must exist before creating UDP load balancer\n- Use weight and priority for traffic distribution\n- Empty block syntax for advertise configuration choices\n- Port ranges support single port or range format",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "udp_loadbalancer",
+        "totalBlocks": 10,
+        "totalAttributes": 12,
+        "totalOneOfGroups": 4,
+        "blocks": [
+          "advertise_custom",
+          "advertise_on_public",
+          "advertise_on_public_default_vip",
+          "do_not_advertise",
+          "domains",
+          "hash_policy_choice_random",
+          "hash_policy_choice_round_robin",
+          "hash_policy_choice_source_ip_stickiness",
+          "origin_pools_weights",
+          "udp"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "dns_volterra_managed",
+          "enable_per_packet_load_balancing",
+          "id",
+          "idle_timeout",
+          "labels",
+          "listen_port",
+          "name",
+          "namespace",
+          "port_ranges"
+        ],
+        "oneOfGroups": {
+          "advertise_choice": [
+            "advertise_custom",
+            "advertise_on_public",
+            "advertise_on_public_default_vip",
+            "do_not_advertise"
+          ],
+          "hash_policy_choice": [
+            "hash_policy_choice_random",
+            "hash_policy_choice_round_robin",
+            "hash_policy_choice_source_ip_stickiness"
+          ],
+          "port_choice": [
+            "listen_port",
+            "port_ranges"
+          ],
+          "loadbalancer_type": [
+            "udp"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "cdn_loadbalancer": {
+      "resource_name": "cdn_loadbalancer",
+      "category": "load_balancing",
+      "prompt_templates": [
+        "Create an F5XC cdn loadbalancer"
+      ],
+      "expected_terraform": "# Complete Example: cdn_loadbalancer (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_cdn_loadbalancer\" \"example\" {\n  name      = \"example-cdn-loadbalancer\"\n  namespace = \"default\"\n\n  # OneOf group: service_policy_choice - choose one\n  active_service_policies {}\n\n  # OneOf group: rate_limit_choice - choose one\n  api_rate_limit {}\n\n  # OneOf group: api_definition_choice - choose one\n  api_specification {}\n\n  # OneOf group: waf_choice - choose one\n  app_firewall {}\n\n  # OneOf group: bot_defense_choice - choose one\n  bot_defense {}\n\n  # OneOf group: challenge_type - choose one\n  captcha_challenge {}\n\n  # OneOf group: client_side_defense_choice - choose one\n  client_side_defense {}\n\n  # OneOf group: sensitive_data_policy_choice - choose one\n  default_sensitive_data_policy {}\n\n  # OneOf group: api_discovery_choice - choose one\n  disable_api_discovery {}\n\n  # OneOf group: ip_reputation_choice - choose one\n  disable_ip_reputation {}\n\n  # OneOf group: malicious_user_detection_choice - choose one\n  disable_malicious_user_detection {}\n\n  # OneOf group: threat_mesh_choice - choose one\n  disable_threat_mesh {}\n\n  # OneOf group: loadbalancer_type - choose one\n  http {}\n\n  # OneOf group: l7_ddos_auto_mitigation_action - choose one\n  l7_ddos_action_block {}\n\n  # OneOf group: slow_ddos_mitigation_choice - choose one\n  slow_ddos_mitigation {}\n\n  # OneOf group: user_id_choice - choose one\n  user_id_client_ip {}\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n- `active_service_policies {}`\n- `api_rate_limit {}`\n- `api_specification {}`\n- `app_firewall {}`\n- `blocked_clients {}`\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `id = <value>`\n- `labels = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "cdn_loadbalancer",
+        "totalBlocks": 53,
+        "totalAttributes": 7,
+        "totalOneOfGroups": 16,
+        "blocks": [
+          "active_service_policies",
+          "api_rate_limit",
+          "api_specification",
+          "app_firewall",
+          "blocked_clients",
+          "bot_defense",
+          "captcha_challenge",
+          "client_side_defense",
+          "cors_policy",
+          "csrf_policy",
+          "custom_cache_rule",
+          "data_guard_rules",
+          "ddos_mitigation_rules",
+          "default_cache_action",
+          "default_sensitive_data_policy",
+          "disable_api_definition",
+          "disable_api_discovery",
+          "disable_client_side_defense",
+          "disable_ip_reputation",
+          "disable_malicious_user_detection",
+          "disable_rate_limit",
+          "disable_threat_mesh",
+          "disable_waf",
+          "domains",
+          "enable_api_discovery",
+          "enable_challenge",
+          "enable_ip_reputation",
+          "enable_malicious_user_detection",
+          "enable_threat_mesh",
+          "graphql_rules",
+          "http",
+          "https",
+          "https_auto_cert",
+          "js_challenge",
+          "jwt_validation",
+          "l7_ddos_action_block",
+          "l7_ddos_action_default",
+          "l7_ddos_action_js_challenge",
+          "no_challenge",
+          "no_service_policies",
+          "origin_pool",
+          "other_settings",
+          "policy_based_challenge",
+          "protected_cookies",
+          "rate_limit",
+          "sensitive_data_policy",
+          "service_policies_from_namespace",
+          "slow_ddos_mitigation",
+          "system_default_timeouts",
+          "trusted_clients",
+          "user_id_client_ip",
+          "user_identification",
+          "waf_exclusion"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {
+          "service_policy_choice": [
+            "active_service_policies",
+            "no_service_policies",
+            "service_policies_from_namespace"
+          ],
+          "rate_limit_choice": [
+            "api_rate_limit",
+            "disable_rate_limit",
+            "rate_limit"
+          ],
+          "api_definition_choice": [
+            "api_specification",
+            "disable_api_definition"
+          ],
+          "waf_choice": [
+            "app_firewall",
+            "disable_waf"
+          ],
+          "bot_defense_choice": [
+            "bot_defense"
+          ],
+          "challenge_type": [
+            "captcha_challenge",
+            "enable_challenge",
+            "js_challenge",
+            "no_challenge",
+            "policy_based_challenge"
+          ],
+          "client_side_defense_choice": [
+            "client_side_defense",
+            "disable_client_side_defense"
+          ],
+          "sensitive_data_policy_choice": [
+            "default_sensitive_data_policy",
+            "sensitive_data_policy"
+          ],
+          "api_discovery_choice": [
+            "disable_api_discovery",
+            "enable_api_discovery"
+          ],
+          "ip_reputation_choice": [
+            "disable_ip_reputation",
+            "enable_ip_reputation"
+          ],
+          "malicious_user_detection_choice": [
+            "disable_malicious_user_detection",
+            "enable_malicious_user_detection"
+          ],
+          "threat_mesh_choice": [
+            "disable_threat_mesh",
+            "enable_threat_mesh"
+          ],
+          "loadbalancer_type": [
+            "http",
+            "https",
+            "https_auto_cert"
+          ],
+          "l7_ddos_auto_mitigation_action": [
+            "l7_ddos_action_block",
+            "l7_ddos_action_default",
+            "l7_ddos_action_js_challenge"
+          ],
+          "slow_ddos_mitigation_choice": [
+            "slow_ddos_mitigation",
+            "system_default_timeouts"
+          ],
+          "user_id_choice": [
+            "user_id_client_ip",
+            "user_identification"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "healthcheck": {
+      "resource_name": "healthcheck",
+      "category": "load_balancing",
+      "prompt_templates": [
+        "Create an HTTP health check for path {path}",
+        "Set up a TCP health check on port {port}"
+      ],
+      "expected_terraform": "# Complete Example: healthcheck (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_healthcheck\" \"example\" {\n  name      = \"example-healthcheck\"\n  namespace = \"default\"\n\n  # OneOf group: health_check - choose one\n  http_health_check {}\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n- `http_health_check {}`\n- `tcp_health_check {}`\n- `udp_icmp_health_check {}`\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `healthy_threshold = <value>`\n- `id = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "healthcheck",
+        "totalBlocks": 3,
+        "totalAttributes": 12,
+        "totalOneOfGroups": 1,
+        "blocks": [
+          "http_health_check",
+          "tcp_health_check",
+          "udp_icmp_health_check"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "healthy_threshold",
+          "id",
+          "interval",
+          "jitter_percent",
+          "labels",
+          "name",
+          "namespace",
+          "timeout",
+          "unhealthy_threshold"
+        ],
+        "oneOfGroups": {
+          "health_check": [
+            "http_health_check",
+            "tcp_health_check",
+            "udp_icmp_health_check"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "app_firewall": {
+      "resource_name": "app_firewall",
+      "category": "security",
+      "prompt_templates": [
+        "Create a WAF policy with default settings",
+        "Set up an application firewall for {app}"
+      ],
+      "expected_terraform": "# Complete Example: App Firewall (WAF)\n\nCreates a Web Application Firewall policy.\n\n```hcl\nresource \"f5xc_app_firewall\" \"example\" {\n  name      = \"my-waf-policy\"\n  namespace = \"default\"\n\n  # Enforcement mode - select ONE (use empty block syntax)\n  # Option 1: Blocking mode (actively blocks attacks)\n  blocking {}\n\n  # Option 2: Monitoring mode (logs only, no blocking)\n  # monitoring {}\n\n  # Anonymization setting - select ONE\n  default_anonymization {}\n  # OR: custom_anonymization { ... }\n  # OR: disable_anonymization {}\n\n  # Bot protection settings - select ONE\n  default_bot_setting {}\n  # OR: custom_bot_protection_setting { ... }\n\n  # Detection settings - select ONE\n  default_detection_settings {}\n  # OR: detection_settings { ... }\n}\n```\n\n## Key OneOf Groups\n\n### enforcement_mode_choice\n- `blocking {}` - Actively block attacks\n- `monitoring {}` - Detection only, no blocking\n\n### anonymization_setting\n- `default_anonymization {}` - Use default settings\n- `custom_anonymization { ... }` - Custom configuration\n- `disable_anonymization {}` - No anonymization\n\n## Important\n\nAll OneOf options use **empty block syntax** `{}`, not boolean assignment.",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "app_firewall",
+        "totalBlocks": 14,
+        "totalAttributes": 7,
+        "totalOneOfGroups": 6,
+        "blocks": [
+          "ai_risk_based_blocking",
+          "allow_all_response_codes",
+          "allowed_response_codes",
+          "blocking",
+          "blocking_page",
+          "bot_protection_setting",
+          "custom_anonymization",
+          "default_anonymization",
+          "default_bot_setting",
+          "default_detection_settings",
+          "detection_settings",
+          "disable_anonymization",
+          "monitoring",
+          "use_default_blocking_page"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {
+          "detection_setting_choice": [
+            "ai_risk_based_blocking",
+            "default_detection_settings",
+            "detection_settings"
+          ],
+          "allowed_response_codes_choice": [
+            "allow_all_response_codes",
+            "allowed_response_codes"
+          ],
+          "enforcement_mode_choice": [
+            "blocking",
+            "monitoring"
+          ],
+          "blocking_page_choice": [
+            "blocking_page",
+            "use_default_blocking_page"
+          ],
+          "bot_protection_choice": [
+            "bot_protection_setting",
+            "default_bot_setting"
+          ],
+          "anonymization_setting": [
+            "custom_anonymization",
+            "default_anonymization",
+            "disable_anonymization"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "service_policy": {
+      "resource_name": "service_policy",
+      "category": "security",
+      "prompt_templates": [
+        "Create an F5XC service policy"
+      ],
+      "expected_terraform": "# Complete Example: service_policy (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_service_policy\" \"example\" {\n  name      = \"example-service-policy\"\n  namespace = \"default\"\n\n  # OneOf group: rule_choice - choose one\n  allow_all_requests {}\n\n  # OneOf group: server_choice - choose one\n  any_server {}\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n- `allow_all_requests {}`\n- `allow_list {}`\n- `any_server {}`\n- `deny_all_requests {}`\n- `deny_list {}`\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `id = <value>`\n- `labels = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "service_policy",
+        "totalBlocks": 8,
+        "totalAttributes": 8,
+        "totalOneOfGroups": 2,
+        "blocks": [
+          "allow_all_requests",
+          "allow_list",
+          "any_server",
+          "deny_all_requests",
+          "deny_list",
+          "rule_list",
+          "server_name_matcher",
+          "server_selector"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace",
+          "server_name"
+        ],
+        "oneOfGroups": {
+          "rule_choice": [
+            "allow_all_requests",
+            "allow_list",
+            "deny_all_requests",
+            "deny_list",
+            "rule_list"
+          ],
+          "server_choice": [
+            "any_server",
+            "server_name",
+            "server_name_matcher",
+            "server_selector"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "service_policy_rule": {
+      "resource_name": "service_policy_rule",
+      "category": "security",
+      "prompt_templates": [
+        "Create an F5XC service policy rule"
+      ],
+      "expected_terraform": "# Complete Example: service_policy_rule (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_service_policy_rule\" \"example\" {\n  name      = \"example-service-policy-rule\"\n  namespace = \"default\"\n\n  # OneOf group: asn_choice - choose one\n  any_asn {}\n\n  # OneOf group: client_choice - choose one\n  any_client {}\n\n  # OneOf group: ip_choice - choose one\n  any_ip {}\n\n  # OneOf group: tls_fingerprint_choice - choose one\n  ja4_tls_fingerprint {}\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n- `any_asn {}`\n- `any_client {}`\n- `any_ip {}`\n- `api_group_matcher {}`\n- `arg_matchers {}`\n\n## Simple Attributes\n\n- `action = <value>`\n- `annotations = <value>`\n- `client_name = <value>`\n- `description = <value>`\n- `disable = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "service_policy_rule",
+        "totalBlocks": 29,
+        "totalAttributes": 10,
+        "totalOneOfGroups": 4,
+        "blocks": [
+          "any_asn",
+          "any_client",
+          "any_ip",
+          "api_group_matcher",
+          "arg_matchers",
+          "asn_list",
+          "asn_matcher",
+          "body_matcher",
+          "bot_action",
+          "client_name_matcher",
+          "client_selector",
+          "cookie_matchers",
+          "domain_matcher",
+          "headers",
+          "http_method",
+          "ip_matcher",
+          "ip_prefix_list",
+          "ip_threat_category_list",
+          "ja4_tls_fingerprint",
+          "jwt_claims",
+          "label_matcher",
+          "mum_action",
+          "path",
+          "port_matcher",
+          "query_params",
+          "request_constraints",
+          "segment_policy",
+          "tls_fingerprint_matcher",
+          "waf_action"
+        ],
+        "attributes": [
+          "action",
+          "annotations",
+          "client_name",
+          "description",
+          "disable",
+          "expiration_timestamp",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {
+          "asn_choice": [
+            "any_asn",
+            "asn_list",
+            "asn_matcher"
+          ],
+          "client_choice": [
+            "any_client",
+            "client_name",
+            "client_name_matcher",
+            "client_selector",
+            "ip_threat_category_list"
+          ],
+          "ip_choice": [
+            "any_ip",
+            "ip_matcher",
+            "ip_prefix_list"
+          ],
+          "tls_fingerprint_choice": [
+            "ja4_tls_fingerprint",
+            "tls_fingerprint_matcher"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "rate_limiter": {
+      "resource_name": "rate_limiter",
+      "category": "security",
+      "prompt_templates": [
+        "Create an F5XC rate limiter"
+      ],
+      "expected_terraform": "# Complete Example: rate_limiter (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_rate_limiter\" \"example\" {\n  name      = \"example-rate-limiter\"\n  namespace = \"default\"\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n- `limits {}`\n- `user_identification {}`\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `id = <value>`\n- `labels = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "rate_limiter",
+        "totalBlocks": 2,
+        "totalAttributes": 7,
+        "totalOneOfGroups": 0,
+        "blocks": [
+          "limits",
+          "user_identification"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {}
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "info",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "message",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "rate_limiter_policy": {
+      "resource_name": "rate_limiter_policy",
+      "category": "security",
+      "prompt_templates": [
+        "Create an F5XC rate limiter policy"
+      ],
+      "expected_terraform": "# Complete Example: rate_limiter_policy (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_rate_limiter_policy\" \"example\" {\n  name      = \"example-rate-limiter-policy\"\n  namespace = \"default\"\n\n  # OneOf group: server_choice - choose one\n  any_server {}\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n- `any_server {}`\n- `rules {}`\n- `server_name_matcher {}`\n- `server_selector {}`\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `id = <value>`\n- `labels = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "rate_limiter_policy",
+        "totalBlocks": 4,
+        "totalAttributes": 8,
+        "totalOneOfGroups": 1,
+        "blocks": [
+          "any_server",
+          "rules",
+          "server_name_matcher",
+          "server_selector"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace",
+          "server_name"
+        ],
+        "oneOfGroups": {
+          "server_choice": [
+            "any_server",
+            "server_name",
+            "server_name_matcher",
+            "server_selector"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "waf_exclusion_policy": {
+      "resource_name": "waf_exclusion_policy",
+      "category": "security",
+      "prompt_templates": [
+        "Create an F5XC waf exclusion policy"
+      ],
+      "expected_terraform": "# Complete Example: waf_exclusion_policy (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_waf_exclusion_policy\" \"example\" {\n  name      = \"example-waf-exclusion-policy\"\n  namespace = \"default\"\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n- `waf_exclusion_rules {}`\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `id = <value>`\n- `labels = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "waf_exclusion_policy",
+        "totalBlocks": 1,
+        "totalAttributes": 7,
+        "totalOneOfGroups": 0,
+        "blocks": [
+          "waf_exclusion_rules"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {}
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "info",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "message",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "virtual_site": {
+      "resource_name": "virtual_site",
+      "category": "infrastructure",
+      "prompt_templates": [
+        "Create an F5XC virtual site"
+      ],
+      "expected_terraform": "# Complete Example: virtual_site (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_virtual_site\" \"example\" {\n  name      = \"example-virtual-site\"\n  namespace = \"default\"\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n- `site_selector {}`\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `id = <value>`\n- `labels = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "virtual_site",
+        "totalBlocks": 1,
+        "totalAttributes": 8,
+        "totalOneOfGroups": 0,
+        "blocks": [
+          "site_selector"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace",
+          "site_type"
+        ],
+        "oneOfGroups": {}
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "info",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "message",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "certificate": {
+      "resource_name": "certificate",
+      "category": "certificates",
+      "prompt_templates": [
+        "Create an F5XC certificate"
+      ],
+      "expected_terraform": "# Complete Example: Certificate (Basic Pattern)\n\nCreates a TLS certificate resource in F5 Distributed Cloud.\n\n## Required Resources\n\n```hcl\nresource \"f5xc_certificate\" \"example\" {\n  name      = \"my-certificate\"\n  namespace = \"default\"\n\n  # Certificate data in PEM format (replace with actual certificate)\n  certificate_url = \"string:///-----BEGIN CERTIFICATE-----\\nMIIDdzCCAl+gAwIBAgIEAgAAuTANBgkqhkiG9w0BAQUFADBaMQswCQYDVQQGEwJJRTESMBAGA1UEChMJQmFsdGltb3JlMRMwEQYDVQQLEwpDeWJlclRydXN0MSIwIAYDVQQDExlCYWx0aW1vcmUgQ3liZXJUcnVzdCBSb290MB4XDTAwMDUxMjE4NDYwMFoXDTI1MDUxMjIzNTkwMFowWjELMAkGA1UEBhMCSUUxEjAQBgNVBAoTCUJhbHRpbW9yZTETMBEGA1UECxMKQ3liZXJUcnVzdDEiMCAGA1UEAxMZQmFsdGltb3JlIEN5YmVyVHJ1c3QgUm9vdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKMEuyKrmD1X6CZymrV51Cni4eiVgLGw41uOKymaZN+hXe2wCQVt2yguzmKiYv60iNoS6zjrIZ3AQSsBUnuId9Mcj8e6uYi1agnnc+gRQKfRzMpijS3ljwumUNKoUMMo6vWrJYeKmpYcqWe4PwzV9/lSEy/CG9VwcPCPwBLKBsua4dnKM3p31vjsufFoREJIE9LAwqSuXmD+tqYF/LTdB1kC1FkYmGP1pWPgkAx9XbIGevOF6uvUA65ehD5f/xXtabz5OTZydc93Uk3zyZAsuT3lySNTPx8kmCFcB5kpvcY67Oduhjprl3RjM71oGDHweI12v/yejl0qhqdNkNwnGjkCAwEAAaNFMEMwHQYDVR0OBBYEFOWdWTCCR1jMrPoIVDaGezq1BE3wMBIGA1UdEwEB/wQIMAYBAf8CAQMwDgYDVR0PAQH/BAQDAgEGMA0GCSqGSIb3DQEBBQUAA4IBAQCFDF2O5G9RaEIFoN27TyclhAO992T9Ldcw46QQF+vaKSm2eT929hkTI7gQCvlYpNRhcL0EYWoSihfVCr3FvDB81ukMJY2GQE/szKN+OMY3EU/t3WgxjkzSswF07r51XgdIGn9w/xZchMB5hbgF/X++ZRGjD8ACtPhSNzkE1akxehi/oCr0Epn3o0WC4zxe9Z2etciefC7IpJ5OCBRLbf1wbWsaY71k5h+3zvDyny67G7fyUIhzksLi4xaNmjICq44Y3ekQEe5+NauQrz4wlHrQMz2nZQ/1/I6eYs9HRCwBXbsdtTLSR9I4LtD+gdwyah617jzV/OeBHRnDJELqYzmp\\n-----END CERTIFICATE-----\"\n}\n```\n\n## Key Syntax Notes\n\n1. **certificate_url**: PEM-encoded certificate with string:/// prefix\n2. **private_key**: Nested block with blindfold_secret_info_internal\n3. **location**: PEM-encoded private key with string:/// prefix\n\n## Important Notes\n\n- Replace MIICert... with your actual certificate content\n- Replace MIIEprivate... with your actual private key content\n- PEM format must include BEGIN/END markers\n- Use \\n for line breaks in the string",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "certificate",
+        "totalBlocks": 5,
+        "totalAttributes": 8,
+        "totalOneOfGroups": 1,
+        "blocks": [
+          "certificate_chain",
+          "custom_hash_algorithms",
+          "disable_ocsp_stapling",
+          "private_key",
+          "use_system_defaults"
+        ],
+        "attributes": [
+          "annotations",
+          "certificate_url",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {
+          "ocsp_stapling_choice": [
+            "custom_hash_algorithms",
+            "disable_ocsp_stapling",
+            "use_system_defaults"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "certificate_chain": {
+      "resource_name": "certificate_chain",
+      "category": "certificates",
+      "prompt_templates": [
+        "Create an F5XC certificate chain"
+      ],
+      "expected_terraform": "# Complete Example: certificate_chain (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_certificate_chain\" \"example\" {\n  name      = \"example-certificate-chain\"\n  namespace = \"default\"\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `certificate_url = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `id = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "certificate_chain",
+        "totalBlocks": 0,
+        "totalAttributes": 8,
+        "totalOneOfGroups": 0,
+        "blocks": [],
+        "attributes": [
+          "annotations",
+          "certificate_url",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {}
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "info",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "message",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "trusted_ca_list": {
+      "resource_name": "trusted_ca_list",
+      "category": "certificates",
+      "prompt_templates": [
+        "Create an F5XC trusted ca list"
+      ],
+      "expected_terraform": "# Complete Example: trusted_ca_list (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_trusted_ca_list\" \"example\" {\n  name      = \"example-trusted-ca-list\"\n  namespace = \"default\"\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `id = <value>`\n- `labels = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "trusted_ca_list",
+        "totalBlocks": 0,
+        "totalAttributes": 8,
+        "totalOneOfGroups": 0,
+        "blocks": [],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace",
+          "trusted_ca_url"
+        ],
+        "oneOfGroups": {}
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "info",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "message",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "api_definition": {
+      "resource_name": "api_definition",
+      "category": "api_security",
+      "prompt_templates": [
+        "Create an F5XC api definition"
+      ],
+      "expected_terraform": "# Complete Example: api_definition (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_api_definition\" \"example\" {\n  name      = \"example-api-definition\"\n  namespace = \"default\"\n\n  # OneOf group: schema_updates_strategy - choose one\n  mixed_schema_origin {}\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n- `api_inventory_exclusion_list {}`\n- `api_inventory_inclusion_list {}`\n- `mixed_schema_origin {}`\n- `non_api_endpoints {}`\n- `strict_schema_origin {}`\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `id = <value>`\n- `labels = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "api_definition",
+        "totalBlocks": 6,
+        "totalAttributes": 7,
+        "totalOneOfGroups": 1,
+        "blocks": [
+          "api_inventory_exclusion_list",
+          "api_inventory_inclusion_list",
+          "mixed_schema_origin",
+          "non_api_endpoints",
+          "strict_schema_origin",
+          "swagger_specs"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {
+          "schema_updates_strategy": [
+            "mixed_schema_origin",
+            "strict_schema_origin"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "api_discovery": {
+      "resource_name": "api_discovery",
+      "category": "api_security",
+      "prompt_templates": [
+        "Create an F5XC api discovery"
+      ],
+      "expected_terraform": "# Complete Example: api_discovery (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_api_discovery\" \"example\" {\n  name      = \"example-api-discovery\"\n  namespace = \"default\"\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n- `custom_auth_types {}`\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `id = <value>`\n- `labels = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "api_discovery",
+        "totalBlocks": 1,
+        "totalAttributes": 7,
+        "totalOneOfGroups": 0,
+        "blocks": [
+          "custom_auth_types"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {}
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "info",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "message",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "api_testing": {
+      "resource_name": "api_testing",
+      "category": "api_security",
+      "prompt_templates": [
+        "Create an F5XC api testing"
+      ],
+      "expected_terraform": "# Complete Example: api_testing (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_api_testing\" \"example\" {\n  name      = \"example-api-testing\"\n  namespace = \"default\"\n\n  # OneOf group: frequency_choice - choose one\n  every_day {}\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n- `domains {}`\n- `every_day {}`\n- `every_month {}`\n- `every_week {}`\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `custom_header_value = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `id = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "api_testing",
+        "totalBlocks": 4,
+        "totalAttributes": 8,
+        "totalOneOfGroups": 1,
+        "blocks": [
+          "domains",
+          "every_day",
+          "every_month",
+          "every_week"
+        ],
+        "attributes": [
+          "annotations",
+          "custom_header_value",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {
+          "frequency_choice": [
+            "every_day",
+            "every_month",
+            "every_week"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "api_crawler": {
+      "resource_name": "api_crawler",
+      "category": "api_security",
+      "prompt_templates": [
+        "Create an F5XC api crawler"
+      ],
+      "expected_terraform": "# Complete Example: api_crawler (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_api_crawler\" \"example\" {\n  name      = \"example-api-crawler\"\n  namespace = \"default\"\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n- `domains {}`\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `id = <value>`\n- `labels = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "api_crawler",
+        "totalBlocks": 1,
+        "totalAttributes": 7,
+        "totalOneOfGroups": 0,
+        "blocks": [
+          "domains"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {}
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "info",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "message",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    },
+    "app_api_group": {
+      "resource_name": "app_api_group",
+      "category": "api_security",
+      "prompt_templates": [
+        "Create an F5XC app api group"
+      ],
+      "expected_terraform": "# Complete Example: app_api_group (Auto-Generated)\n\n⚠️ **Note**: This is an auto-generated example. Verify required fields in documentation.\n\n```hcl\nresource \"f5xc_app_api_group\" \"example\" {\n  name      = \"example-app-api-group\"\n  namespace = \"default\"\n\n  # OneOf group: scope_choice - choose one\n  bigip_virtual_server {}\n\n}\n```\n\n## Block-Type Attributes (use empty block syntax)\n\n- `bigip_virtual_server {}`\n- `cdn_loadbalancer {}`\n- `elements {}`\n- `http_loadbalancer {}`\n\n## Simple Attributes\n\n- `annotations = <value>`\n- `description = <value>`\n- `disable = <value>`\n- `id = <value>`\n- `labels = <value>`",
+      "mcp_syntax": {
+        "operation": "syntax",
+        "resource": "app_api_group",
+        "totalBlocks": 4,
+        "totalAttributes": 7,
+        "totalOneOfGroups": 1,
+        "blocks": [
+          "bigip_virtual_server",
+          "cdn_loadbalancer",
+          "elements",
+          "http_loadbalancer"
+        ],
+        "attributes": [
+          "annotations",
+          "description",
+          "disable",
+          "id",
+          "labels",
+          "name",
+          "namespace"
+        ],
+        "oneOfGroups": {
+          "scope_choice": [
+            "bigip_virtual_server",
+            "cdn_loadbalancer",
+            "http_loadbalancer"
+          ]
+        }
+      },
+      "mcp_oneof_groups": [
+        {
+          "group_name": "operation",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "resource",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "groups",
+          "fields": [],
+          "required": false
+        },
+        {
+          "group_name": "total_groups",
+          "fields": [],
+          "required": false
+        }
+      ],
+      "terraform_validate": "pending",
+      "terraform_fmt": "pending",
+      "determinism_verified": false
+    }
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "F5XC Terraform MCP ML Training Matrix",
+  "description": "Schema for reproducible input→output mappings for ML training context",
+  "type": "object",
+  "required": ["version", "generated_at", "resources"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "MCP server version",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of matrix generation"
+    },
+    "resources": {
+      "type": "object",
+      "description": "Per-resource training data",
+      "additionalProperties": {
+        "$ref": "#/$defs/ResourceTrainingData"
+      }
+    }
+  },
+  "$defs": {
+    "ResourceTrainingData": {
+      "type": "object",
+      "required": ["resource_name", "category"],
+      "properties": {
+        "resource_name": {
+          "type": "string",
+          "description": "Terraform resource name (e.g., 'namespace')"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["load_balancing", "security", "infrastructure", "networking", "dns", "certificates", "observability"],
+          "description": "Resource category"
+        },
+        "prompt_templates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Natural language prompt templates for generating this resource"
+        },
+        "expected_terraform": {
+          "type": "string",
+          "description": "Expected Terraform configuration output"
+        },
+        "mcp_syntax": {
+          "type": "object",
+          "description": "MCP syntax guidance output"
+        },
+        "mcp_oneof_groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/OneOfGroup"
+          },
+          "description": "OneOf group definitions for this resource"
+        },
+        "mcp_common_mistakes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CommonMistake"
+          },
+          "description": "Common configuration mistakes and fixes"
+        },
+        "terraform_validate": {
+          "type": "string",
+          "enum": ["success", "failure"],
+          "description": "Result of terraform validate"
+        },
+        "terraform_fmt": {
+          "type": "string",
+          "enum": ["formatted", "needs_formatting"],
+          "description": "Result of terraform fmt -check"
+        },
+        "determinism_verified": {
+          "type": "boolean",
+          "description": "Whether outputs are verified deterministic across multiple runs"
+        }
+      }
+    },
+    "OneOfGroup": {
+      "type": "object",
+      "required": ["group_name", "fields", "required"],
+      "properties": {
+        "group_name": {
+          "type": "string",
+          "description": "Name of the OneOf group"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Mutually exclusive field names"
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether exactly one field must be specified"
+        },
+        "default_choice": {
+          "type": "string",
+          "description": "Recommended default choice"
+        }
+      }
+    },
+    "CommonMistake": {
+      "type": "object",
+      "required": ["mistake", "fix"],
+      "properties": {
+        "mistake": {
+          "type": "string",
+          "description": "Description of the common mistake"
+        },
+        "wrong_example": {
+          "type": "string",
+          "description": "Example of incorrect configuration"
+        },
+        "fix": {
+          "type": "string",
+          "description": "How to fix the mistake"
+        },
+        "correct_example": {
+          "type": "string",
+          "description": "Example of correct configuration"
+        }
+      }
+    }
+  }
+}

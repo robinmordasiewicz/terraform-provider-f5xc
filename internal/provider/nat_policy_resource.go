@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -557,6 +559,11 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 								"virtual_cidr": schema.StringAttribute{
 									MarkdownDescription: "Virtual Subnet NAT is static NAT that does a one-to-one translation between the real source IP CIDR in the policy and the virtual CIDR in a bidirectional fashion. The range of the real CIDR and virtual CIDRs should be the same (e.g. If the real CIDR has the CIDR..",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("dynamic"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -704,10 +711,22 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 										"port": schema.Int64Attribute{
 											MarkdownDescription: "Exact Port to match.",
 											Optional:            true,
+											Validators: []validator.Int64{
+												int64validator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("no_port_match"),
+													path.MatchRelative().AtParent().AtName("port_ranges"),
+												),
+											},
 										},
 										"port_ranges": schema.StringAttribute{
 											MarkdownDescription: "Port range to match.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("no_port_match"),
+													path.MatchRelative().AtParent().AtName("port"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -774,10 +793,22 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 										"port": schema.Int64Attribute{
 											MarkdownDescription: "Exact Port to match.",
 											Optional:            true,
+											Validators: []validator.Int64{
+												int64validator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("no_port_match"),
+													path.MatchRelative().AtParent().AtName("port_ranges"),
+												),
+											},
 										},
 										"port_ranges": schema.StringAttribute{
 											MarkdownDescription: "Port range to match.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("no_port_match"),
+													path.MatchRelative().AtParent().AtName("port"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -796,10 +827,22 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												"port": schema.Int64Attribute{
 													MarkdownDescription: "Exact Port to match.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("no_port_match"),
+															path.MatchRelative().AtParent().AtName("port_ranges"),
+														),
+													},
 												},
 												"port_ranges": schema.StringAttribute{
 													MarkdownDescription: "Port range to match.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("no_port_match"),
+															path.MatchRelative().AtParent().AtName("port"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -814,10 +857,22 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												"port": schema.Int64Attribute{
 													MarkdownDescription: "Exact Port to match.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("no_port_match"),
+															path.MatchRelative().AtParent().AtName("port_ranges"),
+														),
+													},
 												},
 												"port_ranges": schema.StringAttribute{
 													MarkdownDescription: "Port range to match.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("no_port_match"),
+															path.MatchRelative().AtParent().AtName("port"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -838,10 +893,22 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												"port": schema.Int64Attribute{
 													MarkdownDescription: "Exact Port to match.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("no_port_match"),
+															path.MatchRelative().AtParent().AtName("port_ranges"),
+														),
+													},
 												},
 												"port_ranges": schema.StringAttribute{
 													MarkdownDescription: "Port range to match.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("no_port_match"),
+															path.MatchRelative().AtParent().AtName("port"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -856,10 +923,22 @@ func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 												"port": schema.Int64Attribute{
 													MarkdownDescription: "Exact Port to match.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("no_port_match"),
+															path.MatchRelative().AtParent().AtName("port_ranges"),
+														),
+													},
 												},
 												"port_ranges": schema.StringAttribute{
 													MarkdownDescription: "Port range to match.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("no_port_match"),
+															path.MatchRelative().AtParent().AtName("port"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{

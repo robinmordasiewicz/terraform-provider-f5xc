@@ -1,0 +1,42 @@
+{
+  "operation": "syntax",
+  "resource": "service_policy",
+  "totalBlocks": 8,
+  "totalAttributes": 8,
+  "totalOneOfGroups": 2,
+  "blocks": [
+    "allow_all_requests",
+    "allow_list",
+    "any_server",
+    "deny_all_requests",
+    "deny_list",
+    "rule_list",
+    "server_name_matcher",
+    "server_selector"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace",
+    "server_name"
+  ],
+  "oneOfGroups": {
+    "rule_choice": [
+      "allow_all_requests",
+      "allow_list",
+      "deny_all_requests",
+      "deny_list",
+      "rule_list"
+    ],
+    "server_choice": [
+      "any_server",
+      "server_name",
+      "server_name_matcher",
+      "server_selector"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "operation": "syntax",
+  "resource": "rate_limiter",
+  "totalBlocks": 2,
+  "totalAttributes": 7,
+  "totalOneOfGroups": 0,
+  "blocks": [
+    "limits",
+    "user_identification"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {}
+}

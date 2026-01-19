@@ -1,0 +1,11 @@
+Using the f5xc-terraform MCP server, create a Terraform configuration for an F5XC origin pool with TLS.
+
+Requirements:
+1. Name: "mcp-test-origin-pool"
+2. Namespace: "default"
+3. Origin: example.com on port 443
+4. Enable TLS with default security settings
+5. Use ROUND_ROBIN load balancing
+
+Use the f5xc_terraform_metadata tool with operation=example and resource=origin_pool to get the correct syntax.
+Output ONLY the Terraform configuration, no explanations.

@@ -88,7 +88,8 @@ type SchemaDefinition struct {
 	XF5XCUseCases         []string `json:"x-f5xc-use-cases"`
 	XF5XCRelatedDomains   []string `json:"x-f5xc-related-domains"`
 	XF5XCIsPreview        bool     `json:"x-f5xc-is-preview"`
-	XF5XCServerDefault    bool     `json:"x-f5xc-server-default"` // True if server applies default when omitted
+	XF5XCServerDefault    bool     `json:"x-f5xc-server-default"`    // True if server applies default when omitted
+	XF5XCConflictsWith    []string `json:"x-f5xc-conflicts-with"`    // Fields that conflict with this property
 }
 
 type TerraformAttribute struct {
@@ -107,12 +108,13 @@ type TerraformAttribute struct {
 	IsBlock            bool
 	OneOfGroup         string
 	PlanModifier       string
-	MaxDepth           int    // Track recursion depth to prevent infinite loops
-	IsSpecField        bool   // True if this is a spec field (not metadata)
-	JsonName           string // JSON field name from OpenAPI for API marshaling
-	GoType             string // Go type for client struct generation
-	UseDomainValidator bool   // True if name field should use DomainValidator (for DNS resources)
-	ServerDefault      bool   // True if server applies default when field is omitted (from x-f5xc-server-default)
+	MaxDepth           int      // Track recursion depth to prevent infinite loops
+	IsSpecField        bool     // True if this is a spec field (not metadata)
+	JsonName           string   // JSON field name from OpenAPI for API marshaling
+	GoType             string   // Go type for client struct generation
+	UseDomainValidator bool     // True if name field should use DomainValidator (for DNS resources)
+	ServerDefault      bool     // True if server applies default when field is omitted (from x-f5xc-server-default)
+	ConflictsWith      []string // Field names that conflict with this attribute (from x-f5xc-conflicts-with)
 }
 
 type ResourceTemplate struct {
@@ -130,11 +132,17 @@ type ResourceTemplate struct {
 	OptionalAttributes     []string
 	ComputedAttributes     []string
 	ExampleUsage           string // HCL example for documentation
-	APIDocsURL             string // Link to F5 XC API documentation
-	UsesBoolPlanModifier   bool   // True if any bool attribute uses a plan modifier
-	UsesInt64PlanModifier  bool   // True if any int64 attribute uses a plan modifier
-	UsesStringPlanModifier bool   // True if any string attribute uses a plan modifier
-	HasBlocks              bool   // True if the resource has any nested blocks
+	APIDocsURL                string // Link to F5 XC API documentation
+	UsesBoolPlanModifier      bool   // True if any bool attribute uses a plan modifier
+	UsesInt64PlanModifier     bool   // True if any int64 attribute uses a plan modifier
+	UsesStringPlanModifier    bool   // True if any string attribute uses a plan modifier
+	HasBlocks                 bool   // True if the resource has any nested blocks
+	UsesConflictsWith         bool   // True if any attribute uses ConflictsWith validator
+	UsesBoolConflictsWith     bool   // True if any bool attribute uses ConflictsWith
+	UsesInt64ConflictsWith    bool   // True if any int64 attribute uses ConflictsWith
+	UsesStringConflictsWith   bool   // True if any string attribute uses ConflictsWith
+	UsesListConflictsWith     bool   // True if any list attribute uses ConflictsWith
+	UsesMapConflictsWith      bool   // True if any map attribute uses ConflictsWith
 }
 
 type GenerationResult struct {
@@ -880,6 +888,10 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 	// AttrTypes (which use attr.Type) are generated for any block with nested attributes
 	hasBlocks := hasNestedModelsWithAttrTypes(attributes)
 
+	// Check which ConflictsWith validator types are used
+	usesBoolConflicts, usesInt64Conflicts, usesStringConflicts, usesListConflicts, usesMapConflicts := scanConflictsWithUsage(attributes)
+	usesConflictsWith := usesBoolConflicts || usesInt64Conflicts || usesStringConflicts || usesListConflicts || usesMapConflicts
+
 	return &ResourceTemplate{
 		Name:                   resourceName,
 		TitleCase:              toTitleCase(resourceName),
@@ -896,6 +908,12 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 		UsesInt64PlanModifier:  usesInt64,
 		UsesStringPlanModifier: usesString,
 		HasBlocks:              hasBlocks,
+		UsesConflictsWith:      usesConflictsWith,
+		UsesBoolConflictsWith:     usesBoolConflicts,
+		UsesInt64ConflictsWith:    usesInt64Conflicts,
+		UsesStringConflictsWith:   usesStringConflicts,
+		UsesListConflictsWith:     usesListConflicts,
+		UsesMapConflictsWith:      usesMapConflicts,
 	}, nil
 }
 
@@ -914,6 +932,41 @@ func hasNestedModelsWithAttrTypes(attributes []TerraformAttribute) bool {
 		}
 	}
 	return false
+}
+
+// scanConflictsWithUsage checks which attribute types use ConflictsWith validators
+// Returns flags for each validator type that needs to be imported
+// NOTE: Only scans top-level non-block attributes since the template only renders
+// ConflictsWith validators at the top level. Nested block ConflictsWith would require
+// additional template changes to support.
+func scanConflictsWithUsage(attributes []TerraformAttribute) (usesBool, usesInt64, usesString, usesList, usesMap bool) {
+	for _, attr := range attributes {
+		// Check this attribute's type if it has ConflictsWith (only for non-blocks)
+		if len(attr.ConflictsWith) > 0 && !attr.IsBlock {
+			switch attr.Type {
+			case "bool":
+				usesBool = true
+			case "int64":
+				usesInt64 = true
+			case "string":
+				usesString = true
+			case "list":
+				usesList = true
+			case "map":
+				usesMap = true
+			}
+		}
+		// Recursively check nested attributes (inside blocks)
+		if len(attr.NestedAttributes) > 0 {
+			b, i, s, l, m := scanConflictsWithUsage(attr.NestedAttributes)
+			usesBool = usesBool || b
+			usesInt64 = usesInt64 || i
+			usesString = usesString || s
+			usesList = usesList || l
+			usesMap = usesMap || m
+		}
+	}
+	return
 }
 
 // scanPlanModifierUsage recursively scans attributes to determine which plan modifier imports are needed
@@ -1053,6 +1106,14 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 		IsSpecField:   true, // Attributes from OpenAPI spec are spec fields
 		JsonName:      name, // Original OpenAPI property name for JSON marshaling
 		ServerDefault: schema.XF5XCServerDefault,
+	}
+
+	// Extract ConflictsWith from x-f5xc-conflicts-with extension
+	// Convert field names to snake_case for Terraform schema
+	if len(schema.XF5XCConflictsWith) > 0 {
+		for _, conflictField := range schema.XF5XCConflictsWith {
+			attr.ConflictsWith = append(attr.ConflictsWith, toSnakeCase(conflictField))
+		}
 	}
 
 	// Build description with enrichment extension priority:
@@ -4223,6 +4284,33 @@ func renderNestedAttributes(attrs []TerraformAttribute, indent string) string {
 			sb.WriteString(fmt.Sprintf("%s\t\tElementType: %s,\n", indent, elementTfType))
 		}
 
+		// Add ConflictsWith validators if defined
+		if len(attr.ConflictsWith) > 0 {
+			validatorType := "String"
+			validatorPkg := "stringvalidator"
+			switch attr.Type {
+			case "bool":
+				validatorType = "Bool"
+				validatorPkg = "boolvalidator"
+			case "int64":
+				validatorType = "Int64"
+				validatorPkg = "int64validator"
+			case "list":
+				validatorType = "List"
+				validatorPkg = "listvalidator"
+			case "map":
+				validatorType = "Map"
+				validatorPkg = "mapvalidator"
+			}
+			sb.WriteString(fmt.Sprintf("%s\t\tValidators: []validator.%s{\n", indent, validatorType))
+			sb.WriteString(fmt.Sprintf("%s\t\t\t%s.ConflictsWith(\n", indent, validatorPkg))
+			for _, conflict := range attr.ConflictsWith {
+				sb.WriteString(fmt.Sprintf("%s\t\t\t\tpath.MatchRelative().AtParent().AtName(\"%s\"),\n", indent, conflict))
+			}
+			sb.WriteString(fmt.Sprintf("%s\t\t\t),\n", indent))
+			sb.WriteString(fmt.Sprintf("%s\t\t},\n", indent))
+		}
+
 		sb.WriteString(fmt.Sprintf("%s\t},\n", indent))
 	}
 
@@ -4920,6 +5008,21 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+{{- if .UsesBoolConflictsWith}}
+	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
+{{- end}}
+{{- if .UsesInt64ConflictsWith}}
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+{{- end}}
+{{- if .UsesListConflictsWith}}
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+{{- end}}
+{{- if .UsesMapConflictsWith}}
+	"github.com/hashicorp/terraform-plugin-framework-validators/mapvalidator"
+{{- end}}
+{{- if .UsesStringConflictsWith}}
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -5016,6 +5119,14 @@ func (r *{{.TitleCase}}Resource) Schema(ctx context.Context, req resource.Schema
 {{- else if eq .TfsdkTag "namespace"}}
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
+				},
+{{- else if .ConflictsWith}}
+				Validators: []validator.{{if eq .Type "string"}}String{{else if eq .Type "bool"}}Bool{{else if eq .Type "int64"}}Int64{{else if eq .Type "list"}}List{{else if eq .Type "map"}}Map{{else}}String{{end}}{
+					{{if eq .Type "string"}}stringvalidator{{else if eq .Type "bool"}}boolvalidator{{else if eq .Type "int64"}}int64validator{{else if eq .Type "list"}}listvalidator{{else if eq .Type "map"}}mapvalidator{{else}}stringvalidator{{end}}.ConflictsWith(
+{{- range .ConflictsWith}}
+						path.MatchRelative().AtParent().AtName("{{.}}"),
+{{- end}}
+					),
 				},
 {{- end}}
 			},

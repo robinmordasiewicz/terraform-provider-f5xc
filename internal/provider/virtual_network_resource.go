@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -209,6 +210,12 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 						"ip_address": schema.StringAttribute{
 							MarkdownDescription: "Traffic matching the IP prefixes is sent to this IP Address.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("default_gateway"),
+									path.MatchRelative().AtParent().AtName("node_interface"),
+								),
+							},
 						},
 						"ip_prefixes": schema.ListAttribute{
 							MarkdownDescription: "List of route prefixes that have common next hop and attributes .",

@@ -1,0 +1,21 @@
+{
+  "operation": "syntax",
+  "resource": "virtual_site",
+  "totalBlocks": 1,
+  "totalAttributes": 8,
+  "totalOneOfGroups": 0,
+  "blocks": [
+    "site_selector"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace",
+    "site_type"
+  ],
+  "oneOfGroups": {}
+}

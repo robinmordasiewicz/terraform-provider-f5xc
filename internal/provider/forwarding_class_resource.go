@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -166,6 +167,12 @@ func (r *ForwardingClassResource) Schema(ctx context.Context, req resource.Schem
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
+				},
+				Validators: []validator.Int64{
+					int64validator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("dscp"),
+						path.MatchRelative().AtParent().AtName("no_marking"),
+					),
 				},
 			},
 		},

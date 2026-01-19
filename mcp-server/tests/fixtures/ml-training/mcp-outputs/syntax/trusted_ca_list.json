@@ -1,0 +1,19 @@
+{
+  "operation": "syntax",
+  "resource": "trusted_ca_list",
+  "totalBlocks": 0,
+  "totalAttributes": 8,
+  "totalOneOfGroups": 0,
+  "blocks": [],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace",
+    "trusted_ca_url"
+  ],
+  "oneOfGroups": {}
+}

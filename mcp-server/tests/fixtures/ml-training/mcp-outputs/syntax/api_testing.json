@@ -1,0 +1,30 @@
+{
+  "operation": "syntax",
+  "resource": "api_testing",
+  "totalBlocks": 4,
+  "totalAttributes": 8,
+  "totalOneOfGroups": 1,
+  "blocks": [
+    "domains",
+    "every_day",
+    "every_month",
+    "every_week"
+  ],
+  "attributes": [
+    "annotations",
+    "custom_header_value",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {
+    "frequency_choice": [
+      "every_day",
+      "every_month",
+      "every_week"
+    ]
+  }
+}

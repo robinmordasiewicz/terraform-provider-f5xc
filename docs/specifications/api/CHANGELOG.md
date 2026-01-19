@@ -1,14 +1,12 @@
 # Changelog
 
-## Version 2.0.29 (2026-01-17)
+## Version 2.0.40 (2026-01-19)
 
 ### Version Information
-| Field | Value |
-|-------|-------|
-| Full Version | 2.0.29 |
-| Upstream Timestamp | unknown |
-| Upstream ETag | unknown |
-| Enriched Version | 2.0.29 |
+- **Full Version**: 2.0.40
+- **Upstream Timestamp**: unknown
+- **Upstream ETag**: unknown
+- **Enriched Version**: 2.0.40
 
 ### Release Type
 - **patch** release
@@ -36,19 +34,20 @@
 - Discovery timestamp: 2025-12-20T19:39:20.211392+00:00
 - Endpoints explored: 300 / 1000
 - Applied x-discovered-* extensions from live API exploration
-- See `reports/constraint-analysis.md` for detailed comparison
+- See \`reports/constraint-analysis.md\` for detailed comparison
 
 ### Output Structure
-```text
+\`\`\`text
 docs/specifications/api/
 ├── [domain].json        # Domain-specific specs
 ├── openapi.json         # Master combined spec
 └── index.json           # Metadata index
-```
+\`\`\`
 
 ### Download
-- ZIP Package: F5xc-api-(unknown-2.0.29).zip
+- ZIP Package: F5xc-api-(unknown-2.0.40).zip
 
 ### Source
 - Source: F5 Distributed Cloud OpenAPI specifications
 - Upstream: unknown (ETag: unknown)
+

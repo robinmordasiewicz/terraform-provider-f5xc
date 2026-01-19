@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -3099,6 +3101,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					"site_to_site_tunnel_ip": schema.StringAttribute{
 						MarkdownDescription: "Site Mesh Group Connection Via Virtual IP. This option will use the Virtual IP provided for creating IPsec between two sites which are part of the site mesh group.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("sm_connection_public_ip"),
+								path.MatchRelative().AtParent().AtName("sm_connection_pvt_ip"),
+							),
+						},
 					},
 					"tunnel_dead_timeout": schema.Int64Attribute{
 						MarkdownDescription: "Time interval, in millisec, within which any IPsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used.",
@@ -3331,6 +3339,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"node": schema.StringAttribute{
 													MarkdownDescription: "Configuration will apply to a device on the given node of the site.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("cluster"),
+														),
+													},
 												},
 												"priority": schema.Int64Attribute{
 													MarkdownDescription: "Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority.",
@@ -3369,6 +3382,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"node": schema.StringAttribute{
 													MarkdownDescription: "Configuration will apply to a device on the given node of the site.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("cluster"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -3391,6 +3409,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"node": schema.StringAttribute{
 													MarkdownDescription: "Configuration will apply to a device on the given node.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("cluster"),
+														),
+													},
 												},
 												"priority": schema.Int64Attribute{
 													MarkdownDescription: "Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority.",
@@ -3399,6 +3422,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"vlan_id": schema.Int64Attribute{
 													MarkdownDescription: "Configure a VLAN tagged ethernet interface.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("untagged"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -3425,10 +3453,21 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"dgw_address": schema.StringAttribute{
 																		MarkdownDescription: "Enter a IPv4 address from the network prefix to be used as the default gateway.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("first_address"),
+																				path.MatchRelative().AtParent().AtName("last_address"),
+																			),
+																		},
 																	},
 																	"dns_address": schema.StringAttribute{
 																		MarkdownDescription: "Enter a IPv4 address from the network prefix to be used as the DNS server.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("same_as_dgw"),
+																			),
+																		},
 																	},
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Set the network prefix for the site. Ex: 10.1.1.0/24.",
@@ -3494,6 +3533,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																"network_prefix": schema.StringAttribute{
 																	MarkdownDescription: "Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("stateful"),
+																		),
+																	},
 																},
 															},
 															Blocks: map[string]schema.Block{
@@ -3517,6 +3561,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																				"configured_address": schema.StringAttribute{
 																					MarkdownDescription: "Configured address from the network prefix is chosen as DNS server.",
 																					Optional:            true,
+																					Validators: []validator.String{
+																						stringvalidator.ConflictsWith(
+																							path.MatchRelative().AtParent().AtName("first_address"),
+																							path.MatchRelative().AtParent().AtName("last_address"),
+																						),
+																					},
 																				},
 																			},
 																			Blocks: map[string]schema.Block{
@@ -3796,6 +3846,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"ip_address": schema.StringAttribute{
 													MarkdownDescription: "Traffic matching the IP prefixes is sent to this IP Address.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("default_gateway"),
+															path.MatchRelative().AtParent().AtName("node_interface"),
+														),
+													},
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "List of route prefixes that have common next hop and attributes .",
@@ -3890,6 +3946,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"ip_address": schema.StringAttribute{
 													MarkdownDescription: "Traffic matching the IP prefixes is sent to this IP Address.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("default_gateway"),
+															path.MatchRelative().AtParent().AtName("node_interface"),
+														),
+													},
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "List of IPv6 route prefixes that have common next hop and attributes .",
@@ -4027,6 +4089,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"ip_address": schema.StringAttribute{
 													MarkdownDescription: "Traffic matching the IP prefixes is sent to this IP Address.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("default_gateway"),
+															path.MatchRelative().AtParent().AtName("node_interface"),
+														),
+													},
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "List of route prefixes that have common next hop and attributes .",
@@ -4121,6 +4189,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"ip_address": schema.StringAttribute{
 													MarkdownDescription: "Traffic matching the IP prefixes is sent to this IP Address.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("default_gateway"),
+															path.MatchRelative().AtParent().AtName("node_interface"),
+														),
+													},
 												},
 												"ip_prefixes": schema.ListAttribute{
 													MarkdownDescription: "List of IPv6 route prefixes that have common next hop and attributes .",
@@ -4241,6 +4315,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"ip_address": schema.StringAttribute{
 											MarkdownDescription: "Traffic matching the IP prefixes is sent to this IP Address.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("default_gateway"),
+													path.MatchRelative().AtParent().AtName("node_interface"),
+												),
+											},
 										},
 										"ip_prefixes": schema.ListAttribute{
 											MarkdownDescription: "List of route prefixes that have common next hop and attributes .",
@@ -4611,10 +4691,20 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"data_lif_dns_name": schema.StringAttribute{
 															MarkdownDescription: "Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("data_lif_ip"),
+																),
+															},
 														},
 														"data_lif_ip": schema.StringAttribute{
 															MarkdownDescription: "Backend Data LIF IP Address is reachable at the given IP address.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("data_lif_dns_name"),
+																),
+															},
 														},
 														"limit_aggregate_usage": schema.StringAttribute{
 															MarkdownDescription: "Fail provisioning if usage is above this percentage. Not enforced by default.",
@@ -4627,10 +4717,20 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"management_lif_dns_name": schema.StringAttribute{
 															MarkdownDescription: "Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("management_lif_ip"),
+																),
+															},
 														},
 														"management_lif_ip": schema.StringAttribute{
 															MarkdownDescription: "Backend Management LIF IP Address is reachable at the given IP address.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("management_lif_dns_name"),
+																),
+															},
 														},
 														"nfs_mount_options": schema.StringAttribute{
 															MarkdownDescription: "Comma-separated list of NFS mount OPTIONS. Not enforced by default.",
@@ -4766,6 +4866,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			"adaptive_qos_policy": schema.StringAttribute{
 																				MarkdownDescription: "Policy configuration for this feature.",
 																				Optional:            true,
+																				Validators: []validator.String{
+																					stringvalidator.ConflictsWith(
+																						path.MatchRelative().AtParent().AtName("no_qos"),
+																						path.MatchRelative().AtParent().AtName("qos_policy"),
+																					),
+																				},
 																			},
 																			"encryption": schema.BoolAttribute{
 																				MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
@@ -4778,6 +4884,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			"qos_policy": schema.StringAttribute{
 																				MarkdownDescription: "Policy configuration for this feature.",
 																				Optional:            true,
+																				Validators: []validator.String{
+																					stringvalidator.ConflictsWith(
+																						path.MatchRelative().AtParent().AtName("adaptive_qos_policy"),
+																						path.MatchRelative().AtParent().AtName("no_qos"),
+																					),
+																				},
 																			},
 																			"security_style": schema.StringAttribute{
 																				MarkdownDescription: "Security Style. Security style for new volumes.",
@@ -4827,6 +4939,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																"adaptive_qos_policy": schema.StringAttribute{
 																	MarkdownDescription: "Policy configuration for this feature.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("no_qos"),
+																			path.MatchRelative().AtParent().AtName("qos_policy"),
+																		),
+																	},
 																},
 																"encryption": schema.BoolAttribute{
 																	MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
@@ -4839,6 +4957,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																"qos_policy": schema.StringAttribute{
 																	MarkdownDescription: "Policy configuration for this feature.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("adaptive_qos_policy"),
+																			path.MatchRelative().AtParent().AtName("no_qos"),
+																		),
+																	},
 																},
 																"security_style": schema.StringAttribute{
 																	MarkdownDescription: "Security Style. Security style for new volumes.",
@@ -4891,10 +5015,20 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"data_lif_dns_name": schema.StringAttribute{
 															MarkdownDescription: "Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("data_lif_ip"),
+																),
+															},
 														},
 														"data_lif_ip": schema.StringAttribute{
 															MarkdownDescription: "Backend Data LIF IP Address is reachable at the given IP address.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("data_lif_dns_name"),
+																),
+															},
 														},
 														"igroup_name": schema.StringAttribute{
 															MarkdownDescription: "Name of the igroup for SAN volumes to use.",
@@ -4911,10 +5045,20 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 														"management_lif_dns_name": schema.StringAttribute{
 															MarkdownDescription: "Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("management_lif_ip"),
+																),
+															},
 														},
 														"management_lif_ip": schema.StringAttribute{
 															MarkdownDescription: "Backend Management LIF IP Address is reachable at the given IP address.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("management_lif_dns_name"),
+																),
+															},
 														},
 														"region": schema.StringAttribute{
 															MarkdownDescription: "Backend Region. Virtual Pool Region.",
@@ -5039,6 +5183,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			"adaptive_qos_policy": schema.StringAttribute{
 																				MarkdownDescription: "Policy configuration for this feature.",
 																				Optional:            true,
+																				Validators: []validator.String{
+																					stringvalidator.ConflictsWith(
+																						path.MatchRelative().AtParent().AtName("no_qos"),
+																						path.MatchRelative().AtParent().AtName("qos_policy"),
+																					),
+																				},
 																			},
 																			"encryption": schema.BoolAttribute{
 																				MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
@@ -5051,6 +5201,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			"qos_policy": schema.StringAttribute{
 																				MarkdownDescription: "Policy configuration for this feature.",
 																				Optional:            true,
+																				Validators: []validator.String{
+																					stringvalidator.ConflictsWith(
+																						path.MatchRelative().AtParent().AtName("adaptive_qos_policy"),
+																						path.MatchRelative().AtParent().AtName("no_qos"),
+																					),
+																				},
 																			},
 																			"security_style": schema.StringAttribute{
 																				MarkdownDescription: "Security Style. Security style for new volumes.",
@@ -5187,6 +5343,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																"adaptive_qos_policy": schema.StringAttribute{
 																	MarkdownDescription: "Policy configuration for this feature.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("no_qos"),
+																			path.MatchRelative().AtParent().AtName("qos_policy"),
+																		),
+																	},
 																},
 																"encryption": schema.BoolAttribute{
 																	MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
@@ -5199,6 +5361,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																"qos_policy": schema.StringAttribute{
 																	MarkdownDescription: "Policy configuration for this feature.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("adaptive_qos_policy"),
+																			path.MatchRelative().AtParent().AtName("no_qos"),
+																		),
+																	},
 																},
 																"security_style": schema.StringAttribute{
 																	MarkdownDescription: "Security Style. Security style for new volumes.",
@@ -5301,10 +5469,20 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			"mgmt_dns_name": schema.StringAttribute{
 																				MarkdownDescription: "Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 																				Optional:            true,
+																				Validators: []validator.String{
+																					stringvalidator.ConflictsWith(
+																						path.MatchRelative().AtParent().AtName("mgmt_ip"),
+																					),
+																				},
 																			},
 																			"mgmt_ip": schema.StringAttribute{
 																				MarkdownDescription: "Management Endpoint is reachable at the given IP address.",
 																				Optional:            true,
+																				Validators: []validator.String{
+																					stringvalidator.ConflictsWith(
+																						path.MatchRelative().AtParent().AtName("mgmt_dns_name"),
+																					),
+																				},
 																			},
 																		},
 																		Blocks: map[string]schema.Block{
@@ -5372,18 +5550,38 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																			"mgmt_dns_name": schema.StringAttribute{
 																				MarkdownDescription: "Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 																				Optional:            true,
+																				Validators: []validator.String{
+																					stringvalidator.ConflictsWith(
+																						path.MatchRelative().AtParent().AtName("mgmt_ip"),
+																					),
+																				},
 																			},
 																			"mgmt_ip": schema.StringAttribute{
 																				MarkdownDescription: "Management Endpoint is reachable at the given IP address.",
 																				Optional:            true,
+																				Validators: []validator.String{
+																					stringvalidator.ConflictsWith(
+																						path.MatchRelative().AtParent().AtName("mgmt_dns_name"),
+																					),
+																				},
 																			},
 																			"nfs_endpoint_dns_name": schema.StringAttribute{
 																				MarkdownDescription: "Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 																				Optional:            true,
+																				Validators: []validator.String{
+																					stringvalidator.ConflictsWith(
+																						path.MatchRelative().AtParent().AtName("nfs_endpoint_ip"),
+																					),
+																				},
 																			},
 																			"nfs_endpoint_ip": schema.StringAttribute{
 																				MarkdownDescription: "Endpoint is reachable at the given IP address.",
 																				Optional:            true,
+																				Validators: []validator.String{
+																					stringvalidator.ConflictsWith(
+																						path.MatchRelative().AtParent().AtName("nfs_endpoint_dns_name"),
+																					),
+																				},
 																			},
 																		},
 																		Blocks: map[string]schema.Block{
@@ -5471,6 +5669,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"node": schema.StringAttribute{
 													MarkdownDescription: "Configuration will apply to a device on the given node.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("cluster"),
+														),
+													},
 												},
 												"priority": schema.Int64Attribute{
 													MarkdownDescription: "Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority.",
@@ -5479,6 +5682,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"vlan_id": schema.Int64Attribute{
 													MarkdownDescription: "Configure a VLAN tagged ethernet interface.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("untagged"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -5505,10 +5713,21 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	"dgw_address": schema.StringAttribute{
 																		MarkdownDescription: "Enter a IPv4 address from the network prefix to be used as the default gateway.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("first_address"),
+																				path.MatchRelative().AtParent().AtName("last_address"),
+																			),
+																		},
 																	},
 																	"dns_address": schema.StringAttribute{
 																		MarkdownDescription: "Enter a IPv4 address from the network prefix to be used as the DNS server.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("same_as_dgw"),
+																			),
+																		},
 																	},
 																	"network_prefix": schema.StringAttribute{
 																		MarkdownDescription: "Set the network prefix for the site. Ex: 10.1.1.0/24.",
@@ -5574,6 +5793,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																"network_prefix": schema.StringAttribute{
 																	MarkdownDescription: "Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("stateful"),
+																		),
+																	},
 																},
 															},
 															Blocks: map[string]schema.Block{
@@ -5597,6 +5821,12 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																				"configured_address": schema.StringAttribute{
 																					MarkdownDescription: "Configured address from the network prefix is chosen as DNS server.",
 																					Optional:            true,
+																					Validators: []validator.String{
+																						stringvalidator.ConflictsWith(
+																							path.MatchRelative().AtParent().AtName("first_address"),
+																							path.MatchRelative().AtParent().AtName("last_address"),
+																						),
+																					},
 																				},
 																			},
 																			Blocks: map[string]schema.Block{
@@ -5913,10 +6143,29 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"address": schema.StringAttribute{
 													MarkdownDescription: "Specify IPv4 peer address.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("default_gateway"),
+															path.MatchRelative().AtParent().AtName("disable"),
+															path.MatchRelative().AtParent().AtName("external_connector"),
+															path.MatchRelative().AtParent().AtName("from_site"),
+															path.MatchRelative().AtParent().AtName("subnet_begin_offset"),
+															path.MatchRelative().AtParent().AtName("subnet_end_offset"),
+														),
+													},
 												},
 												"address_ipv6": schema.StringAttribute{
 													MarkdownDescription: "Specify peer IPv6 address.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("default_gateway_v6"),
+															path.MatchRelative().AtParent().AtName("disable_v6"),
+															path.MatchRelative().AtParent().AtName("from_site_v6"),
+															path.MatchRelative().AtParent().AtName("subnet_begin_offset_v6"),
+															path.MatchRelative().AtParent().AtName("subnet_end_offset_v6"),
+														),
+													},
 												},
 												"asn": schema.Int64Attribute{
 													MarkdownDescription: "Autonomous System Number for BGP peer .",
@@ -5925,6 +6174,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"md5_auth_key": schema.StringAttribute{
 													MarkdownDescription: "MD5 key for protecting BGP Sessions (RFC 2385).",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("no_authentication"),
+														),
+													},
 												},
 												"port": schema.Int64Attribute{
 													MarkdownDescription: "Peer Port. Peer TCP port number.",
@@ -5933,18 +6187,56 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"subnet_begin_offset": schema.Int64Attribute{
 													MarkdownDescription: "Calculate peer address using offset from the beginning of the subnet.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("address"),
+															path.MatchRelative().AtParent().AtName("default_gateway"),
+															path.MatchRelative().AtParent().AtName("disable"),
+															path.MatchRelative().AtParent().AtName("external_connector"),
+															path.MatchRelative().AtParent().AtName("from_site"),
+															path.MatchRelative().AtParent().AtName("subnet_end_offset"),
+														),
+													},
 												},
 												"subnet_begin_offset_v6": schema.Int64Attribute{
 													MarkdownDescription: "Calculate peer address using offset from the beginning of the subnet.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("address_ipv6"),
+															path.MatchRelative().AtParent().AtName("default_gateway_v6"),
+															path.MatchRelative().AtParent().AtName("disable_v6"),
+															path.MatchRelative().AtParent().AtName("from_site_v6"),
+															path.MatchRelative().AtParent().AtName("subnet_end_offset_v6"),
+														),
+													},
 												},
 												"subnet_end_offset": schema.Int64Attribute{
 													MarkdownDescription: "Calculate peer address using offset from the end of the subnet.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("address"),
+															path.MatchRelative().AtParent().AtName("default_gateway"),
+															path.MatchRelative().AtParent().AtName("disable"),
+															path.MatchRelative().AtParent().AtName("external_connector"),
+															path.MatchRelative().AtParent().AtName("from_site"),
+															path.MatchRelative().AtParent().AtName("subnet_begin_offset"),
+														),
+													},
 												},
 												"subnet_end_offset_v6": schema.Int64Attribute{
 													MarkdownDescription: "Calculate peer address using offset from the end of the subnet.",
 													Optional:            true,
+													Validators: []validator.Int64{
+														int64validator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("address_ipv6"),
+															path.MatchRelative().AtParent().AtName("default_gateway_v6"),
+															path.MatchRelative().AtParent().AtName("disable_v6"),
+															path.MatchRelative().AtParent().AtName("from_site_v6"),
+															path.MatchRelative().AtParent().AtName("subnet_begin_offset_v6"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -6222,6 +6514,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					"operating_system_version": schema.StringAttribute{
 						MarkdownDescription: "Specify a OS version to be used e.g. 9.2024.6.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_os_version"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -6261,6 +6558,11 @@ func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					"volterra_software_version": schema.StringAttribute{
 						MarkdownDescription: "Specify a F5XC Software Version to be used e.g. Crt-20210329-1002.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_sw_version"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{

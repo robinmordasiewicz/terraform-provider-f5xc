@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -2496,10 +2497,20 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												"data_lif_dns_name": schema.StringAttribute{
 													MarkdownDescription: "Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("data_lif_ip"),
+														),
+													},
 												},
 												"data_lif_ip": schema.StringAttribute{
 													MarkdownDescription: "Backend Data LIF IP Address is reachable at the given IP address.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("data_lif_dns_name"),
+														),
+													},
 												},
 												"limit_aggregate_usage": schema.StringAttribute{
 													MarkdownDescription: "Fail provisioning if usage is above this percentage. Not enforced by default.",
@@ -2512,10 +2523,20 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												"management_lif_dns_name": schema.StringAttribute{
 													MarkdownDescription: "Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("management_lif_ip"),
+														),
+													},
 												},
 												"management_lif_ip": schema.StringAttribute{
 													MarkdownDescription: "Backend Management LIF IP Address is reachable at the given IP address.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("management_lif_dns_name"),
+														),
+													},
 												},
 												"nfs_mount_options": schema.StringAttribute{
 													MarkdownDescription: "Comma-separated list of NFS mount OPTIONS. Not enforced by default.",
@@ -2651,6 +2672,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																	"adaptive_qos_policy": schema.StringAttribute{
 																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("no_qos"),
+																				path.MatchRelative().AtParent().AtName("qos_policy"),
+																			),
+																		},
 																	},
 																	"encryption": schema.BoolAttribute{
 																		MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
@@ -2663,6 +2690,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																	"qos_policy": schema.StringAttribute{
 																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("adaptive_qos_policy"),
+																				path.MatchRelative().AtParent().AtName("no_qos"),
+																			),
+																		},
 																	},
 																	"security_style": schema.StringAttribute{
 																		MarkdownDescription: "Security Style. Security style for new volumes.",
@@ -2712,6 +2745,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														"adaptive_qos_policy": schema.StringAttribute{
 															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("no_qos"),
+																	path.MatchRelative().AtParent().AtName("qos_policy"),
+																),
+															},
 														},
 														"encryption": schema.BoolAttribute{
 															MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
@@ -2724,6 +2763,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														"qos_policy": schema.StringAttribute{
 															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("adaptive_qos_policy"),
+																	path.MatchRelative().AtParent().AtName("no_qos"),
+																),
+															},
 														},
 														"security_style": schema.StringAttribute{
 															MarkdownDescription: "Security Style. Security style for new volumes.",
@@ -2776,10 +2821,20 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												"data_lif_dns_name": schema.StringAttribute{
 													MarkdownDescription: "Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("data_lif_ip"),
+														),
+													},
 												},
 												"data_lif_ip": schema.StringAttribute{
 													MarkdownDescription: "Backend Data LIF IP Address is reachable at the given IP address.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("data_lif_dns_name"),
+														),
+													},
 												},
 												"igroup_name": schema.StringAttribute{
 													MarkdownDescription: "Name of the igroup for SAN volumes to use.",
@@ -2796,10 +2851,20 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 												"management_lif_dns_name": schema.StringAttribute{
 													MarkdownDescription: "Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("management_lif_ip"),
+														),
+													},
 												},
 												"management_lif_ip": schema.StringAttribute{
 													MarkdownDescription: "Backend Management LIF IP Address is reachable at the given IP address.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("management_lif_dns_name"),
+														),
+													},
 												},
 												"region": schema.StringAttribute{
 													MarkdownDescription: "Backend Region. Virtual Pool Region.",
@@ -2924,6 +2989,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																	"adaptive_qos_policy": schema.StringAttribute{
 																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("no_qos"),
+																				path.MatchRelative().AtParent().AtName("qos_policy"),
+																			),
+																		},
 																	},
 																	"encryption": schema.BoolAttribute{
 																		MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
@@ -2936,6 +3007,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																	"qos_policy": schema.StringAttribute{
 																		MarkdownDescription: "Policy configuration for this feature.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("adaptive_qos_policy"),
+																				path.MatchRelative().AtParent().AtName("no_qos"),
+																			),
+																		},
 																	},
 																	"security_style": schema.StringAttribute{
 																		MarkdownDescription: "Security Style. Security style for new volumes.",
@@ -3072,6 +3149,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														"adaptive_qos_policy": schema.StringAttribute{
 															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("no_qos"),
+																	path.MatchRelative().AtParent().AtName("qos_policy"),
+																),
+															},
 														},
 														"encryption": schema.BoolAttribute{
 															MarkdownDescription: "Enable Encryption. Enable NetApp volume encryption.",
@@ -3084,6 +3167,12 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 														"qos_policy": schema.StringAttribute{
 															MarkdownDescription: "Policy configuration for this feature.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("adaptive_qos_policy"),
+																	path.MatchRelative().AtParent().AtName("no_qos"),
+																),
+															},
 														},
 														"security_style": schema.StringAttribute{
 															MarkdownDescription: "Security Style. Security style for new volumes.",
@@ -3186,10 +3275,20 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																	"mgmt_dns_name": schema.StringAttribute{
 																		MarkdownDescription: "Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("mgmt_ip"),
+																			),
+																		},
 																	},
 																	"mgmt_ip": schema.StringAttribute{
 																		MarkdownDescription: "Management Endpoint is reachable at the given IP address.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("mgmt_dns_name"),
+																			),
+																		},
 																	},
 																},
 																Blocks: map[string]schema.Block{
@@ -3257,18 +3356,38 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																	"mgmt_dns_name": schema.StringAttribute{
 																		MarkdownDescription: "Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("mgmt_ip"),
+																			),
+																		},
 																	},
 																	"mgmt_ip": schema.StringAttribute{
 																		MarkdownDescription: "Management Endpoint is reachable at the given IP address.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("mgmt_dns_name"),
+																			),
+																		},
 																	},
 																	"nfs_endpoint_dns_name": schema.StringAttribute{
 																		MarkdownDescription: "Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("nfs_endpoint_ip"),
+																			),
+																		},
 																	},
 																	"nfs_endpoint_ip": schema.StringAttribute{
 																		MarkdownDescription: "Endpoint is reachable at the given IP address.",
 																		Optional:            true,
+																		Validators: []validator.String{
+																			stringvalidator.ConflictsWith(
+																				path.MatchRelative().AtParent().AtName("nfs_endpoint_dns_name"),
+																			),
+																		},
 																	},
 																},
 																Blocks: map[string]schema.Block{

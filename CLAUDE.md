@@ -789,9 +789,13 @@ The following individual files are manually maintained within otherwise auto-gen
 | `internal/provider/functions_registration.go`                          | Registers provider-defined functions with Terraform |
 | `internal/provider/addon_service_data_source.go`                       | Data source for querying addon service details      |
 | `internal/provider/addon_service_activation_status_data_source.go`     | Data source for checking addon activation           |
+| `internal/provider/quota_usage_data_source.go`                         | Data source for querying namespace quota usage      |
+| `internal/client/quota.go`                                             | Quota API client methods                            |
+| `internal/acctest/quota.go`                                            | Test pre-flight quota check helpers                 |
 | `templates/functions.md.tmpl`                                          | Template for generating function documentation      |
 | `examples/data-sources/addon_service/data-source.tf`                   | Example for addon_service data source               |
 | `examples/data-sources/addon_service_activation_status/data-source.tf` | Example for activation status data source           |
+| `examples/data-sources/quota_usage/data-source.tf`                     | Example for quota_usage data source                 |
 
 ### Functions Automation Rules
 

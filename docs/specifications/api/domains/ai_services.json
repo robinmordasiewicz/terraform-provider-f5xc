@@ -3,7 +3,7 @@
   "info": {
     "title": "Ai Services",
     "description": "Query handling through inference routing with production and test modes. Positive and negative quality markers with detailed categorization capture assistant performance. Streaming connections support authenticated access, subscription lifecycles, and feature flags. IP provisioning services allocate infrastructure resources for model workloads across distributed systems.",
-    "version": "2.0.39",
+    "version": "2.0.40",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -2470,13 +2470,19 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.134918+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.298029+00:00"
           },
           "negative_feedback": {
-            "$ref": "#/components/schemas/ai_assistantNegativeFeedbackDetails"
+            "$ref": "#/components/schemas/ai_assistantNegativeFeedbackDetails",
+            "x-f5xc-conflicts-with": [
+              "positive_feedback"
+            ]
           },
           "positive_feedback": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "negative_feedback"
+            ]
           },
           "query": {
             "type": "string",
@@ -2576,7 +2582,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.135008+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.298117+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -2617,7 +2623,14 @@
             }
           },
           "explain_log": {
-            "$ref": "#/components/schemas/explain_log_recordExplainLogRecordResponse"
+            "$ref": "#/components/schemas/explain_log_recordExplainLogRecordResponse",
+            "x-f5xc-conflicts-with": [
+              "gen_dashboard_filter",
+              "generic_response",
+              "list_response",
+              "site_analysis_response",
+              "widget_response"
+            ]
           },
           "follow_up_queries": {
             "type": "array",
@@ -2644,13 +2657,34 @@
             }
           },
           "gen_dashboard_filter": {
-            "$ref": "#/components/schemas/gen_dashboard_filterGenDashboardFilterResponse"
+            "$ref": "#/components/schemas/gen_dashboard_filterGenDashboardFilterResponse",
+            "x-f5xc-conflicts-with": [
+              "explain_log",
+              "generic_response",
+              "list_response",
+              "site_analysis_response",
+              "widget_response"
+            ]
           },
           "generic_response": {
-            "$ref": "#/components/schemas/commonGenericResponse"
+            "$ref": "#/components/schemas/commonGenericResponse",
+            "x-f5xc-conflicts-with": [
+              "explain_log",
+              "gen_dashboard_filter",
+              "list_response",
+              "site_analysis_response",
+              "widget_response"
+            ]
           },
           "list_response": {
-            "$ref": "#/components/schemas/listListResponse"
+            "$ref": "#/components/schemas/listListResponse",
+            "x-f5xc-conflicts-with": [
+              "explain_log",
+              "gen_dashboard_filter",
+              "generic_response",
+              "site_analysis_response",
+              "widget_response"
+            ]
           },
           "query_id": {
             "type": "string",
@@ -2676,10 +2710,24 @@
             "x-field-mutability": "read-only"
           },
           "site_analysis_response": {
-            "$ref": "#/components/schemas/site_analysisSiteAnalysisResponse"
+            "$ref": "#/components/schemas/site_analysisSiteAnalysisResponse",
+            "x-f5xc-conflicts-with": [
+              "explain_log",
+              "gen_dashboard_filter",
+              "generic_response",
+              "list_response",
+              "widget_response"
+            ]
           },
           "widget_response": {
-            "$ref": "#/components/schemas/widgetWidgetResponse"
+            "$ref": "#/components/schemas/widgetWidgetResponse",
+            "x-f5xc-conflicts-with": [
+              "explain_log",
+              "gen_dashboard_filter",
+              "generic_response",
+              "list_response",
+              "site_analysis_response"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -2929,7 +2977,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.135161+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.298269+00:00"
           },
           "log_filters": {
             "type": "array",
@@ -2963,7 +3011,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.135201+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.298309+00:00"
           },
           "object_name": {
             "type": "string",
@@ -3014,7 +3062,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.135250+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.298369+00:00"
           },
           "type": {
             "$ref": "#/components/schemas/commonDashboardLinkType"
@@ -3177,7 +3225,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.135342+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.298463+00:00"
           },
           "title": {
             "type": "string",
@@ -3196,7 +3244,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.135371+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.298492+00:00"
           },
           "tooltip": {
             "type": "string",
@@ -3314,7 +3362,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.135425+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.298545+00:00"
           },
           "title": {
             "type": "string",
@@ -3333,7 +3381,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.135454+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.298574+00:00"
           },
           "url": {
             "type": "string",
@@ -3433,10 +3481,16 @@
         "x-ves-proto-message": "ves.io.schema.ai_assistant.common.Link",
         "properties": {
           "dashboard_link": {
-            "$ref": "#/components/schemas/commonDashboardLink"
+            "$ref": "#/components/schemas/commonDashboardLink",
+            "x-f5xc-conflicts-with": [
+              "generic_link"
+            ]
           },
           "generic_link": {
-            "$ref": "#/components/schemas/commonGenericLink"
+            "$ref": "#/components/schemas/commonGenericLink",
+            "x-f5xc-conflicts-with": [
+              "dashboard_link"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -3476,7 +3530,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.135548+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.298665+00:00"
           },
           "op": {
             "$ref": "#/components/schemas/commonFilterOperator"
@@ -3546,7 +3600,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.135607+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.298747+00:00"
           },
           "type": {
             "$ref": "#/components/schemas/commonDashboardLinkType"
@@ -3808,7 +3862,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.135722+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.298895+00:00"
           },
           "type": {
             "type": "string",
@@ -3997,10 +4051,20 @@
             }
           },
           "bot_defense_event_details": {
-            "$ref": "#/components/schemas/explain_log_recordBotDefenseEventDetails"
+            "$ref": "#/components/schemas/explain_log_recordBotDefenseEventDetails",
+            "x-f5xc-conflicts-with": [
+              "request_details",
+              "svc_policy_event_details",
+              "waf_event_details"
+            ]
           },
           "request_details": {
-            "$ref": "#/components/schemas/explain_log_recordRequestDetails"
+            "$ref": "#/components/schemas/explain_log_recordRequestDetails",
+            "x-f5xc-conflicts-with": [
+              "bot_defense_event_details",
+              "svc_policy_event_details",
+              "waf_event_details"
+            ]
           },
           "summary": {
             "type": "string",
@@ -4019,10 +4083,20 @@
             }
           },
           "svc_policy_event_details": {
-            "$ref": "#/components/schemas/explain_log_recordSvcPolicyEventDetails"
+            "$ref": "#/components/schemas/explain_log_recordSvcPolicyEventDetails",
+            "x-f5xc-conflicts-with": [
+              "bot_defense_event_details",
+              "request_details",
+              "waf_event_details"
+            ]
           },
           "waf_event_details": {
-            "$ref": "#/components/schemas/explain_log_recordWAFEventDetails"
+            "$ref": "#/components/schemas/explain_log_recordWAFEventDetails",
+            "x-f5xc-conflicts-with": [
+              "bot_defense_event_details",
+              "request_details",
+              "svc_policy_event_details"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4092,7 +4166,7 @@
             "x-original-maxLength": 1024,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.135895+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.299058+00:00"
           },
           "rsp_code": {
             "type": "integer",
@@ -4252,7 +4326,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.136007+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.299165+00:00"
           },
           "state": {
             "type": "string",
@@ -4448,7 +4522,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.136135+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.299292+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4537,7 +4611,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.136194+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.299362+00:00"
           },
           "state": {
             "type": "string",
@@ -4786,7 +4860,7 @@
             "maxLength": 26,
             "minLength": 15,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.136344+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.299513+00:00"
           },
           "title": {
             "type": "string",
@@ -4805,7 +4879,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.136372+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.299542+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4964,7 +5038,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.136445+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.299613+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -5194,7 +5268,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.136575+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.299741+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {

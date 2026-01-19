@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -223,14 +225,44 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 								"as_path": schema.StringAttribute{
 									MarkdownDescription: "AS-Path Prepending is generally used to influence incoming traffic.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("aggregate"),
+											path.MatchRelative().AtParent().AtName("allow"),
+											path.MatchRelative().AtParent().AtName("community"),
+											path.MatchRelative().AtParent().AtName("deny"),
+											path.MatchRelative().AtParent().AtName("local_preference"),
+											path.MatchRelative().AtParent().AtName("metric"),
+										),
+									},
 								},
 								"local_preference": schema.Int64Attribute{
 									MarkdownDescription: "BGP Local Preference is generally used to influence outgoing traffic.",
 									Optional:            true,
+									Validators: []validator.Int64{
+										int64validator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("aggregate"),
+											path.MatchRelative().AtParent().AtName("allow"),
+											path.MatchRelative().AtParent().AtName("as_path"),
+											path.MatchRelative().AtParent().AtName("community"),
+											path.MatchRelative().AtParent().AtName("deny"),
+											path.MatchRelative().AtParent().AtName("metric"),
+										),
+									},
 								},
 								"metric": schema.Int64Attribute{
 									MarkdownDescription: "The Multi-Exit Discriminator metric to indicate the preferred path to AS.",
 									Optional:            true,
+									Validators: []validator.Int64{
+										int64validator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("aggregate"),
+											path.MatchRelative().AtParent().AtName("allow"),
+											path.MatchRelative().AtParent().AtName("as_path"),
+											path.MatchRelative().AtParent().AtName("community"),
+											path.MatchRelative().AtParent().AtName("deny"),
+											path.MatchRelative().AtParent().AtName("local_preference"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -261,6 +293,12 @@ func (r *BGPRoutingPolicyResource) Schema(ctx context.Context, req resource.Sche
 								"as_path": schema.StringAttribute{
 									MarkdownDescription: "AS path can also be a regex, which will be matched against route information.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("community"),
+											path.MatchRelative().AtParent().AtName("ip_prefixes"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{

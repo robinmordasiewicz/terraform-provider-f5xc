@@ -1,0 +1,73 @@
+{
+  "operation": "syntax",
+  "resource": "service_policy_rule",
+  "totalBlocks": 29,
+  "totalAttributes": 10,
+  "totalOneOfGroups": 4,
+  "blocks": [
+    "any_asn",
+    "any_client",
+    "any_ip",
+    "api_group_matcher",
+    "arg_matchers",
+    "asn_list",
+    "asn_matcher",
+    "body_matcher",
+    "bot_action",
+    "client_name_matcher",
+    "client_selector",
+    "cookie_matchers",
+    "domain_matcher",
+    "headers",
+    "http_method",
+    "ip_matcher",
+    "ip_prefix_list",
+    "ip_threat_category_list",
+    "ja4_tls_fingerprint",
+    "jwt_claims",
+    "label_matcher",
+    "mum_action",
+    "path",
+    "port_matcher",
+    "query_params",
+    "request_constraints",
+    "segment_policy",
+    "tls_fingerprint_matcher",
+    "waf_action"
+  ],
+  "attributes": [
+    "action",
+    "annotations",
+    "client_name",
+    "description",
+    "disable",
+    "expiration_timestamp",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {
+    "asn_choice": [
+      "any_asn",
+      "asn_list",
+      "asn_matcher"
+    ],
+    "client_choice": [
+      "any_client",
+      "client_name",
+      "client_name_matcher",
+      "client_selector",
+      "ip_threat_category_list"
+    ],
+    "ip_choice": [
+      "any_ip",
+      "ip_matcher",
+      "ip_prefix_list"
+    ],
+    "tls_fingerprint_choice": [
+      "ja4_tls_fingerprint",
+      "tls_fingerprint_matcher"
+    ]
+  }
+}

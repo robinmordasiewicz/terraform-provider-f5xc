@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -594,6 +596,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 					"node": schema.StringAttribute{
 						MarkdownDescription: "Configuration will apply to a device on the given node of the site.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("cluster"),
+							),
+						},
 					},
 					"priority": schema.Int64Attribute{
 						MarkdownDescription: "Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority.",
@@ -632,6 +639,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 					"node": schema.StringAttribute{
 						MarkdownDescription: "Configuration will apply to a device on the given node of the site.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("cluster"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -654,6 +666,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 					"node": schema.StringAttribute{
 						MarkdownDescription: "Configuration will apply to a device on the given node.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("cluster"),
+							),
+						},
 					},
 					"priority": schema.Int64Attribute{
 						MarkdownDescription: "Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority.",
@@ -662,6 +679,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 					"vlan_id": schema.Int64Attribute{
 						MarkdownDescription: "Configure a VLAN tagged ethernet interface.",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("untagged"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -688,10 +710,21 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 										"dgw_address": schema.StringAttribute{
 											MarkdownDescription: "Enter a IPv4 address from the network prefix to be used as the default gateway.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("first_address"),
+													path.MatchRelative().AtParent().AtName("last_address"),
+												),
+											},
 										},
 										"dns_address": schema.StringAttribute{
 											MarkdownDescription: "Enter a IPv4 address from the network prefix to be used as the DNS server.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("same_as_dgw"),
+												),
+											},
 										},
 										"network_prefix": schema.StringAttribute{
 											MarkdownDescription: "Set the network prefix for the site. Ex: 10.1.1.0/24.",
@@ -757,6 +790,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 									"network_prefix": schema.StringAttribute{
 										MarkdownDescription: "Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("stateful"),
+											),
+										},
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -780,6 +818,12 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 													"configured_address": schema.StringAttribute{
 														MarkdownDescription: "Configured address from the network prefix is chosen as DNS server.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("first_address"),
+																path.MatchRelative().AtParent().AtName("last_address"),
+															),
+														},
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -952,6 +996,11 @@ func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.Sche
 							"vlan_id": schema.Int64Attribute{
 								MarkdownDescription: "Configure a VLAN tagged interface.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("untagged"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{

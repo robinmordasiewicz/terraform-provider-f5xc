@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -358,6 +359,12 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 					"custom_external_id": schema.StringAttribute{
 						MarkdownDescription: "External ID is Custom ID.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("external_id_is_optional"),
+								path.MatchRelative().AtParent().AtName("external_id_is_tenant_id"),
+							),
+						},
 					},
 					"duration_seconds": schema.Int64Attribute{
 						MarkdownDescription: "The duration, in seconds of the role session.",

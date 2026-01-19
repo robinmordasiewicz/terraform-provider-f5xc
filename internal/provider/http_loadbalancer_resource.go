@@ -9,6 +9,9 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -9448,10 +9451,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"port": schema.Int64Attribute{
 									MarkdownDescription: "Port to Listen.",
 									Optional:            true,
+									Validators: []validator.Int64{
+										int64validator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("port_ranges"),
+											path.MatchRelative().AtParent().AtName("use_default_port"),
+										),
+									},
 								},
 								"port_ranges": schema.StringAttribute{
 									MarkdownDescription: "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("port"),
+											path.MatchRelative().AtParent().AtName("use_default_port"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -9535,10 +9550,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"specific_v6_vip": schema.StringAttribute{
 											MarkdownDescription: "Use given IPv6 address as VIP on virtual Network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("default_v6_vip"),
+												),
+											},
 										},
 										"specific_vip": schema.StringAttribute{
 											MarkdownDescription: "Use given IPv4 address as VIP on virtual Network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("default_vip"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -9761,6 +9786,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"specific_domain": schema.StringAttribute{
 									MarkdownDescription: "The rule will apply for a specific domain. For",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("any_domain"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -10181,6 +10211,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"specific_domain": schema.StringAttribute{
 									MarkdownDescription: "The rule will apply for a specific domain. For",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("any_domain"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -10589,6 +10624,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"specific_domain": schema.StringAttribute{
 									MarkdownDescription: "The rule will apply for a specific domain.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("any_domain"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -11048,10 +11088,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"base_path": schema.StringAttribute{
 											MarkdownDescription: "The base path which this validation applies to.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("any_url"),
+													path.MatchRelative().AtParent().AtName("api_endpoint"),
+													path.MatchRelative().AtParent().AtName("api_groups"),
+												),
+											},
 										},
 										"specific_domain": schema.StringAttribute{
 											MarkdownDescription: "The rule will apply for a specific domain. For",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("any_domain"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -11508,6 +11560,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"specific_domain": schema.StringAttribute{
 									MarkdownDescription: "The rule will apply for a specific domain.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("any_domain"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -11995,10 +12052,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"api_group": schema.StringAttribute{
 															MarkdownDescription: "The API group which this validation applies to.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("api_endpoint"),
+																	path.MatchRelative().AtParent().AtName("base_path"),
+																),
+															},
 														},
 														"base_path": schema.StringAttribute{
 															MarkdownDescription: "The base path which this validation applies to.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("api_endpoint"),
+																	path.MatchRelative().AtParent().AtName("api_group"),
+																),
+															},
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -12150,10 +12219,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"api_group": schema.StringAttribute{
 															MarkdownDescription: "The API group which this validation applies to.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("api_endpoint"),
+																	path.MatchRelative().AtParent().AtName("base_path"),
+																),
+															},
 														},
 														"base_path": schema.StringAttribute{
 															MarkdownDescription: "The base path which this validation applies to.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("api_endpoint"),
+																	path.MatchRelative().AtParent().AtName("api_group"),
+																),
+															},
 														},
 													},
 													Blocks: map[string]schema.Block{
@@ -12207,14 +12288,31 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"api_group": schema.StringAttribute{
 											MarkdownDescription: "The API group which this validation applies to.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("api_endpoint"),
+													path.MatchRelative().AtParent().AtName("base_path"),
+												),
+											},
 										},
 										"base_path": schema.StringAttribute{
 											MarkdownDescription: "The base path which this validation applies to.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("api_endpoint"),
+													path.MatchRelative().AtParent().AtName("api_group"),
+												),
+											},
 										},
 										"specific_domain": schema.StringAttribute{
 											MarkdownDescription: "The rule will apply for a specific domain.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("any_domain"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -12623,6 +12721,14 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						"as_number": schema.Int64Attribute{
 							MarkdownDescription: "RFC 6793 defined 4-byte AS number.",
 							Optional:            true,
+							Validators: []validator.Int64{
+								int64validator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("http_header"),
+									path.MatchRelative().AtParent().AtName("ip_prefix"),
+									path.MatchRelative().AtParent().AtName("ipv6_prefix"),
+									path.MatchRelative().AtParent().AtName("user_identifier"),
+								),
+							},
 						},
 						"expiration_timestamp": schema.StringAttribute{
 							MarkdownDescription: "Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
@@ -12631,14 +12737,38 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						"ip_prefix": schema.StringAttribute{
 							MarkdownDescription: "IPv4 prefix string.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("as_number"),
+									path.MatchRelative().AtParent().AtName("http_header"),
+									path.MatchRelative().AtParent().AtName("ipv6_prefix"),
+									path.MatchRelative().AtParent().AtName("user_identifier"),
+								),
+							},
 						},
 						"ipv6_prefix": schema.StringAttribute{
 							MarkdownDescription: "IPv6 prefix string.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("as_number"),
+									path.MatchRelative().AtParent().AtName("http_header"),
+									path.MatchRelative().AtParent().AtName("ip_prefix"),
+									path.MatchRelative().AtParent().AtName("user_identifier"),
+								),
+							},
 						},
 						"user_identifier": schema.StringAttribute{
 							MarkdownDescription: "Identify user based on user identifier. User identifier value needs to be copied from security event.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("as_number"),
+									path.MatchRelative().AtParent().AtName("http_header"),
+									path.MatchRelative().AtParent().AtName("ip_prefix"),
+									path.MatchRelative().AtParent().AtName("ipv6_prefix"),
+								),
+							},
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -12656,6 +12786,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"exact": schema.StringAttribute{
 												MarkdownDescription: "Header value to match exactly.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("presence"),
+														path.MatchRelative().AtParent().AtName("regex"),
+													),
+												},
 											},
 											"invert_match": schema.BoolAttribute{
 												MarkdownDescription: "Invert the result of the match to detect missing header or non-matching value.",
@@ -12668,10 +12804,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"presence": schema.BoolAttribute{
 												MarkdownDescription: "If true, check for presence of header.",
 												Optional:            true,
+												Validators: []validator.Bool{
+													boolvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("exact"),
+														path.MatchRelative().AtParent().AtName("regex"),
+													),
+												},
 											},
 											"regex": schema.StringAttribute{
 												MarkdownDescription: "Regex match of the header value in re2 format.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("exact"),
+														path.MatchRelative().AtParent().AtName("presence"),
+													),
+												},
 											},
 										},
 									},
@@ -12770,14 +12918,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"exact_value": schema.StringAttribute{
 															MarkdownDescription: "Exact domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("regex_value"),
+																	path.MatchRelative().AtParent().AtName("suffix_value"),
+																),
+															},
 														},
 														"regex_value": schema.StringAttribute{
 															MarkdownDescription: "Regular Expression value for the domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("exact_value"),
+																	path.MatchRelative().AtParent().AtName("suffix_value"),
+																),
+															},
 														},
 														"suffix_value": schema.StringAttribute{
 															MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("exact_value"),
+																	path.MatchRelative().AtParent().AtName("regex_value"),
+																),
+															},
 														},
 													},
 												},
@@ -12800,14 +12966,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"path": schema.StringAttribute{
 															MarkdownDescription: "Exact path value to match.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("prefix"),
+																	path.MatchRelative().AtParent().AtName("regex"),
+																),
+															},
 														},
 														"prefix": schema.StringAttribute{
 															MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("path"),
+																	path.MatchRelative().AtParent().AtName("regex"),
+																),
+															},
 														},
 														"regex": schema.StringAttribute{
 															MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("path"),
+																	path.MatchRelative().AtParent().AtName("prefix"),
+																),
+															},
 														},
 													},
 												},
@@ -12834,14 +13018,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"exact_value": schema.StringAttribute{
 															MarkdownDescription: "Exact domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("regex_value"),
+																	path.MatchRelative().AtParent().AtName("suffix_value"),
+																),
+															},
 														},
 														"regex_value": schema.StringAttribute{
 															MarkdownDescription: "Regular Expression value for the domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("exact_value"),
+																	path.MatchRelative().AtParent().AtName("suffix_value"),
+																),
+															},
 														},
 														"suffix_value": schema.StringAttribute{
 															MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("exact_value"),
+																	path.MatchRelative().AtParent().AtName("regex_value"),
+																),
+															},
 														},
 													},
 												},
@@ -12864,14 +13066,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"path": schema.StringAttribute{
 															MarkdownDescription: "Exact path value to match.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("prefix"),
+																	path.MatchRelative().AtParent().AtName("regex"),
+																),
+															},
 														},
 														"prefix": schema.StringAttribute{
 															MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("path"),
+																	path.MatchRelative().AtParent().AtName("regex"),
+																),
+															},
 														},
 														"regex": schema.StringAttribute{
 															MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("path"),
+																	path.MatchRelative().AtParent().AtName("prefix"),
+																),
+															},
 														},
 													},
 												},
@@ -12897,14 +13117,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"exact_value": schema.StringAttribute{
 															MarkdownDescription: "Exact domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("regex_value"),
+																	path.MatchRelative().AtParent().AtName("suffix_value"),
+																),
+															},
 														},
 														"regex_value": schema.StringAttribute{
 															MarkdownDescription: "Regular Expression value for the domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("exact_value"),
+																	path.MatchRelative().AtParent().AtName("suffix_value"),
+																),
+															},
 														},
 														"suffix_value": schema.StringAttribute{
 															MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("exact_value"),
+																	path.MatchRelative().AtParent().AtName("regex_value"),
+																),
+															},
 														},
 													},
 												},
@@ -12927,14 +13165,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"path": schema.StringAttribute{
 															MarkdownDescription: "Exact path value to match.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("prefix"),
+																	path.MatchRelative().AtParent().AtName("regex"),
+																),
+															},
 														},
 														"prefix": schema.StringAttribute{
 															MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("path"),
+																	path.MatchRelative().AtParent().AtName("regex"),
+																),
+															},
 														},
 														"regex": schema.StringAttribute{
 															MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("path"),
+																	path.MatchRelative().AtParent().AtName("prefix"),
+																),
+															},
 														},
 													},
 												},
@@ -13021,14 +13277,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"exact_value": schema.StringAttribute{
 													MarkdownDescription: "Exact domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("regex_value"),
+															path.MatchRelative().AtParent().AtName("suffix_value"),
+														),
+													},
 												},
 												"regex_value": schema.StringAttribute{
 													MarkdownDescription: "Regular Expression value for the domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("exact_value"),
+															path.MatchRelative().AtParent().AtName("suffix_value"),
+														),
+													},
 												},
 												"suffix_value": schema.StringAttribute{
 													MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("exact_value"),
+															path.MatchRelative().AtParent().AtName("regex_value"),
+														),
+													},
 												},
 											},
 										},
@@ -13337,14 +13611,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"path": schema.StringAttribute{
 													MarkdownDescription: "Exact path value to match.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("prefix"),
+															path.MatchRelative().AtParent().AtName("regex"),
+														),
+													},
 												},
 												"prefix": schema.StringAttribute{
 													MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("path"),
+															path.MatchRelative().AtParent().AtName("regex"),
+														),
+													},
 												},
 												"regex": schema.StringAttribute{
 													MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("path"),
+															path.MatchRelative().AtParent().AtName("prefix"),
+														),
+													},
 												},
 											},
 										},
@@ -13455,14 +13747,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"exact_value": schema.StringAttribute{
 													MarkdownDescription: "Exact domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("regex_value"),
+															path.MatchRelative().AtParent().AtName("suffix_value"),
+														),
+													},
 												},
 												"regex_value": schema.StringAttribute{
 													MarkdownDescription: "Regular Expression value for the domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("exact_value"),
+															path.MatchRelative().AtParent().AtName("suffix_value"),
+														),
+													},
 												},
 												"suffix_value": schema.StringAttribute{
 													MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("exact_value"),
+															path.MatchRelative().AtParent().AtName("regex_value"),
+														),
+													},
 												},
 											},
 										},
@@ -13485,14 +13795,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"path": schema.StringAttribute{
 													MarkdownDescription: "Exact path value to match.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("prefix"),
+															path.MatchRelative().AtParent().AtName("regex"),
+														),
+													},
 												},
 												"prefix": schema.StringAttribute{
 													MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("path"),
+															path.MatchRelative().AtParent().AtName("regex"),
+														),
+													},
 												},
 												"regex": schema.StringAttribute{
 													MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("path"),
+															path.MatchRelative().AtParent().AtName("prefix"),
+														),
+													},
 												},
 											},
 										},
@@ -13519,14 +13847,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"exact_value": schema.StringAttribute{
 													MarkdownDescription: "Exact domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("regex_value"),
+															path.MatchRelative().AtParent().AtName("suffix_value"),
+														),
+													},
 												},
 												"regex_value": schema.StringAttribute{
 													MarkdownDescription: "Regular Expression value for the domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("exact_value"),
+															path.MatchRelative().AtParent().AtName("suffix_value"),
+														),
+													},
 												},
 												"suffix_value": schema.StringAttribute{
 													MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("exact_value"),
+															path.MatchRelative().AtParent().AtName("regex_value"),
+														),
+													},
 												},
 											},
 										},
@@ -13549,14 +13895,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"path": schema.StringAttribute{
 													MarkdownDescription: "Exact path value to match.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("prefix"),
+															path.MatchRelative().AtParent().AtName("regex"),
+														),
+													},
 												},
 												"prefix": schema.StringAttribute{
 													MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("path"),
+															path.MatchRelative().AtParent().AtName("regex"),
+														),
+													},
 												},
 												"regex": schema.StringAttribute{
 													MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("path"),
+															path.MatchRelative().AtParent().AtName("prefix"),
+														),
+													},
 												},
 											},
 										},
@@ -13582,14 +13946,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"exact_value": schema.StringAttribute{
 													MarkdownDescription: "Exact domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("regex_value"),
+															path.MatchRelative().AtParent().AtName("suffix_value"),
+														),
+													},
 												},
 												"regex_value": schema.StringAttribute{
 													MarkdownDescription: "Regular Expression value for the domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("exact_value"),
+															path.MatchRelative().AtParent().AtName("suffix_value"),
+														),
+													},
 												},
 												"suffix_value": schema.StringAttribute{
 													MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("exact_value"),
+															path.MatchRelative().AtParent().AtName("regex_value"),
+														),
+													},
 												},
 											},
 										},
@@ -13612,14 +13994,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"path": schema.StringAttribute{
 													MarkdownDescription: "Exact path value to match.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("prefix"),
+															path.MatchRelative().AtParent().AtName("regex"),
+														),
+													},
 												},
 												"prefix": schema.StringAttribute{
 													MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("path"),
+															path.MatchRelative().AtParent().AtName("regex"),
+														),
+													},
 												},
 												"regex": schema.StringAttribute{
 													MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("path"),
+															path.MatchRelative().AtParent().AtName("prefix"),
+														),
+													},
 												},
 											},
 										},
@@ -13774,10 +14174,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"cache_ttl_default": schema.StringAttribute{
 								MarkdownDescription: "Use Cache TTL Provided by Origin, and set a contigency TTL value in case one is not provided.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("cache_disabled"),
+										path.MatchRelative().AtParent().AtName("cache_ttl_override"),
+									),
+								},
 							},
 							"cache_ttl_override": schema.StringAttribute{
 								MarkdownDescription: "Always override the Cahce TTL provided by Origin.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("cache_disabled"),
+										path.MatchRelative().AtParent().AtName("cache_ttl_default"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -13833,14 +14245,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"exact_value": schema.StringAttribute{
 															MarkdownDescription: "Exact domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("regex_value"),
+																	path.MatchRelative().AtParent().AtName("suffix_value"),
+																),
+															},
 														},
 														"regex_value": schema.StringAttribute{
 															MarkdownDescription: "Regular Expression value for the domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("exact_value"),
+																	path.MatchRelative().AtParent().AtName("suffix_value"),
+																),
+															},
 														},
 														"suffix_value": schema.StringAttribute{
 															MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("exact_value"),
+																	path.MatchRelative().AtParent().AtName("regex_value"),
+																),
+															},
 														},
 													},
 												},
@@ -13863,14 +14293,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"path": schema.StringAttribute{
 															MarkdownDescription: "Exact path value to match.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("prefix"),
+																	path.MatchRelative().AtParent().AtName("regex"),
+																),
+															},
 														},
 														"prefix": schema.StringAttribute{
 															MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("path"),
+																	path.MatchRelative().AtParent().AtName("regex"),
+																),
+															},
 														},
 														"regex": schema.StringAttribute{
 															MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("path"),
+																	path.MatchRelative().AtParent().AtName("prefix"),
+																),
+															},
 														},
 													},
 												},
@@ -13897,14 +14345,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"exact_value": schema.StringAttribute{
 															MarkdownDescription: "Exact domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("regex_value"),
+																	path.MatchRelative().AtParent().AtName("suffix_value"),
+																),
+															},
 														},
 														"regex_value": schema.StringAttribute{
 															MarkdownDescription: "Regular Expression value for the domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("exact_value"),
+																	path.MatchRelative().AtParent().AtName("suffix_value"),
+																),
+															},
 														},
 														"suffix_value": schema.StringAttribute{
 															MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("exact_value"),
+																	path.MatchRelative().AtParent().AtName("regex_value"),
+																),
+															},
 														},
 													},
 												},
@@ -13927,14 +14393,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"path": schema.StringAttribute{
 															MarkdownDescription: "Exact path value to match.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("prefix"),
+																	path.MatchRelative().AtParent().AtName("regex"),
+																),
+															},
 														},
 														"prefix": schema.StringAttribute{
 															MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("path"),
+																	path.MatchRelative().AtParent().AtName("regex"),
+																),
+															},
 														},
 														"regex": schema.StringAttribute{
 															MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("path"),
+																	path.MatchRelative().AtParent().AtName("prefix"),
+																),
+															},
 														},
 													},
 												},
@@ -13955,14 +14439,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"exact_value": schema.StringAttribute{
 															MarkdownDescription: "Exact domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("regex_value"),
+																	path.MatchRelative().AtParent().AtName("suffix_value"),
+																),
+															},
 														},
 														"regex_value": schema.StringAttribute{
 															MarkdownDescription: "Regular Expression value for the domain name.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("exact_value"),
+																	path.MatchRelative().AtParent().AtName("suffix_value"),
+																),
+															},
 														},
 														"suffix_value": schema.StringAttribute{
 															MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("exact_value"),
+																	path.MatchRelative().AtParent().AtName("regex_value"),
+																),
+															},
 														},
 													},
 												},
@@ -13985,14 +14487,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														"path": schema.StringAttribute{
 															MarkdownDescription: "Exact path value to match.",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("prefix"),
+																	path.MatchRelative().AtParent().AtName("regex"),
+																),
+															},
 														},
 														"prefix": schema.StringAttribute{
 															MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("path"),
+																	path.MatchRelative().AtParent().AtName("regex"),
+																),
+															},
 														},
 														"regex": schema.StringAttribute{
 															MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 															Optional:            true,
+															Validators: []validator.String{
+																stringvalidator.ConflictsWith(
+																	path.MatchRelative().AtParent().AtName("path"),
+																	path.MatchRelative().AtParent().AtName("prefix"),
+																),
+															},
 														},
 													},
 												},
@@ -14116,10 +14636,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						"exact_value": schema.StringAttribute{
 							MarkdownDescription: "Exact domain name.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("any_domain"),
+									path.MatchRelative().AtParent().AtName("suffix_value"),
+								),
+							},
 						},
 						"suffix_value": schema.StringAttribute{
 							MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("any_domain"),
+									path.MatchRelative().AtParent().AtName("exact_value"),
+								),
+							},
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -14148,14 +14680,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"path": schema.StringAttribute{
 									MarkdownDescription: "Exact path value to match.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("prefix"),
+											path.MatchRelative().AtParent().AtName("regex"),
+										),
+									},
 								},
 								"prefix": schema.StringAttribute{
 									MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("path"),
+											path.MatchRelative().AtParent().AtName("regex"),
+										),
+									},
 								},
 								"regex": schema.StringAttribute{
 									MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("path"),
+											path.MatchRelative().AtParent().AtName("prefix"),
+										),
+									},
 								},
 							},
 						},
@@ -14270,6 +14820,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 					"health_check_port": schema.Int64Attribute{
 						MarkdownDescription: "Port used for performing health check.",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("same_as_endpoint_port"),
+							),
+						},
 					},
 					"loadbalancer_algorithm": schema.StringAttribute{
 						MarkdownDescription: "[Enum: ROUND_ROBIN|LEAST_REQUEST|RING_HASH|RANDOM|LB_OVERRIDE] Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in.. Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`. Defaults to `ROUND_ROBIN`. Server applies default when omitted.",
@@ -14278,6 +14833,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 					"port": schema.Int64Attribute{
 						MarkdownDescription: "Endpoint service is available on this port.",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("automatic_port"),
+								path.MatchRelative().AtParent().AtName("lb_port"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -14295,6 +14856,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"panic_threshold": schema.Int64Attribute{
 								MarkdownDescription: "Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("no_panic_threshold"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -15080,10 +15646,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"max_session_keys": schema.Int64Attribute{
 								MarkdownDescription: "Number of session keys that are cached.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("default_session_key_caching"),
+										path.MatchRelative().AtParent().AtName("disable_session_key_caching"),
+									),
+								},
 							},
 							"sni": schema.StringAttribute{
 								MarkdownDescription: "SNI value to be used.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("disable_sni"),
+										path.MatchRelative().AtParent().AtName("use_host_header_as_sni"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -15244,6 +15822,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("trusted_ca"),
+											),
+										},
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -15786,10 +16369,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						"exact_value": schema.StringAttribute{
 							MarkdownDescription: "Exact domain name.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("any_domain"),
+									path.MatchRelative().AtParent().AtName("suffix_value"),
+								),
+							},
 						},
 						"suffix_value": schema.StringAttribute{
 							MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("any_domain"),
+									path.MatchRelative().AtParent().AtName("exact_value"),
+								),
+							},
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -15853,10 +16448,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 					"port": schema.Int64Attribute{
 						MarkdownDescription: "HTTP port to Listen.",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("port_ranges"),
+							),
+						},
 					},
 					"port_ranges": schema.StringAttribute{
 						MarkdownDescription: "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("port"),
+							),
+						},
 					},
 				},
 			},
@@ -15870,6 +16475,13 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 					"append_server_name": schema.StringAttribute{
 						MarkdownDescription: "Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_header"),
+								path.MatchRelative().AtParent().AtName("pass_through"),
+								path.MatchRelative().AtParent().AtName("server_name"),
+							),
+						},
 					},
 					"connection_idle_timeout": schema.Int64Attribute{
 						MarkdownDescription: "The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed.",
@@ -15882,14 +16494,31 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 					"port": schema.Int64Attribute{
 						MarkdownDescription: "HTTPS port to Listen.",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("port_ranges"),
+							),
+						},
 					},
 					"port_ranges": schema.StringAttribute{
 						MarkdownDescription: "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("port"),
+							),
+						},
 					},
 					"server_name": schema.StringAttribute{
 						MarkdownDescription: "Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("append_server_name"),
+								path.MatchRelative().AtParent().AtName("default_header"),
+								path.MatchRelative().AtParent().AtName("pass_through"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -16036,6 +16665,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("trusted_ca"),
+											),
+										},
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -16228,6 +16862,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("trusted_ca"),
+											),
+										},
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -16313,6 +16952,13 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 					"append_server_name": schema.StringAttribute{
 						MarkdownDescription: "Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_header"),
+								path.MatchRelative().AtParent().AtName("pass_through"),
+								path.MatchRelative().AtParent().AtName("server_name"),
+							),
+						},
 					},
 					"connection_idle_timeout": schema.Int64Attribute{
 						MarkdownDescription: "The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed.",
@@ -16325,14 +16971,31 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 					"port": schema.Int64Attribute{
 						MarkdownDescription: "HTTPS port to Listen.",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("port_ranges"),
+							),
+						},
 					},
 					"port_ranges": schema.StringAttribute{
 						MarkdownDescription: "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("port"),
+							),
+						},
 					},
 					"server_name": schema.StringAttribute{
 						MarkdownDescription: "Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("append_server_name"),
+								path.MatchRelative().AtParent().AtName("default_header"),
+								path.MatchRelative().AtParent().AtName("pass_through"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -16448,6 +17111,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Upload a Root CA Certificate specifically for this Load Balancer.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("trusted_ca"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -16579,6 +17247,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 							"issuer": schema.StringAttribute{
 								MarkdownDescription: "Exact Match.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("issuer_disable"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -16675,6 +17348,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 					"rps_threshold": schema.Int64Attribute{
 						MarkdownDescription: "Configure custom RPS threshold.",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_rps_threshold"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -16820,14 +17498,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												"exact_value": schema.StringAttribute{
 													MarkdownDescription: "Exact domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("regex_value"),
+															path.MatchRelative().AtParent().AtName("suffix_value"),
+														),
+													},
 												},
 												"regex_value": schema.StringAttribute{
 													MarkdownDescription: "Regular Expression value for the domain name.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("exact_value"),
+															path.MatchRelative().AtParent().AtName("suffix_value"),
+														),
+													},
 												},
 												"suffix_value": schema.StringAttribute{
 													MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("exact_value"),
+															path.MatchRelative().AtParent().AtName("regex_value"),
+														),
+													},
 												},
 											},
 										},
@@ -16852,14 +17548,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"path": schema.StringAttribute{
 											MarkdownDescription: "Exact path value to match.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("prefix"),
+													path.MatchRelative().AtParent().AtName("regex"),
+												),
+											},
 										},
 										"prefix": schema.StringAttribute{
 											MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("path"),
+													path.MatchRelative().AtParent().AtName("regex"),
+												),
+											},
 										},
 										"regex": schema.StringAttribute{
 											MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("path"),
+													path.MatchRelative().AtParent().AtName("prefix"),
+												),
+											},
 										},
 									},
 								},
@@ -16964,6 +17678,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"value": schema.StringAttribute{
 									MarkdownDescription: "Value of the Cookie header.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("secret_value"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -17021,6 +17740,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"value": schema.StringAttribute{
 									MarkdownDescription: "Value of the HTTP header.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("secret_value"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -17070,18 +17794,38 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"add_domain": schema.StringAttribute{
 									MarkdownDescription: "Add domain attribute.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("ignore_domain"),
+										),
+									},
 								},
 								"add_expiry": schema.StringAttribute{
 									MarkdownDescription: "Add expiry attribute.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("ignore_expiry"),
+										),
+									},
 								},
 								"add_path": schema.StringAttribute{
 									MarkdownDescription: "Add path attribute.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("ignore_path"),
+										),
+									},
 								},
 								"max_age_value": schema.Int64Attribute{
 									MarkdownDescription: "Add max age attribute.",
 									Optional:            true,
+									Validators: []validator.Int64{
+										int64validator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("ignore_max_age"),
+										),
+									},
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name of the cookie in Cookie header.",
@@ -17094,6 +17838,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"value": schema.StringAttribute{
 									MarkdownDescription: "Value of the Cookie header.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("ignore_value"),
+											path.MatchRelative().AtParent().AtName("secret_value"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -17196,6 +17946,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"value": schema.StringAttribute{
 									MarkdownDescription: "Value of the HTTP header.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("secret_value"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -18002,6 +18757,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						"max_age_value": schema.Int64Attribute{
 							MarkdownDescription: "Add max age attribute.",
 							Optional:            true,
+							Validators: []validator.Int64{
+								int64validator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("ignore_max_age"),
+								),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Cookie Name. Name of the Cookie .",
@@ -18212,10 +18972,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"header_name": schema.StringAttribute{
 									MarkdownDescription: "The name or key of the request header that will be used to obtain the hash key.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("cookie"),
+											path.MatchRelative().AtParent().AtName("source_ip"),
+										),
+									},
 								},
 								"source_ip": schema.BoolAttribute{
 									MarkdownDescription: "Hash based on source IP address.",
 									Optional:            true,
+									Validators: []validator.Bool{
+										boolvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("cookie"),
+											path.MatchRelative().AtParent().AtName("header_name"),
+										),
+									},
 								},
 								"terminal": schema.BoolAttribute{
 									MarkdownDescription: "Terminal. Specify if its a terminal policy.",
@@ -18326,6 +19098,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"exact": schema.StringAttribute{
 												MarkdownDescription: "Header value to match exactly.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("presence"),
+														path.MatchRelative().AtParent().AtName("regex"),
+													),
+												},
 											},
 											"invert_match": schema.BoolAttribute{
 												MarkdownDescription: "Invert the result of the match to detect missing header or non-matching value.",
@@ -18338,10 +19116,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"presence": schema.BoolAttribute{
 												MarkdownDescription: "If true, check for presence of header.",
 												Optional:            true,
+												Validators: []validator.Bool{
+													boolvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("exact"),
+														path.MatchRelative().AtParent().AtName("regex"),
+													),
+												},
 											},
 											"regex": schema.StringAttribute{
 												MarkdownDescription: "Regex match of the header value in re2 format.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("exact"),
+														path.MatchRelative().AtParent().AtName("presence"),
+													),
+												},
 											},
 										},
 									},
@@ -18352,10 +19142,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"port": schema.Int64Attribute{
 											MarkdownDescription: "Exact Port to match.",
 											Optional:            true,
+											Validators: []validator.Int64{
+												int64validator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("no_port_match"),
+													path.MatchRelative().AtParent().AtName("port_ranges"),
+												),
+											},
 										},
 										"port_ranges": schema.StringAttribute{
 											MarkdownDescription: "Port range to match.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("no_port_match"),
+													path.MatchRelative().AtParent().AtName("port"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -18370,14 +19172,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"path": schema.StringAttribute{
 											MarkdownDescription: "Exact path value to match.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("prefix"),
+													path.MatchRelative().AtParent().AtName("regex"),
+												),
+											},
 										},
 										"prefix": schema.StringAttribute{
 											MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("path"),
+													path.MatchRelative().AtParent().AtName("regex"),
+												),
+											},
 										},
 										"regex": schema.StringAttribute{
 											MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("path"),
+													path.MatchRelative().AtParent().AtName("prefix"),
+												),
+											},
 										},
 									},
 								},
@@ -18412,6 +19232,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"exact": schema.StringAttribute{
 												MarkdownDescription: "Header value to match exactly.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("presence"),
+														path.MatchRelative().AtParent().AtName("regex"),
+													),
+												},
 											},
 											"invert_match": schema.BoolAttribute{
 												MarkdownDescription: "Invert the result of the match to detect missing header or non-matching value.",
@@ -18424,10 +19250,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"presence": schema.BoolAttribute{
 												MarkdownDescription: "If true, check for presence of header.",
 												Optional:            true,
+												Validators: []validator.Bool{
+													boolvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("exact"),
+														path.MatchRelative().AtParent().AtName("regex"),
+													),
+												},
 											},
 											"regex": schema.StringAttribute{
 												MarkdownDescription: "Regex match of the header value in re2 format.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("exact"),
+														path.MatchRelative().AtParent().AtName("presence"),
+													),
+												},
 											},
 										},
 									},
@@ -18438,10 +19276,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"port": schema.Int64Attribute{
 											MarkdownDescription: "Exact Port to match.",
 											Optional:            true,
+											Validators: []validator.Int64{
+												int64validator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("no_port_match"),
+													path.MatchRelative().AtParent().AtName("port_ranges"),
+												),
+											},
 										},
 										"port_ranges": schema.StringAttribute{
 											MarkdownDescription: "Port range to match.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("no_port_match"),
+													path.MatchRelative().AtParent().AtName("port"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -18456,14 +19306,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"path": schema.StringAttribute{
 											MarkdownDescription: "Exact path value to match.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("prefix"),
+													path.MatchRelative().AtParent().AtName("regex"),
+												),
+											},
 										},
 										"prefix": schema.StringAttribute{
 											MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("path"),
+													path.MatchRelative().AtParent().AtName("regex"),
+												),
+											},
 										},
 										"regex": schema.StringAttribute{
 											MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("path"),
+													path.MatchRelative().AtParent().AtName("prefix"),
+												),
+											},
 										},
 									},
 								},
@@ -18477,10 +19345,20 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"path_redirect": schema.StringAttribute{
 											MarkdownDescription: "swap path part of incoming URL in redirect URL.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("prefix_rewrite"),
+												),
+											},
 										},
 										"prefix_rewrite": schema.StringAttribute{
 											MarkdownDescription: "In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("path_redirect"),
+												),
+											},
 										},
 										"proto_redirect": schema.StringAttribute{
 											MarkdownDescription: "Swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done.",
@@ -18489,6 +19367,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"replace_params": schema.StringAttribute{
 											MarkdownDescription: ".",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("remove_all_params"),
+													path.MatchRelative().AtParent().AtName("retain_all_params"),
+												),
+											},
 										},
 										"response_code": schema.Int64Attribute{
 											MarkdownDescription: "The HTTP status code to use in the redirect response.",
@@ -18512,6 +19396,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								"host_rewrite": schema.StringAttribute{
 									MarkdownDescription: "Host header will be swapped with this value.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("auto_host_rewrite"),
+											path.MatchRelative().AtParent().AtName("disable_host_rewrite"),
+										),
+									},
 								},
 								"http_method": schema.StringAttribute{
 									MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
@@ -18529,6 +19419,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"prefix_rewrite": schema.StringAttribute{
 											MarkdownDescription: "prefix_rewrite indicates that during forwarding, the matched prefix (or path) should be swapped with its value. When using regex path matching, the entire path (not including the query string) will be swapped with this value.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("disable_prefix_rewrite"),
+													path.MatchRelative().AtParent().AtName("regex_rewrite"),
+												),
+											},
 										},
 										"priority": schema.StringAttribute{
 											MarkdownDescription: "[Enum: DEFAULT|HIGH] Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Possible values are `DEFAULT`, `HIGH`. Defaults to `DEFAULT`.",
@@ -18815,6 +19711,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													"value": schema.StringAttribute{
 														MarkdownDescription: "Value of the Cookie header.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("secret_value"),
+															),
+														},
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -18872,6 +19773,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													"value": schema.StringAttribute{
 														MarkdownDescription: "Value of the HTTP header.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("secret_value"),
+															),
+														},
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -18921,18 +19827,38 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													"add_domain": schema.StringAttribute{
 														MarkdownDescription: "Add domain attribute.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("ignore_domain"),
+															),
+														},
 													},
 													"add_expiry": schema.StringAttribute{
 														MarkdownDescription: "Add expiry attribute.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("ignore_expiry"),
+															),
+														},
 													},
 													"add_path": schema.StringAttribute{
 														MarkdownDescription: "Add path attribute.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("ignore_path"),
+															),
+														},
 													},
 													"max_age_value": schema.Int64Attribute{
 														MarkdownDescription: "Add max age attribute.",
 														Optional:            true,
+														Validators: []validator.Int64{
+															int64validator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("ignore_max_age"),
+															),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name of the cookie in Cookie header.",
@@ -18945,6 +19871,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													"value": schema.StringAttribute{
 														MarkdownDescription: "Value of the Cookie header.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("ignore_value"),
+																path.MatchRelative().AtParent().AtName("secret_value"),
+															),
+														},
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -19047,6 +19979,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													"value": schema.StringAttribute{
 														MarkdownDescription: "Value of the HTTP header.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("secret_value"),
+															),
+														},
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -19141,10 +20078,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															"header_name": schema.StringAttribute{
 																MarkdownDescription: "The name or key of the request header that will be used to obtain the hash key.",
 																Optional:            true,
+																Validators: []validator.String{
+																	stringvalidator.ConflictsWith(
+																		path.MatchRelative().AtParent().AtName("cookie"),
+																		path.MatchRelative().AtParent().AtName("source_ip"),
+																	),
+																},
 															},
 															"source_ip": schema.BoolAttribute{
 																MarkdownDescription: "Hash based on source IP address.",
 																Optional:            true,
+																Validators: []validator.Bool{
+																	boolvalidator.ConflictsWith(
+																		path.MatchRelative().AtParent().AtName("cookie"),
+																		path.MatchRelative().AtParent().AtName("header_name"),
+																	),
+																},
 															},
 															"terminal": schema.BoolAttribute{
 																MarkdownDescription: "Terminal. Specify if its a terminal policy.",
@@ -19249,6 +20198,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"exact": schema.StringAttribute{
 												MarkdownDescription: "Header value to match exactly.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("presence"),
+														path.MatchRelative().AtParent().AtName("regex"),
+													),
+												},
 											},
 											"invert_match": schema.BoolAttribute{
 												MarkdownDescription: "Invert the result of the match to detect missing header or non-matching value.",
@@ -19261,10 +20216,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"presence": schema.BoolAttribute{
 												MarkdownDescription: "If true, check for presence of header.",
 												Optional:            true,
+												Validators: []validator.Bool{
+													boolvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("exact"),
+														path.MatchRelative().AtParent().AtName("regex"),
+													),
+												},
 											},
 											"regex": schema.StringAttribute{
 												MarkdownDescription: "Regex match of the header value in re2 format.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("exact"),
+														path.MatchRelative().AtParent().AtName("presence"),
+													),
+												},
 											},
 										},
 									},
@@ -19275,10 +20242,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"port": schema.Int64Attribute{
 											MarkdownDescription: "Exact Port to match.",
 											Optional:            true,
+											Validators: []validator.Int64{
+												int64validator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("no_port_match"),
+													path.MatchRelative().AtParent().AtName("port_ranges"),
+												),
+											},
 										},
 										"port_ranges": schema.StringAttribute{
 											MarkdownDescription: "Port range to match.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("no_port_match"),
+													path.MatchRelative().AtParent().AtName("port"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -19363,14 +20342,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"path": schema.StringAttribute{
 											MarkdownDescription: "Exact path value to match.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("prefix"),
+													path.MatchRelative().AtParent().AtName("regex"),
+												),
+											},
 										},
 										"prefix": schema.StringAttribute{
 											MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths)",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("path"),
+													path.MatchRelative().AtParent().AtName("regex"),
+												),
+											},
 										},
 										"regex": schema.StringAttribute{
 											MarkdownDescription: "Regular expression of path match (e.g. The value .* will match on all paths).",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("path"),
+													path.MatchRelative().AtParent().AtName("prefix"),
+												),
+											},
 										},
 									},
 								},
@@ -19380,6 +20377,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"replace_params": schema.StringAttribute{
 											MarkdownDescription: ".",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("remove_all_params"),
+													path.MatchRelative().AtParent().AtName("retain_all_params"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -19681,6 +20684,11 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 					"request_timeout": schema.Int64Attribute{
 						MarkdownDescription: ".",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("disable_request_timeout"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -19707,6 +20715,14 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						"as_number": schema.Int64Attribute{
 							MarkdownDescription: "RFC 6793 defined 4-byte AS number.",
 							Optional:            true,
+							Validators: []validator.Int64{
+								int64validator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("http_header"),
+									path.MatchRelative().AtParent().AtName("ip_prefix"),
+									path.MatchRelative().AtParent().AtName("ipv6_prefix"),
+									path.MatchRelative().AtParent().AtName("user_identifier"),
+								),
+							},
 						},
 						"expiration_timestamp": schema.StringAttribute{
 							MarkdownDescription: "Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
@@ -19715,14 +20731,38 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						"ip_prefix": schema.StringAttribute{
 							MarkdownDescription: "IPv4 prefix string.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("as_number"),
+									path.MatchRelative().AtParent().AtName("http_header"),
+									path.MatchRelative().AtParent().AtName("ipv6_prefix"),
+									path.MatchRelative().AtParent().AtName("user_identifier"),
+								),
+							},
 						},
 						"ipv6_prefix": schema.StringAttribute{
 							MarkdownDescription: "IPv6 prefix string.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("as_number"),
+									path.MatchRelative().AtParent().AtName("http_header"),
+									path.MatchRelative().AtParent().AtName("ip_prefix"),
+									path.MatchRelative().AtParent().AtName("user_identifier"),
+								),
+							},
 						},
 						"user_identifier": schema.StringAttribute{
 							MarkdownDescription: "Identify user based on user identifier. User identifier value needs to be copied from security event.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("as_number"),
+									path.MatchRelative().AtParent().AtName("http_header"),
+									path.MatchRelative().AtParent().AtName("ip_prefix"),
+									path.MatchRelative().AtParent().AtName("ipv6_prefix"),
+								),
+							},
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -19740,6 +20780,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"exact": schema.StringAttribute{
 												MarkdownDescription: "Header value to match exactly.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("presence"),
+														path.MatchRelative().AtParent().AtName("regex"),
+													),
+												},
 											},
 											"invert_match": schema.BoolAttribute{
 												MarkdownDescription: "Invert the result of the match to detect missing header or non-matching value.",
@@ -19752,10 +20798,22 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											"presence": schema.BoolAttribute{
 												MarkdownDescription: "If true, check for presence of header.",
 												Optional:            true,
+												Validators: []validator.Bool{
+													boolvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("exact"),
+														path.MatchRelative().AtParent().AtName("regex"),
+													),
+												},
 											},
 											"regex": schema.StringAttribute{
 												MarkdownDescription: "Regex match of the header value in re2 format.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("exact"),
+														path.MatchRelative().AtParent().AtName("presence"),
+													),
+												},
 											},
 										},
 									},
@@ -19827,6 +20885,12 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"exact_value": schema.StringAttribute{
 											MarkdownDescription: "Exact domain name.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("any_domain"),
+													path.MatchRelative().AtParent().AtName("suffix_value"),
+												),
+											},
 										},
 										"expiration_timestamp": schema.StringAttribute{
 											MarkdownDescription: "Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
@@ -19840,14 +20904,32 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										"path_prefix": schema.StringAttribute{
 											MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths).",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("any_path"),
+													path.MatchRelative().AtParent().AtName("path_regex"),
+												),
+											},
 										},
 										"path_regex": schema.StringAttribute{
 											MarkdownDescription: "Define the regex for the path. For example, the regex ^/.*$ will match on all paths.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("any_path"),
+													path.MatchRelative().AtParent().AtName("path_prefix"),
+												),
+											},
 										},
 										"suffix_value": schema.StringAttribute{
 											MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("any_domain"),
+													path.MatchRelative().AtParent().AtName("exact_value"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{

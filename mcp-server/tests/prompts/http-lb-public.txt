@@ -1,0 +1,13 @@
+Using the f5xc-terraform MCP server, create a Terraform configuration for an F5XC HTTP load balancer.
+
+Requirements:
+1. Name: "mcp-test-http-lb"
+2. Namespace: "default"
+3. Domain: "test.example.com"
+4. Advertise on public default VIP
+5. HTTP port 80
+6. Reference an origin pool called "test-pool" in namespace "default"
+7. Disable WAF, bot defense, and rate limiting
+
+Use the f5xc_terraform_metadata tool with operation=example and resource=http_loadbalancer to get the correct syntax.
+Output ONLY the Terraform configuration, no explanations.

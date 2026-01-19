@@ -3,7 +3,7 @@
   "info": {
     "title": "Observability",
     "description": "Telemetry systems execute scheduled availability checks from distributed AWS locations worldwide. Response code validation and timing metrics feed into historical trend analysis. DNS resolution accuracy verification ensures name service reliability. Certificate lifecycle tracking generates expiration warnings before outages occur. Regional probe distribution provides geographic coverage insights. Health summaries aggregate results into actionable dashboards with configurable alerting thresholds.",
-    "version": "2.0.39",
+    "version": "2.0.40",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -14897,7 +14897,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.664227+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.813746+00:00"
           },
           "start_time": {
             "type": "string",
@@ -15097,7 +15097,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.664325+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.813842+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -15496,7 +15496,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.664519+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.814035+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Avg Aggregation Data\" Average Aggregation data.",
@@ -15730,7 +15730,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.664663+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.814179+00:00"
           },
           "order_by": {
             "$ref": "#/components/schemas/logOrderByData"
@@ -15839,7 +15839,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.664745+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.814263+00:00"
           },
           "order_by": {
             "$ref": "#/components/schemas/logOrderByData"
@@ -15955,7 +15955,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.664860+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.814388+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Field Sub Field Aggregation Bucket\" Field sub aggregation bucket containing field values and the number of logs.",
@@ -16124,7 +16124,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.664957+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.814474+00:00"
           },
           "sub_aggs": {
             "type": "object",
@@ -16232,7 +16232,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.665093+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.814606+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Max Aggregation Data\" Max Aggregation data.",
@@ -16289,7 +16289,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.665135+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.814649+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Min Aggregation Data\" Min Aggregation data.",
@@ -16520,7 +16520,7 @@
             "maxLength": 16,
             "minLength": 7,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.665292+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.814803+00:00"
           },
           "value": {
             "type": "number",
@@ -16536,7 +16536,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.665319+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.814830+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Percentile Aggregation Data\" Percentile Aggregation data.",
@@ -16646,7 +16646,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.665373+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.814883+00:00"
           },
           "previous_value": {
             "type": "string",
@@ -16680,7 +16680,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.665419+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:28.814929+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Trend Value\" Trend value contains trend value, trend sentiment and trend calculation description and window size.",
@@ -16748,7 +16748,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.559523+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523371+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -16823,7 +16823,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.559577+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523424+00:00"
           },
           "service_name": {
             "type": "string",
@@ -16866,7 +16866,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.559616+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523462+00:00"
           },
           "type": {
             "type": "string",
@@ -17011,7 +17011,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.559691+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523534+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -17127,7 +17127,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.559756+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523596+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -17185,7 +17185,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.559806+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523645+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17206,7 +17206,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.559834+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523672+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
@@ -17286,7 +17286,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.559876+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523714+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -17346,7 +17346,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.559937+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523761+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17367,7 +17367,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.559965+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523788+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
@@ -17447,7 +17447,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560007+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523829+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -17507,7 +17507,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560056+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523877+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17528,7 +17528,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560084+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523904+00:00"
           },
           "uid": {
             "type": "string",
@@ -17552,7 +17552,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560113+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523935+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectMetaType is metadata(common attributes) of an object that all configuration objects will have.",
@@ -17602,7 +17602,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560145+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523966+00:00"
           },
           "name": {
             "type": "string",
@@ -17623,7 +17623,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560173+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.523993+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17644,7 +17644,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560201+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524020+00:00"
           },
           "tenant": {
             "type": "string",
@@ -17667,7 +17667,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560228+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524048+00:00"
           },
           "uid": {
             "type": "string",
@@ -17691,7 +17691,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560258+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524076+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -17771,7 +17771,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560300+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524117+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -17829,7 +17829,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560350+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524165+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17850,7 +17850,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560378+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524192+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
@@ -17974,7 +17974,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560459+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524269+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -18094,7 +18094,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560519+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524328+00:00"
           },
           "status": {
             "type": "string",
@@ -18114,7 +18114,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560547+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524365+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -18309,7 +18309,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560676+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524489+00:00"
           },
           "uid": {
             "type": "string",
@@ -18332,7 +18332,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560705+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524518+00:00"
           }
         },
         "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
@@ -18560,7 +18560,7 @@
             "maxLength": 6,
             "minLength": 6,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560833+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524644+00:00"
           },
           "object_index": {
             "type": "integer",
@@ -18641,7 +18641,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560910+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524708+00:00"
           },
           "trace_info": {
             "type": "string",
@@ -18683,7 +18683,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.560950+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524746+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -18772,7 +18772,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.561001+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524795+00:00"
           },
           "name": {
             "type": "string",
@@ -18793,7 +18793,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.561029+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524822+00:00"
           },
           "namespace": {
             "type": "string",
@@ -18814,7 +18814,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.561057+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524850+00:00"
           },
           "uid": {
             "type": "string",
@@ -18835,7 +18835,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.561086+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.524878+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
@@ -19015,22 +19015,40 @@
         "x-ves-proto-message": "ves.io.schema.observability.synthetic_monitor.HealthPolicy",
         "properties": {
           "dynamic_threshold": {
-            "$ref": "#/components/schemas/synthetic_monitorDynamicThreshold"
+            "$ref": "#/components/schemas/synthetic_monitorDynamicThreshold",
+            "x-f5xc-conflicts-with": [
+              "dynamic_threshold_disabled"
+            ]
           },
           "dynamic_threshold_disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "dynamic_threshold"
+            ]
           },
           "static_max_threshold": {
-            "$ref": "#/components/schemas/synthetic_monitorStaticMaxThreshold"
+            "$ref": "#/components/schemas/synthetic_monitorStaticMaxThreshold",
+            "x-f5xc-conflicts-with": [
+              "static_max_threshold_disabled"
+            ]
           },
           "static_max_threshold_disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "static_max_threshold"
+            ]
           },
           "static_min_threshold": {
-            "$ref": "#/components/schemas/synthetic_monitorStaticMinThreshold"
+            "$ref": "#/components/schemas/synthetic_monitorStaticMinThreshold",
+            "x-f5xc-conflicts-with": [
+              "static_min_threshold_disabled"
+            ]
           },
           "static_min_threshold_disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "static_min_threshold"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -19159,10 +19177,16 @@
         "x-ves-proto-message": "ves.io.schema.observability.synthetic_monitor.Source",
         "properties": {
           "aws": {
-            "$ref": "#/components/schemas/synthetic_monitorAWSRegions"
+            "$ref": "#/components/schemas/synthetic_monitorAWSRegions",
+            "x-f5xc-conflicts-with": [
+              "f5xc"
+            ]
           },
           "f5xc": {
-            "$ref": "#/components/schemas/synthetic_monitorRegionalEdgeRegions"
+            "$ref": "#/components/schemas/synthetic_monitorRegionalEdgeRegions",
+            "x-f5xc-conflicts-with": [
+              "aws"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -19187,10 +19211,16 @@
         "x-ves-proto-message": "ves.io.schema.observability.synthetic_monitor.SourceExternal",
         "properties": {
           "aws": {
-            "$ref": "#/components/schemas/synthetic_monitorAWSRegionsExternal"
+            "$ref": "#/components/schemas/synthetic_monitorAWSRegionsExternal",
+            "x-f5xc-conflicts-with": [
+              "f5xc"
+            ]
           },
           "f5xc": {
-            "$ref": "#/components/schemas/synthetic_monitorRegionalEdgeExternal"
+            "$ref": "#/components/schemas/synthetic_monitorRegionalEdgeExternal",
+            "x-f5xc-conflicts-with": [
+              "aws"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -19431,7 +19461,7 @@
             "x-original-maxLength": 2048,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.561379+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.525163+00:00"
           },
           "external_sources": {
             "type": "array",
@@ -19467,31 +19497,121 @@
             "$ref": "#/components/schemas/synthetic_monitorHealthPolicy"
           },
           "interval_12_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_15_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_day": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_hour": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_min": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_secs": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_5_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_6_hours"
+            ]
           },
           "interval_6_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins"
+            ]
           },
           "lookup_timeout": {
             "type": "integer",
@@ -19566,10 +19686,16 @@
             }
           },
           "on_failure_to_all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "on_failure_to_any"
+            ]
           },
           "on_failure_to_any": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "on_failure_to_all"
+            ]
           },
           "protocol": {
             "type": "string",
@@ -19743,7 +19869,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.561609+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.525395+00:00"
           },
           "namespace": {
             "type": "string",
@@ -19763,7 +19889,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.561637+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.525422+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -19921,7 +20047,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.561756+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.525537+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -20012,7 +20138,7 @@
             "x-original-maxLength": 2048,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.561799+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.525578+00:00"
           },
           "external_sources": {
             "type": "array",
@@ -20048,31 +20174,121 @@
             "$ref": "#/components/schemas/synthetic_monitorHealthPolicy"
           },
           "interval_12_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_15_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_day": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_hour": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_min": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_secs": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_5_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_6_hours"
+            ]
           },
           "interval_6_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins"
+            ]
           },
           "lookup_timeout": {
             "type": "integer",
@@ -20147,10 +20363,16 @@
             }
           },
           "on_failure_to_all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "on_failure_to_any"
+            ]
           },
           "on_failure_to_any": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "on_failure_to_all"
+            ]
           },
           "protocol": {
             "type": "string",
@@ -20326,7 +20548,7 @@
             "x-original-maxLength": 2048,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.562025+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.525790+00:00"
           },
           "external_sources": {
             "type": "array",
@@ -20363,31 +20585,121 @@
             "$ref": "#/components/schemas/synthetic_monitorHealthPolicy"
           },
           "interval_12_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_15_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_day": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_hour": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_min": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_secs": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_5_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_6_hours"
+            ]
           },
           "interval_6_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins"
+            ]
           },
           "lookup_timeout": {
             "type": "integer",
@@ -20465,10 +20777,16 @@
             }
           },
           "on_failure_to_all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "on_failure_to_any"
+            ]
           },
           "on_failure_to_any": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "on_failure_to_all"
+            ]
           },
           "protocol": {
             "type": "string",
@@ -20699,7 +21017,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.562274+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.526037+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -20753,7 +21071,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.562342+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.526104+00:00"
           },
           "namespace": {
             "type": "string",
@@ -20772,7 +21090,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.562370+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.526131+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -20814,7 +21132,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.562426+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.526185+00:00"
           },
           "uid": {
             "type": "string",
@@ -20835,7 +21153,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.562455+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.526214+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of v1_dns_monitor is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -21048,7 +21366,7 @@
             "x-original-maxLength": 2048,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.562558+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.526315+00:00"
           },
           "external_sources": {
             "type": "array",
@@ -21084,31 +21402,121 @@
             "$ref": "#/components/schemas/synthetic_monitorHealthPolicy"
           },
           "interval_12_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_15_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_day": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_hour": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_min": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_secs": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_5_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_6_hours"
+            ]
           },
           "interval_6_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins"
+            ]
           },
           "lookup_timeout": {
             "type": "integer",
@@ -21183,10 +21591,16 @@
             }
           },
           "on_failure_to_all": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "on_failure_to_any"
+            ]
           },
           "on_failure_to_any": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "on_failure_to_all"
+            ]
           },
           "protocol": {
             "type": "string",
@@ -21468,7 +21882,15 @@
         "x-ves-proto-message": "ves.io.schema.observability.synthetic_monitor.v1_http_monitor.CreateSpecType",
         "properties": {
           "delete": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "get",
+              "head",
+              "options",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "external_sources": {
             "type": "array",
@@ -21516,10 +21938,26 @@
             }
           },
           "get": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "head",
+              "options",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "head": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "options",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "health_policy": {
             "$ref": "#/components/schemas/synthetic_monitorHealthPolicy"
@@ -21540,31 +21978,121 @@
             }
           },
           "interval_12_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_15_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_day": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_hour": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_min": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_secs": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_5_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_6_hours"
+            ]
           },
           "interval_6_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins"
+            ]
           },
           "on_failure_count": {
             "type": "integer",
@@ -21595,16 +22123,48 @@
             }
           },
           "options": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "patch": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "options",
+              "post",
+              "put"
+            ]
           },
           "post": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "options",
+              "patch",
+              "put"
+            ]
           },
           "put": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "options",
+              "patch",
+              "post"
+            ]
           },
           "receive": {
             "type": "string",
@@ -21861,7 +22421,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.764866+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.675719+00:00"
           },
           "namespace": {
             "type": "string",
@@ -21881,7 +22441,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.764902+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.675747+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -22039,7 +22599,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.765021+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.675862+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -22101,7 +22661,15 @@
         "x-ves-proto-message": "ves.io.schema.observability.synthetic_monitor.v1_http_monitor.GetSpecType",
         "properties": {
           "delete": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "get",
+              "head",
+              "options",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "external_sources": {
             "type": "array",
@@ -22149,10 +22717,26 @@
             }
           },
           "get": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "head",
+              "options",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "head": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "options",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "health_policy": {
             "$ref": "#/components/schemas/synthetic_monitorHealthPolicy"
@@ -22173,31 +22757,121 @@
             }
           },
           "interval_12_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_15_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_day": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_hour": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_min": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_secs": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_5_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_6_hours"
+            ]
           },
           "interval_6_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins"
+            ]
           },
           "on_failure_count": {
             "type": "integer",
@@ -22228,16 +22902,48 @@
             }
           },
           "options": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "patch": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "options",
+              "post",
+              "put"
+            ]
           },
           "post": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "options",
+              "patch",
+              "put"
+            ]
           },
           "put": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "options",
+              "patch",
+              "post"
+            ]
           },
           "receive": {
             "type": "string",
@@ -22466,7 +23172,15 @@
         "x-ves-proto-message": "ves.io.schema.observability.synthetic_monitor.v1_http_monitor.GlobalSpecType",
         "properties": {
           "delete": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "get",
+              "head",
+              "options",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "external_sources": {
             "type": "array",
@@ -22516,10 +23230,26 @@
             }
           },
           "get": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "head",
+              "options",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "head": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "options",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "health_policy": {
             "$ref": "#/components/schemas/synthetic_monitorHealthPolicy"
@@ -22541,31 +23271,121 @@
             }
           },
           "interval_12_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_15_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_day": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_hour": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_min": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_secs": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_5_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_6_hours"
+            ]
           },
           "interval_6_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins"
+            ]
           },
           "on_failure_count": {
             "type": "integer",
@@ -22597,16 +23417,48 @@
             }
           },
           "options": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "patch": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "options",
+              "post",
+              "put"
+            ]
           },
           "post": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "options",
+              "patch",
+              "put"
+            ]
           },
           "put": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "options",
+              "patch",
+              "post"
+            ]
           },
           "receive": {
             "type": "string",
@@ -22865,7 +23717,7 @@
             },
             "x-original-maxLength": 2048,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.765593+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.676424+00:00"
           },
           "value": {
             "type": "string",
@@ -22889,7 +23741,7 @@
             },
             "x-original-maxLength": 8192,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.765621+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.676451+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -22996,7 +23848,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.765688+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.676515+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -23050,7 +23902,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.765755+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.676581+00:00"
           },
           "namespace": {
             "type": "string",
@@ -23069,7 +23921,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.765784+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.676608+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -23111,7 +23963,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.765839+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.676662+00:00"
           },
           "uid": {
             "type": "string",
@@ -23132,7 +23984,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.765868+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.676690+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of v1_http_monitor is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -23242,7 +24094,15 @@
         "x-ves-proto-message": "ves.io.schema.observability.synthetic_monitor.v1_http_monitor.ReplaceSpecType",
         "properties": {
           "delete": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "get",
+              "head",
+              "options",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "external_sources": {
             "type": "array",
@@ -23290,10 +24150,26 @@
             }
           },
           "get": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "head",
+              "options",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "head": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "options",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "health_policy": {
             "$ref": "#/components/schemas/synthetic_monitorHealthPolicy"
@@ -23314,31 +24190,121 @@
             }
           },
           "interval_12_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_15_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_day": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_hour": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_1_min": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_secs",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_30_secs": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_5_mins",
+              "interval_6_hours"
+            ]
           },
           "interval_5_mins": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_6_hours"
+            ]
           },
           "interval_6_hours": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "interval_12_hours",
+              "interval_15_mins",
+              "interval_1_day",
+              "interval_1_hour",
+              "interval_1_min",
+              "interval_30_mins",
+              "interval_30_secs",
+              "interval_5_mins"
+            ]
           },
           "on_failure_count": {
             "type": "integer",
@@ -23369,16 +24335,48 @@
             }
           },
           "options": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "patch",
+              "post",
+              "put"
+            ]
           },
           "patch": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "options",
+              "post",
+              "put"
+            ]
           },
           "post": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "options",
+              "patch",
+              "put"
+            ]
           },
           "put": {
-            "$ref": "#/components/schemas/v1_http_monitorRequestBody"
+            "$ref": "#/components/schemas/v1_http_monitorRequestBody",
+            "x-f5xc-conflicts-with": [
+              "delete",
+              "get",
+              "head",
+              "options",
+              "patch",
+              "post"
+            ]
           },
           "receive": {
             "type": "string",
@@ -23979,7 +24977,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.746113+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.608459+00:00"
           },
           "query": {
             "type": "string",
@@ -24123,7 +25121,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.746197+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.608543+00:00"
           },
           "query": {
             "type": "string",
@@ -24270,7 +25268,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.746287+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.608632+00:00"
           },
           "query": {
             "type": "string",
@@ -24413,7 +25411,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.746368+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.608711+00:00"
           },
           "query": {
             "type": "string",
@@ -24615,7 +25613,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.746613+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.608955+00:00"
           },
           "site": {
             "type": "string",
@@ -24740,7 +25738,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.747033+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.609374+00:00"
           },
           "query": {
             "type": "string",
@@ -24884,7 +25882,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.747111+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.609453+00:00"
           },
           "query": {
             "type": "string",
@@ -25031,7 +26029,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.747199+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.609540+00:00"
           },
           "query": {
             "type": "string",
@@ -25192,7 +26190,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.747286+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.609627+00:00"
           },
           "query": {
             "type": "string",
@@ -25356,7 +26354,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.747382+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.609723+00:00"
           },
           "query": {
             "type": "string",
@@ -25517,7 +26515,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.747470+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.609809+00:00"
           },
           "query": {
             "type": "string",
@@ -25657,7 +26655,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.747565+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.609903+00:00"
           }
         },
         "x-f5xc-description-short": "Label Filter is used to filter th that match the logs specified label key/value and the operator.",
@@ -25848,7 +26846,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.747751+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.610088+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -25947,7 +26945,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.748101+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.610412+00:00"
           },
           "query": {
             "type": "string",
@@ -26105,7 +27103,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.748189+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.610500+00:00"
           },
           "query": {
             "type": "string",
@@ -26253,7 +27251,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.748298+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.610608+00:00"
           },
           "query": {
             "type": "string",
@@ -26397,7 +27395,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.748376+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.610686+00:00"
           },
           "query": {
             "type": "string",
@@ -26545,7 +27543,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.748464+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.610772+00:00"
           },
           "query": {
             "type": "string",
@@ -26689,7 +27687,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.748544+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.610850+00:00"
           },
           "query": {
             "type": "string",
@@ -28682,7 +29680,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.018155+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.755984+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -29136,7 +30134,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.018361+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.756185+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -29478,7 +30476,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.018530+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.756365+00:00"
           },
           "start_time": {
             "type": "string",
@@ -29628,7 +30626,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.018604+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.756439+00:00"
           },
           "segments": {
             "type": "array",
@@ -30689,7 +31687,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.019125+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.756944+00:00"
           },
           "source": {
             "type": "string",
@@ -30911,7 +31909,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.019244+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.757063+00:00"
           },
           "region": {
             "type": "string",
@@ -31015,7 +32013,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.019297+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.757116+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -31176,7 +32174,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.019386+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.757205+00:00"
           },
           "region": {
             "type": "string",
@@ -31287,7 +32285,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.019454+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.757272+00:00"
           },
           "source": {
             "type": "string",
@@ -31393,7 +32391,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.019512+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.757346+00:00"
           },
           "request_body": {
             "$ref": "#/components/schemas/protobufAny"
@@ -31473,7 +32471,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.019567+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.757411+00:00"
           },
           "value": {
             "type": "string",
@@ -31490,7 +32488,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.019595+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.757440+00:00"
           }
         },
         "x-f5xc-description-short": "Tuple with a suggested value and it's description.",
@@ -31592,7 +32590,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.019656+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.757502+00:00"
           },
           "values": {
             "type": "array",

@@ -1,0 +1,20 @@
+{
+  "operation": "syntax",
+  "resource": "waf_exclusion_policy",
+  "totalBlocks": 1,
+  "totalAttributes": 7,
+  "totalOneOfGroups": 0,
+  "blocks": [
+    "waf_exclusion_rules"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {}
+}

@@ -3,7 +3,7 @@
   "info": {
     "title": "Billing And Usage",
     "description": "Subscription lifecycle with plan transitions and billing states. Payment method hierarchies supporting primary and secondary configurations. Invoice generation with PDF downloads and custom listing. Resource quotas per namespace with limit definitions and consumption metrics. Contact types for billing notifications and tenant deletion workflows.",
-    "version": "2.0.39",
+    "version": "2.0.40",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -5617,7 +5617,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:36.376013+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:34.268897+00:00"
           },
           "period_end": {
             "type": "string",
@@ -5943,7 +5943,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.713165+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.536274+00:00"
           },
           "role": {
             "$ref": "#/components/schemas/payment_methodPaymentMethodRole"
@@ -6004,7 +6004,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.713219+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.536325+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -6044,7 +6044,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.713250+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.536383+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6064,7 +6064,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.713278+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.536412+00:00"
           }
         },
         "x-f5xc-description-short": "Changes a payment method role to primary.",
@@ -6131,7 +6131,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.713310+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.536444+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6151,7 +6151,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.713338+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.536471+00:00"
           }
         },
         "x-f5xc-description-short": "Changes a payment method role (from/to primary or backup).",
@@ -6193,7 +6193,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.713368+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.536500+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6213,7 +6213,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.713396+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.536527+00:00"
           }
         },
         "x-f5xc-description-short": "Changes a payment method role to secondary.",
@@ -6279,7 +6279,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.765126+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.586189+00:00"
           },
           "new_plan": {
             "type": "string",
@@ -6480,7 +6480,7 @@
             "x-original-maxLength": 1024,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:37.765250+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.586311+00:00"
           },
           "payment_address": {
             "$ref": "#/components/schemas/schemacontactGlobalSpecType"
@@ -6835,7 +6835,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.061225+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.877296+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -6946,7 +6946,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.061320+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.877400+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6966,7 +6966,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.061348+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.877428+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -7204,7 +7204,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.061525+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.877604+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -7486,7 +7486,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.061679+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.877757+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -7540,7 +7540,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.061749+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.877826+00:00"
           },
           "namespace": {
             "type": "string",
@@ -7559,7 +7559,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.061776+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.877854+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -7601,7 +7601,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.061831+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.877908+00:00"
           },
           "uid": {
             "type": "string",
@@ -7622,7 +7622,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.061861+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.877938+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of quota is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -7671,7 +7671,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.061904+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.877967+00:00"
           },
           "display_name": {
             "type": "string",
@@ -7730,7 +7730,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.061965+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878025+00:00"
           },
           "display_name": {
             "type": "string",
@@ -7785,7 +7785,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062016+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878073+00:00"
           },
           "display_name": {
             "type": "string",
@@ -7846,7 +7846,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062082+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878139+00:00"
           },
           "display_name": {
             "type": "string",
@@ -8108,7 +8108,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062242+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878296+00:00"
           },
           "service_name": {
             "type": "string",
@@ -8151,7 +8151,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062280+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878346+00:00"
           },
           "type": {
             "type": "string",
@@ -8296,7 +8296,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062351+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878417+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -8412,7 +8412,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062413+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878478+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -8470,7 +8470,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062462+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878526+00:00"
           },
           "namespace": {
             "type": "string",
@@ -8491,7 +8491,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062489+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878553+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
@@ -8571,7 +8571,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062530+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878594+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -8631,7 +8631,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062578+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878642+00:00"
           },
           "namespace": {
             "type": "string",
@@ -8652,7 +8652,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062605+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878669+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
@@ -8700,7 +8700,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062635+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878698+00:00"
           },
           "name": {
             "type": "string",
@@ -8721,7 +8721,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062661+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878725+00:00"
           },
           "namespace": {
             "type": "string",
@@ -8742,7 +8742,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062688+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878752+00:00"
           },
           "tenant": {
             "type": "string",
@@ -8765,7 +8765,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062715+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878779+00:00"
           },
           "uid": {
             "type": "string",
@@ -8789,7 +8789,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062744+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878807+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -8869,7 +8869,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062785+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878848+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -8927,7 +8927,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062833+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878895+00:00"
           },
           "namespace": {
             "type": "string",
@@ -8948,7 +8948,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062861+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.878922+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
@@ -9072,7 +9072,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.062948+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.879000+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -9192,7 +9192,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.063008+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.879059+00:00"
           },
           "status": {
             "type": "string",
@@ -9212,7 +9212,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.063035+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.879085+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -9407,7 +9407,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.063160+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.879209+00:00"
           },
           "uid": {
             "type": "string",
@@ -9430,7 +9430,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.063188+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.879237+00:00"
           }
         },
         "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
@@ -9482,7 +9482,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.063218+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.879267+00:00"
           },
           "name": {
             "type": "string",
@@ -9503,7 +9503,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.063245+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.879294+00:00"
           },
           "namespace": {
             "type": "string",
@@ -9524,7 +9524,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.063272+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.879321+00:00"
           },
           "uid": {
             "type": "string",
@@ -9545,7 +9545,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:38.063300+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:35.879359+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
@@ -10100,7 +10100,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:39.982651+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.721382+00:00"
           }
         },
         "x-f5xc-description-short": "Response to call to GET list of tenant subscriptions.",
@@ -10232,7 +10232,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:39.982732+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.721461+00:00"
           },
           "plan_name": {
             "type": "string",
@@ -10346,43 +10346,225 @@
         "x-ves-proto-message": "ves.io.schema.subscription.SubscribeRequest",
         "properties": {
           "f5xc_appstack_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_big_ip_irule_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_bigip_utilities_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_content_delivery_network_advanced": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_content_delivery_network_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_delegated_access_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_securemesh_advanced": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_securemesh_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_site_management_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_synthetic_monitoring_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_waap_advanced": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_waap_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_web_app_scanning_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard"
+            ]
           }
         },
         "x-f5xc-description-short": "Request to subscribe to one of addon services.",
@@ -10435,43 +10617,225 @@
         "x-ves-proto-message": "ves.io.schema.subscription.UnsubscribeRequest",
         "properties": {
           "f5xc_appstack_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_big_ip_irule_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_bigip_utilities_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_content_delivery_network_advanced": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_content_delivery_network_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_delegated_access_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_securemesh_advanced": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_securemesh_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_site_management_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_synthetic_monitoring_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_waap_advanced": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_standard",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_waap_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_web_app_scanning_standard"
+            ]
           },
           "f5xc_web_app_scanning_standard": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "f5xc_appstack_standard",
+              "f5xc_big_ip_irule_standard",
+              "f5xc_bigip_utilities_standard",
+              "f5xc_content_delivery_network_advanced",
+              "f5xc_content_delivery_network_standard",
+              "f5xc_delegated_access_standard",
+              "f5xc_securemesh_advanced",
+              "f5xc_securemesh_standard",
+              "f5xc_site_management_standard",
+              "f5xc_synthetic_monitoring_standard",
+              "f5xc_waap_advanced",
+              "f5xc_waap_standard"
+            ]
           }
         },
         "x-f5xc-description-short": "Request to unsubscribe to one of addon services.",
@@ -10809,7 +11173,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.814003+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.515470+00:00"
           }
         },
         "x-f5xc-description-short": "Coupon details, discount type, amount and name.",
@@ -11025,7 +11389,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.814110+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.515573+00:00"
           },
           "to": {
             "type": "string",
@@ -11173,7 +11537,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.814191+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.515652+00:00"
           },
           "query": {
             "type": "string",
@@ -11268,7 +11632,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.814244+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.515703+00:00"
           }
         },
         "x-f5xc-description-short": "Request message to GET mon thly usage details.",
@@ -11363,7 +11727,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.814297+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.515754+00:00"
           },
           "to": {
             "type": "string",
@@ -11629,7 +11993,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.814425+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.515881+00:00"
           },
           "object_name": {
             "type": "string",
@@ -11775,7 +12139,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.834754+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.535328+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -11976,7 +12340,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.834860+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.535446+00:00"
           },
           "flat_price": {
             "type": "integer",
@@ -12028,7 +12392,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.834920+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.535494+00:00"
           },
           "renewal_period_unit": {
             "$ref": "#/components/schemas/planPeriodUnitType"
@@ -12073,7 +12437,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:40.834987+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.535560+00:00"
           },
           "transition_flow": {
             "$ref": "#/components/schemas/planUsagePlanTransitionFlow"

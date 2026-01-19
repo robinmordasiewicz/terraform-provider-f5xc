@@ -3,7 +3,7 @@
   "info": {
     "title": "Object Storage",
     "description": "Blob management for application component delivery across namespaces. Time-limited download links with cryptographic signing protect asset retrieval. Version-controlled packages organized by operating system type support artifact discovery. Query filtering by name, type, and release number enables programmatic access to integrator libraries and protection modules for mobile deployments.",
-    "version": "2.0.39",
+    "version": "2.0.40",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -2388,7 +2388,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "string_value"
+            ]
           },
           "content_format": {
             "type": "string",
@@ -2437,16 +2440,31 @@
             },
             "x-original-maxLength": 512,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:39.900403+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.643046+00:00"
           },
           "mobile_app_shield": {
-            "$ref": "#/components/schemas/stored_objectMobileAppShieldAttributes"
+            "$ref": "#/components/schemas/stored_objectMobileAppShieldAttributes",
+            "x-f5xc-conflicts-with": [
+              "mobile_integrator",
+              "mobile_sdk",
+              "no_attributes"
+            ]
           },
           "mobile_integrator": {
-            "$ref": "#/components/schemas/stored_objectMobileIntegratorAttributes"
+            "$ref": "#/components/schemas/stored_objectMobileIntegratorAttributes",
+            "x-f5xc-conflicts-with": [
+              "mobile_app_shield",
+              "mobile_sdk",
+              "no_attributes"
+            ]
           },
           "mobile_sdk": {
-            "$ref": "#/components/schemas/stored_objectMobileSDKAttributes"
+            "$ref": "#/components/schemas/stored_objectMobileSDKAttributes",
+            "x-f5xc-conflicts-with": [
+              "mobile_app_shield",
+              "mobile_integrator",
+              "no_attributes"
+            ]
           },
           "name": {
             "type": "string",
@@ -2479,7 +2497,7 @@
             },
             "x-original-maxLength": 512,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:39.900463+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.643103+00:00"
           },
           "namespace": {
             "type": "string",
@@ -2506,10 +2524,15 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:39.900491+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.643131+00:00"
           },
           "no_attributes": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "mobile_app_shield",
+              "mobile_integrator",
+              "mobile_sdk"
+            ]
           },
           "object_type": {
             "type": "string",
@@ -2556,7 +2579,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "bytes_value"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -2593,10 +2619,16 @@
             "$ref": "#/components/schemas/stored_objectStoredObjectDescriptor"
           },
           "no_additional_info": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "presigned_url"
+            ]
           },
           "presigned_url": {
-            "$ref": "#/components/schemas/stored_objectPreSignedUrl"
+            "$ref": "#/components/schemas/stored_objectPreSignedUrl",
+            "x-f5xc-conflicts-with": [
+              "no_additional_info"
+            ]
           },
           "status": {
             "$ref": "#/components/schemas/stored_objectStoredObjectResponseStatus"
@@ -2685,7 +2717,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "presigned_url",
+              "string_value"
+            ]
           },
           "content_format": {
             "type": "string",
@@ -2708,7 +2744,11 @@
             "$ref": "#/components/schemas/stored_objectStoredObjectDescriptor"
           },
           "presigned_url": {
-            "$ref": "#/components/schemas/stored_objectPreSignedUrl"
+            "$ref": "#/components/schemas/stored_objectPreSignedUrl",
+            "x-f5xc-conflicts-with": [
+              "bytes_value",
+              "string_value"
+            ]
           },
           "string_value": {
             "type": "string",
@@ -2730,7 +2770,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "bytes_value",
+              "presigned_url"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -2758,13 +2802,28 @@
         "x-ves-proto-message": "ves.io.schema.stored_object.ListItemDescriptor",
         "properties": {
           "mobile_app_shield": {
-            "$ref": "#/components/schemas/stored_objectMobileAppShieldAttributes"
+            "$ref": "#/components/schemas/stored_objectMobileAppShieldAttributes",
+            "x-f5xc-conflicts-with": [
+              "mobile_integrator",
+              "mobile_sdk",
+              "no_attributes"
+            ]
           },
           "mobile_integrator": {
-            "$ref": "#/components/schemas/stored_objectMobileIntegratorAttributes"
+            "$ref": "#/components/schemas/stored_objectMobileIntegratorAttributes",
+            "x-f5xc-conflicts-with": [
+              "mobile_app_shield",
+              "mobile_sdk",
+              "no_attributes"
+            ]
           },
           "mobile_sdk": {
-            "$ref": "#/components/schemas/stored_objectMobileSDKAttributes"
+            "$ref": "#/components/schemas/stored_objectMobileSDKAttributes",
+            "x-f5xc-conflicts-with": [
+              "mobile_app_shield",
+              "mobile_integrator",
+              "no_attributes"
+            ]
           },
           "name": {
             "type": "string",
@@ -2782,10 +2841,15 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:39.900682+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.643395+00:00"
           },
           "no_attributes": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "mobile_app_shield",
+              "mobile_integrator",
+              "mobile_sdk"
+            ]
           },
           "tenant": {
             "type": "string",
@@ -2805,7 +2869,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:39.900720+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.643451+00:00"
           },
           "versions": {
             "type": "array",
@@ -3180,16 +3244,31 @@
             },
             "x-original-maxLength": 512,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:39.900880+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.643613+00:00"
           },
           "mobile_app_shield": {
-            "$ref": "#/components/schemas/stored_objectMobileAppShieldAttributes"
+            "$ref": "#/components/schemas/stored_objectMobileAppShieldAttributes",
+            "x-f5xc-conflicts-with": [
+              "mobile_integrator",
+              "mobile_sdk",
+              "no_attributes"
+            ]
           },
           "mobile_integrator": {
-            "$ref": "#/components/schemas/stored_objectMobileIntegratorAttributes"
+            "$ref": "#/components/schemas/stored_objectMobileIntegratorAttributes",
+            "x-f5xc-conflicts-with": [
+              "mobile_app_shield",
+              "mobile_sdk",
+              "no_attributes"
+            ]
           },
           "mobile_sdk": {
-            "$ref": "#/components/schemas/stored_objectMobileSDKAttributes"
+            "$ref": "#/components/schemas/stored_objectMobileSDKAttributes",
+            "x-f5xc-conflicts-with": [
+              "mobile_app_shield",
+              "mobile_integrator",
+              "no_attributes"
+            ]
           },
           "name": {
             "type": "string",
@@ -3215,7 +3294,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:39.900947+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.643668+00:00"
           },
           "namespace": {
             "type": "string",
@@ -3241,10 +3320,15 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:39.900976+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.643695+00:00"
           },
           "no_attributes": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "mobile_app_shield",
+              "mobile_integrator",
+              "mobile_sdk"
+            ]
           },
           "url": {
             "type": "string",
@@ -3292,7 +3376,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:39.901021+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.643740+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -3394,7 +3478,7 @@
             },
             "x-original-maxLength": 512,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:39.901062+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.643780+00:00"
           },
           "latest_version": {
             "type": "boolean",
@@ -3448,7 +3532,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:39.901109+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:37.643828+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -235,6 +236,12 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 						"exact_value": schema.StringAttribute{
 							MarkdownDescription: "Exact domain name.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("any_domain"),
+									path.MatchRelative().AtParent().AtName("suffix_value"),
+								),
+							},
 						},
 						"expiration_timestamp": schema.StringAttribute{
 							MarkdownDescription: "Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
@@ -248,14 +255,32 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 						"path_prefix": schema.StringAttribute{
 							MarkdownDescription: "Path prefix to match (e.g. The value / will match on all paths).",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("any_path"),
+									path.MatchRelative().AtParent().AtName("path_regex"),
+								),
+							},
 						},
 						"path_regex": schema.StringAttribute{
 							MarkdownDescription: "Define the regex for the path. For example, the regex ^/.*$ will match on all paths.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("any_path"),
+									path.MatchRelative().AtParent().AtName("path_prefix"),
+								),
+							},
 						},
 						"suffix_value": schema.StringAttribute{
 							MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 							Optional:            true,
+							Validators: []validator.String{
+								stringvalidator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("any_domain"),
+									path.MatchRelative().AtParent().AtName("exact_value"),
+								),
+							},
 						},
 					},
 					Blocks: map[string]schema.Block{

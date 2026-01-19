@@ -8,6 +8,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework/diag"
@@ -20,15 +22,16 @@ type ErrorCode string
 
 const (
 	// API errors
-	ErrCodeNotFound     ErrorCode = "NOT_FOUND"
-	ErrCodeUnauthorized ErrorCode = "UNAUTHORIZED"
-	ErrCodeForbidden    ErrorCode = "FORBIDDEN"
-	ErrCodeConflict     ErrorCode = "CONFLICT"
-	ErrCodeRateLimit    ErrorCode = "RATE_LIMIT"
-	ErrCodeServerError  ErrorCode = "SERVER_ERROR"
-	ErrCodeBadRequest   ErrorCode = "BAD_REQUEST"
-	ErrCodeTimeout      ErrorCode = "TIMEOUT"
-	ErrCodeNetworkError ErrorCode = "NETWORK_ERROR"
+	ErrCodeNotFound       ErrorCode = "NOT_FOUND"
+	ErrCodeUnauthorized   ErrorCode = "UNAUTHORIZED"
+	ErrCodeForbidden      ErrorCode = "FORBIDDEN"
+	ErrCodeConflict       ErrorCode = "CONFLICT"
+	ErrCodeRateLimit      ErrorCode = "RATE_LIMIT"
+	ErrCodeServerError    ErrorCode = "SERVER_ERROR"
+	ErrCodeBadRequest     ErrorCode = "BAD_REQUEST"
+	ErrCodeTimeout        ErrorCode = "TIMEOUT"
+	ErrCodeNetworkError   ErrorCode = "NETWORK_ERROR"
+	ErrCodeQuotaExhausted ErrorCode = "QUOTA_EXHAUSTED"
 
 	// Resource errors
 	ErrCodeValidation    ErrorCode = "VALIDATION"
@@ -44,7 +47,7 @@ type F5XCError struct {
 	Resource   string
 	Operation  string
 	StatusCode int
-	Details    map[string]interface{}
+	Details    map[string]any
 	Wrapped    error
 }
 
@@ -89,6 +92,11 @@ func (e *F5XCError) IsNotFound() bool {
 	return e.Code == ErrCodeNotFound
 }
 
+// IsQuotaExhausted returns true if the error is due to quota exhaustion
+func (e *F5XCError) IsQuotaExhausted() bool {
+	return e.Code == ErrCodeQuotaExhausted
+}
+
 // APIErrorResponse represents the F5 XC API error response structure
 type APIErrorResponse struct {
 	Code    string `json:"code"`
@@ -106,7 +114,7 @@ func NewAPIError(statusCode int, body []byte, resource, operation string) *F5XCE
 		Resource:   resource,
 		Operation:  operation,
 		StatusCode: statusCode,
-		Details:    make(map[string]interface{}),
+		Details:    make(map[string]any),
 	}
 
 	// Set error code based on status
@@ -145,6 +153,18 @@ func NewAPIError(statusCode int, body []byte, resource, operation string) *F5XCE
 		if jsonErr := json.Unmarshal(body, &apiErr); jsonErr == nil {
 			if apiErr.Message != "" {
 				err.Message = apiErr.Message
+
+				// Check for quota exhaustion pattern in the message
+				if limit := ParseQuotaExhaustedError(apiErr.Message); limit > 0 {
+					err.Code = ErrCodeQuotaExhausted
+					err.Details["quota_limit"] = limit
+					// Enhance message with actionable guidance
+					err.Message = fmt.Sprintf("Quota exhausted for %s (limit: %d). "+
+						"Delete unused resources or request a quota increase from F5. "+
+						"Check current usage via the F5 XC Console or API: "+
+						"GET /api/web/namespaces/{namespace}/quota/usage",
+						resource, limit)
+				}
 			}
 			if apiErr.Code != "" {
 				err.Details["api_code"] = apiErr.Code
@@ -155,6 +175,17 @@ func NewAPIError(statusCode int, body []byte, resource, operation string) *F5XCE
 		} else {
 			// Store raw response if JSON parsing fails
 			err.Details["raw_response"] = string(body)
+
+			// Also check raw response for quota exhaustion pattern
+			if limit := ParseQuotaExhaustedError(string(body)); limit > 0 {
+				err.Code = ErrCodeQuotaExhausted
+				err.Details["quota_limit"] = limit
+				err.Message = fmt.Sprintf("Quota exhausted for %s (limit: %d). "+
+					"Delete unused resources or request a quota increase from F5. "+
+					"Check current usage via the F5 XC Console or API: "+
+					"GET /api/web/namespaces/{namespace}/quota/usage",
+					resource, limit)
+			}
 		}
 	}
 
@@ -167,7 +198,7 @@ func NewNotFoundError(resource, name, namespace string) *F5XCError {
 		Code:     ErrCodeNotFound,
 		Message:  fmt.Sprintf("%s '%s' not found in namespace '%s'", resource, name, namespace),
 		Resource: resource,
-		Details: map[string]interface{}{
+		Details: map[string]any{
 			"name":      name,
 			"namespace": namespace,
 		},
@@ -180,7 +211,7 @@ func NewValidationError(resource, field, message string) *F5XCError {
 		Code:     ErrCodeValidation,
 		Message:  fmt.Sprintf("validation failed for %s.%s: %s", resource, field, message),
 		Resource: resource,
-		Details: map[string]interface{}{
+		Details: map[string]any{
 			"field": field,
 		},
 	}
@@ -212,6 +243,44 @@ func NewConfigurationError(message string) *F5XCError {
 		Code:    ErrCodeConfiguration,
 		Message: message,
 	}
+}
+
+// quotaExhaustedPattern matches quota exhausted error messages like "exhausted limits(150)"
+var quotaExhaustedPattern = regexp.MustCompile(`exhausted limits\((\d+)\)`)
+
+// NewQuotaExhaustedError creates a quota exhausted error with actionable guidance
+func NewQuotaExhaustedError(resourceType string, limit int, namespace string) *F5XCError {
+	return &F5XCError{
+		Code: ErrCodeQuotaExhausted,
+		Message: fmt.Sprintf("Quota exhausted for %s (limit: %d). "+
+			"Delete unused resources or request a quota increase from F5. "+
+			"Check current usage: GET /api/web/namespaces/%s/quota/usage",
+			resourceType, limit, namespace),
+		Resource:   resourceType,
+		StatusCode: http.StatusUnprocessableEntity,
+		Details: map[string]any{
+			"resource_type": resourceType,
+			"limit":         limit,
+			"namespace":     namespace,
+		},
+	}
+}
+
+// ParseQuotaExhaustedError checks if an error message indicates quota exhaustion
+// and returns the limit if found, or -1 if not a quota error
+func ParseQuotaExhaustedError(message string) int {
+	matches := quotaExhaustedPattern.FindStringSubmatch(message)
+	if len(matches) >= 2 {
+		if limit, err := strconv.Atoi(matches[1]); err == nil {
+			return limit
+		}
+	}
+	return -1
+}
+
+// IsQuotaExhaustedMessage checks if an error message indicates quota exhaustion
+func IsQuotaExhaustedMessage(message string) bool {
+	return strings.Contains(message, "exhausted limits")
 }
 
 // DiagnosticHelpers provides methods to add errors to diagnostics

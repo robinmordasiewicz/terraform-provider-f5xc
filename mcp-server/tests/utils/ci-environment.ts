@@ -73,24 +73,26 @@ export function setupAuthenticatedModeEnv(options?: {
 
 /**
  * Check if real API testing is possible (has valid credentials)
+ * Supports both F5XC_API_* (standard) and F5XC_TEST_API_* (legacy) naming
  */
 export function hasRealCredentials(): boolean {
   return Boolean(
-    process.env.F5XC_TEST_API_URL &&
-    process.env.F5XC_TEST_API_TOKEN
+    (process.env.F5XC_API_URL || process.env.F5XC_TEST_API_URL) &&
+    (process.env.F5XC_API_TOKEN || process.env.F5XC_TEST_API_TOKEN)
   );
 }
 
 /**
  * Get real test credentials if available
+ * Supports both F5XC_API_* (standard) and F5XC_TEST_API_* (legacy) naming
  */
 export function getRealCredentials(): { apiUrl: string; apiToken: string } | null {
   if (!hasRealCredentials()) {
     return null;
   }
   return {
-    apiUrl: process.env.F5XC_TEST_API_URL!,
-    apiToken: process.env.F5XC_TEST_API_TOKEN!,
+    apiUrl: process.env.F5XC_API_URL || process.env.F5XC_TEST_API_URL!,
+    apiToken: process.env.F5XC_API_TOKEN || process.env.F5XC_TEST_API_TOKEN!,
   };
 }
 
@@ -165,7 +167,7 @@ export function setupE2ETestEnv(): {
  * Skip message for E2E tests when credentials are not available
  */
 export const E2E_SKIP_MESSAGE =
-  'E2E tests require F5XC_TEST_API_URL and F5XC_TEST_API_TOKEN environment variables';
+  'E2E tests require F5XC_API_URL and F5XC_API_TOKEN environment variables';
 
 /**
  * Skip message for Terraform tests when CLI is not available

@@ -1,0 +1,19 @@
+{
+  "operation": "syntax",
+  "resource": "certificate_chain",
+  "totalBlocks": 0,
+  "totalAttributes": 8,
+  "totalOneOfGroups": 0,
+  "blocks": [],
+  "attributes": [
+    "annotations",
+    "certificate_url",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {}
+}

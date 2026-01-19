@@ -49,6 +49,7 @@ type Schema struct {
 	XF5XCIsPreview        bool     `json:"x-f5xc-is-preview"`
 	XF5XCIcon             string   `json:"x-f5xc-icon"`
 	XF5XCCLIDomain        string   `json:"x-f5xc-cli-domain"`
+	XF5XCConflictsWith    []string `json:"x-f5xc-conflicts-with"`
 }
 
 // TerraformAttribute represents an attribute in a Terraform resource schema.
@@ -68,11 +69,12 @@ type TerraformAttribute struct {
 	IsBlock            bool
 	OneOfGroup         string
 	PlanModifier       string
-	MaxDepth           int    // Track recursion depth to prevent infinite loops
-	IsSpecField        bool   // True if this is a spec field (not metadata)
-	JsonName           string // JSON field name from OpenAPI for API marshaling
-	GoType             string // Go type for client struct generation
-	UseDomainValidator bool   // True if name field should use DomainValidator (for DNS resources)
+	MaxDepth           int      // Track recursion depth to prevent infinite loops
+	IsSpecField        bool     // True if this is a spec field (not metadata)
+	JsonName           string   // JSON field name from OpenAPI for API marshaling
+	GoType             string   // Go type for client struct generation
+	UseDomainValidator bool     // True if name field should use DomainValidator (for DNS resources)
+	ConflictsWith      []string // Field names that conflict with this attribute (from x-f5xc-conflicts-with)
 }
 
 // ResourceTemplate contains data for generating a Terraform resource.

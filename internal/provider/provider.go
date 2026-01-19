@@ -388,6 +388,7 @@ func (p *F5XCProvider) DataSources(ctx context.Context) []func() datasource.Data
 		NewProtocolInspectionDataSource,
 		NewProtocolPolicerDataSource,
 		NewProxyDataSource,
+		NewQuotaUsageDataSource,
 		NewRateLimiterDataSource,
 		NewRateLimiterPolicyDataSource,
 		NewRouteDataSource,

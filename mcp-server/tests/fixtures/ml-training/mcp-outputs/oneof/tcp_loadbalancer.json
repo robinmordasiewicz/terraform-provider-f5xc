@@ -1,0 +1,22 @@
+[
+  {
+    "group_name": "operation",
+    "fields": [],
+    "required": false
+  },
+  {
+    "group_name": "resource",
+    "fields": [],
+    "required": false
+  },
+  {
+    "group_name": "groups",
+    "fields": [],
+    "required": false
+  },
+  {
+    "group_name": "total_groups",
+    "fields": [],
+    "required": false
+  }
+]

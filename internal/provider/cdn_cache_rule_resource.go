@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -435,38 +436,146 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 																"contains": schema.StringAttribute{
 																	MarkdownDescription: "Field must contain.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"does_not_contain": schema.StringAttribute{
 																	MarkdownDescription: "Field must not contain.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"does_not_end_with": schema.StringAttribute{
 																	MarkdownDescription: "Field must not end with.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"does_not_equal": schema.StringAttribute{
 																	MarkdownDescription: "Field must not equal.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"does_not_start_with": schema.StringAttribute{
 																	MarkdownDescription: "Field must not start with.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"endswith": schema.StringAttribute{
 																	MarkdownDescription: "Field must end with.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"equals": schema.StringAttribute{
 																	MarkdownDescription: "Field must exactly match.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"match_regex": schema.StringAttribute{
 																	MarkdownDescription: "Field matches PCRE 1 compliant regular expression.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"startswith": schema.StringAttribute{
 																	MarkdownDescription: "Field must start with.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																		),
+																	},
 																},
 															},
 														},
@@ -489,38 +598,146 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 																"contains": schema.StringAttribute{
 																	MarkdownDescription: "Field must contain.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"does_not_contain": schema.StringAttribute{
 																	MarkdownDescription: "Field must not contain.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"does_not_end_with": schema.StringAttribute{
 																	MarkdownDescription: "Field must not end with.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"does_not_equal": schema.StringAttribute{
 																	MarkdownDescription: "Field must not equal.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"does_not_start_with": schema.StringAttribute{
 																	MarkdownDescription: "Field must not start with.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"endswith": schema.StringAttribute{
 																	MarkdownDescription: "Field must end with.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"equals": schema.StringAttribute{
 																	MarkdownDescription: "Field must exactly match.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"match_regex": schema.StringAttribute{
 																	MarkdownDescription: "Field matches PCRE 1 compliant regular expression.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"startswith": schema.StringAttribute{
 																	MarkdownDescription: "Field must start with.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																		),
+																	},
 																},
 															},
 														},
@@ -537,38 +754,146 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 															"contains": schema.StringAttribute{
 																MarkdownDescription: "Field must contain.",
 																Optional:            true,
+																Validators: []validator.String{
+																	stringvalidator.ConflictsWith(
+																		path.MatchRelative().AtParent().AtName("does_not_contain"),
+																		path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																		path.MatchRelative().AtParent().AtName("does_not_equal"),
+																		path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																		path.MatchRelative().AtParent().AtName("endswith"),
+																		path.MatchRelative().AtParent().AtName("equals"),
+																		path.MatchRelative().AtParent().AtName("match_regex"),
+																		path.MatchRelative().AtParent().AtName("startswith"),
+																	),
+																},
 															},
 															"does_not_contain": schema.StringAttribute{
 																MarkdownDescription: "Field must not contain.",
 																Optional:            true,
+																Validators: []validator.String{
+																	stringvalidator.ConflictsWith(
+																		path.MatchRelative().AtParent().AtName("contains"),
+																		path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																		path.MatchRelative().AtParent().AtName("does_not_equal"),
+																		path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																		path.MatchRelative().AtParent().AtName("endswith"),
+																		path.MatchRelative().AtParent().AtName("equals"),
+																		path.MatchRelative().AtParent().AtName("match_regex"),
+																		path.MatchRelative().AtParent().AtName("startswith"),
+																	),
+																},
 															},
 															"does_not_end_with": schema.StringAttribute{
 																MarkdownDescription: "Field must not end with.",
 																Optional:            true,
+																Validators: []validator.String{
+																	stringvalidator.ConflictsWith(
+																		path.MatchRelative().AtParent().AtName("contains"),
+																		path.MatchRelative().AtParent().AtName("does_not_contain"),
+																		path.MatchRelative().AtParent().AtName("does_not_equal"),
+																		path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																		path.MatchRelative().AtParent().AtName("endswith"),
+																		path.MatchRelative().AtParent().AtName("equals"),
+																		path.MatchRelative().AtParent().AtName("match_regex"),
+																		path.MatchRelative().AtParent().AtName("startswith"),
+																	),
+																},
 															},
 															"does_not_equal": schema.StringAttribute{
 																MarkdownDescription: "Field must not equal.",
 																Optional:            true,
+																Validators: []validator.String{
+																	stringvalidator.ConflictsWith(
+																		path.MatchRelative().AtParent().AtName("contains"),
+																		path.MatchRelative().AtParent().AtName("does_not_contain"),
+																		path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																		path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																		path.MatchRelative().AtParent().AtName("endswith"),
+																		path.MatchRelative().AtParent().AtName("equals"),
+																		path.MatchRelative().AtParent().AtName("match_regex"),
+																		path.MatchRelative().AtParent().AtName("startswith"),
+																	),
+																},
 															},
 															"does_not_start_with": schema.StringAttribute{
 																MarkdownDescription: "Field must not start with.",
 																Optional:            true,
+																Validators: []validator.String{
+																	stringvalidator.ConflictsWith(
+																		path.MatchRelative().AtParent().AtName("contains"),
+																		path.MatchRelative().AtParent().AtName("does_not_contain"),
+																		path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																		path.MatchRelative().AtParent().AtName("does_not_equal"),
+																		path.MatchRelative().AtParent().AtName("endswith"),
+																		path.MatchRelative().AtParent().AtName("equals"),
+																		path.MatchRelative().AtParent().AtName("match_regex"),
+																		path.MatchRelative().AtParent().AtName("startswith"),
+																	),
+																},
 															},
 															"endswith": schema.StringAttribute{
 																MarkdownDescription: "Field must end with.",
 																Optional:            true,
+																Validators: []validator.String{
+																	stringvalidator.ConflictsWith(
+																		path.MatchRelative().AtParent().AtName("contains"),
+																		path.MatchRelative().AtParent().AtName("does_not_contain"),
+																		path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																		path.MatchRelative().AtParent().AtName("does_not_equal"),
+																		path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																		path.MatchRelative().AtParent().AtName("equals"),
+																		path.MatchRelative().AtParent().AtName("match_regex"),
+																		path.MatchRelative().AtParent().AtName("startswith"),
+																	),
+																},
 															},
 															"equals": schema.StringAttribute{
 																MarkdownDescription: "Field must exactly match.",
 																Optional:            true,
+																Validators: []validator.String{
+																	stringvalidator.ConflictsWith(
+																		path.MatchRelative().AtParent().AtName("contains"),
+																		path.MatchRelative().AtParent().AtName("does_not_contain"),
+																		path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																		path.MatchRelative().AtParent().AtName("does_not_equal"),
+																		path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																		path.MatchRelative().AtParent().AtName("endswith"),
+																		path.MatchRelative().AtParent().AtName("match_regex"),
+																		path.MatchRelative().AtParent().AtName("startswith"),
+																	),
+																},
 															},
 															"match_regex": schema.StringAttribute{
 																MarkdownDescription: "Field matches PCRE 1 compliant regular expression.",
 																Optional:            true,
+																Validators: []validator.String{
+																	stringvalidator.ConflictsWith(
+																		path.MatchRelative().AtParent().AtName("contains"),
+																		path.MatchRelative().AtParent().AtName("does_not_contain"),
+																		path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																		path.MatchRelative().AtParent().AtName("does_not_equal"),
+																		path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																		path.MatchRelative().AtParent().AtName("endswith"),
+																		path.MatchRelative().AtParent().AtName("equals"),
+																		path.MatchRelative().AtParent().AtName("startswith"),
+																	),
+																},
 															},
 															"startswith": schema.StringAttribute{
 																MarkdownDescription: "Field must start with.",
 																Optional:            true,
+																Validators: []validator.String{
+																	stringvalidator.ConflictsWith(
+																		path.MatchRelative().AtParent().AtName("contains"),
+																		path.MatchRelative().AtParent().AtName("does_not_contain"),
+																		path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																		path.MatchRelative().AtParent().AtName("does_not_equal"),
+																		path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																		path.MatchRelative().AtParent().AtName("endswith"),
+																		path.MatchRelative().AtParent().AtName("equals"),
+																		path.MatchRelative().AtParent().AtName("match_regex"),
+																	),
+																},
 															},
 														},
 													},
@@ -590,38 +915,146 @@ func (r *CDNCacheRuleResource) Schema(ctx context.Context, req resource.SchemaRe
 																"contains": schema.StringAttribute{
 																	MarkdownDescription: "Field must contain.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"does_not_contain": schema.StringAttribute{
 																	MarkdownDescription: "Field must not contain.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"does_not_end_with": schema.StringAttribute{
 																	MarkdownDescription: "Field must not end with.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"does_not_equal": schema.StringAttribute{
 																	MarkdownDescription: "Field must not equal.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"does_not_start_with": schema.StringAttribute{
 																	MarkdownDescription: "Field must not start with.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"endswith": schema.StringAttribute{
 																	MarkdownDescription: "Field must end with.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"equals": schema.StringAttribute{
 																	MarkdownDescription: "Field must exactly match.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"match_regex": schema.StringAttribute{
 																	MarkdownDescription: "Field matches PCRE 1 compliant regular expression.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("startswith"),
+																		),
+																	},
 																},
 																"startswith": schema.StringAttribute{
 																	MarkdownDescription: "Field must start with.",
 																	Optional:            true,
+																	Validators: []validator.String{
+																		stringvalidator.ConflictsWith(
+																			path.MatchRelative().AtParent().AtName("contains"),
+																			path.MatchRelative().AtParent().AtName("does_not_contain"),
+																			path.MatchRelative().AtParent().AtName("does_not_end_with"),
+																			path.MatchRelative().AtParent().AtName("does_not_equal"),
+																			path.MatchRelative().AtParent().AtName("does_not_start_with"),
+																			path.MatchRelative().AtParent().AtName("endswith"),
+																			path.MatchRelative().AtParent().AtName("equals"),
+																			path.MatchRelative().AtParent().AtName("match_regex"),
+																		),
+																	},
 																},
 															},
 														},

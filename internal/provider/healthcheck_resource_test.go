@@ -35,6 +35,7 @@ import (
 func TestAccHealthcheckResource_basic(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
 
 	rName := acctest.RandomName("tf-acc-test-hc")
 	resourceName := "f5xc_healthcheck.test"
@@ -88,6 +89,7 @@ func testAccHealthcheckImportStateIdFunc(resourceName string) resource.ImportSta
 func TestAccHealthcheckResource_allAttributes(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
 
 	rName := acctest.RandomName("tf-acc-test-hc")
 	resourceName := "f5xc_healthcheck.test"
@@ -136,6 +138,7 @@ func TestAccHealthcheckResource_allAttributes(t *testing.T) {
 func TestAccHealthcheckResource_updateLabels(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
 
 	rName := acctest.RandomName("tf-acc-test-hc")
 	resourceName := "f5xc_healthcheck.test"
@@ -186,6 +189,7 @@ func TestAccHealthcheckResource_updateLabels(t *testing.T) {
 func TestAccHealthcheckResource_updateAnnotations(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
 
 	rName := acctest.RandomName("tf-acc-test-hc")
 	resourceName := "f5xc_healthcheck.test"
@@ -233,6 +237,7 @@ func TestAccHealthcheckResource_updateAnnotations(t *testing.T) {
 func TestAccHealthcheckResource_disappears(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
 
 	rName := acctest.RandomName("tf-acc-test-hc")
 	resourceName := "f5xc_healthcheck.test"
@@ -260,6 +265,7 @@ func TestAccHealthcheckResource_disappears(t *testing.T) {
 func TestAccHealthcheckResource_emptyPlan(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
 
 	rName := acctest.RandomName("tf-acc-test-hc")
 	resourceName := "f5xc_healthcheck.test"
@@ -293,6 +299,7 @@ func TestAccHealthcheckResource_emptyPlan(t *testing.T) {
 func TestAccHealthcheckResource_planChecks(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
 
 	rName := acctest.RandomName("tf-acc-test-hc")
 	resourceName := "f5xc_healthcheck.test"
@@ -339,6 +346,7 @@ func TestAccHealthcheckResource_planChecks(t *testing.T) {
 func TestAccHealthcheckResource_knownValues(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
 
 	rName := acctest.RandomName("tf-acc-test-hc")
 	resourceName := "f5xc_healthcheck.test"
@@ -432,6 +440,7 @@ func TestAccHealthcheckResource_emptyName(t *testing.T) {
 func TestAccHealthcheckResource_requiresReplace(t *testing.T) {
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
 
 	rName1 := acctest.RandomName("tf-acc-test-hc")
 	rName2 := acctest.RandomName("tf-acc-test-hc")
@@ -472,6 +481,7 @@ func TestAccHealthcheckResource_httpHealthCheck(t *testing.T) {
 	// Testing actual error to debug schema type mismatch
 	acctest.SkipIfNotAccTest(t)
 	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
 
 	rName := acctest.RandomName("tf-acc-test-hc")
 	resourceName := "f5xc_healthcheck.test"
@@ -606,4 +616,394 @@ resource "f5xc_healthcheck" "test" {
   }
 }
 `, name)
+}
+
+// =============================================================================
+// ConflictsWith TEST CONFIGURATION HELPERS
+// =============================================================================
+
+// testAccHealthcheckConfig_httpWithHostHeaderOnly creates HTTP healthcheck with only host_header set (valid)
+func testAccHealthcheckConfig_httpWithHostHeaderOnly(name, hostHeader string) string {
+	return fmt.Sprintf(`
+resource "f5xc_healthcheck" "test" {
+  name      = %[1]q
+  namespace = "system"
+
+  healthy_threshold   = 1
+  unhealthy_threshold = 2
+  timeout             = 3
+  interval            = 5
+
+  http_health_check {
+    path        = "/health"
+    host_header = %[2]q
+  }
+}
+`, name, hostHeader)
+}
+
+// testAccHealthcheckConfig_httpWithOriginServerName creates HTTP healthcheck with only use_origin_server_name set (valid)
+func testAccHealthcheckConfig_httpWithOriginServerName(name string) string {
+	return fmt.Sprintf(`
+resource "f5xc_healthcheck" "test" {
+  name      = %[1]q
+  namespace = "system"
+
+  healthy_threshold   = 1
+  unhealthy_threshold = 2
+  timeout             = 3
+  interval            = 5
+
+  http_health_check {
+    path = "/health"
+    use_origin_server_name {}
+  }
+}
+`, name)
+}
+
+// testAccHealthcheckConfig_httpWithBothConflict creates HTTP healthcheck with BOTH host_header AND use_origin_server_name (INVALID - should fail ConflictsWith)
+func testAccHealthcheckConfig_httpWithBothConflict(name, hostHeader string) string {
+	return fmt.Sprintf(`
+resource "f5xc_healthcheck" "test" {
+  name      = %[1]q
+  namespace = "system"
+
+  healthy_threshold   = 1
+  unhealthy_threshold = 2
+  timeout             = 3
+  interval            = 5
+
+  http_health_check {
+    path                   = "/health"
+    host_header            = %[2]q
+    use_origin_server_name {}
+  }
+}
+`, name, hostHeader)
+}
+
+// testAccHealthcheckConfig_httpWithNeither creates HTTP healthcheck with neither host_header nor use_origin_server_name (valid - defaults)
+func testAccHealthcheckConfig_httpWithNeither(name string) string {
+	return fmt.Sprintf(`
+resource "f5xc_healthcheck" "test" {
+  name      = %[1]q
+  namespace = "system"
+
+  healthy_threshold   = 1
+  unhealthy_threshold = 2
+  timeout             = 3
+  interval            = 5
+
+  http_health_check {
+    path = "/health"
+  }
+}
+`, name)
+}
+
+// testAccHealthcheckConfig_tcpWithCustomPayload creates TCP healthcheck with custom send_payload and expected_response values
+func testAccHealthcheckConfig_tcpWithCustomPayload(name, sendPayload, expectedResponse string) string {
+	return fmt.Sprintf(`
+resource "f5xc_healthcheck" "test" {
+  name      = %[1]q
+  namespace = "system"
+
+  healthy_threshold   = 1
+  unhealthy_threshold = 2
+  timeout             = 3
+  interval            = 5
+
+  tcp_health_check {
+    send_payload      = %[2]q
+    expected_response = %[3]q
+  }
+}
+`, name, sendPayload, expectedResponse)
+}
+
+// testAccHealthcheckConfig_udpIcmpBasic creates basic UDP/ICMP healthcheck (empty block)
+func testAccHealthcheckConfig_udpIcmpBasic(name string) string {
+	return fmt.Sprintf(`
+resource "f5xc_healthcheck" "test" {
+  name      = %[1]q
+  namespace = "system"
+
+  healthy_threshold   = 1
+  unhealthy_threshold = 2
+  timeout             = 3
+  interval            = 5
+
+  udp_icmp_health_check {}
+}
+`, name)
+}
+
+// =============================================================================
+// ConflictsWith VALID PATTERN TESTS
+// =============================================================================
+
+// TestAccHealthcheckResource_httpWithHostHeaderOnly tests HTTP healthcheck with only host_header (valid pattern)
+func TestAccHealthcheckResource_httpWithHostHeaderOnly(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
+
+	rName := acctest.RandomName("tf-acc-test-hc")
+	resourceName := "f5xc_healthcheck.test"
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 func() { acctest.PreCheck(t) },
+		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
+		CheckDestroy:             acctest.CheckHealthcheckDestroyed,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccHealthcheckConfig_httpWithHostHeaderOnly(rName, "example.com"),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					acctest.CheckHealthcheckExists(resourceName),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "http_health_check.path", "/health"),
+					resource.TestCheckResourceAttr(resourceName, "http_health_check.host_header", "example.com"),
+				),
+			},
+			{
+				ResourceName:            resourceName,
+				ImportState:             true,
+				ImportStateVerify:       true,
+				ImportStateVerifyIgnore: []string{"timeouts", "http_health_check.use_http2"},
+				ImportStateIdFunc:       testAccHealthcheckImportStateIdFunc(resourceName),
+			},
+		},
+	})
+}
+
+// TestAccHealthcheckResource_httpWithOriginServerName tests HTTP healthcheck with only use_origin_server_name (valid pattern)
+func TestAccHealthcheckResource_httpWithOriginServerName(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
+
+	rName := acctest.RandomName("tf-acc-test-hc")
+	resourceName := "f5xc_healthcheck.test"
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 func() { acctest.PreCheck(t) },
+		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
+		CheckDestroy:             acctest.CheckHealthcheckDestroyed,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccHealthcheckConfig_httpWithOriginServerName(rName),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					acctest.CheckHealthcheckExists(resourceName),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "http_health_check.path", "/health"),
+					resource.TestCheckResourceAttr(resourceName, "http_health_check.use_origin_server_name.%", "0"),
+				),
+			},
+			{
+				ResourceName:            resourceName,
+				ImportState:             true,
+				ImportStateVerify:       true,
+				ImportStateVerifyIgnore: []string{"timeouts", "http_health_check.use_http2"},
+				ImportStateIdFunc:       testAccHealthcheckImportStateIdFunc(resourceName),
+			},
+		},
+	})
+}
+
+// TestAccHealthcheckResource_httpWithNeither tests HTTP healthcheck with neither host_header nor use_origin_server_name (valid - uses defaults)
+func TestAccHealthcheckResource_httpWithNeither(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
+
+	rName := acctest.RandomName("tf-acc-test-hc")
+	resourceName := "f5xc_healthcheck.test"
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 func() { acctest.PreCheck(t) },
+		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
+		CheckDestroy:             acctest.CheckHealthcheckDestroyed,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccHealthcheckConfig_httpWithNeither(rName),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					acctest.CheckHealthcheckExists(resourceName),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "http_health_check.path", "/health"),
+				),
+			},
+		},
+	})
+}
+
+// TestAccHealthcheckResource_tcpWithCustomPayload tests TCP healthcheck with custom send_payload and expected_response values
+func TestAccHealthcheckResource_tcpWithCustomPayload(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
+
+	rName := acctest.RandomName("tf-acc-test-hc")
+	resourceName := "f5xc_healthcheck.test"
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 func() { acctest.PreCheck(t) },
+		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
+		CheckDestroy:             acctest.CheckHealthcheckDestroyed,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccHealthcheckConfig_tcpWithCustomPayload(rName, "48454c4c4f", "574f524c44"),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					acctest.CheckHealthcheckExists(resourceName),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "tcp_health_check.send_payload", "48454c4c4f"),
+					resource.TestCheckResourceAttr(resourceName, "tcp_health_check.expected_response", "574f524c44"),
+				),
+			},
+			{
+				ResourceName:            resourceName,
+				ImportState:             true,
+				ImportStateVerify:       true,
+				ImportStateVerifyIgnore: []string{"timeouts"},
+				ImportStateIdFunc:       testAccHealthcheckImportStateIdFunc(resourceName),
+			},
+		},
+	})
+}
+
+// TestAccHealthcheckResource_udpIcmpHealthCheck tests UDP/ICMP healthcheck (empty block)
+func TestAccHealthcheckResource_udpIcmpHealthCheck(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
+
+	rName := acctest.RandomName("tf-acc-test-hc")
+	resourceName := "f5xc_healthcheck.test"
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 func() { acctest.PreCheck(t) },
+		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
+		CheckDestroy:             acctest.CheckHealthcheckDestroyed,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccHealthcheckConfig_udpIcmpBasic(rName),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					acctest.CheckHealthcheckExists(resourceName),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "udp_icmp_health_check.%", "0"),
+				),
+			},
+			{
+				ResourceName:            resourceName,
+				ImportState:             true,
+				ImportStateVerify:       true,
+				ImportStateVerifyIgnore: []string{"timeouts"},
+				ImportStateIdFunc:       testAccHealthcheckImportStateIdFunc(resourceName),
+			},
+		},
+	})
+}
+
+// =============================================================================
+// ConflictsWith ANTI-PATTERN TESTS (Should Fail Validation)
+// =============================================================================
+
+// TestAccHealthcheckResource_httpHostHeaderConflictsWithOriginServerName tests that using BOTH host_header AND use_origin_server_name fails with ConflictsWith error
+func TestAccHealthcheckResource_httpHostHeaderConflictsWithOriginServerName(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+
+	rName := acctest.RandomName("tf-acc-test-hc")
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 func() { acctest.PreCheck(t) },
+		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config:      testAccHealthcheckConfig_httpWithBothConflict(rName, "example.com"),
+				ExpectError: regexp.MustCompile(`(?i)(conflict|mutually exclusive|cannot be specified together|host_header|use_origin_server_name)`),
+			},
+		},
+	})
+}
+
+// =============================================================================
+// ConflictsWith CRUD LIFECYCLE TESTS
+// =============================================================================
+
+// TestAccHealthcheckResource_switchHostHeaderToOriginServerName tests switching from host_header to use_origin_server_name
+func TestAccHealthcheckResource_switchHostHeaderToOriginServerName(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
+
+	rName := acctest.RandomName("tf-acc-test-hc")
+	resourceName := "f5xc_healthcheck.test"
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 func() { acctest.PreCheck(t) },
+		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
+		CheckDestroy:             acctest.CheckHealthcheckDestroyed,
+		Steps: []resource.TestStep{
+			{
+				// Step 1: Create with host_header
+				Config: testAccHealthcheckConfig_httpWithHostHeaderOnly(rName, "example.com"),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					acctest.CheckHealthcheckExists(resourceName),
+					resource.TestCheckResourceAttr(resourceName, "http_health_check.host_header", "example.com"),
+				),
+			},
+			{
+				// Step 2: Update to use_origin_server_name (switching from host_header)
+				Config: testAccHealthcheckConfig_httpWithOriginServerName(rName),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					acctest.CheckHealthcheckExists(resourceName),
+					resource.TestCheckResourceAttr(resourceName, "http_health_check.use_origin_server_name.%", "0"),
+					resource.TestCheckNoResourceAttr(resourceName, "http_health_check.host_header"),
+				),
+			},
+			{
+				// Step 3: Switch back to host_header
+				Config: testAccHealthcheckConfig_httpWithHostHeaderOnly(rName, "updated.example.com"),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					acctest.CheckHealthcheckExists(resourceName),
+					resource.TestCheckResourceAttr(resourceName, "http_health_check.host_header", "updated.example.com"),
+				),
+			},
+		},
+	})
+}
+
+// TestAccHealthcheckResource_switchOriginServerNameToHostHeader tests switching from use_origin_server_name to host_header
+func TestAccHealthcheckResource_switchOriginServerNameToHostHeader(t *testing.T) {
+	acctest.SkipIfNotAccTest(t)
+	acctest.PreCheck(t)
+	acctest.SkipIfQuotaExhausted(t, "system", "healthcheck")
+
+	rName := acctest.RandomName("tf-acc-test-hc")
+	resourceName := "f5xc_healthcheck.test"
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck:                 func() { acctest.PreCheck(t) },
+		ProtoV6ProviderFactories: acctest.ProtoV6ProviderFactories,
+		CheckDestroy:             acctest.CheckHealthcheckDestroyed,
+		Steps: []resource.TestStep{
+			{
+				// Step 1: Create with use_origin_server_name
+				Config: testAccHealthcheckConfig_httpWithOriginServerName(rName),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					acctest.CheckHealthcheckExists(resourceName),
+					resource.TestCheckResourceAttr(resourceName, "http_health_check.use_origin_server_name.%", "0"),
+				),
+			},
+			{
+				// Step 2: Update to host_header (switching from use_origin_server_name)
+				Config: testAccHealthcheckConfig_httpWithHostHeaderOnly(rName, "myhost.example.com"),
+				Check: resource.ComposeAggregateTestCheckFunc(
+					acctest.CheckHealthcheckExists(resourceName),
+					resource.TestCheckResourceAttr(resourceName, "http_health_check.host_header", "myhost.example.com"),
+				),
+			},
+		},
+	})
 }

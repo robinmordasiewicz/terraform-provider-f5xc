@@ -1,0 +1,80 @@
+{
+  "operation": "syntax",
+  "resource": "tcp_loadbalancer",
+  "totalBlocks": 21,
+  "totalAttributes": 11,
+  "totalOneOfGroups": 7,
+  "blocks": [
+    "active_service_policies",
+    "advertise_custom",
+    "advertise_on_public",
+    "advertise_on_public_default_vip",
+    "default_lb_with_sni",
+    "do_not_advertise",
+    "do_not_retract_cluster",
+    "domains",
+    "hash_policy_choice_least_active",
+    "hash_policy_choice_random",
+    "hash_policy_choice_round_robin",
+    "hash_policy_choice_source_ip_stickiness",
+    "no_service_policies",
+    "no_sni",
+    "origin_pools_weights",
+    "retract_cluster",
+    "service_policies_from_namespace",
+    "sni",
+    "tcp",
+    "tls_tcp",
+    "tls_tcp_auto_cert"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "dns_volterra_managed",
+    "id",
+    "idle_timeout",
+    "labels",
+    "listen_port",
+    "name",
+    "namespace",
+    "port_ranges"
+  ],
+  "oneOfGroups": {
+    "service_policy_choice": [
+      "active_service_policies",
+      "no_service_policies",
+      "service_policies_from_namespace"
+    ],
+    "advertise_choice": [
+      "advertise_custom",
+      "advertise_on_public",
+      "advertise_on_public_default_vip",
+      "do_not_advertise"
+    ],
+    "sni_default_lb_choice": [
+      "default_lb_with_sni",
+      "no_sni",
+      "sni"
+    ],
+    "cluster_retract_choice": [
+      "do_not_retract_cluster",
+      "retract_cluster"
+    ],
+    "hash_policy_choice": [
+      "hash_policy_choice_least_active",
+      "hash_policy_choice_random",
+      "hash_policy_choice_round_robin",
+      "hash_policy_choice_source_ip_stickiness"
+    ],
+    "port_choice": [
+      "listen_port",
+      "port_ranges"
+    ],
+    "loadbalancer_type": [
+      "tcp",
+      "tls_tcp",
+      "tls_tcp_auto_cert"
+    ]
+  }
+}

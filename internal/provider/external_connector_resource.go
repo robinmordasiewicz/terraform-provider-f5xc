@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -354,6 +355,12 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 							"rm_hostname": schema.StringAttribute{
 								MarkdownDescription: "Configure an hostname Remote IKE ID.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("rm_ip_address"),
+										path.MatchRelative().AtParent().AtName("use_default_remote_ike_id"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{

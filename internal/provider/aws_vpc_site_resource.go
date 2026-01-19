@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -1713,6 +1715,12 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
+				Validators: []validator.Int64{
+					int64validator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("no_worker_nodes"),
+						path.MatchRelative().AtParent().AtName("total_nodes"),
+					),
+				},
 			},
 			"ssh_key": schema.StringAttribute{
 				MarkdownDescription: "Public SSH key for accessing the site.",
@@ -1728,6 +1736,12 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
+				},
+				Validators: []validator.Int64{
+					int64validator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("no_worker_nodes"),
+						path.MatchRelative().AtParent().AtName("nodes_per_az"),
+					),
 				},
 			},
 		},
@@ -1881,6 +1895,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					"custom_asn": schema.Int64Attribute{
 						MarkdownDescription: "Custom Autonomous System Number.",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("auto_asn"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1910,6 +1929,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"other_region": schema.StringAttribute{
 											MarkdownDescription: "Other Region.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("same_as_site_region"),
+												),
+											},
 										},
 										"vif_id": schema.StringAttribute{
 											MarkdownDescription: "AWS Direct Connect VIF ID that needs to be connected to the site .",
@@ -2141,6 +2165,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"existing_subnet_id": schema.StringAttribute{
 											MarkdownDescription: "Information about existing subnet ID.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("subnet_param"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2161,6 +2190,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"existing_subnet_id": schema.StringAttribute{
 											MarkdownDescription: "Information about existing subnet ID.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("subnet_param"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2184,6 +2218,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"existing_subnet_id": schema.StringAttribute{
 											MarkdownDescription: "Information about existing subnet ID.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("subnet_param"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2341,6 +2380,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("custom_static_route"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2505,6 +2549,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("custom_static_route"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2721,6 +2770,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"existing_subnet_id": schema.StringAttribute{
 											MarkdownDescription: "Information about existing subnet ID.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("subnet_param"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2843,6 +2897,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					"operating_system_version": schema.StringAttribute{
 						MarkdownDescription: "Specify a OS version to be used e.g. 9.2024.6.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_os_version"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -2894,6 +2953,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					"volterra_software_version": schema.StringAttribute{
 						MarkdownDescription: "Specify a F5XC Software Version to be used e.g. Crt-20210329-1002.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_sw_version"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -3056,6 +3120,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"existing_subnet_id": schema.StringAttribute{
 											MarkdownDescription: "Information about existing subnet ID.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("subnet_param"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -3234,6 +3303,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("custom_static_route"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -3404,6 +3478,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					"vpc_id": schema.StringAttribute{
 						MarkdownDescription: "Information about existing VPC ID.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("new_vpc"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -3413,6 +3492,11 @@ func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 							"name_tag": schema.StringAttribute{
 								MarkdownDescription: "Specify the VPC Name.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("autogenerate"),
+									),
+								},
 							},
 							"primary_ipv4": schema.StringAttribute{
 								MarkdownDescription: "IPv4 CIDR block for this VPC. It has to be private address space. The Primary IPv4 block cannot be modified. All subnets prefixes in this VPC must be part of this CIDR block.",

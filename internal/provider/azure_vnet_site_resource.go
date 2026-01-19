@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -3194,6 +3196,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("azure_region"),
+					),
+				},
 			},
 			"azure_region": schema.StringAttribute{
 				MarkdownDescription: "Name of the Azure region which supports availability zones.",
@@ -3201,6 +3208,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("alternate_region"),
+					),
 				},
 			},
 			"disk_size": schema.Int64Attribute{
@@ -3226,6 +3238,12 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
+				Validators: []validator.Int64{
+					int64validator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("no_worker_nodes"),
+						path.MatchRelative().AtParent().AtName("total_nodes"),
+					),
+				},
 			},
 			"resource_group": schema.StringAttribute{
 				MarkdownDescription: "Azure resource group for resources that will be created .",
@@ -3249,6 +3267,12 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
+				},
+				Validators: []validator.Int64{
+					int64validator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("no_worker_nodes"),
+						path.MatchRelative().AtParent().AtName("nodes_per_az"),
+					),
 				},
 			},
 		},
@@ -3524,6 +3548,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"subnet_resource_grp": schema.StringAttribute{
 													MarkdownDescription: "Specify name of Resource Group.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("vnet_resource_group"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -3557,6 +3586,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"subnet_resource_grp": schema.StringAttribute{
 													MarkdownDescription: "Specify name of Resource Group.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("vnet_resource_group"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -3721,6 +3755,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									"custom_asn": schema.Int64Attribute{
 										MarkdownDescription: "Set custom ASN for F5XC Site.",
 										Optional:            true,
+										Validators: []validator.Int64{
+											int64validator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("auto_asn"),
+											),
+										},
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -3737,6 +3776,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"circuit_id": schema.StringAttribute{
 													MarkdownDescription: "ExpressRoute Circuit is in same subscription as the site.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("other_subscription"),
+														),
+													},
 												},
 												"weight": schema.Int64Attribute{
 													MarkdownDescription: "The weight (or priority) for the routes received from this connection. The. Defaults to `10`.",
@@ -3823,6 +3867,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													"subnet_resource_grp": schema.StringAttribute{
 														MarkdownDescription: "Specify name of Resource Group.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("vnet_resource_group"),
+															),
+														},
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -3855,6 +3904,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													"subnet_resource_grp": schema.StringAttribute{
 														MarkdownDescription: "Specify name of Resource Group.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("vnet_resource_group"),
+															),
+														},
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -3951,6 +4005,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("custom_static_route"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -4118,6 +4177,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("custom_static_route"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -4544,6 +4608,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									"custom_asn": schema.Int64Attribute{
 										MarkdownDescription: "Set custom ASN for F5XC Site.",
 										Optional:            true,
+										Validators: []validator.Int64{
+											int64validator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("auto_asn"),
+											),
+										},
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -4560,6 +4629,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"circuit_id": schema.StringAttribute{
 													MarkdownDescription: "ExpressRoute Circuit is in same subscription as the site.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("other_subscription"),
+														),
+													},
 												},
 												"weight": schema.Int64Attribute{
 													MarkdownDescription: "The weight (or priority) for the routes received from this connection. The. Defaults to `10`.",
@@ -4646,6 +4720,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													"subnet_resource_grp": schema.StringAttribute{
 														MarkdownDescription: "Specify name of Resource Group.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("vnet_resource_group"),
+															),
+														},
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -4678,6 +4757,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													"subnet_resource_grp": schema.StringAttribute{
 														MarkdownDescription: "Specify name of Resource Group.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("vnet_resource_group"),
+															),
+														},
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -4774,6 +4858,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("custom_static_route"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -4958,6 +5047,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											"subnet_resource_grp": schema.StringAttribute{
 												MarkdownDescription: "Specify name of Resource Group.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("vnet_resource_group"),
+													),
+												},
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -4991,6 +5085,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											"subnet_resource_grp": schema.StringAttribute{
 												MarkdownDescription: "Specify name of Resource Group.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("vnet_resource_group"),
+													),
+												},
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -5026,6 +5125,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("custom_static_route"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -5235,6 +5339,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"subnet_resource_grp": schema.StringAttribute{
 													MarkdownDescription: "Specify name of Resource Group.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("vnet_resource_group"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -5332,6 +5441,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											"subnet_resource_grp": schema.StringAttribute{
 												MarkdownDescription: "Specify name of Resource Group.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("vnet_resource_group"),
+													),
+												},
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -5455,6 +5569,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					"operating_system_version": schema.StringAttribute{
 						MarkdownDescription: "Specify a OS version to be used e.g. 9.2024.6.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_os_version"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -5469,6 +5588,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 					"volterra_software_version": schema.StringAttribute{
 						MarkdownDescription: "Specify a F5XC Software Version to be used e.g. Crt-20210329-1002.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_sw_version"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -5511,6 +5635,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 							"name": schema.StringAttribute{
 								MarkdownDescription: "Specify the VNet Name.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("autogenerate"),
+									),
+								},
 							},
 							"primary_ipv4": schema.StringAttribute{
 								MarkdownDescription: "IPv4 CIDR block for this VNet. It has to be private address space.",
@@ -5669,6 +5798,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												"subnet_resource_grp": schema.StringAttribute{
 													MarkdownDescription: "Specify name of Resource Group.",
 													Optional:            true,
+													Validators: []validator.String{
+														stringvalidator.ConflictsWith(
+															path.MatchRelative().AtParent().AtName("vnet_resource_group"),
+														),
+													},
 												},
 											},
 											Blocks: map[string]schema.Block{
@@ -5852,6 +5986,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("custom_static_route"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -6317,6 +6456,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											"subnet_resource_grp": schema.StringAttribute{
 												MarkdownDescription: "Specify name of Resource Group.",
 												Optional:            true,
+												Validators: []validator.String{
+													stringvalidator.ConflictsWith(
+														path.MatchRelative().AtParent().AtName("vnet_resource_group"),
+													),
+												},
 											},
 										},
 										Blocks: map[string]schema.Block{
@@ -6349,6 +6493,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("custom_static_route"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{

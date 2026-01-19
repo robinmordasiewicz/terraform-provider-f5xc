@@ -1,0 +1,12 @@
+[
+  {
+    "group_name": "info",
+    "fields": [],
+    "required": false
+  },
+  {
+    "group_name": "message",
+    "fields": [],
+    "required": false
+  }
+]

@@ -1,6 +1,6 @@
 {
   "name": "@robinmordasiewicz/f5xc-terraform-mcp",
-  "version": "3.21.0",
+  "version": "3.18.0",
   "description": "MCP server for F5 Distributed Cloud Terraform provider - documentation, 270+ OpenAPI specs, subscription info, and addon activation workflows for AI assistants",
   "type": "module",
   "main": "dist/index.js",
@@ -33,7 +33,9 @@
     "test:e2e": "vitest run tests/acceptance/resource-creation.test.ts tests/acceptance/determinism.test.ts --reporter=verbose",
     "test:e2e:resource-creation": "vitest run tests/acceptance/resource-creation.test.ts --reporter=verbose",
     "test:e2e:determinism": "vitest run tests/acceptance/determinism.test.ts --reporter=verbose",
-    "validate:auth": "tsx scripts/validate-auth-integration.ts"
+    "validate:auth": "tsx scripts/validate-auth-integration.ts",
+    "generate:ml-matrix": "tsx tests/fixtures/ml-training/generate-matrix.ts",
+    "test:e2e:all": "./scripts/run-e2e-tests.sh"
   },
   "keywords": [
     "mcp",

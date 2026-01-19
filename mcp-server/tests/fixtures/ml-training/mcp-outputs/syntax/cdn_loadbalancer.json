@@ -1,0 +1,143 @@
+{
+  "operation": "syntax",
+  "resource": "cdn_loadbalancer",
+  "totalBlocks": 53,
+  "totalAttributes": 7,
+  "totalOneOfGroups": 16,
+  "blocks": [
+    "active_service_policies",
+    "api_rate_limit",
+    "api_specification",
+    "app_firewall",
+    "blocked_clients",
+    "bot_defense",
+    "captcha_challenge",
+    "client_side_defense",
+    "cors_policy",
+    "csrf_policy",
+    "custom_cache_rule",
+    "data_guard_rules",
+    "ddos_mitigation_rules",
+    "default_cache_action",
+    "default_sensitive_data_policy",
+    "disable_api_definition",
+    "disable_api_discovery",
+    "disable_client_side_defense",
+    "disable_ip_reputation",
+    "disable_malicious_user_detection",
+    "disable_rate_limit",
+    "disable_threat_mesh",
+    "disable_waf",
+    "domains",
+    "enable_api_discovery",
+    "enable_challenge",
+    "enable_ip_reputation",
+    "enable_malicious_user_detection",
+    "enable_threat_mesh",
+    "graphql_rules",
+    "http",
+    "https",
+    "https_auto_cert",
+    "js_challenge",
+    "jwt_validation",
+    "l7_ddos_action_block",
+    "l7_ddos_action_default",
+    "l7_ddos_action_js_challenge",
+    "no_challenge",
+    "no_service_policies",
+    "origin_pool",
+    "other_settings",
+    "policy_based_challenge",
+    "protected_cookies",
+    "rate_limit",
+    "sensitive_data_policy",
+    "service_policies_from_namespace",
+    "slow_ddos_mitigation",
+    "system_default_timeouts",
+    "trusted_clients",
+    "user_id_client_ip",
+    "user_identification",
+    "waf_exclusion"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {
+    "service_policy_choice": [
+      "active_service_policies",
+      "no_service_policies",
+      "service_policies_from_namespace"
+    ],
+    "rate_limit_choice": [
+      "api_rate_limit",
+      "disable_rate_limit",
+      "rate_limit"
+    ],
+    "api_definition_choice": [
+      "api_specification",
+      "disable_api_definition"
+    ],
+    "waf_choice": [
+      "app_firewall",
+      "disable_waf"
+    ],
+    "bot_defense_choice": [
+      "bot_defense"
+    ],
+    "challenge_type": [
+      "captcha_challenge",
+      "enable_challenge",
+      "js_challenge",
+      "no_challenge",
+      "policy_based_challenge"
+    ],
+    "client_side_defense_choice": [
+      "client_side_defense",
+      "disable_client_side_defense"
+    ],
+    "sensitive_data_policy_choice": [
+      "default_sensitive_data_policy",
+      "sensitive_data_policy"
+    ],
+    "api_discovery_choice": [
+      "disable_api_discovery",
+      "enable_api_discovery"
+    ],
+    "ip_reputation_choice": [
+      "disable_ip_reputation",
+      "enable_ip_reputation"
+    ],
+    "malicious_user_detection_choice": [
+      "disable_malicious_user_detection",
+      "enable_malicious_user_detection"
+    ],
+    "threat_mesh_choice": [
+      "disable_threat_mesh",
+      "enable_threat_mesh"
+    ],
+    "loadbalancer_type": [
+      "http",
+      "https",
+      "https_auto_cert"
+    ],
+    "l7_ddos_auto_mitigation_action": [
+      "l7_ddos_action_block",
+      "l7_ddos_action_default",
+      "l7_ddos_action_js_challenge"
+    ],
+    "slow_ddos_mitigation_choice": [
+      "slow_ddos_mitigation",
+      "system_default_timeouts"
+    ],
+    "user_id_choice": [
+      "user_id_client_ip",
+      "user_identification"
+    ]
+  }
+}

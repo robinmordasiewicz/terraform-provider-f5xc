@@ -194,6 +194,30 @@ provider "f5xc" {
   }
 
   /**
+   * Run terraform fmt -check to verify configuration is formatted
+   * Returns success if config is already properly formatted
+   */
+  async fmt(): Promise<TerraformResult> {
+    const result = await this.runCommand(['fmt', '-check', '-diff', '-no-color']);
+
+    // terraform fmt -check returns exit code 0 if formatted, non-zero if not
+    return {
+      success: result.exitCode === 0,
+      output: result.output,
+      errors: result.exitCode !== 0 ? ['Configuration is not properly formatted. Run: terraform fmt'] : [],
+      exitCode: result.exitCode,
+    };
+  }
+
+  /**
+   * Run terraform fmt to format configuration in place
+   * Returns the list of files that were modified
+   */
+  async fmtWrite(): Promise<TerraformResult> {
+    return this.runCommand(['fmt', '-no-color']);
+  }
+
+  /**
    * Run terraform plan
    */
   async plan(): Promise<TerraformResult> {

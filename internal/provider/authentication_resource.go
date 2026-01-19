@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -416,6 +417,11 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 					"oidc_well_known_config_url": schema.StringAttribute{
 						MarkdownDescription: "An OIDC well-known configuration URL that will be used to fetch authentication related endpoints.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("oidc_auth_params"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{

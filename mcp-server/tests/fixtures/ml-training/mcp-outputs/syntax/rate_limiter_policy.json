@@ -1,0 +1,31 @@
+{
+  "operation": "syntax",
+  "resource": "rate_limiter_policy",
+  "totalBlocks": 4,
+  "totalAttributes": 8,
+  "totalOneOfGroups": 1,
+  "blocks": [
+    "any_server",
+    "rules",
+    "server_name_matcher",
+    "server_selector"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace",
+    "server_name"
+  ],
+  "oneOfGroups": {
+    "server_choice": [
+      "any_server",
+      "server_name",
+      "server_name_matcher",
+      "server_selector"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "operation": "syntax",
+  "resource": "healthcheck",
+  "totalBlocks": 3,
+  "totalAttributes": 12,
+  "totalOneOfGroups": 1,
+  "blocks": [
+    "http_health_check",
+    "tcp_health_check",
+    "udp_icmp_health_check"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "healthy_threshold",
+    "id",
+    "interval",
+    "jitter_percent",
+    "labels",
+    "name",
+    "namespace",
+    "timeout",
+    "unhealthy_threshold"
+  ],
+  "oneOfGroups": {
+    "health_check": [
+      "http_health_check",
+      "tcp_health_check",
+      "udp_icmp_health_check"
+    ]
+  }
+}

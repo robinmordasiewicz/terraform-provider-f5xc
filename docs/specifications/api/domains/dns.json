@@ -3,7 +3,7 @@
   "info": {
     "title": "Dns",
     "description": "Name infrastructure with authoritative zones, A/AAAA/CNAME record types, and zone management. Supports zone transfers, security extensions, health-based routing, and delegation. Enables reliable name resolution, geographic load balancing, and name-based traffic steering across distributed environments.",
-    "version": "2.0.39",
+    "version": "2.0.40",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -12205,7 +12205,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.383325+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.401700+00:00"
           },
           "namespace": {
             "type": "string",
@@ -12225,7 +12225,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.383357+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.401730+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -12458,7 +12458,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.383459+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.401828+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -12716,7 +12716,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.383578+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.401943+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -12770,7 +12770,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.383648+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402010+00:00"
           },
           "namespace": {
             "type": "string",
@@ -12789,7 +12789,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.383677+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402039+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -12831,7 +12831,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.383734+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402093+00:00"
           },
           "uid": {
             "type": "string",
@@ -12853,7 +12853,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.383763+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402122+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of dns_compliance_checks is returned in 'List'.",
@@ -13110,7 +13110,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.383907+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402242+00:00"
           },
           "name": {
             "type": "string",
@@ -13131,7 +13131,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.383936+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402270+00:00"
           },
           "namespace": {
             "type": "string",
@@ -13152,7 +13152,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.383965+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402297+00:00"
           },
           "tenant": {
             "type": "string",
@@ -13175,7 +13175,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.383993+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402325+00:00"
           },
           "uid": {
             "type": "string",
@@ -13199,7 +13199,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384024+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402364+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -13252,7 +13252,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384066+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402404+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -13327,7 +13327,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384117+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402452+00:00"
           },
           "service_name": {
             "type": "string",
@@ -13370,7 +13370,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384155+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402488+00:00"
           },
           "type": {
             "type": "string",
@@ -13515,7 +13515,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384231+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402559+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -13631,7 +13631,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384295+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402621+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -13689,7 +13689,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384346+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402669+00:00"
           },
           "namespace": {
             "type": "string",
@@ -13710,7 +13710,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384375+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402696+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
@@ -13790,7 +13790,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384418+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402738+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -13850,7 +13850,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384468+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402786+00:00"
           },
           "namespace": {
             "type": "string",
@@ -13871,7 +13871,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384495+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402813+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
@@ -13951,7 +13951,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384538+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402853+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -14009,7 +14009,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384588+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402901+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14030,7 +14030,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384616+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.402928+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
@@ -14154,7 +14154,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384695+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.403005+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -14274,7 +14274,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384756+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.403064+00:00"
           },
           "status": {
             "type": "string",
@@ -14294,7 +14294,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384784+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.403091+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -14489,7 +14489,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384921+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.403215+00:00"
           },
           "uid": {
             "type": "string",
@@ -14512,7 +14512,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384951+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.403243+00:00"
           }
         },
         "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
@@ -14564,7 +14564,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.384983+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.403273+00:00"
           },
           "name": {
             "type": "string",
@@ -14585,7 +14585,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.385011+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.403301+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14606,7 +14606,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.385039+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.403328+00:00"
           },
           "uid": {
             "type": "string",
@@ -14627,7 +14627,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.385068+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.403368+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
@@ -14683,7 +14683,7 @@
             },
             "x-original-maxLength": 128,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.385099+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.403398+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14710,7 +14710,7 @@
             },
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.385127+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.403425+00:00"
           },
           "tenant": {
             "type": "string",
@@ -14739,7 +14739,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:33.385155+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:31.403453+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a direct reference from one object(the referrer) to another(the referred).",
@@ -15123,7 +15123,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.379644+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.353532+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15143,7 +15143,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.379675+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.353562+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -15246,7 +15246,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.379773+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.353658+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -15325,7 +15325,7 @@
             "x-original-maxLength": 1024,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.379826+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.353711+00:00"
           },
           "txt_record": {
             "type": "string",
@@ -15452,7 +15452,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.379921+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.353793+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -15506,7 +15506,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.379990+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.353860+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15525,7 +15525,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.380019+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.353888+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -15567,7 +15567,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.380075+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.353942+00:00"
           },
           "uid": {
             "type": "string",
@@ -15588,7 +15588,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.380104+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.353970+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of dns_domain is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -15772,7 +15772,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.380217+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.354082+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15792,7 +15792,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.380244+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.354109+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -16007,7 +16007,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.422679+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394110+00:00"
           },
           "status": {
             "type": "array",
@@ -16027,7 +16027,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.422713+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394142+00:00"
           }
         },
         "x-f5xc-description-short": "Individual item in a collection of DNS Load Balancer.",
@@ -16085,7 +16085,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.422755+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394184+00:00"
           }
         },
         "x-f5xc-description-short": "Response for DNS Load Balancer Health Status Request.",
@@ -16159,7 +16159,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.422806+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394234+00:00"
           },
           "status": {
             "type": "array",
@@ -16180,7 +16180,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.422835+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394263+00:00"
           }
         },
         "x-f5xc-description-short": "Individual item in a collection of DNS Load Balancer Pool.",
@@ -16241,7 +16241,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.422876+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394303+00:00"
           }
         },
         "x-f5xc-description-short": "Response for DNS Load Balancer Pool Health Status Request.",
@@ -16319,7 +16319,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.422948+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394372+00:00"
           }
         },
         "x-f5xc-description-short": "Pool member health status change event data.",
@@ -16474,7 +16474,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.423049+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394470+00:00"
           },
           "ports": {
             "type": "array",
@@ -16521,7 +16521,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.423088+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394509+00:00"
           },
           "unhealthy_ports": {
             "type": "array",
@@ -16647,7 +16647,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.423149+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394570+00:00"
           },
           "namespace": {
             "type": "string",
@@ -16667,7 +16667,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.423178+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394598+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -16770,7 +16770,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.423276+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394693+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -16978,7 +16978,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.423374+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394789+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -17032,7 +17032,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.423443+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394857+00:00"
           },
           "namespace": {
             "type": "string",
@@ -17051,7 +17051,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.423471+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394884+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -17093,7 +17093,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.423526+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394940+00:00"
           },
           "uid": {
             "type": "string",
@@ -17115,7 +17115,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.423556+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.394970+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of dns_load_balancer is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -17153,22 +17153,64 @@
         "x-ves-proto-message": "ves.io.schema.dns_load_balancer.LoadBalancingRule",
         "properties": {
           "asn_list": {
-            "$ref": "#/components/schemas/policyAsnMatchList"
+            "$ref": "#/components/schemas/policyAsnMatchList",
+            "x-f5xc-conflicts-with": [
+              "asn_matcher",
+              "geo_location_label_selector",
+              "geo_location_set",
+              "ip_prefix_list",
+              "ip_prefix_set"
+            ]
           },
           "asn_matcher": {
-            "$ref": "#/components/schemas/policyAsnMatcherType"
+            "$ref": "#/components/schemas/policyAsnMatcherType",
+            "x-f5xc-conflicts-with": [
+              "asn_list",
+              "geo_location_label_selector",
+              "geo_location_set",
+              "ip_prefix_list",
+              "ip_prefix_set"
+            ]
           },
           "geo_location_label_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "asn_list",
+              "asn_matcher",
+              "geo_location_set",
+              "ip_prefix_list",
+              "ip_prefix_set"
+            ]
           },
           "geo_location_set": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "asn_list",
+              "asn_matcher",
+              "geo_location_label_selector",
+              "ip_prefix_list",
+              "ip_prefix_set"
+            ]
           },
           "ip_prefix_list": {
-            "$ref": "#/components/schemas/policyPrefixMatchList"
+            "$ref": "#/components/schemas/policyPrefixMatchList",
+            "x-f5xc-conflicts-with": [
+              "asn_list",
+              "asn_matcher",
+              "geo_location_label_selector",
+              "geo_location_set",
+              "ip_prefix_set"
+            ]
           },
           "ip_prefix_set": {
-            "$ref": "#/components/schemas/policyIpMatcherType"
+            "$ref": "#/components/schemas/policyIpMatcherType",
+            "x-f5xc-conflicts-with": [
+              "asn_list",
+              "asn_matcher",
+              "geo_location_label_selector",
+              "geo_location_set",
+              "ip_prefix_list"
+            ]
           },
           "pool": {
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
@@ -17345,13 +17387,25 @@
         "x-ves-proto-message": "ves.io.schema.dns_load_balancer.ResponseCache",
         "properties": {
           "default_response_cache_parameters": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable",
+              "response_cache_parameters"
+            ]
           },
           "disable": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_response_cache_parameters",
+              "response_cache_parameters"
+            ]
           },
           "response_cache_parameters": {
-            "$ref": "#/components/schemas/dns_load_balancerResponseCacheParameters"
+            "$ref": "#/components/schemas/dns_load_balancerResponseCacheParameters",
+            "x-f5xc-conflicts-with": [
+              "default_response_cache_parameters",
+              "disable"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -17536,7 +17590,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.423779+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.395190+00:00"
           },
           "request_body": {
             "$ref": "#/components/schemas/protobufAny"
@@ -17996,7 +18050,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.424287+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.395690+00:00"
           }
         },
         "x-f5xc-description-short": "Metric data contains timestamp and the value.",
@@ -18062,7 +18116,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.424994+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.396393+00:00"
           },
           "previous_value": {
             "type": "string",
@@ -18101,7 +18155,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.425042+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.396439+00:00"
           }
         },
         "x-f5xc-description-short": "Trend value contains trend value, trend sentiment and trend calculation description and window size.",
@@ -18398,10 +18452,13 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.425354+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.396746+00:00"
           },
           "ref_value": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "str_value"
+            ]
           },
           "str_value": {
             "type": "string",
@@ -18415,7 +18472,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "ref_value"
+            ]
           }
         },
         "x-f5xc-description-short": "Tuple with a suggested value and it's description.",
@@ -18497,22 +18557,64 @@
         "x-ves-proto-message": "ves.io.schema.dns_lb_health_check.CreateSpecType",
         "properties": {
           "http_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkHttpHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkHttpHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "https_health_check",
+              "icmp_health_check",
+              "tcp_health_check",
+              "tcp_hex_health_check",
+              "udp_health_check"
+            ]
           },
           "https_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkHttpHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkHttpHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "icmp_health_check",
+              "tcp_health_check",
+              "tcp_hex_health_check",
+              "udp_health_check"
+            ]
           },
           "icmp_health_check": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "https_health_check",
+              "tcp_health_check",
+              "tcp_hex_health_check",
+              "udp_health_check"
+            ]
           },
           "tcp_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkTcpHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkTcpHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "https_health_check",
+              "icmp_health_check",
+              "tcp_hex_health_check",
+              "udp_health_check"
+            ]
           },
           "tcp_hex_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkTcpHexHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkTcpHexHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "https_health_check",
+              "icmp_health_check",
+              "tcp_health_check",
+              "udp_health_check"
+            ]
           },
           "udp_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkUdpHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkUdpHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "https_health_check",
+              "icmp_health_check",
+              "tcp_health_check",
+              "tcp_hex_health_check"
+            ]
           }
         },
         "x-f5xc-description-short": "Create DNS Load Balancer Health Check in a given namespace. If one already exist it will give a error.",
@@ -18572,7 +18674,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.476359+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.444984+00:00"
           },
           "namespace": {
             "type": "string",
@@ -18592,7 +18694,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.476390+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.445014+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -18695,7 +18797,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.476490+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.445111+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -18771,22 +18873,64 @@
             }
           },
           "http_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkHttpHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkHttpHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "https_health_check",
+              "icmp_health_check",
+              "tcp_health_check",
+              "tcp_hex_health_check",
+              "udp_health_check"
+            ]
           },
           "https_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkHttpHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkHttpHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "icmp_health_check",
+              "tcp_health_check",
+              "tcp_hex_health_check",
+              "udp_health_check"
+            ]
           },
           "icmp_health_check": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "https_health_check",
+              "tcp_health_check",
+              "tcp_hex_health_check",
+              "udp_health_check"
+            ]
           },
           "tcp_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkTcpHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkTcpHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "https_health_check",
+              "icmp_health_check",
+              "tcp_hex_health_check",
+              "udp_health_check"
+            ]
           },
           "tcp_hex_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkTcpHexHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkTcpHexHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "https_health_check",
+              "icmp_health_check",
+              "tcp_health_check",
+              "udp_health_check"
+            ]
           },
           "udp_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkUdpHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkUdpHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "https_health_check",
+              "icmp_health_check",
+              "tcp_health_check",
+              "tcp_hex_health_check"
+            ]
           }
         },
         "x-f5xc-description-short": "GET DNS Load Balancer Health Check details.",
@@ -19037,7 +19181,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.476677+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.445294+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -19091,7 +19235,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.476745+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.445373+00:00"
           },
           "namespace": {
             "type": "string",
@@ -19110,7 +19254,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.476774+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.445401+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -19152,7 +19296,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.476830+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.445456+00:00"
           },
           "uid": {
             "type": "string",
@@ -19174,7 +19318,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.476859+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.445485+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of dns_lb_health_check is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -19252,22 +19396,64 @@
         "x-ves-proto-message": "ves.io.schema.dns_lb_health_check.ReplaceSpecType",
         "properties": {
           "http_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkHttpHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkHttpHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "https_health_check",
+              "icmp_health_check",
+              "tcp_health_check",
+              "tcp_hex_health_check",
+              "udp_health_check"
+            ]
           },
           "https_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkHttpHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkHttpHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "icmp_health_check",
+              "tcp_health_check",
+              "tcp_hex_health_check",
+              "udp_health_check"
+            ]
           },
           "icmp_health_check": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "https_health_check",
+              "tcp_health_check",
+              "tcp_hex_health_check",
+              "udp_health_check"
+            ]
           },
           "tcp_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkTcpHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkTcpHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "https_health_check",
+              "icmp_health_check",
+              "tcp_hex_health_check",
+              "udp_health_check"
+            ]
           },
           "tcp_hex_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkTcpHexHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkTcpHexHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "https_health_check",
+              "icmp_health_check",
+              "tcp_health_check",
+              "udp_health_check"
+            ]
           },
           "udp_health_check": {
-            "$ref": "#/components/schemas/dns_lb_health_checkUdpHealthCheck"
+            "$ref": "#/components/schemas/dns_lb_health_checkUdpHealthCheck",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "https_health_check",
+              "icmp_health_check",
+              "tcp_health_check",
+              "tcp_hex_health_check"
+            ]
           }
         },
         "x-f5xc-description-short": "Replace DNS Load Balancer Health Check in a given namespace.",
@@ -19854,10 +20040,16 @@
         "x-ves-proto-message": "ves.io.schema.dns_lb_pool.APool",
         "properties": {
           "disable_health_check": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "health_check"
+            ]
           },
           "health_check": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "disable_health_check"
+            ]
           },
           "max_answers": {
             "type": "integer",
@@ -20006,7 +20198,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.515418+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.481723+00:00"
           },
           "priority": {
             "type": "integer",
@@ -20113,7 +20305,7 @@
             "x-original-maxLength": 1024,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.515474+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.481776+00:00"
           },
           "final_translation": {
             "type": "boolean",
@@ -20152,7 +20344,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.515513+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.481814+00:00"
           },
           "ratio": {
             "type": "integer",
@@ -20310,22 +20502,52 @@
         "x-ves-proto-message": "ves.io.schema.dns_lb_pool.CreateSpecType",
         "properties": {
           "a_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolAPool"
+            "$ref": "#/components/schemas/dns_lb_poolAPool",
+            "x-f5xc-conflicts-with": [
+              "aaaa_pool",
+              "cname_pool",
+              "mx_pool",
+              "srv_pool"
+            ]
           },
           "aaaa_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolAAAAPool"
+            "$ref": "#/components/schemas/dns_lb_poolAAAAPool",
+            "x-f5xc-conflicts-with": [
+              "a_pool",
+              "cname_pool",
+              "mx_pool",
+              "srv_pool"
+            ]
           },
           "cname_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolCNAMEPool"
+            "$ref": "#/components/schemas/dns_lb_poolCNAMEPool",
+            "x-f5xc-conflicts-with": [
+              "a_pool",
+              "aaaa_pool",
+              "mx_pool",
+              "srv_pool"
+            ]
           },
           "load_balancing_mode": {
             "$ref": "#/components/schemas/dns_lb_poolLoadBalancingMode"
           },
           "mx_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolMXPool"
+            "$ref": "#/components/schemas/dns_lb_poolMXPool",
+            "x-f5xc-conflicts-with": [
+              "a_pool",
+              "aaaa_pool",
+              "cname_pool",
+              "srv_pool"
+            ]
           },
           "srv_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolSRVPool"
+            "$ref": "#/components/schemas/dns_lb_poolSRVPool",
+            "x-f5xc-conflicts-with": [
+              "a_pool",
+              "aaaa_pool",
+              "cname_pool",
+              "mx_pool"
+            ]
           },
           "ttl": {
             "type": "integer",
@@ -20350,10 +20572,16 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "use_rrset_ttl"
+            ]
           },
           "use_rrset_ttl": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "ttl"
+            ]
           }
         },
         "x-f5xc-description-short": "Create DNS Load Balancer Pool in a given namespace. If one already exist it will give a error.",
@@ -20414,7 +20642,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.515707+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.482001+00:00"
           },
           "namespace": {
             "type": "string",
@@ -20434,7 +20662,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.515735+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.482029+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -20537,7 +20765,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.515832+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.482125+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -20599,13 +20827,31 @@
         "x-ves-proto-message": "ves.io.schema.dns_lb_pool.GetSpecType",
         "properties": {
           "a_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolAPool"
+            "$ref": "#/components/schemas/dns_lb_poolAPool",
+            "x-f5xc-conflicts-with": [
+              "aaaa_pool",
+              "cname_pool",
+              "mx_pool",
+              "srv_pool"
+            ]
           },
           "aaaa_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolAAAAPool"
+            "$ref": "#/components/schemas/dns_lb_poolAAAAPool",
+            "x-f5xc-conflicts-with": [
+              "a_pool",
+              "cname_pool",
+              "mx_pool",
+              "srv_pool"
+            ]
           },
           "cname_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolCNAMEPool"
+            "$ref": "#/components/schemas/dns_lb_poolCNAMEPool",
+            "x-f5xc-conflicts-with": [
+              "a_pool",
+              "aaaa_pool",
+              "mx_pool",
+              "srv_pool"
+            ]
           },
           "dns_load_balancers": {
             "type": "array",
@@ -20626,10 +20872,22 @@
             "$ref": "#/components/schemas/dns_lb_poolLoadBalancingMode"
           },
           "mx_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolMXPool"
+            "$ref": "#/components/schemas/dns_lb_poolMXPool",
+            "x-f5xc-conflicts-with": [
+              "a_pool",
+              "aaaa_pool",
+              "cname_pool",
+              "srv_pool"
+            ]
           },
           "srv_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolSRVPool"
+            "$ref": "#/components/schemas/dns_lb_poolSRVPool",
+            "x-f5xc-conflicts-with": [
+              "a_pool",
+              "aaaa_pool",
+              "cname_pool",
+              "mx_pool"
+            ]
           },
           "ttl": {
             "type": "integer",
@@ -20654,10 +20912,16 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "use_rrset_ttl"
+            ]
           },
           "use_rrset_ttl": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "ttl"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -20771,7 +21035,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.516005+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.482283+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -20825,7 +21089,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.516075+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.482362+00:00"
           },
           "namespace": {
             "type": "string",
@@ -20844,7 +21108,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.516103+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.482390+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -20886,7 +21150,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.516159+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.482445+00:00"
           },
           "uid": {
             "type": "string",
@@ -20907,7 +21171,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.516189+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.482473+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of dns_lb_pool is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -20996,7 +21260,7 @@
             "x-original-maxLength": 1024,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.516222+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.482505+00:00"
           },
           "name": {
             "type": "string",
@@ -21021,7 +21285,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.516250+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.482533+00:00"
           },
           "priority": {
             "type": "integer",
@@ -21219,22 +21483,52 @@
         "x-ves-proto-message": "ves.io.schema.dns_lb_pool.ReplaceSpecType",
         "properties": {
           "a_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolAPool"
+            "$ref": "#/components/schemas/dns_lb_poolAPool",
+            "x-f5xc-conflicts-with": [
+              "aaaa_pool",
+              "cname_pool",
+              "mx_pool",
+              "srv_pool"
+            ]
           },
           "aaaa_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolAAAAPool"
+            "$ref": "#/components/schemas/dns_lb_poolAAAAPool",
+            "x-f5xc-conflicts-with": [
+              "a_pool",
+              "cname_pool",
+              "mx_pool",
+              "srv_pool"
+            ]
           },
           "cname_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolCNAMEPool"
+            "$ref": "#/components/schemas/dns_lb_poolCNAMEPool",
+            "x-f5xc-conflicts-with": [
+              "a_pool",
+              "aaaa_pool",
+              "mx_pool",
+              "srv_pool"
+            ]
           },
           "load_balancing_mode": {
             "$ref": "#/components/schemas/dns_lb_poolLoadBalancingMode"
           },
           "mx_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolMXPool"
+            "$ref": "#/components/schemas/dns_lb_poolMXPool",
+            "x-f5xc-conflicts-with": [
+              "a_pool",
+              "aaaa_pool",
+              "cname_pool",
+              "srv_pool"
+            ]
           },
           "srv_pool": {
-            "$ref": "#/components/schemas/dns_lb_poolSRVPool"
+            "$ref": "#/components/schemas/dns_lb_poolSRVPool",
+            "x-f5xc-conflicts-with": [
+              "a_pool",
+              "aaaa_pool",
+              "cname_pool",
+              "mx_pool"
+            ]
           },
           "ttl": {
             "type": "integer",
@@ -21259,10 +21553,16 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "use_rrset_ttl"
+            ]
           },
           "use_rrset_ttl": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "ttl"
+            ]
           }
         },
         "x-f5xc-description-short": "Replace DNS Load Balancer Pool in a given namespace.",
@@ -21330,7 +21630,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.516429+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.482708+00:00"
           },
           "port": {
             "type": "integer",
@@ -21844,7 +22144,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.622757+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583006+00:00"
           },
           "values": {
             "type": "array",
@@ -22001,7 +22301,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.622822+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583068+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -22042,7 +22342,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.622854+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583100+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -22172,10 +22472,16 @@
         "x-ves-proto-message": "ves.io.schema.dns_zone.CreateSpecType",
         "properties": {
           "primary": {
-            "$ref": "#/components/schemas/dns_zonePrimaryDNSCreateSpecType"
+            "$ref": "#/components/schemas/dns_zonePrimaryDNSCreateSpecType",
+            "x-f5xc-conflicts-with": [
+              "secondary"
+            ]
           },
           "secondary": {
-            "$ref": "#/components/schemas/dns_zoneSecondaryDNSCreateSpecType"
+            "$ref": "#/components/schemas/dns_zoneSecondaryDNSCreateSpecType",
+            "x-f5xc-conflicts-with": [
+              "primary"
+            ]
           }
         },
         "x-f5xc-description-short": "Create DNS Zone in a given namespace. If one already exist it will give a error.",
@@ -22214,7 +22520,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.622989+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583224+00:00"
           },
           "values": {
             "type": "array",
@@ -22279,7 +22585,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623030+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583264+00:00"
           },
           "values": {
             "type": "array",
@@ -22361,7 +22667,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623071+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583303+00:00"
           },
           "values": {
             "type": "array",
@@ -22438,7 +22744,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623111+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583354+00:00"
           },
           "values": {
             "type": "array",
@@ -22519,7 +22825,7 @@
             },
             "x-original-maxLength": 255,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623151+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583395+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -22564,7 +22870,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623181+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583425+00:00"
           },
           "values": {
             "type": "array",
@@ -22633,7 +22939,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623221+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583464+00:00"
           },
           "values": {
             "type": "array",
@@ -22711,7 +23017,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623261+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583504+00:00"
           },
           "value": {
             "type": "string",
@@ -22738,7 +23044,7 @@
             },
             "x-original-maxLength": 255,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623288+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583532+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -22785,7 +23091,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623318+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583562+00:00"
           },
           "values": {
             "type": "array",
@@ -22886,7 +23192,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623359+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583602+00:00"
           },
           "value": {
             "type": "string",
@@ -22918,7 +23224,7 @@
             },
             "x-original-maxLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623387+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583630+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -22966,7 +23272,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623417+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583660+00:00"
           },
           "value": {
             "type": "string",
@@ -22998,7 +23304,7 @@
             },
             "x-original-maxLength": 23,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623445+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583689+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -23046,7 +23352,7 @@
             },
             "x-original-maxLength": 255,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623475+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583718+00:00"
           },
           "value": {
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
@@ -23096,7 +23402,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623515+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583757+00:00"
           },
           "values": {
             "type": "array",
@@ -23172,7 +23478,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623555+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583797+00:00"
           },
           "values": {
             "type": "array",
@@ -23245,7 +23551,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623594+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583837+00:00"
           },
           "values": {
             "type": "array",
@@ -23321,7 +23627,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623634+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583876+00:00"
           },
           "values": {
             "type": "array",
@@ -23401,7 +23707,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623673+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583915+00:00"
           },
           "values": {
             "type": "array",
@@ -23459,10 +23765,16 @@
         "x-ves-proto-message": "ves.io.schema.dns_zone.DNSSECMode",
         "properties": {
           "disable": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable"
+            ]
           },
           "enable": {
-            "$ref": "#/components/schemas/dns_zoneDNSSECModeEnable"
+            "$ref": "#/components/schemas/dns_zoneDNSSECModeEnable",
+            "x-f5xc-conflicts-with": [
+              "disable"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -23567,7 +23879,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623756+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.583997+00:00"
           },
           "values": {
             "type": "array",
@@ -23643,7 +23955,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.623796+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.584036+00:00"
           },
           "values": {
             "type": "array",
@@ -23988,13 +24300,25 @@
             }
           },
           "sha1_digest": {
-            "$ref": "#/components/schemas/dns_zoneSHA1Digest"
+            "$ref": "#/components/schemas/dns_zoneSHA1Digest",
+            "x-f5xc-conflicts-with": [
+              "sha256_digest",
+              "sha384_digest"
+            ]
           },
           "sha256_digest": {
-            "$ref": "#/components/schemas/dns_zoneSHA256Digest"
+            "$ref": "#/components/schemas/dns_zoneSHA256Digest",
+            "x-f5xc-conflicts-with": [
+              "sha1_digest",
+              "sha384_digest"
+            ]
           },
           "sha384_digest": {
-            "$ref": "#/components/schemas/dns_zoneSHA384Digest"
+            "$ref": "#/components/schemas/dns_zoneSHA384Digest",
+            "x-f5xc-conflicts-with": [
+              "sha1_digest",
+              "sha256_digest"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -24051,7 +24375,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.624010+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.584234+00:00"
           },
           "namespace": {
             "type": "string",
@@ -24071,7 +24395,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.624038+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.584262+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -24196,7 +24520,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.624105+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.584328+00:00"
           },
           "sort": {
             "$ref": "#/components/schemas/schemaSortOrder"
@@ -24443,7 +24767,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.624222+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.584454+00:00"
           },
           "sort": {
             "$ref": "#/components/schemas/schemaSortOrder"
@@ -24621,7 +24945,7 @@
             "x-original-maxLength": 1024,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.624321+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.584552+00:00"
           },
           "query_type": {
             "type": "string",
@@ -24753,7 +25077,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "dns_service"
+            ]
           },
           "dns_service": {
             "type": "object",
@@ -24766,7 +25093,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "adns_service"
+            ]
           }
         },
         "x-f5xc-description-short": "F5 Cloud Services DNS primary or secondary zone configuration.",
@@ -24954,7 +25284,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.624517+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.584744+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -25030,7 +25360,7 @@
             "x-original-maxLength": 1024,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.624561+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.584787+00:00"
           },
           "num_of_dns_records": {
             "type": "integer",
@@ -25048,10 +25378,16 @@
             }
           },
           "primary": {
-            "$ref": "#/components/schemas/dns_zonePrimaryDNSGetSpecType"
+            "$ref": "#/components/schemas/dns_zonePrimaryDNSGetSpecType",
+            "x-f5xc-conflicts-with": [
+              "secondary"
+            ]
           },
           "secondary": {
-            "$ref": "#/components/schemas/dns_zoneSecondaryDNSGetSpecType"
+            "$ref": "#/components/schemas/dns_zoneSecondaryDNSGetSpecType",
+            "x-f5xc-conflicts-with": [
+              "primary"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -25196,7 +25532,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.624662+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.584887+00:00"
           },
           "file": {
             "type": "string",
@@ -25330,7 +25666,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.624733+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.584957+00:00"
           },
           "file": {
             "type": "string",
@@ -25878,7 +26214,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.624993+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.585203+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -25932,7 +26268,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.625063+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.585271+00:00"
           },
           "namespace": {
             "type": "string",
@@ -25951,7 +26287,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.625091+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.585299+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -25993,7 +26329,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.625147+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.585365+00:00"
           },
           "uid": {
             "type": "string",
@@ -26014,7 +26350,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.625176+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.585394+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of dns_zone is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -26096,7 +26432,7 @@
             "x-original-maxLength": 1024,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.625208+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.585427+00:00"
           },
           "priority": {
             "type": "integer",
@@ -26175,7 +26511,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.625261+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.585479+00:00"
           }
         },
         "x-f5xc-description-short": "Metrics Data contains key/value pairs that uniquely identifies the group_by labels specified in the request.",
@@ -26410,7 +26746,10 @@
             }
           },
           "default_soa_parameters": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "soa_parameters"
+            ]
           },
           "dnssec_mode": {
             "$ref": "#/components/schemas/dns_zoneDNSSECMode"
@@ -26440,7 +26779,10 @@
             }
           },
           "soa_parameters": {
-            "$ref": "#/components/schemas/dns_zoneSOARecordParameterConfig"
+            "$ref": "#/components/schemas/dns_zoneSOARecordParameterConfig",
+            "x-f5xc-conflicts-with": [
+              "default_soa_parameters"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -26515,7 +26857,10 @@
             }
           },
           "default_soa_parameters": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "soa_parameters"
+            ]
           },
           "dnssec_mode": {
             "$ref": "#/components/schemas/dns_zoneDNSSECMode"
@@ -26559,7 +26904,10 @@
             }
           },
           "soa_parameters": {
-            "$ref": "#/components/schemas/dns_zoneSOARecordParameterConfig"
+            "$ref": "#/components/schemas/dns_zoneSOARecordParameterConfig",
+            "x-f5xc-conflicts-with": [
+              "default_soa_parameters"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -26589,28 +26937,204 @@
         "x-ves-proto-message": "ves.io.schema.dns_zone.RRSet",
         "properties": {
           "a_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSAResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSAResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "aaaa_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSAAAAResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSAAAAResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "afsdb_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSAFSDBRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSAFSDBRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "alias_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSAliasResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSAliasResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "caa_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSCAAResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSCAAResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "cds_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSCDSRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSCDSRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "cert_record": {
-            "$ref": "#/components/schemas/dns_zoneCERTResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneCERTResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "cname_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSCNAMEResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSCNAMEResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "description": {
             "type": "string",
@@ -26629,43 +27153,307 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.625558+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.585774+00:00"
           },
           "ds_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSDSRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSDSRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "eui48_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSEUI48ResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSEUI48ResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "eui64_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSEUI64ResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSEUI64ResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "lb_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSLBResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSLBResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "loc_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSLOCResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSLOCResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "mx_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSMXResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSMXResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "naptr_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSNAPTRResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSNAPTRResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "ns_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSNSResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSNSResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "ptr_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSPTRResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSPTRResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "srv_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSSRVResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSSRVResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "sshfp_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "sshfp_record": {
-            "$ref": "#/components/schemas/dns_zoneSSHFPResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneSSHFPResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "tlsa_record",
+              "txt_record"
+            ]
           },
           "tlsa_record": {
-            "$ref": "#/components/schemas/dns_zoneTLSAResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneTLSAResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "txt_record"
+            ]
           },
           "ttl": {
             "type": "integer",
@@ -26693,7 +27481,29 @@
             }
           },
           "txt_record": {
-            "$ref": "#/components/schemas/dns_zoneDNSTXTResourceRecord"
+            "$ref": "#/components/schemas/dns_zoneDNSTXTResourceRecord",
+            "x-f5xc-conflicts-with": [
+              "a_record",
+              "aaaa_record",
+              "afsdb_record",
+              "alias_record",
+              "caa_record",
+              "cds_record",
+              "cert_record",
+              "cname_record",
+              "ds_record",
+              "eui48_record",
+              "eui64_record",
+              "lb_record",
+              "loc_record",
+              "mx_record",
+              "naptr_record",
+              "ns_record",
+              "ptr_record",
+              "srv_record",
+              "sshfp_record",
+              "tlsa_record"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -26824,10 +27634,16 @@
         "x-ves-proto-message": "ves.io.schema.dns_zone.ReplaceSpecType",
         "properties": {
           "primary": {
-            "$ref": "#/components/schemas/dns_zonePrimaryDNSCreateSpecType"
+            "$ref": "#/components/schemas/dns_zonePrimaryDNSCreateSpecType",
+            "x-f5xc-conflicts-with": [
+              "secondary"
+            ]
           },
           "secondary": {
-            "$ref": "#/components/schemas/dns_zoneSecondaryDNSCreateSpecType"
+            "$ref": "#/components/schemas/dns_zoneSecondaryDNSCreateSpecType",
+            "x-f5xc-conflicts-with": [
+              "primary"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -27415,10 +28231,16 @@
             "$ref": "#/components/schemas/dns_zoneSSHFPAlgorithm"
           },
           "sha1_fingerprint": {
-            "$ref": "#/components/schemas/dns_zoneSHA1Fingerprint"
+            "$ref": "#/components/schemas/dns_zoneSHA1Fingerprint",
+            "x-f5xc-conflicts-with": [
+              "sha256_fingerprint"
+            ]
           },
           "sha256_fingerprint": {
-            "$ref": "#/components/schemas/dns_zoneSHA256Fingerprint"
+            "$ref": "#/components/schemas/dns_zoneSHA256Fingerprint",
+            "x-f5xc-conflicts-with": [
+              "sha1_fingerprint"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -27467,7 +28289,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.625968+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.586168+00:00"
           },
           "values": {
             "type": "array",
@@ -27921,7 +28743,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.626178+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.586390+00:00"
           },
           "values": {
             "type": "array",
@@ -28170,7 +28992,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.626461+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.586671+00:00"
           },
           "store_provider": {
             "type": "string",
@@ -28233,7 +29055,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.626500+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.586710+00:00"
           },
           "url": {
             "type": "string",
@@ -28310,7 +29132,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.626719+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.586923+00:00"
           },
           "name": {
             "type": "string",
@@ -28341,7 +29163,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.626747+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.586950+00:00"
           }
         },
         "x-f5xc-description-short": "MessageMetaType is metadata (common attributes) of a message that only certain messages have.",
@@ -28389,10 +29211,16 @@
         "x-ves-proto-message": "ves.io.schema.SecretType",
         "properties": {
           "blindfold_secret_info": {
-            "$ref": "#/components/schemas/schemaBlindfoldSecretInfoType"
+            "$ref": "#/components/schemas/schemaBlindfoldSecretInfoType",
+            "x-f5xc-conflicts-with": [
+              "clear_secret_info"
+            ]
           },
           "clear_secret_info": {
-            "$ref": "#/components/schemas/schemaClearSecretInfoType"
+            "$ref": "#/components/schemas/schemaClearSecretInfoType",
+            "x-f5xc-conflicts-with": [
+              "blindfold_secret_info"
+            ]
           }
         },
         "x-f5xc-description-short": "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -28453,7 +29281,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.627605+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.587797+00:00"
           },
           "location": {
             "type": "string",
@@ -28471,7 +29299,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.627633+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.587825+00:00"
           },
           "provider": {
             "type": "string",
@@ -28490,7 +29318,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.627662+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.587858+00:00"
           },
           "secret_encoding": {
             "$ref": "#/components/schemas/schemaSecretEncodingType"
@@ -28514,7 +29342,7 @@
             "maxLength": 1,
             "minLength": 1,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.627699+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.587895+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Vault Secret\" VaultSecretInfoType specifies information about the Secret managed by Hashicorp Vault.",
@@ -28556,7 +29384,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:34.627844+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:32.588040+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Wingman Secret\" WingmanSecretInfoType specifies the handle to the wingman secret.",
@@ -28846,7 +29674,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:35.205954+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:33.136559+00:00"
           },
           "record_name": {
             "type": "string",

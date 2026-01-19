@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -384,6 +385,11 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 										"user_assigned_name": schema.StringAttribute{
 											MarkdownDescription: "User is managing the AWS resource name.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("system_generated_name"),
+												),
+											},
 										},
 										"virtual_interface_type": schema.StringAttribute{
 											MarkdownDescription: "[Enum: PRIVATE] Defines the type of virtual interface that needs to be configured on AWS - PRIVATE: Private A private virtual interface should be used to access an Amazon VPC using private IP addresses. - TRANSIT: Transit A transit virtual interface is a VLAN that transports traffic from a Direct Connect.. The only possible value is `PRIVATE`. Defaults to `PRIVATE`.",
@@ -501,6 +507,11 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 										"project": schema.StringAttribute{
 											MarkdownDescription: "Specify a GCP Project for the interconnect attachment.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("same_as_credential"),
+												),
+											},
 										},
 										"region": schema.StringAttribute{
 											MarkdownDescription: "GCP Region in which the GCP Cloud Interconnect attachment is configured .",

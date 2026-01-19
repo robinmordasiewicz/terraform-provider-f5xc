@@ -3,7 +3,7 @@
   "info": {
     "title": "Container Services",
     "description": "Namespaced isolation with configurable limits and autoscaling policies. vK8s abstracts operational overhead while providing scheduling, persistent storage, and service mesh integration. Compute profiles specify CPU, memory, and GPU allocations for reproducible environments. Telemetry tracks consumption patterns across geographically distributed infrastructure nodes.",
-    "version": "2.0.39",
+    "version": "2.0.40",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -3821,7 +3821,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235346+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.918882+00:00"
           },
           "name": {
             "type": "string",
@@ -3842,7 +3842,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235377+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.918912+00:00"
           },
           "namespace": {
             "type": "string",
@@ -3863,7 +3863,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235406+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.918941+00:00"
           },
           "tenant": {
             "type": "string",
@@ -3886,7 +3886,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235435+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.918968+00:00"
           },
           "uid": {
             "type": "string",
@@ -3910,7 +3910,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235465+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.918997+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -3963,7 +3963,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235507+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919038+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -4038,7 +4038,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235558+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919087+00:00"
           },
           "service_name": {
             "type": "string",
@@ -4081,7 +4081,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235595+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919123+00:00"
           },
           "type": {
             "type": "string",
@@ -4226,7 +4226,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235668+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919195+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -4326,7 +4326,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235740+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919265+00:00"
           }
         },
         "x-f5xc-description-short": "Metric data contains timestamp and the value.",
@@ -4402,7 +4402,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235782+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919307+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -4460,7 +4460,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235832+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919366+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4481,7 +4481,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235859+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919394+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
@@ -4561,7 +4561,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235913+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919435+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -4621,7 +4621,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235963+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919483+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4642,7 +4642,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.235991+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919510+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
@@ -4722,7 +4722,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236033+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919551+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -4780,7 +4780,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236082+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919599+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4801,7 +4801,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236109+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919626+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
@@ -4925,7 +4925,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236188+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919704+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -5045,7 +5045,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236248+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919763+00:00"
           },
           "status": {
             "type": "string",
@@ -5065,7 +5065,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236276+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919790+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -5260,7 +5260,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236404+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919915+00:00"
           },
           "uid": {
             "type": "string",
@@ -5283,7 +5283,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236432+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919944+00:00"
           }
         },
         "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
@@ -5359,7 +5359,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236464+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.919975+00:00"
           },
           "previous_value": {
             "type": "string",
@@ -5398,7 +5398,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236512+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920021+00:00"
           }
         },
         "x-f5xc-description-short": "Trend value contains trend value, trend sentiment and trend calculation description and window size.",
@@ -5489,7 +5489,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236544+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920053+00:00"
           },
           "name": {
             "type": "string",
@@ -5510,7 +5510,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236573+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920079+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5531,7 +5531,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236601+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920107+00:00"
           },
           "uid": {
             "type": "string",
@@ -5552,7 +5552,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236630+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920135+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
@@ -5608,7 +5608,7 @@
             },
             "x-original-maxLength": 128,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236661+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920164+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5635,7 +5635,7 @@
             },
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236688+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920192+00:00"
           },
           "tenant": {
             "type": "string",
@@ -5664,7 +5664,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236716+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920219+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a direct reference from one object(the referrer) to another(the referred).",
@@ -5750,10 +5750,16 @@
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
           },
           "disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "isolated"
+            ]
           },
           "isolated": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disabled"
+            ]
           },
           "vsite_refs": {
             "type": "array",
@@ -5833,7 +5839,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236848+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920357+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5853,7 +5859,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236876+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920385+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -5956,7 +5962,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.236982+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920480+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -6020,10 +6026,16 @@
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
           },
           "disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "isolated"
+            ]
           },
           "isolated": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disabled"
+            ]
           },
           "vsite_refs": {
             "type": "array",
@@ -6156,7 +6168,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.237096+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920594+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -6210,7 +6222,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.237164+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920662+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6229,7 +6241,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.237192+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920690+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -6271,7 +6283,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.237248+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920745+00:00"
           },
           "uid": {
             "type": "string",
@@ -6292,7 +6304,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.237276+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920774+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of virtual_k8s is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -6433,7 +6445,7 @@
             "maxLength": 16,
             "minLength": 7,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.237340+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920837+00:00"
           },
           "value": {
             "type": "array",
@@ -6452,7 +6464,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.237372+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920868+00:00"
           }
         },
         "x-f5xc-description-short": "PVC Metric Type Data contains key/value pair that uniquely identifies the group_by labels specified in the request.",
@@ -6584,7 +6596,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.237441+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:38.920937+00:00"
           },
           "range": {
             "type": "string",
@@ -6792,10 +6804,16 @@
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
           },
           "disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "isolated"
+            ]
           },
           "isolated": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disabled"
+            ]
           },
           "vsite_refs": {
             "type": "array",
@@ -6940,7 +6958,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "port_ranges"
+            ]
           },
           "port_ranges": {
             "type": "string",
@@ -6970,7 +6991,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "port"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -7052,7 +7076,12 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "default_header",
+              "pass_through",
+              "server_name"
+            ]
           },
           "coalescing_options": {
             "$ref": "#/components/schemas/schemaTLSCoalescingOptions"
@@ -7084,16 +7113,30 @@
             "x-field-mutability": "read-only"
           },
           "default_header": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "append_server_name",
+              "pass_through",
+              "server_name"
+            ]
           },
           "default_loadbalancer": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "non_default_loadbalancer"
+            ]
           },
           "disable_path_normalize": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_path_normalize"
+            ]
           },
           "enable_path_normalize": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable_path_normalize"
+            ]
           },
           "http_protocol_options": {
             "$ref": "#/components/schemas/virtual_hostHttpProtocolOptions"
@@ -7112,10 +7155,18 @@
             }
           },
           "non_default_loadbalancer": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_loadbalancer"
+            ]
           },
           "pass_through": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "append_server_name",
+              "default_header",
+              "server_name"
+            ]
           },
           "port": {
             "type": "integer",
@@ -7139,7 +7190,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "port_ranges"
+            ]
           },
           "port_ranges": {
             "type": "string",
@@ -7169,7 +7223,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "port"
+            ]
           },
           "server_name": {
             "type": "string",
@@ -7192,13 +7249,24 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "append_server_name",
+              "default_header",
+              "pass_through"
+            ]
           },
           "tls_cert_params": {
-            "$ref": "#/components/schemas/viewsDownstreamTLSCertsParams"
+            "$ref": "#/components/schemas/viewsDownstreamTLSCertsParams",
+            "x-f5xc-conflicts-with": [
+              "tls_parameters"
+            ]
           },
           "tls_parameters": {
-            "$ref": "#/components/schemas/schemaviewsDownstreamTlsParamsType"
+            "$ref": "#/components/schemas/schemaviewsDownstreamTlsParamsType",
+            "x-f5xc-conflicts-with": [
+              "tls_cert_params"
+            ]
           }
         },
         "x-f5xc-description-short": "Choice for selecting HTTP proxy with bring your own certificates.",
@@ -7281,7 +7349,12 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "default_header",
+              "pass_through",
+              "server_name"
+            ]
           },
           "coalescing_options": {
             "$ref": "#/components/schemas/schemaTLSCoalescingOptions"
@@ -7313,16 +7386,30 @@
             "x-field-mutability": "read-only"
           },
           "default_header": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "append_server_name",
+              "pass_through",
+              "server_name"
+            ]
           },
           "default_loadbalancer": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "non_default_loadbalancer"
+            ]
           },
           "disable_path_normalize": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enable_path_normalize"
+            ]
           },
           "enable_path_normalize": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable_path_normalize"
+            ]
           },
           "http_protocol_options": {
             "$ref": "#/components/schemas/virtual_hostHttpProtocolOptions"
@@ -7341,13 +7428,24 @@
             }
           },
           "no_mtls": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "use_mtls"
+            ]
           },
           "non_default_loadbalancer": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_loadbalancer"
+            ]
           },
           "pass_through": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "append_server_name",
+              "default_header",
+              "server_name"
+            ]
           },
           "port": {
             "type": "integer",
@@ -7370,7 +7468,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "port_ranges"
+            ]
           },
           "port_ranges": {
             "type": "string",
@@ -7400,7 +7501,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "port"
+            ]
           },
           "server_name": {
             "type": "string",
@@ -7423,13 +7527,21 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "append_server_name",
+              "default_header",
+              "pass_through"
+            ]
           },
           "tls_config": {
             "$ref": "#/components/schemas/viewsTlsConfig"
           },
           "use_mtls": {
-            "$ref": "#/components/schemas/viewsDownstreamTlsValidationContext"
+            "$ref": "#/components/schemas/viewsDownstreamTlsValidationContext",
+            "x-f5xc-conflicts-with": [
+              "no_mtls"
+            ]
           }
         },
         "x-f5xc-description-short": "Choice for selecting HTTP proxy with bring your own certificates.",
@@ -7675,10 +7787,18 @@
         "x-ves-proto-message": "ves.io.schema.views.http_loadbalancer.RouteTypeSimpleWithDefaultOriginPool",
         "properties": {
           "auto_host_rewrite": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable_host_rewrite",
+              "host_rewrite"
+            ]
           },
           "disable_host_rewrite": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "auto_host_rewrite",
+              "host_rewrite"
+            ]
           },
           "host_rewrite": {
             "type": "string",
@@ -7702,7 +7822,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "auto_host_rewrite",
+              "disable_host_rewrite"
+            ]
           },
           "http_method": {
             "$ref": "#/components/schemas/schemaHttpMethod"
@@ -7775,7 +7899,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "presence",
+              "regex"
+            ]
           },
           "invert_match": {
             "type": "boolean",
@@ -7821,7 +7949,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.530036+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.196977+00:00"
           },
           "presence": {
             "type": "boolean",
@@ -7835,7 +7963,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "exact",
+              "regex"
+            ]
           },
           "regex": {
             "type": "string",
@@ -7860,7 +7992,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "exact",
+              "presence"
+            ]
           }
         },
         "x-f5xc-description-short": "Header match is done using the name of the header and its value.",
@@ -7913,7 +8049,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "prefix",
+              "regex"
+            ]
           },
           "prefix": {
             "type": "string",
@@ -7938,7 +8078,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "path",
+              "regex"
+            ]
           },
           "regex": {
             "type": "string",
@@ -7964,7 +8108,11 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "path",
+              "prefix"
+            ]
           }
         },
         "x-f5xc-description-short": "Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
@@ -7992,7 +8140,11 @@
         "x-ves-proto-message": "ves.io.schema.PortMatcherType",
         "properties": {
           "no_port_match": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "port",
+              "port_ranges"
+            ]
           },
           "port": {
             "type": "integer",
@@ -8016,7 +8168,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "no_port_match",
+              "port_ranges"
+            ]
           },
           "port_ranges": {
             "type": "string",
@@ -8043,7 +8199,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "no_port_match",
+              "port"
+            ]
           }
         },
         "x-f5xc-description-short": "Port match of the request can be a range or a specific port.",
@@ -8219,7 +8379,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "prefix_rewrite"
+            ]
           },
           "prefix_rewrite": {
             "type": "string",
@@ -8245,7 +8408,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "path_redirect"
+            ]
           },
           "proto_redirect": {
             "type": "string",
@@ -8272,7 +8438,11 @@
             }
           },
           "remove_all_params": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "replace_params",
+              "retain_all_params"
+            ]
           },
           "replace_params": {
             "type": "string",
@@ -8295,7 +8465,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "remove_all_params",
+              "retain_all_params"
+            ]
           },
           "response_code": {
             "type": "integer",
@@ -8322,7 +8496,11 @@
             }
           },
           "retain_all_params": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "remove_all_params",
+              "replace_params"
+            ]
           }
         },
         "x-f5xc-description-short": "Route redirect parameters when match action is redirect.",
@@ -8399,7 +8577,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.530462+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.197403+00:00"
           },
           "store_provider": {
             "type": "string",
@@ -8462,7 +8640,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.530502+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.197443+00:00"
           },
           "url": {
             "type": "string",
@@ -8595,16 +8773,36 @@
         "x-ves-proto-message": "ves.io.schema.HeaderTransformationType",
         "properties": {
           "default_header_transformation": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "legacy_header_transformation",
+              "preserve_case_header_transformation",
+              "proper_case_header_transformation"
+            ]
           },
           "legacy_header_transformation": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_header_transformation",
+              "preserve_case_header_transformation",
+              "proper_case_header_transformation"
+            ]
           },
           "preserve_case_header_transformation": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_header_transformation",
+              "legacy_header_transformation",
+              "proper_case_header_transformation"
+            ]
           },
           "proper_case_header_transformation": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_header_transformation",
+              "legacy_header_transformation",
+              "preserve_case_header_transformation"
+            ]
           }
         },
         "x-f5xc-description-short": "Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
@@ -8678,7 +8876,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.530776+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.197710+00:00"
           },
           "name": {
             "type": "string",
@@ -8697,7 +8895,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.530805+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.197738+00:00"
           },
           "namespace": {
             "type": "string",
@@ -8716,7 +8914,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.530834+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.197765+00:00"
           }
         },
         "x-f5xc-description-short": "KubeRefType represents a reference to a Kubernetes (K8s) object.",
@@ -8764,10 +8962,16 @@
         "x-ves-proto-message": "ves.io.schema.SecretType",
         "properties": {
           "blindfold_secret_info": {
-            "$ref": "#/components/schemas/schemaBlindfoldSecretInfoType"
+            "$ref": "#/components/schemas/schemaBlindfoldSecretInfoType",
+            "x-f5xc-conflicts-with": [
+              "clear_secret_info"
+            ]
           },
           "clear_secret_info": {
-            "$ref": "#/components/schemas/schemaClearSecretInfoType"
+            "$ref": "#/components/schemas/schemaClearSecretInfoType",
+            "x-f5xc-conflicts-with": [
+              "blindfold_secret_info"
+            ]
           }
         },
         "x-f5xc-description-short": "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -8793,10 +8997,16 @@
         "x-ves-proto-message": "ves.io.schema.TLSCoalescingOptions",
         "properties": {
           "default_coalescing": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "strict_coalescing"
+            ]
           },
           "strict_coalescing": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_coalescing"
+            ]
           }
         },
         "x-f5xc-description-short": "TLS connection coalescing configuration (not compatible with mTLS).",
@@ -8853,7 +9063,11 @@
             }
           },
           "custom_hash_algorithms": {
-            "$ref": "#/components/schemas/schemaHashAlgorithms"
+            "$ref": "#/components/schemas/schemaHashAlgorithms",
+            "x-f5xc-conflicts-with": [
+              "disable_ocsp_stapling",
+              "use_system_defaults"
+            ]
           },
           "description": {
             "type": "string",
@@ -8872,16 +9086,24 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.531656+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.198578+00:00"
           },
           "disable_ocsp_stapling": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "custom_hash_algorithms",
+              "use_system_defaults"
+            ]
           },
           "private_key": {
             "$ref": "#/components/schemas/schemaSecretType"
           },
           "use_system_defaults": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "custom_hash_algorithms",
+              "disable_ocsp_stapling"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -8946,7 +9168,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.531794+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.198714+00:00"
           },
           "location": {
             "type": "string",
@@ -8964,7 +9186,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.531823+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.198743+00:00"
           },
           "provider": {
             "type": "string",
@@ -8983,7 +9205,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.531850+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.198770+00:00"
           },
           "secret_encoding": {
             "$ref": "#/components/schemas/schemaSecretEncodingType"
@@ -9007,7 +9229,7 @@
             "maxLength": 1,
             "minLength": 1,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.531897+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.198807+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Vault Secret\" VaultSecretInfoType specifies information about the Secret managed by Hashicorp Vault.",
@@ -9049,7 +9271,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.532044+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.198954+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Wingman Secret\" WingmanSecretInfoType specifies the handle to the wingman secret.",
@@ -9101,7 +9323,10 @@
         "x-ves-proto-message": "ves.io.schema.views.DownstreamTlsParamsType",
         "properties": {
           "no_mtls": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "use_mtls"
+            ]
           },
           "tls_certificates": {
             "type": "array",
@@ -9137,7 +9362,10 @@
             "$ref": "#/components/schemas/viewsTlsConfig"
           },
           "use_mtls": {
-            "$ref": "#/components/schemas/viewsDownstreamTlsValidationContext"
+            "$ref": "#/components/schemas/viewsDownstreamTlsValidationContext",
+            "x-f5xc-conflicts-with": [
+              "no_mtls"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -9275,13 +9503,19 @@
             }
           },
           "no_mtls": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "use_mtls"
+            ]
           },
           "tls_config": {
             "$ref": "#/components/schemas/viewsTlsConfig"
           },
           "use_mtls": {
-            "$ref": "#/components/schemas/viewsDownstreamTlsValidationContext"
+            "$ref": "#/components/schemas/viewsDownstreamTlsValidationContext",
+            "x-f5xc-conflicts-with": [
+              "no_mtls"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -9326,13 +9560,22 @@
             }
           },
           "crl": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "no_crl"
+            ]
           },
           "no_crl": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "crl"
+            ]
           },
           "trusted_ca": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "trusted_ca_url"
+            ]
           },
           "trusted_ca_url": {
             "type": "string",
@@ -9357,13 +9600,22 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "trusted_ca"
+            ]
           },
           "xfcc_disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "xfcc_options"
+            ]
           },
           "xfcc_options": {
-            "$ref": "#/components/schemas/viewsXfccHeaderKeys"
+            "$ref": "#/components/schemas/viewsXfccHeaderKeys",
+            "x-f5xc-conflicts-with": [
+              "xfcc_disabled"
+            ]
           }
         },
         "x-f5xc-description-short": "Validation context for downstream client TLS connections.",
@@ -9423,16 +9675,36 @@
         "x-ves-proto-message": "ves.io.schema.views.TlsConfig",
         "properties": {
           "custom_security": {
-            "$ref": "#/components/schemas/viewsCustomCiphers"
+            "$ref": "#/components/schemas/viewsCustomCiphers",
+            "x-f5xc-conflicts-with": [
+              "default_security",
+              "low_security",
+              "medium_security"
+            ]
           },
           "default_security": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "custom_security",
+              "low_security",
+              "medium_security"
+            ]
           },
           "low_security": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "custom_security",
+              "default_security",
+              "medium_security"
+            ]
           },
           "medium_security": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "custom_security",
+              "default_security",
+              "low_security"
+            ]
           }
         },
         "x-f5xc-description-short": "Defines various OPTIONS to configure TLS configuration parameters.",
@@ -9515,10 +9787,16 @@
         "x-ves-proto-message": "ves.io.schema.views.WhereVK8SService",
         "properties": {
           "site": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "virtual_site"
+            ]
           },
           "virtual_site": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "site"
+            ]
           }
         },
         "x-f5xc-description-short": "Defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network.",
@@ -9623,16 +9901,36 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.CreateSpecType",
         "properties": {
           "job": {
-            "$ref": "#/components/schemas/workloadJobType"
+            "$ref": "#/components/schemas/workloadJobType",
+            "x-f5xc-conflicts-with": [
+              "service",
+              "simple_service",
+              "stateful_service"
+            ]
           },
           "service": {
-            "$ref": "#/components/schemas/viewsworkloadServiceType"
+            "$ref": "#/components/schemas/viewsworkloadServiceType",
+            "x-f5xc-conflicts-with": [
+              "job",
+              "simple_service",
+              "stateful_service"
+            ]
           },
           "simple_service": {
-            "$ref": "#/components/schemas/workloadSimpleServiceType"
+            "$ref": "#/components/schemas/workloadSimpleServiceType",
+            "x-f5xc-conflicts-with": [
+              "job",
+              "service",
+              "stateful_service"
+            ]
           },
           "stateful_service": {
-            "$ref": "#/components/schemas/workloadStatefulServiceType"
+            "$ref": "#/components/schemas/workloadStatefulServiceType",
+            "x-f5xc-conflicts-with": [
+              "job",
+              "service",
+              "simple_service"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -9659,16 +9957,36 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.GetSpecType",
         "properties": {
           "job": {
-            "$ref": "#/components/schemas/workloadJobType"
+            "$ref": "#/components/schemas/workloadJobType",
+            "x-f5xc-conflicts-with": [
+              "service",
+              "simple_service",
+              "stateful_service"
+            ]
           },
           "service": {
-            "$ref": "#/components/schemas/viewsworkloadServiceType"
+            "$ref": "#/components/schemas/viewsworkloadServiceType",
+            "x-f5xc-conflicts-with": [
+              "job",
+              "simple_service",
+              "stateful_service"
+            ]
           },
           "simple_service": {
-            "$ref": "#/components/schemas/workloadSimpleServiceType"
+            "$ref": "#/components/schemas/workloadSimpleServiceType",
+            "x-f5xc-conflicts-with": [
+              "job",
+              "service",
+              "stateful_service"
+            ]
           },
           "stateful_service": {
-            "$ref": "#/components/schemas/workloadStatefulServiceType"
+            "$ref": "#/components/schemas/workloadStatefulServiceType",
+            "x-f5xc-conflicts-with": [
+              "job",
+              "service",
+              "simple_service"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -9721,16 +10039,36 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.ReplaceSpecType",
         "properties": {
           "job": {
-            "$ref": "#/components/schemas/workloadJobType"
+            "$ref": "#/components/schemas/workloadJobType",
+            "x-f5xc-conflicts-with": [
+              "service",
+              "simple_service",
+              "stateful_service"
+            ]
           },
           "service": {
-            "$ref": "#/components/schemas/viewsworkloadServiceType"
+            "$ref": "#/components/schemas/viewsworkloadServiceType",
+            "x-f5xc-conflicts-with": [
+              "job",
+              "simple_service",
+              "stateful_service"
+            ]
           },
           "simple_service": {
-            "$ref": "#/components/schemas/workloadSimpleServiceType"
+            "$ref": "#/components/schemas/workloadSimpleServiceType",
+            "x-f5xc-conflicts-with": [
+              "job",
+              "service",
+              "stateful_service"
+            ]
           },
           "stateful_service": {
-            "$ref": "#/components/schemas/workloadStatefulServiceType"
+            "$ref": "#/components/schemas/workloadStatefulServiceType",
+            "x-f5xc-conflicts-with": [
+              "job",
+              "service",
+              "simple_service"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -9858,10 +10196,16 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "scale_to_zero"
+            ]
           },
           "scale_to_zero": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "num_replicas"
+            ]
           },
           "volumes": {
             "type": "array",
@@ -9916,13 +10260,25 @@
         "x-ves-proto-message": "ves.io.schema.virtual_host.HttpProtocolOptions",
         "properties": {
           "http_protocol_enable_v1_only": {
-            "$ref": "#/components/schemas/schemavirtual_hostHttp1ProtocolOptions"
+            "$ref": "#/components/schemas/schemavirtual_hostHttp1ProtocolOptions",
+            "x-f5xc-conflicts-with": [
+              "http_protocol_enable_v1_v2",
+              "http_protocol_enable_v2_only"
+            ]
           },
           "http_protocol_enable_v1_v2": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "http_protocol_enable_v1_only",
+              "http_protocol_enable_v2_only"
+            ]
           },
           "http_protocol_enable_v2_only": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "http_protocol_enable_v1_only",
+              "http_protocol_enable_v1_v2"
+            ]
           }
         },
         "x-f5xc-description-short": "HTTP protocol configuration OPTIONS for downstream connections.",
@@ -10027,10 +10383,16 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.AdvertiseInClusterType",
         "properties": {
           "multi_ports": {
-            "$ref": "#/components/schemas/workloadMultiPortType"
+            "$ref": "#/components/schemas/workloadMultiPortType",
+            "x-f5xc-conflicts-with": [
+              "port"
+            ]
           },
           "port": {
-            "$ref": "#/components/schemas/workloadSinglePortType"
+            "$ref": "#/components/schemas/workloadSinglePortType",
+            "x-f5xc-conflicts-with": [
+              "multi_ports"
+            ]
           }
         },
         "x-f5xc-description-short": "Advertise the workload locally in-cluster.",
@@ -10101,16 +10463,36 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.AdvertiseOptionsType",
         "properties": {
           "advertise_custom": {
-            "$ref": "#/components/schemas/workloadAdvertiseCustomType"
+            "$ref": "#/components/schemas/workloadAdvertiseCustomType",
+            "x-f5xc-conflicts-with": [
+              "advertise_in_cluster",
+              "advertise_on_public",
+              "do_not_advertise"
+            ]
           },
           "advertise_in_cluster": {
-            "$ref": "#/components/schemas/workloadAdvertiseInClusterType"
+            "$ref": "#/components/schemas/workloadAdvertiseInClusterType",
+            "x-f5xc-conflicts-with": [
+              "advertise_custom",
+              "advertise_on_public",
+              "do_not_advertise"
+            ]
           },
           "advertise_on_public": {
-            "$ref": "#/components/schemas/workloadAdvertisePublicType"
+            "$ref": "#/components/schemas/workloadAdvertisePublicType",
+            "x-f5xc-conflicts-with": [
+              "advertise_custom",
+              "advertise_in_cluster",
+              "do_not_advertise"
+            ]
           },
           "do_not_advertise": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "advertise_custom",
+              "advertise_in_cluster",
+              "advertise_on_public"
+            ]
           }
         },
         "x-f5xc-description-short": "Advertise OPTIONS are used to configure how and where to advertise the workload using load balancers.",
@@ -10139,13 +10521,19 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.AdvertisePortType",
         "properties": {
           "http_loadbalancer": {
-            "$ref": "#/components/schemas/workloadHTTPLoadBalancerType"
+            "$ref": "#/components/schemas/workloadHTTPLoadBalancerType",
+            "x-f5xc-conflicts-with": [
+              "tcp_loadbalancer"
+            ]
           },
           "port": {
             "$ref": "#/components/schemas/workloadPortType"
           },
           "tcp_loadbalancer": {
-            "$ref": "#/components/schemas/workloadTCPLoadBalancerType"
+            "$ref": "#/components/schemas/workloadTCPLoadBalancerType",
+            "x-f5xc-conflicts-with": [
+              "http_loadbalancer"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -10171,10 +10559,16 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.AdvertisePublicType",
         "properties": {
           "multi_ports": {
-            "$ref": "#/components/schemas/workloadAdvertiseMultiPortType"
+            "$ref": "#/components/schemas/workloadAdvertiseMultiPortType",
+            "x-f5xc-conflicts-with": [
+              "port"
+            ]
           },
           "port": {
-            "$ref": "#/components/schemas/workloadAdvertiseSinglePortType"
+            "$ref": "#/components/schemas/workloadAdvertiseSinglePortType",
+            "x-f5xc-conflicts-with": [
+              "multi_ports"
+            ]
           }
         },
         "x-f5xc-description-short": "Advertise this workload via loadbalancer on Internet with default VIP.",
@@ -10292,13 +10686,19 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.AdvertiseSinglePortType",
         "properties": {
           "http_loadbalancer": {
-            "$ref": "#/components/schemas/workloadHTTPLoadBalancerType"
+            "$ref": "#/components/schemas/workloadHTTPLoadBalancerType",
+            "x-f5xc-conflicts-with": [
+              "tcp_loadbalancer"
+            ]
           },
           "port": {
             "$ref": "#/components/schemas/workloadSinglePortType"
           },
           "tcp_loadbalancer": {
-            "$ref": "#/components/schemas/workloadTCPLoadBalancerType"
+            "$ref": "#/components/schemas/workloadTCPLoadBalancerType",
+            "x-f5xc-conflicts-with": [
+              "http_loadbalancer"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -10324,13 +10724,25 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.AdvertiseWhereType",
         "properties": {
           "site": {
-            "$ref": "#/components/schemas/viewsWhereSite"
+            "$ref": "#/components/schemas/viewsWhereSite",
+            "x-f5xc-conflicts-with": [
+              "virtual_site",
+              "vk8s_service"
+            ]
           },
           "virtual_site": {
-            "$ref": "#/components/schemas/viewsWhereVirtualSite"
+            "$ref": "#/components/schemas/viewsWhereVirtualSite",
+            "x-f5xc-conflicts-with": [
+              "site",
+              "vk8s_service"
+            ]
           },
           "vk8s_service": {
-            "$ref": "#/components/schemas/viewsWhereVK8SService"
+            "$ref": "#/components/schemas/viewsWhereVK8SService",
+            "x-f5xc-conflicts-with": [
+              "site",
+              "virtual_site"
+            ]
           }
         },
         "x-f5xc-description-short": "Defines various OPTIONS where a load balancer could be advertised.",
@@ -10408,7 +10820,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.532938+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.199854+00:00"
           },
           "volume_name": {
             "type": "string",
@@ -10460,10 +10872,16 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.ConfigurationParameterType",
         "properties": {
           "env_var": {
-            "$ref": "#/components/schemas/workloadEnvironmentVariableType"
+            "$ref": "#/components/schemas/workloadEnvironmentVariableType",
+            "x-f5xc-conflicts-with": [
+              "file"
+            ]
           },
           "file": {
-            "$ref": "#/components/schemas/workloadConfigurationFileType"
+            "$ref": "#/components/schemas/workloadConfigurationFileType",
+            "x-f5xc-conflicts-with": [
+              "env_var"
+            ]
           }
         },
         "x-f5xc-description-short": "Configuration parameter for the workload.",
@@ -10608,13 +11026,25 @@
             }
           },
           "custom_flavor": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "default_flavor",
+              "flavor"
+            ]
           },
           "default_flavor": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "custom_flavor",
+              "flavor"
+            ]
           },
           "flavor": {
-            "$ref": "#/components/schemas/workloadContainerFlavorType"
+            "$ref": "#/components/schemas/workloadContainerFlavorType",
+            "x-f5xc-conflicts-with": [
+              "custom_flavor",
+              "default_flavor"
+            ]
           },
           "image": {
             "$ref": "#/components/schemas/workloadImageType"
@@ -10662,7 +11092,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.533084+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.200003+00:00"
           },
           "readiness_check": {
             "$ref": "#/components/schemas/workloadHealthCheckType"
@@ -10783,7 +11213,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.533183+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.200101+00:00"
           },
           "namespace": {
             "type": "string",
@@ -10803,7 +11233,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.533210+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.200129+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -10933,22 +11363,64 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.DeployOptionsType",
         "properties": {
           "all_res": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "default_virtual_sites",
+              "deploy_ce_sites",
+              "deploy_ce_virtual_sites",
+              "deploy_re_sites",
+              "deploy_re_virtual_sites"
+            ]
           },
           "default_virtual_sites": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "all_res",
+              "deploy_ce_sites",
+              "deploy_ce_virtual_sites",
+              "deploy_re_sites",
+              "deploy_re_virtual_sites"
+            ]
           },
           "deploy_ce_sites": {
-            "$ref": "#/components/schemas/workloadDeployCESiteType"
+            "$ref": "#/components/schemas/workloadDeployCESiteType",
+            "x-f5xc-conflicts-with": [
+              "all_res",
+              "default_virtual_sites",
+              "deploy_ce_virtual_sites",
+              "deploy_re_sites",
+              "deploy_re_virtual_sites"
+            ]
           },
           "deploy_ce_virtual_sites": {
-            "$ref": "#/components/schemas/workloadDeployCEVirtualSiteType"
+            "$ref": "#/components/schemas/workloadDeployCEVirtualSiteType",
+            "x-f5xc-conflicts-with": [
+              "all_res",
+              "default_virtual_sites",
+              "deploy_ce_sites",
+              "deploy_re_sites",
+              "deploy_re_virtual_sites"
+            ]
           },
           "deploy_re_sites": {
-            "$ref": "#/components/schemas/workloadDeployRESiteType"
+            "$ref": "#/components/schemas/workloadDeployRESiteType",
+            "x-f5xc-conflicts-with": [
+              "all_res",
+              "default_virtual_sites",
+              "deploy_ce_sites",
+              "deploy_ce_virtual_sites",
+              "deploy_re_virtual_sites"
+            ]
           },
           "deploy_re_virtual_sites": {
-            "$ref": "#/components/schemas/workloadDeployREVirtualSiteType"
+            "$ref": "#/components/schemas/workloadDeployREVirtualSiteType",
+            "x-f5xc-conflicts-with": [
+              "all_res",
+              "default_virtual_sites",
+              "deploy_ce_sites",
+              "deploy_ce_virtual_sites",
+              "deploy_re_sites"
+            ]
           }
         },
         "x-f5xc-description-short": "Deploy OPTIONS are used to configure the workload deployment OPTIONS.",
@@ -11152,7 +11624,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.533364+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.200280+00:00"
           },
           "value": {
             "type": "string",
@@ -11177,7 +11649,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.533392+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.200307+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -11202,10 +11674,16 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.EphemeralStorageVolumeType",
         "properties": {
           "empty_dir": {
-            "$ref": "#/components/schemas/workloadEmptyDirectoryVolumeType"
+            "$ref": "#/components/schemas/workloadEmptyDirectoryVolumeType",
+            "x-f5xc-conflicts-with": [
+              "host_path"
+            ]
           },
           "host_path": {
-            "$ref": "#/components/schemas/workloadHostPathVolumeType"
+            "$ref": "#/components/schemas/workloadHostPathVolumeType",
+            "x-f5xc-conflicts-with": [
+              "empty_dir"
+            ]
           },
           "name": {
             "type": "string",
@@ -11230,7 +11708,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.533439+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.200365+00:00"
           }
         },
         "x-f5xc-description-short": "Ephemeral storage volume configuration for the workload.",
@@ -11407,7 +11885,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.533547+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.200471+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -11590,7 +12068,10 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.HTTPLoadBalancerType",
         "properties": {
           "default_route": {
-            "$ref": "#/components/schemas/workloadMatchAllRouteType"
+            "$ref": "#/components/schemas/workloadMatchAllRouteType",
+            "x-f5xc-conflicts-with": [
+              "specific_routes"
+            ]
           },
           "domains": {
             "type": "array",
@@ -11635,16 +12116,31 @@
             }
           },
           "http": {
-            "$ref": "#/components/schemas/http_loadbalancerProxyTypeHttp"
+            "$ref": "#/components/schemas/http_loadbalancerProxyTypeHttp",
+            "x-f5xc-conflicts-with": [
+              "https",
+              "https_auto_cert"
+            ]
           },
           "https": {
-            "$ref": "#/components/schemas/http_loadbalancerProxyTypeHttps"
+            "$ref": "#/components/schemas/http_loadbalancerProxyTypeHttps",
+            "x-f5xc-conflicts-with": [
+              "http",
+              "https_auto_cert"
+            ]
           },
           "https_auto_cert": {
-            "$ref": "#/components/schemas/http_loadbalancerProxyTypeHttpsAutoCerts"
+            "$ref": "#/components/schemas/http_loadbalancerProxyTypeHttpsAutoCerts",
+            "x-f5xc-conflicts-with": [
+              "http",
+              "https"
+            ]
           },
           "specific_routes": {
-            "$ref": "#/components/schemas/viewsworkloadRouteType"
+            "$ref": "#/components/schemas/viewsworkloadRouteType",
+            "x-f5xc-conflicts-with": [
+              "default_route"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -11673,7 +12169,11 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.HealthCheckType",
         "properties": {
           "exec_health_check": {
-            "$ref": "#/components/schemas/workloadExecHealthCheckType"
+            "$ref": "#/components/schemas/workloadExecHealthCheckType",
+            "x-f5xc-conflicts-with": [
+              "http_health_check",
+              "tcp_health_check"
+            ]
           },
           "healthy_threshold": {
             "type": "integer",
@@ -11706,7 +12206,11 @@
             }
           },
           "http_health_check": {
-            "$ref": "#/components/schemas/workloadHTTPHealthCheckType"
+            "$ref": "#/components/schemas/workloadHTTPHealthCheckType",
+            "x-f5xc-conflicts-with": [
+              "exec_health_check",
+              "tcp_health_check"
+            ]
           },
           "initial_delay": {
             "type": "integer",
@@ -11762,7 +12266,11 @@
             }
           },
           "tcp_health_check": {
-            "$ref": "#/components/schemas/workloadTCPHealthCheckType"
+            "$ref": "#/components/schemas/workloadTCPHealthCheckType",
+            "x-f5xc-conflicts-with": [
+              "exec_health_check",
+              "http_health_check"
+            ]
           },
           "timeout": {
             "type": "integer",
@@ -11973,7 +12481,10 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.ImageType",
         "properties": {
           "container_registry": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "public"
+            ]
           },
           "name": {
             "type": "string",
@@ -12003,10 +12514,13 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.533834+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.200752+00:00"
           },
           "public": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "container_registry"
+            ]
           },
           "pull_policy": {
             "$ref": "#/components/schemas/workloadImagePullPolicyType"
@@ -12223,7 +12737,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.533973+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.200880+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -12277,7 +12791,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.534042+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.200948+00:00"
           },
           "namespace": {
             "type": "string",
@@ -12296,7 +12810,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.534070+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.200976+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -12338,7 +12852,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.534125+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.201030+00:00"
           },
           "uid": {
             "type": "string",
@@ -12359,7 +12873,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.534154+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.201058+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of workload is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
@@ -12397,10 +12911,18 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.MatchAllRouteType",
         "properties": {
           "auto_host_rewrite": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disable_host_rewrite",
+              "host_rewrite"
+            ]
           },
           "disable_host_rewrite": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "auto_host_rewrite",
+              "host_rewrite"
+            ]
           },
           "host_rewrite": {
             "type": "string",
@@ -12424,7 +12946,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "auto_host_rewrite",
+              "disable_host_rewrite"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -12542,10 +13068,16 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "default"
+            ]
           },
           "default": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "class_name"
+            ]
           },
           "storage_size": {
             "type": "number",
@@ -12652,7 +13184,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.534286+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.201189+00:00"
           },
           "persistent_volume": {
             "$ref": "#/components/schemas/workloadPersistentStorageVolumeType"
@@ -12702,7 +13234,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.534325+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.201227+00:00",
+            "x-f5xc-conflicts-with": [
+              "num"
+            ]
           },
           "num": {
             "type": "integer",
@@ -12725,7 +13260,10 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "name"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -12783,7 +13321,10 @@
             "$ref": "#/components/schemas/viewsworkloadProtocolType"
           },
           "same_as_port": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "target_port"
+            ]
           },
           "target_port": {
             "type": "integer",
@@ -12807,7 +13348,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "same_as_port"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -12862,7 +13406,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.534412+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.201314+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -12927,16 +13471,36 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.RouteInfoType",
         "properties": {
           "custom_route_object": {
-            "$ref": "#/components/schemas/http_loadbalancerRouteTypeCustomRoute"
+            "$ref": "#/components/schemas/http_loadbalancerRouteTypeCustomRoute",
+            "x-f5xc-conflicts-with": [
+              "direct_response_route",
+              "redirect_route",
+              "simple_route"
+            ]
           },
           "direct_response_route": {
-            "$ref": "#/components/schemas/http_loadbalancerRouteTypeDirectResponse"
+            "$ref": "#/components/schemas/http_loadbalancerRouteTypeDirectResponse",
+            "x-f5xc-conflicts-with": [
+              "custom_route_object",
+              "redirect_route",
+              "simple_route"
+            ]
           },
           "redirect_route": {
-            "$ref": "#/components/schemas/http_loadbalancerRouteTypeRedirect"
+            "$ref": "#/components/schemas/http_loadbalancerRouteTypeRedirect",
+            "x-f5xc-conflicts-with": [
+              "custom_route_object",
+              "direct_response_route",
+              "simple_route"
+            ]
           },
           "simple_route": {
-            "$ref": "#/components/schemas/http_loadbalancerRouteTypeSimpleWithDefaultOriginPool"
+            "$ref": "#/components/schemas/http_loadbalancerRouteTypeSimpleWithDefaultOriginPool",
+            "x-f5xc-conflicts-with": [
+              "custom_route_object",
+              "direct_response_route",
+              "redirect_route"
+            ]
           }
         },
         "x-f5xc-description-short": "Defines various OPTIONS to define a route.",
@@ -12971,13 +13535,22 @@
             "$ref": "#/components/schemas/workloadContainerType"
           },
           "disabled": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enabled"
+            ]
           },
           "do_not_advertise": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "simple_advertise"
+            ]
           },
           "enabled": {
-            "$ref": "#/components/schemas/workloadPersistentVolumeType"
+            "$ref": "#/components/schemas/workloadPersistentVolumeType",
+            "x-f5xc-conflicts-with": [
+              "disabled"
+            ]
           },
           "scale_to_zero": {
             "type": "boolean",
@@ -12994,7 +13567,10 @@
             }
           },
           "simple_advertise": {
-            "$ref": "#/components/schemas/workloadAdvertiseSimpleServiceType"
+            "$ref": "#/components/schemas/workloadAdvertiseSimpleServiceType",
+            "x-f5xc-conflicts-with": [
+              "do_not_advertise"
+            ]
           }
         },
         "x-f5xc-description-short": "SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP...",
@@ -13107,7 +13683,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "scale_to_zero"
+            ]
           },
           "persistent_volumes": {
             "type": "array",
@@ -13136,7 +13715,10 @@
             }
           },
           "scale_to_zero": {
-            "$ref": "#/components/schemas/ioschemaEmpty"
+            "$ref": "#/components/schemas/ioschemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "num_replicas"
+            ]
           },
           "volumes": {
             "type": "array",
@@ -13263,10 +13845,18 @@
         "x-ves-proto-message": "ves.io.schema.views.workload.StorageVolumeType",
         "properties": {
           "empty_dir": {
-            "$ref": "#/components/schemas/workloadEmptyDirectoryVolumeType"
+            "$ref": "#/components/schemas/workloadEmptyDirectoryVolumeType",
+            "x-f5xc-conflicts-with": [
+              "host_path",
+              "persistent_volume"
+            ]
           },
           "host_path": {
-            "$ref": "#/components/schemas/workloadHostPathVolumeType"
+            "$ref": "#/components/schemas/workloadHostPathVolumeType",
+            "x-f5xc-conflicts-with": [
+              "empty_dir",
+              "persistent_volume"
+            ]
           },
           "name": {
             "type": "string",
@@ -13291,10 +13881,14 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.534710+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.201619+00:00"
           },
           "persistent_volume": {
-            "$ref": "#/components/schemas/workloadPersistentStorageVolumeType"
+            "$ref": "#/components/schemas/workloadPersistentStorageVolumeType",
+            "x-f5xc-conflicts-with": [
+              "empty_dir",
+              "host_path"
+            ]
           }
         },
         "x-f5xc-description-short": "Storage volume configuration for the workload.",
@@ -13617,7 +14211,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.534859+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.201766+00:00"
           },
           "range": {
             "type": "string",
@@ -13823,7 +14417,7 @@
             "maxLength": 16,
             "minLength": 7,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.534949+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.201846+00:00"
           },
           "value": {
             "type": "array",
@@ -13842,7 +14436,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.534980+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.201877+00:00"
           }
         },
         "x-f5xc-description-short": "Usage Type Data contains key/value pair that uniquely identifies a workload in the response and the corresponding metric data.",
@@ -13989,7 +14583,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.602532+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.266845+00:00"
           },
           "name": {
             "type": "string",
@@ -14010,7 +14604,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.602559+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.266872+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14031,7 +14625,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.602586+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.266899+00:00"
           },
           "tenant": {
             "type": "string",
@@ -14054,7 +14648,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.602614+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.266926+00:00"
           },
           "uid": {
             "type": "string",
@@ -14078,7 +14672,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.602645+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.266955+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -14283,7 +14877,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.603335+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.267639+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14303,7 +14897,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.603363+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.267667+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -14406,7 +15000,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.603459+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.267761+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -14640,7 +15234,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.603564+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.267865+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -14694,7 +15288,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.603631+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.267931+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14713,7 +15307,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.603661+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.267959+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -14755,7 +15349,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.603717+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.268015+00:00"
           },
           "uid": {
             "type": "string",
@@ -14776,7 +15370,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:41.603746+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:39.268043+00:00"
           }
         },
         "x-f5xc-description-short": "By default a summary of workload_flavor is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",

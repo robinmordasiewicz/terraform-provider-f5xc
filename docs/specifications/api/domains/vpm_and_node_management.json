@@ -3,7 +3,7 @@
   "info": {
     "title": "Vpm And Node Management",
     "description": "APIs for configuring node policies, fleet management, and lifecycle operations. Supports node registration, configuration deployment, and status monitoring across distributed infrastructure.",
-    "version": "2.0.39",
+    "version": "2.0.40",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -316,13 +316,25 @@
         "x-ves-proto-message": "ves.io.schema.maintenance_status.GetUpgradeStatusResponse",
         "properties": {
           "upgrade_in_progress": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "upgrade_in_progress_with_config_downtime",
+              "upgrade_not_in_progress"
+            ]
           },
           "upgrade_in_progress_with_config_downtime": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "upgrade_in_progress",
+              "upgrade_not_in_progress"
+            ]
           },
           "upgrade_not_in_progress": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "upgrade_in_progress",
+              "upgrade_in_progress_with_config_downtime"
+            ]
           }
         },
         "x-f5xc-description-short": "Response message for Upgrade Status Request. Response contain different states in upgrade process.",

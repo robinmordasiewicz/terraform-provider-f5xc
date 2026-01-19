@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -882,6 +884,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
+				Validators: []validator.Int64{
+					int64validator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("port_ranges"),
+					),
+				},
 			},
 			"port_ranges": schema.StringAttribute{
 				MarkdownDescription: "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
@@ -889,6 +896,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
+				},
+				Validators: []validator.String{
+					stringvalidator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("listen_port"),
+					),
 				},
 			},
 		},
@@ -943,10 +955,22 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								"port": schema.Int64Attribute{
 									MarkdownDescription: "Port to Listen.",
 									Optional:            true,
+									Validators: []validator.Int64{
+										int64validator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("port_ranges"),
+											path.MatchRelative().AtParent().AtName("use_default_port"),
+										),
+									},
 								},
 								"port_ranges": schema.StringAttribute{
 									MarkdownDescription: "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("port"),
+											path.MatchRelative().AtParent().AtName("use_default_port"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -1030,10 +1054,20 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 										"specific_v6_vip": schema.StringAttribute{
 											MarkdownDescription: "Use given IPv6 address as VIP on virtual Network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("default_v6_vip"),
+												),
+											},
 										},
 										"specific_vip": schema.StringAttribute{
 											MarkdownDescription: "Use given IPv4 address as VIP on virtual Network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("default_vip"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -1431,6 +1465,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("trusted_ca"),
+											),
+										},
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1623,6 +1662,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("trusted_ca"),
+											),
+										},
 									},
 								},
 								Blocks: map[string]schema.Block{
@@ -1748,6 +1792,11 @@ func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Upload a Root CA Certificate specifically for this Load Balancer.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("trusted_ca"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{

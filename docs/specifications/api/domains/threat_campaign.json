@@ -3,7 +3,7 @@
   "info": {
     "title": "Threat Campaign",
     "description": "APIs for configuring detection policies and attack tracking. Supports campaign analysis, risk assessment, and automated mitigation rule generation across security domains.",
-    "version": "2.0.39",
+    "version": "2.0.40",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -532,7 +532,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981564+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122070+00:00"
           },
           "namespace": {
             "type": "string",
@@ -552,7 +552,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981596+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122100+00:00"
           },
           "path": {
             "type": "string",
@@ -728,7 +728,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981688+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122190+00:00"
           },
           "namespace": {
             "type": "string",
@@ -748,7 +748,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981716+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122217+00:00"
           },
           "user_id": {
             "type": "string",
@@ -820,7 +820,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981766+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122266+00:00"
           },
           "rule": {
             "$ref": "#/components/schemas/common_wafSimpleClientSrcRule"
@@ -900,7 +900,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981843+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122355+00:00"
           },
           "namespace": {
             "type": "string",
@@ -920,7 +920,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981870+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122382+00:00"
           },
           "tls_fingerprint_matcher": {
             "$ref": "#/components/schemas/policyTlsFingerprintMatcherType"
@@ -1036,7 +1036,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981969+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122469+00:00"
           },
           "namespace": {
             "type": "string",
@@ -1056,7 +1056,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.981997+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122496+00:00"
           },
           "path": {
             "type": "string",
@@ -1113,10 +1113,16 @@
         "x-ves-proto-message": "ves.io.schema.app_security.GetSuggestedOasValidationRuleRsp",
         "properties": {
           "all_endpoints_oas_validation": {
-            "$ref": "#/components/schemas/common_wafOpenApiValidationAllSpecEndpointsSettings"
+            "$ref": "#/components/schemas/common_wafOpenApiValidationAllSpecEndpointsSettings",
+            "x-f5xc-conflicts-with": [
+              "custom_oas_validation"
+            ]
           },
           "custom_oas_validation": {
-            "$ref": "#/components/schemas/common_wafOpenApiValidationRule"
+            "$ref": "#/components/schemas/common_wafOpenApiValidationRule",
+            "x-f5xc-conflicts-with": [
+              "all_endpoints_oas_validation"
+            ]
           },
           "found_existing_rule": {
             "$ref": "#/components/schemas/schemaEmpty"
@@ -1165,7 +1171,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982077+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122573+00:00"
           },
           "namespace": {
             "type": "string",
@@ -1185,7 +1191,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982104+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122600+00:00"
           },
           "path": {
             "type": "string",
@@ -1288,7 +1294,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982174+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122668+00:00"
           },
           "namespace": {
             "type": "string",
@@ -1308,7 +1314,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982202+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122695+00:00"
           },
           "path": {
             "type": "string",
@@ -1500,7 +1506,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982301+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122791+00:00"
           },
           "namespace": {
             "type": "string",
@@ -1520,7 +1526,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982328+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122818+00:00"
           },
           "sec_event_name": {
             "type": "string",
@@ -1655,7 +1661,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982406+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122894+00:00"
           },
           "rule": {
             "$ref": "#/components/schemas/common_wafSimpleClientSrcRule"
@@ -1712,7 +1718,7 @@
             "x-original-maxLength": 256,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982457+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.122944+00:00"
           },
           "exclude_bot_names": {
             "type": "array",
@@ -1813,7 +1819,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982515+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123000+00:00"
           },
           "namespace": {
             "type": "string",
@@ -1833,7 +1839,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982543+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123028+00:00"
           },
           "req_path": {
             "type": "string",
@@ -1930,7 +1936,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982602+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123085+00:00"
           },
           "waf_exclusion_policy": {
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
@@ -1979,7 +1985,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982653+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123135+00:00"
           },
           "namespace": {
             "type": "string",
@@ -1998,7 +2004,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982681+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123163+00:00"
           },
           "request_data": {
             "$ref": "#/components/schemas/app_securityRequestData"
@@ -2136,7 +2142,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982779+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123260+00:00"
           }
         },
         "x-f5xc-description-short": "Metric label filter can be specified to query specific metrics based on label match.",
@@ -2247,7 +2253,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982822+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123302+00:00"
           }
         },
         "x-f5xc-description-short": "GET a list of virtual hosts in all the namespaces matching filter provided in the request.",
@@ -2397,7 +2403,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982894+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123375+00:00"
           },
           "query": {
             "type": "string",
@@ -2596,7 +2602,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.982995+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123474+00:00"
           },
           "start_time": {
             "type": "string",
@@ -2884,7 +2890,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983125+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123602+00:00"
           },
           "query": {
             "type": "string",
@@ -3103,7 +3109,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983243+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123719+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -3202,7 +3208,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983302+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123778+00:00"
           },
           "query": {
             "type": "string",
@@ -3400,7 +3406,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983403+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123878+00:00"
           },
           "query": {
             "type": "string",
@@ -3619,7 +3625,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983521+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.123994+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -3718,7 +3724,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983580+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.124054+00:00"
           },
           "query": {
             "type": "string",
@@ -3916,7 +3922,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983683+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.124154+00:00"
           },
           "query": {
             "type": "string",
@@ -4135,7 +4141,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983800+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.124270+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -4211,7 +4217,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983850+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.124319+00:00"
           },
           "id": {
             "type": "string",
@@ -4327,7 +4333,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.983924+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.124396+00:00"
           },
           "references": {
             "type": "array",
@@ -5195,7 +5201,10 @@
             "$ref": "#/components/schemas/schemaEmpty"
           },
           "ddos_client_source": {
-            "$ref": "#/components/schemas/common_securityDDoSClientSource"
+            "$ref": "#/components/schemas/common_securityDDoSClientSource",
+            "x-f5xc-conflicts-with": [
+              "ip_prefix_list"
+            ]
           },
           "expiration_timestamp": {
             "type": "string",
@@ -5223,7 +5232,10 @@
             }
           },
           "ip_prefix_list": {
-            "$ref": "#/components/schemas/policyPrefixMatchList"
+            "$ref": "#/components/schemas/policyPrefixMatchList",
+            "x-f5xc-conflicts-with": [
+              "ddos_client_source"
+            ]
           },
           "metadata": {
             "$ref": "#/components/schemas/schemaMessageMetaType"
@@ -5258,7 +5270,10 @@
             "$ref": "#/components/schemas/common_wafAPIProtectionRuleAction"
           },
           "any_domain": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "specific_domain"
+            ]
           },
           "api_endpoint_method": {
             "$ref": "#/components/schemas/policyHttpMethodMatcherType"
@@ -5323,7 +5338,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_domain"
+            ]
           }
         },
         "x-f5xc-description-short": "API Protection Rule for a specific endpoint.",
@@ -5355,10 +5373,16 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.APIProtectionRuleAction",
         "properties": {
           "allow": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "deny"
+            ]
           },
           "deny": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow"
+            ]
           }
         },
         "x-f5xc-description-short": "The action to take if the input request matches the rule.",
@@ -5460,7 +5484,10 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.ApiEndpointRule",
         "properties": {
           "any_domain": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "specific_domain"
+            ]
           },
           "api_endpoint_method": {
             "$ref": "#/components/schemas/policyHttpMethodMatcherType"
@@ -5497,10 +5524,16 @@
             "$ref": "#/components/schemas/policyClientMatcher"
           },
           "inline_rate_limiter": {
-            "$ref": "#/components/schemas/common_wafInlineRateLimiter"
+            "$ref": "#/components/schemas/common_wafInlineRateLimiter",
+            "x-f5xc-conflicts-with": [
+              "ref_rate_limiter"
+            ]
           },
           "ref_rate_limiter": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "inline_rate_limiter"
+            ]
           },
           "request_matcher": {
             "$ref": "#/components/schemas/policyRequestMatcher"
@@ -5526,7 +5559,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_domain"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -5635,16 +5671,32 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.FallThroughRule",
         "properties": {
           "action_block": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "action_report",
+              "action_skip"
+            ]
           },
           "action_report": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "action_block",
+              "action_skip"
+            ]
           },
           "action_skip": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "action_block",
+              "action_report"
+            ]
           },
           "api_endpoint": {
-            "$ref": "#/components/schemas/common_wafApiEndpointDetails"
+            "$ref": "#/components/schemas/common_wafApiEndpointDetails",
+            "x-f5xc-conflicts-with": [
+              "api_group",
+              "base_path"
+            ]
           },
           "api_group": {
             "type": "string",
@@ -5667,7 +5719,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "api_endpoint",
+              "base_path"
+            ]
           },
           "base_path": {
             "type": "string",
@@ -5692,7 +5748,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "api_endpoint",
+              "api_group"
+            ]
           },
           "metadata": {
             "$ref": "#/components/schemas/schemaMessageMetaType"
@@ -5772,7 +5832,10 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.InlineRateLimiter",
         "properties": {
           "ref_user_id": {
-            "$ref": "#/components/schemas/schemaviewsObjectRefType"
+            "$ref": "#/components/schemas/schemaviewsObjectRefType",
+            "x-f5xc-conflicts-with": [
+              "use_http_lb_user_id"
+            ]
           },
           "threshold": {
             "type": "integer",
@@ -5808,7 +5871,10 @@
             "$ref": "#/components/schemas/rate_limiterRateLimitPeriodUnit"
           },
           "use_http_lb_user_id": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "ref_user_id"
+            ]
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -5835,10 +5901,16 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.OpenApiFallThroughMode",
         "properties": {
           "fall_through_mode_allow": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "fall_through_mode_custom"
+            ]
           },
           "fall_through_mode_custom": {
-            "$ref": "#/components/schemas/common_wafCustomFallThroughMode"
+            "$ref": "#/components/schemas/common_wafCustomFallThroughMode",
+            "x-f5xc-conflicts-with": [
+              "fall_through_mode_allow"
+            ]
           }
         },
         "x-required": true,
@@ -5900,16 +5972,28 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.OpenApiValidationCommonSettings",
         "properties": {
           "oversized_body_fail_validation": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "oversized_body_skip_validation"
+            ]
           },
           "oversized_body_skip_validation": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "oversized_body_fail_validation"
+            ]
           },
           "property_validation_settings_custom": {
-            "$ref": "#/components/schemas/common_wafValidationPropertySetting"
+            "$ref": "#/components/schemas/common_wafValidationPropertySetting",
+            "x-f5xc-conflicts-with": [
+              "property_validation_settings_default"
+            ]
           },
           "property_validation_settings_default": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "property_validation_settings_custom"
+            ]
           }
         },
         "x-f5xc-description-short": "OpenAPI specification validation settings relevant for \"API Inventory\" enforcement and for \"Custom list\" enforcement.",
@@ -5939,16 +6023,28 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.OpenApiValidationMode",
         "properties": {
           "response_validation_mode_active": {
-            "$ref": "#/components/schemas/common_wafOpenApiValidationModeActiveResponse"
+            "$ref": "#/components/schemas/common_wafOpenApiValidationModeActiveResponse",
+            "x-f5xc-conflicts-with": [
+              "skip_response_validation"
+            ]
           },
           "skip_response_validation": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "response_validation_mode_active"
+            ]
           },
           "skip_validation": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "validation_mode_active"
+            ]
           },
           "validation_mode_active": {
-            "$ref": "#/components/schemas/common_wafOpenApiValidationModeActive"
+            "$ref": "#/components/schemas/common_wafOpenApiValidationModeActive",
+            "x-f5xc-conflicts-with": [
+              "skip_validation"
+            ]
           }
         },
         "x-required": true,
@@ -5978,10 +6074,16 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.OpenApiValidationModeActive",
         "properties": {
           "enforcement_block": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enforcement_report"
+            ]
           },
           "enforcement_report": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enforcement_block"
+            ]
           },
           "request_validation_properties": {
             "type": "array",
@@ -6040,10 +6142,16 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.OpenApiValidationModeActiveResponse",
         "properties": {
           "enforcement_block": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enforcement_report"
+            ]
           },
           "enforcement_report": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "enforcement_block"
+            ]
           },
           "response_validation_properties": {
             "type": "array",
@@ -6103,10 +6211,17 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.OpenApiValidationRule",
         "properties": {
           "any_domain": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "specific_domain"
+            ]
           },
           "api_endpoint": {
-            "$ref": "#/components/schemas/common_wafApiEndpointDetails"
+            "$ref": "#/components/schemas/common_wafApiEndpointDetails",
+            "x-f5xc-conflicts-with": [
+              "api_group",
+              "base_path"
+            ]
           },
           "api_group": {
             "type": "string",
@@ -6129,7 +6244,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "api_endpoint",
+              "base_path"
+            ]
           },
           "base_path": {
             "type": "string",
@@ -6154,7 +6273,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "api_endpoint",
+              "api_group"
+            ]
           },
           "metadata": {
             "$ref": "#/components/schemas/schemaMessageMetaType"
@@ -6180,7 +6303,10 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_domain"
+            ]
           },
           "validation_mode": {
             "$ref": "#/components/schemas/common_wafOpenApiValidationMode"
@@ -6266,10 +6392,20 @@
               "create": true,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "http_header",
+              "ip_prefix",
+              "ipv6_prefix",
+              "user_identifier"
+            ]
           },
           "bot_skip_processing": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "skip_processing",
+              "waf_skip_processing"
+            ]
           },
           "expiration_timestamp": {
             "type": "string",
@@ -6297,7 +6433,13 @@
             }
           },
           "http_header": {
-            "$ref": "#/components/schemas/common_wafHttpHeaderMatcherList"
+            "$ref": "#/components/schemas/common_wafHttpHeaderMatcherList",
+            "x-f5xc-conflicts-with": [
+              "as_number",
+              "ip_prefix",
+              "ipv6_prefix",
+              "user_identifier"
+            ]
           },
           "ip_prefix": {
             "type": "string",
@@ -6320,7 +6462,13 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "as_number",
+              "http_header",
+              "ipv6_prefix",
+              "user_identifier"
+            ]
           },
           "ipv6_prefix": {
             "type": "string",
@@ -6343,13 +6491,23 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "as_number",
+              "http_header",
+              "ip_prefix",
+              "user_identifier"
+            ]
           },
           "metadata": {
             "$ref": "#/components/schemas/schemaMessageMetaType"
           },
           "skip_processing": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "bot_skip_processing",
+              "waf_skip_processing"
+            ]
           },
           "user_identifier": {
             "type": "string",
@@ -6372,10 +6530,20 @@
               "update": false,
               "read": false
             },
-            "x-field-mutability": "read-only"
+            "x-field-mutability": "read-only",
+            "x-f5xc-conflicts-with": [
+              "as_number",
+              "http_header",
+              "ip_prefix",
+              "ipv6_prefix"
+            ]
           },
           "waf_skip_processing": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "bot_skip_processing",
+              "skip_processing"
+            ]
           }
         },
         "x-f5xc-description-short": "Simple client source rule specifies the sources to be blocked or trusted (skip WAF).",
@@ -6459,10 +6627,16 @@
         "x-ves-proto-message": "ves.io.schema.views.common_waf.ValidationSettingForQueryParameters",
         "properties": {
           "allow_additional_parameters": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "disallow_additional_parameters"
+            ]
           },
           "disallow_additional_parameters": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "allow_additional_parameters"
+            ]
           }
         },
         "x-f5xc-description-short": "Custom settings for query parameters validation.",
@@ -6578,10 +6752,16 @@
             "$ref": "#/components/schemas/http_loadbalancerBodySectionMaskingOptions"
           },
           "mask": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "report"
+            ]
           },
           "report": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "mask"
+            ]
           }
         },
         "x-f5xc-description-short": "Settings to mask sensitive data in request/response payload.",
@@ -6647,7 +6827,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "presence",
+              "regex"
+            ]
           },
           "invert_match": {
             "type": "boolean",
@@ -6693,7 +6877,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985293+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125746+00:00"
           },
           "presence": {
             "type": "boolean",
@@ -6707,7 +6891,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "exact",
+              "regex"
+            ]
           },
           "regex": {
             "type": "string",
@@ -6732,7 +6920,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "exact",
+              "presence"
+            ]
           }
         },
         "x-f5xc-description-short": "Header match is done using the name of the header and its value.",
@@ -6780,7 +6972,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985342+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125794+00:00"
           },
           "name": {
             "type": "string",
@@ -6801,7 +6993,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985369+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125822+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6822,7 +7014,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985396+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125849+00:00"
           },
           "tenant": {
             "type": "string",
@@ -6845,7 +7037,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985423+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125877+00:00"
           },
           "uid": {
             "type": "string",
@@ -6869,7 +7061,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985453+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125905+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -6909,7 +7101,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985484+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.125935+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Avg Aggregation Data\" Average Aggregation data.",
@@ -7143,7 +7335,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985628+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126078+00:00"
           },
           "order_by": {
             "$ref": "#/components/schemas/logOrderByData"
@@ -7252,7 +7444,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985710+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126161+00:00"
           },
           "order_by": {
             "$ref": "#/components/schemas/logOrderByData"
@@ -7368,7 +7560,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985825+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126275+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Field Sub Field Aggregation Bucket\" Field sub aggregation bucket containing field values and the number of logs.",
@@ -7537,7 +7729,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.985920+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126369+00:00"
           },
           "sub_aggs": {
             "type": "object",
@@ -7645,7 +7837,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986054+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126501+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Max Aggregation Data\" Max Aggregation data.",
@@ -7702,7 +7894,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986097+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126543+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Min Aggregation Data\" Min Aggregation data.",
@@ -7933,7 +8125,7 @@
             "maxLength": 16,
             "minLength": 7,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986253+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126699+00:00"
           },
           "value": {
             "type": "number",
@@ -7949,7 +8141,7 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986280+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126726+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Percentile Aggregation Data\" Percentile Aggregation data.",
@@ -8081,7 +8273,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986352+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126797+00:00"
           },
           "sec_event_type": {
             "type": "string",
@@ -8220,7 +8412,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986439+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126883+00:00"
           }
         },
         "x-f5xc-description-short": "Label based filtering for Security Events metrics. Security Events metrics are tagged with labels mentioned in MetricLabel.",
@@ -8300,7 +8492,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986481+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.126924+00:00"
           }
         },
         "x-f5xc-description-short": "Value returned for a Security Events Metrics query.",
@@ -8788,28 +8980,70 @@
         "x-ves-proto-message": "ves.io.schema.policy.ClientMatcher",
         "properties": {
           "any_client": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "client_selector",
+              "ip_threat_category_list"
+            ]
           },
           "any_ip": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "asn_list",
+              "asn_matcher",
+              "ip_matcher",
+              "ip_prefix_list"
+            ]
           },
           "asn_list": {
-            "$ref": "#/components/schemas/policyAsnMatchList"
+            "$ref": "#/components/schemas/policyAsnMatchList",
+            "x-f5xc-conflicts-with": [
+              "any_ip",
+              "asn_matcher",
+              "ip_matcher",
+              "ip_prefix_list"
+            ]
           },
           "asn_matcher": {
-            "$ref": "#/components/schemas/policyAsnMatcherType"
+            "$ref": "#/components/schemas/policyAsnMatcherType",
+            "x-f5xc-conflicts-with": [
+              "any_ip",
+              "asn_list",
+              "ip_matcher",
+              "ip_prefix_list"
+            ]
           },
           "client_selector": {
-            "$ref": "#/components/schemas/schemaLabelSelectorType"
+            "$ref": "#/components/schemas/schemaLabelSelectorType",
+            "x-f5xc-conflicts-with": [
+              "any_client",
+              "ip_threat_category_list"
+            ]
           },
           "ip_matcher": {
-            "$ref": "#/components/schemas/policyIpMatcherType"
+            "$ref": "#/components/schemas/policyIpMatcherType",
+            "x-f5xc-conflicts-with": [
+              "any_ip",
+              "asn_list",
+              "asn_matcher",
+              "ip_prefix_list"
+            ]
           },
           "ip_prefix_list": {
-            "$ref": "#/components/schemas/policyPrefixMatchList"
+            "$ref": "#/components/schemas/policyPrefixMatchList",
+            "x-f5xc-conflicts-with": [
+              "any_ip",
+              "asn_list",
+              "asn_matcher",
+              "ip_matcher"
+            ]
           },
           "ip_threat_category_list": {
-            "$ref": "#/components/schemas/schemapolicyIPThreatCategoryListType"
+            "$ref": "#/components/schemas/schemapolicyIPThreatCategoryListType",
+            "x-f5xc-conflicts-with": [
+              "any_client",
+              "client_selector"
+            ]
           },
           "tls_fingerprint_matcher": {
             "$ref": "#/components/schemas/policyTlsFingerprintMatcherType"
@@ -8845,10 +9079,18 @@
         "x-ves-proto-message": "ves.io.schema.policy.CookieMatcherType",
         "properties": {
           "check_not_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_present",
+              "item"
+            ]
           },
           "check_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "item"
+            ]
           },
           "invert_matcher": {
             "type": "boolean",
@@ -8864,7 +9106,11 @@
             }
           },
           "item": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "check_present"
+            ]
           },
           "name": {
             "type": "string",
@@ -8893,7 +9139,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986797+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.127239+00:00"
           }
         },
         "x-f5xc-description-short": "Cookie matcher specifies the name of a single cookie and the criteria to match it.",
@@ -9436,10 +9682,18 @@
         "x-ves-proto-message": "ves.io.schema.policy.JWTClaimMatcherType",
         "properties": {
           "check_not_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_present",
+              "item"
+            ]
           },
           "check_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "item"
+            ]
           },
           "invert_matcher": {
             "type": "boolean",
@@ -9455,7 +9709,11 @@
             }
           },
           "item": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "check_present"
+            ]
           },
           "name": {
             "type": "string",
@@ -9483,7 +9741,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.986930+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.127370+00:00"
           }
         },
         "x-f5xc-description-short": "JWT claim matcher specifies the name of a single JWT claim and the criteria for the input request to match it.",
@@ -9852,13 +10110,24 @@
         "x-ves-proto-message": "ves.io.schema.policy.SimpleWafExclusionRule",
         "properties": {
           "any_domain": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "exact_value",
+              "suffix_value"
+            ]
           },
           "any_path": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "path_prefix",
+              "path_regex"
+            ]
           },
           "app_firewall_detection_control": {
-            "$ref": "#/components/schemas/policyAppFirewallDetectionControl"
+            "$ref": "#/components/schemas/policyAppFirewallDetectionControl",
+            "x-f5xc-conflicts-with": [
+              "waf_skip_processing"
+            ]
           },
           "exact_value": {
             "type": "string",
@@ -9885,7 +10154,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_domain",
+              "suffix_value"
+            ]
           },
           "expiration_timestamp": {
             "type": "string",
@@ -9961,7 +10234,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_path",
+              "path_regex"
+            ]
           },
           "path_regex": {
             "type": "string",
@@ -9987,7 +10264,11 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_path",
+              "path_prefix"
+            ]
           },
           "suffix_value": {
             "type": "string",
@@ -10015,10 +10296,17 @@
               "create": false,
               "update": false,
               "read": false
-            }
+            },
+            "x-f5xc-conflicts-with": [
+              "any_domain",
+              "exact_value"
+            ]
           },
           "waf_skip_processing": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "app_firewall_detection_control"
+            ]
           }
         },
         "x-f5xc-description-short": "Simple WAF exclusion rule specifies a simple set of match conditions to be matched to skip a list of WAF detections.",
@@ -10343,7 +10631,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987203+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.127638+00:00"
           },
           "name": {
             "type": "string",
@@ -10374,7 +10662,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987231+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.127666+00:00"
           }
         },
         "x-f5xc-description-short": "MessageMetaType is metadata (common attributes) of a message that only certain messages have.",
@@ -10486,7 +10774,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987266+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.127701+00:00"
           },
           "previous_value": {
             "type": "string",
@@ -10520,7 +10808,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987313+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.127747+00:00"
           }
         },
         "x-f5xc-description-short": "X-displayName: \"Trend Value\" Trend value contains trend value, trend sentiment and trend calculation description and window size.",
@@ -11058,10 +11346,18 @@
         "x-ves-proto-message": "ves.io.schema.policy.HeaderMatcherType",
         "properties": {
           "check_not_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_present",
+              "item"
+            ]
           },
           "check_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "item"
+            ]
           },
           "invert_matcher": {
             "type": "boolean",
@@ -11077,7 +11373,11 @@
             }
           },
           "item": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "check_present"
+            ]
           },
           "name": {
             "type": "string",
@@ -11108,7 +11408,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987633+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.128063+00:00"
           }
         },
         "x-f5xc-description-short": "Header matcher specifies the name of a single HTTP header and the criteria for the input request to match it.",
@@ -11189,10 +11489,18 @@
         "x-ves-proto-message": "ves.io.schema.policy.QueryParameterMatcherType",
         "properties": {
           "check_not_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_present",
+              "item"
+            ]
           },
           "check_present": {
-            "$ref": "#/components/schemas/schemaEmpty"
+            "$ref": "#/components/schemas/schemaEmpty",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "item"
+            ]
           },
           "invert_matcher": {
             "type": "boolean",
@@ -11208,7 +11516,11 @@
             }
           },
           "item": {
-            "$ref": "#/components/schemas/policyMatcherType"
+            "$ref": "#/components/schemas/policyMatcherType",
+            "x-f5xc-conflicts-with": [
+              "check_not_present",
+              "check_present"
+            ]
           },
           "key": {
             "type": "string",
@@ -11237,7 +11549,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987713+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.128140+00:00"
           }
         },
         "x-f5xc-description-short": "Query parameter matcher specifies the name of a single query parameter and the criteria for the input request to match it.",
@@ -11295,7 +11607,7 @@
             },
             "x-original-maxLength": 128,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987743+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.128170+00:00"
           },
           "namespace": {
             "type": "string",
@@ -11322,7 +11634,7 @@
             },
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987771+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.128198+00:00"
           },
           "tenant": {
             "type": "string",
@@ -11351,7 +11663,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-19T05:53:30.987799+00:00"
+            "x-reconciled-at": "2026-01-19T18:07:29.128226+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a direct reference from one object(the referrer) to another(the referred).",

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -567,26 +568,65 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 								"exact_value": schema.StringAttribute{
 									MarkdownDescription: "Exact domain name.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("regex_value"),
+											path.MatchRelative().AtParent().AtName("suffix_value"),
+										),
+									},
 								},
 								"path_exact_value": schema.StringAttribute{
 									MarkdownDescription: "Exact Path to match.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("any_path"),
+											path.MatchRelative().AtParent().AtName("path_prefix_value"),
+											path.MatchRelative().AtParent().AtName("path_regex_value"),
+										),
+									},
 								},
 								"path_prefix_value": schema.StringAttribute{
 									MarkdownDescription: "Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("any_path"),
+											path.MatchRelative().AtParent().AtName("path_exact_value"),
+											path.MatchRelative().AtParent().AtName("path_regex_value"),
+										),
+									},
 								},
 								"path_regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regular Expression value for the Path to match.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("any_path"),
+											path.MatchRelative().AtParent().AtName("path_exact_value"),
+											path.MatchRelative().AtParent().AtName("path_prefix_value"),
+										),
+									},
 								},
 								"regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regular Expression value for the domain name.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("exact_value"),
+											path.MatchRelative().AtParent().AtName("suffix_value"),
+										),
+									},
 								},
 								"suffix_value": schema.StringAttribute{
 									MarkdownDescription: "Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("exact_value"),
+											path.MatchRelative().AtParent().AtName("regex_value"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -603,14 +643,32 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 								"exact_value": schema.StringAttribute{
 									MarkdownDescription: "Exact domain name.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("regex_value"),
+											path.MatchRelative().AtParent().AtName("suffix_value"),
+										),
+									},
 								},
 								"regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regular Expression value for the domain name.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("exact_value"),
+											path.MatchRelative().AtParent().AtName("suffix_value"),
+										),
+									},
 								},
 								"suffix_value": schema.StringAttribute{
 									MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("exact_value"),
+											path.MatchRelative().AtParent().AtName("regex_value"),
+										),
+									},
 								},
 							},
 						},
@@ -661,26 +719,65 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 								"exact_value": schema.StringAttribute{
 									MarkdownDescription: "Exact domain name.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("regex_value"),
+											path.MatchRelative().AtParent().AtName("suffix_value"),
+										),
+									},
 								},
 								"path_exact_value": schema.StringAttribute{
 									MarkdownDescription: "Exact Path to match.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("any_path"),
+											path.MatchRelative().AtParent().AtName("path_prefix_value"),
+											path.MatchRelative().AtParent().AtName("path_regex_value"),
+										),
+									},
 								},
 								"path_prefix_value": schema.StringAttribute{
 									MarkdownDescription: "Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("any_path"),
+											path.MatchRelative().AtParent().AtName("path_exact_value"),
+											path.MatchRelative().AtParent().AtName("path_regex_value"),
+										),
+									},
 								},
 								"path_regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regular Expression value for the Path to match.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("any_path"),
+											path.MatchRelative().AtParent().AtName("path_exact_value"),
+											path.MatchRelative().AtParent().AtName("path_prefix_value"),
+										),
+									},
 								},
 								"regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regular Expression value for the domain name.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("exact_value"),
+											path.MatchRelative().AtParent().AtName("suffix_value"),
+										),
+									},
 								},
 								"suffix_value": schema.StringAttribute{
 									MarkdownDescription: "Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("exact_value"),
+											path.MatchRelative().AtParent().AtName("regex_value"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{
@@ -697,14 +794,32 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 								"exact_value": schema.StringAttribute{
 									MarkdownDescription: "Exact domain name.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("regex_value"),
+											path.MatchRelative().AtParent().AtName("suffix_value"),
+										),
+									},
 								},
 								"regex_value": schema.StringAttribute{
 									MarkdownDescription: "Regular Expression value for the domain name.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("exact_value"),
+											path.MatchRelative().AtParent().AtName("suffix_value"),
+										),
+									},
 								},
 								"suffix_value": schema.StringAttribute{
 									MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("exact_value"),
+											path.MatchRelative().AtParent().AtName("regex_value"),
+										),
+									},
 								},
 							},
 						},
@@ -860,26 +975,65 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 													"exact_value": schema.StringAttribute{
 														MarkdownDescription: "Exact domain name.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("regex_value"),
+																path.MatchRelative().AtParent().AtName("suffix_value"),
+															),
+														},
 													},
 													"path_exact_value": schema.StringAttribute{
 														MarkdownDescription: "Exact Path to match.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("any_path"),
+																path.MatchRelative().AtParent().AtName("path_prefix_value"),
+																path.MatchRelative().AtParent().AtName("path_regex_value"),
+															),
+														},
 													},
 													"path_prefix_value": schema.StringAttribute{
 														MarkdownDescription: "Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("any_path"),
+																path.MatchRelative().AtParent().AtName("path_exact_value"),
+																path.MatchRelative().AtParent().AtName("path_regex_value"),
+															),
+														},
 													},
 													"path_regex_value": schema.StringAttribute{
 														MarkdownDescription: "Regular Expression value for the Path to match.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("any_path"),
+																path.MatchRelative().AtParent().AtName("path_exact_value"),
+																path.MatchRelative().AtParent().AtName("path_prefix_value"),
+															),
+														},
 													},
 													"regex_value": schema.StringAttribute{
 														MarkdownDescription: "Regular Expression value for the domain name.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("exact_value"),
+																path.MatchRelative().AtParent().AtName("suffix_value"),
+															),
+														},
 													},
 													"suffix_value": schema.StringAttribute{
 														MarkdownDescription: "Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("exact_value"),
+																path.MatchRelative().AtParent().AtName("regex_value"),
+															),
+														},
 													},
 												},
 												Blocks: map[string]schema.Block{
@@ -977,14 +1131,32 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 													"exact_value": schema.StringAttribute{
 														MarkdownDescription: "Exact domain name.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("regex_value"),
+																path.MatchRelative().AtParent().AtName("suffix_value"),
+															),
+														},
 													},
 													"regex_value": schema.StringAttribute{
 														MarkdownDescription: "Regular Expression value for the domain name.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("exact_value"),
+																path.MatchRelative().AtParent().AtName("suffix_value"),
+															),
+														},
 													},
 													"suffix_value": schema.StringAttribute{
 														MarkdownDescription: "Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'.",
 														Optional:            true,
+														Validators: []validator.String{
+															stringvalidator.ConflictsWith(
+																path.MatchRelative().AtParent().AtName("exact_value"),
+																path.MatchRelative().AtParent().AtName("regex_value"),
+															),
+														},
 													},
 												},
 											},

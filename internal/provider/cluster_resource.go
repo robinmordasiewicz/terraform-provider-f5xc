@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -542,6 +544,11 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
+				Validators: []validator.Int64{
+					int64validator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("no_panic_threshold"),
+					),
+				},
 			},
 		},
 		Blocks: map[string]schema.Block{
@@ -756,10 +763,22 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 					"max_session_keys": schema.Int64Attribute{
 						MarkdownDescription: "Number of session keys that are cached.",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_session_key_caching"),
+								path.MatchRelative().AtParent().AtName("disable_session_key_caching"),
+							),
+						},
 					},
 					"sni": schema.StringAttribute{
 						MarkdownDescription: "SNI value to be used.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("disable_sni"),
+								path.MatchRelative().AtParent().AtName("use_host_header_as_sni"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -834,6 +853,11 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("trusted_ca"),
+											),
+										},
 									},
 									"verify_subject_alt_names": schema.ListAttribute{
 										MarkdownDescription: "List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate.",
@@ -992,6 +1016,11 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 									"trusted_ca_url": schema.StringAttribute{
 										MarkdownDescription: "Inline Root CA Certificate.",
 										Optional:            true,
+										Validators: []validator.String{
+											stringvalidator.ConflictsWith(
+												path.MatchRelative().AtParent().AtName("trusted_ca"),
+											),
+										},
 									},
 									"verify_subject_alt_names": schema.ListAttribute{
 										MarkdownDescription: "List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate.",

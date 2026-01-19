@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -203,6 +204,11 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 								"relative": schema.StringAttribute{
 									MarkdownDescription: "relative time duration.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("absolute"),
+										),
+									},
 								},
 							},
 							Blocks: map[string]schema.Block{

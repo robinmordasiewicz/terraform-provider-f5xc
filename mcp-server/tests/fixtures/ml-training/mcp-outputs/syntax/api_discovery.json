@@ -1,0 +1,20 @@
+{
+  "operation": "syntax",
+  "resource": "api_discovery",
+  "totalBlocks": 1,
+  "totalAttributes": 7,
+  "totalOneOfGroups": 0,
+  "blocks": [
+    "custom_auth_types"
+  ],
+  "attributes": [
+    "annotations",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {}
+}

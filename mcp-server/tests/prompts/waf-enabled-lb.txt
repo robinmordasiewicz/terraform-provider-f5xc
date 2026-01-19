@@ -1,0 +1,17 @@
+Using the f5xc-terraform MCP server, create a Terraform configuration for an F5XC HTTP load balancer with WAF protection enabled.
+
+Requirements:
+1. Name: "mcp-test-waf-lb"
+2. Namespace: "default"
+3. Domain: "secure.example.com"
+4. Advertise on public default VIP
+5. HTTPS port 443 with auto-cert
+6. Reference an origin pool called "secure-pool" in namespace "default"
+7. Enable WAF with an app_firewall reference called "default-waf"
+8. Disable bot defense and rate limiting
+
+Use these f5xc-terraform MCP tools:
+1. f5xc_terraform_metadata operation=example resource=http_loadbalancer pattern=with_waf
+2. f5xc_terraform_metadata operation=oneof resource=http_loadbalancer to understand OneOf groups
+
+Output ONLY the Terraform configuration, no explanations.

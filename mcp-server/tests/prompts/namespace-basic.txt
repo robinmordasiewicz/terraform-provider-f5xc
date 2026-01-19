@@ -1,0 +1,6 @@
+Using the f5xc-terraform MCP server, create a Terraform configuration for an F5XC namespace called "mcp-determinism-test".
+
+Requirements:
+1. Use the f5xc_terraform_metadata tool with operation=example and resource=namespace
+2. Output ONLY the Terraform configuration, no explanations
+3. The configuration must pass `terraform fmt -check` without modifications

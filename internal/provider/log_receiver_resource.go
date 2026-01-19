@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -264,6 +266,12 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 							"port": schema.Int64Attribute{
 								MarkdownDescription: "Custom port number used for communication.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("default_https_port"),
+										path.MatchRelative().AtParent().AtName("default_syslog_tls_port"),
+									),
+								},
 							},
 							"server_name": schema.StringAttribute{
 								MarkdownDescription: "ServerName is passed to the server for SNI and is used in the client to check server certificates against.",
@@ -272,6 +280,11 @@ func (r *LogReceiverResource) Schema(ctx context.Context, req resource.SchemaReq
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("volterra_ca"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -408,6 +409,12 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 						"user_defined": schema.Int64Attribute{
 							MarkdownDescription: "Matches the user defined port.",
 							Optional:            true,
+							Validators: []validator.Int64{
+								int64validator.ConflictsWith(
+									path.MatchRelative().AtParent().AtName("all"),
+									path.MatchRelative().AtParent().AtName("dns"),
+								),
+							},
 						},
 					},
 					Blocks: map[string]schema.Block{

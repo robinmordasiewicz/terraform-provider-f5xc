@@ -1,0 +1,31 @@
+{
+  "operation": "syntax",
+  "resource": "certificate",
+  "totalBlocks": 5,
+  "totalAttributes": 8,
+  "totalOneOfGroups": 1,
+  "blocks": [
+    "certificate_chain",
+    "custom_hash_algorithms",
+    "disable_ocsp_stapling",
+    "private_key",
+    "use_system_defaults"
+  ],
+  "attributes": [
+    "annotations",
+    "certificate_url",
+    "description",
+    "disable",
+    "id",
+    "labels",
+    "name",
+    "namespace"
+  ],
+  "oneOfGroups": {
+    "ocsp_stapling_choice": [
+      "custom_hash_algorithms",
+      "disable_ocsp_stapling",
+      "use_system_defaults"
+    ]
+  }
+}

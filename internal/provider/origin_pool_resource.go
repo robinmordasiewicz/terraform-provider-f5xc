@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -996,6 +998,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
+				Validators: []validator.Int64{
+					int64validator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("same_as_endpoint_port"),
+					),
+				},
 			},
 			"loadbalancer_algorithm": schema.StringAttribute{
 				MarkdownDescription: "[Enum: ROUND_ROBIN|LEAST_REQUEST|RING_HASH|RANDOM|LB_OVERRIDE] Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in.. Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`. Defaults to `ROUND_ROBIN`. Server applies default when omitted.",
@@ -1011,6 +1018,12 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
+				},
+				Validators: []validator.Int64{
+					int64validator.ConflictsWith(
+						path.MatchRelative().AtParent().AtName("automatic_port"),
+						path.MatchRelative().AtParent().AtName("lb_port"),
+					),
 				},
 			},
 		},
@@ -1035,6 +1048,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 					"panic_threshold": schema.Int64Attribute{
 						MarkdownDescription: "Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status.",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("no_panic_threshold"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1820,10 +1838,22 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 					"max_session_keys": schema.Int64Attribute{
 						MarkdownDescription: "Number of session keys that are cached.",
 						Optional:            true,
+						Validators: []validator.Int64{
+							int64validator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_session_key_caching"),
+								path.MatchRelative().AtParent().AtName("disable_session_key_caching"),
+							),
+						},
 					},
 					"sni": schema.StringAttribute{
 						MarkdownDescription: "SNI value to be used.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("disable_sni"),
+								path.MatchRelative().AtParent().AtName("use_host_header_as_sni"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1984,6 +2014,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("trusted_ca"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{

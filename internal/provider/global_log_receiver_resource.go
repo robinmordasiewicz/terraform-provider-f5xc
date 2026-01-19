@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -1501,14 +1503,29 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_bytes_disabled"),
+									),
+								},
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_events_disabled"),
+									),
+								},
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("timeout_seconds_default"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1610,14 +1627,29 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_bytes_disabled"),
+									),
+								},
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_events_disabled"),
+									),
+								},
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("timeout_seconds_default"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1689,6 +1721,12 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"custom_folder": schema.StringAttribute{
 								MarkdownDescription: "Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("log_type_folder"),
+										path.MatchRelative().AtParent().AtName("no_folder"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1708,10 +1746,20 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 					"endpoint": schema.StringAttribute{
 						MarkdownDescription: "Datadog Endpoint,.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("site"),
+							),
+						},
 					},
 					"site": schema.StringAttribute{
 						MarkdownDescription: "Datadog Site,.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("endpoint"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -1721,14 +1769,29 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_bytes_disabled"),
+									),
+								},
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_events_disabled"),
+									),
+								},
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("timeout_seconds_default"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1803,6 +1866,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("no_ca"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1893,14 +1961,29 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_bytes_disabled"),
+									),
+								},
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_events_disabled"),
+									),
+								},
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("timeout_seconds_default"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -1936,6 +2019,12 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"custom_folder": schema.StringAttribute{
 								MarkdownDescription: "Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("log_type_folder"),
+										path.MatchRelative().AtParent().AtName("no_folder"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -2081,14 +2170,29 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_bytes_disabled"),
+									),
+								},
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_events_disabled"),
+									),
+								},
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("timeout_seconds_default"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -2127,6 +2231,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("no_ca"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -2219,14 +2328,29 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_bytes_disabled"),
+									),
+								},
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_events_disabled"),
+									),
+								},
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("timeout_seconds_default"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -2265,6 +2389,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("no_ca"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -2416,14 +2545,29 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_bytes_disabled"),
+									),
+								},
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_events_disabled"),
+									),
+								},
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("timeout_seconds_default"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -2462,6 +2606,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("no_ca"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -2581,14 +2730,29 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_bytes_disabled"),
+									),
+								},
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_events_disabled"),
+									),
+								},
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("timeout_seconds_default"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -2624,6 +2788,12 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"custom_folder": schema.StringAttribute{
 								MarkdownDescription: "Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("log_type_folder"),
+										path.MatchRelative().AtParent().AtName("no_folder"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -2655,14 +2825,29 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"max_bytes": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_bytes_disabled"),
+									),
+								},
 							},
 							"max_events": schema.Int64Attribute{
 								MarkdownDescription: "Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
+								Validators: []validator.Int64{
+									int64validator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("max_events_disabled"),
+									),
+								},
 							},
 							"timeout_seconds": schema.StringAttribute{
 								MarkdownDescription: "Send batch to the endpoint after this many seconds.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("timeout_seconds_default"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{
@@ -2737,6 +2922,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
 								Optional:            true,
+								Validators: []validator.String{
+									stringvalidator.ConflictsWith(
+										path.MatchRelative().AtParent().AtName("no_ca"),
+									),
+								},
 							},
 						},
 						Blocks: map[string]schema.Block{

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -2026,6 +2027,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("custom_static_route"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2245,6 +2251,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("custom_static_route"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{
@@ -2609,6 +2620,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					"operating_system_version": schema.StringAttribute{
 						MarkdownDescription: "Specify a OS version to be used e.g. 9.2024.6.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_os_version"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -2663,6 +2679,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 					"volterra_software_version": schema.StringAttribute{
 						MarkdownDescription: "Specify a F5XC Software Version to be used e.g. Crt-20210329-1002.",
 						Optional:            true,
+						Validators: []validator.String{
+							stringvalidator.ConflictsWith(
+								path.MatchRelative().AtParent().AtName("default_sw_version"),
+							),
+						},
 					},
 				},
 				Blocks: map[string]schema.Block{
@@ -2949,6 +2970,11 @@ func (r *GCPVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 										"simple_static_route": schema.StringAttribute{
 											MarkdownDescription: "Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
+											Validators: []validator.String{
+												stringvalidator.ConflictsWith(
+													path.MatchRelative().AtParent().AtName("custom_static_route"),
+												),
+											},
 										},
 									},
 									Blocks: map[string]schema.Block{

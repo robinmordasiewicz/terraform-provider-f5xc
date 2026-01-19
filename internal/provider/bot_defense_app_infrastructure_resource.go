@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -256,10 +257,20 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 								"host_name": schema.StringAttribute{
 									MarkdownDescription: "Ingress Host Name.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("ip_address"),
+										),
+									},
 								},
 								"ip_address": schema.StringAttribute{
 									MarkdownDescription: "Ingress IP Address.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("host_name"),
+										),
+									},
 								},
 								"location": schema.StringAttribute{
 									MarkdownDescription: "[Enum: AWS_AP_NORTHEAST_1|AWS_AP_NORTHEAST_3|AWS_AP_SOUTH_1|AWS_AP_SOUTH_2|AWS_AP_SOUTHEAST_1|AWS_AP_SOUTHEAST_2|AWS_AP_SOUTHEAST_3|AWS_EU_CENTRAL_1|AWS_EU_NORTH_1|AWS_EU_WEST_1|AWS_ME_SOUTH_1|AWS_SA_EAST_1|AWS_US_EAST_1|AWS_US_EAST_2|AWS_US_WEST_1|AWS_US_WEST_2|GCP_ASIA_EAST_1|GCP_ASIA_EAST_2|GCP_ASIA_NORTHEAST_1|GCP_ASIA_NORTHEAST_2|GCP_ASIA_NORTHEAST_3|GCP_ASIA_SOUTH_1|GCP_ASIA_SOUTHEAST_1|GCP_ASIA_SOUTHEAST_2|GCP_AUSTRALIA_SOUTHEAST_1|GCP_EUROPE_WEST_1|GCP_EUROPE_WEST_2|GCP_EUROPE_WEST_3|GCP_NORTHAMERICA_NORTHEAST_1|GCP_NORTHAMERICA_NORTHEAST_2|GCP_SOUTHAMERICA_EAST_1|GCP_SOUTHAMERICA_WEST_1|GCP_US_CENTRAL_1|GCP_US_EAST_1|GCP_US_EAST_4|GCP_US_WEST_1|GCP_US_WEST_2] Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1.. Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`. Defaults to `AWS_AP_NORTHEAST_1`.",
@@ -305,10 +316,20 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 								"host_name": schema.StringAttribute{
 									MarkdownDescription: "Ingress Host Name.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("ip_address"),
+										),
+									},
 								},
 								"ip_address": schema.StringAttribute{
 									MarkdownDescription: "Ingress IP Address.",
 									Optional:            true,
+									Validators: []validator.String{
+										stringvalidator.ConflictsWith(
+											path.MatchRelative().AtParent().AtName("host_name"),
+										),
+									},
 								},
 								"location": schema.StringAttribute{
 									MarkdownDescription: "[Enum: AWS_AP_NORTHEAST_1|AWS_AP_NORTHEAST_3|AWS_AP_SOUTH_1|AWS_AP_SOUTH_2|AWS_AP_SOUTHEAST_1|AWS_AP_SOUTHEAST_2|AWS_AP_SOUTHEAST_3|AWS_EU_CENTRAL_1|AWS_EU_NORTH_1|AWS_EU_WEST_1|AWS_ME_SOUTH_1|AWS_SA_EAST_1|AWS_US_EAST_1|AWS_US_EAST_2|AWS_US_WEST_1|AWS_US_WEST_2|GCP_ASIA_EAST_1|GCP_ASIA_EAST_2|GCP_ASIA_NORTHEAST_1|GCP_ASIA_NORTHEAST_2|GCP_ASIA_NORTHEAST_3|GCP_ASIA_SOUTH_1|GCP_ASIA_SOUTHEAST_1|GCP_ASIA_SOUTHEAST_2|GCP_AUSTRALIA_SOUTHEAST_1|GCP_EUROPE_WEST_1|GCP_EUROPE_WEST_2|GCP_EUROPE_WEST_3|GCP_NORTHAMERICA_NORTHEAST_1|GCP_NORTHAMERICA_NORTHEAST_2|GCP_SOUTHAMERICA_EAST_1|GCP_SOUTHAMERICA_WEST_1|GCP_US_CENTRAL_1|GCP_US_EAST_1|GCP_US_EAST_4|GCP_US_WEST_1|GCP_US_WEST_2] Region location AWS_AP_NORTHEAST_1 AWS_AP_NORTHEAST_3 AWS_AP_SOUTH_1 AWS_AP_SOUTH_2 AWS_AP_SOUTHEAST_1 AWS_AP_SOUTHEAST_2 AWS_AP_SOUTHEAST_3 AWS_EU_CENTRAL_1 AWS_EU_NORTH_1 AWS_EU_WEST_1 AWS_ME_SOUTH_1 AWS_SA_EAST_1 AWS_US_EAST_1 AWS_US_EAST_2 AWS_US_WEST_1 AWS_US_WEST_2 GCP_ASIA_EAST_1.. Possible values are `AWS_AP_NORTHEAST_1`, `AWS_AP_NORTHEAST_3`, `AWS_AP_SOUTH_1`, `AWS_AP_SOUTH_2`, `AWS_AP_SOUTHEAST_1`, `AWS_AP_SOUTHEAST_2`, `AWS_AP_SOUTHEAST_3`, `AWS_EU_CENTRAL_1`, `AWS_EU_NORTH_1`, `AWS_EU_WEST_1`, `AWS_ME_SOUTH_1`, `AWS_SA_EAST_1`, `AWS_US_EAST_1`, `AWS_US_EAST_2`, `AWS_US_WEST_1`, `AWS_US_WEST_2`, `GCP_ASIA_EAST_1`, `GCP_ASIA_EAST_2`, `GCP_ASIA_NORTHEAST_1`, `GCP_ASIA_NORTHEAST_2`, `GCP_ASIA_NORTHEAST_3`, `GCP_ASIA_SOUTH_1`, `GCP_ASIA_SOUTHEAST_1`, `GCP_ASIA_SOUTHEAST_2`, `GCP_AUSTRALIA_SOUTHEAST_1`, `GCP_EUROPE_WEST_1`, `GCP_EUROPE_WEST_2`, `GCP_EUROPE_WEST_3`, `GCP_NORTHAMERICA_NORTHEAST_1`, `GCP_NORTHAMERICA_NORTHEAST_2`, `GCP_SOUTHAMERICA_EAST_1`, `GCP_SOUTHAMERICA_WEST_1`, `GCP_US_CENTRAL_1`, `GCP_US_EAST_1`, `GCP_US_EAST_4`, `GCP_US_WEST_1`, `GCP_US_WEST_2`. Defaults to `AWS_AP_NORTHEAST_1`.",

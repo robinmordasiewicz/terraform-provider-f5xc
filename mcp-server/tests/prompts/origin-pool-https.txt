@@ -1,0 +1,9 @@
+Using the f5xc-terraform MCP server, create a Terraform configuration for an origin pool with TLS.
+
+Requirements:
+- Use the f5xc_terraform_metadata tool with operation=example to get the correct syntax
+- The origin pool should be named "test-origin-pool"
+- Connect to example.com on port 443
+- Enable TLS with automatic certificate verification
+- Only output the Terraform configuration, no explanations
+- Ensure the output passes terraform fmt validation

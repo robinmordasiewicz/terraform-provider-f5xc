@@ -1,0 +1,11 @@
+Using the f5xc-terraform MCP server, create a Terraform configuration for an HTTP load balancer with WAF protection.
+
+Requirements:
+- Use the f5xc_terraform_metadata tool with operation=example to get the correct syntax
+- The load balancer should be named "test-waf-lb"
+- Enable WAF (app_firewall) protection
+- Use a public VIP
+- Configure a domain: secure.example.com
+- Reference both an origin pool and an app_firewall resource
+- Only output the Terraform configuration, no explanations
+- Ensure the output passes terraform fmt validation

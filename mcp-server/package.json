@@ -33,6 +33,8 @@
     "test:e2e": "vitest run tests/acceptance/resource-creation.test.ts tests/acceptance/determinism.test.ts --reporter=verbose",
     "test:e2e:resource-creation": "vitest run tests/acceptance/resource-creation.test.ts --reporter=verbose",
     "test:e2e:determinism": "vitest run tests/acceptance/determinism.test.ts --reporter=verbose",
+    "test:e2e:all": "./scripts/run-e2e-tests.sh",
+    "generate:ml-matrix": "tsx tests/fixtures/ml-training/generate-matrix.ts",
     "validate:auth": "tsx scripts/validate-auth-integration.ts"
   },
   "keywords": [

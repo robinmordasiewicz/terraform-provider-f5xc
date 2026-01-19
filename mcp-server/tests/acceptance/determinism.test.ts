@@ -876,4 +876,99 @@ resource "f5xc_origin_pool" "test" {
       expect(results[1]).toEqual(results[2]);
     });
   });
+
+  // ===========================================================================
+  // TERRAFORM FORMATTING VALIDATION
+  // ===========================================================================
+
+  describe('Terraform Formatting Validation', { timeout: VALIDATION_TIMEOUT }, () => {
+    // Resources to test terraform fmt on
+    const fmtTestResources = [
+      'namespace',
+      'origin_pool',
+      'http_loadbalancer',
+      'healthcheck',
+      'app_firewall',
+      'tcp_loadbalancer',
+      'service_policy',
+    ];
+
+    describe.each(fmtTestResources)('terraform fmt check: %s', (resourceType) => {
+      let terraform: TerraformRunner;
+
+      beforeEach(async () => {
+        if (skipTests) return;
+        terraform = new TerraformRunner(`fmt-${resourceType}-${Date.now()}`);
+        await terraform.setup();
+        terraform.writeProviderConfig(credentials.apiUrl);
+      });
+
+      afterAll(async () => {
+        if (skipTests || !terraform) return;
+        try {
+          const fs = await import('fs');
+          fs.rmSync(terraform.getWorkDir(), { recursive: true, force: true });
+        } catch {
+          // Ignore cleanup errors
+        }
+      });
+
+      it.skipIf(skipTests)(`MCP ${resourceType} example passes terraform fmt`, async () => {
+        // Get example FROM MCP SERVER
+        const example = await mcpClient.getExample(resourceType, 'basic');
+
+        // Example should exist
+        expect(example).toBeTruthy();
+        expect(example.length).toBeGreaterThan(50);
+
+        // Write to terraform directory
+        terraform.writeConfig('main.tf', example);
+
+        // Run terraform fmt -check
+        // This validates the config is already properly formatted
+        const fmtResult = await terraform.fmt();
+
+        // MCP examples should be pre-formatted
+        expect(fmtResult.success).toBe(true);
+
+        // If fmt failed, show the diff
+        if (!fmtResult.success) {
+          console.error(`Format check failed for ${resourceType}:`);
+          console.error(fmtResult.output);
+        }
+      });
+    });
+
+    it.skipIf(skipTests)('formatted config stays unchanged after terraform fmt', async () => {
+      const terraform = new TerraformRunner(`fmt-idempotent-${Date.now()}`);
+      await terraform.setup();
+      terraform.writeProviderConfig(credentials.apiUrl);
+
+      // Get a known-good formatted example
+      const example = await mcpClient.getExample('namespace', 'basic');
+      expect(example).toBeTruthy();
+
+      terraform.writeConfig('main.tf', example);
+
+      // Run fmt check first
+      const checkResult = await terraform.fmt();
+
+      // If not formatted, apply formatting
+      if (!checkResult.success) {
+        await terraform.fmtWrite();
+      }
+
+      // Now verify fmt check passes (idempotent)
+      const verifyResult = await terraform.fmt();
+      expect(verifyResult.success).toBe(true);
+
+      // Cleanup
+      try {
+        const fs = await import('fs');
+        fs.rmSync(terraform.getWorkDir(), { recursive: true, force: true });
+      } catch {
+        // Ignore cleanup errors
+      }
+    });
+  });
 });

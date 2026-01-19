@@ -73,24 +73,26 @@ export function setupAuthenticatedModeEnv(options?: {
 
 /**
  * Check if real API testing is possible (has valid credentials)
+ * Supports both F5XC_API_* and F5XC_TEST_API_* naming conventions
  */
 export function hasRealCredentials(): boolean {
   return Boolean(
-    process.env.F5XC_TEST_API_URL &&
-    process.env.F5XC_TEST_API_TOKEN
+    (process.env.F5XC_API_URL || process.env.F5XC_TEST_API_URL) &&
+    (process.env.F5XC_API_TOKEN || process.env.F5XC_TEST_API_TOKEN)
   );
 }
 
 /**
  * Get real test credentials if available
+ * Supports both F5XC_API_* and F5XC_TEST_API_* naming conventions
  */
 export function getRealCredentials(): { apiUrl: string; apiToken: string } | null {
   if (!hasRealCredentials()) {
     return null;
   }
   return {
-    apiUrl: process.env.F5XC_TEST_API_URL!,
-    apiToken: process.env.F5XC_TEST_API_TOKEN!,
+    apiUrl: process.env.F5XC_API_URL || process.env.F5XC_TEST_API_URL!,
+    apiToken: process.env.F5XC_API_TOKEN || process.env.F5XC_TEST_API_TOKEN!,
   };
 }
 

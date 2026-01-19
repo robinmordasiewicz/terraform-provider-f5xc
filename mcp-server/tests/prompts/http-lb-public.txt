@@ -1,0 +1,10 @@
+Using the f5xc-terraform MCP server, create a Terraform configuration for an HTTP load balancer on a public VIP.
+
+Requirements:
+- Use the f5xc_terraform_metadata tool with operation=example to get the correct syntax
+- The load balancer should be named "test-http-lb"
+- Use a public VIP (advertise_on_internet)
+- Configure a domain: test.example.com
+- Reference an origin pool (can use a placeholder reference)
+- Only output the Terraform configuration, no explanations
+- Ensure the output passes terraform fmt validation

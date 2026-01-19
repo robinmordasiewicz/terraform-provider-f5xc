@@ -1,0 +1,7 @@
+Using the f5xc-terraform MCP server, create a Terraform configuration for a namespace called "test-ns".
+
+Requirements:
+- Use the f5xc_terraform_metadata tool with operation=example to get the correct syntax
+- The namespace should be named "test-ns"
+- Only output the Terraform configuration, no explanations
+- Ensure the output passes terraform fmt validation

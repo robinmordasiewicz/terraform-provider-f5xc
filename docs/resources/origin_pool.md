@@ -146,14 +146,14 @@ resource "f5xc_origin_pool" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="health-check-port"></a>[`health_check_port`](#health-check-port) - Optional Number<br>Port used for performing health check
-<br><br>&#x2022; <a id="same-as-endpoint-port"></a>[`same_as_endpoint_port`](#same-as-endpoint-port) - Optional Block<br>Enable this option Server applies default when omitted
+<br><br>&#x2022; <a id="same-as-endpoint-port"></a>[`same_as_endpoint_port`](#same-as-endpoint-port) - Optional Block  Defaults to `map[]`<br>Enable this option.  Server applies default when omitted
 
 <a id="healthcheck"></a>&#x2022; [`healthcheck`](#healthcheck) - Optional Block  Defaults to `[]`<br>Reference to healthcheck configuration objects.  Server applies default when omitted<br>See [Healthcheck](#healthcheck) below for details.
 
 <a id="loadbalancer-algorithm"></a>&#x2022; [`loadbalancer_algorithm`](#loadbalancer-algorithm) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`<br>[Enum: ROUND_ROBIN|LEAST_REQUEST|RING_HASH|RANDOM|LB_OVERRIDE] Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in..   Server applies default when omitted
 
 -> **One of the following:**
-&#x2022; <a id="no-tls"></a>[`no_tls`](#no-tls) - Optional Block<br>Enable this option Server applies default when omitted
+&#x2022; <a id="no-tls"></a>[`no_tls`](#no-tls) - Optional Block  Defaults to `map[]`<br>Enable this option.  Server applies default when omitted
 
 <a id="origin-servers"></a>&#x2022; [`origin_servers`](#origin-servers) - Optional Block<br>List of origin servers in this pool<br>See [Origin Servers](#origin-servers) below for details.
 
@@ -175,23 +175,23 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`advanced_options`](#advanced-options) block supports the following:
 
-<a id="advanced-options-auto-http-config"></a>&#x2022; [`auto_http_config`](#advanced-options-auto-http-config) - Optional Block<br>Enable this option Server applies default when omitted
+<a id="advanced-options-auto-http-config"></a>&#x2022; [`auto_http_config`](#advanced-options-auto-http-config) - Optional Block  Defaults to `map[]`<br>Enable this option.  Server applies default when omitted
 
 <a id="advanced-options-circuit-breaker"></a>&#x2022; [`circuit_breaker`](#advanced-options-circuit-breaker) - Optional Block<br>CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly<br>See [Circuit Breaker](#advanced-options-circuit-breaker) below.
 
 <a id="advanced-options-connection-timeout"></a>&#x2022; [`connection_timeout`](#advanced-options-connection-timeout) - Optional Number  Defaults to `2`  Specified in milliseconds<br>The timeout for new network connections to endpoints in the cluster.  The seconds
 
-<a id="breaker-c470cf"></a>&#x2022; [`default_circuit_breaker`](#breaker-c470cf) - Optional Block<br>Enable this option Server applies default when omitted
+<a id="breaker-c470cf"></a>&#x2022; [`default_circuit_breaker`](#breaker-c470cf) - Optional Block  Defaults to `map[]`<br>Enable this option.  Server applies default when omitted
 
 <a id="breaker-222fdc"></a>&#x2022; [`disable_circuit_breaker`](#breaker-222fdc) - Optional Block<br>Enable this option
 
-<a id="persistance-1139ff"></a>&#x2022; [`disable_lb_source_ip_persistance`](#persistance-1139ff) - Optional Block<br>Enable this option Server applies default when omitted
+<a id="persistance-1139ff"></a>&#x2022; [`disable_lb_source_ip_persistance`](#persistance-1139ff) - Optional Block  Defaults to `map[]`<br>Enable this option.  Server applies default when omitted
 
-<a id="detection-c26369"></a>&#x2022; [`disable_outlier_detection`](#detection-c26369) - Optional Block<br>Enable this option Server applies default when omitted
+<a id="detection-c26369"></a>&#x2022; [`disable_outlier_detection`](#detection-c26369) - Optional Block  Defaults to `map[]`<br>Enable this option.  Server applies default when omitted
 
-<a id="advanced-options-disable-proxy-protocol"></a>&#x2022; [`disable_proxy_protocol`](#advanced-options-disable-proxy-protocol) - Optional Block<br>Enable this option Server applies default when omitted
+<a id="advanced-options-disable-proxy-protocol"></a>&#x2022; [`disable_proxy_protocol`](#advanced-options-disable-proxy-protocol) - Optional Block  Defaults to `map[]`<br>Enable this option.  Server applies default when omitted
 
-<a id="advanced-options-disable-subsets"></a>&#x2022; [`disable_subsets`](#advanced-options-disable-subsets) - Optional Block<br>Enable this option Server applies default when omitted
+<a id="advanced-options-disable-subsets"></a>&#x2022; [`disable_subsets`](#advanced-options-disable-subsets) - Optional Block  Defaults to `map[]`<br>Enable this option.  Server applies default when omitted
 
 <a id="persistance-62e70d"></a>&#x2022; [`enable_lb_source_ip_persistance`](#persistance-62e70d) - Optional Block<br>Enable this option
 
@@ -203,7 +203,7 @@ An [`advanced_options`](#advanced-options) block supports the following:
 
 <a id="advanced-options-http-idle-timeout"></a>&#x2022; [`http_idle_timeout`](#advanced-options-http-idle-timeout) - Optional Number<br>The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed
 
-<a id="advanced-options-no-panic-threshold"></a>&#x2022; [`no_panic_threshold`](#advanced-options-no-panic-threshold) - Optional Block<br>Enable this option Server applies default when omitted
+<a id="advanced-options-no-panic-threshold"></a>&#x2022; [`no_panic_threshold`](#advanced-options-no-panic-threshold) - Optional Block  Defaults to `map[]`<br>Enable this option.  Server applies default when omitted
 
 <a id="advanced-options-outlier-detection"></a>&#x2022; [`outlier_detection`](#advanced-options-outlier-detection) - Optional Block<br>Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1<br>See [Outlier Detection](#advanced-options-outlier-detection) below.
 

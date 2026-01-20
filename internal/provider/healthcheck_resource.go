@@ -231,7 +231,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 						MarkdownDescription: "Specifies a list of HTTP headers that should be added to each request that is sent to the health checked cluster. This is a list of key-value pairs. Defaults to `map[]`. Server applies default when omitted.",
 					},
 					"use_origin_server_name": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option Server applies default when omitted.",
+						MarkdownDescription: "Enable this option. Defaults to `map[]`. Server applies default when omitted.",
 					},
 				},
 			},

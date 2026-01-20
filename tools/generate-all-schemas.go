@@ -119,8 +119,9 @@ type TerraformAttribute struct {
 	IsSpecField        bool   // True if this is a spec field (not metadata)
 	JsonName           string // JSON field name from OpenAPI for API marshaling
 	GoType             string // Go type for client struct generation
-	UseDomainValidator bool   // True if name field should use DomainValidator (for DNS resources)
-	ServerDefault      bool   // True if server applies default when field is omitted (from x-f5xc-server-default)
+	UseDomainValidator bool        // True if name field should use DomainValidator (for DNS resources)
+	ServerDefault      bool        // True if server applies default when field is omitted (from x-f5xc-server-default)
+	Default            interface{} // Actual default value from OpenAPI spec (when ServerDefault is true)
 	// Enhanced metadata fields from enriched API specs
 	MinimumConfigRequired bool                   // True if required for minimum viable config (from x-f5xc-required-for.minimum_config)
 	RecommendedValue      interface{}            // Suggested value, not enforced (from x-f5xc-recommended-value)
@@ -1034,6 +1035,7 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 	// Preserve extensions from original schema before resolving $ref
 	// Extensions like x-f5xc-server-default are on the property, not the referenced schema
 	serverDefault := schema.XF5XCServerDefault
+	defaultValue := schema.Default // Preserve actual default value
 	descShort := schema.XF5XCDescriptionShort
 	descMed := schema.XF5XCDescriptionMed
 	requiredFor := schema.XF5XCRequiredFor
@@ -1047,6 +1049,9 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 		// Restore preserved extensions (property-level extensions take precedence)
 		if serverDefault {
 			schema.XF5XCServerDefault = serverDefault
+		}
+		if defaultValue != nil && schema.Default == nil {
+			schema.Default = defaultValue
 		}
 		if descShort != "" && schema.XF5XCDescriptionShort == "" {
 			schema.XF5XCDescriptionShort = descShort
@@ -1094,6 +1099,7 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 		IsSpecField:   true, // Attributes from OpenAPI spec are spec fields
 		JsonName:      name, // Original OpenAPI property name for JSON marshaling
 		ServerDefault: schema.XF5XCServerDefault,
+		Default:       schema.Default, // Store actual default value for metadata
 		// Enhanced metadata from enriched API specs
 		MinimumConfigRequired: schema.XF5XCRequiredFor.MinimumConfig,
 		RecommendedValue:      schema.XF5XCRecommendedValue,
@@ -2044,6 +2050,7 @@ func extractAttributeMetadata(attrs []TerraformAttribute, output map[string]*Att
 			PlanModifier:  attr.PlanModifier,
 			Description:   attr.Description,
 			ServerDefault: attr.ServerDefault,
+			Default:       attr.Default, // Copy actual default value
 			// Enhanced metadata from enriched API specs
 			MinimumConfigRequired: attr.MinimumConfigRequired,
 			RecommendedValue:      attr.RecommendedValue,

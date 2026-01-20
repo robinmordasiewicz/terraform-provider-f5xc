@@ -124,7 +124,7 @@ A [`http_health_check`](#http-health-check) block supports the following:
 
 <a id="http-health-check-use-http2"></a>&#x2022; [`use_http2`](#http-health-check-use-http2) - Optional Bool  Defaults to `false`<br>If set, health checks will be made using HTTP/2.  Server applies default when omitted
 
-<a id="name-c19d47"></a>&#x2022; [`use_origin_server_name`](#name-c19d47) - Optional Block<br>Enable this option Server applies default when omitted
+<a id="name-c19d47"></a>&#x2022; [`use_origin_server_name`](#name-c19d47) - Optional Block  Defaults to `map[]`<br>Enable this option.  Server applies default when omitted
 
 #### TCP Health Check
 

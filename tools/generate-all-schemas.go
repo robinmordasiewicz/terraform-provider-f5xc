@@ -89,6 +89,14 @@ type SchemaDefinition struct {
 	XF5XCRelatedDomains   []string `json:"x-f5xc-related-domains"`
 	XF5XCIsPreview        bool     `json:"x-f5xc-is-preview"`
 	XF5XCServerDefault    bool     `json:"x-f5xc-server-default"` // True if server applies default when omitted
+	XF5XCRequiredFor      struct {
+		MinimumConfig bool `json:"minimum_config"`
+		Create        bool `json:"create"`
+		Update        bool `json:"update"`
+		Read          bool `json:"read"`
+	} `json:"x-f5xc-required-for"`
+	XF5XCRecommendedValue     interface{} `json:"x-f5xc-recommended-value"`
+	XF5XCMinimumConfiguration interface{} `json:"x-f5xc-minimum-configuration"`
 }
 
 type TerraformAttribute struct {
@@ -113,6 +121,12 @@ type TerraformAttribute struct {
 	GoType             string // Go type for client struct generation
 	UseDomainValidator bool   // True if name field should use DomainValidator (for DNS resources)
 	ServerDefault      bool   // True if server applies default when field is omitted (from x-f5xc-server-default)
+	// Enhanced metadata fields from enriched API specs
+	MinimumConfigRequired bool                   // True if required for minimum viable config (from x-f5xc-required-for.minimum_config)
+	RecommendedValue      interface{}            // Suggested value, not enforced (from x-f5xc-recommended-value)
+	ValidationRules       map[string]string      // Validation constraints (from x-ves-validation-rules)
+	Complexity            string                 // Complexity rating (from x-f5xc-complexity)
+	UseCases              []string               // Use case scenarios (from x-f5xc-use-cases)
 }
 
 type ResourceTemplate struct {
@@ -190,6 +204,12 @@ type AttributeMetadata struct {
 	Description       string      `json:"description"`
 	ServerDefault     bool        `json:"server_default,omitempty"`      // True if server applies default when field is omitted
 	ServerDefaultDesc string      `json:"server_default_desc,omitempty"` // Description of what server default behavior is
+	// Enhanced metadata from enriched API specs
+	MinimumConfigRequired bool              `json:"minimum_config_required,omitempty"` // True if required for minimal config
+	RecommendedValue      interface{}       `json:"recommended_value,omitempty"`       // Suggested value (not enforced)
+	ValidationRules       map[string]string `json:"validation_rules,omitempty"`        // Validation constraints
+	Complexity            string            `json:"complexity,omitempty"`              // Complexity rating
+	UseCases              []string          `json:"use_cases,omitempty"`               // Use case scenarios
 }
 
 // DependencyInfo holds resource relationship information
@@ -1016,6 +1036,11 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 	serverDefault := schema.XF5XCServerDefault
 	descShort := schema.XF5XCDescriptionShort
 	descMed := schema.XF5XCDescriptionMed
+	requiredFor := schema.XF5XCRequiredFor
+	recommendedValue := schema.XF5XCRecommendedValue
+	validationRules := schema.XVesValidationRules
+	complexity := schema.XF5XCComplexity
+	useCases := schema.XF5XCUseCases
 
 	if schema.Ref != "" {
 		schema = resolveRef(schema.Ref, spec)
@@ -1028,6 +1053,22 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 		}
 		if descMed != "" && schema.XF5XCDescriptionMed == "" {
 			schema.XF5XCDescriptionMed = descMed
+		}
+		// Restore enhanced metadata extensions
+		if requiredFor.MinimumConfig || requiredFor.Create || requiredFor.Update || requiredFor.Read {
+			schema.XF5XCRequiredFor = requiredFor
+		}
+		if recommendedValue != nil {
+			schema.XF5XCRecommendedValue = recommendedValue
+		}
+		if len(validationRules) > 0 && len(schema.XVesValidationRules) == 0 {
+			schema.XVesValidationRules = validationRules
+		}
+		if complexity != "" && schema.XF5XCComplexity == "" {
+			schema.XF5XCComplexity = complexity
+		}
+		if len(useCases) > 0 && len(schema.XF5XCUseCases) == 0 {
+			schema.XF5XCUseCases = useCases
 		}
 	}
 
@@ -1053,6 +1094,12 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 		IsSpecField:   true, // Attributes from OpenAPI spec are spec fields
 		JsonName:      name, // Original OpenAPI property name for JSON marshaling
 		ServerDefault: schema.XF5XCServerDefault,
+		// Enhanced metadata from enriched API specs
+		MinimumConfigRequired: schema.XF5XCRequiredFor.MinimumConfig,
+		RecommendedValue:      schema.XF5XCRecommendedValue,
+		ValidationRules:       schema.XVesValidationRules,
+		Complexity:            schema.XF5XCComplexity,
+		UseCases:              schema.XF5XCUseCases,
 	}
 
 	// Build description with enrichment extension priority:
@@ -1997,6 +2044,12 @@ func extractAttributeMetadata(attrs []TerraformAttribute, output map[string]*Att
 			PlanModifier:  attr.PlanModifier,
 			Description:   attr.Description,
 			ServerDefault: attr.ServerDefault,
+			// Enhanced metadata from enriched API specs
+			MinimumConfigRequired: attr.MinimumConfigRequired,
+			RecommendedValue:      attr.RecommendedValue,
+			ValidationRules:       attr.ValidationRules,
+			Complexity:            attr.Complexity,
+			UseCases:              attr.UseCases,
 		}
 
 		// Add OneOf group reference if applicable

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-19T08:25:10Z",
+  "generated_at": "2026-01-20T02:43:18Z",
   "version": "1.0.0",
   "resources": {
     "address_allocator": {
@@ -17,7 +17,14 @@
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "Address pool from which the allocator carves out subnets or addresses to its clients."
+          "description": "Address pool from which the allocator carves out subnets or addresses to its clients.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.items.string.ipv4_prefix": "true",
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.min_items": "1"
+          }
         },
         "annotations": {
           "type": "map",
@@ -92,7 +99,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Optional. VIP to advertise. This VIP can be either V4/V6 address You can not specify this if where contains a site or virtual site of type REGIONAL_EDGE or public network If not specified and 'where' is specified with site or virtual site option, inside_vip or outside_vip specified in the site.."
+          "description": "Optional. VIP to advertise. This VIP can be either V4/V6 address You can not specify this if where contains a site or virtual site of type REGIONAL_EDGE or public network If not specified and 'where' is specified with site or virtual site option, inside_vip or outside_vip specified in the site..",
+          "validation_rules": {
+            "ves.io.schema.rules.string.ip": "true"
+          }
         },
         "annotations": {
           "type": "map",
@@ -147,7 +157,10 @@
           "plan_modifier": "UseStateForUnknown",
           "validation": "port",
           "oneof_group": "port_choice",
-          "description": "[OneOf: port, port_ranges] Port to advertise."
+          "description": "[OneOf: port, port_ranges] Port to advertise.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "65535"
+          }
         },
         "port_ranges": {
           "type": "string",
@@ -156,7 +169,13 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "port_choice",
-          "description": "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'."
+          "description": "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "512",
+            "ves.io.schema.rules.string.max_ports": "1024",
+            "ves.io.schema.rules.string.min_len": "1",
+            "ves.io.schema.rules.string.unique_port_range_list": "true"
+          }
         },
         "protocol": {
           "type": "string",
@@ -164,7 +183,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Protocol. Protocol to advertise."
+          "description": "Protocol. Protocol to advertise.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.in": "[\\\"TCP\\\",\\\"UDP\\\"]"
+          }
         },
         "public_ip": {
           "type": "list",
@@ -260,14 +282,24 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of Alert Receivers where the alerts will be sent ."
+          "description": "List of Alert Receivers where the alerts will be sent .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "4"
+          }
         },
         "routes": {
           "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Set of routes to match the incoming alert. The routes are evaluated in the specified order and terminates on the first match."
+          "description": "Set of routes to match the incoming alert. The routes are evaluated in the specified order and terminates on the first match.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "16"
+          }
         }
       }
     },
@@ -409,7 +441,12 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "API Crawler Configuration ."
+          "description": "API Crawler Configuration .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "32"
+          }
         },
         "id": {
           "type": "string",
@@ -465,14 +502,22 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of API Endpoints excluded from the API Inventory."
+          "description": "List of API Endpoints excluded from the API Inventory.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "1000",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "api_inventory_inclusion_list": {
           "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list."
+          "description": "List of API Endpoints included in the API Inventory. Typically, discovered API endpoints are added to the API Inventory using this list.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "1000",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "description": {
           "type": "string",
@@ -526,7 +571,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "API Discovery Exclusion List. List of Non-API Endpoints."
+          "description": "API Discovery Exclusion List. List of Non-API Endpoints.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "1000",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "strict_schema_origin": {
           "type": "object",
@@ -541,7 +590,13 @@
           "required": false,
           "optional": true,
           "description": "Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App \u0026 API Protection-\u003e Files-\u003e Swagger Files. 2. Select from the list of uploaded files. Defaults to `[]`. Server applies default when omitted.",
-          "server_default": true
+          "server_default": true,
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.items.string.max_bytes": "512",
+            "ves.io.schema.rules.repeated.items.string.pattern": "/api/object_store/namespaces/([a-z]([-a-z0-9]*[a-z0-9])?)/stored_objects/swagger/([a-z]([-a-z0-9]*[a-z0-9])?)/(v|V)[0-9]+(-[0-9]{2}){3}$",
+            "ves.io.schema.rules.repeated.max_items": "20",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         }
       },
       "dependencies": {
@@ -633,7 +688,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Add x-F5-API-testing-identifier header value to prevent security flags on API testing traffic."
+          "description": "Add x-F5-API-testing-identifier header value to prevent security flags on API testing traffic.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "128"
+          }
         },
         "description": {
           "type": "string",
@@ -652,7 +710,12 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Add and configure testing domains and credentials ."
+          "description": "Add and configure testing domains and credentials .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "32"
+          }
         },
         "every_day": {
           "type": "object",
@@ -847,7 +910,12 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of API group elements with methods and path regex for matching requests."
+          "description": "List of API group elements with methods and path regex for matching requests.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "5000"
+          }
         },
         "http_loadbalancer": {
           "type": "object",
@@ -1124,7 +1192,13 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of settings to enable for each AppType, given instance of AppType Exist in this Namespace ."
+          "description": "List of settings to enable for each AppType, given instance of AppType Exist in this Namespace .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "16",
+            "ves.io.schema.rules.repeated.min_items": "1"
+          }
         },
         "description": {
           "type": "string",
@@ -1201,7 +1275,10 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Features. List of various AI/ML features enabled."
+          "description": "Features. List of various AI/ML features enabled.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "id": {
           "type": "string",
@@ -1502,7 +1579,12 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console."
+          "description": "AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console.",
+          "validation_rules": {
+            "ves.io.schema.rules.map.keys.string.max_len": "127",
+            "ves.io.schema.rules.map.max_pairs": "40",
+            "ves.io.schema.rules.map.values.string.max_len": "255"
+          }
         },
         "tgw_security": {
           "type": "object",
@@ -1609,7 +1691,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Site's geographical address that can be used to determine its latitude and longitude."
+          "description": "Site's geographical address that can be used to determine its latitude and longitude.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "256"
+          }
         },
         "admin_password": {
           "type": "object",
@@ -1638,7 +1723,11 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "AWS Region. Name for AWS Region."
+          "description": "AWS Region. Name for AWS Region.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true"
+          }
         },
         "block_all_services": {
           "type": "object",
@@ -1728,7 +1817,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Disk size to be used for this instance in GiB. 80 is 80 GiB."
+          "description": "Disk size to be used for this instance in GiB. 80 is 80 GiB.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "2048"
+          }
         },
         "egress_gateway_default": {
           "type": "object",
@@ -1807,7 +1899,12 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Select Instance size based on performance needed ."
+          "description": "Select Instance size based on performance needed .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.max_len": "64"
+          }
         },
         "kubernetes_upgrade_drain": {
           "type": "object",
@@ -1875,7 +1972,11 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "worker_nodes",
-          "description": "Desired Worker Nodes Per AZ. Max limit is up to 21."
+          "description": "Desired Worker Nodes Per AZ. Max limit is up to 21.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.gte": "0",
+            "ves.io.schema.rules.uint32.lte": "21"
+          }
         },
         "offline_survivability_mode": {
           "type": "object",
@@ -1905,7 +2006,13 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Public SSH key for accessing the site."
+          "description": "Public SSH key for accessing the site.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.max_len": "8192",
+            "ves.io.schema.rules.string.min_len": "1"
+          }
         },
         "sw": {
           "type": "object",
@@ -1919,7 +2026,12 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console."
+          "description": "AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console.",
+          "validation_rules": {
+            "ves.io.schema.rules.map.keys.string.max_len": "127",
+            "ves.io.schema.rules.map.max_pairs": "40",
+            "ves.io.schema.rules.map.values.string.max_len": "255"
+          }
         },
         "total_nodes": {
           "type": "int64",
@@ -1928,7 +2040,11 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "worker_nodes",
-          "description": "Total number of worker nodes to be deployed across all AZ's used in the Site."
+          "description": "Total number of worker nodes to be deployed across all AZ's used in the Site.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.gte": "0",
+            "ves.io.schema.rules.uint32.lte": "61"
+          }
         },
         "voltstack_cluster": {
           "type": "object",
@@ -2009,7 +2125,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Site's geographical address that can be used to determine its latitude and longitude."
+          "description": "Site's geographical address that can be used to determine its latitude and longitude.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "256"
+          }
         },
         "admin_password": {
           "type": "object",
@@ -2025,7 +2144,10 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "region_choice",
-          "description": "[OneOf: alternate_region, azure_region] Name of the Azure region which does not support availability zones."
+          "description": "[OneOf: alternate_region, azure_region] Name of the Azure region which does not support availability zones.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "64"
+          }
         },
         "annotations": {
           "type": "map",
@@ -2048,7 +2170,10 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "region_choice",
-          "description": "Name of the Azure region which supports availability zones."
+          "description": "Name of the Azure region which supports availability zones.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "64"
+          }
         },
         "block_all_services": {
           "type": "object",
@@ -2106,7 +2231,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Disk size to be used for this instance in GiB. 80 is 80 GiB."
+          "description": "Disk size to be used for this instance in GiB. 80 is 80 GiB.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "4095"
+          }
         },
         "id": {
           "type": "string",
@@ -2182,7 +2310,12 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway \u003e advanced OPTIONS.."
+          "description": "Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway \u003e advanced OPTIONS..",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.max_len": "64"
+          }
         },
         "name": {
           "type": "string",
@@ -2213,7 +2346,11 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "worker_nodes",
-          "description": "Desired Worker Nodes Per AZ. Max limit is up to 21."
+          "description": "Desired Worker Nodes Per AZ. Max limit is up to 21.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.gte": "0",
+            "ves.io.schema.rules.uint32.lte": "21"
+          }
         },
         "offline_survivability_mode": {
           "type": "object",
@@ -2235,7 +2372,13 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Azure resource group for resources that will be created ."
+          "description": "Azure resource group for resources that will be created .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.max_len": "64",
+            "ves.io.schema.rules.string.min_len": "1"
+          }
         },
         "ssh_key": {
           "type": "string",
@@ -2243,7 +2386,13 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Public SSH key for accessing the site."
+          "description": "Public SSH key for accessing the site.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.max_len": "8192",
+            "ves.io.schema.rules.string.min_len": "1"
+          }
         },
         "sw": {
           "type": "object",
@@ -2257,7 +2406,12 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Azure Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in Azure console."
+          "description": "Azure Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in Azure console.",
+          "validation_rules": {
+            "ves.io.schema.rules.map.keys.string.max_len": "127",
+            "ves.io.schema.rules.map.max_pairs": "40",
+            "ves.io.schema.rules.map.values.string.max_len": "255"
+          }
         },
         "total_nodes": {
           "type": "int64",
@@ -2266,7 +2420,11 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "worker_nodes",
-          "description": "Total number of worker nodes to be deployed across all AZ's used in the Site."
+          "description": "Total number of worker nodes to be deployed across all AZ's used in the Site.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.gte": "0",
+            "ves.io.schema.rules.uint32.lte": "61"
+          }
         },
         "vnet": {
           "type": "object",
@@ -2299,7 +2457,7 @@
       }
     },
     "bgp": {
-      "description": "Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.",
+      "description": "Manages a BGP resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers. configuration.",
       "import_format": "namespace/name",
       "attributes": {
         "annotations": {
@@ -2307,13 +2465,6 @@
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
-        },
-        "bgp_parameters": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "BGP Parameters. BGP parameters for the local site."
         },
         "description": {
           "type": "string",
@@ -2354,19 +2505,18 @@
           "validation": "name",
           "description": "Namespace where the BGP will be created."
         },
-        "peers": {
+        "rules": {
           "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Peers. List of peers ."
-        },
-        "where": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "VirtualSiteSiteRefSelector defines a union of reference to site or reference to virtual_site It used to refer site or a group of sites indicated by virtual site."
+          "description": "BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "16",
+            "ves.io.schema.rules.repeated.min_items": "1"
+          }
         }
       }
     },
@@ -2384,7 +2534,14 @@
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy."
+          "description": "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "256",
+            "ves.io.schema.rules.repeated.min_items": "1",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "description": {
           "type": "string",
@@ -2481,7 +2638,13 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom."
+          "description": "BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "16",
+            "ves.io.schema.rules.repeated.min_items": "1"
+          }
         }
       }
     },
@@ -2801,7 +2964,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Define rules to block IP Prefixes or AS numbers."
+          "description": "Define rules to block IP Prefixes or AS numbers.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "256",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         },
         "bot_defense": {
           "type": "object",
@@ -2853,14 +3020,22 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Data Guard prevents responses from exposing sensitive information by masking the data. The system masks credit card numbers and social security numbers leaked from the application from within the HTTP response with a string of asterisks (*)."
+          "description": "Data Guard prevents responses from exposing sensitive information by masking the data. The system masks credit card numbers and social security numbers leaked from the application from within the HTTP response with a string of asterisks (*).",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "64",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         },
         "ddos_mitigation_rules": {
           "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Define manual mitigation rules to block L7 DDoS attacks."
+          "description": "Define manual mitigation rules to block L7 DDoS attacks.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "256",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         },
         "default_cache_action": {
           "type": "object",
@@ -2957,7 +3132,18 @@
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "List of fully qualified domain names. The CDN Distribution will be setup for these FQDN name(s). [This can be a domain or a sub-domain] ."
+          "description": "List of fully qualified domain names. The CDN Distribution will be setup for these FQDN name(s). [This can be a domain or a sub-domain] .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.items.string.hostname": "true",
+            "ves.io.schema.rules.repeated.items.string.max_len": "256",
+            "ves.io.schema.rules.repeated.items.string.min_len": "1",
+            "ves.io.schema.rules.repeated.items.string.pattern": "[\\\\.]+[A-Za-z]+",
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.min_items": "1",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "enable_api_discovery": {
           "type": "object",
@@ -3004,7 +3190,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "GraphQL is a query language and server-side runtime for APIs which provides a complete and understandable description of the data in API. GraphQL gives clients the power to ask for exactly what they need, makes it easier to evolve APIs over time, and enables powerful developer tools. Policy.."
+          "description": "GraphQL is a query language and server-side runtime for APIs which provides a complete and understandable description of the data in API. GraphQL gives clients the power to ask for exactly what they need, makes it easier to evolve APIs over time, and enables powerful developer tools. Policy..",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "64",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         },
         "http": {
           "type": "object",
@@ -3139,7 +3329,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Allows setting attributes (SameSite, Secure, and HttpOnly) on cookies in responses. Cookie Tampering Protection prevents attackers from modifying the value of session cookies. For Cookie Tampering Protection, enabling a web app firewall (WAF) is a prerequisite."
+          "description": "Allows setting attributes (SameSite, Secure, and HttpOnly) on cookies in responses. Cookie Tampering Protection prevents attackers from modifying the value of session cookies. For Cookie Tampering Protection, enabling a web app firewall (WAF) is a prerequisite.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "16",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "rate_limit": {
           "type": "object",
@@ -3186,7 +3380,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Define rules to skip processing of one or more features such as WAF, Bot Defense etc."
+          "description": "Define rules to skip processing of one or more features such as WAF, Bot Defense etc.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "256",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         },
         "user_id_client_ip": {
           "type": "object",
@@ -3236,7 +3434,14 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Certificate chain is the list of intermediate certificates in PEM format including the PEM headers."
+          "description": "Certificate chain is the list of intermediate certificates in PEM format including the PEM headers.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.intermediate_certificate_chain_url": "true",
+            "ves.io.schema.rules.string.max_bytes": "131072",
+            "ves.io.schema.rules.string.min_bytes": "1"
+          }
         },
         "description": {
           "type": "string",
@@ -3302,7 +3507,14 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Certificate chain is the list of intermediate certificates in PEM format including the PEM headers."
+          "description": "Certificate chain is the list of intermediate certificates in PEM format including the PEM headers.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.intermediate_certificate_chain_url": "true",
+            "ves.io.schema.rules.string.max_bytes": "131072",
+            "ves.io.schema.rules.string.min_bytes": "1"
+          }
         },
         "description": {
           "type": "string",
@@ -3532,8 +3744,8 @@
       },
       "dependencies": {
         "referenced_by": [
-          "azure_vnet_site",
           "aws_vpc_site",
+          "azure_vnet_site",
           "gcp_vpc_site"
         ]
       }
@@ -3554,7 +3766,12 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Number of Elastic Ips / Public Ips associated with this object per Node."
+          "description": "Number of Elastic Ips / Public Ips associated with this object per Node.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.gte": "1",
+            "ves.io.schema.rules.uint32.lte": "8"
+          }
         },
         "description": {
           "type": "string",
@@ -3600,7 +3817,12 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Site to which this cloud elastic IP object is attached ."
+          "description": "Site to which this cloud elastic IP object is attached .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "1"
+          }
         }
       }
     },
@@ -3756,14 +3978,20 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The  seconds. Defaults to `2`."
+          "description": "The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The  seconds. Defaults to `2`.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "600000"
+          }
         },
         "default_subset": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of key-value pairs that define default subset. This subset can be referred in fallback_policy which gets used when route specifies no metadata or no subset matching the metadata exists."
+          "description": "List of key-value pairs that define default subset. This subset can be referred in fallback_policy which gets used when route specifies no metadata or no subset matching the metadata exists.",
+          "validation_rules": {
+            "ves.io.schema.rules.map.max_pairs": "32"
+          }
         },
         "description": {
           "type": "string",
@@ -3798,14 +4026,20 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Configure endpoint groups based on metadata labels for traffic routing. Supports weighted distribution and session affinity across labeled endpoints."
+          "description": "Configure endpoint groups based on metadata labels for traffic routing. Supports weighted distribution and session affinity across labeled endpoints.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "32"
+          }
         },
         "endpoints": {
           "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of endpoints for this cluster."
+          "description": "List of endpoints for this cluster.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "32"
+          }
         },
         "fallback_policy": {
           "type": "string",
@@ -3820,7 +4054,10 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Health check configuration for backend monitoring."
+          "description": "Health check configuration for backend monitoring.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "4"
+          }
         },
         "http1_config": {
           "type": "object",
@@ -3844,7 +4081,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed."
+          "description": "The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "600000"
+          }
         },
         "id": {
           "type": "string",
@@ -3903,7 +4143,10 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "panic_threshold_type",
-          "description": "Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status."
+          "description": "Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for loadbalancing ignoring its health status.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "100"
+          }
         },
         "proxy_protocol_v1": {
           "type": "object",
@@ -4014,7 +4257,13 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "validation": "port",
-          "description": "Port of the Central Manager instance to connect to ."
+          "description": "Port of the Central Manager instance to connect to .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.uint32.gte": "1",
+            "ves.io.schema.rules.uint32.lte": "65535"
+          }
         },
         "username": {
           "type": "string",
@@ -4022,7 +4271,13 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Username for the Central Manager instance ."
+          "description": "Username for the Central Manager instance .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.max_len": "128",
+            "ves.io.schema.rules.string.min_len": "4"
+          }
         }
       }
     },
@@ -4114,7 +4369,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Email. Email used for the registry."
+          "description": "Email. Email used for the registry.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.email": "true"
+          }
         },
         "id": {
           "type": "string",
@@ -4156,7 +4414,12 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Fully qualified name of the registry login server ."
+          "description": "Fully qualified name of the registry login server .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.hostname": "true"
+          }
         },
         "user_name": {
           "type": "string",
@@ -4164,7 +4427,12 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Username used to access the registry ."
+          "description": "Username used to access the registry .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.max_len": "128"
+          }
         }
       }
     },
@@ -4238,7 +4506,12 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "CRL Refresh interval. CRL refresh interval, in hours."
+          "description": "CRL Refresh interval. CRL refresh interval, in hours.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.gte": "6",
+            "ves.io.schema.rules.uint32.lte": "168"
+          }
         },
         "server_address": {
           "type": "string",
@@ -4246,7 +4519,13 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "CRL server address or hostname ."
+          "description": "CRL server address or hostname .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.hostname_or_ip": "true",
+            "ves.io.schema.rules.string.max_len": "255"
+          }
         },
         "server_port": {
           "type": "int64",
@@ -4255,7 +4534,12 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "validation": "port",
-          "description": "CRL Server Port. Set CRL Server port number."
+          "description": "CRL Server Port. Set CRL Server port number.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.gte": "1",
+            "ves.io.schema.rules.uint32.lte": "65535"
+          }
         },
         "timeout": {
           "type": "int64",
@@ -4263,7 +4547,12 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "CRL download timeout. CRL download wait time, in seconds."
+          "description": "CRL download timeout. CRL download wait time, in seconds.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.gte": "1",
+            "ves.io.schema.rules.uint32.lte": "180"
+          }
         }
       }
     },
@@ -4365,7 +4654,13 @@
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "[Enum: GDPR|CCPA|PIPEDA|LGPD|DPA_UK|PDPA_SG|APPI|HIPAA|CPRA_2023|CPA_CO|SOC2|PCI_DSS|ISO_IEC_27001|ISO_IEC_27701|EPRIVACY_DIRECTIVE|GLBA|SOX] Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`."
+          "description": "[Enum: GDPR|CCPA|PIPEDA|LGPD|DPA_UK|PDPA_SG|APPI|HIPAA|CPRA_2023|CPA_CO|SOC2|PCI_DSS|ISO_IEC_27001|ISO_IEC_27701|EPRIVACY_DIRECTIVE|GLBA|SOX] Choose applicable compliance frameworks such as GDPR, PCI/DSS, or CCPA to ensure the platform identifies whether vulnerabilities in API endpoints handling this data type may cause a compliance breach. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.items.enum.defined_only": "true",
+            "ves.io.schema.rules.repeated.items.enum.not_in": "[0]",
+            "ves.io.schema.rules.repeated.max_items": "17",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "description": {
           "type": "string",
@@ -4427,7 +4722,14 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response ."
+          "description": "Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "100",
+            "ves.io.schema.rules.repeated.min_items": "1",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         }
       }
     },
@@ -4573,19 +4875,34 @@
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "[Enum: QUERY|IQUERY|STATUS|NOTIFY|UPDATE] Disallowed Query Type Values. Disallowed Query Type Values. Possible values are `QUERY`, `IQUERY`, `STATUS`, `NOTIFY`, `UPDATE`. Defaults to `QUERY`."
+          "description": "[Enum: QUERY|IQUERY|STATUS|NOTIFY|UPDATE] Disallowed Query Type Values. Disallowed Query Type Values. Possible values are `QUERY`, `IQUERY`, `STATUS`, `NOTIFY`, `UPDATE`. Defaults to `QUERY`.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "8",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "disallowed_resource_record_type_list": {
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "[Enum: T|A|NS|MD|MF|CNAME|SOA|MB|MG|MR|NULL|WKS|PTR|HINFO|MINFO|MX|TXT|RP|AFSDB|X25|ISDN|RT|NSAP|NSAP_PTR|SIG|KEY|PX|GPOS|AAAA|LOC|NXT|EID|NIMLOC|SRV|ATMA|NAPTR|KX|CERT|A6|DNAME|SINK|OPT|APL|DS|SSHFP|IPSECKEY|RRSIG|NSEC|DNSKEY|DHCID|NSEC3|NSEC3PARAM|TLSA|SMIMEA|HIP|NINFO|RKEY|TALINK|CDS|CDNSKEY|OPENPGPKEY|CSYNC|SPF|UINFO|UID|GID|UNSPEC|NID|L32|L64|LP|EUI48|EUI64|TKEY|TSIG|IXFR|AXFR|MAILB|MAILA|URI|CAA|TA|DLV] Disallowed Resource Record Types. Disallowed Resource Record Type List. Possible values are `T`, `A`, `NS`, `MD`, `MF`, `CNAME`, `SOA`, `MB`, `MG`, `MR`, `NULL`, `WKS`, `PTR`, `HINFO`, `MINFO`, `MX`, `TXT`, `RP`, `AFSDB`, `X25`, `ISDN`, `RT`, `NSAP`, `NSAP_PTR`, `SIG`, `KEY`, `PX`, `GPOS`, `AAAA`, `LOC`, `NXT`, `EID`, `NIMLOC`, `SRV`, `ATMA`, `NAPTR`, `KX`, `CERT`, `A6`, `DNAME`, `SINK`, `OPT`, `APL`, `DS`, `SSHFP`, `IPSECKEY`, `RRSIG`, `NSEC`, `DNSKEY`, `DHCID`, `NSEC3`, `NSEC3PARAM`, `TLSA`, `SMIMEA`, `HIP`, `NINFO`, `RKEY`, `TALINK`, `CDS`, `CDNSKEY`, `OPENPGPKEY`, `CSYNC`, `SPF`, `UINFO`, `UID`, `GID`, `UNSPEC`, `NID`, `L32`, `L64`, `LP`, `EUI48`, `EUI64`, `TKEY`, `TSIG`, `IXFR`, `AXFR`, `MAILB`, `MAILA`, `URI`, `CAA`, `TA`, `DLV`. Defaults to `T`."
+          "description": "[Enum: T|A|NS|MD|MF|CNAME|SOA|MB|MG|MR|NULL|WKS|PTR|HINFO|MINFO|MX|TXT|RP|AFSDB|X25|ISDN|RT|NSAP|NSAP_PTR|SIG|KEY|PX|GPOS|AAAA|LOC|NXT|EID|NIMLOC|SRV|ATMA|NAPTR|KX|CERT|A6|DNAME|SINK|OPT|APL|DS|SSHFP|IPSECKEY|RRSIG|NSEC|DNSKEY|DHCID|NSEC3|NSEC3PARAM|TLSA|SMIMEA|HIP|NINFO|RKEY|TALINK|CDS|CDNSKEY|OPENPGPKEY|CSYNC|SPF|UINFO|UID|GID|UNSPEC|NID|L32|L64|LP|EUI48|EUI64|TKEY|TSIG|IXFR|AXFR|MAILB|MAILA|URI|CAA|TA|DLV] Disallowed Resource Record Types. Disallowed Resource Record Type List. Possible values are `T`, `A`, `NS`, `MD`, `MF`, `CNAME`, `SOA`, `MB`, `MG`, `MR`, `NULL`, `WKS`, `PTR`, `HINFO`, `MINFO`, `MX`, `TXT`, `RP`, `AFSDB`, `X25`, `ISDN`, `RT`, `NSAP`, `NSAP_PTR`, `SIG`, `KEY`, `PX`, `GPOS`, `AAAA`, `LOC`, `NXT`, `EID`, `NIMLOC`, `SRV`, `ATMA`, `NAPTR`, `KX`, `CERT`, `A6`, `DNAME`, `SINK`, `OPT`, `APL`, `DS`, `SSHFP`, `IPSECKEY`, `RRSIG`, `NSEC`, `DNSKEY`, `DHCID`, `NSEC3`, `NSEC3PARAM`, `TLSA`, `SMIMEA`, `HIP`, `NINFO`, `RKEY`, `TALINK`, `CDS`, `CDNSKEY`, `OPENPGPKEY`, `CSYNC`, `SPF`, `UINFO`, `UID`, `GID`, `UNSPEC`, `NID`, `L32`, `L64`, `LP`, `EUI48`, `EUI64`, `TKEY`, `TSIG`, `IXFR`, `AXFR`, `MAILB`, `MAILA`, `URI`, `CAA`, `TA`, `DLV`. Defaults to `T`.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "8",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "domain_denylist": {
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "List of domains to be denied by configuration object ."
+          "description": "List of domains to be denied by configuration object .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "30",
+            "ves.io.schema.rules.repeated.unique": "true",
+            "ves.io.schema.rules.string.etld_plus_one": "true"
+          }
         },
         "id": {
           "type": "string",
@@ -4733,7 +5050,11 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "endpoint_address",
-          "description": "[OneOf: dns_name, dns_name_advanced, ip, service_info] Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name."
+          "description": "[OneOf: dns_name, dns_name_advanced, ip, service_info] Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.hostname": "true",
+            "ves.io.schema.rules.string.max_len": "256"
+          }
         },
         "dns_name_advanced": {
           "type": "object",
@@ -4750,7 +5071,10 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "validation": "port",
-          "description": "By default the health check port of an endpoint is the same as the endpoint’s port. This option provides an alternative health check port. Setting this with a non-zero value allows an endpoint to have different health check port."
+          "description": "By default the health check port of an endpoint is the same as the endpoint’s port. This option provides an alternative health check port. Setting this with a non-zero value allows an endpoint to have different health check port.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "65535"
+          }
         },
         "id": {
           "type": "string",
@@ -4766,7 +5090,10 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "endpoint_address",
-          "description": "Endpoint is reachable at the given IPv4/IPv6 address."
+          "description": "Endpoint is reachable at the given IPv4/IPv6 address.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.ip": "true"
+          }
         },
         "labels": {
           "type": "map",
@@ -4795,7 +5122,10 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "validation": "port",
-          "description": "Endpoint service is available on this port."
+          "description": "Endpoint service is available on this port.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "65535"
+          }
         },
         "protocol": {
           "type": "string",
@@ -4803,7 +5133,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Protocol. Endpoint protocol. Default is TCP. Both TCP and UDP protocols are supported."
+          "description": "Protocol. Endpoint protocol. Default is TCP. Both TCP and UDP protocols are supported.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.in": "[\\\"TCP\\\",\\\"UDP\\\"]"
+          }
         },
         "service_info": {
           "type": "object",
@@ -5182,7 +5515,12 @@
           "optional": true,
           "is_block": true,
           "validation": "port",
-          "description": "Source Ports. L4 port numbers to match ."
+          "description": "Source Ports. L4 port numbers to match .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "128"
+          }
         },
         "prefix": {
           "type": "object",
@@ -5210,7 +5548,11 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Indexable context key that identifies a page or page type for which the FilterSet is applicable ."
+          "description": "Indexable context key that identifies a page or page type for which the FilterSet is applicable .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true"
+          }
         },
         "description": {
           "type": "string",
@@ -5229,7 +5571,13 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of fields and their values selected by the user ."
+          "description": "List of fields and their values selected by the user .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.min_items": "1",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "id": {
           "type": "string",
@@ -5371,7 +5719,10 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Disable node local services on this site."
+          "description": "Disable node local services on this site.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "6"
+          }
         },
         "bond_device_list": {
           "type": "object",
@@ -5503,7 +5854,12 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Fleet_label value is used to create known_label 'F5 XC/fleet=\u003cfleet_label\u003e' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name \u003cfleet_label\u003e is also created in 'shared' namespace for tenant. The virtual_site object will select all sites.."
+          "description": "Fleet_label value is used to create known_label 'F5 XC/fleet=\u003cfleet_label\u003e' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name \u003cfleet_label\u003e is also created in 'shared' namespace for tenant. The virtual_site object will select all sites..",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.k8s_label_value": "true"
+          }
         },
         "id": {
           "type": "string",
@@ -5517,7 +5873,10 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Default inside (site local) virtual network for the fleet."
+          "description": "Default inside (site local) virtual network for the fleet.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "1"
+          }
         },
         "interface_list": {
           "type": "object",
@@ -5575,14 +5934,20 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Network Connector defines connection between two virtual networks in a given site. Fleet defines one or more such network connectors. The network connectors configuration is applied on all sites that are member of the fleet."
+          "description": "Network Connector defines connection between two virtual networks in a given site. Fleet defines one or more such network connectors. The network connectors configuration is applied on all sites that are member of the fleet.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "8"
+          }
         },
         "network_firewall": {
           "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Network Firewall defines firewall to be applied for the virtual networks in the fleet. The network firewall configuration is applied on all sites that are member of the fleet. Constraints The Network Firewall is applied on Virtual Networks of type site local network and site local inside network."
+          "description": "Network Firewall defines firewall to be applied for the virtual networks in the fleet. The network firewall configuration is applied on all sites that are member of the fleet. Constraints The Network Firewall is applied on Virtual Networks of type site local network and site local inside network.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "1"
+          }
         },
         "no_bond_devices": {
           "type": "object",
@@ -5630,14 +5995,20 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config."
+          "description": "Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "256"
+          }
         },
         "outside_virtual_network": {
           "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Default outside (site local) virtual network for the fleet."
+          "description": "Default outside (site local) virtual network for the fleet.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "1"
+          }
         },
         "performance_enhancement_mode": {
           "type": "object",
@@ -5700,7 +6071,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "F5XC software version is human readable string matching released set of version components. The given software version is applied to all sites that are member of the fleet. Current software installed can be overridden via site config."
+          "description": "F5XC software version is human readable string matching released set of version components. The given software version is applied to all sites that are member of the fleet. Current software installed can be overridden via site config.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "256"
+          }
         }
       }
     },
@@ -5975,7 +6349,10 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "marking_choice",
-          "description": "Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low."
+          "description": "Decimal value of raw 8 bit TOS. In above example DSCP 10 = Precedence Class 1 and drop precedence low.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "255"
+          }
         }
       }
     },
@@ -6025,7 +6402,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Site's geographical address that can be used to determine its latitude and longitude."
+          "description": "Site's geographical address that can be used to determine its latitude and longitude.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "256"
+          }
         },
         "admin_password": {
           "type": "object",
@@ -6104,14 +6484,22 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Disk size to be used for this instance in GiB. 80 is 80 GiB."
+          "description": "Disk size to be used for this instance in GiB. 80 is 80 GiB.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "64000"
+          }
         },
         "gcp_labels": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "GCP Label is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in GCP console."
+          "description": "GCP Label is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in GCP console.",
+          "validation_rules": {
+            "ves.io.schema.rules.map.keys.string.max_len": "127",
+            "ves.io.schema.rules.map.max_pairs": "40",
+            "ves.io.schema.rules.map.values.string.max_len": "255"
+          }
         },
         "gcp_region": {
           "type": "string",
@@ -6119,7 +6507,12 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "GCP Region. Name for GCP Region."
+          "description": "GCP Region. Name for GCP Region.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.max_len": "64"
+          }
         },
         "id": {
           "type": "string",
@@ -6150,7 +6543,12 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Select Instance size based on performance needed ."
+          "description": "Select Instance size based on performance needed .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.max_len": "64"
+          }
         },
         "kubernetes_upgrade_drain": {
           "type": "object",
@@ -6231,7 +6629,13 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Public SSH key for accessing the site."
+          "description": "Public SSH key for accessing the site.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.max_len": "8192",
+            "ves.io.schema.rules.string.min_len": "1"
+          }
         },
         "sw": {
           "type": "object",
@@ -6530,7 +6934,14 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy. Note that during startup, only a single successful health check is required to mark a host healthy."
+          "description": "Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy. Note that during startup, only a single successful health check is required to mark a host healthy.",
+          "minimum_config_required": true,
+          "recommended_value": 3,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.uint32.gte": "1",
+            "ves.io.schema.rules.uint32.lte": "16"
+          }
         },
         "http_health_check": {
           "type": "object",
@@ -6553,7 +6964,14 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Time interval in seconds between two healthcheck requests."
+          "description": "Time interval in seconds between two healthcheck requests.",
+          "minimum_config_required": true,
+          "recommended_value": 15,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.uint32.gte": "1",
+            "ves.io.schema.rules.uint32.lte": "600"
+          }
         },
         "jitter_percent": {
           "type": "int64",
@@ -6562,7 +6980,11 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "description": "Add a random amount of time as a percent value to the interval between successive healthcheck requests. Server applies default when omitted.",
-          "server_default": true
+          "server_default": true,
+          "recommended_value": 30,
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.ranges": "0,10-50"
+          }
         },
         "labels": {
           "type": "map",
@@ -6598,7 +7020,14 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure."
+          "description": "Timeout in seconds to wait for successful response. In other words, it is the time to wait for a health check response. If the timeout is reached the health check attempt will be considered a failure.",
+          "minimum_config_required": true,
+          "recommended_value": 3,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.uint32.gte": "1",
+            "ves.io.schema.rules.uint32.lte": "600"
+          }
         },
         "udp_icmp_health_check": {
           "type": "object",
@@ -6614,14 +7043,21 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy. Note that for HTTP health checking if a host responds with 503 this threshold is ignored and the host is considered unhealthy immediately."
+          "description": "Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy. Note that for HTTP health checking if a host responds with 503 this threshold is ignored and the host is considered unhealthy immediately.",
+          "minimum_config_required": true,
+          "recommended_value": 1,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.uint32.gte": "1",
+            "ves.io.schema.rules.uint32.lte": "16"
+          }
         }
       },
       "dependencies": {
         "referenced_by": [
-          "origin_pool",
           "http_loadbalancer",
-          "tcp_loadbalancer"
+          "tcp_loadbalancer",
+          "origin_pool"
         ]
       }
     },
@@ -6903,7 +7339,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Define rules to block IP Prefixes or AS numbers."
+          "description": "Define rules to block IP Prefixes or AS numbers.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "256",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         },
         "bot_defense": {
           "type": "object",
@@ -6972,14 +7412,22 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Data Guard prevents responses from exposing sensitive information by masking the data. The system masks credit card numbers and social security numbers leaked from the application from within the HTTP response with a string of asterisks (*)."
+          "description": "Data Guard prevents responses from exposing sensitive information by masking the data. The system masks credit card numbers and social security numbers leaked from the application from within the HTTP response with a string of asterisks (*).",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "64",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         },
         "ddos_mitigation_rules": {
           "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Define manual mitigation rules to block L7 DDoS attacks."
+          "description": "Define manual mitigation rules to block L7 DDoS attacks.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "256",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         },
         "default_pool": {
           "type": "object",
@@ -7002,7 +7450,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Origin Pools used when no route is specified (default route)."
+          "description": "Origin Pools used when no route is specified (default route).",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "8",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "default_sensitive_data_policy": {
           "type": "object",
@@ -7140,7 +7592,17 @@
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "List of Domains (host/authority header) that will be matched to load balancer. Supported Domains and search order: 1. Exact Domain names: www.example.com. 2."
+          "description": "List of Domains (host/authority header) that will be matched to load balancer. Supported Domains and search order: 1. Exact Domain names: www.example.com. 2.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.items.string.max_len": "256",
+            "ves.io.schema.rules.repeated.items.string.min_len": "1",
+            "ves.io.schema.rules.repeated.items.string.vh_domain": "true",
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.min_items": "1",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "enable_api_discovery": {
           "type": "object",
@@ -7195,7 +7657,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "GraphQL is a query language and server-side runtime for APIs which provides a complete and understandable description of the data in API. GraphQL gives clients the power to ask for exactly what they need, makes it easier to evolve APIs over time, and enables powerful developer tools. Policy.."
+          "description": "GraphQL is a query language and server-side runtime for APIs which provides a complete and understandable description of the data in API. GraphQL gives clients the power to ask for exactly what they need, makes it easier to evolve APIs over time, and enables powerful developer tools. Policy..",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "64",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         },
         "http": {
           "type": "object",
@@ -7361,7 +7827,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Allows setting attributes (SameSite, Secure, and HttpOnly) on cookies in responses. Cookie Tampering Protection prevents attackers from modifying the value of session cookies. For Cookie Tampering Protection, enabling a web app firewall (WAF) is a prerequisite."
+          "description": "Allows setting attributes (SameSite, Secure, and HttpOnly) on cookies in responses. Cookie Tampering Protection prevents attackers from modifying the value of session cookies. For Cookie Tampering Protection, enabling a web app firewall (WAF) is a prerequisite.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "16",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "random": {
           "type": "object",
@@ -7400,7 +7870,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Routes allow users to define match condition on a path and/or HTTP method to either forward matching traffic to origin pool or redirect matching traffic to a different URL or respond directly to matching traffic."
+          "description": "Routes allow users to define match condition on a path and/or HTTP method to either forward matching traffic to origin pool or redirect matching traffic to a different URL or respond directly to matching traffic.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "256",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "sensitive_data_disclosure_rules": {
           "type": "object",
@@ -7462,7 +7936,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Define rules to skip processing of one or more features such as WAF, Bot Defense etc."
+          "description": "Define rules to skip processing of one or more features such as WAF, Bot Defense etc.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "256",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         },
         "user_id_client_ip": {
           "type": "object",
@@ -7534,7 +8012,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "IPv4 Prefixes. List of IPv4 prefixes with description."
+          "description": "IPv4 Prefixes. List of IPv4 prefixes with description.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "1024",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "labels": {
           "type": "map",
@@ -7559,7 +8041,7 @@
       }
     },
     "irule": {
-      "description": "Manages a Irule resource in F5 Distributed Cloud for desired state for big-ip irule service. configuration.",
+      "description": "Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
       "import_format": "namespace/name",
       "attributes": {
         "annotations": {
@@ -7568,19 +8050,18 @@
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
-        "code": {
+        "description": {
           "type": "string",
           "required": false,
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "IRule code content, this content will be base64 encoded for preserving formating."
-        },
-        "description": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "description": "Human readable description for the object."
+          "description": "Specify Description for iRule .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.max_len": "256"
+          }
         },
         "disable": {
           "type": "bool",
@@ -7595,13 +8076,18 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
-        "irule_name": {
+        "irule": {
           "type": "string",
           "required": false,
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "IRule name. IRule name."
+          "description": "Www.internal.example.f5.com')} DNS::drop} irule content .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.max_len": "24576"
+          }
         },
         "labels": {
           "type": "map",
@@ -7622,31 +8108,44 @@
           "plan_modifier": "RequiresReplace",
           "validation": "name",
           "description": "Namespace where the Irule will be created."
-        },
-        "source": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "IRule source. IRule generation/updation source."
         }
       }
     },
     "log_receiver": {
-      "description": "Manages new Log Receiver object. in F5 Distributed Cloud.",
+      "description": "Manages new Global Log Receiver object. in F5 Distributed Cloud.",
       "category": "Monitoring",
       "tier": "Standard",
       "import_format": "namespace/name",
       "oneof_groups": {
-        "log_receiver_choice": {
+        "filter_choice": {
           "fields": [
-            "syslog"
+            "ns_all",
+            "ns_current",
+            "ns_list"
           ]
         },
-        "where_choice": {
+        "log_type": {
           "fields": [
-            "site_local"
+            "audit_logs",
+            "dns_logs",
+            "request_logs",
+            "security_events"
+          ]
+        },
+        "receiver": {
+          "fields": [
+            "aws_cloud_watch_receiver",
+            "azure_event_hubs_receiver",
+            "azure_receiver",
+            "datadog_receiver",
+            "gcp_bucket_receiver",
+            "http_receiver",
+            "kafka_receiver",
+            "new_relic_receiver",
+            "qradar_receiver",
+            "s3_receiver",
+            "splunk_receiver",
+            "sumo_logic_receiver"
           ]
         }
       },
@@ -7656,6 +8155,46 @@
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
+        },
+        "audit_logs": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "log_type",
+          "description": "[OneOf: audit_logs, dns_logs, request_logs, security_events] Enable this option"
+        },
+        "aws_cloud_watch_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "[OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiver, azure_receiver, datadog_receiver, gcp_bucket_receiver, http_receiver, kafka_receiver, new_relic_receiver, qradar_receiver, s3_receiver, splunk_receiver, sumo_logic_receiver] AWS Cloudwatch Logs Configuration for Global Log Receiver."
+        },
+        "azure_event_hubs_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "Azure Event Hubs Configuration for Global Log Receiver."
+        },
+        "azure_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "Azure Blob Configuration for Global Log Receiver."
+        },
+        "datadog_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "Datadog Configuration. Configuration for Datadog endpoint."
         },
         "description": {
           "type": "string",
@@ -7669,12 +8208,44 @@
           "optional": true,
           "description": "A value of true will administratively disable the object."
         },
+        "dns_logs": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "log_type",
+          "description": "Enable this option"
+        },
+        "gcp_bucket_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "GCP Bucket Configuration for Global Log Receiver."
+        },
+        "http_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "HTTP Configuration. Configuration for HTTP endpoint."
+        },
         "id": {
           "type": "string",
           "required": false,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
+        },
+        "kafka_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "Kafka Configuration for Global Log Receiver."
         },
         "labels": {
           "type": "map",
@@ -7696,21 +8267,85 @@
           "validation": "name",
           "description": "Namespace where the Log Receiver will be created."
         },
-        "site_local": {
+        "new_relic_receiver": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "where_choice",
+          "oneof_group": "receiver",
+          "description": "NewRelic Configuration. Configuration for NewRelic endpoint."
+        },
+        "ns_all": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "filter_choice",
+          "description": "[OneOf: ns_all, ns_current, ns_list] Enable this option"
+        },
+        "ns_current": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "filter_choice",
           "description": "Enable this option"
         },
-        "syslog": {
+        "ns_list": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "log_receiver_choice",
-          "description": "Syslog Server Configuration. Configuration for syslog server."
+          "oneof_group": "filter_choice",
+          "description": "Namespace List. Namespace List."
+        },
+        "qradar_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "IBM QRadar Configuration. Configuration for IBM QRadar endpoint."
+        },
+        "request_logs": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "log_type",
+          "description": "Enable this option"
+        },
+        "s3_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "S3 Configuration for Global Log Receiver."
+        },
+        "security_events": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "log_type",
+          "description": "Enable this option"
+        },
+        "splunk_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "Configuration for Splunk HEC Logs endpoint."
+        },
+        "sumo_logic_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "receiver",
+          "description": "SumoLogic Configuration. Configuration for SumoLogic endpoint."
         }
       }
     },
@@ -7886,7 +8521,12 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of rules to apply under the NAT Policy. Rule that matches first would be applied ."
+          "description": "List of rules to apply under the NAT Policy. Rule that matches first would be applied .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "64"
+          }
         },
         "site": {
           "type": "object",
@@ -8409,7 +9049,11 @@
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192."
+          "description": "List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.items.string.port_range": "true",
+            "ves.io.schema.rules.repeated.max_items": "128"
+          }
         },
         "prefix": {
           "type": "object",
@@ -8433,7 +9077,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Protocol in IP packet to be used as match criteria Values are TCP, UDP, and icmp."
+          "description": "Protocol in IP packet to be used as match criteria Values are TCP, UDP, and icmp.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.in": "[\\\"ALL\\\",\\\"TCP\\\",\\\"UDP\\\",\\\"ICMP\\\"]"
+          }
         }
       }
     },
@@ -8464,7 +9111,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Ordered list of rules applied to connections from policy endpoints."
+          "description": "Ordered list of rules applied to connections from policy endpoints.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "128",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         },
         "endpoint": {
           "type": "object",
@@ -8485,7 +9136,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Ordered list of rules applied to connections to policy endpoints."
+          "description": "Ordered list of rules applied to connections to policy endpoints.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "128",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         },
         "labels": {
           "type": "map",
@@ -8691,7 +9346,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Filters discovered server blocks based on server name, domain and ports. Atleast, one field should be populated for each filter. X-textBlockContent: If no filters are specified, all server blocks will be discovered by default."
+          "description": "Filters discovered server blocks based on server name, domain and ports. Atleast, one field should be populated for each filter. X-textBlockContent: If no filters are specified, all server blocks will be discovered by default.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "10",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         }
       }
     },
@@ -8773,7 +9432,10 @@
           "plan_modifier": "UseStateForUnknown",
           "validation": "port",
           "oneof_group": "health_check_port_choice",
-          "description": "[OneOf: health_check_port, same_as_endpoint_port] Port used for performing health check."
+          "description": "[OneOf: health_check_port, same_as_endpoint_port] Port used for performing health check.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "65535"
+          }
         },
         "healthcheck": {
           "type": "list",
@@ -8781,7 +9443,10 @@
           "optional": true,
           "is_block": true,
           "description": "Reference to healthcheck configuration objects. Defaults to `[]`. Server applies default when omitted.",
-          "server_default": true
+          "server_default": true,
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "4"
+          }
         },
         "id": {
           "type": "string",
@@ -8841,7 +9506,14 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of origin servers in this pool ."
+          "description": "List of origin servers in this pool .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.min_items": "1",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "port": {
           "type": "int64",
@@ -8851,7 +9523,13 @@
           "plan_modifier": "UseStateForUnknown",
           "validation": "port",
           "oneof_group": "port_choice",
-          "description": "Endpoint service is available on this port."
+          "description": "Endpoint service is available on this port.",
+          "minimum_config_required": true,
+          "recommended_value": 443,
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.gte": "1",
+            "ves.io.schema.rules.uint32.lte": "65535"
+          }
         },
         "same_as_endpoint_port": {
           "type": "object",
@@ -8889,7 +9567,7 @@
       }
     },
     "policer": {
-      "description": "Manages new policer with traffic rate limits. in F5 Distributed Cloud.",
+      "description": "Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.",
       "import_format": "namespace/name",
       "attributes": {
         "annotations": {
@@ -8897,22 +9575,6 @@
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
-        },
-        "burst_size": {
-          "type": "int64",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "The maximum size permitted for bursts of data. E.g. 10000 pps burst ."
-        },
-        "committed_information_rate": {
-          "type": "int64",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps ."
         },
         "description": {
           "type": "string",
@@ -8953,21 +9615,16 @@
           "validation": "name",
           "description": "Namespace where the Policer will be created."
         },
-        "policer_mode": {
-          "type": "string",
+        "protocol_policer": {
+          "type": "list",
           "required": false,
           "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "[Enum: POLICER_MODE_NOT_SHARED|POLICER_MODE_SHARED] - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`. Defaults to `POLICER_MODE_NOT_SHARED`."
-        },
-        "policer_type": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "[Enum: POLICER_SINGLE_RATE_TWO_COLOR] Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`. Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`."
+          "is_block": true,
+          "description": "List of L4 protocol match condition and associated traffic rate limits.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "64",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         }
       }
     },
@@ -9014,7 +9671,13 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Ordered list of forwarding Class to be used if source application match and no rule match."
+          "description": "Ordered list of forwarding Class to be used if source application match and no rule match.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "3",
+            "ves.io.schema.rules.repeated.min_items": "1"
+          }
         },
         "id": {
           "type": "string",
@@ -9180,7 +9843,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of L4 protocol match condition and associated traffic rate limits."
+          "description": "List of L4 protocol match condition and associated traffic rate limits.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "64",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         }
       }
     },
@@ -9242,7 +9909,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "The timeout for new network connections to upstream server. This is specified in milliseconds. The  (2 seconds). Defaults to `2000`."
+          "description": "The timeout for new network connections to upstream server. This is specified in milliseconds. The  (2 seconds). Defaults to `2000`.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "1800000"
+          }
         },
         "description": {
           "type": "string",
@@ -9399,7 +10069,12 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of RateLimitValues that specifies the total number of allowed requests for each specified period."
+          "description": "List of RateLimitValues that specifies the total number of allowed requests for each specified period.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "1"
+          }
         },
         "name": {
           "type": "string",
@@ -9421,7 +10096,10 @@
           "optional": true,
           "is_block": true,
           "description": "Reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited. Defaults to `[]`. Server applies default when omitted.",
-          "server_default": true
+          "server_default": true,
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "1"
+          }
         }
       },
       "dependencies": {
@@ -9508,7 +10186,11 @@
           "optional": true,
           "is_block": true,
           "description": "List of RateLimiterRules that are evaluated sequentially till a matching rule is identified. Defaults to `[]`. Server applies default when omitted.",
-          "server_default": true
+          "server_default": true,
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "256",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         },
         "server_name": {
           "type": "string",
@@ -9517,7 +10199,10 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "server_choice",
-          "description": "The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request."
+          "description": "The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_bytes": "256"
+          }
         },
         "server_name_matcher": {
           "type": "object",
@@ -9596,7 +10281,12 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of routes to match for incoming request ."
+          "description": "List of routes to match for incoming request .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "257"
+          }
         }
       }
     },
@@ -9662,7 +10352,13 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Name given to this secret management backend. site.provider needs to be unique, and will be referenced for using this object ."
+          "description": "Name given to this secret management backend. site.provider needs to be unique, and will be referenced for using this object .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.max_len": "256",
+            "ves.io.schema.rules.string.min_len": "1"
+          }
         },
         "where": {
           "type": "object",
@@ -9679,22 +10375,17 @@
       "oneof_groups": {
         "blocked_services_choice": {
           "fields": [
-            "block_all_services",
-            "blocked_services"
-          ]
-        },
-        "enterprise_proxy_choice": {
-          "fields": [
-            "custom_proxy",
-            "f5_proxy"
-          ]
-        },
-        "forward_proxy_choice": {
-          "fields": [
-            "active_forward_proxy_policies",
-            "no_forward_proxy"
+            "blocked_services",
+            "default_blocked_services"
           ],
-          "default": "no_forward_proxy"
+          "default": "default_blocked_services"
+        },
+        "bond_choice": {
+          "fields": [
+            "bond_device_list",
+            "no_bond_devices"
+          ],
+          "default": "no_bond_devices"
         },
         "logs_receiver_choice": {
           "fields": [
@@ -9702,87 +10393,25 @@
             "logs_streaming_disabled"
           ]
         },
-        "network_policy_choice": {
+        "network_cfg_choice": {
           "fields": [
-            "active_enhanced_firewall_policies",
-            "no_network_policy"
+            "custom_network_config",
+            "default_network_config"
           ],
-          "default": "no_network_policy"
-        },
-        "node_ha_choice": {
-          "fields": [
-            "disable_ha",
-            "enable_ha"
-          ],
-          "default": "disable_ha"
-        },
-        "provider_choice": {
-          "fields": [
-            "aws",
-            "azure",
-            "baremetal",
-            "equinix",
-            "gcp",
-            "kvm",
-            "nutanix",
-            "oci",
-            "openstack",
-            "vmware"
-          ]
-        },
-        "proxy_bypass_choice": {
-          "fields": [
-            "custom_proxy_bypass",
-            "no_proxy_bypass"
-          ],
-          "default": "no_proxy_bypass"
-        },
-        "s2s_connectivity_sli_choice": {
-          "fields": [
-            "dc_cluster_group_sli",
-            "no_s2s_connectivity_sli"
-          ],
-          "default": "no_s2s_connectivity_sli"
-        },
-        "s2s_connectivity_slo_choice": {
-          "fields": [
-            "dc_cluster_group_slo",
-            "no_s2s_connectivity_slo",
-            "site_mesh_group_on_slo"
-          ],
-          "default": "no_s2s_connectivity_slo"
-        },
-        "url_categorization_choice": {
-          "fields": [
-            "disable_url_categorization",
-            "enable_url_categorization"
-          ],
-          "default": "disable_url_categorization"
+          "default": "default_network_config"
         }
       },
       "attributes": {
-        "active_enhanced_firewall_policies": {
-          "type": "object",
+        "address": {
+          "type": "string",
           "required": false,
           "optional": true,
-          "is_block": true,
-          "oneof_group": "network_policy_choice",
-          "description": "[OneOf: active_enhanced_firewall_policies, no_network_policy; Default: no_network_policy] List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion."
-        },
-        "active_forward_proxy_policies": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "forward_proxy_choice",
-          "description": "[OneOf: active_forward_proxy_policies, no_forward_proxy; Default: no_forward_proxy] Ordered List of Forward Proxy Policies active."
-        },
-        "admin_user_credentials": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Setup user credentials to manage access to nodes belonging to the site. When configured, 'admin' user will be setup and customers can access these nodes via either the node local WebUI or via SSH to access shell/CLI Ensure 'Node Local Services' are enabled to allow for required access."
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Site's geographical address that can be used to determine its latitude and longitude.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "256"
+          }
         },
         "annotations": {
           "type": "map",
@@ -9790,77 +10419,52 @@
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
-        "aws": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "provider_choice",
-          "description": "[OneOf: aws, azure, baremetal, equinix, gcp, kvm, nutanix, oci, openstack, vmware] AWS Provider Type. AWS Provider Type."
-        },
-        "azure": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "provider_choice",
-          "description": "Azure Provider Type. Azure Provider Type."
-        },
-        "baremetal": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "provider_choice",
-          "description": "Baremetal Provider Type. Baremetal Provider Type."
-        },
-        "block_all_services": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "blocked_services_choice",
-          "description": "[OneOf: block_all_services, blocked_services] Enable this option"
-        },
         "blocked_services": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "Disable node local services on this site."
+          "description": "[OneOf: blocked_services, default_blocked_services; Default: default_blocked_services] Disable node local services on this site."
         },
-        "custom_proxy": {
+        "bond_device_list": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "enterprise_proxy_choice",
-          "description": "[OneOf: custom_proxy, f5_proxy] Custom Enterprise Proxy. Custom Enterprise Proxy."
+          "oneof_group": "bond_choice",
+          "description": "[OneOf: bond_device_list, no_bond_devices; Default: no_bond_devices] Bond Devices List. List of bond devices for this fleet."
         },
-        "custom_proxy_bypass": {
+        "coordinates": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "proxy_bypass_choice",
-          "description": "[OneOf: custom_proxy_bypass, no_proxy_bypass; Default: no_proxy_bypass] Proxy Bypass. List of domains to bypass the proxy."
+          "description": "Coordinates of the site which provides the site physical location."
         },
-        "dc_cluster_group_sli": {
+        "custom_network_config": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "s2s_connectivity_sli_choice",
-          "description": "[OneOf: dc_cluster_group_sli, no_s2s_connectivity_sli; Default: no_s2s_connectivity_sli] Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
+          "oneof_group": "network_cfg_choice",
+          "description": "[OneOf: custom_network_config, default_network_config; Default: default_network_config] SmsNetworkConfiguration."
         },
-        "dc_cluster_group_slo": {
+        "default_blocked_services": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "s2s_connectivity_slo_choice",
-          "description": "[OneOf: dc_cluster_group_slo, no_s2s_connectivity_slo, site_mesh_group_on_slo; Default: no_s2s_connectivity_slo] Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
+          "oneof_group": "blocked_services_choice",
+          "description": "Enable this option"
+        },
+        "default_network_config": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "network_cfg_choice",
+          "description": "Enable this option"
         },
         "description": {
           "type": "string",
@@ -9874,69 +10478,6 @@
           "optional": true,
           "description": "A value of true will administratively disable the object."
         },
-        "disable_ha": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "node_ha_choice",
-          "description": "[OneOf: disable_ha, enable_ha; Default: disable_ha] Enable this option"
-        },
-        "disable_url_categorization": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "url_categorization_choice",
-          "description": "[OneOf: disable_url_categorization, enable_url_categorization; Default: disable_url_categorization] Enable this option"
-        },
-        "dns_ntp_config": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Specify DNS and NTP servers that will be used by the nodes in this Customer Edge site."
-        },
-        "enable_ha": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "node_ha_choice",
-          "description": "Enable this option"
-        },
-        "enable_url_categorization": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "url_categorization_choice",
-          "description": "Enable this option"
-        },
-        "equinix": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "provider_choice",
-          "description": "Equinix Provider Type. Equinix Provider Type."
-        },
-        "f5_proxy": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "enterprise_proxy_choice",
-          "description": "Enable this option"
-        },
-        "gcp": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "provider_choice",
-          "description": "GCP Provider Type. GCP Provider Type."
-        },
         "id": {
           "type": "string",
           "required": false,
@@ -9944,33 +10485,18 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
-        "kvm": {
+        "kubernetes_upgrade_drain": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "provider_choice",
-          "description": "KVM Provider Type. KVM Provider Type."
+          "description": "Specify how worker nodes within a site will be upgraded."
         },
         "labels": {
           "type": "map",
           "required": false,
           "optional": true,
           "description": "Labels is a user defined key value map that can be attached to resources for organization and filtering."
-        },
-        "load_balancing": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Section contains settings on the site that relate to Load Balancing functionality."
-        },
-        "local_vrf": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "There can be two local VRFs on each site. The Site Local Outside (SLO) local VRF is used to connect WAN side workloads to this site and to connect the site to F5 Distributed Cloud for management. All sites are required to have an SLO local VRF."
         },
         "log_receiver": {
           "type": "object",
@@ -9988,6 +10514,19 @@
           "oneof_group": "logs_receiver_choice",
           "description": "Enable this option"
         },
+        "master_node_configuration": {
+          "type": "list",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Configuration of master nodes .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "3",
+            "ves.io.schema.rules.repeated.num_items": "1,3"
+          }
+        },
         "name": {
           "type": "string",
           "required": true,
@@ -10002,61 +10541,13 @@
           "validation": "name",
           "description": "Namespace where the Securemesh Site will be created."
         },
-        "no_forward_proxy": {
+        "no_bond_devices": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "forward_proxy_choice",
+          "oneof_group": "bond_choice",
           "description": "Enable this option"
-        },
-        "no_network_policy": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "network_policy_choice",
-          "description": "Enable this option"
-        },
-        "no_proxy_bypass": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "proxy_bypass_choice",
-          "description": "Enable this option"
-        },
-        "no_s2s_connectivity_sli": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "s2s_connectivity_sli_choice",
-          "description": "Enable this option"
-        },
-        "no_s2s_connectivity_slo": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "s2s_connectivity_slo_choice",
-          "description": "Enable this option"
-        },
-        "nutanix": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "provider_choice",
-          "description": "Nutanix Provider Type. Nutanix Provider Type."
-        },
-        "oci": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "provider_choice",
-          "description": "OCI Provider Type. OCI Provider Type."
         },
         "offline_survivability_mode": {
           "type": "object",
@@ -10065,13 +10556,12 @@
           "is_block": true,
           "description": "Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7.."
         },
-        "openstack": {
+        "os": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "provider_choice",
-          "description": "Openstack Provider Type. Openstack Provider Type."
+          "description": "Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions."
         },
         "performance_enhancement_mode": {
           "type": "object",
@@ -10080,58 +10570,36 @@
           "is_block": true,
           "description": "Optimize the site for L3 or L7 traffic processing. L7 optimized is the default."
         },
-        "re_select": {
+        "sw": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Selection criteria to connect the site with F5 Distributed Cloud Regional Edge(s)."
+          "description": "Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions."
         },
-        "site_mesh_group_on_slo": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "s2s_connectivity_slo_choice",
-          "description": "Select how the site mesh group will be connected. By default, public IPs of the control nodes of the site will be used."
-        },
-        "software_settings": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Select OS and Software version for the site. All nodes in the site will run the same OS and Software version. These settings cannot be changed after the site is created."
-        },
-        "tunnel_dead_timeout": {
-          "type": "int64",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "Time interval, in millisec, within which any IPsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used."
-        },
-        "tunnel_type": {
+        "volterra_certified_hw": {
           "type": "string",
           "required": false,
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "[Enum: SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL|SITE_TO_SITE_TUNNEL_IPSEC|SITE_TO_SITE_TUNNEL_SSL] Tunnel encapsulation to be used between sites Tunnel can operate in both IPsec and SSL, with IPsec being prefered over SSL. Tunnel is of type IPsec Tunnel is of type SSL. Possible values are `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`, `SITE_TO_SITE_TUNNEL_IPSEC`, `SITE_TO_SITE_TUNNEL_SSL`. Defaults to `SITE_TO_SITE_TUNNEL_IPSEC_OR_SSL`."
+          "description": "Name for generic server certified hardware to form this Secure Mesh site.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.min_len": "1",
+            "ves.io.schema.rules.string.ves_object_name": "true"
+          }
         },
-        "upgrade_settings": {
-          "type": "object",
+        "worker_nodes": {
+          "type": "list",
           "required": false,
           "optional": true,
-          "is_block": true,
-          "description": "Upgrade Settings. Specify how a site will be upgraded."
-        },
-        "vmware": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "provider_choice",
-          "description": "VMware Provider Type. VMware Provider Type."
+          "description": "Worker Nodes. Names of worker nodes.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "128",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         }
       }
     },
@@ -10220,14 +10688,23 @@
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "[Enum: GDPR|CCPA|PIPEDA|LGPD|DPA_UK|PDPA_SG|APPI|HIPAA|CPRA_2023|CPA_CO|SOC2|PCI_DSS|ISO_IEC_27001|ISO_IEC_27701|EPRIVACY_DIRECTIVE|GLBA|SOX] Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`."
+          "description": "[Enum: GDPR|CCPA|PIPEDA|LGPD|DPA_UK|PDPA_SG|APPI|HIPAA|CPRA_2023|CPA_CO|SOC2|PCI_DSS|ISO_IEC_27001|ISO_IEC_27701|EPRIVACY_DIRECTIVE|GLBA|SOX] Select relevant compliance frameworks, such as GDPR, HIPAA, or PCI-DSS, to ensure monitoring under your sensitive data discovery. Possible values are `GDPR`, `CCPA`, `PIPEDA`, `LGPD`, `DPA_UK`, `PDPA_SG`, `APPI`, `HIPAA`, `CPRA_2023`, `CPA_CO`, `SOC2`, `PCI_DSS`, `ISO_IEC_27001`, `ISO_IEC_27701`, `EPRIVACY_DIRECTIVE`, `GLBA`, `SOX`.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.items.enum.defined_only": "true",
+            "ves.io.schema.rules.repeated.items.enum.not_in": "[0]",
+            "ves.io.schema.rules.repeated.max_items": "17",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "custom_data_types": {
           "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Select your custom data types to be monitored in the API discovery."
+          "description": "Select your custom data types to be monitored in the API discovery.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "description": {
           "type": "string",
@@ -10245,7 +10722,12 @@
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery."
+          "description": "Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "100",
+            "ves.io.schema.rules.repeated.unique": "true",
+            "ves.io.schema.rules.string.max_len": "64"
+          }
         },
         "id": {
           "type": "string",
@@ -10401,7 +10883,10 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "server_choice",
-          "description": "The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is.."
+          "description": "The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is..",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_bytes": "256"
+          }
         },
         "server_name_matcher": {
           "type": "object",
@@ -10522,7 +11007,10 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name."
+          "description": "List of predicates for all POST args that need to be matched. The criteria for matching each arg are described in individual instances of ArgMatcherType. The actual arg values are extracted from the request API as a list of strings for each arg selector name.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "16"
+          }
         },
         "asn_list": {
           "type": "object",
@@ -10561,7 +11049,10 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "client_choice",
-          "description": "The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name."
+          "description": "The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_bytes": "256"
+          }
         },
         "client_name_matcher": {
           "type": "object",
@@ -10584,7 +11075,10 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name."
+          "description": "List of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "16"
+          }
         },
         "description": {
           "type": "string",
@@ -10618,7 +11112,10 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type."
+          "description": "List of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "16"
+          }
         },
         "http_method": {
           "type": "object",
@@ -10671,7 +11168,10 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings."
+          "description": "List of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "16"
+          }
         },
         "label_matcher": {
           "type": "object",
@@ -10726,7 +11226,10 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query.."
+          "description": "List of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query..",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "16"
+          }
         },
         "request_constraints": {
           "type": "object",
@@ -10760,100 +11263,16 @@
       }
     },
     "site": {
-      "description": "Manages a Site resource in F5 Distributed Cloud for secure mesh site specification. configuration.",
+      "description": "Manages virtual site object in given namespace. in F5 Distributed Cloud.",
       "category": "Infrastructure",
       "tier": "Standard",
       "import_format": "namespace/name",
-      "oneof_groups": {
-        "blocked_services_choice": {
-          "fields": [
-            "blocked_services",
-            "default_blocked_services"
-          ],
-          "default": "default_blocked_services"
-        },
-        "bond_choice": {
-          "fields": [
-            "bond_device_list",
-            "no_bond_devices"
-          ],
-          "default": "no_bond_devices"
-        },
-        "logs_receiver_choice": {
-          "fields": [
-            "log_receiver",
-            "logs_streaming_disabled"
-          ]
-        },
-        "network_cfg_choice": {
-          "fields": [
-            "custom_network_config",
-            "default_network_config"
-          ],
-          "default": "default_network_config"
-        }
-      },
       "attributes": {
-        "address": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "Site's geographical address that can be used to determine its latitude and longitude."
-        },
         "annotations": {
           "type": "map",
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
-        },
-        "blocked_services": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "blocked_services_choice",
-          "description": "[OneOf: blocked_services, default_blocked_services; Default: default_blocked_services] Disable node local services on this site."
-        },
-        "bond_device_list": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "bond_choice",
-          "description": "[OneOf: bond_device_list, no_bond_devices; Default: no_bond_devices] Bond Devices List. List of bond devices for this fleet."
-        },
-        "coordinates": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Coordinates of the site which provides the site physical location."
-        },
-        "custom_network_config": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "network_cfg_choice",
-          "description": "[OneOf: custom_network_config, default_network_config; Default: default_network_config] SmsNetworkConfiguration."
-        },
-        "default_blocked_services": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "blocked_services_choice",
-          "description": "Enable this option"
-        },
-        "default_network_config": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "network_cfg_choice",
-          "description": "Enable this option"
         },
         "description": {
           "type": "string",
@@ -10874,41 +11293,11 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
-        "kubernetes_upgrade_drain": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Specify how worker nodes within a site will be upgraded."
-        },
         "labels": {
           "type": "map",
           "required": false,
           "optional": true,
           "description": "Labels is a user defined key value map that can be attached to resources for organization and filtering."
-        },
-        "log_receiver": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "logs_receiver_choice",
-          "description": "[OneOf: log_receiver, logs_streaming_disabled] Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
-        },
-        "logs_streaming_disabled": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "logs_receiver_choice",
-          "description": "Enable this option"
-        },
-        "master_node_configuration": {
-          "type": "list",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Configuration of master nodes ."
         },
         "name": {
           "type": "string",
@@ -10924,55 +11313,20 @@
           "validation": "name",
           "description": "Namespace where the Site will be created."
         },
-        "no_bond_devices": {
+        "site_selector": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "bond_choice",
-          "description": "Enable this option"
+          "description": "Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects."
         },
-        "offline_survivability_mode": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7.."
-        },
-        "os": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions."
-        },
-        "performance_enhancement_mode": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Optimize the site for L3 or L7 traffic processing. L7 optimized is the default."
-        },
-        "sw": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions."
-        },
-        "volterra_certified_hw": {
+        "site_type": {
           "type": "string",
           "required": false,
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Name for generic server certified hardware to form this Secure Mesh site."
-        },
-        "worker_nodes": {
-          "type": "list",
-          "required": false,
-          "optional": true,
-          "description": "Worker Nodes. Names of worker nodes."
+          "description": "[Enum: INVALID|REGIONAL_EDGE|CUSTOMER_EDGE|NGINX_ONE] Site Type which can either RE or CE Invalid type of site Regional Edge site Customer Edge site. Possible values are `INVALID`, `REGIONAL_EDGE`, `CUSTOMER_EDGE`, `NGINX_ONE`."
         }
       },
       "dependencies": {
@@ -11096,7 +11450,10 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Set of sites for which this mesh group config is valid. If 'Type' is Spoke, then it gives set of spoke sites. If 'Type' is Hub, then it gives set of hub sites."
+          "description": "Set of sites for which this mesh group config is valid. If 'Type' is Spoke, then it gives set of spoke sites. If 'Type' is Hub, then it gives set of hub sites.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "1"
+          }
         }
       },
       "dependencies": {
@@ -11192,7 +11549,13 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Configure subnet parameters per site ."
+          "description": "Configure subnet parameters per site .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "1",
+            "ves.io.schema.rules.repeated.min_items": "1"
+          }
         }
       }
     },
@@ -11342,7 +11705,12 @@
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "List of Domains (host/authority header) that will be matched to this Load Balancer. Supported Domains and search order: 1. Exact Domain names: www.example.com. 2."
+          "description": "List of Domains (host/authority header) that will be matched to this Load Balancer. Supported Domains and search order: 1. Exact Domain names: www.example.com. 2.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.items.string.vh_domain": "true",
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "hash_policy_choice_least_active": {
           "type": "object",
@@ -11389,7 +11757,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "The amount of time that a stream can exist without upstream or downstream activity, in milliseconds."
+          "description": "The amount of time that a stream can exist without upstream or downstream activity, in milliseconds.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "4147200000"
+          }
         },
         "labels": {
           "type": "map",
@@ -11405,7 +11776,10 @@
           "plan_modifier": "UseStateForUnknown",
           "validation": "port",
           "oneof_group": "port_choice",
-          "description": "[OneOf: listen_port, port_ranges] Listen Port for this load balancer."
+          "description": "[OneOf: listen_port, port_ranges] Listen Port for this load balancer.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "65535"
+          }
         },
         "name": {
           "type": "string",
@@ -11442,7 +11816,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Origin pools and weights used for this load balancer."
+          "description": "Origin pools and weights used for this load balancer.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "16",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "port_ranges": {
           "type": "string",
@@ -11451,7 +11829,13 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "port_choice",
-          "description": "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'."
+          "description": "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "512",
+            "ves.io.schema.rules.string.max_ports": "64",
+            "ves.io.schema.rules.string.min_len": "1",
+            "ves.io.schema.rules.string.unique_port_range_list": "true"
+          }
         },
         "retract_cluster": {
           "type": "object",
@@ -11636,7 +12020,11 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Trusted CA certificates for validating certificates."
+          "description": "Trusted CA certificates for validating certificates.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "512000",
+            "ves.io.schema.rules.string.truststore_url": "true"
+          }
         }
       }
     },
@@ -11820,7 +12208,12 @@
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "List of domains (host/authority header) that will be matched to this load balancer."
+          "description": "List of domains (host/authority header) that will be matched to this load balancer.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.items.string.hostname": "true",
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "enable_per_packet_load_balancing": {
           "type": "bool",
@@ -11867,7 +12260,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "The amount of time that a session can exist without upstream or downstream activity, in milliseconds."
+          "description": "The amount of time that a session can exist without upstream or downstream activity, in milliseconds.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "30000"
+          }
         },
         "labels": {
           "type": "map",
@@ -11883,7 +12279,10 @@
           "plan_modifier": "UseStateForUnknown",
           "validation": "port",
           "oneof_group": "port_choice",
-          "description": "[OneOf: listen_port, port_ranges] Listen Port for this load balancer."
+          "description": "[OneOf: listen_port, port_ranges] Listen Port for this load balancer.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "65535"
+          }
         },
         "name": {
           "type": "string",
@@ -11904,7 +12303,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Origin pools with weights and priorities used for this load balancer."
+          "description": "Origin pools with weights and priorities used for this load balancer.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "16",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "port_ranges": {
           "type": "string",
@@ -11913,7 +12316,13 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "port_choice",
-          "description": "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'."
+          "description": "A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "512",
+            "ves.io.schema.rules.string.max_ports": "64",
+            "ves.io.schema.rules.string.min_len": "1",
+            "ves.io.schema.rules.string.unique_port_range_list": "true"
+          }
         },
         "udp": {
           "type": "object",
@@ -11934,7 +12343,14 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of allowed USB devices ."
+          "description": "List of allowed USB devices .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.items.message.required_one_nonzero_field": "true",
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.min_items": "1"
+          }
         },
         "annotations": {
           "type": "map",
@@ -12037,7 +12453,14 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Ordered list of rules that are evaluated sequentially against the input fields extracted from an API request in order to determine a user identifier. Evaluation of the rules is terminated once a user identifier has been extracted."
+          "description": "Ordered list of rules that are evaluated sequentially against the input fields extracted from an API request in order to determine a user identifier. Evaluation of the rules is terminated once a user identifier has been extracted.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "4",
+            "ves.io.schema.rules.repeated.min_items": "1",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         }
       }
     },
@@ -12124,7 +12547,10 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "server_header_choice",
-          "description": "[OneOf: append_server_name, default_header, pass_through, server_name; Default: default_header] Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed."
+          "description": "[OneOf: append_server_name, default_header, pass_through, server_name; Default: default_header] Specifies the value to be used for Server header if it is not already present. If Server Header is already present it is not overwritten. It is just passed.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "8096"
+          }
         },
         "authentication": {
           "type": "object",
@@ -12169,7 +12595,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed."
+          "description": "The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "600000"
+          }
         },
         "cors_policy": {
           "type": "object",
@@ -12190,7 +12619,14 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx.."
+          "description": "Map of integer error codes as keys and string values that can be used to provide custom HTTP pages for each error code. Key of the map can be either response code class or HTTP Error code. Response code classes for key is configured as follows 3 -- for 3xx response code class 4 -- for 4xx..",
+          "validation_rules": {
+            "ves.io.schema.rules.map.keys.uint32.gte": "3",
+            "ves.io.schema.rules.map.keys.uint32.lte": "599",
+            "ves.io.schema.rules.map.max_pairs": "16",
+            "ves.io.schema.rules.map.values.string.max_len": "65536",
+            "ves.io.schema.rules.map.values.string.uri_ref": "true"
+          }
         },
         "default_header": {
           "type": "object",
@@ -12248,7 +12684,12 @@
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "List of domain names matched to this virtual host for routing incoming requests. Supports wildcard patterns like *.example.com for subdomain matching."
+          "description": "List of domain names matched to this virtual host for routing incoming requests. Supports wildcard patterns like *.example.com for subdomain matching.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.items.string.vh_domain": "true",
+            "ves.io.schema.rules.repeated.max_items": "33",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "dynamic_reverse_proxy": {
           "type": "object",
@@ -12307,7 +12748,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "The maximum request header size in KiB for incoming connections. If un-configured, the default max request headers allowed is 60 KiB. Requests that exceed this limit will receive a 431 response."
+          "description": "The maximum request header size in KiB for incoming connections. If un-configured, the default max request headers allowed is 60 KiB. Requests that exceed this limit will receive a 431 response.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.lte": "96"
+          }
         },
         "name": {
           "type": "string",
@@ -12368,59 +12812,98 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting."
+          "description": "References to ip_prefix_set objects. Requests from source IP addresses that are covered by one of the allowed IP Prefixes are not subjected to rate limiting.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "4"
+          }
         },
         "request_cookies_to_add": {
           "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied."
+          "description": "Cookies are key-value pairs to be added to HTTP request being routed towards upstream. Cookies specified at this level are applied after cookies from matched Route are applied.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "request_cookies_to_remove": {
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "List of keys of Cookies to be removed from the HTTP request being sent towards upstream."
+          "description": "List of keys of Cookies to be removed from the HTTP request being sent towards upstream.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.items.string.max_bytes": "256",
+            "ves.io.schema.rules.repeated.items.string.min_bytes": "1",
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "request_headers_to_add": {
           "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied."
+          "description": "Headers are key-value pairs to be added to HTTP request being routed towards upstream. Headers specified at this level are applied after headers from matched Route are applied.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "request_headers_to_remove": {
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "List of keys of Headers to be removed from the HTTP request being sent towards upstream."
+          "description": "List of keys of Headers to be removed from the HTTP request being sent towards upstream.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "response_cookies_to_add": {
           "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied."
+          "description": "Cookies are name-value pairs along with optional attribute parameters to be added to HTTP response being sent towards downstream. Cookies specified at this level are applied after cookies from matched Route are applied.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "response_cookies_to_remove": {
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed."
+          "description": "List of name of Cookies to be removed from the HTTP response being sent towards downstream. Entire set-cookie header will be removed.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.items.string.max_bytes": "256",
+            "ves.io.schema.rules.repeated.items.string.min_bytes": "1",
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "response_headers_to_add": {
           "type": "list",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied."
+          "description": "Headers are key-value pairs to be added to HTTP response being sent towards downstream. Headers specified at this level are applied after headers from matched Route are applied.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "response_headers_to_remove": {
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "List of keys of Headers to be removed from the HTTP response being sent towards downstream."
+          "description": "List of keys of Headers to be removed from the HTTP response being sent towards downstream.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "32",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         },
         "retry_policy": {
           "type": "object",
@@ -12434,7 +12917,10 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "HTTP routing rules that match incoming requests based on path, headers, or query parameters and forward them to appropriate backend origin pools."
+          "description": "HTTP routing rules that match incoming requests based on path, headers, or query parameters and forward them to appropriate backend origin pools.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "256"
+          }
         },
         "sensitive_data_policy": {
           "type": "list",
@@ -12450,7 +12936,10 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "oneof_group": "server_header_choice",
-          "description": "Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header."
+          "description": "Specifies the value to be used for Server header inserted in responses. This will overwrite existing values if any for Server Header.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "8096"
+          }
         },
         "slow_ddos_mitigation": {
           "type": "object",
@@ -12480,7 +12969,10 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited."
+          "description": "Reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "1"
+          }
         },
         "waf_type": {
           "type": "object",
@@ -12590,7 +13082,11 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "List of static routes on the virtual network."
+          "description": "List of static routes on the virtual network.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "165",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         }
       },
       "dependencies": {
@@ -12764,7 +13260,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Site's geographical address that can be used to determine its latitude and longitude."
+          "description": "Site's geographical address that can be used to determine its latitude and longitude.",
+          "validation_rules": {
+            "ves.io.schema.rules.string.max_len": "256"
+          }
         },
         "allow_all_usb": {
           "type": "object",
@@ -12975,7 +13474,12 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Configuration of master nodes ."
+          "description": "Configuration of master nodes .",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "3"
+          }
         },
         "name": {
           "type": "string",
@@ -13058,13 +13562,23 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Name for generic server certified hardware to form this App Stack site."
+          "description": "Name for generic server certified hardware to form this App Stack site.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.string.min_len": "1",
+            "ves.io.schema.rules.string.ves_object_name": "true"
+          }
         },
         "worker_nodes": {
           "type": "list",
           "required": false,
           "optional": true,
-          "description": "Worker Nodes. Names of worker nodes."
+          "description": "Worker Nodes. Names of worker nodes.",
+          "validation_rules": {
+            "ves.io.schema.rules.repeated.max_items": "128",
+            "ves.io.schema.rules.repeated.unique": "true"
+          }
         }
       }
     },
@@ -13122,25 +13636,21 @@
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "WAF Exclusion Rules. An ordered list of rules."
+          "description": "WAF Exclusion Rules. An ordered list of rules.",
+          "minimum_config_required": true,
+          "validation_rules": {
+            "ves.io.schema.rules.message.required": "true",
+            "ves.io.schema.rules.repeated.max_items": "256",
+            "ves.io.schema.rules.repeated.unique_metadata_name": "true"
+          }
         }
       }
     },
     "workload": {
-      "description": "Manages a Workload resource in F5 Distributed Cloud for workload. configuration.",
+      "description": "Manages workload_flavor. in F5 Distributed Cloud.",
       "category": "Container",
       "tier": "Advanced",
       "import_format": "namespace/name",
-      "oneof_groups": {
-        "workload_choice": {
-          "fields": [
-            "job",
-            "service",
-            "simple_service",
-            "stateful_service"
-          ]
-        }
-      },
       "attributes": {
         "annotations": {
           "type": "map",
@@ -13160,6 +13670,17 @@
           "optional": true,
           "description": "A value of true will administratively disable the object."
         },
+        "ephemeral_storage": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.ranges": "1-6000"
+          }
+        },
         "id": {
           "type": "string",
           "required": false,
@@ -13167,19 +13688,22 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
-        "job": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "workload_choice",
-          "description": "[OneOf: job, service, simple_service, stateful_service] Jobs are used for running batch processing tasks and run to completion. Jobs are generally used for tasks like report generation, billing, parallel data processing, ETL processing, etc."
-        },
         "labels": {
           "type": "map",
           "required": false,
           "optional": true,
           "description": "Labels is a user defined key value map that can be attached to resources for organization and filtering."
+        },
+        "memory": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Memory in MiB (mebibyte) allocated for the workload_flavor.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.ranges": "1-32768"
+          }
         },
         "name": {
           "type": "string",
@@ -13195,29 +13719,17 @@
           "validation": "name",
           "description": "Namespace where the Workload will be created."
         },
-        "service": {
-          "type": "object",
+        "vcpus": {
+          "type": "int64",
           "required": false,
           "optional": true,
-          "is_block": true,
-          "oneof_group": "workload_choice",
-          "description": "Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. Replicas of a service are fungible and do not have a stable network identity or storage. Common examples of services are web servers, application servers.."
-        },
-        "simple_service": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "workload_choice",
-          "description": "SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP."
-        },
-        "stateful_service": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "workload_choice",
-          "description": "StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. Stateful service are used for distributed stateful applications like cassandra, mongodb, redis, etc."
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core.",
+          "validation_rules": {
+            "ves.io.schema.rules.float.gte": "0.0",
+            "ves.io.schema.rules.float.lte": "8.0"
+          }
         }
       },
       "dependencies": {
@@ -13257,7 +13769,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor."
+          "description": "Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.ranges": "1-6000"
+          }
         },
         "id": {
           "type": "string",
@@ -13278,7 +13793,10 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Memory in MiB (mebibyte) allocated for the workload_flavor."
+          "description": "Memory in MiB (mebibyte) allocated for the workload_flavor.",
+          "validation_rules": {
+            "ves.io.schema.rules.uint32.ranges": "1-32768"
+          }
         },
         "name": {
           "type": "string",
@@ -13300,7 +13818,11 @@
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core."
+          "description": "Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core.",
+          "validation_rules": {
+            "ves.io.schema.rules.float.gte": "0.0",
+            "ves.io.schema.rules.float.lte": "8.0"
+          }
         }
       }
     }

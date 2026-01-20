@@ -1,0 +1,364 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Vpm And Node Management",
+    "description": "APIs for configuring node policies, fleet management, and lifecycle operations. Supports node registration, configuration deployment, and status monitoring across distributed infrastructure.",
+    "version": "2.0.39",
+    "contact": {
+      "name": "F5 Distributed Cloud",
+      "url": "https://docs.cloud.f5.com"
+    },
+    "license": {
+      "name": "Proprietary",
+      "url": "https://www.f5.com/company/policies/eula"
+    },
+    "x-f5xc-description-long": "APIs for configuring node policies, fleet management, and lifecycle operations. Supports node registration, configuration deployment, and status monitoring across distributed infrastructure.",
+    "summary": "Lifecycle control, fleet configuration, and deployment policies for distributed node management.",
+    "x-f5xc-cli-domain": "vpm_and_node_management",
+    "x-f5xc-best-practices": {
+      "common_errors": [
+        {
+          "code": 400,
+          "message": "Invalid request body",
+          "resolution": "Validate JSON structure and required fields before submission",
+          "prevention": "Use schema validation from OpenAPI spec"
+        },
+        {
+          "code": 401,
+          "message": "Authentication failed",
+          "resolution": "Verify API token is valid and not expired",
+          "prevention": "Use environment variables for token management"
+        },
+        {
+          "code": 403,
+          "message": "Permission denied",
+          "resolution": "Check user role and namespace permissions",
+          "prevention": "Verify RBAC policies before operations"
+        },
+        {
+          "code": 404,
+          "message": "Resource not found",
+          "resolution": "Verify resource name and namespace exist",
+          "prevention": "List resources before attempting operations"
+        },
+        {
+          "code": 409,
+          "message": "Resource already exists",
+          "resolution": "Use unique name or delete existing resource",
+          "prevention": "Check existence before creation"
+        },
+        {
+          "code": 429,
+          "message": "Rate limit exceeded",
+          "resolution": "Implement exponential backoff and retry logic",
+          "prevention": "Batch operations and add delays between requests"
+        }
+      ],
+      "security_notes": [
+        "Always use HTTPS for all API communications",
+        "Store API tokens securely, never in source code",
+        "Rotate API tokens regularly following security policies"
+      ],
+      "performance_tips": [
+        "Use pagination for large result sets",
+        "Batch related operations when possible",
+        "Cache read-only responses appropriately"
+      ]
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{tenant}.{console_url}/api/v1/{domain_prefix}/{environment}/{region}/namespaces/{namespace}",
+      "description": "F5 Distributed Cloud Console",
+      "variables": {
+        "tenant": {
+          "default": "example-corp",
+          "description": "F5 Distributed Cloud tenant identifier (e.g., my-company, acme-inc)"
+        },
+        "console_url": {
+          "default": "console.ves.volterra.io",
+          "description": "Console URL base (e.g., console.ves.volterra.io for production, staging.volterra.us for staging)",
+          "enum": [
+            "console.ves.volterra.io",
+            "staging.volterra.us"
+          ]
+        },
+        "environment": {
+          "default": "production",
+          "description": "Environment designation (production, staging, development)",
+          "enum": [
+            "production",
+            "staging",
+            "development"
+          ]
+        },
+        "domain_prefix": {
+          "default": "api",
+          "description": "Domain naming prefix for consistent naming conventions"
+        },
+        "region": {
+          "default": "us-east-1",
+          "description": "Geographic region for API deployment (e.g., us-east-1, eu-west-1)"
+        },
+        "namespace": {
+          "default": "default",
+          "description": "Kubernetes-style namespace for environment separation (e.g., 'default', 'production', 'staging')"
+        }
+      }
+    }
+  ],
+  "security": [
+    {
+      "ApiToken": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Other",
+      "description": "Miscellaneous operations"
+    }
+  ],
+  "paths": {
+    "/api/data/namespaces/system/upgrade_status": {
+      "get": {
+        "summary": "Upgrade Status.",
+        "description": "Request to GET the upgrade status.",
+        "operationId": "ves.io.schema.maintenance_status.CustomAPI.GetUpgradeStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/maintenance_statusGetUpgradeStatusResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-maintenance_status-customapi-getupgradestatus"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.maintenance_status.CustomAPI.GetUpgradeStatus",
+        "tags": [
+          "Other"
+        ],
+        "x-f5xc-operation-metadata": {
+          "purpose": "Resource retrieval operation",
+          "required_fields": [],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": []
+          },
+          "side_effects": {},
+          "danger_level": "low",
+          "confirmation_required": false,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "moderate",
+            "resource_usage": "moderate"
+          }
+        },
+        "x-f5xc-danger-level": "low",
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 200,
+          "p95_ms": 800,
+          "p99_ms": 2000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "x-displayname": "F5xC Upgrade Status.",
+      "x-ves-proto-service": "ves.io.schema.maintenance_status.CustomAPI",
+      "x-ves-proto-service-type": "CUSTOM_PUBLIC"
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiToken": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "description": "API Token authentication. Format: 'APIToken <your-token>'"
+      }
+    },
+    "schemas": {
+      "maintenance_statusGetUpgradeStatusResponse": {
+        "type": "object",
+        "description": "Response message for Upgrade Status Request.\nResponse contain different states in upgrade process.",
+        "title": "Upgrade Status Response.",
+        "x-displayname": "Upgrade Status Response.",
+        "x-ves-oneof-field-upgrade_state": "[\"upgrade_in_progress\",\"upgrade_in_progress_with_config_downtime\",\"upgrade_not_in_progress\"]",
+        "x-ves-proto-message": "ves.io.schema.maintenance_status.GetUpgradeStatusResponse",
+        "properties": {
+          "upgrade_in_progress": {
+            "$ref": "#/components/schemas/schemaEmpty"
+          },
+          "upgrade_in_progress_with_config_downtime": {
+            "$ref": "#/components/schemas/schemaEmpty"
+          },
+          "upgrade_not_in_progress": {
+            "$ref": "#/components/schemas/schemaEmpty"
+          }
+        },
+        "x-f5xc-description-short": "Response message for Upgrade Status Request. Response contain different states in upgrade process.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for maintenance_statusGetUpgradeStatusResponse",
+          "required_fields": [
+            "upgrade_in_progress",
+            "upgrade_in_progress_with_config_downtime",
+            "upgrade_not_in_progress"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for maintenance_statusGetUpgradeStatusResponse\nmetadata:\n  name: example\n  namespace: default\nspec:\n  upgrade_in_progress: value\n  upgrade_in_progress_with_config_downtime: value\n  upgrade_not_in_progress: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"upgrade_in_progress\": \"value\",\n    \"upgrade_in_progress_with_config_downtime\": \"value\",\n    \"upgrade_not_in_progress\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/maintenance_statuses\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "ce_management"
+      },
+      "schemaEmpty": {
+        "type": "object",
+        "description": "This can be used for messages where no values are needed.",
+        "title": "Empty",
+        "x-displayname": "Empty",
+        "x-ves-proto-message": "ves.io.schema.Empty",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaEmpty",
+          "required_fields": [],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaEmpty\nmetadata:\n  name: example\n  namespace: default",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_empties\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      }
+    },
+    "responses": {},
+    "parameters": {},
+    "requestBodies": {}
+  }
+}

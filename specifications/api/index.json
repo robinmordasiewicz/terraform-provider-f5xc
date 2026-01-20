@@ -1,0 +1,4649 @@
+{
+  "version": "2.0.39",
+  "timestamp": "2026-01-19T05:53:55.907942+00:00",
+  "specifications": [
+    {
+      "domain": "admin_console_and_ui",
+      "title": "Admin Console And Ui",
+      "description": "Dashboard customization through namespace-bounded asset libraries. Storage systems for branding resources, layout templates, and interactive widgets. Catalog organization with system object references tracking modification history and deployment status. Schema enforcement ensuring configuration validity across tenant hierarchies and environment boundaries.",
+      "x-f5xc-description-short": "Static UI components and console assets.",
+      "x-f5xc-description-medium": "Namespace-scoped visual elements with versioning. Custom widget deployment and catalog management for portal surfaces.",
+      "file": "admin_console_and_ui.json",
+      "path_count": 2,
+      "schema_count": 16,
+      "x-f5xc-complexity": "simple",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Platform",
+      "x-f5xc-use-cases": [
+        "Manage static UI components for admin console",
+        "Deploy and retrieve UI assets within namespaces",
+        "Configure console interface elements",
+        "Manage custom UI component metadata"
+      ],
+      "x-f5xc-related-domains": [
+        "admin",
+        "system"
+      ],
+      "x-f5xc-icon": "🖥️",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238B5CF6'%3E%3Cpath d='M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v2H8v2h8v-2h-2v-2h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "ui_component",
+          "description": "UI component for console customization",
+          "description_short": "UI component",
+          "tier": "Standard",
+          "icon": "🎨",
+          "category": "Other",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "static_asset",
+          "description": "Static asset for UI resources",
+          "description_short": "Static asset",
+          "tier": "Standard",
+          "icon": "📁",
+          "category": "Other",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "ai_services",
+      "title": "Ai Services",
+      "description": "Query handling through inference routing with production and test modes. Positive and negative quality markers with detailed categorization capture assistant performance. Streaming connections support authenticated access, subscription lifecycles, and feature flags. IP provisioning services allocate infrastructure resources for model workloads across distributed systems.",
+      "x-f5xc-description-short": "AI assistant queries and feedback collection.",
+      "x-f5xc-description-medium": "Natural language processing with quality signals and anomaly monitoring. Token authentication for data stream subscriptions.",
+      "file": "ai_services.json",
+      "path_count": 11,
+      "schema_count": 66,
+      "x-f5xc-complexity": "simple",
+      "x-f5xc-is-preview": true,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "AI",
+      "x-f5xc-use-cases": [
+        "Access AI-powered features",
+        "Configure AI assistant policies",
+        "Enable flow anomaly detection",
+        "Manage AI data collection"
+      ],
+      "x-f5xc-related-domains": [],
+      "x-f5xc-icon": "🤖",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366F1'%3E%3Cpath d='M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12zM12.5 8v4.25l3.5 2.08-.72 1.21L11 13V8h1.5z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "ai_policy",
+          "description": "AI policy for generative AI traffic control",
+          "description_short": "AI policy",
+          "tier": "Advanced",
+          "icon": "🤖",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "ai_gateway",
+          "description": "AI gateway for LLM API management",
+          "description_short": "AI gateway",
+          "tier": "Advanced",
+          "icon": "🚀",
+          "category": "API Management",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "ai_policy"
+            ]
+          },
+          "relationship_hints": [
+            "ai_policy: Policy for AI traffic control"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "api",
+      "title": "Api",
+      "description": "Structured classification systems with versioning support for contract evolution. Hierarchical groupings segment resources by operational role or security boundaries. Behavioral verification confirms authentication flows and permission constraints. Token and key safeguards protect sensitive credentials. Traffic inspection through connected load balancers and firewalls enables threat detection at network perimeters.",
+      "x-f5xc-description-short": "Interface definitions, schema validation, and grouping.",
+      "x-f5xc-description-medium": "Resource cataloging with automatic classification and security profiling. Organizational hierarchies segment access by function or protection policy.",
+      "file": "api.json",
+      "path_count": 45,
+      "schema_count": 299,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Security",
+      "x-f5xc-use-cases": [
+        "Discover and catalog APIs",
+        "Test API security and behavior",
+        "Manage API credentials",
+        "Define API groups and testing policies"
+      ],
+      "x-f5xc-related-domains": [
+        "waf",
+        "network_security"
+      ],
+      "x-f5xc-icon": "🔐",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23EF4444'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "api_definition",
+          "description": "API schema definition for discovery and protection",
+          "description_short": "API definition",
+          "tier": "Advanced",
+          "icon": "📄",
+          "category": "API Management",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "api_endpoint"
+            ]
+          },
+          "relationship_hints": [
+            "api_endpoint: Endpoints defined by this API"
+          ]
+        },
+        {
+          "name": "api_endpoint",
+          "description": "Individual API endpoint configuration and protection",
+          "description_short": "API endpoint",
+          "tier": "Advanced",
+          "icon": "🔌",
+          "category": "API Management",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "api_rate_limit"
+            ]
+          },
+          "relationship_hints": [
+            "api_rate_limit: Rate limiting for this endpoint"
+          ]
+        },
+        {
+          "name": "api_rate_limit",
+          "description": "API rate limiting configuration for traffic control",
+          "description_short": "API rate limit",
+          "tier": "Advanced",
+          "icon": "⏱️",
+          "category": "API Management",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ],
+      "x-f5xc-cli-metadata": {
+        "quick_start": {
+          "command": "curl $F5XC_API_URL/api/config/namespaces/default/api_catalogs -H 'Authorization: APIToken $F5XC_API_TOKEN'",
+          "description": "List all API catalogs in default namespace",
+          "expected_output": "JSON array of API catalog objects"
+        },
+        "common_workflows": [
+          {
+            "name": "Protect API with Security Policy",
+            "description": "Discover and protect APIs with WAF security policies",
+            "steps": [
+              {
+                "step": 1,
+                "command": "curl -X POST $F5XC_API_URL/api/config/namespaces/default/api_catalogs -H 'Authorization: APIToken $F5XC_API_TOKEN' -H 'Content-Type: application/json' -d '{...catalog_config...}'",
+                "description": "Create API catalog for API discovery and documentation"
+              },
+              {
+                "step": 2,
+                "command": "curl -X POST $F5XC_API_URL/api/config/namespaces/default/api_definitions -H 'Authorization: APIToken $F5XC_API_TOKEN' -H 'Content-Type: application/json' -d '{...api_config...}'",
+                "description": "Create API definition with security enforcement"
+              }
+            ],
+            "prerequisites": [
+              "API endpoints documented",
+              "Security policies defined",
+              "WAF rules configured"
+            ],
+            "expected_outcome": "APIs protected, violations logged and blocked"
+          }
+        ],
+        "troubleshooting": [
+          {
+            "problem": "API traffic blocked by security policy",
+            "symptoms": [
+              "HTTP 403 Forbidden",
+              "Requests rejected at edge"
+            ],
+            "diagnosis_commands": [
+              "curl $F5XC_API_URL/api/config/namespaces/default/api_definitions/{api} -H 'Authorization: APIToken $F5XC_API_TOKEN'",
+              "Check security policy enforcement rules"
+            ],
+            "solutions": [
+              "Review API definition and security policy rules",
+              "Adjust rule sensitivity to reduce false positives",
+              "Add exception rules for legitimate traffic patterns"
+            ]
+          }
+        ],
+        "icon": "🔐"
+      }
+    },
+    {
+      "domain": "authentication",
+      "title": "Authentication",
+      "description": "Identity and access management providing APIs for configuring identity providers, access policies, and user credentials. Supports MFA, identity provider integration, and lifecycle operations for credential management across distributed deployments.",
+      "x-f5xc-description-short": "Identity provider and access policy configuration.",
+      "x-f5xc-description-medium": "Identity management with provider integration, access policies, and credential lifecycle control.",
+      "file": "authentication.json",
+      "path_count": 14,
+      "schema_count": 39,
+      "x-f5xc-complexity": "simple",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Platform",
+      "x-f5xc-use-cases": [
+        "Configure authentication mechanisms",
+        "Manage OIDC and OAuth providers",
+        "Configure SCIM user provisioning",
+        "Manage API credentials and access",
+        "Configure account signup policies"
+      ],
+      "x-f5xc-related-domains": [
+        "system",
+        "users"
+      ],
+      "x-f5xc-icon": "🔑",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FBBF24'%3E%3Cpath d='M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "authentication_policy",
+          "description": "Authentication policy for user and API access",
+          "description_short": "Auth policy",
+          "tier": "Standard",
+          "icon": "🔐",
+          "category": "Identity",
+          "supports_logs": true,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "token",
+          "description": "API token for programmatic access",
+          "description_short": "Token",
+          "tier": "Standard",
+          "icon": "🎫",
+          "category": "Identity",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "api_credential",
+          "description": "API credential for service authentication",
+          "description_short": "API credential",
+          "tier": "Standard",
+          "icon": "🔑",
+          "category": "Identity",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "bigip",
+      "title": "Bigip",
+      "description": "On-premises appliance connector enabling iRule lifecycle operations and data group replication. APM policy coordination, virtual server configuration binding, and CNE linkage. Telemetry aggregation and health status monitoring across hybrid infrastructure deployments.",
+      "x-f5xc-description-short": "iRules, data groups, and APM integration.",
+      "x-f5xc-description-medium": "Legacy device orchestration with iRule scripts and data group synchronization. Virtual server bindings and metrics collection.",
+      "file": "bigip.json",
+      "path_count": 21,
+      "schema_count": 179,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Platform",
+      "x-f5xc-use-cases": [
+        "Manage BigIP F5 appliances",
+        "Configure iRule scripts",
+        "Manage data groups",
+        "Integrate BigIP CNE"
+      ],
+      "x-f5xc-related-domains": [
+        "marketplace"
+      ],
+      "x-f5xc-icon": "🏢",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23EF4444'%3E%3Cpath d='M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "bigip_pool",
+          "description": "BIG-IP pool for load balancing integration",
+          "description_short": "BIG-IP pool",
+          "tier": "Advanced",
+          "icon": "🎯",
+          "category": "Load Balancing",
+          "supports_logs": false,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "bigip_device",
+          "description": "BIG-IP device registration and management",
+          "description_short": "BIG-IP device",
+          "tier": "Advanced",
+          "icon": "🖥️",
+          "category": "Infrastructure",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "billing_and_usage",
+      "title": "Billing And Usage",
+      "description": "Subscription lifecycle with plan transitions and billing states. Payment method hierarchies supporting primary and secondary configurations. Invoice generation with PDF downloads and custom listing. Resource quotas per namespace with limit definitions and consumption metrics. Contact types for billing notifications and tenant deletion workflows.",
+      "x-f5xc-description-short": "Subscription plans, payment methods, and quotas.",
+      "x-f5xc-description-medium": "Plan transitions, invoicing, and resource consumption. Namespace-level quota limits and usage tracking.",
+      "file": "billing_and_usage.json",
+      "path_count": 24,
+      "schema_count": 101,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Platform",
+      "x-f5xc-use-cases": [
+        "Manage subscription plans and billing transitions",
+        "Configure payment methods and invoices",
+        "Track resource quota usage across namespaces",
+        "Monitor usage limits and capacity"
+      ],
+      "x-f5xc-related-domains": [
+        "system",
+        "users"
+      ],
+      "x-f5xc-icon": "💳",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'%3E%3Cpath d='M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "subscription",
+          "description": "Subscription for service entitlements",
+          "description_short": "Subscription",
+          "tier": "Standard",
+          "icon": "💳",
+          "category": "Other",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "quota",
+          "description": "Resource quota for usage limits",
+          "description_short": "Quota",
+          "tier": "Standard",
+          "icon": "📊",
+          "category": "Other",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "usage_report",
+          "description": "Usage report for consumption tracking",
+          "description_short": "Usage report",
+          "tier": "Standard",
+          "icon": "📈",
+          "category": "Other",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "blindfold",
+      "title": "Blindfold",
+      "description": "Public key retrieval and secret policy enforcement for encrypted data handling. Policy rules govern access with configurable matching and transformation actions. VoltShare integration provides decryption services, access counting, and audit log aggregation. Namespace-scoped policies enable fine-grained control over sensitive information with administrative overrides.",
+      "x-f5xc-description-short": "Secret encryption, key policies, and audit trails.",
+      "x-f5xc-description-medium": "Encryption key management with policy-based access controls. Audit logging and secure data protection.",
+      "file": "blindfold.json",
+      "path_count": 27,
+      "schema_count": 177,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Security",
+      "x-f5xc-use-cases": [
+        "Configure secret policies for encryption",
+        "Manage sensitive data encryption",
+        "Enforce data protection policies"
+      ],
+      "x-f5xc-related-domains": [
+        "client_side_defense",
+        "certificates"
+      ],
+      "x-f5xc-icon": "🔏",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366F1'%3E%3Cpath d='M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h2c0-1.66 1.34-3 3-3s3 1.34 3 3v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "blindfold_secret",
+          "description": "Encrypted secret using Blindfold encryption",
+          "description_short": "Blindfold secret",
+          "tier": "Standard",
+          "icon": "🔐",
+          "category": "Security",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "secret_policy",
+          "description": "Secret management policy configuration",
+          "description_short": "Secret policy",
+          "tier": "Standard",
+          "icon": "📋",
+          "category": "Security",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "policy_document",
+          "description": "Policy document for access control definitions",
+          "description_short": "Policy document",
+          "tier": "Standard",
+          "icon": "📄",
+          "category": "Security",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "bot_and_threat_defense",
+      "title": "Bot And Threat Defense",
+      "description": "Behavioral fingerprinting identifies automated clients through request patterns, mouse movements, and JavaScript execution. Threat categories classify attacks by type including credential stuffing, scraping, and denial-of-service. Defense instances apply per-namespace policies with configurable sensitivity thresholds and challenge actions. Provisioning handles integration credentials for third-party threat intelligence feeds.",
+      "x-f5xc-description-short": "Bot detection, threat categories, and defense instances.",
+      "x-f5xc-description-medium": "Threat classification with behavioral analysis and signature matching. Automated blocking for malicious traffic patterns.",
+      "file": "bot_and_threat_defense.json",
+      "path_count": 19,
+      "schema_count": 79,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Security",
+      "x-f5xc-use-cases": [
+        "Configure bot defense instances per namespace",
+        "Manage TPM threat categories for classification",
+        "Provision API keys for automated defense systems",
+        "Integrate threat intelligence services"
+      ],
+      "x-f5xc-related-domains": [
+        "bot_defense",
+        "shape",
+        "waf"
+      ],
+      "x-f5xc-icon": "🦠",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23EF4444'%3E%3Cpath d='M19.5 5.5 18 4l-1.5 1.5L18 7l1.5-1.5zM12 2v3m0 14v3m10-10h-3M5 12H2m15.5 6.5L18 20l1.5-1.5L18 17l-1.5 1.5zm-11 0L6 20l-1.5-1.5L6 17l-1.5 1.5zm0-11L6 4l-1.5 1.5L6 7 4.5 5.5zM12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "bot_defense_instance",
+          "description": "Bot defense instance for deployment",
+          "description_short": "Bot defense instance",
+          "tier": "Advanced",
+          "icon": "🤖",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "threat_category",
+          "description": "Threat category for classification",
+          "description_short": "Threat category",
+          "tier": "Advanced",
+          "icon": "🎯",
+          "category": "Security",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "cdn",
+      "title": "Cdn",
+      "description": "Content delivery networks with edge caching, geographic distribution, and cache management. Supports custom rules, asset purge operations, and performance analytics. Enables worldwide asset distribution, optimization, and delivery monitoring across regions and protocols.",
+      "x-f5xc-description-short": "Content delivery and edge caching networks.",
+      "x-f5xc-description-medium": "Global distribution with cache rules and purge operations. Performance monitoring and analytics.",
+      "file": "cdn.json",
+      "path_count": 26,
+      "schema_count": 618,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Networking",
+      "x-f5xc-use-cases": [
+        "Configure CDN load balancing",
+        "Manage content delivery network services",
+        "Configure caching policies",
+        "Manage data delivery and distribution"
+      ],
+      "x-f5xc-related-domains": [
+        "virtual"
+      ],
+      "x-f5xc-icon": "🚀",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F97316'%3E%3Cpath d='M12 2.5s4.5 2.04 4.5 10c0 3.22-1.67 5.6-3.25 7.08L12 22l-1.25-2.42C9.17 18.1 7.5 15.72 7.5 12.5c0-7.96 4.5-10 4.5-10zm0 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 14.5c0 1.22.57 2.36 1.44 3.22l1.76-1.76c-.43-.43-.7-1.01-.7-1.66 0-.25.04-.49.1-.72L5.21 12.1c-.13.77-.21 1.58-.21 2.4zm14 0c0-.82-.08-1.63-.21-2.4l-2.39 1.48c.06.23.1.47.1.72 0 .65-.27 1.23-.7 1.66l1.76 1.76c.87-.86 1.44-2 1.44-3.22z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "cdn_loadbalancer",
+          "description": "Content delivery network load balancer for edge caching",
+          "description_short": "CDN load balancer",
+          "tier": "Standard",
+          "icon": "🌍",
+          "category": "Load Balancing",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [
+              "cdn_origin_pool"
+            ],
+            "optional": []
+          },
+          "relationship_hints": [
+            "cdn_origin_pool: Origin servers for CDN content"
+          ]
+        },
+        {
+          "name": "cdn_origin_pool",
+          "description": "Origin server pool for CDN content sourcing",
+          "description_short": "CDN origin pool",
+          "tier": "Standard",
+          "icon": "🎯",
+          "category": "Load Balancing",
+          "supports_logs": false,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ],
+      "x-f5xc-examples": {
+        "cdn_loadbalancer": {
+          "minimal": {
+            "description": "Basic CDN distribution",
+            "use_case": "Simple content delivery",
+            "yaml": "metadata:\n  name: cdn-basic\n  namespace: default\nspec:\n  domains:\n    - cdn.example.com\n  origin_pool:\n    - pool:\n        name: origin-pool\n        namespace: default\n"
+          },
+          "production": {
+            "description": "Production CDN with caching and compression",
+            "use_case": "Production content delivery with optimization",
+            "yaml": "metadata:\n  name: cdn-prod\n  namespace: production\nspec:\n  domains:\n    - cdn.example.com\n    - assets.example.com\n  https_auto_cert:\n    add_hsts: true\n  origin_pool:\n    - pool:\n        name: origin-pool\n        namespace: production\n  cache_settings:\n    default_cache_action: CACHE\n    cache_ttl_default: 86400\n  compression_settings:\n    content_types:\n      - text/html\n      - text/css\n      - application/javascript\n    enable_gzip: true\n"
+          }
+        }
+      }
+    },
+    {
+      "domain": "ce_management",
+      "title": "Ce Management",
+      "description": "Customer edge node lifecycle through secure enrollment tokens and downloadable deployment images. Network connectivity options span exclusive, common, and administrative pathways with DHCP address pools supporting both IPv4 and IPv6. Bulk grouping consolidates configuration across distributed locations. Compatibility verification runs before software updates, with rollout tracking for version progression across the infrastructure.",
+      "x-f5xc-description-short": "Network interfaces, fleets, and site registration.",
+      "x-f5xc-description-medium": "Token-based provisioning with image downloads and pre-upgrade validation. Fleet grouping enables bulk operations across distributed locations.",
+      "file": "ce_management.json",
+      "path_count": 16,
+      "schema_count": 181,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Infrastructure",
+      "x-f5xc-use-cases": [
+        "Manage Customer Edge site lifecycle",
+        "Configure network interfaces and fleet settings",
+        "Handle site registration and token workflows",
+        "Execute site upgrades with pre-upgrade checks"
+      ],
+      "x-f5xc-related-domains": [
+        "customer_edge",
+        "sites"
+      ],
+      "x-f5xc-icon": "🔧",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F59E0B'%3E%3Cpath d='M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "site_config",
+          "description": "Site configuration for edge node settings",
+          "description_short": "Site config",
+          "tier": "Standard",
+          "icon": "⚙️",
+          "category": "Infrastructure",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "fleet_config",
+          "description": "Fleet configuration for multi-site management",
+          "description_short": "Fleet config",
+          "tier": "Standard",
+          "icon": "🚀",
+          "category": "Infrastructure",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "registration_token",
+          "description": "Registration token for site onboarding",
+          "description_short": "Registration token",
+          "tier": "Standard",
+          "icon": "🎫",
+          "category": "Infrastructure",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "certificates",
+      "title": "Certificates",
+      "description": "X.509 certificate chains with intermediate and root CA support. Trusted CA list bundles for client authentication and mTLS validation. CRL distribution points and OCSP stapling configuration. Certificate manifests link credentials to load balancers and gateways. Automatic expiration tracking and renewal notifications.",
+      "x-f5xc-description-short": "SSL/TLS chains, trusted CAs, and revocation lists.",
+      "x-f5xc-description-medium": "Certificate chains and trusted CA bundles. Revocation list management and manifest configuration for PKI operations.",
+      "file": "certificates.json",
+      "path_count": 16,
+      "schema_count": 80,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Security",
+      "x-f5xc-use-cases": [
+        "Manage SSL/TLS certificates",
+        "Configure trusted CAs",
+        "Manage certificate revocation lists (CRL)",
+        "Configure certificate manifests"
+      ],
+      "x-f5xc-related-domains": [
+        "blindfold",
+        "system"
+      ],
+      "x-f5xc-icon": "📜",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2314B8A6'%3E%3Cpath d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "certificate",
+          "description": "TLS certificate for secure HTTPS connections",
+          "description_short": "Certificate",
+          "tier": "Standard",
+          "icon": "📜",
+          "category": "Security",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "ca_certificate",
+          "description": "Certificate authority certificate for trust chain",
+          "description_short": "CA certificate",
+          "tier": "Standard",
+          "icon": "📜",
+          "category": "Security",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "certificate_chain",
+          "description": "Certificate chain for complete trust verification",
+          "description_short": "Certificate chain",
+          "tier": "Standard",
+          "icon": "🔗",
+          "category": "Security",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "cloud_infrastructure",
+      "title": "Cloud Infrastructure",
+      "description": "Hyperscaler integration supporting Amazon Web Services, Microsoft Azure, and Google Cloud Platform environments. Virtual network attachment workflows enable elastic compute provisioning with automatic reattachment capabilities. Edge authentication secrets for provider access. Segment telemetry and cross-region link reapplication for distributed deployments. Autonomous path synchronization across peered networks with real-time topology updates.",
+      "x-f5xc-description-short": "AWS, Azure, GCP connectors and VPC attachments.",
+      "x-f5xc-description-medium": "Multi-cloud provider connections with gateway peering and network path configuration. Credential vault integration and subnet enumeration.",
+      "file": "cloud_infrastructure.json",
+      "path_count": 31,
+      "schema_count": 222,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Infrastructure",
+      "x-f5xc-use-cases": [
+        "Connect to cloud providers (AWS, Azure, GCP)",
+        "Manage cloud credentials and authentication",
+        "Configure cloud connectivity and elastic provisioning",
+        "Link and manage cloud regions"
+      ],
+      "x-f5xc-related-domains": [
+        "sites",
+        "customer_edge"
+      ],
+      "x-f5xc-icon": "☁️",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2306B6D4'%3E%3Cpath d='M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "aws_vpc_site",
+          "description": "AWS VPC site deployment with edge node provisioning",
+          "description_short": "AWS VPC site",
+          "tier": "Standard",
+          "icon": "☁️",
+          "category": "Infrastructure",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [
+              "cloud_credentials"
+            ],
+            "optional": []
+          },
+          "relationship_hints": [
+            "cloud_credentials: AWS authentication for deployment"
+          ]
+        },
+        {
+          "name": "azure_vnet_site",
+          "description": "Azure VNet site deployment with edge node provisioning",
+          "description_short": "Azure VNet site",
+          "tier": "Standard",
+          "icon": "☁️",
+          "category": "Infrastructure",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [
+              "cloud_credentials"
+            ],
+            "optional": []
+          },
+          "relationship_hints": [
+            "cloud_credentials: Azure authentication for deployment"
+          ]
+        },
+        {
+          "name": "gcp_vpc_site",
+          "description": "Google Cloud VPC site deployment with edge node provisioning",
+          "description_short": "GCP VPC site",
+          "tier": "Standard",
+          "icon": "☁️",
+          "category": "Infrastructure",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [
+              "cloud_credentials"
+            ],
+            "optional": []
+          },
+          "relationship_hints": [
+            "cloud_credentials: GCP authentication for deployment"
+          ]
+        },
+        {
+          "name": "cloud_credentials",
+          "description": "Cloud provider authentication credentials for site deployment",
+          "description_short": "Cloud credentials",
+          "tier": "Standard",
+          "icon": "🔑",
+          "category": "Infrastructure",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "container_services",
+      "title": "Container Services",
+      "description": "Namespaced isolation with configurable limits and autoscaling policies. vK8s abstracts operational overhead while providing scheduling, persistent storage, and service mesh integration. Compute profiles specify CPU, memory, and GPU allocations for reproducible environments. Telemetry tracks consumption patterns across geographically distributed infrastructure nodes.",
+      "x-f5xc-description-short": "Containerized workloads and virtual Kubernetes clusters.",
+      "x-f5xc-description-medium": "Pod orchestration without full cluster complexity. Edge site execution, quota enforcement, and standardized compute profiles for distributed apps.",
+      "file": "container_services.json",
+      "path_count": 13,
+      "schema_count": 165,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Infrastructure",
+      "x-f5xc-use-cases": [
+        "Deploy XCCS (Container Services) namespaces for multi-tenant workloads",
+        "Manage container workloads with simplified orchestration",
+        "Configure distributed edge container deployments",
+        "Run containerized applications without full K8s complexity"
+      ],
+      "x-f5xc-related-domains": [
+        "managed_kubernetes",
+        "sites",
+        "service_mesh"
+      ],
+      "x-f5xc-icon": "📦",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238B5CF6'%3E%3Cpath d='M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18s-.41-.06-.57-.18l-7.9-4.44A.991.991 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18s.41.06.57.18l7.9 4.44c.32.17.53.5.53.88v9zM12 4.15L5 8.09v7.82l7 3.94 7-3.94V8.09l-7-3.94z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "virtual_k8s",
+          "description": "Virtual Kubernetes namespace for container workloads",
+          "description_short": "Virtual K8s",
+          "tier": "Advanced",
+          "icon": "☸️",
+          "category": "Container",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "workload"
+            ]
+          },
+          "relationship_hints": [
+            "workload: Container workloads in this namespace"
+          ]
+        },
+        {
+          "name": "workload",
+          "description": "Container workload deployment configuration",
+          "description_short": "Workload",
+          "tier": "Advanced",
+          "icon": "📦",
+          "category": "Container",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [
+              "virtual_k8s"
+            ],
+            "optional": []
+          },
+          "relationship_hints": [
+            "virtual_k8s: Namespace for workload deployment"
+          ]
+        },
+        {
+          "name": "pod_security_policy",
+          "description": "Pod security policy for container runtime constraints",
+          "description_short": "Pod security policy",
+          "tier": "Advanced",
+          "icon": "🔒",
+          "category": "Container",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "data_and_privacy_security",
+      "title": "Data And Privacy Security",
+      "description": "Pattern-based detection for personally identifiable information across request and response payloads. Custom data type definitions enable organization-specific classification beyond built-in PII categories. Regional log and metrics aggregation with Clickhouse, Elasticsearch, and Kafka export options. Geo-configuration policies enforce data residency requirements and jurisdiction-specific privacy regulations.",
+      "x-f5xc-description-short": "PII detection, data types, and regional compliance.",
+      "x-f5xc-description-medium": "Sensitive data policies with custom classification rules. LMA region configuration and geo-based compliance controls.",
+      "file": "data_and_privacy_security.json",
+      "path_count": 11,
+      "schema_count": 70,
+      "x-f5xc-complexity": "simple",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Security",
+      "x-f5xc-use-cases": [
+        "Configure sensitive data detection policies",
+        "Define custom data types for PII classification",
+        "Manage LMA region configurations",
+        "Integrate geo-configurations for compliance"
+      ],
+      "x-f5xc-related-domains": [
+        "blindfold",
+        "client_side_defense"
+      ],
+      "x-f5xc-icon": "🔐",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23EF4444'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "sensitive_data_policy",
+          "description": "Sensitive data policy for PII protection",
+          "description_short": "Sensitive data policy",
+          "tier": "Advanced",
+          "icon": "🔐",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "data_classification",
+          "description": "Data classification for content categorization",
+          "description_short": "Data classification",
+          "tier": "Advanced",
+          "icon": "🏷️",
+          "category": "Security",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "data_intelligence",
+      "title": "Data Intelligence",
+      "description": "APIs for configuring classification policies and resource management. Supports data classification, insight generation, and integration with security services across deployments.",
+      "x-f5xc-description-short": "Classification, insights, and policy management.",
+      "x-f5xc-description-medium": "Classification rules, resource policies, and insight generation for data analysis workflows.",
+      "file": "data_intelligence.json",
+      "path_count": 15,
+      "schema_count": 77,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Operations",
+      "x-f5xc-use-cases": [
+        "Analyze security and traffic data",
+        "Generate intelligent insights from logs",
+        "Configure data analytics policies"
+      ],
+      "x-f5xc-related-domains": [
+        "statistics",
+        "observability"
+      ],
+      "x-f5xc-icon": "🧠",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23A855F7'%3E%3Cpath d='M15.5 14l-1.34-4H9.84L8.5 14H6.09l4.01-10h3.8l4.01 10H15.5zm-4.5-5.4h2l.9-2.35.8 2.35h1.8l-1.45 1.05.55 1.7-1.4-1.02-1.4 1.02.55-1.7L11 8.6z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "analytics_query",
+          "description": "Analytics query for data analysis",
+          "description_short": "Analytics query",
+          "tier": "Standard",
+          "icon": "📊",
+          "category": "Monitoring",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "data_export",
+          "description": "Data export configuration for reporting",
+          "description_short": "Data export",
+          "tier": "Standard",
+          "icon": "📤",
+          "category": "Monitoring",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "ddos",
+      "title": "Ddos",
+      "description": "Network perimeter hardening through deny list configurations, rule group hierarchies, and encrypted tunnel endpoints. Attack signature detection identifies flood patterns while throttling mechanisms block anomalous traffic bursts. Tunnel health checks verify coverage across distributed segments. Priority ordering governs policy application for multi-layered screening approaches.",
+      "x-f5xc-description-short": "Volumetric attack mitigation and traffic scrubbing.",
+      "x-f5xc-description-medium": "Deny lists, firewall rule groups, and tunnel-based safeguards. Rate limiting and pattern analysis for network perimeter security.",
+      "file": "ddos.json",
+      "path_count": 59,
+      "schema_count": 223,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Security",
+      "x-f5xc-use-cases": [
+        "Configure DDoS protection policies",
+        "Monitor and analyze DDoS threats",
+        "Configure infrastructure protection"
+      ],
+      "x-f5xc-related-domains": [
+        "network_security",
+        "virtual"
+      ],
+      "x-f5xc-icon": "🛑",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23DC2626'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11H7v-2h10v2z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "ddos_protection",
+          "description": "DDoS protection configuration for traffic scrubbing",
+          "description_short": "DDoS protection",
+          "tier": "Advanced",
+          "icon": "🛡️",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "ddos_mitigation_rule"
+            ]
+          },
+          "relationship_hints": [
+            "ddos_mitigation_rule: Custom mitigation rules"
+          ]
+        },
+        {
+          "name": "ddos_mitigation_rule",
+          "description": "DDoS mitigation rule for attack response",
+          "description_short": "DDoS mitigation rule",
+          "tier": "Advanced",
+          "icon": "📋",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "dns",
+      "title": "Dns",
+      "description": "Name infrastructure with authoritative zones, A/AAAA/CNAME record types, and zone management. Supports zone transfers, security extensions, health-based routing, and delegation. Enables reliable name resolution, geographic load balancing, and name-based traffic steering across distributed environments.",
+      "x-f5xc-description-short": "Authoritative zones and record management.",
+      "x-f5xc-description-medium": "Name resolution with zone transfers and health checks. Record types and delegation support.",
+      "file": "dns.json",
+      "path_count": 45,
+      "schema_count": 251,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Networking",
+      "x-f5xc-use-cases": [
+        "Configure DNS load balancing",
+        "Manage DNS zones and domains",
+        "Configure DNS compliance policies",
+        "Manage resource record sets (RRSets)"
+      ],
+      "x-f5xc-related-domains": [
+        "virtual",
+        "network"
+      ],
+      "x-f5xc-icon": "🌐",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563EB'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "dns_zone",
+          "description": "Authoritative DNS zone with record management capabilities",
+          "description_short": "DNS zone",
+          "tier": "Standard",
+          "icon": "🌐",
+          "category": "DNS",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "dns_load_balancer"
+            ]
+          },
+          "relationship_hints": [
+            "dns_load_balancer: Geographic or weighted DNS routing"
+          ]
+        },
+        {
+          "name": "dns_domain",
+          "description": "DNS domain delegation and configuration settings",
+          "description_short": "DNS domain",
+          "tier": "Standard",
+          "icon": "🔗",
+          "category": "DNS",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "dns_load_balancer",
+          "description": "DNS-based traffic distribution with geographic routing and failover",
+          "description_short": "DNS load balancer",
+          "tier": "Standard",
+          "icon": "⚖️",
+          "category": "DNS",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [
+              "dns_zone"
+            ],
+            "optional": []
+          },
+          "relationship_hints": [
+            "dns_zone: Parent zone for DNS records"
+          ]
+        }
+      ],
+      "x-f5xc-cli-metadata": {
+        "quick_start": {
+          "command": "curl $F5XC_API_URL/api/config/namespaces/default/dns_domains -H 'Authorization: APIToken $F5XC_API_TOKEN'",
+          "description": "List all DNS domains configured in default namespace",
+          "expected_output": "JSON array of DNS domain objects"
+        },
+        "common_workflows": [
+          {
+            "name": "Create DNS Domain",
+            "description": "Configure DNS domain with load balancer backend",
+            "steps": [
+              {
+                "step": 1,
+                "command": "Create load balancer endpoint first (virtual domain)",
+                "description": "Ensure target load balancer exists"
+              },
+              {
+                "step": 2,
+                "command": "curl -X POST $F5XC_API_URL/api/config/namespaces/default/dns_domains -H 'Authorization: APIToken $F5XC_API_TOKEN' -H 'Content-Type: application/json' -d '{...dns_config...}'",
+                "description": "Create DNS domain pointing to load balancer"
+              }
+            ],
+            "prerequisites": [
+              "DNS domain registered",
+              "Load balancer configured",
+              "SOA and NS records prepared"
+            ],
+            "expected_outcome": "DNS domain in Active status, queries resolving to load balancer"
+          }
+        ],
+        "troubleshooting": [
+          {
+            "problem": "DNS queries not resolving",
+            "symptoms": [
+              "NXDOMAIN responses",
+              "Timeout on DNS queries"
+            ],
+            "diagnosis_commands": [
+              "curl $F5XC_API_URL/api/config/namespaces/default/dns_domains/{domain} -H 'Authorization: APIToken $F5XC_API_TOKEN'",
+              "nslookup {domain} @ns-server"
+            ],
+            "solutions": [
+              "Verify domain delegation to F5 XC nameservers",
+              "Check DNS domain configuration and backend load balancer status",
+              "Validate zone file and record configuration"
+            ]
+          }
+        ],
+        "icon": "🌐"
+      },
+      "x-f5xc-examples": {
+        "dns_zone": {
+          "minimal": {
+            "description": "Basic DNS zone with primary nameserver",
+            "use_case": "Simple DNS hosting",
+            "yaml": "metadata:\n  name: example-zone\n  namespace: default\nspec:\n  primary:\n    default_rr_set_group:\n      - ttl: 300\n        a_record:\n          name: www\n          values:\n            - 192.168.1.100\n"
+          },
+          "production": {
+            "description": "Production DNS zone with SOA and multiple records",
+            "use_case": "Production DNS with full configuration",
+            "yaml": "metadata:\n  name: prod-zone\n  namespace: production\nspec:\n  domain: example.com\n  primary:\n    soa_parameters:\n      refresh: 3600\n      retry: 600\n      expire: 604800\n      negative_ttl: 300\n    default_rr_set_group:\n      - ttl: 300\n        a_record:\n          name: www\n          values:\n            - 192.168.1.100\n            - 192.168.1.101\n      - ttl: 300\n        cname_record:\n          name: api\n          value: www.example.com\n      - ttl: 86400\n        mx_record:\n          name: \"\"\n          values:\n            - domain: mail.example.com\n              priority: 10\n"
+          }
+        }
+      }
+    },
+    {
+      "domain": "managed_kubernetes",
+      "title": "Managed Kubernetes",
+      "description": "Role-based access controls with cluster-scoped permissions and namespace bindings. Pod security admission levels enforce baseline, restricted, or privileged profiles. Container registry credentials support private image pulls across hybrid deployments. Policy rules define resource verbs, groups, and non-resource URL access patterns.",
+      "x-f5xc-description-short": "Cluster RBAC, pod security, and container registries.",
+      "x-f5xc-description-medium": "Kubernetes role bindings and admission policies. Registry integration for EKS, AKS, and GKE workloads.",
+      "file": "managed_kubernetes.json",
+      "path_count": 20,
+      "schema_count": 104,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Infrastructure",
+      "x-f5xc-use-cases": [
+        "Manage XCKS (Managed Kubernetes) cluster RBAC and security",
+        "Configure pod security policies and admission controllers",
+        "Manage container registries for enterprise deployments",
+        "Integrate with external Kubernetes clusters (EKS, AKS, GKE)"
+      ],
+      "x-f5xc-related-domains": [
+        "container_services",
+        "sites",
+        "service_mesh"
+      ],
+      "x-f5xc-icon": "⚙️",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748B'%3E%3Cpath d='M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "mk8s_cluster",
+          "description": "Managed Kubernetes cluster configuration",
+          "description_short": "MK8s cluster",
+          "tier": "Advanced",
+          "icon": "☸️",
+          "category": "Container",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "k8s_cluster_role"
+            ]
+          },
+          "relationship_hints": [
+            "k8s_cluster_role: RBAC roles for cluster access"
+          ]
+        },
+        {
+          "name": "k8s_cluster_role",
+          "description": "Kubernetes cluster RBAC role configuration",
+          "description_short": "K8s cluster role",
+          "tier": "Advanced",
+          "icon": "👤",
+          "category": "Container",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "container_registry",
+          "description": "Container image registry for workload images",
+          "description_short": "Container registry",
+          "tier": "Advanced",
+          "icon": "📦",
+          "category": "Container",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "marketplace",
+      "title": "Marketplace",
+      "description": "External connector infrastructure supporting direct, GRE, and encrypted tunnel modes with IKE parameter configuration and dead peer detection intervals. Cloud provider instances for Terraform automation and vendor partnerships. Service catalog entries with per-namespace activation flags, resource quotas, and administrative dashboard tile arrangement for operational workflows.",
+      "x-f5xc-description-short": "Add-on services, connectors, and TPM policies.",
+      "x-f5xc-description-medium": "Third-party GRE and IPSec tunnel provisioning with DPD timers. Shared resource allocation across namespaces with tile placement controls.",
+      "file": "marketplace.json",
+      "path_count": 36,
+      "schema_count": 200,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Platform",
+      "x-f5xc-use-cases": [
+        "Access third-party integrations and add-ons",
+        "Manage marketplace extensions",
+        "Configure Terraform and external integrations",
+        "Manage TPM policies"
+      ],
+      "x-f5xc-related-domains": [
+        "bigip",
+        "admin"
+      ],
+      "x-f5xc-icon": "🏪",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F97316'%3E%3Cpath d='M18.36 9l.6 3H5.04l.6-3h12.72M20 4H4v2h16V4zm0 3H4l-1 5v2h1v6h10v-6h4v6h2v-6h1v-2l-1-5zM6 18v-4h6v4H6z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "marketplace_item",
+          "description": "Marketplace item for service catalog",
+          "description_short": "Marketplace item",
+          "tier": "Standard",
+          "icon": "🛒",
+          "category": "Other",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "subscription",
+          "description": "Subscription for service entitlements",
+          "description_short": "Subscription",
+          "tier": "Standard",
+          "icon": "💳",
+          "category": "Other",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "network",
+      "title": "Network",
+      "description": "Routing table manipulation via peer state machines and path selection algorithms. Secure conduits between locations using IKE handshakes, cipher suites, and key exchanges. Segment attachments bridge hybrid topologies spanning cloud providers and on-premises infrastructure. SRv6 addressing, CIDR block matching, and advertisement controls direct traffic flows across distributed deployments with granular policy enforcement.",
+      "x-f5xc-description-short": "BGP peering, IPsec tunnels, and segment policies.",
+      "x-f5xc-description-medium": "Border gateway protocol with ASN management and autonomous system relationships. Site-to-site VPN linking datacenters through encrypted channels.",
+      "file": "network.json",
+      "path_count": 81,
+      "schema_count": 478,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Networking",
+      "x-f5xc-use-cases": [
+        "Configure BGP routing and ASN management",
+        "Manage IPsec tunnels and IKE phases",
+        "Configure network connectors and routes",
+        "Manage SRv6 and subnetting",
+        "Define segment connections and policies",
+        "Configure IP prefix sets"
+      ],
+      "x-f5xc-related-domains": [
+        "virtual",
+        "network_security",
+        "dns"
+      ],
+      "x-f5xc-icon": "🔌",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233B82F6'%3E%3Cpath d='M16 9v4.66l-3.5 3.51V19h-1v-1.83L8 13.65V9h8m0-6h-2v4h-4V3H8v4H6v6.5l3.5 3.5v5h5v-5l3.5-3.5V7h-2V3z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "virtual_network",
+          "description": "Virtual network for site connectivity and segmentation",
+          "description_short": "Virtual network",
+          "tier": "Standard",
+          "icon": "🔗",
+          "category": "Networking",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "network_connector"
+            ]
+          },
+          "relationship_hints": [
+            "network_connector: Connect to external networks"
+          ]
+        },
+        {
+          "name": "network_connector",
+          "description": "Network connector for site-to-site or cloud connectivity",
+          "description_short": "Network connector",
+          "tier": "Advanced",
+          "icon": "🔌",
+          "category": "Networking",
+          "supports_logs": false,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [
+              "virtual_network"
+            ],
+            "optional": []
+          },
+          "relationship_hints": [
+            "virtual_network: Network to connect"
+          ]
+        },
+        {
+          "name": "site_mesh_group",
+          "description": "Mesh connectivity configuration between multiple sites",
+          "description_short": "Site mesh group",
+          "tier": "Advanced",
+          "icon": "🕸️",
+          "category": "Infrastructure",
+          "supports_logs": false,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [
+              "site"
+            ],
+            "optional": []
+          },
+          "relationship_hints": [
+            "site: Sites to include in mesh connectivity"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "network_security",
+      "title": "Network Security",
+      "description": "Perimeter defense through firewall configurations, address translation, and ingress/egress policies. Traffic steering directs packets according to defined criteria including origin, target, and service type. Segment boundaries create workload isolation zones while HTTP intermediaries manage client requests to external destinations. Port mappings employ static and dynamic address pools for flexible translation scenarios across multi-tenant environments.",
+      "x-f5xc-description-short": "NAT policies, firewalls, and segment connections.",
+      "x-f5xc-description-medium": "Firewall rules with routing decisions based on source, destination, or protocol. Segmentation isolates workloads while outbound proxies govern access.",
+      "file": "network_security.json",
+      "path_count": 61,
+      "schema_count": 402,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Security",
+      "x-f5xc-use-cases": [
+        "Configure network firewall and ACL policies",
+        "Manage NAT policies and port forwarding",
+        "Configure policy-based routing",
+        "Define network segments and policies",
+        "Configure forward proxy policies"
+      ],
+      "x-f5xc-related-domains": [
+        "waf",
+        "api",
+        "network"
+      ],
+      "x-f5xc-icon": "🔒",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F59E0B'%3E%3Cpath d='M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "network_policy",
+          "description": "Network security policy for traffic filtering",
+          "description_short": "Network policy",
+          "tier": "Standard",
+          "icon": "🔒",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "forward_proxy_policy",
+          "description": "Forward proxy policy for outbound traffic control",
+          "description_short": "Forward proxy policy",
+          "tier": "Advanced",
+          "icon": "➡️",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "network_firewall",
+          "description": "Network firewall for layer 3/4 traffic protection",
+          "description_short": "Network firewall",
+          "tier": "Standard",
+          "icon": "🧱",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "nginx_one",
+      "title": "Nginx One",
+      "description": "Dataplane server registration with health status tracking and location awareness. Service discovery bindings for dynamic upstream resolution. Cloud service gateway integration for hybrid deployments. WAF policy attachment and instance-level security controls.",
+      "x-f5xc-description-short": "NGINX Plus instances and dataplane servers.",
+      "x-f5xc-description-medium": "Instance discovery, WAF integration, and service mesh connectivity. Subscription lifecycle and configuration synchronization.",
+      "file": "nginx_one.json",
+      "path_count": 13,
+      "schema_count": 63,
+      "x-f5xc-complexity": "simple",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Platform",
+      "x-f5xc-use-cases": [
+        "Manage NGINX One platform integrations",
+        "Configure NGINX Plus instances",
+        "Integrate NGINX configuration management"
+      ],
+      "x-f5xc-related-domains": [
+        "marketplace"
+      ],
+      "x-f5xc-icon": "🟢",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2322C55E'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "nginx_config",
+          "description": "NGINX configuration for proxy settings",
+          "description_short": "NGINX config",
+          "tier": "Advanced",
+          "icon": "⚙️",
+          "category": "Load Balancing",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "nginx_upstream"
+            ]
+          },
+          "relationship_hints": [
+            "nginx_upstream: Backend server configuration"
+          ]
+        },
+        {
+          "name": "nginx_upstream",
+          "description": "NGINX upstream for backend server pools",
+          "description_short": "NGINX upstream",
+          "tier": "Advanced",
+          "icon": "🎯",
+          "category": "Load Balancing",
+          "supports_logs": false,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "object_storage",
+      "title": "Object Storage",
+      "description": "Blob management for application component delivery across namespaces. Time-limited download links with cryptographic signing protect asset retrieval. Version-controlled packages organized by operating system type support artifact discovery. Query filtering by name, type, and release number enables programmatic access to integrator libraries and protection modules for mobile deployments.",
+      "x-f5xc-description-short": "Mobile SDK assets, versioned binaries, and app shield files.",
+      "x-f5xc-description-medium": "Versioned library distribution for mobile app integrators. Presigned URLs enable secure downloads with OS-specific builds for iOS and Android.",
+      "file": "object_storage.json",
+      "path_count": 7,
+      "schema_count": 18,
+      "x-f5xc-complexity": "simple",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Platform",
+      "x-f5xc-use-cases": [
+        "Manage object storage services",
+        "Configure stored objects and buckets",
+        "Manage storage policies"
+      ],
+      "x-f5xc-related-domains": [
+        "marketplace"
+      ],
+      "x-f5xc-icon": "🗄️",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2378716C'%3E%3Cpath d='M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-8h4v8zm6 0h-4v-8h4v8zm6 0h-4v-8h4v8zm0-10H4V4h16v6z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "object_store",
+          "description": "Object store for blob storage management",
+          "description_short": "Object store",
+          "tier": "Standard",
+          "icon": "💾",
+          "category": "Storage",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "bucket"
+            ]
+          },
+          "relationship_hints": [
+            "bucket: Storage buckets in this store"
+          ]
+        },
+        {
+          "name": "bucket",
+          "description": "Storage bucket for object storage",
+          "description_short": "Bucket",
+          "tier": "Standard",
+          "icon": "📦",
+          "category": "Storage",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [
+              "object_store"
+            ],
+            "optional": []
+          },
+          "relationship_hints": [
+            "object_store: Parent object store"
+          ]
+        }
+      ]
+    },
+    {
+      "domain": "observability",
+      "title": "Observability",
+      "description": "Telemetry systems execute scheduled availability checks from distributed AWS locations worldwide. Response code validation and timing metrics feed into historical trend analysis. DNS resolution accuracy verification ensures name service reliability. Certificate lifecycle tracking generates expiration warnings before outages occur. Regional probe distribution provides geographic coverage insights. Health summaries aggregate results into actionable dashboards with configurable alerting thresholds.",
+      "x-f5xc-description-short": "Synthetic health checks and DNS resolution validation.",
+      "x-f5xc-description-medium": "HTTP availability probes with latency measurement. Certificate expiration alerts and global status dashboards for infrastructure health.",
+      "file": "observability.json",
+      "path_count": 56,
+      "schema_count": 223,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Operations",
+      "x-f5xc-use-cases": [
+        "Configure synthetic monitoring",
+        "Define monitoring and testing policies",
+        "Manage observability dashboards"
+      ],
+      "x-f5xc-related-domains": [
+        "statistics",
+        "support"
+      ],
+      "x-f5xc-icon": "📊",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233B82F6'%3E%3Cpath d='M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zm5.6 8H19v6h-2.8v-6z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "log_receiver",
+          "description": "Log receiver for centralized log collection",
+          "description_short": "Log receiver",
+          "tier": "Standard",
+          "icon": "📝",
+          "category": "Monitoring",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "metrics_receiver",
+          "description": "Metrics receiver for centralized metrics collection",
+          "description_short": "Metrics receiver",
+          "tier": "Standard",
+          "icon": "📊",
+          "category": "Monitoring",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "alert_policy",
+          "description": "Alert policy for monitoring and notification",
+          "description_short": "Alert policy",
+          "tier": "Standard",
+          "icon": "🔔",
+          "category": "Monitoring",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "rate_limiting",
+      "title": "Rate Limiting",
+      "description": "Threshold-based request blocking using sliding window calculations. Burst smoothing algorithms maintain sustained throughput without exceeding defined maximums. Per-connection controls apply granular restrictions by protocol type. Automatic block actions trigger when request counts surpass configured limits within specified intervals.",
+      "x-f5xc-description-short": "Request throttling, quotas, and policer rules.",
+      "x-f5xc-description-medium": "Time-based quota enforcement with configurable windows in hours, minutes, or seconds. Protocol-specific controls for traffic shaping.",
+      "file": "rate_limiting.json",
+      "path_count": 12,
+      "schema_count": 73,
+      "x-f5xc-complexity": "simple",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Networking",
+      "x-f5xc-use-cases": [
+        "Configure rate limiter policies",
+        "Manage policer configurations",
+        "Control traffic flow and queuing"
+      ],
+      "x-f5xc-related-domains": [
+        "virtual",
+        "network_security"
+      ],
+      "x-f5xc-icon": "⏱️",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F97316'%3E%3Cpath d='M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61 1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "rate_limiter",
+          "description": "Rate limiter for traffic throttling and protection",
+          "description_short": "Rate limiter",
+          "tier": "Standard",
+          "icon": "⏱️",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "rate_limiter_policy"
+            ]
+          },
+          "relationship_hints": [
+            "rate_limiter_policy: Detailed rate limiting rules"
+          ]
+        },
+        {
+          "name": "rate_limiter_policy",
+          "description": "Rate limiter policy with detailed throttling rules",
+          "description_short": "Rate limiter policy",
+          "tier": "Standard",
+          "icon": "📋",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "rate_limit_threshold",
+          "description": "Rate limit threshold configuration for traffic control",
+          "description_short": "Rate limit threshold",
+          "tier": "Standard",
+          "icon": "📊",
+          "category": "Security",
+          "supports_logs": false,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "secops_and_incident_response",
+      "title": "Secops And Incident Response",
+      "description": "User threat assessment with configurable risk thresholds and mitigation rules. Detection covers high, medium, and low threat levels with corresponding actions like blocking, rate limiting, or alerting. Mitigation policies link to load balancers for real-time enforcement against identified bad actors.",
+      "x-f5xc-description-short": "Threat detection, user risk scoring, and automated blocking.",
+      "x-f5xc-description-medium": "Malicious user mitigation with threat level classification. Automated response actions for suspicious behavior patterns.",
+      "file": "secops_and_incident_response.json",
+      "path_count": 4,
+      "schema_count": 33,
+      "x-f5xc-complexity": "simple",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Security",
+      "x-f5xc-use-cases": [
+        "Configure automated threat mitigation policies",
+        "Define rules for malicious user detection",
+        "Manage incident response workflows",
+        "Apply blocking or rate limiting to threats"
+      ],
+      "x-f5xc-related-domains": [
+        "bot_defense",
+        "waf",
+        "network_security"
+      ],
+      "x-f5xc-icon": "🚨",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23DC2626'%3E%3Cpath d='M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm6 9.09c0 4-2.55 7.7-6 8.83-3.45-1.13-6-4.82-6-8.83V6.31l6-2.25 6 2.25v4.78zM11 7h2v6h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "mitigation_policy",
+          "description": "Mitigation policy for incident response",
+          "description_short": "Mitigation policy",
+          "tier": "Advanced",
+          "icon": "🛡️",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "malicious_user_rule",
+          "description": "Malicious user rule for threat mitigation",
+          "description_short": "Malicious user rule",
+          "tier": "Advanced",
+          "icon": "🚨",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "service_mesh",
+      "title": "Service Mesh",
+      "description": "NFV service lifecycle and software version tracking. Machine learning-driven classification with security risk assessment and PII detection. Override management for application behavior customization. Sidecar proxy orchestration with automatic mTLS certificate rotation and policy enforcement across distributed workloads.",
+      "x-f5xc-description-short": "Microservice routing and sidecar configuration.",
+      "x-f5xc-description-medium": "Application type definitions with discovery and learned schema analysis. Traffic pattern inference for intelligent request handling.",
+      "file": "service_mesh.json",
+      "path_count": 38,
+      "schema_count": 281,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Infrastructure",
+      "x-f5xc-use-cases": [
+        "Configure service mesh connectivity",
+        "Manage endpoint discovery and routing",
+        "Configure NFV services",
+        "Define application settings and types"
+      ],
+      "x-f5xc-related-domains": [
+        "managed_kubernetes",
+        "container_services",
+        "virtual"
+      ],
+      "x-f5xc-icon": "🕸️",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23A855F7'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "endpoint",
+          "description": "Service mesh endpoint for traffic routing",
+          "description_short": "Endpoint",
+          "tier": "Advanced",
+          "icon": "🎯",
+          "category": "Networking",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "origin_pool",
+          "description": "Backend server group for load balancer traffic distribution",
+          "description_short": "Origin pool",
+          "tier": "Standard",
+          "icon": "🎯",
+          "category": "Load Balancing",
+          "supports_logs": false,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "healthcheck"
+            ]
+          },
+          "relationship_hints": [
+            "healthcheck: Monitor origin server health"
+          ]
+        },
+        {
+          "name": "service_discovery",
+          "description": "Service discovery configuration for dynamic endpoints",
+          "description_short": "Service discovery",
+          "tier": "Advanced",
+          "icon": "🔍",
+          "category": "Networking",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "shape",
+      "title": "Shape",
+      "description": "Bot infrastructure policies with deployment tracking and subscription management. SafeAP protection against credential stuffing and account takeover. Mobile application shielding through SDK integration with OS-specific configurations. Real-time threat intelligence updates and automated response actions based on risk scoring and traffic patterns.",
+      "x-f5xc-description-short": "Bot defense, fraud prevention, and client integrity.",
+      "x-f5xc-description-medium": "Threat recognition with behavioral analysis and device fingerprinting. Mobile SDK integration for application shielding.",
+      "file": "shape.json",
+      "path_count": 268,
+      "schema_count": 829,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Security",
+      "x-f5xc-use-cases": [
+        "Configure Shape Security policies",
+        "Manage bot and threat prevention",
+        "Configure SafeAP policies",
+        "Enable threat recognition"
+      ],
+      "x-f5xc-related-domains": [
+        "bot_defense",
+        "waf"
+      ],
+      "x-f5xc-icon": "🎭",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23A855F7'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9c.83 0 1.5-.67 1.5-1.5S7.83 8 7 8s-1.5.67-1.5 1.5S6.17 11 7 11zm10 0c.83 0 1.5-.67 1.5-1.5S17.83 8 17 8s-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM12 17.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "shape_app_firewall",
+          "description": "Shape application firewall for advanced protection",
+          "description_short": "Shape WAF",
+          "tier": "Advanced",
+          "icon": "🛡️",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "shape_recognizer",
+          "description": "Shape recognizer for traffic pattern analysis",
+          "description_short": "Shape recognizer",
+          "tier": "Advanced",
+          "icon": "🔍",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "sites",
+      "title": "Sites",
+      "description": "Multi-cloud node provisioning spanning major public cloud environments including TGW, VNet, and VPC architectures. VPN tunnel configuration handles secure connectivity while IP prefix management controls address allocation. Customer edge deployments support external container orchestration platforms. Geographic distribution with resource sharing enables consistent policy enforcement across deployment points.",
+      "x-f5xc-description-short": "Cloud and edge node deployments.",
+      "x-f5xc-description-medium": "AWS, Azure, GCP VPC integration with transit gateways. Label-based selection for policy application across regions.",
+      "file": "sites.json",
+      "path_count": 132,
+      "schema_count": 1046,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Infrastructure",
+      "x-f5xc-use-cases": [
+        "Deploy F5 XC across cloud providers (AWS, Azure, GCP)",
+        "Manage XCKS (Managed Kubernetes) site deployments (formerly AppStack)",
+        "Deploy Secure Mesh sites for networking-focused edge deployments",
+        "Integrate external Kubernetes clusters as Customer Edge",
+        "Configure AWS VPC, Azure VNet, and GCP VPC sites",
+        "Manage virtual sites and site policies"
+      ],
+      "x-f5xc-related-domains": [
+        "cloud_infrastructure",
+        "customer_edge",
+        "managed_kubernetes"
+      ],
+      "x-f5xc-icon": "🌍",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "site",
+          "description": "Physical or cloud deployment location for edge services",
+          "description_short": "Site",
+          "tier": "Standard",
+          "icon": "🏢",
+          "category": "Infrastructure",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "virtual_site"
+            ]
+          },
+          "relationship_hints": [
+            "virtual_site: Logical grouping of physical sites"
+          ]
+        },
+        {
+          "name": "virtual_site",
+          "description": "Logical grouping of sites using label selectors",
+          "description_short": "Virtual site",
+          "tier": "Standard",
+          "icon": "🏷️",
+          "category": "Infrastructure",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "site_mesh_group",
+          "description": "Mesh connectivity configuration between multiple sites",
+          "description_short": "Site mesh group",
+          "tier": "Advanced",
+          "icon": "🕸️",
+          "category": "Infrastructure",
+          "supports_logs": false,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [
+              "site"
+            ],
+            "optional": []
+          },
+          "relationship_hints": [
+            "site: Sites to include in mesh connectivity"
+          ]
+        }
+      ],
+      "x-f5xc-cli-metadata": {
+        "quick_start": {
+          "command": "curl $F5XC_API_URL/api/config/namespaces/default/sites -H 'Authorization: APIToken $F5XC_API_TOKEN'",
+          "description": "List all configured sites in default namespace",
+          "expected_output": "JSON array of site objects with deployment status"
+        },
+        "common_workflows": [
+          {
+            "name": "Deploy AWS Cloud Site",
+            "description": "Deploy F5 XC in AWS for traffic management",
+            "steps": [
+              {
+                "step": 1,
+                "command": "curl -X POST $F5XC_API_URL/api/config/namespaces/default/cloud_credentials -H 'Authorization: APIToken $F5XC_API_TOKEN' -H 'Content-Type: application/json' -d '{...aws_credentials...}'",
+                "description": "Create cloud credentials for AWS access"
+              },
+              {
+                "step": 2,
+                "command": "curl -X POST $F5XC_API_URL/api/config/namespaces/default/sites -H 'Authorization: APIToken $F5XC_API_TOKEN' -H 'Content-Type: application/json' -d '{...site_config...}'",
+                "description": "Create site definition for AWS deployment"
+              }
+            ],
+            "prerequisites": [
+              "AWS account configured",
+              "Cloud credentials created",
+              "VPC and security groups prepared"
+            ],
+            "expected_outcome": "Site deployed in AWS, nodes connected and healthy"
+          }
+        ],
+        "troubleshooting": [
+          {
+            "problem": "Site deployment fails",
+            "symptoms": [
+              "Status: Error",
+              "Nodes not coming online",
+              "Connectivity issues"
+            ],
+            "diagnosis_commands": [
+              "curl $F5XC_API_URL/api/config/namespaces/default/sites/{site} -H 'Authorization: APIToken $F5XC_API_TOKEN'",
+              "Check site events and node status"
+            ],
+            "solutions": [
+              "Verify cloud credentials have required permissions",
+              "Check VPC and security group configuration",
+              "Review site logs for deployment errors",
+              "Ensure sufficient cloud resources available"
+            ]
+          }
+        ],
+        "icon": "🌍"
+      }
+    },
+    {
+      "domain": "statistics",
+      "title": "Statistics",
+      "description": "Alert policies with custom matchers, label groupings, and notification parameters. Log receivers for centralized collection with confirmation and verification workflows. Flow analytics, historical trend data, and namespace-scoped dashboards. Topology discovery and site-level health indicators for operational visibility.",
+      "x-f5xc-description-short": "Alerts, logs, flow analytics, and reporting.",
+      "x-f5xc-description-medium": "Alerting policies with receiver integrations. Log aggregation, topology views, and site health tracking.",
+      "file": "statistics.json",
+      "path_count": 77,
+      "schema_count": 622,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Operations",
+      "x-f5xc-use-cases": [
+        "Access flow statistics and analytics",
+        "Manage alerts and alerting policies",
+        "View logs and log receivers",
+        "Generate reports and graphs",
+        "Track topology and service discovery",
+        "Monitor status at sites"
+      ],
+      "x-f5xc-related-domains": [
+        "observability",
+        "support"
+      ],
+      "x-f5xc-icon": "📈",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'%3E%3Cpath d='M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "dashboard",
+          "description": "Dashboard for metrics visualization",
+          "description_short": "Dashboard",
+          "tier": "Standard",
+          "icon": "📊",
+          "category": "Monitoring",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "saved_query"
+            ]
+          },
+          "relationship_hints": [
+            "saved_query: Queries displayed on dashboard"
+          ]
+        },
+        {
+          "name": "saved_query",
+          "description": "Saved query for metrics and log analysis",
+          "description_short": "Saved query",
+          "tier": "Standard",
+          "icon": "🔍",
+          "category": "Monitoring",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "support",
+      "title": "Support",
+      "description": "Case management workflows including submission, commentary, and closure paths. Urgency adjustments and routing for time-sensitive incidents. Tax exemption verification requests. Site-level tcpdump operations—initiation, enumeration, and termination—for low-level network troubleshooting and protocol analysis.",
+      "x-f5xc-description-short": "Tickets, escalations, and network diagnostics.",
+      "x-f5xc-description-medium": "Issue lifecycle with comments, severity changes, and resolution tracking. Packet capture for connection analysis.",
+      "file": "support.json",
+      "path_count": 51,
+      "schema_count": 169,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Operations",
+      "x-f5xc-use-cases": [
+        "Submit and manage support tickets",
+        "Track customer support requests",
+        "Access operational support documentation"
+      ],
+      "x-f5xc-related-domains": [
+        "statistics",
+        "observability"
+      ],
+      "x-f5xc-icon": "🎫",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2314B8A6'%3E%3Cpath d='M22 10V6c0-1.11-.9-2-2-2H4c-1.1 0-1.99.89-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-2-1.46c-1.19.69-2 1.99-2 3.46s.81 2.77 2 3.46V18H4v-2.54c1.19-.69 2-1.99 2-3.46 0-1.48-.8-2.77-1.99-3.46L4 6h16v2.54z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "support_case",
+          "description": "Support case for issue tracking and resolution",
+          "description_short": "Support case",
+          "tier": "Standard",
+          "icon": "🎫",
+          "category": "Other",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "alert",
+          "description": "System alert for operational notifications",
+          "description_short": "Alert",
+          "tier": "Standard",
+          "icon": "🔔",
+          "category": "Monitoring",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "audit_log",
+          "description": "Audit log for compliance and security tracking",
+          "description_short": "Audit log",
+          "tier": "Standard",
+          "icon": "📝",
+          "category": "Monitoring",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "telemetry_and_insights",
+      "title": "Telemetry And Insights",
+      "description": "APIs for configuring collection endpoints, metrics storage, and insight generation. Supports log aggregation, performance monitoring, and alerting integration across deployments.",
+      "x-f5xc-description-short": "Metrics collection, analysis, and visualization.",
+      "x-f5xc-description-medium": "Collection endpoints, metrics storage, and insight generation for observability workflows.",
+      "file": "telemetry_and_insights.json",
+      "path_count": 27,
+      "schema_count": 186,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Operations",
+      "x-f5xc-use-cases": [
+        "Collect and analyze telemetry data",
+        "Generate actionable insights from metrics",
+        "Configure telemetry collection policies"
+      ],
+      "x-f5xc-related-domains": [
+        "observability",
+        "statistics"
+      ],
+      "x-f5xc-icon": "📉",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F59E0B'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "telemetry_receiver",
+          "description": "Telemetry receiver for data collection",
+          "description_short": "Telemetry receiver",
+          "tier": "Standard",
+          "icon": "📡",
+          "category": "Monitoring",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "insight_query",
+          "description": "Insight query for analytics",
+          "description_short": "Insight query",
+          "tier": "Standard",
+          "icon": "🔍",
+          "category": "Monitoring",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "tenant_and_identity",
+      "title": "Tenant And Identity",
+      "description": "Profile images and display customizations for personalized dashboard experiences. Federated authentication toggles controlling SSO behavior across organizational boundaries. Session lifecycle tracking with real-time visibility into active connections and timeout policies. Support ticket workflows including attachment handling and closure procedures for managed client escalations. Initial access provisioning sequences for new user onboarding.",
+      "x-f5xc-description-short": "User profiles, sessions, and OTP settings.",
+      "x-f5xc-description-medium": "Account view configurations and admin alert channels. One-time password resets, provisioning flows, and active connection monitoring.",
+      "file": "tenant_and_identity.json",
+      "path_count": 174,
+      "schema_count": 508,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Platform",
+      "x-f5xc-use-cases": [
+        "Manage user profiles and notification preferences",
+        "Configure session controls and OTP settings",
+        "Handle identity management operations",
+        "Process initial user access requests"
+      ],
+      "x-f5xc-related-domains": [
+        "users",
+        "authentication",
+        "system"
+      ],
+      "x-f5xc-icon": "🪪",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2306B6D4'%3E%3Cpath d='M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-9 3.5c1.38 0 2.5 1.12 2.5 2.5S12.38 12.5 11 12.5 8.5 11.38 8.5 10s1.12-2.5 2.5-2.5zm5 10.5H6v-1.25c0-1.66 3.33-2.5 5-2.5s5 .84 5 2.5V18zm2-4h-4v-2h4v2zm0-4h-4V8h4v2z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "user_profile",
+          "description": "User profile with personal settings",
+          "description_short": "User profile",
+          "tier": "Standard",
+          "icon": "👤",
+          "category": "Identity",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "session",
+          "description": "User session for authentication state",
+          "description_short": "Session",
+          "tier": "Standard",
+          "icon": "🔑",
+          "category": "Identity",
+          "supports_logs": true,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "otp_policy",
+          "description": "OTP policy for multi-factor authentication",
+          "description_short": "OTP policy",
+          "tier": "Standard",
+          "icon": "🔐",
+          "category": "Identity",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "threat_campaign",
+      "title": "Threat Campaign",
+      "description": "APIs for configuring detection policies and attack tracking. Supports campaign analysis, risk assessment, and automated mitigation rule generation across security domains.",
+      "x-f5xc-description-short": "Attack detection, tracking, and mitigation rules.",
+      "x-f5xc-description-medium": "Detection policies, attack tracking, and automated mitigation rule generation for security operations.",
+      "file": "threat_campaign.json",
+      "path_count": 1,
+      "schema_count": 177,
+      "x-f5xc-complexity": "moderate",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Security",
+      "x-f5xc-use-cases": [
+        "Track and analyze threat campaigns",
+        "Monitor active threats and attack patterns",
+        "Configure threat intelligence integration"
+      ],
+      "x-f5xc-related-domains": [
+        "bot_defense",
+        "ddos"
+      ],
+      "x-f5xc-icon": "⚠️",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FBBF24'%3E%3Cpath d='M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "threat_campaign_policy",
+          "description": "Threat campaign detection and mitigation policy",
+          "description_short": "Threat campaign policy",
+          "tier": "Advanced",
+          "icon": "🎯",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "users",
+      "title": "Users",
+      "description": "Token lifecycle governs automated site onboarding through cloud-init integration with configurable validity periods. Explicit category keys establish permitted classification hierarchies enforced across deployments. Inferred attributes attach automatically based on object characteristics and placement context. Namespace-scoped operations handle credential generation, revocation, and state transitions for streamlined provisioning workflows.",
+      "x-f5xc-description-short": "Account tokens, labels, and cloud-init config.",
+      "x-f5xc-description-medium": "Site enrollment credentials with automatic expiration. Taxonomy keys define allowed categorization while auto-derived tags apply dynamically.",
+      "file": "users.json",
+      "path_count": 13,
+      "schema_count": 56,
+      "x-f5xc-complexity": "simple",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Platform",
+      "x-f5xc-use-cases": [
+        "Manage user accounts and tokens",
+        "Configure user identification",
+        "Manage user settings and preferences",
+        "Configure implicit and known labels"
+      ],
+      "x-f5xc-related-domains": [
+        "system",
+        "admin"
+      ],
+      "x-f5xc-icon": "👥",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366F1'%3E%3Cpath d='M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "user",
+          "description": "User account for platform access",
+          "description_short": "User",
+          "tier": "Standard",
+          "icon": "👤",
+          "category": "Identity",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "user_role"
+            ]
+          },
+          "relationship_hints": [
+            "user_role: Role assignment for user permissions"
+          ]
+        },
+        {
+          "name": "user_role",
+          "description": "User role for permission management",
+          "description_short": "User role",
+          "tier": "Standard",
+          "icon": "👔",
+          "category": "Identity",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "namespace_role",
+          "description": "Namespace-scoped role for fine-grained permissions",
+          "description_short": "Namespace role",
+          "tier": "Standard",
+          "icon": "📁",
+          "category": "Identity",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "virtual",
+      "title": "Virtual",
+      "description": "Load balancing for HTTP, TCP, and UDP traffic with configurable routing rules and origin pool management. Supports health checks, session persistence, and automatic failover. Enables geographic distribution, rate limiting, and service policy enforcement across load balancers and routes.",
+      "x-f5xc-description-short": "HTTP, TCP, UDP load balancing with origin pools.",
+      "x-f5xc-description-medium": "Traffic distribution across regions with routing rules. Health checks and failover policies.",
+      "file": "virtual.json",
+      "path_count": 85,
+      "schema_count": 743,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Networking",
+      "x-f5xc-use-cases": [
+        "Configure HTTP/TCP/UDP load balancers",
+        "Manage origin pools and services",
+        "Configure virtual hosts and routing",
+        "Define rate limiter and service policies",
+        "Manage geo-location-based routing",
+        "Configure proxy and forwarding policies",
+        "Manage malware protection and threat campaigns",
+        "Configure health checks and endpoint monitoring"
+      ],
+      "x-f5xc-related-domains": [
+        "dns",
+        "service_policy",
+        "network"
+      ],
+      "x-f5xc-icon": "⚖️",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234F46E5'%3E%3Cpath d='M12 3c-1.27 0-2.4.8-2.82 2H3v2h1.95L2 14c-.47 2 1 4 4 4s4.47-2 4-4L7.05 7H9.1c.42 1.2 1.55 2 2.9 2s2.4-.8 2.82-2h2.13L14 14c-.47 2 1 4 4 4s4.47-2 4-4l-2.95-7H21V5h-6.18c-.42-1.2-1.55-2-2.82-2zm-6 12.5c-.73 0-1.45-.3-1.97-.82L6 10l1.97 4.68c-.52.52-1.24.82-1.97.82zm12 0c-.73 0-1.45-.3-1.97-.82L18 10l1.97 4.68c-.52.52-1.24.82-1.97.82z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "http_loadbalancer",
+          "description": "Layer 7 HTTP/HTTPS load balancer for application traffic distribution",
+          "description_short": "HTTP load balancer",
+          "tier": "Standard",
+          "icon": "🌐",
+          "category": "Load Balancing",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [
+              "origin_pool"
+            ],
+            "optional": [
+              "healthcheck",
+              "app_firewall",
+              "certificate",
+              "rate_limiter",
+              "service_policy",
+              "bot_defense_policy"
+            ]
+          },
+          "relationship_hints": [
+            "origin_pool: Backend servers for traffic distribution",
+            "app_firewall: WAF protection (requires WAAP subscription)",
+            "healthcheck: Monitor backend availability",
+            "certificate: TLS termination for HTTPS",
+            "rate_limiter: Protect against traffic spikes"
+          ]
+        },
+        {
+          "name": "tcp_loadbalancer",
+          "description": "Layer 4 TCP/UDP load balancer for non-HTTP protocol traffic",
+          "description_short": "TCP load balancer",
+          "tier": "Standard",
+          "icon": "🔌",
+          "category": "Load Balancing",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [
+              "origin_pool"
+            ],
+            "optional": [
+              "healthcheck"
+            ]
+          },
+          "relationship_hints": [
+            "origin_pool: Backend servers for TCP/UDP traffic",
+            "healthcheck: Monitor origin server health"
+          ]
+        },
+        {
+          "name": "origin_pool",
+          "description": "Backend server group for load balancer traffic distribution",
+          "description_short": "Origin pool",
+          "tier": "Standard",
+          "icon": "🎯",
+          "category": "Load Balancing",
+          "supports_logs": false,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "healthcheck"
+            ]
+          },
+          "relationship_hints": [
+            "healthcheck: Monitor origin server health"
+          ]
+        },
+        {
+          "name": "healthcheck",
+          "description": "Health monitoring configuration for origin server availability",
+          "description_short": "Health check",
+          "tier": "Standard",
+          "icon": "💓",
+          "category": "Monitoring",
+          "supports_logs": false,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ],
+      "x-f5xc-cli-metadata": {
+        "quick_start": {
+          "command": "curl $F5XC_API_URL/api/config/namespaces/default/http_loadbalancers -H 'Authorization: APIToken $F5XC_API_TOKEN'",
+          "description": "List all HTTP load balancers in default namespace",
+          "expected_output": "JSON array of load balancer objects with status"
+        },
+        "common_workflows": [
+          {
+            "name": "Create HTTP Load Balancer",
+            "description": "Deploy basic HTTP load balancer with origin pool backend",
+            "steps": [
+              {
+                "step": 1,
+                "command": "curl -X POST $F5XC_API_URL/api/config/namespaces/default/origin_pools -H 'Authorization: APIToken $F5XC_API_TOKEN' -H 'Content-Type: application/json' -d '{...pool_config...}'",
+                "description": "Create backend origin pool with target endpoints"
+              },
+              {
+                "step": 2,
+                "command": "curl -X POST $F5XC_API_URL/api/config/namespaces/default/http_loadbalancers -H 'Authorization: APIToken $F5XC_API_TOKEN' -H 'Content-Type: application/json' -d '{...lb_config...}'",
+                "description": "Create HTTP load balancer pointing to origin pool"
+              }
+            ],
+            "prerequisites": [
+              "Active namespace",
+              "Origin pool targets reachable",
+              "DNS domain configured"
+            ],
+            "expected_outcome": "Load balancer in Active status, traffic routed to origins"
+          }
+        ],
+        "troubleshooting": [
+          {
+            "problem": "Load balancer shows Configuration Error status",
+            "symptoms": [
+              "Status: Configuration Error",
+              "No traffic routing",
+              "Requests timeout"
+            ],
+            "diagnosis_commands": [
+              "curl $F5XC_API_URL/api/config/namespaces/default/http_loadbalancers/{name} -H 'Authorization: APIToken $F5XC_API_TOKEN'",
+              "Check origin_pool status and endpoint connectivity"
+            ],
+            "solutions": [
+              "Verify origin pool targets are reachable from edge",
+              "Check DNS configuration and domain propagation",
+              "Validate certificate configuration if using HTTPS",
+              "Review security policies not blocking traffic"
+            ]
+          }
+        ],
+        "icon": "⚖️"
+      },
+      "x-f5xc-examples": {
+        "http_loadbalancer": {
+          "minimal": {
+            "description": "Basic HTTP load balancer for quick testing",
+            "use_case": "Development environments, quick validation",
+            "yaml": "metadata:\n  name: my-lb\n  namespace: default\nspec:\n  domains:\n    - example.com\n  http:\n    port: 80\n  default_route_pools:\n    - pool:\n        name: my-origin-pool\n        namespace: default\n"
+          },
+          "production": {
+            "description": "Production-ready HTTP load balancer with TLS and WAF",
+            "use_case": "Production deployments with security controls",
+            "yaml": "metadata:\n  name: prod-lb\n  namespace: production\nspec:\n  domains:\n    - api.example.com\n  https_auto_cert:\n    http_redirect: true\n    add_hsts: true\n    tls_config:\n      min_version: TLS12\n  app_firewall:\n    name: default-waf\n    namespace: shared\n  default_route_pools:\n    - pool:\n        name: prod-origin-pool\n        namespace: production\n      weight: 100\n  rate_limiter:\n    total_number: 1000\n    unit: MINUTE\n"
+          },
+          "advanced": {
+            "description": "Multi-origin load balancer with routing rules and rate limiting",
+            "use_case": "Complex routing scenarios, API gateways",
+            "yaml": "metadata:\n  name: api-gateway\n  namespace: production\nspec:\n  domains:\n    - api.example.com\n    - api-v2.example.com\n  https_auto_cert:\n    http_redirect: true\n    add_hsts: true\n  app_firewall:\n    name: strict-waf\n    namespace: shared\n  routes:\n    - match:\n        path:\n          prefix: /api/v1\n      route_destination:\n        destinations:\n          - cluster:\n              name: v1-backend\n            weight: 100\n    - match:\n        path:\n          prefix: /api/v2\n      route_destination:\n        destinations:\n          - cluster:\n              name: v2-backend\n            weight: 100\n  default_route_pools:\n    - pool:\n        name: default-backend\n        namespace: production\n  rate_limiter:\n    total_number: 5000\n    unit: MINUTE\n  cors_policy:\n    allow_origins:\n      - exact: https://app.example.com\n    allow_methods:\n      - GET\n      - POST\n      - PUT\n      - DELETE\n"
+          }
+        },
+        "origin_pool": {
+          "minimal": {
+            "description": "Basic origin pool with single backend",
+            "use_case": "Simple backend configuration",
+            "yaml": "metadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_ip:\n        ip: 192.168.1.100\n  port: 8080\n  loadbalancer_algorithm: ROUND_ROBIN\n"
+          },
+          "production": {
+            "description": "Production origin pool with health checks",
+            "use_case": "Production deployments with monitoring",
+            "yaml": "metadata:\n  name: prod-backend\n  namespace: production\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 443\n  use_tls:\n    use_host_header_as_sni: {}\n    tls_config:\n      min_version: TLS12\n  healthcheck:\n    - name: http-health\n      namespace: production\n  loadbalancer_algorithm: LEAST_ACTIVE\n  endpoint_selection: LOCAL_PREFERRED\n"
+          },
+          "advanced": {
+            "description": "Multi-region origin pool with advanced routing",
+            "use_case": "Global deployments, failover scenarios",
+            "yaml": "metadata:\n  name: global-backend\n  namespace: production\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: us-backend.example.com\n      labels:\n        region: us-east\n    - public_name:\n        dns_name: eu-backend.example.com\n      labels:\n        region: eu-west\n  port: 443\n  use_tls:\n    use_host_header_as_sni: {}\n    tls_config:\n      min_version: TLS12\n  healthcheck:\n    - name: tcp-health\n      namespace: production\n  loadbalancer_algorithm: ROUND_ROBIN\n  endpoint_selection: LOCAL_PREFERRED\n  advanced_options:\n    connection_timeout: 30000\n    idle_timeout: 60000\n    max_connections: 10000\n"
+          }
+        },
+        "healthcheck": {
+          "minimal": {
+            "description": "Basic HTTP health check",
+            "use_case": "Simple health monitoring",
+            "yaml": "metadata:\n  name: http-health\n  namespace: default\nspec:\n  http_health_check:\n    path: /health\n  timeout: 3\n  interval: 15\n  unhealthy_threshold: 3\n  healthy_threshold: 2\n"
+          },
+          "production": {
+            "description": "Production health check with custom headers",
+            "use_case": "Production monitoring with authentication",
+            "yaml": "metadata:\n  name: prod-health\n  namespace: production\nspec:\n  http_health_check:\n    path: /api/health\n    headers:\n      x-health-check: \"true\"\n    expected_status_codes:\n      - 200\n      - 204\n  timeout: 5\n  interval: 10\n  unhealthy_threshold: 2\n  healthy_threshold: 3\n"
+          }
+        }
+      }
+    },
+    {
+      "domain": "vpm_and_node_management",
+      "title": "Vpm And Node Management",
+      "description": "APIs for configuring node policies, fleet management, and lifecycle operations. Supports node registration, configuration deployment, and status monitoring across distributed infrastructure.",
+      "x-f5xc-description-short": "Node lifecycle, fleet grouping, and orchestration.",
+      "x-f5xc-description-medium": "Lifecycle control, fleet configuration, and deployment policies for distributed node management.",
+      "file": "vpm_and_node_management.json",
+      "path_count": 1,
+      "schema_count": 2,
+      "x-f5xc-complexity": "simple",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Standard",
+      "x-f5xc-category": "Platform",
+      "x-f5xc-use-cases": [
+        "Manage Virtual Private Mesh (VPM) configuration",
+        "Configure node lifecycle and management",
+        "Monitor VPM and node status"
+      ],
+      "x-f5xc-related-domains": [
+        "sites",
+        "system"
+      ],
+      "x-f5xc-icon": "🖥️",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748B'%3E%3Cpath d='M20 13H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-6c0-.55-.45-1-1-1zM7 19c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM20 3H4c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1zM7 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "node_config",
+          "description": "Node configuration for edge device settings",
+          "description_short": "Node config",
+          "tier": "Standard",
+          "icon": "🖥️",
+          "category": "Infrastructure",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "vpm_config",
+          "description": "VPM configuration for virtual platform management",
+          "description_short": "VPM config",
+          "tier": "Standard",
+          "icon": "⚙️",
+          "category": "Infrastructure",
+          "supports_logs": false,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ]
+    },
+    {
+      "domain": "waf",
+      "title": "Waf",
+      "description": "Signature-based attack detection with customizable blocking responses. Attack type classification, protocol inspection, and AI-driven risk assessment. Exclusion policies override default blocking for trusted traffic. Staged signature testing validates rules before enforcement. Security event metrics track rule hits and blocked requests across namespaces.",
+      "x-f5xc-description-short": "Request inspection, attack signatures, and bot mitigation.",
+      "x-f5xc-description-medium": "Application firewall rules with signature-based detection. Exclusion policies, blocking pages, and anomaly prevention.",
+      "file": "waf.json",
+      "path_count": 40,
+      "schema_count": 314,
+      "x-f5xc-complexity": "advanced",
+      "x-f5xc-is-preview": false,
+      "x-f5xc-requires-tier": "Advanced",
+      "x-f5xc-category": "Security",
+      "x-f5xc-use-cases": [
+        "Configure web application firewall rules",
+        "Manage application security policies",
+        "Enable enhanced firewall capabilities",
+        "Configure protocol inspection"
+      ],
+      "x-f5xc-related-domains": [
+        "api",
+        "network_security",
+        "virtual"
+      ],
+      "x-f5xc-icon": "🛡️",
+      "x-f5xc-logo-svg": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z'/%3E%3C/svg%3E",
+      "x-f5xc-primary-resources": [
+        {
+          "name": "app_firewall",
+          "description": "Web Application Firewall policy for HTTP traffic protection",
+          "description_short": "WAF policy",
+          "tier": "Advanced",
+          "icon": "🛡️",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": [
+              "service_policy"
+            ]
+          },
+          "relationship_hints": [
+            "service_policy: Fine-grained access control rules"
+          ]
+        },
+        {
+          "name": "service_policy",
+          "description": "Service-level access control and traffic management rules",
+          "description_short": "Service policy",
+          "tier": "Advanced",
+          "icon": "📋",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": false,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        },
+        {
+          "name": "malicious_user_detection",
+          "description": "Automated detection and mitigation of malicious user behavior",
+          "description_short": "Malicious user detection",
+          "tier": "Advanced",
+          "icon": "🚨",
+          "category": "Security",
+          "supports_logs": true,
+          "supports_metrics": true,
+          "dependencies": {
+            "required": [],
+            "optional": []
+          },
+          "relationship_hints": []
+        }
+      ],
+      "x-f5xc-examples": {
+        "app_firewall": {
+          "minimal": {
+            "description": "Basic WAF policy with default detection",
+            "use_case": "Quick WAF protection setup",
+            "yaml": "metadata:\n  name: basic-waf\n  namespace: default\nspec:\n  blocking: {}\n  detection_settings:\n    signature_selection_setting:\n      default_attack_type_settings: {}\n      high_medium_accuracy_signatures: {}\n"
+          },
+          "production": {
+            "description": "Production WAF with signature detection and bot defense",
+            "use_case": "Production security with comprehensive protection",
+            "yaml": "metadata:\n  name: prod-waf\n  namespace: production\nspec:\n  blocking: {}\n  detection_settings:\n    signature_selection_setting:\n      default_attack_type_settings: {}\n      high_medium_low_accuracy_signatures: {}\n    enable_suppression: true\n    enable_threat_campaigns: true\n  bot_defense_setting:\n    policy:\n      protected_app_endpoints:\n        - metadata:\n            name: login\n          http_methods:\n            - POST\n          protocol: HTTPS\n          path:\n            prefix: /api/login\n      js_insert_all_pages:\n        javascript_location: AFTER_HEAD\n  allow_all_response_codes: false\n  default_anonymization: true\n"
+          },
+          "advanced": {
+            "description": "Advanced WAF with custom rules and data guard",
+            "use_case": "High-security environments with custom policies",
+            "yaml": "metadata:\n  name: advanced-waf\n  namespace: security\nspec:\n  blocking: {}\n  detection_settings:\n    signature_selection_setting:\n      attack_type_settings:\n        - attack_type: ATTACK_TYPE_COMMAND_EXECUTION\n          disabled: false\n        - attack_type: ATTACK_TYPE_SQL_INJECTION\n          disabled: false\n        - attack_type: ATTACK_TYPE_CROSS_SITE_SCRIPTING\n          disabled: false\n      high_medium_low_accuracy_signatures: {}\n    enable_suppression: true\n    enable_threat_campaigns: true\n    violation_settings:\n      disabled_violation_types:\n        - violation_type: VIOL_FILETYPE\n  bot_defense_setting:\n    policy:\n      protected_app_endpoints:\n        - metadata:\n            name: api-endpoint\n          http_methods:\n            - POST\n            - PUT\n          protocol: HTTPS\n          path:\n            prefix: /api/\n      js_insert_all_pages:\n        javascript_location: AFTER_HEAD\n  data_guard_rules:\n    - name: mask-credit-cards\n      path:\n        prefix: /\n      target_parameters:\n        - parameter_name:\n            exact_value: credit_card\n      apply_data_guard: {}\n"
+          }
+        }
+      }
+    }
+  ],
+  "x-f5xc-critical-resources": [
+    "http_loadbalancer",
+    "tcp_loadbalancer",
+    "origin_pool",
+    "healthcheck",
+    "app_firewall",
+    "service_policy",
+    "network_policy",
+    "dns_zone",
+    "dns_load_balancer",
+    "certificate",
+    "namespace",
+    "virtual_site",
+    "aws_vpc_site",
+    "azure_vnet_site",
+    "gcp_vpc_site"
+  ],
+  "x-f5xc-error-resolution": {
+    "version": "1.0.0",
+    "http_errors": {
+      "400": {
+        "code": 400,
+        "name": "Bad Request",
+        "description": "The request was malformed or contains invalid data",
+        "common_causes": [
+          "Invalid JSON syntax in request body",
+          "Missing required fields",
+          "Invalid field values or formats",
+          "Malformed resource references"
+        ],
+        "diagnostic_steps": [
+          {
+            "step": 1,
+            "action": "Validate JSON syntax",
+            "description": "Check if request body is valid JSON",
+            "command": "echo '$REQUEST_BODY' | jq ."
+          },
+          {
+            "step": 2,
+            "action": "Check required fields",
+            "description": "Verify all required fields from OpenAPI spec are present"
+          },
+          {
+            "step": 3,
+            "action": "Validate field formats",
+            "description": "Check string patterns, enum values, and data types"
+          },
+          {
+            "step": 4,
+            "action": "Verify references",
+            "description": "Ensure referenced resources exist and are properly formatted"
+          }
+        ],
+        "prevention": [
+          "Use schema validation before submission",
+          "Validate JSON with jq or similar tools",
+          "Reference OpenAPI spec for required fields and formats"
+        ],
+        "related_errors": [
+          422
+        ]
+      },
+      "401": {
+        "code": 401,
+        "name": "Unauthorized",
+        "description": "Authentication credentials are missing or invalid",
+        "common_causes": [
+          "Missing Authorization header",
+          "Expired API token",
+          "Invalid API token format",
+          "Token revoked or disabled"
+        ],
+        "diagnostic_steps": [
+          {
+            "step": 1,
+            "action": "Check Authorization header",
+            "description": "Verify Authorization header is present and uses correct format"
+          },
+          {
+            "step": 2,
+            "action": "Validate token format",
+            "description": "Ensure token starts with correct prefix (APIToken, Bearer)"
+          },
+          {
+            "step": 3,
+            "action": "Check token expiry",
+            "description": "Verify token has not expired",
+            "command": "Check token creation date in console"
+          },
+          {
+            "step": 4,
+            "action": "Test with fresh token",
+            "description": "Generate new API token and retry"
+          }
+        ],
+        "prevention": [
+          "Store tokens securely in environment variables",
+          "Implement token refresh logic",
+          "Monitor token expiry dates",
+          "Use service accounts for automation"
+        ],
+        "related_errors": [
+          403
+        ]
+      },
+      "403": {
+        "code": 403,
+        "name": "Forbidden",
+        "description": "Authentication succeeded but authorization denied",
+        "common_causes": [
+          "Insufficient role permissions",
+          "Resource outside allowed namespaces",
+          "Operation not permitted for user type",
+          "Tenant-level restrictions"
+        ],
+        "diagnostic_steps": [
+          {
+            "step": 1,
+            "action": "Check user roles",
+            "description": "Verify current user's role assignments",
+            "command": "GET /api/web/custom/namespaces/{namespace}/whoami"
+          },
+          {
+            "step": 2,
+            "action": "Verify namespace access",
+            "description": "Confirm user has access to target namespace"
+          },
+          {
+            "step": 3,
+            "action": "Check resource permissions",
+            "description": "Verify user has permission for specific resource type"
+          },
+          {
+            "step": 4,
+            "action": "Review RBAC policies",
+            "description": "Audit role-based access control configuration"
+          }
+        ],
+        "prevention": [
+          "Request appropriate role assignments",
+          "Verify RBAC policies before operations",
+          "Use least privilege access principles"
+        ],
+        "related_errors": [
+          401
+        ]
+      },
+      "404": {
+        "code": 404,
+        "name": "Not Found",
+        "description": "The requested resource does not exist",
+        "common_causes": [
+          "Resource was deleted",
+          "Incorrect resource name or ID",
+          "Wrong namespace specified",
+          "Typo in resource path"
+        ],
+        "diagnostic_steps": [
+          {
+            "step": 1,
+            "action": "List resources",
+            "description": "List all resources of this type to verify existence",
+            "command": "GET /api/.../namespaces/{namespace}/{resource_type}"
+          },
+          {
+            "step": 2,
+            "action": "Check namespace",
+            "description": "Verify operating in correct namespace"
+          },
+          {
+            "step": 3,
+            "action": "Verify resource name",
+            "description": "Check for typos in resource name"
+          },
+          {
+            "step": 4,
+            "action": "Check deletion status",
+            "description": "Verify resource was not recently deleted"
+          }
+        ],
+        "prevention": [
+          "List resources before attempting operations",
+          "Use tab completion or autocomplete",
+          "Implement existence checks in scripts"
+        ],
+        "related_errors": [
+          410
+        ]
+      },
+      "409": {
+        "code": 409,
+        "name": "Conflict",
+        "description": "The request conflicts with current resource state",
+        "common_causes": [
+          "Resource with same name already exists",
+          "Concurrent modification detected",
+          "Resource in transitional state",
+          "Dependency conflict"
+        ],
+        "diagnostic_steps": [
+          {
+            "step": 1,
+            "action": "Check resource existence",
+            "description": "Verify if resource already exists",
+            "command": "GET /api/.../namespaces/{namespace}/{resource_type}/{name}"
+          },
+          {
+            "step": 2,
+            "action": "Check resource state",
+            "description": "Verify resource is not in a transitional state"
+          },
+          {
+            "step": 3,
+            "action": "Review dependencies",
+            "description": "Check for conflicting dependent resources"
+          },
+          {
+            "step": 4,
+            "action": "Use unique naming",
+            "description": "Try with a different resource name"
+          }
+        ],
+        "prevention": [
+          "Check existence before creation",
+          "Use unique naming conventions",
+          "Implement retry logic with backoff",
+          "Add timestamps or UUIDs to names"
+        ],
+        "related_errors": [
+          423
+        ]
+      },
+      "422": {
+        "code": 422,
+        "name": "Unprocessable Entity",
+        "description": "The request is well-formed but contains semantic errors",
+        "common_causes": [
+          "Business logic validation failure",
+          "Invalid resource configuration",
+          "Incompatible field combinations",
+          "Referenced resources don't meet requirements"
+        ],
+        "diagnostic_steps": [
+          {
+            "step": 1,
+            "action": "Review error details",
+            "description": "Check response body for specific validation errors"
+          },
+          {
+            "step": 2,
+            "action": "Validate configuration",
+            "description": "Compare configuration against documentation requirements"
+          },
+          {
+            "step": 3,
+            "action": "Check dependencies",
+            "description": "Verify referenced resources meet all requirements"
+          },
+          {
+            "step": 4,
+            "action": "Review constraints",
+            "description": "Check field-level constraints and requirements"
+          }
+        ],
+        "prevention": [
+          "Use configuration templates",
+          "Validate against OpenAPI spec",
+          "Review minimum configuration requirements"
+        ],
+        "related_errors": [
+          400
+        ]
+      },
+      "429": {
+        "code": 429,
+        "name": "Too Many Requests",
+        "description": "Rate limit exceeded",
+        "common_causes": [
+          "Too many requests in time window",
+          "Batch operations without delays",
+          "Parallel operations exceeding limits",
+          "Shared rate limit pool exhausted"
+        ],
+        "diagnostic_steps": [
+          {
+            "step": 1,
+            "action": "Check Retry-After header",
+            "description": "Note the suggested wait time from response headers"
+          },
+          {
+            "step": 2,
+            "action": "Review request rate",
+            "description": "Count requests made in recent time window"
+          },
+          {
+            "step": 3,
+            "action": "Implement backoff",
+            "description": "Add exponential backoff between requests"
+          }
+        ],
+        "prevention": [
+          "Implement exponential backoff",
+          "Add delays between batch operations",
+          "Use parallel request limits",
+          "Cache responses where appropriate"
+        ],
+        "related_errors": [
+          503
+        ]
+      },
+      "500": {
+        "code": 500,
+        "name": "Internal Server Error",
+        "description": "An unexpected server error occurred",
+        "common_causes": [
+          "Temporary service issue",
+          "Bug in request handling",
+          "Backend service failure",
+          "Resource constraint"
+        ],
+        "diagnostic_steps": [
+          {
+            "step": 1,
+            "action": "Retry request",
+            "description": "Wait a moment and retry the request"
+          },
+          {
+            "step": 2,
+            "action": "Check service status",
+            "description": "Verify F5 XC service health status"
+          },
+          {
+            "step": 3,
+            "action": "Simplify request",
+            "description": "Try with minimal configuration"
+          },
+          {
+            "step": 4,
+            "action": "Contact support",
+            "description": "If persistent, open support ticket with request ID"
+          }
+        ],
+        "prevention": [
+          "Implement retry logic",
+          "Monitor service status pages",
+          "Use health check endpoints"
+        ],
+        "related_errors": [
+          502,
+          503
+        ]
+      },
+      "502": {
+        "code": 502,
+        "name": "Bad Gateway",
+        "description": "Upstream service returned invalid response",
+        "common_causes": [
+          "Upstream service unavailable",
+          "Network connectivity issues",
+          "Timeout from backend services"
+        ],
+        "diagnostic_steps": [
+          {
+            "step": 1,
+            "action": "Retry request",
+            "description": "Wait and retry the request"
+          },
+          {
+            "step": 2,
+            "action": "Check connectivity",
+            "description": "Verify network connectivity to API endpoint"
+          },
+          {
+            "step": 3,
+            "action": "Check service status",
+            "description": "Verify F5 XC service availability"
+          }
+        ],
+        "prevention": [
+          "Implement retry logic with backoff",
+          "Use multiple endpoints for redundancy"
+        ],
+        "related_errors": [
+          500,
+          503
+        ]
+      },
+      "503": {
+        "code": 503,
+        "name": "Service Unavailable",
+        "description": "Service is temporarily unavailable",
+        "common_causes": [
+          "Service maintenance",
+          "Overload condition",
+          "Deployment in progress",
+          "Regional outage"
+        ],
+        "diagnostic_steps": [
+          {
+            "step": 1,
+            "action": "Check Retry-After header",
+            "description": "Note suggested retry time if present"
+          },
+          {
+            "step": 2,
+            "action": "Wait and retry",
+            "description": "Implement exponential backoff"
+          },
+          {
+            "step": 3,
+            "action": "Check status page",
+            "description": "Verify service status for maintenance windows"
+          }
+        ],
+        "prevention": [
+          "Implement circuit breaker pattern",
+          "Subscribe to status page updates",
+          "Build in retry logic with backoff"
+        ],
+        "related_errors": [
+          500,
+          502
+        ]
+      },
+      "504": {
+        "code": 504,
+        "name": "Gateway Timeout",
+        "description": "Request timed out waiting for response",
+        "common_causes": [
+          "Long-running operation",
+          "Backend overloaded",
+          "Network latency issues",
+          "Large payload processing"
+        ],
+        "diagnostic_steps": [
+          {
+            "step": 1,
+            "action": "Reduce payload size",
+            "description": "Try with smaller request payload"
+          },
+          {
+            "step": 2,
+            "action": "Check operation status",
+            "description": "For async operations, check status separately"
+          },
+          {
+            "step": 3,
+            "action": "Retry with longer timeout",
+            "description": "If client-controlled, increase timeout"
+          }
+        ],
+        "prevention": [
+          "Use pagination for large requests",
+          "Break large operations into smaller batches",
+          "Use async operation patterns"
+        ],
+        "related_errors": [
+          408,
+          503
+        ]
+      }
+    },
+    "resource_errors": {
+      "dns_zone": [
+        {
+          "error_code": 400,
+          "pattern": "invalid record",
+          "resolution": "Verify DNS record format matches record type requirements"
+        },
+        {
+          "error_code": 409,
+          "pattern": "zone exists",
+          "resolution": "Use existing zone or delete before recreation"
+        }
+      ],
+      "http_loadbalancer": [
+        {
+          "error_code": 400,
+          "pattern": "origin_pool.*not found",
+          "resolution": "Create the referenced origin pool before creating the load balancer"
+        },
+        {
+          "error_code": 400,
+          "pattern": "certificate.*invalid",
+          "resolution": "Verify certificate format and upload a valid certificate first"
+        },
+        {
+          "error_code": 409,
+          "pattern": "already exists",
+          "resolution": "Use a unique name or delete the existing load balancer"
+        }
+      ],
+      "origin_pool": [
+        {
+          "error_code": 400,
+          "pattern": "invalid port",
+          "resolution": "Specify a valid port number between 1-65535"
+        },
+        {
+          "error_code": 400,
+          "pattern": "invalid.*address",
+          "resolution": "Verify IP address format or DNS name resolution"
+        }
+      ],
+      "waf": [
+        {
+          "error_code": 400,
+          "pattern": "invalid rule",
+          "resolution": "Validate WAF rule syntax against rule specification"
+        },
+        {
+          "error_code": 409,
+          "pattern": "already attached",
+          "resolution": "Detach existing WAF policy before attaching new one"
+        }
+      ]
+    }
+  },
+  "x-f5xc-guided-workflows": {
+    "version": "1.0.0",
+    "total_workflows": 7,
+    "domains": [
+      "virtual",
+      "waf",
+      "dns",
+      "cdn",
+      "origin_pool",
+      "sites"
+    ],
+    "workflows": [
+      {
+        "id": "enable_cdn_distribution",
+        "name": "Enable CDN Distribution",
+        "description": "Configure CDN for content delivery",
+        "complexity": "medium",
+        "estimated_steps": 5,
+        "prerequisites": [
+          "Existing origin server or load balancer",
+          "Content cacheable via HTTP headers"
+        ],
+        "steps": [
+          {
+            "order": 1,
+            "action": "create_origin",
+            "name": "Define Origin",
+            "description": "Configure origin server for CDN",
+            "resource": "cdn_origin",
+            "required_fields": [
+              "name",
+              "origin_address"
+            ]
+          },
+          {
+            "order": 2,
+            "action": "configure_cache_rules",
+            "name": "Configure Cache Rules",
+            "description": "Define caching behavior per content type",
+            "tips": [
+              "Set longer TTL for static assets",
+              "Use vary headers appropriately"
+            ]
+          },
+          {
+            "order": 3,
+            "action": "create_distribution",
+            "name": "Create Distribution",
+            "description": "Configure CDN distribution",
+            "resource": "cdn_distribution",
+            "depends_on": [
+              1
+            ]
+          },
+          {
+            "order": 4,
+            "action": "configure_ssl",
+            "name": "Configure SSL",
+            "description": "Set up HTTPS for CDN endpoints",
+            "optional": true
+          },
+          {
+            "order": 5,
+            "action": "verify_caching",
+            "name": "Verify Caching",
+            "description": "Test CDN cache behavior",
+            "verification": [
+              "Check X-Cache headers",
+              "Verify content delivery from edge"
+            ]
+          }
+        ],
+        "domain": "cdn"
+      },
+      {
+        "id": "configure_dns_zone",
+        "name": "Configure DNS Zone",
+        "description": "Set up authoritative DNS zone with records",
+        "complexity": "low",
+        "estimated_steps": 4,
+        "prerequisites": [
+          "Domain name ownership",
+          "NS delegation configured at registrar"
+        ],
+        "steps": [
+          {
+            "order": 1,
+            "action": "create_dns_zone",
+            "name": "Create DNS Zone",
+            "description": "Create authoritative zone for domain",
+            "resource": "dns_zone",
+            "required_fields": [
+              "name",
+              "domain"
+            ]
+          },
+          {
+            "order": 2,
+            "action": "add_dns_records",
+            "name": "Add DNS Records",
+            "description": "Create A, CNAME, and other records",
+            "resource": "dns_record",
+            "depends_on": [
+              1
+            ],
+            "tips": [
+              "Use appropriate TTL values",
+              "Add MX records for email"
+            ]
+          },
+          {
+            "order": 3,
+            "action": "enable_dnssec",
+            "name": "Enable DNSSEC",
+            "description": "Configure DNS security extensions",
+            "optional": true,
+            "depends_on": [
+              1
+            ]
+          },
+          {
+            "order": 4,
+            "action": "verify_resolution",
+            "name": "Verify DNS Resolution",
+            "description": "Test DNS queries",
+            "verification": [
+              "Query records from public DNS",
+              "Verify propagation"
+            ]
+          }
+        ],
+        "domain": "dns"
+      },
+      {
+        "id": "configure_origin_pool",
+        "name": "Configure Origin Pool",
+        "description": "Set up backend server pool with health checks",
+        "complexity": "low",
+        "estimated_steps": 3,
+        "prerequisites": [
+          "Backend server addresses",
+          "Network connectivity to origins"
+        ],
+        "steps": [
+          {
+            "order": 1,
+            "action": "create_origin_pool",
+            "name": "Create Origin Pool",
+            "description": "Define backend servers",
+            "resource": "origin_pool",
+            "required_fields": [
+              "name",
+              "origin_servers",
+              "port"
+            ]
+          },
+          {
+            "order": 2,
+            "action": "add_healthcheck",
+            "name": "Add Health Check",
+            "description": "Configure health monitoring",
+            "resource": "healthcheck",
+            "optional": true
+          },
+          {
+            "order": 3,
+            "action": "verify_connectivity",
+            "name": "Verify Connectivity",
+            "description": "Test origin pool health",
+            "verification": [
+              "All origins showing healthy",
+              "Connection pooling working"
+            ]
+          }
+        ],
+        "domain": "origin_pool"
+      },
+      {
+        "id": "register_site",
+        "name": "Register Customer Edge Site",
+        "description": "Register and configure a CE site",
+        "complexity": "high",
+        "estimated_steps": 6,
+        "prerequisites": [
+          "Site hardware or VM provisioned",
+          "Network connectivity to F5 XC",
+          "Registration token generated"
+        ],
+        "steps": [
+          {
+            "order": 1,
+            "action": "generate_token",
+            "name": "Generate Registration Token",
+            "description": "Create site registration token",
+            "resource": "site_token"
+          },
+          {
+            "order": 2,
+            "action": "configure_site",
+            "name": "Configure Site Settings",
+            "description": "Define site parameters",
+            "resource": "site",
+            "required_fields": [
+              "name",
+              "site_type"
+            ]
+          },
+          {
+            "order": 3,
+            "action": "install_software",
+            "name": "Install CE Software",
+            "description": "Deploy F5 XC software on site",
+            "depends_on": [
+              1
+            ]
+          },
+          {
+            "order": 4,
+            "action": "complete_registration",
+            "name": "Complete Registration",
+            "description": "Finalize site registration",
+            "depends_on": [
+              2,
+              3
+            ]
+          },
+          {
+            "order": 5,
+            "action": "configure_network",
+            "name": "Configure Site Network",
+            "description": "Set up site networking",
+            "depends_on": [
+              4
+            ]
+          },
+          {
+            "order": 6,
+            "action": "verify_site",
+            "name": "Verify Site Status",
+            "description": "Confirm site is operational",
+            "verification": [
+              "Site shows online status",
+              "Tunnel connectivity established",
+              "Services deployed successfully"
+            ]
+          }
+        ],
+        "domain": "sites"
+      },
+      {
+        "id": "deploy_http_loadbalancer",
+        "name": "Deploy HTTP Load Balancer",
+        "description": "Create a fully configured HTTP load balancer with backend origin pool",
+        "complexity": "medium",
+        "estimated_steps": 5,
+        "prerequisites": [
+          "Valid namespace in target tenant",
+          "Backend application reachable via IP or DNS",
+          "SSL certificate (optional for HTTPS)"
+        ],
+        "steps": [
+          {
+            "order": 1,
+            "action": "create_origin_pool",
+            "name": "Create Origin Pool",
+            "description": "Define backend servers for the load balancer",
+            "resource": "origin_pool",
+            "required_fields": [
+              "name",
+              "origin_servers",
+              "port"
+            ],
+            "tips": [
+              "Use private IPs for internal applications",
+              "Configure health checks for high availability"
+            ]
+          },
+          {
+            "order": 2,
+            "action": "create_healthcheck",
+            "name": "Configure Health Check",
+            "description": "Set up health monitoring for origin pool",
+            "resource": "healthcheck",
+            "optional": true,
+            "required_fields": [
+              "name",
+              "http_health_check"
+            ],
+            "tips": [
+              "Use application-specific health endpoints",
+              "Set appropriate timeout values"
+            ]
+          },
+          {
+            "order": 3,
+            "action": "attach_healthcheck",
+            "name": "Attach Health Check",
+            "description": "Link health check to origin pool",
+            "optional": true,
+            "depends_on": [
+              1,
+              2
+            ]
+          },
+          {
+            "order": 4,
+            "action": "create_http_loadbalancer",
+            "name": "Create HTTP Load Balancer",
+            "description": "Configure the load balancer with origin pool",
+            "resource": "http_loadbalancer",
+            "depends_on": [
+              1
+            ],
+            "required_fields": [
+              "name",
+              "domains",
+              "http.port"
+            ],
+            "tips": [
+              "Use wildcard domains for multi-host routing",
+              "Configure advertise policy for internet exposure"
+            ]
+          },
+          {
+            "order": 5,
+            "action": "verify_deployment",
+            "name": "Verify Deployment",
+            "description": "Test load balancer endpoint accessibility",
+            "depends_on": [
+              4
+            ],
+            "verification": [
+              "DNS resolution for configured domains",
+              "HTTP response from load balancer VIP",
+              "Backend origin health status"
+            ]
+          }
+        ],
+        "domain": "virtual"
+      },
+      {
+        "id": "deploy_https_loadbalancer",
+        "name": "Deploy HTTPS Load Balancer with TLS",
+        "description": "Create HTTPS load balancer with SSL/TLS termination",
+        "complexity": "high",
+        "estimated_steps": 7,
+        "prerequisites": [
+          "Valid namespace in target tenant",
+          "SSL certificate and private key",
+          "Backend application reachable"
+        ],
+        "steps": [
+          {
+            "order": 1,
+            "action": "upload_certificate",
+            "name": "Upload SSL Certificate",
+            "description": "Upload certificate and private key",
+            "resource": "certificate",
+            "required_fields": [
+              "name",
+              "certificate_chain",
+              "private_key"
+            ],
+            "tips": [
+              "Include intermediate certificates in chain",
+              "Use PEM format for certificate data"
+            ]
+          },
+          {
+            "order": 2,
+            "action": "create_origin_pool",
+            "name": "Create Origin Pool",
+            "description": "Define backend servers",
+            "resource": "origin_pool",
+            "required_fields": [
+              "name",
+              "origin_servers"
+            ]
+          },
+          {
+            "order": 3,
+            "action": "create_healthcheck",
+            "name": "Configure Health Check",
+            "description": "Set up health monitoring",
+            "resource": "healthcheck",
+            "optional": true
+          },
+          {
+            "order": 4,
+            "action": "create_waf_policy",
+            "name": "Configure WAF Policy",
+            "description": "Enable web application firewall",
+            "resource": "app_firewall",
+            "optional": true,
+            "tips": [
+              "Start in monitoring mode",
+              "Use appropriate rule sets"
+            ]
+          },
+          {
+            "order": 5,
+            "action": "create_https_loadbalancer",
+            "name": "Create HTTPS Load Balancer",
+            "description": "Configure load balancer with TLS",
+            "resource": "http_loadbalancer",
+            "depends_on": [
+              1,
+              2
+            ],
+            "required_fields": [
+              "name",
+              "domains",
+              "https.tls_parameters"
+            ]
+          },
+          {
+            "order": 6,
+            "action": "attach_waf",
+            "name": "Attach WAF Policy",
+            "description": "Link WAF to load balancer",
+            "optional": true,
+            "depends_on": [
+              4,
+              5
+            ]
+          },
+          {
+            "order": 7,
+            "action": "verify_https",
+            "name": "Verify HTTPS Deployment",
+            "description": "Test secure endpoint",
+            "verification": [
+              "TLS certificate validation",
+              "HTTPS response codes",
+              "WAF policy application"
+            ]
+          }
+        ],
+        "domain": "virtual"
+      },
+      {
+        "id": "enable_waf_protection",
+        "name": "Enable WAF Protection",
+        "description": "Add web application firewall to existing load balancer",
+        "complexity": "medium",
+        "estimated_steps": 4,
+        "prerequisites": [
+          "Existing HTTP load balancer",
+          "Understanding of application traffic patterns"
+        ],
+        "steps": [
+          {
+            "order": 1,
+            "action": "create_app_firewall",
+            "name": "Create Application Firewall",
+            "description": "Define WAF policy with rule sets",
+            "resource": "app_firewall",
+            "required_fields": [
+              "name",
+              "blocking"
+            ],
+            "tips": [
+              "Start in monitoring mode for tuning",
+              "Select rules based on application stack"
+            ]
+          },
+          {
+            "order": 2,
+            "action": "configure_exclusions",
+            "name": "Configure Exclusions",
+            "description": "Add bypass rules for false positives",
+            "optional": true,
+            "tips": [
+              "Exclude trusted internal IPs",
+              "Add API endpoint exclusions if needed"
+            ]
+          },
+          {
+            "order": 3,
+            "action": "attach_to_loadbalancer",
+            "name": "Attach to Load Balancer",
+            "description": "Apply WAF policy to load balancer",
+            "depends_on": [
+              1
+            ]
+          },
+          {
+            "order": 4,
+            "action": "monitor_and_tune",
+            "name": "Monitor and Tune",
+            "description": "Review WAF logs and adjust rules",
+            "verification": [
+              "Check security event logs",
+              "Verify no legitimate traffic blocked",
+              "Adjust rules as needed"
+            ]
+          }
+        ],
+        "domain": "waf"
+      }
+    ]
+  },
+  "x-f5xc-acronyms": {
+    "version": "1.0.0",
+    "categories": [
+      "Networking",
+      "Security",
+      "Load Balancing",
+      "Cloud & Infrastructure",
+      "F5 Specific",
+      "Standards & Formats",
+      "Protocols",
+      "Other"
+    ],
+    "acronyms": [
+      {
+        "acronym": "TCP",
+        "expansion": "Transmission Control Protocol",
+        "category": "Networking"
+      },
+      {
+        "acronym": "UDP",
+        "expansion": "User Datagram Protocol",
+        "category": "Networking"
+      },
+      {
+        "acronym": "HTTP",
+        "expansion": "Hypertext Transfer Protocol",
+        "category": "Networking"
+      },
+      {
+        "acronym": "HTTPS",
+        "expansion": "Hypertext Transfer Protocol Secure",
+        "category": "Networking"
+      },
+      {
+        "acronym": "DNS",
+        "expansion": "Domain Name System",
+        "category": "Networking"
+      },
+      {
+        "acronym": "IP",
+        "expansion": "Internet Protocol",
+        "category": "Networking"
+      },
+      {
+        "acronym": "IPv4",
+        "expansion": "Internet Protocol version 4",
+        "category": "Networking"
+      },
+      {
+        "acronym": "IPv6",
+        "expansion": "Internet Protocol version 6",
+        "category": "Networking"
+      },
+      {
+        "acronym": "BGP",
+        "expansion": "Border Gateway Protocol",
+        "category": "Networking"
+      },
+      {
+        "acronym": "OSPF",
+        "expansion": "Open Shortest Path First",
+        "category": "Networking"
+      },
+      {
+        "acronym": "VLAN",
+        "expansion": "Virtual Local Area Network",
+        "category": "Networking"
+      },
+      {
+        "acronym": "VPN",
+        "expansion": "Virtual Private Network",
+        "category": "Networking"
+      },
+      {
+        "acronym": "CIDR",
+        "expansion": "Classless Inter-Domain Routing",
+        "category": "Networking"
+      },
+      {
+        "acronym": "NAT",
+        "expansion": "Network Address Translation",
+        "category": "Networking"
+      },
+      {
+        "acronym": "SNAT",
+        "expansion": "Source Network Address Translation",
+        "category": "Networking"
+      },
+      {
+        "acronym": "DNAT",
+        "expansion": "Destination Network Address Translation",
+        "category": "Networking"
+      },
+      {
+        "acronym": "MAC",
+        "expansion": "Media Access Control",
+        "category": "Networking"
+      },
+      {
+        "acronym": "ARP",
+        "expansion": "Address Resolution Protocol",
+        "category": "Networking"
+      },
+      {
+        "acronym": "NIC",
+        "expansion": "Network Interface Card",
+        "category": "Networking"
+      },
+      {
+        "acronym": "MTU",
+        "expansion": "Maximum Transmission Unit",
+        "category": "Networking"
+      },
+      {
+        "acronym": "QoS",
+        "expansion": "Quality of Service",
+        "category": "Networking"
+      },
+      {
+        "acronym": "MPLS",
+        "expansion": "Multiprotocol Label Switching",
+        "category": "Networking"
+      },
+      {
+        "acronym": "GRE",
+        "expansion": "Generic Routing Encapsulation",
+        "category": "Networking"
+      },
+      {
+        "acronym": "VXLAN",
+        "expansion": "Virtual Extensible LAN",
+        "category": "Networking"
+      },
+      {
+        "acronym": "IPsec",
+        "expansion": "Internet Protocol Security",
+        "category": "Networking"
+      },
+      {
+        "acronym": "SSL",
+        "expansion": "Secure Sockets Layer",
+        "category": "Networking"
+      },
+      {
+        "acronym": "TLS",
+        "expansion": "Transport Layer Security",
+        "category": "Networking"
+      },
+      {
+        "acronym": "SNI",
+        "expansion": "Server Name Indication",
+        "category": "Networking"
+      },
+      {
+        "acronym": "mTLS",
+        "expansion": "Mutual Transport Layer Security",
+        "category": "Networking"
+      },
+      {
+        "acronym": "FQDN",
+        "expansion": "Fully Qualified Domain Name",
+        "category": "Networking"
+      },
+      {
+        "acronym": "VIP",
+        "expansion": "Virtual IP Address",
+        "category": "Networking"
+      },
+      {
+        "acronym": "ASN",
+        "expansion": "Autonomous System Number",
+        "category": "Networking"
+      },
+      {
+        "acronym": "WAF",
+        "expansion": "Web Application Firewall",
+        "category": "Security"
+      },
+      {
+        "acronym": "DDoS",
+        "expansion": "Distributed Denial of Service",
+        "category": "Security"
+      },
+      {
+        "acronym": "XSS",
+        "expansion": "Cross-Site Scripting",
+        "category": "Security"
+      },
+      {
+        "acronym": "CSRF",
+        "expansion": "Cross-Site Request Forgery",
+        "category": "Security"
+      },
+      {
+        "acronym": "SQLi",
+        "expansion": "SQL Injection",
+        "category": "Security"
+      },
+      {
+        "acronym": "OWASP",
+        "expansion": "Open Web Application Security Project",
+        "category": "Security"
+      },
+      {
+        "acronym": "CVE",
+        "expansion": "Common Vulnerabilities and Exposures",
+        "category": "Security"
+      },
+      {
+        "acronym": "JWT",
+        "expansion": "JSON Web Token",
+        "category": "Security"
+      },
+      {
+        "acronym": "OAuth",
+        "expansion": "Open Authorization",
+        "category": "Security"
+      },
+      {
+        "acronym": "OIDC",
+        "expansion": "OpenID Connect",
+        "category": "Security"
+      },
+      {
+        "acronym": "SAML",
+        "expansion": "Security Assertion Markup Language",
+        "category": "Security"
+      },
+      {
+        "acronym": "LDAP",
+        "expansion": "Lightweight Directory Access Protocol",
+        "category": "Security"
+      },
+      {
+        "acronym": "AD",
+        "expansion": "Active Directory",
+        "category": "Security"
+      },
+      {
+        "acronym": "ACL",
+        "expansion": "Access Control List",
+        "category": "Security"
+      },
+      {
+        "acronym": "RBAC",
+        "expansion": "Role-Based Access Control",
+        "category": "Security"
+      },
+      {
+        "acronym": "MFA",
+        "expansion": "Multi-Factor Authentication",
+        "category": "Security"
+      },
+      {
+        "acronym": "SSO",
+        "expansion": "Single Sign-On",
+        "category": "Security"
+      },
+      {
+        "acronym": "PKI",
+        "expansion": "Public Key Infrastructure",
+        "category": "Security"
+      },
+      {
+        "acronym": "CA",
+        "expansion": "Certificate Authority",
+        "category": "Security"
+      },
+      {
+        "acronym": "CRL",
+        "expansion": "Certificate Revocation List",
+        "category": "Security"
+      },
+      {
+        "acronym": "LB",
+        "expansion": "Load Balancer",
+        "category": "Load Balancing"
+      },
+      {
+        "acronym": "SLB",
+        "expansion": "Server Load Balancer",
+        "category": "Load Balancing"
+      },
+      {
+        "acronym": "GLB",
+        "expansion": "Global Load Balancer",
+        "category": "Load Balancing"
+      },
+      {
+        "acronym": "GSLB",
+        "expansion": "Global Server Load Balancing",
+        "category": "Load Balancing"
+      },
+      {
+        "acronym": "ADC",
+        "expansion": "Application Delivery Controller",
+        "category": "Load Balancing"
+      },
+      {
+        "acronym": "NLB",
+        "expansion": "Network Load Balancer",
+        "category": "Load Balancing"
+      },
+      {
+        "acronym": "ALB",
+        "expansion": "Application Load Balancer",
+        "category": "Load Balancing"
+      },
+      {
+        "acronym": "ELB",
+        "expansion": "Elastic Load Balancer",
+        "category": "Load Balancing"
+      },
+      {
+        "acronym": "AWS",
+        "expansion": "Amazon Web Services",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "GCP",
+        "expansion": "Google Cloud Platform",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "Azure",
+        "expansion": "Microsoft Azure",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "VPC",
+        "expansion": "Virtual Private Cloud",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "VNet",
+        "expansion": "Virtual Network",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "EC2",
+        "expansion": "Elastic Compute Cloud",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "EKS",
+        "expansion": "Elastic Kubernetes Service",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "AKS",
+        "expansion": "Azure Kubernetes Service",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "GKE",
+        "expansion": "Google Kubernetes Engine",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "VM",
+        "expansion": "Virtual Machine",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "K8s",
+        "expansion": "Kubernetes",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "API",
+        "expansion": "Application Programming Interface",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "REST",
+        "expansion": "Representational State Transfer",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "gRPC",
+        "expansion": "gRPC Remote Procedure Call",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "SDK",
+        "expansion": "Software Development Kit",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "CLI",
+        "expansion": "Command Line Interface",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "CDN",
+        "expansion": "Content Delivery Network",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "SaaS",
+        "expansion": "Software as a Service",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "PaaS",
+        "expansion": "Platform as a Service",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "IaaS",
+        "expansion": "Infrastructure as a Service",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "CRD",
+        "expansion": "Custom Resource Definition",
+        "category": "Cloud & Infrastructure"
+      },
+      {
+        "acronym": "XC",
+        "expansion": "Distributed Cloud",
+        "category": "F5 Specific"
+      },
+      {
+        "acronym": "F5",
+        "expansion": "F5 Networks",
+        "category": "F5 Specific"
+      },
+      {
+        "acronym": "BIG-IP",
+        "expansion": "BIG-IP Application Delivery Controller",
+        "category": "F5 Specific"
+      },
+      {
+        "acronym": "NGINX",
+        "expansion": "NGINX Web Server",
+        "category": "F5 Specific"
+      },
+      {
+        "acronym": "RE",
+        "expansion": "Regional Edge",
+        "category": "F5 Specific"
+      },
+      {
+        "acronym": "CE",
+        "expansion": "Customer Edge",
+        "category": "F5 Specific"
+      },
+      {
+        "acronym": "POP",
+        "expansion": "Point of Presence",
+        "category": "F5 Specific"
+      },
+      {
+        "acronym": "VES",
+        "expansion": "Volterra Edge Services",
+        "category": "F5 Specific"
+      },
+      {
+        "acronym": "JSON",
+        "expansion": "JavaScript Object Notation",
+        "category": "Standards & Formats"
+      },
+      {
+        "acronym": "XML",
+        "expansion": "Extensible Markup Language",
+        "category": "Standards & Formats"
+      },
+      {
+        "acronym": "YAML",
+        "expansion": "YAML Ain't Markup Language",
+        "category": "Standards & Formats"
+      },
+      {
+        "acronym": "CSV",
+        "expansion": "Comma-Separated Values",
+        "category": "Standards & Formats"
+      },
+      {
+        "acronym": "HTML",
+        "expansion": "Hypertext Markup Language",
+        "category": "Standards & Formats"
+      },
+      {
+        "acronym": "CSS",
+        "expansion": "Cascading Style Sheets",
+        "category": "Standards & Formats"
+      },
+      {
+        "acronym": "URL",
+        "expansion": "Uniform Resource Locator",
+        "category": "Standards & Formats"
+      },
+      {
+        "acronym": "URI",
+        "expansion": "Uniform Resource Identifier",
+        "category": "Standards & Formats"
+      },
+      {
+        "acronym": "UUID",
+        "expansion": "Universally Unique Identifier",
+        "category": "Standards & Formats"
+      },
+      {
+        "acronym": "RFC",
+        "expansion": "Request for Comments",
+        "category": "Standards & Formats"
+      },
+      {
+        "acronym": "ISO",
+        "expansion": "International Organization for Standardization",
+        "category": "Standards & Formats"
+      },
+      {
+        "acronym": "UTC",
+        "expansion": "Coordinated Universal Time",
+        "category": "Standards & Formats"
+      },
+      {
+        "acronym": "TTL",
+        "expansion": "Time to Live",
+        "category": "Standards & Formats"
+      },
+      {
+        "acronym": "SMTP",
+        "expansion": "Simple Mail Transfer Protocol",
+        "category": "Protocols"
+      },
+      {
+        "acronym": "IMAP",
+        "expansion": "Internet Message Access Protocol",
+        "category": "Protocols"
+      },
+      {
+        "acronym": "POP3",
+        "expansion": "Post Office Protocol version 3",
+        "category": "Protocols"
+      },
+      {
+        "acronym": "FTP",
+        "expansion": "File Transfer Protocol",
+        "category": "Protocols"
+      },
+      {
+        "acronym": "SFTP",
+        "expansion": "SSH File Transfer Protocol",
+        "category": "Protocols"
+      },
+      {
+        "acronym": "SSH",
+        "expansion": "Secure Shell",
+        "category": "Protocols"
+      },
+      {
+        "acronym": "RDP",
+        "expansion": "Remote Desktop Protocol",
+        "category": "Protocols"
+      },
+      {
+        "acronym": "SNMP",
+        "expansion": "Simple Network Management Protocol",
+        "category": "Protocols"
+      },
+      {
+        "acronym": "NTP",
+        "expansion": "Network Time Protocol",
+        "category": "Protocols"
+      },
+      {
+        "acronym": "RADIUS",
+        "expansion": "Remote Authentication Dial-In User Service",
+        "category": "Protocols"
+      },
+      {
+        "acronym": "TACACS",
+        "expansion": "Terminal Access Controller Access-Control System",
+        "category": "Protocols"
+      },
+      {
+        "acronym": "CPU",
+        "expansion": "Central Processing Unit",
+        "category": "Other"
+      },
+      {
+        "acronym": "GPU",
+        "expansion": "Graphics Processing Unit",
+        "category": "Other"
+      },
+      {
+        "acronym": "RAM",
+        "expansion": "Random Access Memory",
+        "category": "Other"
+      },
+      {
+        "acronym": "SSD",
+        "expansion": "Solid State Drive",
+        "category": "Other"
+      },
+      {
+        "acronym": "HDD",
+        "expansion": "Hard Disk Drive",
+        "category": "Other"
+      },
+      {
+        "acronym": "IOPS",
+        "expansion": "Input/Output Operations Per Second",
+        "category": "Other"
+      },
+      {
+        "acronym": "I/O",
+        "expansion": "Input/Output",
+        "category": "Other"
+      },
+      {
+        "acronym": "ID",
+        "expansion": "Identifier",
+        "category": "Other"
+      },
+      {
+        "acronym": "OS",
+        "expansion": "Operating System",
+        "category": "Other"
+      },
+      {
+        "acronym": "GUI",
+        "expansion": "Graphical User Interface",
+        "category": "Other"
+      },
+      {
+        "acronym": "UI",
+        "expansion": "User Interface",
+        "category": "Other"
+      },
+      {
+        "acronym": "UX",
+        "expansion": "User Experience",
+        "category": "Other"
+      },
+      {
+        "acronym": "RTT",
+        "expansion": "Round-Trip Time",
+        "category": "Other"
+      },
+      {
+        "acronym": "SLA",
+        "expansion": "Service Level Agreement",
+        "category": "Other"
+      },
+      {
+        "acronym": "KPI",
+        "expansion": "Key Performance Indicator",
+        "category": "Other"
+      }
+    ]
+  }
+}

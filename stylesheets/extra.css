@@ -1,0 +1,1272 @@
+/* ==========================================================================
+   F5 Distributed Cloud Documentation Theme
+   Matches: https://docs.cloud.f5.com/docs-v2/platform
+   ========================================================================== */
+
+/* ==========================================================================
+   CSS Custom Properties (F5 Cloud Color Palette)
+   ========================================================================== */
+
+:root,
+[data-md-color-scheme="default"] {
+  /* Primary Colors */
+  --md-primary-fg-color: #4f73ff;
+  --md-primary-fg-color--light: #6b8aff;
+  --md-primary-fg-color--dark: #3d5ee6;
+  --md-primary-bg-color: #ffffff;
+  --md-primary-bg-color--light: #f3f4f9;
+
+  /* Accent Colors */
+  --md-accent-fg-color: #4f73ff;
+  --md-accent-fg-color--transparent: rgba(79, 115, 255, 0.1);
+  --md-accent-bg-color: #e5eaff;
+
+  /* Text Colors */
+  --md-default-fg-color: #0f1e57;
+  --md-default-fg-color--light: #6c778c;
+  --md-default-fg-color--lighter: #a0a7c2;
+  --md-default-fg-color--lightest: #c9cfdf;
+  --md-default-bg-color: #ffffff;
+  --md-default-bg-color--light: #f3f4f9;
+  --md-default-bg-color--lighter: #f8f9fc;
+  --md-default-bg-color--lightest: #fafbfd;
+
+  /* Code Colors */
+  --md-code-fg-color: #0f1e57;
+  --md-code-bg-color: #f3f4f9;
+  --md-code-hl-color: rgba(79, 115, 255, 0.1);
+  --md-code-hl-number-color: #d63384;
+  --md-code-hl-special-color: #4f73ff;
+  --md-code-hl-function-color: #6f42c1;
+  --md-code-hl-constant-color: #0d6efd;
+  --md-code-hl-keyword-color: #d63384;
+  --md-code-hl-string-color: #198754;
+  --md-code-hl-name-color: #0f1e57;
+  --md-code-hl-operator-color: #6c778c;
+  --md-code-hl-punctuation-color: #6c778c;
+  --md-code-hl-comment-color: #a0a7c2;
+  --md-code-hl-generic-color: #0f1e57;
+  --md-code-hl-variable-color: #0f1e57;
+
+  /* Typography */
+  --md-typeset-color: #0f1e57;
+  --md-typeset-a-color: #4f73ff;
+
+  /* Admonitions */
+  --md-admonition-fg-color: #0f1e57;
+  --md-admonition-bg-color: #f3f4f9;
+
+  /* Footer - light neutral background to match theme */
+  --md-footer-fg-color: var(--md-default-fg-color);
+  --md-footer-fg-color--light: var(--md-default-fg-color--light);
+  --md-footer-fg-color--lighter: var(--md-default-fg-color--lighter);
+  --md-footer-bg-color: var(--md-default-bg-color--light);
+  --md-footer-bg-color--dark: var(--md-default-bg-color--lighter);
+
+  /* Shadows */
+  --md-shadow-z1: 0 2px 4px rgba(15, 30, 87, 0.05), 0 1px 2px rgba(15, 30, 87, 0.08);
+  --md-shadow-z2: 0 4px 8px rgba(15, 30, 87, 0.08), 0 2px 4px rgba(15, 30, 87, 0.1);
+  --md-shadow-z3: 0 8px 16px rgba(15, 30, 87, 0.1), 0 4px 8px rgba(15, 30, 87, 0.12);
+}
+
+/* Dark mode - GitHub Dark theme for maximum contrast */
+[data-md-color-scheme="slate"] {
+  /* GitHub Dark color palette */
+  --md-default-bg-color: #0d1117;
+  --md-default-bg-color--light: #161b22;
+  --md-default-bg-color--lighter: #21262d;
+  --md-default-bg-color--lightest: #30363d;
+
+  /* Text colors - high contrast */
+  --md-default-fg-color: #e6edf3;
+  --md-default-fg-color--light: #8b949e;
+  --md-default-fg-color--lighter: #6e7681;
+  --md-default-fg-color--lightest: #484f58;
+
+  /* Primary accent - GitHub blue */
+  --md-primary-fg-color: #58a6ff;
+  --md-primary-fg-color--light: #79c0ff;
+  --md-primary-fg-color--dark: #388bfd;
+  --md-primary-bg-color: #0d1117;
+  --md-primary-bg-color--light: #161b22;
+  --md-accent-fg-color: #58a6ff;
+  --md-accent-fg-color--transparent: rgba(88, 166, 255, 0.15);
+  --md-accent-bg-color: rgba(88, 166, 255, 0.15);
+
+  /* Code blocks */
+  --md-code-bg-color: #161b22;
+  --md-code-fg-color: #e6edf3;
+  --md-code-hl-color: rgba(88, 166, 255, 0.15);
+  --md-code-hl-number-color: #79c0ff;
+  --md-code-hl-special-color: #ff7b72;
+  --md-code-hl-function-color: #d2a8ff;
+  --md-code-hl-constant-color: #79c0ff;
+  --md-code-hl-keyword-color: #ff7b72;
+  --md-code-hl-string-color: #a5d6ff;
+  --md-code-hl-name-color: #ffa657;
+  --md-code-hl-operator-color: #8b949e;
+  --md-code-hl-punctuation-color: #8b949e;
+  --md-code-hl-comment-color: #8b949e;
+  --md-code-hl-generic-color: #e6edf3;
+  --md-code-hl-variable-color: #ffa657;
+
+  /* Typeset */
+  --md-typeset-color: #e6edf3;
+  --md-typeset-a-color: #58a6ff;
+
+  /* Admonitions */
+  --md-admonition-fg-color: #e6edf3;
+  --md-admonition-bg-color: #161b22;
+
+  /* Footer */
+  --md-footer-fg-color: #e6edf3;
+  --md-footer-fg-color--light: rgba(230, 237, 243, 0.7);
+  --md-footer-fg-color--lighter: rgba(230, 237, 243, 0.5);
+  --md-footer-bg-color: #010409;
+  --md-footer-bg-color--dark: #010409;
+
+  /* Shadows for dark mode */
+  --md-shadow-z1: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --md-shadow-z2: 0 4px 8px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.5);
+  --md-shadow-z3: 0 8px 16px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Dark mode specific overrides */
+[data-md-color-scheme="slate"] .md-header {
+  background-color: #010409;
+  box-shadow: 0 1px 0 #21262d;
+}
+
+[data-md-color-scheme="slate"] .md-tabs {
+  background-color: #010409;
+  border-bottom: 1px solid #21262d;
+}
+
+/* Dark mode tab navigation - improve contrast */
+[data-md-color-scheme="slate"] .md-tabs__link {
+  color: #8b949e;  /* Light gray for inactive tabs */
+}
+
+[data-md-color-scheme="slate"] .md-tabs__link:hover {
+  color: #c9d1d9;  /* Brighter on hover */
+}
+
+[data-md-color-scheme="slate"] .md-tabs__item--active .md-tabs__link,
+[data-md-color-scheme="slate"] .md-tabs__item--active .md-tabs__link:focus,
+[data-md-color-scheme="slate"] .md-tabs__item--active .md-tabs__link:hover {
+  color: #58a6ff !important;  /* GitHub blue - high contrast */
+  border-bottom: 2px solid #58a6ff !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--primary {
+  border-right: 1px solid #21262d;
+}
+
+[data-md-color-scheme="slate"] .md-nav--secondary {
+  border-left: 1px solid #21262d;
+}
+
+[data-md-color-scheme="slate"] .md-typeset pre {
+  border: 1px solid #30363d;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) {
+  border: 1px solid #30363d;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background-color: #161b22;
+  border-bottom: 1px solid #30363d;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) td {
+  border-bottom: 1px solid #21262d;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .admonition,
+[data-md-color-scheme="slate"] .md-typeset details {
+  border: 1px solid #30363d;
+  background-color: #161b22;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .admonition-title,
+[data-md-color-scheme="slate"] .md-typeset details summary {
+  background-color: #21262d;
+  border-bottom: 1px solid #30363d;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .tabbed-set {
+  border: 1px solid #30363d;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .tabbed-labels {
+  background-color: #161b22;
+  border-bottom: 1px solid #30363d;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h2 {
+  border-bottom: 1px solid #21262d;
+}
+
+[data-md-color-scheme="slate"] .md-typeset hr {
+  border-top: 1px solid #21262d;
+}
+
+[data-md-color-scheme="slate"] .md-typeset blockquote {
+  background-color: #161b22;
+}
+
+/* ==========================================================================
+   Base Font Size Override - Compact Layout
+   ========================================================================== */
+
+:root {
+  --md-text-font-size: 0.875rem;
+}
+
+html {
+  font-size: 16px; /* Reset from Material's default 20px for more compact layout */
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+.md-typeset {
+  font-size: 0.875rem; /* 14px base for body text */
+  line-height: 1.5;
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset h1 {
+  font-size: 1.75rem; /* 28px */
+  font-weight: 700;
+  color: var(--md-default-fg-color);
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.md-typeset h2 {
+  font-size: 1.35rem; /* 21.6px */
+  font-weight: 600;
+  color: var(--md-default-fg-color);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.375rem;
+  border-bottom: 1px solid #e6e9f3;
+}
+
+.md-typeset h3 {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  color: var(--md-default-fg-color);
+  margin-top: 1.25rem;
+  margin-bottom: 0.375rem;
+}
+
+.md-typeset h4 {
+  font-size: 1rem; /* 16px */
+  font-weight: 600;
+  color: var(--md-default-fg-color);
+  margin-top: 1rem;
+  margin-bottom: 0.375rem;
+}
+
+.md-typeset h5,
+.md-typeset h6 {
+  font-size: 0.9375rem; /* 15px */
+  font-weight: 600;
+  color: var(--md-default-fg-color);
+  margin-top: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.md-typeset p {
+  margin-bottom: 0.75rem;
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+
+.md-typeset a {
+  color: var(--md-typeset-a-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.md-typeset a:hover {
+  color: var(--md-primary-fg-color--dark);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Header / Navigation Bar
+   ========================================================================== */
+
+.md-header {
+  background-color: var(--md-primary-bg-color);
+  box-shadow: 0 1px 0 #e6e9f3;
+  color: var(--md-default-fg-color);
+}
+
+.md-header[data-md-state="shadow"] {
+  box-shadow: var(--md-shadow-z2);
+}
+
+.md-header__button {
+  color: var(--md-default-fg-color);
+}
+
+.md-header__button:hover {
+  color: var(--md-primary-fg-color);
+}
+
+.md-header__title {
+  color: var(--md-default-fg-color);
+  font-weight: 600;
+}
+
+.md-header__topic {
+  font-weight: 600;
+}
+
+/* Search */
+.md-search__input {
+  background-color: var(--md-default-bg-color--light);
+  color: var(--md-default-fg-color);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.md-search__input::placeholder {
+  color: var(--md-default-fg-color--lighter);
+}
+
+.md-search__input:hover {
+  background-color: var(--md-default-bg-color--lighter);
+}
+
+/* ==========================================================================
+   Navigation Tabs
+   ========================================================================== */
+
+.md-tabs {
+  background-color: var(--md-primary-bg-color);
+  border-bottom: 1px solid #e6e9f3;
+}
+
+.md-tabs__link {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.875rem;
+  font-weight: 500;
+  opacity: 1;
+  transition: color 0.2s ease;
+}
+
+.md-tabs__link:hover {
+  color: var(--md-primary-fg-color);
+}
+
+/* Active tab - ensure visibility with high contrast colors */
+/* Light mode styling - must have same specificity as dark mode */
+[data-md-color-scheme="default"] .md-tabs__item--active .md-tabs__link,
+[data-md-color-scheme="default"] .md-tabs__item--active .md-tabs__link:focus,
+[data-md-color-scheme="default"] .md-tabs__item--active .md-tabs__link:hover {
+  color: #2952cc !important;  /* Darker blue for better contrast on white */
+  border-bottom: 2px solid #2952cc !important;
+  opacity: 1 !important;
+}
+
+/* ==========================================================================
+   Sidebar Navigation
+   ========================================================================== */
+
+.md-sidebar {
+  background-color: var(--md-default-bg-color);
+}
+
+.md-sidebar--primary {
+  border-right: 1px solid #e6e9f3;
+  width: 16rem; /* Wider sidebar to prevent text truncation */
+}
+
+.md-sidebar--secondary {
+  width: 11rem; /* Compact TOC width */
+}
+
+/* Reduce sidebar internal padding */
+.md-sidebar__scrollwrap {
+  padding: 0.5rem 0;
+}
+
+.md-sidebar__inner {
+  padding: 0;
+}
+
+/* Override Material theme's default right padding on sidebar inner */
+.md-sidebar--primary .md-sidebar__inner {
+  padding-right: 0.5rem !important;
+}
+
+/* Hide sidebar on home page only (at desktop breakpoint) */
+@media screen and (min-width: 76.25em) {
+  html[data-md-page="home"] .md-sidebar--primary {
+    display: none !important;
+  }
+}
+
+/* Wider content area for better readability on large screens */
+@media screen and (min-width: 76.25em) {
+  .md-main__inner {
+    max-width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .md-grid {
+    max-width: 100%;
+  }
+
+  /* Content should use available space */
+  .md-content {
+    max-width: none;
+  }
+}
+
+.md-nav__title {
+  font-size: 0.625rem; /* 10px - compact title */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--md-default-fg-color--light);
+  padding: 0.5rem 0.5rem 0.375rem;
+}
+
+.md-nav__item {
+  padding: 0;
+}
+
+.md-nav__link {
+  font-size: 0.75rem; /* 12px - compact nav links */
+  font-weight: 400;
+  color: var(--md-default-fg-color);
+  padding: 0.25rem 0.5rem;
+  margin: 0.0625rem 0;
+  border-radius: 0.25rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  line-height: 1.35;
+}
+
+.md-nav__link:hover {
+  background-color: var(--md-accent-fg-color--transparent);
+  color: var(--md-primary-fg-color);
+}
+
+.md-nav__link--active,
+.md-nav__link--active:hover {
+  background-color: var(--md-accent-fg-color--transparent);
+  color: var(--md-primary-fg-color);
+  font-weight: 500;
+}
+
+.md-nav__link--passed {
+  color: var(--md-default-fg-color--light);
+}
+
+/* Navigation Hierarchy - Clear Indentation by Level */
+/* Level 1 non-nested items - reduced padding for tighter left margin */
+.md-sidebar--primary .md-nav[data-md-level="1"] > .md-nav__list > .md-nav__item:not(.md-nav__item--nested) > .md-nav__link {
+  padding-left: 0.75rem !important;
+  margin-left: 0 !important;
+}
+
+/* Level 1 nested items - the container holds both link and toggle */
+.md-sidebar--primary .md-nav[data-md-level="1"] > .md-nav__list > .md-nav__item--nested > .md-nav__container {
+  padding-left: 0 !important;
+}
+
+/* Links inside nested containers need consistent padding */
+.md-sidebar--primary .md-nav[data-md-level="1"] > .md-nav__list > .md-nav__item--nested > .md-nav__container > .md-nav__link {
+  padding-left: 0.75rem !important;
+}
+
+/* Level 2 items - indented under parents (children) */
+.md-sidebar--primary .md-nav[data-md-level="2"] > .md-nav__list > .md-nav__item > .md-nav__link,
+.md-sidebar--primary .md-nav[data-md-level="2"] > .md-nav__list > .md-nav__item > label.md-nav__link {
+  padding-left: 1.5rem !important;
+}
+
+/* Level 3 items - further indented (grandchildren) */
+.md-sidebar--primary .md-nav[data-md-level="3"] > .md-nav__list > .md-nav__item > .md-nav__link,
+.md-sidebar--primary .md-nav[data-md-level="3"] > .md-nav__list > .md-nav__item > label.md-nav__link {
+  padding-left: 2.25rem !important;
+}
+
+/* Nested navigation - match primary nav font size */
+.md-nav--secondary .md-nav__link {
+  font-size: 0.75rem; /* 12px - match primary nav */
+  padding: 0.1875rem 0.375rem;
+  margin: 0;
+}
+
+/* Hide duplicate section titles in nested navigation
+   The navigation structure creates redundant labels:
+   - First: clickable link to section index
+   - Second: label inside nested nav (visually redundant)
+   This CSS hides the second redundant label */
+.md-nav__item--nested > .md-nav > .md-nav__title {
+  display: none;
+}
+
+/* Section index links - KEPT VISIBLE for command group hierarchy
+   These links provide the parent labels (Api Endpoint, Configuration, etc.)
+   which are essential for proper navigation hierarchy */
+
+/* Table of contents (right sidebar) - Compact styling */
+.md-nav--secondary {
+  border-left: 1px solid #e6e9f3;
+}
+
+.md-nav--secondary .md-nav__title {
+  font-size: 0.75rem; /* 12px - match primary nav */
+  box-shadow: none;
+  background: transparent;
+  padding: 0.375rem 0.375rem 0.25rem;
+}
+
+/* Nested TOC items */
+.md-nav--secondary .md-nav .md-nav__link {
+  font-size: 0.75rem; /* 12px - match primary nav */
+  padding: 0.125rem 0.375rem 0.125rem 0.75rem;
+}
+
+/* ==========================================================================
+   Code Blocks
+   ========================================================================== */
+
+.md-typeset code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.8em;
+  background-color: var(--md-code-bg-color);
+  color: var(--md-code-fg-color);
+  border-radius: 0.1875rem;
+  padding: 0.0625rem 0.25rem;
+}
+
+.md-typeset pre {
+  background-color: var(--md-code-bg-color);
+  border-radius: 0.375rem;
+  border: 1px solid #e6e9f3;
+  box-shadow: none;
+  margin: 0.75rem 0;
+}
+
+.md-typeset pre > code {
+  font-size: 0.75rem; /* 12px for code blocks */
+  line-height: 1.5;
+  padding: 0.625rem 0.75rem;
+}
+
+/* Code copy button */
+.md-clipboard {
+  color: var(--md-default-fg-color--lighter);
+}
+
+.md-clipboard:hover {
+  color: var(--md-primary-fg-color);
+}
+
+/* Code annotations */
+.md-typeset .md-annotation {
+  background-color: var(--md-primary-fg-color);
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+.md-typeset table:not([class]) {
+  font-size: 0.8125rem; /* 13px for table text */
+  border: 1px solid #e6e9f3;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  box-shadow: none;
+  margin: 0.75rem 0;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-default-bg-color--light);
+  color: var(--md-default-fg-color);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.5rem 0.625rem;
+  border-bottom: 1px solid #e6e9f3;
+  font-size: 0.75rem; /* 12px for headers */
+}
+
+.md-typeset table:not([class]) td {
+  padding: 0.375rem 0.625rem;
+  border-bottom: 1px solid #e6e9f3;
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.md-typeset table:not([class]) tr:last-child td {
+  border-bottom: none;
+}
+
+.md-typeset table:not([class]) tr:hover {
+  background-color: var(--md-default-bg-color--lightest);
+}
+
+.md-typeset table:not([class]) code {
+  font-size: 0.75rem; /* 12px for inline code in tables */
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Admonitions
+   ========================================================================== */
+
+.md-typeset .admonition,
+.md-typeset details {
+  border: 1px solid #e6e9f3;
+  border-radius: 0.375rem;
+  box-shadow: none;
+  background-color: var(--md-default-bg-color);
+  overflow: hidden;
+  margin: 0.75rem 0;
+}
+
+.md-typeset .admonition-title,
+.md-typeset details summary {
+  background-color: var(--md-default-bg-color--light);
+  font-weight: 600;
+  font-size: 0.8125rem; /* 13px */
+  padding: 0.375rem 0.75rem;
+  border-bottom: 1px solid #e6e9f3;
+}
+
+.md-typeset .admonition-title::before,
+.md-typeset details summary::before {
+  width: 1rem;
+  height: 1rem;
+}
+
+.md-typeset .admonition > :last-child,
+.md-typeset details > :last-child {
+  margin-bottom: 0.5rem;
+}
+
+.md-typeset .admonition > p,
+.md-typeset details > p {
+  padding: 0.375rem 0.75rem;
+  margin: 0;
+}
+
+/* Note */
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-left: 4px solid var(--md-primary-fg-color);
+}
+
+.md-typeset .note > .admonition-title,
+.md-typeset .note > summary {
+  background-color: rgba(79, 115, 255, 0.1);
+}
+
+/* Info */
+.md-typeset .admonition.info,
+.md-typeset details.info {
+  border-left: 4px solid #17a2b8;
+}
+
+.md-typeset .info > .admonition-title,
+.md-typeset .info > summary {
+  background-color: rgba(23, 162, 184, 0.1);
+}
+
+/* Tip / Success */
+.md-typeset .admonition.tip,
+.md-typeset details.tip,
+.md-typeset .admonition.success,
+.md-typeset details.success {
+  border-left: 4px solid #198754;
+}
+
+.md-typeset .tip > .admonition-title,
+.md-typeset .tip > summary,
+.md-typeset .success > .admonition-title,
+.md-typeset .success > summary {
+  background-color: rgba(25, 135, 84, 0.1);
+}
+
+/* Warning */
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-left: 4px solid #ffc107;
+}
+
+.md-typeset .warning > .admonition-title,
+.md-typeset .warning > summary {
+  background-color: rgba(255, 193, 7, 0.1);
+}
+
+/* Danger / Error */
+.md-typeset .admonition.danger,
+.md-typeset details.danger,
+.md-typeset .admonition.error,
+.md-typeset details.error {
+  border-left: 4px solid #dc3545;
+}
+
+.md-typeset .danger > .admonition-title,
+.md-typeset .danger > summary,
+.md-typeset .error > .admonition-title,
+.md-typeset .error > summary {
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* ==========================================================================
+   Tabs
+   ========================================================================== */
+
+.md-typeset .tabbed-set {
+  border: 1px solid #e6e9f3;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  margin: 0.75rem 0;
+}
+
+.md-typeset .tabbed-labels {
+  background-color: var(--md-default-bg-color--light);
+  border-bottom: 1px solid #e6e9f3;
+}
+
+.md-typeset .tabbed-labels > label {
+  font-size: 0.75rem; /* 12px */
+  font-weight: 500;
+  color: var(--md-default-fg-color--light);
+  padding: 0.5rem 0.75rem;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.md-typeset .tabbed-labels > label:hover {
+  color: var(--md-primary-fg-color);
+}
+
+.md-typeset .tabbed-labels > label.tabbed-labels--active,
+.md-typeset .tabbed-set > input:checked + label {
+  color: var(--md-primary-fg-color);
+  border-bottom-color: var(--md-primary-fg-color);
+  background-color: var(--md-default-bg-color);
+}
+
+.md-typeset .tabbed-content {
+  padding: 0.625rem 0.75rem;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.md-footer {
+  background-color: var(--md-footer-bg-color);
+}
+
+.md-footer-meta {
+  background-color: var(--md-footer-bg-color--dark);
+}
+
+.md-footer__link {
+  color: var(--md-footer-fg-color);
+}
+
+.md-footer__link:hover {
+  color: var(--md-footer-fg-color);
+  opacity: 0.8;
+}
+
+.md-footer__title {
+  color: var(--md-footer-fg-color--light);
+}
+
+.md-footer__direction {
+  color: var(--md-footer-fg-color--lighter);
+}
+
+/* ==========================================================================
+   Content Area
+   ========================================================================== */
+
+.md-content {
+  max-width: 100%;
+}
+
+.md-content__inner {
+  padding: 0.75rem 1rem;
+  margin: 0 0.5rem;
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-content__inner {
+    padding: 1rem 1.5rem;
+    margin: 0 0.75rem;
+  }
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.md-typeset .md-button {
+  background-color: var(--md-primary-fg-color);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.625rem 1.25rem;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.md-typeset .md-button:hover {
+  background-color: var(--md-primary-fg-color--dark);
+  box-shadow: var(--md-shadow-z1);
+}
+
+.md-typeset .md-button--primary {
+  background-color: var(--md-primary-fg-color);
+}
+
+.md-typeset .md-button--secondary {
+  background-color: transparent;
+  color: var(--md-primary-fg-color);
+  border: 1px solid var(--md-primary-fg-color);
+}
+
+.md-typeset .md-button--secondary:hover {
+  background-color: var(--md-accent-fg-color--transparent);
+}
+
+/* ==========================================================================
+   Blockquotes
+   ========================================================================== */
+
+.md-typeset blockquote {
+  border-left: 4px solid var(--md-primary-fg-color);
+  background-color: var(--md-default-bg-color--light);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.md-typeset blockquote p {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Horizontal Rules
+   ========================================================================== */
+
+.md-typeset hr {
+  border: none;
+  border-top: 1px solid #e6e9f3;
+  margin: 2rem 0;
+}
+
+/* ==========================================================================
+   Lists
+   ========================================================================== */
+
+.md-typeset ul,
+.md-typeset ol {
+  margin-left: 0;
+  padding-left: 1.5rem;
+}
+
+.md-typeset li {
+  margin-bottom: 0.375rem;
+}
+
+.md-typeset li::marker {
+  color: var(--md-primary-fg-color);
+}
+
+/* ==========================================================================
+   Version Selector (if used)
+   ========================================================================== */
+
+.md-version {
+  font-size: 0.8125rem;
+}
+
+.md-version__current {
+  color: var(--md-default-fg-color);
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  .md-header,
+  .md-tabs,
+  .md-sidebar,
+  .md-footer {
+    display: none;
+  }
+
+  .md-content {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+.md-nav__link,
+.md-tabs__link,
+.md-typeset a,
+.md-button {
+  transition: all 0.2s ease;
+}
+
+/* ==========================================================================
+   Custom Badge Styles (for CLI commands)
+   ========================================================================== */
+
+.md-typeset .badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 0.25rem;
+  margin-left: 0.5rem;
+}
+
+.md-typeset .badge--required {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.md-typeset .badge--optional {
+  background-color: rgba(108, 119, 140, 0.1);
+  color: #6c778c;
+}
+
+.md-typeset .badge--deprecated {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #856404;
+}
+
+/* ==========================================================================
+   Scrollbar Styling
+   ========================================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--md-default-bg-color--light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--md-default-fg-color--lightest);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--md-default-fg-color--lighter);
+}
+
+/* ==========================================================================
+   Landing Page Styles (Home Page)
+   ========================================================================== */
+
+/* Home Page Container Overrides - Remove Material Theme Dead Space */
+.md-main .md-main__inner.md-grid {
+  margin-top: 0 !important;
+}
+
+article.md-content__inner.md-typeset {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  margin-bottom: 0 !important;
+}
+
+/* Additional overrides for MkDocs Material */
+.md-content .md-content__inner {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.md-main__inner {
+  margin-top: 0 !important;
+}
+
+/* Hero Section - Minimal */
+.hero {
+  text-align: center;
+  padding: 0.25rem 1rem 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.hero h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: var(--md-default-fg-color);
+}
+
+.hero-subtitle {
+  font-size: 0.95rem;
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Features Grid - Compact */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+.feature-card {
+  display: block;
+  background-color: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none !important;
+  color: inherit;
+  cursor: pointer;
+}
+
+.feature-card:hover {
+  border-color: var(--md-primary-fg-color);
+  box-shadow: var(--md-shadow-z2);
+  text-decoration: none !important;
+}
+
+.feature-card *,
+.feature-card:hover * {
+  text-decoration: none !important;
+}
+
+.feature-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.feature-card-header .feature-icon {
+  margin-bottom: 0;
+}
+
+.feature-icon {
+  font-size: 1.1rem;
+  color: var(--md-primary-fg-color);
+}
+
+.feature-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--md-primary-fg-color);
+}
+
+.feature-card h3,
+.md-typeset .feature-card h3 {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+  color: var(--md-default-fg-color);
+}
+
+.feature-card p,
+.md-typeset .feature-card p {
+  font-size: 12px !important;
+  color: var(--md-default-fg-color--light) !important;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Highlights Section */
+.highlights {
+  background-color: var(--md-default-bg-color--light);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.highlights h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+}
+
+.highlight-icon {
+  font-size: 1.5rem;
+  color: var(--md-primary-fg-color);
+  flex-shrink: 0;
+}
+
+.highlight-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--md-primary-fg-color);
+}
+
+.highlight-content strong {
+  display: block;
+  font-size: 0.9375rem;
+  margin-bottom: 0.25rem;
+  color: var(--md-default-fg-color);
+}
+
+.highlight-content p {
+  font-size: 0.875rem;
+  color: var(--md-default-fg-color--light);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Quick Install Section */
+.quick-install {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.quick-install h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.quick-install > p {
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 1rem;
+}
+
+.quick-install .highlight {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Dark mode adjustments for landing page */
+[data-md-color-scheme="slate"] .feature-card {
+  background-color: var(--md-default-bg-color--light);
+  border-color: var(--md-default-bg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .feature-card:hover {
+  border-color: var(--md-primary-fg-color);
+}
+
+[data-md-color-scheme="slate"] .highlights {
+  background-color: var(--md-default-bg-color--light);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Header layout - give more space to GitHub source */
+.md-header__inner {
+  gap: 0.5rem;
+}
+
+/* Reduce search box width to give more space to source */
+.md-search {
+  max-width: 8rem;
+}
+
+/* Give source container enough width to fit content */
+.md-header__source {
+  min-width: 17rem;
+  flex-shrink: 0;
+}
+
+/* GitHub repository header - single line layout */
+.md-source {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.3rem;
+  flex-shrink: 0;
+  min-width: max-content;
+}
+
+.md-source__repository {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.25rem;
+  font-size: 0.75rem !important;
+  white-space: nowrap;
+}
+
+.md-source__facts {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.md-source__fact--version {
+  font-size: 0.75rem !important;
+  opacity: 0.85;
+}
+
+/* Hide GitHub stars and forks from header, keep version only */
+.md-source__fact--stars,
+.md-source__fact--forks {
+  display: none !important;
+}

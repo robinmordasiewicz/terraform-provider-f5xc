@@ -1,0 +1,3700 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Secops And Incident Response",
+    "description": "User threat assessment with configurable risk thresholds and mitigation rules. Detection covers high, medium, and low threat levels with corresponding actions like blocking, rate limiting, or alerting. Mitigation policies link to load balancers for real-time enforcement against identified bad actors.",
+    "version": "2.0.39",
+    "contact": {
+      "name": "F5 Distributed Cloud",
+      "url": "https://docs.cloud.f5.com"
+    },
+    "license": {
+      "name": "Proprietary",
+      "url": "https://www.f5.com/company/policies/eula"
+    },
+    "x-f5xc-description-long": "User threat assessment with configurable risk thresholds and mitigation rules. Detection covers high, medium, and low threat levels with corresponding actions like blocking, rate limiting, or alerting. Mitigation policies link to load balancers for real-time enforcement against identified bad actors.",
+    "summary": "Malicious user mitigation with threat level classification. Automated response actions for suspicious behavior patterns.",
+    "x-f5xc-cli-domain": "secops_and_incident_response",
+    "x-f5xc-best-practices": {
+      "common_errors": [
+        {
+          "code": 400,
+          "message": "Invalid request body",
+          "resolution": "Validate JSON structure and required fields before submission",
+          "prevention": "Use schema validation from OpenAPI spec"
+        },
+        {
+          "code": 401,
+          "message": "Authentication failed",
+          "resolution": "Verify API token is valid and not expired",
+          "prevention": "Use environment variables for token management"
+        },
+        {
+          "code": 403,
+          "message": "Permission denied",
+          "resolution": "Check user role and namespace permissions",
+          "prevention": "Verify RBAC policies before operations"
+        },
+        {
+          "code": 404,
+          "message": "Resource not found",
+          "resolution": "Verify resource name and namespace exist",
+          "prevention": "List resources before attempting operations"
+        },
+        {
+          "code": 409,
+          "message": "Resource already exists",
+          "resolution": "Use unique name or delete existing resource",
+          "prevention": "Check existence before creation"
+        },
+        {
+          "code": 429,
+          "message": "Rate limit exceeded",
+          "resolution": "Implement exponential backoff and retry logic",
+          "prevention": "Batch operations and add delays between requests"
+        }
+      ],
+      "security_notes": [
+        "Always use HTTPS for all API communications",
+        "Store API tokens securely, never in source code",
+        "Rotate API tokens regularly following security policies"
+      ],
+      "performance_tips": [
+        "Use pagination for large result sets",
+        "Batch related operations when possible",
+        "Cache read-only responses appropriately"
+      ]
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{tenant}.{console_url}/api/v1/{domain_prefix}/{environment}/{region}/namespaces/{namespace}",
+      "description": "F5 Distributed Cloud Console",
+      "variables": {
+        "tenant": {
+          "default": "example-corp",
+          "description": "F5 Distributed Cloud tenant identifier (e.g., my-company, acme-inc)"
+        },
+        "console_url": {
+          "default": "console.ves.volterra.io",
+          "description": "Console URL base (e.g., console.ves.volterra.io for production, staging.volterra.us for staging)",
+          "enum": [
+            "console.ves.volterra.io",
+            "staging.volterra.us"
+          ]
+        },
+        "environment": {
+          "default": "production",
+          "description": "Environment designation (production, staging, development)",
+          "enum": [
+            "production",
+            "staging",
+            "development"
+          ]
+        },
+        "domain_prefix": {
+          "default": "api",
+          "description": "Domain naming prefix for consistent naming conventions"
+        },
+        "region": {
+          "default": "us-east-1",
+          "description": "Geographic region for API deployment (e.g., us-east-1, eu-west-1)"
+        },
+        "namespace": {
+          "default": "default",
+          "description": "Kubernetes-style namespace for environment separation (e.g., 'default', 'production', 'staging')"
+        }
+      }
+    }
+  ],
+  "security": [
+    {
+      "ApiToken": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Other",
+      "description": "Miscellaneous operations"
+    }
+  ],
+  "paths": {
+    "/api/config/namespaces/{metadata.namespace}/malicious_user_mitigations": {
+      "post": {
+        "summary": "Create Malicious User Mitigation.",
+        "description": "Create malicious_user_mitigation creates a new object in the storage backend for metadata.namespace.",
+        "operationId": "ves.io.schema.malicious_user_mitigation.API.Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/malicious_user_mitigationCreateResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "metadata.namespace",
+            "description": "Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\"",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "staging"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/malicious_user_mitigationCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-malicious_user_mitigation-api-create"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.malicious_user_mitigation.API.Create",
+        "tags": [
+          "Other"
+        ],
+        "x-f5xc-operation-metadata": {
+          "purpose": "User account for access management",
+          "required_fields": [
+            "metadata.name",
+            "metadata.namespace",
+            "path.metadata.namespace"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": [
+              "Malicious-user-mitigation resource created",
+              "Resource assigned unique identifier"
+            ]
+          },
+          "side_effects": {
+            "creates": [
+              "malicious-user-mitigation"
+            ]
+          },
+          "danger_level": "medium",
+          "confirmation_required": false,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "low",
+            "resource_usage": "low"
+          }
+        },
+        "x-f5xc-required-fields": [
+          "metadata.name",
+          "metadata.namespace",
+          "path.metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "creates": [
+            "malicious-user-mitigation"
+          ]
+        },
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 1000,
+          "p95_ms": 3000,
+          "p99_ms": 8000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "x-displayname": "Malicious User Mitigation.",
+      "x-ves-proto-service": "ves.io.schema.malicious_user_mitigation.API",
+      "x-ves-proto-service-type": "AUTO_CRUD_PUBLIC"
+    },
+    "/api/config/namespaces/{metadata.namespace}/malicious_user_mitigations/{metadata.name}": {
+      "put": {
+        "summary": "Replace Malicious User Mitigation.",
+        "description": "Replace malicious_user_mitigation replaces an existing object in the storage backend for metadata.namespace.",
+        "operationId": "ves.io.schema.malicious_user_mitigation.API.Replace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/malicious_user_mitigationReplaceResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "metadata.namespace",
+            "description": "Namespace\nThis defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\"",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "staging"
+          },
+          {
+            "name": "metadata.name",
+            "description": "Name\nThe configuration object to be replaced will be looked up by name.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Name",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "example-corp-web"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/malicious_user_mitigationReplaceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-malicious_user_mitigation-api-replace"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.malicious_user_mitigation.API.Replace",
+        "tags": [
+          "Other"
+        ],
+        "x-f5xc-operation-metadata": {
+          "purpose": "User account for access management",
+          "required_fields": [
+            "path.metadata.name",
+            "path.metadata.namespace"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": [
+              "Resource updated with new values"
+            ]
+          },
+          "side_effects": {
+            "modifies": [
+              "malicious-user-mitigation"
+            ]
+          },
+          "danger_level": "medium",
+          "confirmation_required": false,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "low",
+            "resource_usage": "low"
+          }
+        },
+        "x-f5xc-required-fields": [
+          "path.metadata.name",
+          "path.metadata.namespace"
+        ],
+        "x-f5xc-danger-level": "medium",
+        "x-f5xc-side-effects": {
+          "modifies": [
+            "malicious-user-mitigation"
+          ]
+        },
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 800,
+          "p95_ms": 2500,
+          "p99_ms": 6000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "x-displayname": "Malicious User Mitigation.",
+      "x-ves-proto-service": "ves.io.schema.malicious_user_mitigation.API",
+      "x-ves-proto-service-type": "AUTO_CRUD_PUBLIC"
+    },
+    "/api/config/namespaces/{namespace}/malicious_user_mitigations": {
+      "get": {
+        "summary": "List Malicious User Mitigation.",
+        "description": "List the set of malicious_user_mitigation in a namespace.",
+        "operationId": "ves.io.schema.malicious_user_mitigation.API.List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/malicious_user_mitigationListResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "description": "Namespace\nNamespace to scope the listing of malicious_user_mitigation.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "ns1"
+          },
+          {
+            "name": "label_filter",
+            "description": "A LabelSelectorType expression that every item in list response will satisfy.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Label Filter.",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "env in (staging, testing), tier in (web, db)"
+          },
+          {
+            "name": "report_fields",
+            "description": "X-example: \"\"\nExtra fields to return along with summary fields.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Report Fields.",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "report_status_fields",
+            "description": "X-example: \"\"\nExtra status fields to return along with summary fields.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Report Status Fields.",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-malicious_user_mitigation-api-list"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.malicious_user_mitigation.API.List",
+        "tags": [
+          "Other"
+        ],
+        "x-f5xc-operation-metadata": {
+          "purpose": "User account for access management",
+          "required_fields": [
+            "path.namespace"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": []
+          },
+          "side_effects": {},
+          "danger_level": "low",
+          "confirmation_required": false,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "moderate",
+            "resource_usage": "moderate"
+          }
+        },
+        "x-f5xc-required-fields": [
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 200,
+          "p95_ms": 800,
+          "p99_ms": 2000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "x-displayname": "Malicious User Mitigation.",
+      "x-ves-proto-service": "ves.io.schema.malicious_user_mitigation.API",
+      "x-ves-proto-service-type": "AUTO_CRUD_PUBLIC"
+    },
+    "/api/config/namespaces/{namespace}/malicious_user_mitigations/{name}": {
+      "get": {
+        "summary": "GET Malicious User Mitigation.",
+        "description": "GET malicious_user_mitigation reads a given object from storage backend for metadata.namespace.",
+        "operationId": "ves.io.schema.malicious_user_mitigation.API.Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/malicious_user_mitigationGetResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "description": "Namespace\nThe namespace in which the configuration object is present.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "ns1"
+          },
+          {
+            "name": "name",
+            "description": "Name\nThe name of the configuration object to be fetched.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Name",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "name"
+          },
+          {
+            "name": "response_format",
+            "description": "The format in which the configuration object is to be fetched. This could be for example\n - in GetSpec form for the contents of object\n - in CreateRequest form to create a new similar object\n - to ReplaceRequest form to replace changeable values\n\nDefault format of returned resource\nResponse should be in CreateRequest format\nResponse should be in ReplaceRequest format\nResponse should be in StatusObject(s) format\nResponse should be in format of GetSpecType\nResponse should have other objects referring to this object\nResponse should have deleted and disabled objects referrred by this object.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Broken Referred Objects.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "GET_RSP_FORMAT_DEFAULT",
+                "GET_RSP_FORMAT_FOR_CREATE",
+                "GET_RSP_FORMAT_FOR_REPLACE",
+                "GET_RSP_FORMAT_STATUS",
+                "GET_RSP_FORMAT_READ",
+                "GET_RSP_FORMAT_REFERRING_OBJECTS",
+                "GET_RSP_FORMAT_BROKEN_REFERENCES"
+              ],
+              "default": "GET_RSP_FORMAT_DEFAULT"
+            }
+          }
+        ],
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-malicious_user_mitigation-api-get"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.malicious_user_mitigation.API.Get",
+        "tags": [
+          "Other"
+        ],
+        "x-f5xc-operation-metadata": {
+          "purpose": "User account for access management",
+          "required_fields": [
+            "path.name",
+            "path.namespace"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": []
+          },
+          "side_effects": {},
+          "danger_level": "low",
+          "confirmation_required": false,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "low",
+            "resource_usage": "low"
+          }
+        },
+        "x-f5xc-required-fields": [
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "low",
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 200,
+          "p95_ms": 800,
+          "p99_ms": 2000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "delete": {
+        "summary": "DELETE Malicious User Mitigation.",
+        "description": "DELETE the specified malicious_user_mitigation.",
+        "operationId": "ves.io.schema.malicious_user_mitigation.API.Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "description": "Namespace\nNamespace in which the configuration object is present.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "ns1"
+          },
+          {
+            "name": "name",
+            "description": "Name\nName of the configuration object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Name",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "name"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/malicious_user_mitigationDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-malicious_user_mitigation-api-delete"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.malicious_user_mitigation.API.Delete",
+        "tags": [
+          "Other"
+        ],
+        "x-f5xc-operation-metadata": {
+          "purpose": "User account for access management",
+          "required_fields": [
+            "path.name",
+            "path.namespace"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": [
+              "Resource removed from system",
+              "Associated resources may be affected"
+            ]
+          },
+          "side_effects": {
+            "deletes": [
+              "malicious-user-mitigation",
+              "contained_resources"
+            ]
+          },
+          "danger_level": "high",
+          "confirmation_required": true,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "high",
+            "resource_usage": "moderate"
+          }
+        },
+        "x-f5xc-required-fields": [
+          "path.name",
+          "path.namespace"
+        ],
+        "x-f5xc-danger-level": "high",
+        "x-f5xc-confirmation-required": true,
+        "x-f5xc-side-effects": {
+          "deletes": [
+            "malicious-user-mitigation",
+            "contained_resources"
+          ]
+        },
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 500,
+          "p95_ms": 1500,
+          "p99_ms": 4000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "x-displayname": "Malicious User Mitigation.",
+      "x-ves-proto-service": "ves.io.schema.malicious_user_mitigation.API",
+      "x-ves-proto-service-type": "AUTO_CRUD_PUBLIC"
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiToken": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "description": "API Token authentication. Format: 'APIToken <your-token>'"
+      }
+    },
+    "schemas": {
+      "ioschemaEmpty": {
+        "type": "object",
+        "description": "This can be used for messages where no values are needed.",
+        "title": "Empty",
+        "x-displayname": "Empty",
+        "x-ves-proto-message": "ves.io.schema.Empty",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for ioschemaEmpty",
+          "required_fields": [],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for ioschemaEmpty\nmetadata:\n  name: example\n  namespace: default",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/ioschema_empties\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "malicious_user_mitigationCreateRequest": {
+        "type": "object",
+        "description": "This is the input message of the 'Create' RPC.",
+        "title": "CreateRequest is used to create an instance of malicious_user_mitigation.",
+        "x-displayname": "Create Request.",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.CreateRequest",
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/schemaObjectCreateMetaType"
+          },
+          "spec": {
+            "$ref": "#/components/schemas/malicious_user_mitigationCreateSpecType"
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationCreateRequest",
+          "required_fields": [
+            "metadata",
+            "spec"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationCreateRequest\nmetadata:\n  name: example\n  namespace: default\nspec:\n  spec: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"spec\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigations\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationCreateResponse": {
+        "type": "object",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.CreateResponse",
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/schemaObjectGetMetaType"
+          },
+          "spec": {
+            "$ref": "#/components/schemas/malicious_user_mitigationGetSpecType"
+          },
+          "system_metadata": {
+            "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationCreateResponse",
+          "required_fields": [
+            "metadata",
+            "spec",
+            "system_metadata"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationCreateResponse\nmetadata:\n  name: example\n  namespace: default\nspec:\n  spec: value\n  system_metadata: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"spec\": \"value\",\n    \"system_metadata\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigations\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationCreateSpecType": {
+        "type": "object",
+        "description": "Create malicious_user_mitigation creates a new object in the storage backend for metadata.namespace.",
+        "title": "Create malicious user mitigation.",
+        "x-displayname": "Create Malicious User Mitigation.",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.CreateSpecType",
+        "properties": {
+          "mitigation_type": {
+            "$ref": "#/components/schemas/malicious_user_mitigationMaliciousUserMitigationType"
+          }
+        },
+        "x-f5xc-description-short": "Create malicious_user_mitigation creates a new object in the storage backend for metadata.namespace.",
+        "x-f5xc-description-medium": "Create malicious_user_mitigation creates a new object in the storage backend for metadata.namespace.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationCreateSpecType",
+          "required_fields": [
+            "mitigation_type"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationCreateSpecType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  mitigation_type: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"mitigation_type\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigations\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationDeleteRequest": {
+        "type": "object",
+        "description": "This is the input message of the 'DELETE' RPC.",
+        "title": "DeleteRequest is used to DELETE a malicious_user_mitigation.",
+        "x-displayname": "DELETE Request.",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.DeleteRequest",
+        "properties": {
+          "fail_if_referred": {
+            "type": "boolean",
+            "description": "Fail the DELETE operation if this object is being referred by other objects.",
+            "title": "Fail_if_referred.",
+            "format": "boolean",
+            "x-displayname": "Fail-If-Referred.",
+            "x-f5xc-description-short": "Fail the DELETE operation if this object is being referred by other objects.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the configuration object.",
+            "title": "Name",
+            "x-displayname": "Name",
+            "x-ves-example": "Name",
+            "x-f5xc-example": "name",
+            "minLength": 0,
+            "maxLength": 16,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.835628+00:00"
+          },
+          "namespace": {
+            "type": "string",
+            "description": "Namespace in which the configuration object is present.",
+            "title": "Namespace",
+            "x-displayname": "Namespace",
+            "x-ves-example": "Ns1",
+            "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "Namespace in which the configuration object is present.",
+            "minLength": 0,
+            "maxLength": 6,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.835658+00:00"
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationDeleteRequest",
+          "required_fields": [
+            "fail_if_referred",
+            "name",
+            "namespace"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationDeleteRequest\nmetadata:\n  name: example\n  namespace: default\nspec:\n  fail_if_referred: value\n  name: value\n  namespace: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"fail_if_referred\": \"value\",\n    \"name\": \"value\",\n    \"namespace\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigations\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationGetResponse": {
+        "type": "object",
+        "description": "This is the output message of the 'GET' RPC.",
+        "title": "GetResponse is the shape of a read malicious_user_mitigation.",
+        "x-displayname": "GET Response.",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.GetResponse",
+        "properties": {
+          "create_form": {
+            "$ref": "#/components/schemas/malicious_user_mitigationCreateRequest"
+          },
+          "deleted_referred_objects": {
+            "type": "array",
+            "description": "The set of deleted objects that are referred by this object.",
+            "title": "Deleted_referred_objects.",
+            "items": {
+              "$ref": "#/components/schemas/schemaObjectRefType"
+            },
+            "x-displayname": "Deleted Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "disabled_referred_objects": {
+            "type": "array",
+            "description": "The set of deleted objects that are referred by this object.",
+            "title": "Disabled_referred_objects.",
+            "items": {
+              "$ref": "#/components/schemas/schemaObjectRefType"
+            },
+            "x-displayname": "Disabled Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/schemaObjectGetMetaType"
+          },
+          "referring_objects": {
+            "type": "array",
+            "description": "The set of objects that are referring to this object in their spec.",
+            "title": "Referring_objects.",
+            "items": {
+              "$ref": "#/components/schemas/schemaObjectRefType"
+            },
+            "x-displayname": "Referring Objects.",
+            "x-f5xc-description-short": "The set of objects that are referring to this object in their spec.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "replace_form": {
+            "$ref": "#/components/schemas/malicious_user_mitigationReplaceRequest"
+          },
+          "spec": {
+            "$ref": "#/components/schemas/malicious_user_mitigationGetSpecType"
+          },
+          "status": {
+            "type": "array",
+            "description": "The status reported by different services for this configuration object.",
+            "title": "Status",
+            "items": {
+              "$ref": "#/components/schemas/malicious_user_mitigationStatusObject"
+            },
+            "x-displayname": "Status",
+            "x-f5xc-example": "active",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "maxLength": 17,
+            "minLength": 17,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.835758+00:00"
+          },
+          "system_metadata": {
+            "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationGetResponse",
+          "required_fields": [
+            "create_form",
+            "deleted_referred_objects",
+            "disabled_referred_objects",
+            "metadata",
+            "referring_objects",
+            "replace_form",
+            "spec",
+            "status",
+            "system_metadata"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationGetResponse\nmetadata:\n  name: example\n  namespace: default\nspec:\n  create_form: value\n  deleted_referred_objects: value\n  disabled_referred_objects: value\n  referring_objects: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"create_form\": \"value\",\n    \"deleted_referred_objects\": \"value\",\n    \"disabled_referred_objects\": \"value\",\n    \"referring_objects\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigations\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationGetResponseFormatCode": {
+        "type": "string",
+        "description": "X-displayName: \"GET Response Format\"\nThis is the various forms that can be requested to be sent in the GetResponse\n\n- GET_RSP_FORMAT_DEFAULT: x-displayName: \"Default Format\"\nDefault format of returned resource\n- GET_RSP_FORMAT_FOR_CREATE: x-displayName: \"Create request Format\"\nResponse should be in CreateRequest format\n- GET_RSP_FORMAT_FOR_REPLACE: x-displayName: \"Replace request format\"\nResponse should be in ReplaceRequest format\n- GET_RSP_FORMAT_STATUS: x-displayName: \"Status format\"\nResponse should be in StatusObject(s) format\n- GET_RSP_FORMAT_READ: x-displayName: \"GetSpecType format\"\nResponse should be in format of GetSpecType\n- GET_RSP_FORMAT_REFERRING_OBJECTS: x-displayName: \"Referring Objects\"\nResponse should have other objects referring to this object\n- GET_RSP_FORMAT_BROKEN_REFERENCES: x-displayName: \"Broken Referred Objects\"\nResponse should have deleted and disabled objects referrred by this object.",
+        "title": "GetResponseFormatCode.",
+        "enum": [
+          "GET_RSP_FORMAT_DEFAULT",
+          "GET_RSP_FORMAT_FOR_CREATE",
+          "GET_RSP_FORMAT_FOR_REPLACE",
+          "GET_RSP_FORMAT_STATUS",
+          "GET_RSP_FORMAT_READ",
+          "GET_RSP_FORMAT_REFERRING_OBJECTS",
+          "GET_RSP_FORMAT_BROKEN_REFERENCES"
+        ],
+        "default": "GET_RSP_FORMAT_DEFAULT",
+        "x-f5xc-description-short": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT...",
+        "x-f5xc-description-medium": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT: x-displayName: \"Default Format\" Default format of returned resource - GET_RSP_FORMAT_FOR_CREATE: x-displayName: \"Create request Format\" Response should be...",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationGetResponseFormatCode",
+          "required_fields": [],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationGetResponseFormatCode\nmetadata:\n  name: example\n  namespace: default",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigations\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationGetSpecType": {
+        "type": "object",
+        "description": "GET malicious_user_mitigation reads a given object from storage backend for metadata.namespace.",
+        "title": "GET malicious user mitigation.",
+        "x-displayname": "GET Malicious User Mitigation.",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.GetSpecType",
+        "properties": {
+          "mitigation_type": {
+            "$ref": "#/components/schemas/malicious_user_mitigationMaliciousUserMitigationType"
+          }
+        },
+        "x-f5xc-description-short": "GET malicious_user_mitigation reads a given object from storage backend for metadata.namespace.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationGetSpecType",
+          "required_fields": [
+            "mitigation_type"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationGetSpecType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  mitigation_type: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"mitigation_type\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigations\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationListResponse": {
+        "type": "object",
+        "description": "This is the output message of 'List' RPC.",
+        "title": "ListResponse is the collection of malicious_user_mitigation.",
+        "x-displayname": "List Response.",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.ListResponse",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "description": "Errors(if any) while listing items from collection.",
+            "title": "Errors",
+            "items": {
+              "$ref": "#/components/schemas/schemaErrorType"
+            },
+            "x-displayname": "Errors",
+            "x-f5xc-description-short": "Errors(if any) while listing items from collection.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "items": {
+            "type": "array",
+            "description": "Items represents the collection in response.",
+            "title": "Items",
+            "items": {
+              "$ref": "#/components/schemas/malicious_user_mitigationListResponseItem"
+            },
+            "x-displayname": "Items",
+            "x-f5xc-example": "[\"item1\", \"item2\", \"item3\"]",
+            "x-f5xc-description-short": "Items represents the collection in response.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationListResponse",
+          "required_fields": [
+            "errors",
+            "items"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationListResponse\nmetadata:\n  name: example\n  namespace: default\nspec:\n  errors: value\n  items: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"errors\": \"value\",\n    \"items\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigation_list_responses\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationListResponseItem": {
+        "type": "object",
+        "description": "By default a summary of malicious_user_mitigation is returned in 'List'. By setting\n'report_fields' in the ListRequest more details of each item can be got.",
+        "title": "ListResponseItem is an individual item in a collection of malicious_user_mitigation.",
+        "x-displayname": "List Item",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.ListResponseItem",
+        "properties": {
+          "annotations": {
+            "type": "object",
+            "description": "The set of annotations present on this malicious_user_mitigation.",
+            "title": "Annotations.",
+            "x-displayname": "Annotations.",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of annotations present on this malicious_user_mitigation.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "The description set for this malicious_user_mitigation.",
+            "title": "Description.",
+            "x-displayname": "Description.",
+            "x-f5xc-description-short": "The description set for this malicious_user_mitigation.",
+            "minLength": 0,
+            "maxLength": 0,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.835846+00:00"
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "A value of true indicates malicious_user_mitigation is administratively disabled.",
+            "title": "Disabled",
+            "format": "boolean",
+            "x-displayname": "Disabled",
+            "x-f5xc-example": "True",
+            "x-f5xc-description-short": "Value of true indicates malicious_user_mitigation is administratively disabled.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "get_spec": {
+            "$ref": "#/components/schemas/malicious_user_mitigationGetSpecType"
+          },
+          "labels": {
+            "type": "object",
+            "description": "The set of labels present on this malicious_user_mitigation.",
+            "title": "Labels",
+            "x-displayname": "Labels",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of labels present on this malicious_user_mitigation.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/schemaObjectGetMetaType"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of this malicious_user_mitigation.",
+            "title": "Name",
+            "x-displayname": "Name",
+            "x-ves-example": "Name",
+            "x-f5xc-example": "name",
+            "x-f5xc-description-short": "The name of this malicious_user_mitigation.",
+            "minLength": 0,
+            "maxLength": 16,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.835926+00:00"
+          },
+          "namespace": {
+            "type": "string",
+            "description": "The namespace this item belongs to.",
+            "title": "Namespace",
+            "x-displayname": "Namespace",
+            "x-ves-example": "Ns1",
+            "x-f5xc-example": "ns1",
+            "minLength": 0,
+            "maxLength": 6,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.835955+00:00"
+          },
+          "owner_view": {
+            "$ref": "#/components/schemas/schemaViewRefType"
+          },
+          "status_set": {
+            "type": "array",
+            "description": "The status reported by different services for this configuration object.",
+            "title": "Status",
+            "items": {
+              "$ref": "#/components/schemas/malicious_user_mitigationStatusObject"
+            },
+            "x-displayname": "Status",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "system_metadata": {
+            "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
+          },
+          "tenant": {
+            "type": "string",
+            "description": "The tenant this item belongs to.",
+            "title": "Tenant",
+            "x-displayname": "Tenant",
+            "x-ves-example": "Example-corp.",
+            "x-f5xc-example": "example-corp",
+            "minLength": 0,
+            "maxLength": 18,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only",
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836010+00:00"
+          },
+          "uid": {
+            "type": "string",
+            "description": "The unique uid of this malicious_user_mitigation.",
+            "title": "Uid",
+            "x-displayname": "UID",
+            "x-ves-example": "D27938ba-967e-40a7-9709-57b8627f9f75.",
+            "x-f5xc-example": "d27938ba-967e-40a7-9709-57b8627f9f75",
+            "x-f5xc-description-short": "The unique uid of this malicious_user_mitigation.",
+            "minLength": 0,
+            "maxLength": 36,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only",
+            "x-original-maxLength": 1024,
+            "format": "uuid",
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836040+00:00"
+          }
+        },
+        "x-f5xc-description-short": "By default a summary of malicious_user_mitigation is returned in 'List'.",
+        "x-f5xc-description-medium": "By default a summary of malicious_user_mitigation is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationListResponseItem",
+          "required_fields": [
+            "annotations",
+            "description",
+            "disabled",
+            "get_spec",
+            "labels",
+            "metadata",
+            "name",
+            "namespace",
+            "owner_view",
+            "status_set",
+            "system_metadata",
+            "tenant",
+            "uid"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationListResponseItem\nmetadata:\n  name: example\n  namespace: default\nspec:\n  annotations: value\n  description: value\n  disabled: value\n  get_spec: value\n  labels: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"annotations\": \"value\",\n    \"description\": \"value\",\n    \"disabled\": \"value\",\n    \"get_spec\": \"value\",\n    \"labels\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigation_list_response_items\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationMaliciousUserMitigationAction": {
+        "type": "object",
+        "description": "Supported actions that can be taken to mitigate malicious activity from a user.",
+        "title": "MaliciousUserMitigationAction.",
+        "x-displayname": "Malicious User Mitigation Action.",
+        "x-ves-oneof-field-mitigation_action": "[\"block_temporarily\",\"captcha_challenge\",\"javascript_challenge\"]",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.MaliciousUserMitigationAction",
+        "properties": {
+          "block_temporarily": {
+            "$ref": "#/components/schemas/ioschemaEmpty"
+          },
+          "captcha_challenge": {
+            "$ref": "#/components/schemas/ioschemaEmpty"
+          },
+          "javascript_challenge": {
+            "$ref": "#/components/schemas/ioschemaEmpty"
+          }
+        },
+        "x-f5xc-description-short": "Supported actions that can be taken to mitigate malicious activity from a user.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationMaliciousUserMitigationAction",
+          "required_fields": [
+            "block_temporarily",
+            "captcha_challenge",
+            "javascript_challenge"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationMaliciousUserMitigationAction\nmetadata:\n  name: example\n  namespace: default\nspec:\n  block_temporarily: value\n  captcha_challenge: value\n  javascript_challenge: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"block_temporarily\": \"value\",\n    \"captcha_challenge\": \"value\",\n    \"javascript_challenge\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigation_malicious_user_mitigation_actions\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationMaliciousUserMitigationRule": {
+        "type": "object",
+        "description": "Malicious user mitigation rules specify the actions to be taken for users mapped to different threat levels.",
+        "title": "MaliciousUserMitigationRule.",
+        "x-displayname": "Mitigation Rule.",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.MaliciousUserMitigationRule",
+        "properties": {
+          "mitigation_action": {
+            "$ref": "#/components/schemas/malicious_user_mitigationMaliciousUserMitigationAction"
+          },
+          "threat_level": {
+            "$ref": "#/components/schemas/malicious_user_mitigationMaliciousUserThreatLevel"
+          }
+        },
+        "x-f5xc-description-short": "Malicious user mitigation rules specify the actions to be taken for users mapped to different threat levels.",
+        "x-f5xc-description-medium": "Malicious user mitigation rules specify the actions to be taken for users mapped to different threat levels.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationMaliciousUserMitigationRule",
+          "required_fields": [
+            "mitigation_action",
+            "threat_level"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationMaliciousUserMitigationRule\nmetadata:\n  name: example\n  namespace: default\nspec:\n  mitigation_action: value\n  threat_level: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"mitigation_action\": \"value\",\n    \"threat_level\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigation_malicious_user_mitigation_rules\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationMaliciousUserMitigationType": {
+        "type": "object",
+        "description": "Settings that specify the actions to be taken when malicious users are determined to be at different threat levels.\nUser's activity is monitored and continuously analyzed for malicious behavior. From this analysis, a threat-level\nis assigned to each user. The settings defined in malicious user mitigation specify what mitigation actions to take\nfor user determined to be at different threat levels.",
+        "title": "MaliciousUserMitigationType.",
+        "x-displayname": "Malicious User Mitigation Settings.",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.MaliciousUserMitigationType",
+        "properties": {
+          "rules": {
+            "type": "array",
+            "description": "Define the threat levels and the corresponding mitigation actions to be taken\n\nRequired: YES.",
+            "title": "Malicious user mitigation rules.",
+            "maxItems": 3,
+            "items": {
+              "$ref": "#/components/schemas/malicious_user_mitigationMaliciousUserMitigationRule"
+            },
+            "x-displayname": "Rules",
+            "x-ves-required": "true",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true",
+              "ves.io.schema.rules.repeated.max_items": "3",
+              "ves.io.schema.rules.repeated.unique": "true",
+              "ves.io.schema.rules.repeated.unique_threat_level": "true"
+            },
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true",
+              "ves.io.schema.rules.repeated.max_items": "3",
+              "ves.io.schema.rules.repeated.unique": "true",
+              "ves.io.schema.rules.repeated.unique_threat_level": "true"
+            },
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "Define the threat levels and the corresponding mitigation actions to be taken Required: YES.",
+            "x-f5xc-required-for": {
+              "minimum_config": true,
+              "create": true,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-description-short": "Settings that specify the actions to be taken when malicious users are determined to be at different threat levels.",
+        "x-f5xc-description-medium": "Settings that specify the actions to be taken when malicious users are determined to be at different threat levels. User's activity is monitored and continuously analyzed for malicious behavior. From this analysis, a threat-level is assigned to each user.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationMaliciousUserMitigationType",
+          "required_fields": [
+            "rules"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationMaliciousUserMitigationType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  rules: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"rules\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigation_malicious_user_mitigation_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationMaliciousUserThreatLevel": {
+        "type": "object",
+        "description": "Threat level estimated for each user based on the user's activity and reputation.",
+        "title": "MaliciousUserThreatLevel.",
+        "x-displayname": "Malicious User Threat Level.",
+        "x-ves-oneof-field-threat_level": "[\"high\",\"low\",\"medium\"]",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.MaliciousUserThreatLevel",
+        "properties": {
+          "high": {
+            "$ref": "#/components/schemas/ioschemaEmpty"
+          },
+          "low": {
+            "$ref": "#/components/schemas/ioschemaEmpty"
+          },
+          "medium": {
+            "$ref": "#/components/schemas/ioschemaEmpty"
+          }
+        },
+        "x-f5xc-description-short": "Threat level estimated for each user based on the user's activity and reputation.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationMaliciousUserThreatLevel",
+          "required_fields": [
+            "high",
+            "low",
+            "medium"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationMaliciousUserThreatLevel\nmetadata:\n  name: example\n  namespace: default\nspec:\n  high: value\n  low: value\n  medium: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"high\": \"value\",\n    \"low\": \"value\",\n    \"medium\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigation_malicious_user_threat_levels\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationReplaceRequest": {
+        "type": "object",
+        "description": "This is the input message of the 'Replace' RPC.",
+        "title": "ReplaceRequest is used to replace contents of a malicious_user_mitigation.",
+        "x-displayname": "Replace Request.",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.ReplaceRequest",
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/schemaObjectReplaceMetaType"
+          },
+          "spec": {
+            "$ref": "#/components/schemas/malicious_user_mitigationReplaceSpecType"
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationReplaceRequest",
+          "required_fields": [
+            "metadata",
+            "spec"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationReplaceRequest\nmetadata:\n  name: example\n  namespace: default\nspec:\n  spec: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"spec\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigation_replace_requests\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationReplaceResponse": {
+        "type": "object",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.ReplaceResponse",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationReplaceResponse",
+          "required_fields": [],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationReplaceResponse\nmetadata:\n  name: example\n  namespace: default",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigation_replace_responses\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationReplaceSpecType": {
+        "type": "object",
+        "description": "Replace malicious_user_mitigation replaces an existing object in the storage backend for metadata.namespace.",
+        "title": "Replace malicious user mitigation.",
+        "x-displayname": "Replace Malicious User Mitigation.",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.ReplaceSpecType",
+        "properties": {
+          "mitigation_type": {
+            "$ref": "#/components/schemas/malicious_user_mitigationMaliciousUserMitigationType"
+          }
+        },
+        "x-f5xc-description-short": "Replace malicious_user_mitigation replaces an existing object in the storage backend for metadata.namespace.",
+        "x-f5xc-description-medium": "Replace malicious_user_mitigation replaces an existing object in the storage backend for metadata.namespace.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationReplaceSpecType",
+          "required_fields": [
+            "mitigation_type"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationReplaceSpecType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  mitigation_type: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"mitigation_type\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigation_replace_spec_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "malicious_user_mitigationStatusObject": {
+        "type": "object",
+        "description": "Most recently observed status of object.",
+        "title": "Status for malicious user mitigation.",
+        "x-displayname": "Status",
+        "x-ves-proto-message": "ves.io.schema.malicious_user_mitigation.StatusObject",
+        "properties": {
+          "conditions": {
+            "type": "array",
+            "description": "Conditions reported by various component of the system.",
+            "title": "Conditions.",
+            "items": {
+              "$ref": "#/components/schemas/schemaConditionType"
+            },
+            "x-displayname": "Conditions.",
+            "x-f5xc-description-short": "Conditions reported by various component of the system.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/schemaStatusMetaType"
+          },
+          "object_refs": {
+            "type": "array",
+            "description": "Object reference.",
+            "title": "Object_refs.",
+            "items": {
+              "$ref": "#/components/schemas/schemaObjectRefType"
+            },
+            "x-displayname": "Config Object.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-description-short": "Most recently observed status of object.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for malicious_user_mitigationStatusObject",
+          "required_fields": [
+            "conditions",
+            "metadata",
+            "object_refs"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for malicious_user_mitigationStatusObject\nmetadata:\n  name: example\n  namespace: default\nspec:\n  conditions: value\n  object_refs: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"conditions\": \"value\",\n    \"object_refs\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/malicious_user_mitigation_status_objects\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "secops_and_incident_response"
+      },
+      "protobufAny": {
+        "type": "object",
+        "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\nFoo foo = ...;\nAny any;\nany.packfrom(foo);\n...\nIf (any.unpackto(&foo)) {\n...\n}\n\nExample 2: Pack and unpack a message in Java.\n\nFoo foo = ...;\nAny any = any.pack(foo);\n...\nIf (any.is(foo.class)) {\nfoo = any.unpack(foo.class);\n}\n\nExample 3: Pack and unpack a message in Python.\n\nFoo = Foo(...)\nany = Any()\nany.pack(foo)\n...\nIf any.is(foo.descriptor):\nany.unpack(foo)\n...\n\nExample 4: Pack and unpack a message in Go\n\nfoo := &pb.foo{...}\nany, err := ptypes.marshalany(foo)\n...\nFoo := &pb.foo{}\nif err := ptypes.unmarshalany(any, foo); err != nil {\n...\n}\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.example.com/x/y.z\" will yield type\nname \"y.z\".\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\npackage google.profile;\nmessage Person {\nstring first_name = 1;\nstring last_name = 2;\n}\n\n{\n\"@type\": \"type.googleapis.com/google.profile.person\",\n\"firstName\": <string>,\n\"lastName\": <string>\n}\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.duration][]):\n\n{\n\"@type\": \"type.googleapis.com/google.protobuf.duration\",\n\"value\": \"1.212s\"\n}",
+        "properties": {
+          "type_url": {
+            "type": "string",
+            "description": "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `HTTP`, `HTTPS`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `HTTPS` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.type][]\nvalue in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\nURL, or have them precompiled into a binary to avoid any\nlookup. Therefore, binary compatibility needs to be preserved\non changes to types. (Use versioned type names to manage\nbreaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com.\n\nSchemes other than `HTTP`, `HTTPS` (or the empty scheme) might be\nused with implementation specific semantics.",
+            "x-f5xc-description-short": "URL identifying the protocol buffer message type.",
+            "x-f5xc-description-medium": "URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one \"/\" character. The last segment of the URL's path must represent the fully qualified name of the type (as in ).",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "value": {
+            "type": "string",
+            "description": "Must be a valid serialized protocol buffer of the above specified type.",
+            "format": "byte",
+            "minLength": 0,
+            "maxLength": 15,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836236+00:00"
+          }
+        },
+        "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
+        "x-f5xc-description-medium": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message. Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type. Example 1: Pack and unpack a...",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for protobufAny",
+          "required_fields": [
+            "type_url",
+            "value"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for protobufAny\nmetadata:\n  name: example\n  namespace: default\nspec:\n  type_url: value\n  value: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"type_url\": \"value\",\n    \"value\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/protobuf_anies\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaConditionType": {
+        "type": "object",
+        "description": "Conditions are used in the object status to describe the current state of the\nobject, e.g. Ready, Succeeded, etc.",
+        "title": "ConditionType.",
+        "x-displayname": "Status Condition.",
+        "x-ves-proto-message": "ves.io.schema.ConditionType",
+        "properties": {
+          "hostname": {
+            "type": "string",
+            "description": "Hostname of the instance of the site that sent the status.",
+            "title": "Hostname",
+            "x-displayname": "Hostname",
+            "x-f5xc-example": "example-resource",
+            "x-f5xc-description-short": "Hostname of the instance of the site that sent the status.",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "last_update_time": {
+            "type": "string",
+            "description": "Last time the condition was updated.",
+            "title": "Last_update_time.",
+            "format": "date-time",
+            "x-displayname": "Last Updated.",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "reason": {
+            "type": "string",
+            "description": "X-reason: \"Insufficient memory in data plane\"\nA human readable string explaining the reason for reaching this condition.",
+            "title": "Reason",
+            "x-displayname": "Reason",
+            "x-ves-example": "Value",
+            "x-f5xc-example": "value",
+            "x-f5xc-description-short": "X-reason: \"Insufficient memory in data plane\" A human readable string explaining the reason for reaching this condition.",
+            "x-f5xc-description-medium": "X-reason: \"Insufficient memory in data plane\" A human readable string explaining the reason for reaching this condition.",
+            "minLength": 0,
+            "maxLength": 43,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836286+00:00"
+          },
+          "service_name": {
+            "type": "string",
+            "description": "Name of the service that sent the status.",
+            "title": "Service name.",
+            "x-displayname": "Service Name.",
+            "x-f5xc-example": "example-resource",
+            "x-f5xc-description-short": "Name of the service that sent the status.",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the condition\n\"Success\" Validtion has succeded. Requested operation was successful.\n\"Failed\" Validation has failed.\n\"Incomplete\" Validation of configuration has failed due to missing configuration.\n\"Installed\" Validation has passed and configuration has been installed in data path or K8s\n\"Down\" Configuration is operationally down. E.g. Down interface\n\"Disabled\" Configuration is administratively disabled i.e. objectmetatype.disable = true.\n\"NotApplicable\" Configuration is not applicable e.g. Tenant service_policy_set(s) in system namespace are not applicable on REs.",
+            "title": "Status",
+            "x-displayname": "Status",
+            "x-ves-example": "Failed",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.string.in": "[\\\"Success\\\",\\\"Failed\\\",\\\"Incomplete\\\",\\\"Installed\\\",\\\"Down\\\",\\\"Disabled\\\",\\\"NotApplicable\\\"]"
+            },
+            "x-f5xc-example": "Failed",
+            "x-validation-rules": {
+              "ves.io.schema.rules.string.in": "[\\\"Success\\\",\\\"Failed\\\",\\\"Incomplete\\\",\\\"Installed\\\",\\\"Down\\\",\\\"Disabled\\\",\\\"NotApplicable\\\"]"
+            },
+            "x-f5xc-description-short": "Status of the condition \"Success\" Validtion has succeded.",
+            "x-f5xc-description-medium": "Status of the condition \"Success\" Validtion has succeded. Requested operation was successful. \"Failed\" Validation has failed. \"Incomplete\" Validation of configuration has failed due to missing configuration. \"Installed\" Validation has passed and configuration has been installed in data path or...",
+            "minLength": 0,
+            "maxLength": 17,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836324+00:00"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the condition\n\"Validation\" represents validation user given configuration object\n\"Operational\" represents operational status of a given configuration object.",
+            "title": "Type",
+            "x-displayname": "Type",
+            "x-ves-example": "Operational.",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.string.in": "[\\\"Validation\\\",\\\"Operational\\\"]"
+            },
+            "x-f5xc-example": "Operational",
+            "x-validation-rules": {
+              "ves.io.schema.rules.string.in": "[\\\"Validation\\\",\\\"Operational\\\"]"
+            },
+            "x-f5xc-description-short": "Type of the condition \"Validation\" represents validation user given configuration object \"Operational\" represents operational status of a given...",
+            "x-f5xc-description-medium": "Type of the condition \"Validation\" represents validation user given configuration object \"Operational\" represents operational status of a given configuration object.",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-description-short": "Conditions are used in the object status to describe the current state of the object, e.g.",
+        "x-f5xc-description-medium": "Conditions are used in the object status to describe the current state of the object, e.g. Ready, Succeeded, etc.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaConditionType",
+          "required_fields": [
+            "hostname",
+            "last_update_time",
+            "reason",
+            "service_name",
+            "status",
+            "type"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaConditionType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  hostname: value\n  last_update_time: value\n  reason: value\n  service_name: value\n  status: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"hostname\": \"value\",\n    \"last_update_time\": \"value\",\n    \"reason\": \"value\",\n    \"service_name\": \"value\",\n    \"status\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_condition_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaErrorCode": {
+        "type": "string",
+        "description": "Union of all possible error-codes from system\n\n- EOK: No error\n- EPERMS: Permissions error\n- EBADINPUT: Input is not correct\n- ENOTFOUND: Not found\n- EEXISTS: Already exists\n- EUNKNOWN: Unknown/catchall error\n- ESERIALIZE: Error in serializing/de-serializing\n- EINTERNAL: Server error\n- EPARTIAL: Partial error.",
+        "title": "ErrorCode",
+        "enum": [
+          "EOK",
+          "EPERMS",
+          "EBADINPUT",
+          "ENOTFOUND",
+          "EEXISTS",
+          "EUNKNOWN",
+          "ESERIALIZE",
+          "EINTERNAL",
+          "EPARTIAL"
+        ],
+        "default": "EOK",
+        "x-displayname": "Error Code.",
+        "x-ves-proto-enum": "ves.io.schema.ErrorCode",
+        "x-f5xc-description-short": "Union of all possible error-codes from system - EOK: No error - EPERMS: Permissions error - EBADINPUT: Input is not correct - ENOTFOUND: Not found...",
+        "x-f5xc-description-medium": "Union of all possible error-codes from system - EOK: No error - EPERMS: Permissions error - EBADINPUT: Input is not correct - ENOTFOUND: Not found - EEXISTS: Already exists - EUNKNOWN: Unknown/catchall error - ESERIALIZE: Error in serializing/de-serializing - EINTERNAL: Server error - EPARTIAL...",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaErrorCode",
+          "required_fields": [],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaErrorCode\nmetadata:\n  name: example\n  namespace: default",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_error_codes\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaErrorType": {
+        "type": "object",
+        "description": "Information about a error in API operation.",
+        "title": "ErrorType",
+        "x-displayname": "Error Type.",
+        "x-ves-proto-message": "ves.io.schema.ErrorType",
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/schemaErrorCode"
+          },
+          "error_obj": {
+            "$ref": "#/components/schemas/protobufAny"
+          },
+          "message": {
+            "type": "string",
+            "description": "A human readable string of the error.",
+            "title": "Message",
+            "x-displayname": "Message",
+            "x-ves-example": "Value",
+            "x-f5xc-example": "value",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-description-short": "Information about a error in API operation.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaErrorType",
+          "required_fields": [
+            "code",
+            "error_obj",
+            "message"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaErrorType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  code: value\n  error_obj: value\n  message: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"code\": \"value\",\n    \"error_obj\": \"value\",\n    \"message\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_error_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaInitializerType": {
+        "type": "object",
+        "description": "Initializer is information about an initializer that has not yet completed.",
+        "title": "InitializerType.",
+        "x-displayname": "Initializer.",
+        "x-ves-proto-message": "ves.io.schema.InitializerType",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the service that is responsible for initializing this object.",
+            "title": "Name",
+            "x-displayname": "Name",
+            "x-f5xc-example": "example-resource",
+            "x-f5xc-description-short": "Name of the service that is responsible for initializing this object.",
+            "minLength": 0,
+            "maxLength": 16,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836397+00:00"
+          }
+        },
+        "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaInitializerType",
+          "required_fields": [
+            "name"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaInitializerType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  name: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"name\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_initializer_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaInitializersType": {
+        "type": "object",
+        "description": "Initializers tracks the progress of initialization of a configuration object.",
+        "title": "InitializersType.",
+        "x-displayname": "Initializers.",
+        "x-ves-proto-message": "ves.io.schema.InitializersType",
+        "properties": {
+          "pending": {
+            "type": "array",
+            "description": "Pending is a list of initializers that must execute in order before this object is initialized.\nWhen the last pending initializer is removed, and no failing result is set, the initializers\nstruct will be set to nil and the object is considered as initialized and visible to all\nclients.",
+            "title": "Pending",
+            "items": {
+              "$ref": "#/components/schemas/schemaInitializerType"
+            },
+            "x-displayname": "Pending",
+            "x-f5xc-description-short": "Pending is a list of initializers that must execute in order before this object is initialized.",
+            "x-f5xc-description-medium": "Pending is a list of initializers that must execute in order before this object is initialized. When the last pending initializer is removed, and no failing result is set, the initializers struct will be set to nil and the object is considered as initialized and visible to all clients.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "result": {
+            "$ref": "#/components/schemas/schemaStatusType"
+          }
+        },
+        "x-f5xc-description-short": "Initializers tracks the progress of initialization of a configuration object.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaInitializersType",
+          "required_fields": [
+            "pending",
+            "result"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaInitializersType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  pending: value\n  result: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"pending\": \"value\",\n    \"result\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_initializers_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaObjectCreateMetaType": {
+        "type": "object",
+        "description": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
+        "title": "ObjectCreateMetaType.",
+        "x-displayname": "Create Metadata.",
+        "x-ves-proto-message": "ves.io.schema.ObjectCreateMetaType",
+        "properties": {
+          "annotations": {
+            "type": "object",
+            "description": "Annotations is an unstructured key value map stored with a resource that may be\nset by external tools to store and retrieve arbitrary metadata. They are not\nqueryable and should be preserved when modifying objects.",
+            "title": "Annotations.",
+            "x-displayname": "Annotation.",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.map.keys.string.max_len": "64",
+              "ves.io.schema.rules.map.keys.string.min_len": "1",
+              "ves.io.schema.rules.map.values.string.max_len": "1024",
+              "ves.io.schema.rules.map.values.string.min_len": "1"
+            },
+            "x-f5xc-example": "value",
+            "x-validation-rules": {
+              "ves.io.schema.rules.map.keys.string.max_len": "64",
+              "ves.io.schema.rules.map.keys.string.min_len": "1",
+              "ves.io.schema.rules.map.values.string.max_len": "1024",
+              "ves.io.schema.rules.map.values.string.min_len": "1"
+            },
+            "x-f5xc-description-short": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
+            "x-f5xc-description-medium": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "Human readable description for the object.",
+            "title": "Description.",
+            "maxLength": 0,
+            "x-displayname": "Description.",
+            "x-ves-example": "Virtual Host for example-corp website.",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.string.max_bytes": "1200"
+            },
+            "x-f5xc-example": "Virtual Host for example-corp website",
+            "x-validation-rules": {
+              "ves.io.schema.rules.string.max_bytes": "1200"
+            },
+            "x-f5xc-description-short": "Human readable description for the object.",
+            "minLength": 0,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1200,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836461+00:00"
+          },
+          "disable": {
+            "type": "boolean",
+            "description": "A value of true will administratively disable the object.",
+            "title": "Disable",
+            "format": "boolean",
+            "x-displayname": "Disable",
+            "x-f5xc-example": "true",
+            "x-f5xc-description-short": "Value of true will administratively disable the object.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "labels": {
+            "type": "object",
+            "description": "Map of string keys and values that can be used to organize and categorize\n(scope and select) objects as chosen by the user. Values specified here will be used\nby selector expression.",
+            "title": "Labels",
+            "x-displayname": "Labels",
+            "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user.",
+            "x-f5xc-description-medium": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user. Values specified here will be used by selector expression.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "This is the name of configuration object. It has to be unique within the namespace.\nIt can only be specified during create API and cannot be changed during replace API.\nThe value of name has to follow DNS-1035 format.\nRequired: YES.",
+            "title": "Name",
+            "x-displayname": "Name",
+            "x-ves-example": "Example-corp-web.",
+            "x-ves-required": "true",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-f5xc-example": "example-corp-web",
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-f5xc-description-short": "Name of configuration object. It has to be unique within the namespace.",
+            "x-f5xc-description-medium": "Name of configuration object. It has to be unique within the namespace. It can only be specified during create API and cannot be changed during replace API.",
+            "minLength": 0,
+            "maxLength": 16,
+            "x-f5xc-required-for": {
+              "minimum_config": true,
+              "create": true,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836509+00:00"
+          },
+          "namespace": {
+            "type": "string",
+            "description": "This defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\"",
+            "title": "Namespace",
+            "x-displayname": "Namespace",
+            "x-ves-example": "Staging",
+            "x-f5xc-example": "staging",
+            "x-f5xc-description-short": "Defines the workspace within which each the configuration object is to be created.",
+            "x-f5xc-description-medium": "Defines the workspace within which each the configuration object is to be created. Must be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\".",
+            "minLength": 0,
+            "maxLength": 6,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836537+00:00"
+          }
+        },
+        "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaObjectCreateMetaType",
+          "required_fields": [
+            "annotations",
+            "description",
+            "disable",
+            "labels",
+            "name",
+            "namespace"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaObjectCreateMetaType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  annotations: value\n  description: value\n  disable: value\n  labels: value\n  name: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"annotations\": \"value\",\n    \"description\": \"value\",\n    \"disable\": \"value\",\n    \"labels\": \"value\",\n    \"name\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_objects\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaObjectGetMetaType": {
+        "type": "object",
+        "description": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
+        "title": "ObjectGetMetaType.",
+        "x-displayname": "GET Metadata.",
+        "x-ves-proto-message": "ves.io.schema.ObjectGetMetaType",
+        "properties": {
+          "annotations": {
+            "type": "object",
+            "description": "Annotations is an unstructured key value map stored with a resource that may be\nset by external tools to store and retrieve arbitrary metadata. They are not\nqueryable and should be preserved when modifying objects.",
+            "title": "Annotations.",
+            "x-displayname": "Annotation.",
+            "x-ves-example": "Value",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.map.keys.string.max_len": "64",
+              "ves.io.schema.rules.map.keys.string.min_len": "1",
+              "ves.io.schema.rules.map.values.string.max_len": "1024",
+              "ves.io.schema.rules.map.values.string.min_len": "1"
+            },
+            "x-f5xc-example": "value",
+            "x-validation-rules": {
+              "ves.io.schema.rules.map.keys.string.max_len": "64",
+              "ves.io.schema.rules.map.keys.string.min_len": "1",
+              "ves.io.schema.rules.map.values.string.max_len": "1024",
+              "ves.io.schema.rules.map.values.string.min_len": "1"
+            },
+            "x-f5xc-description-short": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
+            "x-f5xc-description-medium": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "Human readable description for the object.",
+            "title": "Description.",
+            "maxLength": 0,
+            "x-displayname": "Description.",
+            "x-ves-example": "Virtual Host for example-corp website.",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.string.max_bytes": "1200"
+            },
+            "x-f5xc-example": "Virtual Host for example-corp website",
+            "x-validation-rules": {
+              "ves.io.schema.rules.string.max_bytes": "1200"
+            },
+            "x-f5xc-description-short": "Human readable description for the object.",
+            "minLength": 0,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1200,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836578+00:00"
+          },
+          "disable": {
+            "type": "boolean",
+            "description": "A value of true will administratively disable the object.",
+            "title": "Disable",
+            "format": "boolean",
+            "x-displayname": "Disable",
+            "x-ves-example": "True",
+            "x-f5xc-example": "true",
+            "x-f5xc-description-short": "Value of true will administratively disable the object.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "labels": {
+            "type": "object",
+            "description": "Map of string keys and values that can be used to organize and categorize\n(scope and select) objects as chosen by the user. Values specified here will be used\nby selector expression.",
+            "title": "Labels",
+            "x-displayname": "Labels",
+            "x-ves-example": "Value",
+            "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user.",
+            "x-f5xc-description-medium": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user. Values specified here will be used by selector expression.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "This is the name of configuration object. It has to be unique within the namespace.\nIt can only be specified during create API and cannot be changed during replace API.\nThe value of name has to follow DNS-1035 format.\nRequired: YES.",
+            "title": "Name",
+            "x-displayname": "Name",
+            "x-ves-example": "Example-corp-web.",
+            "x-ves-required": "true",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-f5xc-example": "example-corp-web",
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-f5xc-description-short": "Name of configuration object. It has to be unique within the namespace.",
+            "x-f5xc-description-medium": "Name of configuration object. It has to be unique within the namespace. It can only be specified during create API and cannot be changed during replace API.",
+            "minLength": 0,
+            "maxLength": 16,
+            "x-f5xc-required-for": {
+              "minimum_config": true,
+              "create": true,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836627+00:00"
+          },
+          "namespace": {
+            "type": "string",
+            "description": "This defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\"",
+            "title": "Namespace",
+            "x-displayname": "Namespace",
+            "x-ves-example": "Staging",
+            "x-f5xc-example": "staging",
+            "x-f5xc-description-short": "Defines the workspace within which each the configuration object is to be created.",
+            "x-f5xc-description-medium": "Defines the workspace within which each the configuration object is to be created. Must be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\".",
+            "minLength": 0,
+            "maxLength": 6,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836655+00:00"
+          }
+        },
+        "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaObjectGetMetaType",
+          "required_fields": [
+            "annotations",
+            "description",
+            "disable",
+            "labels",
+            "name",
+            "namespace"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaObjectGetMetaType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  annotations: value\n  description: value\n  disable: value\n  labels: value\n  name: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"annotations\": \"value\",\n    \"description\": \"value\",\n    \"disable\": \"value\",\n    \"labels\": \"value\",\n    \"name\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_objects\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaObjectRefType": {
+        "type": "object",
+        "description": "This type establishes a 'direct reference' from one object(the referrer) to another(the referred).\nSuch a reference is in form of tenant/namespace/name for public API and Uid for private API\nThis type of reference is called direct because the relation is explicit and concrete (as opposed\nto selector reference which builds a group based on labels of selectee objects)",
+        "title": "ObjectRefType.",
+        "x-displayname": "Object reference.",
+        "x-ves-proto-message": "ves.io.schema.ObjectRefType",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "When a configuration object(e.g. Virtual_host) refers to another(e.g route)\nthen kind will hold the referred object's kind (e.g. \"route\")",
+            "title": "Kind",
+            "x-displayname": "Kind",
+            "x-ves-example": "Virtual_site.",
+            "x-f5xc-example": "virtual_site",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. \"route\")",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. \"route\").",
+            "minLength": 0,
+            "maxLength": 14,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "readOnly": true,
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836686+00:00"
+          },
+          "name": {
+            "type": "string",
+            "description": "When a configuration object(e.g. Virtual_host) refers to another(e.g route)\nthen name will hold the referred object's(e.g. Route's) name.",
+            "title": "Name",
+            "x-displayname": "Name",
+            "x-ves-example": "Contactus-route.",
+            "x-f5xc-example": "contactus-route",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+            "minLength": 0,
+            "maxLength": 16,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836714+00:00"
+          },
+          "namespace": {
+            "type": "string",
+            "description": "When a configuration object(e.g. Virtual_host) refers to another(e.g route)\nthen namespace will hold the referred object's(e.g. Route's) namespace.",
+            "title": "Namespace",
+            "x-displayname": "Namespace",
+            "x-ves-example": "Ns1",
+            "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+            "minLength": 0,
+            "maxLength": 6,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836741+00:00"
+          },
+          "tenant": {
+            "type": "string",
+            "description": "When a configuration object(e.g. Virtual_host) refers to another(e.g route)\nthen tenant will hold the referred object's(e.g. Route's) tenant.",
+            "title": "Tenant",
+            "x-displayname": "Tenant",
+            "x-ves-example": "Example-corp.",
+            "x-f5xc-example": "example-corp",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+            "minLength": 0,
+            "maxLength": 18,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "readOnly": true,
+            "x-field-mutability": "read-only",
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836769+00:00"
+          },
+          "uid": {
+            "type": "string",
+            "description": "When a configuration object(e.g. Virtual_host) refers to another(e.g route)\nthen uid will hold the referred object's(e.g. Route's) uid.",
+            "title": "Uid",
+            "x-displayname": "UID",
+            "x-ves-example": "D15f1fad-4d37-48c0-8706-df1824d76d31.",
+            "x-f5xc-example": "d15f1fad-4d37-48c0-8706-df1824d76d31",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
+            "minLength": 0,
+            "maxLength": 36,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "readOnly": true,
+            "x-field-mutability": "read-only",
+            "x-original-maxLength": 1024,
+            "format": "uuid",
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836798+00:00"
+          }
+        },
+        "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
+        "x-f5xc-description-medium": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name for public API and Uid for private API This type of reference is called direct because the relation is explicit and concrete (as opposed to selector...",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaObjectRefType",
+          "required_fields": [
+            "kind",
+            "name",
+            "namespace",
+            "tenant",
+            "uid"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaObjectRefType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  name: value\n  namespace: value\n  tenant: value\n  uid: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"name\": \"value\",\n    \"namespace\": \"value\",\n    \"tenant\": \"value\",\n    \"uid\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_object_ref_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaObjectReplaceMetaType": {
+        "type": "object",
+        "description": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
+        "title": "ObjectReplaceMetaType.",
+        "x-displayname": "Replace Metadata.",
+        "x-ves-proto-message": "ves.io.schema.ObjectReplaceMetaType",
+        "properties": {
+          "annotations": {
+            "type": "object",
+            "description": "Annotations is an unstructured key value map stored with a resource that may be\nset by external tools to store and retrieve arbitrary metadata. They are not\nqueryable and should be preserved when modifying objects.",
+            "title": "Annotations.",
+            "x-displayname": "Annotations.",
+            "x-ves-example": "Value",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.map.keys.string.max_len": "64",
+              "ves.io.schema.rules.map.keys.string.min_len": "1",
+              "ves.io.schema.rules.map.values.string.max_len": "1024",
+              "ves.io.schema.rules.map.values.string.min_len": "1"
+            },
+            "x-f5xc-example": "value",
+            "x-validation-rules": {
+              "ves.io.schema.rules.map.keys.string.max_len": "64",
+              "ves.io.schema.rules.map.keys.string.min_len": "1",
+              "ves.io.schema.rules.map.values.string.max_len": "1024",
+              "ves.io.schema.rules.map.values.string.min_len": "1"
+            },
+            "x-f5xc-description-short": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
+            "x-f5xc-description-medium": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "Human readable description for the object.",
+            "title": "Description.",
+            "maxLength": 0,
+            "x-displayname": "Description.",
+            "x-ves-example": "Virtual Host for example-corp website.",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.string.max_bytes": "1200"
+            },
+            "x-f5xc-example": "Virtual Host for example-corp website",
+            "x-validation-rules": {
+              "ves.io.schema.rules.string.max_bytes": "1200"
+            },
+            "x-f5xc-description-short": "Human readable description for the object.",
+            "minLength": 0,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1200,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836840+00:00"
+          },
+          "disable": {
+            "type": "boolean",
+            "description": "A value of true will administratively disable the object.",
+            "title": "Disable",
+            "format": "boolean",
+            "x-displayname": "Disable",
+            "x-f5xc-example": "true",
+            "x-f5xc-description-short": "Value of true will administratively disable the object.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "labels": {
+            "type": "object",
+            "description": "Map of string keys and values that can be used to organize and categorize\n(scope and select) objects as chosen by the user. Values specified here will be used\nby selector expression.",
+            "title": "Labels",
+            "x-displayname": "Labels",
+            "x-ves-example": "Value",
+            "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user.",
+            "x-f5xc-description-medium": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user. Values specified here will be used by selector expression.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "This is the name of configuration object. It has to be unique within the namespace.\nIt can only be specified during create API and cannot be changed during replace API.\nThe value of name has to follow DNS-1035 format.\nRequired: YES.",
+            "title": "Name",
+            "x-displayname": "Name",
+            "x-ves-example": "Example-corp-web.",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-f5xc-example": "example-corp-web",
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-f5xc-description-short": "Name of configuration object. It has to be unique within the namespace.",
+            "x-f5xc-description-medium": "Name of configuration object. It has to be unique within the namespace. It can only be specified during create API and cannot be changed during replace API.",
+            "minLength": 0,
+            "maxLength": 16,
+            "x-f5xc-required-for": {
+              "minimum_config": true,
+              "create": true,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836898+00:00"
+          },
+          "namespace": {
+            "type": "string",
+            "description": "This defines the workspace within which each the configuration object is to be created.\nMust be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\"",
+            "title": "Namespace",
+            "x-displayname": "Namespace",
+            "x-ves-example": "Staging",
+            "x-f5xc-example": "staging",
+            "x-f5xc-description-short": "Defines the workspace within which each the configuration object is to be created.",
+            "x-f5xc-description-medium": "Defines the workspace within which each the configuration object is to be created. Must be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\".",
+            "minLength": 0,
+            "maxLength": 6,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.836927+00:00"
+          }
+        },
+        "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaObjectReplaceMetaType",
+          "required_fields": [
+            "annotations",
+            "description",
+            "disable",
+            "labels",
+            "name",
+            "namespace"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaObjectReplaceMetaType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  annotations: value\n  description: value\n  disable: value\n  labels: value\n  name: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"annotations\": \"value\",\n    \"description\": \"value\",\n    \"disable\": \"value\",\n    \"labels\": \"value\",\n    \"name\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_object_replace_meta_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaStatusMetaType": {
+        "type": "object",
+        "description": "StatusMetaType is metadata that all status must have.",
+        "title": "StatusMetaType.",
+        "x-displayname": "Metadata",
+        "x-ves-proto-message": "ves.io.schema.StatusMetaType",
+        "properties": {
+          "creation_timestamp": {
+            "type": "string",
+            "description": "Creation_timestamp is when the status object was created. It is used to find/tie-break\nfor latest status object from same origin.",
+            "title": "Creation_timestamp.",
+            "format": "date-time",
+            "x-displayname": "Creation Timestamp.",
+            "x-f5xc-description-short": "Creation_timestamp is when the status object was created. It is used to find/tie-break for latest status object from same origin.",
+            "x-f5xc-description-medium": "Creation_timestamp is when the status object was created. It is used to find/tie-break for latest status object from same origin.",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only"
+          },
+          "creator_class": {
+            "type": "string",
+            "description": "Class of creator which created this StatusObject. This will be service's DNS FQDN.\nThis will be set by the system based on client certificate information.",
+            "title": "Creator_class.",
+            "x-displayname": "Creator Class.",
+            "x-ves-example": "ver.re1.int.ves.I/O.",
+            "x-f5xc-example": "ver.re1.int.F5 XC",
+            "x-f5xc-description-short": "Class of creator which created this StatusObject. This will be service's DNS FQDN.",
+            "x-f5xc-description-medium": "Class of creator which created this StatusObject. This will be service's DNS FQDN. This will be set by the system based on client certificate information.",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only"
+          },
+          "creator_id": {
+            "type": "string",
+            "description": "ID of creator which created this StatusObject. This will be a concrete identifier for service (e.g.\nIdentifying the environment also). This will be set by the system based on client certificate\ninformation.",
+            "title": "Creator_id.",
+            "x-displayname": "Creator ID.",
+            "x-ves-example": "Ver-instance-1.",
+            "x-f5xc-example": "ver-instance-1",
+            "x-f5xc-description-short": "ID of creator which created this StatusObject. This will be a concrete identifier for service (e.g.",
+            "x-f5xc-description-medium": "ID of creator which created this StatusObject. This will be a concrete identifier for service (e.g. Identifying the environment also). This will be set by the system based on client certificate information.",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only"
+          },
+          "publish": {
+            "$ref": "#/components/schemas/schemaStatusPublishType"
+          },
+          "status_id": {
+            "type": "string",
+            "description": "Status_id is a field used by the generator to distinguish (if necessary) between two status\nobjects for the same config object from the same site and same service and potentially same\ndaemon(creator-ID)",
+            "title": "Status_id",
+            "x-displayname": "Status ID",
+            "x-f5xc-description-short": "Status_id is a field used by the generator to distinguish (if necessary) between two status objects for the same config object from the same site...",
+            "x-f5xc-description-medium": "Status_id is a field used by the generator to distinguish (if necessary) between two status objects for the same config object from the same site and same service and potentially same daemon(creator-ID).",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only"
+          },
+          "uid": {
+            "type": "string",
+            "description": "Uid is the unique in time and space value for a StatusObject.",
+            "title": "Uid",
+            "x-displayname": "UID",
+            "x-ves-example": "D15f1fad-4d37-48c0-8706-df1824d76d31.",
+            "x-f5xc-example": "d15f1fad-4d37-48c0-8706-df1824d76d31",
+            "x-f5xc-description-short": "Uid is the unique in time and space value for a StatusObject.",
+            "minLength": 0,
+            "maxLength": 36,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only",
+            "x-original-maxLength": 1024,
+            "format": "uuid",
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.837006+00:00"
+          },
+          "vtrp_id": {
+            "type": "string",
+            "description": "Origin of this status exchanged by VTRP.",
+            "title": "Vtrp_id",
+            "x-displayname": "VTRP ID",
+            "x-f5xc-description-short": "Origin of this status exchanged by VTRP.",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only"
+          },
+          "vtrp_stale": {
+            "type": "boolean",
+            "description": "Indicate whether mars deems this object to be stale via graceful restart timer information.",
+            "title": "Vtrp_stale.",
+            "format": "boolean",
+            "x-displayname": "VTRP Stale.",
+            "x-f5xc-description-short": "Indicate whether mars deems this object to be stale via graceful restart timer information.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-description-short": "StatusMetaType is metadata that all status must have.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaStatusMetaType",
+          "required_fields": [
+            "creation_timestamp",
+            "creator_class",
+            "creator_id",
+            "publish",
+            "status_id",
+            "uid",
+            "vtrp_id",
+            "vtrp_stale"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaStatusMetaType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  creation_timestamp: value\n  creator_class: value\n  creator_id: value\n  publish: value\n  status_id: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"creation_timestamp\": \"value\",\n    \"creator_class\": \"value\",\n    \"creator_id\": \"value\",\n    \"publish\": \"value\",\n    \"status_id\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_status_meta_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaStatusPublishType": {
+        "type": "string",
+        "description": "StatusPublishType is all possible publish operations on a StatusObject\n\n- STATUS_DO_NOT_PUBLISH: Do Not Publish\n\nDo not propagate this status to user. This could be because status is only informational\n- STATUS_PUBLISH: Publish\n\nPropagate this status up to user as it might be actionable.",
+        "title": "StatusPublishType.",
+        "enum": [
+          "STATUS_DO_NOT_PUBLISH",
+          "STATUS_PUBLISH"
+        ],
+        "default": "STATUS_DO_NOT_PUBLISH",
+        "x-displayname": "Status Publish Type.",
+        "x-ves-proto-enum": "ves.io.schema.StatusPublishType",
+        "x-f5xc-description-short": "StatusPublishType is all possible publish operations on a StatusObject - STATUS_DO_NOT_PUBLISH: Do Not Publish Do not propagate this status to user.",
+        "x-f5xc-description-medium": "StatusPublishType is all possible publish operations on a StatusObject - STATUS_DO_NOT_PUBLISH: Do Not Publish Do not propagate this status to user. This could be because status is only informational - STATUS_PUBLISH: Publish Propagate this status up to user as it might be actionable.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaStatusPublishType",
+          "required_fields": [],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaStatusPublishType\nmetadata:\n  name: example\n  namespace: default",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_status_publish_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaStatusType": {
+        "type": "object",
+        "description": "Status is a return value for calls that don't return other objects.",
+        "title": "StatusType.",
+        "x-displayname": "Status",
+        "x-ves-proto-message": "ves.io.schema.StatusType",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Suggested HTTP return code for this status, 0 if not set.",
+            "title": "Code",
+            "format": "int32",
+            "x-displayname": "Code",
+            "x-ves-example": "0",
+            "x-f5xc-example": "0",
+            "x-f5xc-description-short": "Suggested HTTP return code for this status, 0 if not set.",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "reason": {
+            "type": "string",
+            "description": "A human-readable description of why this operation is in the\n\"Failure\" status. If this value is empty there\nis no information available.",
+            "title": "Reason",
+            "x-displayname": "Reason",
+            "x-ves-example": "Value",
+            "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Human-readable description of why this operation is in the \"Failure\" status. If this value is empty there is no information available.",
+            "x-f5xc-description-medium": "Human-readable description of why this operation is in the \"Failure\" status. If this value is empty there is no information available.",
+            "minLength": 0,
+            "maxLength": 43,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.837066+00:00"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the operation.\nOne of: \"Success\" or \"Failure\".",
+            "title": "Status",
+            "x-displayname": "Status",
+            "x-ves-example": "Value",
+            "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Status of the operation. One of: \"Success\" or \"Failure\".",
+            "minLength": 0,
+            "maxLength": 17,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.837094+00:00"
+          }
+        },
+        "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaStatusType",
+          "required_fields": [
+            "code",
+            "reason",
+            "status"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaStatusType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  code: value\n  reason: value\n  status: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"code\": \"value\",\n    \"reason\": \"value\",\n    \"status\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_status_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaSystemObjectGetMetaType": {
+        "type": "object",
+        "description": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and\ncannot be updated directly by users.",
+        "title": "SystemObjectGetMetaType.",
+        "x-displayname": "System Metadata.",
+        "x-ves-proto-message": "ves.io.schema.SystemObjectGetMetaType",
+        "properties": {
+          "creation_timestamp": {
+            "type": "string",
+            "description": "CreationTimestamp is a timestamp representing the server time when this object was\ncreated. It is not guaranteed to be set in happens-before order across separate operations.\nClients may not set this value. It is represented in RFC3339 form and is in UTC.",
+            "title": "Creation_timestamp.",
+            "format": "date-time",
+            "x-displayname": "Creation Timestamp.",
+            "x-f5xc-description-short": "CreationTimestamp is a timestamp representing the server time when this object was created.",
+            "x-f5xc-description-medium": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value.",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only"
+          },
+          "creator_class": {
+            "type": "string",
+            "description": "A value identifying the class of the user or service which created this configuration object.",
+            "title": "Creator_class.",
+            "x-displayname": "Creator Class.",
+            "x-ves-example": "Prism",
+            "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Value identifying the class of the user or service which created this configuration object.",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only"
+          },
+          "creator_id": {
+            "type": "string",
+            "description": "A value identifying the exact user or service that created this configuration object.",
+            "title": "Creator_id.",
+            "x-displayname": "Creator ID.",
+            "x-ves-example": "Admin@example-corp.com.",
+            "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Value identifying the exact user or service that created this configuration object.",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only"
+          },
+          "deletion_timestamp": {
+            "type": "string",
+            "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This\nfield is set by the server when a graceful deletion is requested by the user, and is not\ndirectly settable by a client. The resource is expected to be deleted (no longer visible\nfrom resource lists, and not reachable by name) after the time in this field, once the\nfinalizers list is empty. As long as the finalizers list contains items, deletion is blocked.\nOnce the deletionTimestamp is set, this value may not be unset or be set further into the\nfuture, although it may be shortened or the resource may be deleted prior to this time.\nFor example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react\nby sending a graceful termination signal to the containers in the pod. After that 30 seconds,\nthe Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup,\nremove the pod from the API. In the presence of network partitions, this object may still\nexist after this timestamp, until an administrator or automated process can determine the\nresource is fully terminated.\nIf not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested.\nRead-only.",
+            "title": "Deletion_timestamp.",
+            "format": "date-time",
+            "x-displayname": "Deletion Timestamp.",
+            "x-f5xc-description-short": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted.",
+            "x-f5xc-description-medium": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not...",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "finalizers": {
+            "type": "array",
+            "description": "Must be empty before the object is deleted from the registry. Each entry\nis an identifier for the responsible component that will remove the entry\nfrom the list. If the deletionTimestamp of the object is non-nil, entries\nin this list can only be removed.",
+            "title": "Finalizers.",
+            "items": {
+              "type": "string"
+            },
+            "x-displayname": "Finalizers.",
+            "x-ves-example": "Value",
+            "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Must be empty before the object is deleted from the registry.",
+            "x-f5xc-description-medium": "Must be empty before the object is deleted from the registry. Each entry is an identifier for the responsible component that will remove the entry from the list. If the deletionTimestamp of the object is non-nil, entries in this list can only be removed.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "initializers": {
+            "$ref": "#/components/schemas/schemaInitializersType"
+          },
+          "labels": {
+            "type": "object",
+            "description": "Map of string keys and values that can be used to organize and categorize\n(scope and select) objects as chosen by the operator or software. Values here can be interpreted\nby software(backend or frontend) to enable certain behavior e.g. Things marked as soft-deleted(restorable).",
+            "title": "Labels",
+            "x-displayname": "Labels",
+            "x-ves-example": "'VES.I/O/soft-deleted': 'true'",
+            "x-f5xc-example": "'F5 XC/soft-deleted''true'",
+            "x-f5xc-description-short": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the operator or software.",
+            "x-f5xc-description-medium": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the operator or software. Values here can be interpreted by software(backend or frontend) to enable certain behavior e.g. Things marked as soft-deleted(restorable).",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "modification_timestamp": {
+            "type": "string",
+            "description": "ModificationTimestamp is a timestamp representing the server time when this object was\nlast modified.",
+            "title": "Modification_timestamp.",
+            "format": "date-time",
+            "x-displayname": "Modification Timestamp.",
+            "x-f5xc-description-short": "ModificationTimestamp is a timestamp representing the server time when this object was last modified.",
+            "x-f5xc-description-medium": "ModificationTimestamp is a timestamp representing the server time when this object was last modified.",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only"
+          },
+          "object_index": {
+            "type": "integer",
+            "description": "Unique index for the object. Some objects need a unique integer index to be allocated\nfor each object type. This field will be populated for all objects that need it and will\nbe zero otherwise.",
+            "title": "Object_index.",
+            "format": "int64",
+            "x-displayname": "Object Index.",
+            "x-ves-example": "0",
+            "x-f5xc-example": "0",
+            "x-f5xc-description-short": "Unique index for the object. Some objects need a unique integer index to be allocated for each object type.",
+            "x-f5xc-description-medium": "Unique index for the object. Some objects need a unique integer index to be allocated for each object type. This field will be populated for all objects that need it and will be zero otherwise.",
+            "minimum": 0,
+            "maximum": 2147483647,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only"
+          },
+          "owner_view": {
+            "$ref": "#/components/schemas/schemaViewRefType"
+          },
+          "tenant": {
+            "type": "string",
+            "description": "Tenant to which this configuration object belongs to. The value for this is found from\npresented credentials.",
+            "title": "Tenant",
+            "x-displayname": "Tenant",
+            "x-ves-example": "Example-corp.",
+            "x-f5xc-example": "example-corp",
+            "x-f5xc-description-short": "Tenant to which this configuration object belongs to. The value for this is found from presented credentials.",
+            "x-f5xc-description-medium": "Tenant to which this configuration object belongs to. The value for this is found from presented credentials.",
+            "minLength": 0,
+            "maxLength": 18,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only",
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.837219+00:00"
+          },
+          "uid": {
+            "type": "string",
+            "description": "Uid is the unique in time and space value for this object. It is generated by\nthe server on successful creation of an object and is not allowed to change on Replace\nAPI. The value of is taken from uid field of ObjectMetaType, if provided.",
+            "title": "Uid",
+            "x-displayname": "UID",
+            "x-ves-example": "D15f1fad-4d37-48c0-8706-df1824d76d31.",
+            "x-f5xc-example": "d15f1fad-4d37-48c0-8706-df1824d76d31",
+            "x-f5xc-description-short": "Uid is the unique in time and space value for this object.",
+            "x-f5xc-description-medium": "Uid is the unique in time and space value for this object. It is generated by the server on successful creation of an object and is not allowed to change on Replace API. The value of is taken from uid field of ObjectMetaType, if provided.",
+            "minLength": 0,
+            "maxLength": 36,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only",
+            "x-original-maxLength": 1024,
+            "format": "uuid",
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.837247+00:00"
+          }
+        },
+        "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
+        "x-f5xc-description-medium": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaSystemObjectGetMetaType",
+          "required_fields": [
+            "creation_timestamp",
+            "creator_class",
+            "creator_id",
+            "deletion_timestamp",
+            "finalizers",
+            "initializers",
+            "labels",
+            "modification_timestamp",
+            "object_index",
+            "owner_view",
+            "tenant",
+            "uid"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaSystemObjectGetMetaType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  creation_timestamp: value\n  creator_class: value\n  creator_id: value\n  deletion_timestamp: value\n  finalizers: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"creation_timestamp\": \"value\",\n    \"creator_class\": \"value\",\n    \"creator_id\": \"value\",\n    \"deletion_timestamp\": \"value\",\n    \"finalizers\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_system_objects\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaViewRefType": {
+        "type": "object",
+        "description": "ViewRefType represents a reference to a view.",
+        "title": "ViewRefType.",
+        "x-displayname": "View Reference.",
+        "x-ves-proto-message": "ves.io.schema.ViewRefType",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Kind of the view object.",
+            "title": "Kind",
+            "x-displayname": "Kind",
+            "x-ves-example": "Http_proxy.",
+            "x-f5xc-example": "http_proxy",
+            "minLength": 0,
+            "maxLength": 14,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.837278+00:00"
+          },
+          "name": {
+            "type": "string",
+            "description": "When a configuration object(e.g. Virtual_host) refers to another(e.g route)\nthen name will hold the referred object's(e.g. Route's) name.",
+            "title": "Name",
+            "x-displayname": "Name",
+            "x-ves-example": "Contactus-route.",
+            "x-f5xc-example": "contactus-route",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+            "minLength": 0,
+            "maxLength": 16,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.837305+00:00"
+          },
+          "namespace": {
+            "type": "string",
+            "description": "When a configuration object(e.g. Virtual_host) refers to another(e.g route)\nthen namespace will hold the referred object's(e.g. Route's) namespace.",
+            "title": "Namespace",
+            "x-displayname": "Namespace",
+            "x-ves-example": "Ns1",
+            "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+            "minLength": 0,
+            "maxLength": 6,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.837333+00:00"
+          },
+          "uid": {
+            "type": "string",
+            "description": "UID of the view object.",
+            "title": "Uid",
+            "x-displayname": "UID",
+            "x-ves-example": "F3744323-1adf-4aaa-a5dc-0707c1d1bd82.",
+            "x-f5xc-example": "f3744323-1adf-4aaa-a5dc-0707c1d1bd82",
+            "minLength": 0,
+            "maxLength": 36,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only",
+            "x-original-maxLength": 1024,
+            "format": "uuid",
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-19T05:53:36.837361+00:00"
+          }
+        },
+        "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaViewRefType",
+          "required_fields": [
+            "kind",
+            "name",
+            "namespace",
+            "uid"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaViewRefType\nmetadata:\n  name: example\n  namespace: default\nspec:\n  name: value\n  namespace: value\n  uid: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"name\": \"value\",\n    \"namespace\": \"value\",\n    \"uid\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_view_ref_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      }
+    },
+    "responses": {},
+    "parameters": {},
+    "requestBodies": {}
+  }
+}

@@ -259,7 +259,7 @@ export const AddonSchema = z.object({
  * Provides access to resource metadata for deterministic AI configuration generation
  */
 export const MetadataSchema = z.object({
-  operation: z.enum(['oneof', 'validation', 'defaults', 'enums', 'attribute', 'requires_replace', 'tier', 'dependencies', 'troubleshoot', 'summary', 'syntax', 'validate', 'example', 'mistakes'])
+  operation: z.enum(['oneof', 'validation', 'defaults', 'enums', 'attribute', 'requires_replace', 'tier', 'dependencies', 'troubleshoot', 'summary', 'syntax', 'validate', 'example', 'mistakes', 'minimum_config'])
     .describe(COMMON_PARAM_DESCRIPTIONS.operation),
   resource: z.string()
     .min(1)

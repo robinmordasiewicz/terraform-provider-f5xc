@@ -37,6 +37,8 @@ import {
   generateTerraformSyntaxGuide,
   validateConfigurationSyntax as _validateConfigurationSyntax,
   getOneOfGroupsQuickReference as _getOneOfGroupsQuickReference,
+  loadResourceMetadata,
+  type ResourceMetadata,
 } from '../services/metadata.js';
 
 // =============================================================================
@@ -88,6 +90,8 @@ export async function handleMetadata(input: MetadataInput): Promise<string> {
       return handleExample(input, response_format);
     case 'mistakes':
       return handleMistakes(input, response_format);
+    case 'minimum_config':
+      return handleMinimumConfig(input, response_format);
     default:
       throw new Error(`Unknown operation: ${operation}`);
   }
@@ -421,6 +425,10 @@ function handleAttribute(input: MetadataInput, format: ResponseFormat): string {
   if (attrMeta.validation) lines.push(`**Validation**: ${attrMeta.validation}`);
   if (attrMeta.oneof_group) lines.push(`**OneOf Group**: ${attrMeta.oneof_group}`);
 
+  // Phase 1 enhanced metadata fields
+  if (attrMeta.minimum_config_required) lines.push(`**Minimum Config Required**: Yes`);
+  if (attrMeta.server_default) lines.push(`**Server Default**: Yes`);
+
   lines.push('');
   lines.push(`**Description**: ${attrMeta.description}`);
 
@@ -432,6 +440,29 @@ function handleAttribute(input: MetadataInput, format: ResponseFormat): string {
   if (attrMeta.default !== undefined) {
     lines.push('');
     lines.push(`**Default**: ${JSON.stringify(attrMeta.default)}`);
+  }
+
+  if (attrMeta.recommended_value !== undefined) {
+    lines.push('');
+    lines.push(`**Recommended Value**: ${JSON.stringify(attrMeta.recommended_value)}`);
+  }
+
+  if (attrMeta.validation_rules && Object.keys(attrMeta.validation_rules).length > 0) {
+    lines.push('');
+    lines.push('**Validation Rules**:');
+    for (const [rule, value] of Object.entries(attrMeta.validation_rules)) {
+      lines.push(`- ${rule}: ${value}`);
+    }
+  }
+
+  if (attrMeta.complexity) {
+    lines.push('');
+    lines.push(`**Complexity**: ${attrMeta.complexity}`);
+  }
+
+  if (attrMeta.use_cases && attrMeta.use_cases.length > 0) {
+    lines.push('');
+    lines.push(`**Use Cases**: ${attrMeta.use_cases.join(', ')}`);
   }
 
   // Add syntax guidance for this attribute
@@ -851,12 +882,41 @@ function handleSummary(format: ResponseFormat): string {
   const summary = getEnhancedMetadataSummary();
   const resources = listResourcesWithMetadata();
 
+  // Calculate Phase 1 enhanced metadata statistics
+  const metadata = loadResourceMetadata();
+  let minConfigCount = 0;
+  let recommendedValueCount = 0;
+  let validationRulesCount = 0;
+  let serverDefaultCount = 0;
+  let complexityCount = 0;
+  let useCasesCount = 0;
+
+  if (metadata) {
+    for (const resourceMeta of Object.values(metadata.resources)) {
+      for (const attrMeta of Object.values(resourceMeta.attributes)) {
+        if (attrMeta.minimum_config_required) minConfigCount++;
+        if (attrMeta.recommended_value !== undefined) recommendedValueCount++;
+        if (attrMeta.validation_rules && Object.keys(attrMeta.validation_rules).length > 0) validationRulesCount++;
+        if (attrMeta.server_default) serverDefaultCount++;
+        if (attrMeta.complexity) complexityCount++;
+        if (attrMeta.use_cases && attrMeta.use_cases.length > 0) useCasesCount++;
+      }
+    }
+  }
+
   if (format === ResponseFormat.JSON) {
     return JSON.stringify(
       {
         operation: 'summary',
         ...summary,
         sample_resources: resources.slice(0, 20),
+        // Phase 1 enhanced metadata statistics
+        attributes_with_minimum_config_required: minConfigCount,
+        attributes_with_recommended_value: recommendedValueCount,
+        attributes_with_validation_rules: validationRulesCount,
+        attributes_with_server_default: serverDefaultCount,
+        attributes_with_complexity: complexityCount,
+        attributes_with_use_cases: useCasesCount,
       },
       null,
       2,
@@ -875,6 +935,17 @@ function handleSummary(format: ResponseFormat): string {
     `| Error Codes Indexed | ${summary.errorCodeCount} |`,
     `| Generated At | ${summary.generatedAt || 'Unknown'} |`,
     '',
+    '## Phase 1 Enhanced Metadata',
+    '',
+    '| Metric | Value |',
+    '|--------|-------|',
+    `| Attributes with Minimum Config Required | ${minConfigCount} |`,
+    `| Attributes with Recommended Value | ${recommendedValueCount} |`,
+    `| Attributes with Validation Rules | ${validationRulesCount} |`,
+    `| Attributes with Server Default | ${serverDefaultCount} |`,
+    `| Attributes with Complexity Rating | ${complexityCount} |`,
+    `| Attributes with Use Cases | ${useCasesCount} |`,
+    '',
     '## Tier Distribution',
     '',
     '| Tier | Count |',
@@ -890,6 +961,7 @@ function handleSummary(format: ResponseFormat): string {
   lines.push('');
   lines.push('| Operation | Description |');
   lines.push('|-----------|-------------|');
+  lines.push('| `minimum_config` | Get minimum required fields and recommended values |');
   lines.push('| `oneof` | Get mutually exclusive field groups for a resource |');
   lines.push('| `validation` | Get validation patterns (regex/range rules) |');
   lines.push('| `defaults` | Get default values for a resource |');
@@ -900,6 +972,9 @@ function handleSummary(format: ResponseFormat): string {
   lines.push('| `dependencies` | Get resource dependencies and creation order |');
   lines.push('| `troubleshoot` | Get error codes, causes, and remediation steps |');
   lines.push('| `syntax` | Get Terraform syntax guidance (block vs attribute) |');
+  lines.push('| `validate` | Validate Terraform configuration syntax |');
+  lines.push('| `example` | Generate working examples (basic, with_waf, full) |');
+  lines.push('| `mistakes` | Common Terraform syntax mistakes |');
   lines.push('| `summary` | This summary |');
 
   return lines.join('\n');
@@ -2151,6 +2226,199 @@ Or use f5xc_terraform_metadata(operation="validate", resource="origin_pool", con
 }
 
 // =============================================================================
+// MINIMUM CONFIG HANDLER (Phase 2)
+// =============================================================================
+
+/**
+ * Handles minimum_config operation - returns minimum required configuration
+ * Combines required fields, minimum_config_required fields, and server defaults
+ */
+function handleMinimumConfig(input: MetadataInput, format: ResponseFormat): string {
+  const { resource } = input;
+
+  if (!resource) {
+    return formatError(
+      'Missing parameter',
+      'resource parameter is required for minimum_config operation',
+      format,
+    );
+  }
+
+  const resourceMeta = getResourceMetadata(resource);
+
+  if (!resourceMeta) {
+    return formatError(
+      'Resource not found',
+      `Resource '${resource}' not found in metadata`,
+      format,
+    );
+  }
+
+  // Analyze attributes to categorize them
+  const trulyRequired: string[] = [];
+  const minConfigRequired: string[] = [];
+  const serverDefaults: Record<string, unknown> = {};
+  const recommendedValues: Record<string, unknown> = {};
+  const optionalWithRecommendations: string[] = [];
+
+  for (const [name, attr] of Object.entries(resourceMeta.attributes)) {
+    // Top-level required fields (must be set by user)
+    if (attr.required && !attr.server_default) {
+      trulyRequired.push(name);
+    }
+
+    // Fields marked as required for minimum config
+    if (attr.minimum_config_required && !trulyRequired.includes(name)) {
+      minConfigRequired.push(name);
+    }
+
+    // Server defaults (can be omitted)
+    if (attr.server_default && attr.default !== undefined) {
+      serverDefaults[name] = attr.default;
+    }
+
+    // Recommended values
+    if (attr.recommended_value !== undefined) {
+      recommendedValues[name] = attr.recommended_value;
+      if (!trulyRequired.includes(name) && !minConfigRequired.includes(name)) {
+        optionalWithRecommendations.push(name);
+      }
+    }
+  }
+
+  // Generate minimal example
+  const minimalExample = generateMinimalExample(resource, trulyRequired, resourceMeta);
+
+  if (format === ResponseFormat.JSON) {
+    return JSON.stringify(
+      {
+        operation: 'minimum_config',
+        resource,
+        truly_required: trulyRequired,
+        minimum_config_required: minConfigRequired,
+        server_defaults: serverDefaults,
+        recommended_values: recommendedValues,
+        optional_with_recommendations: optionalWithRecommendations,
+        minimal_config_example: minimalExample,
+      },
+      null,
+      2,
+    );
+  }
+
+  // Markdown format
+  const lines: string[] = [
+    `# Minimum Configuration: ${resource}`,
+    '',
+    '## Required Fields',
+    '',
+  ];
+
+  if (trulyRequired.length === 0) {
+    lines.push('*No strictly required fields (all have server defaults)*');
+  } else {
+    lines.push('These fields **must** be set by the user:');
+    lines.push('');
+    for (const field of trulyRequired) {
+      const attr = resourceMeta.attributes[field];
+      lines.push(`- **\`${field}\`**: ${attr.description}`);
+    }
+  }
+
+  if (minConfigRequired.length > 0) {
+    lines.push('');
+    lines.push('## Minimum Config Required');
+    lines.push('');
+    lines.push('These fields should be set for a minimal viable configuration:');
+    lines.push('');
+    for (const field of minConfigRequired) {
+      const attr = resourceMeta.attributes[field];
+      lines.push(`- **\`${field}\`**: ${attr.description}`);
+    }
+  }
+
+  if (Object.keys(serverDefaults).length > 0) {
+    lines.push('');
+    lines.push('## Server Defaults');
+    lines.push('');
+    lines.push('These fields have server-side defaults and can be omitted:');
+    lines.push('');
+    lines.push('| Field | Default Value |');
+    lines.push('|-------|---------------|');
+    for (const [field, value] of Object.entries(serverDefaults)) {
+      lines.push(`| \`${field}\` | \`${JSON.stringify(value)}\` |`);
+    }
+  }
+
+  if (Object.keys(recommendedValues).length > 0) {
+    lines.push('');
+    lines.push('## Recommended Values');
+    lines.push('');
+    lines.push('These values are recommended for production use:');
+    lines.push('');
+    lines.push('| Field | Recommended Value |');
+    lines.push('|-------|-------------------|');
+    for (const [field, value] of Object.entries(recommendedValues)) {
+      lines.push(`| \`${field}\` | \`${JSON.stringify(value)}\` |`);
+    }
+  }
+
+  lines.push('');
+  lines.push('## Minimal Configuration Example');
+  lines.push('');
+  lines.push('```hcl');
+  lines.push(minimalExample);
+  lines.push('```');
+
+  return lines.join('\n');
+}
+
+/**
+ * Generate a minimal Terraform configuration example
+ */
+function generateMinimalExample(
+  resource: string,
+  requiredFields: string[],
+  resourceMeta: ResourceMetadata,
+): string {
+  const lines: string[] = [
+    `resource "f5xc_${resource}" "example" {`,
+  ];
+
+  // Add required fields with example values
+  for (const field of requiredFields) {
+    const attr = resourceMeta.attributes[field];
+    let value: string;
+
+    if (field === 'name') {
+      value = '"example"';
+    } else if (field === 'namespace') {
+      value = '"default"';
+    } else if (attr.type === 'string') {
+      value = `"${field}_value"`;
+    } else if (attr.type === 'list(string)') {
+      value = '["value1"]';
+    } else if (attr.type === 'number') {
+      value = '1';
+    } else if (attr.type === 'bool') {
+      value = 'true';
+    } else if (attr.is_block) {
+      value = '{}';
+      lines.push('');
+      lines.push(`  ${field} {}`);
+      continue;
+    } else {
+      value = '{}';
+    }
+
+    lines.push(`  ${field} = ${value}`);
+  }
+
+  lines.push('}');
+  return lines.join('\n');
+}
+
+// =============================================================================
 // HELPERS
 // =============================================================================
 
@@ -2568,5 +2836,5 @@ function getReferenceResourceName(fieldName: string): string {
 
 export const METADATA_TOOL_DEFINITION = {
   name: 'f5xc_terraform_metadata',
-  description: 'Query resource metadata for deterministic Terraform configuration generation. Operations: oneof (mutually exclusive fields), validation (regex/range patterns), defaults, enums, attribute (full metadata), requires_replace, tier (subscription requirements), dependencies (creation order), troubleshoot (error remediation), syntax (correct Terraform block vs attribute syntax), validate (check config for syntax errors), example (generate complete working examples), mistakes (common errors and fixes), summary.',
+  description: 'Query resource metadata for deterministic Terraform configuration generation. Operations: minimum_config (minimal required fields with recommended values), oneof (mutually exclusive fields), validation (regex/range patterns), defaults, enums, attribute (full metadata), requires_replace, tier (subscription requirements), dependencies (creation order), troubleshoot (error remediation), syntax (correct Terraform block vs attribute syntax), validate (check config for syntax errors), example (generate complete working examples), mistakes (common errors and fixes), summary.',
 };

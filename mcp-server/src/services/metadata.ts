@@ -65,6 +65,13 @@ export interface AttributeMetadata {
   default?: unknown;
   oneof_group?: string;
   description: string;
+  // Phase 1 enhanced metadata fields
+  minimum_config_required?: boolean;
+  recommended_value?: unknown;
+  validation_rules?: Record<string, string>;
+  server_default?: boolean;
+  complexity?: string;
+  use_cases?: string[];
 }
 
 export interface DependencyInfo {

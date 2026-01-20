@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "@robinmordasiewicz/f5xc-terraform-mcp",
   "display_name": "F5 Distributed Cloud Terraform Provider",
-  "version": "3.22.0",
+  "version": "3.23.0",
   "description": "MCP server providing AI assistants with access to F5 Distributed Cloud Terraform provider documentation, 270+ OpenAPI specifications, subscription tier information, and addon service activation workflows.",
   "long_description": "Model Context Protocol (MCP) server for F5 Distributed Cloud (F5XC) Terraform provider. Provides AI assistants with comprehensive access to:\n\n- **Terraform Documentation**: Search, retrieve, and explore F5XC resources, data sources, functions, and guides\n- **OpenAPI Specifications**: Query 270+ F5 Distributed Cloud API specs with endpoint discovery and schema definitions\n- **Subscription Intelligence**: Check resource subscription tier requirements (STANDARD, ADVANCED, PREMIUM)\n- **Addon Service Workflows**: List, check activation status, and get activation workflows for F5XC addon services\n- **Metadata & Patterns**: Access validation patterns, oneof constraints, default values, and common configuration mistakes\n\nDesigned for infrastructure-as-code workflows, enabling intelligent Terraform configuration generation with subscription compliance and best practices built-in.",
   "author": {
